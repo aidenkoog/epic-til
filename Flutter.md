@@ -5,14 +5,7 @@
 
 - 개념 / 용어 정의, 사용 이유
 - 성능, 메모리 등 이슈 해결 방법
-- Lecture Scenario
 - Interview Question, Answer
-
-## Lecture Scenario
-
-- 선정 이유, 장점
-- 앱 서비스 기획 개념 / 중요 포인트
-- 
 
 ## Flutter 사용 이유
 
