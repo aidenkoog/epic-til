@@ -107,3 +107,10 @@
 - pubspec.yaml 내 fonts: 추가
 - ThemeData 내 폰트 패밀리 지정 시 앱 전체적으로 지정
 - 기기 폰트 사이즈에 의존 제거 방법: MaterialApp 내 builder 에 MediaQuery 지정 후 textScaleFactor를 1.0d으로 고정
+
+## 테마 설정
+
+- 컬러셋 지정
+- ThemeData 분리 후 커스터마이징
+- scaffoldBackgroundColor, backgroundColor 차이
+- splashColor (리플효과)
