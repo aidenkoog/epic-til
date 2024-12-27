@@ -32,11 +32,38 @@
   - 앱 내 기능 나열
 
 ## 크로스 플랫폼
-  - 단일 코드 베이스로 두가지 이상의 플랫폼에서 동작 가능
-  - 여러 환경에서 동시 개발이 가능한 프레임워크
+
+- 단일 코드 베이스로 두가지 이상의 플랫폼에서 동작 가능
+- 여러 환경에서 동시 개발이 가능한 프레임워크
+
+## 다트 문법
+
+- main() / String, int, double, bool
+- List, Set
+- Map
+- final, const, Nullable Variable (변수)
+- Getter / Setter / 접근 제한자
+- 상속, Super, Override
+- 추상화 클래스, 인터페이스
+
+## 위젯 사용
+
+- 프로젝트 구조
+- 화면 레이아웃 구성 위젯: MaterialApp, Text, Scaffold, Appbar
+- 위젯 추출 코드 분리: StatelessWidget
+- Public / Private 위젯
+- 단일 컨테이너: Container / SizedBox / Center
+- 복수 위젯 컨테이너: Column / Row / Stack
+- 여백 스타일: Padding, EdgeInsets
+- 배치 및 공간 제어 위젯: Align, Spacer, Expanded
+- 버튼: ElevatedButton, OutlineButton, TextButton, GestureDetector
+- 동적 업데이트 화면: StatefulWidget
+- 플로팅 버튼 작성: FloatingActionButton
+- 위젯 간 데이터 전달 (생성자)
+- 이미지 출력: AssetImage, NetworkImage
 
 ## 키워드
 
 - UTC
 - Timezone
-- 
+- Local Notification (단순 알람 추가 / 알람 스케쥴링)
