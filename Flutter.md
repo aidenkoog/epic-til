@@ -68,7 +68,7 @@
 - 입력 창: TextField, TextEditingController
 - 구분선: Divider
 - 스위치: Switch, CupertinoSwitch
-- 값 변경될 때 마다 자동으로 UI 갱신: ValueListenableBuilder
+- 값 변경될 때 마다 자동으로 UI 갱신: ValueListenableBuilder (DbObserver와 유사)
 
 ## 자주 사용되는 기능
 
