@@ -81,6 +81,15 @@
 - HiveType, HiveField Annotation
 - HiveObject extends 해줘야 키 사용 가능
 
+## 프로젝트 폴더 구조
+
+- components
+- config
+- models
+- repositories
+- pages
+- services
+
 ## 키워드
 
 - UTC
