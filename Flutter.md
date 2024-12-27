@@ -78,6 +78,7 @@
 - hive 에서 저장된 모든 데이터는 Box로 구성
   - 구조가 없으며 무엇이든 포함 가능
 - hive, hive_flutter, hive_generator, build_runner
+- HiveType, HiveField Annotation
 
 ## 키워드
 
