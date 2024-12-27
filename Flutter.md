@@ -67,6 +67,7 @@
 - 구분선: Divider
 - 스위치: Switch, CupertinoSwitch
 - 값 변경될 때 마다 자동으로 UI 갱신: ValueListenableBuilder (DbObserver와 유사)
+- 세이프 영역 처리: iOS X 이상에서만 처리 가능, 물리 영역 침범하지 않도록 처리 가능
 
 ## 로컬 노티피케이션
 
@@ -122,3 +123,6 @@
 - floatingActionButton, FloatingActionButton 추가 가능
 - 클릭에 따른 동적 처리 setState 활용
 - 새 페이지로 이동하려고 할 때: Navigator.push 활용
+- Scaffold leading, body 활용
+- Input 창 포커스 처리 > 아무 영역 눌렀을 때 키보드 제거
+  - Scaffold body를 GestureDectector로 Wrapping 후 onTap 내 FocusScope.of(context).unfocus() 처리 추가
