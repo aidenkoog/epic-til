@@ -42,7 +42,9 @@
 - List, Set
 - Map
 - final, const, Nullable Variable (변수)
-- Getter / Setter / 접근 제한자
+  - final 값 할당 한번만 가능, 변수 선언과 생성자 통해 할당, 런타임 때 할당
+  - const 는 상수, 빌드 타임때 값 할당, 컴파일 타임 때 값 할당
+- Getter / Setter / 접근 제한자 (set, get, _)
 - 상속, Super, Override
 - 추상화 클래스, 인터페이스
 
@@ -55,7 +57,7 @@
 - 단일 컨테이너: Container / SizedBox / Center
 - 복수 위젯 컨테이너: Column / Row / Stack
 - 여백 스타일: Padding, EdgeInsets
-- 배치 및 공간 제어 위젯: Align, Spacer, Expanded
+- 배치 및 공간 제어 위젯: Align, Spacer, Flexible, Expanded (남은 영역 차지)
 - 버튼: ElevatedButton, OutlineButton, TextButton, GestureDetector
 - 동적 업데이트 화면: StatefulWidget
 - 플로팅 버튼 작성: FloatingActionButton
@@ -63,10 +65,17 @@
 - 이미지 출력: AssetImage, NetworkImage
 - 플랫폼 스타일 위젯: Material / Cupertino
 - 화면 전환: Navigator
+- 입력 창: TextField, TextEditingController
+- 구분선: Divider
 
 ## 자주 사용되는 기능
 
 - Local Notification (단순 알람 추가 / 알람 스케쥴링)
+- hive (로컬 데이터 베이스), 빠르고 Secure NoSQL (Key - Value)
+  - AES-256 암호화
+- hive 에서 저장된 모든 데이터는 Box로 구성
+  - 구조가 없으며 무엇이든 포함 가능
+- hive, hive_flutter, hive_generator, build_runner
 
 ## 키워드
 
