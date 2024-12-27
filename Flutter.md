@@ -79,6 +79,7 @@
   - 구조가 없으며 무엇이든 포함 가능
 - hive, hive_flutter, hive_generator, build_runner
 - HiveType, HiveField Annotation
+- HiveObject extends 해줘야 키 사용 가능
 
 ## 키워드
 
