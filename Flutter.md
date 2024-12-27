@@ -38,10 +38,8 @@
 
 ## 다트 문법
 
-- main() / String, int, double, bool
-- List, Set
-- Map
-- final, const, Nullable Variable (변수)
+- List, Set, Map
+- final, const, Nullable / NotNull Variable
   - final 값 할당 한번만 가능, 변수 선언과 생성자 통해 할당, 런타임 때 할당
   - const 는 상수, 빌드 타임때 값 할당, 컴파일 타임 때 값 할당
 - Getter / Setter / 접근 제한자 (set, get, _)
@@ -70,16 +68,19 @@
 - 스위치: Switch, CupertinoSwitch
 - 값 변경될 때 마다 자동으로 UI 갱신: ValueListenableBuilder (DbObserver와 유사)
 
-## 자주 사용되는 기능
+## 로컬 노티피케이션
 
 - Local Notification (단순 알람 추가 / 알람 스케쥴링)
+
+## 로컬 데이터베이스
+
 - hive (로컬 데이터 베이스), 빠르고 Secure NoSQL (Key - Value)
   - AES-256 암호화
-- hive 에서 저장된 모든 데이터는 Box로 구성
+  - hive 에서 저장된 모든 데이터는 Box로 구성
   - 구조가 없으며 무엇이든 포함 가능
-- hive, hive_flutter, hive_generator, build_runner
-- HiveType, HiveField Annotation
-- HiveObject extends 해줘야 키 사용 가능
+  - hive, hive_flutter, hive_generator, build_runner
+  - HiveType, HiveField Annotation
+  - HiveObject extends 해줘야 키 사용 가능
 
 ## 프로젝트 폴더 구조
 
@@ -99,7 +100,10 @@
 - linter 내 rules 가 명시되어 있음
 - severity: ignore / info / warning / error
 
-## 키워드
+## 커스텀 폰트 사용
 
-- UTC
-- Timezone
+- 프로젝트 루트 위치에 assets 폴더 추가
+- font 하위 디렉토리 생성 후 폰트 파일 삽입
+- pubspec.yaml 내 fonts: 추가
+- ThemeData 내 폰트 패밀리 지정 시 앱 전체적으로 지정
+- 기기 폰트 사이즈에 의존 제거 방법: MaterialApp 내 builder 에 MediaQuery 지정 후 textScaleFactor를 1.0d으로 고정
