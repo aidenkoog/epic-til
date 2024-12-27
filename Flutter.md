@@ -114,3 +114,11 @@
 - ThemeData 분리 후 커스터마이징
 - scaffoldBackgroundColor, backgroundColor 차이
 - splashColor (리플효과)
+
+## 페이지 구조
+
+- Scaffold 내 bottomNavigationBar, BottomAppBar
+  - child: 내 아이콘, 텍스트, 클릭 이벤트 처리 등 설정 가능
+- floatingActionButton, FloatingActionButton 추가 가능
+- 클릭에 따른 동적 처리 setState 활용
+- 새 페이지로 이동하려고 할 때: Navigator.push 활용
