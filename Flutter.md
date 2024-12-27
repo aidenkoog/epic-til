@@ -90,6 +90,15 @@
 - pages
 - services
 
+## 린트
+
+- linter (동일 코딩 스타일 등)
+  - analysis_options.yaml
+- 표준 린트 세트
+- 정적 분석 (프로그램 실행 없이 코드 분석)
+- linter 내 rules 가 명시되어 있음
+- severity: ignore / info / warning / error
+
 ## 키워드
 
 - UTC
