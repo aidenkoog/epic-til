@@ -61,9 +61,14 @@
 - 플로팅 버튼 작성: FloatingActionButton
 - 위젯 간 데이터 전달 (생성자)
 - 이미지 출력: AssetImage, NetworkImage
+- 플랫폼 스타일 위젯: Material / Cupertino
+- 화면 전환: Navigator
+
+## 자주 사용되는 기능
+
+- Local Notification (단순 알람 추가 / 알람 스케쥴링)
 
 ## 키워드
 
 - UTC
 - Timezone
-- Local Notification (단순 알람 추가 / 알람 스케쥴링)
