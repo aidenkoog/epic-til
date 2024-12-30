@@ -68,6 +68,7 @@
 - 스위치: Switch, CupertinoSwitch
 - 값 변경될 때 마다 자동으로 UI 갱신: ValueListenableBuilder (DbObserver와 유사)
 - 세이프 영역 처리: iOS X 이상에서만 처리 가능, 물리 영역 침범하지 않도록 처리 가능
+- 가시화 여부: Visibility
 
 ## 로컬 노티피케이션
 
@@ -126,3 +127,29 @@
 - Scaffold leading, body 활용
 - Input 창 포커스 처리 > 아무 영역 눌렀을 때 키보드 제거
   - Scaffold body를 GestureDectector로 Wrapping 후 onTap 내 FocusScope.of(context).unfocus() 처리 추가
+
+## 앱 개발 프로젝트 진행 관련 내용
+
+- 화면 UI 제작
+- 서비스 로직 분리
+- 서비스 내 데이터 변경 시 UI 갱신, ChangeNotifier, notifyListeners(), AnimatedBuilder
+- 알림 추가, 예외처리
+- 데이터 (텍스트, 이미지) 영구 저장
+- 객체 타입 로컬 데이터 추가
+- 화면 전환 시 pop / popUntil (pop, pop)
+- ListView, ListTile (without Designer), ListView.separated, separatedBuilder, itemBuilder
+- CupertinoButton (자체 패딩)
+- 글자가 길어서 오버플로우 발생하는 경우 > Wrap 위젯 처리
+- 갤러리 사진 로드, 촬영 기능, 사진 크게 보기, 작게 보기
+- 팝업 / 바텀 시트 구성 및 기능 연결
+- 개발 중 나머지 영역을 채우도록 처리하기 위해서는 Expanded 사용 (Expanded(child: ListView...))
+- Navigator.pop(context, [데이터])
+  - 예) showModalBottomSheet().then((value) { service.setAlaram() })
+- 로컬 데이터베이스 사용 시 객체 타입 저장을 위한 모델 정의
+- 해당하는 모델에 해당하는 Hive Adapter 등록 (예: 결제 내역 / 결제 상세 내역 데이터 모델)
+- 속성 오버라이드 textStyle.copyWith(fontWeight: w500)
+- CustomObj get myObject => values.singleWhere((item) => item.id == id)
+- sort
+- 앱 이름, 아이콘 설정, 앱 아이디 설정
+  - iOS: Runner > Display Name / 1024 * 1024 규격의 아이콘 준비
+  - AOS: AndroidManifest.xml > label, res/mipmap
