@@ -1,4 +1,4 @@
-# (2025~) TIL
-Today I Learned
+# TIL
+(2025 ~ )Today I Learned
 
-오늘 배운 내용에 대해서 기록합니다.
+## 하루동안 배운 내용에 대해 정리합니다.
