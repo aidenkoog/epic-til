@@ -221,6 +221,11 @@
   - 가독성 증대, 성능 개선 목적
 - 반복적으로 지속적으로 행해져야 하는 활동, 일회성 X
 
+## 소프트웨어 아키텍쳐 - 정보시스템의 구조(분류)를 확립
+
+- 구조, 분류, 공통, 의사소통
+- 컴포넌트, 인터페이스(I/F)
+
 ## 그외 키워드 정리 건
 - 유스케이스, 액터, 시스템 바운더리 (개발 범위), 어떤일을 실행하는 게 유스케이스
 - 스테레오 타입, include, extend
@@ -240,4 +245,4 @@
 - OTP, Web shell, DrDoS
 - SQL 파싱트리, syn cookie
 - DDoS 공격기법 3가지, 대응방법
-- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), GDPR. Spear Phishing, Watering Hole
+- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), GDPR. ISMSP, Spear Phishing, Watering Hole
