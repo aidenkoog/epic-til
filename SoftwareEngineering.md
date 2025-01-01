@@ -230,3 +230,12 @@
 - 프레임워크, Proframe, 전자 정부 Framework, ORM
 - MainFrame, 선진 Process, 업무 개선, 패트리넷 (요구사항 명세화 기법)
 - 솔루션, 패턴, 해결책
+- SQL Injection, XSS, TCP SYN Flooding
+- 파일 업로드 취약점
+- CSRF
+- 개발보안 방법론
+- Buffer overflow
+- Format String
+- HTTP 분할응답
+- OTP
+- SQL 파싱트리, syn cookie
