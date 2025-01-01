@@ -237,5 +237,7 @@
 - Buffer overflow
 - Format String
 - HTTP 분할응답
-- OTP
+- OTP, Web shell, DrDoS
 - SQL 파싱트리, syn cookie
+- DDoS 공격기법 3가지, 대응방법
+- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), GDPR. Spear Phishing, Watering Hole
