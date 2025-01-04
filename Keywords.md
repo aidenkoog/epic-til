@@ -1,0 +1,36 @@
+# 키워드 리스트
+
+- 유스케이스, 액터, 시스템 바운더리 (개발 범위), 어떤일을 실행하는 게 유스케이스
+- 스테레오 타입, include, extend
+- Validation: Review, 테스트
+- WBS (Work Breakdown Structure): 업무 분업 구조 / 작업 분해 구조, 업무 일정 세분화하여 체크하는 목적
+- 유사추정: 소프트웨어 개발비 산정
+- 프레임워크, Proframe, 전자 정부 Framework, ORM
+- MainFrame, 선진 Process, 업무 개선, 패트리넷 (요구사항 명세화 기법)
+- 솔루션, 패턴, 해결책
+- SQL Injection, XSS, TCP SYN Flooding
+- 파일 업로드 취약점
+- CSRF
+- 개발보안 방법론
+- Buffer overflow
+- Format String
+- HTTP 분할응답
+- OTP, Web shell, DrDoS
+- SQL 파싱트리, syn cookie
+- DDoS 공격기법 3가지, 대응방법
+- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), GDPR. ISMSP, Spear Phishing, Watering Hole
+- 객체 > 객체지향을 어떻게 모델링 > UML
+- 소프트웨어 공학 (개발방법론 + 프로젝트 관리 + 품질)
+- SCM (Supply Chain Management)
+- BOM, 원칙, 단가 자체만, 물류, 부가세 제외, 최종액 산정 방법
+- 데이터와 기능 등의 용어 (같지만 다른 표현들)
+  - 필드, 애트리뷰트, 프로퍼티, 메소드, 펑션, 오퍼레이션, 행위, 속성, 객체, 오브젝트, 인스턴스화, 실행중
+  - 동적 구조화 (시퀀스 다이어그램) - 사용자가 예약 시스템을 통해 물건을 주문하는 과정에 대한 흐름
+- UseCase > Class > Sequence > Component > Deployment (시스텀 구성도)
+- Request For Proposal, 제안 요청서. 프로젝트 담당할 최종 업체를 선정하기 전, 1차로 선별된 업체들에게 보내는 문서
+  - 원하는 요구 사항을 체계적으로 정리한 문서라고 볼 수 있습니다. 
+  - 제안 요청서에는 프로젝트의 주제, 목적, 목표, 내용, 기대성과 등 진행할 업무 내용에 대한 자세한 사항 포함
+- 프로젝트 관리 계획서, 사업수행 계획서 (맨 처음 만들어야 하고 고객과 소통, 최소한 자원, 인력있어야 함, 방법론도 있어야 하고 검수기준 필요), 과업대비표, 착수보고서
+- 일정 단축 기법, PMBOK
+- Function Point를 MM (맨먼스)로 어떻게 산정
+- 공공데이터 개방 > 통계 분석이 끝난 결과 데이터를 개방 > 분석을 한다면 원 데이터를 받아야 함

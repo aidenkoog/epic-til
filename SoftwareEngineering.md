@@ -9,9 +9,9 @@
 
 전체범위 4가지중 소프트웨어 공학
 - 소프트웨어 공학
-  - 방법론: OOP, UML(UseCase, )
-  - 프로젝트 관리
-  - 품질
+  1. 방법론: OOP, UML(UseCase, Class, Sequence, Component, Deployment)
+  2. 프로젝트 관리: RFP 범위, WBS(구조), 일정 (일의 순서, PND), 비용
+  3. 품질
 - 데이터베이스
 - 정보보안
 - IT 경영
@@ -236,24 +236,3 @@
 
 - 구조, 분류, 공통, 의사소통
 - 컴포넌트, 인터페이스(I/F)
-
-## 그외 키워드 정리 건
-- 유스케이스, 액터, 시스템 바운더리 (개발 범위), 어떤일을 실행하는 게 유스케이스
-- 스테레오 타입, include, extend
-- Validation: Review, 테스트
-- WBS (Work Breakdown Structure): 업무 분업 구조 / 작업 분해 구조, 업무 일정 세분화하여 체크하는 목적
-- 유사추정: 소프트웨어 개발비 산정
-- 프레임워크, Proframe, 전자 정부 Framework, ORM
-- MainFrame, 선진 Process, 업무 개선, 패트리넷 (요구사항 명세화 기법)
-- 솔루션, 패턴, 해결책
-- SQL Injection, XSS, TCP SYN Flooding
-- 파일 업로드 취약점
-- CSRF
-- 개발보안 방법론
-- Buffer overflow
-- Format String
-- HTTP 분할응답
-- OTP, Web shell, DrDoS
-- SQL 파싱트리, syn cookie
-- DDoS 공격기법 3가지, 대응방법
-- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), GDPR. ISMSP, Spear Phishing, Watering Hole
