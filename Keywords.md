@@ -34,3 +34,8 @@
 - 일정 단축 기법, PMBOK
 - Function Point를 MM (맨먼스)로 어떻게 산정
 - 공공데이터 개방 > 통계 분석이 끝난 결과 데이터를 개방 > 분석을 한다면 원 데이터를 받아야 함
+- On-premise 전환 방법
+- 클라우드 보안, APT 공격, ISMS-P 애자일 프로세스, 스크럼, TDD
+- 협의 알고리즘, 블록체인, 머신러닝
+- PCM 변조
+- GFS, Scale Up, Scale Down, Json
