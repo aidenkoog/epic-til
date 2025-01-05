@@ -34,8 +34,28 @@
 - 일정 단축 기법, PMBOK
 - Function Point를 MM (맨먼스)로 어떻게 산정
 - 공공데이터 개방 > 통계 분석이 끝난 결과 데이터를 개방 > 분석을 한다면 원 데이터를 받아야 함
-- On-premise 전환 방법
+- On-premise 전환 방법, On-Premise 는 클라우드와 반대되는 말
+- TPMC, 분당 CPU 처리
 - 클라우드 보안, APT 공격, ISMS-P 애자일 프로세스, 스크럼, TDD
 - 협의 알고리즘, 블록체인, 머신러닝
 - PCM 변조
 - GFS, Scale Up, Scale Down, Json
+- HDFS (계층형 분산 파일 시스템), Map Reduce, Pig, Hive, HBase
+- BigData 분석, 통계, 샘플링, 표본, 온톨로지
+- Public / Private Cloud Computing, ISMS-P 인증 모델, 클라우드 보안 검사, Hybrid Cloud
+- Private Cloud Computing
+  - 통합 서버 관리, 가상화 -> n개의 물리적 자원을 하나의 통합된 툴로 만들어 주는것, 기기가 1대인데 여러대 있는것처럼 관리해주는것도 가상화
+  - OpenStack을 각각에 다 설치해서 가상화 실현
+- QoS, SLA (Service Level Agreement, 사용한 만큼 비용 지불)
+  - On-Demand, 유틸리티 컴퓨팅
+- 클라우드에서 인스턴스는 서버, 컴퓨터, 네트워크라 인지
+- 세그먼트, 대역폭
+- 클라우드 컴퓨팅 주변으로 머신러닝 + 빅데이터 + IoT + 블록체인
+- 지도학습 (사람이 결과를 안다), 자율학습 (사람이 결과를 모름)
+- 샘플링, 전수데이터
+- Scale Out, Scale Up, Scale Down
+- IaaS, 서버만 빌려준다
+- PaaS, 윈도우까지도 설치해준다
+- SaaS, 앱까지도 설치해준다, 유틸리티 프로그램 (노트패드, Office 365 등)
+- CRM 고객관리 프로그램
+- Host OS > Guest OS > (Virtualization) > USB 드라이버, 하이퍼바이저 개념
