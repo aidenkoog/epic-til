@@ -59,3 +59,11 @@
 - SaaS, 앱까지도 설치해준다, 유틸리티 프로그램 (노트패드, Office 365 등)
 - CRM 고객관리 프로그램
 - Host OS > Guest OS > (Virtualization) > USB 드라이버, 하이퍼바이저 개념
+- 목표(전략, 실행) > 컨설팅 (문제에 대한 해결책) > 비즈니스 프로세스 자동화, 업무체계 정립 (Mega > Major > Process > Activity > Task), End To End 서비스 (고객)
+  - 컨설팅
+    - ISP
+    - BPR(workflow)
+    - EA (Enterprise Architecture)
+    - 6 Sigma
+    - 보안컨설팅
+- 업무체계 정립: 1 업무프로세스, 2 조직(도)
