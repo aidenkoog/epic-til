@@ -289,9 +289,9 @@
     - Pipe Filter: 여러개 명령 동시 실행, 순차 처리와 병렬 처리 모두를 모델링
     - Layer Style
     - Repository: 공유 저장소
-    - Publish Subscribe
+    - Publish Subscribe: MVC와 유사, EAI
     - Client-Server
-    - Virtual Machine
+    - Virtual Machine: Host OS, VM, VM 안의 OS (Guest OS), Vitualization, 하이퍼바이저, Docker
 - 기타 작성 내용
   - 유틸리티 분석은 아래와 같음
   - 비기능적 요구사항:
