@@ -10,15 +10,24 @@
 - 솔루션, 패턴, 해결책
 - SQL Injection, XSS, TCP SYN Flooding
 - 파일 업로드 취약점
+  - 서버 사이드 화이트리스트 필터링
+  - 파일명을 난수로 변경, 확장자 제거
+  - 업로드 디렉토리, 다운로드 디렉토리 분리
+  - 파일 시그니처(헤더) 읽어서 파일에 문제가 없는지 확인
+  - Web Shell (서버에서 실행되는 악성 스크립트, 서버를 원격으로 제어할수 있도록 하는 일종의 백도어)
+    - PDF, 매크로, DDE, cmd.php^jpg
 - CSRF
 - 개발보안 방법론
+  - CLASP, 7-TouchPoint, MSSDN, 입력값 검증, 보안기능, 에러처리, 세션통제
 - Buffer overflow
 - Format String
 - HTTP 분할응답
 - OTP, Web shell, DrDoS
+- TCP Max Backlog
 - SQL 파싱트리, syn cookie
 - DDoS 공격기법 3가지, 대응방법
-- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), GDPR. ISMSP, Spear Phishing, Watering Hole
+- 개발 보안 설명, CC인증, APT 공격 기법 (절차 4가지), Spear Phishing, Watering Hole
+- GDPR, ISMSP
 - 객체 > 객체지향을 어떻게 모델링 > UML
 - 소프트웨어 공학 (개발방법론 + 프로젝트 관리 + 품질)
 - SCM (Supply Chain Management)
@@ -73,3 +82,8 @@
 - 0주소, OPCode, 인터럽트 벡터 테이블, 시스템 콜
 - 모놀리티 커널, 마이크로 커널 (유저모드 -> 시스템 콜)
 - 1주소, Operand (1. Register, 2. Mode, 3. Address) 
+- FailOver
+- Zookeeper
+- 메모리 데이터베이스, MMDB, SSL, 인증서, AES
+- 적시성 (원하는 시점에 정보 제공 및 물품/활동 제공하는 것)
+- 무결성(변조, 중복 등이 없는 것, 데이터의 정확성, 일관성 그리고 신뢰성 의미)
