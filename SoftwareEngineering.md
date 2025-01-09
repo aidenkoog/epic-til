@@ -345,3 +345,18 @@
 - Class Diagram
   - 정적 모델링, 클래스 속성, 행위, 서로간의 관계 모델링 (상속, 연관, 구현, 합성 등)
   - A라는 클래스가 있을 때 A클래스만 사용하는 경우, 아니면 다른 경우에도 사용하는 경우에 따라 표기 달라짐
+  - Association: 의미적 링크
+    - Aggregation: 전체와 부분을 표현
+    - Composition: 같이 죽고 같이 산다, 생성자 때 같이 생성
+  - Generalization: 상속
+  - Dependency
+  - Implementation
+- Sequence Diagram
+  - 세로는 시간, 세로 네모는 인스턴스 생명주기, 화살표 위 문구는 메소드
+  - 라우팅, 비동기 표시, 메소드(행위)
+- State Chart Diagram
+  - 상태 전이, 객체의 상태변화를 표현, 이벤트 발생에 따른 변화
+- Deployment Diagram
+  - 시스템 물리적 구성, 제품의 이름까지 작성되어 있음
+- Component Diagram
+  - 소프트웨어 물리적 단위 모델링 (exe, dll 등), 프로그램
