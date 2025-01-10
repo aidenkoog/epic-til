@@ -360,3 +360,57 @@
   - 시스템 물리적 구성, 제품의 이름까지 작성되어 있음
 - Component Diagram
   - 소프트웨어 물리적 단위 모델링 (exe, dll 등), 프로그램
+
+## Java Code 변환
+
+- 클래스를 자바 코드로 자동 생성
+  - Association: 전역변수
+  - Dependency: 메소드 내 지역변수, 메소드 파라미터
+  - Realication: implements
+  - Generalization: extends
+- MDA(Model Driven Architecture)
+  - 메타 모델을 기반으로 구현환경에 독립적인 시스템을 개발하고 자동으로 구현 환경에 배치하는 방법으로 소프트웨어 개발
+    - 메타데이터: 자원을 설명하는 데이터
+    - 메타모델: 데이터를 어떻게 집어넣느냐에 대한 건
+  - 목적: 설계의 재사용
+  - 참고) UML Profile: OCL (Object Constraint Language)
+  - MOF(Meta Object Facility): 모델에 대한 표준 저장소
+  - CWM(Common Warehouse Meta Model): 데이터 저장소에 대한 모델 데이터베이스 스키마 변환
+  - XMI(XML Metadata Interface): XML변환
+  - UML Meta Model
+  - UML Profile: 스테레오 타입 태그, 태그 값 정의, MOF 메타 모델
+- MDD 개발 프로세스
+  - CIM(Computation Independent Mode): 비즈니스 요구항을 추출
+  - PIM(Platform Independent Model)
+  - PSM(Platform Specification Model)
+- Product Line
+  - 도메인 공통 컴포넌트를 사용해서 소프트웨어를 개발하는 프로세스
+- Product Line Process
+  - Core Asset Development (Collabration)
+  - Application Engineering
+  - Management
+    - 형상관리, 변경관리, 버전 컨트롤 시스템, 변경 최적화하고 관리하는 프로세스, 변경을 추적하는 프로세스, CCB(Change control board)
+    - VCS: SVN(중앙집중형), GIT(분산형 워크플로우, 스토리지 2개)
+    - IEEE 4Step: 식별, 통제, 감사, 기록
+      - Configuration Identification (식별)
+      - Configuration Control, CCB (통제)
+      - Configuration Status Accounting (상태관리)
+      - Configuration Audit (감사, 산출물 감사, Baseline Core Asset)
+  - 모든 프로젝트에는 Management Set 이라는 것이 있음
+    - Requirement Artifact (유스케이스 모델링, 명세서)
+    - 클래스 다이어그램 등
+    - 소스코드
+    - 테스트 시나리오, 테스트 케이스
+- Domain Engineering
+  - 특정 도메인 내의 애플리케이션에서 공통 컴포넌트(Core Asset)을 생산하기 위한 프로세스
+  - 도메인 분석/설계/구현
+- Refactoring: 소프트웨어 기능은 변경하지 않고 로직을 개선하는 활동
+  - 외부 기능은 변경하지 않고 내부 기능을 개선
+  - 언제 하는게 좋은가? > 개선시점 설명하는 것 핵심
+    - 버그가 발견될 때
+    - 소프트웨어 가독성 (Read Ability) 향상 목적
+    - 모듈화 통한 재사용하고자 할 때
+    - Performance(성능) 개선 목적
+    - TDD, 테스트를 반복적으로 수행할 때
+  - 리팩토링 기법
+    - 클래스 추출 등
