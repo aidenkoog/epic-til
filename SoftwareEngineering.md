@@ -370,13 +370,13 @@
   - Generalization: extends
 - MDA(Model Driven Architecture)
   - 메타 모델을 기반으로 구현환경에 독립적인 시스템을 개발하고 자동으로 구현 환경에 배치하는 방법으로 소프트웨어 개발
-    - 메타데이터: 자원을 설명하는 데이터
-    - 메타모델: 데이터를 어떻게 집어넣느냐에 대한 건
+    - 메타데이터: 자원을 설명하는 데이터, Resource를 설명하는 데이터
+    - 메타모델: 설명하는 데이터를 어떻게 집어넣느냐, 구조에 대한 건
   - 목적: 설계의 재사용
-  - 참고) UML Profile: OCL (Object Constraint Language)
+  - 참고: UML Profile: OCL (Object Constraint Language)
   - MOF(Meta Object Facility): 모델에 대한 표준 저장소
   - CWM(Common Warehouse Meta Model): 데이터 저장소에 대한 모델 데이터베이스 스키마 변환
-  - XMI(XML Metadata Interface): XML변환
+  - XMI(XML Metadata Interface): XML변환, XML이 표준이니까 변환가능
   - UML Meta Model
   - UML Profile: 스테레오 타입 태그, 태그 값 정의, MOF 메타 모델
 - MDD 개발 프로세스
