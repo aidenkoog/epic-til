@@ -820,3 +820,18 @@
 ## 인수 테스트(Acceptance Test)
 
 - 인수 테스트는 사용자 스토리(시나리오)에 맞춰 수행하는 테스트
+
+## 응용 프로그램 종류
+
+- Batch Processing System: 대용량 데이터를 처리하는 프로그램
+- Entertainment System: 유져가 즐길 수 있는 프로그램 (게임 등)
+- System for Modeling and Simulation: 시뮬레이션이나 모델링을 위한 시스템
+- Data Collection System: 다른 시스템에서 전달 받은 데이터들을 수집하는 시스템
+- System of System: 다양한 시스템끼리 구성되어 상호작용
+
+## 좋은 소프트웨어가 가져야 할 특성
+
+- 유지가능성 (Maintainability)
+- 신뢰성과 보안 (Reliability and Security)
+- 효율성 (Efficiency)
+- 접근가능성 (Acceptability)
