@@ -1463,3 +1463,32 @@ val c: LiveData<String>
 - val (hello, number) = Pair("Hello", 1234) 이런식도 가능
 - val (hello, world) = "Hello" to "World"
 - Triple은 first, second, third 로 접근 가능
+
+#### 코루틴 데이터 통신을 위한 채널 Channel
+
+- Channel은 두개의 Coroutine 사이를 연결한 파이프이며, 단방향보다는 여러 방향에서 데이터를 주고 받는 형식으로 코루틴끼리 데이터를 전달하기 위한 것
+- Channel은 BlockingQueue와 유사하지만, 약간의 차이점이 존재
+- BlockingQueue은 put(), take()를 사용하여 차단해서 전송하는 방법이고 Channel은 send(), receive()를 사용하여 일시중단(suspend)으로 전송하는 방식
+- 또한, Channel은 더 이상 사용하지 않을 때 채널을 close로 닫음으로서 더 이상 오지 않음을 표현할 수 있다
+- Channel<>()를 통해 생성할 수 있으며, 데이터를 스트림에 넣을 때는 send(), 스트림에서 받을 때에는 receive를 사용하면 된다
+- send와 receive는 supsend 함수이기 때문에 코루틴 내부에서 호출해야 한다
+- 또한, Channel에 더 이상 아무 데이터도 보내거나 받지 않는다면 close 메서드를 통해 채널을 종료시켜야 한다
+- 만약 같은 코루틴에서 채널을 읽고 쓰면 어떻게 될까요?
+- send나 receive가 suspension point이고 서로에게 의존적이기 때문에 같은 코루틴에서 사용하는 것은 위험할 수 있으며 코드가 무한으로 실행될 수 있음
+- Channel Producer
+- 채널은 일반적으로 생산하는 쪽과 소비하는 쪽을 구현하는 producer-consumer 패턴
+- 이를 구현하기 위해  한 쪽에서 데이터를 만들고 다른 쪽에서 받는 것을 도와주는 확장 함수들이 존재
+- 생산하는 형태를 쉽게 구현하도록 제공하는 coroutine builder로 produce가 있음
+- 소비하는 쪽에서 사용하는 extension function으로 cosumeEach가 있음 (for-loop로 대체 가능.)
+- produce를 사용하면 ProducerScope를 상속받은 ProducerCoroutine을 얻게 됨
+- 여기서, ProducerScope는 CoroutineScope와 SendChannel 인터페이스를 상속받아 코루틴 컨텍스트와 몇몇 채널 인터페이스를 사용할 수 있는 스코프
+- 데이터를 받는 방식
+- 채널의 데이터를 가져오는 방법은 receive 이외에도 여러 가지 방법이 존재
+- receive를 통해서 하나의 값 받기
+- for-loop, consumeEach를 통해서 값 전체 하나씩 받기
+- consumeAsFlow를 이용하여 데이터를 Flow 형식으로 받기 
+- 해당 메서드는 소비를 cold stream으로 할뿐, 데이터 배출 자체는 hot stream이기 떄문에 사용을 기다리지 않고 한 번에 배출
+- 즉, 한번 밖에 배출이 안되니, 실제 Flow처럼 여러 곳에서 동일한 데이터를 받는 것은 불가능
+- consumeAsFlow는 언제 사용하는 것이 좋을까
+- 데이터를 가공하지 않고 그대로 사용한다면, consumeAsFlow를 굳이 사용할 필요가 없음
+- 만약, 데이터를 조작하기 위해 find, map, filter와 같은 메서드를 사용해야 한다면 consumeAsFlow를 사용해주면 됨
