@@ -10,3 +10,4 @@
 - [Algorithm](https://github.com/aidenkoog/TIL/blob/master/Algorithm.md)
 - [ComputerStructure](https://github.com/aidenkoog/TIL/blob/master/ComputerStructure.md)
 - [ProjectManagement](https://github.com/aidenkoog/TIL/blob/master/ProjectManagement.md)
+- [Work](https://github.com/aidenkoog/TIL/blob/master/Work.md)
