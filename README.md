@@ -7,3 +7,5 @@
 - [Keywords](https://github.com/aidenkoog/TIL/blob/master/Keywords.md)
 - [Temporary Knowledge](https://github.com/aidenkoog/TIL/blob/master/Temp.md)
 - [English](https://github.com/aidenkoog/TIL/blob/master/English.md)
+- [Algorithm](https://github.com/aidenkoog/TIL/blob/master/Algorithm.md)
+- [ComputerStructure](https://github.com/aidenkoog/TIL/blob/master/ComputerStructure.md)
