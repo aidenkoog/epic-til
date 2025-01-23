@@ -1702,3 +1702,10 @@
   - 공유기에서 WOL으로 깨울 PC를 설정하기 
   - 공유기에서 DDNS 설정하기 (집 밖에서도 WOL으로 집안의 PC를 깨우기 위함)
   - 스마트폰에서 WOL용 앱으로 공유기 접속 설정하기
+
+#### Bearer Token
+
+- Authorization 헤더의 Bearer 토큰이 왜 “Bearer”인가?
+- “Bearer”라는 용어는 영어로 “소지자(bearer)”라는 뜻
+- 즉, 토큰을 소지한 사용자가 인증된 사용자로 간주되는 구조
+- Bearer 토큰은 API 보안, OAuth 2.0, OpenID Connect 등 다양한 기술에서 핵심적인 역할
