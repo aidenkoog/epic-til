@@ -1,5 +1,7 @@
 # Epic TIL
-(2025 ~ )Today I Learned
+(~ 2024) Awesome Til
+(2025 ~) Now Epic Til (Today I Learned)
+Every day, I organize and categorize new things I learn, repeat existing knowledge, or learn additional things.
 
 ## CS (Computer Science)
 
