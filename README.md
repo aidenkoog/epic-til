@@ -8,6 +8,7 @@
 - [Keywords](https://github.com/aidenkoog/TIL/blob/master/Keywords.md)
 - [TemporaryNote](https://github.com/aidenkoog/TIL/blob/master/TemporaryNote.md)
 - [EnglishSentence](https://github.com/aidenkoog/TIL/blob/master/EnglishSentence.md)
+- [JapaneseSentence](https://github.com/aidenkoog/TIL/blob/master/JapaneseSentence.md)
 - [Algorithm](https://github.com/aidenkoog/TIL/blob/master/Algorithm.md)
 - [ComputerStructure](https://github.com/aidenkoog/TIL/blob/master/ComputerStructure.md)
 - [ProjectManagement](https://github.com/aidenkoog/TIL/blob/master/ProjectManagement.md)

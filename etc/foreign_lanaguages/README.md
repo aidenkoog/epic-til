@@ -1,4 +1,0 @@
-#### Foreign Language
-
-- English
-- Japanese
