@@ -1,7 +1,7 @@
 # Epic TIL
 (2025 ~ )Today I Learned
 
-## Computer Science Knowledge
+## CS (Computer Science)
 
 - [ComputerScience](https://github.com/aidenkoog/TIL/blob/master/ComputerScience.md)
 
