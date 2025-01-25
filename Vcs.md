@@ -1,3 +1,10 @@
+# VCS (Version Control System)
+
+정리될 내용들은 아래와 같습니다.
+
+- 개념 / 용어 정의, 사용 이유
+- Interview Question, Answer
+
 #### Git 개념
 
 - 형상 관리 도구 중 하나

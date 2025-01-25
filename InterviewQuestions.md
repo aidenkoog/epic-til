@@ -1,6 +1,6 @@
 # Interview Preparation
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/aidenkoog)
+- Organized Interview Questions & Answers
 
 ### Summary of Questions.
 
