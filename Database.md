@@ -988,3 +988,36 @@ DB 사용자들은 일반적으로 서로 다른 객체에 대하여 다른 접�
 
 - Data Mining
   - 대용량의 데이터로부터 의미 있는 패턴을 발견하기 위한 지식발견 프로세스
+- Data Mining 기법
+  - 신경망(Neural Network)
+    - 반복적인 학습을 기반으로 하여 패턴 및 지식을 발견
+    - 설명력이 부족(구조: 입력층, 은닉층, 출력층)
+  - 군집분석(Clustering)
+    - 유사한 특성을 가진 데이터를 군집하여 분석
+    - K-mean 알고리즘: 거리로 묶음
+  - 의사결정 나무(Decision Tree)
+    - 설명력이 우수한 방법으로 나무 형태로 데이터를 분류하여 분석
+    - 우수, 이탈, 신규 고객 분석
+  - 연관성 분석(Association)
+    - 동시에 발생되는 데이터 간의 연관성 분석 (맥주와 기저귀)
+    - 지지도(Support)
+    - 신뢰도(Confidence)
+    - 향상도(Lift/Improvement)
+    - 연속성 분석(Sequence): 시간의 흐름에 따른 데이터의 연관성을 분석
+    - 분류화(Classification): 다른 분류와 차별적인 특성을 분석하기 위한 데이터 분석
+- Data Quality Management(DQMS)
+  - 기업 내부 및 외부 정보시스템 및 데이터베이스 사용자에게
+  - 데이터 완전성, 유효성, 정확성, 일관성, 명확성을 향상시키기 위한 프로세스 및 조직, 도구
+- Data Quality Management Process
+  - 데이터 품질 항목 결정
+  - 데이터 품질 측정
+  - 데이터 품질 개선
+  - 데이터 품질 유지 관리
+- Data Quality Management System
+  - Data Profiling, Data Firewall
+  - Metadata Management
+  - Data Quality Score Management
+  - Data Process Management
+- Data Quality Management 지표
+  - DQI (Data Quality Indicator)
+  - CQI (Critical Quality Indicator)
