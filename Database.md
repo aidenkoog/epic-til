@@ -858,3 +858,46 @@ DB 사용자들은 일반적으로 서로 다른 객체에 대하여 다른 접�
   - DBMS의 구조에 맞는 모델링
   - 하드웨어 환경을 고려한 구성
   - 데이터베이스 튜닝, 반정규화
+
+## Database Tuning (최적화)
+
+- DBMS 시스템 구조
+  - 고객, SQL, 메모리, 파일, 데이터, 로그, 제어정보, 운영체제, 네트워크
+
+- 튜닝 접근 방법
+  - 서버 튜닝
+  - App 튜닝
+
+- SQL 실행 절차
+  - 구문 분석, 실행, 인출
+
+- 옵티마이저(Optimizer): SQL의 실행계획을 수립하는 DBMS 소프트웨어
+
+- 옵티마이저 종류
+  - Rule Base Optimizer: 정해진 규칙
+  - Cost Base Optimizer: 통계 정보
+
+- DB Join 방식
+  - Nested Loop Join: X를 찾고 Y를 찾는 방식
+  - Sort Merge Join: SORT_AREA를 사용해서 병렬적으로 정렬과 머지를 실행하고 한번의 Full Scan 수행
+
+- DB 튜닝 절차
+  - 설계 튜닝
+  - SQL 튜닝
+  - DB 논리적 구조 튜닝
+  - DB 메모리 튜닝
+  - 입출력 튜닝
+  - 자원경합 튜닝
+
+- DB 인덱스 종류
+  - 인덱스 선정
+    - 기본키와 외래키
+    - 접근경로 분석
+    - 분포도 조사 = 평균 Row수 / 총 Row*100, 10~15%정도 컬럼이 인덱스 후보
+    - 인덱스 순서: 결합 인덱스
+  - 인덱스 종류
+    - 단일 인덱스(Ordered Index)
+    - 결합 인덱스(Combined Index)
+    - 해시 인덱스(Hash Index): HASH_AREA 사용
+    - 비트맵 인덱스(Bitmap Index): 0 혹은 1로 데이터를 표현
+    - 클러스터 인덱스(Cluster Index): 물리적으로 인덱스를 정렬함
