@@ -1021,3 +1021,23 @@ DB 사용자들은 일반적으로 서로 다른 객체에 대하여 다른 접�
 - Data Quality Management 지표
   - DQI (Data Quality Indicator)
   - CQI (Critical Quality Indicator)
+
+## DBMS 종류
+
+- MMDB(Main Memory DB)
+  - DBMS 전체를 주기억장치에 상주시킴
+  - 64비트 컴퓨팅 기술
+  - T-Tree 및 B-Tree 기반의 검색
+  - Log기반 회복기법: Check Point
+  - 멀티 스레드 기반 아키텍처
+- Hybrid MMDB
+  - MMDB와 디스크 기반 DB를 동시에 사용
+- GIS(Geographic Information System) DB
+  - 도형과 비도형 데이터 관리
+  - 공간좌표 기능
+  - 데이터 검색 및 분석기능
+- GIS 공간 데이터 표현 방식
+  - Vector: 지도 정보를 좌표로 표현
+  - Raster: 그리드 셀을 사용해서 공간 데이터를 표현
+- R-Tree
+  - 객체를 저장하고 관리하기 위해서 사용하는 최소 사각형기반의 알고리즘
