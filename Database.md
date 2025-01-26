@@ -932,3 +932,27 @@ DB 사용자들은 일반적으로 서로 다른 객체에 대하여 다른 접�
 
 - DW(Data Warehouse)
   - 기업 내부 및 외부 데이터를 주체지향적으로 통합한 데이터 집합체
+- DW 특징
+  - 주체지향적: 분석목적에 맞게 함
+  - 통합적: 표준화 함
+  - 시계열성: 히스토리 데이터
+  - 비소멸성: 읽기 전용
+- DW 구성요소
+  - 통합 ERD: 주체지향적 모델
+  - ODS(Operational Data Store)
+    - 임시 저장소
+  - Meta Data: 표준 및 데이터 관리
+  - ETL: 데이터 추출, 정제, 적재
+  - 통합DB: Shared Architecture, Shared Noting
+  - OLAP: 대화식 데이터 분석
+  - Data Mining: 대용량 데이터로부터 패턴분석
+- DW 구성도
+  - 기업내부, 기업외부, ETT, ODS, Data Mart, DW, DW Meta Data
+  - OLAP, Data Mining, 분석 TOOL, 경영기반 솔루션
+- DW 구축방법
+  - 원천 데이터 분석
+  - 데이터 표준정의
+  - ETL 수립: 추출, 정제, 적재
+  - 데이터 아키텍처: 표준화, 품질
+  - DW 모델 및 구축
+  - 메타 데이터 구축
