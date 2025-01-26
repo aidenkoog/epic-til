@@ -956,3 +956,30 @@ DB 사용자들은 일반적으로 서로 다른 객체에 대하여 다른 접�
   - 데이터 아키텍처: 표준화, 품질
   - DW 모델 및 구축
   - 메타 데이터 구축
+
+## 통합 데이터베이스
+
+- ETL(Extraction, Transformation Loading)
+  - ETL 프로세스 수립
+  - 데이터 정제방안: 변환식(Rule), 배치 프로그램 설계
+  - ETL 방법: SAM 파일, CDC, Batch
+  - 메타 데이터
+  - ETL 구축 및 튜닝
+- 데이터 표준화
+  - 테이터 명칭: 통일된 용어, 의미전달
+  - 데이터 정의: 데이터 범위, 규정, 소유자
+  - 데이터 규칙: 기본 값, 허용 값, 허용범위
+  - 데이터 형식: 데이터 타입, 길이, 소수점 등
+- OLAP(Online Analytical Processing)
+  - 사용자가 대화식 및 다차원 분석을 통해서 데이터를 분석하는 BI 솔루션
+- OLAP 기능
+  - Slicing과 Dicing
+  - Pivoting
+  - Drill-Down, Drill-Up, Drill-across, Drill-Through
+- OLAP 종류
+  - ROLAP: 관계형 DB기반, 대용량 DB, 원천 데이터 추적 가능, SQL 사용
+    - Star Schema: Fact와 Dimension으로 구성
+    - Snowflake: Dimension 테이블에 대한 제3정규화 수행
+  - MOLAP: 고속으로 소용량 데이터를 분석, 복합 질의, 원천 추적 불가능, SQL을 사용못함
+    - 데이터 큐브기반 모델링 사용
+  - HOLAP: ROLAP과 HOLAP
