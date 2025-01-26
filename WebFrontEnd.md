@@ -1688,3 +1688,8 @@
   - 기본적으로 return 값은 true 가 되어 rendering 이 시작되지만 rerendering 이 필요하지 않은 부분이라면 개발자가 return value 를 false 값으로 지정함으로써 리렌더링 되는 상황을 막아줄수 있음
 - forceUpdate가 실행될때
   - props 나 state 가 아닌 다른 값이 변경되었을 때 리렌더링을 하고 싶다면 그때 사용할수 있는 메서드
+
+#### IntersectionObserver API
+
+- 요소가 유저의 뷰포트에 들어왔는지, 숨겨졌는지 탐지
+- 지연 로딩 이미지, 애니메이션 발동, 유저의 활동 추적 등에 용이
