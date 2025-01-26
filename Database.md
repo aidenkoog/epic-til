@@ -1041,3 +1041,16 @@ DB 사용자들은 일반적으로 서로 다른 객체에 대하여 다른 접�
   - Raster: 그리드 셀을 사용해서 공간 데이터를 표현
 - R-Tree
   - 객체를 저장하고 관리하기 위해서 사용하는 최소 사각형기반의 알고리즘
+
+## SQL
+
+- DDL(Data Definition Language)
+- DML(Data Manipulation Language)
+- DCL(Data Control Language)
+
+## Join
+
+- 내부조인(Inner Join)
+- 외부조인(Outer Join)
+- 상호조인(Cross Join)
+- 자기조인(Self Join)
