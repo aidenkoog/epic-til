@@ -1867,3 +1867,29 @@
   - Seek Time: 헤드가 트랙까지 가는데 걸리는 시간
   - Rotation Time: 헤드가 섹터까지 가는데 걸리는 시간
   - Transfer Time: 데이터를 전송하는데 걸리는 시간
+
+## Operating System
+
+- 운영체제의 목적
+  - 편리성(Convenience)
+  - 효율성(Efficiency)
+  - 진화(Ability to evolve)
+- 운영체제 제공 서비스
+  - 프로그램 개발, 프로그램 실행
+  - IO Devices 접근
+  - 파일 접근 및 시스템 접근 관리
+  - 에러탐지 및 대응
+  - Accounting: 통계, 모니터링 등
+- 커널(Kernel)
+  - 운영체제 핵심, Main Memory 상주, 중요한 기능 포함
+- 프로세스와 스레드
+  - 프로세스: 독립적으로 실행가능한 단위로 Process Table을 유지
+  - 스레드: 프로세스 내에서 실행단위, 프로세스의 자원을 공유한다
+- 운영체제 종류
+  - Uniprogramming: 한순간에 하나의 명령만 CPU에서 실행된다
+  - Multiprogramming: 여러 개의 프로세스를 동시에 실행
+  - Time Sharing: Multiple Interactive Jobs, Multi Users가 CPU를 시간단위로 사용
+  - Simple Batch Systems: 작업을 순서적으로 처리
+    - Monitor: 실행되는 프로그램이 모니터 소프트웨어로 제공된다. Main Memory에서 실행된다.
+  - Batch Multiprogramming: CPU를 최대한으로 사용, JCL을 제공한다.
+    - JCL(Job Control Language): Monitor에 명령을 제공
