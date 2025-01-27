@@ -1823,3 +1823,17 @@
   - Hard Failure
   - Soft Failure
   - Error Detection(탐지): 해밍코드
+
+## Virtual Memory (페이지 단위)
+
+- 가상메모리(Virtual Memory)
+  - 할당(Allocation): 메모리 블록 결정(고정길이 Paging, 가변: Segmentation)
+  - 인출(Fetch): 보조기억장치에서 주기억장치 적재 시점
+    - Demand(요청 시에), Prefetch(예측기법)
+  - 배치(Placement): 주기억장치 위치 결정(First, Best, Next, Best, Worst fit)
+  - 교체(Replacement): 주기억장치 부족 시에 교체 대상 결정
+    - FIFO, Random, LRU(최근에 참조하지 않은 페이지 교체)
+    - LFU(참조횟수가 적은 페이지 교체), NUR(참조비트와 수정비트),
+    - SCR(한번 더 기회를 준다), Optimal
+- Paging
+- Segmentation
