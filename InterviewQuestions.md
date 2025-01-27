@@ -1,4 +1,6 @@
-# Interview Preparation
+# Interview Questions
+
+정리될 내용들은 아래와 같습니다.
 
 - Organized Interview Questions & Answers
 

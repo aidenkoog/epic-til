@@ -1,4 +1,11 @@
-#### AI (Artificial Intelligence)
+# AI (인공지능, Artificial Intelligence)
+
+정리될 내용들은 아래와 같습니다.
+
+- 개념 / 용어 정의, 사용 이유
+- Interview Question, Answer
+
+#### AI (인공지능, Artificial Intelligence) 개요
 
 - Artificial Intelligence
 - 컴퓨터에서 음성 및 작성된 언어를 보고 이해하고 번역하고 데이터를 분석하고 추천하는 기능을 포함하여 다양한 고급 기능을 수행할 수 있는 일련의 기술

@@ -1,3 +1,11 @@
+# Career Management
+
+정리될 내용들은 아래와 같습니다.
+
+- 개념 / 용어 정의, 사용 이유
+- 경력관리 방법론, 관리 예
+- Interview Question, Answer
+
 ### How to manage career
 
 #### Resume

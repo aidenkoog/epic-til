@@ -1,3 +1,9 @@
+# English
+
+정리될 내용들은 아래와 같습니다.
+
+- 문장 및 단어를 작성합니다.
+
 ### English Sentences
 
 - Spending time in the country is good for relieving stress.

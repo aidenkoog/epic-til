@@ -1,3 +1,10 @@
+# iOS App Development
+
+정리될 내용들은 아래와 같습니다.
+
+- 개념 / 용어 정의, 사용 이유
+- Interview Question, Answer
+
 #### iOS Swift 설명
 
 - 모바일 / 테스크탑 용 앱을 개발하기 위해 2014년 애플에서 개발한 프로그래밍 언어

@@ -1,3 +1,11 @@
+# AR, VR, MR
+
+정리될 내용들은 아래와 같습니다.
+
+- 개념 / 용어 정의, 사용 이유
+- 증강현실, 가상현실, 혼합현실 등 관련 개념, 기술 정리
+- Interview Question, Answer
+
 #### XR 기술 개념 설명
 
 - XR(eXtended Reality)
