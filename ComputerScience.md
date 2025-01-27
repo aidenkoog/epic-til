@@ -1837,3 +1837,33 @@
     - SCR(한번 더 기회를 준다), Optimal
 - Paging
 - Segmentation
+
+## IO Device (블록/클러스터/페이지 단위, 저속)
+
+- Programmed IO
+  - CPU가 직접 입출력장치를 관리
+  - CPU 시간 낭비가 심함
+- Interrupt Driven IO
+  - 인터럽트 처리를 통한 입출력 관리
+  - CPU는 다른 작업을 할 수 있음, 비동기
+- DMA(Direct Memory Access)
+  - CPU의 개입없이 직접 입출력 수행
+  - Cycle Stealing: CPU가 버스를 사용하지 않는 동안 DMA 제어기가 버스를 사용
+- IO Channel
+  - 전용 입출력 장치 사용
+  - 한번에 하나씩 수행하는 Selector 채널,
+  - 한번에 여러 개를 입출력 하는 Multiplexer 채널
+- 인터럽트 식별방법 4개
+  - Multiple Interrupt Lines
+  - Software poll
+  - Daisy Chain
+  - Bus Master
+- Interfacing 기법
+  - Serial Interface: 한개의 선으로 한번에 한 비트씩 전송
+  - Parallel Interface: 여러 개의 선으로 한번에 여러 개의 비트를 동시전송
+- IEEE 1394 FireWire: 고속의 시리얼 버스, 빠른속도, 낮은 비용, 디지털 카메라, VCR등에 사용
+- USB: 직렬 버스, IEEE 1394보다 느림
+- DISK: Sector 단위 저장
+  - Seek Time: 헤드가 트랙까지 가는데 걸리는 시간
+  - Rotation Time: 헤드가 섹터까지 가는데 걸리는 시간
+  - Transfer Time: 데이터를 전송하는데 걸리는 시간
