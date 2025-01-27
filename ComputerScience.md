@@ -1919,3 +1919,40 @@
     - FCFS
     - SJF
     - HRN
+
+## Memory Management (주기억장치)
+
+- Memory Management 요구사항
+  - Relocation
+  - Protection
+  - Sharing
+  - Logical Organization
+  - Physical Organization
+
+- Memory Management 기술
+  - Fixed Partitioning
+    - 모든 프로세스들에게 같은 크기의 메모리 공간 할당
+    - 내부단편화(Internal Fragmentation) 발생
+  - Dynamic Partitioning
+    - 가변적 길이 할당
+    - 프로세스 요구사항 만큼 메모리를 할당한다.
+    - 외부 단편화(External Fragmentation) 발생
+    - Dynamic Paritioning Placement 알고리즘
+      - Best fit: 나쁜 성능
+      - First fit: 가장 빠름
+      - Next fit: 마지막으로 할당된 곳에 배치
+- Memory Addresses
+  - Logical: 참조주소, 메모리접근 전에 Physical Address로 바뀐다
+  - Relative: 상대주소, Processor Register가 사용
+  - Physical(Absolute Address): 실제 물리적인 절대 주소
+
+- Paging 기법
+  - 모든 프로세스들은 같은 크기의 Chunks로 메모리를 나누어 사용한다.
+  - Chunks는 프로세스의 Page와 메모리의 프레임(Frame)을 되어 있다.
+  - 프로세스는 각자의 Page table을 유지한다
+  - Fixed Partitioning 기법
+
+- Segmentation 기법
+  - 모든 프로그램들은 같은 길이의 세그먼트를 가지지 않는다(가변적 길이, 다른깅이)
+  - 주소에는 Segment Number와 Offset이 있다.
+  - Dynamic Partitioning 기법
