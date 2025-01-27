@@ -1956,3 +1956,23 @@
   - 모든 프로그램들은 같은 길이의 세그먼트를 가지지 않는다(가변적 길이, 다른깅이)
   - 주소에는 Segment Number와 Offset이 있다.
   - Dynamic Partitioning 기법
+
+## File System
+
+- 파일에서 사용되는 단위
+  - Field, Record, File, Database
+- 파일 시스템 아키텍처(Architecture)
+  - Device Drivers
+  - Basic File System
+  - Basic I/O Supervisor
+  - Logical I/O
+  - Access Method
+  - Elements of File System
+- 파일 시스템 기능
+  - 파일식별, 디렉토리 사용, 시스템 공유 및 접근 제어, 블록단위 접근, 블록단위 할당, 비어있는 블록관리
+- 파일 조직화(Organization)
+  - Pile: 모든 레코드가 다른 필드를 가짐, 구조화 되어 있지 않음
+  - Sequantial File: 레코드들이 같은 길이, 하나의 Key Field(유일함)를 가진다.
+  - Indexed Sequantial File: 메인 파일은 키필드와 포인터(주소) 포함, 독립적 주소를 가짐, 멀티 인덱스를 가지고 같은 키필드이다.
+  - Indexed File: 멀티 인덱스는 다른 키필드, 파티션 인덱스
+  - Direct File: 해시파일, 주소로 직접 접근
