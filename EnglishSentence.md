@@ -117,3 +117,69 @@
 - I can see some hills covered in bushes.
 - There are some boats floating on the lake.
 - I can see shelves filled with books.
+- I'm used to this stuff.
+- I'm afraid I cannot make it.
+- I'm afraid I don't understand.
+- I'm afraid I'll be late.
+- I'm sure you did a good job.
+- I'm sure you will do better next time.
+- I'm sure things will work out.
+- I'm not sure we can park here.
+- I was thinking about going out.
+- There's been a problem.
+- I've decided to move on.
+- I've decided to go back.
+- I want you to be happy.
+- Can you help me understand.
+- May I help you find something?
+- May I help you with anything?
+- It seems like a great deal.
+- I like the way you are.
+- I like the way you think.
+- I like the way it feels.
+- I never thought I could do it.
+- I owe you an apology.
+- I owe you one.
+- It slipped my mind.
+- It takes up all my time.
+- It takes funny.
+- It's better than nothing.
+- It's on the house.
+- It's the least I can do.
+- I'm on it.
+- I'm on a break.
+- A bicycle will rust if you leave it in the rain.
+- I know you're busy. so I'll make it brief.
+- I'll keep this presentation as brief as possible.
+- Did you set a date for the meeting?
+- Are you available for a quick meeting tomorrow?
+- How behind are we on the project?
+- The project is a little behind schedule.
+- I'm walking on air.
+- No clue.
+- Don't make up a story.
+- I'm not in the mood.
+- It goes without saying.
+- Made you jump?
+- Have a go at it.
+- He is my age.
+- It was a stimulating discussion.
+- I couldn't be happier.
+- Can you arrange the files?
+- If you'd like, I'd be happy to arrange it for you.
+- I'll make the arrangements.
+- If you could make those arrangements, that'd be great.
+- He needed some time to grieve.
+- Could she be more out of my league?
+- None of responsibility.
+- I'm sorry it didn't work out.
+- I was just about to come looking for you.
+- I thank you from the bottom of my heart.
+- My wife's part time job brings in a little extra money.
+- I wanted to thank you for what you did today.
+- Our teacher has a wonderful sense of humor.
+- I'm kind of pressed for time. so could you get back to me as soon as you can?
+- I was wondering if I could get an extension on the deadline.
+- It might come in handy when you lose your credit cards.
+- What's eating you?
+- You look beat / You look tired
