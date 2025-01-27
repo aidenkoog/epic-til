@@ -1893,3 +1893,29 @@
     - Monitor: 실행되는 프로그램이 모니터 소프트웨어로 제공된다. Main Memory에서 실행된다.
   - Batch Multiprogramming: CPU를 최대한으로 사용, JCL을 제공한다.
     - JCL(Job Control Language): Monitor에 명령을 제공
+
+## Processor Scheduling (CPU)
+
+- Five-State Model
+  - Running: 프로세스 실행
+  - Ready: 준비큐에서 실행 대기
+  - Blocked: 입출력 대기
+  - New: 새로운 프로세스 실행
+  - Exit: 작업완료 혹은 중지
+- Types of Scheduling
+  - Long-Term Shceduling: 새로운 프로세스가 실행되어서 대기 상태(Ready)가 됨
+  - Medium-Term Scheduling
+    - 연기된 대기(Ready/Suspend)상태에서 대기(Ready)로 된다.
+    - Blocked/Suspend에서 Blocked상태로 전환
+  - Short-Term Scheduling
+    - 준비 큐에 있는 프로세스가 CPU에서 실행(Dispatcher)
+- 프로세서 스케쥴링
+  - 선점(Preemptive): 우선순위가 바뀐다.
+    - Round Robin
+    - SRT
+    - Multi Level Queue
+    - Multi Level Feedback Queue
+  - 비선점(Non-Preemptive): 안 바뀜
+    - FCFS
+    - SJF
+    - HRN
