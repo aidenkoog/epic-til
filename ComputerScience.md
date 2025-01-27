@@ -1772,7 +1772,7 @@
 
 ## CPU (Microprocessor) - Word 단위
 
-- 컴퓨터 아키텍처
+- 컴퓨터 아키텍처 (x86, ARM)
   - CPU, Cache
   - 시스템 버스
   - 주기억장치, I/O 프로세서
@@ -1792,3 +1792,34 @@
   - RISC: 단순 명령어, 파이프라인 사용, 하드웨어 설계가 간단, 단순명령, 고정길이, 병렬처리 기법
   - EPIC: RISC와 VLIW가 결합된 구조
     - 병렬처리, 파이프라인, 복수의 명령 동시 실행
+
+## Memory System (Block 단위)
+
+- Cache Memory
+  - CPU와 Main Memory의 속도 차이를 위한 고속 메모리(SRAM)
+  - L1 Cache(CPU 내부에 존재), L2 Cache(CPU 외부에 존재)
+- Cache Memory Mapping
+  - 직접사상(Direct Mapping)
+  - 연관사항(Associative Mapping)
+  - 집합연관사상(Set Associative)
+- 지역성 (Locality)
+  - 프로그램이 실행될 때 어느 한 메모리 부분과 비슷한 시간 때에 집중적으로 메모리를 참조하는 원리 (공간 및 시간)
+- Cache 일관성 정책
+  - Write Through: CPU가 동시에 Cache와 Main Memory 갱신
+  - Write Back: Cache 갱신 후 일정시간이 지나서 Main Memory 갱신
+- 휘발성 메모리
+  - 전원이 나가면 데이터를 잃어버림
+  - DRAM
+    - Main Memory로 사용, 주기적으로 Refresh가 필요, 저속, 작은 비트 단위로 저장
+  - SRAM
+    - Cache Memory로 사용, Refresh가 필요없음, 고속, 큰 비트 단위로 저장
+- 비휘발성
+  - 전원이 없어도 데이터가 지워지지 않음
+  - ROM
+  - PROM: Once Write
+  - EPROM: 자외선으로 쓰기 가능
+  - EEPROM: 전기적으로 쓰기 가능
+- Error Correction (에러 수정)
+  - Hard Failure
+  - Soft Failure
+  - Error Detection(탐지): 해밍코드
