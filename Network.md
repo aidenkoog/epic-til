@@ -32,3 +32,34 @@
 - Header Checksum: 오류검출
 - Source Address: 송신자 IP
 - Destination Address: 목적지 IP
+
+## IPv6 Header
+
+- Version: IPv6
+- Traffic Class(Priority): Qos를 위한 클래스 설정(우선순위)
+- Flow Label: Flow를 위한 인덱스 지정
+- Next Header: 기본헤더 다음의 헤더 정보로 IPv6 확장헤더, TCP, UDP일 수 있음
+- Hop Limit: IPv4의 TTL
+- Source Address: 송신자 IP
+- Destination Address: 목적지 IP
+
+## ICMP Header
+
+- Type: ICMP 메시지 유형
+- Code: Type과 같이 사용되며 세부적 유형을 표현
+- Checksum: 오류검출
+- ICMP Message: 메시지 타입별 추가정보
+
+## ARP Header
+
+- Hardware Type: MAC 주소 형식(Ethernet은 항상 1임)
+- Protocol Type: 매핑되는 프로토콜 주소(IPv4는 0x0800)
+- Hardware Address Length
+- Protocol Address Length
+- Operation Code
+    - 1: ARP Request
+    - 2: ARP Reply
+    - 3: RARP Request
+    - 4: RARP Reply
+
+
