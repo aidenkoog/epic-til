@@ -114,6 +114,24 @@
 
 ## 데이터마이닝 개요 (대규모 데이터)
 
+- 데이터마이닝(Data Mining)
+    - 통계 및 수학적 기술을 사용해서 대용량 데이터를 분석하는 지식발견 과정
+- 데이터마이닝 기법
+    - 지도학습 (예측, Predictive)
+        - 추정 (Estimate)
+        - 분류 (Classification)
+        - 회귀분석 (Regression)
+        - 시계열분석 (Time-series)
+    - 자율학습 (설명, Descriptive)
+        - 연관규칙 (Association Rule)
+        - 군집분석 (Clustering)
+        - 비정형 (Text Mining)
+        - 요약 (Summarization)
+- 데이터마이닝 데이터
+    - 학습용 데이터: 모델에 사용되는 데이터
+    - 검증용 데이터: 모델 검증에 사용되는 데이터
+    - 평가용 데이터: 모델을 완료하고 검증하는 데이터
+
 ## 데이터마이닝 방법론 (빅데이터 방법론)
 
 ## 지도학습 (Y변수가 주어진다)
