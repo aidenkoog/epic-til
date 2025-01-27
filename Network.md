@@ -108,3 +108,68 @@
     - Keep-Alive: 연결유지 시간
     - Connection: Keep-Alive 사용여부
     - Content-Type: 미디어 타입
+
+## 인터넷망 ~ 내부네트워크
+
+- 인터넷망에서 ~ 내부네트워크까지 흐름
+    - 인터넷망 > L3스위치(웹 방화벽/방화벽, 웹서버, DB서버)
+    - L3스위치 > VPN > 트래픽 수집 장비(TAP) > 방화벽 / 위협관리시스템(IDS, TMS)
+    - 방화벽 / 위협관리시스템(IDS, TMS) > 침입방지시스템(IPS) > 백본스위치
+    - 백본 스위치 > 방화벽 > 허브 > 서버팜 (내부 네트워크)
+- 벡본 (벡본스위치)
+    - 네트워크의 중심. 방화벽, 워크그룹 스위치, 각종 서버가 접속하는 핵심영역
+    - 많은 트래픽을 처리해야 해서 고가용성, 고성능, 고확장성이 확보되는 기가급 장비를 많이 사용
+    - 이 장비의 성능이 안 좋으면 이곳에서 병목(bottleneck)이 걸릴 가능성이 많다.
+    - 주로 L3스위치가 백본스위치 역할을 한다.
+    - 스위치를 그리지 않고 선으로만 표시하기도 한다.
+- 허브(Hub)
+    - 여러 개의 시스템을 연결할 경우 각 포트별로 케이블을 연결하여 사용하는 물리계층의 장치
+- 스위치(Switch) L1~L3까지 사용
+    - 포트에 연결된 네트워크 연결상태 관리
+    - 포트에 네트워크 관리 기능이 추가
+    - 터널링 기술 및 Qos를 지원
+        - 터널링
+            - 한 네트워크에서 다른 네트워크로 패킷을 이동시키는 방법
+            - 데이터스트림을 인터넷상에서 가상의 파이프를 통해 전달시키는 기술
+        - Qos (Quality of service)
+            - 한정된 네트워크 용량으로 트래픽을 제어하고 주요 애플리케이션의 성능을 보장하기 위해 메커니즘이나 기술을 활용하는 것
+- VPN의 종류
+    - SSL VPN: OSI 4~7계층 동작
+        - 웹 브라우저를 기반으로 동작, RSA / X.509방식
+    - IPSEC VPN: 전송모드와 터널모드
+    - PPTP VPN: MS의 RAS를 기반으로 데이터 링크 계층에서 동작
+    - L2TP VPN: 데이터 링크 계층, PPTP와 호환
+- 침입차단시스템(방화벽)
+    - Access Control을 하는 보안장비
+        - 스크리닝 라우터
+        - 버스천 호스트
+        - 듀얼 홈
+        - 스크린드 호스트
+        - 스크린드 서브넷
+- 침입탐지시스템(IDS/TMS)
+    - 호스트 및 네트워크 침입을 탐지하는 시스템
+    - 오용탐지(Misuse)
+        - 시그니처 기반, 지식기반, 미리정의된 Rule과 비교
+        - False Positive가 낮고 False Negative가 크다
+    - 비정상탐지(Anomaly)
+        - 프로파일, 행위기반, 통계기반, 사용패턴과 비교, Zero day attack에 대응
+        - False Positive가 크다
+    - False Positive
+        - 공격이 아닌 것을 공격으로 오판
+    - False Negative
+        - 공격인데 공격이 아니라고 오판
+- IDS 종류
+    - Network, Host, Application, Misuse, Anomaly, Real time, Interval-based
+    - Active(탐지만 수행), Passive(대응 수행)
+- ESM(Enterprise Security Management)
+    - 로그를 실시간으로 수집해서 분석하는 통합보안 관제 시스템
+- SIEM(Security Information & Event Management)
+    - 로그 수집, 취약점 관리, 실시간 탐지, 경보 등을 수행하는 이벤트 기반 보안 관제 시스템
+- NAC(Network Access Control)
+    - End Point 보안, IP 및 MAC 주소를 사용해서 네트워크 접근 제어
+- Honeypot
+    - 공격자를 유인하기 위한 함정
+    - Zero day 공격을 탐지하기 위한 수단
+- 웹 방화벽(Web Firewall)
+    - 웹 애플리케이션의 취약점을 탐지 및 대응
+    - 홈 페이지 및 웹 프로토콜에 대한 보안 서비스
