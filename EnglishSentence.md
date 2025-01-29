@@ -215,3 +215,245 @@ Recently, I’ve noticed little to no growth in my skillset.
 I regret selecting this company. 
 I wish I hadn’t decided to work for this company.
 Hit the hay
+
+
+You wonder about my colleagues curious abour my class?
+Are you wondering if my colleagues are curious about my class?
+
+There are no people who don't know me. 
+No one knows about it. 
+
+There is no person who catch I take this class. 
+Nobody knows I'm taking this class. 
+
+I didn't tell anyone this. 
+I haven’t told anyone about this.
+
+I always go outside for the calling with you. 
+I always go outside to take your call.
+
+Yesterday, I had chance to talk to Chinese person with zoom. 
+Yesterday, I had the chance to talk to a Chinese person on Zoom.
+
+We first met each other when we get interview in first company. 
+We first met during the interview at our first company.
+
+We are all same age people so we can familiar each other easily. 
+We are all the same age, so we became familiar with each other easily.
+
+Even though they are younger than me, it not problem.
+Even though they are younger than me, it’s not a problem.
+
+Age is not problem and age is not obstacle. 
+Age is neither a problem nor an obstacle.
+
+Great sentence/s:
+I was just enduring that situation. 
+I was putting up with it at that moment.
+
+At that time, I was a freshman in that company. 
+Back then, I was new to the company.
+
+Government give pension to them. 
+The government gives them pensions.
+
+I think I can get job as freelancer. 
+ I think I can get a job as a freelancer.
+
+When I was in first company there are a lot of business trip. 
+When I was at my first company, there were a lot of business trips.
+
+I don't curious about another country anymore. 
+I’m no longer curious about other countries.
+
+My first business trip is to go to Japan. 
+My first business trip was to Japan.
+
+Only one baby maybe he feels solitude. 
+An only child might experience loneliness.
+
+I want to make friend for him. 
+I want to give him a friend. 
+
+Academy enroll fee is expensive. 
+The academy enrollment fee is expensive.
+
+We cannot have chance to communicate with foreigners. 
+Opportunities to engage with foreigners are limited.
+
+The reason is various.
+The reasons vary.
+
+Great sentences:
+I don't want to go abroad anymore.
+I’m not interested in going overseas anymore.
+
+I also agree with your students.
+I’m in agreement with your students too.
+
+In Korea, men have to do military service for two years. 
+Military service is mandatory for men in Korea.
+
+I do military service for about two years. 
+I served in the military for about two years.
+
+Almost all men in Korea, dislike military service. 
+Most men in Korea have a negative view of military service.
+
+I was so happy because of my military service. 
+Surprisingly, I enjoyed my time in the military.
+
+The purpose is not to earn the money.
+The purpose is not to earn money. 
+
+Every Seollal I go to home for meeting my parents.
+Every Seollal, I got home to meet my parents. 
+
+I think it's better than not being a job. 
+I think it's better than not having a job. 
+
+Small IT company in Korea is hard to survive.
+It is difficult for small IT companies in Korea to stay afloat.
+
+I can earn the money a lot. 
+I can still earn a lot of money. 
+
+I think now I start to prepare  
+I think I have to start preparing now. 
+
+Great sentences: 
+A huge salary makes me very happy. 
+A high salary brings me a lot of joy.
+
+I have been working in that company for eight years. 
+I was in that company for almost a decade. 
+
+I can express everything with them. 
+I can openly communicate with them.
+
+One of them is an IT engineer. 
+One of the people I know is an IT engineer.
+
+My parents support me at that time. 
+At the time, my parents were there to support me.
+
+I like foreign resturant Italian. 
+I like foreign restaurants, especially Italian ones.
+
+I think there is no restaurant I dislike. 
+I think there isn’t any restaurant I dislike.
+
+Every day I try to do exercise in the gym or at home. 
+Every day, I try to exercise either at the gym or at home.
+
+Now, I also don't do exercise.
+I don't exercise these days. 
+
+Actually, I don't like to do exercise. 
+Honestly, I don’t enjoy exercising.
+
+Only water I drink. 
+I only drink water. 
+
+Drinking water much makes people healthy. 
+Drinking too much water can make people healthy. 
+
+Many people said to me about that. 
+Many people said the same thing. 
+
+I can save it in my body so long term. 
+I can store it in my body for a long time. 
+
+I feel always hungry. 
+I always feel hungry. 
+
+Every day I try to endure hungry. 
+Every day, I try to endure my hunger.
+
+Do you wonder about how my mother can keep her health? 
+Are you wondering about how my mother maintains her health? 
+
+Let me keep in touch with you through KakaoTalk. 
+We can keep in contact on KakaoTalk.
+
+I ate breakfast this morning.
+I had my morning meal today. 
+
+I have to take care of my body. 
+I have to look after my health.
+
+I always think about the nutrition of that menu. 
+I always think about the nutritional value of that menu.
+
+This month my salary not enough. 
+My salary is not enough this month.
+
+From my mother I heard it. 
+I heard it from my mother. 
+
+In Korea, the economy situation is very bad. 
+In Korea, the economy situation is very bad. 
+
+My mother stops eating it. 
+My mother stopped eating it. 
+
+Thai resturant I like it. 
+I like Thai restaurants. 
+
+Ungrammatical sentence: I don't know this word meaning. 
+Corrected Sentence: I don't know what this word means.
+
+I have to work overtime, three times a week or four times.  
+I have to work overtime three or four times a week. 
+
+This years my plan is to improve my skills. 
+This year, I plan to improve my skills. 
+
+Every day I get sleep 12 a.m to 8 a.m. 
+Every day, I sleep from 12 a.m. to 8 a.m.
+
+I just want to familiar with English as native Korean. 
+I just want to familiarize myself with English as a Korean.
+
+My age is 39 years old.
+I am 39 years old. 
+
+I never think of it. 
+I have never thought of it. 
+
+I think my members always working hard. 
+I think my members are always working hard. 
+
+Let me summary my life every day my life. 
+Let me summarize my daily life. 
+
+I just ignore to their saying. 
+I just ignore what they say. 
+
+There was no best boss.
+I've never had a good boss. 
+
+I'm one of members. 
+I'm one of the members. 
+
+Great sentences:
+Great sentence: This project is very challenging. 
+Another useful expression: This project is proving to be a tough one.
+
+I have been developing Android and IOS applications. 
+I am an Android and iOS application developer.
+
+My company doesn't give me a lot of money. 
+My company doesn’t pay me very well.
+
+For about 10 years, I have been working as a software engineer. 
+It's been a decade since I started working as a software engineer. 
+
+I want to communicate with foreigners freely.
+I hope to converse effortlessly with foreigners.
+
+Last year, I had been living like a zombie. 
+I felt lifeless and disconnected throughout last year.
+
+These days, I have no chance to use English.
+Lately, I haven’t had the chance to practice my English.
