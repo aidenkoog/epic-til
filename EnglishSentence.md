@@ -183,3 +183,35 @@
 - It might come in handy when you lose your credit cards.
 - What's eating you?
 - You look beat / You look tired
+
+I go out from elevator. 
+I just got out of the elevator. 
+
+Today, I also I'm so busy. 
+I'm also very busy today. 
+
+I think it's very hard for me to work with my coworker. 
+I find it very hard to work with my coworker.
+
+My coworker is all junior levels. 
+My team consists entirely of junior-level employees.
+
+The situation is goes well. 
+The situation is going well. 
+
+They don't know what they have to do. 
+They’re unclear about their responsibilities.
+
+I involve in three project. 
+I’m involved in three projects.
+
+Great sentence/s:
+Our CEO doesn't want to hire more employees. 
+Our CEO is reluctant to expand the workforce.
+
+These days, I haven't been improving on my skills. 
+Recently, I’ve noticed little to no growth in my skillset.
+
+I regret selecting this company. 
+I wish I hadn’t decided to work for this company.
+Hit the hay
