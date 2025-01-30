@@ -409,3 +409,207 @@
 - Q.야근을 어떻게 생각하나요?
 - Q.지원 부서와 다른 부서로 배치받는다면?
 - 본인의 성격적/업무적 장점 및 단점
+
+
+	1.	React의 핵심 개념은 무엇인가?
+	2.	Virtual DOM이란 무엇이며, 어떻게 동작하는가?
+	3.	React의 State와 Props의 차이점은?
+	4.	React에서 상태 관리는 어떻게 하는가?
+	5.	Redux와 Context API의 차이점은?
+	6.	React에서 useEffect 훅의 역할은?
+	7.	useMemo와 useCallback의 차이점은?
+	8.	React에서 이벤트 핸들링은 어떻게 하는가?
+	9.	React의 컴포넌트 라이프사이클을 설명하시오.
+	10.	React에서 불필요한 리렌더링을 방지하는 방법은?
+	11.	React에서 상태(state)를 변경할 때 주의할 점은?
+	12.	React에서 Suspense와 Error Boundary의 차이점은?
+	13.	React의 Concurrent Mode란 무엇인가?
+	14.	Server-side Rendering(SSR)과 Client-side Rendering(CSR)의 차이점은?
+	15.	Next.js를 사용할 때의 장점은?
+	16.	React에서 HOC(High Order Component)란?
+	17.	React의 Reconciliation 알고리즘이란?
+	18.	React에서 상태를 전역으로 관리하는 방법에는 무엇이 있는가?
+	19.	useReducer를 사용하는 경우는 언제인가?
+	20.	React에서 useRef의 용도는?
+	21.	React에서 Portals란 무엇인가?
+	22.	React에서 Synthetic Event란?
+	23.	React에서 key props가 필요한 이유는?
+	24.	React에서 Suspense를 이용해 데이터를 비동기적으로 로딩하는 방법은?
+	25.	React의 hydrate 기능은 무엇인가?
+	26.	React에서 새로운 상태를 만들지 않고 이전 상태를 직접 변경하면 왜 안 되는가?
+	27.	React에서 Lazy Loading을 구현하는 방법은?
+	28.	React.memo()를 사용하는 이유는?
+	29.	React에서 Fragment란 무엇인가?
+	30.	React에서 Error Boundary를 구현하는 방법은?
+  1.	React에서 Strict Mode를 사용하는 이유는?
+	2.	React에서 Synthetic Events와 Native Events의 차이점은?
+	3.	React의 forwardRef를 사용해야 하는 경우는?
+	4.	React에서 createContext()와 useContext()의 차이점은?
+	5.	React에서 JSX의 역할과 내부적으로 변환되는 방식은?
+	6.	React에서 useEffect의 실행 순서는 어떻게 결정되는가?
+	7.	React의 useLayoutEffect와 useEffect의 차이점은?
+	8.	React에서 Fragment와 div를 사용할 때의 차이점은?
+	9.	React에서 이벤트 버블링을 방지하는 방법은?
+	10.	React에서 useState의 이전 상태를 기반으로 새 상태를 설정하는 방법은?
+	11.	React에서 React.lazy()를 사용하면 어떤 장점이 있는가?
+	12.	React에서 Suspense와 Concurrent Mode의 연관성은?
+	13.	React에서 setState()가 비동기로 동작하는 이유는?
+	14.	React에서 컴포넌트 최적화를 위해 shouldComponentUpdate()를 활용하는 방법은?
+	15.	React에서 children props를 활용하는 방식은?
+	16.	React에서 상태(state) 변경이 반영되지 않는 이유는?
+	17.	React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
+	18.	React에서 Redux Thunk와 Redux Saga의 차이점은?
+	19.	React에서 Server Components의 개념과 활용 방법은?
+	20.	React에서 hydration이 실패하는 이유는?
+	21.	React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제는?
+	22.	React의 Concurrent Rendering이 UI 성능에 미치는 영향은?
+	23.	React에서 useRef와 useState의 차이점은?
+	24.	React에서 useReducer를 사용하는 시나리오는?
+	25.	React의 Error Boundaries는 어떤 상황에서 유용한가?
+	26.	React에서 CSS-in-JS 라이브러리를 사용하는 이유는?
+	27.	React에서 Refs를 활용해 DOM 요소를 조작하는 방법은?
+	28.	React에서 비동기 상태 업데이트를 수행하는 방법은?
+	29.	React에서 Formik과 React Hook Form의 차이점은?
+	30.	React에서 useImperativeHandle()은 어떤 역할을 하는가?
+
+	1.	React Native와 React의 차이점은?
+	2.	React Native에서 Navigation을 구현하는 방법은?
+	3.	React Native에서 상태 관리는 어떻게 하는가?
+	4.	React Native에서 AsyncStorage의 역할은?
+	5.	React Native에서 Reanimated란?
+	6.	React Native에서 Native Module이란?
+	7.	React Native에서 Expo와 Bare Workflow의 차이점은?
+	8.	React Native에서 성능 최적화 방법은?
+	9.	React Native에서 useEffect의 메모리 누수를 방지하는 방법은?
+	10.	React Native에서 Gesture Handling을 구현하는 방법은?
+	11.	React Native에서 push notification을 설정하는 방법은?
+	12.	React Native에서 App State를 관리하는 방법은?
+	13.	React Native에서 Hot Reloading과 Fast Refresh의 차이점은?
+	14.	React Native에서 Dynamic Linking이란?
+	15.	React Native에서 Code Splitting이 필요한 이유는?
+  1.  React Native에서 Flipper를 사용하는 이유는?
+	2.	React Native의 Metro Bundler와 Webpack의 차이점은?
+	3.	React Native에서 Hermes 엔진을 사용하는 장점은?
+	4.	React Native에서 SafeAreaView의 역할은?
+	5.	React Native에서 Dynamic Styles을 적용하는 방법은?
+	6.	React Native에서 Performance Profiling을 수행하는 방법은?
+	7.	React Native에서 Detox와 Appium의 차이점은?
+	8.	React Native에서 Firebase를 연동하는 방법은?
+	9.	React Native에서 Clipboard API를 사용하는 방법은?
+	10.	React Native에서 StatusBar를 동적으로 변경하는 방법은?
+
+	1.	프로젝트 관리에서 Agile과 Waterfall의 차이점은?
+	2.	Scrum과 Kanban의 차이점은?
+	3.	프로젝트의 요구 사항을 분석하는 방법은?
+	4.	프로젝트 일정 관리를 어떻게 하는가?
+	5.	팀 내 갈등이 발생했을 때 해결 방법은?
+	6.	프로젝트의 리스크를 사전에 식별하고 대응하는 방법은?
+	7.	프로젝트 일정이 지연될 때 대처하는 방법은?
+	8.	팀원의 생산성을 높이는 방법은?
+	9.	프로젝트 예산을 효과적으로 관리하는 방법은?
+	10.	프로젝트 관리에서 KPI(Key Performance Indicator)를 설정하는 방법은?
+  1.  Agile 환경에서 Story Points를 설정하는 기준은?
+	2.	프로젝트에서 Technical Debt(기술 부채)를 관리하는 방법은?
+	3.	프로젝트 Kickoff Meeting에서 논의해야 할 주요 사항은?
+	4.	프로젝트에서 Scope Creep(스코프 변동)을 방지하는 방법은?
+	5.	Sprint Planning과 Sprint Review의 차이점은?
+	6.	프로젝트에서 Burn Down Chart를 사용하는 이유는?
+	7.	프로젝트 일정이 변경될 때 팀을 조율하는 방법은?
+	8.	프로젝트에서 MVP(Minimum Viable Product) 개념을 적용하는 방법은?
+	9.	프로젝트 예산 초과를 방지하는 전략은?
+	10.	프로젝트 종료 후 Retrospective를 효과적으로 진행하는 방법은?
+
+	1.	Jetpack Compose와 기존 XML 기반 UI의 차이점은?
+	2.	Android의 ViewModel과 LiveData의 차이점은?
+	3.	Android에서 Coroutine과 RxJava의 차이점은?
+	4.	Android의 Room Database와 SQLite의 차이점은?
+	5.	Android에서 Dependency Injection을 구현하는 방법은?
+	6.	Android에서 Jetpack Paging 라이브러리를 사용하는 이유는?
+	7.	Android TV 앱 개발 시 고려해야 할 사항은?
+	8.	OTT 플랫폼에서 DRM(Digital Rights Management)이 중요한 이유는?
+	9.	Android 앱의 백그라운드 작업을 효율적으로 수행하는 방법은?
+	10.	Android에서 WorkManager와 JobScheduler의 차이점은?
+  1.	Android TV 앱에서 Leanback 라이브러리의 역할은?
+	2.	Android TV 앱 개발 시 D-pad(방향키) 네비게이션을 처리하는 방법은?
+	3.	Android에서 RecyclerView의 DiffUtil이 중요한 이유는?
+	4.	Android에서 Jetpack DataStore를 사용하는 이유는?
+	5.	Android에서 Jetpack Hilt와 Dagger의 차이점은?
+	6.	Android에서 Shared Preferences보다 Encrypted Shared Preferences가 필요한 이유는?
+	7.	Android에서 CameraX와 기존 Camera API의 차이점은?
+	8.	Android에서 Jetpack WorkManager와 Foreground Service의 차이점은?
+	9.	Android에서 Jetpack Paging을 사용하는 이유는?
+	10.	Android에서 App Bundle과 APK의 차이점은?
+
+	1.	Flutter의 StatefulWidget과 StatelessWidget의 차이점은?
+	2.	Flutter에서 Navigator 1.0과 2.0의 차이점은?
+	3.	Flutter에서 Riverpod과 Provider의 차이점은?
+	4.	Flutter의 BuildContext란 무엇인가?
+	5.	Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
+	6.	Flutter에서 Hot Reload와 Hot Restart의 차이점은?
+	7.	Flutter에서 플랫폼별 코드(Android/iOS)를 다르게 적용하는 방법은?
+	8.	Flutter에서 Web과 Mobile 개발의 차이점은?
+	9.	Flutter에서 Adaptive UI를 구현하는 방법은?
+	10.	Flutter에서 BLoC 패턴을 사용하는 이유는?
+  1.	Flutter에서 Sliver Widgets을 사용하는 이유는?
+	2.	Flutter에서 InheritedWidget의 역할은?
+	3.	Flutter에서 Provider와 Bloc의 차이점은?
+	4.	Flutter에서 Isolates를 활용하는 이유는?
+	5.	Flutter에서 Custom Painter를 활용하는 방법은?
+	6.	Flutter에서 Native Code(Android, iOS)를 호출하는 방법은?
+	7.	Flutter에서 Firebase Analytics를 활용하는 방법은?
+	8.	Flutter에서 FFI(Foreign Function Interface)를 사용하는 이유는?
+	9.	Flutter에서 Riverpod의 Family Modifier를 사용하는 이유는?
+	10.	Flutter에서 Drag and Drop을 구현하는 방법은?
+
+	1.	Vue.js의 반응형(Reactive) 시스템이 어떻게 동작하는가?
+	2.	Vue.js에서 Vuex와 Pinia의 차이점은?
+	3.	Vue.js의 Computed Property와 Watcher의 차이점은?
+	4.	Vue.js에서 Composition API와 Options API의 차이점은?
+	5.	Vue.js에서 Teleport 기능은 무엇인가?
+	6.	Vue.js에서 Lazy Loading을 구현하는 방법은?
+	7.	Vue.js에서 Virtual DOM이 어떻게 작동하는가?
+	8.	Vue.js에서 Suspense를 사용하는 이유는?
+	9.	Vue.js에서 Slots를 활용하는 방법은?
+	10.	Vue Router에서 History Mode와 Hash Mode의 차이점은?
+  1.	Vue.js에서 Composition API의 provide/inject를 활용하는 방법은?
+	2.	Vue.js에서 Mixin과 Composition API의 차이점은?
+	3.	Vue.js에서 Web Component를 만들 때 주의할 점은?
+	4.	Vue.js에서 Reactivity Transform이 필요한 이유는?
+	5.	Vue.js에서 keep-alive의 역할은?
+	6.	Vue.js에서 Transition과 Animation을 활용하는 방법은?
+	7.	Vue.js에서 SSR(Server-Side Rendering)을 적용하는 방법은?
+	8.	Vue.js에서 Suspense와 async setup()을 활용하는 방법은?
+	9.	Vue.js에서 Teleport를 사용하는 시나리오는?
+	10.	Vue.js에서 PWA(Progressive Web App)를 구현하는 방법은?
+
+	1.	Java의 JVM, JRE, JDK의 차이점은?
+	2.	Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
+	3.	Java에서 Multi-threading을 구현하는 방법은?
+	4.	Java에서 HashMap과 ConcurrentHashMap의 차이점은?
+	5.	Java에서 Stream API를 활용하는 방법은?
+  1.	Java에서 Reflection을 사용할 때 주의해야 할 점은?
+	2.	Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
+	3.	Java에서 CompletableFuture를 활용하는 방법은?
+	4.	Java에서 메모리 누수를 방지하는 방법은?
+	5.	Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
+	6.	Java의 Optional 클래스를 사용하는 이유는?
+	7.	Java에서 Thread와 Executor의 차이점은?
+	8.	Java에서 WebSockets을 구현하는 방법은?
+	9.	Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
+	10.	Java에서 Functional Interface를 활용하는 방법은?
+
+	1.	Python에서 GIL(Global Interpreter Lock)이란?
+	2.	Python의 List와 Tuple의 차이점은?
+	3.	Python에서 Decorator의 역할은?
+	4.	Python의 Pandas와 NumPy의 차이점은?
+	5.	Python에서 Lambda 함수는 어떻게 동작하는가?
+  1.	Python에서 리스트와 제너레이터의 차이점은?
+	2.	Python에서 name == “main“을 사용하는 이유는?
+	3.	Python에서 multi-threading과 multi-processing의 차이점은?
+	4.	Python에서 asyncio의 역할은?
+	5.	Python에서 Flask와 Django의 차이점은?
+	6.	Python에서 pandas와 polars의 차이점은?
+	7.	Python에서 Celery를 활용하는 방법은?
+	8.	Python에서 TensorFlow와 PyTorch의 차이점은?
+	9.	Python에서 Decorator를 사용하여 함수 성능을 측정하는 방법은?
+	10.	Python에서 SQLAlchemy ORM을 사용하는 이유는?
