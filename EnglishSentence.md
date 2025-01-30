@@ -457,3 +457,7 @@ I felt lifeless and disconnected throughout last year.
 
 These days, I have no chance to use English.
 Lately, I haven’t had the chance to practice my English.
+
+What is the biggest goal in life?
+What is your goal?
+Why do you book an English class?
