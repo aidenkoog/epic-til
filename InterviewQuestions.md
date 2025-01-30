@@ -2060,3 +2060,73 @@
 	179.	Infrastructure as Code(IaC)의 개념과 도입 시 고려할 점은?
 	180.	Edge Computing이 클라우드 컴퓨팅과 다른 점은?
 
+
+  - Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
+  - Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
+  - OOP의 4대 원칙과 SOLID 원칙에 대해 설명해주세요.
+  - 멀티스레딩과 동시성 처리에 대해 설명해주세요. (Thread, ExecutorService, Synchronized, Volatile 등)
+  - Java의 컬렉션 프레임워크에 대해 설명해주세요. (List, Set, Map 등)
+  - 예외 처리의 종류와 차이점을 설명해주세요. (Checked Exception vs Unchecked Exception)
+
+  - Kotlin의 주요 특징과 Java와의 차이점은 무엇인가요?
+  - Null Safety를 어떻게 구현했는지 설명해주세요.
+  - Kotlin의 Coroutine과 Java의 Thread의 차이점은 무엇인가요?
+  - Kotlin에서의 확장 함수(Extension Function)에 대해 설명해주세요.
+  - Data Class의 장점과 사용 사례를 설명해주세요.
+
+  - Coroutine이란 무엇이고, 어떤 상황에서 사용하나요?
+  - Coroutine의 Dispatcher 종류와 각각의 사용 사례를 설명해주세요.
+  - Coroutine의 Cancellation과 Exception Handling에 대해 설명해주세요.
+  - Coroutine과 RxJava의 차이점은 무엇인가요?
+  - Coroutine을 사용해본 프로젝트에서의 경험을 공유해주세요.
+
+  - Android의 생명주기(Lifecycle)에 대해 설명해주세요.
+  - Activity와 Fragment의 차이점은 무엇인가요?
+  - ViewModel과 LiveData의 역할과 장점은 무엇인가요?
+  - Android에서의 메모리 관리와 LeakCanary 사용 경험에 대해 설명해주세요.
+  - Jetpack Compose를 사용해본 경험이 있다면 설명해주세요.
+  - Android에서의 DI(Dependency Injection) 사용 경험을 공유해주세요. (Dagger, Hilt 등)
+  - Android의 백그라운드 작업 처리 방법을 설명해주세요. (WorkManager, JobScheduler 등)
+
+  - AOSP 빌드 과정에 대해 설명해주세요.
+  - Android 시스템의 주요 컴포넌트에 대해 설명해주세요. (Binder, Zygote, SystemServer 등)
+  - 커스텀 ROM을 제작한 경험이 있다면 설명해주세요.
+
+  - React의 Virtual DOM에 대해 설명해주세요.
+  - React의 상태 관리 방법에 대해 설명해주세요. (Redux, Context API 등)
+  - React Native와 Native 개발의 차이점은 무엇인가요?
+  - React Native에서의 성능 최적화 방법을 설명해주세요.
+
+  - Flutter의 주요 특징과 장단점은 무엇인가요?
+  - Dart 언어의 특징을 설명해주세요.
+  - Flutter에서의 상태 관리 방법을 설명해주세요. (Provider, Riverpod, Bloc 등)
+  - Flutter의 Hot Reload와 Hot Restart의 차이점은 무엇인가요?
+
+  - Vue.js의 주요 특징과 React와의 차이점은 무엇인가요?
+  - Vuex를 사용한 상태 관리 경험을 설명해주세요.
+  - Vue.js에서의 라우팅 처리 방법을 설명해주세요.
+
+  - Swift의 주요 특징과 Objective-C와의 차이점은 무엇인가요?
+  - iOS 앱의 생명주기에 대해 설명해주세요.
+  - SwiftUI와 UIKit의 차이점은 무엇인가요?
+
+  - Python의 GIL(Global Interpreter Lock)에 대해 설명해주세요.
+  - Python에서의 멀티스레딩과 멀티프로세싱의 차이점은 무엇인가요?
+  - Python의 가상 환경(Virtual Environment) 사용 이유와 방법을 설명해주세요.
+  - Python의 주요 라이브러리 사용 경험을 공유해주세요. (Pandas, NumPy, Flask, Django 등)
+
+  - 데이터 구조와 알고리즘: 스택, 큐, 트리, 그래프, 해시 테이블 등
+  - 네트워크: TCP/IP, HTTP/HTTPS, REST API, WebSocket 등
+  - 운영체제: 프로세스 vs 스레드, 동기화, 데드락 등
+  - 데이터베이스: SQL vs NoSQL, 인덱싱, 트랜잭션 등
+  - 디자인 패턴: Singleton, Factory, Observer, MVC/MVVM 등
+  - 프로젝트 일정 관리와 리소스 배분은 어떻게 하셨나요? (Agile, Scrum, Kanban 등)
+  - 팀 내 갈등 상황을 어떻게 해결하셨나요?
+  - 프로젝트의 위험 관리(Risk Management)는 어떻게 하셨나요?
+  - 프로젝트의 성공/실패 사례를 공유해주세요.
+  - 기술적 부채(Technical Debt)를 어떻게 관리하셨나요?
+  - 팀원들의 성과를 어떻게 평가하고 동기부여를 하셨나요?
+  - 최근 관심 있는 기술 트렌드는 무엇인가요?
+  - 코드 리뷰를 어떻게 진행하시나요?
+  - 테스트 자동화 경험이 있다면 설명해주세요. (Unit Test, UI Test 등)
+  - CI/CD 파이프라인 구축 경험을 설명해주세요. (Jenkins, GitHub Actions 등)
