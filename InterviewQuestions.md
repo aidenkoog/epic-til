@@ -2061,6 +2061,135 @@
 	180.	Edge Computing이 클라우드 컴퓨팅과 다른 점은?
 
 
+	•	iOS의 주요 아키텍처와 컴포넌트는?
+	•	Swift의 주요 특징은?
+	•	struct와 class의 차이는?
+	•	optional이란 무엇이고, !와 ?의 차이는?
+	•	guard와 if let의 차이는?
+	•	weak, strong, unowned의 차이는?
+	•	ARC(Automatic Reference Counting)란 무엇인가?
+	•	protocol과 extension의 역할과 활용 사례는?
+	•	enum과 associated value를 활용하는 방법은?
+	•	closure란 무엇이며, 캡처 리스트([weak self])를 사용하는 이유는?
+	•	UIKit과 SwiftUI의 차이는?
+	•	UIView와 CALayer의 차이는?
+	•	Auto Layout과 Constraint의 원리 및 사용 방법은?
+	•	frame과 bounds의 차이는?
+	•	TableView와 CollectionView의 차이점과 사용 사례는?
+	•	SwiftUI에서 State, Binding, ObservedObject, EnvironmentObject의 차이는?
+	•	UIKit에서 ViewController 생명주기는?
+	•	SwiftUI에서 View의 생명주기는?
+	•	NavigationView와 TabView의 기본 동작 원리는?
+	•	UIKit에서 커스텀 셀을 만들 때 고려해야 할 사항은?
+	•	iOS에서 네트워킹을 처리하는 방법은?
+	•	URLSession을 활용한 네트워킹 구현 방법은?
+	•	JSON을 파싱하는 방법과 Codable의 역할은?
+	•	비동기 네트워킹을 처리할 때 async/await과 completion handler의 차이는?
+	•	Core Data와 Realm의 차이는?
+	•	UserDefaults, Keychain, File System의 차이와 각각의 사용 사례는?
+	•	REST API와 GraphQL의 차이는?
+	•	iOS에서 메모리 누수가 발생하는 원인과 해결 방법은?
+	•	DispatchQueue.main.async을 사용하는 이유는?
+	•	Grand Central Dispatch(GCD)와 OperationQueue의 차이는?
+	•	iOS에서 성능 최적화를 위해 고려해야 할 사항은?
+	•	앱의 메모리 사용량을 줄이는 방법은?
+	•	Instruments에서 메모리 릭을 탐지하는 방법은?
+	•	스레드 안전성을 보장하는 방법은?
+	•	iOS에서 자주 사용되는 디자인 패턴은?
+	•	MVC, MVVM, VIPER의 차이점과 장단점은?
+	•	의존성 주입(Dependency Injection)이란?
+	•	Singleton 패턴이 가지는 문제점과 해결 방법은?
+	•	Combine 프레임워크를 활용하는 방법은?
+	•	Swift에서 Delegate 패턴과 Notification 패턴의 차이는?
+	•	iOS 앱을 App Store에 배포하는 과정은?
+	•	Ad Hoc, Enterprise, App Store 배포 방식의 차이는?
+	•	iOS 앱의 테스트 종류(Unit Test, UI Test 등)와 활용 방법은?
+	•	XCTest에서 UI 테스트를 구현하는 방법은?
+	•	TestFlight를 이용한 베타 테스트 방법은?
+	•	Crashlytics를 활용하여 크래시 로그를 분석하는 방법은?
+	•	Keychain을 활용하여 민감한 데이터를 저장하는 방법은?
+	•	iOS에서 HTTPS를 강제하는 방법은?
+	•	앱의 보안을 강화하는 방법은?
+	•	Face ID 및 Touch ID를 활용하는 방법은?
+	•	Dynamic Type과 VoiceOver를 지원하는 방법은?
+	•	iOS 앱에서 사용자 데이터를 보호하기 위한 방법은?
+	•	iOS 최신 버전에서 추가된 주요 기능은?
+	•	Swift Concurrency(async/await)와 기존 GCD의 차이점은?
+	•	Apple Silicon에서 iOS 앱이 어떻게 동작하는가?
+	•	WidgetKit, App Clips, Swift Charts 등 최신 프레임워크를 활용하는 방법은?
+	•	Vision, ARKit, CoreML 등 최신 기술을 프로젝트에서 어떻게 활용할 수 있는가?
+	•	Swift에서 copy-on-write(COW)란? 어떤 자료형에서 활용되는가?
+	•	Swift에서 dynamic 키워드는 언제 사용되는가?
+	•	associatedtype을 활용한 제네릭 프로토콜을 정의하는 방법은?
+	•	Swift의 Property Wrapper를 활용하는 방법과 사용 사례는?
+	•	lazy var와 computed property의 차이점은?
+	•	Swift에서 Equatable, Comparable 프로토콜을 직접 구현하는 방법은?
+	•	async let과 Task {}의 차이점은?
+	•	Swift의 Result<T, Error> 타입을 활용하는 방법은?
+	•	actor와 기존 DispatchQueue.sync를 비교하면 어떤 차이가 있는가?
+	•	Memory Layout<T>을 활용하여 메모리 구조를 확인하는 방법은?
+	•	UIBezierPath와 CAShapeLayer를 활용하여 커스텀 UI를 만드는 방법은?
+	•	UIView 애니메이션에서 spring damping이란 무엇이며 어떻게 활용하는가?
+	•	CALayer에서 shadowPath를 직접 설정하면 성능이 왜 향상되는가?
+	•	SwiftUI에서 PreferenceKey를 활용하는 방법과 사례는?
+	•	GeometryReader의 역할과 성능 최적화 방안은?
+	•	UIKit에서 layoutSubviews()와 draw(_:)의 차이는?
+	•	UIStackView가 실제로 내부에서 어떻게 동작하는가?
+	•	SwiftUI에서 ViewBuilder는 어떻게 작동하는가?
+	•	URLSessionDataTask, URLSessionDownloadTask, URLSessionUploadTask의 차이점은?
+	•	HTTP/2와 HTTP/3의 차이는?
+	•	URLCache를 활용하여 네트워크 응답을 캐싱하는 방법은?
+	•	WebSocket과 HTTP Long Polling의 차이점은?
+	•	multipart/form-data 요청을 iOS에서 처리하는 방법은?
+	•	Core Data의 NSPersistentContainer와 NSPersistentStoreCoordinator의 차이는?
+	•	Core Data의 merge policy 옵션이란?
+	•	Core Data에서 NSFetchedResultsController는 언제 사용되는가?
+	•	Realm을 사용할 때 @Persisted와 기존 List<>의 차이점은?
+	•	CloudKit을 활용한 데이터 동기화의 원리는?
+	•	RunLoop의 개념과 활용 사례는?
+	•	autoreleasepool이 필요한 경우는?
+	•	malloc과 free는 iOS에서 어떻게 동작하는가?
+	•	Object Graph와 Reference Counting의 관계는?
+	•	NSCache와 UserDefaults의 차이는?
+	•	NSOperationQueue와 DispatchQueue의 차이점과 적절한 사용 사례는?
+	•	Swift의 UnsafePointer<T>와 OpaquePointer의 차이는?
+	•	iOS에서 Lazy Loading을 구현하는 방법은?
+	•	NSThread와 pthread의 차이는?
+	•	iOS에서 Backtrace를 활용하여 메모리 릭을 찾는 방법은?
+	•	Clean Architecture를 iOS 프로젝트에서 적용하는 방법은?
+	•	Interactor, Presenter, Repository는 각각 어떤 역할을 하는가?
+	•	RxSwift와 Combine의 차이점은?
+	•	Coordinator Pattern이 필요한 이유는?
+	•	Dependency Injection을 활용하여 ViewController의 의존성을 관리하는 방법은?
+	•	SOLID 원칙을 iOS 개발에서 적용하는 방법은?
+	•	Protocol-Oriented Programming(POP)이 객체 지향 프로그래밍(OOP)과 비교했을 때 가지는 장점은?
+	•	Higher-Order Function이란 무엇이며 Swift에서 어떤 예제가 있는가?
+	•	State Restoration이란 무엇이며, iOS에서 어떻게 적용하는가?
+	•	Bitcode의 개념과 iOS 앱 빌드 과정에서의 역할은?
+	•	dSYM 파일의 역할과 Crash 로그 분석 방법은?
+	•	Xcode의 Build Phases에서 Run Script를 활용하는 방법은?
+	•	XCTestCase에서 setUp()과 tearDown()은 각각 언제 호출되는가?
+	•	iOS에서 Fastlane을 활용한 자동 배포 방법은?
+	•	iOS 앱의 크기를 최적화하는 방법은?
+	•	In-App Purchase에서 Receipt Validation을 처리하는 방법은?
+	•	iOS의 On Demand Resources (ODR)란?
+	•	Xcode Cloud와 기존 CI/CD 도구(GitHub Actions, Bitrise) 비교 분석
+	•	App Transport Security (ATS)란?
+	•	Keychain을 활용하여 민감한 데이터를 저장할 때 고려해야 할 사항은?
+	•	iOS에서 Secure Enclave를 활용하는 방법은?
+	•	JWT (JSON Web Token)을 활용한 인증 방식은?
+	•	Biometric Authentication을 적용할 때 LocalAuthentication 프레임워크의 역할은?
+	•	앱이 Background 상태에서 네트워크 통신을 보안적으로 유지하는 방법은?
+	•	iOS Sandboxing이란?
+	•	iOS Privacy Manifest와 앱 개인정보 보호 정책 작성 방법은?
+	•	Swift 5.9에서 추가된 주요 기능은?
+	•	Swift Concurrency의 structured concurrency 개념이 무엇인가?
+	•	Metal을 활용하여 iOS 앱에서 그래픽 성능을 최적화하는 방법은?
+	•	ARKit과 RealityKit의 차이점은?
+	•	iOS에서 Passkeys를 지원하는 방법은?
+	•	Live Activities를 구현하는 방법은?
+	•	Dynamic Island에서 실시간 업데이트를 처리하는 방법은?
+
   - Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
   - Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
   - OOP의 4대 원칙과 SOLID 원칙에 대해 설명해주세요.
