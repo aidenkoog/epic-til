@@ -1877,3 +1877,186 @@
 	78.	Jetpack Compose에서 Jetpack CameraX를 활용하는 방법은?
 	79.	Jetpack Compose에서 Biometric API를 활용하는 방법은?
 	80.	Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법은?
+
+
+	1.	운영체제의 주요 역할과 기능은 무엇인가?
+	2.	커널(Kernel)의 역할과 사용자 모드(User Mode)와 커널 모드(Kernel Mode)의 차이점은?
+	3.	멀티태스킹(Multitasking)과 멀티스레딩(Multithreading)의 차이점은?
+	4.	프로세스(Process)와 스레드(Thread)의 차이점은?
+	5.	PCB(Process Control Block)란 무엇이며, 어떤 정보가 포함되는가?
+	6.	스케줄러(Scheduler)의 종류와 각각의 역할은?
+	7.	운영체제에서 동기(Synchronous)와 비동기(Asynchronous)의 차이점은?
+	8.	운영체제에서 Context Switching이란 무엇이며, 어떤 비용이 발생하는가?
+	9.	멀티프로세싱(Multiprocessing)과 멀티프로그램밍(Multiprogramming)의 차이점은?
+	10.	CPU 스케줄링 알고리즘에는 어떤 것들이 있으며, 각각의 장단점은?
+	11.	FIFO, SJF, Round Robin 스케줄링 알고리즘의 차이점은?
+	12.	운영체제에서 인터럽트(Interrupt)와 폴링(Polling)의 차이점은?
+	13.	데드락(Deadlock)의 발생 조건(교착 상태 발생 조건, Coffman 조건)은?
+	14.	데드락을 해결하는 방법에는 어떤 것들이 있는가?
+	15.	페이징(Paging)과 세그먼테이션(Segmentation)의 차이점은?
+	16.	페이지 교체 알고리즘에는 어떤 것들이 있으며, 각각의 특징은?
+	17.	운영체제에서 가상 메모리(Virtual Memory)의 개념과 동작 방식은?
+	18.	TLB(Translation Lookaside Buffer)의 역할과 동작 방식은?
+	19.	운영체제에서 캐시(Cache)의 역할과 계층 구조(Cache Hierarchy)는?
+	20.	운영체제에서 쓰레싱(Thrashing)이 발생하는 원인과 해결 방법은?
+	21.	커널의 종류에는 어떤 것이 있으며, Monolithic Kernel과 MicroKernel의 차이점은?
+	22.	UNIX와 Windows 운영체제의 차이점은?
+	23.	Linux 운영체제에서 fork()와 exec() 함수의 차이점은?
+	24.	멀티코어 시스템에서 CPU 스케줄링을 최적화하는 방법은?
+	25.	NUMA(Non-Uniform Memory Access) 아키텍처란 무엇이며, 운영체제에서 어떻게 지원하는가?
+	26.	하이퍼바이저(Hypervisor)와 컨테이너(Container)의 차이점은?
+	27.	운영체제에서 Swap 메모리를 사용하는 이유는?
+	28.	커널 패닉(Kernel Panic)이란 무엇이며, 어떤 원인으로 발생하는가?
+	29.	운영체제에서 프로세스의 상태(State Transition) 변화 과정은?
+	30.	DMA(Direct Memory Access)의 개념과 CPU와의 차이점은?
+	31.	CPU에서 파이프라이닝(Pipelining)이 성능을 개선하는 원리는?
+	32.	SSD와 HDD의 차이점, 운영체제가 이를 다루는 방식은?
+	33.	운영체제에서 RAID(Redundant Array of Independent Disks) 수준과 장단점은?
+	34.	파일 시스템에서 저널링(Journaling) 파일 시스템의 개념과 장점은?
+	35.	메모리 매핑 파일(Memory Mapped File)이란 무엇이며, 장점은?
+	36.	POSIX 스레드(POSIX Thread, PThread)란 무엇이며, Java 스레드와의 차이점은?
+	37.	배치 처리(Batch Processing)와 실시간 처리(Real-time Processing)의 차이점은?
+	38.	운영체제에서 Shadow Page Table이란 무엇이며, 어떻게 동작하는가?
+	39.	Page Table과 Inverted Page Table의 차이점은?
+	40.	Spinlock과 Mutex의 차이점 및 사용 사례는?
+	41.	배열(Array)과 연결 리스트(Linked List)의 차이점은?
+	42.	스택(Stack)과 큐(Queue)의 차이점은?
+	43.	이진 트리(Binary Tree)와 이진 탐색 트리(BST)의 차이점은?
+	44.	힙(Heap) 자료구조의 개념과 활용 사례는?
+	45.	Priority Queue와 일반 Queue의 차이점은?
+	46.	Hash Table(해시 테이블)의 개념과 충돌(Collision) 해결 방법은?
+	47.	그래프(Graph)와 트리(Tree)의 차이점은?
+	48.	B-Tree와 B+Tree의 차이점은?
+	49.	Trie(트라이) 자료구조의 개념과 활용 사례는?
+	50.	DFS(깊이 우선 탐색)와 BFS(너비 우선 탐색)의 차이점은?
+	51.	정렬 알고리즘(Bubble Sort, Quick Sort, Merge Sort, Heap Sort 등)의 차이점은?
+	52.	이진 탐색(Binary Search)의 개념과 시간 복잡도는?
+	53.	동적 프로그래밍(Dynamic Programming)과 그리디 알고리즘(Greedy)의 차이점은?
+	54.	다익스트라(Dijkstra) 알고리즘의 원리와 활용 사례는?
+	55.	벨만-포드(Bellman-Ford) 알고리즘과 다익스트라의 차이점은?
+	56.	A (A-Star) 탐색 알고리즘의 개념과 활용 사례는?*
+	57.	KMP(Knuth-Morris-Pratt) 문자열 검색 알고리즘의 원리는?
+	58.	Trie 자료구조를 활용한 문자열 검색 최적화 방법은?
+	59.	Union-Find 자료구조의 원리와 활용 사례는?
+	60.	백트래킹(Backtracking)과 분할 정복(Divide and Conquer)의 차이점은?
+	61.	OSI 7 계층과 각 계층의 역할은?
+	62.	TCP와 UDP의 차이점과 각각의 활용 사례는?
+	63.	HTTP/2와 HTTP/3의 차이점은?
+	64.	DNS(Domain Name System)의 역할과 동작 방식은?
+	65.	IPSec과 SSL/TLS의 차이점은?
+	66.	방화벽(Firewall)의 종류와 역할은?
+	67.	공개 키 암호화(Public Key Encryption)와 대칭 키 암호화(Symmetric Key Encryption)의 차이점은?
+	68.	MITM(Man-In-The-Middle) 공격과 방어 방법은?
+	69.	DDoS(Distributed Denial of Service) 공격이란 무엇이며, 방어 방법은?
+	70.	SQL Injection 공격과 방어 방법은?
+	71.	관계형 데이터베이스(RDBMS)와 NoSQL 데이터베이스의 차이점은?
+	72.	SQL과 NoSQL 데이터베이스는 각각 어떤 경우에 사용하는 것이 적절한가?
+	73.	정규화(Normalization)와 비정규화(Denormalization)의 차이점은?
+	74.	ACID 원칙(Atomicity, Consistency, Isolation, Durability)이란 무엇인가?
+	75.	트랜잭션(Transaction)과 트랜잭션 격리 수준(Isolation Level)의 차이점은?
+	76.	인덱스(Index)의 역할과 성능 최적화에 미치는 영향은?
+	77.	클러스터드 인덱스(Clustered Index)와 논클러스터드 인덱스(Non-clustered Index)의 차이점은?
+	78.	데이터베이스에서 조인(Join)의 종류와 차이점은? (INNER JOIN, OUTER JOIN, LEFT JOIN, RIGHT JOIN 등)
+	79.	Sharding과 Partitioning의 차이점은?
+	80.	데이터베이스에서 View의 역할과 성능상의 고려 사항은?
+	81.	ORM(Object-Relational Mapping)이란 무엇이며, 장단점은?
+	82.	데이터 정합성(Data Integrity) 유지 방법에는 어떤 것들이 있는가?
+	83.	MySQL과 PostgreSQL의 주요 차이점은?
+	84.	MongoDB에서 Replica Set과 Sharding의 차이점은?
+	85.	Graph Database(그래프 데이터베이스)의 개념과 활용 사례는?
+	86.	CAP 이론(Consistency, Availability, Partition Tolerance)이란 무엇인가?
+	87.	SQL의 GROUP BY와 PARTITION BY의 차이점은?
+	88.	PostgreSQL의 JSONB 타입과 MongoDB의 문서 저장 방식의 차이점은?
+	89.	데이터베이스에서 MVCC(Multi-Version Concurrency Control)가 어떻게 동작하는가?
+	90.	트랜잭션 로그(Transaction Log)란 무엇이며, 어떻게 활용되는가?
+	91.	데이터베이스에서 Deadlock이 발생하는 원인과 해결 방법은?
+	92.	NoSQL 데이터베이스의 BASE 원칙(Basically Available, Soft state, Eventually consistent)이란?
+	93.	Elasticsearch에서 Inverted Index의 역할과 활용 사례는?
+	94.	GraphQL과 REST API의 차이점은?
+	95.	SQL에서 서브쿼리(Subquery)와 CTE(Common Table Expression)의 차이점은?
+	96.	NewSQL 데이터베이스가 기존 SQL 및 NoSQL과 차별화되는 점은?
+	97.	데이터베이스에서 조인 연산의 성능을 최적화하는 방법은?
+	98.	Column-Oriented Database(열 지향 데이터베이스)와 Row-Oriented Database(행 지향 데이터베이스)의 차이점은?
+	99.	데이터 웨어하우스(Data Warehouse)와 데이터 레이크(Data Lake)의 차이점은?
+	100.	SQL Index Scan과 Index Seek의 차이점과 성능 최적화 방법은?
+	101.	확장 가능한(Scalable) 시스템을 설계할 때 고려해야 할 요소는?
+	102.	CDN(Content Delivery Network)이란 무엇이며, 어떻게 동작하는가?
+	103.	로드 밸런서(Load Balancer)의 역할과 종류(L4, L7)의 차이점은?
+	104.	캐시(Cache) 시스템을 설계할 때 고려해야 할 점은?
+	105.	API Gateway와 Reverse Proxy의 차이점은?
+	106.	마이크로서비스 아키텍처(MSA)와 모놀리식 아키텍처의 차이점은?
+	107.	Consistent Hashing(일관된 해싱)이란 무엇이며, 어떤 경우에 유용한가?
+	108.	데이터베이스 샤딩(Sharding)과 레플리케이션(Replication)의 차이점은?
+	109.	이벤트 소싱(Event Sourcing) 패턴이란 무엇인가?
+	110.	CQRS(Command Query Responsibility Segregation) 패턴이란 무엇인가?
+	111.	대규모 트래픽을 처리하는 웹 애플리케이션을 설계하는 방법은?
+	112.	IoT(사물인터넷) 시스템에서 메시지 브로커(Message Broker)의 역할은?
+	113.	데이터 일관성을 유지하면서도 높은 가용성을 보장하는 방법은?
+	114.	소셜 네트워크 서비스(SNS)의 뉴스피드(News Feed) 시스템을 설계하는 방법은?
+	115.	온라인 결제 시스템을 설계할 때 보안상 고려해야 할 점은?
+	116.	분산 시스템에서 리더 선출(Leader Election) 알고리즘이란 무엇이며, 어떻게 동작하는가?
+	117.	캡 테이블(CAP Table)이란 무엇이며, 스타트업에서 어떻게 활용되는가?
+	118.	서버리스(Serverless) 아키텍처를 활용할 때의 장점과 단점은?
+	119.	클라우드 네이티브(Cloud Native) 애플리케이션을 설계할 때 고려해야 할 사항은?
+	120.	OAuth 2.0을 활용한 인증 시스템을 설계하는 방법은?
+	121.	TDD(Test-Driven Development)와 BDD(Behavior-Driven Development)의 차이점은?
+	122.	CI/CD(Continuous Integration / Continuous Deployment)의 개념과 활용 사례는?
+	123.	소프트웨어 개발에서 SOLID 원칙이란 무엇이며, 각각의 원칙은?
+	124.	A/B 테스트(A/B Testing)의 개념과 활용 사례는?
+	125.	소프트웨어 개발에서 Observability(가시성, 모니터링, 트레이싱)의 중요성은?
+	126.	클라우드 컴퓨팅(AWS, GCP, Azure)의 주요 서비스와 차이점은?
+	127.	Web3.0과 기존 Web2.0의 차이점은?
+	128.	양자 컴퓨팅(Quantum Computing)이 기존 컴퓨터와 다른 점은?
+	129.	대규모 AI 모델(LLM, GPT-4 등)의 훈련 및 배포에서 고려해야 할 점은?
+	130.	제로 트러스트 보안(Zero Trust Security) 모델이란 무엇인가?
+	131.	Paging과 Segmentation을 결합한 Hybrid Memory Management 방식이 존재하는가?
+	132.	TLB Miss가 발생했을 때의 처리 과정은?
+	133.	UNIX에서 fork()와 vfork()의 차이점은?
+	134.	Real-Time OS(RTOS)와 일반 OS의 차이점은?
+	135.	커널에서 Copy-on-Write(COW) 기법이란 무엇이며, 어떤 경우에 활용되는가?
+	136.	Windows NT 커널과 Linux 커널의 아키텍처 차이점은?
+	137.	Interrupt Handling에서 Soft Interrupt와 Hard Interrupt의 차이점은?
+	138.	Spinlock이 Semaphore보다 성능이 좋을 수 있는 경우는?
+	139.	우선순위 역전(Priority Inversion) 문제와 이를 해결하는 방법은?
+	140.	I/O 바운드 프로세스와 CPU 바운드 프로세스의 차이점과 스케줄링 전략은?
+	141.	Fenwick Tree(Binary Indexed Tree)란 무엇이며, 어떤 경우에 활용하는가?
+	142.	트라이(Trie) 자료구조의 Space Complexity를 줄이는 최적화 기법은?
+	143.	Hash Table의 Resizing 과정과 성능 최적화 방법은?
+	144.	균형 이진 트리(AVL, Red-Black Tree)에서 Rebalancing이 발생하는 조건은?
+	145.	Heavy-Light Decomposition(HLD) 알고리즘이란 무엇이며, 트리에서 어떻게 활용하는가?
+	146.	Kruskal과 Prim 알고리즘의 시간 복잡도 차이점은?
+	147.	KMP 알고리즘이 Brute Force보다 효율적인 이유는?
+	148.	Dijkstra 알고리즘이 음수 가중치를 지원하지 않는 이유는?
+	149.	Floyd-Warshall 알고리즘과 Bellman-Ford 알고리즘의 차이점은?
+	150.	Rolling Hash를 활용한 Substring Search 최적화 기법은?
+	151.	SYN Flooding 공격이란 무엇이며, 방어 방법은?
+	152.	BGP(Border Gateway Protocol)의 주요 역할과 보안 취약점은?
+	153.	IP Fragmentation과 관련된 보안 위협은?
+	154.	TCP Fast Open이란 무엇이며, 어떤 성능 최적화를 제공하는가?
+	155.	Zero Trust Architecture의 개념과 구현 방법은?
+	156.	MITM(Man-In-The-Middle) 공격이 가능한 경우와 방어 방법은?
+	157.	OAuth 2.0의 Authorization Code Flow와 Implicit Flow의 차이점은?
+	158.	HSTS(HTTP Strict Transport Security)의 역할과 적용 방법은?
+	159.	TLS 1.3에서 Handshake 프로세스가 최적화된 방식은?
+	160.	XSS(Cross-Site Scripting)과 CSRF(Cross-Site Request Forgery)의 차이점은?
+	161.	PostgreSQL에서 JSONB와 hstore의 차이점은?
+	162.	NewSQL이 기존 SQL 및 NoSQL과 차별화되는 점은?
+	163.	MySQL의 InnoDB와 MyISAM 스토리지 엔진의 차이점은?
+	164.	데이터베이스에서 Materialized View와 일반 View의 차이점은?
+	165.	NoSQL에서 Eventual Consistency와 Strong Consistency를 비교하시오.
+	166.	Read-Heavy 시스템에서 인덱스를 최적화하는 방법은?
+	167.	Cassandra의 Gossip Protocol이란 무엇이며, 어떤 역할을 하는가?
+	168.	SQL에서 Window Function이란 무엇이며, 일반 Aggregate Function과 차이점은?
+	169.	Distributed Database에서 Consistency와 Availability를 균형 있게 유지하는 방법은?
+	170.	Bloom Filter가 데이터베이스의 검색 성능을 개선하는 원리는?
+	171.	대용량 로그 데이터를 처리하는 ELK(Elasticsearch, Logstash, Kibana) 스택의 역할은?
+	172.	분산 캐시 시스템에서 Redis와 Memcached의 차이점은?
+	173.	메시지 큐(Message Queue)와 스트림 프로세싱(Stream Processing)의 차이점은?
+	174.	Kubernetes의 Horizontal Pod Autoscaler(HPA)와 Vertical Pod Autoscaler(VPA)의 차이점은?
+	175.	CDN에서 Cache Invalidation이 중요한 이유는?
+	176.	Serverless Architecture의 장점과 단점은?
+	177.	GraphQL과 REST API의 성능 차이 및 장단점은?
+	178.	Feature Flagging이 DevOps에서 중요한 이유는?
+	179.	Infrastructure as Code(IaC)의 개념과 도입 시 고려할 점은?
+	180.	Edge Computing이 클라우드 컴퓨팅과 다른 점은?
+
