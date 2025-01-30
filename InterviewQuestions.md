@@ -2259,3 +2259,408 @@
   - 코드 리뷰를 어떻게 진행하시나요?
   - 테스트 자동화 경험이 있다면 설명해주세요. (Unit Test, UI Test 등)
   - CI/CD 파이프라인 구축 경험을 설명해주세요. (Jenkins, GitHub Actions 등)
+
+  - Java의 Garbage Collection 알고리즘에 대해 설명해주세요. (CMS, G1, ZGC 등)
+  - Java의 ClassLoader와 동적 로딩에 대해 설명해주세요.
+  - Java의 Reflection API 사용 사례와 주의점은 무엇인가요?
+  - Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)에 대해 설명해주세요.
+  - Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리를 설명해주세요.
+  - 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
+
+  - Kotlin의 Inline 함수와 Reified 타입에 대해 설명해주세요.
+  - Kotlin의 Sealed Class와 Enum Class의 차이점은 무엇인가요?
+  - Kotlin의 Delegated Properties 사용 사례를 설명해주세요.
+  - Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
+
+  - Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
+  - Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
+  - Coroutine의 SupervisorJob과 일반 Job의 차이점은 무엇인가요?
+  - Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
+  - Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
+
+  - Android의 Binder IPC 메커니즘에 대해 설명해주세요.
+  - Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
+  - Android의 ProGuard와 R8의 차이점은 무엇인가요?
+  - Android의 ANR(Application Not Responding) 원인과 해결 방법은 무엇인가요?
+  - Android의 Jetpack Navigation Component 사용 경험을 설명해주세요.
+
+  - AOSP의 SELinux 정책과 보안 메커니즘에 대해 설명해주세요.
+  - AOSP의 HAL(Hardware Abstraction Layer)에 대해 설명해주세요.
+  - AOSP의 시스템 서비스(SystemService) 추가 경험이 있다면 설명해주세요.
+
+  - React의 Hooks 내부 동작 원리에 대해 설명해주세요.
+  - React Native의 Bridge와 TurboModules에 대해 설명해주세요.
+  - React Native의 Hermes 엔진 사용 경험을 설명해주세요.
+
+  - Flutter의 Widget Tree와 Element Tree의 차이점은 무엇인가요?
+  - Flutter의 렌더링 프로세스에 대해 설명해주세요.
+  - Dart의 Isolate와 멀티스레딩 처리 방법을 설명해주세요.
+
+  - Vue.js의 Reactivity 시스템 내부 동작 원리를 설명해주세요.
+  - Vue.js의 Composition API와 Options API의 차이점은 무엇인가요?
+
+  - Swift의 ARC(Automatic Reference Counting)와 메모리 관리 방법을 설명해주세요.
+  - Combine 프레임워크 사용 경험을 설명해주세요.
+
+  - Python의 메타클래스(Metaclass)와 사용 사례를 설명해주세요.
+  - Python의 Asyncio와 동시성 처리 방법을 설명해주세요.
+  - Python의 Garbage Collection 메커니즘에 대해 설명해주세요.
+  - Python의 Descriptor Protocol에 대해 설명해주세요.
+
+    - 동적 프로그래밍(Dynamic Programming)과 분할 정복(Divide and Conquer)의 차이점은 무엇인가요?
+    - 그래프 알고리즘(Dijkstra, Bellman-Ford, Floyd-Warshall 등)의 시간 복잡도와 사용 사례를 설명해주세요.
+    - NP-완전 문제와 근사 알고리즘에 대해 설명해주세요.
+
+    - QUIC 프로토콜과 HTTP/3의 차이점은 무엇인가요?
+    - TCP의 혼잡 제어(Congestion Control) 알고리즘에 대해 설명해주세요.
+
+    - 가상 메모리와 페이지 교체 알고리즘에 대해 설명해주세요.
+    - 파일 시스템의 동작 원리와 종류를 설명해주세요.
+
+    - 데이터베이스 샤딩(Sharding)과 파티셔닝(Partitioning)의 차이점은 무엇인가요?
+    - 분산 데이터베이스의 CAP 이론에 대해 설명해주세요.
+
+  - 프로젝트의 기술적 부채(Technical Debt)를 어떻게 식별하고 관리하셨나요?
+  - 팀의 생산성을 높이기 위해 어떤 전략을 사용하셨나요?
+  - 프로젝트의 ROI(Return on Investment)를 어떻게 측정하셨나요?
+  - 팀원들의 기술적 성장을 위해 어떤 프로그램을 운영하셨나요?
+
+    - OWASP Top 10에 대해 설명하고, 이를 방어하기 위한 방법을 설명해주세요.
+    - 암호화 알고리즘(AES, RSA 등)의 차이점과 사용 사례를 설명해주세요.
+    - Kubernetes의 아키텍처와 주요 컴포넌트를 설명해주세요.
+    - 서버리스(Serverless) 아키텍처의 장단점은 무엇인가요?
+    - Blue-Green Deployment와 Canary Deployment의 차이점은 무엇인가요?
+    - 모니터링과 로깅 시스템 구축 경험을 설명해주세요. (Prometheus, Grafana, ELK Stack 등)
+
+  - Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
+  - Java의 VarHandle과 Atomic 클래스의 사용 사례를 설명해주세요.
+  - Java의 Module System(JPMS)에 대해 설명해주세요.
+  - Java의 Bytecode 조작 라이브러리(ASM, ByteBuddy 등) 사용 경험이 있다면 설명해주세요.
+
+  - Kotlin의 Type Alias와 Inline Class의 차이점은 무엇인가요?
+  - Kotlin의 Contracts API 사용 사례를 설명해주세요.
+  - Kotlin의 Multiplatform 프로젝트 경험이 있다면 설명해주세요.
+
+  - Coroutine의 Flow에서의 Backpressure 처리 방법을 설명해주세요.
+  - Coroutine의 StateFlow와 SharedFlow의 차이점은 무엇인가요?
+  - Coroutine의 Channel과 Actor의 차이점은 무엇인가요?
+
+  - Android의 RenderThread와 UI Thread의 상호작용을 설명해주세요.
+  - Android의 WindowManager와 SurfaceFlinger의 역할은 무엇인가요?
+  - Android의 ART(Android Runtime)와 Dalvik의 차이점은 무엇인가요?
+
+  - AOSP의 init 프로세스와 서비스 관리 방법을 설명해주세요.
+  - AOSP의 Binder 드라이버와 IPC 메커니즘에 대해 설명해주세요.
+
+  - React의 Concurrent Mode와 Suspense에 대해 설명해주세요.
+  - React Native의 JSI(JavaScript Interface)와 Fabric 아키텍처에 대해 설명해주세요.
+
+  - Flutter의 Skia 그래픽 엔진에 대해 설명해주세요.
+  - Dart의 Sound Null Safety와 Migration 전략을 설명해주세요.
+
+  - Vue.js의 Virtual DOM Diffing 알고리즘에 대해 설명해주세요.
+  - Vue.js의 Server-Side Rendering(SSR)과 Static Site Generation(SSG) 경험이 있다면 설명해주세요.
+
+  - Swift의 Result Builder와 Property Wrapper의 사용 사례를 설명해주세요.
+  - Swift의 Concurrency 모델(Async/Await)에 대해 설명해주세요.
+
+  - Python의 GIL(Global Interpreter Lock)을 우회하는 방법은 무엇인가요?
+  - Python의 Descriptor Protocol과 Metaclass의 차이점은 무엇인가요?
+  - Python의 Type Hinting과 Mypy 사용 경험을 설명해주세요.
+
+    - 외부 정렬(External Sorting) 알고리즘에 대해 설명해주세요.
+    - 문자열 매칭 알고리즘(KMP, Rabin-Karp 등)의 차이점은 무엇인가요?
+
+    - HTTP/2와 HTTP/3의 차이점은 무엇인가요?
+    - WebRTC의 Signaling과 ICE(Interactive Connectivity Establishment) 프로토콜에 대해 설명해주세요.
+
+    - 커널의 스케줄링 알고리즘(CFS, O(1) 등)에 대해 설명해주세요.
+    - 메모리 관리의 Buddy System과 Slab Allocator의 차이점은 무엇인가요?
+
+    - 데이터베이스의 WAL(Write-Ahead Logging)과 체크포인트(Checkpoint) 메커니즘에 대해 설명해주세요.
+    - 분산 데이터베이스의 Paxos와 Raft 알고리즘의 차이점은 무엇인가요?
+
+  - 프로젝트의 기술적 부채(Technical Debt)를 어떻게 식별하고 관리하셨나요?
+  - 팀의 생산성을 높이기 위해 어떤 전략을 사용하셨나요?
+  - 프로젝트의 ROI(Return on Investment)를 어떻게 측정하셨나요?
+  - 팀원들의 기술적 성장을 위해 어떤 프로그램을 운영하셨나요?
+
+    - OWASP Top 10에 대해 설명하고, 이를 방어하기 위한 방법을 설명해주세요.
+    - 암호화 알고리즘(AES, RSA 등)의 차이점과 사용 사례를 설명해주세요.
+
+    - Kubernetes의 아키텍처와 주요 컴포넌트를 설명해주세요.
+    - 서버리스(Serverless) 아키텍처의 장단점은 무엇인가요?
+
+    - Blue-Green Deployment와 Canary Deployment의 차이점은 무엇인가요?
+    - 모니터링과 로깅 시스템 구축 경험을 설명해주세요. (Prometheus, Grafana, ELK Stack 등)
+
+	•	Git이란 무엇인가?
+	•	Git과 SVN의 차이점은?
+	•	Git에서 commit과 push의 차이점은?
+	•	Git에서 clone과 pull의 차이점은?
+	•	Git에서 add, commit, push의 기본적인 흐름은?
+	•	Git의 3가지 주요 상태(Working Directory, Staging Area, Repository)에 대해 설명하라.
+	•	git init을 실행하면 어떤 일이 발생하는가?
+	•	git status의 역할은?
+	•	git log를 사용하여 특정 커밋을 확인하는 방법은?
+	•	.gitignore의 역할과 사용법은?
+
+	•	Git에서 브랜치를 사용하는 이유는?
+	•	git branch와 git checkout의 차이점은?
+	•	git merge와 git rebase의 차이점은?
+	•	git stash의 역할과 사용법은?
+	•	git cherry-pick이란 무엇이며 언제 사용하는가?
+	•	git reset과 git revert의 차이는?
+	•	git fetch와 git pull의 차이점은?
+	•	브랜치 충돌이 발생했을 때 해결하는 방법은?
+	•	Git에서 HEAD란 무엇인가?
+	•	git tag의 역할과 사용법은?
+
+	•	Git에서 원격 저장소(remote repository)란 무엇인가?
+	•	git remote -v를 실행하면 어떤 정보가 나오는가?
+	•	git push --force를 사용할 때 주의해야 할 점은?
+	•	git pull --rebase를 사용하면 어떤 일이 발생하는가?
+	•	원격 저장소에서 특정 브랜치만 가져오려면 어떻게 해야 하는가?
+	•	git clone --depth 1 옵션의 의미는?
+	•	git submodule이란 무엇이며 언제 사용하는가?
+	•	git bisect를 사용하여 버그를 찾는 방법은?
+	•	git blame을 사용하면 어떤 정보를 얻을 수 있는가?
+	•	Git에서 커밋 메시지를 올바르게 작성하는 방법은?
+
+	•	Git이 내부적으로 데이터를 저장하는 방식은?
+	•	Git에서 SHA-1 해시가 사용되는 이유는?
+	•	Git의 오브젝트 유형(blob, tree, commit, tag)에 대해 설명하라.
+	•	Git에서 index(staging area)가 가지는 역할은?
+	•	git reflog가 하는 역할과 활용 사례는?
+	•	git gc와 git prune의 차이는?
+	•	git packfile이란 무엇인가?
+	•	Git에서 detached HEAD 상태란 무엇인가?
+	•	git fsck 명령어의 역할은?
+	•	git repack이란 무엇이며 언제 사용하는가?
+
+	•	git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
+	•	git filter-branch와 git rebase -i의 차이점은?
+	•	git hooks(pre-commit, post-merge 등)란 무엇이며 어떻게 활용하는가?
+	•	git sparse-checkout을 사용하여 특정 폴더만 체크아웃하는 방법은?
+	•	git notes의 역할과 사용법은?
+	•	git replace의 역할과 활용 사례는?
+	•	Git에서 LFS(Large File Storage)를 사용하는 이유와 설정 방법은?
+	•	git rerere(Reuse Recorded Resolution)의 개념과 활용법은?
+	•	git bundle이란 무엇이며 언제 사용하는가?
+	•	git pack-objects를 활용한 저장소 최적화 방법은?
+
+	•	git fsck를 사용하여 저장소 무결성을 검사하는 방법은?
+	•	Git에서 특정 커밋을 제거하는 방법은?
+	•	git commit --amend를 사용할 때 주의해야 할 점은?
+	•	Git에서 브랜치를 삭제했을 때 복구하는 방법은?
+	•	Git에서 특정 파일을 과거 버전으로 되돌리는 방법은?
+	•	원격 저장소에서 특정 커밋을 삭제하는 방법은?
+	•	Git에서 크기가 큰 파일을 실수로 커밋했을 때 해결하는 방법은?
+	•	git reset --hard를 실행했을 때 복구할 수 있는 방법은?
+	•	Git에서 접근 권한을 관리하는 방법은?
+	•	Git 저장소를 백업하는 방법은?
+
+1. Git이란 무엇인가요? 다른 버전 관리 시스템과의 차이점은 무엇인가요?
+2. Git의 주요 장점은 무엇인가요?
+3. Git의 기본 명령어(add, commit, push, pull 등)에 대해 설명해주세요.
+4. Git에서의 Working Directory, Staging Area, Repository의 차이점은 무엇인가요?
+5. Git에서의 `git init`과 `git clone`의 차이점은 무엇인가요?
+6. Git에서의 `git status` 명령어는 어떤 역할을 하나요?
+7. Git에서의 `git log` 명령어와 옵션(`--oneline`, `--graph` 등)에 대해 설명해주세요.
+
+1. Git 브랜치란 무엇인가요? 왜 사용하나요?
+2. `git branch`와 `git checkout` 명령어의 차이점은 무엇인가요?
+3. `git merge`와 `git rebase`의 차이점은 무엇인가요?
+4. Merge Conflict가 발생하는 이유와 해결 방법은 무엇인가요?
+5. Fast-Forward Merge와 3-Way Merge의 차이점은 무엇인가요?
+6. `git stash` 명령어는 어떤 상황에서 사용하나요?
+7. `git cherry-pick` 명령어의 사용 사례를 설명해주세요.
+
+1. Git 원격 저장소(Remote Repository)란 무엇인가요?
+2. `git remote add`와 `git remote -v` 명령어의 역할은 무엇인가요?
+3. `git fetch`와 `git pull`의 차이점은 무엇인가요?
+4. `git push` 명령어에서 `--force` 옵션을 사용하는 경우와 주의점은 무엇인가요?
+5. Fork와 Clone의 차이점은 무엇인가요?
+6. Upstream Repository란 무엇인가요? 어떻게 설정하나요?
+
+1. Git 태그(Tag)란 무엇인가요? 왜 사용하나요?
+2. Lightweight Tag와 Annotated Tag의 차이점은 무엇인가요?
+3. `git tag` 명령어와 `git push --tags` 명령어의 역할은 무엇인가요?
+
+1. `git reset`과 `git revert`의 차이점은 무엇인가요?
+2. `git reset`의 세 가지 모드(Soft, Mixed, Hard)의 차이점은 무엇인가요?
+3. `git reflog` 명령어는 어떤 상황에서 사용하나요?
+4. `git bisect` 명령어의 사용 사례를 설명해주세요.
+
+1. Git의 전역 설정과 로컬 설정의 차이점은 무엇인가요?
+2. `.gitignore` 파일의 역할은 무엇인가요? 어떻게 사용하나요?
+3. Git의 Hook 기능이란 무엇인가요? 어떤 Hook을 사용해보셨나요?
+4. Git의 Config 파일에서 자주 사용하는 설정은 무엇인가요?
+
+1. Git Flow, GitHub Flow, GitLab Flow의 차이점은 무엇인가요?
+2. Feature Branch Workflow를 설명해주세요.
+3. Pull Request(PR)와 Merge Request(MR)의 차이점은 무엇인가요?
+4. Code Review를 위한 Git 워크플로우를 어떻게 구성하셨나요?
+
+1. Git의 내부 구조(Object Database, Blob, Tree, Commit 등)에 대해 설명해주세요.
+2. Git의 SHA-1 해시 값은 어떻게 생성되나요?
+3. Git의 Detached HEAD 상태란 무엇인가요? 어떻게 해결하나요?
+4. `git submodule`과 `git subtree`의 차이점은 무엇인가요?
+5. Git의 Shallow Clone이란 무엇인가요? 어떤 상황에서 사용하나요?
+6. Git의 Sparse Checkout이란 무엇인가요? 어떻게 사용하나요?
+7. Git의 LFS(Large File Storage)를 사용한 경험이 있다면 설명해주세요.
+
+1. Git을 사용한 CI/CD 파이프라인 구축 경험을 설명해주세요.
+2. Git Hook을 사용해 CI/CD 프로세스를 자동화한 경험이 있다면 설명해주세요.
+3. Git과 Jenkins/GitLab CI/GitHub Actions의 통합 경험을 설명해주세요.
+
+1. Git에서의 충돌(Conflict)을 해결한 경험을 설명해주세요.
+2. 실수로 `git reset --hard`를 실행했을 때, 이전 상태로 복구하는 방법은 무엇인가요?
+3. Git에서의 대용량 파일 처리 문제를 어떻게 해결하셨나요?
+4. Git 저장소의 크기를 줄이기 위한 방법은 무엇인가요? (`git gc`, `git repack` 등)
+
+1. Git에서의 보안 취약점을 어떻게 관리하셨나요? (예: .git 디렉토리 노출)
+2. Git Hook을 사용해 보안 정책을 강화한 경험이 있다면 설명해주세요.
+3. Git의 Signed Commit과 Tag 사용 경험이 있다면 설명해주세요.
+
+1. Git을 사용한 팀 협업 경험을 설명해주세요.
+2. Git에서의 Code Review 프로세스를 어떻게 구성하셨나요?
+3. Git에서의 Conflict를 최소화하기 위한 전략은 무엇인가요?
+
+	•	Git이 분산 버전 관리 시스템(DVCS)인 이유는?
+	•	Git을 사용하면 협업이 어떻게 향상되는가?
+	•	Git에서 fast-forward merge와 no-fast-forward merge의 차이점은?
+	•	Git에서 three-way merge는 어떻게 동작하는가?
+	•	Git의 SHA-1 해시 충돌 가능성에 대해 설명하라.
+	•	Git에서 untracked, modified, staged 파일의 차이는?
+	•	Git에서 commit hash가 왜 중요한가?
+	•	git help <command>를 활용하는 방법과 실무에서 유용한 예제는?
+
+	•	Git에서 브랜치 전략을 설계할 때 고려해야 할 사항은?
+	•	Git Flow, GitHub Flow, Trunk-Based Development의 차이점은?
+	•	git switch와 git checkout의 차이점은?
+	•	git merge --squash의 역할과 활용 사례는?
+	•	Git에서 lightweight tag와 annotated tag의 차이는?
+	•	git describe를 사용하면 어떤 정보를 얻을 수 있는가?
+	•	git log --graph --oneline --decorate를 사용하면 어떤 시각적인 정보를 얻을 수 있는가?
+	•	브랜치의 HEAD를 특정 커밋으로 되돌리는 방법은?
+
+	•	충돌이 발생하는 주요 원인은 무엇인가?
+	•	git rerere를 사용하여 충돌 해결을 자동화하는 방법은?
+	•	충돌 해결 과정에서 ours와 theirs의 차이는?
+	•	git merge --abort와 git reset --merge의 차이점은?
+	•	git checkout --conflict=diff3 옵션의 의미는?
+	•	특정 파일의 충돌만 해결하고 나머지는 유지하는 방법은?
+	•	git mergetool을 사용하여 GUI 기반으로 충돌을 해결하는 방법은?
+	•	충돌이 발생한 경우 이전 상태로 안전하게 복구하는 방법은?
+
+	•	git rebase -i의 옵션과 각 명령어(pick, squash, edit, reword, drop)의 역할은?
+	•	git rebase 중에 충돌이 발생하면 어떻게 해결하는가?
+	•	git rebase --onto의 활용 사례는?
+	•	git rebase --autosquash가 어떤 역할을 하는가?
+	•	git reflog를 사용하여 git reset --hard 후에도 원래 상태로 복구하는 방법은?
+	•	git filter-repo를 활용하여 민감한 정보가 포함된 커밋을 제거하는 방법은?
+	•	git replace를 사용하여 특정 커밋을 다른 커밋으로 대체하는 방법은?
+
+	•	Git 서브모듈(submodule)을 사용해야 하는 이유는?
+	•	git submodule update --init --recursive의 역할은?
+	•	서브모듈을 제거하는 방법은?
+	•	서브트리(Git Subtree)와 서브모듈(Git Submodule)의 차이는?
+	•	대형 프로젝트에서 Git의 성능을 최적화하는 방법은?
+	•	git-lfs (Large File Storage)를 사용해야 하는 경우는?
+	•	Git에서 프로젝트의 크기를 줄이기 위한 방법은?
+
+	•	Git이 파일을 저장하는 방식이 SVN과 다른 이유는?
+	•	Git에서 delta compression이란 무엇인가?
+	•	git gc --aggressive가 수행하는 작업은?
+	•	git repack이 저장소 최적화에 미치는 영향은?
+	•	git index 파일이 하는 역할은?
+	•	Git에서 unreachable object란 무엇이며 이를 정리하는 방법은?
+	•	git fsck --full을 사용하여 저장소 무결성을 검사하는 방법은?
+	•	git pack-objects의 역할과 성능 최적화 방안은?
+
+	•	git push --mirror의 역할과 활용 사례는?
+	•	원격 저장소에서 특정 브랜치만 삭제하는 방법은?
+	•	git fetch --prune을 사용하는 이유는?
+	•	git bundle을 사용하여 네트워크 없이 저장소를 공유하는 방법은?
+	•	git remote set-url을 활용하여 원격 저장소 URL을 변경하는 방법은?
+	•	git daemon을 사용하여 로컬에서 Git 서버를 호스팅하는 방법은?
+	•	git archive를 사용하여 특정 브랜치나 커밋을 압축 파일로 내보내는 방법은?
+
+	•	Git에서 브랜치 정책을 CI/CD 파이프라인과 연계하는 방법은?
+	•	GitHub Actions, GitLab CI/CD, Jenkins에서 Git을 활용하는 방법은?
+	•	git diff --check를 활용하여 CI/CD에서 코드 스타일 체크를 수행하는 방법은?
+	•	pre-commit hook을 설정하여 코드 푸시 전에 검사를 수행하는 방법은?
+	•	Git을 사용한 블루/그린 배포 전략은 어떻게 구현되는가?
+	•	Git에서 GitOps를 구현하는 방법은?
+	•	git notes를 활용하여 CI/CD 로그를 관리하는 방법은?
+
+	•	git credential.helper를 설정하여 인증을 자동화하는 방법은?
+	•	Git에서 커밋에 서명을 추가하는 방법(GPG 서명)은?
+	•	GitHub에서 사용자 권한을 설정하는 방법은?
+	•	git verify-commit과 git verify-tag의 차이점은?
+	•	Git에서 secrets scanning을 수행하는 방법은?
+	•	GitHub의 Dependabot이 하는 역할은?
+	•	Git에서 민감한 데이터를 실수로 푸시했을 때 제거하는 방법은?
+
+	•	Git 2.x 버전 이후 추가된 주요 기능은?
+	•	git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
+	•	git sparse-checkout을 사용하여 대형 저장소에서 특정 폴더만 체크아웃하는 방법은?
+	•	git maintenance 명령어가 수행하는 작업은?
+	•	git pack-redundant의 역할과 활용 방법은?
+	•	git replace를 활용하여 리팩토링을 수행하는 방법은?
+	•	GitHub의 Codespaces와 Gitpod을 활용한 원격 개발 환경 구축 방법은?
+
+1. Git에서의 `git diff` 명령어와 다양한 옵션(`--cached`, `--staged` 등)에 대해 설명해주세요.
+2. Git에서의 `git show` 명령어는 어떤 정보를 보여주나요?
+3. Git에서의 `git blame` 명령어는 어떤 상황에서 사용하나요?
+
+1. `git branch --merged`와 `git branch --no-merged` 명령어의 차이점은 무엇인가요?
+2. `git rebase --interactive`를 사용해본 경험이 있다면 설명해주세요.
+3. `git worktree` 명령어는 어떤 상황에서 사용하나요?
+
+1. `git remote prune origin` 명령어의 역할은 무엇인가요?
+2. `git push --mirror` 명령어는 어떤 상황에서 사용하나요?
+3. `git ls-remote` 명령어는 어떤 정보를 보여주나요?
+
+1. `git describe` 명령어는 어떤 정보를 제공하나요?
+2. 태그를 사용해 릴리즈 버전을 관리한 경험이 있다면 설명해주세요.
+
+1. `git reflog expire`와 `git reflog delete` 명령어의 차이점은 무엇인가요?
+2. `git filter-branch`와 `git filter-repo`의 차이점은 무엇인가요?
+
+1. Git의 `core.autocrlf` 설정은 어떤 역할을 하나요?
+2. Git의 `core.excludesfile` 설정은 어떤 상황에서 사용하나요?
+3. Git의 `core.hooksPath` 설정은 어떤 역할을 하나요?
+
+1. Trunk-Based Development와 Git Flow의 차이점은 무엇인가요?
+2. `git rebase --onto` 명령어를 사용해본 경험이 있다면 설명해주세요.
+
+1. Git의 Packfile과 Delta Compression에 대해 설명해주세요.
+2. Git의 Object Database에서의 Garbage Collection 과정을 설명해주세요.
+3. Git의 `git replace` 명령어는 어떤 상황에서 사용하나요?
+4. Git의 `git bundle` 명령어는 어떤 상황에서 사용하나요?
+5. Git의 `git notes` 명령어는 어떤 정보를 추가하나요?
+
+1. Git Hook을 사용해 CI/CD 파이프라인을 트리거한 경험이 있다면 설명해주세요.
+2. Git의 `pre-commit`과 `pre-push` Hook을 사용해본 경험이 있다면 설명해주세요.
+
+1. Git에서의 대용량 파일 처리 문제를 `git filter-repo`로 해결한 경험이 있다면 설명해주세요.
+2. Git에서의 `git fsck` 명령어는 어떤 문제를 진단하나요?
+3. Git에서의 `git repack` 명령어는 어떤 상황에서 사용하나요?
+
+1. Git의 `git crypt`를 사용해본 경험이 있다면 설명해주세요.
+2. Git의 `git-secrets`를 사용해본 경험이 있다면 설명해주세요.
+
+1. Git에서의 `git patch` 명령어는 어떤 상황에서 사용하나요?
+2. Git에서의 `git request-pull` 명령어는 어떤 역할을 하나요?
+
+1. Git의 `git archive` 명령어는 어떤 상황에서 사용하나요?
+2. Git의 `git submodule update --remote` 명령어는 어떤 역할을 하나요?
+3. Git의 `git sparse-checkout` 명령어는 어떤 상황에서 사용하나요?
+
+1. Git의 `git gc --aggressive` 명령어는 어떤 역할을 하나요?
+2. Git의 `git repack -ad --depth=250 --window=250` 명령어는 어떤 상황에서 사용하나요?
+
+1. Git Hook을 사용해 커스텀 스크립트를 실행한 경험이 있다면 설명해주세요.
+2. Git의 `git alias`를 사용해본 경험이 있다면 설명해주세요.
