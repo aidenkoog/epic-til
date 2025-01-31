@@ -2664,3 +2664,96 @@
 
 1. Git Hook을 사용해 커스텀 스크립트를 실행한 경험이 있다면 설명해주세요.
 2. Git의 `git alias`를 사용해본 경험이 있다면 설명해주세요.
+
+	•	Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
+	•	Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
+	•	Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
+	•	Kotlin의 Flow와 LiveData의 차이점은?
+	•	Kotlin에서 Channel과 SharedFlow의 차이점은?
+	•	Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
+	•	Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
+	•	Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
+	•	Jetpack Compose에서 Modifier의 역할과 best practice는?
+	•	Android에서 WorkManager와 AlarmManager의 차이점은?
+	•	Android에서 DataStore와 SharedPreferences의 차이점은?
+	•	Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
+	•	Android에서 ViewBinding과 DataBinding의 차이점은?
+	•	Android에서 CameraX를 사용할 때의 장점은?
+	•	Android에서 Activity Result API를 활용하는 방법은?
+	•	Android에서 LifecycleOwner와 ViewModel의 관계를 설명하시오.
+	•	Android에서 Hilt와 Koin의 차이점은?
+	•	Android에서 Firebase Cloud Messaging(FCM)과 OneSignal의 차이점은?
+	•	Android에서 ExoPlayer와 MediaPlayer의 차이점은?
+	•	Android에서 Jetpack Paging 3 라이브러리의 개념과 사용법은?
+	•	Android에서 Service와 JobIntentService의 차이점은?
+	•	Flutter에서 Navigator 2.0의 장점과 기존 방식과의 차이점은?
+	•	Flutter의 InheritedWidget과 Provider 패턴의 차이점은?
+	•	Flutter에서 setState()가 불필요한 리빌드를 초래하는 이유는?
+	•	Flutter에서 Isolate를 활용하는 이유는?
+	•	Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
+	•	Flutter에서 AnimatedList와 ListView.builder의 차이점은?
+	•	Flutter에서 go_router와 기존 Navigator의 차이점은?
+	•	Flutter에서 Canvas API를 활용하는 방법은?
+	•	Flutter에서 SafeArea가 필요한 이유는?
+	•	Flutter에서 ExpansionTile과 ListTile의 차이점은?
+	•	Flutter에서 build() 함수의 역할과 성능 최적화 방법은?
+	•	Flutter에서 SliverAppBar와 AppBar의 차이점은?
+	•	Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
+	•	Flutter에서 RepaintBoundary의 역할은?
+	•	React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 미치는가?
+	•	React에서 Server Components란 무엇인가?
+	•	React에서 Suspense와 Error Boundary를 활용하는 방법은?
+	•	React에서 React.memo()와 PureComponent의 차이점은?
+	•	React에서 Recoil과 Zustand의 차이점은?
+	•	React에서 PWA(Progressive Web App)를 구현하는 방법은?
+	•	React Native에서 Fabric과 기존 렌더링 방식의 차이점은?
+	•	React Native에서 Metro Bundler와 Webpack의 차이점은?
+	•	React Native에서 Gesture Handler를 최적화하는 방법은?
+	•	React Native에서 Dynamic Code Push를 적용하는 방법은?
+	•	React Native에서 Hermes 엔진을 사용할 때의 장점은?
+	•	React Native에서 Accessibility를 최적화하는 방법은?
+	•	React Native에서 Custom Native Module을 작성하는 방법은?
+	•	Clean Architecture의 핵심 개념과 MVVM과의 차이점은?
+	•	CQRS(Command Query Responsibility Segregation)를 적용해야 하는 경우는?
+	•	Event Sourcing 패턴을 적용하면 얻을 수 있는 장점은?
+	•	Domain-Driven Design(DDD)의 핵심 개념은?
+	•	Hexagonal Architecture와 Clean Architecture의 차이점은?
+	•	Microservices 아키텍처에서 API Gateway를 활용하는 방법은?
+	•	Monolithic Architecture와 Microservices의 장단점 비교
+	•	Kubernetes에서 Pod, ReplicaSet, Deployment의 차이점은?
+	•	Kubernetes에서 Ingress Controller를 활용하는 방법은?
+	•	CI/CD에서 Blue-Green Deployment와 Canary Deployment의 차이점은?
+	•	TLS 1.2와 TLS 1.3의 차이점은?
+	•	OAuth 2.0과 OpenID Connect(OIDC)의 차이점은?
+	•	Zero Trust Security 모델이란 무엇인가?
+	•	JWT와 OAuth의 차이점은?
+	•	API Gateway에서 Rate Limiting을 적용하는 방법은?
+	•	CORS 문제를 해결하는 방법은?
+	•	DDOS 공격을 방어하는 방법은?
+	•	HTTP/2와 HTTP/3의 차이점은?
+	•	gRPC와 REST API의 차이점은?
+	•	Kubernetes에서 Network Policy를 활용하는 방법은?
+	•	SQL Injection을 방어하는 방법은?
+	•	Redis와 Memcached의 차이점은?
+	•	PostgreSQL에서 JSONB를 사용하는 이유는?
+	•	Database Sharding과 Replication의 차이점은?
+	•	Read Replica와 Write Replica의 차이점은?
+	•	Cassandra와 MongoDB의 차이점은?
+	•	RDBMS에서 Partitioning을 수행하는 이유는?
+	•	BigTable, BigQuery, Redshift의 차이점은?
+	•	NoSQL에서 Eventual Consistency가 적용되는 이유는?
+	•	ElasticSearch의 인덱싱 구조를 설명하시오.
+	•	Graph Database와 Relational Database의 차이점은?
+	•	본인이 생각하는 “좋은 개발자”란?
+	•	본인의 가장 큰 장점과 단점은 무엇인가?
+	•	가장 도전적이었던 프로젝트와 해결 방법은?
+	•	기술 도입을 설득해야 하는 상황에서 어떻게 접근할 것인가?
+	•	동료 개발자와 갈등이 발생했을 때 어떻게 해결할 것인가?
+	•	비개발 팀과 협업할 때 중요하다고 생각하는 점은?
+	•	고객의 요구사항이 모호할 때 어떻게 접근하는가?
+	•	프로젝트 일정이 지연될 경우 어떤 방식으로 대처하는가?
+	•	새로운 기술을 학습할 때의 접근 방식은?
+	•	단기간 내 빠르게 학습했던 기술이 있다면 설명하시오.
+	•	다양한 프로젝트를 진행하면서 가장 크게 배운 점은?
+	•	AI, IoT, 블록체인 등의 신기술이 개발 환경에 미치는 영향은?
+	•	향후 3년, 5년 뒤 자신의 개발자로서의 목표는?  
