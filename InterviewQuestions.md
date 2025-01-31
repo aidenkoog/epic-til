@@ -2061,134 +2061,134 @@
 	180.	Edge Computing이 클라우드 컴퓨팅과 다른 점은?
 
 
-	•	iOS의 주요 아키텍처와 컴포넌트는?
-	•	Swift의 주요 특징은?
-	•	struct와 class의 차이는?
-	•	optional이란 무엇이고, !와 ?의 차이는?
-	•	guard와 if let의 차이는?
-	•	weak, strong, unowned의 차이는?
-	•	ARC(Automatic Reference Counting)란 무엇인가?
-	•	protocol과 extension의 역할과 활용 사례는?
-	•	enum과 associated value를 활용하는 방법은?
-	•	closure란 무엇이며, 캡처 리스트([weak self])를 사용하는 이유는?
-	•	UIKit과 SwiftUI의 차이는?
-	•	UIView와 CALayer의 차이는?
-	•	Auto Layout과 Constraint의 원리 및 사용 방법은?
-	•	frame과 bounds의 차이는?
-	•	TableView와 CollectionView의 차이점과 사용 사례는?
-	•	SwiftUI에서 State, Binding, ObservedObject, EnvironmentObject의 차이는?
-	•	UIKit에서 ViewController 생명주기는?
-	•	SwiftUI에서 View의 생명주기는?
-	•	NavigationView와 TabView의 기본 동작 원리는?
-	•	UIKit에서 커스텀 셀을 만들 때 고려해야 할 사항은?
-	•	iOS에서 네트워킹을 처리하는 방법은?
-	•	URLSession을 활용한 네트워킹 구현 방법은?
-	•	JSON을 파싱하는 방법과 Codable의 역할은?
-	•	비동기 네트워킹을 처리할 때 async/await과 completion handler의 차이는?
-	•	Core Data와 Realm의 차이는?
-	•	UserDefaults, Keychain, File System의 차이와 각각의 사용 사례는?
-	•	REST API와 GraphQL의 차이는?
-	•	iOS에서 메모리 누수가 발생하는 원인과 해결 방법은?
-	•	DispatchQueue.main.async을 사용하는 이유는?
-	•	Grand Central Dispatch(GCD)와 OperationQueue의 차이는?
-	•	iOS에서 성능 최적화를 위해 고려해야 할 사항은?
-	•	앱의 메모리 사용량을 줄이는 방법은?
-	•	Instruments에서 메모리 릭을 탐지하는 방법은?
-	•	스레드 안전성을 보장하는 방법은?
-	•	iOS에서 자주 사용되는 디자인 패턴은?
-	•	MVC, MVVM, VIPER의 차이점과 장단점은?
-	•	의존성 주입(Dependency Injection)이란?
-	•	Singleton 패턴이 가지는 문제점과 해결 방법은?
-	•	Combine 프레임워크를 활용하는 방법은?
-	•	Swift에서 Delegate 패턴과 Notification 패턴의 차이는?
-	•	iOS 앱을 App Store에 배포하는 과정은?
-	•	Ad Hoc, Enterprise, App Store 배포 방식의 차이는?
-	•	iOS 앱의 테스트 종류(Unit Test, UI Test 등)와 활용 방법은?
-	•	XCTest에서 UI 테스트를 구현하는 방법은?
-	•	TestFlight를 이용한 베타 테스트 방법은?
-	•	Crashlytics를 활용하여 크래시 로그를 분석하는 방법은?
-	•	Keychain을 활용하여 민감한 데이터를 저장하는 방법은?
-	•	iOS에서 HTTPS를 강제하는 방법은?
-	•	앱의 보안을 강화하는 방법은?
-	•	Face ID 및 Touch ID를 활용하는 방법은?
-	•	Dynamic Type과 VoiceOver를 지원하는 방법은?
-	•	iOS 앱에서 사용자 데이터를 보호하기 위한 방법은?
-	•	iOS 최신 버전에서 추가된 주요 기능은?
-	•	Swift Concurrency(async/await)와 기존 GCD의 차이점은?
-	•	Apple Silicon에서 iOS 앱이 어떻게 동작하는가?
-	•	WidgetKit, App Clips, Swift Charts 등 최신 프레임워크를 활용하는 방법은?
-	•	Vision, ARKit, CoreML 등 최신 기술을 프로젝트에서 어떻게 활용할 수 있는가?
-	•	Swift에서 copy-on-write(COW)란? 어떤 자료형에서 활용되는가?
-	•	Swift에서 dynamic 키워드는 언제 사용되는가?
-	•	associatedtype을 활용한 제네릭 프로토콜을 정의하는 방법은?
-	•	Swift의 Property Wrapper를 활용하는 방법과 사용 사례는?
-	•	lazy var와 computed property의 차이점은?
-	•	Swift에서 Equatable, Comparable 프로토콜을 직접 구현하는 방법은?
-	•	async let과 Task {}의 차이점은?
-	•	Swift의 Result<T, Error> 타입을 활용하는 방법은?
-	•	actor와 기존 DispatchQueue.sync를 비교하면 어떤 차이가 있는가?
-	•	Memory Layout<T>을 활용하여 메모리 구조를 확인하는 방법은?
-	•	UIBezierPath와 CAShapeLayer를 활용하여 커스텀 UI를 만드는 방법은?
-	•	UIView 애니메이션에서 spring damping이란 무엇이며 어떻게 활용하는가?
-	•	CALayer에서 shadowPath를 직접 설정하면 성능이 왜 향상되는가?
-	•	SwiftUI에서 PreferenceKey를 활용하는 방법과 사례는?
-	•	GeometryReader의 역할과 성능 최적화 방안은?
-	•	UIKit에서 layoutSubviews()와 draw(_:)의 차이는?
-	•	UIStackView가 실제로 내부에서 어떻게 동작하는가?
-	•	SwiftUI에서 ViewBuilder는 어떻게 작동하는가?
-	•	URLSessionDataTask, URLSessionDownloadTask, URLSessionUploadTask의 차이점은?
-	•	HTTP/2와 HTTP/3의 차이는?
-	•	URLCache를 활용하여 네트워크 응답을 캐싱하는 방법은?
-	•	WebSocket과 HTTP Long Polling의 차이점은?
-	•	multipart/form-data 요청을 iOS에서 처리하는 방법은?
-	•	Core Data의 NSPersistentContainer와 NSPersistentStoreCoordinator의 차이는?
-	•	Core Data의 merge policy 옵션이란?
-	•	Core Data에서 NSFetchedResultsController는 언제 사용되는가?
-	•	Realm을 사용할 때 @Persisted와 기존 List<>의 차이점은?
-	•	CloudKit을 활용한 데이터 동기화의 원리는?
-	•	RunLoop의 개념과 활용 사례는?
-	•	autoreleasepool이 필요한 경우는?
-	•	malloc과 free는 iOS에서 어떻게 동작하는가?
-	•	Object Graph와 Reference Counting의 관계는?
-	•	NSCache와 UserDefaults의 차이는?
-	•	NSOperationQueue와 DispatchQueue의 차이점과 적절한 사용 사례는?
-	•	Swift의 UnsafePointer<T>와 OpaquePointer의 차이는?
-	•	iOS에서 Lazy Loading을 구현하는 방법은?
-	•	NSThread와 pthread의 차이는?
-	•	iOS에서 Backtrace를 활용하여 메모리 릭을 찾는 방법은?
-	•	Clean Architecture를 iOS 프로젝트에서 적용하는 방법은?
-	•	Interactor, Presenter, Repository는 각각 어떤 역할을 하는가?
-	•	RxSwift와 Combine의 차이점은?
-	•	Coordinator Pattern이 필요한 이유는?
-	•	Dependency Injection을 활용하여 ViewController의 의존성을 관리하는 방법은?
-	•	SOLID 원칙을 iOS 개발에서 적용하는 방법은?
-	•	Protocol-Oriented Programming(POP)이 객체 지향 프로그래밍(OOP)과 비교했을 때 가지는 장점은?
-	•	Higher-Order Function이란 무엇이며 Swift에서 어떤 예제가 있는가?
-	•	State Restoration이란 무엇이며, iOS에서 어떻게 적용하는가?
-	•	Bitcode의 개념과 iOS 앱 빌드 과정에서의 역할은?
-	•	dSYM 파일의 역할과 Crash 로그 분석 방법은?
-	•	Xcode의 Build Phases에서 Run Script를 활용하는 방법은?
-	•	XCTestCase에서 setUp()과 tearDown()은 각각 언제 호출되는가?
-	•	iOS에서 Fastlane을 활용한 자동 배포 방법은?
-	•	iOS 앱의 크기를 최적화하는 방법은?
-	•	In-App Purchase에서 Receipt Validation을 처리하는 방법은?
-	•	iOS의 On Demand Resources (ODR)란?
-	•	Xcode Cloud와 기존 CI/CD 도구(GitHub Actions, Bitrise) 비교 분석
-	•	App Transport Security (ATS)란?
-	•	Keychain을 활용하여 민감한 데이터를 저장할 때 고려해야 할 사항은?
-	•	iOS에서 Secure Enclave를 활용하는 방법은?
-	•	JWT (JSON Web Token)을 활용한 인증 방식은?
-	•	Biometric Authentication을 적용할 때 LocalAuthentication 프레임워크의 역할은?
-	•	앱이 Background 상태에서 네트워크 통신을 보안적으로 유지하는 방법은?
-	•	iOS Sandboxing이란?
-	•	iOS Privacy Manifest와 앱 개인정보 보호 정책 작성 방법은?
-	•	Swift 5.9에서 추가된 주요 기능은?
-	•	Swift Concurrency의 structured concurrency 개념이 무엇인가?
-	•	Metal을 활용하여 iOS 앱에서 그래픽 성능을 최적화하는 방법은?
-	•	ARKit과 RealityKit의 차이점은?
-	•	iOS에서 Passkeys를 지원하는 방법은?
-	•	Live Activities를 구현하는 방법은?
-	•	Dynamic Island에서 실시간 업데이트를 처리하는 방법은?
+- iOS의 주요 아키텍처와 컴포넌트는?
+- Swift의 주요 특징은?
+- struct와 class의 차이는?
+- optional이란 무엇이고, !와 ?의 차이는?
+- guard와 if let의 차이는?
+- weak, strong, unowned의 차이는?
+- ARC(Automatic Reference Counting)란 무엇인가?
+- protocol과 extension의 역할과 활용 사례는?
+- enum과 associated value를 활용하는 방법은?
+- closure란 무엇이며, 캡처 리스트([weak self])를 사용하는 이유는?
+- UIKit과 SwiftUI의 차이는?
+- UIView와 CALayer의 차이는?
+- Auto Layout과 Constraint의 원리 및 사용 방법은?
+- frame과 bounds의 차이는?
+- TableView와 CollectionView의 차이점과 사용 사례는?
+- SwiftUI에서 State, Binding, ObservedObject, EnvironmentObject의 차이는?
+- UIKit에서 ViewController 생명주기는?
+- SwiftUI에서 View의 생명주기는?
+- NavigationView와 TabView의 기본 동작 원리는?
+- UIKit에서 커스텀 셀을 만들 때 고려해야 할 사항은?
+- iOS에서 네트워킹을 처리하는 방법은?
+- URLSession을 활용한 네트워킹 구현 방법은?
+- JSON을 파싱하는 방법과 Codable의 역할은?
+- 비동기 네트워킹을 처리할 때 async/await과 completion handler의 차이는?
+- Core Data와 Realm의 차이는?
+- UserDefaults, Keychain, File System의 차이와 각각의 사용 사례는?
+- REST API와 GraphQL의 차이는?
+- iOS에서 메모리 누수가 발생하는 원인과 해결 방법은?
+- DispatchQueue.main.async을 사용하는 이유는?
+- Grand Central Dispatch(GCD)와 OperationQueue의 차이는?
+- iOS에서 성능 최적화를 위해 고려해야 할 사항은?
+- 앱의 메모리 사용량을 줄이는 방법은?
+- Instruments에서 메모리 릭을 탐지하는 방법은?
+- 스레드 안전성을 보장하는 방법은?
+- iOS에서 자주 사용되는 디자인 패턴은?
+- MVC, MVVM, VIPER의 차이점과 장단점은?
+- 의존성 주입(Dependency Injection)이란?
+- Singleton 패턴이 가지는 문제점과 해결 방법은?
+- Combine 프레임워크를 활용하는 방법은?
+- Swift에서 Delegate 패턴과 Notification 패턴의 차이는?
+- iOS 앱을 App Store에 배포하는 과정은?
+- Ad Hoc, Enterprise, App Store 배포 방식의 차이는?
+- iOS 앱의 테스트 종류(Unit Test, UI Test 등)와 활용 방법은?
+- XCTest에서 UI 테스트를 구현하는 방법은?
+- TestFlight를 이용한 베타 테스트 방법은?
+- Crashlytics를 활용하여 크래시 로그를 분석하는 방법은?
+- Keychain을 활용하여 민감한 데이터를 저장하는 방법은?
+- iOS에서 HTTPS를 강제하는 방법은?
+- 앱의 보안을 강화하는 방법은?
+- Face ID 및 Touch ID를 활용하는 방법은?
+- Dynamic Type과 VoiceOver를 지원하는 방법은?
+- iOS 앱에서 사용자 데이터를 보호하기 위한 방법은?
+- iOS 최신 버전에서 추가된 주요 기능은?
+- Swift Concurrency(async/await)와 기존 GCD의 차이점은?
+- Apple Silicon에서 iOS 앱이 어떻게 동작하는가?
+- WidgetKit, App Clips, Swift Charts 등 최신 프레임워크를 활용하는 방법은?
+- Vision, ARKit, CoreML 등 최신 기술을 프로젝트에서 어떻게 활용할 수 있는가?
+- Swift에서 copy-on-write(COW)란? 어떤 자료형에서 활용되는가?
+- Swift에서 dynamic 키워드는 언제 사용되는가?
+- associatedtype을 활용한 제네릭 프로토콜을 정의하는 방법은?
+- Swift의 Property Wrapper를 활용하는 방법과 사용 사례는?
+- lazy var와 computed property의 차이점은?
+- Swift에서 Equatable, Comparable 프로토콜을 직접 구현하는 방법은?
+- async let과 Task {}의 차이점은?
+- Swift의 Result<T, Error> 타입을 활용하는 방법은?
+- actor와 기존 DispatchQueue.sync를 비교하면 어떤 차이가 있는가?
+- Memory Layout<T>을 활용하여 메모리 구조를 확인하는 방법은?
+- UIBezierPath와 CAShapeLayer를 활용하여 커스텀 UI를 만드는 방법은?
+- UIView 애니메이션에서 spring damping이란 무엇이며 어떻게 활용하는가?
+- CALayer에서 shadowPath를 직접 설정하면 성능이 왜 향상되는가?
+- SwiftUI에서 PreferenceKey를 활용하는 방법과 사례는?
+- GeometryReader의 역할과 성능 최적화 방안은?
+- UIKit에서 layoutSubviews()와 draw(_:)의 차이는?
+- UIStackView가 실제로 내부에서 어떻게 동작하는가?
+- SwiftUI에서 ViewBuilder는 어떻게 작동하는가?
+- URLSessionDataTask, URLSessionDownloadTask, URLSessionUploadTask의 차이점은?
+- HTTP/2와 HTTP/3의 차이는?
+- URLCache를 활용하여 네트워크 응답을 캐싱하는 방법은?
+- WebSocket과 HTTP Long Polling의 차이점은?
+- multipart/form-data 요청을 iOS에서 처리하는 방법은?
+- Core Data의 NSPersistentContainer와 NSPersistentStoreCoordinator의 차이는?
+- Core Data의 merge policy 옵션이란?
+- Core Data에서 NSFetchedResultsController는 언제 사용되는가?
+- Realm을 사용할 때 @Persisted와 기존 List<>의 차이점은?
+- CloudKit을 활용한 데이터 동기화의 원리는?
+- RunLoop의 개념과 활용 사례는?
+- autoreleasepool이 필요한 경우는?
+- malloc과 free는 iOS에서 어떻게 동작하는가?
+- Object Graph와 Reference Counting의 관계는?
+- NSCache와 UserDefaults의 차이는?
+- NSOperationQueue와 DispatchQueue의 차이점과 적절한 사용 사례는?
+- Swift의 UnsafePointer<T>와 OpaquePointer의 차이는?
+- iOS에서 Lazy Loading을 구현하는 방법은?
+- NSThread와 pthread의 차이는?
+- iOS에서 Backtrace를 활용하여 메모리 릭을 찾는 방법은?
+- Clean Architecture를 iOS 프로젝트에서 적용하는 방법은?
+- Interactor, Presenter, Repository는 각각 어떤 역할을 하는가?
+- RxSwift와 Combine의 차이점은?
+- Coordinator Pattern이 필요한 이유는?
+- Dependency Injection을 활용하여 ViewController의 의존성을 관리하는 방법은?
+- SOLID 원칙을 iOS 개발에서 적용하는 방법은?
+- Protocol-Oriented Programming(POP)이 객체 지향 프로그래밍(OOP)과 비교했을 때 가지는 장점은?
+- Higher-Order Function이란 무엇이며 Swift에서 어떤 예제가 있는가?
+- State Restoration이란 무엇이며, iOS에서 어떻게 적용하는가?
+- Bitcode의 개념과 iOS 앱 빌드 과정에서의 역할은?
+- dSYM 파일의 역할과 Crash 로그 분석 방법은?
+- Xcode의 Build Phases에서 Run Script를 활용하는 방법은?
+- XCTestCase에서 setUp()과 tearDown()은 각각 언제 호출되는가?
+- iOS에서 Fastlane을 활용한 자동 배포 방법은?
+- iOS 앱의 크기를 최적화하는 방법은?
+- In-App Purchase에서 Receipt Validation을 처리하는 방법은?
+- iOS의 On Demand Resources (ODR)란?
+- Xcode Cloud와 기존 CI/CD 도구(GitHub Actions, Bitrise) 비교 분석
+- App Transport Security (ATS)란?
+- Keychain을 활용하여 민감한 데이터를 저장할 때 고려해야 할 사항은?
+- iOS에서 Secure Enclave를 활용하는 방법은?
+- JWT (JSON Web Token)을 활용한 인증 방식은?
+- Biometric Authentication을 적용할 때 LocalAuthentication 프레임워크의 역할은?
+- 앱이 Background 상태에서 네트워크 통신을 보안적으로 유지하는 방법은?
+- iOS Sandboxing이란?
+- iOS Privacy Manifest와 앱 개인정보 보호 정책 작성 방법은?
+- Swift 5.9에서 추가된 주요 기능은?
+- Swift Concurrency의 structured concurrency 개념이 무엇인가?
+- Metal을 활용하여 iOS 앱에서 그래픽 성능을 최적화하는 방법은?
+- ARKit과 RealityKit의 차이점은?
+- iOS에서 Passkeys를 지원하는 방법은?
+- Live Activities를 구현하는 방법은?
+- Dynamic Island에서 실시간 업데이트를 처리하는 방법은?
 
   - Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
   - Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
@@ -2394,71 +2394,71 @@
     - Blue-Green Deployment와 Canary Deployment의 차이점은 무엇인가요?
     - 모니터링과 로깅 시스템 구축 경험을 설명해주세요. (Prometheus, Grafana, ELK Stack 등)
 
-	•	Git이란 무엇인가?
-	•	Git과 SVN의 차이점은?
-	•	Git에서 commit과 push의 차이점은?
-	•	Git에서 clone과 pull의 차이점은?
-	•	Git에서 add, commit, push의 기본적인 흐름은?
-	•	Git의 3가지 주요 상태(Working Directory, Staging Area, Repository)에 대해 설명하라.
-	•	git init을 실행하면 어떤 일이 발생하는가?
-	•	git status의 역할은?
-	•	git log를 사용하여 특정 커밋을 확인하는 방법은?
-	•	.gitignore의 역할과 사용법은?
+- Git이란 무엇인가?
+- Git과 SVN의 차이점은?
+- Git에서 commit과 push의 차이점은?
+- Git에서 clone과 pull의 차이점은?
+- Git에서 add, commit, push의 기본적인 흐름은?
+- Git의 3가지 주요 상태(Working Directory, Staging Area, Repository)에 대해 설명하라.
+- git init을 실행하면 어떤 일이 발생하는가?
+- git status의 역할은?
+- git log를 사용하여 특정 커밋을 확인하는 방법은?
+- .gitignore의 역할과 사용법은?
 
-	•	Git에서 브랜치를 사용하는 이유는?
-	•	git branch와 git checkout의 차이점은?
-	•	git merge와 git rebase의 차이점은?
-	•	git stash의 역할과 사용법은?
-	•	git cherry-pick이란 무엇이며 언제 사용하는가?
-	•	git reset과 git revert의 차이는?
-	•	git fetch와 git pull의 차이점은?
-	•	브랜치 충돌이 발생했을 때 해결하는 방법은?
-	•	Git에서 HEAD란 무엇인가?
-	•	git tag의 역할과 사용법은?
+- Git에서 브랜치를 사용하는 이유는?
+- git branch와 git checkout의 차이점은?
+- git merge와 git rebase의 차이점은?
+- git stash의 역할과 사용법은?
+- git cherry-pick이란 무엇이며 언제 사용하는가?
+- git reset과 git revert의 차이는?
+- git fetch와 git pull의 차이점은?
+- 브랜치 충돌이 발생했을 때 해결하는 방법은?
+- Git에서 HEAD란 무엇인가?
+- git tag의 역할과 사용법은?
 
-	•	Git에서 원격 저장소(remote repository)란 무엇인가?
-	•	git remote -v를 실행하면 어떤 정보가 나오는가?
-	•	git push --force를 사용할 때 주의해야 할 점은?
-	•	git pull --rebase를 사용하면 어떤 일이 발생하는가?
-	•	원격 저장소에서 특정 브랜치만 가져오려면 어떻게 해야 하는가?
-	•	git clone --depth 1 옵션의 의미는?
-	•	git submodule이란 무엇이며 언제 사용하는가?
-	•	git bisect를 사용하여 버그를 찾는 방법은?
-	•	git blame을 사용하면 어떤 정보를 얻을 수 있는가?
-	•	Git에서 커밋 메시지를 올바르게 작성하는 방법은?
+- Git에서 원격 저장소(remote repository)란 무엇인가?
+- git remote -v를 실행하면 어떤 정보가 나오는가?
+- git push --force를 사용할 때 주의해야 할 점은?
+- git pull --rebase를 사용하면 어떤 일이 발생하는가?
+- 원격 저장소에서 특정 브랜치만 가져오려면 어떻게 해야 하는가?
+- git clone --depth 1 옵션의 의미는?
+- git submodule이란 무엇이며 언제 사용하는가?
+- git bisect를 사용하여 버그를 찾는 방법은?
+- git blame을 사용하면 어떤 정보를 얻을 수 있는가?
+- Git에서 커밋 메시지를 올바르게 작성하는 방법은?
 
-	•	Git이 내부적으로 데이터를 저장하는 방식은?
-	•	Git에서 SHA-1 해시가 사용되는 이유는?
-	•	Git의 오브젝트 유형(blob, tree, commit, tag)에 대해 설명하라.
-	•	Git에서 index(staging area)가 가지는 역할은?
-	•	git reflog가 하는 역할과 활용 사례는?
-	•	git gc와 git prune의 차이는?
-	•	git packfile이란 무엇인가?
-	•	Git에서 detached HEAD 상태란 무엇인가?
-	•	git fsck 명령어의 역할은?
-	•	git repack이란 무엇이며 언제 사용하는가?
+- Git이 내부적으로 데이터를 저장하는 방식은?
+- Git에서 SHA-1 해시가 사용되는 이유는?
+- Git의 오브젝트 유형(blob, tree, commit, tag)에 대해 설명하라.
+- Git에서 index(staging area)가 가지는 역할은?
+- git reflog가 하는 역할과 활용 사례는?
+- git gc와 git prune의 차이는?
+- git packfile이란 무엇인가?
+- Git에서 detached HEAD 상태란 무엇인가?
+- git fsck 명령어의 역할은?
+- git repack이란 무엇이며 언제 사용하는가?
 
-	•	git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
-	•	git filter-branch와 git rebase -i의 차이점은?
-	•	git hooks(pre-commit, post-merge 등)란 무엇이며 어떻게 활용하는가?
-	•	git sparse-checkout을 사용하여 특정 폴더만 체크아웃하는 방법은?
-	•	git notes의 역할과 사용법은?
-	•	git replace의 역할과 활용 사례는?
-	•	Git에서 LFS(Large File Storage)를 사용하는 이유와 설정 방법은?
-	•	git rerere(Reuse Recorded Resolution)의 개념과 활용법은?
-	•	git bundle이란 무엇이며 언제 사용하는가?
-	•	git pack-objects를 활용한 저장소 최적화 방법은?
+- git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
+- git filter-branch와 git rebase -i의 차이점은?
+- git hooks(pre-commit, post-merge 등)란 무엇이며 어떻게 활용하는가?
+- git sparse-checkout을 사용하여 특정 폴더만 체크아웃하는 방법은?
+- git notes의 역할과 사용법은?
+- git replace의 역할과 활용 사례는?
+- Git에서 LFS(Large File Storage)를 사용하는 이유와 설정 방법은?
+- git rerere(Reuse Recorded Resolution)의 개념과 활용법은?
+- git bundle이란 무엇이며 언제 사용하는가?
+- git pack-objects를 활용한 저장소 최적화 방법은?
 
-	•	git fsck를 사용하여 저장소 무결성을 검사하는 방법은?
-	•	Git에서 특정 커밋을 제거하는 방법은?
-	•	git commit --amend를 사용할 때 주의해야 할 점은?
-	•	Git에서 브랜치를 삭제했을 때 복구하는 방법은?
-	•	Git에서 특정 파일을 과거 버전으로 되돌리는 방법은?
-	•	원격 저장소에서 특정 커밋을 삭제하는 방법은?
-	•	Git에서 크기가 큰 파일을 실수로 커밋했을 때 해결하는 방법은?
-	•	git reset --hard를 실행했을 때 복구할 수 있는 방법은?
-	•	Git에서 접근 권한을 관리하는 방법은?
-	•	Git 저장소를 백업하는 방법은?
+- git fsck를 사용하여 저장소 무결성을 검사하는 방법은?
+- Git에서 특정 커밋을 제거하는 방법은?
+- git commit --amend를 사용할 때 주의해야 할 점은?
+- Git에서 브랜치를 삭제했을 때 복구하는 방법은?
+- Git에서 특정 파일을 과거 버전으로 되돌리는 방법은?
+- 원격 저장소에서 특정 커밋을 삭제하는 방법은?
+- Git에서 크기가 큰 파일을 실수로 커밋했을 때 해결하는 방법은?
+- git reset --hard를 실행했을 때 복구할 수 있는 방법은?
+- Git에서 접근 권한을 관리하는 방법은?
+- Git 저장소를 백업하는 방법은?
 
 1. Git이란 무엇인가요? 다른 버전 관리 시스템과의 차이점은 무엇인가요?
 2. Git의 주요 장점은 무엇인가요?
@@ -2527,89 +2527,89 @@
 2. Git에서의 Code Review 프로세스를 어떻게 구성하셨나요?
 3. Git에서의 Conflict를 최소화하기 위한 전략은 무엇인가요?
 
-	•	Git이 분산 버전 관리 시스템(DVCS)인 이유는?
-	•	Git을 사용하면 협업이 어떻게 향상되는가?
-	•	Git에서 fast-forward merge와 no-fast-forward merge의 차이점은?
-	•	Git에서 three-way merge는 어떻게 동작하는가?
-	•	Git의 SHA-1 해시 충돌 가능성에 대해 설명하라.
-	•	Git에서 untracked, modified, staged 파일의 차이는?
-	•	Git에서 commit hash가 왜 중요한가?
-	•	git help <command>를 활용하는 방법과 실무에서 유용한 예제는?
+- Git이 분산 버전 관리 시스템(DVCS)인 이유는?
+- Git을 사용하면 협업이 어떻게 향상되는가?
+- Git에서 fast-forward merge와 no-fast-forward merge의 차이점은?
+- Git에서 three-way merge는 어떻게 동작하는가?
+- Git의 SHA-1 해시 충돌 가능성에 대해 설명하라.
+- Git에서 untracked, modified, staged 파일의 차이는?
+- Git에서 commit hash가 왜 중요한가?
+- git help <command>를 활용하는 방법과 실무에서 유용한 예제는?
 
-	•	Git에서 브랜치 전략을 설계할 때 고려해야 할 사항은?
-	•	Git Flow, GitHub Flow, Trunk-Based Development의 차이점은?
-	•	git switch와 git checkout의 차이점은?
-	•	git merge --squash의 역할과 활용 사례는?
-	•	Git에서 lightweight tag와 annotated tag의 차이는?
-	•	git describe를 사용하면 어떤 정보를 얻을 수 있는가?
-	•	git log --graph --oneline --decorate를 사용하면 어떤 시각적인 정보를 얻을 수 있는가?
-	•	브랜치의 HEAD를 특정 커밋으로 되돌리는 방법은?
+- Git에서 브랜치 전략을 설계할 때 고려해야 할 사항은?
+- Git Flow, GitHub Flow, Trunk-Based Development의 차이점은?
+- git switch와 git checkout의 차이점은?
+- git merge --squash의 역할과 활용 사례는?
+- Git에서 lightweight tag와 annotated tag의 차이는?
+- git describe를 사용하면 어떤 정보를 얻을 수 있는가?
+- git log --graph --oneline --decorate를 사용하면 어떤 시각적인 정보를 얻을 수 있는가?
+- 브랜치의 HEAD를 특정 커밋으로 되돌리는 방법은?
 
-	•	충돌이 발생하는 주요 원인은 무엇인가?
-	•	git rerere를 사용하여 충돌 해결을 자동화하는 방법은?
-	•	충돌 해결 과정에서 ours와 theirs의 차이는?
-	•	git merge --abort와 git reset --merge의 차이점은?
-	•	git checkout --conflict=diff3 옵션의 의미는?
-	•	특정 파일의 충돌만 해결하고 나머지는 유지하는 방법은?
-	•	git mergetool을 사용하여 GUI 기반으로 충돌을 해결하는 방법은?
-	•	충돌이 발생한 경우 이전 상태로 안전하게 복구하는 방법은?
+- 충돌이 발생하는 주요 원인은 무엇인가?
+- git rerere를 사용하여 충돌 해결을 자동화하는 방법은?
+- 충돌 해결 과정에서 ours와 theirs의 차이는?
+- git merge --abort와 git reset --merge의 차이점은?
+- git checkout --conflict=diff3 옵션의 의미는?
+- 특정 파일의 충돌만 해결하고 나머지는 유지하는 방법은?
+- git mergetool을 사용하여 GUI 기반으로 충돌을 해결하는 방법은?
+- 충돌이 발생한 경우 이전 상태로 안전하게 복구하는 방법은?
 
-	•	git rebase -i의 옵션과 각 명령어(pick, squash, edit, reword, drop)의 역할은?
-	•	git rebase 중에 충돌이 발생하면 어떻게 해결하는가?
-	•	git rebase --onto의 활용 사례는?
-	•	git rebase --autosquash가 어떤 역할을 하는가?
-	•	git reflog를 사용하여 git reset --hard 후에도 원래 상태로 복구하는 방법은?
-	•	git filter-repo를 활용하여 민감한 정보가 포함된 커밋을 제거하는 방법은?
-	•	git replace를 사용하여 특정 커밋을 다른 커밋으로 대체하는 방법은?
+- git rebase -i의 옵션과 각 명령어(pick, squash, edit, reword, drop)의 역할은?
+- git rebase 중에 충돌이 발생하면 어떻게 해결하는가?
+- git rebase --onto의 활용 사례는?
+- git rebase --autosquash가 어떤 역할을 하는가?
+- git reflog를 사용하여 git reset --hard 후에도 원래 상태로 복구하는 방법은?
+- git filter-repo를 활용하여 민감한 정보가 포함된 커밋을 제거하는 방법은?
+- git replace를 사용하여 특정 커밋을 다른 커밋으로 대체하는 방법은?
 
-	•	Git 서브모듈(submodule)을 사용해야 하는 이유는?
-	•	git submodule update --init --recursive의 역할은?
-	•	서브모듈을 제거하는 방법은?
-	•	서브트리(Git Subtree)와 서브모듈(Git Submodule)의 차이는?
-	•	대형 프로젝트에서 Git의 성능을 최적화하는 방법은?
-	•	git-lfs (Large File Storage)를 사용해야 하는 경우는?
-	•	Git에서 프로젝트의 크기를 줄이기 위한 방법은?
+- Git 서브모듈(submodule)을 사용해야 하는 이유는?
+- git submodule update --init --recursive의 역할은?
+- 서브모듈을 제거하는 방법은?
+- 서브트리(Git Subtree)와 서브모듈(Git Submodule)의 차이는?
+- 대형 프로젝트에서 Git의 성능을 최적화하는 방법은?
+- git-lfs (Large File Storage)를 사용해야 하는 경우는?
+- Git에서 프로젝트의 크기를 줄이기 위한 방법은?
 
-	•	Git이 파일을 저장하는 방식이 SVN과 다른 이유는?
-	•	Git에서 delta compression이란 무엇인가?
-	•	git gc --aggressive가 수행하는 작업은?
-	•	git repack이 저장소 최적화에 미치는 영향은?
-	•	git index 파일이 하는 역할은?
-	•	Git에서 unreachable object란 무엇이며 이를 정리하는 방법은?
-	•	git fsck --full을 사용하여 저장소 무결성을 검사하는 방법은?
-	•	git pack-objects의 역할과 성능 최적화 방안은?
+- Git이 파일을 저장하는 방식이 SVN과 다른 이유는?
+- Git에서 delta compression이란 무엇인가?
+- git gc --aggressive가 수행하는 작업은?
+- git repack이 저장소 최적화에 미치는 영향은?
+- git index 파일이 하는 역할은?
+- Git에서 unreachable object란 무엇이며 이를 정리하는 방법은?
+- git fsck --full을 사용하여 저장소 무결성을 검사하는 방법은?
+- git pack-objects의 역할과 성능 최적화 방안은?
 
-	•	git push --mirror의 역할과 활용 사례는?
-	•	원격 저장소에서 특정 브랜치만 삭제하는 방법은?
-	•	git fetch --prune을 사용하는 이유는?
-	•	git bundle을 사용하여 네트워크 없이 저장소를 공유하는 방법은?
-	•	git remote set-url을 활용하여 원격 저장소 URL을 변경하는 방법은?
-	•	git daemon을 사용하여 로컬에서 Git 서버를 호스팅하는 방법은?
-	•	git archive를 사용하여 특정 브랜치나 커밋을 압축 파일로 내보내는 방법은?
+- git push --mirror의 역할과 활용 사례는?
+- 원격 저장소에서 특정 브랜치만 삭제하는 방법은?
+- git fetch --prune을 사용하는 이유는?
+- git bundle을 사용하여 네트워크 없이 저장소를 공유하는 방법은?
+- git remote set-url을 활용하여 원격 저장소 URL을 변경하는 방법은?
+- git daemon을 사용하여 로컬에서 Git 서버를 호스팅하는 방법은?
+- git archive를 사용하여 특정 브랜치나 커밋을 압축 파일로 내보내는 방법은?
 
-	•	Git에서 브랜치 정책을 CI/CD 파이프라인과 연계하는 방법은?
-	•	GitHub Actions, GitLab CI/CD, Jenkins에서 Git을 활용하는 방법은?
-	•	git diff --check를 활용하여 CI/CD에서 코드 스타일 체크를 수행하는 방법은?
-	•	pre-commit hook을 설정하여 코드 푸시 전에 검사를 수행하는 방법은?
-	•	Git을 사용한 블루/그린 배포 전략은 어떻게 구현되는가?
-	•	Git에서 GitOps를 구현하는 방법은?
-	•	git notes를 활용하여 CI/CD 로그를 관리하는 방법은?
+- Git에서 브랜치 정책을 CI/CD 파이프라인과 연계하는 방법은?
+- GitHub Actions, GitLab CI/CD, Jenkins에서 Git을 활용하는 방법은?
+- git diff --check를 활용하여 CI/CD에서 코드 스타일 체크를 수행하는 방법은?
+- pre-commit hook을 설정하여 코드 푸시 전에 검사를 수행하는 방법은?
+- Git을 사용한 블루/그린 배포 전략은 어떻게 구현되는가?
+- Git에서 GitOps를 구현하는 방법은?
+- git notes를 활용하여 CI/CD 로그를 관리하는 방법은?
 
-	•	git credential.helper를 설정하여 인증을 자동화하는 방법은?
-	•	Git에서 커밋에 서명을 추가하는 방법(GPG 서명)은?
-	•	GitHub에서 사용자 권한을 설정하는 방법은?
-	•	git verify-commit과 git verify-tag의 차이점은?
-	•	Git에서 secrets scanning을 수행하는 방법은?
-	•	GitHub의 Dependabot이 하는 역할은?
-	•	Git에서 민감한 데이터를 실수로 푸시했을 때 제거하는 방법은?
+- git credential.helper를 설정하여 인증을 자동화하는 방법은?
+- Git에서 커밋에 서명을 추가하는 방법(GPG 서명)은?
+- GitHub에서 사용자 권한을 설정하는 방법은?
+- git verify-commit과 git verify-tag의 차이점은?
+- Git에서 secrets scanning을 수행하는 방법은?
+- GitHub의 Dependabot이 하는 역할은?
+- Git에서 민감한 데이터를 실수로 푸시했을 때 제거하는 방법은?
 
-	•	Git 2.x 버전 이후 추가된 주요 기능은?
-	•	git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
-	•	git sparse-checkout을 사용하여 대형 저장소에서 특정 폴더만 체크아웃하는 방법은?
-	•	git maintenance 명령어가 수행하는 작업은?
-	•	git pack-redundant의 역할과 활용 방법은?
-	•	git replace를 활용하여 리팩토링을 수행하는 방법은?
-	•	GitHub의 Codespaces와 Gitpod을 활용한 원격 개발 환경 구축 방법은?
+- Git 2.x 버전 이후 추가된 주요 기능은?
+- git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
+- git sparse-checkout을 사용하여 대형 저장소에서 특정 폴더만 체크아웃하는 방법은?
+- git maintenance 명령어가 수행하는 작업은?
+- git pack-redundant의 역할과 활용 방법은?
+- git replace를 활용하여 리팩토링을 수행하는 방법은?
+- GitHub의 Codespaces와 Gitpod을 활용한 원격 개발 환경 구축 방법은?
 
 1. Git에서의 `git diff` 명령어와 다양한 옵션(`--cached`, `--staged` 등)에 대해 설명해주세요.
 2. Git에서의 `git show` 명령어는 어떤 정보를 보여주나요?
@@ -2665,98 +2665,98 @@
 1. Git Hook을 사용해 커스텀 스크립트를 실행한 경험이 있다면 설명해주세요.
 2. Git의 `git alias`를 사용해본 경험이 있다면 설명해주세요.
 
-	•	Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
-	•	Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
-	•	Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
-	•	Kotlin의 Flow와 LiveData의 차이점은?
-	•	Kotlin에서 Channel과 SharedFlow의 차이점은?
-	•	Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
-	•	Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
-	•	Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
-	•	Jetpack Compose에서 Modifier의 역할과 best practice는?
-	•	Android에서 WorkManager와 AlarmManager의 차이점은?
-	•	Android에서 DataStore와 SharedPreferences의 차이점은?
-	•	Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
-	•	Android에서 ViewBinding과 DataBinding의 차이점은?
-	•	Android에서 CameraX를 사용할 때의 장점은?
-	•	Android에서 Activity Result API를 활용하는 방법은?
-	•	Android에서 LifecycleOwner와 ViewModel의 관계를 설명하시오.
-	•	Android에서 Hilt와 Koin의 차이점은?
-	•	Android에서 Firebase Cloud Messaging(FCM)과 OneSignal의 차이점은?
-	•	Android에서 ExoPlayer와 MediaPlayer의 차이점은?
-	•	Android에서 Jetpack Paging 3 라이브러리의 개념과 사용법은?
-	•	Android에서 Service와 JobIntentService의 차이점은?
-	•	Flutter에서 Navigator 2.0의 장점과 기존 방식과의 차이점은?
-	•	Flutter의 InheritedWidget과 Provider 패턴의 차이점은?
-	•	Flutter에서 setState()가 불필요한 리빌드를 초래하는 이유는?
-	•	Flutter에서 Isolate를 활용하는 이유는?
-	•	Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
-	•	Flutter에서 AnimatedList와 ListView.builder의 차이점은?
-	•	Flutter에서 go_router와 기존 Navigator의 차이점은?
-	•	Flutter에서 Canvas API를 활용하는 방법은?
-	•	Flutter에서 SafeArea가 필요한 이유는?
-	•	Flutter에서 ExpansionTile과 ListTile의 차이점은?
-	•	Flutter에서 build() 함수의 역할과 성능 최적화 방법은?
-	•	Flutter에서 SliverAppBar와 AppBar의 차이점은?
-	•	Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
-	•	Flutter에서 RepaintBoundary의 역할은?
-	•	React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 미치는가?
-	•	React에서 Server Components란 무엇인가?
-	•	React에서 Suspense와 Error Boundary를 활용하는 방법은?
-	•	React에서 React.memo()와 PureComponent의 차이점은?
-	•	React에서 Recoil과 Zustand의 차이점은?
-	•	React에서 PWA(Progressive Web App)를 구현하는 방법은?
-	•	React Native에서 Fabric과 기존 렌더링 방식의 차이점은?
-	•	React Native에서 Metro Bundler와 Webpack의 차이점은?
-	•	React Native에서 Gesture Handler를 최적화하는 방법은?
-	•	React Native에서 Dynamic Code Push를 적용하는 방법은?
-	•	React Native에서 Hermes 엔진을 사용할 때의 장점은?
-	•	React Native에서 Accessibility를 최적화하는 방법은?
-	•	React Native에서 Custom Native Module을 작성하는 방법은?
-	•	Clean Architecture의 핵심 개념과 MVVM과의 차이점은?
-	•	CQRS(Command Query Responsibility Segregation)를 적용해야 하는 경우는?
-	•	Event Sourcing 패턴을 적용하면 얻을 수 있는 장점은?
-	•	Domain-Driven Design(DDD)의 핵심 개념은?
-	•	Hexagonal Architecture와 Clean Architecture의 차이점은?
-	•	Microservices 아키텍처에서 API Gateway를 활용하는 방법은?
-	•	Monolithic Architecture와 Microservices의 장단점 비교
-	•	Kubernetes에서 Pod, ReplicaSet, Deployment의 차이점은?
-	•	Kubernetes에서 Ingress Controller를 활용하는 방법은?
-	•	CI/CD에서 Blue-Green Deployment와 Canary Deployment의 차이점은?
-	•	TLS 1.2와 TLS 1.3의 차이점은?
-	•	OAuth 2.0과 OpenID Connect(OIDC)의 차이점은?
-	•	Zero Trust Security 모델이란 무엇인가?
-	•	JWT와 OAuth의 차이점은?
-	•	API Gateway에서 Rate Limiting을 적용하는 방법은?
-	•	CORS 문제를 해결하는 방법은?
-	•	DDOS 공격을 방어하는 방법은?
-	•	HTTP/2와 HTTP/3의 차이점은?
-	•	gRPC와 REST API의 차이점은?
-	•	Kubernetes에서 Network Policy를 활용하는 방법은?
-	•	SQL Injection을 방어하는 방법은?
-	•	Redis와 Memcached의 차이점은?
-	•	PostgreSQL에서 JSONB를 사용하는 이유는?
-	•	Database Sharding과 Replication의 차이점은?
-	•	Read Replica와 Write Replica의 차이점은?
-	•	Cassandra와 MongoDB의 차이점은?
-	•	RDBMS에서 Partitioning을 수행하는 이유는?
-	•	BigTable, BigQuery, Redshift의 차이점은?
-	•	NoSQL에서 Eventual Consistency가 적용되는 이유는?
-	•	ElasticSearch의 인덱싱 구조를 설명하시오.
-	•	Graph Database와 Relational Database의 차이점은?
-	•	본인이 생각하는 “좋은 개발자”란?
-	•	본인의 가장 큰 장점과 단점은 무엇인가?
-	•	가장 도전적이었던 프로젝트와 해결 방법은?
-	•	기술 도입을 설득해야 하는 상황에서 어떻게 접근할 것인가?
-	•	동료 개발자와 갈등이 발생했을 때 어떻게 해결할 것인가?
-	•	비개발 팀과 협업할 때 중요하다고 생각하는 점은?
-	•	고객의 요구사항이 모호할 때 어떻게 접근하는가?
-	•	프로젝트 일정이 지연될 경우 어떤 방식으로 대처하는가?
-	•	새로운 기술을 학습할 때의 접근 방식은?
-	•	단기간 내 빠르게 학습했던 기술이 있다면 설명하시오.
-	•	다양한 프로젝트를 진행하면서 가장 크게 배운 점은?
-	•	AI, IoT, 블록체인 등의 신기술이 개발 환경에 미치는 영향은?
-	•	향후 3년, 5년 뒤 자신의 개발자로서의 목표는?  
+- Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
+- Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
+- Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
+- Kotlin의 Flow와 LiveData의 차이점은?
+- Kotlin에서 Channel과 SharedFlow의 차이점은?
+- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
+- Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
+- Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
+- Jetpack Compose에서 Modifier의 역할과 best practice는?
+- Android에서 WorkManager와 AlarmManager의 차이점은?
+- Android에서 DataStore와 SharedPreferences의 차이점은?
+- Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
+- Android에서 ViewBinding과 DataBinding의 차이점은?
+- Android에서 CameraX를 사용할 때의 장점은?
+- Android에서 Activity Result API를 활용하는 방법은?
+- Android에서 LifecycleOwner와 ViewModel의 관계를 설명하시오.
+- Android에서 Hilt와 Koin의 차이점은?
+- Android에서 Firebase Cloud Messaging(FCM)과 OneSignal의 차이점은?
+- Android에서 ExoPlayer와 MediaPlayer의 차이점은?
+- Android에서 Jetpack Paging 3 라이브러리의 개념과 사용법은?
+- Android에서 Service와 JobIntentService의 차이점은?
+- Flutter에서 Navigator 2.0의 장점과 기존 방식과의 차이점은?
+- Flutter의 InheritedWidget과 Provider 패턴의 차이점은?
+- Flutter에서 setState()가 불필요한 리빌드를 초래하는 이유는?
+- Flutter에서 Isolate를 활용하는 이유는?
+- Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
+- Flutter에서 AnimatedList와 ListView.builder의 차이점은?
+- Flutter에서 go_router와 기존 Navigator의 차이점은?
+- Flutter에서 Canvas API를 활용하는 방법은?
+- Flutter에서 SafeArea가 필요한 이유는?
+- Flutter에서 ExpansionTile과 ListTile의 차이점은?
+- Flutter에서 build() 함수의 역할과 성능 최적화 방법은?
+- Flutter에서 SliverAppBar와 AppBar의 차이점은?
+- Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
+- Flutter에서 RepaintBoundary의 역할은?
+- React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 미치는가?
+- React에서 Server Components란 무엇인가?
+- React에서 Suspense와 Error Boundary를 활용하는 방법은?
+- React에서 React.memo()와 PureComponent의 차이점은?
+- React에서 Recoil과 Zustand의 차이점은?
+- React에서 PWA(Progressive Web App)를 구현하는 방법은?
+- React Native에서 Fabric과 기존 렌더링 방식의 차이점은?
+- React Native에서 Metro Bundler와 Webpack의 차이점은?
+- React Native에서 Gesture Handler를 최적화하는 방법은?
+- React Native에서 Dynamic Code Push를 적용하는 방법은?
+- React Native에서 Hermes 엔진을 사용할 때의 장점은?
+- React Native에서 Accessibility를 최적화하는 방법은?
+- React Native에서 Custom Native Module을 작성하는 방법은?
+- Clean Architecture의 핵심 개념과 MVVM과의 차이점은?
+- CQRS(Command Query Responsibility Segregation)를 적용해야 하는 경우는?
+- Event Sourcing 패턴을 적용하면 얻을 수 있는 장점은?
+- Domain-Driven Design(DDD)의 핵심 개념은?
+- Hexagonal Architecture와 Clean Architecture의 차이점은?
+- Microservices 아키텍처에서 API Gateway를 활용하는 방법은?
+- Monolithic Architecture와 Microservices의 장단점 비교
+- Kubernetes에서 Pod, ReplicaSet, Deployment의 차이점은?
+- Kubernetes에서 Ingress Controller를 활용하는 방법은?
+- CI/CD에서 Blue-Green Deployment와 Canary Deployment의 차이점은?
+- TLS 1.2와 TLS 1.3의 차이점은?
+- OAuth 2.0과 OpenID Connect(OIDC)의 차이점은?
+- Zero Trust Security 모델이란 무엇인가?
+- JWT와 OAuth의 차이점은?
+- API Gateway에서 Rate Limiting을 적용하는 방법은?
+- CORS 문제를 해결하는 방법은?
+- DDOS 공격을 방어하는 방법은?
+- HTTP/2와 HTTP/3의 차이점은?
+- gRPC와 REST API의 차이점은?
+- Kubernetes에서 Network Policy를 활용하는 방법은?
+- SQL Injection을 방어하는 방법은?
+- Redis와 Memcached의 차이점은?
+- PostgreSQL에서 JSONB를 사용하는 이유는?
+- Database Sharding과 Replication의 차이점은?
+- Read Replica와 Write Replica의 차이점은?
+- Cassandra와 MongoDB의 차이점은?
+- RDBMS에서 Partitioning을 수행하는 이유는?
+- BigTable, BigQuery, Redshift의 차이점은?
+- NoSQL에서 Eventual Consistency가 적용되는 이유는?
+- ElasticSearch의 인덱싱 구조를 설명하시오.
+- Graph Database와 Relational Database의 차이점은?
+- 본인이 생각하는 “좋은 개발자”란?
+- 본인의 가장 큰 장점과 단점은 무엇인가?
+- 가장 도전적이었던 프로젝트와 해결 방법은?
+- 기술 도입을 설득해야 하는 상황에서 어떻게 접근할 것인가?
+- 동료 개발자와 갈등이 발생했을 때 어떻게 해결할 것인가?
+- 비개발 팀과 협업할 때 중요하다고 생각하는 점은?
+- 고객의 요구사항이 모호할 때 어떻게 접근하는가?
+- 프로젝트 일정이 지연될 경우 어떤 방식으로 대처하는가?
+- 새로운 기술을 학습할 때의 접근 방식은?
+- 단기간 내 빠르게 학습했던 기술이 있다면 설명하시오.
+- 다양한 프로젝트를 진행하면서 가장 크게 배운 점은?
+- AI, IoT, 블록체인 등의 신기술이 개발 환경에 미치는 영향은?
+- 향후 3년, 5년 뒤 자신의 개발자로서의 목표는?  
 
    - AWS, GCP, Azure와 같은 클라우드 플랫폼에서의 주요 서비스와 차이점은 무엇인가요?
    - 클라우드 네이티브 애플리케이션을 설계할 때 고려해야 할 사항은 무엇인가요?
@@ -2801,87 +2801,87 @@
    - 오픈소스 프로젝트에 기여한 경험이 있다면 설명해주세요.
    - 개발자로서의 네트워킹을 어떻게 관리하시나요?
 
-	•	Jetpack Compose에서 recomposition이 발생하는 조건은?
-	•	Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
-	•	Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
-	•	Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
-	•	Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
-	•	Kotlin에서 Flow와 LiveData의 차이점은?
-	•	Kotlin에서 coroutineScope와 supervisorScope의 차이점은?
-	•	Kotlin에서 backing field와 backing property란?
-	•	Kotlin에서 deep copy와 shallow copy의 차이점은?
-	•	Kotlin에서 sealed class와 enum class의 차이점은?
-	•	Jetpack Compose에서 Slot API란?
-	•	Jetpack Compose에서 derivedStateOf를 사용하는 이유는?
-	•	Jetpack Compose에서 LazyColumn의 성능을 최적화하는 방법은?
-	•	Kotlin Multiplatform을 사용해본 경험이 있는가?
-	•	Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
-	•	Android에서 Inline Class의 장점은?
-	•	Flutter에서 const 키워드를 사용할 때 성능 최적화가 되는 이유는?
-	•	Flutter의 State Restoration이란 무엇인가?
-	•	Flutter에서 isolate를 사용하는 이유는?
-	•	Flutter에서 navigator key를 사용하는 이유는?
-	•	Flutter에서 Platform Channel을 활용한 네이티브 통신 방식은?
-	•	Flutter에서 DevTools을 활용한 성능 최적화 방법은?
-	•	Flutter에서 Platform Views를 사용하는 이유는?
-	•	Flutter의 implicit animation과 explicit animation의 차이점은?
-	•	Swift에서 struct와 class의 차이점은?
-	•	Swift에서 Combine과 RxSwift의 차이점은?
-	•	Swift에서 Result 타입을 사용하는 이유는?
-	•	Swift의 Codable과 JSONSerialization의 차이점은?
-	•	SwiftUI에서 @State, @ObservedObject, @EnvironmentObject의 차이점은?
-	•	SwiftUI에서 LazyVStack과 LazyHStack을 사용하는 이유는?
-	•	AWS Lambda와 EC2의 차이점은?
-	•	Firebase Firestore와 Realtime Database의 차이점은?
-	•	OAuth 2.0의 Authorization Code Flow와 Implicit Flow의 차이점은?
-	•	OAuth 2.0에서 PKCE(Proof Key for Code Exchange)의 역할은?
-	•	JWT(JSON Web Token)과 Session 기반 인증의 차이점은?
-	•	RESTful API 설계 시 고려해야 할 보안 요소는?
-	•	API Gateway와 Reverse Proxy의 차이점은?
-	•	Serverless와 Container 기반 아키텍처의 차이점은?
-	•	Google Cloud Functions와 AWS Lambda의 차이점은?
-	•	Kubernetes에서 Ingress Controller의 역할은?
-	•	MySQL에서 INDEX를 남용했을 때의 문제점은?
-	•	NoSQL과 RDBMS의 트랜잭션 모델 차이는?
-	•	MongoDB에서 ACID 트랜잭션을 구현하는 방법은?
-	•	PostgreSQL에서 JSONB를 사용할 때 장점은?
-	•	데이터베이스 정규화(Normalization)와 비정규화(Denormalization)의 차이점은?
-	•	Sharding과 Replication의 차이점은?
-	•	Redis와 Memcached의 차이점은?
-	•	Connection Pooling을 사용하는 이유는?
-	•	데이터베이스에서 인덱스가 효과적인 경우와 그렇지 않은 경우는?
-	•	머신러닝에서 과적합(Overfitting)을 방지하는 방법은?
-	•	머신러닝 모델의 성능 평가 지표 중 ROC-AUC와 F1-score의 차이점은?
-	•	딥러닝에서 Batch Normalization의 역할은?
-	•	Transformer 모델의 핵심 개념은?
-	•	머신러닝에서 Feature Engineering이 중요한 이유는?
-	•	코드 리뷰를 진행할 때 가장 중요하게 생각하는 요소는?
-	•	코드 리뷰 시 동료와 의견이 충돌할 때 어떻게 해결하는가?
-	•	프로젝트가 일정에 맞추어 진행되지 못할 경우 어떻게 대처하는가?
-	•	개발 프로세스에서 애자일과 스크럼을 적용해본 경험이 있는가?
-	•	개발팀과 비개발팀(기획, 디자인) 간의 갈등을 해결한 경험이 있는가?
-	•	프로젝트에서 요구사항 변경이 발생했을 때 어떻게 대처하는가?
-	•	새로운 기술 도입을 팀원들에게 설득할 때의 접근 방법은?
-	•	프로젝트 일정 산정 시 가장 중요하게 고려해야 할 요소는?
-	•	PM으로서 팀원의 동기부여를 위해 어떤 방법을 사용할 것인가?
-	•	원격 근무 환경에서의 개발 프로세스 개선 방안은?
-	•	영어 면접에서 가장 어려웠던 점은 무엇인가?
-	•	비개발자가 이해할 수 있도록 기술적인 내용을 영어로 설명해 본 경험이 있는가?
-	•	해외 개발자 커뮤니티에서 문제 해결을 위해 질문하거나 답변해 본 경험이 있는가?
-	•	비즈니스 영어와 기술 영어의 차이점은 무엇이라고 생각하는가?
-	•	해외 컨퍼런스 발표를 준비한다면 어떤 방식으로 접근할 것인가?
-	•	팀워크에서 가장 중요하다고 생각하는 요소는 무엇인가?
-	•	업무 중 스트레스를 어떻게 관리하는가?
-	•	상사나 동료의 피드백을 수용하는 태도는 어떠한가?
-	•	본인이 가진 강점이 팀 내에서 어떤 가치를 제공할 수 있는가?
-	•	개발자로서 성장하기 위해 어떤 노력을 하고 있는가?
-	•	본인의 실패 경험 중 가장 큰 것을 말해보고, 이를 어떻게 극복했는가?
-	•	최근 읽은 개발 관련 책이나 논문이 있는가?
-	•	개발 외적으로 관심 있는 분야는 무엇인가?
-	•	기술 트렌드를 따라가기 위해 어떤 노력을 하는가?
-	•	해당 회사의 비즈니스 모델을 어떻게 이해하고 있는가?
-	•	회사의 핵심 가치 중 본인과 가장 일치하는 것은 무엇인가?
-	•	입사 후 첫 3개월 동안의 목표는 무엇인가?
-	•	해당 회사의 제품이나 서비스에서 개선할 점이 있다면 무엇인가?
-	•	경쟁사 대비 우리 회사의 차별점은 무엇이라고 생각하는가?
-	•	우리 회사가 해결하려는 문제를 본인은 어떻게 해결할 것인가?
+- Jetpack Compose에서 recomposition이 발생하는 조건은?
+- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
+- Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
+- Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
+- Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
+- Kotlin에서 Flow와 LiveData의 차이점은?
+- Kotlin에서 coroutineScope와 supervisorScope의 차이점은?
+- Kotlin에서 backing field와 backing property란?
+- Kotlin에서 deep copy와 shallow copy의 차이점은?
+- Kotlin에서 sealed class와 enum class의 차이점은?
+- Jetpack Compose에서 Slot API란?
+- Jetpack Compose에서 derivedStateOf를 사용하는 이유는?
+- Jetpack Compose에서 LazyColumn의 성능을 최적화하는 방법은?
+- Kotlin Multiplatform을 사용해본 경험이 있는가?
+- Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
+- Android에서 Inline Class의 장점은?
+- Flutter에서 const 키워드를 사용할 때 성능 최적화가 되는 이유는?
+- Flutter의 State Restoration이란 무엇인가?
+- Flutter에서 isolate를 사용하는 이유는?
+- Flutter에서 navigator key를 사용하는 이유는?
+- Flutter에서 Platform Channel을 활용한 네이티브 통신 방식은?
+- Flutter에서 DevTools을 활용한 성능 최적화 방법은?
+- Flutter에서 Platform Views를 사용하는 이유는?
+- Flutter의 implicit animation과 explicit animation의 차이점은?
+- Swift에서 struct와 class의 차이점은?
+- Swift에서 Combine과 RxSwift의 차이점은?
+- Swift에서 Result 타입을 사용하는 이유는?
+- Swift의 Codable과 JSONSerialization의 차이점은?
+- SwiftUI에서 @State, @ObservedObject, @EnvironmentObject의 차이점은?
+- SwiftUI에서 LazyVStack과 LazyHStack을 사용하는 이유는?
+- AWS Lambda와 EC2의 차이점은?
+- Firebase Firestore와 Realtime Database의 차이점은?
+- OAuth 2.0의 Authorization Code Flow와 Implicit Flow의 차이점은?
+- OAuth 2.0에서 PKCE(Proof Key for Code Exchange)의 역할은?
+- JWT(JSON Web Token)과 Session 기반 인증의 차이점은?
+- RESTful API 설계 시 고려해야 할 보안 요소는?
+- API Gateway와 Reverse Proxy의 차이점은?
+- Serverless와 Container 기반 아키텍처의 차이점은?
+- Google Cloud Functions와 AWS Lambda의 차이점은?
+- Kubernetes에서 Ingress Controller의 역할은?
+- MySQL에서 INDEX를 남용했을 때의 문제점은?
+- NoSQL과 RDBMS의 트랜잭션 모델 차이는?
+- MongoDB에서 ACID 트랜잭션을 구현하는 방법은?
+- PostgreSQL에서 JSONB를 사용할 때 장점은?
+- 데이터베이스 정규화(Normalization)와 비정규화(Denormalization)의 차이점은?
+- Sharding과 Replication의 차이점은?
+- Redis와 Memcached의 차이점은?
+- Connection Pooling을 사용하는 이유는?
+- 데이터베이스에서 인덱스가 효과적인 경우와 그렇지 않은 경우는?
+- 머신러닝에서 과적합(Overfitting)을 방지하는 방법은?
+- 머신러닝 모델의 성능 평가 지표 중 ROC-AUC와 F1-score의 차이점은?
+- 딥러닝에서 Batch Normalization의 역할은?
+- Transformer 모델의 핵심 개념은?
+- 머신러닝에서 Feature Engineering이 중요한 이유는?
+- 코드 리뷰를 진행할 때 가장 중요하게 생각하는 요소는?
+- 코드 리뷰 시 동료와 의견이 충돌할 때 어떻게 해결하는가?
+- 프로젝트가 일정에 맞추어 진행되지 못할 경우 어떻게 대처하는가?
+- 개발 프로세스에서 애자일과 스크럼을 적용해본 경험이 있는가?
+- 개발팀과 비개발팀(기획, 디자인) 간의 갈등을 해결한 경험이 있는가?
+- 프로젝트에서 요구사항 변경이 발생했을 때 어떻게 대처하는가?
+- 새로운 기술 도입을 팀원들에게 설득할 때의 접근 방법은?
+- 프로젝트 일정 산정 시 가장 중요하게 고려해야 할 요소는?
+- PM으로서 팀원의 동기부여를 위해 어떤 방법을 사용할 것인가?
+- 원격 근무 환경에서의 개발 프로세스 개선 방안은?
+- 영어 면접에서 가장 어려웠던 점은 무엇인가?
+- 비개발자가 이해할 수 있도록 기술적인 내용을 영어로 설명해 본 경험이 있는가?
+- 해외 개발자 커뮤니티에서 문제 해결을 위해 질문하거나 답변해 본 경험이 있는가?
+- 비즈니스 영어와 기술 영어의 차이점은 무엇이라고 생각하는가?
+- 해외 컨퍼런스 발표를 준비한다면 어떤 방식으로 접근할 것인가?
+- 팀워크에서 가장 중요하다고 생각하는 요소는 무엇인가?
+- 업무 중 스트레스를 어떻게 관리하는가?
+- 상사나 동료의 피드백을 수용하는 태도는 어떠한가?
+- 본인이 가진 강점이 팀 내에서 어떤 가치를 제공할 수 있는가?
+- 개발자로서 성장하기 위해 어떤 노력을 하고 있는가?
+- 본인의 실패 경험 중 가장 큰 것을 말해보고, 이를 어떻게 극복했는가?
+- 최근 읽은 개발 관련 책이나 논문이 있는가?
+- 개발 외적으로 관심 있는 분야는 무엇인가?
+- 기술 트렌드를 따라가기 위해 어떤 노력을 하는가?
+- 해당 회사의 비즈니스 모델을 어떻게 이해하고 있는가?
+- 회사의 핵심 가치 중 본인과 가장 일치하는 것은 무엇인가?
+- 입사 후 첫 3개월 동안의 목표는 무엇인가?
+- 해당 회사의 제품이나 서비스에서 개선할 점이 있다면 무엇인가?
+- 경쟁사 대비 우리 회사의 차별점은 무엇이라고 생각하는가?
+- 우리 회사가 해결하려는 문제를 본인은 어떻게 해결할 것인가?
