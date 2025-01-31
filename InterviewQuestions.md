@@ -2800,3 +2800,88 @@
    - 개발자 커뮤니티에 참여한 경험이 있다면 공유해주세요.
    - 오픈소스 프로젝트에 기여한 경험이 있다면 설명해주세요.
    - 개발자로서의 네트워킹을 어떻게 관리하시나요?
+
+	•	Jetpack Compose에서 recomposition이 발생하는 조건은?
+	•	Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
+	•	Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
+	•	Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
+	•	Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
+	•	Kotlin에서 Flow와 LiveData의 차이점은?
+	•	Kotlin에서 coroutineScope와 supervisorScope의 차이점은?
+	•	Kotlin에서 backing field와 backing property란?
+	•	Kotlin에서 deep copy와 shallow copy의 차이점은?
+	•	Kotlin에서 sealed class와 enum class의 차이점은?
+	•	Jetpack Compose에서 Slot API란?
+	•	Jetpack Compose에서 derivedStateOf를 사용하는 이유는?
+	•	Jetpack Compose에서 LazyColumn의 성능을 최적화하는 방법은?
+	•	Kotlin Multiplatform을 사용해본 경험이 있는가?
+	•	Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
+	•	Android에서 Inline Class의 장점은?
+	•	Flutter에서 const 키워드를 사용할 때 성능 최적화가 되는 이유는?
+	•	Flutter의 State Restoration이란 무엇인가?
+	•	Flutter에서 isolate를 사용하는 이유는?
+	•	Flutter에서 navigator key를 사용하는 이유는?
+	•	Flutter에서 Platform Channel을 활용한 네이티브 통신 방식은?
+	•	Flutter에서 DevTools을 활용한 성능 최적화 방법은?
+	•	Flutter에서 Platform Views를 사용하는 이유는?
+	•	Flutter의 implicit animation과 explicit animation의 차이점은?
+	•	Swift에서 struct와 class의 차이점은?
+	•	Swift에서 Combine과 RxSwift의 차이점은?
+	•	Swift에서 Result 타입을 사용하는 이유는?
+	•	Swift의 Codable과 JSONSerialization의 차이점은?
+	•	SwiftUI에서 @State, @ObservedObject, @EnvironmentObject의 차이점은?
+	•	SwiftUI에서 LazyVStack과 LazyHStack을 사용하는 이유는?
+	•	AWS Lambda와 EC2의 차이점은?
+	•	Firebase Firestore와 Realtime Database의 차이점은?
+	•	OAuth 2.0의 Authorization Code Flow와 Implicit Flow의 차이점은?
+	•	OAuth 2.0에서 PKCE(Proof Key for Code Exchange)의 역할은?
+	•	JWT(JSON Web Token)과 Session 기반 인증의 차이점은?
+	•	RESTful API 설계 시 고려해야 할 보안 요소는?
+	•	API Gateway와 Reverse Proxy의 차이점은?
+	•	Serverless와 Container 기반 아키텍처의 차이점은?
+	•	Google Cloud Functions와 AWS Lambda의 차이점은?
+	•	Kubernetes에서 Ingress Controller의 역할은?
+	•	MySQL에서 INDEX를 남용했을 때의 문제점은?
+	•	NoSQL과 RDBMS의 트랜잭션 모델 차이는?
+	•	MongoDB에서 ACID 트랜잭션을 구현하는 방법은?
+	•	PostgreSQL에서 JSONB를 사용할 때 장점은?
+	•	데이터베이스 정규화(Normalization)와 비정규화(Denormalization)의 차이점은?
+	•	Sharding과 Replication의 차이점은?
+	•	Redis와 Memcached의 차이점은?
+	•	Connection Pooling을 사용하는 이유는?
+	•	데이터베이스에서 인덱스가 효과적인 경우와 그렇지 않은 경우는?
+	•	머신러닝에서 과적합(Overfitting)을 방지하는 방법은?
+	•	머신러닝 모델의 성능 평가 지표 중 ROC-AUC와 F1-score의 차이점은?
+	•	딥러닝에서 Batch Normalization의 역할은?
+	•	Transformer 모델의 핵심 개념은?
+	•	머신러닝에서 Feature Engineering이 중요한 이유는?
+	•	코드 리뷰를 진행할 때 가장 중요하게 생각하는 요소는?
+	•	코드 리뷰 시 동료와 의견이 충돌할 때 어떻게 해결하는가?
+	•	프로젝트가 일정에 맞추어 진행되지 못할 경우 어떻게 대처하는가?
+	•	개발 프로세스에서 애자일과 스크럼을 적용해본 경험이 있는가?
+	•	개발팀과 비개발팀(기획, 디자인) 간의 갈등을 해결한 경험이 있는가?
+	•	프로젝트에서 요구사항 변경이 발생했을 때 어떻게 대처하는가?
+	•	새로운 기술 도입을 팀원들에게 설득할 때의 접근 방법은?
+	•	프로젝트 일정 산정 시 가장 중요하게 고려해야 할 요소는?
+	•	PM으로서 팀원의 동기부여를 위해 어떤 방법을 사용할 것인가?
+	•	원격 근무 환경에서의 개발 프로세스 개선 방안은?
+	•	영어 면접에서 가장 어려웠던 점은 무엇인가?
+	•	비개발자가 이해할 수 있도록 기술적인 내용을 영어로 설명해 본 경험이 있는가?
+	•	해외 개발자 커뮤니티에서 문제 해결을 위해 질문하거나 답변해 본 경험이 있는가?
+	•	비즈니스 영어와 기술 영어의 차이점은 무엇이라고 생각하는가?
+	•	해외 컨퍼런스 발표를 준비한다면 어떤 방식으로 접근할 것인가?
+	•	팀워크에서 가장 중요하다고 생각하는 요소는 무엇인가?
+	•	업무 중 스트레스를 어떻게 관리하는가?
+	•	상사나 동료의 피드백을 수용하는 태도는 어떠한가?
+	•	본인이 가진 강점이 팀 내에서 어떤 가치를 제공할 수 있는가?
+	•	개발자로서 성장하기 위해 어떤 노력을 하고 있는가?
+	•	본인의 실패 경험 중 가장 큰 것을 말해보고, 이를 어떻게 극복했는가?
+	•	최근 읽은 개발 관련 책이나 논문이 있는가?
+	•	개발 외적으로 관심 있는 분야는 무엇인가?
+	•	기술 트렌드를 따라가기 위해 어떤 노력을 하는가?
+	•	해당 회사의 비즈니스 모델을 어떻게 이해하고 있는가?
+	•	회사의 핵심 가치 중 본인과 가장 일치하는 것은 무엇인가?
+	•	입사 후 첫 3개월 동안의 목표는 무엇인가?
+	•	해당 회사의 제품이나 서비스에서 개선할 점이 있다면 무엇인가?
+	•	경쟁사 대비 우리 회사의 차별점은 무엇이라고 생각하는가?
+	•	우리 회사가 해결하려는 문제를 본인은 어떻게 해결할 것인가?
