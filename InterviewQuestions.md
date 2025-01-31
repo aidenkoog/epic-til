@@ -3292,5 +3292,204 @@
 26. 개발이랑 매니저 중 어디에 더 맞으신것 같나요?
 27. 혹시 와이파이 관련해서 이슈가 없었는지?
 28. 이더넷 랜 연결 쪽도 해본적 있는지?
-
-
+	1.	Jetpack Compose를 사용해본 경험이 있는가? 기존 XML 방식과 비교했을 때 어떤 장점과 단점이 있는가?
+	2.	Android Lifecycle에 대해 설명하고, ViewModel이 어떻게 메모리 관리를 도와주는지 설명해보라.
+	3.	Coroutine과 LiveData의 차이를 설명해보라.
+	4.	Flow와 StateFlow, SharedFlow의 차이점은?
+	5.	Android 앱의 성능 최적화를 위해 어떤 기법을 사용했는가?
+	6.	ProGuard와 R8의 차이를 설명해보라.
+	7.	WorkManager, AlarmManager, Foreground Service의 차이점은?
+	8.	Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
+	9.	Flutter의 State Management를 어떤 방식으로 사용했는가? (Provider, Riverpod, Bloc 등)
+	10.	Flutter에서의 네이티브 연동 (MethodChannel) 경험이 있는가?
+	11.	Flutter에서 성능 최적화를 위해 어떤 기법을 적용했는가?
+	12.	Flutter Web과 Mobile의 차이점은?
+	13.	REST API와 GraphQL의 차이점은?
+	14.	WebSocket과 HTTP Polling의 차이는?
+	15.	Retrofit과 Volley의 차이점은?
+	16.	모바일 앱에서 보안 강화를 위해 어떤 방식을 적용했는가?
+	17.	HTTPS와 SSL Pinning에 대해 설명해보라.
+	18.	안드로이드에서 로컬 데이터 저장 시 보안을 위해 어떤 방법을 사용했는가?
+	19.	CI/CD를 적용해본 경험이 있는가? 어떤 툴을 사용했는가? (GitHub Actions, Jenkins, Bitrise 등)
+	20.	Firebase Crashlytics를 사용한 경험이 있는가? 어떻게 활용했는가?
+	21.	앱의 메모리 릭을 찾고 해결하는 방법은?
+	22.	최근에 겪었던 기술적 문제와 이를 해결한 방법을 설명해보라.
+	23.	개발 과정에서 발생한 성능 이슈를 분석하고 해결했던 경험이 있는가?
+	24.	앱이 갑자기 크래시가 발생했을 때 어떻게 디버깅할 것인가?
+	1.	Android 앱의 생명주기(Lifecycle)에 대해 설명하라.
+	2.	Service와 Foreground Service의 차이점은?
+	3.	ViewBinding과 DataBinding의 차이는?
+	4.	Jetpack Compose와 기존 View 시스템의 차이점은?
+	5.	RecyclerView에서 ViewHolder 패턴이 중요한 이유는?
+	6.	안드로이드의 권한 요청(Permission) 방식이 Android 6.0 이후 어떻게 변경되었는가?
+	7.	멀티 모듈(Multi Module) 프로젝트를 구성할 때 장점과 단점은?
+	8.	Dagger, Hilt, Koin 같은 DI(Dependency Injection) 라이브러리를 사용해본 경험이 있는가?
+	9.	Android 앱의 ANR(Application Not Responding) 이슈를 해결하는 방법은?
+	1.	Java의 OOP(객체지향 프로그래밍) 특징을 설명하라.
+	2.	JVM, JRE, JDK의 차이점은?
+	3.	Java의 가비지 컬렉션(GC)은 어떻게 동작하는가?
+	4.	String, StringBuilder, StringBuffer의 차이는?
+	5.	Java에서 volatile, synchronized, Atomic의 차이를 설명하라.
+	6.	Java 8에서 추가된 주요 기능(람다, 스트림, Optional 등)에 대해 설명하라.
+	7.	Checked Exception과 Unchecked Exception의 차이는?
+	8.	HashMap과 ConcurrentHashMap의 차이점은?
+	9.	Java에서 Reflection을 사용할 때 주의할 점은?
+	1.	Kotlin과 Java의 주요 차이점은?
+	2.	Kotlin의 data class와 일반 클래스의 차이는?
+	3.	suspend 함수와 Coroutine의 작동 방식은?
+	4.	Kotlin에서 lateinit과 lazy의 차이는?
+	5.	Kotlin의 sealed class는 어떤 경우에 사용하는가?
+	6.	Kotlin의 companion object의 역할은?
+	7.	inline 함수와 일반 함수의 차이는?
+	8.	Kotlin의 extension function을 설명하라.
+	9.	Kotlin의 flow와 channel의 차이점은?
+	1.	Dart의 Null Safety 개념을 설명하라.
+	2.	Dart의 Future와 Stream의 차이점은?
+	3.	Dart의 late 키워드는 언제 사용하는가?
+	4.	Dart의 mixin과 abstract class의 차이는?
+	5.	Dart에서 async와 await은 어떻게 동작하는가?
+	6.	Dart에서 const와 final의 차이점은?
+	7.	Dart의 Isolates는 어떻게 동작하는가?
+	8.	Dart에서 factory constructor는 어떤 역할을 하는가?
+	1.	Flutter의 StatefulWidget과 StatelessWidget의 차이는?
+	2.	Flutter에서 상태 관리(State Management)를 어떤 방식으로 구현하는가? (Provider, Riverpod, Bloc 등)
+	3.	Flutter의 Widget 트리에서 BuildContext의 역할은?
+	4.	setState()는 언제 사용하는가?
+	5.	Flutter의 Hot Reload와 Hot Restart의 차이는?
+	6.	Flutter의 Navigator 1.0과 2.0의 차이점은?
+	7.	Flutter에서 Platform-specific 코드(Android, iOS)와 연동하는 방법은?
+	8.	Flutter의 애니메이션 시스템(AnimationController, Tween, CurvedAnimation)을 설명하라.
+	1.	Swift의 guard와 if let의 차이는?
+	2.	ARC(Automatic Reference Counting)란 무엇인가?
+	3.	Swift의 Protocol-Oriented Programming(POP)이란 무엇인가?
+	4.	Swift의 Result 타입은 어떤 용도로 사용되는가?
+	5.	Grand Central Dispatch(GCD)와 OperationQueue의 차이점은?
+	6.	UIViewController의 라이프사이클을 설명하라.
+	7.	weak와 unowned의 차이는?
+	8.	Swift의 Combine 프레임워크를 사용해본 경험이 있는가?
+	1.	React의 Virtual DOM은 어떻게 동작하는가?
+	2.	React에서 useEffect와 useLayoutEffect의 차이는?
+	3.	React의 상태 관리 라이브러리(Redux, Recoil, Zustand)를 사용해본 경험이 있는가?
+	4.	React에서 context API는 언제 사용하는가?
+	5.	React에서 useMemo와 useCallback의 차이는?
+	6.	React에서 forwardRef는 언제 사용하는가?
+	7.	React의 Server Components와 Client Components의 차이는?
+	8.	React에서 Suspense와 Error Boundary는 어떻게 활용하는가?
+	1.	React Native와 Flutter의 차이점은?
+	2.	React Native에서 native module을 추가하는 방법은?
+	3.	React Native에서 성능 최적화를 위해 어떤 기법을 적용하는가?
+	4.	React Native의 useEffect가 componentDidMount와 componentWillUnmount와 어떻게 비교되는가?
+	5.	React Native에서 AsyncStorage와 SecureStore의 차이는?
+	6.	React Native에서 Animation을 구현하는 방법은?
+	7.	React Native에서 네이티브 코드(Android, iOS)와 연동하는 방법은?
+	1.	JavaScript의 this 바인딩 원리는?
+	2.	JavaScript의 Promise와 async/await의 차이는?
+	3.	TypeScript의 interface와 type의 차이는?
+	4.	JavaScript에서 클로저(Closure)는 어떻게 동작하는가?
+	5.	JavaScript의 event loop와 call stack의 동작 원리는?
+	6.	TypeScript에서 unknown과 any의 차이점은?
+	7.	TypeScript에서 never 타입은 언제 사용하는가?
+	8.	JavaScript의 debounce와 throttle의 차이는?
+	1.	Python의 GIL(Global Interpreter Lock)이란?
+	2.	Python에서 리스트 컴프리헨션(List Comprehension)은 어떻게 동작하는가?
+	3.	Python의 generator와 iterator의 차이는?
+	4.	Python의 asyncio와 Threading의 차이점은?
+	5.	Python에서 shallow copy와 deep copy의 차이는?
+	6.	Python의 __init__과 __new__ 메서드는 언제 호출되는가?
+	7.	Python에서 메타클래스(Metaclass)의 역할은?
+	8.	Python의 context manager를 설명하라.
+	1.	TCP와 UDP의 차이를 설명하라.
+	2.	HTTP와 HTTPS의 차이는?
+	3.	OS의 프로세스와 스레드의 차이는?
+	4.	메모리 관리에서 Stack과 Heap의 차이는?
+	5.	데이터베이스의 Index는 어떻게 동작하는가?
+	6.	SQL의 JOIN과 UNION의 차이는?
+	7.	CPU 스케줄링 알고리즘(FCFS, SJF, RR, Priority 등)에 대해 설명하라.
+	8.	캐시(Cache) 메모리의 역할은?
+	1.	Flexbox와 Grid의 차이점은?
+	2.	CSS의 position: absolute와 position: fixed의 차이는?
+	3.	CSS의 z-index는 어떻게 동작하는가?
+	4.	CSS의 rem과 em 단위의 차이는?
+	5.	HTML5의 data-* 속성은 어떤 용도로 사용되는가?
+	6.	CSS에서 transform과 transition의 차이는?
+	7.	CSS에서 will-change 속성은 언제 사용하는가?
+	1.	Jetpack Compose에서 Composition이란 무엇인가? Recomposition은 언제 발생하는가?
+	2.	WorkManager와 AlarmManager의 차이점과 사용 사례는?
+	3.	Android의 StrictMode를 활용한 성능 개선 방법을 설명하라.
+	4.	ViewModel을 Scope별로 관리하는 최적의 방법은?
+	5.	프로세스가 종료된 후에도 데이터가 유지되도록 하는 방법은? (DataStore, Room, SharedPreferences 비교)
+	6.	Android에서 Parcelable과 Serializable의 차이를 설명하고, Parcelable을 사용하는 이유는?
+	7.	MotionLayout을 활용한 애니메이션 구현 방법을 설명하라.
+	8.	Jetpack Navigation Component의 Deep Link 동작 방식과 활용 사례는?
+	9.	Android 앱에서 보안 강화를 위한 ProGuard, R8, App Integrity 적용 방법은?
+	1.	Java에서 ClassLoader는 어떻게 동작하는가? (Bootstrap, System, Custom ClassLoader)
+	2.	ThreadLocal은 어떤 상황에서 유용하게 사용할 수 있는가?
+	3.	Java의 CompletableFuture와 ExecutorService의 차이점은?
+	4.	JVM의 Garbage Collection(GC) 알고리즘(G1, CMS, ZGC 등)의 차이점과 최적화 방법은?
+	5.	synchronized, Lock, ReentrantLock의 차이점과 각각의 장단점은?
+	6.	Java의 ForkJoinPool은 어떤 경우에 사용하는가?
+	7.	Java에서 Immutable 객체를 설계하는 방법과 장점은?
+	8.	Java 17의 최신 기능과 주요 변경 사항을 설명하라.
+	9.	Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할은?
+	1.	Kotlin의 inline, noinline, crossinline 키워드는 언제 사용하는가?
+	2.	Coroutine의 Structured Concurrency 개념을 설명하라.
+	3.	Coroutine에서 SupervisorJob과 일반 Job의 차이는?
+	4.	Kotlin의 Flow에서 SharedFlow와 StateFlow의 차이는?
+	5.	Kotlin의 Delegation 패턴은 어떤 경우에 유용한가?
+	6.	Jetpack Compose의 Slot API 개념과 활용 사례는?
+	7.	invoke operator를 활용한 고급 함수형 프로그래밍 예제를 설명하라.
+	8.	Kotlin Multiplatform에서 JVM, Native, JS 타겟을 함께 사용할 때의 문제점과 해결 방법은?
+	1.	Dart의 Zone은 무엇이며, 어떤 상황에서 유용하게 사용할 수 있는가?
+	2.	Dart의 mixin과 abstract class의 활용 방식과 차이점은?
+	3.	Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법을 설명하라.
+	4.	Dart의 Isolates를 사용한 병렬 처리 기법을 설명하라.
+	5.	Future와 Completer의 차이점과 활용법은?
+	6.	Dart의 typedef를 활용한 함수 타입 정의 방식은?
+	7.	dart:ffi를 활용하여 Native 코드와 상호작용하는 방법을 설명하라.
+	1.	Flutter에서 setState를 많이 사용하면 성능 문제가 발생하는 이유는?
+	2.	InheritedWidget과 Provider의 차이점과 성능 차이를 비교하라.
+	3.	Flutter에서 RenderObject의 역할과 커스텀 위젯 제작 방법은?
+	4.	Flutter의 Platform Channels를 활용한 네이티브 코드 연동 방식은?
+	5.	Flutter 앱에서 메모리 관리를 최적화하는 방법은?
+	6.	Flutter에서 Hero 애니메이션이 동작하는 방식과 제약 사항은?
+	7.	Flutter에서 Sliver 위젯을 활용한 고급 리스트 렌더링 기법을 설명하라.
+	8.	Flutter의 새로운 impeller 렌더링 엔진이 기존 엔진 대비 갖는 장점은?
+	1.	iOS의 Core Data와 Realm의 차이점과 성능 비교는?
+	2.	Swift의 Property Wrappers(@State, @Binding, @ObservedObject)는 어떻게 동작하는가?
+	3.	Swift에서 Key-Value Observing (KVO)의 동작 방식과 한계는?
+	4.	iOS의 SceneDelegate와 AppDelegate의 차이점과 역할은?
+	5.	Combine 프레임워크에서 Publisher와 Subscriber의 동작 방식은?
+	6.	Swift의 Memory Management와 ARC에서 Retain Cycle을 방지하는 방법은?
+	7.	iOS 앱에서 Background Execution이 필요한 경우와 구현 방식은?
+	8.	Swift에서 Result Builder를 활용하는 방법은?
+	1.	React의 Reconciliation 알고리즘은 어떻게 동작하는가?
+	2.	React에서 useReducer를 사용하는 이유와 useState와의 차이점은?
+	3.	React에서 memoization을 활용하여 성능 최적화하는 방법은?
+	4.	Server Components의 동작 방식과 기존 CSR/SSR 방식과의 차이는?
+	5.	React에서 Hydration이란 무엇인가?
+	6.	React 18의 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이는?
+	7.	React에서 Suspense를 활용한 데이터 패칭 전략을 설명하라.
+	1.	React Native에서 TurboModules와 Fabric의 개념을 설명하라.
+	2.	React Native에서 JSC와 Hermes 엔진의 차이는?
+	3.	React Native의 Flipper 디버깅 도구를 활용하는 방법은?
+	4.	React Native에서 네이티브 모듈을 직접 구현할 때 주의해야 할 사항은?
+	5.	React Native의 Bridge 통신 방식과 성능 최적화 기법은?
+	1.	JavaScript의 Prototype Chain과 Closure를 활용한 메모리 최적화 방법은?
+	2.	JavaScript의 Event Loop와 Microtask Queue의 차이는?
+	3.	TypeScript의 Mapped Types와 Conditional Types은 어떻게 동작하는가?
+	4.	JavaScript에서 WeakMap, WeakSet의 사용 사례는?
+	5.	JavaScript에서 Proxy와 Reflect API는 어떤 경우에 유용한가?
+	6.	TypeScript에서 Utility Types를 활용하여 코드 재사용성을 높이는 방법은?
+	1.	Python의 GIL이 병렬 프로그래밍 성능에 미치는 영향은?
+	2.	Python의 Metaclass를 활용한 고급 객체 지향 설계 방법은?
+	3.	Asyncio에서 Event Loop의 동작 원리는?
+	4.	Python의 Descriptor와 Property의 차이는?
+	5.	NumPy의 메모리 최적화 기법을 설명하라.
+	6.	Python의 Pickle 모듈을 활용한 객체 직렬화 방식은?
+	7.	Python에서 __slots__의 역할과 메모리 절약 효과는?
+	1.	DNS(Domain Name System)의 내부 동작 방식과 DNS 캐싱 기법은?
+	2.	운영체제의 Copy-On-Write (COW) 메커니즘은 어떻게 동작하는가?
+	3.	캐시 메모리의 Write-Through와 Write-Back 전략의 차이는?
+	4.	RAID의 각 레벨(RAID 0, 1, 5, 10)의 장단점은?
+	5.	OS에서 Deadlock을 방지하는 방법과 해결 기법은?
+  6.  플러터에서 디자인 스타일 구현 방법, 위치, 통상적인 방법
