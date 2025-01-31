@@ -93,6 +93,7 @@
 - Process <-> Thread 차이점
 - RxJava 사용해본 적 있는가?
 - Mutable / Immutable Class 설명
+- mutableMapOf, mapOf, Map 차이
 - Bitmap Class 사용함에 있어서의 유의사항 / 용법
 - Bitmap & JPEG 차이점 설명
 - 리스트뷰 / 스크롤뷰 / 리싸이클러뷰 차이점
