@@ -52,8 +52,7 @@
 - [Keywords](https://github.com/aidenkoog/TIL/blob/master/Keywords/Keywords.md)
 - [TemporaryNote](https://github.com/aidenkoog/TIL/blob/master/TemporaryNote.md)
 - [WorkNote](https://github.com/aidenkoog/TIL/blob/master/WorkNote/WorkNote.md)
-- [InterviewQuestions](https://github.com/aidenkoog/TIL/blob/master/InterviewQuestions.md)
-- [Career](https://github.com/aidenkoog/TIL/blob/master/Career/CareerManagement.md)
+- [Career](https://github.com/aidenkoog/TIL/blob/master/WorkNote/CareerManagement.md)
 
 ### Self Assessment
 
