@@ -1,10 +1,10 @@
-# Interview Questions
+# Expected Questions
 
-Organized Interview Questions & Answers
+Organized expected questions & answers
 
 ## Summary of Questions.
 
-- 각 파트별로 Question 분류
+- 각 파트별로 분류
 
 ### Android
 
