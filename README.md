@@ -16,7 +16,7 @@
 - [SoftwareEngineering](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/SoftwareEngineering.md)
 - [SoftwareTesting](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/SoftwareTesting.md)
 - [Refactoring](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/SoftwareRefactoring.md)
-- [OOP](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/ObjectOrientedProgramming.md)
+- [ObjectOrientedProgramming](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/ObjectOrientedProgramming.md)
 - [CodingConvention](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/CodingConvention.md)
 - [DesignPattern](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/GoFDesignPattern.md)
 - [ProjectManagement](https://github.com/aidenkoog/TIL/blob/master/SoftwareEngineering/ProjectManagement.md)
