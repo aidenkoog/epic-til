@@ -49,8 +49,7 @@
 
 ### My note
 
-- [Keywords](https://github.com/aidenkoog/TIL/blob/master/Keywords/Keywords.md)
-- [TemporaryNote](https://github.com/aidenkoog/TIL/blob/master/TemporaryNote.md)
+- [MyNote](https://github.com/aidenkoog/TIL/blob/master/MyNote.md)
 - [WorkNote](https://github.com/aidenkoog/TIL/blob/master/WorkNote/WorkNote.md)
 - [Career](https://github.com/aidenkoog/TIL/blob/master/WorkNote/CareerManagement.md)
 
