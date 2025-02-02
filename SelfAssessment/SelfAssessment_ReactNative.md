@@ -157,3 +157,73 @@ Organized expected questions & answers
 - React Native의 Flipper 디버깅 도구를 활용하는 방법은?
 - React Native에서 네이티브 모듈을 직접 구현할 때 주의해야 할 사항은?
 - React Native의 Bridge 통신 방식과 성능 최적화 기법은?
+- React Native의 기본 개념 및 차이점
+- React Native에서 Virtual DOM이 어떻게 작동하는가?
+- React Native의 JSX와 HTML의 차이점은?
+- React Native의 View, Text, Image와 같은 기본 컴포넌트는 어떻게 동작하는가?
+- React Native에서 DOM이 없는 환경에서 스타일을 어떻게 적용하는가?
+- React Native에서 CSS 대신 StyleSheet.create를 사용하는 이유는?
+- React와 React Native에서 onClick과 onPress 이벤트의 차이점은?
+- React Native에서 iOS와 Android의 네이티브 코드 차이를 어떻게 다루는가?
+- React Native에서 상태 관리를 위한 다양한 방법(Redux, Recoil, Zustand, MobX 등)을 비교해보세요.
+- React Native에서 Context API와 Redux를 비교하고, 언제 Context API를 사용할지 설명하세요.
+- React Native에서 useReducer를 상태 관리에 활용하는 방법은?
+- React Native에서 상태 관리를 최적화하는 방법은? (e.g., 불필요한 리렌더링 방지)
+- React Native에서 React.memo와 useMemo의 차이점과 사용 사례는?
+- React Native에서 React Query와 SWR을 사용할 때의 차이점은?
+- React Native에서 fetch API와 Axios의 차이점은?
+- React Native에서 WebSocket과 HTTP Polling의 차이점은?
+- React Native에서 GraphQL을 활용하는 방법은?
+- React Native에서 API 호출을 최적화하는 방법은? (e.g., 캐싱, 중복 요청 방지)
+- React Native에서 Background Fetch와 Foreground Fetch의 차이는?
+- React Native에서 Long Polling을 구현하는 방법은?
+- React Native에서 메모리 누수를 방지하는 방법은?
+- React Native에서 Lazy Loading을 적용하는 방법은?
+- React Native에서 앱 크기를 줄이는 방법은?
+- React Native에서 FlatList의 getItemLayout을 활용하는 방법은?
+- React Native에서 Animated API와 Reanimated의 차이점은?
+- React Native에서 Fast Refresh가 어떻게 동작하는가?
+- React Native에서 Hermes를 사용할 때 성능 이점은?
+- React Native에서 Metro Bundler의 역할과 최적화 방법은?
+- React Native에서 JavaScript 코드와 네이티브 코드가 어떻게 통신하는가?
+- React Native에서 Custom Native Module을 구현하는 방법은?
+- React Native에서 TurboModules와 기존 Native Module의 차이점은?
+- React Native에서 Fabric Renderer가 기존 브릿지 방식과 어떻게 다른가?
+- React Native에서 Native Event Emitter를 활용하는 이유는?
+- React Native에서 Bluetooth 통신을 구현하는 방법은?
+- React Native에서 react-native link와 autolinking의 차이점은?
+- React Native에서 OAuth를 구현하는 방법은?
+- React Native에서 JWT 토큰을 안전하게 저장하는 방법은?
+- React Native에서 SecureStore와 AsyncStorage의 차이점은?
+- React Native에서 Code Injection을 방지하는 방법은?
+- React Native에서 App Transport Security (ATS)를 활성화하는 방법은?
+- React Native에서 WebView 보안을 강화하는 방법은?
+- React Native에서 Unit Test와 E2E Test를 수행하는 방법은?
+- React Native에서 Jest와 Detox의 차이점은?
+- React Native에서 CodePush를 활용하여 앱을 업데이트하는 방법은?
+- React Native에서 App Store와 Google Play 배포 프로세스를 설명하세요.
+- React Native에서 CI/CD 파이프라인을 구축하는 방법은?
+- React Native에서 Firebase Test Lab을 활용하는 방법은?
+- React Native에서 크래시 리포팅을 설정하는 방법은?
+- React Native에서 SQLite와 Realm의 차이점은?
+- React Native에서 AsyncStorage 대신 사용할 수 있는 데이터 저장 방법은?
+- React Native에서 데이터를 암호화하는 방법은?
+- React Native에서 실시간 동기화를 구현하는 방법은? (Firebase, WebSockets 등)
+- React Native에서 Redux Persist와 MMKV의 차이점은?
+- React Native에서 Apollo Client를 사용할 때의 장점은?
+- React Native에서 i18n(다국어 지원)을 구현하는 방법은?
+- React Native에서 Dynamic Font Scaling을 적용하는 방법은?
+- React Native에서 Accessibility(접근성)를 강화하는 방법은?
+- React Native에서 RTL (Right-to-Left) 언어를 지원하는 방법은?
+- React Native에서 카메라와 갤러리를 사용하는 방법은?
+- React Native에서 Face ID와 Touch ID를 적용하는 방법은?
+- React Native에서 NFC 기능을 구현하는 방법은?
+- React Native에서 GPS 및 위치 기반 서비스를 구현하는 방법은?
+- React Native에서 AR(Augmented Reality) 기능을 적용하는 방법은?
+- React Native에서 머신러닝 모델을 활용하는 방법은? (TensorFlow.js, ML Kit 등)
+- React Native의 최신 트렌드 및 업데이트된 기능은 무엇인가?
+- React Native에서 New Architecture(Fabric & TurboModules)를 적용하는 방법은?
+- React Native와 Flutter를 비교할 때, React Native의 강점과 약점은?
+- React Native의 JSI(JavaScript Interface)는 무엇이며, 어떻게 동작하는가?
+- React Native에서 Expo Router를 사용하면 어떤 장점이 있는가?
+- React Native에서 새로운 패키지를 선택할 때 고려해야 할 점은?
