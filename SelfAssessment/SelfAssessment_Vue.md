@@ -116,3 +116,77 @@ Organized expected questions & answers
 - Vue.js의 Composition API와 Options API의 차이점은 무엇인가요?
 - Vue.js의 Virtual DOM Diffing 알고리즘에 대해 설명해주세요.
 - Vue.js의 Server-Side Rendering(SSR)과 Static Site Generation(SSG) 경험이 있다면 설명해주세요.
+- Vue.js의 단방향 데이터 흐름(One-way data flow)과 양방향 바인딩(Two-way binding)의 차이점은?
+- Vue.js에서 v-model과 @input 이벤트의 차이는?
+- Vue.js에서 v-bind와 v-on을 단축해서 사용할 수 있는 방법은?
+- Vue.js에서 ref()와 reactive()를 사용하는 기준은?
+- Vue.js에서 computed() 속성을 사용할 때 성능 최적화 효과가 있는 이유는?
+- Vue.js의 watch()와 watchEffect()의 차이점과 각각의 사용 사례는?
+- Vue.js의 v-if, v-else-if, v-show의 차이점은?
+- Vue.js에서 v-for와 key 속성을 함께 사용하는 이유는?
+- Vue.js에서 setup() 함수 내부에서 this를 사용할 수 없는 이유는?
+- Vuex와 Pinia의 차이점과 Pinia가 Vuex보다 유리한 점은?
+- Vue.js에서 Vuex modules를 사용하는 이유는?
+- Vue.js에서 Vuex getters와 actions의 차이점은?
+- Vue.js에서 Vuex mutations과 actions의 차이점은?
+- Vue.js에서 Vuex의 비동기 처리를 할 때 고려해야 할 사항은?
+- Vue.js에서 Pinia를 활용하여 전역 상태를 관리하는 방법은?
+- Vue.js에서 localStorage, sessionStorage, cookies를 활용한 상태 관리 방법은?
+- Vue.js에서 reactivity transform이 상태 관리에서 어떤 역할을 하는가?
+- Vue.js에서 shallowRef()와 shallowReactive()를 사용하는 이유는?
+- Vue.js에서 props와 emit을 활용한 컴포넌트 간 데이터 전달 방법은?
+- Vue.js에서 slot과 scoped slot의 차이점은?
+- Vue.js에서 Teleport의 역할과 사용 사례는?
+- Vue.js에서 keep-alive의 역할과 사용 예제는?
+- Vue.js에서 mixins과 composables의 차이점은?
+- Vue.js에서 Fragment 기능을 활용하는 이유는?
+- Vue.js에서 dynamic component를 렌더링하는 방법은?
+- Vue.js에서 key 속성을 활용하여 리스트 렌더링 성능을 최적화하는 방법은?
+- Vue.js에서 lazy loading을 구현하는 방법은?
+- Vue.js에서 template refs를 활용하여 DOM 요소에 접근하는 방법은?
+- Vue.js에서 watch()를 과도하게 사용할 때 발생할 수 있는 문제는?
+- Vue.js에서 ref()와 computed()를 활용하여 성능을 개선하는 방법은?
+- Vue.js에서 Vue DevTools을 활용하여 성능을 분석하는 방법은?
+- Vue.js에서 Virtual Scroll을 활용하여 성능을 최적화하는 방법은?
+- Vue.js에서 Intersection Observer API를 활용하여 Lazy Loading을 구현하는 방법은?
+- Vue.js에서 async setup()을 사용할 때 성능 최적화하는 방법은?
+- Vue.js에서 Tree Shaking을 활용하여 불필요한 코드 제거하는 방법은?
+- Vue.js에서 debounce와 throttle을 활용하여 이벤트 핸들링을 최적화하는 방법은?
+- Vue.js에서 memoization을 활용하여 성능을 최적화하는 방법은?
+- Vue.js에서 Prefetching과 Preloading의 차이점은?
+- Vue.js에서 History Mode와 Hash Mode의 차이점은?
+- Vue.js에서 beforeEnter()와 beforeEach()의 차이점은?
+- Vue.js에서 Navigation Guards를 활용한 인증 처리 방법은?
+- Vue.js에서 Lazy Loading Routes를 적용하는 방법은?
+- Vue.js에서 Dynamic Route Matching을 활용하는 방법은?
+- Vue.js에서 keep-alive를 활용하여 페이지 상태를 유지하는 방법은?
+- Vue.js에서 REST API와 GraphQL을 비교했을 때의 차이점은?
+- Vue.js에서 Axios를 활용한 API 호출 방법은?
+- Vue.js에서 fetch()와 Axios의 차이점은?
+- Vue.js에서 CORS 오류를 해결하는 방법은?
+- Vue.js에서 JWT를 활용하여 인증을 구현하는 방법은?
+- Vue.js에서 Vue Query를 활용한 데이터 페칭 방법은?
+- Vue.js에서 WebSockets을 활용한 실시간 데이터 업데이트 방법은?
+- Vue.js에서 API 응답을 캐싱하는 방법은?
+- Vue.js에서 SSR(Server-Side Rendering)을 활용하는 이유는?
+- Vue.js에서 CSR(Client-Side Rendering)과 SSR(Server-Side Rendering)의 차이점은?
+- Vue.js에서 Static Site Generation(SSG)과 Server-Side Rendering(SSR)의 차이점은?
+- Vue.js에서 Hydration 개념과 성능 최적화 방법은?
+- Vue.js에서 Nuxt.js를 활용하여 SEO를 최적화하는 방법은?
+- Vue.js에서 Prefetching을 활용하여 네트워크 요청을 최적화하는 방법은?
+- Vue.js에서 Incremental Static Regeneration(ISR)이란 무엇인가?
+- Vue.js에서 Edge Functions를 사용하면 어떤 장점이 있는가?
+- Vue.js에서 Static Rendering과 Streaming SSR의 차이는?
+- Vue.js에서 Composition API와 Options API의 차이점은?
+- Vue.js에서 Suspense와 async setup()을 활용하는 방법은?
+- Vue.js에서 Teleport와 Suspense를 조합하여 성능을 최적화하는 방법은?
+- Vue.js에서 Vite와 Webpack의 차이점 및 성능 비교는?
+- Vue.js에서 isRef(), shallowRef(), customRef()의 차이점은?
+- Vue.js에서 Service Worker를 활용하여 PWA를 구현하는 방법은?
+- Vue.js에서 Vue Resource와 Axios의 차이점은?
+- Vue.js에서 Web Workers를 활용하여 무거운 연산을 최적화하는 방법은?
+- Vue.js에서 Optimistic UI 패턴을 활용하여 성능을 개선하는 방법은?
+- Vue.js에서 Server Components를 활용하면 어떤 이점이 있는가?
+- Vue.js에서 Tree Shaking과 Dead Code Elimination의 차이점은?
+- Vue.js에서 Vue 3.3 이후 추가된 주요 기능은 무엇인가?
+- Vue.js에서 GraphQL을 사용할 때 고려해야 할 보안 이슈는?

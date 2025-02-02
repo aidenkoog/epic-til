@@ -2,7 +2,7 @@
 
 Organized expected questions & answers
 
-## CS
+## CS, Database, Network, ETC
 
 - REST API와 GraphQL의 차이점은?
 - WebSocket과 HTTP Polling의 차이는?
@@ -412,3 +412,90 @@ Organized expected questions & answers
 - 캐시 메모리의 Write-Through와 Write-Back 전략의 차이는?
 - RAID의 각 레벨(RAID 0, 1, 5, 10)의 장단점은?
 - OS에서 Deadlock을 방지하는 방법과 해결 기법은?
+- CPU의 L1, L2, L3 캐시가 어떻게 동작하며, 성능에 미치는 영향은?
+- Context Switching의 오버헤드를 줄이는 방법은?
+- Race Condition이 발생하는 이유와 해결 방법은?
+- Deadlock이 발생했을 때 탐지하는 방법은?
+- Mutex와 Semaphore의 차이점과 활용 사례는?
+- Spinlock이 필요한 경우와 단점은?
+- Banker's Algorithm을 활용하여 Deadlock을 예방하는 방법은?
+- NUMA(Non-Uniform Memory Access) 아키텍처란 무엇이며, 어떤 경우에 유용한가?
+- Linux의 Out-Of-Memory Killer는 어떻게 동작하는가?
+- Page Fault가 발생하는 원인과 이를 줄이는 방법은?
+- TLB(Translation Lookaside Buffer)의 역할과 동작 방식은?
+- 메모리 압축(Memory Compression)이란 무엇이며, 어떤 장점이 있는가?
+- 캐시 일관성(Cache Coherence) 문제를 해결하는 방법은?
+- Garbage Collection(GC)의 Mark-Sweep, Copying, Generational GC 방식 차이점은?
+- 리눅스의 cgroups와 namespace를 활용하여 프로세스를 격리하는 방법은?
+- Modern CPU에서 Out-of-Order Execution이 성능에 미치는 영향은?
+- 네트워크의 MTU(Maximum Transmission Unit)가 중요한 이유는?
+- TCP와 QUIC 프로토콜의 차이점과 성능 비교는?
+- BBR(Bottleneck Bandwidth and RTT) Congestion Control 알고리즘이 기존 TCP 대비 어떤 장점을 가지는가?
+- BLE(Bluetooth Low Energy) 통신에서 한 번에 보낼 수 있는 최대 바이트 수
+- HTTP/2와 HTTP/3의 차이점은?
+- TCP에서 Selective Acknowledgment(SACK)의 역할은?
+- IPv4와 IPv6의 차이점과 IPv6의 주요 개선 사항은?
+- NAT(Network Address Translation)의 동작 방식과 보안상의 장단점은?
+- DNS Query의 과정과 보안 취약점은?
+- TLS 1.2와 TLS 1.3의 차이점과 성능 향상 요소는?
+- VPN과 Zero Trust Security의 차이점은?
+- Kubernetes에서 Network Policy를 적용하는 방법은?
+- API Gateway에서 Rate Limiting을 적용하는 방법은?
+- CDN에서 Edge Computing을 활용하여 성능을 최적화하는 방법은?
+- MITM(Man-In-The-Middle) 공격을 탐지하고 방어하는 방법은?
+- DNS Rebinding 공격이란 무엇이며, 이를 방어하는 방법은?
+- HSTS(HTTP Strict Transport Security)의 역할과 적용 방법은?
+- WebRTC의 STUN, TURN, ICE 프로토콜의 차이점은?
+- Zero Trust Architecture(ZTA)가 기존 보안 모델과 다른 점은?
+- 데이터베이스에서 **WAL(Write-Ahead Logging)**이란 무엇이며, 성능 최적화 방안은?
+- MySQL의 InnoDB와 RocksDB의 차이점은?
+- MySQL의 Clustered Index와 Non-Clustered Index 차이점은?
+- PostgreSQL의 Vacuum 프로세스는 어떻게 동작하는가?
+- NoSQL의 Eventual Consistency와 Strong Consistency를 비교하시오.
+- Redis에서 HyperLogLog를 활용하는 이유는?
+- Redis에서 Hash, Sorted Set을 사용해야 하는 경우는?
+- MongoDB의 Aggregation Framework와 RDBMS의 GROUP BY의 차이점은?
+- Apache Kafka에서 Log Compaction을 활용하는 방법은?
+- BigTable, BigQuery, Redshift의 차이점은?
+- 데이터 정합성을 유지하면서도 높은 가용성을 보장하는 방법은?
+- NewSQL이 기존 SQL 및 NoSQL과 차별화되는 점은?
+- 데이터 웨어하우스와 데이터 레이크의 차이점은?
+- Column-Oriented Database(열 지향 데이터베이스)와 Row-Oriented Database(행 지향 데이터베이스)의 차이점은?
+- 분산 데이터베이스의 Paxos와 Raft 알고리즘의 차이점은?
+- Graph Database가 관계형 데이터베이스보다 유리한 경우는?
+- CQRS(Command Query Responsibility Segregation) 패턴을 적용해야 하는 경우는?
+- 데이터 일관성을 유지하면서도 높은 가용성을 보장하는 방법은?
+- CAP 이론에서 Partition Tolerance를 보장해야 하는 이유는?
+- 데이터베이스에서 MVCC(Multi-Version Concurrency Control)가 어떻게 동작하는가?
+- 데이터베이스의 Buffer Pool을 최적화하는 방법은?
+- 데이터베이스에서 Partitioning을 활용하여 성능을 최적화하는 방법은?
+- 대규모 트래픽을 처리하는 웹 애플리케이션을 설계하는 방법은?
+- Consistent Hashing을 적용해야 하는 경우는?
+- Serverless와 Container 기반 아키텍처의 차이점은?
+- API Gateway와 Service Mesh의 차이점은?
+- Kubernetes에서 Horizontal Pod Autoscaler(HPA)와 Vertical Pod Autoscaler(VPA)의 차이점은?
+- Kafka와 RabbitMQ의 차이점은?
+- Blue-Green Deployment와 Canary Deployment의 차이점은?
+- 대규모 데이터 파이프라인을 설계할 때 고려해야 할 사항은?
+- AWS Lambda와 GCP Cloud Functions의 차이점은?
+- GraphQL과 REST API의 성능 차이 및 장단점은?
+- 메모리 최적화를 위해 Object Pooling을 활용하는 방법은?
+- Kubernetes에서 Ingress Controller를 활용하여 트래픽을 제어하는 방법은?
+- API Gateway에서 WebSocket을 처리하는 방법은?
+- CDN에서 Cache Invalidation이 중요한 이유는?
+- PostgreSQL에서 JSONB를 사용할 때 장점은?
+- 데이터 일관성을 유지하면서도 높은 가용성을 보장하는 방법은?
+- GraphQL과 gRPC의 차이점은?
+- B+ Tree와 LSM Tree의 차이점은?
+- Heap과 Fibonacci Heap의 차이점과 활용 사례는?
+- Fenwick Tree(Binary Indexed Tree)의 원리와 활용 사례는?
+- Bloom Filter가 데이터베이스의 검색 성능을 개선하는 원리는?
+- Trie(트라이) 자료구조를 활용한 문자열 검색 최적화 방법은?
+- A* (A-Star) 탐색 알고리즘이 Dijkstra보다 효율적인 경우는?
+- Quick Sort와 Merge Sort의 차이점과 활용 사례는?
+- AVL Tree와 Red-Black Tree의 차이점은?
+- Hash Table의 Collision 해결 방법은?
+- KMP(Knuth-Morris-Pratt) 알고리즘이 Brute Force보다 효율적인 이유는?
+- Union-Find 자료구조를 활용한 Disjoint Set의 구현 방법은?
+- 다익스트라(Dijkstra) 알고리즘과 Bellman-Ford 알고리즘의 차이점은?
+- Graph에서 Topological Sorting을 활용하는 경우는?

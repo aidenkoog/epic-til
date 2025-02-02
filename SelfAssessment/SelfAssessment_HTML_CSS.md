@@ -11,3 +11,147 @@ Organized expected questions & answers
 - HTML5의 data-* 속성은 어떤 용도로 사용되는가?
 - CSS에서 transform과 transition의 차이는?
 - CSS에서 will-change 속성은 언제 사용하는가?
+- HTML과 XHTML의 차이점은?
+- HTML5에서 새롭게 추가된 주요 태그들은 무엇인가?
+- <section>, <article>, <aside>, <header>, <footer> 태그의 역할과 차이점은?
+- <div>와 <span>의 차이점은?
+- <iframe> 태그는 언제 사용하는가? 보안 이슈는?
+- <form> 태그의 주요 속성과 HTML5에서 추가된 새로운 input 타입들은?
+- <datalist>와 <select>의 차이점은?
+- <picture>와 <img> 태그의 차이점은?
+- <canvas>와 <svg>의 차이점은?
+- <meta> 태그 중 SEO(검색 엔진 최적화)와 관련된 중요한 메타 태그는 무엇인가?
+- <link rel="preload">, <link rel="prefetch">, <link rel="preconnect">, <link rel="dns-prefetch">의 차이점은?
+- <script> 태그에서 defer와 async의 차이점은?
+- 웹 표준(Web Standards)이란 무엇이며, W3C(월드 와이드 웹 컨소시엄)의 역할은?
+- CSS에서 relative, absolute, fixed, sticky의 차이점은?
+- display: block, inline, inline-block의 차이점은?
+- visibility: hidden과 display: none의 차이점은?
+- opacity: 0과 visibility: hidden의 차이점은?
+- CSS에서 float의 동작 원리와 clearfix를 사용하는 이유는?
+- CSS의 inherit, initial, unset, revert의 차이점은?
+- CSS에서 rem, em, px, %, vw, vh의 차이점은?
+- :nth-child(n)과 :nth-of-type(n)의 차이점은?
+- ::before와 ::after는 어떻게 동작하는가?
+- clip-path와 mask의 차이점은?
+- CSS의 content-visibility 속성은 어떤 역할을 하는가?
+- CSS에서 Flexbox와 Grid의 차이점은?
+- Flexbox에서 justify-content와 align-items의 차이점은?
+- Grid의 grid-template-columns과 grid-template-rows의 역할은?
+- Flexbox에서 flex-grow, flex-shrink, flex-basis의 차이점은?
+- Flexbox의 align-self와 align-items의 차이점은?
+- CSS Grid에서 fr 단위는 어떻게 동작하는가?
+- Flexbox를 사용했을 때 부모와 자식 요소의 너비를 조절하는 방법은?
+- min-width, max-width, min-height, max-height 속성은 어떻게 동작하는가?
+- position: absolute 요소의 부모가 position: relative인 경우와 아닌 경우의 차이점은?
+- CSS에서 grid-auto-flow: row dense는 어떻게 동작하는가?
+- CSS에서 container queries(컨테이너 쿼리)란 무엇이며, 어떻게 활용하는가?
+- 반응형 웹(Responsive Web Design, RWD)과 적응형 웹(Adaptive Web Design, AWD)의 차이점은?
+- @media 쿼리를 사용하는 방법과 주요 브레이크포인트 설정 방법은?
+- vw, vh, vmin, vmax 단위는 어떻게 동작하는가?
+- object-fit과 background-size의 차이점은?
+- CSS에서 clamp(), min(), max() 함수의 활용법은?
+- 모바일 웹에서 hover 이벤트를 처리하는 방법은?
+- prefers-reduced-motion, prefers-color-scheme 미디어 쿼리는 어떻게 동작하는가?
+- CSS에서 transform, transition, animation의 차이점은?
+- will-change 속성은 언제 사용하는가?
+- requestAnimationFrame()과 CSS animations 중 어떤 것이 더 성능이 좋은가?
+- CSS에서 backface-visibility 속성의 역할은?
+- CSS 애니메이션과 JavaScript 애니메이션의 차이점은?
+- hardware acceleration이란 무엇이며, CSS에서 이를 활용하는 방법은?
+- 애니메이션 성능을 최적화하는 방법은? (GPU 가속 활용)
+- subgrid란 무엇이며 어떻게 활용하는가?
+- CSS Houdini란 무엇이며, 실제 프로젝트에서 어떻게 활용할 수 있는가?
+- :has() 선택자는 어떤 경우에 유용한가?
+- container queries는 어떻게 동작하는가?
+- CSS Nesting의 장점과 사용 예제는?
+- Cascade Layers (@layer) 기능은 무엇이며, 기존의 CSS 우선순위와 어떤 차이가 있는가?
+- accent-color 속성의 역할은?
+- 웹 접근성(Web Accessibility)이란 무엇인가?
+- alt 속성은 왜 중요한가?
+- aria-label, aria-labelledby, aria-describedby의 차이점은?
+- tabindex 속성은 어떻게 동작하는가?
+- semantic HTML이 중요한 이유는?
+- prefers-reduced-motion과 prefers-color-scheme을 활용한 접근성 개선 방법은?
+- meta description과 meta keywords는 어떻게 설정해야 하는가?
+- HTML5의 semantic tags가 SEO에 미치는 영향은?
+- lazy loading을 활용하여 페이지 로딩 속도를 최적화하는 방법은?
+- canonical tag는 언제 사용하는가?
+- 웹 성능 최적화를 위해 preload, prefetch, preconnect를 어떻게 사용하는가?
+- 브라우저의 Critical Rendering Path란?
+- reflow와 repaint의 차이점은?
+- CSS contain 속성을 사용하면 어떤 성능 최적화 효과가 있는가?
+- Lazy Loading과 Intersection Observer를 활용한 이미지 로딩 최적화 방법은?
+- DOMContentLoaded와 load 이벤트의 차이는?
+- CLS(Cumulative Layout Shift) 문제를 해결하는 방법은?
+- FOUC(Flash of Unstyled Content) 현상을 방지하는 방법은?
+- Web Components란 무엇이며, 어떤 경우에 사용하는가?
+- Shadow DOM이란 무엇이며, CSS 스타일링과 관련하여 어떤 특징이 있는가?
+- CSS Variables와 SASS/SCSS의 차이점은?
+- Custom Elements와 Shadow DOM을 활용한 웹 컴포넌트 구현 방법은?
+- Intersection Observer API를 활용한 Lazy Loading 구현 방법은?
+- HTML의 Global Attributes(전역 속성)에는 어떤 것들이 있는가?
+- <noscript> 태그는 언제 사용되는가?
+- HTML5의 Custom Elements API(맞춤형 요소)란 무엇이며, 언제 사용하는가?
+- <dialog> 태그란 무엇이며, 브라우저에서 어떻게 동작하는가?
+- <summary>와 <details> 태그는 언제 활용되는가?
+- <template> 태그와 <slot> 태그의 차이점은?
+- HTML에서 <progress>와 <meter>의 차이점은?
+- <abbr>, <cite>, <dfn> 태그의 역할은?
+- HTML에서 Microdata, RDFa, JSON-LD는 무엇이며, SEO 최적화에 어떻게 기여하는가?
+- HTML 문서에서 "soft hyphen(­)" (&shy;)은 언제 활용하는가?
+- HTML에서 "Accessible Name Computation"이란 무엇인가?
+- contain: content을 사용하면 어떤 최적화 효과가 있는가?
+- aspect-ratio 속성이 무엇이며, 어떻게 활용하는가?
+- mix-blend-mode와 isolation 속성의 차이점은?
+- scroll-snap 속성을 사용하면 어떤 UX 효과를 줄 수 있는가?
+- image-rendering 속성을 활용한 성능 최적화 방법은?
+- content-visibility와 lazy loading의 차이점은?
+- will-change 속성 남용이 성능에 미치는 영향은?
+- object-fit과 object-position 속성의 차이점은?
+- border-image 속성은 언제 사용하는가?
+- counter-reset과 counter-increment를 활용하여 목록 스타일을 정의하는 방법은?
+- overscroll-behavior 속성이 UX 개선에 어떻게 활용될 수 있는가?
+- :target 가상 선택자를 활용하여 단일 페이지 내에서 UI를 조작하는 방법은?
+- :focus-within과 :focus-visible의 차이점은?
+- inset 속성은 top, right, bottom, left 속성과 어떤 관계를 가지는가?
+- all: unset과 initial의 차이점은?
+- :root 선택자는 언제 유용하게 사용될 수 있는가?
+- CSS container-type: inline-size의 활용 방법과 장점은?
+- CSS에서 grid-template-areas를 활용하여 레이아웃을 쉽게 설계하는 방법은?
+- CSS의 clamp()를 활용하여 가변 폰트 크기를 설정하는 방법은?
+- 웹 접근성을 고려한 "색 대비(Color Contrast)" 최소 기준은 무엇인가?
+- reduced-motion을 지원하지 않는 경우 사용자가 애니메이션을 최소화하는 방법은?
+- @container 규칙이 웹 디자인에서 어떻게 활용될 수 있는가?
+- aria-hidden을 남용할 경우 발생할 수 있는 문제점은?
+- HTML5 landmark roles(예: role="banner", role="navigation")을 올바르게 적용하는 방법은?
+- pointer-events: none이 접근성(A11Y)에 미치는 영향은?
+- 모바일 터치스크린 UX 최적화를 위한 CSS 속성(예: touch-action, hover)은?
+- <label>을 <input>과 연결할 때 for 속성과 aria-labelledby 속성의 차이점은?
+- 브라우저가 HTML/CSS를 파싱하는 과정에서 "Critical Rendering Path"를 최적화하는 방법은?
+- repaint, reflow, layout thrashing의 차이점은?
+- CSSOM & DOM을 병렬 처리할 때 발생할 수 있는 문제점은?
+- CSS에서 contain: size layout paint를 설정하면 어떤 이점이 있는가?
+- CSSOM과 DOM이 결합하여 Render Tree를 형성하는 과정은?
+- @font-display: swap을 설정하면 성능과 UX에 어떤 영향을 주는가?
+- First Contentful Paint(FCP), Largest Contentful Paint(LCP), Cumulative Layout - - Shift(CLS)는 무엇이며, 웹 성능 최적화에 어떻게 활용되는가?
+- 브라우저가 Viewport Units (vw, vh, vmin, vmax)를 계산하는 방식은?
+- CSS에서 will-change를 사용하면 브라우저의 Layer Composition(레이어 합성)에 어떤 영향을 미치는가?
+- 브라우저에서 Chrome DevTools을 사용하여 "Repaint Flashing"을 감지하는 방법은?
+- Content Security Policy(CSP)란 무엇이며, 어떻게 활용하는가?
+- Feature Policy(현재 Permission Policy로 변경됨)는 어떤 역할을 하는가?
+- Subresource Integrity(SRI)는 어떻게 보안을 강화하는가?
+- Cross-Origin Resource Sharing(CORS)가 웹 애플리케이션에서 중요한 이유는?
+- SameSite Cookie 속성은 XSS 공격 방어에 어떻게 기여하는가?
+- 웹 페이지에서 Clickjacking 공격을 방지하는 방법은?
+- Strict-Transport-Security (HSTS) 헤더의 역할은 무엇인가?
+- Referrer-Policy 헤더는 어떻게 보안을 강화하는가?
+- X-Frame-Options을 설정하면 발생하는 효과는?
+- X-Content-Type-Options: nosniff를 사용해야 하는 이유는?
+- CSS Masonry Layout이란 무엇이며, CSS Grid와 비교했을 때 차이점은?
+- CSS scroll-timeline과 view-timeline이 어떻게 동작하는가?
+- CSS Scoped Styles란 무엇이며, 기존 Shadow DOM 방식과 차이점은?
+- CSS @property를 사용하여 CSS 변수를 애니메이션하는 방법은?
+- color-mix()와 relative color syntax를 활용하여 동적 테마를 적용하는 방법은?
+- CSS media queries에서 prefers-contrast는 어떻게 활용될 수 있는가?
+- CSS Houdini를 사용하여 브라우저에서 새로운 레이아웃을 정의하는 방법은?

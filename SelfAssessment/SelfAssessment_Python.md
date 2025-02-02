@@ -160,3 +160,85 @@ Organized expected questions & answers
 - NumPy의 메모리 최적화 기법을 설명하라.
 - Python의 Pickle 모듈을 활용한 객체 직렬화 방식은?
 - Python에서 __slots__의 역할과 메모리 절약 효과는?
+- Python에서 __name__ == "__main__"을 사용하는 이유는?
+- Python에서 is와 ==의 차이점은?
+- Python에서 pass, continue, break의 차이점은?
+- Python에서 None, False, 0, [], {}의 차이점은?
+- Python에서 *args와 **kwargs의 차이점과 사용법은?
+- Python에서 리스트 컴프리헨션(List Comprehension)의 장점은?
+- Python에서 enumerate() 함수의 역할은?
+- Python에서 zip() 함수의 활용 방법은?
+- Python에서 map(), filter(), reduce()의 차이점은?
+- Python에서 lambda 표현식과 일반 함수의 차이점은?
+- Python에서 dir()과 help() 함수의 차이점은?
+- Python에서 __str__()과 __repr__()의 차이점은?
+- Python에서 hash() 함수의 역할은?
+- Python에서 ord()와 chr() 함수의 차이점은?
+- Python에서 any()와 all() 함수의 차이점은?
+- Python에서 sorted()의 key 매개변수를 활용한 정렬 방법은?
+- Python에서 shallow copy와 deep copy의 차이는?
+- Python에서 heapq 모듈을 활용하여 힙 정렬하는 방법은?
+- Python에서 bisect 모듈을 활용한 이진 탐색 구현 방법은?
+- Python에서 __init__() 메서드의 역할은?
+- Python에서 static method, class method, instance method의 차이점은?
+- Python에서 super() 함수의 역할은?
+- Python에서 MRO(Method Resolution Order)는 어떻게 동작하는가?
+- Python에서 @property 데코레이터의 역할은?
+- Python에서 __new__() 메서드와 __init__() 메서드의 차이점은?
+- Python에서 메타클래스(Metaclass)의 개념과 활용 방법은?
+- Python에서 __call__ 메서드를 구현하면 어떤 효과가 있는가?
+- Python에서 abc(Abstract Base Class)의 역할은?
+- Python에서 __del__() 메서드는 언제 호출되는가?
+- Python에서 __slots__을 사용하면 메모리 사용이 줄어드는 이유는?
+- Python에서 다형성(Polymorphism)을 구현하는 방법은?
+- Python에서 객체 간 비교를 위한 __eq__(), __lt__(), __gt__() 메서드의 역할은?
+- Python에서 싱글톤 패턴(Singleton Pattern)을 구현하는 방법은?
+- Python에서 팩토리 패턴(Factory Pattern)을 구현하는 방법은?
+- Python에서 다중 상속(Multiple Inheritance)을 사용할 때의 주의점은?
+- Python에서 GIL(Global Interpreter Lock)이란?
+- Python의 Garbage Collection(GC) 메커니즘은?
+- Python에서 메모리 누수(memory leak)를 방지하는 방법은?
+- Python에서 WeakRef의 역할과 활용 방법은?
+- Python에서 __slots__을 사용하면 메모리 사용이 줄어드는 이유는?
+- Python에서 object.__dict__와 __slots__의 차이점은?
+- Python에서 cython을 활용하여 성능을 최적화하는 방법은?
+- Python에서 NumPy 배열이 리스트보다 성능이 좋은 이유는?
+- Python에서 lru_cache()를 활용한 성능 최적화 방법은?
+- Python에서 deque와 list의 차이점은?
+- Python에서 Threading과 Multiprocessing의 차이점은?
+- Python에서 asyncio를 활용한 비동기 네트워크 프로그래밍 방법은?
+- Python에서 GIL을 우회하는 방법은?
+- Python에서 subprocess 모듈을 활용하여 외부 프로세스를 실행하는 방법은?
+- Python에서 queue.Queue와 multiprocessing.Queue의 차이점은?
+- Python에서 concurrent.futures를 활용하여 병렬 처리를 수행하는 방법은?
+- Python에서 gevent와 asyncio의 차이점은?
+- Python에서 select()와 poll()의 차이점은?
+- Python에서 itertools.permutations()과 itertools.combinations()의 차이점은?
+- Python에서 Counter 클래스를 활용한 문자열 빈도수 계산 방법은?
+- Python에서 collections.defaultdict()와 dict의 차이점은?
+- Python에서 heapq 모듈을 활용한 최솟값/최댓값 추출 방법은?
+- Python에서 json.loads()와 json.dumps()의 차이점은?
+- Python에서 csv.DictReader를 활용하여 CSV 파일을 읽는 방법은?
+- Python에서 pandas를 활용하여 데이터 프레임을 조작하는 방법은?
+- Python에서 NumPy 배열과 list의 차이점은?
+- Python에서 groupby()를 활용한 데이터 그룹핑 방법은?
+- Python에서 matplotlib와 seaborn의 차이점은?
+- Python에서 Flask와 FastAPI의 차이점은?
+- Python에서 Django의 ORM과 SQLAlchemy의 차이점은?
+- Python에서 requests 모듈과 http.client의 차이점은?
+- Python에서 urllib과 requests의 차이점은?
+- Python에서 gunicorn을 활용한 WSGI 서버 실행 방법은?
+- Python에서 Celery를 활용한 비동기 작업 처리 방법은?
+- Python에서 websockets 모듈을 활용한 WebSocket 서버 구현 방법은?
+- Python에서 pydantic을 활용한 데이터 검증 방법은?
+- Python에서 paramiko를 활용한 원격 SSH 접속 방법은?
+- Python에서 dataclass를 활용한 객체 생성 최적화 방법은?
+- Python에서 attrs 라이브러리를 활용하는 이유는?
+- Python에서 orjson과 ujson의 차이점은?
+- Python에서 pydantic을 활용한 고급 데이터 검증 및 성능 최적화 방법은?
+- Python에서 FastAPI의 Dependency Injection을 활용하는 방법은?
+- Python에서 pybind11을 활용하여 C++ 모듈을 호출하는 방법은?
+- Python에서 h5py를 활용한 대규모 데이터 저장 방법은?
+- Python에서 Python 3.12+에서 GIL 제거 실험이 어떤 영향을 미칠까?
+- Python에서 Polars와 Pandas의 차이점 및 대규모 데이터 처리 성능 비교는?
+- Python에서 async/await와 Threading/Multi-processing의 차이점은?

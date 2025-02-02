@@ -150,3 +150,66 @@ Organized expected questions & answers
 - 프로젝트 일정 산정 시 가장 중요하게 고려해야 할 요소는?
 - PM으로서 팀원의 동기부여를 위해 어떤 방법을 사용할 것인가?
 - 원격 근무 환경에서의 개발 프로세스 개선 방안은?
+- 프로젝트 일정이 비현실적으로 설정되었을 때 어떻게 조정하는가?
+- 프로젝트에서 PERT(Program Evaluation and Review Technique)를 활용하는 방법은?
+- 프로젝트에서 Monte Carlo Simulation을 활용하여 일정 리스크를 예측하는 방법은?
+- 프로젝트의 Time Boxing 기법을 적용하는 방법은?
+- 프로젝트 일정이 예상보다 빨리 진행될 경우 어떻게 조정하는가?
+- 프로젝트에서 Lead Time과 Cycle Time의 차이점은?
+- 프로젝트에서 Horizon Planning을 적용하는 방법은?
+- 프로젝트에서 Task Prioritization Framework(Eisenhower Matrix, RICE, WSJF 등)를 사용하는 이유는?
+- 프로젝트에서 Risk Mitigation과 Risk Contingency Plan의 차이점은?
+- 프로젝트에서 Risk Tolerance와 Risk Appetite을 어떻게 결정하는가?
+- 프로젝트에서 Impact vs. Probability Matrix를 활용하여 리스크를 평가하는 방법은?
+- 프로젝트에서 FMEA(Failure Mode and Effects Analysis)를 적용하는 방법은?
+- 프로젝트에서 예측하지 못한 리스크가 발생했을 때 대처하는 방법은?
+- 프로젝트에서 Early Warning System(EWS)을 설정하는 방법은?
+- 프로젝트의 Black Swan Event(예측 불가능한 이벤트)를 대비하는 전략은?
+- 프로젝트에서 Stakeholder Resistance(이해관계자의 저항)를 극복하는 방법은?
+- Scrum@Scale과 SAFe(Scaled Agile Framework)의 차이점은?
+- 프로젝트에서 Lean Portfolio Management를 적용하는 방법은?
+- Scrum of Scrums를 활용하여 여러 팀 간 협업을 최적화하는 방법은?
+- Dual-track Agile을 프로젝트에 적용하는 방법은?
+- Spotify Model을 적용하여 애자일 팀을 운영하는 방법은?
+- 애자일 환경에서 Velocity를 신뢰할 수 있는 지표로 만들기 위한 전략은?
+- Mob Programming과 Pair Programming의 차이점과 효과적인 활용 방법은?
+- Agile at Scale을 구현할 때 가장 큰 도전 과제는 무엇인가?
+- 애자일에서 Definition of Ready(DoR)와 Definition of Done(DoD)의 차이점은?
+- No Estimates 접근 방식이 프로젝트 일정 관리에 미치는 영향은?
+- 프로젝트에서 High-Performing Teams를 구축하는 방법은?
+- 팀원들의 업무 과부하(Burnout)를 방지하는 방법은?
+- 팀원 간의 Cultural Diversity를 고려한 협업 방안은?
+- Psychological Safety(심리적 안전성)를 확보하기 위한 프로젝트 관리 전략은?
+- Remote Team과 Hybrid Team의 생산성을 유지하는 방법은?
+- 팀의 사기를 유지하기 위해 Gamification을 도입할 때 고려해야 할 요소는?
+- 팀원 간 피드백 문화를 정착시키는 방법은?
+- 프로젝트에서 Tuckman Model(Forming, Storming, Norming, Performing)을 활용하는 방법은?
+- Servant Leadership을 프로젝트 관리에 적용하는 방법은?
+- 프로젝트에서 Stakeholder Mapping을 수행하는 방법은?
+- 프로젝트에서 Executive Sponsor의 역할은 무엇인가?
+- Stakeholder Buy-in을 확보하기 위한 전략은?
+- 프로젝트에서 Negotiation Strategy(협상 전략)를 활용하는 방법은?
+- 프로젝트에서 User-Centered Design(사용자 중심 설계)을 적용하는 방법은?
+- 프로젝트에서 Customer Journey Mapping을 수행하는 이유는?
+- 프로젝트에서 Business Model Canvas(BMC)를 활용하는 방법은?
+- Customer Churn Rate(고객 이탈률)를 줄이기 위한 프로젝트 관리 전략은?
+- 프로젝트에서 Leading Indicator와 Lagging Indicator의 차이점은?
+- 프로젝트에서 OKR vs. KPI의 차이점과 적용 방법은?
+- 프로젝트에서 Data-Driven Decision Making(DDDM)을 구현하는 방법은?
+- Cumulative Flow Diagram(CFD)을 활용하여 프로젝트 병목현상을 분석하는 방법은?
+- 프로젝트에서 Cost Performance Index(CPI)와 Schedule Performance Index(SPI)의 차이점은?
+- 프로젝트에서 DORA Metrics(Deployment Frequency, Change Failure Rate 등)를 활용하는 방법은?
+- 프로젝트에서 North Star Metric을 설정하는 방법은?
+- DevOps 환경에서 프로젝트 관리의 역할은?
+- Continuous Integration(CI)과 Continuous Deployment(CD)를 프로젝트에 적용하는 방법은?
+- 프로젝트에서 Feature Toggle을 활용하는 이유는?
+- Infrastructure as Code(IaC)를 활용하여 프로젝트의 운영 효율성을 높이는 방법은?
+- 프로젝트에서 Automated Testing Pyramid를 적용하는 방법은?
+- Site Reliability Engineering(SRE)과 프로젝트 관리의 연관성은?
+- Progressive Delivery(Canary Deployment, Blue-Green Deployment)를 활용하는 이유는?
+- 프로젝트에서 Premortem Analysis를 활용하는 이유는?
+- 프로젝트 종료 후 Lessons Learned를 효과적으로 정리하는 방법은?
+- 프로젝트 종료 후 Post-Mortem Meeting을 효과적으로 운영하는 방법은?
+- 프로젝트에서 Service Transition Plan을 작성하는 방법은?
+- 프로젝트의 Retrospective Meeting을 성공적으로 진행하는 방법은?
+- 프로젝트 종료 후 SLA(Service Level Agreement)를 검토하는 방법은?

@@ -161,3 +161,73 @@ Organized expected questions & answers
 - Swift의 Memory Management와 ARC에서 Retain Cycle을 방지하는 방법은?
 - iOS 앱에서 Background Execution이 필요한 경우와 구현 방식은?
 - Swift에서 Result Builder를 활용하는 방법은?
+- Swift에서 some 키워드는 언제 사용되는가?
+- Noncopyable 프로토콜이 무엇이며, 언제 활용할 수 있는가? (Swift 5.10 이상)
+- Swift에서 defer 문을 활용하는 경우는?
+- Swift에서 Codable과 Decodable, Encodable의 차이는?
+- Swift에서 KeyPath와 @dynamicMemberLookup을 활용하는 방법은?
+- Swift에서 Set과 Array의 차이점은?
+- Hashable 프로토콜을 직접 구현하는 방법과 그 용도는?
+- Swift의 Lazy Sequence는 무엇이며 언제 사용하는가?
+- Swift에서 Mirror API를 활용하여 런타임에 객체 정보를 조회하는 방법은?
+- Swift의 SPM(Swift Package Manager)을 활용하여 모듈을 관리하는 방법은?
+- Swift에서 Opaque Types(some keyword)과 Generics의 차이는?
+- Swift에서 throw, rethrows, try?, try!의 차이점은?
+- Swift에서 Equatable과 Identifiable을 구현해야 하는 경우는?
+- Swift에서 Capture List([weak self])을 사용해야 하는 경우는?
+- Swift에서 @autoclosure의 역할과 활용 방법은?
+- Swift에서 Copy-on-Write(COW)가 적용되는 자료형과 동작 방식은?
+- Swift에서 Memory Layout<T>을 활용하여 메모리 구조를 확인하는 방법은?
+- Swift에서 UnsafePointer<T>와 OpaquePointer의 차이는?
+- autoreleasepool을 사용해야 하는 경우는?
+- Swift의 Pointer와 Buffer를 활용하여 성능을 최적화하는 방법은?
+- Swift의 Concurrency (비동기 프로그래밍)
+- async let과 Task {}의 차이점은?
+- TaskGroup과 AsyncStream을 활용하여 비동기 작업을 처리하는 방법은?
+- Global Actor(@MainActor)와 Detached Task의 차이점은?
+- Swift에서 CheckedContinuation을 활용하여 기존의 Completion Handler 패턴을 변환하는 방법은?
+- Swift의 Task Priority 설정이 실행 성능에 미치는 영향은?
+- Swift에서 Continuations을 활용한 비동기 API 래핑 방법은?
+- Swift에서 Parallel Execution을 효율적으로 처리하는 방법은?
+- LazyVStack과 LazyHStack의 차이점과 성능 최적화 사례는?
+- SwiftUI에서 PreferenceKey를 활용하는 방법과 사례는?
+- GeometryReader를 사용할 때 성능을 최적화하는 방법은?
+- UIHostingController와 UIViewControllerRepresentable의 차이는?
+- UIViewController와 SwiftUI View 간 데이터 바인딩을 최적화하는 방법은?
+- SwiftUI에서 Transaction과 Animation의 차이는?
+- SwiftUI에서 @StateObject와 @ObservedObject의 차이는?
+- Swift에서 multipart/form-data 요청을 처리하는 방법은?
+- iOS에서 NSURLSessionWebSocketTask을 활용하여 WebSocket을 처리하는 방법은?
+- iOS에서 URLSession의 HTTP/2 및 HTTP/3 지원 여부와 그 차이는?
+- iOS에서 GraphQL을 활용한 네트워크 요청을 처리하는 방법은?
+- CoreData와 Realm에서 Schema Migration을 수행하는 방법은?
+- UserDefaults, Keychain, File System, CloudKit의 차이점과 사용 사례는?
+- URLSessionDataTask, URLSessionDownloadTask, URLSessionUploadTask의 차이는?
+- iOS 앱에서 메모리 사용량을 줄이는 방법은?
+- RunLoop의 개념과 활용 사례는?
+- iOS에서 Background Task를 활용하여 네트워크 요청을 최적화하는 방법은?
+- CALayer에서 shadowPath를 직접 설정하면 성능이 왜 향상되는가?
+- iOS에서 프레임 드롭(Frame Drop)을 방지하기 위한 성능 최적화 기법은?
+- NSCache와 UserDefaults의 차이는?
+- Image Rendering Mode를 설정하면 성능이 어떻게 최적화되는가?
+- Core Animation과 Metal을 활용하여 UI 성능을 최적화하는 방법은?
+- iOS 앱을 App Store에 배포하는 과정을 설명하시오.
+- Xcode Cloud와 기존 CI/CD 도구(GitHub Actions, Bitrise)의 차이는?
+- TestFlight를 활용한 베타 테스트 프로세스는?
+- iOS에서 Fastlane을 활용하여 자동 배포를 설정하는 방법은?
+- App Transport Security (ATS)란?
+- Bitcode가 iOS 앱 배포 과정에서 가지는 역할은?
+- iOS에서 Secure Enclave를 활용하는 방법은?
+- iOS 앱에서 Face ID 및 Touch ID를 활용하는 방법은?
+- iOS에서 JWT (JSON Web Token)을 활용한 인증 방식은?
+- App Privacy Manifest와 앱 개인정보 보호 정책을 작성하는 방법은?
+- iOS Sandboxing이란?
+- iOS 앱에서 In-App Purchase의 보안을 강화하는 방법은?
+- iOS 최신 버전에서 추가된 주요 기능은?
+- Live Activities를 구현하는 방법은?
+- Dynamic Island에서 실시간 업데이트를 처리하는 방법은?
+- iOS에서 Passkeys를 지원하는 방법은?
+- Swift 5.10에서 추가된 새로운 기능은?
+- RealityKit과 ARKit의 차이는?
+- iOS에서 Metal을 활용하여 그래픽 성능을 최적화하는 방법은?
+- WidgetKit을 활용하여 iOS 위젯을 만드는 방법은?

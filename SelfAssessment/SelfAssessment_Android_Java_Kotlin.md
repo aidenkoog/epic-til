@@ -795,3 +795,7 @@ Organized expected questions & answers
 - String vs StringBuffer vs StringBuilder 에 대해 설명해보아라?
 - 직렬화 vs 역직렬화 개념에 대해 설명해보아라?
 - Parcelable, Serializable 차이점은 무엇입니까?
+- var, val차이
+- 코틀린에서 두드러지는 특징
+- 코루틴 설명
+- 엘비스 연산자

@@ -196,3 +196,75 @@ Organized expected questions & answers
 - Flutter에서 Sliver 위젯을 활용한 고급 리스트 렌더링 기법을 설명하라.
 - Flutter의 새로운 impeller 렌더링 엔진이 기존 엔진 대비 갖는 장점은?
 - 플러터에서 디자인 스타일 구현 방법, 위치, 통상적인 방법
+- Flutter의 StatelessWidget이 내부적으로 StatefulWidget보다 성능이 좋은 이유는?
+- StatefulWidget의 dispose() 메서드는 언제 호출되는가?
+- didUpdateWidget()은 언제 호출되는가?
+- GlobalKey는 언제 필요하며, LocalKey와의 차이점은?
+- CustomPainter와 RenderObject의 차이는?
+- PreferredSizeWidget을 활용하는 시나리오는?
+- CustomScrollView를 활용하여 SliverList와 SliverGrid를 함께 사용하는 방법은?
+- RepaintBoundary를 사용할 때의 장점과 주의할 점은?
+- Constraints 객체의 역할과 BoxConstraints를 직접 설정해야 하는 이유는?
+- IntrinsicHeight과 IntrinsicWidth 위젯을 사용할 때 성능에 미치는 영향은?
+- ScrollController와 NotificationListener를 활용하여 스크롤 이벤트를 감지하는 방법은?
+- AutofillGroup 위젯을 사용해야 하는 경우는?
+- NestedScrollView를 사용할 때 SliverAppBar와 body가 올바르게 동작하지 않는 경우 해결 방법은?
+- TickerProviderStateMixin과 SingleTickerProviderStateMixin의 차이점은?
+- AnimatedBuilder와 AnimatedContainer 중 어떤 것이 더 성능이 좋은가?
+- CurvedAnimation에서 Curves.easeInOut과 Curves.bounceOut의 차이점은?
+- Hero 애니메이션이 정상적으로 동작하지 않는 경우 해결 방법은?
+- ShaderMask를 활용하여 텍스트나 이미지에 그라디언트 효과를 적용하는 방법은?
+- AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법은?
+- ImageShader를 활용하여 커스텀 효과를 구현하는 방법은?
+- dart:developer 패키지를 활용하여 디버깅을 최적화하는 방법은?
+- Performance Overlay에서 Raster Thread가 병목이 되는 이유와 해결 방법은?
+- Flutter Inspector에서 RepaintBoundary 색상이 계속 변하는 경우 해결 방법은?
+- Flutter DevTools의 Timeline을 활용하여 프레임 드랍을 분석하는 방법은?
+- Dart Garbage Collector(GC)가 Flutter에서 메모리 관리를 하는 방식은?
+- Flutter에서 메모리 릭이 발생하는 주요 원인과 해결 방법은?
+- Profile Mode와 Release Mode에서 성능 차이가 발생하는 이유는?
+- Dart VM의 JIT(Just-In-Time)와 AOT(Ahead-Of-Time) 컴파일 차이는?
+- ListView.builder에서 itemCount를 설정하지 않으면 성능에 어떤 영향을 미치는가?
+- SliverPersistentHeaderDelegate를 활용하여 성능을 최적화하는 방법은?
+- StatefulWidget에서 didChangeDependencies()와 initState()의 차이점은?
+- InheritedWidget을 사용해야 하는 경우는?
+- ChangeNotifier와 StateNotifier 중 어떤 것이 성능적으로 더 우수한가?
+- BLoC에서 Cubit을 사용하면 어떤 장점이 있는가?
+- 상태관리 라이브러리 없이 전역적인 상태 관리가 가능한가? 가능하다면 어떻게 구현하는가?
+- StreamController.broadcast()를 사용할 때 발생할 수 있는 문제는?
+- GetX에서 Bindings를 활용하여 의존성 주입을 최적화하는 방법은?
+- Flutter Hooks에서 useEffect를 사용할 때 발생할 수 있는 문제점은?
+- Riverpod에서 ScopedProvider와 Override 기능을 활용하는 방법은?
+- State Restoration이 필요한 경우는?
+- Dio 패키지에서 Interceptors를 활용하는 방법은?
+- Flutter에서 GraphQL을 사용할 때 cache policy를 설정하는 방법은?
+- WebSockets을 사용할 때 StreamTransformer를 활용하는 이유는?
+- Flutter에서 Rate Limiting을 구현하는 방법은?
+- Retrofit을 활용하여 REST API 호출을 최적화하는 방법은?
+- Dart에서 Future.wait()와 Future.forEach()의 차이점은?
+- Dart에서 Completer를 활용하여 Future를 제어하는 방법은?
+- Firebase Remote Config를 활용하여 앱의 동적 업데이트를 적용하는 방법은?
+- SQLite와 Hive, Drift의 차이점은?
+- Flutter에서 SSL Pinning을 적용하는 방법은?
+- Flutter Secure Storage와 SharedPreferences의 차이점은?
+- AES 암호화를 활용하여 데이터를 암호화하는 방법은?
+- Dart에서 RSA 키 쌍을 생성하고 이를 활용하여 데이터를 암호화하는 방법은?
+- Flutter에서 App Tracking Transparency (ATT)를 적용하는 방법은?
+- Flutter에서 Firebase App Check를 활용하여 API 보안을 강화하는 방법은?
+- Flutter에서 패스워드 필드의 자동 완성을 방지하는 방법은?
+- Flutter에서 Accessibility Inspector를 활용하여 접근성을 개선하는 방법은?
+- Flutter Web과 Flutter Mobile에서 Navigator 2.0을 사용할 때 차이점은?
+- Flutter에서 Tizen 및 Embedded Linux를 지원하는 방식은?
+- Flutter에서 MacOS 및 Windows 지원을 위한 주요 고려사항은?
+- Flutter에서 FlutterFlow 같은 Low-Code 툴을 활용하여 개발을 최적화하는 방법은?
+- Flutter에서 PWA(Progressive Web App)를 구현하는 방법은?
+- Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점은?
+- Flutter에서 WebRTC를 활용하여 화상 채팅을 구현하는 방법은?
+- Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 최적화 방법은?
+- Flutter 3.22에서 추가된 주요 기능과 개선 사항은?
+- Flutter 4.0에서 기대할 수 있는 변화는?
+- Impeller 렌더링 엔진이 기존 Skia 대비 성능적으로 어떤 이점을 제공하는가?
+- Flutter DevTools에서 memory leak을 탐지하는 방법은?
+- Flutter에서 openAI API를 활용한 ChatGPT 챗봇 기능을 구현하는 방법은?
+- Flutter에서 Live Activities를 활용하여 실시간 업데이트를 구현하는 방법은?
+- Flutter에서 Dynamic Island를 지원하는 방법은?

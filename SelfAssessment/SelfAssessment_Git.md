@@ -232,3 +232,70 @@ Organized expected questions & answers
 - Git의 `git repack -ad --depth=250 --window=250` 명령어는 어떤 상황에서 사용하나요?
 - Git Hook을 사용해 커스텀 스크립트를 실행한 경험이 있다면 설명해주세요.
 - Git의 `git alias`를 사용해본 경험이 있다면 설명해주세요.
+- Git의 **분산 버전 관리 시스템(DVCS)**과 **중앙 집중식 버전 관리 시스템(CVCS)**의 차이점은?
+- Git에서 git commit --amend를 사용할 때 발생할 수 있는 문제점은?
+- Git에서 git clean -df 명령어는 어떤 역할을 하는가?
+- Git에서 git add -p 명령어의 역할은?
+- git reset HEAD~1과 git reset --soft HEAD~1의 차이는?
+- git diff --staged와 git diff의 차이는?
+- Git에서 특정 커밋을 체크아웃하는 방법과 주의점은?
+- Git에서 git branch -d와 git branch -D의 차이점은?
+- Git에서 브랜치를 삭제했을 때 원격 저장소에서 완전히 제거하는 방법은?
+- Git에서 main 브랜치를 develop 브랜치로 변경할 때, 기존 브랜치명을 유지하면서 변경할 수 있는 방법은?
+- Git에서 git switch와 git checkout의 차이점은?
+- git push origin --delete <branch>를 실행하면 원격 저장소에서 브랜치가 삭제되지만, 로컬에서 복구할 방법은?
+- Git에서 Git Flow, GitHub Flow, GitLab Flow의 차이점과 장단점은?
+- Git에서 브랜치를 checkout하지 않고도 브랜치 간 차이를 확인하는 방법은?
+- Git에서 git merge --squash는 어떤 역할을 하는가?
+- Git에서 git merge --no-ff를 사용하는 이유는?
+- Git에서 ours 전략과 theirs 전략의 차이는?
+- Git에서 git mergetool을 활용하는 방법은?
+- git rerere를 활성화하면 Git에서 어떤 일이 발생하는가?
+- git rebase --onto 명령어의 실무 활용 사례는?
+- git rebase -i에서 squash, fixup, edit의 차이점은?
+- Git에서 rebase 중 충돌 해결 후, rebase를 계속 진행하는 방법은?
+- Git에서 git cherry-pick -n을 실행했을 때의 동작 방식은?
+- git reset --mixed HEAD~1과 git reset --soft HEAD~1의 차이는?
+- git revert와 git checkout <commit>을 사용하여 특정 커밋을 되돌리는 차이점은?
+- 실수로 git reset --hard를 실행했을 때, 복구하는 방법은?
+- Git에서 git reflog를 활용하여 특정 커밋을 복구하는 방법은?
+- Git에서 특정 파일만 과거 커밋 상태로 되돌리는 방법은?
+- Git에서 Fork와 Clone의 차이점은?
+- git remote set-url을 활용하여 원격 저장소 URL을 변경하는 방법은?
+- git push --force-with-lease의 역할과 git push --force의 차이점은?
+- 원격 저장소에서 특정 브랜치만 가져오는 방법은?
+- git fetch --prune을 사용하는 이유는?
+- Git에서 git remote prune origin 명령어의 역할은?
+- git push --mirror를 사용하면 어떤 일이 발생하는가?
+- Git에서 Lightweight Tag와 Annotated Tag의 차이점은?
+- git tag -d와 git push origin --delete tag <tagname>의 차이는?
+- Git에서 특정 태그만 원격 저장소로 푸시하는 방법은?
+- Git에서 특정 커밋을 태그로 checkout하는 방법은?
+- git describe 명령어를 사용하면 어떤 정보를 얻을 수 있는가?
+- Git에서 git submodule update --init --recursive 명령어의 역할은?
+- Git 서브모듈과 서브트리(Subtree)의 차이점은?
+- 서브모듈을 제거하는 방법은?
+- Git 서브모듈을 사용하면 발생할 수 있는 문제점과 해결책은?
+- Git에서 .git 폴더 내부 구조는 어떻게 되어 있는가?
+- Git에서 Packfile과 Loose Object의 차이는?
+- Git에서 git gc --aggressive를 실행하면 어떤 일이 발생하는가?
+- git repack 명령어의 역할과 저장소 최적화 방법은?
+- Git 저장소의 크기를 줄이는 방법은? (git gc, git repack 활용)
+- Git에서 git index 파일이 하는 역할은?
+- git fsck 명령어를 실행했을 때 나타날 수 있는 에러 메시지는?
+- Git에서 Signed Commit과 일반 커밋의 차이는?
+- Git에서 **GPG 서명(Signing Key)**을 사용하는 방법은?
+- Git에서 git verify-commit과 git verify-tag의 차이점은?
+- Git에서 .git 디렉토리 노출을 방지하는 방법은?
+- Git에서 민감한 정보(Secrets)를 실수로 푸시했을 때 제거하는 방법은?
+- git-secrets를 활용하여 보안 정책을 자동화하는 방법은?
+- Git을 사용하여 Blue-Green Deployment를 구현하는 방법은?
+- Git에서 CI/CD 파이프라인과 연계하여 git diff를 활용하는 방법은?
+- Git에서 Feature Flag를 활용한 배포 전략은?
+- Git과 GitHub Actions, GitLab CI/CD, Jenkins를 연동하는 방법은?
+- Git에서 pre-push 또는 pre-commit Hook을 활용한 코드 검증 방법은?
+- Git 2.x 이후 추가된 주요 기능은?
+- git worktree를 활용하여 여러 브랜치를 동시에 작업하는 방법은?
+- Git에서 git sparse-checkout을 사용하여 대형 저장소에서 특정 폴더만 체크아웃하는 방법은?
+- git maintenance 명령어가 수행하는 작업은?
+- git pack-redundant의 역할과 활용 방법은?
