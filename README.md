@@ -56,6 +56,8 @@
 ### Self Assessment
 
 - [Android/Java/Kotlin](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Android_Java_Kotlin.md)
+- [Common](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Common.md)
+- [ComputerScience](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_ComputerScience.md)
 - [Flutter/Dart](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Flutter_Dart.md)
 - [Git](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Git.md)
 - [HTML/CSS](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_HTML_CSS.md)
