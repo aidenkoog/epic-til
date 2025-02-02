@@ -4,9 +4,20 @@ Organized expected questions & answers
 
 ## Javascript, Typescript
 
+- 브라우저에서 JavaScript 코드가 실행되는 과정을 설명할 수 있는가?
+- 이벤트 루프(Event Loop)가 렌더링과 관련된 최적화 기법과 어떤 관계가 있는가?
+- JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
+- Immutable 데이터 패턴을 사용하면 어떤 이점이 있는가?
+- 프론트엔드 성능 최적화를 위해 JavaScript에서 할 수 있는 것들은?
+- TypeScript의 **제네릭(Generic)**을 사용하면 어떤 장점이 있는가?
+- TypeScript의 strict 옵션을 활성화하면 어떤 이점이 있는가?
+- TypeScript의 Decorator 패턴은 무엇이며, 실제로 어떻게 사용하는가?
+- JavaScript와 TypeScript를 비교했을 때 TypeScript를 사용하면 유지보수성이 개선되는 이유는?
+- JavaScript에서 **CSR(Client Side Rendering)과 SSR(Server Side Rendering)**의 차이점은?
 - JavaScript의 this 바인딩 원리는?
 - JavaScript의 Promise와 async/await의 차이는?
 - TypeScript의 interface와 type의 차이는?
+- 렉시컬 스코프에 대한 설명
 - JavaScript에서 클로저(Closure)는 어떻게 동작하는가?
 - JavaScript의 event loop와 call stack의 동작 원리는?
 - TypeScript에서 unknown과 any의 차이점은?
@@ -18,3 +29,57 @@ Organized expected questions & answers
 - JavaScript에서 WeakMap, WeakSet의 사용 사례는?
 - JavaScript에서 Proxy와 Reflect API는 어떤 경우에 유용한가?
 - TypeScript에서 Utility Types를 활용하여 코드 재사용성을 높이는 방법은?
+- JavaScript의 var, let, const의 차이점은?
+- ==와 ===의 차이점은?
+- JavaScript에서 null과 undefined의 차이는?
+- JavaScript에서 typeof 연산자는 어떤 값을 반환하는가?
+- JavaScript에서 데이터 타입은 몇 가지가 있는가?
+- Hoisting(호이스팅)이란 무엇이며, 어떻게 동작하는가?
+- IIFE(즉시 실행 함수, Immediately Invoked Function Expression)의 역할은?
+- JavaScript에서 truthy와 falsy 값에는 무엇이 있는가?
+- JavaScript에서 deep copy와 shallow copy의 차이는?
+- JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점은?
+- JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
+- JavaScript에서 함수 선언과 함수 표현식의 차이는?
+- JavaScript에서 bind, call, apply의 차이점은?
+- JavaScript에서 setTimeout과 setInterval은 어떻게 동작하는가?
+- JavaScript에서 Map과 Object의 차이점은?
+- JavaScript에서 forEach, map, filter, reduce의 차이점은?
+- JavaScript에서 동기 코드와 비동기 코드의 차이는?
+- JavaScript의 실행 컨텍스트(Execution Context)는 무엇인가?
+- JavaScript에서 arguments 객체는 어떻게 동작하는가?
+- JavaScript에서 use strict의 역할은?
+- JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
+- JavaScript에서 setTimeout(fn, 0)은 어떻게 동작하는가?
+- JavaScript에서 Event Delegation(이벤트 위임)이란?
+- JavaScript에서 this가 동적으로 바뀌는 경우는 언제인가?
+- JavaScript에서 비동기 프로그래밍을 다루는 방법은?
+- JavaScript의 Generator 함수와 일반 함수의 차이점은?
+- JavaScript에서 Symbol 타입은 왜 필요한가?
+- JavaScript에서 garbage collection(가비지 컬렉션)의 동작 방식은?
+- JavaScript에서 WeakMap과 WeakSet은 언제 사용하는가?
+- JavaScript에서 Promise.all과 Promise.race의 차이는?
+- JavaScript에서 옵저버 패턴(Observer Pattern)과 이벤트 기반 프로그래밍의 차이는?
+- TypeScript와 JavaScript의 차이점은?
+- TypeScript에서 타입 추론(Type Inference)이란?
+- TypeScript에서 enum 타입은 언제 사용하는가?
+- TypeScript에서 interface와 type alias의 차이는?
+- TypeScript에서 readonly 키워드는 어떻게 사용하는가?
+- TypeScript에서 typeof, keyof, in 연산자는 어떻게 동작하는가?
+- TypeScript에서 Partial<T>와 Required<T>의 차이는?
+- TypeScript에서 함수 오버로딩(Function Overloading)은 어떻게 사용하는가?
+- TypeScript에서 never 타입은 어떤 경우에 사용되는가?
+- TypeScript에서 unknown과 any의 차이점은?
+- TypeScript에서 extends 키워드는 어떤 역할을 하는가?
+- TypeScript에서 interface를 확장하는 방법은?
+- TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
+- TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
+- TypeScript에서 Mapped Types은 무엇이며, 어떻게 사용하는가?
+- TypeScript에서 Conditional Types(조건부 타입)은 어떻게 동작하는가?
+- TypeScript에서 Infer 키워드는 어떤 역할을 하는가?
+- TypeScript에서 Discriminated Unions(태그된 유니온 타입)은 언제 사용하는가?
+- TypeScript에서 Function Overloading(함수 오버로딩)을 어떻게 정의하는가?
+- TypeScript에서 Indexed Access Types는 어떻게 사용하는가?
+- TypeScript에서 ReadonlyArray<T>와 Array<T>의 차이점은?
+- TypeScript에서 Module Augmentation은 무엇인가?
+- TypeScript에서 Declaration Merging(선언 병합)이란?
