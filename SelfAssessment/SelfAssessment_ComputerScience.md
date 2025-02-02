@@ -38,6 +38,72 @@ Organized expected questions & answers
 - CQRS(Command Query Responsibility Segregation) 패턴을 적용하는 방법은?
 - 마이크로서비스 아키텍처(MSA)와 모놀리식 아키텍처의 차이점은?
 - RESTful API와 GraphQL의 차이점은?
+- OOP란 무엇인가?
+- OOP를 사용하는 이유는 무엇인가?
+- OOP와 절차 지향 프로그래밍(Procedural Programming)의 차이점은?
+- OOP의 주요 특징(캡슐화, 추상화, 다형성, 상속)에 대해 설명하라.
+- OOP를 적용하면 얻을 수 있는 장점과 단점은 무엇인가?
+- OOP와 FP(Functional Programming, 함수형 프로그래밍)의 차이점은?
+- 객체(Object)란 무엇인가?
+- 클래스(Class)란 무엇인가?
+- 객체와 클래스의 차이는 무엇인가?
+- 클래스가 왜 필요한가?
+- 객체의 상태(State)와 행동(Behavior)은 무엇인가?
+- 생성자(Constructor)와 소멸자(Destructor)의 역할은 무엇인가?
+- 클래스의 인스턴스화(Instantiation)란 무엇인가?
+- 정적(static) 변수와 인스턴스 변수의 차이점은?
+- 캡슐화란 무엇이며, 왜 필요한가?
+- 정보 은닉(Information Hiding)과 캡슐화의 차이는 무엇인가?
+- 접근 제한자(Access Modifier)에는 어떤 것들이 있는가?
+- private, protected, public의 차이를 설명하라.
+- getter와 setter의 필요성은?
+- 캡슐화를 위반하는 코드의 예시와 해결 방법은?
+- 추상화란 무엇이며, 왜 필요한가?
+- 추상 클래스(Abstract Class)와 인터페이스(Interface)의 차이점은?
+- OOP에서 인터페이스를 사용하는 이유는?
+- 인터페이스를 사용하면 얻을 수 있는 장점은?
+- 추상 클래스와 인터페이스 중 언제 무엇을 사용해야 하는가?
+- 자바에서는 다중 상속을 지원하지 않는데, 인터페이스가 어떻게 이를 보완하는가?
+- 실제 프로젝트에서 추상화를 적용한 사례를 설명하라.
+- 다형성이란 무엇이며, 왜 필요한가?
+- 다형성은 어떻게 구현할 수 있는가?
+- 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
+- 오버로딩의 조건과 예제는?
+- 오버라이딩의 조건과 예제는?
+- final, static, private 메서드는 오버라이딩이 가능한가?
+- 다형성을 활용한 실제 사례를 설명하라.
+- 다형성이 없는 언어에서도 비슷한 효과를 낼 수 있는 방법은?
+- 상속이란 무엇이며, 왜 필요한가
+- 상속의 장점과 단점은?
+- 단일 상속(Single Inheritance)과 다중 상속(Multiple Inheritance)의 차이점은?
+- 자바에서는 다중 상속을 허용하지 않는 이유는?
+- 부모 클래스와 자식 클래스의 관계는 어떻게 설정되는가?
+- super 키워드는 무엇이며, 언제 사용하는가?
+- 오버라이딩과 상속의 관계는?
+- 인터페이스를 사용한 다중 상속의 예제는?
+- 상속을 사용할 때 주의해야 할 점은?
+- SOLID 원칙이란 무엇인가?
+- SOLID 원칙의 각 요소를 설명하라.
+- OCP(Open-Closed Principle)를 적용한 예제는?
+- DIP(Dependency Inversion Principle)와 DI(Dependency Injection)의 차이점은?
+- 디자인 패턴이란 무엇인가?
+- GoF(Gang of Four) 디자인 패턴에는 어떤 것들이 있는가?
+- 싱글톤(Singleton) 패턴이란 무엇인가? 장점과 단점은?
+- 팩토리(Factory) 패턴이란 무엇인가? 예제 코드와 함께 설명하라.
+- MVC(Model-View-Controller) 패턴에서 OOP가 어떻게 적용되는가?
+- 전략(Strategy) 패턴과 상태(State) 패턴의 차이점은?
+- OOP가 적용된 프로젝트 경험이 있는가? 예시를 들어 설명하라.
+- 절차 지향 코드(Procedural Code)를 OOP 방식으로 리팩토링하는 방법은?
+- 유지보수하기 쉬운 OOP 코드를 작성하려면 어떻게 해야 하는가?
+- OOP에서 테스트 가능한 코드를 작성하는 방법은?
+- OOP의 단점과 해결 방법은?
+- 코드에서 OOP 원칙을 제대로 지켰는지 평가하는 기준은?
+- OOP와 FP(함수형 프로그래밍)의 차이점?
+- OOP의 단점을 해결하기 위한 방법?
+- 추상화와 캡슐화의 차이점?
+- SOLID 원칙과 실제 적용 사례?
+- GoF 디자인 패턴의 대표적인 예시?
+- 절차 지향 코드를 OOP로 리팩토링하는 방법?
 - API 게이트웨이(API Gateway)의 역할은?
 - Circuit Breaker 패턴의 개념과 활용 사례는?
 - 웹 애플리케이션에서 캐싱 전략을 적용하는 방법은?
