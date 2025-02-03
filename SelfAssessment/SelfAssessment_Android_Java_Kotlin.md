@@ -5,6 +5,40 @@ Organized expected questions & answers
 ## Android (+Java, Kotlin, Coroutine)
 
 - Jetpack Compose와 기존 XML 기반 UI의 차이점
+    - Jetpack Compose (선언적 UI)
+        - UI를 함수로 선언하여 상태(state)에 따라 UI를 자동 갱신
+        - 데이터가 변경되면 UI가 자동으로 다시 그려짐(Recomposition)
+    - XML 기반 UI (명령형 UI)
+        - XML에서 UI를 정의하고, 변경이 필요할 때 findViewById 또는 ViewBinding을 사용하여 직접 조작
+        - UI 변경 시 setText() 등 명령어로 상태 변경을 직접 반영해야 함
+
+- 코드 단순성 및 유지보수성
+    - Jetpack Compose: XML과 Activity/Fragment 간의 분리가 필요 없음. UI를 Kotlin 코드에서 직접 작성 가능.
+    - XML 기반 UI: XML과 Kotlin(Java) 코드가 분리되어 있어, UI 변경 시 코드 수정이 더 많아질 수 있음.
+
+- UI 업데이트 방식
+    - Jetpack Compose: UI가 상태 변화에 따라 자동으로 다시 그려짐.
+    - XML 기반 UI: UI 변경 시 notifyDataSetChanged(), invalidate() 등의 메서드를 직접 호출해야 함.
+
+- 퍼포먼스
+    - Jetpack Compose: Recomposition(변경된 부분만 다시 그림) 최적화.
+    - XML 기반 UI: View Hierarchy가 복잡해질수록 성능 저하 가능성이 높음
+
+- 테마 및 스타일 관리
+    - Jetpack Compose: MaterialTheme을 사용해 테마 적용이 간편.
+    - XML 기반 UI: styles.xml을 사용해야 하며, 다크모드 지원 등에서 추가 설정이 필요.
+
+- 애니메이션
+    - Jetpack Compose: animate*AsState() 등을 활용해 간단한 코드로 애니메이션 구현 가능.
+    - XML 기반 UI: ObjectAnimator, Lottie, Animation XML을 사용해야 함.
+
+- 기존 코드와의 호환성
+    - Jetpack Compose: 기존 XML UI와 혼용 가능 (ComposeView 사용).
+    - XML 기반 UI: Jetpack Compose 사용하려면 ComposeView로 포함해야 함.
+        - ComposeView
+            - Jetpack Compose를 기존 XML 기반의 Android UI(View 시스템)와 혼합할 수 있도록 해주는 Bridge View
+            - 기존 XML 기반 UI 프로젝트에서 Jetpack Compose UI를 포함할 때 사용하는 View
+
 - Android의 ViewModel과 LiveData의 차이점
 - Android에서 Coroutine과 RxJava의 차이점
 - Android의 Room Database와 SQLite의 차이점

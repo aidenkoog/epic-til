@@ -5,6 +5,24 @@ Organized expected questions & answers
 ## CS, Database, Network, ETC
 
 - REST API와 GraphQL의 차이점은?
+    - REST API
+        - 데이터 요청 방식: 여러 개의 EndPoint(URI) 사용
+        - 응답 데이터 구조: 서버가 정한 고정된 형식으로 응답
+        - 오버페칭(Over-fetching): 불필요 데이터도 함께 받아야 할 수도 있음
+        - 언더페칭(Under-fetching): 하나의 요청으로 모든 데이터 가져오기 어려움, 추가 요청 필요
+        - 버전 관리: v1, v2 필요 가능성
+        - 성능 최적화: 다수의 요청 필요할 수 있음
+        - 데이터 전송 형식: JSON, XML 등
+        
+    - GraphQL
+        - 데이터 요청 방식: 단일 EndPoint(/graphql)에서 Query로 요청
+        - 응답 데이터 구조: 클라이언트가 원하는 데이터만 선택하여 응답
+        - 오버페칭(Over-fetching): 필요한 데이터만 요청 가능
+        - 언더페칭(Under-fetching): 단일 요청으로 관련된 여러 데이터 가져오기 가능
+        - 버전 관리: 버전 관리 없이 스키마 확장 가능
+        - 성능 최적화: 한 번으 요청으로 최적화 가능
+        - 데이터 전송 형식: JSON
+    
 - WebSocket과 HTTP Polling의 차이는?
 - Retrofit과 Volley의 차이점은?
 - 모바일 앱에서 보안 강화를 위해 어떤 방식을 적용했는가?
