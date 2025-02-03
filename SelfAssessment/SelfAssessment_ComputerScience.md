@@ -4,7 +4,7 @@ Organized expected questions & answers
 
 ## CS, Database, Network, ETC
 
-- REST API와 GraphQL의 차이점은?
+- REST API와 GraphQL의 차이점
     - REST API
         - 데이터 요청 방식: 여러 개의 EndPoint(URI) 사용
         - 응답 데이터 구조: 서버가 정한 고정된 형식으로 응답
@@ -13,7 +13,7 @@ Organized expected questions & answers
         - 버전 관리: v1, v2 필요 가능성
         - 성능 최적화: 다수의 요청 필요할 수 있음
         - 데이터 전송 형식: JSON, XML 등
-        
+
     - GraphQL
         - 데이터 요청 방식: 단일 EndPoint(/graphql)에서 Query로 요청
         - 응답 데이터 구조: 클라이언트가 원하는 데이터만 선택하여 응답
