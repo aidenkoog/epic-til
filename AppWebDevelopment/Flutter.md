@@ -911,3 +911,37 @@
 - 위 내용 적용해도 에러 발생하는 경우 아래 스텝 수동으로 진행
   - flutter config --android-sdk "C:\Users\k0376\AppData\Local\Android\Sdk"
   - flutter config --android-studio-dir "C:\Program Files\Android\Android Studio"
+ 
+#### Flutter의 StatefulWidget과 StatelessWidget의 차이점 및 권장사항
+
+- StatelessWidget
+  - 변경되지 않는 UI를 가진 위젯
+  - 한 번 생성되면 다시 빌드될 때 내부 상태가 변경되지 않음, 내부 상태 보관 없음
+  - build() 함수가 한 번 실행되고 나면, 위젯이 변경되지 않는 한 다시 호출되지 않음 (정적 화면)
+  - 재랜더링 트리거 포인트: 부모 위젯의 변경
+  - 주로 UI만 렌더링하는 단순한 위젯을 만들 때 사용
+  - 사용 시기
+    - 화면에 표시되는 정보가 변경되지 않는 경우
+    - API 호출 없이 정적인 화면을 만들 때
+    - 부모 위젯에서 전달된 값만을 사용해야 할 때
+- StatefulWidget
+  - 내부 상태(State)를 변경할 수 있는 UI를 가진 위젯
+  - State 객체를 가지고 있으며, setState()를 호출하면 UI를 다시 렌더링
+  - StatefulWidget 자체는 immutable(불변)하지만, State 객체는 변경이 가능
+  - 사용 시기
+    - 버튼 클릭, 입력 필드, 애니메이션 등 UI의 변경이 필요한 경우
+    - API 데이터를 받아와 화면을 업데이트해야 할 때
+    - 사용자 입력(텍스트, 스크롤, 드래그 등)을 처리할 때
+- 권장사항
+  - StatelessWidget을 최대한 사용하고, 상태를 관리해야 할 때 StatefulWidget 또는 Provider, Riverpod 같은 상태 관리 패턴을 활용하는 것이 좋은 방향
+  - StatefulWidget은 내부 상태(State)를 가지며, setState()를 호출하면 해당 위젯과 그 하위 위젯들이 전체 다시 빌드(Rebuild), 불필요한 렌더링이 발생
+  - 만약 StatefulWidget을 써야한다고 하면 전체를 StatelessWidget으로 구성하고 일부 위젯을 StatefulWidget으로 만드는 방향 추천
+    - StatefulWidget의 State 최소화
+  - StatelessWidget으로 구성, Provider, Riverpod, GetX, Bloc 상태관리라이브러리 사용하는 것이 좋은 방향
+- 언제 StatefulWidget을 사용하는 것이 효과적인가?
+  - 일회성 UI 변경이 필요한 경우
+    - 애니메이션, 버튼 클릭 등의 UI 효과를 관리할 때 (e.g., AnimatedContainer, PageView 등)
+  - 초기화가 필요한 데이터가 있을 때
+    - 예: initState()에서 Future를 실행하는 경우 (API 요청 등)
+  - 외부 상태 관리가 필요하지 않은 경우
+    - 간단한 UI 상태 변경 (예: TextField 입력 감지)
