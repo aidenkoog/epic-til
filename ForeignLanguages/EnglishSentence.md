@@ -461,3 +461,8 @@ Lately, I haven’t had the chance to practice my English.
 What is the biggest goal in life?
 What is your goal?
 Why do you book an English class?
+A friend in need is a friend indeed.
+A person who helps at a difficult time is a truly reliable person.
+Sure, no worries.
+This is the time of our class?
+You will be having the demo class on friday at 6AM.
