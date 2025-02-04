@@ -54,8 +54,27 @@ Organized expected questions & answers
         - Lifecycle-aware: 액티비티/프래그먼트가 활성 상태일 때만 데이터 업데이트를 수신
         - 자동 UI 업데이트: 값이 변경되면 UI가 자동으로 업데이트
         - 메모리 누수 방지: 비활성 상태인 UI에는 업데이트를 전달하지 않음
-        
+
 - Android에서 Coroutine과 RxJava의 차이점
+    -  Coroutine
+        - 단순한 비동기 작업 (네트워크 요청, 데이터베이스 호출 등)
+        - 코드를 동기처럼 간결하게 유지 가능
+        - Android에서 공식적으로 지원하는 비동기 처리 방식
+        - 간단한 비동기 작업, 가독성이 좋은 코드 작성, 최신 Android 공식 추천 방식
+        - 경량 스레드(Coroutine)로 메모리 소비 적음
+        - Kotlin 전용
+        - Flow (buffer, conflate) 사용한 백프레셔 처리
+    - RxJava
+        - 복잡한 데이터 흐름 처리, 다중 스트림 관리, 강력한 비동기 프로그래밍
+        - 이벤트 기반 프로그래밍이 필요한 경우 (예: UI 이벤트, 스트리밍 데이터)
+        - 데이터 흐름을 적극적으로 변형(map, flatMap, filter 등)필요 시
+        - Observable 체이닝 방식으로 비동기 흐름 관리
+        - 여러 개의 비동기 데이터 소스를 결합 필요 시
+        - 강력한 스트림 처리 기능 제공하지만 스레드 비용 증가
+        - Java, Kotlin 지원
+        - Flowable 사용한 백프레셔 처리
+
+- Android Coroutine과 RxJava에서 백프레셔 처리 방법
 - Android의 Room Database와 SQLite의 차이점
 - Android에서 Dependency Injection을 구현하는 방법
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
