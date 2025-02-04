@@ -8,7 +8,7 @@ Organized expected questions & answers
     - Jetpack Compose (선언적 UI)
         - UI를 함수로 선언하여 상태(state)에 따라 UI를 자동 갱신
         - 데이터가 변경되면 UI가 자동으로 다시 그려짐(Recomposition)
-        
+
     - XML 기반 UI (명령형 UI)
         - XML에서 UI를 정의하고, 변경이 필요할 때 findViewById 또는 ViewBinding을 사용하여 직접 조작
         - UI 변경 시 setText() 등 명령어로 상태 변경을 직접 반영해야 함
@@ -41,6 +41,20 @@ Organized expected questions & answers
                 - 기존 XML 기반 UI 프로젝트에서 Jetpack Compose UI를 포함할 때 사용하는 View
 
 - Android의 ViewModel과 LiveData의 차이점
+    - 공통
+        - ViewModel과 LiveData는 Android 앱의 상태 관리 및 UI 데이터 처리를 돕는 컴포넌트
+    - ViewModel
+        - ViewModel은 화면 회전이나 구성 변경(Configuration Changes) 시에도 데이터를 유지할 수 있는 컴포넌트
+        - UI 관련 데이터를 저장하고 관리
+        - 액티비티/프래그먼트가 소멸되어도 데이터 유지
+        - 수명 주기를 인식하여 메모리 누수를 방지
+        - 데이터 로직과 UI를 분리하여 클린 아키텍처 구현 가능
+    - LiveData
+        - LiveData는 관찰 가능한 데이터 홀더(Observable)로, 데이터가 변경될 때 자동으로 UI에 반영되는 컴포넌트
+        - Lifecycle-aware: 액티비티/프래그먼트가 활성 상태일 때만 데이터 업데이트를 수신
+        - 자동 UI 업데이트: 값이 변경되면 UI가 자동으로 업데이트
+        - 메모리 누수 방지: 비활성 상태인 UI에는 업데이트를 전달하지 않음
+        
 - Android에서 Coroutine과 RxJava의 차이점
 - Android의 Room Database와 SQLite의 차이점
 - Android에서 Dependency Injection을 구현하는 방법
