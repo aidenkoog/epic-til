@@ -100,6 +100,41 @@ Organized expected questions & answers
                 - onBackpressureLatest(): 가장 최근 데이터만 유지
 
 - Android의 Room Database와 SQLite의 차이점
+    - SQL 쿼리 작성 방식
+        - SQLite: 직접 SQL 쿼리를 사용해야 하며, 문법 오류를 개발자가 직접 해결해야 함 (rawQuery)
+        - Room: @Query 어노테이션을 사용하여 간결한 SQL 작성 가능, 컴파일 타임에 문법 오류 체크 가능
+    - 보일러플레이트 코드
+        - SQLite: Cursor를 사용해야 하며, 데이터를 수동으로 매핑해야 함
+        - Room: 자동으로 객체 매핑을 수행하며, 개발자의 부담을 줄임
+    - 데이터 무결성 및 타입 안정성
+        - SQLite: 타입 안정성 보장 없음 (동적 SQL 실행)
+        - Room: Kotlin의 data class와 함께 사용하여 타입 안정성을 보장
+    - LiveData 및 Flow 지원
+        - SQLite: 직접 구현 필요 (콜백 등)
+        - Room: LiveData, Flow를 지원하여 데이터 변경 사항을 자동 감지 가능
+    - 트랜잭션 및 비동기 처리
+        - SQLite: 개발자가 BEGIN TRANSACTION, END TRANSACTION을 직접 관리 필요
+        - Room: @Transaction 어노테이션으로 간편하게 트랜잭션 처리 가능
+            - 데이터 삭제 > 데이터 삽입 두가지의 트랜잭션을 나열만 하면 됨
+    - Migration (데이터베이스 스키마 변경)
+        - SQLite: 기존 테이블을 삭제하고 새로 생성하는 방식이 일반적
+        - Room: Migration 클래스를 사용하여 데이터 유지하면서 스키마 변경 가능
+            - 데이터 유지 상태에서 컬럼만 추가 가능
+
+- DAO 설명
+    - DAO 개념 설명
+        - Data Access Object
+        - 데이터베이스와 애플리케이션 사이의 데이터 접근을 추상화하는 객체
+            - 데이터베이스 - DAO - 애플리케이션
+        - DAO를 사용하면 SQL 쿼리를 직접 작성하지 않고, 데이터베이스 작업을 객체지향적인 방식으로 처리 가능
+        - Entity(Table 이름) 데이터 모델 정의, DAO 인터페이스 정의, Room 데이터베이스 정의 순으로 구현 필요
+        - Room Database에서 DAO는 인터페이스로 정의되며, 데이터베이스에서 데이터를 조회, 삽입, 삭제, 업데이트하는 역할
+    - DAO 역할과 장점
+        - SQL 쿼리를 캡슐화: 데이터 접근 로직을 분리하여 코드의 유지보수성을 높임
+        - 객체 지향적인 데이터 처리: SQL을 직접 사용하지 않고, 엔티티 클래스를 이용하여 데이터를 조회/수정
+        - 비즈니스 로직과 데이터베이스 로직 분리: 데이터베이스 변경이 있어도 앱 로직에 미치는 영향을 최소화
+        - Room이 SQL 쿼리 오류를 컴파일 타임에 체크: @Query 어노테이션을 사용하여 SQL 문법 오류를 방지
+
 - Android에서 Dependency Injection을 구현하는 방법
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
 - Android TV 앱 개발 시 고려해야 할 사항
