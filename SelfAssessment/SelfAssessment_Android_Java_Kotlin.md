@@ -75,6 +75,30 @@ Organized expected questions & answers
         - Flowable 사용한 백프레셔 처리
 
 - Android Coroutine과 RxJava에서 백프레셔 처리 방법
+    - 백프레셔(Backpressure) 개념
+        - 백프레셔(Backpressure)란 데이터 생산 속도와 소비 속도의 불균형으로 인해 발생하는 문제
+        - 생산자(Producer)가 데이터를 너무 빨리 생성하여 소비자(Consumer)가 처리하지 못하는 문제
+        - 생산자가 데이터를 너무 빠르게 방출하면, 소비자가 이를 처리하지 못하는 경우 발생
+        - 생산자(Producer): 데이터를 생성하는 측 (예: 네트워크 응답, 센서 데이터, 이벤트 스트림 등)
+        - 소비자(Consumer): 데이터를 소비하는 측 (예: UI 업데이트, 파일 저장 등)
+    - 백프레셔 문제가 발생 시 이슈
+        - 메모리 과부하 (버퍼에 데이터가 쌓임)
+        - 애플리케이션 성능 저하 (CPU 과부하, ANR 발생 가능)
+        - 데이터 손실 (처리되지 못한 데이터가 버려짐)
+    - 백프레셔 구현
+        - 10,000개의 데이터를 딜레이 없이 방출
+        - 소비자 측에서는 딜레이 적용해서 데이터를 천천히 처리
+        - 느리게 소비하기 때문에 버퍼가 가득차는 문제 발생
+    - Coroutine, RxJava에서의 백프레셔 처리 방법
+        - Coroutine
+            - buffer(): 생산자가 빠르게 데이터를 방출해도 버퍼를 사용하여 소비자가 처리할 때까지 대기
+            - conflate(): 최신 데이터만 유지하고 이전 데이터는 삭제 (속도 우선)
+            - collectLatest(): 소비자가 새로운 데이터를 받을 때, 이전 처리 중인 데이터를 취소하고 최신 데이터만 처리
+        - RxJava
+            - Flowable 사용
+                - onBackpressureDrop(): 오래된 데이터를 버리고 최신 데이터만 유지
+                - onBackpressureLatest(): 가장 최근 데이터만 유지
+
 - Android의 Room Database와 SQLite의 차이점
 - Android에서 Dependency Injection을 구현하는 방법
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
