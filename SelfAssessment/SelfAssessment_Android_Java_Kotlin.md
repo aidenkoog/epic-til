@@ -96,6 +96,7 @@ Organized expected questions & answers
 - Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
 - Android에서 ViewBinding과 DataBinding의 차이점
 - Android에서 Parcelable과 Serializable의 차이점
+- Compound Component 패턴고ㅏ Slot API 설명
 - Media Player 자체 내부 로직 설명
 - ExoPlayer 내부 구조 설명
 - FFMpegPlayer 내부 구조 설명
