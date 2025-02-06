@@ -182,7 +182,7 @@ Organized expected questions & answers
         - 안전성 문제 → private 필드, 메서드 접근 가능하여 보안 위험 발생 가능.
             - isAccessible = true
         - 복잡성 증가 → 유지보수 어려움
-    - 리플렉션이 사용되는 대표적인 사례
+    - 리플렉션이 사용되는 대표적인 사례 (내부 구현부에서 리플렉션 기법 적용)
         - 의존성 주입 (DI)
             - Dagger, Hilt, Koin 같은 DI 프레임워크에서 리플렉션을 사용하여 의존성을 자동 주입
         - 객체-관계 매핑(ORM)
