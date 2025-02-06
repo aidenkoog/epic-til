@@ -197,6 +197,31 @@ Organized expected questions & answers
             - 클래스 생성자 인자로 인터페이스 타입 변수 설정
         - 대체 방법 2: 코틀린의 sealed class 활용하여 타입 안전성을 높임
 
+- Retrofit과 Volley의 차이점
+    - 개요
+        - Retrofit
+            - RESTful API 호출을 쉽게 할 수 있도록 설계된 HTTP 클라이언트
+            - Gson, Moshi 등을 활용하여 JSON을 자동 직렬화/역직렬화 지원
+            - 코루틴(Coroutine) 및 RxJava 지원
+        - Volley
+            - Google이 개발한 네트워크 라이브러리로, 간단한 HTTP 요청과 이미지 로딩을 빠르게 수행
+            - Android SDK에 내장
+            - 내장 캐싱 기능 제공 → 같은 요청 반복 시 빠른 응답
+            - 이미지 로딩 기능 포함 (ImageLoader, NetworkImageView 사용 가능)
+            - 다양한 요청 지원 (StringRequest, JsonRequest, ImageRequest 등)
+    - Retrofit 단점
+        - 이미지 로딩 기능 없음 (Glide, Picasso 필요)
+    - Volley 단점
+        - JSON 변환을 직접 수행해야 함
+        - 코루틴, RxJava 미지원 (Callback 기반)
+        - 요청이 많을 경우 성능 저하 (메모리 사용 증가)
+    - 목적에 맞는 추천 라이브러리
+        - REST API 요청, JSON 변환 필요: Retrofit
+        - 빠른 네트워크 요청, 이미지 로딩: Volley
+        - 큰 데이터, 멀티파트 업로드: Retrofit
+        - 캐싱이 중요한 경우: Volley
+        - RxJava, Coroutine 연동 필요: Retrofit
+
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
 - Android TV 앱 개발 시 고려해야 할 사항
 - Embedded (OTT, STB etc) 플랫폼에서 DRM(Digital Rights Management)이 중요한 이유

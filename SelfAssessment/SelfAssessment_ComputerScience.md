@@ -60,7 +60,6 @@ Organized expected questions & answers
     - Polling보다 서버 부담이 적지만, WebSocket보다는 효율이 낮음
     - 구형 브라우저에서도 동작 가능 (WebSocket 지원 안 될 때 대체 가능)
 
-- Retrofit과 Volley의 차이점은?
 - 모바일 앱에서 보안 강화를 위해 어떤 방식을 적용했는가?
 - HTTPS와 SSL Pinning에 대해 설명해보라.
 - 안드로이드에서 로컬 데이터 저장 시 보안을 위해 어떤 방법을 사용했는가?
