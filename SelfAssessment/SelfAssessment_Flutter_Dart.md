@@ -24,15 +24,13 @@ Organized expected questions & answers
             - 버튼 클릭, 입력 필드, 애니메이션 등 UI의 변경이 필요한 경우
             - API 데이터를 받아와 화면을 업데이트해야 할 때
             - 사용자 입력(텍스트, 스크롤, 드래그 등)을 처리할 때
-
         - 권장사항
             - StatelessWidget을 최대한 사용하고, 상태를 관리해야 할 때 StatefulWidget 또는 Provider, Riverpod 같은 상태 관리 패턴을 활용하는 것이 좋은 방향
             - StatefulWidget은 내부 상태(State)를 가지며, setState()를 호출하면 해당 위젯과 그 하위 위젯들이 전체 다시 빌드(Rebuild), 불필요한 렌더링이 발생
             - 만약 StatefulWidget을 써야한다고 하면 전체를 StatelessWidget으로 구성하고 일부 위젯을 StatefulWidget으로 만드는 방향 추천
                 - StatefulWidget의 State 최소화
             - StatelessWidget으로 구성, Provider, Riverpod, GetX, Bloc 상태관리라이브러리 사용하는 것이 좋은 방향
-
-        - 언제 StatefulWidget을 사용하는 것이 효과적인가?
+        - StatefulWidget 사용의 효과적인 시기
             - 일회성 UI 변경이 필요한 경우
                 - 애니메이션, 버튼 클릭 등의 UI 효과를 관리할 때 (ex. AnimatedContainer, PageView 등)
             - 초기화가 필요한 데이터가 있을 때
@@ -40,25 +38,51 @@ Organized expected questions & answers
             - 외부 상태 관리가 필요하지 않은 경우
                 - 간단한 UI 상태 변경 (예: TextField 입력 감지)
 
-- Flutter에서 Navigator 1.0과 2.0의 차이점은?
-- Flutter에서 Riverpod과 Provider의 차이점은?
-- Flutter의 BuildContext란 무엇인가?
+- Flutter의 BuildContext 설명
   - 위젯 트리에서 현재 위젯의 위치를 나타내는 객체
   - 위젯 트리를 탐색하고, 부모 또는 자식 위젯과 상호작용하는 데 사용
-
   - BuildContext의 역할
-    - 위젯의 트리 구조에서 현재 위치를 나타냄.
+    - 위젯의 트리 구조에서 현재 위치를 나타냄
     - 부모/자식 위젯과 상호작용할 때 사용됨
     - Theme, MediaQuery, Navigator 등과 같은 상위 위젯 정보를 가져올 때 사용됨
     - 위젯의 build() 함수에서 제공되며, setState() 등과 함께 UI를 업데이트하는 역할.
 
-- Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
+- Flutter에서 FutureBuilder와 StreamBuilder의 차이점
+    - 공통
+        - FutureBuilder와 StreamBuilder는 비동기 데이터를 UI에 반영하는 위젯
+        - 둘 다 비동기 작업을 기다려서 결과를 UI에 표시
+    - 차이점
+        - FutureBuilder (단일 Future 비동기 작업)
+	        - 한 번만 실행되는 비동기 작업을 처리할 때 사용
+            - Future<T>를 받고, 작업이 완료되면 UI를 업데이트
+            - 한 번 실행되면 다시 실행되지 않음 (새로운 Future를 제공하지 않는 이상)
+            - API 호출, DB 조회 시 사용
+            - FutureBuilder 동작 방식
+                - 비동기 작업 실행
+                - 비동기 작업 완료 전 → CircularProgressIndicator() 표시
+	            - 작업 완료 후 → Text(snapshot.data)로 UI 업데이트
+	            - 한 번 완료된 이후 다시 실행되지 않음 (새 Future 제공해야 함)
+        - StreamBuilder (연속적인 데이터 스트림)
+	        - 지속적으로 변화하는 데이터를 UI에 반영할 때 사용
+	        - Stream<T>를 받고, 새로운 데이터가 발생할 때마다 UI를 업데이트
+	        - 웹소켓, 센서 데이터, Firebase Firestore 등의 실시간 데이터와 함께 사용
+            - StreamBuilder 동작 방식
+                - Stream()이 실행
+	            - 새로운 값이 도착할 때마다 UI 업데이트 (Text(snapshot.data))
+	            - 스트림이 종료되면 마지막 데이터가 유지
+	            - 새로운 이벤트가 발생하면 UI가 다시 렌더링
+    - 결론
+	    - FutureBuilder → 한 번만 실행되는 비동기 작업 처리 (Future<T>)
+	    - StreamBuilder → 지속적으로 변화하는 데이터 처리 (Stream<T>)
+
 - Flutter에서 Hot Reload와 Hot Restart의 차이점은?
 - Flutter에서 플랫폼별 코드(Android/iOS)를 다르게 적용하는 방법은?
 - Flutter에서 Web과 Mobile 개발의 차이점은?
 - Flutter에서 Adaptive UI를 구현하는 방법은?
 - Flutter에서 BLoC 패턴을 사용하는 이유는?
 - Flutter에서 Sliver Widgets을 사용하는 이유는?
+- Flutter에서 Navigator 1.0과 2.0의 차이점은?
+- Flutter에서 Riverpod과 Provider의 차이점은?
 - Flutter에서 InheritedWidget의 역할은?
 - Flutter에서 Provider와 Bloc의 차이점은?
 - Flutter에서 Isolates를 활용하는 이유는?
