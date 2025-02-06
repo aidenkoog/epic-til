@@ -466,3 +466,9 @@ A person who helps at a difficult time is a truly reliable person.
 Sure, no worries.
 This is the time of our class?
 You will be having the demo class on friday at 6AM.
+I always failed to achieve my plan.
+When I was young, my family didn't plan on taking a vacation.
+When we were in university/college.
+Our friendship is the same,
+it's the topic that only changed.
+It's not important on how long you took it, what's important is you finished it!
