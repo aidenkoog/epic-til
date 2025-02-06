@@ -8,31 +8,24 @@ Organized expected questions & answers
     - Jetpack Compose (선언적 UI)
         - UI를 함수로 선언하여 상태(state)에 따라 UI를 자동 갱신
         - 데이터가 변경되면 UI가 자동으로 다시 그려짐(Recomposition)
-
     - XML 기반 UI (명령형 UI)
         - XML에서 UI를 정의하고, 변경이 필요할 때 findViewById 또는 ViewBinding을 사용하여 직접 조작
         - UI 변경 시 setText() 등 명령어로 상태 변경을 직접 반영해야 함
-
     - 코드 단순성 및 유지보수성
         - Jetpack Compose: XML과 Activity/Fragment 간의 분리가 필요 없음. UI를 Kotlin 코드에서 직접 작성 가능.
         - XML 기반 UI: XML과 Kotlin(Java) 코드가 분리되어 있어, UI 변경 시 코드 수정이 더 많아질 수 있음.
-
     - UI 업데이트 방식
         - Jetpack Compose: UI가 상태 변화에 따라 자동으로 다시 그려짐.
         - XML 기반 UI: UI 변경 시 notifyDataSetChanged(), invalidate() 등의 메서드를 직접 호출해야 함.
-
     - 퍼포먼스
         - Jetpack Compose: Recomposition(변경된 부분만 다시 그림) 최적화.
         - XML 기반 UI: View Hierarchy가 복잡해질수록 성능 저하 가능성이 높음
-
     - 테마 및 스타일 관리
         - Jetpack Compose: MaterialTheme을 사용해 테마 적용이 간편.
         - XML 기반 UI: styles.xml을 사용해야 하며, 다크모드 지원 등에서 추가 설정이 필요.
-
     - 애니메이션
         - Jetpack Compose: animate*AsState() 등을 활용해 간단한 코드로 애니메이션 구현 가능.
         - XML 기반 UI: ObjectAnimator, Lottie, Animation XML을 사용해야 함.
-
     - 기존 코드와의 호환성
         - Jetpack Compose: 기존 XML UI와 혼용 가능 (ComposeView 사용).
         - XML 기반 UI: Jetpack Compose 사용하려면 ComposeView로 포함해야 함.
@@ -136,6 +129,39 @@ Organized expected questions & answers
         - Room이 SQL 쿼리 오류를 컴파일 타임에 체크: @Query 어노테이션을 사용하여 SQL 문법 오류를 방지
 
 - Android에서 Dependency Injection을 구현하는 방법
+    - DI(Dependency Injection) 개념
+        - 객체가 직접 의존성을 생성하는 것이 아니라, 외부에서 필요한 객체를 주입(Inject)받는 방식을 의미
+        - 이를 통해 코드의 재사용성, 유연성, 단위 테스트 용이성이 증가
+    - Android에서 DI를 구현하는 방법
+        - 수동 의존성 주입 (Constructor Injection)
+        - Dagger/Hilt (Google 공식 DI 프레임워크)
+            - Hilt: Dagger 기반의 Android 공식 DI 라이브러리로, 생성자 주입 및 자동 의존성 주입을 지원
+        - Koin (Kotlin DSL 기반 DI 라이브러리)
+    - Hilt 적용 방법
+        - 모든 Hilt 주입 객체는 @HiltAndroidApp을 사용하여 초기화 필수
+        - Module 사용, @Module과 @InstallIn을 사용하여 의존성을 제공
+        - ViewModel에 의존성을 자동으로 주입
+            - @Inject constructor(...) : 생성자를 통해 의존성 자동 주입
+            - @HiltViewModel : ViewModel에 Hilt 적용
+        - Activity: @AndroidEntryPoint를 사용하여 자동으로 의존성을 주입 가능
+    - Hilt 단점
+        - 빌드 속도 증가 (Annotation Processor 사용)
+    - Koin 설명
+        - Kotlin DSL 기반의 가볍고 직관적인 DI 라이브러리
+        - XML이나 Annotation 없이 간단한 DSL 문법으로 DI를 설정 가능
+        - 모듈 정의
+            - single {} → 싱글톤 객체 생성
+            - viewModel {} → ViewModel 객체 생성
+        - Koin 초기화
+            - startKoin { androidContext() modules() }
+        - Koin 장점
+            - Kotlin DSL을 활용한 간결한 문법
+            - Reflection이 없어 빠른 실행 속도
+            - 초기 설정이 간단하며 빌드 속도 빠름
+        - Koin 단점
+            - Hilt보다 공식 지원이 부족함
+            - 대규모 프로젝트에서는 Hilt보다 관리가 어렵다는 의견 있음
+    
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
 - Android TV 앱 개발 시 고려해야 할 사항
 - Embedded (OTT, STB etc) 플랫폼에서 DRM(Digital Rights Management)이 중요한 이유
