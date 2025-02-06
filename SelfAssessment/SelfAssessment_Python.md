@@ -5,6 +5,20 @@ Organized expected questions & answers
 ## Python
 
 - Python에서 GIL(Global Interpreter Lock)이란?
+  - GIL (Global Interpreter Lock) 개념
+    - Python 인터프리터가 동시에 하나의 스레드만 실행하도록 제한하는 락(lock)
+    - 멀티스레딩 환경에서도 한 번에 하나의 스레드만 실행할 수 있도록 보장하는 메커니즘
+
+  - 존재 이유
+    - Python의 기본 구현체인 CPython은 메모리 관리 (Garbage Collection) 를 위해 참조 카운트(Reference Counting) 방식을 사용
+    - 참조 카운트를 여러 스레드에서 동시에 변경하면 경합 조건(Race Condition) 발생 가능성 있음
+    - 문제를 해결하기 위해 GIL을 도입하여 한 번에 하나의 스레드만 실행하도록 만들어짐
+
+  - GIL의 문제점
+	- 멀티코어 CPU를 제대로 활용하지 못함, 한 번에 하나의 스레드만 실행되므로, CPU 연산이 많은 작업에서는 멀티스레딩 성능이 향상되지 않음.
+	- Python의 멀티스레딩이 제한적임, 여러 개의 CPU 코어를 활용하는 병렬 컴퓨팅이 어렵고, 오히려 멀티스레딩 성능이 저하될 수도 있음.
+	- I/O 작업에서는 큰 영향이 없음, GIL은 I/O 바운드 작업에서는 자동으로 다른 스레드에게 실행 권한을 넘겨줌.
+
 - Python의 List와 Tuple의 차이점은?
 - Python에서 Decorator의 역할은?
 - Python의 Pandas와 NumPy의 차이점은?
