@@ -43,6 +43,15 @@ Organized expected questions & answers
 - Flutter에서 Navigator 1.0과 2.0의 차이점은?
 - Flutter에서 Riverpod과 Provider의 차이점은?
 - Flutter의 BuildContext란 무엇인가?
+  - 위젯 트리에서 현재 위젯의 위치를 나타내는 객체
+  - 위젯 트리를 탐색하고, 부모 또는 자식 위젯과 상호작용하는 데 사용
+
+  - BuildContext의 역할
+    - 위젯의 트리 구조에서 현재 위치를 나타냄.
+    - 부모/자식 위젯과 상호작용할 때 사용됨
+    - Theme, MediaQuery, Navigator 등과 같은 상위 위젯 정보를 가져올 때 사용됨
+    - 위젯의 build() 함수에서 제공되며, setState() 등과 함께 UI를 업데이트하는 역할.
+
 - Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
 - Flutter에서 Hot Reload와 Hot Restart의 차이점은?
 - Flutter에서 플랫폼별 코드(Android/iOS)를 다르게 적용하는 방법은?
