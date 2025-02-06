@@ -15,9 +15,36 @@ Organized expected questions & answers
     - 문제를 해결하기 위해 GIL을 도입하여 한 번에 하나의 스레드만 실행하도록 만들어짐
 
   - GIL의 문제점
-	- 멀티코어 CPU를 제대로 활용하지 못함, 한 번에 하나의 스레드만 실행되므로, CPU 연산이 많은 작업에서는 멀티스레딩 성능이 향상되지 않음.
-	- Python의 멀티스레딩이 제한적임, 여러 개의 CPU 코어를 활용하는 병렬 컴퓨팅이 어렵고, 오히려 멀티스레딩 성능이 저하될 수도 있음.
-	- I/O 작업에서는 큰 영향이 없음, GIL은 I/O 바운드 작업에서는 자동으로 다른 스레드에게 실행 권한을 넘겨줌.
+	  - 멀티코어 CPU를 제대로 활용하지 못함, 한 번에 하나의 스레드만 실행되므로, CPU 연산이 많은 작업에서는 멀티스레딩 성능이 향상되지 않음.
+	  - Python의 멀티스레딩이 제한적임, 여러 개의 CPU 코어를 활용하는 병렬 컴퓨팅이 어렵고, 오히려 멀티스레딩 성능이 저하될 수도 있음.
+	  - I/O 작업에서는 큰 영향이 없음, GIL은 I/O 바운드 작업에서는 자동으로 다른 스레드에게 실행 권한을 넘겨줌.
+
+  - GIL을 우회하는 방법
+    - 멀티프로세싱 (multiprocessing 모듈 사용)
+      - multiprocessing을 사용하면 GIL을 우회하고 병렬 실행이 가능
+      - 프로세스마다 독립적인 Python 인터프리터가 실행되므로, CPU 연산이 많은 작업에 적합
+    - C 확장 모듈 (NumPy, Cython, Numba 등)
+      - NumPy, Pandas 등 C로 구현된 확장 모듈은 GIL을 자동으로 해제함.
+      - Cython을 사용해 nogil 옵션을 적용하면 GIL 없이 실행 가능.
+    - JIT 컴파일러 (PyPy) 사용
+      - JIT(Just-In-Time) 컴파일을 통해 GIL의 영향을 줄이고 실행 속도를 향상시킴.
+    - I/O 바운드 작업에서는 비동기 (asyncio) 사용
+      - GIL은 CPU 연산이 많은 작업에 영향을 주지만, I/O 작업 (파일 읽기, 네트워크 요청 등) 에는 큰 영향을 주지 않음.
+      - 비동기 asyncio를 활용하면 GIL의 영향을 최소화할 수 있음.
+
+  - GIL이 없는 Python 구현체
+    - Jython (Java 기반 Python)
+      - Java의 JVM 위에서 실행되며 GIL이 없음.
+      - Python C 확장 모듈을 사용할 수 없음.
+    - IronPython (.NET 기반 Python)
+      - .NET 환경에서 실행되며 GIL이 없음.
+    - PyPy (JIT 컴파일 사용)
+      - GIL이 있지만 JIT 컴파일을 통해 성능이 향상됨
+
+  - 결론
+    - CPU 바운드 작업: multiprocessing 사용
+    - I/O 바운드 작업: asyncio 사용
+    - 고성능 연산: NumPy, Cython 활용
 
 - Python의 List와 Tuple의 차이점은?
 - Python에서 Decorator의 역할은?
