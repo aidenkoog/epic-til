@@ -24,6 +24,42 @@ Organized expected questions & answers
         - 데이터 전송 형식: JSON
     
 - WebSocket과 HTTP Polling의 차이는?
+  - WebSocket (웹소켓)
+	- 양방향(Full-duplex) 통신을 지원하는 프로토콜.
+	- 서버와 클라이언트 간 연결이 유지됨 (Persistent Connection).
+	- 데이터가 필요할 때마다 서버가 즉시 전송 가능 (Push 방식).
+	- 실시간성이 중요한 서비스에 적합.
+
+  - HTTP Polling (HTTP 폴링)
+	- 클라이언트가 일정 주기마다 서버에 HTTP 요청을 보내 새로운 데이터가 있는지 확인하는 방식.
+	- 요청-응답 방식으로 서버에서 새로운 데이터가 없어도 응답을 보내야 함.
+	- 네트워크 및 서버 리소스를 많이 사용함.
+
+  - 비교 (웹소켓 / HTTP Polling)
+    - 통신 방식: 지속적인 연결 (Persistent) / 주기적인 요청 (Polling)
+    - 데이터 흐름: 양방향 (Full-Duplex)	/ 단방향 (Request → Response)
+    - 응답 속도: 즉시 푸시 가능 (서버 → 클라이언트) / 클라이언트가 주기적으로 요청해야 함
+    - 네트워크 효율성: 연결 유지, 데이터 발생 시 전송 → 효율적	/ 반복적인 요청으로 오버헤드 발생
+    - 서버 부하: 연결당 일정한 부하 (WebSocket 핸들링 필요) / 짧은 간격의 Polling은 서버 과부하 발생 가능
+    - 데이터 전송량	: 데이터가 필요할 때만 전송 → 효율적 / 주기적으로 요청 → 불필요한 데이터 전송 가능
+    - 연결 유지: 항상 연결 유지 / 요청할 때마다 새 연결 생성
+    - 사용 사례: 실시간 채팅, 실시간 데이터 스트리밍 (주식, 제조 데이터 등) / 간단한 상태 업데이트 (ex. 뉴스 새로고침)
+
+  - 언제 사용하는가 (웹소켓 / HTTP Polling)
+    - 실시간 데이터 필요: 웹소켓
+    - 서버 부하 최소화: 웹소켓
+    - 클라이언트 요청량이 적음: HTTP Polling
+    - 제조 장비 상태 실시간 업데이트: 웹소켓
+    - 일반적인 REST API 요청: HTTP Polling
+
+  - WebSocket과 Polling을 혼합한 Long Polling
+	- Long Polling은 기본적인 Polling 방식의 단점(불필요한 요청)을 개선한 방식.
+	- 클라이언트가 서버에 요청을 보내면, 서버가 즉시 응답하지 않고, 데이터가 준비될 때까지 대기함
+    - 데이터가 변경되면 응답을 보냄 → Polling보다 효율적
+    - Long Polling은 실시간에 가깝지만 WebSocket만큼 빠르진 않음
+    - Polling보다 서버 부담이 적지만, WebSocket보다는 효율이 낮음
+    - 구형 브라우저에서도 동작 가능 (WebSocket 지원 안 될 때 대체 가능)
+
 - Retrofit과 Volley의 차이점은?
 - 모바일 앱에서 보안 강화를 위해 어떤 방식을 적용했는가?
 - HTTPS와 SSL Pinning에 대해 설명해보라.
