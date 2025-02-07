@@ -47,6 +47,23 @@ Organized expected questions & answers
     - 고성능 연산: NumPy, Cython 활용
 
 - Python의 List와 Tuple의 차이점은?
+  - 공통
+    - 여러 개의 값을 저장하는 자료구조
+  - 변경 가능 여부
+    - List (변경 가능) / Tuple (불가능)
+  - 속도 성능 차이
+    - Tuple이 더 빠름 (불변성으로 최적화)
+  - 메모리 사용량 차이
+    - Tuple이 메모리 적게 사용 (불변성)
+  - 선택
+    - List를 사용해야 하는 경우
+      - 값이 자주 변경될 때 (append(), remove(), sort() 필요)
+      - 동적으로 데이터 추가/삭제가 필요할 때
+    - Tuple을 사용해야 하는 경우
+      - 변경이 필요 없는 데이터 ((x, y) 좌표, 날짜, 고정 설정 값)
+      - 속도가 중요한 경우 (Tuple이 List보다 빠름)
+      - Dictionary의 키(key)로 사용해야 할 때 (tuple은 immutable이므로 가능, list는 불가능)
+
 - Python에서 Decorator의 역할은?
 - Python의 Pandas와 NumPy의 차이점은?
 - Python에서 Lambda 함수는 어떻게 동작하는가?
