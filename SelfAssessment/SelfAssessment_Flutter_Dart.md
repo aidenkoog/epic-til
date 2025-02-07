@@ -76,6 +76,34 @@ Organized expected questions & answers
 	    - StreamBuilder → 지속적으로 변화하는 데이터 처리 (Stream<T>)
 
 - Flutter에서 Hot Reload와 Hot Restart의 차이점은?
+  - Hot Reload
+    - 개념
+      - 상태(State)를 유지하면서 코드 변경 사항을 UI에 즉시 반영 (UI 수정 & 로직 변경 반영 가능)
+    - 특징
+      - 앱의 상태를 유지한 채 변경 사항을 반영
+	  - 위젯 트리를 다시 그리지만 앱을 재시작하지 않음
+	  - 주로 UI 변경 사항을 빠르게 확인할 때 사용
+    - Hot Reload 적용 가능 변경 사항
+      - UI 변경 (Text, Color, Padding 등)
+      - 메서드 또는 함수 수정
+      - 새로운 위젯 추가
+    - Hot Reload 적용 안 되는 변경 사항
+      - main() 함수 내 코드 수정
+      - initState() 내부 코드 변경
+      - 전역 변수 또는 static 변수 변경
+  - Hot Restart
+    - 개념
+      - 앱을 완전히 재시작하여 모든 상태를 초기화 (앱의 모든 변수를 초기화하고 다시 실행)
+    - 특징
+      - 앱을 처음부터 다시 실행 (초기 상태로 돌아감)
+	  - UI뿐만 아니라 모든 코드가 다시 실행됨
+	  - StatefulWidget의 상태(setState)가 초기화
+	  - 앱 로직을 변경할 때 필요함 (예: 전역 변수, initState 변경)
+    - Hot Restart가 필요한 경우
+      - main() 함수 변경
+      - initState()에서 실행되는 코드 변경
+      - 전역 변수 또는 static 변수 변경
+
 - Flutter에서 플랫폼별 코드(Android/iOS)를 다르게 적용하는 방법은?
 - Flutter에서 Web과 Mobile 개발의 차이점은?
 - Flutter에서 Adaptive UI를 구현하는 방법은?
