@@ -4,7 +4,39 @@ Organized expected questions & answers
 
 ## Git (+GitHub, Gerrit, Bitbucket)
 
-- Git이란 무엇인가?
+- Git 개념
+  - 개요
+    - 분산 버전 관리 시스템(DVCS, Distributed Version Control System)
+    - 소스 코드 변경 사항을 추적하고 여러 개발자가 협업할 수 있도록 도와주는 도구
+    - Git을 사용하면 코드의 변경 이력을 저장하고, 이전 버전으로 쉽게 되돌릴 수 있으며, 여러 개발자가 동시에 작업 가능
+
+  - Git의 핵심 개념
+    - 분산 버전 관리 시스템 (Distributed VCS)
+	  - Git은 중앙 서버 없이도 각 개발자가 전체 프로젝트 히스토리를 복사하여 보관할 수 있음
+	  - 로컬 저장소에서 변경 내용을 커밋하고, 원격 저장소(GitHub, GitLab 등)와 동기화 가능
+
+    - 스냅샷 방식 (Snapshot-based)
+	  - Git은 파일을 변경할 때 전체 파일을 저장하는 것이 아니라, 변경된 내용만 저장함
+	  - 기존 버전 관리 시스템(SVN 등)보다 효율적이고 빠름
+
+    - 데이터 무결성 보장 (SHA-1 해시)
+	  - Git은 파일 변경 사항을 암호화된 해시(SHA-1)로 저장하여 데이터가 손상되지 않도록 보호함
+
+  - Git의 주요 기능
+    - 로컬 저장소 및 원격 저장소
+	- 버전 관리 (Commit & Checkout)
+    - 브랜치 (Branch)
+    - 협업 및 충돌 해결 (Merge & Rebase)
+	  - 여러 개발자가 동시에 작업하면 코드 충돌(conflict) 이 발생할 수 있음
+	  - Git은 이를 해결하기 위해 머지(Merge)와 리베이스(Rebase) 기능을 제공함
+
+  - Git과 GitHub의 차이점
+    - 분산 버전 관리 시스템 / 코드 저장소 및 협업 플랫폼
+    - 로컬에서 사용 가능	/ 원격 저장소를 제공
+    - git 명령어로 사용	/ push, pull 등을 통해 원격 동기화
+    - 오픈소스 (GitLab, Bitbucket 등과 유사) / GitHub는 Git을 활용하는 서비스
+
+- git rebase 에 대한 설명
 - Git과 SVN의 차이점은?
 - Git에서 commit과 push의 차이점은?
 - Git에서 clone과 pull의 차이점은?
