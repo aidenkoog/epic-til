@@ -223,6 +223,24 @@ Organized expected questions & answers
         - RxJava, Coroutine 연동 필요: Retrofit
 
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
+  - 개요
+    - Android에서 대량의 데이터를 효율적으로 로드하고 표시하기 위해 사용
+    - 특히 RecyclerView에서 대량의 리스트 데이터를 페이징 방식으로 로드할 때 성능을 최적화 가능
+  - 사용이유
+    - 대량 데이터 로딩 성능 향상
+	  - 한 번에 모든 데이터를 불러오지 않고 부분적으로 가져와서 메모리 사용을 최적화
+	  - 네트워크 또는 데이터베이스에서 필요한 데이터만 가져옴
+    - 자동 페이징 처리
+	  - PagingSource를 사용하여 자동으로 추가 데이터를 요청
+	  - 사용자가 스크롤하면 필요한 페이지를 불러오는 방식
+    - 메모리 효율성 증가
+	  - 필요한 데이터만 로드하고, 오래된 데이터를 자동으로 제거하여 메모리 과부하 방지
+    - LiveData, Flow, RxJava 연동 가능
+	  - MVVM 패턴과 함께 LiveData, Flow, RxJava를 지원하여 상태 관리를 쉽게 할 수 있음.
+    - 네트워크 & 데이터베이스와 통합 가능
+	  - 네트워크(API) 데이터 + 로컬(Room DB) 데이터 결합 가능 (RemoteMediator 사용).
+	  - 오프라인에서도 캐싱된 데이터를 사용할 수 있도록 지원.
+
 - Android TV 앱 개발 시 고려해야 할 사항
 - Embedded (OTT, STB etc) 플랫폼에서 DRM(Digital Rights Management)이 중요한 이유
 - Android 앱의 백그라운드 작업을 효율적으로 수행하는 방법
