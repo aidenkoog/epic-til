@@ -4,7 +4,93 @@ Organized expected questions & answers
 
 ## iOS, Swift
 
-- iOS의 주요 아키텍처와 컴포넌트는?
+- iOS의 주요 아키텍처와 컴포넌트 설명
+  - iOS의 주요 아키텍처 개요
+    - iOS 애플리케이션은 크게 5계층(5-Tier Architecture) 으로 구성
+
+  - 주요 아키텍쳐
+    - Core OS
+	  - iOS의 가장 하위 계층, 하드웨어 및 시스템 수준의 기능을 제공
+	  - 핵심 역할: 메모리 관리, 파일 시스템, 네트워크 보안, Bluetooth, 암호화 등
+	  - 관련 프레임워크
+	    - Kernel (XNU): iOS의 Unix 기반 커널
+	    - Security Framework: 암호화 및 보안 관련 기능
+	    - Core Bluetooth: 블루투스 통신 지원
+
+    - Core Services
+	  - 앱 개발에서 가장 많이 사용되는 기본 서비스 제공 계층
+	  - 핵심 역할: 데이터 저장, 네트워크 통신, 로케이션 서비스 제공
+	  - 관련 프레임워크:
+	    - Foundation Framework: 컬렉션(Array, Dictionary 등), 파일 입출력, 날짜 및 시간 처리.
+	    - Core Data: 객체 기반 데이터 저장소 (ORM 역할)
+	  - CloudKit: iCloud 연동
+      - Core Location: GPS 및 위치 기반 서비스
+
+    - Media
+	  - 멀티미디어 처리 및 UI 표현을 담당
+	  - 핵심 역할: 그래픽, 오디오, 비디오 재생 및 이미지 처리
+	  - 관련 프레임워크
+	    - AVFoundation: 오디오 및 비디오 처리
+	    - Core Animation: UI 애니메이션 효과 제공
+	    - Core Graphics: 2D 그래픽 렌더링
+	    - Metal: GPU 최적화 그래픽 프로그래밍
+
+    - Cocoa Touch (UIKit)
+	  - 사용자 인터페이스(UI) 및 사용자 경험(UX) 제공 계층
+	  - 핵심 역할: 버튼, 텍스트 필드, 테이블 뷰, 제스처 등을 제공하여 UI 구현
+	  - 관련 프레임워크
+	    - UIKit: iOS의 기본 UI 프레임워크
+	    - SwiftUI: 선언형 UI 프레임워크 (iOS 13부터 지원)
+	    - EventKit: 캘린더 및 일정 관리
+	    - Contacts: 주소록 데이터 관리
+
+    - Application Layer
+	  - 실제 앱이 동작하는 계층
+	  - 개발자가 구현하는 비즈니스 로직, UI 레이아웃, 데이터 처리 등이 포함
+
+  - iOS 주요 디자인 패턴 (아키텍처 패턴)
+    - 개요
+      - iOS 개발에서는 코드의 재사용성, 유지보수성, 테스트 용이성을 높이기 위해 아키텍처 패턴을 적용
+    - MVC (Model-View-Controller)
+      - iOS의 기본 아키텍처 패턴
+      - Apple이 공식적으로 권장하지만, ViewController에 너무 많은 로직이 집중되는 문제가 있음 (Massive View Controller 문제)
+      - 구성요소 및 설명
+        - Model: 데이터 및 비즈니스 로직 담당
+        - View: UI 및 사용자 인터페이스 표시
+        - Controller: View와 Model을 연결하는 중간 역할 (UIViewController)
+    - MVVM (Model-View-ViewModel)
+      - UI 로직을 ViewModel로 분리하여 테스트 가능성을 높이고 유지보수를 쉽게 하는 패턴
+      - SwiftUI 및 Combine과 함께 사용하기 적합
+      - 구성요소 및 설명
+        - Model: 데이터 구조 및 비즈니스 로직
+        - ViewModel: UI에서 사용할 데이터를 가공하여 View에 전달
+        - View: UI를 담당 (SwiftUI 또는 UIViewController)
+    - VIPER (View-Interactor-Presenter-Entity-Router)
+      - iOS에서 가장 분리도가 높은 구조로, 대규모 프로젝트에 적합
+      - 테스트가 용이하고 유지보수가 쉬운 구조
+      - 구성요소 및 설명
+        - View: UI 표시
+        - Interactor: 비즈니스 로직 및 데이터 처리
+        - Presenter: View와 Interactor 간 데이터 변환
+        - Entity: 데이터 모델
+        - Router: 화면 이동 (네비게이션 관리)
+  - iOS 주요 컴포넌트
+    - ViewController (UIViewController)
+	  - 화면을 구성하는 가장 기본적인 컴포넌트.
+	  - 라이프사이클 (viewDidLoad, viewWillAppear, viewDidDisappear) 관리.
+    - TableView & CollectionView (UITableView, UICollectionView)
+	  - 리스트 UI를 구성할 때 사용.
+	  - UITableView → 단순 리스트
+	  - UICollectionView → 그리드 형태 리스트
+    - UserDefaults & Core Data
+	  - UserDefaults → 간단한 데이터 저장 (예: 설정 값)
+	  - Core Data → ORM 기반 로컬 데이터 저장소
+    - URLSession
+	  - 네트워크 통신을 위한 API (GET, POST 요청 처리)
+    - Combine & SwiftUI
+	  - Combine → 비동기 데이터 스트림 관리 (Publisher, Subscriber)
+	  - SwiftUI → 선언형 UI 프레임워크
+
 - Swift의 주요 특징은?
 - struct와 class의 차이는?
 - optional이란 무엇이고, !와 ?의 차이는?
