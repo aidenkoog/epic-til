@@ -105,8 +105,20 @@ Organized expected questions & answers
       - 전역 변수 또는 static 변수 변경
 
 - Flutter에서 플랫폼별 코드(Android/iOS)를 다르게 적용하는 방법은?
+  - 결론
+    - UI 위젯을 플랫폼별로 다르게 적용
+      - Platform.isAndroid, Platform.isIOS, Theme.of(context).platform
+    - 특정 로직을 플랫폼별로 분기
+      - defaultTargetPlatform, kIsWeb
+        - defaultTargetPlatform 사용 시에는 kIsWeb을 먼저 사용하여 체크 필요
+    - Android/iOS 네이티브 코드 실행
+      - MethodChannel
+    - Android/iOS에서 다른 패키지 사용
+      - Platform.isAndroid로 분기
+
 - Flutter에서 Web과 Mobile 개발의 차이점은?
 - Flutter에서 Adaptive UI를 구현하는 방법은?
+- Flutter에서 태블릿, 일반폰의 화면 사이즈 대응 방법
 - Flutter에서 BLoC 패턴을 사용하는 이유는?
 - Flutter에서 Sliver Widgets을 사용하는 이유는?
 - Flutter에서 Navigator 1.0과 2.0의 차이점은?
