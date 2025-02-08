@@ -1,3 +1,304 @@
 # Expected Questions
 
 Organized expected questions & answers
+
+- 소프트웨어공학(Software Engineering)의 개념과 목적을 설명하시오.
+- 소프트웨어 개발 생명주기(SDLC: Software Development Life Cycle)의 개념과 단계별 주요 활동을 설명하시오.
+- 소프트웨어 위기(Software Crisis)의 개념과 해결 방안을 설명하시오.
+- 소프트웨어 품질의 정의와 ISO/IEC 25010 품질 특성을 설명하시오.
+- 소프트웨어의 기능적 요구사항(Functional Requirements)과 비기능적 요구사항(Non-Functional Requirements)의 차이를 설명하시오.
+- CMMI(Capability Maturity Model Integration)의 개념과 5단계를 설명하시오.
+- 소프트웨어 개발에서 사용되는 ISO 12207 표준의 개념과 주요 내용을 설명하시오.
+- 애자일 소프트웨어 개발(Agile Development)의 개념과 주요 방법론을 설명하시오.
+- 소프트웨어 개발 방법론(Waterfall, Incremental, Spiral, V-Model 등)의 차이점을 설명하시오.
+- 소프트웨어 비용 추정 기법(LOC, COCOMO, Function Point)의 개념과 차이를 설명하시오.
+- 소프트웨어 개발 프로세스(Process Model)의 개념과 주요 유형을 설명하시오.
+- 폭포수 모델(Waterfall Model)의 개념과 장단점을 설명하시오.
+- 스파이럴 모델(Spiral Model)의 개념과 적용 사례를 설명하시오.
+- V-모델(V-Model)의 개념과 테스트 단계와의 관계를 설명하시오.
+- 애자일(Agile) 개발 방법론의 개념과 스크럼(Scrum) 및 XP(Extreme Programming)의 차이를 설명하시오.
+- 소프트웨어 프로젝트 관리(SPM: Software Project Management)의 개념과 주요 활동을 설명하시오.
+- 프로젝트 일정 관리 기법(PERT, CPM, 간트 차트)의 개념과 차이를 설명하시오.
+- 프로젝트 리스크 관리(Risk Management)의 개념과 주요 프로세스를 설명하시오.
+- 소프트웨어 형상 관리(Configuration Management)의 개념과 주요 기능을 설명하시오.
+- CI/CD(Continuous Integration / Continuous Deployment)의 개념과 활용 사례를 설명하시오.
+- 요구사항 분석(Requirement Analysis)의 개념과 주요 기법을 설명하시오.
+- 요구사항 명세(Requirement Specification) 작성 시 고려해야 할 사항을 설명하시오.
+- 요구사항 추적성(Requirement Traceability)의 개념과 필요성을 설명하시오.
+- UML(Unified Modeling Language)의 개념과 주요 다이어그램을 설명하시오.
+- 유스케이스 다이어그램(Use Case Diagram)의 개념과 활용 사례를 설명하시오.
+- 클래스 다이어그램(Class Diagram)의 개념과 주요 구성 요소를 설명하시오.
+- 시퀀스 다이어그램(Sequence Diagram)의 개념과 메시지 흐름을 설명하시오.
+- 소프트웨어 설계 원칙(SOLID)의 개념과 각 원칙을 설명하시오.
+- 소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)을 설명하시오.
+- 마이크로서비스 아키텍처(MSA: Microservices Architecture)의 개념과 장점을 설명하시오.
+- 클린 코드(Clean Code)의 개념과 중요성을 설명하시오.
+- 코드 리팩토링(Refactoring)의 개념과 주요 기법을 설명하시오.
+- 디자인 패턴 중 싱글턴(Singleton) 패턴의 개념과 구현 방법을 설명하시오.
+- 디자인 패턴 중 팩토리 메소드(Factory Method) 패턴의 개념과 활용 사례를 설명하시오.
+- 소프트웨어 유지보수(Maintenance)의 개념과 유형(수정, 적응, 예방, 완전 유지보수)을 설명하시오.
+- 기술 부채(Technical Debt)의 개념과 이를 해결하는 방법을 설명하시오.
+- 레거시 코드(Legacy Code)의 개념과 리팩토링 전략을 설명하시오.
+- DevOps(Development & Operations)의 개념과 주요 원칙을 설명하시오.
+- 소프트웨어 테스트 자동화의 개념과 활용 사례를 설명하시오.
+- 소프트웨어 문서화(Documentation)의 중요성과 주요 유형(요구사항 명세서, 설계 문서, 사용자 매뉴얼 등)을 설명하시오.
+- 소프트웨어 품질(Software Quality)의 정의와 주요 특성을 설명하시오.
+- ISO/IEC 25010(소프트웨어 품질 모델)의 개념과 주요 품질 특성을 설명하시오.
+- 소프트웨어 품질 보증(QA: Quality Assurance)과 품질 통제(QC: Quality Control)의 차이를 설명하시오.
+- 정적 분석(Static Analysis)과 동적 분석(Dynamic Analysis)의 개념과 차이를 설명하시오.
+- 코드 리뷰(Code Review)의 개념과 주요 방법(동료 검토, 워크스루, 인스펙션 등)을 설명하시오.
+- 소프트웨어의 신뢰성(Reliability)과 가용성(Availability)의 차이를 설명하시오.
+- 소프트웨어의 유지보수성(Maintainability)을 높이기 위한 설계 기법을 설명하시오.
+- 성능 테스트(Performance Testing)와 부하 테스트(Load Testing), 스트레스 테스트(Stress Testing)의 차이를 설명하시오.
+- 프로파일링(Profiling) 기법을 이용한 소프트웨어 성능 최적화 방법을 설명하시오.
+- 소프트웨어 품질 향상을 위한 결함 예방 기법(Defect Prevention)을 설명하시오.
+- 소프트웨어 테스트(Software Testing)의 개념과 목적을 설명하시오.
+- 단위 테스트(Unit Test), 통합 테스트(Integration Test), 시스템 테스트(System Test), 인수 테스트(Acceptance Test)의 차이를 설명하시오.
+- 화이트박스 테스트(White-Box Testing)와 블랙박스 테스트(Black-Box Testing)의 차이를 설명하시오.
+- 테스트 자동화(Test Automation)의 개념과 주요 도구(Selenium, JUnit, TestNG 등)를 설명하시오.
+- 회귀 테스트(Regression Testing)의 개념과 필요성을 설명하시오.
+- 테스트 커버리지(Test Coverage)의 개념과 측정 지표(구문, 분기, 조건, 경로 커버리지 등)를 설명하시오.
+- 동등 분할 테스트(Equivalence Partitioning)와 경계값 분석(Boundary Value Analysis)의 개념과 활용 사례를 설명하시오.
+- 페어와이즈 테스트(Pairwise Testing)의 개념과 적용 사례를 설명하시오.
+- 정형 기법(Formal Methods)을 활용한 소프트웨어 검증 방법을 설명하시오.
+- 애자일 테스트(Agile Testing)의 개념과 주요 원칙을 설명하시오.
+- 소프트웨어 아키텍처(Software Architecture)의 개념과 중요성을 설명하시오.
+- 계층형 아키텍처(Layered Architecture)와 클라이언트-서버 아키텍처(Client-Server Architecture)의 차이를 설명하시오.
+- MVC(Model-View-Controller) 패턴의 개념과 주요 구성 요소를 설명하시오.
+- MVVM(Model-View-ViewModel) 패턴의 개념과 활용 사례를 설명하시오.
+- 마이크로서비스 아키텍처(Microservices Architecture)와 모놀리식 아키텍처(Monolithic Architecture)의 차이를 설명하시오.
+- 디자인 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)을 설명하시오.
+- 싱글턴 패턴(Singleton Pattern)의 개념과 활용 사례를 설명하시오.
+- 팩토리 패턴(Factory Pattern)과 빌더 패턴(Builder Pattern)의 차이를 설명하시오.
+- 옵저버 패턴(Observer Pattern)과 퍼블리셔-서브스크라이버 패턴(Pub-Sub Pattern)의 차이를 설명하시오.
+- 전략 패턴(Strategy Pattern)과 상태 패턴(State Pattern)의 차이를 설명하시오.
+- 소프트웨어 유지보수(Software Maintenance)의 개념과 주요 유형(수정, 적응, 예방, 완전 유지보수)을 설명하시오.
+- 기술 부채(Technical Debt)의 개념과 해결 방법을 설명하시오.
+- 리팩토링(Refactoring)의 개념과 주요 기법(Extract Method, Inline Variable 등)을 설명하시오.
+- 소프트웨어 회귀(Software Regression)의 개념과 방지 방법을 설명하시오.
+- 소프트웨어 릴리즈 관리(Release Management)의 개념과 주요 단계(빌드, 배포, 운영)를 설명하시오.
+- 블루-그린 배포(Blue-Green Deployment)의 개념과 활용 사례를 설명하시오.
+- 카나리아 배포(Canary Deployment)와 롤링 배포(Rolling Deployment)의 차이를 설명하시오.
+- 롤백 전략(Rollback Strategy)과 롤포워드 전략(Rollforward Strategy)의 차이를 설명하시오.
+- 소프트웨어 유지보수를 위한 코드 메트릭(Code Metrics)의 개념과 활용을 설명하시오.
+- 변경 관리(Change Management) 프로세스와 주요 기법을 설명하시오.
+- 최신 소프트웨어 개발 트렌드(Cloud, AI, DevOps, Serverless 등)를 설명하시오.
+- DevOps(Development & Operations)의 개념과 주요 원칙을 설명하시오.
+- MLOps(Machine Learning Operations)의 개념과 필요성을 설명하시오.
+- 서버리스(Serverless) 컴퓨팅의 개념과 기존 클라우드 컴퓨팅과의 차이를 설명하시오.
+- 컨테이너(Container) 기반 개발과 가상 머신(VM) 기반 개발의 차이를 설명하시오.
+- 블록체인(Blockchain) 기술이 소프트웨어 개발에 미치는 영향을 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이를 설명하시오.
+- 최신 API 설계 기법(RESTful, GraphQL, gRPC 등)의 개념과 차이를 설명하시오.
+- 지속적 테스트(Continuous Testing)의 개념과 필요성을 설명하시오.
+- 최신 소프트웨어 보안 취약점과 대응 방안을 설명하시오.
+- 소프트웨어 엔지니어링 원칙(Simplicity, Modularity, Abstraction 등)을 설명하시오.
+- XP(eXtreme Programming)의 개념과 주요 기법(TDD, Pair Programming 등)을 설명하시오.
+- 스크럼(Scrum) 개발 프로세스의 개념과 주요 역할(Product Owner, Scrum Master, Development Team)을 설명하시오.
+- 린(Lean) 소프트웨어 개발 방법론의 개념과 주요 원칙을 설명하시오.
+- RUP(Rational Unified Process)의 개념과 주요 단계(Inception, Elaboration, Construction, Transition)를 설명하시오.
+- DDD(Domain-Driven Design)의 개념과 주요 전략(Tactical Design, Strategic Design)을 설명하시오.
+- BDD(Behavior-Driven Development)의 개념과 주요 차이점을 설명하시오.
+- ATDD(Acceptance Test-Driven Development)와 TDD(Test-Driven Development)의 차이를 설명하시오.
+- 폭포수 모델(Waterfall Model)과 애자일 모델(Agile Model)의 차이를 설명하시오.
+- 애자일과 DevOps의 개념적 차이를 설명하시오.
+- 소프트웨어 형상관리(Configuration Management)의 개념과 주요 기능을 설명하시오.
+- 버전 관리 시스템(VCS: Version Control System)의 개념과 중앙 집중형(CVS, SVN)과 분산형(Git)의 차이를 설명하시오.
+- Git과 GitHub/GitLab의 개념과 차이를 설명하시오.
+- Git 브랜칭 전략(Git Flow, GitHub Flow, Trunk-based Development)의 차이를 설명하시오.
+- CI(Continuous Integration)와 CD(Continuous Deployment)의 개념과 차이를 설명하시오.
+- 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할을 설명하시오.
+- 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명하시오.
+- 롤링 업데이트(Rolling Update)와 재배포(Redeployment)의 차이를 설명하시오.
+- 소프트웨어 배포 전략(Feature Toggles, A/B Testing, Dark Launching 등)의 개념을 설명하시오.
+- 운영 환경에서의 모니터링 및 장애 대응 전략을 설명하시오.
+- 요구사항 정의(Requirement Definition)와 요구사항 수집(Requirement Elicitation)의 차이를 설명하시오.
+- 요구사항 검토(Requirement Review) 기법(Inspection, Walkthrough, Peer Review)을 설명하시오.
+- 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소를 설명하시오.
+- 요구사항 변경 관리(Change Management)의 개념과 프로세스를 설명하시오.
+- 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소를 설명하시오.
+- 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
+- UML의 구성 요소(Class Diagram, Sequence Diagram, Activity Diagram 등)와 역할을 설명하시오.
+- ERD(Entity-Relationship Diagram)의 개념과 정규화(Normalization) 과정의 중요성을 설명하시오.
+- 기능적 요구사항과 비기능적 요구사항의 차이를 설명하시오.
+- 소프트웨어 프로젝트에서 요구사항 추적 매트릭스(Traceability Matrix)의 개념과 필요성을 설명하시오.
+- 소프트웨어 성능 최적화(Performance Optimization)의 주요 기법을 설명하시오.
+- 소프트웨어 성능 테스트(Performance Testing)의 개념과 주요 지표(응답 시간, 처리량, 가용성 등)를 설명하시오.
+- 부하 테스트(Load Testing), 스트레스 테스트(Stress Testing), 내구성 테스트(Endurance Testing)의 차이를 설명하시오.
+- 코드 프로파일링(Code Profiling)과 CPU/메모리 최적화 방법을 설명하시오.
+- 소프트웨어 품질 특성(ISO/IEC 25010)의 개념과 측정 방법을 설명하시오.
+- 소프트웨어 결함 관리(Bug Tracking)와 결함 보고서 작성 원칙을 설명하시오.
+- 정적 코드 분석(Static Code Analysis)과 동적 코드 분석(Dynamic Code Analysis)의 차이를 설명하시오.
+- 코드 리뷰(Code Review)의 개념과 주요 방법(Peer Review, Walkthrough, Inspection 등)을 설명하시오.
+- 테스트 자동화 도구(JUnit, Selenium, Cypress 등)의 개념과 활용 사례를 설명하시오.
+- DevOps에서 CI/CD 파이프라인을 활용한 품질 개선 방법을 설명하시오.
+- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술을 설명하시오.
+- 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이를 설명하시오.
+- 마이크로서비스 아키텍처(MSA)와 서비스 메시(Service Mesh)의 개념과 필요성을 설명하시오.
+- GraphQL과 REST API의 차이를 설명하시오.
+- 블록체인(Blockchain) 기반 소프트웨어 개발의 개념과 보안 이슈를 설명하시오.
+- 양자 컴퓨팅(Quantum Computing) 소프트웨어의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이를 설명하시오.
+- 최신 AI/ML 소프트웨어 개발 기법과 MLOps의 개념을 설명하시오.
+- 소프트웨어 개발에서 데이터 중심 접근 방식(Data-Driven Development)의 필요성을 설명하시오.
+- No-Code/Low-Code 개발 플랫폼의 개념과 활용 사례를 설명하시오.
+- 시스템 개발 방법론(System Development Methodology)의 개념과 주요 유형을 설명하시오.
+- 정보 시스템 아키텍처(EA, Enterprise Architecture)의 개념과 구성 요소(Business, Data, Application, Technology)를 설명하시오.
+- 소프트웨어 프로토타이핑(Prototyping) 기법의 개념과 유형(Rapid, Evolutionary, Throwaway)을 설명하시오.
+- RAD(Rapid Application Development) 모델의 개념과 장단점을 설명하시오.
+- DevOps(Development & Operations)의 개념과 주요 원칙을 설명하시오.
+- ITIL(Information Technology Infrastructure Library)의 개념과 주요 프로세스를 설명하시오.
+- TDD(Test-Driven Development)와 BDD(Behavior-Driven Development)의 차이를 설명하시오.
+- 모델 기반 개발(MBD, Model-Based Development)의 개념과 활용 사례를 설명하시오.
+- 소프트웨어 공학에서 CASE(Computer-Aided Software Engineering) 도구의 개념과 활용 사례를 설명하시오.
+- 유지보수 비용을 줄이기 위한 소프트웨어 개발 방법론을 설명하시오.
+- 정적 테스트(Static Testing)와 동적 테스트(Dynamic Testing)의 차이를 설명하시오.
+- 소프트웨어 테스팅 원칙(Software Testing Principles) 7가지를 설명하시오.
+- ISO/IEC/IEEE 29119 소프트웨어 테스트 표준의 개념과 주요 내용(테스트 프로세스, 문서화, 기술)을 설명하시오.
+- 회귀 테스트(Regression Testing)의 개념과 자동화 도구(Selenium, JUnit 등)를 설명하시오.
+- 테스트 기반 개발(TDD, Test-Driven Development)의 개념과 주요 단계를 설명하시오.
+- 동등 분할 테스트(Equivalence Partitioning)와 경계값 분석(Boundary Value Analysis)의 차이를 설명하시오.
+- 결함 추적 시스템(Bug Tracking System)의 개념과 주요 도구(JIRA, Redmine 등)를 설명하시오.
+- 테스트 자동화 프레임워크(Test Automation Framework)의 개념과 주요 유형을 설명하시오.
+- 성능 테스트(Performance Testing)와 부하 테스트(Load Testing)의 차이를 설명하시오.
+- 애자일 테스팅(Agile Testing)의 개념과 전통적인 소프트웨어 테스트와의 차이를 설명하시오.
+- 소프트웨어 개발 보안(Secure Software Development)의 개념과 주요 원칙을 설명하시오.
+- OWASP(Top 10 Security Risks)의 주요 보안 취약점을 설명하시오.
+- Secure SDLC(Secure Software Development Life Cycle)의 개념과 주요 단계(Security by Design 포함)를 설명하시오.
+- 코드 인젝션(Code Injection) 공격(SQL Injection, XSS 등)의 개념과 대응 방안을 설명하시오.
+- 소프트웨어에서 인증(Authentication)과 인가(Authorization)의 차이를 설명하시오.
+- 데이터 암호화 알고리즘(AES, RSA, SHA 등)의 개념과 활용 사례를 설명하시오.
+- 보안 취약점 분석 도구(Static Analysis, Dynamic Analysis)의 개념과 활용 사례를 설명하시오.
+- 보안 코딩(Secure Coding)의 개념과 주요 원칙을 설명하시오.
+- GDPR(General Data Protection Regulation)과 소프트웨어 개발의 관계를 설명하시오.
+- 블록체인(Blockchain) 기반 보안 기술과 소프트웨어 개발에의 적용 방안을 설명하시오.
+- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술을 설명하시오.
+- Serverless Computing(서버리스 컴퓨팅)의 개념과 기존 클라우드 컴퓨팅과의 차이를 설명하시오.
+- 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이를 설명하시오.
+- API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이를 설명하시오.
+- 데이터 중심 소프트웨어 개발(Data-Driven Development)의 개념과 필요성을 설명하시오.
+- 양자 컴퓨팅(Quantum Computing) 소프트웨어의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
+- DevSecOps(Development, Security, and Operations)의 개념과 필요성을 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이를 설명하시오.
+- 소프트웨어 개발에서 AI/ML을 활용한 자동화 기법(AI Code Generation, AutoML 등)을 설명하시오.
+- No-Code/Low-Code 플랫폼의 개념과 소프트웨어 개발에 미치는 영향을 설명하시오.
+- 유지보수성(Maintainability)의 개념과 유지보수 유형(Adaptive, Corrective, Perfective, Preventive)의 차이를 설명하시오.
+- 기술 부채(Technical Debt)의 개념과 이를 해결하는 방법을 설명하시오.
+- 소프트웨어 회귀(Software Regression) 문제와 이를 방지하는 방법을 설명하시오.
+- 지속적 배포(Continuous Deployment)와 지속적 제공(Continuous Delivery)의 차이를 설명하시오.
+- 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 개념과 차이를 설명하시오.
+- 코드 리팩토링(Refactoring)의 개념과 주요 기법을 설명하시오.
+- 변경 관리(Change Management) 프로세스와 주요 기법을 설명하시오.
+- 소프트웨어 배포 전략(Feature Toggles, A/B Testing, Dark Launching 등)을 설명하시오.
+- 롤백 전략(Rollback Strategy)과 롤포워드 전략(Rollforward Strategy)의 차이를 설명하시오.
+- 지속적 테스트(Continuous Testing)의 개념과 필요성을 설명하시오.
+- 소프트웨어 프로젝트 관리(Project Management)의 개념과 주요 역할을 설명하시오.
+- 소프트웨어 프로젝트 일정 관리(Schedule Management) 기법과 PERT, CPM의 차이를 설명하시오.
+- 소프트웨어 프로젝트의 주요 성공 요인과 실패 요인을 설명하시오.
+- 소프트웨어 위험 관리(Risk Management)의 개념과 주요 프로세스를 설명하시오.
+- 프로젝트 원가 관리(Cost Management) 기법과 EVM(Earned Value Management)의 개념을 설명하시오.
+- 소프트웨어 프로젝트 이해관계자 관리(Stakeholder Management)의 중요성과 주요 기법을 설명하시오.
+- 프로젝트 범위 관리(Scope Management)에서 범위 정의, 범위 변동 관리(Change Control)의 개념을 설명하시오.
+- 프로젝트 품질 보증(Quality Assurance)과 품질 통제(Quality Control)의 차이를 설명하시오.
+- IT 거버넌스(IT Governance)의 개념과 주요 프레임워크(COBIT, ITIL)를 설명하시오.
+- 프로젝트 종료 후 사후 평가(Post-Mortem Analysis)의 중요성과 주요 수행 활동을 설명하시오.
+- 데이터 중심 소프트웨어 개발(Data-Driven Development)의 개념과 주요 활용 사례를 설명하시오.
+- 빅데이터(Big Data) 소프트웨어 설계 시 고려해야 할 주요 요소(5V: Volume, Velocity, Variety, Veracity, Value)를 설명하시오.
+- 데이터 웨어하우스(Data Warehouse)와 데이터 레이크(Data Lake)의 개념과 차이를 설명하시오.
+- ETL(Extract, Transform, Load) 프로세스와 데이터 파이프라인(Data Pipeline)의 개념을 설명하시오.
+- 데이터 정규화(Normalization)와 비정규화(Denormalization)의 개념과 차이를 설명하시오.
+- CAP 정리(CAP Theorem)의 개념과 분산 시스템에서의 적용 사례를 설명하시오.
+- 데이터 모델링(Data Modeling)에서 ERD(Entity-Relationship Diagram)의 개념과 주요 구성 요소를 설명하시오.
+- 데이터 마이그레이션(Data Migration)의 개념과 수행 절차를 설명하시오.
+- 데이터 품질(Data Quality) 보장을 위한 주요 기법을 설명하시오.
+- 데이터 거버넌스(Data Governance)의 개념과 주요 원칙을 설명하시오.
+- AI 기반 소프트웨어 개발(AI-Assisted Software Development)의 개념과 주요 사례를 설명하시오.
+- ChatGPT와 같은 생성형 AI(Generative AI)가 소프트웨어 개발에 미치는 영향을 설명하시오.
+- 블록체인(Blockchain) 기반 스마트 계약(Smart Contract)의 개념과 활용 사례를 설명하시오.
+- 디지털 트윈(Digital Twin)의 개념과 소프트웨어 공학에서의 활용 사례를 설명하시오.
+- 지속적 테스트(Continuous Testing)와 테스트 자동화(AI 기반 테스트)의 개념을 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 FaaS(Function as a Service)의 개념과 차이를 설명하시오.
+- IoT(Internet of Things) 운영체제의 개념과 소프트웨어 개발의 차이를 설명하시오.
+- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)과 멀티클라우드 전략의 개념을 설명하시오.
+- 양자 컴퓨팅(Quantum Computing) 소프트웨어 개발의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
+- API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이를 설명하시오.
+- UI/UX(User Interface/User Experience)의 개념과 차이를 설명하시오.
+- HCI(Human-Computer Interaction)의 개념과 사용자 중심 설계(User-Centered Design)의 필요성을 설명하시오.
+- 웹 접근성(Web Accessibility)의 개념과 주요 표준(WCAG, ARIA)을 설명하시오.
+- 사용성 테스트(Usability Testing)의 개념과 주요 수행 방법을 설명하시오.
+- 다크 패턴(Dark Patterns)의 개념과 윤리적 문제를 설명하시오.
+- 사용자 경험(UX) 평가 기법(A/B Testing, Heatmap Analysis 등)의 개념과 차이를 설명하시오.
+- 소프트웨어 개발에서 감성 컴퓨팅(Affective Computing)의 개념과 주요 응용 사례를 설명하시오.
+- 디자인 시스템(Design System)과 UI 프레임워크(Material UI, Ant Design 등)의 개념과 차이를 설명하시오.
+- 반응형 웹(Responsive Web)과 적응형 웹(Adaptive Web)의 개념과 차이를 설명하시오.
+- HCI 기반 음성 인식(Voice Recognition) 및 자연어 처리(NLP)의 개념과 소프트웨어 개발 적용 사례를 설명하시오.
+- 소프트웨어 엔지니어링 윤리(SE Code of Ethics)의 개념과 주요 원칙을 설명하시오.
+- GDPR(General Data Protection Regulation)의 개념과 소프트웨어 개발에서의 준수 사항을 설명하시오.
+- CCPA(California Consumer Privacy Act)와 GDPR의 차이를 설명하시오.
+- 소프트웨어 라이선스(Software License)의 개념과 오픈소스 라이선스(MIT, GPL, Apache 등)의 차이를 설명하시오.
+- 알고리즘 편향(Algorithmic Bias)과 AI 윤리(AI Ethics)의 개념을 설명하시오.
+- 사이버 보안 법률(Cybersecurity Laws)의 개념과 주요 법규를 설명하시오.
+- 디지털 저작권 관리(Digital Rights Management, DRM)의 개념과 주요 사례를 설명하시오.
+- 블록체인 기반 개인정보 보호(Decentralized Identity)의 개념과 필요성을 설명하시오.
+- 소프트웨어의 법적 책임(Software Liability)과 결함으로 인한 법적 분쟁 사례를 설명하시오.
+- 소프트웨어 개발에서 윤리적 해킹(Ethical Hacking)의 개념과 필요성을 설명하시오.
+- 소프트웨어 유지보수의 주요 유형(Adaptive, Corrective, Perfective, Preventive)의 개념과 차이를 설명하시오.
+- 유지보수 비용을 절감하기 위한 소프트웨어 아키텍처 설계 기법을 설명하시오.
+- 성능 튜닝(Performance Tuning)의 개념과 소프트웨어 최적화를 위한 주요 기법을 설명하시오.
+- 메모리 누수(Memory Leak) 문제를 식별하고 해결하는 방법을 설명하시오.
+- 코드 리팩토링(Refactoring)과 소프트웨어 성능 개선의 관계를 설명하시오.
+- 가비지 컬렉션(Garbage Collection)의 개념과 주요 알고리즘(Mark and Sweep, Reference Counting 등)을 설명하시오.
+- 소프트웨어의 부하 테스트(Load Testing)와 스트레스 테스트(Stress Testing)의 차이를 설명하시오.
+- 웹 애플리케이션 성능 개선을 위한 주요 기법(캐싱, CDN, 비동기 처리 등)을 설명하시오.
+- 소프트웨어의 응답 시간(Response Time)과 처리량(Throughput)을 최적화하는 방법을 설명하시오.
+- 분산 시스템(Distributed System)에서의 성능 최적화 전략을 설명하시오.
+- 인공지능(AI)이 소프트웨어 개발에 미치는 영향을 설명하시오.
+- AI 기반 코드 자동 생성(Code Generation) 기술과 대표적인 사례(GitHub Copilot, ChatGPT 등)를 설명하시오.
+- AI를 활용한 소프트웨어 테스트 자동화 기법을 설명하시오.
+- MLOps(Machine Learning Operations)의 개념과 기존 DevOps와의 차이를 설명하시오.
+- AI 기반 이상 탐지(Anomaly Detection) 기법과 소프트웨어 품질 개선에서의 활용을 설명하시오.
+- AI 기반 버그 예측(Bug Prediction) 및 코드 품질 개선 기법을 설명하시오.
+- AI가 포함된 소프트웨어 개발 시 윤리적 고려사항을 설명하시오.
+- 소프트웨어 개발에서의 AI 편향(Algorithmic Bias) 문제와 이를 해결하는 방법을 설명하시오.
+- AI 기반 챗봇(Conversational AI)의 개발 방법과 주요 아키텍처를 설명하시오.
+- AI 및 머신러닝 소프트웨어에서 모델 배포 및 운영(ML Deployment & Serving)의 주요 기법을 설명하시오.
+- DevSecOps(Development, Security, and Operations)의 개념과 주요 원칙을 설명하시오.
+- 보안 취약점 분석 도구(SAST, DAST, IAST)의 개념과 차이를 설명하시오.
+- OWASP Top 10 보안 취약점과 대응 방안을 설명하시오.
+- 제로 트러스트 보안(Zero Trust Security)의 개념과 소프트웨어 개발에서의 활용을 설명하시오.
+- 랜섬웨어(Ransomware)의 개념과 소프트웨어 보안 강화 방법을 설명하시오.
+- 소프트웨어에서 인증(Authentication)과 권한 부여(Authorization)의 차이를 설명하시오.
+- 블록체인 기반 보안 기술과 스마트 계약(Smart Contract)의 개념을 설명하시오.
+- 데이터 프라이버시(Data Privacy) 보호를 위한 암호화 및 보안 기법을 설명하시오.
+- G- DPR(General Data Protection Regulation) 준수를 위한 소프트웨어 개발 원칙을 설명하시오.
+- 취약점 분석 및 모의 해킹(Penetration Testing)의 개념과 수행 방법을 설명하시오.
+- 최신 소프트웨어 개발 트렌드(클라우드 네이티브, MLOps, Serverless 등)를 설명하시오.
+- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)과 컨테이너 기반 개발의 차이를 설명하시오.
+- 멀티클라우드(Multi-Cloud)와 하이브리드 클라우드(Hybrid Cloud)의 개념과 차이를 설명하시오.
+- 소프트웨어 개발에서 블록체인 기술의 적용 가능성을 설명하시오.
+- 소프트웨어 개발에서 양자 컴퓨팅(Quantum Computing)이 미치는 영향을 설명하시오.
+- 5G 및 엣지 컴퓨팅(Edge Computing) 기반 소프트웨어 개발의 개념을 설명하시오.
+- 소프트웨어의 지속 가능한 개발(Sustainable Software Engineering)의 개념과 주요 원칙을 설명하시오.
+- 로우 코드(Low-Code) 및 노 코드(No-Code) 개발 플랫폼의 개념과 활용 사례를 설명하시오.
+- API 경제(API Economy)와 소프트웨어 개발의 관계를 설명하시오.
+- AI 기반 코딩 도구(예: GitHub Copilot, OpenAI Codex)가 소프트웨어 개발의 생산성에 미치는 영향을 설명하시오.
+- 소프트웨어 프로세스 개선(Software Process Improvement, SPI)의 개념과 필요성을 설명하시오.
+- ISO/IEC 15504(스파이스, SPICE) 소프트웨어 프로세스 평가 모델의 개념과 주요 단계(성숙도 레벨)를 설명하시오.
+- 소프트웨어 공학에서 6시그마(Six Sigma)의 개념과 소프트웨어 품질 개선에의 적용 방안을 설명하시오.
+- 소프트웨어 결함 관리(Defect Management)의 개념과 결함 추적 시스템(Bug Tracking System)의 활용을 설명하시오.
+- 소프트웨어 품질 측정 지표(소프트웨어 신뢰도, 유지보수성, 결함 밀도 등)의 개념과 활용 방안을 설명하시오.
+- 코드 복잡도 측정 지표(사이클로매틱 복잡도, Halstead Metrics 등)의 개념과 활용 방법을 설명하시오.
+- 지속적 테스트(Continuous Testing)와 지속적 품질 모니터링의 개념을 설명하시오.
+- 사용자 경험(UX) 평가 기법(A/B Testing, Heatmap Analysis 등)의 개념과 차이를 설명하시오.
+- 소프트웨어 개발에서 Lean Software Development(린 소프트웨어 개발)의 개념과 주요 원칙을 설명하시오.
+- 소프트웨어 개발에서 품질 비용(Quality Cost)의 개념과 예방 비용, 평가 비용, 실패 비용을 설명하시오.
+- 소프트웨어 공학의 미래 도전 과제(보안, 확장성, 복잡성 증가 등)를 설명하시오.
+- 소프트웨어 개발에서 지속 가능한 IT(Sustainable IT)의 개념과 필요성을 설명하시오.
+- 양자 컴퓨팅 시대의 소프트웨어 개발 방식 변화 전망을 설명하시오.
+- AI 및 자동화 기술이 소프트웨어 공학 프로세스를 어떻게 변화시키는지 설명하시오.
+- IT 산업에서 데이터 윤리(Data Ethics)의 개념과 중요성을 설명하시오.
+- 사이버 보안 및 개인정보 보호 규제 변화가 소프트웨어 개발에 미치는 영향을 설명하시오.
+- 차세대 개발 환경에서 소프트웨어 엔지니어의 역할 변화 전망을 설명하시오.
+- 지속적 소프트웨어 개발 혁신을 위한 주요 연구 트렌드를 설명하시오.
+- 글로벌 소프트웨어 개발(Global Software Development, GSD)의 개념과 주요 도전 과제를 설명하시오.
+- 소프트웨어 공학과 IT 산업의 발전이 사회 및 경제에 미치는 영향을 설명하시오.
