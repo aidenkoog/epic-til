@@ -1,3 +1,304 @@
 # Expected Questions
 
 Organized expected questions & answers
+
+- 네트워크(Network)의 개념과 주요 역할을 설명하시오.
+- 네트워크 프로토콜(Network Protocol)의 개념과 필요성을 설명하시오.
+- OSI 7계층(Open Systems Interconnection)의 개념과 각 계층의 역할을 설명하시오.
+- OSI 7계층과 TCP/IP 모델의 차이를 설명하시오.
+- OSI 7계층에서 데이터 캡슐화(Encapsulation) 과정과 디캡슐화(Decapsulation) 과정을 설명하시오.
+- 데이터링크 계층에서 사용되는 MAC 주소(Media Access Control Address)의 개념과 역할을 설명하시오.
+- 네트워크 계층에서 사용되는 IP 주소(IPv4, IPv6)의 개념과 차이를 설명하시오.
+- 전송 계층(Transport Layer)에서 TCP와 UDP의 차이점을 설명하시오.
+- 응용 계층(Application Layer)에서 사용하는 주요 프로토콜(HTTP, FTP, SMTP 등)을 설명하시오.
+- OSI 모델에서 흐름 제어(Flow Control)와 오류 제어(Error Control)의 개념을 설명하시오.
+- 네트워크 토폴로지(Network Topology)의 개념과 주요 유형(Star, Bus, Ring, Mesh)을 설명하시오.
+- LAN(Local Area Network)과 WAN(Wide Area Network)의 개념과 차이를 설명하시오.
+- MAN(Metropolitan Area Network)과 PAN(Personal Area Network)의 개념과 활용 사례를 설명하시오.
+- SDN(Software-Defined Networking)의 개념과 기존 네트워크와의 차이를 설명하시오.
+- NFV(Network Functions Virtualization)의 개념과 주요 활용 사례를 설명하시오.
+- 멀티캐스트(Multicast)와 유니캐스트(Unicast), 브로드캐스트(Broadcast)의 차이를 설명하시오.
+- CDN(Content Delivery Network)의 개념과 작동 방식을 설명하시오.
+- 네트워크 슬라이싱(Network Slicing)의 개념과 5G에서의 활용 사례를 설명하시오.
+- SD-WAN(Software-Defined Wide Area Network)의 개념과 기존 WAN과의 차이를 설명하시오.
+- 네트워크 성능을 향상시키기 위한 주요 기술(QoS, MPLS, Traffic Shaping 등)을 설명하시오.
+- IPv4와 IPv6의 차이를 설명하시오.
+- 서브넷팅(Subnetting)의 개념과 주요 목적을 설명하시오.
+- CIDR(Classless Inter-Domain Routing)의 개념과 기존 IP 주소 체계와의 차이를 설명하시오.
+- DHCP(Dynamic Host Configuration Protocol)의 개념과 작동 방식을 설명하시오.
+- NAT(Network Address Translation)의 개념과 주요 유형(Static NAT, Dynamic NAT, PAT)을 설명하시오.
+- IPv6 주소 체계의 주요 특징과 주소 형식을 설명하시오.
+- IP 주소 충돌(IP Address Conflict)이 발생하는 원인과 해결 방법을 설명하시오.
+- 네트워크에서 프라이빗 IP(Private IP)와 퍼블릭 IP(Public IP)의 차이를 설명하시오.
+- IP 주소 서브넷 마스크(Subnet Mask)의 개념과 활용 방법을 설명하시오.
+- IPv6에서 사용되는 SLAAC(Stateless Address Autoconfiguration)의 개념을 설명하시오.
+- 라우팅(Routing)의 개념과 주요 역할을 설명하시오.
+- 정적 라우팅(Static Routing)과 동적 라우팅(Dynamic Routing)의 차이를 설명하시오.
+- 라우팅 프로토콜(RIP, OSPF, BGP)의 개념과 차이를 설명하시오.
+- 내부 게이트웨이 프로토콜(IGP)과 외부 게이트웨이 프로토콜(EGP)의 차이를 설명하시오.
+- VLAN(Virtual Local Area Network)의 개념과 주요 활용 사례를 설명하시오.
+- 트렁킹(Trunking)의 개념과 VLAN 간 통신을 위한 기술을 설명하시오.
+- STP(Spanning Tree Protocol)의 개념과 루프 방지 방법을 설명하시오.
+- MPLS(Multiprotocol Label Switching)의 개념과 기존 IP 라우팅과의 차이를 설명하시오.
+- VRRP(Virtual Router Redundancy Protocol)의 개념과 역할을 설명하시오.
+- QoS(Quality of Service)의 개념과 네트워크에서의 중요성을 설명하시오.
+- 네트워크 보안(Network Security)의 개념과 주요 목표(무결성, 기밀성, 가용성)를 설명하시오.
+- 방화벽(Firewall)의 개념과 주요 유형(Stateless, Stateful, Proxy Firewall 등)을 설명하시오.
+- IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이를 설명하시오.
+- 네트워크에서 사용되는 VPN(Virtual Private Network)의 개념과 주요 암호화 프로토콜(IPSec, SSL VPN 등)을 설명하시오.
+- DDoS(Distributed Denial of Service) 공격의 개념과 주요 대응 방안을 설명하시오.
+- 네트워크에서 사용하는 NAC(Network Access Control)의 개념과 주요 보안 정책을 설명하시오.
+- 네트워크에서 맥어드레스 스푸핑(MAC Address Spoofing)의 개념과 방어 기법을 설명하시오.
+- IEEE 802.1X 인증의 개념과 EAP(Extensible Authentication Protocol)의 역할을 설명하시오.
+- 네트워크에서 사용하는 침입 탐지 기법(시그니처 기반, 이상 탐지 기반)의 차이를 설명하시오.
+- 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 도구(Wireshark, Tcpdump 등)를 설명하시오.
+- 무선 네트워크(Wireless Network)의 개념과 유선 네트워크와의 차이를 설명하시오.
+- IEEE 802.11(Wi-Fi)의 주요 표준(802.11a/b/g/n/ac/ax)의 차이를 설명하시오.
+- 5G 네트워크의 개념과 4G LTE와의 주요 차이를 설명하시오.
+- 이동통신 네트워크에서 셀룰러 구조(Cellular Network)의 개념과 핸드오버(Handover) 방식을 설명하시오.
+- Wi-Fi 보안 프로토콜(WEP, WPA, WPA2, WPA3)의 차이를 설명하시오.
+- 블루투스(Bluetooth)와 Wi-Fi의 차이를 설명하시오.
+- NFC(Near Field Communication)의 개념과 주요 활용 사례를 설명하시오.
+- 이동통신에서 OFDM(Orthogonal Frequency Division Multiplexing)의 개념과 주요 장점을 설명하시오.
+- 무선 센서 네트워크(WSN, Wireless Sensor Network)의 개념과 주요 활용 사례를 설명하시오.
+- LoRaWAN과 NB-IoT의 개념과 차이를 설명하시오.
+- 클라우드 네트워크(Cloud Networking)의 개념과 기존 네트워크와의 차이를 설명하시오.
+- 클라우드 환경에서 SDN(Software-Defined Networking)과 NFV(Network Functions Virtualization)의 역할을 설명하시오.
+- 퍼블릭 클라우드, 프라이빗 클라우드, 하이브리드 클라우드의 차이를 설명하시오.
+- 클라우드 네트워크에서 VPN과 VPC(Virtual Private Cloud)의 차이를 설명하시오.
+- 클라우드에서 네트워크 트래픽을 최적화하는 방법(로드 밸런싱, CDN 등)을 설명하시오.
+- 서버리스(Serverless) 아키텍처에서 네트워크의 역할을 설명하시오.
+- 클라우드 기반 보안 서비스(CASB, Cloud Access Security Broker)의 개념과 역할을 설명하시오.
+- 클라우드 환경에서 DDoS 방어 기법(AWS Shield, Google Cloud Armor 등)을 설명하시오.
+- 클라우드 기반 API Gateway의 개념과 역할을 설명하시오.
+- 네트워크 가상화(Network Virtualization)와 VLAN, VXLAN의 차이를 설명하시오.
+- 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 기법을 설명하시오.
+- QoS(Quality of Service)의 개념과 주요 메커니즘(DSCP, IntServ, DiffServ 등)을 설명하시오.
+- MPLS(Multiprotocol Label Switching)의 개념과 기존 IP 라우팅과의 차이를 설명하시오.
+- 네트워크 로드 밸런싱(Load Balancing)의 개념과 주요 기법(Round Robin, Least Connection 등)을 설명하시오.
+- 네트워크에서 사용되는 혼잡 제어(Congestion Control) 기법을 설명하시오.
+- TCP 윈도우 크기 조정(TCP Window Scaling)의 개념과 성능 최적화 방법을 설명하시오.
+- 네트워크 대역폭(Bandwidth)과 레이턴시(Latency)의 개념과 성능 최적화 방법을 설명하시오.
+- CDN(Content Delivery Network)의 개념과 성능 최적화 기법을 설명하시오.
+- VoIP(Voice over IP) 서비스에서 QoS 보장을 위한 주요 기술을 설명하시오.
+- 네트워크 성능 모니터링 도구(SNMP, NetFlow, sFlow 등)의 개념과 활용 방안을 설명하시오.
+- 6G 네트워크의 개념과 5G와의 차이를 설명하시오.
+- 차세대 이동통신 기술(Massive MIMO, Beamforming, THz Communication 등)의 개념을 설명하시오.
+- 양자 네트워크(Quantum Network)의 개념과 기존 네트워크와의 차이를 설명하시오.
+- 블록체인 기반 네트워크 보안(Blockchain for Network Security)의 개념과 활용 방안을 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅의 차이를 설명하시오.
+- SD-WAN(Software-Defined Wide Area Network)의 개념과 기존 WAN과의 차이를 설명하시오.
+- 네트워크에서 AI/ML 기반 이상 탐지(Anomaly Detection)의 개념과 주요 기법을 설명하시오.
+- 5G MEC(Multi-access Edge Computing)의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
+- IoT 네트워크에서 발생하는 주요 보안 위협과 대응 방안을 설명하시오.
+- 네트워크 관리(Network Management)의 개념과 주요 기능(FCAPS: Fault, Configuration, Accounting, Performance, Security)을 설명하시오.
+- SNMP(Simple Network Management Protocol)의 개념과 주요 메시지 유형(GET, SET, TRAP 등)을 설명하시오.
+- 네트워크 성능 모니터링 도구(Ping, Traceroute, NetFlow, Wireshark 등)의 개념과 활용 방법을 설명하시오.
+- 네트워크에서 사용되는 로깅(logging)과 로그 분석(Log Analysis)의 개념과 활용 사례를 설명하시오.
+- NetFlow, sFlow, IPFIX의 개념과 네트워크 트래픽 분석에서의 차이를 설명하시오.
+- Syslog 프로토콜의 개념과 네트워크 로그 관리에서의 활용을 설명하시오.
+- 네트워크 성능 지표(Latency, Jitter, Packet Loss, Throughput)의 개념과 측정 방법을 설명하시오.
+- 네트워크에서 사용되는 프로토콜 분석기(Network Protocol Analyzer)의 개념과 활용 방안을 설명하시오.
+- 엔터프라이즈 네트워크 관리에서 NAC(Network Access Control)의 역할과 주요 기술을 설명하시오.
+- 네트워크 장애(Network Failure)의 주요 원인과 해결 방법을 설명하시오.
+- 데이터센터 네트워크(Data Center Network)의 개념과 주요 구성 요소(Spine-Leaf Architecture 등)를 설명하시오.
+- 전통적인 3계층 네트워크(Access, Distribution, Core)와 Spine-Leaf 구조의 차이를 설명하시오.
+- 데이터센터 네트워크에서 사용하는 VXLAN(Virtual Extensible LAN)의 개념과 주요 특징을 설명하시오.
+- 데이터센터 내 로드 밸런서(Load Balancer)의 역할과 주요 유형을 설명하시오.
+- 데이터센터 네트워크에서 사용되는 Overlay Network와 Underlay Network의 개념과 차이를 설명하시오.
+- 네트워크 자동화(Network Automation)의 개념과 주요 도구(Ansible, Terraform, Netmiko 등)를 설명하시오.
+- BGP(Border Gateway Protocol)의 개념과 주요 속성(AS Path, MED, Local Preference 등)을 설명하시오.
+- Anycast의 개념과 기존 Unicast, Multicast, Broadcast와의 차이를 설명하시오.
+- 글로벌 네트워크 아키텍처에서 MPLS-VPN과 SD-WAN의 차이를 설명하시오.
+- 데이터센터 네트워크에서 Dual-Homing과 Multi-Homing의 개념과 활용 사례를 설명하시오.
+- 네트워크에서 발생하는 주요 보안 위협(MITM, ARP Spoofing, DNS Spoofing 등)의 개념과 대응 방안을 설명하시오.
+- VPN(Virtual Private Network)에서 사용하는 터널링(Tunneling) 기법과 보안 프로토콜(IPSec, SSL VPN 등)을 설명하시오.
+- 제로 트러스트 보안(Zero Trust Security)의 개념과 기존 보안 모델과의 차이를 설명하시오.
+- 방화벽(Firewall)에서 사용하는 상태 저장(Stateful)과 상태 비저장(Stateless)의 차이를 설명하시오.
+- 네트워크에서 사용되는 침입 방지 시스템(IPS)과 침입 탐지 시스템(IDS)의 차이를 설명하시오.
+- 랜섬웨어(Ransomware) 공격의 개념과 네트워크 보안 측면에서의 방어 전략을 설명하시오.
+- DNS 보안 위협(DNS Spoofing, DNS Hijacking 등)의 개념과 보호 기법을 설명하시오.
+- 네트워크 환경에서 Multi-Factor Authentication(MFA)의 개념과 주요 활용 사례를 설명하시오.
+- 네트워크에서 IoT 보안 위협과 이에 대한 대응 방법을 설명하시오.
+- 기업 네트워크에서 SIEM(Security Information and Event Management)의 개념과 활용 방안을 설명하시오.
+- HTTP/2, HTTP/3의 차이점을 설명하시오.
+- DNS(Domain Name System)의 개념과 주요 구성 요소(A, AAAA, CNAME, MX, PTR 레코드 등)를 설명하시오.
+- TLS(Transport Layer Security) 1.2와 TLS 1.3의 차이점을 설명하시오.
+- QUIC(Quick UDP Internet Connections)의 개념과 기존 TCP와의 차이를 설명하시오.
+- WebSocket의 개념과 HTTP Polling, Server-Sent Events(SSE)와의 차이를 설명하시오.
+- MQTT(Message Queuing Telemetry Transport)의 개념과 IoT 네트워크에서의 활용을 설명하시오.
+- CoAP(Constrained Application Protocol)의 개념과 주요 활용 사례를 설명하시오.
+- LISP(Location/ID Separation Protocol)의 개념과 기존 IP 라우팅과의 차이를 설명하시오.
+- BGP(Border Gateway Protocol)에서 Route Reflector와 Confederation의 개념을 설명하시오.
+- 네트워크에서 IPv6 Migration 전략(Dual Stack, Tunneling, NAT64)의 개념과 차이를 설명하시오.
+- 네트워크 트래픽 관리(Traffic Shaping, Traffic Policing)의 개념과 차이를 설명하시오.
+- TCP Congestion Control의 개념과 주요 알고리즘(Reno, Cubic, BBR 등)을 설명하시오.
+- 패킷 손실(Packet Loss)이 네트워크 성능에 미치는 영향과 이를 줄이는 방법을 설명하시오.
+- 네트워크에서 Jitter의 개념과 VoIP, 비디오 스트리밍에 미치는 영향을 설명하시오.
+- CDN(Content Delivery Network)의 개념과 트래픽 최적화 방식(Edge Caching, Pre-Fetching 등)을 설명하시오.
+- 5G 네트워크에서 Slicing 기법의 개념과 주요 활용 사례를 설명하시오.
+- L4, L7 로드 밸런서의 차이점을 설명하시오.
+- QoE(Quality of Experience)와 QoS(Quality of Service)의 차이를 설명하시오.
+- 엔터프라이즈 네트워크에서 Capacity Planning의 개념과 최적화 방법을 설명하시오.
+- 네트워크에서 Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 관계를 설명하시오.
+- 네트워크 가상화(Network Virtualization)의 개념과 주요 기술을 설명하시오.
+- VXLAN(Virtual Extensible LAN)의 개념과 기존 VLAN과의 차이를 설명하시오.
+- SDN(Software-Defined Networking)과 NFV(Network Functions Virtualization)의 개념과 차이를 설명하시오.
+- SDN 컨트롤러의 역할과 OpenFlow 프로토콜의 개념을 설명하시오.
+- 클라우드 네트워크에서 VPC(Virtual Private Cloud)의 개념과 구성 요소를 설명하시오.
+- AWS, Azure, GCP에서 제공하는 네트워크 서비스(VPC, Load Balancer, Firewall 등)의 차이를 설명하시오.
+- 클라우드 환경에서 네트워크 트래픽 최적화를 위한 주요 기법(Anycast, CDN, GSLB 등)을 설명하시오.
+- 하이브리드 클라우드(Hybrid Cloud) 환경에서 네트워크 연결 방식(Direct Connect, VPN Gateway 등)을 설명하시오.
+- 클라우드 기반 보안 모델(Shared Responsibility Model)의 개념과 주요 내용(AWS, Azure 기준)을 설명하시오.
+- Kubernetes에서 서비스 네트워킹(Pod-to-Pod, Pod-to-Service, Ingress 등)의 개념을 설명하시오.
+- 대규모 네트워크 설계 시 고려해야 할 요소(Scalability, Redundancy, Load Balancing 등)를 설명하시오.
+- 기업 네트워크 설계에서 Access, Distribution, Core 계층의 개념과 역할을 설명하시오.
+- 네트워크에서 High Availability(HA) 설계 기법(Active-Active, Active-Passive)의 차이를 설명하시오.
+- BGP(Border Gateway Protocol)에서 Route Aggregation과 Route Reflector의 개념을 설명하시오.
+- 네트워크에서 MTU(Maximum Transmission Unit)와 Fragmentation이 성능에 미치는 영향을 설명하시오.
+- IPv6 트랜지션 기술(Dual Stack, 6to4, NAT64)의 개념과 차이를 설명하시오.
+- MPLS-VPN과 인터넷 기반 VPN의 차이를 설명하시오.
+- VoIP(Voice over IP) 네트워크 설계 시 고려해야 할 QoS 정책을 설명하시오.
+- 네트워크 캐싱 기술(Web Caching, Transparent Proxy, Reverse Proxy)의 개념과 차이를 설명하시오.
+- 네트워크 성능 최적화를 위한 TCP Fast Open, QUIC, Multipath TCP 등의 최신 기술을 설명하시오.
+- 네트워크에서 Zero Trust 보안 모델의 개념과 기존 보안 모델과의 차이를 설명하시오.
+- 보안 게이트웨이(Security Gateway)의 개념과 UTM(Unified Threat Management) 장비의 역할을 설명하시오.
+- 방화벽(Firewall)에서 DPI(Deep Packet Inspection)와 SPI(Stateful Packet Inspection)의 차이를 설명하시오.
+- 네트워크에서 사용하는 VPN의 주요 보안 프로토콜(IPSec, SSL/TLS, WireGuard 등)의 차이를 설명하시오.
+- 네트워크에서 DNSSEC(Domain Name System Security Extensions)의 개념과 활용 방안을 설명하시오.
+- 네트워크에서 사이버 공격 유형(DoS, DDoS, Man-in-the-Middle, Ransomware)의 개념과 방어 방법을 설명하시오.
+- 기업 네트워크에서 SIEM(Security Information and Event Management)의 개념과 주요 기능을 설명하시오.
+- IoT 네트워크에서 발생할 수 있는 보안 위협과 대응 방안을 설명하시오.
+- 블록체인(Blockchain) 기반 네트워크 보안 기술의 개념과 주요 활용 사례를 설명하시오.
+- 네트워크 보안에서 AI 기반 위협 탐지(Anomaly Detection)의 개념과 주요 기법을 설명하시오.
+- 5G 네트워크의 개념과 기존 4G LTE와의 차이를 설명하시오.
+- 5G 네트워크에서 사용되는 주요 기술(Massive MIMO, Beamforming, Network Slicing 등)을 설명하시오.
+- 5G SA(Standalone)와 NSA(Non-Standalone)의 차이를 설명하시오.
+- 6G 네트워크의 개념과 5G 대비 주요 특징을 설명하시오.
+- 네트워크에서 Low Latency(초저지연) 통신 기술과 URLLC(Ultra-Reliable Low Latency Communications)의 개념을 설명하시오.
+- B5G(Beyond 5G) 기술과 향후 네트워크 발전 방향을 설명하시오.
+- 5G MEC(Multi-access Edge Computing)의 개념과 주요 활용 사례를 설명하시오.
+- 차세대 이동통신에서 위성 인터넷(Starlink, OneWeb 등)의 개념과 기존 네트워크와의 차이를 설명하시오.
+- AI 기반 네트워크 자동화(Autonomous Networking)의 개념과 주요 사례를 설명하시오.
+- 미래형 네트워크에서 양자 인터넷(Quantum Internet)의 개념과 주요 원리를 설명하시오.
+- 네트워크에서 발생하는 주요 장애 유형(Hardware Failure, Configuration Error, Congestion 등)을 설명하시오.
+- 네트워크 장애 분석을 위한 주요 트러블슈팅(Troubleshooting) 기법을 설명하시오.
+- 네트워크 패킷 분석(Packet Analysis)의 개념과 주요 도구(Wireshark, Tcpdump 등)의 활용 방법을 설명하시오.
+- TCP 3-Way Handshake와 TCP Connection Termination의 개념을 설명하시오.
+- 네트워크에서 ICMP 프로토콜의 개념과 활용 방법(Ping, Traceroute 등)을 설명하시오.
+- DHCP의 개념과 DHCP Snooping을 이용한 보안 강화 방법을 설명하시오.
+- BGP Hijacking 공격의 개념과 방어 방법을 설명하시오.
+- 네트워크에서 패킷 손실(Packet Loss)의 원인과 해결 방법을 설명하시오.
+- NAT(Network Address Translation)와 PAT(Port Address Translation)의 차이를 설명하시오.
+- 엔터프라이즈 네트워크에서 Change Management의 개념과 주요 프로세스를 설명하시오.
+- AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
+- 차세대 무선 네트워크에서 Open RAN(Open Radio Access Network)의 개념과 주요 특징을 설명하시오.
+- 양자 네트워크(Quantum Network)와 기존 네트워크의 차이를 설명하시오.
+- 네트워크에서 블록체인 기반 보안 기술의 개념과 활용 사례를 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅의 차이를 설명하시오.
+- 자율 네트워크(Self-Driving Network)의 개념과 AI와의 관계를 설명하시오.
+- 6G에서 활용될 테라헤르츠(THz) 주파수 대역의 개념과 주요 기술을 설명하시오.
+- SD-WAN(Software-Defined WAN)과 기존 MPLS 네트워크의 차이를 설명하시오.
+- 메타버스(Metaverse)와 차세대 네트워크 인프라의 관계를 설명하시오.
+- 미래 네트워크에서 네트워크 디지털 트윈(Network Digital Twin)의 개념과 활용 사례를 설명하시오.
+- 네트워크 트러블슈팅(Network Troubleshooting)의 개념과 주요 기법을 설명하시오.
+- Ping과 Traceroute를 이용한 네트워크 문제 진단 방법을 설명하시오.
+- 패킷 캡처(Packet Capture) 도구(Wireshark, Tcpdump 등)를 이용한 네트워크 분석 방법을 설명하시오.
+- 네트워크에서 발생하는 Loop 문제의 개념과 해결 방법을 설명하시오.
+- 네트워크에서 발생하는 IP 주소 충돌(Address Conflict)의 원인과 해결 방법을 설명하시오.
+- 네트워크에서 발생하는 MTU(Minimum Transmission Unit) 관련 문제의 개념과 해결 방법을 설명하시오.
+- TCP Retransmission(재전송) 문제의 개념과 주요 원인 및 해결 방법을 설명하시오.
+- BGP(Border Gateway Protocol)에서 발생할 수 있는 경로 루프(Route Loop) 문제와 해결 방법을 설명하시오.
+- 네트워크에서 브로드캐스트 스톰(Broadcast Storm)이 발생하는 원인과 해결 방법을 설명하시오.
+- Wi-Fi 네트워크에서 전파 간섭(Interference)이 발생하는 원인과 해결 방법을 설명하시오.
+- 네트워크에서 트래픽 엔지니어링(Traffic Engineering)의 개념과 필요성을 설명하시오.
+- QoS(Quality of Service)의 개념과 주요 트래픽 우선순위 정책을 설명하시오.
+- 네트워크에서 트래픽 쉐이핑(Traffic Shaping)과 트래픽 폴리싱(Traffic Policing)의 차이를 설명하시오.
+- MPLS(Multiprotocol Label Switching) 기반 트래픽 엔지니어링의 개념과 주요 기술을 설명하시오.
+- TCP Congestion Control의 개념과 주요 알고리즘(Reno, Cubic, BBR 등)을 설명하시오.
+- Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 차이를 설명하시오.
+- 네트워크에서 패킷 큐잉(Packet Queuing) 기법(FIFO, WFQ, CBWFQ, LLQ 등)의 개념을 설명하시오.
+- 로드 밸런싱(Load Balancing)에서 L4, L7 방식의 차이를 설명하시오.
+- 인터넷 트래픽을 최적화하는 캐싱 기술(Web Caching, Proxy Caching, Transparent Caching)의 개념을 설명하시오.
+- 네트워크에서 Jumbo Frame(9000 MTU) 사용의 개념과 장단점을 설명하시오.
+- 엔터프라이즈 네트워크(Enterprise Network)의 개념과 주요 구성 요소를 설명하시오.
+- 네트워크 설계에서 계층형 모델(Hierarchical Network Model)의 개념과 Access, Distribution, Core 계층의 역할을 설명하시오.
+- WAN(Wide Area Network)과 LAN(Local Area Network)의 차이를 설명하시오.
+- MPLS VPN과 SD-WAN의 차이를 설명하시오.
+- WAN 연결 기술(Frame Relay, ATM, MPLS, SD-WAN)의 개념과 차이를 설명하시오.
+- 엔터프라이즈 네트워크에서 고가용성(High Availability) 보장을 위한 설계 방법을 설명하시오.
+- 데이터센터 네트워크에서 Spine-Leaf 아키텍처의 개념과 기존 3계층 구조와의 차이를 설명하시오.
+- BGP(Border Gateway Protocol)에서 Multi-Homing과 Single-Homing의 개념과 차이를 설명하시오.
+- 데이터센터 네트워크에서 Overlay Network와 Underlay Network의 차이를 설명하시오.
+- 대규모 네트워크에서 VXLAN과 VLAN의 차이를 설명하시오.
+- IoT 네트워크의 개념과 기존 네트워크와의 차이를 설명하시오.
+- LPWAN(Low-Power Wide-Area Network)의 개념과 주요 기술(LoRa, NB-IoT, Sigfox 등)의 차이를 설명하시오.
+- IEEE 802.15.4 기반 무선 프로토콜(Zigbee, Thread, 6LoWPAN)의 개념과 차이를 설명하시오.
+- Wi-Fi HaLow(IEEE 802.11ah)의 개념과 기존 Wi-Fi와의 차이를 설명하시오.
+- IoT 네트워크에서 CoAP(Constrained Application Protocol)과 MQTT의 차이를 설명하시오.
+- IoT 환경에서 사용되는 Edge Computing의 개념과 주요 활용 사례를 설명하시오.
+- 스마트 그리드(Smart Grid) 네트워크의 개념과 주요 기술을 설명하시오.
+- 스마트 시티(Smart City)에서 IoT 네트워크의 역할과 주요 기술을 설명하시오.
+- IoT 보안(Security)에서 발생할 수 있는 주요 위협과 해결 방안을 설명하시오.
+- 차세대 IoT 네트워크에서 AIoT(AI + IoT)의 개념과 활용 사례를 설명하시오.
+- 6G 네트워크에서 테라헤르츠(THz) 대역의 개념과 활용 방안을 설명하시오.
+- 네트워크에서 FSO(Free-Space Optics)의 개념과 기존 광섬유 네트워크와의 차이를 설명하시오.
+- 양자 네트워크(Quantum Network)에서 QKD(Quantum Key Distribution)의 개념과 기존 암호화 방식과의 차이를 설명하시오.
+- 네트워크에서 Open RAN(Open Radio Access Network)의 개념과 기존 폐쇄형 RAN과의 차이를 설명하시오.
+- AI 기반 네트워크 자동화(AIOps)의 개념과 주요 활용 사례를 설명하시오.
+- 블록체인(Blockchain) 기반 네트워크 보안 기술과 주요 활용 사례를 설명하시오.
+- 디지털 트윈(Digital Twin) 기술이 네트워크 관리에서 활용되는 방식을 설명하시오.
+- Starlink, OneWeb과 같은 위성 인터넷 네트워크의 개념과 기존 지상 네트워크와의 차이를 설명하시오.
+- B5G(Beyond 5G) 네트워크의 개념과 주요 특징을 설명하시오.
+- 미래 네트워크에서 Intent-Based Networking(IBN)의 개념과 주요 활용 사례를 설명하시오.
+- TCP/IP 프로토콜 스택에서 데이터 캡슐화(Encapsulation)와 디캡슐화(Decapsulation) 과정을 설명하시오.
+- ICMP(Internet Control Message Protocol)의 개념과 주요 메시지 유형(Echo Request, Destination Unreachable 등)을 설명하시오.
+- ARP(Address Resolution Protocol)와 RARP(Reverse ARP)의 개념과 차이를 설명하시오.
+- DHCP의 개념과 IP 주소 할당 방식(Static, Dynamic, Automatic)을 설명하시오.
+- DNS(Domain Name System)에서 사용하는 주요 레코드 유형(A, AAAA, CNAME, MX, PTR 등)의 차이를 설명하시오.
+- HTTP/1.1, HTTP/2, HTTP/3의 차이를 설명하시오.
+- TLS(Transport Layer Security) 1.2와 TLS 1.3의 차이를 설명하시오.
+- QUIC(Quick UDP Internet Connections) 프로토콜의 개념과 기존 TCP와의 차이를 설명하시오.
+- IPv4의 클래스 기반 주소(Class A, B, C, D, E)의 개념과 활용 사례를 설명하시오.
+- IPv6에서 Stateless Address Autoconfiguration(SLAAC)의 개념과 주요 원리를 설명하시오.
+- TCP에서 흐름 제어(Flow Control)와 혼잡 제어(Congestion Control)의 개념과 차이를 설명하시오.
+- TCP의 슬라이딩 윈도우(Sliding Window) 기법과 윈도우 크기 조정의 개념을 설명하시오.
+- TCP Fast Open의 개념과 기존 3-way handshake와의 차이를 설명하시오.
+- Multipath TCP(MPTCP)의 개념과 기존 TCP와의 차이를 설명하시오.
+- 네트워크에서 ECN(Explicit Congestion Notification)의 개념과 TCP와의 연관성을 설명하시오.
+- 네트워크에서 NAT(Network Address Translation)의 개념과 유형(Static NAT, Dynamic NAT, PAT)을 설명하시오.
+- Wi-Fi 네트워크에서 사용되는 주파수 대역(2.4GHz, 5GHz, 6GHz)과 성능 차이를 설명하시오.
+- Wi-Fi 6(802.11ax)와 Wi-Fi 7의 차이점을 설명하시오.
+- LACP(Link Aggregation Control Protocol)의 개념과 네트워크 성능 향상 방법을 설명하시오.
+- 네트워크에서 패킷 손실(Packet Loss)이 발생하는 주요 원인과 해결 방법을 설명하시오.
+- 데이터센터 네트워크에서 EVPN(Extensible Virtual Private Network)의 개념과 활용 사례를 설명하시오.
+- VXLAN과 NVGRE(Network Virtualization using Generic Routing Encapsulation)의 차이를 설명하시오.
+- 클라우드 네트워크에서 SDN(Software-Defined Networking)의 개념과 기존 네트워크와의 차이를 설명하시오.
+- 클라우드 환경에서 네트워크 보안을 위한 주요 기법(VPC, Security Group, NACL 등)을 설명하시오.
+- SD-WAN(Software-Defined WAN)의 개념과 기존 MPLS 네트워크와의 차이를 설명하시오.
+- 클라우드 기반 로드 밸런싱(Cloud Load Balancer)의 개념과 주요 유형(L4, L7 Load Balancing)을 설명하시오.
+- 클라우드 네트워크에서 DDoS 방어 기법(AWS Shield, Google Cloud Armor 등)을 설명하시오.
+- 클라우드 환경에서 네트워크 자동화(Network Automation) 도구(Terraform, Ansible, Netmiko 등)를 설명하시오.
+- Kubernetes 네트워크 모델에서 CNI(Container Network Interface)의 개념과 주요 플러그인(Calico, Flannel 등)의 차이를 설명하시오.
+- 클라우드 네트워크에서 Anycast의 개념과 기존 Unicast, Multicast와의 차이를 설명하시오.
+- 6G 네트워크에서 AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
+- 네트워크에서 사용되는 머신러닝 기반 이상 탐지(Anomaly Detection)의 개념과 주요 활용 사례를 설명하시오.
+- 자율 네트워크(Self-Driving Network)의 개념과 주요 활용 사례를 설명하시오.
+- Intent-Based Networking(IBN)의 개념과 기존 네트워크 운영 방식과의 차이를 설명하시오.
+- 차세대 네트워크에서 B5G(Beyond 5G)의 개념과 주요 기술을 설명하시오.
+- AI와 네트워크 보안이 결합된 SOAR(Security Orchestration, Automation, and Response)의 개념과 역할을 설명하시오.
+- 네트워크에서 디지털 트윈(Digital Twin) 기술의 개념과 주요 활용 사례를 설명하시오.
+- 양자 네트워크(Quantum Network)와 기존 네트워크의 차이를 설명하시오.
+- 위성 인터넷(Starlink, OneWeb)과 기존 지상 네트워크의 차이를 설명하시오.
+- 메타버스(Metaverse)와 차세대 네트워크 인프라의 관계를 설명하시오.
+- 네트워크 자동화(Network Automation)의 개념과 필요성을 설명하시오.
+- Terraform과 Ansible을 이용한 네트워크 자동화의 개념과 주요 활용 사례를 설명하시오.
+- Zero Touch Provisioning(ZTP)의 개념과 네트워크 장비 자동 설정에서의 활용 방안을 설명하시오.
+- 네트워크에서 AI 기반 AIOps(Artificial Intelligence for IT Operations)의 개념과 주요 활용 사례를 설명하시오.
+- SDN과 네트워크 자동화(Network Automation)의 관계를 설명하시오.
+- 네트워크 장비 운영에서 API 기반 관리와 CLI 기반 관리의 차이를 설명하시오.
+- 네트워크 모니터링에서 SNMP(Simple Network Management Protocol)와 Telemetry의 차이를 설명하시오.
+- 네트워크에서 BGP Flapping 문제의 개념과 해결 방법을 설명하시오.
+- DNS에서 발생할 수 있는 캐시 포이즈닝(Cache Poisoning) 공격의 개념과 방어 방법을 설명하시오.
+- 기업 네트워크에서 네트워크 접근 제어(NAC, Network Access Control)의 개념과 주요 보안 정책을 설명하시오.
