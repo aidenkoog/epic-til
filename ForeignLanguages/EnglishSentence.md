@@ -7,7 +7,9 @@
 ### English Sentences
 
 - Spending time in the country is good for relieving stress.
+    - be good for
 - I prefer eating out to spending a lot of time cooking at home.
+    - prefer A to B
 - It is easy to buy my groceries at a large supermarket.
 - Many people now do their banking online.
 - I check my e-mail about four times every day.

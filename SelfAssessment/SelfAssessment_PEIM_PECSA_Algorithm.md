@@ -4,12 +4,79 @@ Organized expected questions & answers
 
 ## Algorithm
 
-- 알고리즘이란 무엇인가? 정의와 특징을 설명하시오.
-- 알고리즘의 성능을 평가하는 기준은 무엇인가?
-- 시간 복잡도(Time Complexity)와 공간 복잡도(Space Complexity)의 차이점을 설명하시오.
-- Big-O 표기법이란 무엇인가? 주요 Big-O 표기법 예제를 설명하시오.
-- Best case, Worst case, Average case의 개념과 차이점을 설명하시오.
-- 시간 복잡도가 O(n)인 알고리즘과 O(n²)인 알고리즘의 차이를 실제 사례와 함께 설명하시오.
+- 알고리즘 정의와 특징을 설명
+    - 정의: 알고리즘(Algorithm)은 주어진 문제를 해결하기 위한 일련의 절차나 규칙의 집합
+    - 특징
+        - 명확성 (Definiteness): 각 단계는 정확하고 모호함이 없어야 한다
+        - 입력 (Input): 0개 이상의 입력이 존재한다
+        - 출력 (Output): 최소한 1개 이상의 결과(출력)가 있어야 한다
+        - 유한성 (Finiteness): 유한한 단계 내에 종료해야 한다.
+        - 효율성 (Effectiveness): 모든 연산이 기계적으로 수행 가능해야 한다.
+
+- 알고리즘의 성능을 평가하는 기준
+    - 시간 복잡도(Time Complexity)
+        - 알고리즘이 수행하는 연산의 개수를 측정하여 입력 크기에 따른 실행 시간 증가율을 평가한다.
+        - 일반적으로 Big-O 표기법을 사용해 표현한다.
+    - 공간 복잡도(Space Complexity)
+        - 알고리즘이 실행될 때 필요한 메모리 사용량을 평가한다.
+        - 추가적인 데이터 구조(배열, 리스트, 스택 등)가 필요한 경우 공간 복잡도가 증가할 수 있다.
+
+- 시간 복잡도(Time Complexity)와 공간 복잡도(Space Complexity)의 차이점 설명
+    - 시간 복잡도는 알고리즘이 실행되는 시간의 효율성을 평가하는 개념
+        - 입력 크기(n)가 증가할 때 연산 횟수가 어떻게 변하는지 분석한다.
+    - 공간 복잡도는 알고리즘이 실행되는 동안 사용하는 메모리 공간을 분석하는 개념이다.
+    - 예시
+        - 선형 탐색(Linear Search)
+            - 시간복잡도: O(n), 공간복잡도: O(1)
+        - 이진 탐색(Binary Search)
+            - 시간복잡도: O(logn), 공간복잡도: O(1)
+        - 병합 정렬(Merge Sort)
+            - 시간복잡도: O(nlogn), 공간복잡도: O(n)
+        - 퀵 정렬(Quick Sort)
+            - 시간복잡도: O(nlogn)(평균), 공간복잡도: O(logn)
+
+- Big-O 표기법과 주요 Big-O 표기법 예제 설명
+    - Big-O 표기법: 알고리즘의 시간 복잡도를 표현하는 수학적 표기법으로, 입력 크기(n)에 따른 실행 시간 증가율을 나타낸다.
+    - 주요 Big-O 표기법 예제
+        - O(1) / 상수 시간 / 배열 인덱스 접근
+        - O(log n) / 로그 시간 / 이진 탐색
+        - O(n) / 선형 시간 / 선형 탐색
+        - O(n log n) / 로그 선형 시간 / 병합 정렬, 퀵 정렬(평균)
+        - O(n²) / 이차 시간 / 버블 정렬, 삽입 정렬
+        - O(2ⁿ) / 지수 시간 / 피보나치 수열(재귀)
+
+- Best case, Worst case, Average case의 개념과 차이점을 설명
+    - Best Case
+        - 가장 이상적인 상황에서 알고리즘이 실행되는 경우
+        - 예: **이진 탐색(Binary Search)**에서 찾으려는 값이 첫 번째 요소에 있는 경우 → O(1)
+    - Worst Case
+        - 가장 나쁜 상황에서 알고리즘이 실행되는 경우
+        - 예: **선형 탐색(Linear Search)**에서 찾는 값이 배열의 마지막 요소에 있는 경우 → O(n)
+    - Average Case
+        - 모든 가능한 입력에 대한 평균적인 수행 시간
+        - 예: **퀵 정렬(Quick Sort)**에서 랜덤한 피벗 선택 → O(n log n)
+
+- 시간 복잡도가 O(n)인 알고리즘과 O(n²)인 알고리즘의 차이를 실제 사례와 함께 설명
+    - O(n) 알고리즘 예시 (선형 탐색)
+        ```python
+        def linear_search(arr, target):
+        for i in range(len(arr)):
+            if arr[i] == target:
+                return i
+        return -1
+        ```
+    - O(n²) 알고리즘 예시 (버블 정렬)
+        ```python
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n):
+                for j in range(0, n - i - 1):
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+        ```
+    - 차이점
+        - O(n) 알고리즘은 데이터 크기가 증가해도 비교적 빠르게 실행되지만, O(n²) 알고리즘은 입력 크기가 커질수록 실행 속도가 매우 느려진다.
+        
 - 분할 정복(Divide and Conquer) 기법이란 무엇인가? 주요 예제를 설명하시오.
 - 동적 계획법(Dynamic Programming)이란 무엇인가? 대표적인 예제를 설명하시오.
 - 탐욕 알고리즘(Greedy Algorithm)이란 무엇인가? 장점과 단점을 설명하시오.
