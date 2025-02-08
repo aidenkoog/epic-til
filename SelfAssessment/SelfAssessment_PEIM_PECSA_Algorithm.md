@@ -2,6 +2,8 @@
 
 Organized expected questions & answers
 
+## Algorithm
+
 - 알고리즘이란 무엇인가? 정의와 특징을 설명하시오.
 - 알고리즘의 성능을 평가하는 기준은 무엇인가?
 - 시간 복잡도(Time Complexity)와 공간 복잡도(Space Complexity)의 차이점을 설명하시오.

@@ -2,6 +2,8 @@
 
 Organized expected questions & answers
 
+## Latest Technology
+
 - 인공지능(AI)의 개념과 주요 기술(머신러닝, 딥러닝, 강화학습 등)을 설명하시오.
 - 지도학습(Supervised Learning)과 비지도학습(Unsupervised Learning)의 차이를 설명하시오.
 - 강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)을 설명하시오.

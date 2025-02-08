@@ -2,6 +2,8 @@
 
 Organized expected questions & answers
 
+## Operating System
+
 - 운영체제(Operating System)의 정의와 역할을 설명하시오.
 - 운영체제의 주요 기능(Process Management, Memory Management, File System, I/O Management)을 설명하시오.
 - 단일 사용자(single-user) 운영체제와 다중 사용자(multi-user) 운영체제의 차이를 설명하시오.
