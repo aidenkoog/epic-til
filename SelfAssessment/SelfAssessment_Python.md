@@ -64,6 +64,11 @@ Organized expected questions & answers
       - 속도가 중요한 경우 (Tuple이 List보다 빠름)
       - Dictionary의 키(key)로 사용해야 할 때 (tuple은 immutable이므로 가능, list는 불가능)
 
+
+- Python에서 __name__ == "__main__"의 의미는?
+  - if __name__ == "__main__":는 현재 실행 중인 스크립트가 직접 실행된 경우에만 특정 코드 블록을 실행하도록 하는 기능
+  - 자세한 정리 더 필요
+
 - Python에서 Decorator의 역할은?
 - Python의 Pandas와 NumPy의 차이점은?
 - Python에서 Lambda 함수는 어떻게 동작하는가?
@@ -92,7 +97,6 @@ Organized expected questions & answers
 - Python에서 __slots__을 활용하면 얻을 수 있는 장점은?
 - Python에서 global과 nonlocal 키워드의 차이점은?
 - Python의 dir()과 help() 함수의 차이점은?
-- Python에서 __name__ == "__main__"의 의미는?
 - Python에서 try-except-finally 블록의 동작 방식은?
 - Python에서 with 문과 context manager의 역할은?
 - Python에서 staticmethod, classmethod, instance method의 차이점은?
