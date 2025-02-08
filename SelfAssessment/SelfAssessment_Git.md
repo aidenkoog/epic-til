@@ -36,7 +36,49 @@ Organized expected questions & answers
     - git 명령어로 사용	/ push, pull 등을 통해 원격 동기화
     - 오픈소스 (GitLab, Bitbucket 등과 유사) / GitHub는 Git을 활용하는 서비스
 
-- git rebase 에 대한 설명
+- Git rebase 에 대한 설명
+  - Git rebase 개요
+    - 현재 브랜치를 다른 브랜치의 최신 상태로 업데이트하면서, 커밋 히스토리를 정리하는 Git 명령어
+    - 즉, 브랜치를 최신 상태로 유지하면서도 깔끔한 커밋 히스토리를 만들 수 있음
+  - Git rebase 동작 내용
+    - Rebase를 사용하면 깔끔한 히스토리를 유지할 수 있음
+    - feature-branch 가 main 브랜치에서 분기된 상태에서 최신 상태로 유지하려면 Rebase 를 사용할 수 있음
+    - Rebase 후, feature-branch의 커밋이 최신 main 위로 다시 정렬
+    - 이전 커밋(D, E)이 D’, E’로 새롭게 변경됨 (새로운 커밋 ID 생성됨)
+  - 사용법
+    - git checkout feature-branch (feature 브랜치로 이동)
+    - git rebase main (main 브랜치의 최신 변경사항을 적용)
+    - feature-branch의 변경사항이 main 위에서 새롭게 적용 (해시값 변경)
+  - 충돌 시 해결
+    - 충돌 부분 수정
+    - git add <파일명> (변경된 파일을 스테이징)
+    - git rebase --continue (Rebase 계속 진행)
+  - 충돌 시 취소
+    - git rebase --abort (충돌 발생 시 취소)
+  - Interactive Rebase (git rebase -i) 설명
+    - 개요
+      - 커밋을 수정, 삭제, 합치기(Squash)하고 싶을 때 사용
+    - 명령어 예
+      - git rebase -i HEAD~3 (최근 3개의 커밋을 수정)
+    - 옵션 설명
+      - pick: 커밋을 유지
+      - reword: 커밋 메시지만 변경
+      - edit: 커밋 내용 수정
+      - squash: 이전 커밋과 합치기
+      - drop: 커밋 삭제
+    - Git Rebase 사용 시 주의할 점
+      - 협업 브랜치(main, develop)에서는 rebase를 피해야 함
+      - rebase는 커밋의 SHA-1 해시를 변경하므로, 이미 공유된 브랜치에서 사용하면 안 됨
+      - 공동 작업 중인 브랜치에서는 merge를 사용하는 것이 안전함
+      - Rebase 후에는 git push --force가 필요할 수 있으므로 주의
+      - 공유된 브랜치에서 Rebase를 잘못 사용하면 다른 팀원의 작업이 꼬일 수 있음
+  - 정리 (Merge / Rebase)
+    - 커밋 히스토리: 복잡해질 수 있음 / 깔끔하게 유지됨
+    - 새로운 Merge 커밋 생성: O / X
+    - 공유된 브랜치 사용 가능	: O / X (비추천, 커밋아이디 변경)
+    - Rebase 후 푸시 방법: git push	/ git push --force 필요
+    - 사용 예시: 협업 프로젝트에서 브랜치 병합	/ 개인 브랜치에서 커밋 정리
+
 - Git과 SVN의 차이점은?
 - Git에서 commit과 push의 차이점은?
 - Git에서 clone과 pull의 차이점은?
