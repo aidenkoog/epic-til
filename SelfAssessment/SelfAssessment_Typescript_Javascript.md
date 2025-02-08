@@ -4,7 +4,55 @@ Organized expected questions & answers
 
 ## Javascript, Typescript
 
-- 브라우저에서 JavaScript 코드가 실행되는 과정을 설명할 수 있는가?
+- 브라우저에서 JavaScript 코드가 실행되는 과정 설명
+  - 브라우저의 주요 구성 요소
+    - JavaScript가 실행되는 환경은 브라우저
+    - 주요 구성 요소
+	  - HTML 파서: HTML을 읽고 DOM(Document Object Model) 생성
+	  - CSS 파서: CSS를 읽고 스타일 규칙을 생성
+	  - JavaScript 엔진: JavaScript 코드 실행 (예: Chrome의 V8, Firefox의 SpiderMonkey)
+	  - 렌더링 엔진: 화면을 그리는 역할 (예: Blink, WebKit)
+	  - 네트워크 모듈: 서버에서 리소스를 다운로드
+    - 브라우저의 JavaScript 실행 과정
+      - HTML 문서 로드 및 파싱
+	    - 브라우저는 먼저 HTML 문서를 다운로드하고, 위에서부터 차례로 분석(파싱)하여 DOM을 생성
+	    - HTML 내 <script> 태그를 만나면 JavaScript 코드 실행을 위해 파싱을 멈춤(동기 실행)
+        - "<script src="app.js">" 처럼 외부 파일을 불러오면 네트워크 요청이 발생하며, 다운로드가 완료될 때까지 HTML 파싱이 멈출 수 있음.
+	      - 해결 방법: <script async> 또는 <script defer> 속성을 사용.
+	        - async: HTML 파싱과 병렬로 다운로드, 다운로드 완료 즉시 실행.
+	        - defer: HTML 파싱이 끝난 후 실행
+      - JavaScript 엔진이 코드 실행
+        - 브라우저는 JavaScript 엔진을 사용하여 코드를 실행
+        - 대표적인 JavaScript 엔진
+	      - Chrome: V8 엔진
+	      - Firefox: SpiderMonkey
+	      - Edge: Chakra
+	      - Safari: JavaScriptCore
+        - JavaScript 엔진의 실행 과정
+          - 파싱 (Parsing)
+	        - JavaScript 코드를 토큰(token) 단위로 분석하여 AST(Abstract Syntax Tree, 추상 구문 트리) 생성
+          - 컴파일 (Compilation, JIT Compilation)
+	        - JavaScript 엔진은 인터프리터 + JIT(Just-In-Time) 컴파일러를 사용
+              - JIT: 실행과정에서 컴파일하기 위해, 실행하는 시점에서 필요한 부분을 컴파일하는 방식
+	        - 코드를 한 줄씩 실행하는 것이 아니라, 최적화된 바이트코드로 변환하여 실행 속도 개선
+          - 실행 (Execution)
+	        - JavaScript 코드는 콜 스택(Call Stack)과 힙(Heap) 메모리에서 실행
+      - 실행 컨텍스트 생성 및 콜 스택 관리
+        - JavaScript 엔진이 코드를 실행할 때 실행 컨텍스트(Execution Context) 를 생성하고 콜 스택(Call Stack) 에 저장하면서 실행
+          - 콜 스택은 LIFO(Last In, First Out) 방식으로 동작
+        - 실행 컨텍스트
+          - 실행 컨텍스트에는 변수, 함수, this 객체 등이 포함
+        - 코드 실행 과정
+          - global execution context (전역 실행 컨텍스트) 생성
+          - xxx() 함수 실행 → 새로운 실행 컨텍스트 생성 → 콜 스택에 추가
+          - 내부 코드 실행 후 xxx() 컨텍스트가 제거
+      - 비동기 코드 실행 (이벤트 루프와 콜백 큐)
+        - JavaScript는 싱글 스레드(single-threaded) 기반
+        - 비동기 처리를 위해 이벤트 루프(Event Loop) 와 콜백 큐(Callback Queue) 를 사용
+      - DOM 업데이트 및 렌더링
+        - JavaScript 실행이 끝나면 브라우저는 렌더링 엔진을 통해 화면을 다시 그림 (Repaint & Reflow).
+	    - 비효율적인 DOM 조작이 많으면 성능 저하 발생
+        
 - 이벤트 루프(Event Loop)가 렌더링과 관련된 최적화 기법과 어떤 관계가 있는가?
 - JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
 - Immutable 데이터 패턴을 사용하면 어떤 이점이 있는가?
