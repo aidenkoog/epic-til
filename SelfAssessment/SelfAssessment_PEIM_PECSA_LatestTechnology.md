@@ -1,3 +1,284 @@
 # Expected Questions
 
 Organized expected questions & answers
+
+- 인공지능(AI)의 개념과 주요 기술(머신러닝, 딥러닝, 강화학습 등)을 설명하시오.
+- 지도학습(Supervised Learning)과 비지도학습(Unsupervised Learning)의 차이를 설명하시오.
+- 강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)을 설명하시오.
+- 신경망(Neural Network)의 개념과 CNN(Convolutional Neural Network)의 차이를 설명하시오.
+- Transformer 모델과 기존 RNN, LSTM 모델의 차이를 설명하시오.
+- 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)을 설명하시오.
+- AI의 윤리적 문제(AI Bias, Explainability, Privacy)를 설명하시오.
+- AutoML(Auto Machine Learning)의 개념과 주요 프레임워크(Google AutoML, H2O.ai 등)를 설명하시오.
+- AI 모델 경량화 기술(Knowledge Distillation, Pruning, Quantization)을 설명하시오.
+- AI의 Explainable AI(XAI) 기술과 신뢰성 확보 방안을 설명하시오.
+- 클라우드 컴퓨팅(Cloud Computing)의 개념과 주요 서비스 모델(IaaS, PaaS, SaaS)을 설명하시오.
+- 멀티 클라우드(Multi-Cloud)와 하이브리드 클라우드(Hybrid Cloud)의 차이를 설명하시오.
+- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅의 차이를 설명하시오.
+- 서버리스 컴퓨팅(Serverless Computing)의 개념과 주요 장점을 설명하시오.
+- Kubernetes의 개념과 컨테이너 오케스트레이션 역할을 설명하시오.
+- 클라우드 네이티브(Cloud Native)의 개념과 주요 기술을 설명하시오.
+- Function-as-a-Service(FaaS)의 개념과 활용 사례를 설명하시오.
+- 클라우드 보안(Cloud Security)의 개념과 주요 보안 위협을 설명하시오.
+- FinOps(Financial Operations)의 개념과 클라우드 비용 최적화 방법을 설명하시오.
+- 클라우드 기반 AI 모델 배포(MLOps)의 개념과 주요 전략을 설명하시오.
+- 블록체인의 개념과 주요 구성 요소(노드, 합의 알고리즘, 스마트 계약 등)를 설명하시오.
+- 퍼블릭 블록체인(Public Blockchain)과 프라이빗 블록체인(Private Blockchain)의 차이를 설명하시오.
+- 합의 알고리즘(Proof of Work, Proof of Stake, Delegated Proof of Stake 등)의 개념과 차이를 설명하시오.
+- 스마트 계약(Smart Contract)의 개념과 주요 활용 사례를 설명하시오.
+- 블록체인 기반 신원 관리(Decentralized Identity, DID)의 개념과 필요성을 설명하시오.
+- 블록체인의 확장성 문제(Scalability Trilemma)와 해결 방법을 설명하시오.
+- NFT(Non-Fungible Token)의 개념과 주요 활용 사례를 설명하시오.
+- Web3의 개념과 기존 Web2와의 차이를 설명하시오.
+- 블록체인 기반 금융 서비스(DeFi, Decentralized Finance)의 개념과 주요 사례를 설명하시오.
+- 블록체인의 보안 위협(51% 공격, Sybil Attack, Replay Attack 등)을 설명하시오.
+- 메타버스(Metaverse)의 개념과 주요 기술을 설명하시오.
+- 증강현실(AR)과 가상현실(VR)의 차이를 설명하시오.
+- 확장현실(XR)의 개념과 주요 활용 사례를 설명하시오.
+- 메타버스의 5가지 기술 요소(Connectivity, Digital Twin, Blockchain, AI, Cloud)를 설명하시오.
+- 디지털 트윈(Digital Twin)의 개념과 주요 활용 사례(스마트팩토리, 스마트시티 등)를 설명하시오.
+- 메타버스와 블록체인의 관계를 설명하시오.
+- 메타버스에서 경제 시스템(Virtual Economy)의 개념과 NFT와의 관계를 설명하시오.
+- 메타버스 보안 이슈(Privacy, Data Breach, Digital Identity)를 설명하시오.
+- 3D 공간 기반 협업 플랫폼의 개념과 주요 기술을 설명하시오.
+- 메타버스와 AI 기술의 융합 사례를 설명하시오.
+- 양자 컴퓨팅(Quantum Computing)의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
+- 큐비트(Qubit)의 개념과 기존 비트(Bit)와의 차이를 설명하시오.
+- 양자 얽힘(Quantum Entanglement)과 양자 중첩(Quantum Superposition)의 개념을 설명하시오.
+- 양자 게이트(Quantum Gate)와 기존 논리 게이트(Classical Gate)의 차이를 설명하시오.
+- 양자 알고리즘(Shor’s Algorithm, Grover’s Algorithm)의 개념과 기존 알고리즘과의 차이를 설명하시오.
+- NISQ(Noisy Intermediate-Scale Quantum)의 개념과 현재 양자 컴퓨팅의 한계를 설명하시오.
+- 양자 컴퓨팅의 보안 위협과 양자 내성 암호(Post-Quantum Cryptography)의 필요성을 설명하시오.
+- 초전도 기반 양자 컴퓨터와 이온 트랩 기반 양자 컴퓨터의 차이를 설명하시오.
+- 양자 네트워크(Quantum Network)와 기존 네트워크의 차이를 설명하시오.
+- 양자 인터넷(Quantum Internet)의 개념과 주요 기술을 설명하시오.
+- 6G 네트워크의 개념과 기존 5G와의 차이를 설명하시오.
+- 6G에서 사용할 테라헤르츠(THz) 주파수 대역의 개념과 활용 방안을 설명하시오.
+- 6G 네트워크에서 AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
+- 6G와 위성 인터넷(Starlink, OneWeb 등)의 관계를 설명하시오.
+- O-RAN(Open Radio Access Network)의 개념과 기존 폐쇄형 RAN과의 차이를 설명하시오.
+- 5G 네트워크에서 URLLC(Ultra-Reliable Low Latency Communications)의 개념과 주요 기술을 설명하시오.
+- 5G/6G 네트워크에서 Massive MIMO와 Beamforming 기술의 개념과 차이를 설명하시오.
+- B5G(Beyond 5G) 네트워크의 개념과 주요 특징을 설명하시오.
+- 네트워크에서 Intent-Based Networking(IBN)의 개념과 기존 네트워크 운영 방식과의 차이를 설명하시오.
+- 차세대 무선 네트워크에서 FSO(Free-Space Optics)의 개념과 기존 광섬유 네트워크와의 차이를 설명하시오.
+- 바이오인포매틱스(Bioinformatics)의 개념과 주요 응용 분야를 설명하시오.
+- 유전체 데이터 분석(Genomics Data Analysis)의 개념과 주요 활용 사례를 설명하시오.
+- 정밀의료(Precision Medicine)의 개념과 기존 의료 방식과의 차이를 설명하시오.
+- 헬스케어 IT에서 AI 기반 영상 진단 기술(CT, MRI 분석 등)의 개념을 설명하시오.
+- 웨어러블 헬스케어(Wearable Healthcare)의 개념과 주요 활용 사례를 설명하시오.
+- 원격 의료(Telemedicine)의 개념과 주요 기술을 설명하시오.
+- 전자의무기록(EMR, Electronic Medical Record)의 개념과 개인건강기록(PHR)과의 차이를 설명하시오.
+- 디지털 치료제(Digital Therapeutics)의 개념과 기존 의약품과의 차이를 설명하시오.
+- 의료 데이터의 보안 및 프라이버시 보호를 위한 주요 기술을 설명하시오.
+- 블록체인 기반 의료 데이터 관리의 개념과 주요 활용 사례를 설명하시오.
+- 차세대 반도체 기술(GAAFET, CFET, 3D-IC)의 개념과 기존 반도체와의 차이를 설명하시오.
+- 모어의 법칙(Moore’s Law)과 반도체 산업의 한계를 설명하시오.
+- 신소재 반도체(그래핀, 탄소 나노튜브)의 개념과 기존 실리콘 기반 반도체와의 차이를 설명하시오.
+- RISC-V 프로세서의 개념과 기존 x86, ARM 아키텍처와의 차이를 설명하시오.
+- 뉴로모픽 컴퓨팅(Neuromorphic Computing)의 개념과 기존 컴퓨터 아키텍처와의 차이를 설명하시오.
+- AI 가속기(Edge TPU, GPU, NPU, FPGA)의 개념과 차이를 설명하시오.
+- 칩렛(Chiplet) 기반 반도체 설계의 개념과 기존 SoC와의 차이를 설명하시오.
+- DPU(Data Processing Unit)의 개념과 기존 CPU, GPU와의 차이를 설명하시오.
+- HBM(High Bandwidth Memory)과 기존 DRAM의 차이를 설명하시오.
+- MRAM, ReRAM, PCM과 같은 차세대 메모리 기술의 개념과 차이를 설명하시오.
+- 제로 트러스트 보안(Zero Trust Security)의 개념과 기존 보안 모델과의 차이를 설명하시오.
+- SOAR(Security Orchestration, Automation, and Response)의 개념과 주요 활용 사례를 설명하시오.
+- XDR(Extended Detection and Response)의 개념과 기존 EDR(Endpoint Detection and Response)과의 차이를 설명하시오.
+- 동형암호(Homomorphic Encryption)의 개념과 주요 활용 사례를 설명하시오.
+- 양자 내성 암호(Post-Quantum Cryptography)의 개념과 필요성을 설명하시오.
+- Confidential Computing의 개념과 주요 활용 사례를 설명하시오.
+- 데이터 프라이버시 강화 기술(Privacy Enhancing Technologies, PETs)의 개념과 주요 기법을 설명하시오.
+- FIDO2(WebAuthn)의 개념과 기존 패스워드 기반 인증 방식과의 차이를 설명하시오.
+- 사이버 위협 인텔리전스(CTI, Cyber Threat Intelligence)의 개념과 활용 방법을 설명하시오.
+- GDPR(General Data Protection Regulation)의 주요 원칙과 IT 시스템에서의 구현 방안을 설명하시오.
+- 지속 가능한 IT(Sustainable IT)의 개념과 필요성을 설명하시오.
+- ESG(Environmental, Social, Governance) 경영에서 IT의 역할을 설명하시오.
+- 그린 컴퓨팅(Green Computing)의 개념과 주요 기술을 설명하시오.
+- 탄소중립 데이터센터(Carbon-Neutral Data Center)의 개념과 주요 기술을 설명하시오.
+- 에너지 효율적인 컴퓨팅(Energy-Efficient Computing) 기법을 설명하시오.
+- 클라우드 컴퓨팅에서 탄소 발자국(Carbon Footprint)을 줄이기 위한 전략을 설명하시오.
+- 지속 가능한 네트워크 인프라 구축을 위한 주요 기법을 설명하시오.
+- 블록체인 기반 탄소 배출권 거래 시스템의 개념과 주요 활용 사례를 설명하시오.
+- 친환경 반도체 기술(저전력 설계, 소재 혁신 등)의 개념과 주요 연구 동향을 설명하시오.
+- 전자 폐기물(e-Waste) 문제와 이를 해결하기 위한 IT 기술을 설명하시오.
+- 데이터 거버넌스(Data Governance)의 개념과 주요 구성 요소(정책, 품질, 보안 등)를 설명하시오.
+- 데이터 카탈로그(Data Catalog)의 개념과 데이터 관리에서의 역할을 설명하시오.
+- 데이터 리터러시(Data Literacy)의 개념과 기업에서의 필요성을 설명하시오.
+- 데이터 오너십(Data Ownership)과 데이터 스튜어드십(Data Stewardship)의 차이를 설명하시오.
+- 데이터 프라이버시 보호를 위한 데이터 익명화(Anonymization)와 가명화(Pseudonymization)의 차이를 설명하시오.
+- 데이터 경제(Data Economy)의 개념과 주요 비즈니스 모델을 설명하시오.
+- 데이터 마켓플레이스(Data Marketplace)의 개념과 주요 사례를 설명하시오.
+- 데이터 셰어링(Data Sharing)과 데이터 상호운용성(Interoperability)의 개념과 주요 기술을 설명하시오.
+- 데이터 품질(Data Quality) 관리의 개념과 주요 지표를 설명하시오.
+- FAIR 데이터 원칙(Findable, Accessible, Interoperable, Reusable)의 개념과 데이터 관리에서의 필요성을 설명하시오.
+- 로보틱스(Robotics)의 개념과 주요 응용 분야(산업용 로봇, 서비스 로봇 등)를 설명하시오.
+- 자율주행차(Autonomous Vehicle)의 개념과 주요 기술(LiDAR, Sensor Fusion, V2X 등)을 설명하시오.
+- SLAM(Simultaneous Localization and Mapping)의 개념과 주요 활용 사례를 설명하시오.
+- 로봇 프로세스 자동화(RPA, Robotic Process Automation)의 개념과 주요 활용 사례를 설명하시오.
+- 로보틱스에서 강화학습(Reinforcement Learning) 기반 제어 기술의 개념을 설명하시오.
+- 휴머노이드 로봇의 개념과 기존 산업용 로봇과의 차이를 설명하시오.
+- 드론(Drone) 기술의 개념과 주요 활용 사례(물류, 감시, 농업 등)를 설명하시오.
+- 협동 로봇(Cobot, Collaborative Robot)의 개념과 기존 산업용 로봇과의 차이를 설명하시오.
+- 로봇 윤리(Robot Ethics)의 개념과 주요 논점을 설명하시오.
+- 소프트 로봇(Soft Robotics)의 개념과 기존 하드 로봇과의 차이를 설명하시오.
+- RISC-V 프로세서의 개념과 기존 x86, ARM 아키텍처와의 차이를 설명하시오.
+- PIM(Processing In Memory)의 개념과 기존 CPU/GPU 기반 연산 방식과의 차이를 설명하시오.
+- DPU(Data Processing Unit)의 개념과 기존 CPU, GPU와의 차이를 설명하시오.
+- TPU(Tensor Processing Unit)의 개념과 AI 연산에서의 역할을 설명하시오.
+- 반도체 공정에서 GAAFET(Gate-All-Around FET)의 개념과 기존 FinFET과의 차이를 설명하시오.
+- 칩렛(Chiplet) 기반 반도체 설계의 개념과 기존 SoC(System-on-Chip)과의 차이를 설명하시오.
+- 뉴로모픽 컴퓨팅(Neuromorphic Computing)의 개념과 기존 컴퓨터 아키텍처와의 차이를 설명하시오.
+- 3D-IC(3D Integrated Circuit)의 개념과 기존 2D 반도체와의 차이를 설명하시오.
+- 양자 점(Quantum Dot) 기반 반도체의 개념과 기존 실리콘 반도체와의 차이를 설명하시오.
+- 탄소 나노튜브 반도체의 개념과 기존 실리콘 기반 반도체와의 차이를 설명하시오.
+- 스마트시티(Smart City)의 개념과 주요 구성 요소(IoT, AI, 빅데이터 등)를 설명하시오.
+- 디지털 트윈(Digital Twin)의 개념과 스마트시티에서의 활용 사례를 설명하시오.
+- 스마트시티에서 교통 최적화를 위한 AI 및 빅데이터 분석 기법을 설명하시오.
+- 스마트 에너지 관리 시스템(Smart Grid)의 개념과 기존 전력망과의 차이를 설명하시오.
+- 스마트시티에서 5G 및 엣지 컴퓨팅의 역할을 설명하시오.
+- 디지털 트윈을 활용한 산업 자동화(Smart Factory)의 개념과 주요 사례를 설명하시오.
+- 스마트 빌딩(Smart Building)에서 IoT 센서의 역할과 주요 활용 사례를 설명하시오.
+- 스마트시티에서 도시 데이터 플랫폼(Urban Data Platform)의 개념과 주요 활용 사례를 설명하시오.
+- 디지털 트윈과 AI 기반 시뮬레이션 기술의 관계를 설명하시오.
+- 스마트 헬스케어(Smart Healthcare)의 개념과 주요 활용 사례를 설명하시오.
+- 자율주행의 6단계(Level 0~5)와 각 단계의 특징을 설명하시오.
+- V2X(Vehicle-to-Everything) 통신의 개념과 주요 활용 사례를 설명하시오.
+- LiDAR, Radar, Camera 센서를 활용한 자율주행 인식 기술의 개념과 차이를 설명하시오.
+- 자율주행차에서 SLAM(Simultaneous Localization and Mapping)의 개념과 주요 알고리즘을 설명하시오.
+- 강화학습 기반 자율주행(AI Reinforcement Learning for Autonomous Driving)의 개념과 주요 활용 사례를 설명하시오.
+- 드론 택시(Drone Taxi) 및 도심 항공 모빌리티(UAM, Urban Air Mobility)의 개념과 주요 기술을 설명하시오.
+- 전기차(EV)와 수소차(Hydrogen Vehicle)의 차이를 설명하시오.
+- 자율주행차의 보안 위협과 이를 해결하기 위한 주요 기술을 설명하시오.
+- 모빌리티 플랫폼(Mobility as a Service, MaaS)의 개념과 주요 사례를 설명하시오.
+- 스마트 물류(Smart Logistics)의 개념과 AI 및 IoT 활용 사례를 설명하시오.
+- AI 기반 추천 시스템(Recommender System)의 개념과 주요 알고리즘(Collaborative Filtering, Content-Based Filtering 등)을 설명하시오.
+- 생성형 AI(Generative AI)의 개념과 주요 모델(GAN, Diffusion Models, GPT 등)을 설명하시오.
+- AI 기반 음성 합성(Text-to-Speech, TTS) 기술의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 이미지 생성(Image Synthesis) 기술의 개념과 주요 알고리즘을 설명하시오.
+- AI 모델 경량화(Knowledge Distillation, Pruning, Quantization)의 개념과 주요 기술을 설명하시오.
+- MLOps(Machine Learning Operations)의 개념과 AI 모델 운영의 중요성을 설명하시오.
+- AI 기반 코드 생성(GitHub Copilot, OpenAI Codex 등)의 개념과 기존 프로그래밍 방식과의 차이를 설명하시오.
+- AI 윤리(AI Ethics)와 AI 사용 시 발생할 수 있는 사회적 문제를 설명하시오.
+- AI 기반 이상 탐지(Anomaly Detection)의 개념과 주요 활용 사례(보안, 금융 등)를 설명하시오.
+- AI 기반 법률 자동화(Legal AI)의 개념과 주요 활용 사례를 설명하시오.
+- 위성 인터넷(Satellite Internet)의 개념과 주요 사례(Starlink, OneWeb 등)를 설명하시오.
+- 6G 네트워크에서 AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
+- 차세대 Wi-Fi 기술(Wi-Fi 6E, Wi-Fi 7)의 개념과 기존 Wi-Fi 5와의 차이를 설명하시오.
+- FSO(Free-Space Optics) 기반 광 무선 통신 기술의 개념과 활용 사례를 설명하시오.
+- 차세대 통신에서 홀로그래픽 무선 기술(Holographic Beamforming)의 개념과 활용 사례를 설명하시오.
+- 양자 암호 통신(Quantum Cryptography)의 개념과 기존 암호화 기술과의 차이를 설명하시오.
+- 6G 네트워크에서 테라헤르츠(THz) 대역 주파수의 개념과 주요 특징을 설명하시오.
+- 오픈랜(Open RAN)의 개념과 기존 폐쇄형 RAN과의 차이를 설명하시오.
+- B5G(Beyond 5G) 기술과 향후 네트워크 발전 방향을 설명하시오.
+- 차세대 네트워크에서 Intent-Based Networking(IBN)의 개념과 주요 활용 사례를 설명하시오.
+- 양자 컴퓨터에서 사용하는 큐비트(Qubit)의 개념과 기존 비트(Bit)와의 차이를 설명하시오.
+- 양자 얽힘(Quantum Entanglement)과 양자 중첩(Quantum Superposition)의 개념을 설명하시오.
+- 양자 게이트(Quantum Gate)와 기존 논리 게이트(Classical Logic Gate)의 차이를 설명하시오.
+- Shor 알고리즘(Shor’s Algorithm)의 개념과 기존 암호 알고리즘(RSA, ECC 등)에 미치는 영향을 설명하시오.
+- Grover 알고리즘(Grover’s Algorithm)의 개념과 기존 탐색 알고리즘과의 차이를 설명하시오.
+- 양자 내성 암호(Post-Quantum Cryptography)의 개념과 필요성을 설명하시오.
+- QKD(Quantum Key Distribution)의 개념과 기존 암호화 방식과의 차이를 설명하시오.
+- NISQ(Noisy Intermediate-Scale Quantum) 시대의 개념과 양자 컴퓨팅의 현재 한계를 설명하시오.
+- 초전도 기반 양자 컴퓨터와 이온 트랩 기반 양자 컴퓨터의 차이를 설명하시오.
+- 양자 인터넷(Quantum Internet)의 개념과 주요 기술을 설명하시오.
+- 디지털 전환(Digital Transformation)의 개념과 주요 추진 전략을 설명하시오.
+- IT 거버넌스(IT Governance)의 개념과 주요 프레임워크(COBIT, ITIL 등)를 설명하시오.
+- ITSM(IT Service Management)의 개념과 주요 프로세스를 설명하시오.
+- 디지털 혁신을 위한 DevOps와 GitOps의 차이를 설명하시오.
+- ITIL(Information Technology Infrastructure Library)의 개념과 주요 프로세스를 설명하시오.
+- RPA(Robotic Process Automation)의 개념과 주요 활용 사례를 설명하시오.
+- 클라우드 네이티브(Cloud Native)의 개념과 기존 IT 환경과의 차이를 설명하시오.
+- IT 자산 관리(IT Asset Management, ITAM)의 개념과 주요 필요성을 설명하시오.
+- 데이터 중심 조직(Data-Driven Organization)의 개념과 이를 구현하기 위한 전략을 설명하시오.
+- 디지털 플랫폼(Digital Platform)의 개념과 주요 활용 사례를 설명하시오.
+- 바이오인포매틱스(Bioinformatics)의 개념과 주요 응용 분야를 설명하시오.
+- 정밀의료(Precision Medicine)의 개념과 기존 의료 방식과의 차이를 설명하시오.
+- 유전체 데이터 분석(Genomics Data Analysis)의 개념과 주요 활용 사례를 설명하시오.
+- 헬스케어 IT에서 AI 기반 영상 진단 기술(CT, MRI 분석 등)의 개념을 설명하시오.
+- 원격 의료(Telemedicine)의 개념과 주요 기술을 설명하시오.
+- 웨어러블 헬스케어(Wearable Healthcare)의 개념과 주요 활용 사례를 설명하시오.
+- 디지털 치료제(Digital Therapeutics)의 개념과 기존 의약품과의 차이를 설명하시오.
+- 의료 데이터의 보안 및 프라이버시 보호를 위한 주요 기술을 설명하시오.
+- 의료 데이터 상호운용성(Interoperability)과 주요 표준(FHIR, HL7 등)을 설명하시오.
+- 블록체인 기반 의료 데이터 관리의 개념과 주요 활용 사례를 설명하시오.
+- 스마트 팩토리(Smart Factory)의 개념과 주요 구성 요소(IoT, AI, 로봇 등)를 설명하시오.
+- AI 기반 제조 공정 최적화의 개념과 주요 활용 사례를 설명하시오.
+- 산업용 로봇(Industrial Robots)의 개념과 기존 자동화 시스템과의 차이를 설명하시오.
+- 디지털 트윈(Digital Twin)을 활용한 제조 공정 시뮬레이션의 개념과 주요 사례를 설명하시오.
+- IIoT(Industrial Internet of Things)의 개념과 기존 IoT와의 차이를 설명하시오.
+- CPS(Cyber-Physical System)의 개념과 스마트 제조에서의 역할을 설명하시오.
+- 스마트 물류(Smart Logistics)의 개념과 AI 및 IoT 활용 사례를 설명하시오.
+- 스마트 센서(Smart Sensor)의 개념과 제조 산업에서의 활용 방안을 설명하시오.
+- 협동 로봇(Cobot, Collaborative Robot)의 개념과 기존 산업용 로봇과의 차이를 설명하시오.
+- 공정 제어 시스템(Manufacturing Execution System, MES)의 개념과 주요 역할을 설명하시오.
+- Web3의 개념과 기존 Web2와의 차이를 설명하시오.
+- NFT(Non-Fungible Token)의 개념과 주요 활용 사례를 설명하시오.
+- DeFi(Decentralized Finance, 탈중앙화 금융)의 개념과 기존 금융 시스템과의 차이를 설명하시오.
+- 메타버스와 블록체인의 관계를 설명하시오.
+- 디지털 휴먼(Digital Human)의 개념과 주요 활용 사례를 설명하시오.
+- 음성 인식 AI(Speech Recognition AI)의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 법률 자동화(Legal AI)의 개념과 주요 활용 사례를 설명하시오.
+- AI와 빅데이터를 활용한 사이버 보안 기술의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 이상 탐지(Anomaly Detection)의 개념과 주요 활용 사례(보안, 금융 등)를 설명하시오.
+- AI 윤리(AI Ethics)와 AI 사용 시 발생할 수 있는 사회적 문제를 설명하시오.
+- 제로 트러스트 아키텍처(Zero Trust Architecture)의 개념과 기존 보안 모델과의 차이를 설명하시오.
+- Confidential Computing의 개념과 주요 활용 사례를 설명하시오.
+- 동형암호(Homomorphic Encryption)의 개념과 주요 활용 사례를 설명하시오.
+- 양자 암호 통신(Quantum Cryptography)의 개념과 기존 암호화 기술과의 차이를 설명하시오.
+- PETs(Privacy Enhancing Technologies)의 개념과 주요 기법(Differential Privacy, Federated Learning 등)을 설명하시오.
+- 다중 인증(MFA, Multi-Factor Authentication)의 개념과 주요 방식(Biometrics, OTP 등)을 설명하시오.
+- IDaaS(Identity as a Service)의 개념과 기존 IAM(Identity & Access Management)과의 차이를 설명하시오.
+- FIDO2 및 패스워드리스 인증의 개념과 기존 패스워드 기반 인증 방식과의 차이를 설명하시오.
+- AI 기반 보안 위협 탐지(Anomaly Detection for Cybersecurity)의 개념과 주요 활용 사례를 설명하시오.
+- 랜섬웨어 공격 기법과 효과적인 방어 전략을 설명하시오.
+- 디지털 트윈(Digital Twin)의 개념과 제조, 건설, 도시 관리에서의 활용 사례를 설명하시오.
+- 메타버스(Metaverse)에서 아바타 기술과 디지털 휴먼의 차이를 설명하시오.
+- Web3 기반 메타버스 생태계의 개념과 주요 특징을 설명하시오.
+- VR과 AR의 차이점과 혼합현실(MR, Mixed Reality)의 개념을 설명하시오.
+- 메타버스에서 NFT(Non-Fungible Token)의 역할과 경제적 활용 사례를 설명하시오.
+- 디지털 트윈과 AI 기반 시뮬레이션의 개념과 주요 기술을 설명하시오.
+- 메타버스 보안 위협(Identity Theft, Privacy Breach 등)의 개념과 대응 방안을 설명하시오.
+- 메타버스에서 사용되는 블록체인 기술의 개념과 역할을 설명하시오.
+- 메타버스 기반 원격 협업 시스템의 개념과 주요 활용 사례를 설명하시오.
+- 메타버스에서 AI 기반 콘텐츠 생성 기술(Generative AI for Metaverse)의 개념을 설명하시오.
+- 위성 인터넷(Satellite Internet)의 개념과 기존 지상 네트워크와의 차이를 설명하시오.
+- FSO(Free-Space Optics) 기반 광 무선 통신 기술의 개념과 활용 사례를 설명하시오.
+- 6G 네트워크에서 테라헤르츠(THz) 대역 주파수의 개념과 주요 특징을 설명하시오.
+- 오픈랜(Open RAN)의 개념과 기존 폐쇄형 RAN과의 차이를 설명하시오.
+- 6G 네트워크에서 AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
+- B5G(Beyond 5G) 기술과 향후 네트워크 발전 방향을 설명하시오.
+- Intent-Based Networking(IBN)의 개념과 기존 네트워크 운영 방식과의 차이를 설명하시오.
+- 차세대 통신에서 홀로그래픽 무선 기술(Holographic Beamforming)의 개념과 활용 사례를 설명하시오.
+- Wi-Fi 7과 기존 Wi-Fi 6/6E와의 차이를 설명하시오.
+- 양자 네트워크(Quantum Network)의 개념과 기존 네트워크 기술과의 차이를 설명하시오.
+- 금융 AI(Financial AI)의 개념과 주요 활용 사례(신용 평가, 이상 탐지 등)를 설명하시오.
+- 제조 AI(Manufacturing AI)의 개념과 스마트 팩토리에서의 활용 사례를 설명하시오.
+- AI 기반 의료 영상 분석(CT, MRI, X-ray)의 개념과 주요 사례를 설명하시오.
+- AI 기반 음성 분석 기술(Speech Recognition AI)의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 추천 시스템(Recommender System)의 개념과 주요 알고리즘을 설명하시오.
+- AI와 데이터 거버넌스(Data Governance)의 개념과 주요 연관성을 설명하시오.
+- AI 윤리(AI Ethics)와 AI 모델의 공정성(Fairness) 문제를 설명하시오.
+- Edge AI(엣지 AI)의 개념과 기존 클라우드 AI와의 차이를 설명하시오.
+- AI 기반 법률 자동화(Legal AI)의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 이상 탐지(Anomaly Detection)의 개념과 금융 및 보안에서의 활용 사례를 설명하시오.
+- 지속 가능한 IT(Sustainable IT)의 개념과 주요 기술을 설명하시오.
+- ESG(Environmental, Social, Governance) 경영에서 IT의 역할을 설명하시오.
+- 그린 데이터센터(Green Data Center)의 개념과 기존 데이터센터와의 차이를 설명하시오.
+- 에너지 효율적인 컴퓨팅(Energy-Efficient Computing) 기법을 설명하시오.
+- 블록체인 기반 탄소 배출권 거래 시스템의 개념과 주요 활용 사례를 설명하시오.
+- 친환경 반도체 기술(저전력 설계, 소재 혁신 등)의 개념과 주요 연구 동향을 설명하시오.
+- 지속 가능한 네트워크 인프라 구축을 위한 주요 기법을 설명하시오.
+- 전자 폐기물(e-Waste) 문제와 이를 해결하기 위한 IT 기술을 설명하시오.
+- 탄소중립 IT 기술(Carbon-Neutral IT)의 개념과 클라우드 컴퓨팅에서의 역할을 설명하시오.
+- 스마트 그리드(Smart Grid)와 AI 기반 에너지 최적화 기술을 설명하시오.
+- Web5의 개념과 Web3, Web2와의 차이를 설명하시오.
+- LLM(Large Language Model)의 개념과 기존 AI 모델과의 차이를 설명하시오.
+- AutoML(Automated Machine Learning)의 개념과 주요 활용 사례를 설명하시오.
+- AI와 IoT의 융합(AIoT)의 개념과 주요 활용 사례를 설명하시오.
+- AI 기반 로보틱스 기술의 개념과 주요 활용 사례를 설명하시오.
+- 3D 프린팅과 AI 기반 설계 자동화의 개념과 주요 활용 사례를 설명하시오.
+- AR Cloud(증강현실 클라우드)의 개념과 주요 활용 사례를 설명하시오.
+- IT 기반 스마트 농업(Smart Agriculture)의 개념과 주요 기술을 설명하시오.
+- 스마트 해양(Smart Ocean)의 개념과 IT 기술의 활용 방안을 설명하시오.
+- 미래 IT 기술 발전 방향과 주요 트렌드를 설명하시오.
