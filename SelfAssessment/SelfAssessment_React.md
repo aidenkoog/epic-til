@@ -5,6 +5,60 @@ Organized expected questions & answers
 ## React.js (+HTML, CSS, Javascript, Typescript)
 
 - React의 핵심 개념은 무엇인가?
+  - 간략 개요
+    - 컴포넌트: UI를 구성하는 기본 단위
+    - JSX: JavaScript에서 XML-like 문법을 사용
+    - State: 변경 가능한 컴포넌트의 상태
+    - Props: 부모에서 자식으로 전달하는 데이터
+    - 이벤트 핸들링: onClick, onChange 등 이벤트 처리
+    - Hooks: 함수형 컴포넌트에서 상태 및 라이프사이클 관리
+    - Context API: 글로벌 상태 관리 (useContext)
+    - Redux: 복잡한 전역 상태 관리 라이브러리
+    - React Router: SPA에서 페이지 이동을 위한 라우팅
+    - 가상 DOM: 성능 최적화를 위한 업데이트 방식
+    - SSR (Next.js): 서버 사이드 렌더링으로 SEO 및 성능 개선
+  - 핵심 개념 상세
+    - 컴포넌트 (Component)
+	  - UI를 구성하는 최소 단위
+	  - 재사용 가능하며, 작은 단위로 나누어 개발 가능
+	  - 함수형 컴포넌트와 클래스형 컴포넌트가 있으나, 최근에는 함수형 컴포넌트 + 훅(Hooks)이 주로 사용
+    - JSX (JavaScript XML)
+	  - JavaScript 내에서 XML-like 문법을 사용하여 UI를 정의하는 방식
+	  - Babel이 JSX를 React.createElement() 형태로 변환하여 실행
+        - const element = <h1>Hello, World!</h1>;
+        - const element = React.createElement('h1', null, 'Hello, World!');
+    - 상태 (State)
+      - 컴포넌트 내부에서 변경될 수 있는 데이터
+      - useState 훅을 사용하여 상태를 관리
+    - 속성 (Props)
+	  - 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방법.
+	  - 읽기 전용(immutable)
+    - 이벤트 핸들링 (Event Handling)
+	  - React에서는 onClick, onChange 등의 이벤트 핸들러를 사용.
+    - 훅 (Hooks)
+	  - 클래스형 컴포넌트에서 제공되던 기능(state, lifecycle)을 함수형 컴포넌트에서도 사용할 수 있도록 도와주는 기능
+	  - 대표적인 훅:
+	    - useState → 상태 관리
+        - useEffect → 컴포넌트 라이프사이클 관리
+	    - useContext → 전역 상태 관리
+	    - useReducer → 복잡한 상태 로직 관리
+	    - useRef → DOM 요소 접근 및 유지
+    - 컨텍스트 (Context API)
+	  - 전역 상태 관리를 위한 기능
+	  - useContext 훅을 활용하여 컴포넌트 트리에서 깊이 전달해야 하는 데이터를 쉽게 공유 가능
+    - 리덕스 (Redux)
+	  - React에서 상태 관리를 위한 대표적인 라이브러리
+      - useReducer와 유사하지만, 전역 상태 관리 기능을 제공
+    - React Router
+	  - SPA(Single Page Application)에서 페이지 이동을 구현하기 위한 라이브러리
+	  - react-router-dom을 사용하여 라우팅 처리 가능.
+    - 가상 DOM (Virtual DOM)
+	  - React는 변경 사항을 가상 DOM에서 먼저 비교하고, 실제 DOM에 최소한의 변경만 적용하여 성능을 최적화.
+	  - diffing algorithm을 사용하여 효율적으로 UI 업데이트.
+    - 서버 사이드 렌더링 (SSR)
+	  - React는 기본적으로 클라이언트 사이드 렌더링(CSR)을 사용
+      - Next.js 같은 프레임워크를 사용하면 서버에서 HTML을 미리 렌더링 가능.
+
 - Virtual DOM이란 무엇이며, 어떻게 동작하는가?
 - React의 State와 Props의 차이점은?
 - React에서 상태 관리는 어떻게 하는가?
