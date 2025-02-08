@@ -126,7 +126,34 @@ Organized expected questions & answers
         - 프로세스의 중요한 정보를 포함하고 있음
         - 따라서 일반 사용자 접근을 막기 위해 커널 스택의 가장 앞부분에서 관리됨
 
-- 모바일 앱에서 보안 강화를 위해 어떤 방식을 적용했는가?
+- 모바일 앱에서 보안 강화를 위한 방법
+  - 개요
+    - 데이터 보호, 네트워크 보안, 코드 보안, 인증 보안 등을 고려
+  - 방법
+    - 데이터 보호 - 민감 데이터 저장 X
+    - 데이터베이스 암호화
+    - 네트워크 보안
+      - HTTPS TLS1.2이상 강제 적용
+      - SSL Pinning 적용 (중간자 공격 방지)
+    - 인증 접근 제어
+      - 안전한 로그인 & OAuth2 적용
+      - 비밀번호를 직접 저장하지 않음
+      - OAuth2, OpenID Connect, JWT 사용 권장
+      - 생체인증(Fingerprint, Face ID) 적용 가능
+      - 토큰 보안 (JWT & Refresh Token)
+        - JWT 토큰을 사용하여 인증 시, Access Token은 짧게 설정하고 Refresh Token을 사용해야 함
+        - 토큰을 Secure Storage(Android KeyStore, iOS Keychain)에 저장해야 함
+    - Code 보안
+      - 코드 난독화 (Obfuscation)
+        - Android → ProGuard / R8 사용하여 난독화 적용
+        - iOS → Bitcode & Strip Symbols 사용하여 보호
+      - 디버깅 차단 & 루팅 / 탈옥 탐지
+        - 루팅된 Android 기기, 탈옥된 iOS 기기에서 실행되지 않도록 방어 코드 추가
+        - 디버거 연결 탐지 & 차단
+  - 결론
+    - 모바일 앱 보안은 “데이터 보호 + 네트워크 보안 + 인증 보안 + 코드 보안”을 모두 고려 필수
+    - 기본적으로 HTTPS 적용, SSL Pinning, 안전한 인증(OAuth2, Firebase Auth), 코드 난독화(ProGuard) 등을 반드시 적용 필수
+
 - HTTPS와 SSL Pinning에 대해 설명해보라.
 - 안드로이드에서 로컬 데이터 저장 시 보안을 위해 어떤 방법을 사용했는가?
 - CI/CD를 적용해본 경험이 있는가? 어떤 툴을 사용했는가? (GitHub Actions, Jenkins, Bitrise 등)
