@@ -93,7 +93,141 @@ Organized expected questions & answers
     - 차이점
         - O(n) 알고리즘은 데이터 크기가 증가해도 비교적 빠르게 실행되지만, O(n²) 알고리즘은 입력 크기가 커질수록 실행 속도가 매우 느려진다.
 
-- 분할 정복(Divide and Conquer) 기법이란 무엇인가? 주요 예제를 설명하시오.
+- 분할 정복(Divide and Conquer) 기법과 주요 예제 제시
+    - 개요
+        - 큰 문제를 작은 문제로 나누어 해결한 후, 이를 합쳐서 최종 결과를 얻는 알고리즘 설계 기법
+    - 핵심 개념
+        - 분할(Divide): 문제를 더 작은 부분 문제(subproblems)로 나눈다
+        - 정복(Conquer): 나눠진 작은 문제를 해결한다
+        - 병합(Combine): 해결한 작은 문제들을 합쳐서 최종 해결책을 도출한다
+        - 이 방식은 재귀(Recursion)를 많이 활용하며, 복잡한 문제를 해결하는 데 자주 사용됨
+    - 분할정복 사용되는 대표적인 알고리즘
+        - 병합 정렬 (Merge Sort) / O(n log n) / 배열을 반으로 나눈 후 정렬하여 합침
+        - 퀵 정렬 (Quick Sort) / 평균 O(n log n) / 피벗을 기준으로 분할 후 정렬
+        - 이진 탐색 (Binary Search)	/ O(log n) / 정렬된 배열을 반씩 나누며 탐색
+        - 최근접 점 쌍 문제 (Closest Pair of Points) / O(n log n) / 좌표평면에서 가장 가까운 두 점을 찾음
+        - 스트라센 행렬 곱셈 (Strassen’s Matrix Multiplication) / O(n².⁸) / 일반 행렬 곱셈보다 빠름
+        - FFT(Fast Fourier Transform) / O(n log n) / 푸리에 변환을 빠르게 수행
+    - 분할 정복(DC) 기법의 장점과 단점
+        - 장점
+            - 복잡한 문제 해결 가능
+                - 정렬, 탐색, 행렬 연산 등에서 효율적인 해결 방법을 제공함.
+            - 병렬 처리(Parallel Processing)에 유리함
+                - 작은 문제를 독립적으로 해결할 수 있어 병렬 연산이 가능함.
+            - 빠른 실행 속도
+                - 정렬 알고리즘(병합 정렬, 퀵 정렬) 등에서 O(n log n) 성능을 제공.
+        - 단점
+            - 재귀(Recursion)로 인한 함수 호출 비용 발생
+                - 스택 오버플로우(Stack Overflow) 위험 있음
+            - 추가적인 메모리 사용
+                - 병합 정렬처럼 새로운 배열을 사용하면 O(n) 추가 공간이 필요할 수도 있음.
+            - 피벗 선택이 중요한 경우(퀵 정렬)
+                - 잘못된 피벗을 선택하면 최악의 경우 O(n²) 성능이 될 수 있음.
+    - 분할 정복(DC) 주요 예제
+        - 병합정렬
+            - 정의: 병합 정렬은 배열을 계속 반으로 나눈 후(Divide), 각각 정렬한 후 병합(Conquer & Combine)하는 정렬 알고리즘
+            - 병합 정렬의 과정
+                - 배열을 절반으로 계속 나눈다.
+                - 크기가 1이 되면 정렬된 상태로 간주한다.
+                - 나눠진 두 개의 정렬된 배열을 하나로 합친다(병합).
+            - 병합 정렬 코드 예시
+                ```python
+                def merge_sort(arr):
+                    if len(arr) <= 1:
+                        return arr  # 원소가 1개 이하이면 그대로 반환
+
+                    # 1. 분할 (Divide)
+                    mid = len(arr) // 2
+                    # 0부터 mid-1까지의 요소, 0,1,2
+                    left_half = merge_sort(arr[:mid])
+                    # mid부터 끝까지의 요소, 3,4,5,6
+                    right_half = merge_sort(arr[mid:])
+                    # 2. 정복 & 병합 (Conquer & Combine)
+                    return merge(left_half, right_half)
+
+                def merge(left, right):
+                    result = []
+                    i = j = 0
+
+                    # 두 리스트를 정렬된 순서대로 병합
+                    while i < len(left) and j < len(right):
+                        if left[i] < right[j]:
+                            result.append(left[i])
+                            i += 1
+                        else:
+                            result.append(right[j])
+                            j += 1
+
+                    # 남은 원소 추가
+                    result.extend(left[i:])
+                    result.extend(right[j:])
+                    return result
+
+                    # 사용 예제 (Entry Point)
+                    arr = [38, 27, 43, 3, 9, 82, 10]
+                    sorted_arr = merge_sort(arr)
+                    print(sorted_arr)
+                ```
+        - 퀵정렬
+            - 정의: 퀵 정렬은 피벗(Pivot)을 설정하고, 이를 기준으로 작은 값과 큰 값으로 나눈 뒤 각각 정렬하는 방식
+            - 퀵 정렬의 과정
+                - 피벗(Pivot)을 설정한다.
+                - 피벗보다 작은 값은 왼쪽, 큰 값은 오른쪽으로 정렬한다.
+                - 각각을 다시 퀵 정렬로 정렬한다.
+            - 퀵 정렬 코드 예시
+                ```python
+                def quick_sort(arr):
+                if len(arr) <= 1:
+                    return arr  # 원소가 1개 이하이면 그대로 반환
+
+                pivot = arr[len(arr) // 2]  # 피벗 설정 (중간값)
+                left = [x for x in arr if x < pivot]  # 피벗보다 작은 값
+                middle = [x for x in arr if x == pivot]  # 피벗과 같은 값
+                right = [x for x in arr if x > pivot]  # 피벗보다 큰 값
+
+                return quick_sort(left) + middle + quick_sort(right)  # 재귀 호출
+
+                # 사용 예제 (Entry Point)
+                arr = [38, 27, 43, 3, 9, 82, 10]
+                sorted_arr = quick_sort(arr)
+                print(sorted_arr)
+
+                # 참고 List Comprehension 다른 표현
+                [x for x in arr if x < pivot]
+
+                result = []
+                for x in arr:
+                    if x < pivot:
+                        result.append(x)
+                ```
+        - 이진탐색
+            - 정의: 이진 탐색은 정렬된 배열에서 탐색 범위를 반씩 줄여가며 값을 찾는 알고리즘 (반씩 줄이는 과정을 반복)
+            - 이진 탐색의 과정
+                - 배열의 중간값과 찾으려는 값을 비교한다.
+                - 같으면 찾은 것이고, 크면 왼쪽 부분을 탐색, 작으면 오른쪽 부분을 탐색한다.
+                - 이 과정을 찾을 때까지 반복한다.
+            - 이진탐색 코드 예시
+                ```python
+                # 기준 인덱스를 계속 변화시키면서 값을 찾는 방식
+                def binary_search(arr, target):
+                    left, right = 0, len(arr) - 1
+                    while left <= right:
+                        mid = (left + right) // 2  # 중간값 찾기
+                        if arr[mid] == target:
+                            return mid  # 찾음
+                        elif arr[mid] < target:
+                            left = mid + 1  # 오른쪽 탐색
+                        else:
+                            right = mid - 1  # 왼쪽 탐색
+
+                    return -1  # 못 찾음
+
+                # 사용 예제 (정렬된 배열 필요, Entry Point)
+                arr = [3, 9, 10, 27, 38, 43, 82]
+                target = 27
+                result = binary_search(arr, target)
+                ```
+
 - 동적 계획법(Dynamic Programming)이란 무엇인가? 대표적인 예제를 설명하시오.
 - 탐욕 알고리즘(Greedy Algorithm)이란 무엇인가? 장점과 단점을 설명하시오.
 - 백트래킹(Backtracking) 기법이란 무엇인가? 예제를 설명하시오.
