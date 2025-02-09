@@ -284,6 +284,55 @@ Organized expected questions & answers
 - Android TV 앱에서 Leanback 라이브러리의 역할
 - Android TV 앱 개발 시 D-pad(방향키) 네비게이션을 처리하는 방법
 - Android 개발 시 설정했던 HDMI CEC 에 대한 설명
+  - HDMI CEC 개요
+    - HDMI CEC (Consumer Electronics Control)
+    - HDMI(High-Definition Multimedia Interface) 케이블을 통해 연결된 여러 기기를 하나의 리모컨으로 제어할 수 있도록 하는 기능
+    - TV 리모컨으로 셋톱박스, 블루레이 플레이어, 사운드바 등을 동시에 컨트롤할 수 있는 기능을 제공
+  - HDMI CEC의 주요 기능
+    - 한 개의 리모컨으로 여러 기기 제어 가능
+	  - 예: TV 리모컨으로 셋톱박스, 블루레이 플레이어, 게임 콘솔(PS5, Xbox) 제어 가능
+    - 기기 자동 켜기/끄기 (One Touch Play & Standby)
+	  - TV를 켜면 연결된 셋톱박스도 자동으로 켜짐
+	  - TV를 끄면 연결된 장치(예: Fire TV, Chromecast)도 자동으로 꺼짐
+    - 입력 소스 자동 전환
+	  - 예: PlayStation 5를 켜면 TV가 자동으로 HDMI 입력을 PS5로 변경
+    - 음량 조절 (Audio System Control)
+	  - TV 리모컨으로 사운드바, AV 리시버의 볼륨을 직접 조절 가능
+    - 리모컨 신호 전달 (Remote Control Pass-through)
+	  - TV 리모컨의 화살표(←,→,↑,↓) 버튼으로 HDMI CEC를 지원하는 셋톱박스나 미디어 플레이어 조작 가능
+  - HDMI CEC 작동 방식
+	- HDMI CEC는 HDMI 케이블의 13번 핀을 사용하여 기기 간 신호를 주고받음
+	- 각 기기에는 CEC Address가 할당되며, 최대 15개의 기기를 연결 가능
+	- 기기 간 CEC 명령(예: 전원 On/Off, 입력 전환, 재생/일시정지 등)을 송수신
+  - 브랜드별 HDMI CEC 명칭
+    - 제조사는 HDMI CEC를 지원하지만, 브랜드마다 다른 명칭을 사용
+    - 예시
+      - Samsung: Anynet+
+      - LG: SimpLink
+      - Sony: BRAVIA Sync
+      - Hitachi: HDMI-CEC
+    - 기능은 동일하지만 브랜드마다 명칭이 다르므로, TV 설정에서 “HDMI CEC” 관련 옵션을 활성화해야 사용 가능
+  - Android TV & HDMI CEC
+    - Android TV, 셋톱박스, Chromecast, Fire TV 같은 장치에서도 HDMI CEC를 지원한다.
+    - Android TV에서 HDMI CEC 활성화 방법 (예: Google TV)
+      - 설정(Settings) → 장치 설정(Device Preferences) → HDMI → HDMI CEC 활성화
+      - 연결된 기기의 CEC 기능도 활성화해야 함.
+    - HDMI CEC를 이용한 Android TV 앱 개발
+	  - HDMI CEC를 통해 Android TV 앱이 외부 장치(셋톱박스, 콘솔 등)와 상호 작용할 수 있음.
+	  - BroadcastReceiver를 활용하여 CEC 신호 감지 가능.
+  - HDMI CEC의 장점과 단점
+    - 장점
+      - 한 개의 리모컨으로 여러 기기 조작 가능
+      - 기기 간 자동 전원 관리 (TV를 켜면 셋톱박스도 자동 켜짐)
+      - 입력 소스 자동 전환으로 편리한 사용 가능
+      - 추가 설정 없이 HDMI 케이블만 연결하면 동작
+    - 단점
+      - 브랜드별 호환성 문제 (예: 삼성 TV의 Anynet+가 LG의 SimpLink와 완벽히 호환되지 않을 수 있음)
+      - 일부 기기는 CEC 기능이 제한적 (예: 특정 브랜드의 사운드바, HDMI 스위치)
+      - 모든 HDMI 포트가 CEC를 지원하지 않을 수도 있음
+  - 결론
+    - HDMI CEC를 활용하면 셋톱박스/OTT/TV 앱의 전원 및 입력 전환을 자동화할 수 있어 사용자 편의성이 대폭 증가
+
 - Android에서 RecyclerView의 DiffUtil이 중요한 이유
 - Android에서 Jetpack DataStore를 사용하는 이유
 - Android에서 Jetpack Hilt와 Dagger의 차이점
