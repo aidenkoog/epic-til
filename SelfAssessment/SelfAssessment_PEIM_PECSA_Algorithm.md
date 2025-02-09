@@ -49,6 +49,8 @@ Organized expected questions & answers
     - Best Case
         - 가장 이상적인 상황에서 알고리즘이 실행되는 경우
         - 예: 이진 탐색(Binary Search)에서 찾으려는 값이 첫 번째 요소에 있는 경우 → O(1)
+            - 정렬된 배열에서 임의의 중간값을 찾고자 하는 값과 비교하여 좌측 또는 우측을 대상으로 탐색을 하는 알고리즘
+            - 임의의 중간값 선정 후 찾고자 하는 값 비교 과정을 계속 반복한다
     - Worst Case
         - 가장 나쁜 상황에서 알고리즘이 실행되는 경우
         - 예: 선형 탐색(Linear Search)에서 찾는 값이 배열의 마지막 요소에 있는 경우 → O(n)
@@ -69,12 +71,25 @@ Organized expected questions & answers
     - O(n²) 알고리즘 예시 (버블 정렬)
         ```python
         def bubble_sort(arr):
-            n = len(arr)
-            for i in range(n):
-                for j in range(0, n - i - 1):
-                    if arr[j] > arr[j + 1]:
-                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            n = len(arr) # example: [5, 4, 1, 2, 9]
+            for i in range(n): # n = 5
+                for j in range(0, n - i - 1): # 0, 4, 0, 3, 0, 2
+                    if arr[j] > arr[j + 1]: #arr[0] > arr[1]
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j] #arr[0], arr[1] = arr[1], arr[0], swap
         ```
+        - 알고리즘 분석
+            - 예: [5,4,1,2,9]라 가정할 때 전체 아이템 개수만큼 반복문을 돈다.
+            - Set 1 (0,4), 1세트가 끝나면 가장 큰 수는 배열의 맨뒤에 위치하게 된다.
+                - 1) [4,5,1,2,9]
+                - 2) [4,1,5,2,9]
+                - 3) [4,1,2,5,9]
+                - 4) [4,1,2,5,9] 
+            - Set 2 (0,3)
+                - 1) [1,4,2,5,9]
+                - 2) [1,2,4,5,9]
+                - 3) [1,2,4,5,9]
+            - Set 3 (0,2)
+            - Set 4 (0,1)
     - 차이점
         - O(n) 알고리즘은 데이터 크기가 증가해도 비교적 빠르게 실행되지만, O(n²) 알고리즘은 입력 크기가 커질수록 실행 속도가 매우 느려진다.
 
