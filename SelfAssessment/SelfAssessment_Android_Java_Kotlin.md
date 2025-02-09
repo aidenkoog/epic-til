@@ -241,8 +241,44 @@ Organized expected questions & answers
 	  - 네트워크(API) 데이터 + 로컬(Room DB) 데이터 결합 가능 (RemoteMediator 사용).
 	  - 오프라인에서도 캐싱된 데이터를 사용할 수 있도록 지원.
 
-- Android TV 앱 개발 시 고려해야 할 사항
+- Android 모바일 앱 개발과 안드로이드 Set-top/OTT/Embedded 앱 개발 차이점
+  - 개요
+    - 모바일 앱(Android Phone/Tablet App) 개발과 Android Set-top/OTT/Embedded 앱 개발은 동일한 Android 플랫폼을 사용
+    - UI/UX, 입력 방식, 성능 최적화, 마켓 배포 방식 등에 차이
+  - 결론 (고려해야 될 내용)
+    - UI/UX 최적화 필수
+	  - TV 앱은 리모컨 중심(DPAD, Focus Navigation) 으로 동작해야 함
+	  - 모바일 앱처럼 터치 기반 UI를 그대로 사용하면 안 됨
+    - 미디어 재생 & DRM 대응 필요
+	  - OTT 앱은 ExoPlayer + Widevine DRM을 활용하여 4K, HDR 스트리밍 최적화 필요
+    - 앱 실행 방식 차이
+	  - TV 앱은 싱글 앱 모드(한 번에 하나의 앱 실행) → 백그라운드 실행 제한 고려
+    - Google Play for TV 요구 사항 준수
+	  - android.hardware.touchscreen=false 설정 필수
+	  - TV 전용 UI 요구 사항 맞춰야 등록 가능
+    - 입력 방식 고려
+	  - 모바일: 터치스크린 중심
+	  - OTT,Set-top/TV: 리모컨 + 음성 명령 기반의 조작 방식 적용해야 함
+
 - Embedded (OTT, STB etc) 플랫폼에서 DRM(Digital Rights Management)이 중요한 이유
+  - DRM이 필수적인 이유
+    - 고품질 콘텐츠 보호 (HD, 4K, HDR)
+	  - 모바일에서는 저해상도(720p, 1080p) 콘텐츠가 일반적이지만, TV 앱에서는 4K, 8K, HDR 콘텐츠가 기본이기 때문에 해킹 및 불법 복제 위험이 높음.
+	  - DRM이 없으면 고화질 콘텐츠가 쉽게 캡처되거나 복제될 수 있음.
+    - 콘텐츠 불법 복제 방지
+	  - PC나 모바일에서는 화면 녹화(Screen Recording) 기능이 제한되지만, 셋톱박스(TV)는 HDMI를 통해 쉽게 외부 장치로 녹화 가능
+	  - DRM을 사용하면 HDMI 출력 자체를 차단할 수 있어 불법 녹화를 방지
+    - 콘텐츠 제공업체(Netflix, Disney+ 등)의 필수 요구사항
+	  - 넷플릭스, 유튜브, 디즈니+ 같은 서비스는 TV에서 4K 콘텐츠를 제공하기 위해 DRM을 필수적으로 요구
+	  - Netflix 4K 콘텐츠를 재생하려면 Widevine L1 또는 PlayReady 같은 DRM 인증이 필수
+    - 라이선스 정책 준수
+	  - 영화, 스포츠, 방송 콘텐츠는 스튜디오 및 저작권 소유자의 보호 정책을 따라야 함
+	  - DRM 없이 콘텐츠를 제공하면 법적 문제 발생 가능
+    - OTT 및 VOD 스트리밍 서비스 최적화
+	  - OTT 서비스(예: 넷플릭스, 티빙, 웨이브, 쿠팡플레이)에서는 DRM이 적용되지 않으면 고화질 영상 지원이 불가능
+	  - DRM이 적용되지 않은 기기에서는 화질 제한(480p, 720p) 발생 가능
+
+- Android TV 앱 개발 시 고려해야 할 사항
 - Android 앱의 백그라운드 작업을 효율적으로 수행하는 방법
 - Android에서 WorkManager와 JobScheduler의 차이점
 - Android TV 앱에서 Leanback 라이브러리의 역할
