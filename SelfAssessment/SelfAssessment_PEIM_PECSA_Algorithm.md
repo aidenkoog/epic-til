@@ -48,13 +48,14 @@ Organized expected questions & answers
 - Best case, Worst case, Average case의 개념과 차이점을 설명
     - Best Case
         - 가장 이상적인 상황에서 알고리즘이 실행되는 경우
-        - 예: **이진 탐색(Binary Search)**에서 찾으려는 값이 첫 번째 요소에 있는 경우 → O(1)
+        - 예: 이진 탐색(Binary Search)에서 찾으려는 값이 첫 번째 요소에 있는 경우 → O(1)
     - Worst Case
         - 가장 나쁜 상황에서 알고리즘이 실행되는 경우
-        - 예: **선형 탐색(Linear Search)**에서 찾는 값이 배열의 마지막 요소에 있는 경우 → O(n)
+        - 예: 선형 탐색(Linear Search)에서 찾는 값이 배열의 마지막 요소에 있는 경우 → O(n)
+            - 배열이나 리스트에서 특정 값을 찾기 위해 처음부터 끝까지 하나씩 순차적으로 확인하는 탐색 알고리즘
     - Average Case
         - 모든 가능한 입력에 대한 평균적인 수행 시간
-        - 예: **퀵 정렬(Quick Sort)**에서 랜덤한 피벗 선택 → O(n log n)
+        - 예: 퀵 정렬(Quick Sort)에서 랜덤한 피벗 선택 → O(n log n)
 
 - 시간 복잡도가 O(n)인 알고리즘과 O(n²)인 알고리즘의 차이를 실제 사례와 함께 설명
     - O(n) 알고리즘 예시 (선형 탐색)
@@ -76,7 +77,7 @@ Organized expected questions & answers
         ```
     - 차이점
         - O(n) 알고리즘은 데이터 크기가 증가해도 비교적 빠르게 실행되지만, O(n²) 알고리즘은 입력 크기가 커질수록 실행 속도가 매우 느려진다.
-        
+
 - 분할 정복(Divide and Conquer) 기법이란 무엇인가? 주요 예제를 설명하시오.
 - 동적 계획법(Dynamic Programming)이란 무엇인가? 대표적인 예제를 설명하시오.
 - 탐욕 알고리즘(Greedy Algorithm)이란 무엇인가? 장점과 단점을 설명하시오.
