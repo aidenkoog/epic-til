@@ -62,26 +62,26 @@ Organized expected questions & answers
 
 - REST API 서버 구축 이유에 대한 설명
   - 결론 (TCP/IP Socket, REST-API)
-    - 표준화된 HTTP 프로토콜을 활용하여 보안이 강화되고, 유지보수와 확장성이 뛰어나며, 다양한 클라이언트(Android, 웹, iOS)에서 쉽게 사용 가능
-    - TCP/IP 소켓 통신은 실시간 데이터 전송이 필요할 때 적합하지만, 요청-응답 방식에서는 REST API가 더 효율적
+      - 표준화된 HTTP 프로토콜을 활용하여 보안이 강화되고, 유지보수와 확장성이 뛰어나며, 다양한 클라이언트(Android, 웹, iOS)에서 쉽게 사용 가능
+      - TCP/IP 소켓 통신은 실시간 데이터 전송이 필요할 때 적합하지만, 요청-응답 방식에서는 REST API가 더 효율적
   - Client 앱 ↔ Python 서버에 REST API를 사용 이유
     - 모바일 환경에서 표준적인 방식
-	  - Android, iOS, 웹 등 다양한 플랫폼이 HTTP API를 쉽게 사용할 수 있음
-      - REST API는 웹 서비스와의 연동이 쉽고, Android에서도 Retrofit 같은 라이브러리로 쉽게 요청을 보낼 수 있음.
+        - Android, iOS, 웹 등 다양한 플랫폼이 HTTP API를 쉽게 사용할 수 있음
+        - REST API는 웹 서비스와의 연동이 쉽고, Android에서도 Retrofit 같은 라이브러리로 쉽게 요청을 보낼 수 있음.
         - 클라이언트 단 구축에 있어서 수작업 줄어들며 어노테이션 기반으로 간편하게 가독성있게 구축 가능
     - 보안 & 방화벽 이슈 해결
-	  - TCP 소켓 통신을 사용하면 커스텀 포트를 열어야 하고, 방화벽 설정을 추가해야 함
-	  - REST API는 HTTPS를 사용할 수 있어 기본적으로 보안이 강화됨
-	  - 보안 토큰(JWT, OAuth2) 같은 인증 방식을 적용할 수 있음
+        - TCP 소켓 통신을 사용하면 커스텀 포트를 열어야 하고, 방화벽 설정을 추가해야 함
+        - REST API는 HTTPS를 사용할 수 있어 기본적으로 보안이 강화됨
+        - 보안 토큰(JWT, OAuth2) 같은 인증 방식을 적용할 수 있음
     - 요청-응답 구조가 명확함
-	  - REST API는 클라이언트가 특정 작업을 요청하고 서버가 응답하는 구조로 동작하므로, 비즈니스 로직을 구현할 때 직관적이고 유지보수하기 쉬움.
-      - 예제: POST /login → 로그인 요청 → {"status": "success", "message": "login started"} 응답
+	      - REST API는 클라이언트가 특정 작업을 요청하고 서버가 응답하는 구조로 동작하므로, 비즈니스 로직을 구현할 때 직관적이고 유지보수하기 쉬움.
+        - 예제: POST /login → 로그인 요청 → {"status": "success", "message": "login started"} 응답
     - 데이터 형식(JSON) 표준화
-	  - REST API는 JSON, XML 같은 표준화된 데이터 포맷을 사용.
+	      - REST API는 JSON, XML 같은 표준화된 데이터 포맷을 사용.
 	  - TCP/IP 소켓 통신을 쓰면 바이너리 데이터 또는 커스텀 포맷을 직접 설계해야 하며, 파싱 로직이 추가로 필요.
     - 확장성과 유지보수 용이
-	  - REST API는 버전 관리 (/api/v1/login)가 가능해서 API 변경 시 클라이언트가 쉽게 대응할 수 있음.
-	  - 클라이언트(앱)와 서버가 독립적으로 업데이트 가능
+	      - REST API는 버전 관리 (/api/v1/login)가 가능해서 API 변경 시 클라이언트가 쉽게 대응할 수 있음.
+	      - 클라이언트(앱)와 서버가 독립적으로 업데이트 가능
 	  - 여러 클라이언트(Android, 웹, iOS)가 동일한 API를 사용할 수 있음
     - 디버깅 및 테스트가 쉬움
 	  - REST API는 Postman, cURL, Swagger 등을 사용하여 쉽게 테스트 가능
