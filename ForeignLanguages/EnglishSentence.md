@@ -296,3 +296,6 @@
 - It's not important on how long you took it, what's important is you finished it!
 - Can you cook an easy dish?
 - Lunar new year.
+- Money doesn't grow on trees.
+- Time is money.
+- If money does grow on trees what would you think our life would be?
