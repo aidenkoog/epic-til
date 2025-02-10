@@ -4,7 +4,52 @@ Organized expected questions & answers
 
 ## React Native (+HTML, CSS, Javascript, Typescript)
 
-- React Native와 React의 차이점은?
+- React Native와 React의 차이점
+  - 공통 사항
+    - 둘 다 리액트 라이브러리 기반하나 사용 목적과 실행 환경에서의 차이
+  - 개념 (React.js / React Native)
+    - 설명
+      - 웹 애플리케이션 개발을 위한 UI 라이브러리
+      - 모바일 앱(Android/iOS) 개발을 위한 프레임워크
+    - 실행 환경
+      - 브라우저 (Chrome, Firefox 등)
+      - 모바일 앱 (Android, iOS)
+    - 렌더링 방식
+      - HTML + CSS 사용
+      - 네이티브 UI 컴포넌트 사용 (View, Text 등)
+    - 사용 언어
+      - JavaScript, JSX, CSS
+      - JavaScript, JSX, 스타일은 React Native 스타일 객체 사용
+    - 배포 방식
+      - 웹사이트 URL로 접근
+      - Android/iOS 앱스토어에 배포
+  - 주요 차이점
+    - UI 요소 (HTML vs 네이티브 컴포넌트)
+	  - React는 웹을 위한 HTML 태그(div, span, button, input 등) 을 사용.
+	  - React Native는 네이티브 모바일 UI 요소(View, Text, Button, ScrollView 등)를 사용.
+    - 스타일링 방식 (CSS vs React Native Styles)
+	  - React에서는 CSS 또는 CSS-in-JS 사용.
+	  - React Native에서는 StyleSheet API를 사용하여 스타일 적용
+    - 네비게이션 방식 (React Router vs React Navigation)
+      - React (웹)에서는 react-router-dom을 사용하여 URL 기반 라우팅을 함
+      - React Native (모바일)에서는 react-navigation을 사용하여 화면 간 이동을 처리.
+  - API 접근 방식
+    - React (웹)
+	  - fetch 또는 axios로 API 호출
+	  - 브라우저 기반 API 사용 (예: localStorage, sessionStorage, document 등)
+    - React Native (모바일)
+	  - fetch 또는 axios로 API 호출
+	  - 네이티브 기능 접근 가능 (카메라, GPS, 센서 등)
+	    - react-native-camera → 카메라 사용
+	    - react-native-geolocation → GPS 사용
+	    - AsyncStorage → 로컬 데이터 저장
+  - 사용 목적에 따른 선택
+    - 웹사이트 개발: 리액트
+    - 모바일 앱 개발: 리액트 네이티브
+    - 데스크톱 앱 개발: 리액트 (Electron 사용 가능)
+    - 하이브리드 개발 (웹+앱): 리액트 (PWA 가능) / 리액트 네이티브 (크로스플랫폼 앱 가능)
+
+
 - React Native에서 Navigation을 구현하는 방법은?
 - React Native에서 상태 관리는 어떻게 하는가?
 - React Native에서 AsyncStorage의 역할은?
