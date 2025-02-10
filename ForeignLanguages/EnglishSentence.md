@@ -299,3 +299,8 @@
 - Money doesn't grow on trees.
 - Time is money.
 - If money does grow on trees what would you think our life would be?
+- Money doesn't grow on trees" is an idiom that means money is a valuable resource that is hard earned and limited. 
+  - It's a reminder that money is not easily available and that people should be careful with how much they spend.
+- Time is money means that you should not waste time, because you could be using it to earn money.
+
+
