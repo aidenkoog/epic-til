@@ -4,7 +4,75 @@ Organized expected questions & answers
 
 ## Operating System
 
-- 운영체제(Operating System)의 정의와 역할을 설명하시오.
+- 운영체제(Operating System)의 정의와 역할
+  - 정의
+    - 컴퓨터 하드웨어와 소프트웨어를 관리하고, 사용자와 컴퓨터 간의 인터페이스를 제공하는 시스템 소프트웨어
+    - 사용자가 프로그램을 실행하고, 하드웨어를 효율적으로 사용할 수 있도록 지원하는 핵심 소프트웨어
+  - 운영체제의 주요 특징
+    - 하드웨어와 소프트웨어를 관리
+    - 사용자와 컴퓨터 간 인터페이스 제공
+    - 프로그램 실행 및 프로세스 관리
+    - 자원 할당 및 보안 기능 제공
+  - 운영체제 부재의 경우
+    - 사용자 프로그램이 직접 하드웨어를 제어해야 하므로 매우 복잡
+	- 프로세스, 메모리, 파일 시스템, 입출력 장치를 직접 관리해야 하는 부담이 생김
+    - 운영체제가 이를 자동으로 관리하여 효율적이고 편리한 환경을 제공
+  - 운영체제의 주요 역할
+    - 프로세스 관리 (Process Management)
+      - 프로그램 실행 및 CPU 스케줄링
+      - 멀티태스킹 지원 (여러 프로세스 동시 실행)
+      - 프로세스 동기화 및 상호 배제 (Mutex, Semaphore)
+      - 예제: 멀티태스킹 환경
+	    - 사용자가 브라우저에서 유튜브를 보면서, 동시에 음악을 재생하고, 문서 편집을 할 수 있도록 프로세스를 관리
+    - 메모리 관리 (Memory Management)
+      - RAM(주기억장치) 할당 및 해제
+      - 가상 메모리(Virtual Memory) 및 페이지 교체 (Paging, Segmentation)
+      - 캐시 및 버퍼 관리
+      - 예제: 가상 메모리(Virtual Memory)
+	    - 실행 중인 프로그램이 RAM보다 많은 메모리를 요구할 경우, 운영체제는 디스크의 일부를 가상 메모리(Swap)로 사용하여 실행을 유지
+    - 파일 시스템 관리 (File System Management)
+      - 파일 저장, 검색, 삭제 및 권한 관리
+      - 파일 시스템 구조 관리 (FAT32, NTFS, ext4 등)
+      - 디스크 할당 및 최적화
+      - 예제: 파일 권한 관리
+	    - 운영체제는 특정 파일에 대해 읽기(Read), 쓰기(Write), 실행(Execute) 권한을 설정하여 보안을 유지
+    - 입출력 장치 관리 (I/O Device Management)
+      - 하드웨어 장치(키보드, 마우스, 프린터, 디스크 등) 제어
+      - 입출력 버퍼 및 인터럽트 처리
+      - 드라이버(Driver) 관리
+      - 예제: 프린터 스풀링(Spooling) 기능
+	    - 여러 사용자가 동시에 프린터를 사용할 경우, 운영체제는 프린터 작업을 스풀링하여 순차적으로 인쇄
+    - 사용자 인터페이스 제공 (User Interface)
+      - CLI(Command Line Interface) → 터미널, 명령 프롬프트
+      - GUI(Graphical User Interface) → Windows, macOS의 그래픽 인터페이스
+      - 예제: GUI vs CLI
+	    - Windows/macOS: 아이콘, 마우스 클릭으로 조작 가능 (GUI)
+	    - Linux/Unix: 명령어 입력 방식으로 파일 관리 가능 (CLI)
+    - 보안 및 권한 관리 (Security & Access Control)
+      - 사용자 계정 및 권한 관리
+      - 암호화 및 방화벽 제공
+      - 바이러스 및 멀웨어 차단 기능
+      - 예제: 사용자 계정 관리
+	    - Windows의 Administrator(관리자) 계정과 Guest(게스트) 계정을 구분하여 보안 유지
+  - 운영체제 종류
+    - 데스크톱 OS: Windows, macOS, Linux
+    - 모바일 OS: Android, iOS
+    - 서버 OS: Windows Server, Ubuntu Server, CentOS
+    - 임베디드 OS: RTOS, FreeRTOS
+    - 메인프레임 OS: IBM z/OS (대형컴퓨터용)
+  - 운영체제 핵심 개념
+    - 멀티태스킹 (Multitasking): 여러 프로세스를 동시에 실행
+    - 멀티스레딩 (Multithreading): 하나의 프로세스 내에서 여러 스레드 실행
+    - 인터럽트 (Interrupt): CPU가 특정 작업을 중단하고, 즉시 처리해야 할 이벤트 처리
+    - 가상 메모리 (Virtual Memory): 물리적 메모리가 부족할 때, 디스크를 RAM처럼 활용
+    - 파일 시스템 (File System): 파일 및 디렉터리를 관리하는 구조
+    - 커널 (Kernel): 운영체제의 핵심, 하드웨어와 소프트웨어를 중재
+  - 결론
+    - 운영체제(OS)는 컴퓨터의 자원을 관리하고 사용자와 하드웨어 간 인터페이스를 제공하는 핵심 소프트웨어
+    - CPU, 메모리, 파일 시스템, 입출력 장치를 효율적으로 관리하여 시스템 성능을 최적화
+    - Windows, macOS, Linux, Android, iOS 등 다양한 OS가 존재하며, 클라우드 및 IoT 환경에서도 발전 중
+
+
 - 운영체제의 주요 기능(Process Management, Memory Management, File System, I/O Management)을 설명하시오.
 - 단일 사용자(single-user) 운영체제와 다중 사용자(multi-user) 운영체제의 차이를 설명하시오.
 - 멀티태스킹(Multitasking)과 멀티프로그래밍(Multiprogramming)의 차이를 설명하시오.
