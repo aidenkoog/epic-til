@@ -4,7 +4,116 @@ Organized expected questions & answers
 
 ## Latest Technology
 
-- 인공지능(AI)의 개념과 주요 기술(머신러닝, 딥러닝, 강화학습 등)을 설명하시오.
+- 인공지능(AI)의 개념과 주요 기술(머신러닝, 딥러닝, 강화학습 등)을 설명
+  - AI 개념
+    - Artificial Intelligence, 인공지능
+    - 인간의 학습, 추론, 문제 해결 능력을 컴퓨터가 모방할 수 있도록 하는 기술 및 연구 분야
+    - 컴퓨터가 데이터를 분석하고, 패턴을 학습하며, 스스로 판단을 내릴 수 있도록 설계된 시스템
+  - AI의 목표
+    - 인간과 같은 사고 및 의사 결정 수행
+    - 복잡한 문제 해결 자동화
+    - 데이터 기반 예측 및 최적화
+  - AI의 주요 기술
+    - 머신러닝 (Machine Learning, ML)
+      - 데이터에서 패턴을 학습하고, 이를 기반으로 예측하거나 결정을 내리는 알고리즘
+      - 명시적인 프로그래밍 없이도 데이터를 통해 학습하는 AI 기술
+      - 주요 유형
+        - 지도 학습 (Supervised Learning): 입력(X) → 정답(Y) 학습 후 예측	
+          - 예: 이메일 스팸 필터링, 이미지 분류
+        - 비지도 학습 (Unsupervised Learning): 정답 없이 데이터 구조 학습
+          - 예: 고객 군집 분석, 이상 탐지
+        - 강화 학습 (Reinforcement Learning)	보상을 통해 최적의 행동 학습
+          - 예: 자율주행, 게임 AI
+      - 대표 알고리즘
+	    - 지도 학습: 선형 회귀(Linear Regression), 로지스틱 회귀(Logistic Regression), 랜덤 포레스트(Random Forest), SVM, 신경망(Neural Networks)
+	    - 비지도 학습: K-Means 클러스터링, 주성분 분석(PCA), DBSCAN
+	    - 강화 학습: Q-Learning, Deep Q-Network(DQN), PPO
+    - 딥러닝 (Deep Learning, DL)
+      - 머신러닝의 한 분야로, 다층 신경망(Deep Neural Networks, DNN)을 활용하여 복잡한 패턴을 학습하는 기술.
+      - 사람의 뇌 신경망(뉴런)과 유사한 구조를 활용하여 대량의 데이터를 학습하는 방식.
+      - 딥러닝의 특징
+        - 인간이 직접 특징을 정의하지 않아도 자동으로 학습
+        - 이미지, 음성, 자연어 처리 같은 복잡한 문제 해결 가능
+        - 대규모 데이터셋과 강력한 GPU 연산 필요
+      - 대표적인 신경망 구조
+        - CNN (합성곱 신경망): 이미지 인식 최적화
+          - 예: 얼굴 인식, 의료 영상 분석
+        - RNN (순환 신경망): 시퀀스 데이터 처리
+          - 예: 음성 인식, 번역
+        - GAN (생성적 적대 신경망): 데이터 생성 모델
+          - 예: 딥페이크, 이미지 생성
+        - Transformer (BERT, GPT): 자연어 처리
+          - 예: 챗봇, 기계 번역
+      - 딥러닝 프레임워크
+	    - TensorFlow, PyTorch, Keras (대표적인 라이브러리)
+    - 강화학습 (Reinforcement Learning, RL)
+      - 보상을 기반으로 최적의 행동을 학습하는 AI 기술.
+      - 에이전트(Agent)가 환경(Environment)과 상호작용하면서 보상을 최대화하는 방향으로 학습하는 방식.
+      - 강화학습의 특징
+        - 목표 기반 학습 → 최대 보상을 받기 위해 최적의 전략(Policy) 학습
+        - 순차적 의사 결정 → 행동(Action)이 환경에 영향을 미치고, 결과를 반영하여 학습
+        - 게임, 로봇, 자율주행 등에 활용됨
+      - 강화학습의 구조 (AEAR)
+	    - Agent (에이전트): 학습을 수행하는 주체
+	    - Environment (환경): 에이전트가 작용하는 공간
+	    - Action (행동): 에이전트가 취할 수 있는 선택
+	    - Reward (보상): 행동에 대한 피드백 (좋은 행동 → 보상, 나쁜 행동 → 패널티)
+      - 강화학습 알고리즘
+	    - Q-Learning (기본적인 가치 기반 학습)
+	    - Deep Q-Network (DQN) (딥러닝 적용)
+	    - Proximal Policy Optimization (PPO) (정책 최적화)
+      - 강화학습 응용 사례
+        - 자율주행
+        - 알파고(바둑 AI)
+        - 로봇 제어
+        - 동적 트레이딩 시스템 (주식 거래)
+  - AI 기술 비교: 머신러닝 vs 딥러닝 vs 강화학습
+    - 학습 방식
+      - ML: 데이터 기반 패턴 학습
+      - DL: 신경망 기반 복잡한 데이터 학습
+      - RL: 환경과 상호작용하며 학습
+    - 데이터 필요량
+      - ML: 비교적 적음
+      - DL: 대량의 데이터 필요
+      - RL: 시뮬레이션 필요
+    - 사용 분야
+      - ML: 예측, 분류, 군집 분석	
+      - DL: 이미지, 음성, 자연어 처리
+      - RL: 게임, 로봇, 자율주행
+    - 예제
+      - ML: 스팸 필터, 추천 시스템
+      - DL: 얼굴 인식, 번역
+      - RL: 바둑 AI, 자율주행
+  - AI 기술의 응용 분야
+    - 의료 (Healthcare)
+      - AI 기반 질병 진단 (MRI 분석)
+      - 유전자 데이터 분석
+      - 신약 개발 최적화
+    - 금융 (Finance)
+      - 주식 거래 예측
+      - 부정 거래 탐지 (Fraud Detection)
+      - 고객 신용 평가
+    - 자율주행 (Autonomous Driving)
+      - AI 기반 자율주행 차량 (Tesla, Waymo)
+      - 교통 흐름 최적화
+      - 충돌 방지 시스템
+    - 자연어 처리 (NLP, Natural Language Processing)
+      - AI 챗봇 (ChatGPT, Siri, Google Assistant)
+      - 자동 번역 (Google Translate)
+      - 감성 분석 (소셜미디어 분석)
+    - 게임 및 로봇 (Game & Robotics)
+      - 알파고 (바둑 AI)
+      - 게임 AI (StarCraft, Dota 2 AI)
+      - 스마트 로봇
+  - 결론
+    - AI는 인간의 사고 방식을 모방하는 기술로 머신러닝, 딥러닝, 강화학습 등의 기술을 포함
+    - 머신러닝은 데이터를 기반으로 학습하는 방식
+    - 딥러닝은 신경망을 활용한 고급 패턴 학습
+    - 강화학습은 보상을 통해 최적의 행동을 학습하는 방식
+    - 의료, 금융, 자율주행, 게임, 로봇 등 다양한 산업에서 AI가 적극 활용
+    - AI는 데이터를 학습하여 인간의 지능을 모방하는 강력한 기술이며, 미래 산업의 핵심 기술
+
+
 - 지도학습(Supervised Learning)과 비지도학습(Unsupervised Learning)의 차이를 설명하시오.
 - 강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)을 설명하시오.
 - 신경망(Neural Network)의 개념과 CNN(Convolutional Neural Network)의 차이를 설명하시오.
