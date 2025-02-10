@@ -4,7 +4,33 @@ Organized expected questions & answers
 
 ## Vue.js (+HTML, CSS, Javascript, Typescript)
 
-- Vue.js의 반응형(Reactive) 시스템이 어떻게 동작하는가?
+- Vue.js의 반응형(Reactive) 시스템 동작 설명
+  - 개요
+    - Vue.js의 반응형 시스템은 데이터가 변경되면 자동으로 UI가 업데이트되도록 설계된 핵심 메커니즘
+    - Vue는 프록시(Proxy) 기반의 반응형(Reactivity) 시스템을 사용하여 데이터 변경을 감지하고, 필요할 때만 DOM을 업데이트
+  - Vue.js 반응형 시스템의 핵심 개념
+    - "데이터 변경 감지” + “필요한 부분만 업데이트” 를 결합하여 최적화된 UI 렌더링을 수행
+    - 핵심 개념
+      - 반응형 데이터 감지
+        - Vue는 Proxy (Vue 3) 또는 Object.defineProperty (Vue 2) 를 이용해 데이터 변경을 감지.
+	    - ref() 또는 reactive()를 사용하여 반응형 데이터 생성.
+      - 종속성 추적 (Dependency Tracking)
+	    - Vue의 반응형 시스템은 데이터가 어떤 컴포넌트에서 사용되는지 추적
+	    - 특정 데이터가 변경될 때 관련된 컴포넌트만 업데이트
+      - 효율적인 DOM 업데이트
+	    - 변경된 데이터와 관련된 Virtual DOM 부분만 업데이트하여 성능 최적화
+  - Vue의 반응형 시스템이 DOM을 업데이트하는 과정
+    - 데이터 변경 감지 (Proxy set 트랩 실행)
+    - 종속성 추적 (어떤 컴포넌트에서 해당 데이터가 사용되는지 기록)
+    - Virtual DOM 업데이트 (변경된 부분만 업데이트하여 성능 최적화)
+    - 실제 DOM 업데이트 (최적화된 패치 적용)
+  - 결론 (Vue 반응형 시스템 핵심 요약)
+    - Vue는 Proxy 기반(3.x) 또는 Object.defineProperty()(2.x)로 반응형 시스템을 구현
+    - 종속성 추적을 통해 변경된 부분만 업데이트하여 성능 최적화
+    - reactive(), ref(), computed(), watch() 같은 API를 활용하여 상태 관리 가능
+    - Virtual DOM을 활용하여 효율적으로 실제 DOM 업데이트 수행
+    - Vue의 반응형 시스템은 데이터 변경을 자동으로 감지하고, 필요한 부분만 업데이트하여 효율적인 UI 렌더링을 제공
+
 - Vue.js에서 Vuex와 Pinia의 차이점은?
 - Vue.js의 Computed Property와 Watcher의 차이점은?
 - Vue.js에서 Composition API와 Options API의 차이점은?
