@@ -56,6 +56,7 @@
 ### Self Assessment
 
 - [Android/Java/Kotlin](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Android_Java_Kotlin.md)
+- [C-C++](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_C_C++.md)
 - [Common](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Common.md)
 - [ComputerScience](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_ComputerScience.md)
 - [Flutter/Dart](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Flutter_Dart.md)
@@ -68,6 +69,19 @@
 - [ReactNative](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_ReactNative.md)
 - [Typescript/Javascript](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Typescript_Javascript.md)
 - [Vue.js](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_Vue.md)
+
+### PEIM & PECSA
+
+- [Algorithm](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_Algorithm.md)
+- [Cloud](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_Cloud.md)
+- [ComputerStructure](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_ComputerStructure.md)
+- [Database](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_Database.md)
+- [InformationSecurity](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_InformationSecurity.md)
+- [ItManagement](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_ItManagement.md)
+- [LatestTechnology](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_LatestTechnology.md)
+- [Network](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_Network.md)
+- [OperatingSystem](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_OperatingSystem.md)
+- [SoftwareEngineering](https://github.com/aidenkoog/TIL/blob/master/SelfAssessment/SelfAssessment_PEIM_PECSA_SoftwareEngineering.md)
 
 ### Robot operating system
 
