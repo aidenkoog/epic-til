@@ -92,6 +92,45 @@ Organized expected questions & answers
 	  - SwiftUI → 선언형 UI 프레임워크
 
 - Swift의 주요 특징은?
+    - 개요
+        - Apple이 개발한 프로그래밍 언어로, iOS, macOS, watchOS, tvOS 애플리케이션을 개발하기 위해 사용
+        - 안전성, 성능, 간결성을 고려하여 설계된 언어로, 기존 Objective-C보다 더 직관적이고 효율적인 코드 작성을 지원
+    - Swift의 목표
+        - 안전한(Safe) 코드 → 메모리 충돌 방지, 타입 안정성
+        - 빠른(Fast) 실행 속도 → LLVM 기반 컴파일러 사용
+        - 간결한(Simple) 문법 → 개발자가 쉽게 배울 수 있도록 설계
+    - Swift 주요 활용 분야
+	       - iOS 앱 개발 (iPhone, iPad)
+	       - macOS 앱 개발
+	       - watchOS, tvOS 앱 개발
+	       - 서버 개발 (Vapor, Kitura 프레임워크 활용)
+    - 주요 특징
+        - 간결, 직관적인 문법
+        - 타입 안정성(Type Safety) 및 타입 추론(Type Inference)
+            - 엄격한 타입 시스템을 적용하여 오류를 줄이고, 타입을 자동으로 추론
+        - 옵션(Optional) 타입 - Null Safety 지원
+            - Null 값(= nil) 사용을 엄격하게 제한하여 런타임 오류를 방지
+								    - 옵셔널(Optional)을 사용하여 값이 존재할 수도 있고, 존재하지 않을 수도 있는 상황을 명확하게 처리
+        - 함수형 프로그래밍 지원 (Functional Programming)
+            - 고차 함수(Higher-Order Functions) 를 제공하여 함수형 프로그래밍 패러다임을 지원
+        - 메모리 안전성 (Automatic Memory Management - ARC)
+            - ARC(Automatic Reference Counting) 를 사용하여 메모리를 자동으로 관리하므로, 개발자가 직접 메모리를 해제할 필요가 없음
+        - 프로토콜 지향 프로그래밍 (Protocol-Oriented Programming, POP)
+            - 객체 지향 프로그래밍(OOP)보다 프로토콜 지향 프로그래밍(POP)을 강조하여 코드의 유연성과 확장성을 높임
+        - 안전한 에러 처리 (Error Handling)
+            - do-try-catch 구문을 사용하여 예외를 명확하게 처리할 수 있도록 함
+        - 강력한 확장 기능 (Extensions)
+            - 확장(Extension) 기능을 사용하면 기존 클래스, 구조체, 열거형에 새로운 기능을 추가 가능
+        - 멀티스레딩 및 동시성(Concurrency) 지원
+            - 비동기 프로그래밍을 쉽게 구현할 수 있도록 async/await을 지원
+    - 결론
+        - Swift는 Apple의 공식 프로그래밍 언어로 iOS, macOS, watchOS, tvOS 앱 개발에 사용됨
+        - 간결하고 직관적인 문법, 타입 안정성, 옵셔널, 함수형 프로그래밍 지원
+        - ARC를 통한 자동 메모리 관리, 프로토콜 지향 프로그래밍(POP) 지원
+        - 비동기 프로그래밍(Concurrency), 에러 처리, 확장성(Extension) 기능 제공
+        - Objective-C보다 성능이 뛰어나며, 최신 Apple 생태계에 최적화된 언어
+        - Swift는 안전하고 빠르며, 개발자 친화적인 최신 프로그래밍 언어
+
 - struct와 class의 차이는?
 - optional이란 무엇이고, !와 ?의 차이는?
 - guard와 if let의 차이는?
