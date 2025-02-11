@@ -738,7 +738,6 @@ Organized expected questions & answers
             print(optimized_bubble_sort(arr))  # O(N)으로 빠르게 종료
             ```
 
-✔ 이미 정렬된 경우 즉시 종료하여 불필요한 반복을 줄이는 최적화 적용
 - 선택 정렬(Selection Sort)의 동작 원리와 특징을 설명하시오.
 - 삽입 정렬(Insertion Sort)의 과정과 시간 복잡도를 설명하시오.
 - 병합 정렬(Merge Sort) 알고리즘의 개념과 적용 사례를 설명하시오.
