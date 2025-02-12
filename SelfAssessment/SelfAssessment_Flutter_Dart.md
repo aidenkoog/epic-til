@@ -136,7 +136,83 @@ Organized expected questions & answers
         - 마이크로태스크 사용하지 않는 경우 UI 지연 발생 가능성 존재
         - initState 내에서 delayed로 처리할 경우 UI 느려질 가능성 존재 
 
-- Flutter에서 Web과 Mobile 개발의 차이점은?
+- Flutter에서 Web과 Mobile 개발의 차이점
+    - 공통
+        - Web과 Mobile(iOS/Android)에서 동일한 코드베이스를 사용할 수 있는 크로스플랫폼 프레임워크
+    - Flutter Web과 Mobile 개발의 주요 차이점
+        - 렌더링 방식 차이
+            - Flutter Web
+	            - HTML + CSS + CanvasKit(옵션)으로 렌더링
+	            - CanvasKit 사용 시 성능 향상 가능 (WebGL 기반)
+	        - Flutter Mobile (iOS/Android)
+	            - Skia 엔진을 사용하여 네이티브 수준의 성능 제공
+	            - 모든 위젯을 픽셀 단위로 직접 렌더링
+            - 차이점
+	            - 웹은 브라우저 기반 렌더링 방식 사용 → 성능이 제한될 수 있음
+	            - 모바일은 직접 Skia 엔진을 사용하여 더 부드럽고 빠름
+        - 성능 차이
+	        - Flutter Web
+	            - HTML, CSS, JavaScript의 DOM 구조를 사용해야 해서 성능 저하 가능
+	            - 복잡한 애니메이션이나 고해상도 그래픽 작업이 모바일보다 느릴 수 있음
+	            - CanvasKit 사용 시 성능 개선 가능하지만, 로드 시간이 증가
+	        - Flutter Mobile
+	            - Skia 그래픽 엔진 덕분에 네이티브 수준의 성능 제공
+	            - 모든 위젯을 직접 그려서 GPU를 최대한 활용 가능
+            - 차이점
+	            - Flutter Web은 HTML 기반이라 모바일보다 성능이 떨어질 수 있음
+	            - 복잡한 애니메이션이나 그래픽이 많은 경우 모바일이 더 부드럽게 동작
+        - 플랫폼 API 접근 차이
+            - Flutter Web
+	            - 웹 브라우저 환경에서 동작하므로, 파일 시스템, 블루투스, 센서, 네이티브 API 접근 제한
+	            - 브라우저에서 지원하는 API(WebRTC, LocalStorage 등)만 사용 가능
+	        - Flutter Mobile
+	            - 네이티브 API 완전 접근 가능 (카메라, GPS, 블루투스, 센서 등)
+	            - MethodChannel을 통해 네이티브(Android, iOS) 기능 확장 가능
+            - 차이점
+	            - 웹에서는 브라우저 보안 정책(CORS, 파일 접근 제한)으로 네이티브 기능 접근이 제한됨
+	            - 모바일에서는 네이티브 API를 자유롭게 활용 가능
+        - 상태 관리(State Management)
+	        - Flutter Web
+	            - 새로고침(F5) 시 상태가 초기화됨 (앱의 상태가 사라짐)
+	            - URL을 통한 네비게이션 필요 (페이지 이동 시 상태 유지 어려움)
+	        - Flutter Mobile
+	            - 앱이 백그라운드로 가도 상태 유지 가능
+                - 네비게이션이 Stack 기반이므로 자연스럽게 상태 유지
+            - 차이점
+	            - 웹에서는 페이지 새로고침 시 상태가 초기화될 수 있으므로, SharedPreferences, Firebase 등을 활용하여 상태 저장 필요
+	            - 모바일에서는 네비게이션과 상태 관리가 더 자연스럽게 동작
+        - 네비게이션 방식 차이
+            - Flutter Web
+	            - URL 기반 네비게이션 사용 가능 (Flutter 2.0부터 go_router 지원)
+	            - 브라우저의 “뒤로 가기” 버튼과 연동 가능
+	        - Flutter Mobile
+	            - Stack 기반 네비게이션 사용 (Navigator API)
+	            - URL 기반 네비게이션이 기본적으로 필요하지 않음
+            - 차이점
+	            - 웹에서는 URL을 기반으로 페이지 전환을 고려해야 함
+	            - 모바일에서는 Navigator를 통한 Stack 방식이 기본
+        - 네이티브 기능 연동 차이
+	        - Flutter Web
+                - 웹 브라우저 환경에서 실행되므로, 네이티브 기능(카메라, 블루투스 등) 사용이 제한적
+                - flutter_web_plugins 패키지를 사용하여 일부 기능 지원 가능
+            - Flutter Mobile
+                - MethodChannel을 활용하여 네이티브(Android/iOS) 기능과 완전한 연동 가능
+	            - 카메라, GPS, 바이오메트릭 인증, NFC 등 모든 네이티브 기능을 사용할 수 있음
+            - 차이점
+	            - 웹은 브라우저에서 지원하는 API만 사용 가능
+	            - 모바일은 네이티브 API까지 활용 가능하여 확장성이 뛰어남
+        - 앱 배포 방식 차이
+	        - Flutter Web
+	            - 배포 방식 → 정적 웹 사이트로 배포 가능 (Firebase Hosting, Netlify, AWS S3)
+	            - 사용자는 브라우저에서 실행 가능
+	        - Flutter Mobile
+	            - 배포 방식 → App Store, Google Play에 업로드 필요
+	            - 사용자는 앱을 설치해야 사용 가능
+            - 차이점
+	            - 웹은 배포가 간편하고 URL을 통해 접속 가능
+	            - 모바일은 스토어 등록 과정이 필요하지만 네이티브 경험 제공
+
+
 - Flutter에서 Adaptive UI를 구현하는 방법은?
 - Flutter에서 태블릿, 일반폰의 화면 사이즈 대응 방법
 - Flutter에서 BLoC 패턴을 사용하는 이유는?
