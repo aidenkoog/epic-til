@@ -116,6 +116,26 @@ Organized expected questions & answers
     - Android/iOS에서 다른 패키지 사용
       - Platform.isAndroid로 분기
 
+- Future.microtask 의미
+    - 정의
+        - 마이크로태스크 큐에 작업을 추가하여 즉시 실행하는 다트의 비동기 처리 메커니즘
+        - 즉시 실행해야 하는 비동기 작업 예약 함수
+        - 현재 실행 중인 코드가 끝난 후 이벤트 루프에서 가장 먼저 실행됨
+        - UI 프레임 드롭을 방지하면서 UI 업데이트 후 빠르게 실행할 때 유용
+    - Future.microtask와 Future.delayed 비교
+        - 실행시점: 현재 코드 실행이 끝난 직후 / 지정한 시간이 지난 후 실행
+        - UI 영향: 영향 없음 (즉시 실행) / 일정 시간이 지나야 실행
+        - 우선 순위: 마이크로태스크 큐 (우선 실행) / 일반 이벤트 루프(대기)
+    - 동작 방식
+        - 다트의 이벤트 루프는 두가지 큐를 가짐
+            - 마이크로태스크 큐
+                - 현재 실행 중인 코드가 끝나면 가장 먼저 실행
+            - 이벤트 큐
+                - UI 이벤트, 네트워크 응답, Future.delayed, setState() 등 실행 대기 
+    - UI 최적화
+        - 마이크로태스크 사용하지 않는 경우 UI 지연 발생 가능성 존재
+        - initState 내에서 delayed로 처리할 경우 UI 느려질 가능성 존재 
+
 - Flutter에서 Web과 Mobile 개발의 차이점은?
 - Flutter에서 Adaptive UI를 구현하는 방법은?
 - Flutter에서 태블릿, 일반폰의 화면 사이즈 대응 방법
