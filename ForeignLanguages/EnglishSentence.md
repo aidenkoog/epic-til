@@ -302,5 +302,13 @@
 - Money doesn't grow on trees" is an idiom that means money is a valuable resource that is hard earned and limited. 
   - It's a reminder that money is not easily available and that people should be careful with how much they spend.
 - Time is money means that you should not waste time, because you could be using it to earn money.
-
-
+- Pretty good!
+- Not bad. How about you?
+- I’m doing great!
+- Couldn’t be better!
+- Fantastic! How about you?
+- I’m getting by
+- I’ve been better.
+- Not so great.
+- I’m feeling a bit under the weather.
+- Not bad, just a bit tired from work.
