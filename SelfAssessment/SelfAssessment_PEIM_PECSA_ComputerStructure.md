@@ -72,7 +72,71 @@ Organized expected questions & answers
           - 폰 노이만: 대부분의 범용 컴퓨터(PC, 서버)
           - 하버드 구조: 임베디드 시스템, DSP(Digital Signal Processor)
 
-- CISC와 RISC의 개념과 차이점은 무엇인가?
+- CISC와 RISC의 개념과 차이점
+    - CISC
+        - Complex Instruction Set Computer
+        - CISC(복잡한 명령어 집합 컴퓨터, Complex Instruction Set Computer)는 하나의 명령어로 복잡한 연산을 수행할 수 있도록 설계된 프로세서 아키텍처
+        - 명령어 개수가 많고, 하나의 명령어가 여러 개의 연산을 수행할 수 있음.
+        - 어셈블리 코드가 간결해지고, 프로그래밍이 쉬워짐.
+        - 특징
+	        - 명령어 개수 多, 명령어 길이 가변적
+	        - 하나의 명령어로 여러 연산 수행 가능 → 고급 언어와 유사한 기능 지원
+	        - 메모리 접근 방식이 다양함 → 다양한 주소 지정 방식 지원
+	        - 마이크로코드(Microcode) 사용 → 하드웨어가 복잡해짐
+	        - CPU 설계가 복잡하지만, 코드 크기를 줄일 수 있음
+        - 대표적인 CISC 프로세서
+	        - Intel x86 (Pentium, Core i7, i9 등)
+	        - AMD Ryzen
+    - RISC
+        - Reduced Instruction Set Computer
+        - RISC(축소 명령어 집합 컴퓨터, Reduced Instruction Set Computer)는 명령어를 단순화하여 빠르게 실행할 수 있도록 설계된 프로세서 아키텍처
+        - 단순한 명령어를 빠르게 실행하는 방식으로, 하드웨어가 단순하고 최적화가 쉬움.
+        - 명령어가 동일한 크기로 고정되어 있어 파이프라이닝(Pipelining) 성능이 우수함.
+        - 특징
+	        - 명령어 개수 少, 명령어 길이 고정적
+	        - 하나의 명령어는 한 가지 연산만 수행 (LOAD/STORE 방식)
+	        - 메모리 접근 제한 (메모리 연산은 LOAD/STORE 명령어로만 가능)
+	        - 하드웨어 설계가 단순하고, 실행 속도가 빠름
+	        - CPU 내부에서 명령어 실행이 균일하여 병렬 처리(Pipelining) 최적화 가능
+        - 대표적인 RISC 프로세서
+	        - ARM (스마트폰, 태블릿, 임베디드 시스템 등 대부분의 모바일 CPU)
+	        - Apple M1/M2, Qualcomm Snapdragon, Samsung Exynos
+	        - IBM PowerPC, RISC-V, MIPS
+    - 핵심 차이점 정리
+        - CISC는 명령어가 강력하여 코드가 짧지만, 실행 속도가 상대적으로 느림.
+        - RISC는 단순한 명령어를 빠르게 실행하여 성능이 뛰어나며, 저전력 설계에 적합함
+    - CISC vs RISC 실제 적용 예시
+        - CISC (Intel x86)
+            - 데스크톱, 서버, 고성능 컴퓨팅에 사용
+            - 명령어 하나로 여러 연산을 수행
+            - Windows PC, 고성능 워크스테이션, 서버에서 주로 사용
+            - 예제 (Intel x86 어셈블리)
+            - 한 번의 명령어로 메모리에서 값을 가져오고 연산 가능
+            - CISC 구조에서는 복잡한 연산을 적은 명령어로 표현 가능
+        - RISC (ARM, Apple M1)
+            - 모바일, 임베디드, 저전력 환경에 사용
+            - 단순한 명령어를 빠르게 실행하여 전력 효율성이 높음
+            - 스마트폰, 태블릿, IoT, 클라우드 서버에서 사용
+            - 예제 (ARM 어셈블리)
+            - LOAD/STORE 방식을 사용하여 메모리 접근 제한
+            - 파이프라이닝이 용이하여 실행 속도가 빠름
+    - 최신 트렌드: RISC 기반의 시장 확대
+        - 최근 RISC 아키텍처(특히 ARM)가 점점 시장을 확장하고 있음
+            - Apple M1, M2 칩 → MacBook에서 ARM 기반으로 전환
+            - Qualcomm Snapdragon → 모바일 & 노트북 시장 확대
+            - AWS Graviton → 클라우드 서버에서도 ARM 기반 RISC CPU 사용 증가
+        - 이유
+            - RISC는 전력 효율이 높아 모바일, 클라우드, 서버 환경에 적합
+            - CISC(Intel, AMD)는 고성능 컴퓨팅에 강하지만, 전력 소모가 많음
+            - ARM 기반 CPU가 계속 발전하면서 서버 및 데스크톱 시장에서도 사용 증가
+    - 결론
+        - CISC는 복잡한 명령어 집합을 제공하여 코드 크기를 줄일 수 있지만, 실행 속도가 상대적으로 느림.
+        - RISC는 단순한 명령어를 빠르게 실행하여 성능이 뛰어나고, 전력 효율이 높음.
+        - Intel, AMD CPU는 CISC 기반, ARM 및 Apple M1/M2, Qualcomm은 RISC 기반.
+        - 최근에는 RISC 기반 프로세서가 성능을 향상시키면서 시장 점유율이 증가하는 추세.
+        - 전통적인 고성능 컴퓨팅(CISC) vs 저전력, 고효율(RISC)의 차이가 있으며, 최근에는 RISC 기반 CPU가 데스크톱/서버 시장에서도 성장 중
+
+
 - 컴퓨터의 기본 구성 요소(입력, 출력, 기억장치, 연산장치, 제어장치)에 대해 설명하라.
 - CPU의 기본 동작 사이클(Fetch-Decode-Execute)에 대해 설명하라.
 - 명령어 파이프라이닝(Instruction Pipelining)의 개념과 장단점은?
