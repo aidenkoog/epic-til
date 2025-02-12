@@ -931,7 +931,80 @@ print(optimized_insertion_sort(arr))  # O(N)으로 빠르게 종료
 
 
 
-- 병합 정렬(Merge Sort) 알고리즘의 개념과 적용 사례를 설명하시오.
+- 병합 정렬(Merge Sort) 알고리즘의 개념과 적용 사례
+    - 병합 정렬(Merge Sort)의 개념
+
+병합 정렬(Merge Sort)은 분할 정복(Divide and Conquer) 전략을 기반으로 하는 정렬 알고리즘이다. 주어진 배열을 계속해서 두 개의 작은 배열로 분할하고, 더 이상 분할할 수 없는 크기(즉, 원소가 1개 이하)가 되면, 이를 다시 병합하면서 정렬하는 방식으로 동작한다.
+
+알고리즘 과정
+	1.	분할(Divide)
+배열을 중간을 기준으로 두 개의 부분 배열로 나눈다.
+	2.	정복(Conquer)
+나눈 부분 배열을 각각 다시 병합 정렬을 적용하여 정렬된 상태로 만든다.
+	3.	병합(Merge)
+정렬된 두 개의 부분 배열을 하나의 정렬된 배열로 합친다.
+
+시간 복잡도
+	•	최선, 평균, 최악의 경우: O(n log n)
+	•	공간 복잡도: O(n) (추가적인 보조 배열이 필요함)
+
+병합 정렬의 적용 사례
+	1.	대용량 데이터 정렬
+	•	퀵 정렬(Quick Sort)은 최악의 경우 O(n²)이 될 수 있어, 안정적인 성능이 필요한 경우 병합 정렬을 사용함.
+	•	내부 정렬(메모리 내 정렬)보다 외부 정렬(디스크에서 데이터를 읽고 정렬하는 경우)에서 자주 사용됨.
+	2.	링크드 리스트 정렬
+	•	배열 기반 정렬은 랜덤 액세스(random access)가 빠른 배열에서 효과적이지만, 링크드 리스트는 연속된 메모리 할당이 없기 때문에 퀵 정렬보다 병합 정렬이 더 적합함.
+	3.	멀티스레딩 환경에서 정렬
+	•	병합 정렬은 재귀적으로 정렬할 부분을 나누므로, 여러 개의 스레드에서 병렬로 처리하기 용이함.
+	4.	외부 정렬(External Sorting)
+	•	대용량 데이터가 메모리에 한 번에 들어오지 않는 경우(예: DBMS에서 테이블을 정렬할 때), 병합 정렬을 사용하여 디스크에서 데이터를 부분적으로 읽고 정렬 후 합치는 방식으로 사용됨.
+
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    # 중간 지점 찾기
+    mid = len(arr) // 2
+    left_half = merge_sort(arr[:mid])
+    right_half = merge_sort(arr[mid:])
+    
+    return merge(left_half, right_half)
+
+def merge(left, right):
+    sorted_arr = []
+    i = j = 0
+    
+    # 두 배열을 병합하는 과정
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            sorted_arr.append(left[i])
+            i += 1
+        else:
+            sorted_arr.append(right[j])
+            j += 1
+    
+    # 남은 요소 추가
+    sorted_arr.extend(left[i:])
+    sorted_arr.extend(right[j:])
+    
+    return sorted_arr
+
+# 테스트 실행
+arr = [5, 3, 8, 4, 2, 7, 1, 6]
+sorted_arr = merge_sort(arr)
+print(sorted_arr)
+
+
+정리
+	•	병합 정렬은 분할 정복(Divide and Conquer) 개념을 활용한 정렬 알고리즘.
+	•	시간 복잡도 O(n log n) 으로 비교적 안정적인 정렬 속도를 보장함.
+	•	추가적인 공간(O(n)) 이 필요하기 때문에 메모리 사용량이 많을 수 있음.
+	•	대용량 데이터 처리, 링크드 리스트 정렬, 외부 정렬 등에 유용함.
+
+이해가 쉽게 되었나요? 추가적인 설명이 필요하면 알려주세요!
+
+
 - 퀵 정렬(Quick Sort)의 피벗 선택 방법과 성능에 미치는 영향을 설명하시오.
 - 힙 정렬(Heap Sort)의 개념과 구현 방법을 설명하시오.
 - 기수 정렬(Radix Sort)과 카운팅 정렬(Counting Sort)의 차이점을 설명하시오.
