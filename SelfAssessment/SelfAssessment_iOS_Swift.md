@@ -131,7 +131,99 @@ Organized expected questions & answers
         - Objective-C보다 성능이 뛰어나며, 최신 Apple 생태계에 최적화된 언어
         - Swift는 안전하고 빠르며, 개발자 친화적인 최신 프로그래밍 언어
 
-- struct와 class의 차이는?
+- struct와 class의 차이점
+    - 개요
+        - struct(구조체)와 class(클래스)의 주요 차이점은 값 타입과 참조 타입의 차이
+    - 값 타입, 참조 타입
+        - Struct: 값 타입
+            - 값을 직접 저장하며, 변수에 할당하거나 함수의 인자로 전달될 때 복사됨
+            - 각각의 인스턴스가 독립적인 데이터를 가짐
+        - Class: 참조 타입
+            - 인스턴스를 변수에 할당하거나 함수의 인자로 전달할 때 참조(주소)가 전달됨
+            - 같은 인스턴스를 여러 변수에서 공유할 수 있음
+        - 예제
+          ```Swift
+          struct UserStruct {
+              var name: String
+          }
+
+          class UserClass {
+              var name: String
+              
+              init(name: String) {
+                  self.name = name
+              }
+          }
+
+          var struct1 = UserStruct(name: "Alice")
+          var struct2 = struct1  // 값 복사
+          struct2.name = "Bob"
+
+          var class1 = UserClass(name: "Alice")
+          var class2 = class1  // 참조 전달
+          class2.name = "Bob"
+
+          print(struct1.name)  // "Alice" (독립적인 값), struct2.name을 Bob으로 변경해도 struct1의 name은 변경되지 않음
+          print(class1.name)   // "Bob" (같은 객체 참조), class2.name을 변경했는데 class1.name 도 변경, 참조관계
+          ```
+    - 메모리 관리
+        - Struct
+            - 스택 메모리에 저장됨
+            - 빠르고 자동으로 메모리에서 제거됨(ARC 영향 없음)
+        - Class
+            - 힙 메모리에 저장됨 (자바와 동일)
+            - ARC(Automatic Reference Counting)에 의해 메모리를 관리함
+            - 순환 참조(Retain Cycle)가 발생할 수 있음
+    - 상속(Inherirance) 
+        - Struct 상속 불가능
+        - Class 상속 가능
+    - Mutability (불변성)
+        - Struct
+            - let 키워드로 선언된 struct 인스턴스는 내부 속성도 변경 불가
+            - 내부 속성 변경하려면 mutating 키워드 사용 필수
+              ```Swift
+              struct Car {
+                  var model: String
+                  // mutating keyword
+                  mutating func changeModel(to newModel: String) {
+                      self.model = newModel
+                  }
+              }
+              var myCar = Car(model: "BMW")
+              myCar.changeModel(to: "Tesla") 
+              ```
+        - Class
+            - let 키워드로 선언된 class 인스턴스라도 내부 속성 변경 가능
+    - Protocol Conformance
+        - Struct & Class 모두 프로토콜을 채택 가능
+        - struct는 상속이 불가능하므로 프로토콜 기반의 확장을 더 많이 활용
+          ```Swift
+          protocol Driveable {
+              func drive()
+          }
+          struct Bike: Driveable {
+              func drive() {
+                  print("Riding a bike")
+              }
+          }
+          ```
+    - 사용 사례
+        - Struct 사용
+            - 값이 독립적이고 변경이 적은 경우
+            - 데이터 중심(모델)
+            - SwiftUI에서 ViewModel
+            - Codable 데이터 모델 
+        - Class 사용 
+            - 상태를 변경하거나 공유해야 하는 경우
+            - 객체 지향 프로그래밍(OOP) 필요
+            - UIKit 기반 UI 코드
+            - 네트워크, 데이터베이스, 싱글톤 패턴
+    - 결론
+        - 값 타입(struct)은 복사되어 독립적인 데이터를 가짐 > SwiftUI 등에서 많이 사용됨
+        - 참조 타입(Class)은 참조되어 여러 객체에서 공유됨 > UIKit 기반 개발에 유용
+        - Struct가 기본적으로 더 안전하고 성능이 좋음 > 기본적으로 Struct를 사용하고 필요할 때 Class 를 사용
+        - Swift에서는 가능하면 Struct를 기본으로 사용하고, 상속이나 참조가 필요할 때 Class를 고려하는 것이 좋은 방향
+ 
 - optional이란 무엇이고, !와 ?의 차이는?
 - guard와 if let의 차이는?
 - weak, strong, unowned의 차이는?
