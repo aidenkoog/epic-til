@@ -118,7 +118,142 @@ Organized expected questions & answers
         - 즉, 프로토콜이 없다면 현재의 인터넷 및 네트워크 환경은 존재할 수 없으며, 데이터 통신이 불가능
         - 효율적이고 안전한 네트워크 환경을 구축하려면 프로토콜의 개념과 역할을 정확히 이해하는 것이 중요
 
-- OSI 7계층(Open Systems Interconnection)의 개념과 각 계층의 역할을 설명하시오.
+- OSI 7계층(Open Systems Interconnection)의 개념과 각 계층의 역할
+    - OSI 7계층(Open Systems Interconnection) 모델과 역할
+
+OSI 7계층 모델은 **컴퓨터 네트워크에서 통신이 어떻게 이루어지는지 체계적으로 설명하기 위해 국제표준화기구(ISO)**에서 개발한 네트워크 아키텍처 모델입니다.
+이 모델은 네트워크 통신을 7개의 계층으로 나누어 각 계층이 특정 기능을 수행하도록 설계되었습니다.
+
+1. OSI 7계층의 개념
+	•	네트워크 통신을 계층별로 분리하여 모듈화하고, 표준화된 프로토콜을 정의하여 상호 운용성을 높임
+	•	각 계층은 독립적으로 동작하며, 하위 계층의 서비스를 기반으로 상위 계층이 동작
+	•	물리 계층(1계층)에서 응용 계층(7계층)까지 데이터가 순차적으로 흐름
+	•	각 계층에서 데이터를 전송할 때, 특정 헤더(Header) 를 추가하여 정보를 전달 (캡슐화, Encapsulation)
+
+2. OSI 7계층 구조 및 역할
+
+🔹 1계층: 물리 계층 (Physical Layer)
+
+	비트(Bit) 단위의 데이터 전송을 담당하는 계층
+
+📌 주요 역할
+	•	물리적 전송 매체(케이블, 광섬유, 무선 등)를 통해 데이터를 전송
+	•	데이터를 0과 1의 비트 스트림으로 변환하여 신호화
+	•	신호의 전압, 펄스, 주파수, 변조 방식 결정
+	•	전송 속도, 전송 거리, 데이터 손실율 등과 관련됨
+
+📌 주요 장비 및 프로토콜
+	•	장비: 리피터(Repeater), 허브(Hub), 네트워크 케이블, 모뎀
+	•	기술: 광케이블, UTP 케이블, 전기 신호, 무선 신호
+
+🔹 2계층: 데이터 링크 계층 (Data Link Layer)
+
+	MAC 주소 기반으로 오류 없는 데이터 프레임(Frame) 전송
+
+📌 주요 역할
+	•	물리 계층에서 전송된 데이터를 신뢰성 있는 데이터 프레임(Frame)으로 변환
+	•	MAC 주소(물리 주소, 하드웨어 주소)를 이용하여 장치 간 통신 수행
+	•	흐름 제어(Flow Control) 및 오류 감지(Error Detection), 오류 수정(Error Correction) 기능 수행
+	•	데이터 프레임의 시작과 끝을 구분하는 역할
+
+📌 주요 장비 및 프로토콜
+	•	장비: 스위치(Switch), 브리지(Bridge), 네트워크 인터페이스 카드(NIC)
+	•	프로토콜: 이더넷(Ethernet), PPP(Point-to-Point Protocol), HDLC(High-Level Data Link Control)
+	•	주소 체계: MAC 주소 (48비트, ex: 00:1A:2B:3C:4D:5E)
+
+🔹 3계층: 네트워크 계층 (Network Layer)
+
+	IP 주소를 기반으로 최적의 경로를 찾아 데이터 패킷 전달
+
+📌 주요 역할
+	•	IP 주소(논리 주소)를 기반으로 패킷을 목적지까지 전송
+	•	여러 개의 네트워크를 거쳐 최적의 경로(Routing)를 결정
+	•	데이터가 서로 다른 네트워크 간에도 통신할 수 있도록 지원
+	•	패킷 분할(Fragmentation) 및 재조립(Reassembly)
+
+📌 주요 장비 및 프로토콜
+	•	장비: 라우터(Router), L3 스위치
+	•	프로토콜: IP(IPv4, IPv6), ICMP(핑 요청), ARP, RIP, OSPF, BGP
+	•	주소 체계: IP 주소 (ex: 192.168.1.1)
+
+🔹 4계층: 전송 계층 (Transport Layer)
+
+	포트 번호를 기반으로 신뢰성 있는 데이터 전송을 수행
+
+📌 주요 역할
+	•	애플리케이션 간 종단 간(End-to-End) 통신을 담당
+	•	데이터를 작은 블록(Segment) 단위로 나누고, 전송을 제어
+	•	데이터의 흐름 제어(Flow Control) 및 오류 복구(Error Recovery) 수행
+	•	송신자와 수신자가 올바른 순서(Sequencing)로 데이터 조립 가능하도록 지원
+
+📌 주요 장비 및 프로토콜
+	•	프로토콜:
+	•	TCP(Transmission Control Protocol): 연결 지향(3-way Handshake), 신뢰성 보장
+	•	UDP(User Datagram Protocol): 비연결 지향, 빠른 전송(실시간 스트리밍, VoIP)
+	•	포트 번호:
+	•	HTTP (80), HTTPS (443), FTP (21), SSH (22), DNS (53)
+
+🔹 5계층: 세션 계층 (Session Layer)
+
+	통신 세션을 설정하고 유지 및 종료하는 역할
+
+📌 주요 역할
+	•	송신자와 수신자 간 세션(Session) 설정, 유지, 종료 관리
+	•	애플리케이션 간 다중 연결 관리 (예: 브라우저에서 여러 개의 탭 유지)
+	•	데이터 동기화(Synchronization) 기능 제공
+	•	세션 복구(Checkpointing): 연결이 끊겼을 때, 재전송할 위치 지정
+
+📌 주요 프로토콜
+	•	RPC(Remote Procedure Call): 원격 함수 호출
+	•	NetBIOS, PPTP(Point-to-Point Tunneling Protocol)
+
+🔹 6계층: 표현 계층 (Presentation Layer)
+
+	데이터 포맷 변환(Encoding, Decoding) 및 암호화 수행
+
+📌 주요 역할
+	•	데이터 인코딩(Encoding) 및 디코딩(Decoding) 수행 (문자 인코딩, 이미지 포맷 변환)
+	•	데이터 압축(Compression) 및 암호화(Encryption) 지원
+	•	서로 다른 데이터 포맷을 사용하는 시스템 간 변환 역할
+
+📌 주요 프로토콜
+	•	JPEG, GIF, PNG (이미지 변환)
+	•	ASCII, UTF-8 (문자 인코딩)
+	•	SSL/TLS (보안 암호화)
+	•	MPEG, MP3, AVI (미디어 데이터 변환)
+
+🔹 7계층: 응용 계층 (Application Layer)
+
+	사용자가 직접 접근하는 네트워크 서비스 제공
+
+📌 주요 역할
+	•	사용자가 네트워크 서비스를 이용할 수 있도록 인터페이스 제공
+	•	웹, 이메일, 파일 전송, 원격 접속 등 다양한 인터넷 서비스 지원
+	•	애플리케이션 간 데이터 전송을 위한 프로토콜 정의
+
+📌 주요 프로토콜
+	•	HTTP/HTTPS (웹 서비스)
+	•	FTP (파일 전송)
+	•	SMTP, POP3, IMAP (이메일 서비스)
+	•	DNS (도메인 네임 서비스)
+	•	SSH (보안 원격 접속)
+
+3. OSI 7계층 정리
+
+계층	역할	주요 프로토콜 및 장비
+7. 응용 계층	사용자 인터페이스 제공	HTTP, FTP, SMTP, DNS
+6. 표현 계층	데이터 인코딩, 암호화	JPEG, ASCII, SSL/TLS
+5. 세션 계층	세션 설정, 유지, 종료	RPC, PPTP
+4. 전송 계층	포트 기반 데이터 전송, 오류 복구	TCP, UDP
+3. 네트워크 계층	IP 주소 기반 라우팅	IP, ICMP, ARP, 라우터
+2. 데이터 링크 계층	MAC 주소 기반 프레임 전송	Ethernet, 스위치, 브리지
+1. 물리 계층	비트 단위 데이터 전송	케이블, 리피터, 허브
+
+4. 결론
+	•	OSI 7계층 모델은 네트워크 통신을 체계적으로 이해하는 기본 개념
+	•	각 계층은 독립적인 역할을 하며, 하위 계층의 서비스를 이용하여 상위 계층이 동작
+	•	실전에서는 TCP/IP 모델(4계층)이 더 자주 사용되지만, 네트워크 문제 해결 시 OSI 모델을 활용하여 원인을 분석할 수 있음 🚀
+
 - OSI 7계층과 TCP/IP 모델의 차이를 설명하시오.
 - OSI 7계층에서 데이터 캡슐화(Encapsulation) 과정과 디캡슐화(Decapsulation) 과정을 설명하시오.
 - 데이터링크 계층에서 사용되는 MAC 주소(Media Access Control Address)의 개념과 역할을 설명하시오.
