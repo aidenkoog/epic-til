@@ -150,7 +150,95 @@ Organized expected questions & answers
                 - 정적 분석 도구(SonarQube, ESLint, Pylint)를 사용하여 코드 품질을 자동으로 검토
         - 지속적인 개선과 관리 필수
 
-- 소프트웨어 품질의 정의와 ISO/IEC 25010 품질 특성을 설명하시오.
+- 소프트웨어 품질의 정의와 ISO/IEC 25010 품질 특성을 설명
+    - 소프트웨어 품질의 정의
+        - 소프트웨어가 요구사항을 충족하고, 기대하는 성능을 제공하며, 사용자와 개발자가 만족할 수 있는 수준의 기능과 특성을 갖춘 상태
+        - ISO/IEC 표준에서는 소프트웨어 품질을 "명시된 요구사항과 암묵적인 기대를 충족하는 능력"으로 정의, 소프트웨어 품질을 평가하기 위해 다양한 품질 모델을 사용
+        - 대표적인 소프트웨어 품질 표준인 ISO/IEC 25010은 소프트웨어의 품질을 평가하기 위한 8가지 품질 특성(Quality Characteristics)과 31가지 하위 특성(Sub-characteristics)을 정의
+    - ISO/IEC 25010 품질 특성
+        - 제품 품질: 소프트웨어 자체의 품질을 측정하는 기준, 8가지 주요 특성 존재
+            - 8가지 주요 특성
+                - 기능 적합성 (Functional Suitability): 소프트웨어가 주어진 기능을 올바르게 수행하는 능력
+                - 성능 효율성 (Performance Efficiency): 시스템이 주어진 자원으로 얼마나 빠르고 효율적으로 동작하는지
+                - 호환성 (Compatibility): 다른 시스템이나 환경과의 호환성이 얼마나 뛰어난지
+                - 사용성 (Usability): 사용자가 소프트웨어를 얼마나 쉽게 이해하고 사용할 수 있는지
+                - 신뢰성 (Reliability): 오류 없이 지속적으로 동작할 수 있는 능력
+                - 보안성 (Security): 시스템이 사이버 공격으로부터 데이터를 보호하는 능력
+                - 유지보수성 (Maintainability): 소프트웨어를 쉽게 수정, 개선할 수 있는 능력
+                - 이식성 (Portability): 다양한 운영체제 및 환경에서 소프트웨어가 동작할 수 있는 능력
+        - 사용 품질(Quality in Use)
+            - 사용자가 실제 환경에서 소프트웨어를 사용할 때 경험하는 품질을 측정하는 기준, 5가지 주요 특성 존재
+                - 5가지 주요 특성
+                    - 효과성 (Effectiveness): 사용자가 원하는 목표를 얼마나 정확하고 완벽하게 달성할 수 있는지
+                    - 효율성 (Efficiency): 사용자가 적절한 자원을 사용하여 목표를 얼마나 빠르게 달성할 수 있는지
+                    - 만족성 (Satisfaction): 사용자가 소프트웨어를 사용할 때 만족하는 정도
+                    - 리스크 회피성 (Freedom from Risk): 소프트웨어 사용으로 인해 발생할 수 있는 위험을 최소화하는 능력
+                    - 맥락 적합성 (Context Coverage): 다양한 환경과 사용자의 요구사항에 맞게 적절히 동작할 수 있는 능력
+    - ISO/IEC 25010 품질 특성 상세 설명
+        - 제품 품질(Product Quality) 상세 설명
+            - 기능 적합성 (Functional Suitability)
+                - 소프트웨어가 요구된 기능을 올바르게 수행하는 능력을 평가
+                - 하위 특성
+                    - 기능 완전성 (Functional Completeness) : 요구된 기능을 모두 제공하는가?
+                    - 기능 정확성 (Functional Correctness) : 기능이 정확한 결과를 제공하는가?
+                    - 기능 적절성 (Functional Appropriateness) : 기능이 적절하게 동작하는가?
+            - 성능 효율성 (Performance Efficiency)
+                - 시스템이 하드웨어 자원을 효율적으로 활용하고 빠르게 동작하는지 평가
+                - 하위 특성
+                    - 시간 효율성 (Time Behaviour) : 시스템이 빠르게 응답하는가?
+                    - 자원 효율성 (Resource Utilization) : CPU, 메모리, 네트워크를 효율적으로 사용하는가?
+                    - 용량 (Capacity) : 처리할 수 있는 데이터 양이 충분한가?
+            - 호환성 (Compatibility)
+                - 소프트웨어가 다양한 환경에서 다른 시스템과 함께 동작할 수 있는지 평가
+                - 하위 특성
+                    - 공존성 (Co-existence) : 동일한 환경에서 다른 시스템과 충돌 없이 실행되는가?
+                    - 상호운용성 (Interoperability) : 다른 시스템과 데이터 및 기능을 원활하게 교환할 수 있는가?
+            - 사용성 (Usability)
+                - 사용자가 쉽게 이해하고 사용할 수 있는지 평가
+                - 하위 특성
+                    - 인식 용이성 (Appropriateness Recognizability) : 사용자가 기능을 쉽게 이해할 수 있는가?
+                    - 학습 용이성 (Learnability) : 사용법을 쉽게 배울 수 있는가?
+                    - 운영 용이성 (Operability) : 사용자가 편리하게 조작할 수 있는가?
+                    - 접근성 (Accessibility) : 장애인을 포함한 다양한 사용자가 접근할 수 있는가?
+            - 신뢰성 (Reliability)
+                - 소프트웨어가 오류 없이 안정적으로 동작하는지를 평가
+                - 하위 특성
+                    - 성숙성 (Maturity) : 오류 발생이 적은가?
+                    - 가용성 (Availability) : 일정 시간 동안 지속적으로 동작하는가?
+                    - 결함 허용성 (Fault Tolerance) : 오류가 발생해도 정상 동작을 유지하는가?
+                    - 복구성 (Recoverability) : 오류 발생 후 신속하게 복구할 수 있는가?
+            - 보안성 (Security)
+                - 해킹, 데이터 유출 등을 방지하고 시스템을 안전하게 보호하는 능력
+                - 하위 특성
+                    - 기밀성 (Confidentiality) : 권한이 없는 사용자는 데이터를 볼 수 없는가?
+                    - 무결성 (Integrity) : 데이터가 변조되지 않고 정확하게 유지되는가?
+                    - 인증 (Authenticity) : 사용자와 시스템이 신뢰할 수 있는가?
+                    - 책임추적성 (Accountability) : 사용자 활동이 추적 가능한가?
+            - 유지보수성 (Maintainability)
+                - 소프트웨어를 쉽게 수정하고 개선할 수 있는 능력
+                - 하위 특성
+                    - 모듈성 (Modularity) : 소프트웨어가 독립적인 모듈로 구성되어 있는가?
+                    - 재사용성 (Reusability) : 코드가 다른 프로젝트에서 재사용될 수 있는가?
+                    - 분석성 (Analyzability) : 오류 발생 시 원인을 쉽게 분석할 수 있는가?
+                    - 변경 용이성 (Modifiability) : 코드를 쉽게 수정할 수 있는가?
+            - 이식성 (Portability)
+                - 다양한 운영체제, 하드웨어 환경에서도 정상적으로 실행되는 능력
+                - 하위 특성
+                    - 적응성 (Adaptability) : 다른 환경에서도 쉽게 적용 가능한가?
+                    - 설치 용이성 (Installability) : 쉽게 설치할 수 있는가?
+                    - 대체 가능성 (Replaceability) : 기존 시스템을 대체할 수 있는가?
+        - 사용 품질(Quality in Use) 상세 설명
+            - 효과성 (Effectiveness)
+                - 사용자가 원하는 목표를 얼마나 정확하고 완벽하게 달성할 수 있는가?
+            - 효율성 (Efficiency)
+                - 목표를 최소한의 시간과 노력으로 달성할 수 있는가?
+            - 만족성 (Satisfaction)
+                - 사용자가 소프트웨어를 사용할 때 얼마나 만족하는가?
+            - 리스크 회피성 (Freedom from Risk)
+                - 사용자가 소프트웨어를 사용할 때 위험 요소(보안, 안전, 경제적 손실 등)를 최소화할 수 있는가?
+            - 맥락 적합성 (Context Coverage)
+                - 다양한 환경과 사용자의 요구사항에 맞게 적절히 동작할 수 있는가?
+
 - 소프트웨어의 기능적 요구사항(Functional Requirements)과 비기능적 요구사항(Non-Functional Requirements)의 차이를 설명하시오.
 - CMMI(Capability Maturity Model Integration)의 개념과 5단계를 설명하시오.
 - 소프트웨어 개발에서 사용되는 ISO 12207 표준의 개념과 주요 내용을 설명하시오.
