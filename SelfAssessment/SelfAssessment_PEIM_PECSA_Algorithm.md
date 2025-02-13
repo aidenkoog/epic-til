@@ -1020,7 +1020,79 @@ Organized expected questions & answers
         - 데이터가 랜덤하게 섞여 있다면: 랜덤 피벗 선택
         - "Median of Three" 기법이 가장 안정적이며, 다양한 입력 데이터에서 성능이 가장 우수한 방법
   
-- 힙 정렬(Heap Sort)의 개념과 구현 방법을 설명하시오.
+- 힙 정렬(Heap Sort)의 개념과 구현 방법 설명
+    - 개념
+        - 완전 이진트리(Complete Binary Tree) 구조를 기반으로 하는 선택 정렬(Selection Sort)의 일종
+        - 힙(Heap)을 활용하여 데이터를 정렬하는 알고리즘
+            - 힙은 최대 힙 또는 최소 힙을 사용하여 데이터를 정렬하는 자료구조
+            - 최대 힙: 부모 노드의 값이 자식 노드보다 크거나 같은 완전 이진 트리
+            - 최소 힙: 부모 노드의 값이 자식 노드보다 작거나 같은 완전 이진 트리
+            - 힙 정렬은 제자리 정렬(In-Place Sorting)이며 불안정 정렬(Unstable Sorting)에 해당
+        - 참고: 완전 이진트리란 각 노드가 최대 2개의 자식 노드를 갖는 트리 형태의 자료구조, 마지막 레벨을 제외한 모든 노드는 완전히 채워져 있어야 함
+    - 힙 정렬의 과정
+        - 힙 생성(Build Heap)
+            - 주어진 배열을 최대 힙 또는 최소 힙으로 변환
+            - O(n)의 시간 복잡도
+        - 정렬 과정(Sorting Process)
+            - 최대 힙(또는 최소 힙)에서 루트 노드(최대값 또는 최소값)를 추출하고 마지막 원소와 교환한 후 다시 힙을 정리한다
+            - 이 과정을 반복하여 정렬을 수행
+            - O(n log n)의 시간 복잡도
+    - 힙 정렬 구현 방법
+        - 힙을 만드는 과정 (Heapify)
+            ```python
+            # 힙의 성질을 만족하도록 정리하는 과정 수행
+            def heapify(arr, n, i):
+                largest = i  # 현재 노드를 가장 큰 값으로 가정
+                left = 2 * i + 1  # 왼쪽 자식 노드 인덱스
+                right = 2 * i + 2  # 오른쪽 자식 노드 인덱스
+
+                # 왼쪽 자식이 존재하고, 현재 노드보다 크다면 largest 변경
+                if left < n and arr[left] > arr[largest]:
+                    largest = left
+
+                # 오른쪽 자식이 존재하고, 현재 노드보다 크다면 largest 변경
+                if right < n and arr[right] > arr[largest]:
+                    largest = right
+
+                # largest가 변경되었으면 스왑 후 재귀적으로 heapify 수행
+                if largest != i:
+                    arr[i], arr[largest] = arr[largest], arr[i]
+                    heapify(arr, n, largest)
+            ```
+        - 힙 정렬 구현
+            ```python
+            def heap_sort(arr):
+                n = len(arr)
+
+                # 1. 최대 힙을 구성 (Build Max Heap)
+                for i in range(n // 2 - 1, -1, -1):
+                    heapify(arr, n, i)
+
+                # 2. 힙에서 요소를 하나씩 꺼내서 정렬
+                for i in range(n - 1, 0, -1):
+                    arr[i], arr[0] = arr[0], arr[i]  # 최댓값(루트 노드)과 마지막 요소를 교환
+                    heapify(arr, i, 0)  # 힙 속성을 유지하도록 다시 heapify 수행
+
+            # 실행 예제
+            arr = [4, 10, 3, 5, 1]
+            heap_sort(arr)
+            print("정렬된 배열:", arr)
+            ```
+    - 시간 복잡도: 최선, 평균, 최악의 경우 모두 O(n log n)으로 일정
+    - 힙 정렬의 장점과 단점
+        - 장점
+            - 시간 복잡도가 안정적(O(n log n)): 데이터의 정렬 여부에 관계없이 성능이 일정
+            - 제자리 정렬(In-place Sort): 추가적인 메모리 공간이 거의 필요 없음 (O(1))
+            - 느리지만 안정적인 성능: 최악의 경우에도 O(n log n) 성능을 보장
+        - 단점
+            - 불안정 정렬(Unstable Sort): 동일한 값을 가진 요소들의 상대적인 순서가 유지되지 않음
+            - 캐시 친화적이지 않음: 다른 정렬 알고리즘(예: 퀵 정렬)에 비해 메모리 접근이 불규칙하여 실제 성능이 다소 떨어질 수 있음.
+    - 결론
+        - 힙 구조를 이용하여 O(n log n)의 시간 복잡도를 가지는 정렬 알고리즘
+        - 힙을 구성한 후, 최댓값(또는 최솟값)을 루트에서 제거하며 정렬을 수행
+        - 제자리 정렬이지만, 불안정 정렬이며 캐시 효율이 낮아 실제 성능은 퀵 정렬보다 다소 떨어질 수 있다.
+        - 최악의 경우에도 O(n log n) 성능을 유지하므로 안정적인 성능이 필요한 경우 사용
+
 - 기수 정렬(Radix Sort)과 카운팅 정렬(Counting Sort)의 차이점을 설명하시오.
 - 정렬 알고리즘의 안정성(Stable Sort)이란 무엇인가?
 - O(n log n) 정렬 알고리즘을 비교하고 특징을 설명하시오.
