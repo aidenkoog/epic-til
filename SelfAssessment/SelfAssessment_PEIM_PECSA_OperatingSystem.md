@@ -73,7 +73,102 @@ Organized expected questions & answers
     - Windows, macOS, Linux, Android, iOS 등 다양한 OS가 존재하며, 클라우드 및 IoT 환경에서도 발전 중
 
 
-- 운영체제의 주요 기능(Process Management, Memory Management, File System, I/O Management)을 설명하시오.
+- 운영체제의 주요 기능(Process Management, Memory Management, File System, I/O Management)
+    - 운영체제의 주요 기능
+
+운영체제(OS, Operating System)는 하드웨어와 소프트웨어를 관리하여 사용자와 컴퓨터 시스템 간의 원활한 상호작용을 지원하는 핵심 소프트웨어입니다.
+운영체제의 주요 기능은 다음과 같이 네 가지로 나눌 수 있습니다.
+	1.	프로세스 관리 (Process Management)
+	2.	메모리 관리 (Memory Management)
+	3.	파일 시스템 (File System)
+	4.	입출력 관리 (I/O Management)
+
+1. 프로세스 관리 (Process Management)
+
+운영체제는 CPU 및 프로세스의 실행을 관리하여 다중 작업 환경을 제공하고, 시스템의 성능과 응답성을 최적화합니다.
+
+1) 주요 개념
+	•	프로세스(Process): 실행 중인 프로그램 (코드, 데이터, 스택, 힙을 포함)
+	•	스레드(Thread): 프로세스 내에서 실행되는 작은 단위의 작업 (멀티스레딩 지원)
+	•	PCB (Process Control Block): 각 프로세스의 상태, 메모리 주소, 레지스터 정보 등을 저장하는 구조체
+	•	컨텍스트 스위칭(Context Switching): 프로세스 간 전환 시 CPU 상태를 저장하고 복구하는 작업
+
+2) 주요 기능
+	•	프로세스 생성 및 종료 (fork(), exit())
+	•	프로세스 스케줄링 (CPU 할당 순서 결정)
+	•	선점형 스케줄링(Preemptive Scheduling): 운영체제가 강제로 CPU를 회수 (예: Round Robin, Priority Scheduling)
+	•	비선점형 스케줄링(Non-Preemptive Scheduling): 프로세스가 자발적으로 CPU를 양보 (예: FCFS, SJF)
+	•	동기화 및 상호 배제 (Mutual Exclusion, Deadlock Prevention)
+	•	IPC (Inter-Process Communication, 프로세스 간 통신) (Shared Memory, Message Passing)
+
+2. 메모리 관리 (Memory Management)
+
+운영체제는 프로세스가 사용할 메모리를 효율적으로 할당하고 보호하는 역할을 합니다.
+
+1) 주요 개념
+	•	물리 메모리(Physical Memory): 실제 RAM의 주소 공간
+	•	가상 메모리(Virtual Memory): 보조 저장장치(예: HDD, SSD)를 활용하여 메모리를 확장
+	•	MMU (Memory Management Unit): 가상 주소를 물리 주소로 변환하는 하드웨어 장치
+	•	페이지(Page) & 프레임(Frame): 메모리를 일정 크기로 나눈 블록
+
+2) 주요 기능
+	•	메모리 할당 및 해제
+	•	고정 분할(Fixed Partitioning) vs 가변 분할(Variable Partitioning)
+	•	메모리 단편화 해결
+	•	외부 단편화(External Fragmentation) → 페이징(Paging)
+	•	내부 단편화(Internal Fragmentation) → 세그멘테이션(Segmentation)
+	•	가상 메모리 관리
+	•	페이지 교체 알고리즘 (FIFO, LRU, LFU 등)
+	•	캐시(Cache) 관리
+	•	CPU 캐시, TLB (Translation Lookaside Buffer) 사용
+
+3. 파일 시스템 (File System)
+
+운영체제는 파일과 디렉터리를 관리하여 데이터를 저장, 검색, 보호하는 역할을 합니다.
+
+1) 주요 개념
+	•	파일(File): 데이터를 저장하는 기본 단위
+	•	디렉터리(Directory): 파일을 조직적으로 관리하는 구조
+	•	파일 속성: 이름, 크기, 위치, 생성일, 권한 등 포함
+	•	파일 시스템 인터페이스: open(), read(), write(), close()
+
+2) 주요 기능
+	•	파일 생성 및 삭제
+	•	디렉터리 구조 관리
+	•	단일 레벨(Single-Level), 2단계(Two-Level), 트리(Tree), 그래프(Directed Acyclic Graph, DAG) 등
+	•	파일 접근 방식
+	•	순차 접근(Sequential Access): 순차적으로 읽고 쓰기
+	•	직접 접근(Direct Access, Random Access): 특정 위치에서 읽고 쓰기
+	•	파일 보호 및 보안
+	•	파일 권한(Permissions): 읽기(Read), 쓰기(Write), 실행(Execute)
+	•	파일 잠금(File Locking)
+	•	암호화(Encryption)
+
+4. 입출력 관리 (I/O Management)
+
+운영체제는 다양한 입출력 장치(CPU, 디스크, 네트워크, 키보드, 마우스 등)와 데이터를 효율적으로 주고받는 역할을 합니다.
+
+1) 주요 개념
+	•	입출력 장치(I/O Devices): 디스크, 프린터, 네트워크, 키보드 등
+	•	버퍼(Buffer)와 캐싱(Caching): 데이터를 일시적으로 저장하여 성능 향상
+	•	장치 드라이버(Device Driver): 하드웨어와 운영체제 간 인터페이스 역할
+
+2) 주요 기능
+	•	장치 드라이버 관리
+	•	하드웨어와 운영체제 간 통신
+	•	인터럽트(Interrupt) 처리
+	•	CPU가 I/O 요청을 받을 때 인터럽트 발생
+	•	DMA (Direct Memory Access)
+	•	CPU 개입 없이 직접 메모리에 데이터 전송
+	•	디스크 스케줄링 알고리즘
+	•	FCFS (First-Come, First-Served)
+	•	SSTF (Shortest Seek Time First)
+	•	SCAN (전방향 탐색), C-SCAN (순환 탐색)
+
+5. 결론
+
+운영체제는 컴퓨터의 핵심 자원(CPU, 메모리, 파일 시스템, I/O)을 관리하며, 다중 프로세스 환경에서 최적의 성능과 안정성을 제공합니다. 각 기능이 서로 유기적으로 연결되어 효율적인 자원 활용, 사용자 편의성 향상, 보안 및 안정성 강화를 목표로 운영됩니다.
+
 - 단일 사용자(single-user) 운영체제와 다중 사용자(multi-user) 운영체제의 차이를 설명하시오.
 - 멀티태스킹(Multitasking)과 멀티프로그래밍(Multiprogramming)의 차이를 설명하시오.
 - 커널(Kernel)의 개념과 역할을 설명하시오.
