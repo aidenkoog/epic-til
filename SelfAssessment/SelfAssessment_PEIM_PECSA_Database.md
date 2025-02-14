@@ -87,7 +87,69 @@ Organized expected questions & answers
           - DB: 자동 백업 및 복구 지원
           - File: 수동 백업 필요
 
-- 관계형 데이터베이스(RDBMS)의 개념과 주요 특징을 설명하시오.
+- 관계형 데이터베이스(RDBMS)의 개념과 주요 특징
+    - 개념
+        - RDBMS, Relational Database Management System
+        - 데이터를 테이블 형태로 저장하고 각 테이블 관계(Relationship)를 정의하여 관리하는 데이터베이스 시스템
+        - 각 테이블 간에는 기본 키(Primary Key)와 외래 키(Foreign Key)를 통해 관계 설정
+    - 주요 특징
+        - 테이블 기반 데이터 저장 (Table-based)
+            - 데이터를 행(Row, Record)과 열(Column, Attribute)의 형태로 저장
+            - 각 행은 한 개의 개체(예: 학생, 직원, 제품 등)를 나타냄
+            - 각 열은 해당 개체의 속성을 정의
+        - 데이터 무결성 (Data Integrity)
+            - 기본 키(Primary Key): 테이블의 각 행을 고유하게 식별
+            - 외래 키(Foreign Key): 다른 테이블과의 관계를 정의하며 데이터 일관성 유지
+            - 제약 조건(Constraints)을 사용하여 데이터의 정확성과 일관성을 보장 (예: NOT NULL, UNIQUE, CHECK)
+        - 데이터 중복 최소화 (Normalization)
+            - 정규화(Normalization) 기법을 사용하여 데이터 중복을 최소화하고 데이터 무결성을 유지
+            - 데이터의 일관성을 유지하고, 저장 공간을 절약
+        - 관계 설정 가능 (Relational)
+            - 테이블 간 기본 키(PK)와 외래 키(FK)를 통해 관계를 정의
+            - JOIN 연산을 통해 여러 테이블의 데이터를 조합하여 원하는 정보를 조회 가능
+        - SQL(Structured Query Language) 사용
+            - 데이터 검색(SELECT), 삽입(INSERT), 수정(UPDATE), 삭제(DELETE) 등의 작업을 수행하는 표준 언어
+            - 복잡한 쿼리를 작성하여 데이터를 쉽게 조작 가능
+        - 트랜잭션 관리 (Transaction Management)
+            - 트랜잭션(Transaction): 하나의 작업 단위(예: 송금 시 돈 빼기 + 돈 넣기)
+            - ACID 특성을 준수하여 데이터의 일관성과 신뢰성을 보장
+                - Atomicity (원자성): 모든 작업이 완료되거나, 전혀 수행되지 않아야 함
+                - Consistency (일관성): 트랜잭션 수행 후 데이터의 무결성이 유지
+                - Isolation (고립성): 트랜잭션은 서로 간섭하지 않아야 함
+                - Durability (지속성): 트랜잭션이 완료된 후 데이터가 영구적으로 저장
+        - 동시성 제어 및 백업/복구 기능
+            - 다수의 사용자가 동시에 접근해도 데이터 충돌을 방지하는 동시성 제어(Concurrency Control) 제공
+            - 장애 발생 시 데이터를 복구할 수 있는 백업 및 복구(Backup & Recovery) 기능 지원
+    - 주요 관계형 데이터베이스 관리 시스템
+        - MySQL
+        - PostgreSQL
+        - Oracle DB
+        - Microsoft SQL Server
+        - MariaDB
+    - 관계형 데이터베이스(RDBMS) vs NoSQL 데이터베이스
+        - 데이터 구조
+            - RDBMS: 테이블(Table) 기반
+            - NoSQL: 키-값(Key-Value), 문서(Document), 컬럼(Column) 등
+        - 관계 지원
+            - RDBMS: 기본 키/외래 키를 통한 관계 설정 가능
+            - NoSQL: 관계가 없거나 느슨한 관계
+        - SQL 사용 여부
+            - RDBMS: SQL 사용 (표준화된 쿼리 언어)
+            - NoSQL (다양한 쿼리 방식)
+        - 확장성
+            - RDBMS: 수직 확장(Scale-up) 중심
+            - NoSQL: 수평 확장(Scale-out) 중심
+        - 트랜잭션
+            - RDBMS: ACID 준수
+            - NoSQL: 대부분 Eventually Consistent
+        - 사용 예시
+            - RDBMS: 금융, ERP, 전자상거래
+            - NoSQL: 빅데이터, IoT, 소셜미디어, 실시간 분석
+    - 결론
+        - 관계형 데이터베이스(RDBMS)는 데이터 무결성을 보장하고 복잡한 관계를 처리하는 데 적합
+        - SQL을 사용하여 효율적으로 데이터 조작이 가능
+        - 웹 애플리케이션, 금융, ERP 시스템 등 다양한 분야에서 필수적으로 사용
+
 - 데이터베이스 관리 시스템(DBMS)의 개념과 주요 기능을 설명하시오.
 - 데이터 독립성(Data Independence)의 개념과 논리적 독립성과 물리적 독립성을 설명하시오.
 - 데이터 모델(Data Model)의 개념과 주요 유형(계층형, 네트워크형, 관계형, 객체지향형)을 설명하시오.
