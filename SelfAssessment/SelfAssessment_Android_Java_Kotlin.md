@@ -334,6 +334,67 @@ Organized expected questions & answers
     - HDMI CEC를 활용하면 셋톱박스/OTT/TV 앱의 전원 및 입력 전환을 자동화할 수 있어 사용자 편의성이 대폭 증가
 
 - Android에서 RecyclerView의 DiffUtil이 중요한 이유
+    - 개요
+        - 데이터 변경을 효율적으로 반영하는 데 중요한 역할
+    - 중요한 이유
+        - 성능 최적화
+            - RecyclerView는 기본적으로 notifyDataSetChanged()를 호출하면 전체 리스트를 무조건 갱신
+            - 이는 불필요한 UI 렌더링과 애니메이션을 유발하여 성능 저하를 초래할 가능성 존재
+            - DiffUtil을 사용하면 변경된 항목만 업데이트되므로 불필요한 UI 갱신 방지 가능
+        - 부드러운 UI 애니메이션
+            - DiffUtil은 변경된 항목을 자동으로 감지하여 notifyItemInserted(), notifyItemRemoved(), notifyItemChanged() 등의 적절한 메서드를 호출
+            - 이를 통해 아이템 추가, 삭제, 변경 등의 애니메이션이 자연스럽게 적용
+        - 리스트가 큰 경우 성능 차이 극대화
+            - 대량의 데이터를 다룰 때 notifyDataSetChanged()를 사용하면 모든 아이템을 새로 바인딩해야 하므로 성능 저하가 발생
+            - DiffUtil은 백그라운드 스레드에서 변경 사항을 계산한 후 UI 스레드에서 필요한 부분만 갱신하므로 큰 리스트에서도 성능이 우수
+        - 변경 감지를 자동화하여 코드 간결화
+            - 기존 방식에서는 리스트가 변경될 때 어떤 항목이 추가, 삭제, 변경되었는지 수동으로 비교하고, 적절한 notify 메서드를 호출해야 했음
+            - DiffUtil을 사용하면 areItemsTheSame()과 areContentsTheSame()을 구현하는 것만으로 자동으로 변경 사항을 감지하는 것 가능
+        - Paging 라이브러리와의 궁합
+            - Android Jetpack의 Paging 라이브러리는 DiffUtil을 기본적으로 활용하여 페이징된 데이터를 효율적으로 업데이트
+            - RecyclerView.Adapter가 ListAdapter(DiffUtil 내장)와 함께 사용되면 리스트가 페이징될 때도 부드러운 데이터 변경이 가능
+    - DiffUtil을 사용하는 방법
+        - DiffUtil.Callback 구현
+            ```kotlin
+            class MyDiffCallback : DiffUtil.ItemCallback<MyItem>() {
+                override fun areItemsTheSame(oldItem: MyItem, newItem: MyItem): Boolean {
+                    return oldItem.id == newItem.id // 고유 ID가 같으면 동일한 아이템으로 판단
+                }
+
+                override fun areContentsTheSame(oldItem: MyItem, newItem: MyItem): Boolean {
+                    return oldItem == newItem // 내용까지 같은 경우만 변경 없음으로 처리
+                }
+            }
+            ```
+    - ListAdapter 활용
+        - ListAdapter는 RecyclerView.Adapter를 상속받으며 DiffUtil을 자동으로 적용하는 Jetpack 라이브러리의 Adapter
+            ```kotlin
+            class MyAdapter : ListAdapter<MyItem, MyViewHolder>(MyDiffCallback()) {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+                    return MyViewHolder(view)
+                }
+
+                override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+                    holder.bind(getItem(position)) // getItem() 사용 (ListAdapter에서 제공)
+                }
+            }
+            ```
+    - 데이터 변경 시 submitList() 호출
+        ```kotlin
+        val adapter = MyAdapter()
+        recyclerView.adapter = adapter
+
+        // 데이터 변경 시
+        adapter.submitList(newList)
+        // submitList()는 내부적으로 DiffUtil을 실행하여 변경된 부분만 업데이트
+        ```
+    - 결론
+        - DiffUtil을 사용하면 불필요한 UI 갱신을 최소화하고, 부드러운 애니메이션을 적용하며, 대량의 데이터를 다룰 때 성능 최적화 가능
+        - ListAdapter를 활용하면 DiffUtil을 자동 적용할 수 있어 더욱 간편한 코드 작성이 가능
+        - RecyclerView에서 DiffUtil을 활용하는 것이 필수적인 이유는 성능, 애니메이션, 코드 유지보수 측면에서 강력한 장점을 제공하기 때문임.
+
+
 - Android에서 Jetpack DataStore를 사용하는 이유
 - Android에서 Jetpack Hilt와 Dagger의 차이점
 - Android에서 Shared Preferences보다 Encrypted Shared Preferences가 필요한 이유
