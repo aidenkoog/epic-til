@@ -224,7 +224,46 @@ Organized expected questions & answers
     	- 각 계층은 독립적인 역할을 하며, 하위 계층의 서비스를 이용하여 상위 계층이 동작
     	- 실전에서는 TCP/IP 모델(4계층)이 더 자주 사용되지만, 네트워크 문제 해결 시 OSI 모델을 활용하여 원인을 분석할 수 있음
 
-- OSI 7계층과 TCP/IP 모델의 차이를 설명하시오.
+- OSI 7계층과 TCP/IP 모델의 차이를 설명
+    - OSI 7계층 모델
+        - OSI(Open Systems Interconnection) 7계층 모델은 네트워크 통신을 단계별로 나누어 정의한 모델
+        - ISO(국제표준화기구)가 개발한 개념적 프레임워크
+        - 각 계층 설명 (맨 아래가 1계층)
+            - 응용 계층 (Application Layer)	사용자와 직접 상호작용하는 계층 (HTTP, FTP, SMTP)
+            - 표현 계층 (Presentation Layer)	데이터 인코딩, 암호화, 압축 (JPEG, TLS, SSL)
+            - 세션 계층 (Session Layer)	연결 설정, 유지, 종료 (RPC, NetBIOS)
+            - 전송 계층 (Transport Layer)	신뢰성 있는 데이터 전송 (TCP, UDP)
+            - 네트워크 계층 (Network Layer)	IP 주소를 기반으로 데이터 라우팅 (IP, ICMP, ARP)
+            - 데이터 링크 계층 (Data Link Layer)	MAC 주소를 통한 데이터 전송 (Ethernet, Wi-Fi)
+            - 물리 계층 (Physical Layer)	실제 하드웨어를 통한 신호 전송 (케이블, 광섬유)
+        - 특징
+            - 이론적인 모델로, 네트워크의 개념을 구조화하여 이해하기 쉽게 만듦.
+            - 실제 네트워크 프로토콜은 OSI 모델을 완벽히 따르지는 않음.
+            - 각 계층이 독립적으로 동작하며, 특정 계층의 변경이 다른 계층에 영향을 미치지 않도록 설계됨.
+    - TCP/IP 모델
+        - TCP/IP 모델은 실제 인터넷에서 사용되는 네트워크 모델로, OSI 모델보다 현실적인 구조
+        - 초기에는 ARPANET에서 사용되었으며, 현재 대부분의 네트워크에서 표준으로 사용
+        - 각 계층 설명 (맨 아래가 1계층)
+            - 응용 계층 (Application Layer)
+                - OSI 7, 6, 5 계층 포함	/ HTTP, FTP, DNS 등 응용 서비스 제공
+            - 전송 계층 (Transport Layer)
+                - OSI 4계층	/ TCP(신뢰성), UDP(비신뢰성)
+            - 인터넷 계층 (Internet Layer)
+                - OSI 3계층	/ IP 주소를 기반으로 데이터 전달 (IP, ICMP, ARP)
+            - 네트워크 액세스 계층 (Network Access Layer)
+                - OSI 2, 1 계층 포함 / MAC 주소 기반 전송 (Ethernet, Wi-Fi, PPP)
+                - 데이터링크 + 물리 계층
+        - 특징
+            - 실제 인터넷에서 사용되는 모델로, OSI 모델보다 현실적.
+            - OSI 모델보다 간결한 구조 (4계층).
+            - 응용 계층에서 HTTP, FTP, DNS 같은 프로토콜이 포함됨.
+            - TCP(연결형)와 UDP(비연결형) 프로토콜을 사용하여 데이터 전송.
+    - 결론
+        - OSI 7계층은 네트워크 개념을 구조화하여 표준화한 모델, 하지만 실제 네트워크에서는 사용되지 않음.
+        - TCP/IP 모델은 인터넷에서 실제로 사용되는 네트워크 프로토콜 모델.
+        - TCP/IP 모델은 OSI 모델을 기반으로 하지만, 더 간결한 4계층 구조로 설계됨.
+        - 현재 인터넷 통신의 표준은 TCP/IP 모델이며, OSI 모델은 네트워크 개념을 이해하는 데 유용
+
 - OSI 7계층에서 데이터 캡슐화(Encapsulation) 과정과 디캡슐화(Decapsulation) 과정을 설명하시오.
 - 데이터링크 계층에서 사용되는 MAC 주소(Media Access Control Address)의 개념과 역할을 설명하시오.
 - 네트워크 계층에서 사용되는 IP 주소(IPv4, IPv6)의 개념과 차이를 설명하시오.
