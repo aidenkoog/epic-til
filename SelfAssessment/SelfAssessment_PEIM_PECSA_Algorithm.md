@@ -1570,180 +1570,147 @@ Organized expected questions & answers
 
 - 해싱(Hashing)에서 충돌(Collision) 해결 방법
     - 해싱과 충돌(Collision) 개념
+        - 해싱(Hashing)
+            - 키(Key) 를 해시 함수(Hash Function)를 사용하여 특정 해시 값(Hash Value, 인덱스) 으로 변환한 후, 해당 위치에 데이터를 저장하는 방식
+            - 해시 함수가 서로 다른 키에 대해 동일한 해시 값을 반환하는 경우 충돌(Collision) 이 발생할 수 있음
+    - 충돌 해결 방법
+        - 체이닝(Chaining, Separate Chaining)
+            - 개요
+                - 체이닝 방식은 같은 해시 값을 갖는 데이터를 연결 리스트(Linked List) 또는 트리(Tree) 로 저장하는 방법
+                - 즉, 충돌이 발생하면 해당 인덱스의 리스트에 데이터를 추가하여 해결
+            - 장점
+	            - 해시 테이블의 크기를 초과하여 데이터를 저장할 수 있음
+	            - 충돌이 많아도 테이블 크기를 변경할 필요가 없음
+            - 단점
+                - 연결 리스트로 인해 추가적인 메모리 사용
+                - 탐색 시 리스트의 길이가 길어지면 성능 저하 발생 가능 (O(n))
+            - 체이닝 방식 예제 (파이썬)
+                ```python
+                class HashTable:
+                    def __init__(self, size):
+                        self.size = size
+                        self.table = [[] for _ in range(size)]  # 각 버킷에 리스트 생성
 
-해싱(Hashing)은 키(Key) 를 해시 함수(Hash Function)를 사용하여 특정 해시 값(Hash Value, 인덱스) 으로 변환한 후, 해당 위치에 데이터를 저장하는 방식이다.
-그러나 해시 함수가 서로 다른 키에 대해 동일한 해시 값을 반환하는 경우 충돌(Collision) 이 발생할 수 있다.
+                    def hash_function(self, key):
+                        return hash(key) % self.size
 
-	예제:
-		•	hash("apple") → index 3
-	•	hash("banana") → index 3  (충돌 발생)
+                    def insert(self, key, value):
+                        index = self.hash_function(key)
+                        self.table[index].append((key, value))  # 체이닝 방식으로 저장
 
-이러한 충돌을 해결하기 위해 여러 가지 방법이 사용된다.
+                    def search(self, key):
+                        index = self.hash_function(key)
+                        for k, v in self.table[index]:  # 리스트 내에서 탐색
+                            if k == key:
+                                return v
+                        return None  # 데이터가 없으면 None 반환
+                ```
+        - 개방 주소법(Open Addressing)
+            - 개요
+                - 충돌이 발생했을 때 다른 빈 슬롯을 찾아 데이터를 저장하는 방법
+                - 해시 테이블 자체에서 충돌을 해결
+                - 주요 방식은 선형 탐사(Linear Probing), 이차 탐사(Quadratic Probing), 이중 해싱(Double Hashing)
+            - 주요 방식
+                - 선형 탐사(Linear Probing)
+                    - 개요
+                        - 충돌이 발생하면 다음 버킷(인덱스 + 1)을 검사 하여 빈 공간을 찾음
+                        - index = (해시 값 + 1) % 테이블 크기 를 반복
+                    - 장점
+                        - 구현이 간단하고 캐시 성능이 좋음
+                    - 단점
+                        - 연속적인 데이터 저장으로 인해 1차 클러스터링(Primary Clustering) 문제 발생
+                        - (충돌이 많아지면 빈 공간을 찾는 시간이 길어짐)
+                    - 예제
+                        ```python
+                        class LinearProbingHashTable:
+                            def __init__(self, size):
+                                self.size = size
+                                self.table = [None] * size
 
-2. 충돌 해결 방법
+                            def hash_function(self, key):
+                                return hash(key) % self.size
 
-충돌을 해결하는 대표적인 방법은 체이닝(Chaining) 과 개방 주소법(Open Addressing) 으로 나뉜다.
+                            def insert(self, key, value):
+                                index = self.hash_function(key)
+                                while self.table[index] is not None:  # 충돌 발생 시 다음 위치 탐색
+                                    index = (index + 1) % self.size
+                                self.table[index] = (key, value)
 
-(1) 체이닝(Chaining, Separate Chaining)
+                            def search(self, key):
+                                index = self.hash_function(key)
+                                while self.table[index] is not None:
+                                    if self.table[index][0] == key:
+                                        return self.table[index][1]
+                                    index = (index + 1) % self.size
+                                return None
+                        ```
+                - 이차 탐사(Quadratic Probing)
+                    - 개요
+                        - 충돌이 발생하면 탐색 위치를 1², 2², 3², … 형태로 증가시켜 빈 공간을 찾음
+                        - index = (해시 값 + i²) % 테이블 크기
+                    - 장점
+                        - 선형 탐사보다 클러스터링이 덜 발생 (2차 클러스터링(Secondary Clustering) 해결)
+                    - 단점
+                        - 저장할 공간이 부족할 경우 무한 루프 발생 가능
+                        - 해시 테이블 크기가 소수(Prime Number) 여야 효과적
+                - 이중 해싱(Double Hashing)
+                    - 개요
+                        - 두 개의 해시 함수를 사용하여 충돌을 해결하는 방식
+                        - 충돌 발생 시 두 번째 해시 함수를 적용하여 이동 간격을 결정
+                        - index = (해시 값 + i * hash2(key)) % 테이블 크기
+                    - 장점
+                        - 클러스터링 문제를 최소화
+                        - 탐색 성능이 우수
+                    - 단점
+                        - 추가적인 해시 함수 연산이 필요하여 성능이 다소 느릴 수 있음
+                    - 예제
+                        ```python
+                        class DoubleHashingHashTable:
+                            def __init__(self, size):
+                                self.size = size
+                                self.table = [None] * size
 
-체이닝 방식은 같은 해시 값을 갖는 데이터를 연결 리스트(Linked List) 또는 트리(Tree) 로 저장하는 방법이다.
-즉, 충돌이 발생하면 해당 인덱스의 리스트에 데이터를 추가하여 해결한다.
+                            def hash_function1(self, key):
+                                return hash(key) % self.size
 
-장점
-	•	해시 테이블의 크기를 초과하여 데이터를 저장할 수 있음
-	•	충돌이 많아도 테이블 크기를 변경할 필요가 없음
+                            def hash_function2(self, key):
+                                return 1 + (hash(key) % (self.size - 1))  # 두 번째 해시 값 계산
 
-단점
-	•	연결 리스트로 인해 추가적인 메모리 사용
-	•	탐색 시 리스트의 길이가 길어지면 성능 저하 발생 가능 (O(n))
+                            def insert(self, key, value):
+                                index = self.hash_function1(key)
+                                step = self.hash_function2(key)
 
-체이닝 방식 예제 (파이썬)
+                                while self.table[index] is not None:  # 충돌 발생 시 이중 해싱 적용
+                                    index = (index + step) % self.size
+                                self.table[index] = (key, value)
 
-class HashTable:
-    def __init__(self, size):
-        self.size = size
-        self.table = [[] for _ in range(size)]  # 각 버킷에 리스트 생성
+                            def search(self, key):
+                                index = self.hash_function1(key)
+                                step = self.hash_function2(key)
 
-    def hash_function(self, key):
-        return hash(key) % self.size
-
-    def insert(self, key, value):
-        index = self.hash_function(key)
-        self.table[index].append((key, value))  # 체이닝 방식으로 저장
-
-    def search(self, key):
-        index = self.hash_function(key)
-        for k, v in self.table[index]:  # 리스트 내에서 탐색
-            if k == key:
-                return v
-        return None  # 데이터가 없으면 None 반환
-
-(2) 개방 주소법(Open Addressing)
-
-개방 주소법은 충돌이 발생했을 때 다른 빈 슬롯을 찾아 데이터를 저장하는 방법 이다.
-이 방식에서는 해시 테이블 자체에서 충돌을 해결하며, 주요 방식은 선형 탐사(Linear Probing), 이차 탐사(Quadratic Probing), 이중 해싱(Double Hashing) 이 있다.
-
-(2-1) 선형 탐사(Linear Probing)
-	•	충돌이 발생하면 다음 버킷(인덱스 + 1)을 검사 하여 빈 공간을 찾음
-	•	즉, index = (해시 값 + 1) % 테이블 크기 를 반복
-
-장점
-	•	구현이 간단하고 캐시 성능이 좋음
-
-단점
-	•	연속적인 데이터 저장으로 인해 1차 클러스터링(Primary Clustering) 문제 발생
-(충돌이 많아지면 빈 공간을 찾는 시간이 길어짐)
-
-예제
-
-해시 테이블 크기: 5
-hash("apple") → index 2
-hash("banana") → index 2 (충돌 발생) → index 3로 저장
-
-파이썬 구현
-
-class LinearProbingHashTable:
-    def __init__(self, size):
-        self.size = size
-        self.table = [None] * size
-
-    def hash_function(self, key):
-        return hash(key) % self.size
-
-    def insert(self, key, value):
-        index = self.hash_function(key)
-        while self.table[index] is not None:  # 충돌 발생 시 다음 위치 탐색
-            index = (index + 1) % self.size
-        self.table[index] = (key, value)
-
-    def search(self, key):
-        index = self.hash_function(key)
-        while self.table[index] is not None:
-            if self.table[index][0] == key:
-                return self.table[index][1]
-            index = (index + 1) % self.size
-        return None
-
-(2-2) 이차 탐사(Quadratic Probing)
-	•	충돌이 발생하면 탐색 위치를 1², 2², 3², … 형태로 증가시켜 빈 공간을 찾음
-	•	index = (해시 값 + i²) % 테이블 크기
-
-장점
-	•	선형 탐사보다 클러스터링이 덜 발생 (2차 클러스터링(Secondary Clustering) 해결)
-
-단점
-	•	저장할 공간이 부족할 경우 무한 루프 발생 가능
-	•	해시 테이블 크기가 소수(Prime Number) 여야 효과적
-
-예제
-
-hash("apple") → index 3
-hash("banana") → index 3 (충돌) → index (3 + 1²) % 7 = 4에 저장
-
-(2-3) 이중 해싱(Double Hashing)
-	•	두 개의 해시 함수를 사용하여 충돌을 해결하는 방식
-	•	충돌 발생 시 두 번째 해시 함수를 적용하여 이동 간격을 결정
-	•	index = (해시 값 + i * hash2(key)) % 테이블 크기
-
-장점
-	•	클러스터링 문제를 최소화
-	•	탐색 성능이 우수
-
-단점
-	•	추가적인 해시 함수 연산이 필요하여 성능이 다소 느릴 수 있음
-
-예제
-
-hash1("apple") → index 3
-hash1("banana") → index 3 (충돌)
-hash2("banana") = 2
-index = (3 + 1 * 2) % 7 = 5에 저장
-
-파이썬 구현
-
-class DoubleHashingHashTable:
-    def __init__(self, size):
-        self.size = size
-        self.table = [None] * size
-
-    def hash_function1(self, key):
-        return hash(key) % self.size
-
-    def hash_function2(self, key):
-        return 1 + (hash(key) % (self.size - 1))  # 두 번째 해시 값 계산
-
-    def insert(self, key, value):
-        index = self.hash_function1(key)
-        step = self.hash_function2(key)
-
-        while self.table[index] is not None:  # 충돌 발생 시 이중 해싱 적용
-            index = (index + step) % self.size
-        self.table[index] = (key, value)
-
-    def search(self, key):
-        index = self.hash_function1(key)
-        step = self.hash_function2(key)
-
-        while self.table[index] is not None:
-            if self.table[index][0] == key:
-                return self.table[index][1]
-            index = (index + step) % self.size
-        return None
-
-3. 충돌 해결 방법 비교
-
-충돌 해결 방법	장점	단점
-체이닝 (Chaining)	테이블 크기 초과 저장 가능, 동적 크기 조정 가능	추가 메모리 사용 (연결 리스트)
-선형 탐사 (Linear Probing)	구현이 간단하고 캐시 성능이 좋음	1차 클러스터링 발생
-이차 탐사 (Quadratic Probing)	클러스터링 감소	무한 루프 가능성 존재
-이중 해싱 (Double Hashing)	클러스터링 최소화, 탐색 성능 우수	추가 해시 연산 필요
-
-4. 결론
-	•	충돌이 많을 경우: 체이닝(Chaining) 방식이 유리함
-	•	메모리를 절약하고 싶을 경우: 개방 주소법(Open Addressing)
-	•	빠른 탐색이 필요할 경우: 이중 해싱(Double Hashing)
-
-해시 테이블의 충돌 해결 방법은 사용 환경과 데이터 특성에 따라 적절한 방법을 선택하는 것이 중요하다.
+                                while self.table[index] is not None:
+                                    if self.table[index][0] == key:
+                                        return self.table[index][1]
+                                    index = (index + step) % self.size
+                                return None
+                        ```
+    - 충돌 해결 방법 비교
+        - 체이닝 (Chaining)
+            - 장점: 테이블 크기 초과 저장 가능, 동적 크기 조정 가능
+            - 단점: 추가 메모리 사용 (연결 리스트)
+        - 선형 탐사 (Linear Probing)
+            - 장점: 구현이 간단하고 캐시 성능이 좋음	
+            - 단점: 1차 클러스터링 발생
+        - 이차 탐사 (Quadratic Probing)
+            - 장점: 클러스터링 감소
+            - 단점: 무한 루프 가능성 존재
+        - 이중 해싱 (Double Hashing)	
+            - 장점: 클러스터링 최소화, 탐색 성능 우수	
+            - 단점: 추가 해시 연산 필요
+    - 결론
+        - 충돌이 많을 경우: 체이닝(Chaining) 방식이 유리함
+        - 메모리를 절약하고 싶을 경우: 개방 주소법(Open Addressing)
+        - 빠른 탐색이 필요할 경우: 이중 해싱(Double Hashing)
 
 - 그래프의 정의와 주요 용어(정점, 간선, 가중치 등)
 
