@@ -1353,12 +1353,94 @@ Organized expected questions & answers
         - 주어진 그래프에서 특정 노드를 방문하는 방법을 정의
     - 차이점
         - 탐색 방식	한 방향으로 끝까지 탐색 후 백트래킹	모든 인접 노드를 먼저 탐색
-자료 구조	스택(Stack) 또는 재귀(Recursive)	큐(Queue)
-메모리 사용량	경로를 저장하는 데 적은 메모리 사용	방문해야 할 모든 노드를 저장하므로 메모리 사용량이 큼
-속도	깊게 탐색 후 백트래킹으로 비효율적일 수 있음	항상 최단 경로를 보장하므로 빠를 수 있음
-최단 경로 보장 여부	최단 경로를 보장하지 않음	최단 경로를 보장함(가중치가 없는 그래프에서)
-순환(사이클) 탐색	사이클 존재 여부를 쉽게 판별 가능	사이클 판별에 불리함
-트리 탐색 방식	전위 순회(Preorder Traversal) 방식과 유사	레벨 순회(Level Order Traversal) 방식과 유사
+    - DFS, BFS 차이점 상세
+        - 자료 구조
+            - DFS: 스택(Stack) 또는 재귀(Recursive)
+            - BFS: 큐(Queue)
+        - 메모리 사용량
+            - DFS: 경로를 저장하는 데 적은 메모리 사용
+            - BFS: 방문해야 할 모든 노드를 저장하므로 메모리 사용량이 큼
+        - 속도
+            - DFS: 깊게 탐색 후 백트래킹으로 비효율적일 수 있음
+            - BFS: 항상 최단 경로를 보장하므로 빠를 수 있음
+        - 최단 경로 보장 여부
+            - DFS: 최단 경로를 보장하지 않음
+            - BFS: 최단 경로를 보장함(가중치가 없는 그래프에서)
+        - 순환(사이클) 탐색
+            - DFS: 사이클 존재 여부를 쉽게 판별 가능
+            - BFS: 사이클 판별에 불리함
+        - 트리 탐색 방식
+            - DFS: 전위 순회(Preorder Traversal) 방식과 유사
+            - BFS: 레벨 순회(Level Order Traversal) 방식과 유사
+
+- 전위 순회(Preorder Traversal)과 레벨 순회(Level Order Traversal) 방식
+    - 전위 순회 (Preorder Traversal)
+        - 개요
+            - 방문 순서: 루트 → 왼쪽 서브트리 → 오른쪽 서브트리
+            - 순회 방식: 깊이 우선 탐색(DFS, Depth-First Search) 방식 중 하나
+        - 전위 순회 순서 (좌측 먼저 다 돌고 우측 순회)
+            - A → B → D → E → C → F
+        - 코드 (Python)
+            ```python
+            class Node:
+                def __init__(self, value):
+                    self.value = value
+                    self.left = None
+                    self.right = None
+
+            # 전위 순회 함수 (Preorder Traversal)
+            def preorder_traversal(node):
+                if node:
+                    print(node.value, end=" ")      # 1. 루트 방문
+                    preorder_traversal(node.left)   # 2. 왼쪽 서브트리 탐색
+                    preorder_traversal(node.right)  # 3. 오른쪽 서브트리 탐색
+
+            # 트리 생성
+            root = Node('A')
+            root.left = Node('B')
+            root.right = Node('C')
+            root.left.left = Node('D')
+            root.left.right = Node('E')
+            root.right.right = Node('F')
+
+            # 실행
+            preorder_traversal(root)
+            # 출력: A B D E C F
+            ```
+    - 레벨 순회 (Level-order Traversal)
+        - 개요
+            - 방문 순서: 트리의 각 레벨(층) 을 왼쪽에서 오른쪽으로 차례대로 탐색
+            - 순회 방식: 너비 우선 탐색(BFS, Breadth-First Search)
+        - 레벨 순회 순서
+            - A → B → C → D → E → F
+        - 코드 (Python, BFS 활용)
+            ```python
+            # 레벨 순회 함수 (Level-order Traversal)
+            def level_order_traversal(root):
+                if not root:
+                    return
+
+                queue = deque([root])  # 큐에 루트 노드 삽입
+
+                while queue:
+                    node = queue.popleft()  # 큐에서 노드 제거
+                    print(node.value, end=" ")
+
+                    if node.left:
+                        queue.append(node.left)  # 왼쪽 자식 노드 추가
+                    if node.right:
+                        queue.append(node.right) # 오른쪽 자식 노드 추가
+
+            # 실행
+            level_order_traversal(root)
+            # 출력: A B C D E F
+            ```
+    - 전위 순회 vs 레벨 순회 비교
+        - 전위 순회 (Preorder Traversal): 루트 → 왼쪽 → 오른쪽 / DFS 방식, 재귀적
+        - 레벨 순회 (Level-order Traversal): 각 층을 왼쪽 → 오른쪽 순서 / BFS 방식, 큐 사용
+    - 정리
+        - 전위 순회 (Preorder Traversal): 루트 먼저 방문, 깊이 우선 탐색(DFS)
+        - 레벨 순회 (Level-order Traversal): 층별로 방문, 너비 우선 탐색(BFS)
 
 - DFS와 BFS가 각각 유리한 문제 유형을 설명
 
