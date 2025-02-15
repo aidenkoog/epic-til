@@ -220,7 +220,53 @@ Organized expected questions & answers
     	- 다중 사용자 운영체제(Multi-User OS)는 여러 사용자가 동시에 시스템을 사용할 수 있으며, 서버 및 네트워크 환경에서 활용
     	- 목적과 사용 환경에 따라 적절한 운영체제를 선택하는 것이 중요ㄴ
 
-- 멀티태스킹(Multitasking)과 멀티프로그래밍(Multiprogramming)의 차이를 설명하시오.
+- 멀티태스킹(Multitasking)과 멀티프로그래밍(Multiprogramming)의 차이
+
+멀티태스킹(Multitasking)과 멀티프로그래밍(Multiprogramming)의 차이
+
+1. 개념 정의
+
+✅ 멀티태스킹(Multitasking)
+	•	하나의 CPU에서 여러 개의 프로세스(Process) 또는 스레드(Thread)를 빠르게 전환하면서 실행하는 방식
+	•	사용자가 동시에 여러 작업을 수행하는 것처럼 보이게 함
+	•	CPU가 빠르게 작업을 스위칭하며 처리 (시분할(Time-sharing) 시스템 활용)
+
+✅ 멀티프로그래밍(Multiprogramming)
+	•	CPU가 유휴 상태(idle)로 남아 있는 시간을 최소화하기 위해 여러 개의 프로그램을 메모리에 로드하여 실행하는 기법
+	•	하나의 프로그램이 I/O 작업을 수행할 때, CPU가 다른 프로그램을 실행
+	•	배치 처리(Batch Processing) 시스템에서 주로 사용
+
+2. 차이점 비교
+
+구분	멀티태스킹 (Multitasking)	멀티프로그래밍 (Multiprogramming)
+개념	CPU가 여러 프로세스를 빠르게 전환하여 실행	CPU가 유휴 시간을 최소화하기 위해 여러 개의 프로그램을 실행
+목적	사용자에게 동시에 여러 작업을 실행하는 것처럼 보이게 함	CPU의 활용도를 극대화하여 유휴 상태를 줄임
+방식	시분할 시스템(Time-sharing) 기반으로 프로세스를 전환	한 프로그램이 I/O 대기 상태일 때, 다른 프로그램 실행
+CPU 사용 방식	빠른 컨텍스트 스위칭(Context Switching)으로 CPU 활용	CPU를 최대한 활용하여 작업을 수행
+사용 환경	GUI 기반 운영체제(Windows, macOS, Linux)	배치 처리 시스템(Batch Processing)
+예제	웹 브라우저, 음악 재생, 워드 편집을 동시에 실행	운영체제가 메모리에 여러 프로그램을 로드하고 순차적으로 실행
+
+3. 예제 설명
+
+✅ 멀티태스킹 예제
+	•	Windows에서 MS Word에서 문서 작성, YouTube에서 음악 재생, 웹 브라우징을 동시에 수행
+	•	CPU가 매우 빠르게 작업을 전환하면서 실행됨 (사용자는 동시에 실행되는 것처럼 느낌)
+
+✅ 멀티프로그래밍 예제
+	•	과거 배치 처리 시스템(Batch System) 에서 프린팅 작업과 계산 작업을 병렬적으로 실행
+	•	한 프로그램이 입출력(I/O) 작업을 수행하는 동안 CPU가 다른 프로그램을 실행하여 CPU 낭비를 최소화
+
+4. 정리
+
+구분	멀티태스킹 (Multitasking)	멀티프로그래밍 (Multiprogramming)
+운영방식	여러 프로세스 또는 스레드가 빠르게 전환되며 실행됨	CPU가 대기하는 동안 다른 프로그램 실행
+사용 목적	사용자가 여러 프로그램을 동시에 실행하는 느낌 제공	CPU 활용률을 극대화하여 성능 최적화
+사용 환경	Windows, macOS, Linux 등 GUI OS	배치 처리 시스템 (Batch Processing)
+주요 특징	시분할(Time-sharing), 컨텍스트 스위칭	CPU 유휴 시간 최소화
+
+✅ 멀티태스킹은 사용자 경험 중심, 멀티프로그래밍은 CPU 활용률 중심
+✅ 현대 운영체제는 멀티태스킹 + 멀티프로그래밍을 결합하여 동작
+
 - 커널(Kernel)의 개념과 역할을 설명하시오.
 - 운영체제의 커널 유형(Monolithic Kernel, Microkernel, Hybrid Kernel)의 차이점을 설명하시오.
 - 시스템 콜(System Call)의 개념과 주요 기능을 설명하시오.
