@@ -325,7 +325,95 @@ Organized expected questions & answers
         - 슈퍼스칼라는 현대 CPU에서 필수적인 성능 향상 기법이지만, 명령어 병렬성을 확보해야 효과적
         - 최신 CPU는 슈퍼스칼라 + 파이프라이닝 + Out-of-Order Execution + 분기 예측을 조합하여 성능을 극대화
 
-- 명령어 집합 구조(ISA, Instruction Set Architecture)란 무엇이며, 설계 시 고려해야 할 요소는?
+- 명령어 집합 구조(ISA, Instruction Set Architecture)란 무엇이며, 설계 시 고려해야 할 요소
+    - 개념
+        - 컴퓨터의 하드웨어와 소프트웨어 간의 인터페이스를 정의하는 명령어들의 집합
+        - CPU가 실행할 수 있는 명령어들의 집합과 이들 명령어가 수행하는 동작을 규정하는 추상적인 명세
+        - ISA는 주어진 프로세서가 지원하는 명령어 형식, 데이터 유형, 주소 지정 방식, 레지스터 구조 등을 포함
+        - 동일한 ISA를 따르는 프로세서들은 같은 바이너리 명령어를 실행할 수 있으며, 이로 인해 소프트웨어의 이식성이 보장됨
+    - ISA 설계 시 고려해야 할 요소
+
+ISA를 설계할 때는 성능, 전력 소비, 구현 비용 등을 균형 있게 고려해야 한다. 주요 설계 요소는 다음과 같다.
+
+1. 명령어 형식(Instruction Format)
+	•	명령어의 길이(고정 길이 vs 가변 길이)
+	•	명령어 필드(Opcode, 피연산자 등)의 크기 및 배치
+	•	인코딩 방식 (CISC vs RISC)
+예시:
+	•	RISC(Reduced Instruction Set Computing): 고정된 길이의 명령어, 단순한 인코딩 방식
+	•	CISC(Complex Instruction Set Computing): 가변 길이 명령어, 복잡한 인코딩 방식
+
+2. 주소 지정 방식(Addressing Modes)
+
+CPU가 데이터를 메모리에서 읽거나 저장하는 방법을 정의하는 방식이다.
+	•	즉시 주소 지정(Immediate Addressing): 명령어 내에 직접 값이 포함됨
+	•	레지스터 주소 지정(Register Addressing): 연산 대상이 레지스터에 저장됨
+	•	직접 주소 지정(Direct Addressing): 메모리 주소가 명령어에 직접 포함됨
+	•	간접 주소 지정(Indirect Addressing): 명령어가 가리키는 메모리 주소에 실제 주소가 저장됨
+	•	기타(Indexed, Base + Offset, PC-relative 등)
+
+3. 데이터 유형(Data Types)
+
+ISA가 지원하는 데이터 유형과 연산 방식을 정의한다.
+	•	정수(Integer)
+	•	부동소수점(Floating Point)
+	•	벡터(Vector, SIMD)
+	•	기타 복합 데이터 유형(예: MMX, AVX 등)
+
+4. 연산 유형(Operations)
+
+CPU가 수행할 수 있는 기본 연산의 종류
+	•	산술 연산(ADD, SUB, MUL, DIV)
+	•	논리 연산(AND, OR, XOR, NOT)
+	•	비교 연산(CMP)
+	•	데이터 이동(Load/Store, Move)
+	•	흐름 제어(Jump, Branch, Call, Return)
+	•	특수 명령어(SIMD, 멀티스레딩 관련 명령어)
+
+5. 레지스터 구조(Register Architecture)
+	•	일반 목적 레지스터(GPR, General Purpose Register) 개수
+	•	예: x86(8개), ARM(16개 이상), RISC-V(32개)
+	•	전용 레지스터(Special Purpose Register)
+	•	예: PC(Program Counter), SP(Stack Pointer), FP(Frame Pointer)
+	•	명령어 인코딩에서 레지스터의 위치
+	•	RISC는 대부분 레지스터 간 연산을 기반으로 설계됨
+
+6. 메모리 모델 및 관리(Memory Model & Management)
+	•	메모리 정렬(Alignment)
+	•	엔디언(Endianness, Little-endian vs Big-endian)
+	•	메모리 보호 및 가상 메모리 지원 여부
+	•	캐시 및 페이지 테이블 관리 방식
+
+7. 입출력 방식(I/O Model)
+	•	메모리 매핑 I/O (Memory-mapped I/O)
+	•	포트 매핑 I/O (Port-mapped I/O)
+	•	인터럽트 기반 I/O (Interrupt-driven I/O)
+	•	DMA(Direct Memory Access) 지원 여부
+
+8. 명령어 실행 방식 및 성능 최적화
+	•	파이프라이닝(Pipelining): 명령어를 단계적으로 실행하여 성능 향상
+	•	슈퍼스칼라(Superscalar): 여러 명령어를 동시에 실행하는 구조
+	•	VLIW(Very Long Instruction Word): 병렬 실행을 위해 긴 명령어를 사용하는 방식
+	•	Out-of-Order Execution: 명령어를 순서에 관계없이 실행하여 성능 향상
+	•	Branch Prediction: 분기 예측 기술로 성능 향상
+
+9. 에너지 효율성 및 저전력 설계
+	•	모바일 및 IoT 기기에서는 저전력 소비가 필수
+	•	단순한 명령어와 연산 구조(RISC 계열 ISA) 활용
+	•	전력 소모를 줄이기 위한 명령어 집합 제공(예: ARM의 Thumb 모드)
+
+10. 소프트웨어 및 호환성 고려
+	•	이전 세대 ISA와의 하위 호환성 (Backward Compatibility)
+	•	가상화 및 보안 기능 지원 (예: Intel VT-x, ARM TrustZone)
+	•	운영체제(OS) 및 컴파일러 지원 고려
+결론
+
+ISA 설계는 성능, 전력 소비, 하드웨어 구현 비용, 소프트웨어 호환성 등의 요소를 균형 있게 고려해야 함
+RISC와 CISC와 같은 철학적 차이뿐만 아니라, 데이터 유형, 메모리 모델, 주소 지정 방식, 파이프라이닝 등의 다양한 요소를 최적화하는 것이 중요하다.
+
+최근의 ISA 설계는 병렬 처리, AI 가속, 저전력 소비 등의 특성을 반영하여 발전하고 있으며, 대표적인 ISA로는 x86, ARM, RISC-V 등이 있다.
+
+
 - 명령어 형식(Format)과 종류(Type)에 대해 설명하라.
 - 레지스터(Register)의 종류와 역할은 무엇인가?
 - 산술논리연산장치(ALU)의 역할과 기능은?
