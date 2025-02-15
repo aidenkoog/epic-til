@@ -1471,124 +1471,105 @@ Organized expected questions & answers
 	    - BFS: 최단 거리, 레벨 탐색, 최적 경로를 찾는 문제에서 유리함
 
 - 해시 테이블(Hash Table)의 구조와 충돌 해결 방법
+    - 해시 테이블(Hash Table) 구조
+        - 해시 테이블은 키(Key) 를 해시 함수(Hash Function)를 사용하여 특정한 해시 값(Hash Value, 인덱스) 로 변환한 후, 해당 위치에 데이터를 저장하는 자료 구조
+	        - 해시 함수(Hash Function): 입력된 키를 특정한 인덱스로 변환하는 함수
+	        - 버킷(Bucket): 해시 함수에 의해 결정된 저장 공간 (배열의 특정 위치)
+	        - 충돌(Collision): 서로 다른 키가 같은 해시 값(인덱스)을 가질 때 발생하는 문제
+        - 예제
+            - hash("apple") -> index 3
+            - hash("banana") -> index 5
+            - hash("grape") -> index 3  # 충돌 발생
+    - 해시 충돌(Collision) 해결 방법
+        - 체이닝(Chaining) (Separate Chaining)
+            - 개념
+                - 같은 인덱스에 여러 개의 데이터를 연결 리스트(Linked List) 또는 트리(Tree) 로 저장하는 방법
+                - 새로운 키가 동일한 해시 값을 가지면 리스트의 끝에 추가됨
+            - 장점: 충돌이 많아도 테이블의 크기를 변경하지 않아도 됨
+            - 단점: 연결 리스트 사용으로 인해 메모리 오버헤드 발생 가능
+            - 예제
+                ```python
+                class HashTable:
+                    def __init__(self, size):
+                        self.size = size
+                        self.table = [[] for _ in range(size)]
 
-해시 테이블(Hash Table)의 구조와 충돌 해결 방법
+                    def hash_function(self, key):
+                        return hash(key) % self.size
 
-1. 해시 테이블(Hash Table) 구조
+                    def insert(self, key, value):
+                        index = self.hash_function(key)
+                        self.table[index].append((key, value))  # 체이닝 방식 사용
 
-해시 테이블은 키(Key) 를 해시 함수(Hash Function)를 사용하여 특정한 해시 값(Hash Value, 인덱스) 로 변환한 후, 해당 위치에 데이터를 저장하는 자료 구조이다.
-	•	해시 함수(Hash Function): 입력된 키를 특정한 인덱스로 변환하는 함수
-	•	버킷(Bucket): 해시 함수에 의해 결정된 저장 공간 (배열의 특정 위치)
-	•	충돌(Collision): 서로 다른 키가 같은 해시 값(인덱스)을 가질 때 발생하는 문제
+                    def search(self, key):
+                        index = self.hash_function(key)
+                        for k, v in self.table[index]:
+                            if k == key:
+                                return v
+                        return None  # 데이터가 없으면 None 반환
+                ```
+        - 개방 주소법(Open Addressing)
+            - 개요
+                - 충돌이 발생하면 다른 빈 슬롯을 찾아 데이터를 저장하는 방법
+                - 해시 테이블 내의 공간을 최대한 활용할 수 있음
+            - 방법
+	            - 선형 탐사(Linear Probing)
+	                - 충돌이 발생하면 다음 버킷(인덱스 + 1)을 검사하여 빈 공간을 찾음
+	                - 단점: 연속된 데이터 저장으로 인해 클러스터링(Cluster)이 발생하여 성능 저하
+                    - 해시 충돌 해결 예시
+                        - 해시 테이블 크기: 5
+                        - hash("apple") -> index 2
+                        - hash("banana") -> index 2 (충돌 발생) -> index 3로 저장
+                - 이차 탐사(Quadratic Probing)
+	                - 충돌이 발생하면 1², 2², 3², … 형태로 탐색하여 빈 공간을 찾음
+	                - 선형 탐사보다 클러스터링이 줄어들지만, 저장 공간이 제한될 수 있음
+	            - 이중 해싱(Double Hashing)
+	                - 해시 함수를 두 개 사용하여 충돌이 발생할 경우 두 번째 해시 값을 이용하여 새로운 인덱스를 찾음
+	                - 예: index = (hash1(key) + i * hash2(key)) % table_size
+	                - 클러스터링 문제를 줄이면서도 공간 활용을 최적화
+                - 예제
+                    ```python
+                    class OpenAddressingHashTable:
+                        def __init__(self, size):
+                            self.size = size
+                            self.table = [None] * size
 
-예제
+                        def hash_function(self, key):
+                            return hash(key) % self.size
 
-hash("apple") -> index 3
-hash("banana") -> index 5
-hash("grape") -> index 3  # 충돌 발생
+                        def insert(self, key, value):
+                            index = self.hash_function(key)
+                            while self.table[index] is not None:  # 선형 탐사 방식
+                                index = (index + 1) % self.size
+                            self.table[index] = (key, value)
 
-2. 해시 충돌(Collision) 해결 방법
-
-해시 테이블에서 충돌이 발생하면 이를 해결하는 방법이 필요하다. 대표적인 해결 방법은 다음과 같다.
-
-(1) 체이닝(Chaining) (Separate Chaining)
-	•	같은 인덱스에 여러 개의 데이터를 연결 리스트(Linked List) 또는 트리(Tree) 로 저장하는 방법
-	•	새로운 키가 동일한 해시 값을 가지면 리스트의 끝에 추가됨
-
-장점: 충돌이 많아도 테이블의 크기를 변경하지 않아도 됨
-단점: 연결 리스트 사용으로 인해 메모리 오버헤드 발생 가능
-
-예제 (파이썬 구현)
-
-class HashTable:
-    def __init__(self, size):
-        self.size = size
-        self.table = [[] for _ in range(size)]
-
-    def hash_function(self, key):
-        return hash(key) % self.size
-
-    def insert(self, key, value):
-        index = self.hash_function(key)
-        self.table[index].append((key, value))  # 체이닝 방식 사용
-
-    def search(self, key):
-        index = self.hash_function(key)
-        for k, v in self.table[index]:
-            if k == key:
-                return v
-        return None  # 데이터가 없으면 None 반환
-
-(2) 개방 주소법(Open Addressing)
-
-충돌이 발생하면 다른 빈 슬롯을 찾아 데이터를 저장하는 방법
-해시 테이블 내의 공간을 최대한 활용할 수 있음
-	1.	선형 탐사(Linear Probing)
-	•	충돌이 발생하면 다음 버킷(인덱스 + 1)을 검사하여 빈 공간을 찾음
-	•	단점: 연속된 데이터 저장으로 인해 클러스터링(Cluster)이 발생하여 성능 저하
-해시 충돌 해결 예시
-
-해시 테이블 크기: 5
-hash("apple") -> index 2
-hash("banana") -> index 2 (충돌 발생) -> index 3로 저장
-
-
-	2.	이차 탐사(Quadratic Probing)
-	•	충돌이 발생하면 1², 2², 3², … 형태로 탐색하여 빈 공간을 찾음
-	•	선형 탐사보다 클러스터링이 줄어들지만, 저장 공간이 제한될 수 있음
-	3.	이중 해싱(Double Hashing)
-	•	해시 함수를 두 개 사용하여 충돌이 발생할 경우 두 번째 해시 값을 이용하여 새로운 인덱스를 찾음
-	•	예: index = (hash1(key) + i * hash2(key)) % table_size
-	•	클러스터링 문제를 줄이면서도 공간 활용을 최적화
-
-예제 (파이썬 구현)
-
-class OpenAddressingHashTable:
-    def __init__(self, size):
-        self.size = size
-        self.table = [None] * size
-
-    def hash_function(self, key):
-        return hash(key) % self.size
-
-    def insert(self, key, value):
-        index = self.hash_function(key)
-        while self.table[index] is not None:  # 선형 탐사 방식
-            index = (index + 1) % self.size
-        self.table[index] = (key, value)
-
-    def search(self, key):
-        index = self.hash_function(key)
-        while self.table[index] is not None:
-            if self.table[index][0] == key:
-                return self.table[index][1]
-            index = (index + 1) % self.size
-        return None
-
-3. 해시 테이블 성능 분석
-	•	탐색 평균 시간 복잡도: O(1)
-	•	충돌 발생 시 최악의 경우: O(n)
-	•	부하율(Load Factor, α) = (저장된 요소 개수) / (테이블 크기)
-	•	α가 너무 크면 충돌이 많이 발생 → 성능 저하
-	•	보통 α < 0.7 정도로 유지하며, 필요 시 해시 테이블 크기를 늘려 리해싱(Rehashing) 수행
-
-4. 해시 테이블의 활용 사례
-	•	데이터베이스 인덱싱
-	•	캐싱 시스템 (LRU Cache)
-	•	컴파일러 (심볼 테이블)
-	•	DNS 조회
-	•	비밀번호 저장 (해시 함수 적용 후 저장)
-
-결론
-
-해시 테이블은 빠른 데이터 검색이 가능한 효율적인 자료 구조이지만, 충돌(Collision) 해결 방식에 따라 성능이 달라진다. 일반적으로 체이닝(Chaining) 방식과 개방 주소법(Open Addressing) 이 많이 사용되며, 상황에 맞게 적절한 충돌 해결 기법을 선택하는 것이 중요하다.
-
+                        def search(self, key):
+                            index = self.hash_function(key)
+                            while self.table[index] is not None:
+                                if self.table[index][0] == key:
+                                    return self.table[index][1]
+                                index = (index + 1) % self.size
+                            return None
+                    ```
+    - 해시 테이블 성능 분석
+	    - 탐색 평균 시간 복잡도: O(1)
+	    - 충돌 발생 시 최악의 경우: O(n)
+	    - 부하율(Load Factor, α) = (저장된 요소 개수) / (테이블 크기)
+	    - α가 너무 크면 충돌이 많이 발생 → 성능 저하
+	    - 보통 α < 0.7 정도로 유지하며, 필요 시 해시 테이블 크기를 늘려 리해싱(Rehashing) 수행
+    - 해시 테이블의 활용 사례
+	    - 데이터베이스 인덱싱
+	    - 캐싱 시스템 (LRU Cache)
+	    - 컴파일러 (심볼 테이블)
+	    - DNS 조회
+	    - 비밀번호 저장 (해시 함수 적용 후 저장)
+    - 결론
+        - 해시 테이블은 빠른 데이터 검색이 가능한 효율적인 자료 구조
+        - 충돌(Collision) 해결 방식에 따라 성능이 달라짐
+        - 일반적으로 체이닝(Chaining) 방식과 개방 주소법(Open Addressing) 이 많이 사용되며, 상황에 맞게 적절한 충돌 해결 기법을 선택 필요
 
 - 해싱(Hashing)에서 충돌(Collision) 해결 방법
-
-    - 해싱(Hashing)에서 충돌(Collision) 해결 방법
-
-1. 해싱과 충돌(Collision)이란?
+    - 해싱과 충돌(Collision) 개념
 
 해싱(Hashing)은 키(Key) 를 해시 함수(Hash Function)를 사용하여 특정 해시 값(Hash Value, 인덱스) 으로 변환한 후, 해당 위치에 데이터를 저장하는 방식이다.
 그러나 해시 함수가 서로 다른 키에 대해 동일한 해시 값을 반환하는 경우 충돌(Collision) 이 발생할 수 있다.
