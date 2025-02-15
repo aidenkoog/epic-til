@@ -103,7 +103,100 @@ Organized expected questions & answers
         - 기업과 개인이 IT 인프라를 더욱 효율적으로 운영할 수 있도록 돕는 기술
 
 
-- 클라우드 컴퓨팅의 주요 서비스 모델(IaaS, PaaS, SaaS)의 개념과 차이점은?
+- 클라우드 컴퓨팅의 주요 서비스 모델(IaaS, PaaS, SaaS)의 개념과 차이점
+
+클라우드 컴퓨팅의 주요 서비스 모델: IaaS, PaaS, SaaS
+
+클라우드 컴퓨팅은 사용자가 인터넷을 통해 IT 리소스를 필요에 따라 사용할 수 있도록 제공하는 서비스 모델이다. 주요 서비스 모델에는 IaaS, PaaS, SaaS가 있으며, 각각의 차이점은 관리해야 할 범위와 제공되는 기능에 따라 달라진다.
+
+1. IaaS(Infrastructure as a Service, 인프라 서비스)
+
+IaaS는 가상화된 컴퓨팅 리소스(서버, 스토리지, 네트워크 등)를 제공하는 서비스이다. 사용자는 클라우드 환경에서 운영체제(OS)와 애플리케이션을 직접 설치 및 관리해야 한다.
+
+특징
+	•	물리적인 서버 없이 클라우드에서 가상 머신(VM), 네트워크, 스토리지를 제공
+	•	사용자는 인프라를 원격에서 관리하며, OS 및 애플리케이션을 직접 설정 가능
+	•	자동 확장(Scaling) 가능하여, 사용량에 따라 서버 리소스를 조절할 수 있음
+	•	보통 시간당 요금제로 운영되며, 필요할 때만 리소스를 사용하여 비용 절감 가능
+
+예제
+	•	AWS EC2 (Elastic Compute Cloud)
+	•	Microsoft Azure Virtual Machines
+	•	Google Cloud Compute Engine(GCE)
+	•	IBM Cloud Infrastructure
+
+언제 사용해야 하는가?
+	•	데이터센터를 운영하지 않고 IT 인프라를 빠르게 구축할 때
+	•	개발 환경, 테스트 환경을 빠르게 배포할 때
+	•	유동적인 트래픽 증가에 따라 서버를 확장할 필요가 있을 때
+
+2. PaaS(Platform as a Service, 플랫폼 서비스)
+
+PaaS는 애플리케이션을 개발, 실행, 관리할 수 있는 플랫폼을 제공하는 서비스이다.
+사용자는 인프라 및 운영체제를 직접 관리할 필요 없이, 애플리케이션 개발과 실행에 집중할 수 있다.
+
+특징
+	•	개발자는 서버, OS, 미들웨어, 데이터베이스 관리 등을 신경 쓰지 않고 코드 개발에 집중 가능
+	•	애플리케이션 실행을 위한 개발 프레임워크, API, DB 관리 도구 등을 제공
+	•	사용자가 환경 설정 및 배포를 쉽게 할 수 있도록 지원
+	•	자동 확장(Auto Scaling) 및 CI/CD(Continuous Integration/Continuous Deployment) 지원
+
+예제
+	•	Google App Engine(GAE)
+	•	AWS Elastic Beanstalk
+	•	Microsoft Azure App Service
+	•	Heroku
+	•	Red Hat OpenShift
+
+언제 사용해야 하는가?
+	•	웹 애플리케이션을 빠르게 개발하고 배포해야 할 때
+	•	소프트웨어 개발자들이 서버 관리 없이 애플리케이션 개발에 집중할 때
+	•	CI/CD 파이프라인을 구축하여 자동 배포를 진행할 때
+
+3. SaaS(Software as a Service, 소프트웨어 서비스)
+
+SaaS는 인터넷을 통해 사용자가 직접 소프트웨어를 실행하고 사용할 수 있는 서비스이다.
+사용자는 소프트웨어를 설치할 필요 없이, 웹 브라우저 또는 앱을 통해 서비스를 사용한다.
+
+특징
+	•	사용자는 소프트웨어 설치 없이 웹이나 애플리케이션을 통해 바로 사용 가능
+	•	보통 구독형(Subscription) 모델을 기반으로 제공 (월 요금 또는 연간 요금제)
+	•	소프트웨어의 업데이트, 유지보수, 보안 패치가 자동으로 이루어짐
+	•	여러 기기에서 접속 가능하며, 협업 기능이 포함된 경우가 많음
+
+예제
+	•	Google Workspace (Gmail, Google Docs, Google Drive)
+	•	Microsoft 365 (Word, Excel, Outlook, Teams)
+	•	Dropbox, OneDrive (클라우드 스토리지)
+	•	Slack, Zoom (협업 도구)
+	•	Adobe Creative Cloud (Photoshop, Premiere Pro 등)
+
+언제 사용해야 하는가?
+	•	소프트웨어를 별도로 설치하지 않고 사용해야 할 때
+	•	기업 내 협업 도구를 효율적으로 활용해야 할 때
+	•	자동 업데이트 및 보안 패치가 중요한 경우
+
+4. IaaS, PaaS, SaaS의 차이점
+
+아래 표는 각 서비스 모델이 제공하는 기능과 관리해야 할 부분을 비교한 것이다.
+
+구분	IaaS	PaaS	SaaS
+사용 대상	IT 관리자, 개발자	개발자, DevOps	일반 사용자, 기업
+제공 기능	서버, 네트워크, 스토리지 등 인프라	개발 환경, 미들웨어, DB 관리	소프트웨어 및 애플리케이션
+사용자가 관리해야 할 요소	OS, 애플리케이션, 보안 설정	애플리케이션 개발, 데이터 관리	없음 (소프트웨어만 사용)
+확장성(Scaling)	수동 설정(사용자가 직접 확장)	자동 확장 지원	사용자가 신경 쓸 필요 없음
+설치 필요 여부	필요 (OS 및 애플리케이션 직접 설치)	필요 없음 (코드만 개발)	필요 없음 (바로 사용 가능)
+비용	사용량 기반 요금제	사용량 기반 또는 정액제	구독형 요금제
+예제 서비스	AWS EC2, Azure VM	AWS Elastic Beanstalk, GAE	Gmail, Dropbox, Microsoft 365
+
+5. 결론: IaaS, PaaS, SaaS 선택 기준
+	•	IaaS: 서버를 직접 구축하고 관리해야 하는 기업, 클라우드 환경에서 유연한 인프라가 필요한 경우
+	•	PaaS: 개발자가 코드 개발과 배포에 집중하고, 서버 관리 부담을 줄이고 싶은 경우
+	•	SaaS: 별도의 설치 없이 즉시 소프트웨어를 사용해야 하는 일반 사용자 및 기업
+
+기업과 개인의 목적과 사용 환경에 따라 적절한 클라우드 서비스를 선택하는 것이 중요하다.
+
+
 - 클라우드 배포 모델(Public, Private, Hybrid, Community Cloud)의 차이점은?
 - 멀티 클라우드(Multi-Cloud) 전략이 필요한 이유와 장단점은?
 - 서버리스 컴퓨팅(Serverless Computing)의 개념과 장점은?
