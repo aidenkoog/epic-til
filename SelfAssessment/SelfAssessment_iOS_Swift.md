@@ -224,7 +224,35 @@ Organized expected questions & answers
         - Struct가 기본적으로 더 안전하고 성능이 좋음 > 기본적으로 Struct를 사용하고 필요할 때 Class 를 사용
         - Swift에서는 가능하면 Struct를 기본으로 사용하고, 상속이나 참조가 필요할 때 Class를 고려하는 것이 좋은 방향
  
-- optional이란 무엇이고, !와 ?의 차이는?
+- optional이란 무엇이고, !와 ?의 차이
+    - 개요
+        - Swift에서 Optional은 값이 있을 수도 있고 없을 수도 있는 변수를 나타내는 타입
+    - Optional 정의
+        - Optional은 값이 nil일 가능성이 있는 변수나 상수를 안전하게 다루기 위해 사용
+        - 일반적으로 ?를 붙여서 선언
+    - ?와 !의 차이
+        - ? (Optional)
+            - ?는 값이 있을 수도 있고 없을 수도 있음을 나타냄
+            - 값을 직접 사용하려면 언래핑이 필요합니다.
+    - 안전한 언래핑
+        ```swift
+        var name: String? = "Aiden"
+        print(name) // Optional("Aiden")
+        // 안전한 언래핑 (Optional Binding)
+        if let unwrappedName = name {
+            print(unwrappedName) // Aiden
+        }
+        // Nil-Coalescing Operator (기본값 제공)
+        print(name ?? "Unknown") // Aiden
+        ```
+    - ! (Forced Unwrapping)
+        - !는 강제로 언래핑하여 값을 가져오는 방법
+        - nil이면 앱이 크래시 발생
+    - 언제 ?와 ! 사용
+        - ? → 값이 nil일 수도 있는 경우, 안전한 처리 필요
+        - ! → 값이 nil이 될 수 없다고 확신하는 경우 (하지만 주의해서 사용해야 함)
+            - 가능하면 ?를 사용하고, if let 또는 guard let을 활용하여 안전하게 언래핑하는 것이 좋은 방향
+
 - guard와 if let의 차이는?
 - weak, strong, unowned의 차이는?
 - ARC(Automatic Reference Counting)란 무엇인가?
