@@ -2299,7 +2299,116 @@ MST를 찾는 대표적인 알고리즘으로 크루스칼(Kruskal) 알고리즘
 
 즉, 그래프에서 최소 비용으로 모든 정점을 연결하는 문제를 해결할 때 MST를 활용하면 된다.
 
-- 크루스칼(Kruskal) 알고리즘의 개념과 구현 방법을 설명하시오.
+- 크루스칼(Kruskal) 알고리즘의 개념과 구현 방법
+
+크루스칼(Kruskal) 알고리즘 개념
+
+크루스칼(Kruskal) 알고리즘은 최소 신장 트리(MST, Minimum Spanning Tree)를 찾는 대표적인 알고리즘 중 하나로, 그리디(Greedy) 알고리즘을 기반으로 한다.
+
+주어진 그래프에서 모든 정점을 최소 비용으로 연결하는 트리를 구성하는 것이 목표이며, 간선의 가중치를 기준으로 정렬한 후, 최소 비용의 간선부터 추가하면서 사이클을 방지하는 방식으로 동작한다.
+
+크루스칼 알고리즘의 동작 원리
+	1.	모든 간선을 가중치 기준으로 오름차순 정렬한다.
+	2.	사이클이 발생하지 않는 경우에만 간선을 추가하면서 최소 신장 트리를 구성한다.
+	•	이를 위해 유니온-파인드(Union-Find, Disjoint Set) 자료구조를 사용하여 사이클 여부를 판별한다.
+	3.	N-1개의 간선이 선택되면 종료한다. (N은 정점의 개수)
+
+크루스칼 알고리즘의 구현 방법
+	1.	간선 리스트를 가중치 기준으로 정렬
+	2.	유니온-파인드(Union-Find) 자료구조 초기화
+	•	각 정점을 자기 자신을 부모로 설정 (대표 노드 초기화)
+	3.	정렬된 간선을 하나씩 확인하면서 MST에 추가
+	•	두 정점이 같은 집합에 속해 있지 않으면(사이클이 발생하지 않으면) MST에 포함
+	•	포함 후 유니온 연산 수행(두 집합을 하나로 합침)
+	4.	MST의 간선 개수가 (N-1)개가 되면 종료
+
+크루스칼 알고리즘의 시간 복잡도
+	•	O(E log E) (간선 정렬: O(E log E) + 유니온-파인드 연산 O(E α(V)), 여기서 α(V)는 아커만 함수의 역함수로 거의 O(1))
+	•	간선 개수 E가 많을수록 정렬 비용이 크지만, 일반적으로 매우 효율적이다.
+
+크루스칼 알고리즘 구현 (Python)
+
+# 크루스칼 알고리즘 구현 (Union-Find 사용)
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))  # 자기 자신을 부모로 초기화
+        self.rank = [0] * n           # 랭크(트리 깊이) 초기화
+    
+    def find(self, x):
+        if self.parent[x] != x:  # 루트 노드 찾기 (경로 압축)
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+    
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
+        
+        if root_x != root_y:  # 사이클이 발생하지 않을 경우 병합
+            if self.rank[root_x] > self.rank[root_y]:
+                self.parent[root_y] = root_x
+            elif self.rank[root_x] < self.rank[root_y]:
+                self.parent[root_x] = root_y
+            else:
+                self.parent[root_y] = root_x
+                self.rank[root_x] += 1
+            return True  # Union 성공
+        return False  # 이미 같은 집합 (사이클 발생)
+
+def kruskal(n, edges):
+    edges.sort(key=lambda x: x[2])  # 간선을 가중치 기준으로 정렬
+    uf = UnionFind(n)  # 유니온-파인드 초기화
+    mst = []  # 최소 신장 트리 (MST) 저장 리스트
+    mst_cost = 0  # MST의 총 비용
+    
+    for u, v, weight in edges:
+        if uf.union(u, v):  # 사이클이 발생하지 않는 경우 MST에 추가
+            mst.append((u, v, weight))
+            mst_cost += weight
+            if len(mst) == n - 1:  # MST 완성 (N-1개의 간선)
+                break
+    
+    return mst, mst_cost  # MST의 간선 리스트와 총 비용 반환
+
+# 사용 예제 (정점 개수: 4, 간선 리스트)
+edges = [
+    (0, 1, 1),
+    (0, 2, 3),
+    (1, 2, 1),
+    (1, 3, 4),
+    (2, 3, 2)
+]
+
+n = 4  # 정점 개수
+mst, total_cost = kruskal(n, edges)
+
+print("최소 신장 트리의 간선:", mst)
+print("최소 신장 트리의 총 비용:", total_cost)
+
+크루스칼 알고리즘의 활용 사례
+	1.	네트워크 구축(전기, 통신, 도로, 철도 등)
+	•	최소한의 비용으로 도시(노드)들을 연결하는 도로망 또는 전력망 설계
+	•	예: 인터넷 망을 구축할 때, 최소한의 케이블 비용으로 연결
+	2.	클러스터링(데이터 분석 및 그래프 이론)
+	•	그래프 기반 클러스터링(예: 소셜 네트워크 분석)
+	3.	이미지 처리 및 패턴 인식
+	•	이미지에서 객체의 경계를 찾거나 연결을 분석할 때 활용
+	4.	배관 및 회로 설계
+	•	최소한의 전선으로 모든 회로를 연결하는 최적 설계
+
+크루스칼 vs 프림 비교
+
+알고리즘	시간 복잡도	특징	적합한 그래프
+크루스칼	O(E log E)	간선을 정렬한 후 작은 것부터 선택	간선 개수가 적은 희소 그래프(Sparse Graph)
+프림	O(E log V)	임의의 정점에서 시작하여 최소 간선을 선택	간선이 많은 밀집 그래프(Dense Graph)
+
+정리
+	•	크루스칼 알고리즘은 그리디(Greedy) 알고리즘을 기반으로 최소 신장 트리를 찾는 방법.
+	•	간선의 가중치를 기준으로 정렬 후, 유니온-파인드(Union-Find)를 이용하여 사이클을 방지하면서 MST를 구성.
+	•	시간 복잡도 O(E log E)로, 간선이 적은 희소 그래프에서 효율적.
+	•	네트워크 구축, 클러스터링, 배관 설계 등 다양한 분야에서 활용.
+
+즉, 크루스칼 알고리즘은 최소 비용으로 그래프를 연결하는 최적의 해법을 제공하며, 특히 간선 개수가 적은 경우 매우 효율적이다.
+
 - 프림(Prim) 알고리즘과 크루스칼 알고리즘의 차이점을 설명하시오.
 - KMP(Knuth-Morris-Pratt) 문자열 검색 알고리즘의 개념과 구현 방법을 설명하시오.
 - 보이어-무어(Boyer-Moore) 알고리즘의 특징과 시간 복잡도를 설명하시오.
