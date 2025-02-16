@@ -1877,164 +1877,140 @@ Organized expected questions & answers
     - 최단 경로 문제 정의
         - 최단 경로 문제(Shortest Path Problem)는 그래프(Graph)에서 한 정점에서 다른 정점으로 이동하는 가장 짧은 경로를 찾는 문제
         - 네트워크 경로 최적화, GPS 네비게이션, 통신 라우팅 등 다양한 분야에서 활용
+    - 최단 경로 알고리즘의 종류
+        - 그래프의 특성(가중치, 음수 간선 포함 여부 등)에 따라 단일 출발점(single-source) 또는 전체 쌍(all-pairs) 최단 경로로 나뉨
+        - 종류
+            - 다익스트라(Dijkstra): 양수 가중치 그래프 / O(V²) (우선순위 큐 사용 시 O(E log V)) / 음수 가중치 X, 빠른 탐색
+            - 벨만-포드(Bellman-Ford): 음수 가중치 가능	/ O(VE)	/ 최단 경로 + 음수 사이클 감지
+            - 플로이드-워셜(Floyd-Warshall): 전체 쌍 최단 경로 / O(V³) / 모든 정점 간 최단 거리 계산
+            - 존슨(Johnson): 전체 쌍 최단 경로 + 음수 간선 / O(V² log V + VE) / 효율적 (음수 가중치 포함 가능)
+        - 다익스트라(Dijkstra) 알고리즘
+            - 특징
+                - 음수 가중치가 없는 그래프에서 최단 경로를 찾는 알고리즘
+                - 우선순위 큐(Priority Queue) 를 활용하면 O(E log V) 의 시간 복잡도를 가짐
+                - 네트워크 경로 탐색, 지도 서비스(GPS) 등에 활용됨
+            - 다익스트라 동작 방식
+                - 출발 노드에서 거리를 0 으로 설정하고, 나머지 노드는 무한대(∞)로 초기화
+                - 가장 가까운 노드(최단 거리)를 선택하여, 인접한 노드의 최단 거리를 갱신
+                - 모든 노드를 방문할 때까지 반복
+            - 다익스트라 구현 (파이썬, 우선순위 큐 사용)
+                ```python
+                import heapq
 
-최단 경로 알고리즘의 종류
+                def dijkstra(graph, start):
+                    distances = {node: float('inf') for node in graph}
+                    distances[start] = 0
+                    pq = [(0, start)]  # (거리, 노드)
 
-최단 경로 알고리즘은 그래프의 특성(가중치, 음수 간선 포함 여부 등)에 따라 단일 출발점(single-source) 또는 전체 쌍(all-pairs) 최단 경로로 나뉜다.
+                    while pq:
+                        current_distance, current_node = heapq.heappop(pq)
+                        if distances[current_node] < current_distance:
+                            continue  # 이미 처리된 경우 건너뜀
 
-알고리즘	그래프 유형	시간 복잡도	특징
-다익스트라(Dijkstra)	양수 가중치 그래프	O(V²) (우선순위 큐 사용 시 O(E log V))	음수 가중치 X, 빠른 탐색
-벨만-포드(Bellman-Ford)	음수 가중치 가능	O(VE)	최단 경로 + 음수 사이클 감지
-플로이드-워셜(Floyd-Warshall)	전체 쌍 최단 경로	O(V³)	모든 정점 간 최단 거리 계산
-존슨(Johnson)	전체 쌍 최단 경로 + 음수 간선	O(V² log V + VE)	효율적 (음수 가중치 포함 가능)
+                        for neighbor, weight in graph[current_node].items():
+                            distance = current_distance + weight
 
-1. 다익스트라(Dijkstra) 알고리즘
+                            if distance < distances[neighbor]:  # 더 짧은 경로 발견 시 갱신
+                                distances[neighbor] = distance
+                                heapq.heappush(pq, (distance, neighbor))
+                                
+                    return distances
 
-특징:
-	- 음수 가중치가 없는 그래프에서 최단 경로를 찾는 알고리즘
-	- 우선순위 큐(Priority Queue) 를 활용하면 O(E log V) 의 시간 복잡도를 가짐
-	- 네트워크 경로 탐색, 지도 서비스(GPS) 등에 활용됨
+                # 그래프 정의 (딕셔너리)
+                graph = {
+                    'A': {'B': 1, 'C': 4},
+                    'B': {'A': 1, 'C': 2, 'D': 5},
+                    'C': {'A': 4, 'B': 2, 'D': 1},
+                    'D': {'B': 5, 'C': 1}
+                }
 
-다익스트라 동작 방식
-	1.	출발 노드에서 거리를 0 으로 설정하고, 나머지 노드는 무한대(∞)로 초기화
-	2.	가장 가까운 노드(최단 거리)를 선택하여, 인접한 노드의 최단 거리를 갱신
-	3.	모든 노드를 방문할 때까지 반복
+                print(dijkstra(graph, 'A'))  # {'A': 0, 'B': 1, 'C': 3, 'D': 4}
+                ```
+        - 벨만-포드(Bellman-Ford) 알고리즘
+            - 특징
+                - 음수 가중치를 포함한 그래프에서도 최단 경로 계산 가능
+                - 시간 복잡도 O(VE) 로 다익스트라보다 느림
+                - 음수 사이클(negative cycle) 검출 가능
+            - 벨만-포드 동작 방식
+                - 출발 노드에서 모든 노드까지의 거리를 무한대(∞) 로 초기화, 시작 노드는 0
+                - 모든 간선을 V-1번 반복 하면서 거리 갱신
+                - V번째 반복에서도 갱신이 발생하면 음수 사이클 존재
+            - 벨만-포드 구현 (파이썬)
+                ```python
+                def bellman_ford(graph, start):
+                    distances = {node: float('inf') for node in graph}
+                    distances[start] = 0
 
-다익스트라 구현 (파이썬, 우선순위 큐 사용)
+                    for _ in range(len(graph) - 1):
+                        for node in graph:
+                            for neighbor, weight in graph[node].items():
+                                if distances[node] + weight < distances[neighbor]:
+                                    distances[neighbor] = distances[node] + weight
 
-import heapq
+                    # 음수 사이클 검출
+                    for node in graph:
+                        for neighbor, weight in graph[node].items():
+                            if distances[node] + weight < distances[neighbor]:
+                                return "음수 사이클 발견"
 
-def dijkstra(graph, start):
-    distances = {node: float('inf') for node in graph}
-    distances[start] = 0
-    pq = [(0, start)]  # (거리, 노드)
+                    return distances
 
-    while pq:
-        current_distance, current_node = heapq.heappop(pq)
+                graph = {
+                    'A': {'B': 1, 'C': 4},
+                    'B': {'C': -2, 'D': 5},
+                    'C': {'D': 1},
+                    'D': {}
+                }
 
-        if distances[current_node] < current_distance:
-            continue  # 이미 처리된 경우 건너뜀
+                print(bellman_ford(graph, 'A'))  # {'A': 0, 'B': 1, 'C': -1, 'D': 0}
+                ```
+        - 플로이드-워셜(Floyd-Warshall) 알고리즘
+            - 특징
+                - 모든 정점 쌍의 최단 경로 를 구하는 알고리즘
+                - 시간 복잡도 O(V³) 로 큰 그래프에서는 비효율적
+                - 동적 프로그래밍(DP) 기반 알고리즘
+            - 플로이드-워셜 동작 방식
+                - 2차원 배열을 초기화하여, 자기 자신으로 가는 경로는 0, 나머지는 ∞로 설정
+                - 모든 노드를 중간 경로로 사용하여 최단 거리 갱신 (i → k → j)
+            - 플로이드-워셜 구현 (파이썬)
+                ```python
+                def floyd_warshall(graph):
+                    nodes = list(graph.keys())
+                    dist = {node: {n: float('inf') for n in nodes} for node in nodes}
 
-        for neighbor, weight in graph[current_node].items():
-            distance = current_distance + weight
+                    for node in nodes:
+                        dist[node][node] = 0
 
-            if distance < distances[neighbor]:  # 더 짧은 경로 발견 시 갱신
-                distances[neighbor] = distance
-                heapq.heappush(pq, (distance, neighbor))
+                    for node in graph:
+                        for neighbor, weight in graph[node].items():
+                            dist[node][neighbor] = weight
 
-    return distances
+                    for k in nodes:
+                        for i in nodes:
+                            for j in nodes:
+                                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
 
-# 그래프 정의 (딕셔너리)
-graph = {
-    'A': {'B': 1, 'C': 4},
-    'B': {'A': 1, 'C': 2, 'D': 5},
-    'C': {'A': 4, 'B': 2, 'D': 1},
-    'D': {'B': 5, 'C': 1}
-}
+                    return dist
 
-print(dijkstra(graph, 'A'))  # {'A': 0, 'B': 1, 'C': 3, 'D': 4}
+                graph = {
+                    'A': {'B': 3, 'C': 7},
+                    'B': {'A': 3, 'C': 1, 'D': 5},
+                    'C': {'A': 7, 'B': 1, 'D': 2},
+                    'D': {'B': 5, 'C': 2}
+                }
 
-2. 벨만-포드(Bellman-Ford) 알고리즘
-
-특징:
-	- 음수 가중치를 포함한 그래프에서도 최단 경로 계산 가능
-	- 시간 복잡도 O(VE) 로 다익스트라보다 느림
-	- 음수 사이클(negative cycle) 검출 가능
-
-벨만-포드 동작 방식
-	1.	출발 노드에서 모든 노드까지의 거리를 무한대(∞) 로 초기화, 시작 노드는 0
-	2.	모든 간선을 V-1번 반복 하면서 거리 갱신
-	3.	V번째 반복에서도 갱신이 발생하면 음수 사이클 존재
-
-벨만-포드 구현 (파이썬)
-
-def bellman_ford(graph, start):
-    distances = {node: float('inf') for node in graph}
-    distances[start] = 0
-
-    for _ in range(len(graph) - 1):
-        for node in graph:
-            for neighbor, weight in graph[node].items():
-                if distances[node] + weight < distances[neighbor]:
-                    distances[neighbor] = distances[node] + weight
-
-    # 음수 사이클 검출
-    for node in graph:
-        for neighbor, weight in graph[node].items():
-            if distances[node] + weight < distances[neighbor]:
-                return "음수 사이클 발견"
-
-    return distances
-
-graph = {
-    'A': {'B': 1, 'C': 4},
-    'B': {'C': -2, 'D': 5},
-    'C': {'D': 1},
-    'D': {}
-}
-
-print(bellman_ford(graph, 'A'))  # {'A': 0, 'B': 1, 'C': -1, 'D': 0}
-
-3. 플로이드-워셜(Floyd-Warshall) 알고리즘
-
-특징:
-	- 모든 정점 쌍의 최단 경로 를 구하는 알고리즘
-	- 시간 복잡도 O(V³) 로 큰 그래프에서는 비효율적
-	- 동적 프로그래밍(DP) 기반 알고리즘
-
-플로이드-워셜 동작 방식
-	1.	2차원 배열을 초기화하여, 자기 자신으로 가는 경로는 0, 나머지는 ∞로 설정
-	2.	모든 노드를 중간 경로로 사용하여 최단 거리 갱신 (i → k → j)
-
-플로이드-워셜 구현 (파이썬)
-
-def floyd_warshall(graph):
-    nodes = list(graph.keys())
-    dist = {node: {n: float('inf') for n in nodes} for node in nodes}
-
-    for node in nodes:
-        dist[node][node] = 0
-
-    for node in graph:
-        for neighbor, weight in graph[node].items():
-            dist[node][neighbor] = weight
-
-    for k in nodes:
-        for i in nodes:
-            for j in nodes:
-                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
-
-    return dist
-
-graph = {
-    'A': {'B': 3, 'C': 7},
-    'B': {'A': 3, 'C': 1, 'D': 5},
-    'C': {'A': 7, 'B': 1, 'D': 2},
-    'D': {'B': 5, 'C': 2}
-}
-
-print(floyd_warshall(graph))
-
-4. 존슨(Johnson) 알고리즘
-
-특징:
-	- 모든 정점 간 최단 경로 + 음수 가중치 가능
-	- 벨만-포드 + 다익스트라 결합 (O(V² log V + VE))
-	- 효율적이지만, 복잡도가 높아 큰 그래프에 적합
-
-5. 최단 경로 알고리즘 비교
-
-알고리즘	음수 가중치	시간 복잡도	사용 사례
-다익스트라	❌ (불가능)	O(E log V)	GPS 네비게이션, 네트워크 라우팅
-벨만-포드	✅ (가능)	O(VE)	음수 가중치 그래프, 금융 리스크 분석
-플로이드-워셜	✅ (가능)	O(V³)	전체 노드 간 최단 거리 계산
-존슨	✅ (가능)	O(V² log V + VE)	희소 그래프에서 모든 쌍 최단 거리
-
-결론
-	- 음수 가중치가 없고 단일 출발점 → 다익스트라
-	- 음수 가중치 존재 → 벨만-포드
-	- 전체 쌍 최단 경로 → 플로이드-워셜
-	- 희소 그래프에서 전체 쌍 최단 경로 → 존슨 알고리즘
+                print(floyd_warshall(graph))
+                ```
+        - 존슨(Johnson) 알고리즘
+            - 특징
+                - 모든 정점 간 최단 경로 + 음수 가중치 가능
+                - 벨만-포드 + 다익스트라 결합 (O(V² log V + VE))
+                - 효율적이지만, 복잡도가 높아 큰 그래프에 적합
+    - 결론
+        - 음수 가중치가 없고 단일 출발점 → 다익스트라
+        - 음수 가중치 존재 → 벨만-포드
+        - 전체 쌍 최단 경로 → 플로이드-워셜
+        - 희소 그래프에서 전체 쌍 최단 경로 → 존슨 알고리즘
 
 - 음수 가중치(음수 간선, Negative Weight)의 필요성
 
