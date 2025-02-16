@@ -68,6 +68,14 @@ Organized expected questions & answers
     - 개요
         - 핵심 요소는 온디맨드(self-service), 탄력성(elasticity), 확장성(scalability), 비용 효율성(cost efficiency), 리소스 풀링(resource pooling), 측정 가능한 서비스(measured service) 등 존재
     - 핵심 요소
+        - 핵심 요소 키워드 나열
+            - 온디맨드(Self-Service)
+            - 탄력성(Elasticity)
+            - 확장성(Scalability)
+            - 비용 효율성(Cost efficiency)
+            - 리소스 풀링(Resource pooling)
+            - 측정 가능한 서비스(Measured service)
+            - 보안(Security) 및 가용성(Availability)
         - 온디맨드(Self-Service)
             - 사용자가 필요할 때 즉시 컴퓨팅 리소스(서버, 스토리지, 네트워크, 애플리케이션 등)를 자동으로 할당받아 사용할 수 있는 기능
             - 클라우드 서비스 제공자는 관리자의 개입 없이도 사용자 요청에 따라 리소스를 제공할 수 있도록 자동화된 프로비저닝 시스템을 구축
@@ -104,31 +112,29 @@ Organized expected questions & answers
 
 
 - 클라우드 컴퓨팅의 주요 서비스 모델(IaaS, PaaS, SaaS)의 개념과 차이점
-
-클라우드 컴퓨팅의 주요 서비스 모델: IaaS, PaaS, SaaS
-
-클라우드 컴퓨팅은 사용자가 인터넷을 통해 IT 리소스를 필요에 따라 사용할 수 있도록 제공하는 서비스 모델이다. 주요 서비스 모델에는 IaaS, PaaS, SaaS가 있으며, 각각의 차이점은 관리해야 할 범위와 제공되는 기능에 따라 달라진다.
-
-1. IaaS(Infrastructure as a Service, 인프라 서비스)
-
-IaaS는 가상화된 컴퓨팅 리소스(서버, 스토리지, 네트워크 등)를 제공하는 서비스이다. 사용자는 클라우드 환경에서 운영체제(OS)와 애플리케이션을 직접 설치 및 관리해야 한다.
-
-특징
-	•	물리적인 서버 없이 클라우드에서 가상 머신(VM), 네트워크, 스토리지를 제공
-	•	사용자는 인프라를 원격에서 관리하며, OS 및 애플리케이션을 직접 설정 가능
-	•	자동 확장(Scaling) 가능하여, 사용량에 따라 서버 리소스를 조절할 수 있음
-	•	보통 시간당 요금제로 운영되며, 필요할 때만 리소스를 사용하여 비용 절감 가능
-
-예제
-	•	AWS EC2 (Elastic Compute Cloud)
-	•	Microsoft Azure Virtual Machines
-	•	Google Cloud Compute Engine(GCE)
-	•	IBM Cloud Infrastructure
-
-언제 사용해야 하는가?
-	•	데이터센터를 운영하지 않고 IT 인프라를 빠르게 구축할 때
-	•	개발 환경, 테스트 환경을 빠르게 배포할 때
-	•	유동적인 트래픽 증가에 따라 서버를 확장할 필요가 있을 때
+    - 개요
+        - 클라우드 컴퓨팅의 주요 서비스 모델: IaaS, PaaS, SaaS
+        - 클라우드 컴퓨팅은 사용자가 인터넷을 통해 IT 리소스를 필요에 따라 사용할 수 있도록 제공하는 서비스 모델
+        - 주요 서비스 모델에는 IaaS, PaaS, SaaS가 있으며, 각각의 차이점은 관리해야 할 범위와 제공되는 기능에 따라 달라진다.
+    - 주요 서비스 모델 (IaaS, PaaS, SaaS)
+        - IaaS(Infrastructure as a Service, 인프라 서비스)
+            - 개요
+                - IaaS는 가상화된 컴퓨팅 리소스(서버, 스토리지, 네트워크 등)를 제공하는 서비스
+                - 사용자는 클라우드 환경에서 운영체제(OS)와 애플리케이션을 직접 설치 및 관리해야 한다.
+            - 특징
+                - 물리적인 서버 없이 클라우드에서 가상 머신(VM), 네트워크, 스토리지를 제공
+                - 사용자는 인프라를 원격에서 관리하며, OS 및 애플리케이션을 직접 설정 가능
+                - 자동 확장(Scaling) 가능하여, 사용량에 따라 서버 리소스를 조절할 수 있음
+                - 보통 시간당 요금제로 운영되며, 필요할 때만 리소스를 사용하여 비용 절감 가능
+            - 예제
+	            - AWS EC2 (Elastic Compute Cloud)
+	            - Microsoft Azure Virtual Machines
+	            - Google Cloud Compute Engine(GCE)
+	            - IBM Cloud Infrastructure
+            - 언제 사용해야 하는가?
+                - 데이터센터를 운영하지 않고 IT 인프라를 빠르게 구축할 때
+                - 개발 환경, 테스트 환경을 빠르게 배포할 때
+                - 유동적인 트래픽 증가에 따라 서버를 확장할 필요가 있을 때
 
 2. PaaS(Platform as a Service, 플랫폼 서비스)
 
