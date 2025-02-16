@@ -161,3 +161,15 @@ a,b = input().split()
 a = int(a)
 b = int(b)
 print(a-b)
+
+''' [::-1] 슬라이싱 기법
+	•	슬라이싱(Slicing) 문법: string[start:end:step]
+	•	start: 시작 인덱스 (생략 시 처음부터)
+	•	end: 끝 인덱스 (생략 시 끝까지)
+	•	step: 증가 또는 감소 (양수는 정방향, 음수는 역방향)
+	•	[::-1]의 의미:
+	•	start 생략 → 문자열의 처음부터
+	•	end 생략 → 문자열의 끝까지
+	•	step = -1 → 문자열을 거꾸로 (역순) 출력'''
+string = 'Welcome SJKOding!'
+print(string[::-1])
