@@ -2843,7 +2843,84 @@ print("접미사 배열:", suffix_array)  # [5, 3, 1, 0, 4, 2]
 즉, 대량의 텍스트 검색 및 유전자 분석, 압축 알고리즘에서 필수적인 자료구조이다!
 
 
-- 애너그램(Anagram) 검사 알고리즘을 구현하는 방법을 설명하시오.
+- 애너그램(Anagram) 검사 알고리즘을 구현하는 방법
+
+애너그램(Anagram) 검사 알고리즘
+
+**애너그램(Anagram)**이란 두 개의 문자열이 같은 문자들로 구성되었지만, 순서만 다를 경우를 의미한다.
+즉, 문자열을 정렬하거나 문자 개수를 비교하면 애너그램인지 확인할 수 있다.
+
+1. 애너그램 검사 방법
+
+방법 1: 정렬(Sorting) 활용 (O(N log N))
+	1.	두 문자열을 알파벳 순으로 정렬한 후 비교.
+	2.	정렬한 결과가 같다면 애너그램.
+
+구현 (Python)
+
+def is_anagram_sort(s1, s2):
+    return sorted(s1) == sorted(s2)
+
+# 테스트
+print(is_anagram_sort("listen", "silent"))  # True
+print(is_anagram_sort("hello", "world"))    # False
+
+✅ 장점: 간단하고 직관적
+❌ 단점: 정렬로 인해 **O(N log N)**의 시간 복잡도를 가짐.
+
+방법 2: 해시맵(딕셔너리) 활용 (O(N))
+	1.	각 문자의 개수를 카운트하여 비교.
+	2.	Python의 collections.Counter 사용 가능.
+
+구현 (Python)
+
+from collections import Counter
+
+def is_anagram_counter(s1, s2):
+    return Counter(s1) == Counter(s2)
+
+# 테스트
+print(is_anagram_counter("listen", "silent"))  # True
+print(is_anagram_counter("hello", "world"))    # False
+
+✅ 장점: 빠름 (O(N))
+❌ 단점: 공간을 추가로 사용해야 함.
+
+방법 3: 배열 활용 (O(N))
+	1.	알파벳 개수를 저장하는 리스트(길이 26)를 사용하여 각 문자의 등장 횟수를 기록.
+	2.	두 문자열의 개수를 비교.
+
+구현 (Python)
+
+def is_anagram_array(s1, s2):
+    if len(s1) != len(s2):
+        return False
+    
+    count = [0] * 26  # 영어 소문자 기준
+    
+    for c1, c2 in zip(s1, s2):
+        count[ord(c1) - ord('a')] += 1
+        count[ord(c2) - ord('a')] -= 1
+    
+    return all(x == 0 for x in count)
+
+# 테스트
+print(is_anagram_array("listen", "silent"))  # True
+print(is_anagram_array("hello", "world"))    # False
+
+✅ 장점: O(N)으로 매우 빠름, 추가 공간 사용이 적음
+❌ 단점: 영어 소문자(a~z)만 처리 가능 (유니코드 확장 시 비효율적)
+
+2. 정리
+
+방법	시간 복잡도	공간 복잡도	특징
+정렬 사용	O(N log N)	O(1)	직관적이지만 느림
+딕셔너리 사용	O(N)	O(N)	빠르지만 추가 공간 필요
+배열 사용	O(N)	O(1)	가장 빠름, 영어 소문자에 최적화
+
+✅ 문자열이 길다면 Counter나 배열 활용 방법이 가장 효율적!
+✅ 문자열에 특수 문자, 대소문자가 포함될 경우 Counter 방법이 유리!
+
 - A* (A-Star) 알고리즘의 개념과 활용 사례를 설명하시오.
 - 네트워크 플로우(Network Flow) 알고리즘의 개념과 적용 사례를 설명하시오.
 - 최대 유량 문제(Maximum Flow Problem)란 무엇인가?
