@@ -208,156 +208,111 @@ Organized expected questions & answers
     - 정리 : 지도학습이 예측을 위한 모델이라면, 비지도학습은 패턴을 찾는 모델
 
 
-- 강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)을 설명
+- 강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)
+    - 강화학습(Reinforcement Learning, RL) 개념
+        - 정의
+	          - 강화학습은 에이전트(Agent) 가 환경(Environment)과 상호작용하며 보상(Reward) 을 최대화하는 행동(Policy)을 학습하는 기계학습 방법
+	          - 지도학습(Supervised Learning)처럼 정답(Label)이 주어지지 않으며, 시행착오(Trial and Error)를 통해 최적의 행동을 학습함.
+        - 강화학습의 특징
+	          - 보상(Reward) 신호를 기반으로 최적의 행동(Policy) 학습
+	          - 환경과의 상호작용을 통해 점진적으로 개선
+	          - 미래의 보상을 고려하여 최적의 정책(Policy) 탐색
+        - 강화학습 적용 사례
+            - 게임 AI (알파고, OpenAI Five, AlphaStar)
+            - 자율주행 (Tesla, Waymo)
+            - 로보틱스 (Boston Dynamics 로봇 제어)
+            - 금융 및 투자 전략 (강화학습 기반 자동매매)
+    - 강화학습의 기본 요소
+        - 에이전트(Agent)
+            - 학습을 수행하는 주체 (예: 로봇, AI, 게임 캐릭터)
+        - 환경(Environment)
+            - 에이전트가 상호작용하는 시스템 (예: 체스 보드, 자율주행 도로)
+        - 상태(State, S)
+            - 환경의 현재 상태 (예: 체스판의 말 배치 상태)
+        - 행동(Action, A)
+            - 에이전트가 수행하는 액션 (예: 체스 말 이동)
+        - 보상(Reward, R)
+            - 행동의 결과로 주어지는 점수 (예: 게임에서 점수 증가)
+        - 정책(Policy, π)
+            - 주어진 상태에서 행동을 선택하는 전략
+            - 정책은 확률적(Stochastic) 또는 결정적(Deterministic) 일 수 있음
+        - 가치 함수(Value Function, V)
+            - 특정 상태에서 미래 보상의 기대값을 나타냄
+        - Q-값(Q-Value, Q-function)
+            - 특정 상태(S)에서 특정 행동(A)을 수행했을 때 기대되는 총 보상 값
+            -  Q(s, a)  값이 클수록 좋은 행동
+    - 주요 강화학습 알고리즘
+        - 가치 기반(Value-based), 정책 기반(Policy-based), 모델 기반(Model-based) 으로 구분
+        - 구분
+            - 가치 기반(Value-based):	Q-값을 예측하여 최적의 행동을 선택,	Q-Learning, DQN
+            - 정책 기반(Policy-based): 정책 함수(π)를 직접 최적화, REINFORCE, PPO
+            - 액터-크리틱(Actor-Critic): 정책 기반 + 가치 기반 결합, A3C, DDPG
+            - 모델 기반(Model-based): 환경의 모델을 학습하여 예측, AlphaGo, MuZero
+    - 대표적인 강화학습 알고리즘
+        - Q-Learning (가치 기반 알고리즘)
+            - 개념
+                - Q-값( Q(s, a) )을 업데이트하여 최적의 정책 학습
+                - 미래 보상을 고려하여 행동 선택 (Bellman Equation 사용)
+                - Off-policy 학습 → 이전 경험을 활용하여 학습 가능
+            - Q-러닝의 핵심 수식 (Bellman Equation)
+                - Q(s, a) \leftarrow Q(s, a) + \alpha \left[ R + \gamma \max Q(s{\prime}, a{\prime}) - Q(s, a) \right]
+                    -  \alpha : 학습률 (Learning Rate)
+                    -  \gamma : 할인 계수 (Discount Factor)
+                    -  R : 즉각적인 보상 (Reward)
+                    -  s{\prime}, a{\prime} : 다음 상태, 다음 행동
+            - 단점
+                - 상태 공간이 커지면 Q 테이블 크기가 너무 커져서 사용이 어려움
+                - 딥러닝을 활용한 DQN으로 개선 가능
+            - 활용 사례
+              - 미로 찾기, 게임 AI
+        - DQN (Deep Q-Network)
+            - 개념
+                - Q-러닝을 딥러닝(Deep Learning) 과 결합한 강화학습 알고리즘
+                - Q-값을 신경망(Neural Network)으로 근사함
+            - DQN의 주요 기술
+                - 경험 재현(Experience Replay) → 과거 데이터를 랜덤 샘플링하여 학습
+                - 타깃 네트워크(Target Network) → Q-값 갱신 시 타깃 네트워크 사용하여 안정화
+            - 활용 사례
+                - Atari 게임 AI (DeepMind, 2015)
+                - 자율주행 차량 경로 최적화
+        - REINFORCE (정책 기반 알고리즘)
+            - 개념
+                - 정책 함수(π)를 직접 학습하는 방법
+                - 확률적으로 행동을 선택하고 보상을 기반으로 학습
+            - 활용 사례
+              - 로봇 동작 학습, 전략적 게임 플레이
+        - DDPG (Deep Deterministic Policy Gradient, 액터-크리틱)
+            - 개념
+                - 정책 기반 + 가치 기반 알고리즘 을 결합하여 학습 성능 향상
+                - 연속적인 행동 공간(Continuous Action Space) 에 적합
+                - 액터(Actor)와 크리틱(Critic) 두 개의 신경망 사용
+                - Actor: 정책(Policy) 업데이트
+                - Critic: Q-값 예측
+            - 활용 사례
+                - 자율주행, 로봇 제어 (Boston Dynamics)
+        - PPO (Proximal Policy Optimization)
+            - 개념
+                - 기존 정책 기반 알고리즘(Policy Gradient)에서 학습 안정성 개선
+                - 정책 업데이트 시 큰 변화 방지 (Clip Objective 사용)
+            - 활용 사례
+                - OpenAI Five (Dota2 AI)
+                - 자율 드론, 로보틱스 최적화
+    - 강화학습 알고리즘 비교
+        - Q-Learning: 테이블 기반 Q-값 학습, 미로 찾기, 작은 환경
+        - DQN	딥러닝 활용: Q-러닝 확장, 게임 AI (Atari)
+        - REINFORCE: 정책 기반 학습, 전략적 게임, 로봇 제어
+        - DDPG: 연속적인 행동 학습, 자율주행, 로보틱스
+        - PPO: 정책 업데이트 안정화, OpenAI Five, 강화학습 AI
+    - 정리
+	      - 강화학습(RL) 은 에이전트가 환경과 상호작용하며 보상을 최대화하는 방식으로 학습하는 기법
+	      - 주요 알고리즘
+            - Q-Learning → 가치 기반, 테이블 방식
+            - DQN → 딥러닝 기반 Q-Learning 확장
+            - REINFORCE → 정책 기반 강화학습
+            - DDPG → 연속 행동 공간에서 최적화
+            - PPO → 정책 기반 학습 안정화
 
-강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)
-
-1. 강화학습(Reinforcement Learning, RL) 개념
-
-✅ 정의:
-	•	강화학습은 에이전트(Agent) 가 환경(Environment)과 상호작용하며 보상(Reward) 을 최대화하는 행동(Policy)을 학습하는 기계학습 방법이다.
-	•	지도학습(Supervised Learning)처럼 정답(Label)이 주어지지 않으며, 시행착오(Trial and Error)를 통해 최적의 행동을 학습함.
-
-✅ 강화학습의 특징:
-	•	보상(Reward) 신호를 기반으로 최적의 행동(Policy) 학습
-	•	환경과의 상호작용을 통해 점진적으로 개선
-	•	미래의 보상을 고려하여 최적의 정책(Policy) 탐색
-
-✅ 강화학습 적용 사례:
-	•	게임 AI (알파고, OpenAI Five, AlphaStar)
-	•	자율주행 (Tesla, Waymo)
-	•	로보틱스 (Boston Dynamics 로봇 제어)
-	•	금융 및 투자 전략 (강화학습 기반 자동매매)
-
-2. 강화학습의 기본 요소
-
-강화학습은 에이전트(Agent), 환경(Environment), 상태(State), 행동(Action), 보상(Reward), 정책(Policy) 로 구성됨.
-
-✅ (1) 에이전트(Agent)
-	•	학습을 수행하는 주체 (예: 로봇, AI, 게임 캐릭터)
-
-✅ (2) 환경(Environment)
-	•	에이전트가 상호작용하는 시스템 (예: 체스 보드, 자율주행 도로)
-
-✅ (3) 상태(State, S)
-	•	환경의 현재 상태 (예: 체스판의 말 배치 상태)
-
-✅ (4) 행동(Action, A)
-	•	에이전트가 수행하는 액션 (예: 체스 말 이동)
-
-✅ (5) 보상(Reward, R)
-	•	행동의 결과로 주어지는 점수 (예: 게임에서 점수 증가)
-
-✅ (6) 정책(Policy, π)
-	•	주어진 상태에서 행동을 선택하는 전략
-	•	정책은 확률적(Stochastic) 또는 결정적(Deterministic) 일 수 있음
-
-✅ (7) 가치 함수(Value Function, V)
-	•	특정 상태에서 미래 보상의 기대값을 나타냄
-
-✅ (8) Q-값(Q-Value, Q-function)
-	•	특정 상태(S)에서 특정 행동(A)을 수행했을 때 기대되는 총 보상 값
-	•	 Q(s, a)  값이 클수록 좋은 행동
-
-3. 주요 강화학습 알고리즘
-
-강화학습 알고리즘은 가치 기반(Value-based), 정책 기반(Policy-based), 모델 기반(Model-based) 으로 구분됨.
-
-알고리즘 유형	설명	대표 알고리즘
-가치 기반(Value-based)	Q-값을 예측하여 최적의 행동을 선택	Q-Learning, DQN
-정책 기반(Policy-based)	정책 함수(π)를 직접 최적화	REINFORCE, PPO
-액터-크리틱(Actor-Critic)	정책 기반 + 가치 기반 결합	A3C, DDPG
-모델 기반(Model-based)	환경의 모델을 학습하여 예측	AlphaGo, MuZero
-
-4. 대표적인 강화학습 알고리즘
-
-(1) Q-Learning (가치 기반 알고리즘)
-
-✅ 개념:
-	•	Q-값( Q(s, a) )을 업데이트하여 최적의 정책 학습
-	•	미래 보상을 고려하여 행동 선택 (Bellman Equation 사용)
-	•	Off-policy 학습 → 이전 경험을 활용하여 학습 가능
-
-✅ Q-러닝의 핵심 수식 (Bellman Equation)
-
-Q(s, a) \leftarrow Q(s, a) + \alpha \left[ R + \gamma \max Q(s{\prime}, a{\prime}) - Q(s, a) \right]
-
-	•	 \alpha : 학습률 (Learning Rate)
-	•	 \gamma : 할인 계수 (Discount Factor)
-	•	 R : 즉각적인 보상 (Reward)
-	•	 s{\prime}, a{\prime} : 다음 상태, 다음 행동
-
-✅ 단점:
-	•	상태 공간이 커지면 Q 테이블 크기가 너무 커져서 사용이 어려움
-	•	딥러닝을 활용한 DQN으로 개선 가능
-
-✅ 활용 사례:
-	•	미로 찾기, 게임 AI
-
-(2) DQN (Deep Q-Network)
-
-✅ 개념:
-	•	Q-러닝을 딥러닝(Deep Learning) 과 결합한 강화학습 알고리즘
-	•	Q-값을 신경망(Neural Network)으로 근사함
-
-✅ DQN의 주요 기술
-	1.	경험 재현(Experience Replay) → 과거 데이터를 랜덤 샘플링하여 학습
-	2.	타깃 네트워크(Target Network) → Q-값 갱신 시 타깃 네트워크 사용하여 안정화
-
-✅ 활용 사례:
-	•	Atari 게임 AI (DeepMind, 2015)
-	•	자율주행 차량 경로 최적화
-
-(3) REINFORCE (정책 기반 알고리즘)
-
-✅ 개념:
-	•	정책 함수(π)를 직접 학습하는 방법
-	•	확률적으로 행동을 선택하고 보상을 기반으로 학습
-
-✅ 활용 사례:
-	•	로봇 동작 학습, 전략적 게임 플레이
-
-(4) DDPG (Deep Deterministic Policy Gradient, 액터-크리틱)
-
-✅ 개념:
-	•	정책 기반 + 가치 기반 알고리즘 을 결합하여 학습 성능 향상
-	•	연속적인 행동 공간(Continuous Action Space) 에 적합
-	•	액터(Actor)와 크리틱(Critic) 두 개의 신경망 사용
-	•	Actor: 정책(Policy) 업데이트
-	•	Critic: Q-값 예측
-
-✅ 활용 사례:
-	•	자율주행, 로봇 제어 (Boston Dynamics)
-
-(5) PPO (Proximal Policy Optimization)
-
-✅ 개념:
-	•	기존 정책 기반 알고리즘(Policy Gradient)에서 학습 안정성 개선
-	•	정책 업데이트 시 큰 변화 방지 (Clip Objective 사용)
-
-✅ 활용 사례:
-	•	OpenAI Five (Dota2 AI)
-	•	자율 드론, 로보틱스 최적화
-
-5. 강화학습 알고리즘 비교
-
-알고리즘	특징	적용 분야
-Q-Learning	테이블 기반 Q-값 학습	미로 찾기, 작은 환경
-DQN	딥러닝 활용 Q-러닝 확장	게임 AI (Atari)
-REINFORCE	정책 기반 학습	전략적 게임, 로봇 제어
-DDPG	연속적인 행동 학습	자율주행, 로보틱스
-PPO	정책 업데이트 안정화	OpenAI Five, 강화학습 AI
-
-6. 정리
-	•	강화학습(RL) 은 에이전트가 환경과 상호작용하며 보상을 최대화하는 방식으로 학습하는 기법
-	•	주요 알고리즘:
-	1.	Q-Learning → 가치 기반, 테이블 방식
-	2.	DQN → 딥러닝 기반 Q-Learning 확장
-	3.	REINFORCE → 정책 기반 강화학습
-	4.	DDPG → 연속 행동 공간에서 최적화
-	5.	PPO → 정책 기반 학습 안정화
-
-✅ 강화학습은 게임, 자율주행, 금융, 로보틱스 등 다양한 분야에서 활용됨!
+- 강화학습은 게임, 자율주행, 금융, 로보틱스 등 다양한 분야에서 활용됨!
 - 신경망(Neural Network)의 개념과 CNN(Convolutional Neural Network)의 차이를 설명하시오.
 - Transformer 모델과 기존 RNN, LSTM 모델의 차이를 설명하시오.
 - 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)을 설명하시오.
