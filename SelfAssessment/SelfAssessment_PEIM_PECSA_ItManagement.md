@@ -244,115 +244,85 @@ Organized expected questions & answers
         - 개요: ITIL, COBIT, TOGAF, ISO/IEC 27001, DX 전략 프레임워크 등
         - 프레임워크
             - ITIL (Information Technology Infrastructure Library)
-            - 개념
-                - IT 서비스 관리를 위한 베스트 프랙티스(최적의 운영 방법론)
-                - IT 서비스(운영, 개발, 지원)를 효율적으로 관리하기 위한 프로세스 중심의 프레임워크
-            - 특징
-                - IT 서비스를 체계적으로 관리하여 서비스 품질 향상
-                - 서비스 수명주기(ITIL Service Lifecycle) 기반 관리
-            - 핵심 프로세스
-                - 서비스 전략(Service Strategy) → IT 서비스 기획
-                - 서비스 설계(Service Design) → IT 시스템 설계 및 개선
-                - 서비스 운영(Service Operation) → IT 서비스 운영 및 문제 관리
-                - 서비스 전환(Service Transition) → IT 변경 관리, 배포
-                - 지속적 서비스 개선(Continual Service Improvement, CSI) → 서비스 성능 개선
-
-- 활용 예시:
-	- IT 서비스 데스크 운영 관리 (티켓 관리, 장애 대응)
-	- IT 서비스 품질 최적화 (SLA, KPI 설정 및 모니터링)
-
-(2) COBIT (Control Objectives for Information and Related Technologies)
-
-- 개념:
-	- IT 거버넌스 및 리스크 관리를 위한 글로벌 프레임워크
-	- 기업의 IT 운영과 비즈니스 목표를 연결하여 의사결정 체계 정립
-
-- 특징:
-	- IT 거버넌스(IT Governance) 강화
-	- IT 프로세스별 리스크 및 통제 기준 제공
-	- 비즈니스 목표와 IT 목표의 연계
-
-- 핵심 원칙 (COBIT 2019 기준)
-	1.	Stakeholder Needs Alignment (이해관계자 요구사항 반영)
-	2.	End-to-End Governance System (엔드 투 엔드 거버넌스)
-	3.	Dynamic Governance System (동적인 거버넌스)
-	4.	Customized & Scalable Approach (맞춤형 적용)
-	5.	Distinct Governance & Management (거버넌스와 관리 구분)
-
-- 활용 예시:
-	- 기업의 IT 투자 의사결정 프레임워크 구축
-	- 리스크 관리 및 내부 통제(감사) 시스템 정립
-
-(3) TOGAF (The Open Group Architecture Framework)
-
-- 개념:
-	- IT 아키텍처를 체계적으로 설계하고 운영하는 프레임워크
-	- 기업의 엔터프라이즈 아키텍처(Enterprise Architecture, EA) 구축을 위한 표준
-
-- 특징:
-	- 비즈니스, 데이터, 애플리케이션, 기술 아키텍처 정의
-	- IT 시스템을 일관되게 설계하고 확장 가능
-
-- TOGAF 아키텍처 개발 방법론(ADM, Architecture Development Method)
-	1.	비즈니스 아키텍처 → 조직의 목표 및 프로세스 정의
-	2.	데이터 아키텍처 → 데이터 모델링 및 데이터 관리 설계
-	3.	애플리케이션 아키텍처 → 시스템 간 연계 구조 설계
-	4.	기술 아키텍처 → 네트워크, 하드웨어, 보안, 클라우드 설계
-
-- 활용 예시:
-	- 대기업 IT 시스템 통합 및 클라우드 전환 아키텍처 설계
-	- ERP, CRM, SCM 등 기업 정보 시스템 설계
-
-(4) ISO/IEC 27001 (정보보안 관리 시스템, ISMS)
-
-- 개념:
-	- 정보보호 및 IT 보안 관리 체계를 위한 국제 표준
-	- 보안 정책, 리스크 관리, 감사 절차 등을 정의
-
-- 핵심 요소:
-	1.	정보보안 정책(Policy) 수립
-	2.	위험 평가 및 관리(Risk Assessment & Management)
-	3.	접근 통제(Access Control)
-	4.	보안 감사 및 개선(Security Audit & Improvement)
-
-- 활용 예시:
-	- 기업의 정보보안 정책 수립 및 컴플라이언스 준수
-	- 개인정보 보호법, GDPR, HIPAA 준수
-
-(5) DX(디지털 트랜스포메이션, Digital Transformation) 전략 프레임워크
-
-- 개념:
-	- 기업이 디지털 기술(AI, 클라우드, 빅데이터, IoT) 을 활용하여 비즈니스 프로세스를 혁신하는 전략
-
-- 핵심 요소:
-	1.	디지털 기술 도입 (AI, 클라우드, RPA, IoT)
-	2.	데이터 기반 의사결정 (빅데이터, 데이터 분석)
-	3.	자동화 및 프로세스 혁신 (RPA, 스마트팩토리)
-	4.	고객 경험 최적화 (UX, UI 개선)
-
-- 활용 예시:
-	- 제조업 스마트팩토리 구축 (IoT, AI 자동화)
-	- 금융업 AI 챗봇, 데이터 분석 기반 서비스 제공
-
-3. IT 전략 프레임워크 비교
-
-프레임워크	주요 목적	적용 분야
-ITIL	IT 서비스 관리	IT 운영, ITSM (서비스 관리)
-COBIT	IT 거버넌스, 리스크 관리	기업 IT 감사, 내부 통제
-TOGAF	IT 아키텍처 설계	엔터프라이즈 아키텍처 (EA)
-ISO/IEC 27001	정보보안 관리	보안 정책, 법규 준수
-DX 전략 프레임워크	디지털 혁신	AI, 클라우드, IoT 도입
-
-4. 정리
-	- IT 전략(IT Strategy) 은 조직의 비즈니스 목표를 IT와 정렬하여 효율적으로 운영하는 전략
-	- 주요 프레임워크:
-	1.	ITIL → IT 서비스 관리
-	2.	COBIT → IT 거버넌스 및 리스크 관리
-	3.	TOGAF → IT 아키텍처 설계
-	4.	ISO 27001 → 정보보안 관리
-	5.	DX 전략 → 디지털 트랜스포메이션
-
-- IT 전략은 기업의 성장과 보안, 혁신을 동시에 달성하기 위한 핵심 요소!
+                - 개념
+                    - IT 서비스 관리를 위한 베스트 프랙티스(최적의 운영 방법론)
+                    - IT 서비스(운영, 개발, 지원)를 효율적으로 관리하기 위한 프로세스 중심의 프레임워크
+                - 특징
+                    - IT 서비스를 체계적으로 관리하여 서비스 품질 향상
+                    - 서비스 수명주기(ITIL Service Lifecycle) 기반 관리
+                - 핵심 프로세스
+                    - 서비스 전략(Service Strategy) → IT 서비스 기획
+                    - 서비스 설계(Service Design) → IT 시스템 설계 및 개선
+                    - 서비스 운영(Service Operation) → IT 서비스 운영 및 문제 관리
+                    - 서비스 전환(Service Transition) → IT 변경 관리, 배포
+                    - 지속적 서비스 개선(Continual Service Improvement, CSI) → 서비스 성능 개선
+                - 활용 예시
+                    - IT 서비스 데스크 운영 관리 (티켓 관리, 장애 대응)
+                    - IT 서비스 품질 최적화 (SLA, KPI 설정 및 모니터링)
+            - COBIT (Control Objectives for Information and Related Technologies)
+                - 개념
+                    - IT 거버넌스 및 리스크 관리를 위한 글로벌 프레임워크
+                    - 기업의 IT 운영과 비즈니스 목표를 연결하여 의사결정 체계 정립
+                - 특징
+                    - IT 거버넌스(IT Governance) 강화
+                    - IT 프로세스별 리스크 및 통제 기준 제공
+                    - 비즈니스 목표와 IT 목표의 연계
+                - 핵심 원칙 (COBIT 2019 기준)
+                    - Stakeholder Needs Alignment (이해관계자 요구사항 반영)
+                    - End-to-End Governance System (엔드 투 엔드 거버넌스)
+                    - Dynamic Governance System (동적인 거버넌스)
+                    - Customized & Scalable Approach (맞춤형 적용)
+                    - Distinct Governance & Management (거버넌스와 관리 구분)
+                - 활용 예시
+                    - 기업의 IT 투자 의사결정 프레임워크 구축
+                    - 리스크 관리 및 내부 통제(감사) 시스템 정립
+            - TOGAF (The Open Group Architecture Framework)
+                - 개념
+                    - IT 아키텍처를 체계적으로 설계하고 운영하는 프레임워크
+                    - 기업의 엔터프라이즈 아키텍처(Enterprise Architecture, EA) 구축을 위한 표준
+                - 특징
+                    - 비즈니스, 데이터, 애플리케이션, 기술 아키텍처 정의
+                    - IT 시스템을 일관되게 설계하고 확장 가능
+                - TOGAF 아키텍처 개발 방법론(ADM, Architecture Development Method)
+                    - 비즈니스 아키텍처 → 조직의 목표 및 프로세스 정의
+                    - 데이터 아키텍처 → 데이터 모델링 및 데이터 관리 설계
+                    - 애플리케이션 아키텍처 → 시스템 간 연계 구조 설계
+                    - 기술 아키텍처 → 네트워크, 하드웨어, 보안, 클라우드 설계
+                - 활용 예시
+	                - 대기업 IT 시스템 통합 및 클라우드 전환 아키텍처 설계
+	                - ERP, CRM, SCM 등 기업 정보 시스템 설계
+            - ISO/IEC 27001 (정보보안 관리 시스템, ISMS)
+                - 개념
+                    - 정보보호 및 IT 보안 관리 체계를 위한 국제 표준
+                    - 보안 정책, 리스크 관리, 감사 절차 등을 정의
+                - 핵심 요소
+                    - 정보보안 정책(Policy) 수립
+                    - 위험 평가 및 관리(Risk Assessment & Management)
+                    - 접근 통제(Access Control)
+                    - 보안 감사 및 개선(Security Audit & Improvement)
+                - 활용 예시
+                    - 기업의 정보보안 정책 수립 및 컴플라이언스 준수
+                    - 개인정보 보호법, GDPR, HIPAA 준수
+            - DX(디지털 트랜스포메이션, Digital Transformation) 전략 프레임워크
+                - 개념
+	                - 기업이 디지털 기술(AI, 클라우드, 빅데이터, IoT) 을 활용하여 비즈니스 프로세스를 혁신하는 전략
+                - 핵심 요소
+                    - 디지털 기술 도입 (AI, 클라우드, RPA, IoT)
+                    - 데이터 기반 의사결정 (빅데이터, 데이터 분석)
+                    - 자동화 및 프로세스 혁신 (RPA, 스마트팩토리)
+                    - 고객 경험 최적화 (UX, UI 개선)
+                - 활용 예시
+                    - 제조업 스마트팩토리 구축 (IoT, AI 자동화)
+                    - 금융업 AI 챗봇, 데이터 분석 기반 서비스 제공
+    - 결론
+	    - IT 전략(IT Strategy) 은 조직의 비즈니스 목표를 IT와 정렬하여 효율적으로 운영하는 전략
+	    - 주요 프레임워크
+            - ITIL → IT 서비스 관리
+            - COBIT → IT 거버넌스 및 리스크 관리
+            - TOGAF → IT 아키텍처 설계
+            - ISO 27001 → 정보보안 관리
+            - DX 전략 → 디지털 트랜스포메이션
+        - IT 전략은 기업의 성장과 보안, 혁신을 동시에 달성하기 위한 핵심 요소
 
 
 - IT 서비스 관리(IT Service Management, ITSM)의 개념과 주요 프레임워크(ITIL 등)를 설명하시오.

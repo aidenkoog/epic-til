@@ -248,7 +248,7 @@ Organized expected questions & answers
             - 정책 기반(Policy-based): 정책 함수(π)를 직접 최적화, REINFORCE, PPO
             - 액터-크리틱(Actor-Critic): 정책 기반 + 가치 기반 결합, A3C, DDPG
             - 모델 기반(Model-based): 환경의 모델을 학습하여 예측, AlphaGo, MuZero
-    - 대표적인 강화학습 알고리즘
+    - 대표적인 강화학습 알고리즘 (Q-Learning, DQN, Reinforce, DDPG, PPO)
         - Q-Learning (가치 기반 알고리즘)
             - 개념
                 - Q-값( Q(s, a) )을 업데이트하여 최적의 정책 학습
