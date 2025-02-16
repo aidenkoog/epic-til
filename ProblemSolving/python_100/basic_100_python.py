@@ -147,3 +147,11 @@ print(chr(c))  #c에 저장되어 있는 정수 값을 유니코드 문자(chrac
 a = input()
 a = int(a)
 print(-a)
+
+# 6033, 문자 하나 입력 받아 다음 문자 출력하기
+# 문자 입력 받기
+char = input()
+
+# 다음 문자 출력
+# ord(char)는 입력된 문자의 ASCII(유니코드) 값을 반환
+print(chr(ord(char) + 1))
