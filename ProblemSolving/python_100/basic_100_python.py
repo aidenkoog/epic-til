@@ -162,6 +162,7 @@ a = int(a)
 b = int(b)
 print(a-b)
 
+# 문자열 거꾸로 출력하기
 ''' [::-1] 슬라이싱 기법
 	•	슬라이싱(Slicing) 문법: string[start:end:step]
 	•	start: 시작 인덱스 (생략 시 처음부터)
@@ -173,3 +174,7 @@ print(a-b)
 	•	step = -1 → 문자열을 거꾸로 (역순) 출력'''
 string = 'Welcome SJKOding!'
 print(string[::-1])
+
+# 중복 제거하기
+temp = [1, 1, 2, 2, 3, 4, 4, 5]
+print(list(set(temp)))
