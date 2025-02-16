@@ -2990,10 +2990,221 @@ BFS의 시간 및 공간 복잡도
 
 - 페르마의 소정리(Fermat’s Little Theorem)란 무엇인가?
 - RSA 암호화 알고리즘에서 소수를 이용하는 이유를 설명하시오.
-- 스택(Stack)과 큐(Queue)의 차이점을 설명하시오.
-- 덱(Deque, Double-ended Queue)의 개념과 활용 사례를 설명하시오.
-- 우선순위 큐(Priority Queue)의 개념과 구현 방식(힙 구조 포함)을 설명하시오.
-- 트리(Tree)와 그래프(Graph)의 차이점을 설명하시오.
+- 스택(Stack)과 큐(Queue)
+
+스택(Stack)과 큐(Queue)의 차이점
+
+1. 스택(Stack)과 큐(Queue)의 개념
+	•	스택(Stack): LIFO(Last In, First Out, 후입선출) 구조
+→ 나중에 들어온 데이터가 먼저 나감 (ex: 접시 쌓기)
+	•	큐(Queue): FIFO(First In, First Out, 선입선출) 구조
+→ 먼저 들어온 데이터가 먼저 나감 (ex: 줄 서기)
+
+2. 스택(Stack)
+
+특징
+	•	후입선출(LIFO): 마지막에 추가된 데이터가 가장 먼저 제거됨.
+	•	한쪽 끝에서만 데이터 삽입과 삭제가 이루어짐.
+
+연산
+	•	push(x) → 요소 x를 스택에 추가
+	•	pop() → 스택에서 요소 제거 후 반환
+	•	peek() → 최상단 요소 확인(삭제 X)
+	•	isEmpty() → 스택이 비었는지 확인
+
+Python 스택 구현
+
+stack = []
+stack.append(1)  # push(1)
+stack.append(2)  
+stack.append(3)  
+print(stack.pop())  # 3 (LIFO)
+
+3. 큐(Queue)
+
+특징
+	•	선입선출(FIFO): 먼저 들어온 데이터가 먼저 나감.
+	•	한쪽 끝에서 삽입(enqueue), 반대쪽 끝에서 삭제(dequeue).
+
+연산
+	•	enqueue(x) → 요소 x를 큐에 추가
+	•	dequeue() → 큐에서 요소 제거 후 반환
+	•	front() → 큐의 첫 번째 요소 확인(삭제 X)
+	•	isEmpty() → 큐가 비었는지 확인
+
+Python 큐 구현 (collections.deque 사용)
+
+from collections import deque
+queue = deque()
+queue.append(1)  # enqueue(1)
+queue.append(2)
+queue.append(3)
+print(queue.popleft())  # 1 (FIFO)
+
+4. 스택 vs 큐 비교
+
+비교 항목	스택(Stack)	큐(Queue)
+구조	LIFO (후입선출)	FIFO (선입선출)
+삽입 위치	Top (마지막 위치)	Rear (마지막 위치)
+삭제 위치	Top (마지막 위치)	Front (처음 위치)
+속도	빠름 (O(1))	빠름 (O(1))
+활용 예시	재귀 호출, 뒤로 가기	프로세스 스케줄링, 네트워크 패킷 처리
+
+5. 스택과 큐의 활용 사례
+
+✅ 스택(Stack) 활용
+	•	함수 호출 (재귀 호출)
+	•	웹 브라우저 뒤로 가기 (뒤로/앞으로 이동)
+	•	문자열 괄호 검사 (ex: ((())) 검증)
+
+✅ 큐(Queue) 활용
+	•	CPU 프로세스 스케줄링
+	•	네트워크 패킷 처리 (데이터 스트리밍)
+	•	프린터 작업 대기열 (선착순 출력)
+
+6. 결론
+
+✔ “마지막 데이터부터 처리해야 하면 스택” (LIFO)
+✔ “먼저 들어온 데이터를 먼저 처리해야 하면 큐” (FIFO)
+✔ “실제 구현에서는 deque를 사용하면 큐/스택 모두 효율적”
+
+즉, 순서에 따라 데이터 처리 방식이 다르므로, 문제 유형에 맞게 스택과 큐를 선택해야 한다.
+
+- 덱(Deque, Double-ended Queue)의 개념과 활용 사례
+
+1. 덱(Deque, Double-ended Queue) 개념과 활용 사례
+
+1.1 덱(Deque)의 개념
+	•	덱(Deque, Double-ended Queue)은 양쪽(앞과 뒤)에서 삽입과 삭제가 모두 가능한 큐.
+	•	일반적인 큐(Queue)는 FIFO 구조이지만, 덱은 양방향 삽입/삭제 가능.
+	•	스택(Stack)과 큐(Queue)의 기능을 모두 포함하는 자료구조.
+
+1.2 덱의 연산
+
+연산	설명
+push_front(x)	앞쪽에 원소 추가
+push_back(x)	뒤쪽에 원소 추가
+pop_front()	앞쪽 원소 삭제 및 반환
+pop_back()	뒤쪽 원소 삭제 및 반환
+front()	앞쪽 원소 확인 (삭제 X)
+back()	뒤쪽 원소 확인 (삭제 X)
+isEmpty()	덱이 비었는지 확인
+
+1.3 Python 덱 구현 (collections.deque)
+
+from collections import deque
+
+dq = deque()
+dq.append(1)  # push_back(1)
+dq.appendleft(2)  # push_front(2)
+print(dq.pop())  # pop_back() → 1
+print(dq.popleft())  # pop_front() → 2
+
+1.4 덱의 활용 사례
+
+✅ 양방향 탐색이 필요한 경우
+	•	웹 브라우저 앞으로/뒤로 가기 (앞으로 가기, 뒤로 가기)
+	•	슬라이딩 윈도우 최적화 (윈도우 내 최소/최대값 구하기)
+	•	캐시(Cache) 구현 (LRU 캐시, 가장 오래된 데이터 삭제)
+
+- 우선순위 큐(Priority Queue)의 개념과 구현 방식(힙 구조 포함)
+
+우선순위 큐(Priority Queue) 개념과 구현 방식
+
+2.1 우선순위 큐 개념
+	•	일반적인 큐(Queue)는 FIFO 방식으로 동작하지만, 우선순위 큐(Priority Queue)는 높은 우선순위를 가진 원소가 먼저 나오는 큐.
+	•	우선순위를 기준으로 자동 정렬됨 (최소/최대값을 빠르게 찾을 수 있음).
+
+2.2 우선순위 큐 구현 방식
+	1.	리스트(List) 기반
+	•	삽입: O(1) (맨 뒤에 추가)
+	•	삭제: O(N) (최대/최소값을 찾기 위해 정렬 필요)
+	2.	정렬된 리스트(Sorted List) 기반
+	•	삽입: O(N) (올바른 위치에 삽입)
+	•	삭제: O(1) (가장 앞의 원소 제거)
+	3.	힙(Heap) 기반 (가장 효율적)
+	•	삽입: O(log N)
+	•	삭제: O(log N)
+
+2.3 힙(Heap) 구조
+	•	완전 이진 트리(Complete Binary Tree) 기반의 자료구조.
+	•	최소 힙(Min Heap): 루트가 가장 작은 값
+	•	최대 힙(Max Heap): 루트가 가장 큰 값
+
+2.4 Python 우선순위 큐 구현 (heapq 사용)
+
+import heapq
+
+pq = []
+heapq.heappush(pq, 3)  # 삽입 (O(log N))
+heapq.heappush(pq, 1)  
+heapq.heappush(pq, 2)
+print(heapq.heappop(pq))  # 가장 작은 값(1) 출력 후 삭제
+
+✅ 최대 힙 구현 (Python에서는 기본적으로 최소 힙이므로 음수 값을 활용)
+
+heapq.heappush(pq, -3)
+heapq.heappush(pq, -1)
+heapq.heappush(pq, -2)
+print(-heapq.heappop(pq))  # 가장 큰 값(3) 출력 후 삭제
+
+2.5 우선순위 큐 활용 사례
+
+✅ 네트워크 패킷 스케줄링 (우선순위가 높은 데이터 먼저 처리)
+✅ 다익스트라(Dijkstra) 알고리즘 (최단 경로 탐색)
+✅ 작업 스케줄링 (CPU 프로세스 우선순위 처리)
+
+- 트리(Tree)와 그래프(Graph)
+
+트리(Tree)와 그래프(Graph)의 차이점
+
+3.1 트리(Tree) 개념
+	•	트리는 사이클이 없는 그래프의 특별한 형태.
+	•	N개의 정점이 있으면 항상 (N-1)개의 간선이 존재.
+	•	루트(Root) 노드가 있으며, 부모-자식 관계가 존재.
+	•	이진 트리(Binary Tree), AVL 트리, 이진 탐색 트리(BST) 등 다양한 유형 존재.
+
+✅ 트리의 예시
+
+      1
+     / \
+    2   3
+   / \
+  4   5
+
+3.2 그래프(Graph) 개념
+	•	노드(Node)와 간선(Edge)으로 이루어진 자료구조.
+	•	트리와 달리 사이클이 존재할 수도 있음.
+	•	방향 그래프(Directed Graph)와 무방향 그래프(Undirected Graph) 존재.
+	•	DFS, BFS, 다익스트라, 크루스칼 알고리즘 등으로 탐색.
+
+✅ 그래프의 예시
+
+   (1) --- (2)
+    |    /
+   (3) - (4)
+
+3.3 트리 vs 그래프 비교
+
+구분	트리(Tree)	그래프(Graph)
+정의	계층적 구조의 자료구조	노드와 간선으로 이루어진 자료구조
+루트(Root)	존재함	존재하지 않음 (루트 없음)
+사이클(Cycle)	없음	존재할 수 있음
+간선 개수	N-1 (항상)	제한 없음
+연결성	모든 노드가 연결됨	연결되지 않을 수도 있음
+대표적 알고리즘	DFS, BFS, 트리 순회	DFS, BFS, 다익스트라, 크루스칼
+
+✅ 트리는 계층 구조(부모-자식 관계), 그래프는 자유로운 노드 간 연결
+✅ 트리는 DFS/BFS 탐색, 그래프는 다익스트라/크루스칼 등의 알고리즘 활용
+
+결론
+
+✔ 덱(Deque) → 양방향 삽입/삭제 가능, 웹 브라우저 뒤로/앞으로 가기, 슬라이딩 윈도우 최적화에 활용
+✔ 우선순위 큐(Priority Queue) → 힙(Heap) 기반이 가장 효율적, 다익스트라, 작업 스케줄링에 활용
+✔ 트리(Tree) vs 그래프(Graph) → 트리는 계층적이며 사이클 없음, 그래프는 복잡한 노드 연결 구조
+
+✅ “문제 유형에 맞는 자료구조 선택이 중요!”
+
 - 이진 트리(Binary Tree)와 이진 탐색 트리(Binary Search Tree, BST)의 차이점을 설명하시오.
 - AVL 트리와 레드-블랙 트리(Red-Black Tree)의 차이점을 설명하시오.
 - B-트리(B-Tree)와 B+트리(B+ Tree)의 구조와 활용 사례를 설명하시오.
