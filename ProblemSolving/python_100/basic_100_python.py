@@ -155,3 +155,9 @@ char = input()
 # 다음 문자 출력
 # ord(char)는 입력된 문자의 ASCII(유니코드) 값을 반환
 print(chr(ord(char) + 1))
+
+# 6034, 정수 2개 입력받아 차 계산하기
+a,b = input().split()
+a = int(a)
+b = int(b)
+print(a-b)
