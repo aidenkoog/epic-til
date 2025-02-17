@@ -325,7 +325,121 @@ Organized expected questions & answers
         - IT 전략은 기업의 성장과 보안, 혁신을 동시에 달성하기 위한 핵심 요소
 
 
-- IT 서비스 관리(IT Service Management, ITSM)의 개념과 주요 프레임워크(ITIL 등)를 설명하시오.
+- IT 서비스 관리(IT Service Management, ITSM)의 개념과 주요 프레임워크(ITIL 등)
+
+IT 서비스 관리(IT Service Management, ITSM) 개념
+
+IT 서비스 관리(ITSM, IT Service Management)는 조직이 IT 서비스를 효과적으로 설계, 제공, 운영, 지원 및 개선할 수 있도록 관리하는 체계적인 접근 방식이다.
+즉, IT 서비스가 비즈니스 목표에 맞게 효율적으로 운영되도록 관리하는 프로세스와 방법론을 의미한다.
+
+ITSM의 핵심 개념은 **서비스 중심적인 사고(Service-Oriented Thinking)**로, IT 부서는 단순한 기술 제공자가 아니라 비즈니스의 서비스 제공자로 역할을 수행해야 한다는 점을 강조한다.
+
+ITSM의 주요 목표
+	•	비즈니스 목표와 IT 서비스의 정렬: IT 서비스가 비즈니스 요구사항을 충족하도록 지원
+	•	서비스 품질 향상: IT 서비스의 가용성, 성능 및 신뢰성을 개선
+	•	운영 비용 절감: IT 자원을 효율적으로 사용하여 비용 절감
+	•	서비스 제공 속도 개선: 문제 해결 및 요청 처리 속도 향상
+	•	IT 서비스의 지속적인 개선: 서비스 품질을 지속적으로 모니터링하고 개선
+
+ITSM의 주요 프레임워크 및 표준
+
+ITSM을 구현하기 위해 다양한 프레임워크와 표준이 존재하며, 가장 널리 사용되는 대표적인 프레임워크는 **ITIL(IT Infrastructure Library)**이다.
+이외에도 COBIT, ISO/IEC 20000, DevOps, MOF 등이 존재한다.
+
+1. ITIL(Information Technology Infrastructure Library)
+
+ITIL은 ITSM의 대표적인 프레임워크로, IT 서비스를 효과적으로 관리하기 위한 **베스트 프랙티스(Best Practices)**를 제공한다.
+ITIL은 비즈니스 요구사항에 맞춰 IT 서비스를 운영 및 개선하는 체계적인 가이드라인을 제공하며, 현재 ITIL v4가 최신 버전이다.
+
+ITIL 주요 개념
+
+ITIL은 5단계 서비스 라이프사이클로 구성되며, 현재 ITIL v4에서는 **4가지 서비스 관리 차원(Dimensions)**과 서비스 가치 시스템(SVS) 개념이 도입되었다.
+
+ITIL v3의 5단계 라이프사이클
+	1.	서비스 전략(Service Strategy)
+	•	IT 서비스의 비즈니스 연계 전략을 수립
+	•	예: 시장 분석, 수익 모델 정의, 서비스 투자 계획
+	2.	서비스 설계(Service Design)
+	•	IT 서비스의 설계 및 아키텍처 개발
+	•	예: 서비스 수준 관리(SLA), 보안 관리, 용량 관리
+	3.	서비스 전환(Service Transition)
+	•	새로운 서비스 도입 및 변경 관리
+	•	예: 변경 관리(Change Management), 배포 관리(Release Management)
+	4.	서비스 운영(Service Operation)
+	•	IT 서비스 운영 및 유지보수
+	•	예: 사건 관리(Incident Management), 문제 관리(Problem Management)
+	5.	지속적 서비스 개선(Continual Service Improvement, CSI)
+	•	서비스 품질을 지속적으로 분석하고 개선
+	•	예: KPI 분석, IT 서비스 개선 활동
+
+ITIL v4의 주요 개념
+	•	서비스 가치 시스템(SVS, Service Value System)
+	•	IT 서비스를 비즈니스 가치와 연결하는 개념
+	•	핵심 요소: 서비스 가치 사슬(Service Value Chain), 지침(Principles), 거버넌스, 개선(Continual Improvement)
+	•	4가지 서비스 관리 차원
+	1.	조직 및 인력
+	2.	정보 및 기술
+	3.	파트너 및 공급업체
+	4.	가치 스트림 및 프로세스
+
+2. COBIT(Control Objectives for Information and Related Technologies)
+
+COBIT은 IT 거버넌스와 리스크 관리에 초점을 맞춘 프레임워크로, 기업이 IT 리소스를 효과적으로 관리할 수 있도록 돕는다.
+주로 **기업의 IT 감사(IT Audit) 및 규제 준수(Compliance)**에 많이 활용된다.
+
+COBIT 특징
+	•	IT 프로세스와 비즈니스 목표 정렬
+	•	IT 리스크 관리 강화
+	•	규제 및 컴플라이언스(Compliance) 준수 지원 (예: SOX법)
+
+3. ISO/IEC 20000
+
+ISO/IEC 20000은 IT 서비스 관리에 대한 국제 표준으로, 조직이 ITSM을 효과적으로 운영하는지 평가하고 인증을 부여하는 기준이다.
+ITIL과 유사한 구조를 가지고 있으며, **ISO 9001(품질 관리 시스템)**과 함께 활용되기도 한다.
+
+ISO/IEC 20000의 핵심 구성
+	•	IT 서비스 관리 정책 수립
+	•	서비스 수준 관리(SLA) 및 성과 평가
+	•	문제 및 변경 관리 프로세스 구축
+
+4. DevOps(Development & Operations)
+
+DevOps는 개발(Development)과 운영(Operations)의 협업을 통해 소프트웨어 개발 속도를 높이고, 지속적인 배포(Continuous Deployment)를 가능하게 하는 ITSM 접근 방식이다.
+
+DevOps의 핵심 개념
+	•	CI/CD (Continuous Integration & Continuous Deployment)
+	•	지속적인 코드 배포 및 테스트 자동화
+	•	Infrastructure as Code (IaC)
+	•	인프라를 코드로 관리하여 자동화 및 효율성 증대
+	•	애자일(Agile)과 협업 문화
+	•	개발, 운영, QA 팀 간의 긴밀한 협업을 강조
+
+5. MOF (Microsoft Operations Framework)
+
+MOF는 마이크로소프트가 개발한 IT 서비스 관리 프레임워크로, ITIL을 기반으로 Microsoft 환경에 맞게 최적화된 버전이다.
+Windows Server 및 클라우드 환경을 운영하는 조직에서 활용된다.
+
+MOF 특징
+	•	ITIL을 기반으로 한 Microsoft 환경 최적화
+	•	IT 서비스 운영 및 유지보수 프로세스 중심
+	•	애플리케이션 및 서버 운영에 강점
+
+ITSM 프레임워크 비교 요약
+
+프레임워크	주요 목적	특징
+ITIL	IT 서비스 운영 및 개선	가장 널리 사용되는 ITSM 프레임워크
+COBIT	IT 거버넌스 및 감사	기업 IT 리스크 관리 및 규제 준수 강화
+ISO/IEC 20000	ITSM 국제 표준 인증	IT 서비스 품질 평가 및 인증 가능
+DevOps	개발과 운영의 협업	CI/CD 및 자동화 중심, 소프트웨어 개발 속도 향상
+MOF	Microsoft 환경 ITSM	ITIL 기반, Microsoft 제품 운영에 최적화
+
+결론
+
+ITSM은 조직이 IT 서비스를 효과적으로 운영하고 관리할 수 있도록 도와주는 개념이며, ITIL, COBIT, ISO 20000, DevOps와 같은 다양한 프레임워크가 존재한다.
+기업은 비즈니스 목표와 조직의 IT 환경에 적합한 ITSM 프레임워크를 선택하여 운영 효율성을 극대화할 수 있다.
+
+특히, 최근에는 ITIL v4와 DevOps가 결합되어 빠른 서비스 제공과 지속적인 개선을 가능하게 하는 애자일 ITSM 환경이 주목받고 있다.
+
 - IT 투자 관리(IT Investment Management)의 개념과 주요 고려 사항을 설명하시오.
 - IT 거버넌스(IT Governance)의 주요 프레임워크(COBIT, ITIL, ISO 38500)를 비교 설명하시오.
 - IT 경영에서 IT 위험 관리(IT Risk Management)의 개념과 주요 기법을 설명하시오.
