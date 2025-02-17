@@ -311,9 +311,57 @@ Organized expected questions & answers
             - REINFORCE → 정책 기반 강화학습
             - DDPG → 연속 행동 공간에서 최적화
             - PPO → 정책 기반 학습 안정화
+        - 강화학습은 게임, 자율주행, 금융, 로보틱스 등 다양한 분야에서 활용
 
-- 강화학습은 게임, 자율주행, 금융, 로보틱스 등 다양한 분야에서 활용됨!
-- 신경망(Neural Network)의 개념과 CNN(Convolutional Neural Network)의 차이를 설명하시오.
+
+- 신경망(Neural Network)의 개념과 CNN(Convolutional Neural Network)의 차이
+
+신경망(Neural Network) 개념
+
+신경망(Neural Network, NN)은 인공 지능(AI) 및 머신러닝(ML)의 핵심 알고리즘 중 하나로, 인간의 뇌 구조에서 영감을 받아 만들어진 모델이다.
+뉴런(Neuron)이라는 개별 노드가 여러 층으로 연결되어 있으며, 데이터를 학습하고 패턴을 인식하는 능력을 가진다.
+
+신경망의 주요 개념
+	•	입력층(Input Layer): 데이터가 들어오는 층
+	•	은닉층(Hidden Layer): 데이터가 가중치(Weight)와 활성화 함수(Activation Function)를 거쳐 변환되는 층
+	•	출력층(Output Layer): 최종 결과를 도출하는 층
+	•	가중치(Weight)와 바이어스(Bias): 학습을 통해 조정되는 매개변수
+	•	활성화 함수(Activation Function): 뉴런이 활성화될지 결정하는 함수 (ReLU, Sigmoid, Softmax 등)
+
+CNN(Convolutional Neural Network) 개념
+
+CNN(Convolutional Neural Network)은 이미지, 영상, 시각적 데이터 분석에 특화된 신경망이다.
+일반적인 신경망(ANN, Artificial Neural Network)은 **모든 뉴런이 서로 연결된 Fully Connected Layer(완전 연결 계층)**로 구성되지만, CNN은 합성곱(Convolution)과 풀링(Pooling) 연산을 이용하여 특징을 추출하는 방식으로 동작한다.
+
+CNN의 주요 구성 요소
+	1.	합성곱층(Convolutional Layer)
+	•	이미지를 작은 영역(커널, 필터)으로 나누어 특징을 추출하는 계층
+	•	이미지의 경계선, 색상 패턴 등 저수준(로우레벨) 특징을 학습
+	•	**필터(커널, Kernel)**을 사용하여 연산 수행
+	2.	풀링층(Pooling Layer)
+	•	데이터의 크기를 줄이고 계산량을 감소시키기 위한 계층
+	•	대표적인 방식: 최대 풀링(Max Pooling), 평균 풀링(Average Pooling)
+	•	불필요한 정보 제거 및 노이즈 감소 효과
+	3.	완전 연결층(Fully Connected Layer, FC)
+	•	CNN에서 추출한 특징을 기반으로 최종 분류(Classification) 수행
+	•	전통적인 신경망과 동일한 역할을 함 (Softmax, ReLU 등 사용)
+
+신경망(ANN) vs CNN 차이점
+
+비교 항목	일반 신경망(ANN)	CNN(Convolutional Neural Network)
+구조	완전 연결(FC Layer)	합성곱 + 풀링 + FC
+주요 연산	행렬 연산(Matrix Multiplication)	합성곱(Convolution) 연산
+데이터 유형	구조화된 데이터(수치형, 텍스트)	이미지, 영상, 시각적 데이터
+파라미터 수	매우 많음 (고차원 데이터일수록 증가)	파라미터 수 감소 (공간 공유)
+과적합 문제	데이터가 많지 않으면 과적합 발생	과적합 가능성이 상대적으로 낮음
+적용 분야	예측 모델, NLP, 금융 데이터 분석 등	이미지 분류, 객체 검출, 얼굴 인식 등
+
+결론
+	•	신경망(ANN): 일반적인 패턴 인식, 텍스트 분석 등에 사용
+	•	CNN: 이미지 및 영상 분석에 최적화된 모델로, 합성곱 연산을 활용하여 특징을 자동으로 추출하는 방식
+
+따라서 이미지 데이터 처리가 필요할 경우, 일반 신경망보다 CNN이 훨씬 더 효과적이다.
+
 - Transformer 모델과 기존 RNN, LSTM 모델의 차이를 설명하시오.
 - 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)을 설명하시오.
 - AI의 윤리적 문제(AI Bias, Explainability, Privacy)를 설명하시오.
