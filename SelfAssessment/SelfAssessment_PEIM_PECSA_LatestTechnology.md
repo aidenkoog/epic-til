@@ -18,16 +18,16 @@ Organized expected questions & answers
       - 데이터에서 패턴을 학습하고, 이를 기반으로 예측하거나 결정을 내리는 알고리즘
       - 명시적인 프로그래밍 없이도 데이터를 통해 학습하는 AI 기술
       - 주요 유형
-        - 지도 학습 (Supervised Learning): 입력(X) → 정답(Y) 학습 후 예측	
+        - 지도 학습 (Supervised Learning): 입력(X) → 정답(Y) 학습 후 예측
           - 예: 이메일 스팸 필터링, 이미지 분류
         - 비지도 학습 (Unsupervised Learning): 정답 없이 데이터 구조 학습
           - 예: 고객 군집 분석, 이상 탐지
-        - 강화 학습 (Reinforcement Learning)	보상을 통해 최적의 행동 학습
+        - 강화 학습 (Reinforcement Learning) 보상을 통해 최적의 행동 학습
           - 예: 자율주행, 게임 AI
       - 대표 알고리즘
-	    - 지도 학습: 선형 회귀(Linear Regression), 로지스틱 회귀(Logistic Regression), 랜덤 포레스트(Random Forest), SVM, 신경망(Neural Networks)
-	    - 비지도 학습: K-Means 클러스터링, 주성분 분석(PCA), DBSCAN
-	    - 강화 학습: Q-Learning, Deep Q-Network(DQN), PPO
+        - 지도 학습: 선형 회귀(Linear Regression), 로지스틱 회귀(Logistic Regression), 랜덤 포레스트(Random Forest), SVM, 신경망(Neural Networks)
+        - 비지도 학습: K-Means 클러스터링, 주성분 분석(PCA), DBSCAN
+        - 강화 학습: Q-Learning, Deep Q-Network(DQN), PPO
     - 딥러닝 (Deep Learning, DL)
       - 머신러닝의 한 분야로, 다층 신경망(Deep Neural Networks, DNN)을 활용하여 복잡한 패턴을 학습하는 기술.
       - 사람의 뇌 신경망(뉴런)과 유사한 구조를 활용하여 대량의 데이터를 학습하는 방식.
@@ -45,7 +45,7 @@ Organized expected questions & answers
         - Transformer (BERT, GPT): 자연어 처리
           - 예: 챗봇, 기계 번역
       - 딥러닝 프레임워크
-	    - TensorFlow, PyTorch, Keras (대표적인 라이브러리)
+        - TensorFlow, PyTorch, Keras (대표적인 라이브러리)
     - 강화학습 (Reinforcement Learning, RL)
       - 보상을 기반으로 최적의 행동을 학습하는 AI 기술.
       - 에이전트(Agent)가 환경(Environment)과 상호작용하면서 보상을 최대화하는 방향으로 학습하는 방식.
@@ -54,14 +54,14 @@ Organized expected questions & answers
         - 순차적 의사 결정 → 행동(Action)이 환경에 영향을 미치고, 결과를 반영하여 학습
         - 게임, 로봇, 자율주행 등에 활용됨
       - 강화학습의 구조 (AEAR)
-	    - Agent (에이전트): 학습을 수행하는 주체
-	    - Environment (환경): 에이전트가 작용하는 공간
-	    - Action (행동): 에이전트가 취할 수 있는 선택
-	    - Reward (보상): 행동에 대한 피드백 (좋은 행동 → 보상, 나쁜 행동 → 패널티)
+        - Agent (에이전트): 학습을 수행하는 주체
+        - Environment (환경): 에이전트가 작용하는 공간
+        - Action (행동): 에이전트가 취할 수 있는 선택
+        - Reward (보상): 행동에 대한 피드백 (좋은 행동 → 보상, 나쁜 행동 → 패널티)
       - 강화학습 알고리즘
-	    - Q-Learning (기본적인 가치 기반 학습)
-	    - Deep Q-Network (DQN) (딥러닝 적용)
-	    - Proximal Policy Optimization (PPO) (정책 최적화)
+        - Q-Learning (기본적인 가치 기반 학습)
+        - Deep Q-Network (DQN) (딥러닝 적용)
+        - Proximal Policy Optimization (PPO) (정책 최적화)
       - 강화학습 응용 사례
         - 자율주행
         - 알파고(바둑 AI)
@@ -77,7 +77,7 @@ Organized expected questions & answers
       - DL: 대량의 데이터 필요
       - RL: 시뮬레이션 필요
     - 사용 분야
-      - ML: 예측, 분류, 군집 분석	
+      - ML: 예측, 분류, 군집 분석
       - DL: 이미지, 음성, 자연어 처리
       - RL: 게임, 로봇, 자율주행
     - 예제
@@ -114,253 +114,234 @@ Organized expected questions & answers
     - AI는 데이터를 학습하여 인간의 지능을 모방하는 강력한 기술이며, 미래 산업의 핵심 기술
 
 - 지도학습(Supervised Learning)과 비지도학습(Unsupervised Learning)의 차이
-    - 지도학습(Supervised Learning)
-        - 개요
-            - 정답(레이블, Label)이 있는 데이터로 학습하는 방식
-        - 개념
-            - 입력 데이터(X)와 그에 대응하는 정답(출력 값, Y)이 주어진 상태에서 모델을 학습
-            - 지도(Teacher) 데이터를 활용하여 패턴을 학습한 후, 새로운 입력 데이터에 대해 예측 수행
-            - 주어진 데이터의 입출력 관계를 학습하여 일반화하는 것이 목표
-        - 특징
-            - 정답(Label)이 있는 데이터 필요 → 라벨링 비용 발생
-            - 학습 데이터와 테스트 데이터의 분포가 유사해야 높은 성능 보장
-            - 정확한 예측이 가능하지만, 새로운 패턴을 탐색하는 능력은 부족
-        - 주요 알고리즘
-            - 선형 회귀 (Linear Regression): 연속된 숫자 값을 예측 / 가격 예측, 수요 예측
-            - 로지스틱 회귀 (Logistic Regression): 이진 분류(0 또는 1) / 이메일 스팸 분류
-            - 의사결정나무 (Decision Tree): 데이터 기반 분류 및 예측 / 고객 이탈 예측
-            - 랜덤 포레스트 (Random Forest): 여러 개의 의사결정나무를 조합 / 금융 사기 탐지
-            - 서포트 벡터 머신 (SVM): 최적의 초평면을 찾아 분류	/ 얼굴 인식
-            - 신경망 (Neural Networks): 복잡한 패턴 학습 / 음성 인식, 자율주행
-            - k-NN (K-Nearest Neighbors):	가장 가까운 데이터 기반 예측 / 추천 시스템
-        - 예시
-            - 예제 1: 이메일 스팸 분류
-                -	입력 데이터(X): 이메일 본문
-                -	출력 데이터(Y): “스팸” 또는 “일반 메일” (라벨 존재)
-                - 학습 방식: 기존의 스팸 메일 데이터를 학습하여 새로운 이메일이 스팸인지 아닌지 예측
-            - 예제 2: 주택 가격 예측
-                -	입력 데이터(X): 면적, 방 개수, 위치 등
-                -	출력 데이터(Y): 집 가격
-                -	학습 방식: 과거 데이터를 바탕으로 새로운 집의 가격 예측
-    - 비지도학습(Unsupervised Learning)
-        - 개요
-            - 정답(레이블, Label)이 없는 데이터로 학습하는 방식
-        - 개념
-            - 입력 데이터만 주어지고, 이에 대한 정답(출력 값)은 없음
-            - 데이터의 숨겨진 패턴을 찾아 그룹화하거나 특징을 추출하는 것이 목표
-            - 정답이 없기 때문에, 새로운 패턴을 탐색하는 능력이 뛰어남
-        - 특징
-            - 라벨이 없는 데이터만 있어도 학습 가능 → 라벨링 비용 절감
-            - 데이터를 자동으로 클러스터링(그룹화)하거나, 특징(Feature)을 추출하여 활용
-            - 해석이 어렵고, 정답이 정해져 있지 않기 때문에 성능 평가가 까다로움
-        - 주요 알고리즘
-            - K-평균 클러스터링 (K-Means Clustering):	데이터를 K개의 그룹으로 분류	고객 세분화, 이미지 분할
-            - DBSCAN (Density-Based Spatial Clustering): 밀도를 기반으로 이상값 탐지 및 클러스터링	이상 감지(Outlier Detection)
-            - 계층적 클러스터링 (Hierarchical Clustering): 데이터 간 계층적 관계를 분석, 	생물학적 계통 분석
-            - 주성분 분석 (PCA, Principal Component Analysis): 차원 축소(Feature Extraction), 	이미지 압축, 빅데이터 시각화
-            - 연관 규칙 학습 (Apriori, FP-Growth): 데이터 간 연관 관계 탐색	장바구니 분석, 추천 시스템
-            - GAN (Generative Adversarial Networks): 새로운 데이터를 생성하는 모델	가짜 이미지 생성(딥페이크), 데이터 증강
-        - 예시
-            - 예제 1: 고객 세분화 (Clustering)
-                - 입력 데이터(X): 고객의 구매 이력, 연령, 소비 패턴
-                - 출력 데이터(Y): 없음 (라벨 X)
-                - 학습 방식: 고객을 유사한 구매 패턴에 따라 그룹화하여 타겟 마케팅에 활용
-            - 예제 2: 장바구니 분석 (연관 규칙 학습)
-                - 입력 데이터(X): 고객의 쇼핑 내역
-                - 출력 데이터(Y): 없음 (라벨 X)
-                - 학습 방식: 자주 함께 구매되는 상품을 찾고 추천 시스템에 적용 (예: “맥북을 사면 에어팟을 추천”)
+  - 지도학습(Supervised Learning)
+    - 개요
+      - 정답(레이블, Label)이 있는 데이터로 학습하는 방식
+    - 개념
+      - 입력 데이터(X)와 그에 대응하는 정답(출력 값, Y)이 주어진 상태에서 모델을 학습
+      - 지도(Teacher) 데이터를 활용하여 패턴을 학습한 후, 새로운 입력 데이터에 대해 예측 수행
+      - 주어진 데이터의 입출력 관계를 학습하여 일반화하는 것이 목표
+    - 특징
+      - 정답(Label)이 있는 데이터 필요 → 라벨링 비용 발생
+      - 학습 데이터와 테스트 데이터의 분포가 유사해야 높은 성능 보장
+      - 정확한 예측이 가능하지만, 새로운 패턴을 탐색하는 능력은 부족
+    - 주요 알고리즘
+      - 선형 회귀 (Linear Regression): 연속된 숫자 값을 예측 / 가격 예측, 수요 예측
+      - 로지스틱 회귀 (Logistic Regression): 이진 분류(0 또는 1) / 이메일 스팸 분류
+      - 의사결정나무 (Decision Tree): 데이터 기반 분류 및 예측 / 고객 이탈 예측
+      - 랜덤 포레스트 (Random Forest): 여러 개의 의사결정나무를 조합 / 금융 사기 탐지
+      - 서포트 벡터 머신 (SVM): 최적의 초평면을 찾아 분류 / 얼굴 인식
+      - 신경망 (Neural Networks): 복잡한 패턴 학습 / 음성 인식, 자율주행
+      - k-NN (K-Nearest Neighbors): 가장 가까운 데이터 기반 예측 / 추천 시스템
+    - 예시
+      - 예제 1: 이메일 스팸 분류
+        - 입력 데이터(X): 이메일 본문
+        - 출력 데이터(Y): “스팸” 또는 “일반 메일” (라벨 존재)
+        - 학습 방식: 기존의 스팸 메일 데이터를 학습하여 새로운 이메일이 스팸인지 아닌지 예측
+      - 예제 2: 주택 가격 예측
+        - 입력 데이터(X): 면적, 방 개수, 위치 등
+        - 출력 데이터(Y): 집 가격
+        - 학습 방식: 과거 데이터를 바탕으로 새로운 집의 가격 예측
+  - 비지도학습(Unsupervised Learning)
+    - 개요
+      - 정답(레이블, Label)이 없는 데이터로 학습하는 방식
+    - 개념
+      - 입력 데이터만 주어지고, 이에 대한 정답(출력 값)은 없음
+      - 데이터의 숨겨진 패턴을 찾아 그룹화하거나 특징을 추출하는 것이 목표
+      - 정답이 없기 때문에, 새로운 패턴을 탐색하는 능력이 뛰어남
+    - 특징
+      - 라벨이 없는 데이터만 있어도 학습 가능 → 라벨링 비용 절감
+      - 데이터를 자동으로 클러스터링(그룹화)하거나, 특징(Feature)을 추출하여 활용
+      - 해석이 어렵고, 정답이 정해져 있지 않기 때문에 성능 평가가 까다로움
+    - 주요 알고리즘
+      - K-평균 클러스터링 (K-Means Clustering): 데이터를 K개의 그룹으로 분류 고객 세분화, 이미지 분할
+      - DBSCAN (Density-Based Spatial Clustering): 밀도를 기반으로 이상값 탐지 및 클러스터링 이상 감지(Outlier Detection)
+      - 계층적 클러스터링 (Hierarchical Clustering): 데이터 간 계층적 관계를 분석,  생물학적 계통 분석
+      - 주성분 분석 (PCA, Principal Component Analysis): 차원 축소(Feature Extraction),  이미지 압축, 빅데이터 시각화
+      - 연관 규칙 학습 (Apriori, FP-Growth): 데이터 간 연관 관계 탐색 장바구니 분석, 추천 시스템
+      - GAN (Generative Adversarial Networks): 새로운 데이터를 생성하는 모델 가짜 이미지 생성(딥페이크), 데이터 증강
+    - 예시
+      - 예제 1: 고객 세분화 (Clustering)
+        - 입력 데이터(X): 고객의 구매 이력, 연령, 소비 패턴
+        - 출력 데이터(Y): 없음 (라벨 X)
+        - 학습 방식: 고객을 유사한 구매 패턴에 따라 그룹화하여 타겟 마케팅에 활용
+      - 예제 2: 장바구니 분석 (연관 규칙 학습)
+        - 입력 데이터(X): 고객의 쇼핑 내역
+        - 출력 데이터(Y): 없음 (라벨 X)
+        - 학습 방식: 자주 함께 구매되는 상품을 찾고 추천 시스템에 적용 (예: “맥북을 사면 에어팟을 추천”)
 
-    - 지도학습 vs. 비지도학습 차이점 정리
-        - 데이터
-            - 지도: 입력(X)과 출력(Y)이 존재 (정답 있음)
-            - 비지도: 출력(Y) 없이 입력(X)만 존재
-        - 목표
-            - 지도: 입력 → 출력 관계 학습 (예측)	
-            - 비지도: 데이터 내 숨겨진 패턴 탐색 (그룹화)
-        - 라벨(Label)
-            - 지도: 존재 (지도 데이터)
-            - 비지도: 없음 (라벨 없는 데이터)
-        - 주요 알고리즘
-            - 지도: 회귀, 분류 알고리즘 (SVM, NN, 의사결정나무 등)
-            - 비지도: 클러스터링, - 차원 축소 (K-Means, PCA 등)
-        - 활용 예시
-            - 지도: 이메일 스팸 필터, 이미지 인식, 주가 예측	
-            - 비지도: 고객 세분화, 이상 탐지, 추천 시스템
-        - 장점
-            - 지도: 예측 정확도가 높음	
-            - 비지도: 새로운 패턴 탐색 가능
-        - 단점
-            - 지도: 라벨링 비용이 높음, 데이터 의존성 큼	
-            - 비지도: 정답이 없어 해석이 어려움
+  - 지도학습 vs. 비지도학습 차이점 정리
+    - 데이터
+      - 지도: 입력(X)과 출력(Y)이 존재 (정답 있음)
+      - 비지도: 출력(Y) 없이 입력(X)만 존재
+    - 목표
+      - 지도: 입력 → 출력 관계 학습 (예측)
+      - 비지도: 데이터 내 숨겨진 패턴 탐색 (그룹화)
+    - 라벨(Label)
+      - 지도: 존재 (지도 데이터)
+      - 비지도: 없음 (라벨 없는 데이터)
+    - 주요 알고리즘
+      - 지도: 회귀, 분류 알고리즘 (SVM, NN, 의사결정나무 등)
+      - 비지도: 클러스터링, - 차원 축소 (K-Means, PCA 등)
+    - 활용 예시
+      - 지도: 이메일 스팸 필터, 이미지 인식, 주가 예측
+      - 비지도: 고객 세분화, 이상 탐지, 추천 시스템
+    - 장점
+      - 지도: 예측 정확도가 높음
+      - 비지도: 새로운 패턴 탐색 가능
+    - 단점
+      - 지도: 라벨링 비용이 높음, 데이터 의존성 큼
+      - 비지도: 정답이 없어 해석이 어려움
 
-    - 지도학습과 비지도학습의 결합 (반지도학습, 강화학습)
-        - 반지도학습(Semi-Supervised Learning)
-      	    - 일부 데이터만 정답(레이블)이 있고, 나머지는 비지도학습 방식으로 처리
-      	    - 라벨이 부족한 경우 활용 (예: 의료 데이터 분석)
-        - 강화학습(Reinforcement Learning)
-    	      - 보상(Reward)과 처벌(Penalty)을 통해 최적의 행동(정책, Policy)을 학습
-    	      - 자율주행, 게임 AI, 로봇 학습 등에 사용됨
+  - 지도학습과 비지도학습의 결합 (반지도학습, 강화학습)
+    - 반지도학습(Semi-Supervised Learning)
+      - 일부 데이터만 정답(레이블)이 있고, 나머지는 비지도학습 방식으로 처리
+      - 라벨이 부족한 경우 활용 (예: 의료 데이터 분석)
+    - 강화학습(Reinforcement Learning)
+           - 보상(Reward)과 처벌(Penalty)을 통해 최적의 행동(정책, Policy)을 학습
+           - 자율주행, 게임 AI, 로봇 학습 등에 사용됨
 
-    - 결론
-    	  - 지도학습(Supervised Learning): 라벨이 있는 데이터를 학습하여 새로운 데이터를 예측하는 모델
-      	- 비지도학습(Unsupervised Learning): 라벨이 없는 데이터에서 패턴을 발견하는 모델
-    	  - 둘의 차이를 이해하고, 문제 상황에 맞는 기법을 선택하는 것이 중요
-    - 정리 : 지도학습이 예측을 위한 모델이라면, 비지도학습은 패턴을 찾는 모델
-
+  - 결론
+    - 지도학습(Supervised Learning): 라벨이 있는 데이터를 학습하여 새로운 데이터를 예측하는 모델
+    - 비지도학습(Unsupervised Learning): 라벨이 없는 데이터에서 패턴을 발견하는 모델
+      - 둘의 차이를 이해하고, 문제 상황에 맞는 기법을 선택하는 것이 중요
+  - 정리 : 지도학습이 예측을 위한 모델이라면, 비지도학습은 패턴을 찾는 모델
 
 - 강화학습(Reinforcement Learning)의 개념과 주요 알고리즘(Q-Learning, DDPG 등)
-    - 강화학습(Reinforcement Learning, RL) 개념
-        - 정의
-	          - 강화학습은 에이전트(Agent) 가 환경(Environment)과 상호작용하며 보상(Reward) 을 최대화하는 행동(Policy)을 학습하는 기계학습 방법
-	          - 지도학습(Supervised Learning)처럼 정답(Label)이 주어지지 않으며, 시행착오(Trial and Error)를 통해 최적의 행동을 학습함.
-        - 강화학습의 특징
-	          - 보상(Reward) 신호를 기반으로 최적의 행동(Policy) 학습
-	          - 환경과의 상호작용을 통해 점진적으로 개선
-	          - 미래의 보상을 고려하여 최적의 정책(Policy) 탐색
-        - 강화학습 적용 사례
-            - 게임 AI (알파고, OpenAI Five, AlphaStar)
-            - 자율주행 (Tesla, Waymo)
-            - 로보틱스 (Boston Dynamics 로봇 제어)
-            - 금융 및 투자 전략 (강화학습 기반 자동매매)
-    - 강화학습의 기본 요소
-        - 에이전트(Agent)
-            - 학습을 수행하는 주체 (예: 로봇, AI, 게임 캐릭터)
-        - 환경(Environment)
-            - 에이전트가 상호작용하는 시스템 (예: 체스 보드, 자율주행 도로)
-        - 상태(State, S)
-            - 환경의 현재 상태 (예: 체스판의 말 배치 상태)
-        - 행동(Action, A)
-            - 에이전트가 수행하는 액션 (예: 체스 말 이동)
-        - 보상(Reward, R)
-            - 행동의 결과로 주어지는 점수 (예: 게임에서 점수 증가)
-        - 정책(Policy, π)
-            - 주어진 상태에서 행동을 선택하는 전략
-            - 정책은 확률적(Stochastic) 또는 결정적(Deterministic) 일 수 있음
-        - 가치 함수(Value Function, V)
-            - 특정 상태에서 미래 보상의 기대값을 나타냄
-        - Q-값(Q-Value, Q-function)
-            - 특정 상태(S)에서 특정 행동(A)을 수행했을 때 기대되는 총 보상 값
-            -  Q(s, a)  값이 클수록 좋은 행동
-    - 주요 강화학습 알고리즘
-        - 가치 기반(Value-based), 정책 기반(Policy-based), 모델 기반(Model-based) 으로 구분
-        - 구분
-            - 가치 기반(Value-based):	Q-값을 예측하여 최적의 행동을 선택,	Q-Learning, DQN
-            - 정책 기반(Policy-based): 정책 함수(π)를 직접 최적화, REINFORCE, PPO
-            - 액터-크리틱(Actor-Critic): 정책 기반 + 가치 기반 결합, A3C, DDPG
-            - 모델 기반(Model-based): 환경의 모델을 학습하여 예측, AlphaGo, MuZero
-    - 대표적인 강화학습 알고리즘 (Q-Learning, DQN, Reinforce, DDPG, PPO)
-        - Q-Learning (가치 기반 알고리즘)
-            - 개념
-                - Q-값( Q(s, a) )을 업데이트하여 최적의 정책 학습
-                - 미래 보상을 고려하여 행동 선택 (Bellman Equation 사용)
-                - Off-policy 학습 → 이전 경험을 활용하여 학습 가능
-            - Q-러닝의 핵심 수식 (Bellman Equation)
-                - Q(s, a) \leftarrow Q(s, a) + \alpha \left[ R + \gamma \max Q(s{\prime}, a{\prime}) - Q(s, a) \right]
-                    -  \alpha : 학습률 (Learning Rate)
-                    -  \gamma : 할인 계수 (Discount Factor)
-                    -  R : 즉각적인 보상 (Reward)
-                    -  s{\prime}, a{\prime} : 다음 상태, 다음 행동
-            - 단점
-                - 상태 공간이 커지면 Q 테이블 크기가 너무 커져서 사용이 어려움
-                - 딥러닝을 활용한 DQN으로 개선 가능
-            - 활용 사례
-              - 미로 찾기, 게임 AI
-        - DQN (Deep Q-Network)
-            - 개념
-                - Q-러닝을 딥러닝(Deep Learning) 과 결합한 강화학습 알고리즘
-                - Q-값을 신경망(Neural Network)으로 근사함
-            - DQN의 주요 기술
-                - 경험 재현(Experience Replay) → 과거 데이터를 랜덤 샘플링하여 학습
-                - 타깃 네트워크(Target Network) → Q-값 갱신 시 타깃 네트워크 사용하여 안정화
-            - 활용 사례
-                - Atari 게임 AI (DeepMind, 2015)
-                - 자율주행 차량 경로 최적화
-        - REINFORCE (정책 기반 알고리즘)
-            - 개념
-                - 정책 함수(π)를 직접 학습하는 방법
-                - 확률적으로 행동을 선택하고 보상을 기반으로 학습
-            - 활용 사례
-              - 로봇 동작 학습, 전략적 게임 플레이
-        - DDPG (Deep Deterministic Policy Gradient, 액터-크리틱)
-            - 개념
-                - 정책 기반 + 가치 기반 알고리즘 을 결합하여 학습 성능 향상
-                - 연속적인 행동 공간(Continuous Action Space) 에 적합
-                - 액터(Actor)와 크리틱(Critic) 두 개의 신경망 사용
-                - Actor: 정책(Policy) 업데이트
-                - Critic: Q-값 예측
-            - 활용 사례
-                - 자율주행, 로봇 제어 (Boston Dynamics)
-        - PPO (Proximal Policy Optimization)
-            - 개념
-                - 기존 정책 기반 알고리즘(Policy Gradient)에서 학습 안정성 개선
-                - 정책 업데이트 시 큰 변화 방지 (Clip Objective 사용)
-            - 활용 사례
-                - OpenAI Five (Dota2 AI)
-                - 자율 드론, 로보틱스 최적화
-    - 강화학습 알고리즘 비교
-        - Q-Learning: 테이블 기반 Q-값 학습, 미로 찾기, 작은 환경
-        - DQN	딥러닝 활용: Q-러닝 확장, 게임 AI (Atari)
-        - REINFORCE: 정책 기반 학습, 전략적 게임, 로봇 제어
-        - DDPG: 연속적인 행동 학습, 자율주행, 로보틱스
-        - PPO: 정책 업데이트 안정화, OpenAI Five, 강화학습 AI
-    - 정리
-	      - 강화학습(RL) 은 에이전트가 환경과 상호작용하며 보상을 최대화하는 방식으로 학습하는 기법
-	      - 주요 알고리즘
-            - Q-Learning → 가치 기반, 테이블 방식
-            - DQN → 딥러닝 기반 Q-Learning 확장
-            - REINFORCE → 정책 기반 강화학습
-            - DDPG → 연속 행동 공간에서 최적화
-            - PPO → 정책 기반 학습 안정화
-        - 강화학습은 게임, 자율주행, 금융, 로보틱스 등 다양한 분야에서 활용
-
+  - 강화학습(Reinforcement Learning, RL) 개념
+    - 정의
+           - 강화학습은 에이전트(Agent) 가 환경(Environment)과 상호작용하며 보상(Reward) 을 최대화하는 행동(Policy)을 학습하는 기계학습 방법
+           - 지도학습(Supervised Learning)처럼 정답(Label)이 주어지지 않으며, 시행착오(Trial and Error)를 통해 최적의 행동을 학습함.
+    - 강화학습의 특징
+           - 보상(Reward) 신호를 기반으로 최적의 행동(Policy) 학습
+           - 환경과의 상호작용을 통해 점진적으로 개선
+           - 미래의 보상을 고려하여 최적의 정책(Policy) 탐색
+    - 강화학습 적용 사례
+      - 게임 AI (알파고, OpenAI Five, AlphaStar)
+      - 자율주행 (Tesla, Waymo)
+      - 로보틱스 (Boston Dynamics 로봇 제어)
+      - 금융 및 투자 전략 (강화학습 기반 자동매매)
+  - 강화학습의 기본 요소
+    - 에이전트(Agent)
+      - 학습을 수행하는 주체 (예: 로봇, AI, 게임 캐릭터)
+    - 환경(Environment)
+      - 에이전트가 상호작용하는 시스템 (예: 체스 보드, 자율주행 도로)
+    - 상태(State, S)
+      - 환경의 현재 상태 (예: 체스판의 말 배치 상태)
+    - 행동(Action, A)
+      - 에이전트가 수행하는 액션 (예: 체스 말 이동)
+    - 보상(Reward, R)
+      - 행동의 결과로 주어지는 점수 (예: 게임에서 점수 증가)
+    - 정책(Policy, π)
+      - 주어진 상태에서 행동을 선택하는 전략
+      - 정책은 확률적(Stochastic) 또는 결정적(Deterministic) 일 수 있음
+    - 가치 함수(Value Function, V)
+      - 특정 상태에서 미래 보상의 기대값을 나타냄
+    - Q-값(Q-Value, Q-function)
+      - 특정 상태(S)에서 특정 행동(A)을 수행했을 때 기대되는 총 보상 값
+      - Q(s, a)  값이 클수록 좋은 행동
+  - 주요 강화학습 알고리즘
+    - 가치 기반(Value-based), 정책 기반(Policy-based), 모델 기반(Model-based) 으로 구분
+    - 구분
+      - 가치 기반(Value-based): Q-값을 예측하여 최적의 행동을 선택, Q-Learning, DQN
+      - 정책 기반(Policy-based): 정책 함수(π)를 직접 최적화, REINFORCE, PPO
+      - 액터-크리틱(Actor-Critic): 정책 기반 + 가치 기반 결합, A3C, DDPG
+      - 모델 기반(Model-based): 환경의 모델을 학습하여 예측, AlphaGo, MuZero
+  - 대표적인 강화학습 알고리즘 (Q-Learning, DQN, Reinforce, DDPG, PPO)
+    - Q-Learning (가치 기반 알고리즘)
+      - 개념
+        - Q-값( Q(s, a) )을 업데이트하여 최적의 정책 학습
+        - 미래 보상을 고려하여 행동 선택 (Bellman Equation 사용)
+        - Off-policy 학습 → 이전 경험을 활용하여 학습 가능
+      - Q-러닝의 핵심 수식 (Bellman Equation)
+        - Q(s, a) \leftarrow Q(s, a) + \alpha \left[ R + \gamma \max Q(s{\prime}, a{\prime}) - Q(s, a) \right]
+          - \alpha : 학습률 (Learning Rate)
+          - \gamma : 할인 계수 (Discount Factor)
+          - R : 즉각적인 보상 (Reward)
+          - s{\prime}, a{\prime} : 다음 상태, 다음 행동
+      - 단점
+        - 상태 공간이 커지면 Q 테이블 크기가 너무 커져서 사용이 어려움
+        - 딥러닝을 활용한 DQN으로 개선 가능
+      - 활용 사례
+        - 미로 찾기, 게임 AI
+    - DQN (Deep Q-Network)
+      - 개념
+        - Q-러닝을 딥러닝(Deep Learning) 과 결합한 강화학습 알고리즘
+        - Q-값을 신경망(Neural Network)으로 근사함
+      - DQN의 주요 기술
+        - 경험 재현(Experience Replay) → 과거 데이터를 랜덤 샘플링하여 학습
+        - 타깃 네트워크(Target Network) → Q-값 갱신 시 타깃 네트워크 사용하여 안정화
+      - 활용 사례
+        - Atari 게임 AI (DeepMind, 2015)
+        - 자율주행 차량 경로 최적화
+    - REINFORCE (정책 기반 알고리즘)
+      - 개념
+        - 정책 함수(π)를 직접 학습하는 방법
+        - 확률적으로 행동을 선택하고 보상을 기반으로 학습
+      - 활용 사례
+        - 로봇 동작 학습, 전략적 게임 플레이
+    - DDPG (Deep Deterministic Policy Gradient, 액터-크리틱)
+      - 개념
+        - 정책 기반 + 가치 기반 알고리즘 을 결합하여 학습 성능 향상
+        - 연속적인 행동 공간(Continuous Action Space) 에 적합
+        - 액터(Actor)와 크리틱(Critic) 두 개의 신경망 사용
+        - Actor: 정책(Policy) 업데이트
+        - Critic: Q-값 예측
+      - 활용 사례
+        - 자율주행, 로봇 제어 (Boston Dynamics)
+    - PPO (Proximal Policy Optimization)
+      - 개념
+        - 기존 정책 기반 알고리즘(Policy Gradient)에서 학습 안정성 개선
+        - 정책 업데이트 시 큰 변화 방지 (Clip Objective 사용)
+      - 활용 사례
+        - OpenAI Five (Dota2 AI)
+        - 자율 드론, 로보틱스 최적화
+  - 강화학습 알고리즘 비교
+    - Q-Learning: 테이블 기반 Q-값 학습, 미로 찾기, 작은 환경
+    - DQN 딥러닝 활용: Q-러닝 확장, 게임 AI (Atari)
+    - REINFORCE: 정책 기반 학습, 전략적 게임, 로봇 제어
+    - DDPG: 연속적인 행동 학습, 자율주행, 로보틱스
+    - PPO: 정책 업데이트 안정화, OpenAI Five, 강화학습 AI
+  - 정리
+    - 강화학습(RL) 은 에이전트가 환경과 상호작용하며 보상을 최대화하는 방식으로 학습하는 기법
+    - 주요 알고리즘
+      - Q-Learning → 가치 기반, 테이블 방식
+      - DQN → 딥러닝 기반 Q-Learning 확장
+      - REINFORCE → 정책 기반 강화학습
+      - DDPG → 연속 행동 공간에서 최적화
+      - PPO → 정책 기반 학습 안정화
+    - 강화학습은 게임, 자율주행, 금융, 로보틱스 등 다양한 분야에서 활용
 
 - 신경망(Neural Network)의 개념과 CNN(Convolutional Neural Network)의 차이
-
-신경망(Neural Network) 개념
-
-신경망(Neural Network, NN)은 인공 지능(AI) 및 머신러닝(ML)의 핵심 알고리즘 중 하나로, 인간의 뇌 구조에서 영감을 받아 만들어진 모델이다.
-뉴런(Neuron)이라는 개별 노드가 여러 층으로 연결되어 있으며, 데이터를 학습하고 패턴을 인식하는 능력을 가진다.
-
-신경망의 주요 개념
-	•	입력층(Input Layer): 데이터가 들어오는 층
-	•	은닉층(Hidden Layer): 데이터가 가중치(Weight)와 활성화 함수(Activation Function)를 거쳐 변환되는 층
-	•	출력층(Output Layer): 최종 결과를 도출하는 층
-	•	가중치(Weight)와 바이어스(Bias): 학습을 통해 조정되는 매개변수
-	•	활성화 함수(Activation Function): 뉴런이 활성화될지 결정하는 함수 (ReLU, Sigmoid, Softmax 등)
-
-CNN(Convolutional Neural Network) 개념
-
-CNN(Convolutional Neural Network)은 이미지, 영상, 시각적 데이터 분석에 특화된 신경망이다.
-일반적인 신경망(ANN, Artificial Neural Network)은 **모든 뉴런이 서로 연결된 Fully Connected Layer(완전 연결 계층)**로 구성되지만, CNN은 합성곱(Convolution)과 풀링(Pooling) 연산을 이용하여 특징을 추출하는 방식으로 동작한다.
-
-CNN의 주요 구성 요소
-	1.	합성곱층(Convolutional Layer)
-	•	이미지를 작은 영역(커널, 필터)으로 나누어 특징을 추출하는 계층
-	•	이미지의 경계선, 색상 패턴 등 저수준(로우레벨) 특징을 학습
-	•	**필터(커널, Kernel)**을 사용하여 연산 수행
-	2.	풀링층(Pooling Layer)
-	•	데이터의 크기를 줄이고 계산량을 감소시키기 위한 계층
-	•	대표적인 방식: 최대 풀링(Max Pooling), 평균 풀링(Average Pooling)
-	•	불필요한 정보 제거 및 노이즈 감소 효과
-	3.	완전 연결층(Fully Connected Layer, FC)
-	•	CNN에서 추출한 특징을 기반으로 최종 분류(Classification) 수행
-	•	전통적인 신경망과 동일한 역할을 함 (Softmax, ReLU 등 사용)
-
-신경망(ANN) vs CNN 차이점
-
-비교 항목	일반 신경망(ANN)	CNN(Convolutional Neural Network)
-구조	완전 연결(FC Layer)	합성곱 + 풀링 + FC
-주요 연산	행렬 연산(Matrix Multiplication)	합성곱(Convolution) 연산
-데이터 유형	구조화된 데이터(수치형, 텍스트)	이미지, 영상, 시각적 데이터
-파라미터 수	매우 많음 (고차원 데이터일수록 증가)	파라미터 수 감소 (공간 공유)
-과적합 문제	데이터가 많지 않으면 과적합 발생	과적합 가능성이 상대적으로 낮음
-적용 분야	예측 모델, NLP, 금융 데이터 분석 등	이미지 분류, 객체 검출, 얼굴 인식 등
-
-결론
-	•	신경망(ANN): 일반적인 패턴 인식, 텍스트 분석 등에 사용
-	•	CNN: 이미지 및 영상 분석에 최적화된 모델로, 합성곱 연산을 활용하여 특징을 자동으로 추출하는 방식
-
-따라서 이미지 데이터 처리가 필요할 경우, 일반 신경망보다 CNN이 훨씬 더 효과적이다.
+  - 신경망(Neural Network) 개념
+    - 신경망(Neural Network, NN)은 인공 지능(AI) 및 머신러닝(ML)의 핵심 알고리즘 중 하나
+    - 인간의 뇌 구조에서 영감을 받아 만들어진 모델
+    - 뉴런(Neuron)이라는 개별 노드가 여러 층으로 연결되어 있으며, 데이터를 학습하고 패턴을 인식하는 능력을 가진다
+  - 신경망의 주요 개념
+    - 입력층(Input Layer): 데이터가 들어오는 층
+    - 은닉층(Hidden Layer): 데이터가 가중치(Weight)와 활성화 함수(Activation Function)를 거쳐 변환되는 층
+    - 출력층(Output Layer): 최종 결과를 도출하는 층
+    - 가중치(Weight)와 바이어스(Bias): 학습을 통해 조정되는 매개변수
+    - 활성화 함수(Activation Function): 뉴런이 활성화될지 결정하는 함수 (ReLU, Sigmoid, Softmax 등)
+  - CNN(Convolutional Neural Network) 개념
+    - CNN(Convolutional Neural Network)은 이미지, 영상, 시각적 데이터 분석에 특화된 신경망
+    - 일반적인 신경망(ANN, Artificial Neural Network)은 모든 뉴런이 서로 연결된 Fully Connected Layer(완전 연결 계층)로 구성되지만, CNN은 합성곱(Convolution)과 풀링(Pooling) 연산을 이용하여 특징을 추출하는 방식으로 동작
+  - CNN의 주요 구성 요소
+    - 합성곱층(Convolutional Layer)
+      - 이미지를 작은 영역(커널, 필터)으로 나누어 특징을 추출하는 계층
+      - 이미지의 경계선, 색상 패턴 등 저수준(로우레벨) 특징을 학습
+      - 필터(커널, Kernel)을 사용하여 연산 수행
+    - 풀링층(Pooling Layer)
+      - 데이터의 크기를 줄이고 계산량을 감소시키기 위한 계층
+      - 대표적인 방식: 최대 풀링(Max Pooling), 평균 풀링(Average Pooling)
+      - 불필요한 정보 제거 및 노이즈 감소 효과
+    - 완전 연결층(Fully Connected Layer, FC)
+      - CNN에서 추출한 특징을 기반으로 최종 분류(Classification) 수행
+      - 전통적인 신경망과 동일한 역할을 함 (Softmax, ReLU 등 사용)
+  - 결론
+    - 신경망(ANN): 일반적인 패턴 인식, 텍스트 분석 등에 사용
+    - CNN: 이미지 및 영상 분석에 최적화된 모델로, 합성곱 연산을 활용하여 특징을 자동으로 추출하는 방식
+    - 이미지 데이터 처리가 필요할 경우, 일반 신경망보다 CNN이 훨씬 더 효과적
 
 - Transformer 모델과 기존 RNN, LSTM 모델의 차이를 설명하시오.
 - 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)을 설명하시오.
