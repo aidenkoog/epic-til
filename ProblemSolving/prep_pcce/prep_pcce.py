@@ -25,13 +25,13 @@ answer = 0
 
 # 기존 코드의 이슈는 for i in range(1): 루프는 한번만 실행되므로 두자리씩 자르는 작업이 한번만 수행된다는 점.
 # 예: 666666
-# number: 666666 > 0 
+# 1. number: 666666 > 0 
 # >> answer에 66 추가 >> number: 6666 
-# number: 6666 > 0
+# 2. number: 6666 > 0
 # >> answer에 66 추가 >> number: 66
-# number: 66 > 0
+# 3. number: 66 > 0
 # >> answer에 66 추가 >> number: 0
-# Loop 종료
+# 4. Loop 종료
 while number > 0:
     answer += number % 100
     number //= 100
