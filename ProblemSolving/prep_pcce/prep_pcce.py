@@ -37,3 +37,21 @@ while number > 0:
     number //= 100
 
 print(answer)
+
+# 4. 병과 분류
+code = input()
+
+# code[-4:]는 문자열 code의 마지막 4글자를 가져오는 슬라이싱(slicing) 표현
+# -4:는 문자열의 끝에서 4번째 문자부터 마지막 문자까지를 선택
+last_four_words = code[-4:]
+
+if last_four_words == "_eye":
+    print("Ophthalmologyc")
+elif last_four_words == "head":
+    print("Neurosurgery")
+elif last_four_words == "infl":
+    print("Orthopedics")
+elif last_four_words == "skin":
+    print("Dermatology")
+else:
+    print("direct recommendation")
