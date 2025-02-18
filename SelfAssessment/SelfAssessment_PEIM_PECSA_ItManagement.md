@@ -407,7 +407,57 @@ Organized expected questions & answers
     - 기업은 비즈니스 목표와 조직의 IT 환경에 적합한 ITSM 프레임워크를 선택하여 운영 효율성을 극대화할 수 있다
     - 특히, 최근에는 ITIL v4와 DevOps가 결합되어 빠른 서비스 제공과 지속적인 개선을 가능하게 하는 애자일 ITSM 환경이 주목받고 있다.
 
-- IT 투자 관리(IT Investment Management)의 개념과 주요 고려 사항을 설명하시오.
+- IT 투자 관리(IT Investment Management)의 개념과 주요 고려 사항
+
+IT 투자 관리(IT Investment Management) 개념
+
+IT 투자 관리(IT Investment Management, ITIM)는 조직이 IT 자원을 효과적으로 계획, 평가, 선택, 실행, 운영 및 폐기하는 프로세스를 의미합니다. 이는 조직의 비즈니스 목표와 IT 투자가 일치하도록 조정하는 체계적인 접근 방식이며, IT 자원의 최적 활용을 통해 비용을 절감하고 성과를 극대화하는 것이 목표입니다.
+
+IT 투자 관리는 일반적으로 전략적 계획, 투자 의사결정, 성과 측정, 리스크 관리, 거버넌스 등의 요소로 구성되며, 조직의 IT 투자 효과성을 높이고 재무적 가치를 극대화하는 데 초점을 맞춥니다.
+
+주요 고려 사항
+
+IT 투자 관리를 효과적으로 수행하기 위해서는 다음과 같은 주요 사항을 고려해야 합니다.
+
+1. IT 투자 전략 및 정렬 (Strategic Alignment)
+	•	IT 투자는 조직의 비즈니스 목표 및 전략과 정렬되어야 합니다.
+	•	IT 투자 계획은 장기적인 조직의 방향성과 일관되게 수립해야 합니다.
+	•	기업의 디지털 전환(Digital Transformation) 전략과 연계하여 IT 자원을 배분해야 합니다.
+
+2. IT 투자 거버넌스 (IT Investment Governance)
+	•	IT 투자의 의사결정 과정은 투명하고 명확한 거버넌스 프레임워크에 의해 운영되어야 합니다.
+	•	IT 투자에 대한 책임(Responsibility) 및 권한(Accountability) 을 명확히 규정해야 합니다.
+	•	IT 투자 평가 및 관리 프로세스를 IT Steering Committee 등과 같은 거버넌스 조직을 통해 운영할 수 있습니다.
+
+3. IT 투자 포트폴리오 관리 (IT Portfolio Management)
+	•	IT 투자는 단일 프로젝트가 아니라 포트폴리오(Portfolio) 관점에서 관리되어야 합니다.
+	•	비즈니스 가치(Business Value), 비용(Cost), 위험(Risk), ROI(Return on Investment) 등을 고려하여 투자 우선순위를 설정해야 합니다.
+	•	CAPEX(자본 지출, Capital Expenditure) 와 OPEX(운영 지출, Operating Expenditure) 을 적절히 분배해야 합니다.
+
+4. 비용 및 성과 분석 (Cost-Benefit Analysis & Performance Evaluation)
+	•	IT 투자에 대한 비용-편익 분석(Cost-Benefit Analysis, CBA) 을 수행하여 투자 타당성을 검토해야 합니다.
+	•	투자 후 IT 시스템의 성과를 측정하고, KPI(Key Performance Indicators)를 설정하여 효과성을 평가해야 합니다.
+	•	TCO(Total Cost of Ownership, 총소유비용) 와 TVM(Total Value of Management, 총관리가치) 개념을 적용하여 장기적인 투자 효과를 분석할 필요가 있습니다.
+
+5. 리스크 관리 및 보안 (Risk Management & Security)
+	•	IT 투자와 관련된 재무적, 기술적, 운영적 리스크를 사전에 식별하고 대응 방안을 마련해야 합니다.
+	•	IT 프로젝트의 실패 가능성을 줄이기 위해 리스크 평가(Risk Assessment) 와 비상 계획(Contingency Planning) 을 수립해야 합니다.
+	•	보안(Security) 및 컴플라이언스(Compliance, 규제 준수) 요건을 준수해야 하며, 특히 금융, 의료, 공공 부문 등에서 철저한 관리가 필요합니다.
+
+6. IT 서비스 및 운영 최적화 (IT Service & Operations Optimization)
+	•	IT 투자 후 운영 및 유지보수 단계에서 서비스 품질(ITSM, IT Service Management) 을 지속적으로 개선해야 합니다.
+	•	클라우드, AI, 데이터 분석 등 최신 IT 기술을 도입하여 비즈니스 민첩성(Business Agility) 을 높여야 합니다.
+	•	ITIL(IT Infrastructure Library), COBIT(Control Objectives for Information and Related Technologies) 등의 IT 관리 프레임워크를 활용하여 IT 운영을 최적화할 수 있습니다.
+
+7. 기술 변화 및 혁신 관리 (Technology Change & Innovation Management)
+	•	급변하는 기술 환경에 대응하기 위해 IT 투자 계획을 유연하게 조정할 수 있어야 합니다.
+	•	최신 IT 트렌드(예: AI, 클라우드, 빅데이터, IoT, 블록체인 등)를 분석하고, 지속적인 혁신을 추진해야 합니다.
+	•	IT 투자를 통한 디지털 경쟁력 강화를 목표로 애자일(Agile) 방식 또는 DevOps 접근법을 활용할 수 있습니다.
+
+결론
+
+IT 투자 관리는 조직의 비즈니스 성과를 극대화하고, 비용을 최적화하며, 리스크를 최소화하는 중요한 프로세스입니다. 이를 위해 전략적 정렬, 거버넌스 구축, 포트폴리오 관리, 성과 평가, 리스크 관리, 운영 최적화, 기술 혁신 등의 요소를 종합적으로 고려해야 합니다. IT 투자의 효과적인 관리는 조직의 디지털 전환을 성공적으로 이끌고, 장기적인 경쟁력을 확보하는 핵심 요소로 작용할 것입니다.
+
 - IT 거버넌스(IT Governance)의 주요 프레임워크(COBIT, ITIL, ISO 38500)를 비교 설명하시오.
 - IT 경영에서 IT 위험 관리(IT Risk Management)의 개념과 주요 기법을 설명하시오.
 - IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)를 설명하시오.
