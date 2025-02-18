@@ -312,3 +312,16 @@
 - Not so great.
 - I’m feeling a bit under the weather.
 - Not bad, just a bit tired from work.
+- Is your back still aches? I hope you get well soon.
+- I am aching all over.
+- Let's have it in some other time.
+- Thank you for the heads up. You take care. 
+- Thank you so much. I feel much better now. My back is still in pain, but much more tolerable now than last night. 
+- How are you? I hope you're good. Just let me know what happened
+- Talent is an innate, natural ability that a person is born with. 
+- It's a gift that exists independently of the person's effort or desire. 
+- Conversely, skill is acquired through learning and experience. 
+- It's developed over time through dedication, education, and practice.
+- Just let me know within the day your desired topic and then I'm gonna send you the list of the questions.
+- But still. I will try my best to look for the easiest thing.
+- I think it would be better to keep the class time the same. I'll try my best again
