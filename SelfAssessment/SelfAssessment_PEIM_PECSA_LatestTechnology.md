@@ -343,7 +343,125 @@ Organized expected questions & answers
     - CNN: 이미지 및 영상 분석에 최적화된 모델로, 합성곱 연산을 활용하여 특징을 자동으로 추출하는 방식
     - 이미지 데이터 처리가 필요할 경우, 일반 신경망보다 CNN이 훨씬 더 효과적
 
-- Transformer 모델과 기존 RNN, LSTM 모델의 차이를 설명하시오.
+- Transformer 모델과 기존 RNN, LSTM 모델의 차이
+
+Transformer 모델과 기존 RNN, LSTM 모델의 차이점
+
+딥러닝 기반의 자연어 처리(NLP)에서는 RNN(Recurrent Neural Network), LSTM(Long Short-Term Memory), Transformer가 주로 사용됩니다. Transformer 모델은 기존의 RNN, LSTM 모델의 한계를 극복하고 성능을 크게 향상시켰습니다. 각 모델의 차이를 구조, 성능, 학습 효율성 측면에서 비교해 보겠습니다.
+
+1. RNN(Recurrent Neural Network)
+
+개념
+	•	RNN은 **순차적인 데이터(Sequential Data)**를 처리하기 위한 신경망 구조로, 이전 상태(hidden state)를 다음 단계로 전달하는 방식으로 동작합니다.
+	•	입력 데이터가 시간 순서대로 처리되며, 시퀀스 내에서의 문맥(Context)를 유지할 수 있습니다.
+
+특징
+
+✅ 순차적 데이터(텍스트, 음성, 시계열 데이터) 처리에 적합
+✅ 이전 시점 정보를 기억하여 문맥(Context)을 반영
+❌ 긴 문장을 처리할 때 ‘장기 의존성 문제(Long-Term Dependency)’ 발생
+❌ 순차적 연산으로 병렬 처리 불가능 → 학습 속도가 느림
+
+구조
+	•	기본적으로 Hidden State를 활용하여 시퀀스를 처리:
+
+h_t = f(W \cdot h_{t-1} + U \cdot x_t)
+
+	•	 h_t  : 현재 시점의 은닉 상태
+	•	 x_t  : 현재 시점의 입력
+	•	 W, U  : 가중치 행렬
+
+한계
+	•	Vanishing Gradient(기울기 소실) 문제: 역전파(Backpropagation) 과정에서 시간이 길어질수록 초기 정보가 사라짐.
+	•	병렬 처리 불가능: 데이터를 한 번에 처리하는 것이 아니라, 이전 계산 결과를 다음 단계에 넘겨주므로 순차적으로만 학습 가능.
+
+2. LSTM(Long Short-Term Memory)
+
+개념
+	•	RNN의 **장기 의존성 문제(Long-Term Dependency Problem)**를 해결하기 위해 등장한 모델.
+	•	RNN 구조를 개선하여 Cell State(셀 상태)와 게이트(Gate) 메커니즘을 도입해 중요한 정보를 장기간 보존할 수 있도록 설계됨.
+
+특징
+
+✅ 장기 의존성 문제 해결
+✅ Forget Gate(망각 게이트), Input Gate(입력 게이트), Output Gate(출력 게이트)를 통해 정보 유지 및 조절
+❌ 순차적인 연산 구조로 인해 병렬 처리 불가능 → 학습 속도 느림
+❌ 시퀀스 길이가 길어질수록 계산량 증가
+
+구조
+
+LSTM은 다음과 같은 3가지 게이트(Gate) 구조로 동작:
+	1.	Forget Gate(망각 게이트): 불필요한 정보를 삭제
+	2.	Input Gate(입력 게이트): 새로운 정보를 셀 상태에 추가
+	3.	Output Gate(출력 게이트): 다음 시점으로 전달할 정보 선택
+
+
+C_t = f_t \cdot C_{t-1} + i_t \cdot \tilde{C}_t
+
+	•	 C_t  : 현재 셀 상태
+	•	 f_t  : Forget Gate의 결과
+	•	 i_t  : Input Gate의 결과
+	•	 \tilde{C}_t  : 새로운 입력 정보
+
+한계
+	•	순차적 연산으로 인해 병렬 처리 불가능
+	•	문장이 길어지면 계산량 증가
+	•	Transformer 대비 학습 속도가 느림
+
+3. Transformer 모델
+
+개념
+	•	Google이 발표한 “Attention Is All You Need”(2017) 논문에서 등장한 모델.
+	•	Self-Attention(자기 어텐션) 메커니즘을 사용하여 문장 내 단어 간 관계를 효율적으로 학습함.
+	•	RNN이나 LSTM과 달리 순차적 연산 없이 병렬 연산 가능하여 학습 속도가 빠름.
+
+특징
+
+✅ Self-Attention을 통해 문맥(Context) 정보 유지 및 장기 의존성 해결
+✅ 병렬 처리 가능 → GPU 가속을 극대화하여 학습 속도 빠름
+✅ 긴 문장에서도 정보 손실 없이 전역적인(Context) 정보 활용 가능
+❌ 연산량 증가 → 메모리 사용량이 많음
+
+구조
+
+Transformer는 Encoder-Decoder 구조로 구성됨.
+	1.	Self-Attention: 문장 내 모든 단어가 서로를 참조하여 의미를 이해.
+	2.	Multi-Head Attention: 여러 개의 Attention을 병렬적으로 실행하여 다양한 문맥을 학습.
+	3.	Position Encoding: RNN처럼 순서를 따르지 않으므로, 위치 정보를 추가해야 함.
+
+
+Attention(Q, K, V) = softmax \left( \frac{QK^T}{\sqrt{d_k}} \right) V
+
+	•	 Q, K, V  : Query, Key, Value 벡터
+	•	 d_k  : 차원의 크기
+
+장점
+	•	병렬 처리 가능 → 학습 속도가 빠름
+	•	Self-Attention으로 문맥을 전역적으로 이해 가능
+	•	긴 문장에서도 정보 손실이 적음
+
+한계
+	•	연산량이 많아 메모리 사용량이 큼
+	•	훈련 데이터가 많아야 효과적
+
+4. Transformer vs RNN, LSTM 비교 정리
+
+특징	RNN	LSTM	Transformer
+문맥 정보 유지	짧은 문장에서 가능, 긴 문장에서는 어려움	장기 의존성 해결 가능	Self-Attention으로 문맥을 완전히 반영
+병렬 처리	불가능 (순차적 처리)	불가능 (순차적 처리)	가능 (Self-Attention으로 한 번에 처리)
+연산 속도	느림	느림	빠름 (병렬 처리 가능)
+학습 효율성	기울기 소실 문제 발생	기울기 소실 해결, 하지만 계산량 증가	학습 속도 빠름, 하지만 메모리 사용량 많음
+문장 길이 대응력	짧은 문장만 효과적	긴 문장도 가능	긴 문장에서도 효과적
+적용 예시	음성 인식, 챗봇	번역, 감정 분석	GPT, BERT, ChatGPT
+
+5. 결론
+	•	RNN은 순차적 데이터를 처리하는 기본 구조이지만, 장기 의존성 문제와 병렬 처리 불가능한 한계가 있음.
+	•	LSTM은 RNN의 한계를 보완하여 장기 의존성을 해결했지만, 여전히 병렬 처리 불가능.
+	•	Transformer는 Self-Attention 메커니즘을 사용하여 문맥을 더 효과적으로 이해하고, 병렬 처리 가능하여 학습 속도가 훨씬 빠름.
+	•	최근 NLP 모델(GPT, BERT, T5 등)은 대부분 Transformer 기반으로 발전하고 있음.
+
+결론적으로, RNN과 LSTM은 특정 시퀀스 기반 작업(음성 인식, 시계열 분석)에서 여전히 유용하지만, 자연어 처리에서는 Transformer가 가장 우수한 성능을 보임.
+
 - 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)을 설명하시오.
 - AI의 윤리적 문제(AI Bias, Explainability, Privacy)를 설명하시오.
 - AutoML(Auto Machine Learning)의 개념과 주요 프레임워크(Google AutoML, H2O.ai 등)를 설명하시오.
