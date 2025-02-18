@@ -2614,12 +2614,12 @@ Organized expected questions & answers
         - 문자열 “banana”의 접미사 배열
         - 모든 접미사를 추출하고 사전순으로 정렬
             - 접미사, 인덱스
-            - a	5
-            - ana	3
-            - anana	1
-            - banana	0
-            - na	4
-            - nana	2
+            - a	        5
+            - ana	    3
+            - anana	    1
+            - banana    0
+            - na	    4
+            - nana	    2
         - 접미사 배열 (Suffix Array): [5, 3, 1, 0, 4, 2]
     - 접미사 배열의 생성 방법
 
