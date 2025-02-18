@@ -2622,153 +2622,103 @@ Organized expected questions & answers
             - nana	    2
         - 접미사 배열 (Suffix Array): [5, 3, 1, 0, 4, 2]
     - 접미사 배열의 생성 방법
-
-(1) O(N log² N) - 단순 정렬 방식
-	1.	문자열의 모든 접미사 생성
-	2.	사전순으로 정렬
-	3.	해당 접미사의 시작 인덱스를 저장
-
-def build_suffix_array(s):
-    suffixes = [(s[i:], i) for i in range(len(s))]  # (접미사, 시작 인덱스)
-    suffixes.sort()  # 사전순 정렬
-    return [suffix[1] for suffix in suffixes]  # 정렬된 접미사의 인덱스 반환
-
-# 사용 예제
-text = "banana"
-suffix_array = build_suffix_array(text)
-print("접미사 배열:", suffix_array)  # [5, 3, 1, 0, 4, 2]
-
-(2) O(N log N) - 맨버-마이어스(Manber-Myers) 알고리즘
-	•	두 배씩 증가하는 길이 단위로 비교하여 빠르게 정렬
-	•	**O(N log N)**에 접미사 배열을 생성할 수 있음
-
-(3) O(N) - SA-IS 알고리즘
-	•	가장 효율적인 알고리즘으로, **O(N)**에 접미사 배열을 구성할 수 있음.
-	•	특히 **긴 문자열(수백만 개 이상)**에서 유용함.
-
-4. 접미사 배열의 활용
-
-(1) 문자열 검색 (Substring Search)
-	•	특정 패턴이 문자열 내에 존재하는지 빠르게 찾을 수 있음.
-	•	이진 탐색을 활용하여 O(M log N)으로 검색 가능 (M: 패턴 길이).
-
-(2) 사전순 정렬 (Lexicographic Sorting)
-	•	문자열의 모든 부분 문자열을 사전순으로 정렬하는 문제 해결에 사용.
-
-(3) 가장 긴 공통 접두사(LCP, Longest Common Prefix)
-	•	접미사 배열과 함께 LCP 배열을 사용하면, 문자열 내에서 가장 긴 반복되는 부분 문자열을 찾을 수 있음.
-
-(4) 데이터 압축
-	•	Burrows-Wheeler Transform (BWT)에서 중요한 역할을 함.
-	•	BWT는 ZIP, bzip2 등의 압축 알고리즘에서 사용됨.
-
-(5) 유전자 서열 분석
-	•	DNA 서열 분석에서 유사한 서열을 찾는 데 활용됨.
-
-5. 접미사 배열 vs 접미사 트리
-
-비교 항목	접미사 배열 (Suffix Array)	접미사 트리 (Suffix Tree)
-공간 복잡도	O(N)	O(N) (하지만 더 많은 공간 필요)
-구현 난이도	상대적으로 쉬움	복잡함
-문자열 검색 속도	O(M log N) (이진 탐색 활용)	O(M)
-활용 분야	검색, 정렬, LCP 계산	빠른 문자열 검색, 중복 패턴 분석
-
-⇒ 접미사 트리는 더 빠르지만, 공간 복잡도가 크기 때문에 접미사 배열이 더 실용적인 경우가 많음.
-
-6. 정리
-	•	**접미사 배열(Suffix Array)**은 문자열 내 모든 접미사를 정렬한 후, 해당 접미사의 시작 위치를 저장하는 배열.
-	•	빠른 문자열 검색, LCP 계산, 데이터 압축, 유전자 분석 등에 활용.
-	•	생성 방법에는 단순 정렬(O(N log² N)), 맨버-마이어스(O(N log N)), SA-IS(O(N)) 등이 있음.
-	•	접미사 트리보다 메모리 사용량이 적고, 문자열 처리에 실용적으로 사용됨.
-
-즉, 대량의 텍스트 검색 및 유전자 분석, 압축 알고리즘에서 필수적인 자료구조이다!
-
+        - O(N log² N) - 단순 정렬 방식
+	        - 문자열의 모든 접미사 생성
+	        - 사전순으로 정렬
+	        - 해당 접미사의 시작 인덱스를 저장
+        - O(N log N) - 맨버-마이어스(Manber-Myers) 알고리즘
+	        - 두 배씩 증가하는 길이 단위로 비교하여 빠르게 정렬
+	        - O(N log N)에 접미사 배열을 생성할 수 있음
+        - O(N) - SA-IS 알고리즘
+	        - 가장 효율적인 알고리즘으로, O(N)에 접미사 배열을 구성할 수 있음
+	        - 특히 긴 문자열(수백만 개 이상)에서 유용함
+    - 접미사 배열의 활용
+        - 문자열 검색 (Substring Search)
+            - 특정 패턴이 문자열 내에 존재하는지 빠르게 찾을 수 있음.
+            - 이진 탐색을 활용하여 O(M log N)으로 검색 가능 (M: 패턴 길이).
+        - 사전순 정렬 (Lexicographic Sorting)
+            - 문자열의 모든 부분 문자열을 사전순으로 정렬하는 문제 해결에 사용.
+        - 가장 긴 공통 접두사(LCP, Longest Common Prefix)
+            - 접미사 배열과 함께 LCP 배열을 사용하면, 문자열 내에서 가장 긴 반복되는 부분 문자열을 찾을 수 있음.
+        - 데이터 압축
+            - Burrows-Wheeler Transform (BWT)에서 중요한 역할을 함
+            - BWT는 ZIP, bzip2 등의 압축 알고리즘에서 사용됨
+        - 유전자 서열 분석
+            - DNA 서열 분석에서 유사한 서열을 찾는 데 활용됨.
+    - 접미사 트리, 접미사 배열
+        - 접미사 트리는 더 빠르지만, 공간 복잡도가 크기 때문에 접미사 배열이 더 실용적인 경우가 많음
+    - 결론
+	    - 접미사 배열(Suffix Array)은 문자열 내 모든 접미사를 정렬한 후, 해당 접미사의 시작 위치를 저장하는 배열.
+	    - 빠른 문자열 검색, LCP 계산, 데이터 압축, 유전자 분석 등에 활용.
+	    - 생성 방법에는 단순 정렬(O(N log² N)), 맨버-마이어스(O(N log N)), SA-IS(O(N)) 등이 있음.
+	    - 접미사 트리보다 메모리 사용량이 적고, 문자열 처리에 실용적으로 사용됨.
+        - 즉, 대량의 텍스트 검색 및 유전자 분석, 압축 알고리즘에서 필수적인 자료구조
 
 - 애너그램(Anagram) 검사 알고리즘을 구현하는 방법
+    - 애너그램(Anagram) 검사 알고리즘 개요
+        - 두 개의 문자열이 같은 문자들로 구성되었지만, 순서만 다를 경우를 의미
+        - 즉, 문자열을 정렬하거나 문자 개수를 비교하면 애너그램인지 확인할 수 있음
+    - 애너그램 검사 방법
+        - 방법 1: 정렬(Sorting) 활용 (O(N log N))
+            - 개요
+	            - 두 문자열을 알파벳 순으로 정렬한 후 비교.
+	            - 정렬한 결과가 같다면 애너그램.
+            - 구현 (Python)
+                ```python
+                def is_anagram_sort(s1, s2):
+                    return sorted(s1) == sorted(s2)
+                print(is_anagram_sort("listen", "silent"))  # True
+                print(is_anagram_sort("hello", "world"))    # False
+                ```
+            - 장단점
+                - 장점: 간단하고 직관적
+                - 단점: 정렬로 인해 O(N log N)의 시간 복잡도를 가짐
+        - 방법 2: 해시맵(딕셔너리) 활용 (O(N))
+            - 개요
+                - 각 문자의 개수를 카운트하여 비교.
+                - Python의 collections.Counter 사용 가능.
+            - 구현 (Python)
+                ```python
+                from collections import Counter
 
-애너그램(Anagram) 검사 알고리즘
+                def is_anagram_counter(s1, s2):
+                    return Counter(s1) == Counter(s2)
+                ```
+            - 장단점
+                - 장점: 빠름 (O(N))
+                - 단점: 공간을 추가로 사용해야 함
+        - 방법 3: 배열 활용 (O(N))
+	        - 개요
+                - 알파벳 개수를 저장하는 리스트(길이 26)를 사용하여 각 문자의 등장 횟수를 기록.
+                - 두 문자열의 개수를 비교.
+            - 구현 (Python)
+                ```python
+                def is_anagram_array(s1, s2):
+                    if len(s1) != len(s2):
+                        return False
+                    
+                    count = [0] * 26  # 영어 소문자 기준
+                    
+                    for c1, c2 in zip(s1, s2):
+                        count[ord(c1) - ord('a')] += 1
+                        count[ord(c2) - ord('a')] -= 1
+                    
+                    return all(x == 0 for x in count)
+                ```
+            - 장단점
+                - 장점: O(N)으로 매우 빠름, 추가 공간 사용이 적음
+                - 단점: 영어 소문자(a~z)만 처리 가능 (유니코드 확장 시 비효율적)
+    - 애너그램 검사 알고리즘 구현 방법에 대한 결론
+        - 정렬 사용: 시간-O(N log N), 공간-O(1), 직관적이지만 느림
+        - 딕셔너리 사용: 시간-O(N), 공간-O(N), 빠르지만 추가 공간 필요
+        - 배열 사용: 시간-O(N), 공간-O(1), 가장 빠름, 영어 소문자에 최적화
+        - 문자열이 길다면 Counter나 배열 활용 방법이 가장 효율적
+        - 문자열에 특수 문자, 대소문자가 포함될 경우 Counter 방법이 유리
 
-**애너그램(Anagram)**이란 두 개의 문자열이 같은 문자들로 구성되었지만, 순서만 다를 경우를 의미한다.
-즉, 문자열을 정렬하거나 문자 개수를 비교하면 애너그램인지 확인할 수 있다.
-
-1. 애너그램 검사 방법
-
-방법 1: 정렬(Sorting) 활용 (O(N log N))
-	1.	두 문자열을 알파벳 순으로 정렬한 후 비교.
-	2.	정렬한 결과가 같다면 애너그램.
-
-구현 (Python)
-
-def is_anagram_sort(s1, s2):
-    return sorted(s1) == sorted(s2)
-
-# 테스트
-print(is_anagram_sort("listen", "silent"))  # True
-print(is_anagram_sort("hello", "world"))    # False
-
-✅ 장점: 간단하고 직관적
-❌ 단점: 정렬로 인해 **O(N log N)**의 시간 복잡도를 가짐.
-
-방법 2: 해시맵(딕셔너리) 활용 (O(N))
-	1.	각 문자의 개수를 카운트하여 비교.
-	2.	Python의 collections.Counter 사용 가능.
-
-구현 (Python)
-
-from collections import Counter
-
-def is_anagram_counter(s1, s2):
-    return Counter(s1) == Counter(s2)
-
-# 테스트
-print(is_anagram_counter("listen", "silent"))  # True
-print(is_anagram_counter("hello", "world"))    # False
-
-✅ 장점: 빠름 (O(N))
-❌ 단점: 공간을 추가로 사용해야 함.
-
-방법 3: 배열 활용 (O(N))
-	1.	알파벳 개수를 저장하는 리스트(길이 26)를 사용하여 각 문자의 등장 횟수를 기록.
-	2.	두 문자열의 개수를 비교.
-
-구현 (Python)
-
-def is_anagram_array(s1, s2):
-    if len(s1) != len(s2):
-        return False
-    
-    count = [0] * 26  # 영어 소문자 기준
-    
-    for c1, c2 in zip(s1, s2):
-        count[ord(c1) - ord('a')] += 1
-        count[ord(c2) - ord('a')] -= 1
-    
-    return all(x == 0 for x in count)
-
-# 테스트
-print(is_anagram_array("listen", "silent"))  # True
-print(is_anagram_array("hello", "world"))    # False
-
-✅ 장점: O(N)으로 매우 빠름, 추가 공간 사용이 적음
-❌ 단점: 영어 소문자(a~z)만 처리 가능 (유니코드 확장 시 비효율적)
-
-2. 정리
-
-방법	시간 복잡도	공간 복잡도	특징
-정렬 사용	O(N log N)	O(1)	직관적이지만 느림
-딕셔너리 사용	O(N)	O(N)	빠르지만 추가 공간 필요
-배열 사용	O(N)	O(1)	가장 빠름, 영어 소문자에 최적화
-
-✅ 문자열이 길다면 Counter나 배열 활용 방법이 가장 효율적!
-✅ 문자열에 특수 문자, 대소문자가 포함될 경우 Counter 방법이 유리!
-
-- A* (A-Star) 알고리즘의 개념과 활용 사례를 설명하시오.
-
-A (A-Star) 알고리즘 개념과 활용 사례*
-
-1. A 알고리즘 개념*
-
-*A 알고리즘(A-Star Algorithm)**은 최단 경로 탐색 알고리즘 중 하나로, 다익스트라(Dijkstra) 알고리즘과 휴리스틱(Heuristic) 탐색을 결합하여 더 빠르고 효율적인 경로 탐색을 수행하는 알고리즘이다.
+- A* (A-Star) 알고리즘의 개념과 활용 사례
+    - A 알고리즘 개념
+        - A 알고리즘(A-Star Algorithm)은 최단 경로 탐색 알고리즘 중 하나
+        - 다익스트라(Dijkstra) 알고리즘과 휴리스틱(Heuristic) 탐색을 결합하여 더 빠르고 효율적인 경로 탐색을 수행하는 알고리즘
 
 A* 알고리즘은 두 가지 비용을 조합하여 최적의 경로를 탐색한다:
 	•	g(n): 시작 지점에서 현재 노드까지의 실제 비용 (경로 비용)
