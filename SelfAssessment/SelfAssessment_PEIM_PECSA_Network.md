@@ -341,71 +341,50 @@ Organized expected questions & answers
     - OSI 7계층 모델을 이해하면 네트워크 패킷 흐름을 분석하고 트러블슈팅을 수행하는 데 매우 유용하다.
 
 - 데이터링크 계층에서 사용되는 MAC 주소(Media Access Control Address)의 개념과 역할
+  - MAC 주소(Media Access Control Address) 개요
+    - MAC 주소의 개념
+      - 네트워크 인터페이스 카드(NIC: Network Interface Card)에 할당된 고유한 물리적 주소
+	    - 48비트(6바이트) 길이의 이진수(Binary) 주소이며, 16진수(Hexadecimal)로 표기됨
+        - 예: 00:1A:2B:3C:4D:5E 또는 00-1A-2B-3C-4D-5E
+	    - 데이터링크 계층(Layer 2)에서 장치 간 통신을 위해 사용됨.
+	    - OSI 7계층 모델의 2계층(데이터링크 계층)에서 동작하며, 네트워크 내에서 장치를 식별하는 역할을 함.
+	    - NIC(네트워크 카드) 제조사가 공장에서 할당하며, 전 세계에서 유일한 값을 가짐
 
-MAC 주소(Media Access Control Address)의 개념과 역할
+  - MAC 주소의 역할
+    - 개요: MAC 주소는 네트워크에서 데이터를 올바른 장치로 전달하는 데 중요한 역할
+    - 주요 역할
+      - 네트워크 장치 식별
+        - MAC 주소는 네트워크 내에서 각 장치를 유일하게 식별하는 역할
+        - 같은 네트워크(LAN) 내에서 패킷을 전송할 대상 장치를 결정할 때 사용됨.
+      - 데이터 프레임 전송
+        - 데이터링크 계층에서 이더넷 프레임(Ethernet Frame)을 목적지 MAC 주소를 기반으로 전달.
+        - 스위치(Switch)는 MAC 주소 테이블을 이용하여 프레임을 올바른 장치로 전송.
+      - ARP(Address Resolution Protocol)와의 관계
+        - IP 주소를 기반으로 통신할 때, ARP 프로토콜을 이용해 IP 주소에 해당하는 MAC 주소를 찾음.
+        - 예: 192.168.1.10의 MAC 주소를 찾기 위해 ARP 요청을 보내고 응답을 받음.
+      - 유니캐스트, 브로드캐스트, 멀티캐스트 통신
+        - 유니캐스트(Unicast): 특정 장치의 MAC 주소를 지정하여 1:1 통신.
+        - 브로드캐스트(Broadcast): 네트워크의 모든 장치(FF:FF:FF:FF:FF:FF)에게 전송.
+        - 멀티캐스트(Multicast): 특정 그룹의 MAC 주소를 이용해 다수의 장치에게 전송.
+    - MAC 주소의 구조
+      - OUI(Organizationally Unique Identifier) + UAA(Device Identifier)로 구성
+      
+    - 참고
+      - OUI: IEEE가 네트워크 장치 제조업체(예: Intel, Cisco, Samsung 등)에 할당.
+      - UAA: 각 제조업체가 자체적으로 장치별 고유한 값 할당.
 
-1. MAC 주소의 개념
+    - MAC 주소를 사용하는 네트워크 장비
+	    - 스위치(Switch)
+	      - 스위치는 MAC 주소 테이블(MAC Address Table, CAM Table)을 사용하여 목적지 MAC 주소에 따라 데이터를 포트로 전달
+      - 라우터(Router)
+	      - 라우터는 MAC 주소를 사용하여 직접 연결된 네트워크에서 패킷을 전달하지만, 다른 네트워크로 이동할 때는 IP 주소 기반으로 경로 지정.
+	    - 네트워크 카드(NIC, Network Interface Card)
+	      - NIC는 각 장치에 고유한 MAC 주소를 제공하고, 물리적인 네트워크 연결을 담당.
 
-MAC(Media Access Control) 주소는 **네트워크 인터페이스 카드(NIC: Network Interface Card)**에 할당된 고유한 물리적 주소이다.
-	•	48비트(6바이트) 길이의 이진수(Binary) 주소이며, 16진수(Hexadecimal)로 표기됨.
-예: 00:1A:2B:3C:4D:5E 또는 00-1A-2B-3C-4D-5E
-	•	데이터링크 계층(Layer 2)에서 장치 간 통신을 위해 사용됨.
-	•	**OSI 7계층 모델의 2계층(데이터링크 계층)**에서 동작하며, 네트워크 내에서 장치를 식별하는 역할을 함.
-	•	NIC(네트워크 카드) 제조사가 공장에서 할당하며, 전 세계에서 유일한 값을 가짐.
-
-2. MAC 주소의 역할
-
-MAC 주소는 네트워크에서 데이터를 올바른 장치로 전달하는 데 중요한 역할을 한다.
-
-1) 네트워크 장치 식별
-	•	MAC 주소는 네트워크 내에서 각 장치를 유일하게 식별하는 역할을 한다.
-	•	같은 네트워크(LAN) 내에서 패킷을 전송할 대상 장치를 결정할 때 사용됨.
-
-2) 데이터 프레임 전송
-	•	데이터링크 계층에서 **이더넷 프레임(Ethernet Frame)**을 목적지 MAC 주소를 기반으로 전달.
-	•	스위치(Switch)는 MAC 주소 테이블을 이용하여 프레임을 올바른 장치로 전송.
-
-3) ARP(Address Resolution Protocol)와의 관계
-	•	IP 주소를 기반으로 통신할 때, ARP 프로토콜을 이용해 IP 주소에 해당하는 MAC 주소를 찾음.
-	•	예: 192.168.1.10의 MAC 주소를 찾기 위해 ARP 요청을 보내고 응답을 받음.
-
-4) 유니캐스트, 브로드캐스트, 멀티캐스트 통신
-	•	유니캐스트(Unicast): 특정 장치의 MAC 주소를 지정하여 1:1 통신.
-	•	브로드캐스트(Broadcast): 네트워크의 모든 장치(FF:FF:FF:FF:FF:FF)에게 전송.
-	•	멀티캐스트(Multicast): 특정 그룹의 MAC 주소를 이용해 다수의 장치에게 전송.
-
-3. MAC 주소의 구조
-
-MAC 주소는 **OUI(Organizationally Unique Identifier) + UAA(Device Identifier)**로 구성됨.
-
-구분	설명	비트 수
-OUI (Organizationally Unique Identifier)	제조사 식별자	24비트 (앞 3바이트)
-UAA (Universal Administered Address)	장치별 고유번호	24비트 (뒤 3바이트)
-
-	•	OUI: IEEE가 네트워크 장치 제조업체(예: Intel, Cisco, Samsung 등)에 할당.
-	•	UAA: 각 제조업체가 자체적으로 장치별 고유한 값 할당.
-
-4. MAC 주소 vs IP 주소 비교
-
-구분	MAC 주소	IP 주소
-계층	데이터링크 계층 (2계층)	네트워크 계층 (3계층)
-역할	네트워크 내 장치 식별	네트워크 간 장치 식별
-변경 여부	변경 불가 (네트워크 카드에 고정)	변경 가능 (DHCP 또는 수동 설정)
-길이	48비트 (6바이트)	IPv4: 32비트, IPv6: 128비트
-표기법	16진수 (00:1A:2B:3C:4D:5E)	IPv4 (192.168.1.1), IPv6 (2001:db8::1)
-
-5. MAC 주소를 사용하는 네트워크 장비
-	1.	스위치(Switch)
-	•	스위치는 MAC 주소 테이블(MAC Address Table, CAM Table)을 사용하여 목적지 MAC 주소에 따라 데이터를 포트로 전달.
-	2.	라우터(Router)
-	•	라우터는 MAC 주소를 사용하여 직접 연결된 네트워크에서 패킷을 전달하지만, 다른 네트워크로 이동할 때는 IP 주소 기반으로 경로 지정.
-	3.	네트워크 카드(NIC, Network Interface Card)
-	•	NIC는 각 장치에 고유한 MAC 주소를 제공하고, 물리적인 네트워크 연결을 담당.
-
-6. 결론
-	•	MAC 주소는 네트워크에서 각 장치를 고유하게 식별하는 역할을 하며, OSI 2계층(데이터링크 계층)에서 사용됨.
-	•	스위치는 MAC 주소를 기반으로 프레임을 전달하며, ARP를 이용해 IP 주소와 MAC 주소를 매핑함.
-	•	MAC 주소는 네트워크에서 데이터를 정확한 목적지로 전송하는 핵심 역할을 하며, IP 주소와 함께 사용되어 원활한 통신을 가능하게 함.
+  - 결론
+	  - MAC 주소는 네트워크에서 각 장치를 고유하게 식별하는 역할을 하며, OSI 2계층(데이터링크 계층)에서 사용됨.
+	  - 스위치는 MAC 주소를 기반으로 프레임을 전달하며, ARP를 이용해 IP 주소와 MAC 주소를 매핑함.
+	  - MAC 주소는 네트워크에서 데이터를 정확한 목적지로 전송하는 핵심 역할을 하며, IP 주소와 함께 사용되어 원활한 통신을 가능하게 함.
 
 - 네트워크 계층에서 사용되는 IP 주소(IPv4, IPv6)의 개념과 차이를 설명하시오.
 - 전송 계층(Transport Layer)에서 TCP와 UDP의 차이점을 설명하시오.
