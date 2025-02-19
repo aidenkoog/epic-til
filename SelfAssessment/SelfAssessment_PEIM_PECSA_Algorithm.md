@@ -2955,51 +2955,49 @@ Organized expected questions & answers
 	        -캐시(Cache) 구현 (LRU 캐시, 가장 오래된 데이터 삭제)
 
 - 우선순위 큐(Priority Queue)의 개념과 구현 방식(힙 구조 포함)
+    - 우선순위 큐 개념
+	    - 일반적인 큐(Queue)는 FIFO 방식으로 동작하지만, 우선순위 큐(Priority Queue)는 높은 우선순위를 가진 원소가 먼저 나오는 큐
+	    - 우선순위를 기준으로 자동 정렬됨 (최소/최대값을 빠르게 찾을 수 있음)
 
-우선순위 큐(Priority Queue) 개념과 구현 방식
+    - 우선순위 큐 구현 방식
+	    - 리스트(List) 기반
+	        - 삽입: O(1) (맨 뒤에 추가)
+	        - 삭제: O(N) (최대/최소값을 찾기 위해 정렬 필요)
+	    - 정렬된 리스트(Sorted List) 기반
+	        - 삽입: O(N) (올바른 위치에 삽입)
+	        - 삭제: O(1) (가장 앞의 원소 제거)
+        - 힙(Heap) 기반 (가장 효율적)
+	        - 삽입: O(log N)
+	        - 삭제: O(log N)
 
-2.1 우선순위 큐 개념
-	•	일반적인 큐(Queue)는 FIFO 방식으로 동작하지만, 우선순위 큐(Priority Queue)는 높은 우선순위를 가진 원소가 먼저 나오는 큐.
-	•	우선순위를 기준으로 자동 정렬됨 (최소/최대값을 빠르게 찾을 수 있음).
+    - 힙(Heap) 구조
+	    - 완전 이진 트리(Complete Binary Tree) 기반의 자료구조.
+	    - 최소 힙(Min Heap): 루트가 가장 작은 값
+	    - 최대 힙(Max Heap): 루트가 가장 큰 값
 
-2.2 우선순위 큐 구현 방식
-	1.	리스트(List) 기반
-	•	삽입: O(1) (맨 뒤에 추가)
-	•	삭제: O(N) (최대/최소값을 찾기 위해 정렬 필요)
-	2.	정렬된 리스트(Sorted List) 기반
-	•	삽입: O(N) (올바른 위치에 삽입)
-	•	삭제: O(1) (가장 앞의 원소 제거)
-	3.	힙(Heap) 기반 (가장 효율적)
-	•	삽입: O(log N)
-	•	삭제: O(log N)
+    - 우선순위 큐 구현 (heapq 사용)
+        ```python
+        import heapq
 
-2.3 힙(Heap) 구조
-	•	완전 이진 트리(Complete Binary Tree) 기반의 자료구조.
-	•	최소 힙(Min Heap): 루트가 가장 작은 값
-	•	최대 힙(Max Heap): 루트가 가장 큰 값
+        pq = []
+        heapq.heappush(pq, 3)  # 삽입 (O(log N))
+        heapq.heappush(pq, 1)  
+        heapq.heappush(pq, 2)
+        print(heapq.heappop(pq))  # 가장 작은 값(1) 출력 후 삭제
+        ```
 
-2.4 Python 우선순위 큐 구현 (heapq 사용)
+    - 최대 힙 구현 (Python에서는 기본적으로 최소 힙이므로 음수 값을 활용)
+        ```python
+        heapq.heappush(pq, -3)
+        heapq.heappush(pq, -1)
+        heapq.heappush(pq, -2)
+        print(-heapq.heappop(pq))  # 가장 큰 값(3) 출력 후 삭제
+        ```
 
-import heapq
-
-pq = []
-heapq.heappush(pq, 3)  # 삽입 (O(log N))
-heapq.heappush(pq, 1)  
-heapq.heappush(pq, 2)
-print(heapq.heappop(pq))  # 가장 작은 값(1) 출력 후 삭제
-
-✅ 최대 힙 구현 (Python에서는 기본적으로 최소 힙이므로 음수 값을 활용)
-
-heapq.heappush(pq, -3)
-heapq.heappush(pq, -1)
-heapq.heappush(pq, -2)
-print(-heapq.heappop(pq))  # 가장 큰 값(3) 출력 후 삭제
-
-2.5 우선순위 큐 활용 사례
-
-✅ 네트워크 패킷 스케줄링 (우선순위가 높은 데이터 먼저 처리)
-✅ 다익스트라(Dijkstra) 알고리즘 (최단 경로 탐색)
-✅ 작업 스케줄링 (CPU 프로세스 우선순위 처리)
+    - 우선순위 큐 활용 사례
+        - 네트워크 패킷 스케줄링 (우선순위가 높은 데이터 먼저 처리)
+        - 다익스트라(Dijkstra) 알고리즘 (최단 경로 탐색)
+        - 작업 스케줄링 (CPU 프로세스 우선순위 처리)
 
 - 트리(Tree)와 그래프(Graph)
 
