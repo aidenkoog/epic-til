@@ -2792,130 +2792,97 @@ Organized expected questions & answers
         - 현실 세계에서 최적화 문제를 해결할 때, 문제 유형에 따라 적절한 알고리즘을 선택해야 함.
 
 - 트리(Tree) 자료구조에서 DFS와 BFS의 차이점
+    - 개요
+        - 트리(Tree)에서 DFS(Depth-First Search, 깊이 우선 탐색)과 BFS(Breadth-First Search, 너비 우선 탐색)은 노드를 탐색하는 두 가지 대표적인 방법
+        - 두 알고리즘은 트리와 그래프에서 사용됨
+        - 탐색 방식과 시간/공간 복잡도 측면에서 차이 존재
+    
+    - DFS(깊이 우선 탐색, Depth-First Search)
+        - 개념
+	        - DFS는 트리의 루트(root)에서 시작하여 한 방향으로 끝까지 탐색한 후, 다시 돌아와 다른 경로를 탐색하는 방식.
+	        - 스택(Stack) 또는 재귀(Recursion)를 사용하여 구현 가능.
 
-트리(Tree) 자료구조에서 DFS와 BFS의 차이점
+        - 동작 방식
+	        - 현재 노드를 방문하고 출력(처리).
+	        - 자식 노드가 있으면 먼저 깊이(depth) 방향으로 이동.
+	        - 더 이상 방문할 노드가 없으면 백트래킹(Backtracking, 되돌아가기) 수행.
+	        - 모든 노드를 방문할 때까지 반복.
 
-트리(Tree)에서 **DFS(Depth-First Search, 깊이 우선 탐색)**과 **BFS(Breadth-First Search, 너비 우선 탐색)**은 노드를 탐색하는 두 가지 대표적인 방법이다.
-이 두 알고리즘은 트리와 그래프에서 사용되며, 탐색 방식과 시간/공간 복잡도 측면에서 차이가 있다.
+        - DFS의 구현 방법
+            - (1) 스택을 활용한 DFS (반복문)
+                ```python
+                def dfs_stack(root):
+                stack = [root]  # 스택 사용
+                while stack:
+                    node = stack.pop()
+                    print(node.value, end=" ")  # 방문 처리
+                    # 자식 노드를 오른쪽부터 넣어 왼쪽부터 탐색
+                    stack.extend(reversed(node.children))
+                ```
+            - (2) 재귀(Recursion) 방식
+                ```python
+                def dfs_recursive(node):
+                    if node is None:
+                        return
+                    print(node.value, end=" ")  # 방문 처리
+                    for child in node.children:
+                        dfs_recursive(child)
+                ```
 
-1. DFS(깊이 우선 탐색, Depth-First Search)
+            - DFS의 시간 및 공간 복잡도
+                - 시간 복잡도: O(N) (모든 노드를 방문)
+                - 공간 복잡도: O(H) (H = 트리의 높이)
+                - 최악의 경우: 트리가 한쪽으로 편향되면 O(N) (스택 깊이가 최대 N)
+	            - 균형 잡힌 트리: O(log N) (완전 이진 트리의 높이는 log N)
 
-개념
-	•	DFS는 트리의 루트(root)에서 시작하여 한 방향으로 끝까지 탐색한 후, 다시 돌아와 다른 경로를 탐색하는 방식.
-	•	스택(Stack) 또는 재귀(Recursion)를 사용하여 구현 가능.
+    - BFS(너비 우선 탐색, Breadth-First Search)
+        - 개념
+	        - BFS는 루트에서 가까운 노드부터 탐색하는 방식
+	        - 큐(Queue, FIFO)를 사용하여 구현
 
-동작 방식
-	1.	현재 노드를 방문하고 출력(처리).
-	2.	자식 노드가 있으면 먼저 깊이(depth) 방향으로 이동.
-	3.	더 이상 방문할 노드가 없으면 백트래킹(Backtracking, 되돌아가기) 수행.
-	4.	모든 노드를 방문할 때까지 반복.
+        - 동작 방식
+	        - 루트에서 시작하여 큐에 삽입
+	        - 큐에서 노드를 하나씩 꺼내면서 방문
+	        - 현재 노드의 모든 자식 노드를 큐에 추가
+	        - 큐가 빌 때까지 반복
 
-DFS의 구현 방법
+        - BFS의 구현 (Python)
+            ```python
+            from collections import deque
 
-(1) 스택을 활용한 DFS (반복문)
+            def bfs(root):
+                queue = deque([root])  # 큐 사용
+                while queue:
+                    node = queue.popleft()
+                    print(node.value, end=" ")  # 방문 처리
+                    queue.extend(node.children)  # 모든 자식 노드를 큐에 추가
+            ```
 
-def dfs_stack(root):
-    stack = [root]  # 스택 사용
-    while stack:
-        node = stack.pop()
-        print(node.value, end=" ")  # 방문 처리
-        # 자식 노드를 오른쪽부터 넣어 왼쪽부터 탐색
-        stack.extend(reversed(node.children))
+        - BFS의 시간 및 공간 복잡도
+            - 시간 복잡도: O(N) (모든 노드를 방문)
+            - 공간 복잡도: O(W) (W = 최대 너비)
+                - 트리의 폭(W)이 클 경우, 공간 복잡도가 커질 수 있음.
+	        - 완전 이진 트리에서 W = 2^(logN) ≈ N이므로, 공간 복잡도는 O(N)
 
-(2) 재귀(Recursion) 방식
+    - DFS, BFS 정리
+        - DFS(깊이 우선 탐색)
+	        - 재귀 또는 스택을 사용하며, 한 경로를 끝까지 탐색 후 돌아옴 (백트래킹)
+	        - 공간 복잡도가 낮음 (O(H)) → 트리의 높이가 낮은 경우 적합
+	        - 최적 경로 보장 X (DFS는 목표 노드를 먼저 찾는 것이 아니라 깊이 우선)
+	        - 사용 예제: 백트래킹, 퍼즐, 순열/조합 생성, 그래프 탐색
 
-def dfs_recursive(node):
-    if node is None:
-        return
-    print(node.value, end=" ")  # 방문 처리
-    for child in node.children:
-        dfs_recursive(child)
+        - BFS(너비 우선 탐색)
+	        - 큐(Queue)를 사용하며, 한 레벨씩 탐색하면서 가장 가까운 노드부터 확장
+	        - 최단 경로를 보장 (최소 이동 횟수로 도착할 수 있음)
+	        - 공간 복잡도가 높음 (O(W)) → 트리의 너비가 클 경우 메모리 부담
+	        - 사용 예제: 최단 거리 문제, 네트워크 검색, 웹 크롤링
 
-DFS의 시간 및 공간 복잡도
+    - 결론
+        - 최단 경로가 필요하면 BFS
+        - 모든 경로를 탐색하거나 백트래킹이 필요하면 DFS
+        - 공간 절약이 필요하면 DFS, 너비가 좁으면 BFS
+        - 최단 경로 문제라면 BFS를, 경로 탐색이나 조합 생성이라면 DFS를 사용하는 것이 일반적
 
-복잡도	값
-시간 복잡도	O(N) (모든 노드를 방문)
-공간 복잡도	O(H) (H = 트리의 높이)
-
-	•	최악의 경우: 트리가 한쪽으로 편향되면 O(N) (스택 깊이가 최대 N)
-	•	균형 잡힌 트리: O(log N) (완전 이진 트리의 높이는 log N)
-
-2. BFS(너비 우선 탐색, Breadth-First Search)
-
-개념
-	•	BFS는 루트에서 가까운 노드부터 탐색하는 방식.
-	•	큐(Queue, FIFO)를 사용하여 구현.
-
-동작 방식
-	1.	루트에서 시작하여 큐에 삽입.
-	2.	큐에서 노드를 하나씩 꺼내면서 방문.
-	3.	현재 노드의 모든 자식 노드를 큐에 추가.
-	4.	큐가 빌 때까지 반복.
-
-BFS의 구현 (Python)
-
-from collections import deque
-
-def bfs(root):
-    queue = deque([root])  # 큐 사용
-    while queue:
-        node = queue.popleft()
-        print(node.value, end=" ")  # 방문 처리
-        queue.extend(node.children)  # 모든 자식 노드를 큐에 추가
-
-BFS의 시간 및 공간 복잡도
-
-복잡도	값
-시간 복잡도	O(N) (모든 노드를 방문)
-공간 복잡도	O(W) (W = 최대 너비)
-
-	•	트리의 폭(W)이 클 경우, 공간 복잡도가 커질 수 있음.
-	•	완전 이진 트리에서 W = 2^(logN) ≈ N이므로, 공간 복잡도는 O(N).
-
-3. DFS vs BFS 차이점 정리
-
-비교 항목	DFS (깊이 우선 탐색)	BFS (너비 우선 탐색)
-탐색 방식	루트 → 깊이 우선 탐색	루트 → 너비 우선 탐색
-자료구조	스택(Stack) or 재귀(Recursion)	큐(Queue)
-시간 복잡도	O(N)	O(N)
-공간 복잡도	O(H) (H = 트리 높이)	O(W) (W = 트리 너비)
-탐색 순서	왼쪽 하위 노드 → 오른쪽 하위 노드	왼쪽부터 한 레벨씩 탐색
-경로 찾기	최적 경로 보장 X	최적 경로 보장 (최단 거리)
-사용 사례	백트래킹, 경로 탐색, 순열/조합	최단 거리 찾기, 네트워크 탐색
-
-4. DFS vs BFS 언제 사용할까?
-
-사용 경우	DFS 추천	BFS 추천
-경로 탐색 (Maze, 게임)	최적 경로가 필요 없을 때	최단 경로가 필요할 때
-공간 효율성 필요 (메모리 절약)	깊이가 적은 경우	너비가 적은 경우
-모든 경로 탐색 (예: 순열, 조합, 그래프 탐색)	백트래킹, 그래프 탐색	네트워크 탐색, 웹 크롤링
-길찾기 문제 (예: 미로, 지도 네비게이션)	복잡한 길 찾기	최단 거리 찾기
-웹 크롤러 (Web Crawler)	특정 경로 우선	모든 페이지를 단계별로 검색
-
-5. 정리
-
-✅ DFS(깊이 우선 탐색)
-	•	재귀 또는 스택을 사용하며, 한 경로를 끝까지 탐색 후 돌아옴 (백트래킹)
-	•	공간 복잡도가 낮음 (O(H)) → 트리의 높이가 낮은 경우 적합
-	•	최적 경로 보장 X (DFS는 목표 노드를 먼저 찾는 것이 아니라 깊이 우선)
-	•	사용 예제: 백트래킹, 퍼즐, 순열/조합 생성, 그래프 탐색
-
-✅ BFS(너비 우선 탐색)
-	•	큐(Queue)를 사용하며, 한 레벨씩 탐색하면서 가장 가까운 노드부터 확장
-	•	최단 경로를 보장 (최소 이동 횟수로 도착할 수 있음)
-	•	공간 복잡도가 높음 (O(W)) → 트리의 너비가 클 경우 메모리 부담
-	•	사용 예제: 최단 거리 문제, 네트워크 검색, 웹 크롤링
-
-결론
-
-✔ “최단 경로가 필요하면 BFS”,
-✔ “모든 경로를 탐색하거나 백트래킹이 필요하면 DFS”
-✔ “공간 절약이 필요하면 DFS, 너비가 좁으면 BFS”
-
-즉, DFS와 BFS는 문제 유형에 따라 선택해야 하며, 최단 경로 문제라면 BFS를, 경로 탐색이나 조합 생성이라면 DFS를 사용하는 것이 일반적이다.
-
-- 페르마의 소정리(Fermat’s Little Theorem)란 무엇인가?
-- RSA 암호화 알고리즘에서 소수를 이용하는 이유를 설명하시오.
 - 스택(Stack)과 큐(Queue)
 
 스택(Stack)과 큐(Queue)의 차이점
@@ -3510,6 +3477,8 @@ t    r   p   g t  (endOfWord=True)
 - 내부 정렬(Internal Sorting)과 외부 정렬(External Sorting)의 차이점을 설명하시오.
 - O(n log n) 정렬 알고리즘을 비교하고 어떤 상황에서 어떤 정렬이 유리한지 설명하시오.
 - 특정 데이터 크기(예: 1억 개)의 숫자를 정렬해야 할 때 가장 적합한 알고리즘을 선택하고 이유를 설명하시오.
+- 페르마의 소정리(Fermat’s Little Theorem)란 무엇인가?
+- RSA 암호화 알고리즘에서 소수를 이용하는 이유를 설명하시오.
 - 해시 함수(Hash Function)의 개념과 이상적인 조건을 설명하시오.
 - 체이닝(Chaining)과 개방 주소법(Open Addressing)의 차이점을 설명하시오.
 - 퍼펙트 해시(Perfect Hashing)란 무엇인가?
