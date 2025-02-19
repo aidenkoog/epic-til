@@ -2884,84 +2884,46 @@ Organized expected questions & answers
         - 최단 경로 문제라면 BFS를, 경로 탐색이나 조합 생성이라면 DFS를 사용하는 것이 일반적
 
 - 스택(Stack)과 큐(Queue)
+    - 스택(Stack)과 큐(Queue)의 개념
+	    - 스택(Stack): LIFO(Last In, First Out, 후입선출) 구조
+            - 나중에 들어온 데이터가 먼저 나감 (ex: 접시 쌓기)
+	    - 큐(Queue): FIFO(First In, First Out, 선입선출) 구조
+            - 먼저 들어온 데이터가 먼저 나감 (ex: 줄 서기)
 
-스택(Stack)과 큐(Queue)의 차이점
+    - 스택(Stack)
+        - 특징
+	        - 후입선출(LIFO): 마지막에 추가된 데이터가 가장 먼저 제거됨.
+	        - 한쪽 끝에서만 데이터 삽입과 삭제가 이루어짐.
+        - 연산
+	        - push(x) → 요소 x를 스택에 추가
+	        - pop() → 스택에서 요소 제거 후 반환
+	        - peek() → 최상단 요소 확인(삭제 X)
+	        - isEmpty() → 스택이 비었는지 확인
 
-1. 스택(Stack)과 큐(Queue)의 개념
-	•	스택(Stack): LIFO(Last In, First Out, 후입선출) 구조
-→ 나중에 들어온 데이터가 먼저 나감 (ex: 접시 쌓기)
-	•	큐(Queue): FIFO(First In, First Out, 선입선출) 구조
-→ 먼저 들어온 데이터가 먼저 나감 (ex: 줄 서기)
+    - 큐(Queue)
+        - 특징
+	        - 선입선출(FIFO): 먼저 들어온 데이터가 먼저 나감
+	        - 한쪽 끝에서 삽입(enqueue), 반대쪽 끝에서 삭제(dequeue)
+        - 연산
+	        - enqueue(x) → 요소 x를 큐에 추가
+	        - dequeue() → 큐에서 요소 제거 후 반환
+	        - front() → 큐의 첫 번째 요소 확인(삭제 X)
+	        - isEmpty() → 큐가 비었는지 확인
 
-2. 스택(Stack)
-
-특징
-	•	후입선출(LIFO): 마지막에 추가된 데이터가 가장 먼저 제거됨.
-	•	한쪽 끝에서만 데이터 삽입과 삭제가 이루어짐.
-
-연산
-	•	push(x) → 요소 x를 스택에 추가
-	•	pop() → 스택에서 요소 제거 후 반환
-	•	peek() → 최상단 요소 확인(삭제 X)
-	•	isEmpty() → 스택이 비었는지 확인
-
-Python 스택 구현
-
-stack = []
-stack.append(1)  # push(1)
-stack.append(2)  
-stack.append(3)  
-print(stack.pop())  # 3 (LIFO)
-
-3. 큐(Queue)
-
-특징
-	•	선입선출(FIFO): 먼저 들어온 데이터가 먼저 나감.
-	•	한쪽 끝에서 삽입(enqueue), 반대쪽 끝에서 삭제(dequeue).
-
-연산
-	•	enqueue(x) → 요소 x를 큐에 추가
-	•	dequeue() → 큐에서 요소 제거 후 반환
-	•	front() → 큐의 첫 번째 요소 확인(삭제 X)
-	•	isEmpty() → 큐가 비었는지 확인
-
-Python 큐 구현 (collections.deque 사용)
-
-from collections import deque
-queue = deque()
-queue.append(1)  # enqueue(1)
-queue.append(2)
-queue.append(3)
-print(queue.popleft())  # 1 (FIFO)
-
-4. 스택 vs 큐 비교
-
-비교 항목	스택(Stack)	큐(Queue)
-구조	LIFO (후입선출)	FIFO (선입선출)
-삽입 위치	Top (마지막 위치)	Rear (마지막 위치)
-삭제 위치	Top (마지막 위치)	Front (처음 위치)
-속도	빠름 (O(1))	빠름 (O(1))
-활용 예시	재귀 호출, 뒤로 가기	프로세스 스케줄링, 네트워크 패킷 처리
-
-5. 스택과 큐의 활용 사례
-
-✅ 스택(Stack) 활용
-	•	함수 호출 (재귀 호출)
-	•	웹 브라우저 뒤로 가기 (뒤로/앞으로 이동)
-	•	문자열 괄호 검사 (ex: ((())) 검증)
-
-✅ 큐(Queue) 활용
-	•	CPU 프로세스 스케줄링
-	•	네트워크 패킷 처리 (데이터 스트리밍)
-	•	프린터 작업 대기열 (선착순 출력)
-
-6. 결론
-
-✔ “마지막 데이터부터 처리해야 하면 스택” (LIFO)
-✔ “먼저 들어온 데이터를 먼저 처리해야 하면 큐” (FIFO)
-✔ “실제 구현에서는 deque를 사용하면 큐/스택 모두 효율적”
-
-즉, 순서에 따라 데이터 처리 방식이 다르므로, 문제 유형에 맞게 스택과 큐를 선택해야 한다.
+    - 스택과 큐의 활용 사례
+        - 스택(Stack) 활용
+	        - 함수 호출 (재귀 호출)
+	        - 웹 브라우저 뒤로 가기 (뒤로/앞으로 이동)
+	        - 문자열 괄호 검사 (ex: ((())) 검증)
+        - 큐(Queue) 활용
+	        - CPU 프로세스 스케줄링
+	        - 네트워크 패킷 처리 (데이터 스트리밍)
+	        - 프린터 작업 대기열 (선착순 출력)
+    - 결론
+        - 마지막 데이터부터 처리해야 하면 스택 (LIFO)
+        - 먼저 들어온 데이터를 먼저 처리해야 하면 큐 (FIFO)
+        - 실제 구현에서는 deque를 사용하면 큐/스택 모두 효율적
+        - 순서에 따라 데이터 처리 방식이 다르므로, 문제 유형에 맞게 스택과 큐를 선택 필요
 
 - 덱(Deque, Double-ended Queue)의 개념과 활용 사례
 
