@@ -2925,42 +2925,34 @@ Organized expected questions & answers
         - 실제 구현에서는 deque를 사용하면 큐/스택 모두 효율적
         - 순서에 따라 데이터 처리 방식이 다르므로, 문제 유형에 맞게 스택과 큐를 선택 필요
 
-- 덱(Deque, Double-ended Queue)의 개념과 활용 사례
+- 덱/데크(Deque, Double-ended Queue) 개념과 활용 사례
+    - 덱/데크(Deque)의 개념 (스택 + 큐 기능 둘다 가짐)
+	    - 양쪽(앞과 뒤)에서 삽입과 삭제가 모두 가능한 큐
+	    - 일반적인 큐(Queue)는 FIFO 구조이지만, 덱은 양방향 삽입/삭제 가능
+	    - 스택(Stack)과 큐(Queue)의 기능을 모두 포함하는 자료구조
+    - 덱의 연산
+        - push_front(x): 앞쪽에 원소 추가
+        - push_back(x): 뒤쪽에 원소 추가
+        - pop_front(): 앞쪽 원소 삭제 및 반환
+        - pop_back(): 뒤쪽 원소 삭제 및 반환
+        - front(): 앞쪽 원소 확인 (삭제 X)
+        - back(): 뒤쪽 원소 확인 (삭제 X)
+        - isEmpty(): 덱이 비었는지 확인
+    - 덱 구현
+        ```python
+        from collections import deque
 
-1. 덱(Deque, Double-ended Queue) 개념과 활용 사례
-
-1.1 덱(Deque)의 개념
-	•	덱(Deque, Double-ended Queue)은 양쪽(앞과 뒤)에서 삽입과 삭제가 모두 가능한 큐.
-	•	일반적인 큐(Queue)는 FIFO 구조이지만, 덱은 양방향 삽입/삭제 가능.
-	•	스택(Stack)과 큐(Queue)의 기능을 모두 포함하는 자료구조.
-
-1.2 덱의 연산
-
-연산	설명
-push_front(x)	앞쪽에 원소 추가
-push_back(x)	뒤쪽에 원소 추가
-pop_front()	앞쪽 원소 삭제 및 반환
-pop_back()	뒤쪽 원소 삭제 및 반환
-front()	앞쪽 원소 확인 (삭제 X)
-back()	뒤쪽 원소 확인 (삭제 X)
-isEmpty()	덱이 비었는지 확인
-
-1.3 Python 덱 구현 (collections.deque)
-
-from collections import deque
-
-dq = deque()
-dq.append(1)  # push_back(1)
-dq.appendleft(2)  # push_front(2)
-print(dq.pop())  # pop_back() → 1
-print(dq.popleft())  # pop_front() → 2
-
-1.4 덱의 활용 사례
-
-✅ 양방향 탐색이 필요한 경우
-	•	웹 브라우저 앞으로/뒤로 가기 (앞으로 가기, 뒤로 가기)
-	•	슬라이딩 윈도우 최적화 (윈도우 내 최소/최대값 구하기)
-	•	캐시(Cache) 구현 (LRU 캐시, 가장 오래된 데이터 삭제)
+        dq = deque()
+        dq.append(1)  # push_back(1)
+        dq.appendleft(2)  # push_front(2)
+        print(dq.pop())  # pop_back() → 1
+        print(dq.popleft())  # pop_front() → 2
+        ```
+    - 덱의 활용 사례
+        - 양방향 탐색이 필요한 경우
+	        - 웹 브라우저 앞으로/뒤로 가기 (앞으로 가기, 뒤로 가기)
+	        - 슬라이딩 윈도우 최적화 (윈도우 내 최소/최대값 구하기)
+	        -캐시(Cache) 구현 (LRU 캐시, 가장 오래된 데이터 삭제)
 
 - 우선순위 큐(Priority Queue)의 개념과 구현 방식(힙 구조 포함)
 
