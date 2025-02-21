@@ -59,3 +59,213 @@
 
 - 파라미터(Parameter)
   - 전역적으로 설정할 수 있는 변수로, rosparam을 통해 저장 및 조회 가능
+
+## ROS 핵심요소, 환경셋업, 노드작성, 필수명령어, 토픽 발행/구독, 서버/클라이언트, 실행/테스트
+
+ROS( Robot Operating System) 초보자가 반드시 알아야 할 문법 및 구현 방식
+
+ROS(Robot Operating System)는 로봇 개발을 위한 오픈소스 프레임워크입니다. ROS를 처음 배우는 초보자라면, 기본적인 개념과 필수적인 명령어, 코드 작성 방법을 익히는 것이 중요합니다.
+
+1. ROS의 기본 개념
+
+✅ 1) ROS 핵심 요소
+
+개념	설명
+노드(Node)	ROS에서 실행되는 하나의 프로그램(프로세스)
+토픽(Topic)	노드 간의 메시지 전달을 위한 통신 채널 (Publish/Subscribe 방식)
+메시지(Message)	노드 간 데이터를 주고받는 데이터 형식 (std_msgs/String, sensor_msgs/Image 등)
+서비스(Service)	요청(Request)과 응답(Response)을 처리하는 방식
+액션(Action)	서비스와 유사하지만, 장시간 실행되는 비동기 작업 수행
+패키지(Package)	ROS에서 코드, 실행 파일, 메시지 등을 관리하는 단위
+워크스페이스(Workspace)	ROS 프로젝트를 관리하는 작업 공간 (catkin_ws 등)
+
+2. ROS 환경 설정 및 기본 명령어
+
+✅ 1) ROS 설치 및 초기 설정
+	•	ROS를 설치한 후, 매 실행 시 환경 변수를 설정해야 함.
+
+source /opt/ros/noetic/setup.bash  # ROS Noetic 환경 설정 (Ubuntu 20.04 기준)
+
+	•	여러 워크스페이스를 사용할 경우:
+
+source ~/catkin_ws/devel/setup.bash  # 내 워크스페이스 설정
+
+	•	자동 실행을 위해 .bashrc에 추가:
+
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+✅ 2) ROS 필수 명령어
+
+명령어	설명
+roscore	ROS 마스터 노드 실행 (ROS 시스템 시작)
+rosnode list	현재 실행 중인 모든 노드 목록 출력
+rosnode info <노드명>	특정 노드의 정보 확인
+rostopic list	현재 활성화된 모든 토픽 확인
+rostopic echo <토픽명>	특정 토픽의 메시지 출력
+rosservice list	사용 가능한 서비스 목록 출력
+rosservice call <서비스명>	특정 서비스 호출
+roslaunch <패키지명> <launch 파일명>	launch 파일을 실행하여 여러 노드를 동시에 실행
+catkin_make	ROS 패키지 빌드 (컴파일)
+
+3. ROS 패키지 생성 및 빌드
+
+✅ 1) 새 패키지 생성
+
+cd ~/catkin_ws/src
+catkin_create_pkg my_robot std_msgs rospy roscpp
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
+
+✅ 설명
+	•	my_robot 패키지를 생성하면서 **의존성(std_msgs, rospy, roscpp)**을 추가.
+	•	catkin_make로 패키지를 빌드 후, 환경 변수 설정.
+
+4. ROS 노드(Node) 작성
+
+✅ 1) Python 노드 작성
+
+#!/usr/bin/env python3
+import rospy  # ROS 라이브러리
+from std_msgs.msg import String  # 메시지 타입
+
+def talker():
+    pub = rospy.Publisher('chatter', String, queue_size=10)  # 토픽 생성
+    rospy.init_node('talker_node', anonymous=True)  # 노드 초기화
+    rate = rospy.Rate(10)  # 10Hz 주기로 실행
+
+    while not rospy.is_shutdown():
+        message = "Hello ROS! %s" % rospy.get_time()
+        rospy.loginfo(message)
+        pub.publish(message)  # 메시지 전송
+        rate.sleep()  # 주기 맞추기
+
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
+
+✅ 설명
+	•	rospy.Publisher를 사용하여 chatter라는 토픽을 생성하고 문자열 데이터를 전송.
+	•	rospy.init_node('talker_node')를 통해 노드 이름을 설정.
+
+✅ 2) C++ 노드 작성
+
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+int main(int argc, char **argv) {
+    ros::init(argc, argv, "talker_node"); // 노드 초기화
+    ros::NodeHandle nh; // 노드 핸들 생성
+    ros::Publisher pub = nh.advertise<std_msgs::String>("chatter", 10); // 토픽 생성
+
+    ros::Rate loop_rate(10); // 10Hz
+    while (ros::ok()) {
+        std_msgs::String msg;
+        msg.data = "Hello ROS from C++!";
+        ROS_INFO("%s", msg.data.c_str());
+        pub.publish(msg);
+        ros::spinOnce();
+        loop_rate.sleep();
+    }
+    return 0;
+}
+
+✅ 설명
+	•	C++에서는 ros::Publisher를 사용하여 “chatter” 토픽을 생성하고 메시지를 발행.
+	•	ros::spinOnce()로 ROS 콜백을 실행.
+
+5. ROS 토픽(Topic) 통신
+
+✅ 1) Python 노드에서 토픽 구독 (Subscriber)
+
+#!/usr/bin/env python3
+import rospy
+from std_msgs.msg import String
+
+def callback(msg):
+    rospy.loginfo("Received: %s", msg.data)
+
+def listener():
+    rospy.init_node('listener_node', anonymous=True)
+    rospy.Subscriber("chatter", String, callback)
+    rospy.spin()
+
+if __name__ == '__main__':
+    listener()
+
+✅ 설명
+	•	rospy.Subscriber("chatter", String, callback)로 “chatter” 토픽을 구독하여 메시지를 수신.
+
+6. ROS 서비스(Service)
+
+✅ 1) 서비스 서버 (Python)
+
+#!/usr/bin/env python3
+import rospy
+from std_srvs.srv import SetBool, SetBoolResponse
+
+def handle_request(req):
+    return SetBoolResponse(success=True, message="Service Executed!")
+
+def service_server():
+    rospy.init_node('service_server')
+    service = rospy.Service('my_service', SetBool, handle_request)
+    rospy.spin()
+
+if __name__ == "__main__":
+    service_server()
+
+✅ 설명
+	•	rospy.Service('my_service', SetBool, handle_request)로 서비스 생성.
+
+✅ 2) 서비스 클라이언트 (Python)
+
+#!/usr/bin/env python3
+import rospy
+from std_srvs.srv import SetBool, SetBoolRequest
+
+def service_client():
+    rospy.wait_for_service('my_service')
+    try:
+        my_service = rospy.ServiceProxy('my_service', SetBool)
+        response = my_service(SetBoolRequest(data=True))
+        rospy.loginfo("Response: %s", response.message)
+    except rospy.ServiceException as e:
+        rospy.logerr("Service call failed: %s", e)
+
+if __name__ == "__main__":
+    rospy.init_node('service_client')
+    service_client()
+
+✅ 설명
+	•	rospy.ServiceProxy('my_service', SetBool)을 사용하여 서비스 호출.
+
+7. ROS 실행 및 테스트
+
+✅ 1) ROS 시스템 실행
+
+roscore  # ROS 마스터 실행
+
+✅ 2) 노드 실행
+
+rosrun my_robot talker.py   # 노드 실행 (퍼블리셔)
+rosrun my_robot listener.py # 노드 실행 (서브스크라이버)
+
+✅ 3) 메시지 확인
+
+rostopic echo /chatter
+
+✅ 4) 서비스 호출
+
+rosservice call /my_service "data: true"
+
+8. 결론
+
+✅ ROS는 노드 기반의 분산 시스템으로, 노드 간 통신(Topic), 요청-응답(Service), 장기 실행(Action) 등의 개념을 이해하는 것이 필수
+✅ Python을 활용한 노드 구현이 기본이며, C++을 사용할 수도 있음
+✅ rostopic, rosnode, rosservice 등 기본 명령어를 익히고, catkin_make를 활용한 빌드 프로세스를 이해하는 것이 중요
+
+🚀 초보자는 ROS 환경 설정, 노드 실행, 토픽 퍼블리셔 & 서브스크라이버 구현부터 시작하면 좋음!
