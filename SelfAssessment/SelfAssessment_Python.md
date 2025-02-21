@@ -69,7 +69,243 @@ Organized expected questions & answers
   - if __name__ == "__main__":는 현재 실행 중인 스크립트가 직접 실행된 경우에만 특정 코드 블록을 실행하도록 하는 기능
   - 자세한 정리 더 필요
 
-- Python에서 Decorator의 역할은?
+- Python에서 Decorator의 역할
+
+Python에서 Decorator의 역할
+
+1. Decorator란?
+
+✅ **Decorator(데코레이터)**는 기존 함수를 수정하지 않고, 기능을 확장하는 Python의 함수형 프로그래밍 기법입니다.
+✅ @ 문법을 사용하여 함수 또는 클래스의 동작을 감싸는 역할을 합니다.
+✅ 로깅, 성능 측정, 접근 제어, 캐싱, 인증 등 다양한 기능 추가에 사용됩니다.
+
+2. Decorator의 기본 개념
+	•	함수를 인자로 받아 새로운 기능을 추가한 후 반환하는 함수입니다.
+	•	Python의 고차 함수(First-Class Function)와 클로저(Closure) 개념을 활용합니다.
+
+🔹 기본 구조
+
+def decorator_function(original_function):
+    def wrapper_function():
+        print("Wrapper 실행 전")
+        original_function()
+        print("Wrapper 실행 후")
+    return wrapper_function
+
+	•	original_function()을 감싸는 wrapper_function()을 정의하여 기능을 추가.
+
+3. 기본적인 Decorator 예제
+
+🔹 함수를 감싸는 기본 Decorator
+
+def my_decorator(func):
+    def wrapper():
+        print("함수 실행 전")
+        func()
+        print("함수 실행 후")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello, World!")
+
+say_hello()
+
+🔹 출력 결과
+
+함수 실행 전
+Hello, World!
+함수 실행 후
+
+✅ 설명
+	•	@my_decorator를 사용하여 say_hello() 실행 전후로 추가 기능을 수행.
+
+4. 인자를 받는 Decorator
+
+🔹 함수가 인자를 받을 경우 *args, **kwargs를 활용
+
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("함수 실행 전")
+        result = func(*args, **kwargs)
+        print("함수 실행 후")
+        return result
+    return wrapper
+
+@my_decorator
+def add(a, b):
+    return a + b
+
+print(add(3, 5))
+
+🔹 출력 결과
+
+함수 실행 전
+함수 실행 후
+8
+
+✅ 설명
+	•	*args, **kwargs를 사용하여 데코레이터가 인자를 처리할 수 있도록 구현.
+
+5. 여러 개의 Decorator 적용
+
+🔹 여러 개의 @decorator를 적용 가능
+
+def decorator1(func):
+    def wrapper():
+        print("데코레이터 1 실행")
+        func()
+    return wrapper
+
+def decorator2(func):
+    def wrapper():
+        print("데코레이터 2 실행")
+        func()
+    return wrapper
+
+@decorator1
+@decorator2
+def greet():
+    print("안녕하세요!")
+
+greet()
+
+🔹 출력 결과
+
+데코레이터 1 실행
+데코레이터 2 실행
+안녕하세요!
+
+✅ 설명
+	•	@decorator1 → @decorator2 순으로 적용되며, 먼저 선언된 decorator가 나중에 실행.
+
+6. 인자를 받는 Decorator (Decorator Factory)
+
+🔹 Decorator 자체에 인자를 추가하려면 함수를 한 번 더 감싸야 함
+
+def repeat(n):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(n):
+                func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@repeat(3)
+def hello():
+    print("Hello!")
+
+hello()
+
+🔹 출력 결과
+
+Hello!
+Hello!
+Hello!
+
+✅ 설명
+	•	@repeat(3)를 통해 hello()가 3번 실행됨.
+
+7. 클래스 메서드에 Decorator 적용
+
+🔹 클래스의 @staticmethod, @classmethod, @property 데코레이터
+
+class MyClass:
+    @staticmethod
+    def static_method():
+        print("이것은 정적 메서드입니다.")
+
+    @classmethod
+    def class_method(cls):
+        print(f"이것은 {cls.__name__} 클래스의 클래스 메서드입니다.")
+
+    @property
+    def info(self):
+        return "이것은 프로퍼티입니다."
+
+obj = MyClass()
+obj.static_method()  # 정적 메서드 실행
+obj.class_method()   # 클래스 메서드 실행
+print(obj.info)      # 프로퍼티 값 출력
+
+🔹 출력 결과
+
+이것은 정적 메서드입니다.
+이것은 MyClass 클래스의 클래스 메서드입니다.
+이것은 프로퍼티입니다.
+
+✅ 설명
+	•	@staticmethod: 인스턴스 없이 호출 가능한 정적 메서드.
+	•	@classmethod: cls를 사용하여 클래스 자체를 참조하는 클래스 메서드.
+	•	@property: 메서드를 속성처럼 사용할 수 있도록 변환.
+
+8. 실전 활용 예제
+
+✅ 1) 로깅(logging) 기능 추가
+
+import time
+
+def log_decorator(func):
+    def wrapper(*args, **kwargs):
+        print(f"[LOG] {func.__name__} 함수 실행")
+        result = func(*args, **kwargs)
+        print(f"[LOG] {func.__name__} 함수 완료")
+        return result
+    return wrapper
+
+@log_decorator
+def process_data():
+    print("데이터 처리 중...")
+
+process_data()
+
+🔹 출력 결과
+
+[LOG] process_data 함수 실행
+데이터 처리 중...
+[LOG] process_data 함수 완료
+
+✅ 설명
+	•	@log_decorator를 사용하여 함수 실행 로그를 자동으로 출력.
+
+✅ 2) 실행 시간 측정
+
+import time
+
+def timing_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"실행 시간: {end_time - start_time:.4f}초")
+        return result
+    return wrapper
+
+@timing_decorator
+def slow_function():
+    time.sleep(2)
+    print("작업 완료!")
+
+slow_function()
+
+🔹 출력 결과
+
+작업 완료!
+실행 시간: 2.0001초
+
+✅ 설명
+	•	@timing_decorator를 활용하여 함수 실행 시간을 측정.
+
+9. 결론
+
+기능	설명
+코드 재사용성 증가	여러 함수에 동일한 기능을 추가할 때 유용
+기능 확장 가능	로깅, 실행 시간 측정, 접근 제어 등에 활용
+함수/클래스의 동작 수정 가능	기존 코드를 변경하지 않고 새로운 기능 추가
+Pythonic한 코드 스타일 지원	@decorator 문법으로 가독성이 뛰어남
+
+➡ Decorator는 Python에서 매우 유용한 기능으로, 함수나 클래스의 동작을 수정하거나 기능을 확장하는 데 자주 사용됨!
+
 - Python의 Pandas와 NumPy의 차이점은?
 - Python에서 Lambda 함수는 어떻게 동작하는가?
 - Python에서 리스트와 제너레이터의 차이점은?
