@@ -3290,7 +3290,149 @@ Organized expected questions & answers
         - 원소 탐색(검색): 0(n) 순차 검색
         - 설명: 동적으로 노드 생성/해제 가능하여 크기 유연하게 조정 가능
 
-- 이중 연결 리스트(Doubly Linked List)의 구조와 장점을 설명하시오.
+- 이중 연결 리스트(Doubly Linked List)의 구조와 장점
+
+이중 연결 리스트(Doubly Linked List)의 구조와 장점
+
+1. 이중 연결 리스트(Doubly Linked List)란?
+	•	**이중 연결 리스트(Doubly Linked List, DLL)**는 각 노드(Node)가 앞(Previous)과 뒤(Next)를 가리키는 두 개의 포인터를 가지는 연결 리스트이다.
+	•	단일 연결 리스트(Singly Linked List)는 한 방향(Next)으로만 이동 가능하지만, 이중 연결 리스트는 양방향 이동 가능(Previous, Next 포인터 존재).
+
+✅ 이중 연결 리스트의 구조
+
+[Head] ↔ [Node1] ↔ [Node2] ↔ [Node3] ↔ [Tail]
+
+	•	각 노드는 이전 노드(Prev)와 다음 노드(Next)를 가리키는 포인터를 포함함.
+
+✅ 이중 연결 리스트 노드 구조
+
+struct Node {
+    int data;       // 데이터
+    Node* prev;     // 이전 노드를 가리키는 포인터
+    Node* next;     // 다음 노드를 가리키는 포인터
+};
+
+2. 이중 연결 리스트의 구조
+
+✅ 노드(Node) 구조
+	•	각 노드는 3가지 요소로 구성됨:
+	1.	데이터(Data): 저장할 값
+	2.	이전 노드 포인터(Prev): 앞쪽 노드를 가리키는 포인터
+	3.	다음 노드 포인터(Next): 뒤쪽 노드를 가리키는 포인터
+
+✅ 기본적인 연결 구조
+
+NULL ← [Node1] ↔ [Node2] ↔ [Node3] → NULL
+
+	•	Node1.prev = NULL (첫 번째 노드의 Prev는 NULL)
+	•	Node3.next = NULL (마지막 노드의 Next는 NULL)
+	•	중간 노드(Node2)는 양방향 링크(Prev, Next)를 가짐)
+
+✅ C++ 코드 예제
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+// 새로운 노드 생성 함수
+Node* createNode(int value) {
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->prev = nullptr;
+    newNode->next = nullptr;
+    return newNode;
+}
+
+// 리스트 출력 함수 (앞에서 뒤로)
+void printForward(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ↔ ";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+// 리스트 출력 함수 (뒤에서 앞으로)
+void printBackward(Node* tail) {
+    Node* temp = tail;
+    while (temp != nullptr) {
+        cout << temp->data << " ↔ ";
+        temp = temp->prev;
+    }
+    cout << "NULL" << endl;
+}
+
+int main() {
+    Node* head = createNode(10);
+    Node* second = createNode(20);
+    Node* third = createNode(30);
+
+    // 노드 연결
+    head->next = second;
+    second->prev = head;
+    second->next = third;
+    third->prev = second;
+
+    // 리스트 출력
+    cout << "앞에서 뒤로 출력: ";
+    printForward(head);
+
+    cout << "뒤에서 앞으로 출력: ";
+    printBackward(third);
+
+    return 0;
+}
+
+3. 이중 연결 리스트의 장점
+
+✅ (1) 양방향 이동 가능
+	•	단일 연결 리스트(Singly Linked List)는 한 방향(Next)으로만 이동 가능하지만, 이중 연결 리스트는 양쪽(Prev, Next)으로 이동 가능.
+	•	이전 노드로 쉽게 이동할 수 있어 탐색이 유연함.
+
+✅ (2) 노드 삭제 시 더 효율적
+	•	단일 연결 리스트에서는 노드를 삭제할 때 이전 노드를 탐색해야 하지만, 이중 연결 리스트는 Prev 포인터를 사용하여 O(1) 시간 복잡도로 삭제 가능.
+	•	특히, 중간 노드 삭제 시 효율적.
+
+✅ (3) 양방향 순회 가능
+	•	리스트를 앞에서 뒤로(Forward) 또는 뒤에서 앞으로(Backward) 순회 가능.
+	•	LRU(Least Recently Used) 캐시 구현에서 사용됨.
+
+✅ (4) 더블 링크 구조로 다양한 자료구조 구현 가능
+	•	이중 연결 리스트는 덱(Deque), LRU 캐시, 트리 순회 등에 활용됨.
+	•	스택, 큐, 그래프 구현에도 사용 가능.
+
+4. 이중 연결 리스트의 단점
+
+❌ (1) 추가적인 메모리 사용
+	•	Prev 포인터가 필요하기 때문에 단일 연결 리스트보다 메모리 사용량이 많음.
+
+❌ (2) 삽입 및 삭제 시 포인터 조작이 복잡
+	•	단일 연결 리스트보다 Prev와 Next 포인터를 모두 관리해야 하므로, 삽입/삭제 시 코드가 복잡.
+
+❌ (3) 구현이 상대적으로 어려움
+	•	포인터 관리가 복잡하여 실수로 메모리 누수 발생 가능.
+
+5. 단일 연결 리스트 vs 이중 연결 리스트 비교
+
+비교 항목	단일 연결 리스트 (Singly Linked List)	이중 연결 리스트 (Doubly Linked List)
+포인터 개수	Next (1개)	Prev, Next (2개)
+메모리 사용량	상대적으로 적음	추가 메모리(Prev 포인터) 필요
+양방향 이동	❌ 불가능	✅ 가능 (Prev, Next 모두 활용)
+중간 노드 삭제	❌ 이전 노드 탐색 필요	✅ O(1) 시간 복잡도로 가능
+구현 난이도	상대적으로 쉬움	포인터 조작이 복잡
+
+6. 결론
+	•	이중 연결 리스트(Doubly Linked List)는 양방향 탐색과 빠른 삭제가 가능하므로 단일 연결 리스트보다 더 유연한 구조를 제공.
+	•	노드 삭제 및 탐색이 빠르고 양방향 순회가 가능하지만, 추가적인 메모리(Prev 포인터)가 필요하고 포인터 조작이 복잡.
+	•	LRU 캐시, Undo 기능(뒤로 가기/앞으로 가기), 덱(Deque), 그래프 탐색 등에 적합.
+	•	메모리 효율이 중요한 경우 단일 연결 리스트, 성능과 유연성이 중요한 경우 이중 연결 리스트를 선택.
+
 - 원형 연결 리스트(Circular Linked List)의 개념과 활용 방안을 설명하시오.
 - 정렬 알고리즘에서 안정 정렬(Stable Sort)과 불안정 정렬(Unstable Sort)의 차이점을 설명하시오.
 - 팀 정렬(Timsort)의 개념과 활용 사례를 설명하시오.
