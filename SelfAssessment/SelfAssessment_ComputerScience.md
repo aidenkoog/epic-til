@@ -168,7 +168,129 @@ Organized expected questions & answers
           - 범위를 벗어난 값(에러 발생 가능): -1, 101
     - 이런 경계값에서 예외 처리를 하지 않으면 "배열 인덱스 초과", "잘못된 입력" 등의 오류가 발생할 가능성 존재
 
-- HTTPS와 SSL Pinning에 대해 설명해보라.
+- HTTPS와 SSL Pinning
+
+HTTPS와 SSL Pinning 설명
+
+1. HTTPS란?
+
+✅ HTTPS (HyperText Transfer Protocol Secure) 개념
+	•	HTTP + SSL/TLS로 보안이 강화된 웹 통신 프로토콜.
+	•	데이터를 **암호화(Encryption)**하여 클라이언트(브라우저)와 서버 간 안전한 통신 제공.
+	•	MITM(Man-in-the-Middle) 공격 방지 → 중간자가 데이터를 가로채더라도 해독 불가.
+
+✅ HTTPS 동작 과정
+	1.	클라이언트(브라우저)가 서버에 HTTPS 요청.
+	2.	서버가 SSL/TLS 인증서를 클라이언트에 전달.
+	3.	클라이언트가 인증서를 검증 (CA 신뢰 여부 확인).
+	4.	암호화된 세션 키(대칭키) 교환 후 안전한 통신 시작.
+
+✅ HTTPS의 주요 특징
+
+특징	설명
+데이터 암호화	중간자가 가로채도 해독 불가 (TLS 암호화 적용)
+데이터 무결성	데이터 위변조 방지 (해시 검증)
+인증(Authentication)	SSL 인증서를 통해 신뢰할 수 있는 서버임을 검증
+
+2. SSL Pinning이란?
+
+✅ SSL Pinning 개념
+	•	클라이언트(앱)가 **인증서의 공개 키(Public Key)를 사전에 저장(Pinning)**하여 정확한 서버와만 통신하도록 제한하는 보안 기법.
+	•	HTTPS가 CA(Certificate Authority)를 통해 인증서 검증하는 것과 달리, 앱 내부에 특정 인증서 정보를 하드코딩하여 신뢰성을 보장.
+
+✅ SSL Pinning 동작 과정
+	1.	앱이 서버의 SSL 인증서의 공개 키(Public Key)를 앱 내부에 저장.
+	2.	앱이 HTTPS 요청을 보낼 때 서버의 인증서를 받아 내부 저장된 키와 비교.
+	3.	일치하면 정상적인 서버로 판단하고 통신 진행, 불일치하면 차단.
+
+✅ SSL Pinning이 필요한 이유
+
+보안 위협	설명
+MITM 공격	중간자가 가짜 인증서를 이용해 사용자 데이터를 가로챌 가능성
+프록시 공격	공격자가 Fiddler, Burp Suite 같은 프록시 툴을 사용해 HTTPS 트래픽을 분석 가능
+Fake CA 발급 공격	공격자가 악성 인증서를 발급하여 클라이언트를 속일 가능성
+
+3. SSL Pinning 구현 방법
+
+✅ 1) Android (OkHttp 사용)
+	•	CertificatePinner를 활용하여 특정 서버의 인증서 핀(Pin) 설정.
+
+🔹 예제 코드 (Kotlin)
+
+val certificatePinner = CertificatePinner.Builder()
+    .add("example.com", "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")
+    .build()
+
+val client = OkHttpClient.Builder()
+    .certificatePinner(certificatePinner)
+    .build()
+
+val request = Request.Builder()
+    .url("https://example.com")
+    .build()
+
+val response = client.newCall(request).execute()
+
+✅ 설명
+	•	sha256/ 값은 서버 인증서의 Public Key의 해시값.
+	•	example.com 서버에 대한 SSL Pinning 적용.
+
+✅ 2) iOS (URLSession 사용)
+
+🔹 예제 코드 (Swift)
+
+class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        
+        if let serverTrust = challenge.protectionSpace.serverTrust {
+            let certificate = SecTrustGetCertificateAtIndex(serverTrust, 0)
+            let remoteCertificateData = SecCertificateCopyData(certificate!) as Data
+            let localCertificate = NSDataAsset(name: "certificate")!.data
+            
+            if remoteCertificateData == localCertificate {
+                let credential = URLCredential(trust: serverTrust)
+                completionHandler(.useCredential, credential)
+                return
+            }
+        }
+        completionHandler(.cancelAuthenticationChallenge, nil)
+    }
+}
+
+✅ 설명
+	•	SecCertificateCopyData()를 사용하여 서버의 인증서를 추출하고, 앱 내부의 저장된 인증서와 비교.
+
+4. SSL Pinning의 장점과 단점
+
+✅ 장점
+
+항목	설명
+MITM 공격 방어	공격자가 중간에서 가짜 인증서를 제공해도 차단
+프록시 공격 차단	Burp Suite, Fiddler 등으로 HTTPS 트래픽을 분석하는 공격 방어
+보안 강화	서버 인증서 위변조 방지
+
+❌ 단점
+
+항목	설명
+인증서 변경 시 앱 업데이트 필요	인증서 갱신 시, 앱도 새로운 인증서를 반영해야 함
+개발 복잡성 증가	구현 및 유지보수가 복잡
+운영 중 인증서 만료 리스크	인증서 만료 시 앱이 서버와 통신 불가
+
+5. HTTPS와 SSL Pinning 비교
+
+항목	HTTPS	SSL Pinning
+보안 방식	CA 인증서를 검증하여 신뢰성 확보	앱 내부에 서버 인증서를 저장하고 검증
+MITM 공격 방어	가능하지만 CA 위조 가능성 있음	더욱 강력한 보안
+앱 업데이트 필요 여부	필요 없음	서버 인증서 변경 시 필요
+구현 난이도	간단	복잡 (앱 업데이트 필요)
+
+6. 결론
+	1.	HTTPS만으로도 보안이 가능하지만, SSL Pinning을 적용하면 MITM 공격을 더 강력하게 차단할 수 있음.
+	2.	SSL Pinning은 보안성이 높지만, 인증서 변경 시 앱 업데이트가 필요하므로 운영 부담이 증가함.
+	3.	보안이 중요한 금융, 결제, 개인정보 관련 앱에서는 SSL Pinning 적용이 권장됨.
+
+➡ 최적의 보안 솔루션을 위해 HTTPS와 SSL Pinning을 함께 적용하는 것이 가장 안전한 방법!
+
 - 안드로이드에서 로컬 데이터 저장 시 보안을 위해 어떤 방법을 사용했는가?
 - CI/CD를 적용해본 경험이 있는가? 어떤 툴을 사용했는가? (GitHub Actions, Jenkins, Bitrise 등)
 - Firebase Crashlytics를 사용한 경험이 있는가? 어떻게 활용했는가?
