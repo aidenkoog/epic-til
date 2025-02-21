@@ -362,7 +362,150 @@ Organized expected questions & answers
 	  - 하이브리드 커널은 성능과 안정성을 동시에 고려하는 범용 OS에 적합 (ex: Windows, macOS, iOS).
       - 커널 유형 선택은 시스템의 요구사항에 따라 결정되며, 현대 운영체제는 대부분 하이브리드 커널 방식을 채택 중
 
-- 시스템 콜(System Call)의 개념과 주요 기능을 설명하시오.
+- 시스템 콜(System Call)의 개념과 주요 기능
+
+시스템 콜(System Call)의 개념과 주요 기능
+
+1. 시스템 콜(System Call)이란?
+	•	**시스템 콜(System Call)**은 응용 프로그램(사용자 모드)이 운영체제(OS)의 커널 기능을 요청하는 인터페이스이다.
+	•	운영체제의 커널은 **하드웨어와 직접 상호작용하는 특권 레벨(Supervisor Mode)**에서 동작하는데, 사용자 프로그램이 직접 커널 기능을 호출할 수 없기 때문에 시스템 콜을 통해 OS의 서비스를 요청해야 한다.
+	•	일반적으로 파일 처리, 프로세스 제어, 메모리 관리, 네트워크 통신, 디바이스 제어 등의 기능을 수행한다.
+
+2. 시스템 콜의 동작 과정
+	1.	사용자 프로그램이 시스템 콜 라이브러리(API)를 호출 (예: open(), read(), write())
+	2.	시스템 콜 번호(System Call Number)와 함께 소프트웨어 인터럽트(SW Interrupt, INT 명령어 또는 syscall 명령어) 발생
+	3.	CPU가 사용자 모드에서 커널 모드로 전환
+	4.	운영체제 커널이 요청된 시스템 콜을 실행
+	5.	실행이 완료되면 결과 값을 반환하고, 커널 모드에서 사용자 모드로 복귀
+
+	예시 (C 코드)
+
+#include <unistd.h>
+#include <stdio.h>
+int main() {
+    write(1, "Hello, System Call!\n", 20); // 시스템 콜 'write()' 호출
+    return 0;
+}
+
+	•	write() 함수는 시스템 콜을 통해 운영체제 커널에서 실행되며, stdout(파일 디스크립터 1)에 문자열을 출력함.
+
+3. 주요 시스템 콜 기능
+
+시스템 콜은 프로세스 제어, 파일 관리, 장치 관리, 메모리 관리, 네트워크 관리 등 여러 분야에서 활용된다.
+
+1) 프로세스 관리(Process Control)
+	•	fork() : 새로운 프로세스를 생성 (부모-자식 관계)
+	•	exec() : 현재 프로세스를 새로운 프로그램으로 교체
+	•	wait() : 자식 프로세스 종료를 기다림
+	•	exit() : 현재 프로세스를 종료
+	•	getpid() : 프로세스 ID 반환
+
+	✅ 예제: fork()를 이용한 프로세스 생성
+
+#include <stdio.h>
+#include <unistd.h>
+int main() {
+    pid_t pid = fork(); // 새로운 프로세스 생성
+    if (pid == 0) {
+        printf("자식 프로세스 실행 (PID: %d)\n", getpid());
+    } else {
+        printf("부모 프로세스 실행 (PID: %d)\n", getpid());
+    }
+    return 0;
+}
+
+2) 파일 관리(File Management)
+	•	open() : 파일 열기
+	•	read() : 파일에서 데이터 읽기
+	•	write() : 파일에 데이터 쓰기
+	•	close() : 파일 닫기
+	•	lseek() : 파일의 특정 위치로 이동
+
+	✅ 예제: 파일을 읽고 출력하는 프로그램
+
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int fd = open("test.txt", O_RDONLY); // 파일 열기
+    if (fd < 0) {
+        perror("파일 열기 실패");
+        return 1;
+    }
+    char buffer[100];
+    int bytesRead = read(fd, buffer, sizeof(buffer)); // 파일 읽기
+    write(1, buffer, bytesRead); // 콘솔 출력 (stdout: 1)
+    close(fd); // 파일 닫기
+    return 0;
+}
+
+3) 메모리 관리(Memory Management)
+	•	brk() / sbrk() : 힙(Heap) 메모리 크기 변경
+	•	mmap() : 가상 메모리 매핑
+	•	munmap() : 메모리 매핑 해제
+
+	✅ 예제: mmap()을 이용한 메모리 매핑
+
+#include <stdio.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int fd = open("test.txt", O_RDONLY);
+    char *data = mmap(NULL, 100, PROT_READ, MAP_PRIVATE, fd, 0);
+    write(1, data, 100);
+    munmap(data, 100);
+    close(fd);
+    return 0;
+}
+
+4) 디바이스 관리(Device Management)
+	•	ioctl() : 장치 제어
+	•	read() / write() : 디바이스 데이터 입출력
+
+5) 네트워크 관리(Network Communication)
+	•	socket() : 네트워크 소켓 생성
+	•	connect() : 서버에 연결
+	•	bind() : 소켓을 특정 주소와 포트에 바인딩
+	•	listen() : 클라이언트 연결 대기
+	•	accept() : 클라이언트 연결 수락
+
+	✅ 예제: TCP 서버 소켓 생성
+
+#include <stdio.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+
+int main() {
+    int server_fd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in addr = {AF_INET, htons(8080), INADDR_ANY};
+    bind(server_fd, (struct sockaddr*)&addr, sizeof(addr));
+    listen(server_fd, 3);
+    int client_fd = accept(server_fd, NULL, NULL);
+    write(client_fd, "Hello, Client!\n", 15);
+    close(client_fd);
+    close(server_fd);
+    return 0;
+}
+
+4. 시스템 콜 vs 라이브러리 호출
+
+구분	시스템 콜 (System Call)	라이브러리 호출 (Library Call)
+동작 방식	운영체제 커널을 호출	사용자 공간에서 실행
+속도	커널 모드 전환(비교적 느림)	커널 모드 전환 없음(빠름)
+예제	read(), write(), fork()	printf(), strlen(), malloc()
+접근 권한	하드웨어 및 시스템 리소스 접근 가능	OS 기능 직접 호출 불가
+
+5. 결론
+	•	시스템 콜은 응용 프로그램이 운영체제의 커널 기능을 요청하는 인터페이스로, 프로세스 제어, 파일 관리, 메모리 관리, 네트워크 통신, 디바이스 제어 등의 기능을 제공한다.
+	•	시스템 콜을 활용하면 운영체제의 핵심 기능을 안전하게 사용할 수 있으며, 이는 모든 운영체제에서 필수적으로 제공되는 기능이다.
+	•	하지만 시스템 콜은 커널 모드 전환으로 인해 성능 오버헤드가 발생할 수 있으므로, 불필요한 호출을 줄이는 것이 중요하다.
+
+➡️ 즉, 운영체제와 응용 프로그램 간의 인터페이스 역할을 하며, 사용자는 라이브러리를 통해 간접적으로 시스템 콜을 호출할 수도 있음.
+
 - 사용자 모드(User Mode)와 커널 모드(Kernel Mode)의 차이점을 설명하시오.
 - 운영체제의 구조(Layered OS, Monolithic OS, Microkernel 등)를 비교하여 설명하시오.
 - 운영체제의 주요 발전 과정과 역사(일괄 처리 → 다중 프로그래밍 → 시분할 → 분산 시스템)를 설명하시오.
