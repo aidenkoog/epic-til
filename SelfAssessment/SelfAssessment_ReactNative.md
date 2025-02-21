@@ -50,7 +50,260 @@ Organized expected questions & answers
     - 하이브리드 개발 (웹+앱): 리액트 (PWA 가능) / 리액트 네이티브 (크로스플랫폼 앱 가능)
 
 
-- React Native에서 Navigation을 구현하는 방법은?
+- React Native에서 Navigation을 구현하는 방법
+
+React Native에서 Navigation을 구현하는 방법
+
+1. React Native에서 Navigation이 필요한 이유
+
+✅ 모바일 앱은 여러 개의 화면(Screen)으로 구성되며, 사용자가 화면 간 이동이 필요함
+✅ React Native는 웹과 달리 브라우저 히스토리(window.history)가 없으므로 별도의 내비게이션 라이브러리 필요
+✅ React Native에서는 react-navigation을 사용하여 네이티브 수준의 내비게이션 기능을 제공
+
+2. React Navigation 라이브러리 사용
+
+React Native에서 가장 많이 사용되는 내비게이션 라이브러리는 **react-navigation**입니다.
+
+✅ 설치 명령어
+
+npm install @react-navigation/native
+npm install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons react-native-dev-menu
+npm install @react-navigation/stack
+
+✅ 설치 후 babel.config.js 설정 (react-native-reanimated 활성화)
+
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: ['react-native-reanimated/plugin'], // 추가
+};
+
+✅ Android에서 MainActivity.java 수정 (제스처 기능 활성화)
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(null);
+}
+
+3. Stack Navigation (기본적인 화면 이동)
+
+✅ Stack Navigation은 화면을 쌓는 형태(스택)로 구성되어 push, pop 방식으로 동작
+✅ 뒤로가기 버튼이 자동 생성됨 (iOS는 좌측 스와이프, Android는 BackHandler)
+
+🔹 예제: Stack Navigation 구현
+
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+// 홈 화면
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Home Screen</Text>
+      <Button title="Go to Details" onPress={() => navigation.navigate('Details', { itemId: 42 })} />
+    </View>
+  );
+};
+
+// 상세 화면
+const DetailsScreen = ({ route, navigation }) => {
+  const { itemId } = route.params;
+  return (
+    <View>
+      <Text>Details Screen - Item ID: {itemId}</Text>
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+};
+
+// Stack Navigator 생성
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+✅ 설명
+	•	Stack.Navigator로 화면 이동을 관리.
+	•	navigation.navigate('Details', { itemId: 42 })로 파라미터 전달 가능.
+	•	navigation.goBack()으로 이전 화면으로 돌아감.
+
+4. Tab Navigation (하단 탭 내비게이션)
+
+✅ 하단 탭 메뉴를 사용하여 화면 전환하는 방식
+✅ 일반적으로 createBottomTabNavigator를 사용
+
+🔹 설치
+
+npm install @react-navigation/bottom-tabs
+npm install react-native-vector-icons
+
+🔹 예제: Bottom Tab Navigation 구현
+
+import React from 'react';
+import { View, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+const HomeScreen = () => (
+  <View>
+    <Text>Home Screen</Text>
+  </View>
+);
+
+const ProfileScreen = () => (
+  <View>
+    <Text>Profile Screen</Text>
+  </View>
+);
+
+// Tab Navigator 생성
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName = route.name === 'Home' ? 'home-outline' : 'person-outline';
+            return <Icon name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+✅ 설명
+	•	createBottomTabNavigator()를 사용하여 하단 탭 내비게이션 구현.
+	•	tabBarIcon을 사용하여 아이콘 추가 (react-native-vector-icons 필요).
+
+5. Drawer Navigation (사이드 메뉴)
+
+✅ 왼쪽에서 밀어서 나오는 드로어(햄버거 메뉴) 내비게이션
+✅ 대부분의 Android 앱에서 사용되며, React Navigation에서 지원
+
+🔹 설치
+
+npm install @react-navigation/drawer
+
+🔹 예제: Drawer Navigation 구현
+
+import React from 'react';
+import { View, Text } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+
+const HomeScreen = () => (
+  <View>
+    <Text>Home Screen</Text>
+  </View>
+);
+
+const SettingsScreen = () => (
+  <View>
+    <Text>Settings Screen</Text>
+  </View>
+);
+
+// Drawer Navigator 생성
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Settings" component={SettingsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+
+✅ 설명
+	•	createDrawerNavigator()를 사용하여 왼쪽에서 나오는 사이드 메뉴(햄버거 메뉴) 구현.
+
+6. Stack, Tab, Drawer 조합하여 사용하기
+
+✅ 여러 개의 내비게이션을 조합하여 사용 가능
+✅ 예제: Stack + Tab Navigation 혼합
+
+import React from 'react';
+import { View, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+// Home Screen
+const HomeScreen = ({ navigation }) => (
+  <View>
+    <Text>Home Screen</Text>
+    <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
+  </View>
+);
+
+// Details Screen (Stack)
+const DetailsScreen = () => (
+  <View>
+    <Text>Details Screen</Text>
+  </View>
+);
+
+// Profile Screen (Tab)
+const ProfileScreen = () => (
+  <View>
+    <Text>Profile Screen</Text>
+  </View>
+);
+
+// Stack Navigator (Home + Details)
+const Stack = createStackNavigator();
+const HomeStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Details" component={DetailsScreen} />
+  </Stack.Navigator>
+);
+
+// Bottom Tab Navigator
+const Tab = createBottomTabNavigator();
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="HomeStack" component={HomeStack} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+✅ 설명
+	•	HomeStack을 만들어 Stack Navigation(Home, Details) + Tab Navigation(Profile) 조합.
+
+7. 결론
+
+Navigation Type	설명
+Stack Navigation	화면을 스택(stack)처럼 쌓아가며 이동 (navigate, goBack())
+Tab Navigation	하단 탭을 사용하여 여러 화면 간 전환 (createBottomTabNavigator)
+Drawer Navigation	왼쪽에서 밀어서 열리는 사이드 메뉴 (createDrawerNavigator)
+혼합 사용	Stack + Tab, Stack + Drawer 등 조합 가능
+
+➡ React Native에서는 react-navigation을 활용하여 다양한 내비게이션을 쉽게 구현 가능! 🚀
+
 - React Native에서 상태 관리는 어떻게 하는가?
 - React Native에서 AsyncStorage의 역할은?
 - React Native에서 Reanimated란?
