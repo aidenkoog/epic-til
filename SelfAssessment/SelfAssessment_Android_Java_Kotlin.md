@@ -279,6 +279,173 @@ Organized expected questions & answers
 	  - DRM이 적용되지 않은 기기에서는 화질 제한(480p, 720p) 발생 가능
 
 - Android TV 앱 개발 시 고려해야 할 사항
+
+Android TV 앱 개발 시 고려해야 할 사항
+
+Android TV 앱을 개발할 때는 모바일 앱과의 차이점을 이해하고, TV 환경에 최적화된 UI/UX 및 기능을 고려해야 합니다. 아래는 주요 고려 사항을 정리한 내용입니다.
+
+1. UI/UX 디자인
+
+✅ 1) D-Pad(방향키) 네비게이션 지원
+	•	Android TV에는 터치스크린이 없고, 리모컨으로 조작하기 때문에 방향키(D-Pad) 및 이벤트 처리가 중요함.
+	•	focusable, nextFocusUp, nextFocusDown, nextFocusLeft, nextFocusRight 속성을 설정하여 UI 포커스 이동을 제어.
+	•	onKeyDown(), onKeyUp(), dispatchKeyEvent()를 활용하여 리모컨 이벤트 처리.
+
+🔹 예제
+
+<Button
+    android:id="@+id/btn_play"
+    android:focusable="true"
+    android:nextFocusRight="@+id/btn_pause"
+    android:nextFocusDown="@+id/btn_settings"/>
+
+✅ 2) TV 전용 레이아웃 사용 (Leanback Library)
+	•	Android TV는 Leanback 라이브러리를 제공하여 TV UI 최적화된 레이아웃을 쉽게 구현 가능.
+	•	BrowseFragment, DetailsFragment, PlaybackFragment 등 제공.
+
+🔹 예제
+
+dependencies {
+    implementation 'androidx.leanback:leanback:1.0.0'
+}
+
+class MainFragment : BrowseSupportFragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupUI()
+    }
+
+    private fun setupUI() {
+        title = "Android TV App"
+    }
+}
+
+✅ 3) TV 해상도 및 안전 영역(Safe Area) 고려
+	•	TV는 다양한 해상도를 가짐 (1920x1080, 4K, 8K 등).
+	•	UI 요소가 TV 화면 가장자리로 잘리지 않도록 **Safe Area(안전 영역)**를 고려.
+
+🔹 해결 방법
+	•	android:layout_margin을 활용하여 UI 여백 설정.
+	•	Overscan 처리 (android:padding="16dp").
+
+✅ 4) 큰 화면에 적합한 UI 구성
+	•	가독성이 좋은 큰 글씨체 (sp 단위 사용).
+	•	선명한 아이콘 및 이미지 (xxxhdpi 이상 지원).
+	•	컬러 대비 강조 (어두운 배경 + 밝은 글씨).
+
+🔹 예제
+
+<TextView
+    android:text="TV 앱 제목"
+    android:textSize="24sp"
+    android:textColor="#FFFFFF"/>
+
+2. 입력 및 컨트롤
+
+✅ 1) 리모컨 버튼 지원
+	•	D-Pad(방향키), ENTER, BACK, HOME, MENU, PLAY, PAUSE 등 리모컨 이벤트 처리 필요.
+	•	KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE 등을 활용.
+
+🔹 예제
+
+override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+    return when (keyCode) {
+        KeyEvent.KEYCODE_DPAD_LEFT -> {
+            moveLeft()
+            true
+        }
+        KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
+            togglePlayPause()
+            true
+        }
+        else -> super.onKeyDown(keyCode, event)
+    }
+}
+
+✅ 2) 음성 검색 지원 (Google Assistant)
+	•	TV에서는 **음성 검색(Voice Input)**이 중요하며, Google Assistant와 통합 가능.
+	•	android.speech.RecognizerIntent 사용.
+
+🔹 예제
+
+val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+startActivityForResult(intent, REQUEST_CODE)
+
+3. 미디어 및 스트리밍
+
+✅ 1) ExoPlayer 활용
+	•	Android TV는 미디어 소비 중심이므로 ExoPlayer를 활용한 동영상 스트리밍 필수.
+	•	HLS, DASH, MP4 등의 포맷 지원.
+
+🔹 예제
+
+dependencies {
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
+}
+
+val player = ExoPlayer.Builder(context).build()
+val mediaItem = MediaItem.fromUri("https://example.com/video.mp4")
+player.setMediaItem(mediaItem)
+player.prepare()
+player.play()
+
+✅ 2) 미디어 리모컨 & 재생 제어
+	•	리모컨 Play/Pause 버튼 지원 (MediaSessionCompat 활용).
+	•	PlaybackSupportFragment를 사용하여 TV 전용 미디어 UI 제공.
+
+🔹 예제
+
+val mediaSession = MediaSessionCompat(context, "TVApp")
+mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS)
+
+4. 성능 최적화 및 기타 고려 사항
+
+✅ 1) 성능 최적화
+	•	Android TV의 하드웨어 성능이 제한적일 수 있음 (특히 저가형 셋톱박스).
+	•	최적화된 이미지 및 비디오 사용 (.webp, 동적 로딩).
+	•	네트워크 최적화 → 비디오 스트리밍 시 Adaptive Streaming 활용.
+
+✅ 2) Google Play Store TV 인증
+	•	Android TV 앱을 Google Play에 배포하려면 TV 인증 기준 충족 필요.
+	•	android.hardware.type.television을 AndroidManifest.xml에 추가.
+
+<uses-feature android:name="android.hardware.type.television"/>
+<uses-feature android:name="android.software.leanback" />
+
+	•	Google TV 리모컨 네비게이션 테스트 필수.
+
+✅ 3) 광고 및 인앱 구매 지원
+	•	TV 광고 및 인앱 구매 시 Google Ads 또는 Google Play Billing API 활용.
+
+🔹 광고 예제
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-ads:20.4.0'
+}
+
+MobileAds.initialize(this) {}
+val adView = AdView(this)
+adView.adUnitId = "YOUR_AD_UNIT_ID"
+
+5. Android TV 앱 개발 체크리스트
+
+항목	고려 사항
+UI/UX	D-Pad 네비게이션, 큰 글씨, 안전 영역(Safe Area)
+입력 지원	리모컨 버튼, 음성 검색(Google Assistant)
+미디어 재생	ExoPlayer, HLS/DASH 스트리밍 지원
+성능 최적화	저사양 TV 기기 최적화, 네트워크 최적화
+TV 앱 배포	Google Play TV 인증, Leanback 지원
+
+6. 결론
+
+✅ Android TV 앱은 터치 기반이 아닌 리모컨 중심이므로, D-Pad 네비게이션을 최적화하는 것이 중요
+✅ ExoPlayer를 활용하여 원활한 미디어 스트리밍 제공
+✅ 성능 최적화, 네트워크 최적화, Google Play TV 인증 고려 필수
+✅ Leanback 라이브러리를 적극 활용하여 TV 친화적인 UI 구현
+
+➡ Android TV 앱 개발 시 모바일과 다른 점을 충분히 고려하여 최적화하는 것이 핵심!
+
 - Android 앱의 백그라운드 작업을 효율적으로 수행하는 방법
 - Android에서 WorkManager와 JobScheduler의 차이점
 - Android TV 앱에서 Leanback 라이브러리의 역할
