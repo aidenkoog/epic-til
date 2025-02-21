@@ -234,7 +234,209 @@ Debouncing & Throttling	이벤트 루프 내에서 실행 횟수 조절	성능 �
 
 ➡ 이벤트 루프를 이해하고 활용하면 웹 애플리케이션의 성능을 향상시키고 부드러운 UI 렌더링을 제공할 수 있음! 🚀
 
-- JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
+- JavaScript에서 메모리 누수를 방지하는 방법
+
+JavaScript에서 메모리 누수를 방지하는 방법
+
+1. 메모리 누수란?
+
+✅ **메모리 누수(Memory Leak)**는 프로그램이 더 이상 필요하지 않은 메모리를 해제하지 않고 계속 점유하는 상태를 의미합니다.
+✅ JavaScript는 가비지 컬렉션(Garbage Collection, GC)을 자동으로 수행하지만, 특정 패턴에서는 메모리 누수가 발생할 수 있음.
+
+2. JavaScript에서 발생하는 주요 메모리 누수 유형 및 방지 방법
+
+✅ 1) 글로벌 변수 남용 방지 (var 대신 let 또는 const 사용)
+
+문제점:
+	•	var로 선언된 전역 변수는 window 객체에 저장되므로, 명시적으로 해제하지 않으면 메모리에 계속 남아 있음.
+
+🔹 예제 (잘못된 코드 - 글로벌 변수 남용)
+
+function createLeak() {
+    globalVar = "I am a global variable"; // 암묵적 글로벌 변수 생성 (var 없음)
+}
+createLeak();
+console.log(window.globalVar); // "I am a global variable"
+
+✅ 해결 방법
+	•	let 또는 const를 사용하여 블록 범위 변수로 선언.
+	•	use strict를 적용하여 암묵적 전역 변수 생성 방지.
+
+🔹 수정된 코드
+
+"use strict";
+function createNoLeak() {
+    let localVar = "I am a local variable"; // 블록 범위 변수
+}
+createNoLeak();
+console.log(typeof localVar); // undefined (메모리에서 해제됨)
+
+✅ 2) 타이머(setInterval, setTimeout) 정리
+
+문제점:
+	•	setInterval()을 사용할 때, 참조하는 객체가 삭제되었음에도 타이머가 계속 실행되면 메모리 누수가 발생.
+
+🔹 예제 (잘못된 코드 - 타이머 미제거)
+
+function startTimer() {
+    let obj = { message: "Memory Leak" };
+    setInterval(() => {
+        console.log(obj.message); // obj는 메모리에 계속 유지됨
+    }, 1000);
+}
+startTimer();
+
+✅ 해결 방법
+	•	clearInterval()을 사용하여 불필요한 타이머를 제거.
+
+🔹 수정된 코드
+
+function startSafeTimer() {
+    let obj = { message: "No Leak" };
+    let interval = setInterval(() => {
+        console.log(obj.message);
+    }, 1000);
+
+    setTimeout(() => {
+        clearInterval(interval); // 5초 후 타이머 정리
+        console.log("Interval cleared");
+    }, 5000);
+}
+startSafeTimer();
+
+✅ 3) DOM 요소의 이벤트 리스너 정리
+
+문제점:
+	•	이벤트 리스너가 제거되지 않으면, 관련 객체가 메모리에 계속 유지됨.
+
+🔹 예제 (잘못된 코드 - 이벤트 리스너 미제거)
+
+document.getElementById("btn").addEventListener("click", function() {
+    console.log("Button clicked!");
+});
+
+✅ 해결 방법
+	•	removeEventListener()를 사용하여 이벤트 리스너를 제거.
+
+🔹 수정된 코드
+
+let btn = document.getElementById("btn");
+
+function handleClick() {
+    console.log("Button clicked!");
+}
+
+// 이벤트 추가
+btn.addEventListener("click", handleClick);
+
+// 필요 시 이벤트 제거
+btn.removeEventListener("click", handleClick);
+
+✅ 4) 클로저(Closure) 사용 시 참조 정리
+
+문제점:
+	•	클로저 내부에서 외부 변수를 참조할 경우, 해당 변수가 GC(가비지 컬렉션)에서 제거되지 않음.
+
+🔹 예제 (잘못된 코드 - 클로저 내부 변수 참조 유지)
+
+function outer() {
+    let bigData = new Array(1000000).fill("Leak"); // 메모리 차지
+    return function inner() {
+        console.log(bigData[0]); // 클로저가 bigData를 계속 참조
+    };
+}
+
+let leakyFunction = outer();
+
+✅ 해결 방법
+	•	필요하지 않은 데이터는 null로 할당하여 참조를 해제.
+
+🔹 수정된 코드
+
+function outer() {
+    let bigData = new Array(1000000).fill("No Leak");
+    let inner = function() {
+        console.log(bigData[0]);
+    };
+    bigData = null; // 참조 제거 (GC 처리 가능)
+    return inner;
+}
+
+let safeFunction = outer();
+
+✅ 5) 객체 간의 순환 참조 방지
+
+문제점:
+	•	객체가 서로를 참조하면 가비지 컬렉터가 이를 수집하지 못하고 메모리 누수가 발생.
+
+🔹 예제 (잘못된 코드 - 순환 참조)
+
+function createCircularReference() {
+    let objA = {};
+    let objB = {};
+    objA.ref = objB;
+    objB.ref = objA; // 순환 참조 발생
+}
+createCircularReference();
+
+✅ 해결 방법
+	•	객체가 서로를 참조할 경우, WeakMap 또는 WeakRef을 사용하여 가비지 컬렉션이 가능하도록 함.
+
+🔹 수정된 코드 (WeakMap 사용)
+
+let weakMap = new WeakMap();
+function createSafeReference() {
+    let objA = {};
+    let objB = {};
+    weakMap.set(objA, objB); // objA가 제거되면 objB도 자동 해제
+}
+createSafeReference();
+
+✅ 6) WeakMap과 WeakSet을 활용한 메모리 자동 해제
+	•	WeakMap과 WeakSet은 가비지 컬렉터가 참조를 자동으로 관리하므로 메모리 누수 방지에 효과적.
+
+🔹 예제 (WeakMap 활용)
+
+let cache = new WeakMap();
+
+function getUserData(user) {
+    if (!cache.has(user)) {
+        cache.set(user, { data: "User Data" });
+    }
+    return cache.get(user);
+}
+
+let user = { name: "Alice" };
+console.log(getUserData(user));
+
+user = null; // GC가 자동으로 `WeakMap`의 데이터를 해제
+
+✅ 메모리 최적화 효과:
+	•	user = null로 설정하면 GC가 자동으로 WeakMap에서 해당 데이터를 제거.
+
+✅ 7) 개발자 도구를 활용한 메모리 누수 디버깅
+
+Chrome DevTools에서 메모리 누수 분석 가능
+	1.	Performance 패널
+	•	메모리 사용량이 지속적으로 증가하는지 확인.
+	2.	Memory Snapshot
+	•	객체 할당 상태 분석.
+	3.	Heap Snapshot
+	•	참조가 유지되고 있는 객체 추적.
+
+3. 결론
+
+메모리 누수 원인	해결 방법
+전역 변수 사용	let, const 사용 및 use strict 적용
+타이머 미제거 (setInterval)	clearInterval() 호출
+이벤트 리스너 미제거	removeEventListener() 사용
+클로저 내부 참조 유지	필요 없는 변수 null 할당
+순환 참조 발생	WeakMap, WeakSet 사용
+객체 참조 유지	WeakRef 활용
+디버깅 방법	Chrome DevTools 활용
+
+➡ JavaScript의 메모리 누수를 예방하려면, 불필요한 참조를 제거하고, 이벤트 리스너 및 타이머를 적절히 정리하는 것이 중요함! 🚀
+
 - Immutable 데이터 패턴을 사용하면 어떤 이점이 있는가?
 - 프론트엔드 성능 최적화를 위해 JavaScript에서 할 수 있는 것들은?
 - TypeScript의 **제네릭(Generic)**을 사용하면 어떤 장점이 있는가?
