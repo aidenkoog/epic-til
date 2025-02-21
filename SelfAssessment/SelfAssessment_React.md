@@ -59,7 +59,85 @@ Organized expected questions & answers
 	  - React는 기본적으로 클라이언트 사이드 렌더링(CSR)을 사용
       - Next.js 같은 프레임워크를 사용하면 서버에서 HTML을 미리 렌더링 가능.
 
-- Virtual DOM이란 무엇이며, 어떻게 동작하는가?
+- Virtual DOM이란 무엇이며, 동작 방법
+
+Virtual DOM이란?
+
+1. Virtual DOM 개념
+
+✅ **Virtual DOM(Virtual Document Object Model, 가상 DOM)**은 웹 브라우저의 실제 DOM을 직접 조작하는 대신, 가상의 DOM을 사용하여 성능을 최적화하는 기법입니다.
+✅ React, Vue 등 프론트엔드 라이브러리에서 효율적인 렌더링을 위해 사용됩니다.
+✅ 실제 DOM 조작은 비용이 크므로, Virtual DOM을 활용하여 최소한의 변경만 실제 DOM에 반영합니다.
+
+2. Virtual DOM의 동작 방식
+
+Virtual DOM의 핵심 개념은 “비교(Diffing) → 최소 업데이트(Reconciliation)” 입니다.
+
+✅ 1) Initial Render (초기 렌더링)
+	•	앱이 처음 실행될 때, Virtual DOM을 생성하고 이를 실제 DOM에 반영.
+
+✅ 2) 상태(State) 변경 발생
+	•	사용자의 이벤트(onClick, onChange 등) 또는 데이터 변경(State Update) 발생.
+	•	React 등에서는 setState(), useState() 등의 함수로 상태를 변경.
+
+✅ 3) Virtual DOM 생성 및 Diffing (비교)
+	•	변경된 상태를 반영한 새로운 Virtual DOM을 생성.
+	•	이전 Virtual DOM과 새로운 Virtual DOM을 비교하는 Diffing Algorithm(차이 비교 알고리즘) 실행.
+
+✅ 4) 최소한의 변경만 실제 DOM에 적용 (Reconciliation)
+	•	변경된 부분만 찾아서 실제 DOM에 최소한의 업데이트 수행.
+	•	전체 DOM을 다시 그리지 않고, 변경된 요소만 효율적으로 수정.
+
+3. Virtual DOM의 동작 과정 예제
+
+🔹 예제: 상태(State) 변경 시 Virtual DOM 동작
+
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>현재 카운트: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>+1 증가</button>
+    </div>
+  );
+}
+
+export default Counter;
+
+✅ 동작 흐름
+	1.	초기 렌더링: count = 0 → Virtual DOM 생성 → 실제 DOM 반영.
+	2.	버튼 클릭(setCount(count + 1)):
+	•	count 상태가 1로 변경됨.
+	•	새로운 Virtual DOM을 생성하여 기존 Virtual DOM과 비교(diff).
+	•	<h1>현재 카운트: 1</h1> 부분만 변경됨을 감지.
+	•	변경된 부분만 실제 DOM에 반영.
+
+4. Virtual DOM vs 실제 DOM 차이점
+
+비교 항목	Virtual DOM	실제 DOM
+개념	메모리에 저장된 가상의 DOM	브라우저가 직접 렌더링하는 DOM
+업데이트 방식	변경된 부분만 업데이트 (Diffing & Reconciliation)	전체 페이지를 다시 렌더링
+성능	빠름 (최소한의 변경만 적용)	느림 (DOM 변경 시 브라우저 렌더링 성능 저하)
+활용 기술	React, Vue 등의 라이브러리	일반 HTML, JavaScript
+
+5. Virtual DOM의 장점
+
+장점	설명
+성능 최적화	변경된 부분만 실제 DOM에 반영하여 렌더링 성능 향상
+브라우저 렌더링 부하 감소	직접적인 DOM 변경이 줄어들어 렌더링 속도 개선
+코드 유지보수성 증가	개발자가 직접 DOM을 다루지 않아도 되므로 코드가 간결해짐
+React, Vue 등의 프레임워크에서 효율적인 UI 업데이트 가능	상태 기반 UI 관리가 쉬워짐
+
+6. 결론
+
+✅ Virtual DOM은 실제 DOM보다 빠른 성능을 제공하며, React/Vue 같은 라이브러리에서 효율적인 UI 업데이트를 위해 사용됨.
+✅ 기존 DOM을 직접 조작하는 것보다 최소한의 변경만 반영하여 렌더링 성능을 최적화.
+✅ Diffing 알고리즘을 활용하여 변경된 요소만 찾아서 업데이트하는 것이 핵심 원리.
+✅ 결과적으로, Virtual DOM은 웹 애플리케이션의 성능을 향상시키고, 유지보수를 쉽게 만들어 주는 중요한 기술! 🚀
+
 - React의 State와 Props의 차이점은?
 - React에서 상태 관리는 어떻게 하는가?
 - Redux와 Context API의 차이점은?
