@@ -437,7 +437,111 @@ Organized expected questions & answers
 	  - 최근 NLP 모델(GPT, BERT, T5 등)은 대부분 Transformer 기반으로 발전하고 있음.
     - RNN과 LSTM은 특정 시퀀스 기반 작업(음성 인식, 시계열 분석)에서 여전히 유용하지만, 자연어 처리에서는 Transformer가 가장 우수한 성능을 보임.
 
-- 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)을 설명하시오.
+- 생성형 AI(Generative AI)와 대표적인 기술(GPT, DALL-E, Stable Diffusion 등)
+
+생성형 AI(Generative AI)와 대표적인 기술
+
+1. 생성형 AI(Generative AI)란?
+	•	**Generative AI(생성형 AI)**는 새로운 콘텐츠(텍스트, 이미지, 오디오, 영상, 코드 등)를 생성하는 인공지능 기술을 의미한다.
+	•	기존 AI는 데이터를 분석하고 분류하는 데 초점을 맞췄다면, 생성형 AI는 학습된 데이터를 바탕으로 창의적인 결과물을 생성할 수 있음.
+	•	딥러닝(Deep Learning) 모델을 기반으로 하며, 특히 GAN(Generative Adversarial Networks), VAE(Variational Autoencoder), 트랜스포머(Transformer) 등의 기술을 활용함.
+
+✅ 활용 분야
+	•	텍스트 생성: 자연어 처리(NLP), 자동 글쓰기, 문서 요약, 챗봇 (예: GPT)
+	•	이미지 생성: AI 그림 생성, 사진 변환, 스타일 변환 (예: DALL-E, Stable Diffusion)
+	•	음성 합성: 가상 아나운서, 딥페이크 음성, 오디오 변환 (예: VALL-E)
+	•	코드 생성: 프로그래밍 코드 자동 생성, 버그 수정 (예: GitHub Copilot)
+	•	영상 생성: 동영상 편집, AI 애니메이션 생성 (예: Runway Gen-2)
+
+2. 대표적인 생성형 AI 기술
+
+1) GPT (Generative Pre-trained Transformer)
+
+✅ 개념
+	•	**GPT(Generative Pre-trained Transformer)**는 OpenAI가 개발한 자연어 생성 모델로, 인간처럼 텍스트를 이해하고 생성할 수 있는 트랜스포머(Transformer) 기반의 언어 모델이다.
+	•	대규모 데이터 학습을 통해 문장 완성, 요약, 번역, 코딩, 문서 작성 등 다양한 언어 관련 작업 수행 가능.
+	•	딥러닝 기반의 사전 학습(Pre-training) + 미세 조정(Fine-tuning) 기법을 사용하여 성능 향상.
+
+✅ 주요 버전
+
+모델	특징
+GPT-1 (2018)	최초의 GPT 모델, 1억 1천 7백만 개의 매개변수
+GPT-2 (2019)	15억 개의 매개변수, 강력한 자연어 생성 능력
+GPT-3 (2020)	1,750억 개의 매개변수, 고품질 텍스트 생성
+GPT-3.5 (2022)	향상된 코드 및 자연어 처리
+GPT-4 (2023)	멀티모달(이미지+텍스트 처리), 논리적 사고 향상
+
+✅ 활용 예시
+	•	ChatGPT: 대화형 AI 챗봇 서비스 제공
+	•	GitHub Copilot: 코드 자동 완성 지원
+	•	자동 기사 생성: 뉴스 기사, 블로그 글 작성
+
+2) DALL-E (AI 이미지 생성)
+
+✅ 개념
+	•	DALL-E는 OpenAI가 개발한 텍스트 기반 이미지 생성 모델로, 사용자가 입력한 문장을 기반으로 창의적인 이미지를 생성하는 AI.
+	•	트랜스포머(Transformer) 기반의 Diffusion 모델을 활용하여 텍스트를 이미지로 변환함.
+	•	상상 속의 개념이나 독창적인 그림을 만들어낼 수 있음.
+
+✅ 주요 버전
+
+모델	특징
+DALL-E (2021)	텍스트 설명을 기반으로 이미지 생성
+DALL-E 2 (2022)	해상도 및 이미지 품질 개선, Inpainting(이미지 편집) 기능 추가
+DALL-E 3 (2023)	더욱 정밀한 이미지 생성, 텍스트 일관성 향상
+
+✅ 활용 예시
+	•	AI 아트 생성: 창작 이미지 제작
+	•	제품 디자인: 시제품 이미지 제작
+	•	배경 생성: 게임 및 애니메이션용 배경 제작
+
+3) Stable Diffusion (오픈소스 이미지 생성 AI)
+
+✅ 개념
+	•	Stable Diffusion은 Stability AI에서 개발한 텍스트-이미지 변환 AI 모델로, 오픈소스로 제공되어 누구나 사용할 수 있음.
+	•	Latent Diffusion Model (LDM) 기반으로 작동하며, 로컬 PC에서도 실행 가능하다는 장점이 있음.
+	•	이미지 품질을 조정할 수 있는 다양한 파라미터 제공 (CFG Scale, Sampling Steps 등).
+
+✅ 특징
+	•	오픈소스(Open Source): 누구나 자유롭게 모델을 수정하고 배포 가능.
+	•	로컬 실행 가능: GPU를 활용하여 개인 PC에서 모델 실행 가능.
+	•	텍스트-이미지 변환(Text-to-Image), 이미지 보정(Image-to-Image), Inpainting(이미지 복원) 기능 제공.
+
+✅ 활용 예시
+	•	게임 및 애니메이션 제작: 캐릭터 디자인 및 배경 생성
+	•	AI 사진 편집: 이미지 리터칭 및 색상 보정
+	•	NFT 및 디지털 아트 생성
+
+4) MidJourney (창의적인 AI 아트 생성)
+
+✅ 개념
+	•	MidJourney는 AI 기반의 이미지 생성 서비스로, 예술적이고 창의적인 스타일의 이미지 제작에 특화됨.
+	•	OpenAI의 DALL-E와 Stable Diffusion과 비슷하지만, 환상적인 분위기의 창의적인 이미지 생성에 강점이 있음.
+	•	디스코드(Discord) 기반의 명령어를 통해 이미지 생성 가능.
+
+✅ 특징
+	•	고품질의 예술적인 이미지 생성
+	•	세밀한 스타일 조정 가능
+	•	텍스트 프롬프트를 통해 다양한 분위기 연출
+
+✅ 활용 예시
+	•	디지털 아트 및 일러스트 제작
+	•	광고 및 마케팅 콘텐츠 생성
+	•	게임 및 영화 콘셉트 아트 제작
+
+5. 생성형 AI 기술 비교
+
+기술	주요 기능	주요 특징	활용 분야
+GPT (Generative Pre-trained Transformer)	자연어 처리	텍스트 생성, 번역, 요약, 코드 작성	챗봇, 문서 작성, 코딩
+DALL-E	텍스트-이미지 변환	사실적 또는 창의적인 이미지 생성	광고, 제품 디자인, 예술
+Stable Diffusion	텍스트-이미지 변환	오픈소스, 로컬 실행 가능	NFT, 게임 배경, 그래픽 디자인
+MidJourney	창의적인 이미지 생성	예술적 스타일 강조	일러스트, 포스터 디자인, 아트 생성
+
+6. 결론
+	•	**생성형 AI(Generative AI)**는 텍스트, 이미지, 음성, 코드 등 다양한 콘텐츠를 생성하는 AI 기술이며, GPT, DALL-E, Stable Diffusion, MidJourney 등이 대표적인 모델이다.
+	•	GPT는 텍스트 생성, DALL-E는 이미지 생성, Stable Diffusion은 오픈소스 이미지 생성, MidJourney는 예술적 이미지 생성에 강점을 가진다.
+	•	앞으로 생성형 AI 기술은 창작, 마케팅, 개발, 교육, 엔터테인먼트 등 다양한 산업에서 더욱 활발하게 활용될 전망이다.
+
 - AI의 윤리적 문제(AI Bias, Explainability, Privacy)를 설명하시오.
 - AutoML(Auto Machine Learning)의 개념과 주요 프레임워크(Google AutoML, H2O.ai 등)를 설명하시오.
 - AI 모델 경량화 기술(Knowledge Distillation, Pruning, Quantization)을 설명하시오.
