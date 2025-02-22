@@ -428,6 +428,125 @@ AdaptiveLayout 패키지	자동 크기 대응	스마트폰/태블릿/데스크�
 ➡ Adaptive UI를 사용하면 다양한 기기에서 최적의 사용자 경험을 제공할 수 있으며, Flutter에서는 여러 방법을 조합하여 효과적으로 구현 가능!
 
 - Flutter에서 태블릿, 일반폰의 화면 사이즈 대응 방법
+- Isolate 설명
+
+Isolate.run() – Flutter 3.7부터 도입된 간단한 비동기 Isolate 실행 방법
+
+Flutter 3.7부터 **새로운 API Isolate.run()**이 도입되었습니다.
+✅ compute()와 유사하지만 더 직관적이고 사용이 편리한 방식입니다.
+
+1. Isolate.run()이란?
+
+기존 compute()와 비슷한 방식으로 백그라운드에서 무거운 연산을 실행하는 기능을 제공합니다.
+📌 Isolate.run()을 사용하면 별도의 Isolate를 생성하여 코드 실행 후 결과를 반환받을 수 있습니다.
+
+✔ 장점
+	•	compute()보다 더 직관적인 문법
+	•	async/await을 지원하여 비동기 방식으로 사용 가능
+	•	일회성 작업에 적합 (사용 후 자동 종료)
+
+2. Isolate.run() 기본 사용법
+
+💡 기존의 compute()와 비슷하지만, async/await을 직접 사용할 수 있어서 코드가 더 간결합니다.
+
+import 'dart:async';
+import 'dart:isolate';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: IsolateRunExample(),
+    );
+  }
+}
+
+class IsolateRunExample extends StatefulWidget {
+  @override
+  _IsolateRunExampleState createState() => _IsolateRunExampleState();
+}
+
+class _IsolateRunExampleState extends State<IsolateRunExample> {
+  String _result = "계산 전";
+
+  Future<void> runHeavyTask() async {
+    int result = await Isolate.run(() => heavyCalculation(1000000000));
+    setState(() {
+      _result = "결과: $result";
+    });
+  }
+
+  static int heavyCalculation(int count) {
+    int sum = 0;
+    for (int i = 0; i < count; i++) {
+      sum += i;
+    }
+    return sum;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Flutter Isolate.run() 예제")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(_result),
+            ElevatedButton(
+              onPressed: runHeavyTask,
+              child: Text("계산 시작"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+✅ 코드 설명
+	•	Isolate.run(() => heavyCalculation(1000000000))
+→ 백그라운드에서 heavyCalculation 실행 후 결과 반환
+	•	UI가 멈추지 않고 정상적으로 작동
+	•	async/await을 활용하여 코드를 깔끔하게 작성 가능
+
+3. Isolate.run() vs compute() vs Isolate.spawn() 비교
+
+기능	Isolate.run()	compute()	Isolate.spawn()
+데이터 교환	단일 입력값, 단일 결과	단일 입력값, 단일 결과	SendPort/ReceivePort 사용
+실행 방식	백그라운드에서 함수 실행 후 종료	백그라운드에서 함수 실행 후 종료	장기 실행 가능, 여러 개의 메시지 송수신 가능
+사용 방법	await Isolate.run() (async 지원)	await compute()	Isolate.spawn() + 포트 통신
+활용 예	단순한 연산 작업	단순한 연산 작업	장기 실행 작업 (파일 다운로드, 네트워크 통신 등)
+메모리 사용	적음	적음	더 많은 메모리 사용 가능
+
+✅ 정리
+	•	Isolate.run() → compute()보다 더 직관적인 방식, async/await 지원
+	•	compute() → 기존 방식, 단순한 연산에 적합
+	•	Isolate.spawn() → SendPort/ReceivePort를 이용해 데이터 송수신이 필요한 경우 사용
+
+4. Isolate.run() 사용 시 주의할 점
+
+🚨 UI 관련 코드를 실행할 수 없다.
+	•	Isolate.run()은 메인 스레드에서 실행되지 않으므로 setState() 호출 불가
+	•	UI 업데이트는 반환된 값으로 메인 스레드에서 실행해야 함
+
+🚨 데이터 공유 불가
+	•	Isolate는 메모리를 공유하지 않음 → 복사된 데이터만 사용 가능
+	•	대용량 데이터 전달 시 성능 저하 가능
+
+5. 결론
+
+✅ Flutter 3.7 이상에서는 Isolate.run()을 적극 활용!
+✅ compute()보다 직관적이며, async/await 지원으로 코드가 간결!
+✅ 장기 실행 작업이 아니라면 Isolate.spawn()보다 간편하게 사용 가능!
+
+📌 Flutter에서 백그라운드 작업을 쉽게 실행하려면 Isolate.run()을 사용하세요! 🚀
+
 - Flutter에서 BLoC 패턴을 사용하는 이유는?
 - Flutter에서 Sliver Widgets을 사용하는 이유는?
 - Flutter에서 Navigator 1.0과 2.0의 차이점은?
