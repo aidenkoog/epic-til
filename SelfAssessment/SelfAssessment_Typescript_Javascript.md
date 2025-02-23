@@ -13,7 +13,7 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 	  - JavaScript 엔진: JavaScript 코드 실행 (예: Chrome의 V8, Firefox의 SpiderMonkey)
 	  - 렌더링 엔진: 화면을 그리는 역할 (예: Blink, WebKit)
 	  - 네트워크 모듈: 서버에서 리소스를 다운로드
-      
+
     - 브라우저의 JavaScript 실행 과정
       - HTML 문서 로드 및 파싱
 	    - 브라우저는 먼저 HTML 문서를 다운로드하고, 위에서부터 차례로 분석(파싱)하여 DOM을 생성
@@ -173,6 +173,58 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
     - 결론
         - JavaScript의 메모리 누수를 예방하려면, 불필요한 참조를 제거하고, 이벤트 리스너 및 타이머를 적절히 정리하는 것이 중요
+
+- 클로져의 핵심 개념
+    - 개요
+        - 함수 안의 함수
+        - 외부 함수의 변수를 기억하고 접근할 수 있는 함수
+
+    - 클로저의 핵심 개념
+        - 함수 안에 정의된 함수(내부 함수)
+        - 외부 함수의 변수에 접근 가능
+        - 심지어 외부 함수의 실행이 끝난 후에도 변수를 기억하고 사용 가능
+        - 변수를 은닉(캡슐화)하는 효과를 가질 수 있음
+
+    - 예제 1: 기본적인 클로저
+        - inner_function은 outer_function의 변수 x를 기억하고 있음 → 클로저
+        - 예제 코드
+            ```python
+            def outer_function(x):
+                def inner_function(y):
+                    return x + y  # 외부 함수의 변수 x를 사용
+                return inner_function  # 내부 함수를 반환
+
+            closure = outer_function(10)  # outer_function 실행 후 inner_function 반환
+            print(closure(5))  # 10 + 5 = 15
+            ```
+
+    - 예제 2: 클로저가 변수를 기억하는 동작
+        - increment()는 counter()의 count 변수를 기억하고 있음 → 클로저
+        - 예제 코드
+            ```python
+            def counter():
+                count = 0  # 외부 함수의 변수
+
+                def increment():
+                    nonlocal count  # 외부 변수 사용 (nonlocal 키워드 필요)
+                    count += 1
+                    return count
+
+                return increment  # 내부 함수 반환
+
+            counter1 = counter()  # 새로운 카운터 생성
+            print(counter1())  # 1
+            print(counter1())  # 2
+
+            counter2 = counter()  # 새로운 카운터 생성
+            print(counter2())  # 1  (독립적인 상태 유지)
+            ```
+
+    - 결론
+        - 클로저는 "함수 안의 함수"일 뿐만 아니라, 외부 함수의 변수를 기억하고 사용하는 함수
+        - 내부 함수가 외부 함수의 변수를 포획(Closure) 하여, 외부 함수가 종료되어도 변수를 유지 가능
+        - 데이터 은닉과 상태 유지가 가능하여 함수형 프로그래밍과 객체 지향 프로그래밍에서 유용하게 활용됨
+        - 외부 함수의 변수를 기억하는 함수 안의 함수
 
 - Immutable 데이터 패턴을 사용하면 어떤 이점이 있는가?
 - 프론트엔드 성능 최적화를 위해 JavaScript에서 할 수 있는 것들은?
