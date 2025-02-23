@@ -265,3 +265,14 @@ val = input()
 val = float(val)
 result = format(val, ".2f")
 print(result)
+
+# -----------------------------------------------------------------------------------------
+# 6043, 실수 2개 입력받아 나눈 결과 계산하기
+# 분석: ".3f" formatting, 나누기 표현
+# -----------------------------------------------------------------------------------------
+f1, f2 = input().split()    # f1, f2 = map(float, input().split())
+f1 = float(f1)
+f2 = float(f2)
+result = f1 / f2
+# format 함수를 사용하여 result 값을 소숫점 셋째 자리까지 반올림한 문자열로 변환
+print("{:.3f}".format(result))  # print(format(result, ".3f"))
