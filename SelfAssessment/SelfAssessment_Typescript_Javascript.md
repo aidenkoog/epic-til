@@ -1,6 +1,6 @@
-# Expected Questions
+# Self-Assessment Vue.js
 
-Organized expected questions & answers
+This page summarizes the main concepts, features, pros and cons of Javascript and Typescript.
 
 ## Javascript, Typescript
 
@@ -54,24 +54,17 @@ Organized expected questions & answers
 	    - 비효율적인 DOM 조작이 많으면 성능 저하 발생
         
 - 이벤트 루프(Event Loop)가 렌더링과 관련된 최적화 기법과의 관계
+    - 이벤트 루프(Event Loop)
+        - JavaScript의 비동기 처리를 담당하는 메커니즘으로, 단일 스레드 환경에서 비동기 작업을 효율적으로 처리하는 방식
+        - JavaScript는 싱글 스레드(Single Thread) 기반이므로, 이벤트 루프를 통해 비동기 작업(렌더링, I/O, 타이머 등)을 관리하며 UI를 원활하게 업데이트
+        - 주요 역할:
+	        - 콜백 큐(Callback Queue)에서 태스크를 하나씩 가져와 실행
+	        - 렌더링과 동시성 작업을 최적화하여 성능을 향상
 
-이벤트 루프(Event Loop)와 렌더링 최적화의 관계
-
-1. 이벤트 루프(Event Loop)란?
-
-✅ **이벤트 루프(Event Loop)**는 JavaScript의 비동기 처리를 담당하는 메커니즘으로, 단일 스레드 환경에서 비동기 작업을 효율적으로 처리하는 방식입니다.
-✅ JavaScript는 싱글 스레드(Single Thread) 기반이므로, 이벤트 루프를 통해 비동기 작업(렌더링, I/O, 타이머 등)을 관리하며 UI를 원활하게 업데이트합니다.
-✅ 주요 역할:
-	•	콜백 큐(Callback Queue)에서 태스크를 하나씩 가져와 실행.
-	•	렌더링과 동시성 작업을 최적화하여 성능을 향상.
-
-2. 이벤트 루프의 동작 과정
-
-이벤트 루프는 다음과 같은 단계를 반복하여 실행됩니다.
-
-✅ (1) Call Stack(콜 스택)
-	•	JavaScript 코드가 실행될 때 호출되는 함수가 쌓이는 스택(Stack).
-	•	함수 실행이 끝나면 스택에서 제거(Pop).
+    - 이벤트 루프의 동작 과정
+        - (1) Call Stack(콜 스택)
+	        - JavaScript 코드가 실행될 때 호출되는 함수가 쌓이는 스택(Stack)
+	        - 함수 실행이 끝나면 스택에서 제거(Pop)
 
 ✅ (2) Web APIs (비동기 작업 처리)
 	•	setTimeout, DOM 이벤트, AJAX 요청 등 비동기 작업은 Web API를 통해 처리됨.
