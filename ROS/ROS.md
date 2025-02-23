@@ -62,69 +62,53 @@
 
 ## ROS 핵심요소, 환경셋업, 노드작성, 필수명령어, 토픽 발행/구독, 서버/클라이언트, 실행/테스트
 
-ROS( Robot Operating System) 초보자가 반드시 알아야 할 문법 및 구현 방식
+- 개요
+  - ROS( Robot Operating System): 로봇 개발을 위한 오픈소스 프레임워크
 
-ROS(Robot Operating System)는 로봇 개발을 위한 오픈소스 프레임워크입니다. ROS를 처음 배우는 초보자라면, 기본적인 개념과 필수적인 명령어, 코드 작성 방법을 익히는 것이 중요합니다.
+- ROS의 기본 개념
+  - ROS 핵심 요소
+    - 노드(Node):	ROS에서 실행되는 하나의 프로그램(프로세스)
+    - 토픽(Topic): 노드 간의 메시지 전달을 위한 통신 채널 (Publish/Subscribe 방식)
+    - 메시지(Message): 노드 간 데이터를 주고받는 데이터 형식 (std_msgs/String, sensor_msgs/Image 등)
+    - 서비스(Service): 요청(Request)과 응답(Response)을 처리하는 방식
+    - 액션(Action): 서비스와 유사하지만, 장시간 실행되는 비동기 작업 수행
+    - 패키지(Package): ROS에서 코드, 실행 파일, 메시지 등을 관리하는 단위
+    - 워크스페이스(Workspace): ROS 프로젝트를 관리하는 작업 공간 (catkin_ws 등)
 
-1. ROS의 기본 개념
+  - ROS 환경 설정 및 기본 명령어
+    - (1) ROS 설치 및 초기 설정
+	    - ROS를 설치한 후, 매 실행 시 환경 변수를 설정해야 함.
+        - source /opt/ros/noetic/setup.bash  # ROS Noetic 환경 설정 (Ubuntu 20.04 기준)
+      - 여러 워크스페이스를 사용할 경우:
+        - source ~/catkin_ws/devel/setup.bash  # 내 워크스페이스 설정
+      - 자동 실행을 위해 .bashrc에 추가:
+        - echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+        - source ~/.bashrc
 
-✅ 1) ROS 핵심 요소
+    - (2) ROS 필수 명령어
+      - roscore: ROS 마스터 노드 실행 (ROS 시스템 시작)
+      - rosnode list: 현재 실행 중인 모든 노드 목록 출력
+      - rosnode info <노드명>: 특정 노드의 정보 확인
+      - rostopic list: 현재 활성화된 모든 토픽 확인
+      - rostopic echo <토픽명>: 특정 토픽의 메시지 출력
+      - rosservice list: 사용 가능한 서비스 목록 출력
+      - rosservice call <서비스명>: 특정 서비스 호출
+      - roslaunch <패키지명> <launch 파일명>: launch 파일을 실행하여 여러 노드를 동시에 실행
+      - catkin_make: ROS 패키지 빌드 (컴파일)
 
-개념	설명
-노드(Node)	ROS에서 실행되는 하나의 프로그램(프로세스)
-토픽(Topic)	노드 간의 메시지 전달을 위한 통신 채널 (Publish/Subscribe 방식)
-메시지(Message)	노드 간 데이터를 주고받는 데이터 형식 (std_msgs/String, sensor_msgs/Image 등)
-서비스(Service)	요청(Request)과 응답(Response)을 처리하는 방식
-액션(Action)	서비스와 유사하지만, 장시간 실행되는 비동기 작업 수행
-패키지(Package)	ROS에서 코드, 실행 파일, 메시지 등을 관리하는 단위
-워크스페이스(Workspace)	ROS 프로젝트를 관리하는 작업 공간 (catkin_ws 등)
+  - ROS 패키지 생성 및 빌드
+    - 새 패키지 생성
+      - cd ~/catkin_ws/src
+      - catkin_create_pkg my_robot std_msgs rospy roscpp
+      - cd ~/catkin_ws
+      - catkin_make
+      - source devel/setup.bash
+    - 설명
+	    - my_robot 패키지를 생성하면서 의존성(std_msgs, rospy, roscpp)을 추가
+	    - catkin_make로 패키지를 빌드 후, 환경 변수 설정
 
-2. ROS 환경 설정 및 기본 명령어
-
-✅ 1) ROS 설치 및 초기 설정
-	•	ROS를 설치한 후, 매 실행 시 환경 변수를 설정해야 함.
-
-source /opt/ros/noetic/setup.bash  # ROS Noetic 환경 설정 (Ubuntu 20.04 기준)
-
-	•	여러 워크스페이스를 사용할 경우:
-
-source ~/catkin_ws/devel/setup.bash  # 내 워크스페이스 설정
-
-	•	자동 실행을 위해 .bashrc에 추가:
-
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-
-✅ 2) ROS 필수 명령어
-
-명령어	설명
-roscore	ROS 마스터 노드 실행 (ROS 시스템 시작)
-rosnode list	현재 실행 중인 모든 노드 목록 출력
-rosnode info <노드명>	특정 노드의 정보 확인
-rostopic list	현재 활성화된 모든 토픽 확인
-rostopic echo <토픽명>	특정 토픽의 메시지 출력
-rosservice list	사용 가능한 서비스 목록 출력
-rosservice call <서비스명>	특정 서비스 호출
-roslaunch <패키지명> <launch 파일명>	launch 파일을 실행하여 여러 노드를 동시에 실행
-catkin_make	ROS 패키지 빌드 (컴파일)
-
-3. ROS 패키지 생성 및 빌드
-
-✅ 1) 새 패키지 생성
-
-cd ~/catkin_ws/src
-catkin_create_pkg my_robot std_msgs rospy roscpp
-cd ~/catkin_ws
-catkin_make
-source devel/setup.bash
-
-✅ 설명
-	•	my_robot 패키지를 생성하면서 **의존성(std_msgs, rospy, roscpp)**을 추가.
-	•	catkin_make로 패키지를 빌드 후, 환경 변수 설정.
-
-4. ROS 노드(Node) 작성
-
-✅ 1) Python 노드 작성
+  - ROS 노드(Node) 작성
+    - (1) Python 노드 작성
 
 #!/usr/bin/env python3
 import rospy  # ROS 라이브러리
