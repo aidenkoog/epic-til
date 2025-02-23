@@ -1,10 +1,8 @@
-# Expected Questions
+# Self-Assessment Vue.js
 
-Organized expected questions & answers
+This page summarizes the main concepts, features, pros and cons of Vue.js.
 
-## Vue.js (+HTML, CSS, Javascript, Typescript)
-
-- Vue.js의 반응형(Reactive) 시스템 동작 설명
+## Vue.js의 반응형(Reactive) 시스템 동작 설명
   - 개요
     - Vue.js의 반응형 시스템은 데이터가 변경되면 자동으로 UI가 업데이트되도록 설계된 핵심 메커니즘
     - Vue는 프록시(Proxy) 기반의 반응형(Reactivity) 시스템을 사용하여 데이터 변경을 감지하고, 필요할 때만 DOM을 업데이트
@@ -31,178 +29,56 @@ Organized expected questions & answers
     - Virtual DOM을 활용하여 효율적으로 실제 DOM 업데이트 수행
     - Vue의 반응형 시스템은 데이터 변경을 자동으로 감지하고, 필요한 부분만 업데이트하여 효율적인 UI 렌더링을 제공
 
-- Vue.js에서 Vuex와 Pinia의 차이점
+## Vue.js에서 Vuex와 Pinia의 차이점
+  - Vuex와 Pinia 개요
+    - Vuex
+      - 2015년 출시 (Vue2)
+      - Vue 공식 지원	Vue 2, Vue 3 지원
+      - 중앙 집중식(store, mutations, actions)
+      - mutations, actions, getters 사용
+      - 타입스크립트 지원 관련해서 타입 지원이 복잡함
+      - Vue.observable 사용한 반응형 지원
+      - 보일러플레이트 코드가 많음
+      - 지원 (Vuex 패널 필요)
+    - Pinia
+      - 2021년 출시 (Vue3 공식 추천)
+      - Vue 3 공식 상태 관리 라이브러리
+      - 모듈 기반 (defineStore())
+      - state, actions, getters 간결화
+      - 타입 지원이 복잡함	기본적으로 타입스크립트 친화적
+      - reactive() 기반의 반응형 상태
+      - 코드가 간결하고 직관적
+      - 지원 (Vue DevTools 기본 제공)
 
-Vue.js에서 Vuex와 Pinia의 차이점
+  - Vuex 개념 및 사용법
+    - Vuex 특징
+	    - 중앙 집중식 상태 관리 패턴 (Flux 패턴 기반)
+	    - mutations을 통해서만 상태 변경 가능 (동기적 변경)
+	    - 비동기 작업(actions)과 동기 작업(mutations)이 구분됨
+	    - Vue 2, Vue 3 모두 지원하지만, Vue 3에서는 Pinia를 공식 추천.
 
-Vue.js에서 **상태 관리(State Management)**를 위해 사용되는 두 가지 주요 라이브러리인 Vuex와 Pinia는 각각의 특징과 차이점을 가지고 있습니다.
+  - Vuex의 문제점
+	    - mutations, actions을 따로 정의해야 하므로 코드가 복잡해짐
+	    - mapState(), mapMutations() 등을 사용해야 하므로 가독성이 떨어짐
+      - 리액트의 리덕스와 유사
 
-1. Vuex와 Pinia 개요
+  - Pinia 개념 및 사용법
+    - Pinia 특징
+	    - Vue 3 공식 상태 관리 라이브러리 (Vuex의 차세대 버전).
+	    - Composition API와 Reactivity 기반 (reactive, computed, ref).
+	    - mutations 없이 직접 상태 변경 가능.
+	    - Typescript 친화적이며 코드가 간결.
+	    - Vue DevTools와 기본적으로 통합됨.
 
-비교 항목	Vuex	Pinia
-출시 연도	2015년 (Vue 2)	2021년 (Vue 3 공식 추천)
-Vue 공식 지원	Vue 2, Vue 3 지원	Vue 3 공식 상태 관리 라이브러리
-상태 저장 구조	중앙 집중식(store, mutations, actions)	모듈 기반 (defineStore())
-사용 방식	mutations, actions, getters 사용	state, actions, getters 간결화
-타입스크립트 지원	타입 지원이 복잡함	기본적으로 타입스크립트 친화적
-반응형(reactivity)	Vue.observable 사용	reactive() 기반의 반응형 상태
-코드 복잡성	보일러플레이트 코드가 많음	코드가 간결하고 직관적
-Vue DevTools 지원	지원 (Vuex 패널 필요)	지원 (Vue DevTools 기본 제공)
+    - Pinia의 장점
+	    - mutations 없이 상태 직접 변경 가능
+	    - Composition API를 활용하여 사용법이 직관적
+	    - 코드가 간결하고 유지보수하기 쉬움
 
-2. Vuex 개념 및 사용법
-
-✅ Vuex 특징
-	•	중앙 집중식 상태 관리 패턴 (Flux 패턴 기반).
-	•	mutations을 통해서만 상태 변경 가능 (동기적 변경).
-	•	비동기 작업(actions)과 동기 작업(mutations)이 구분됨.
-	•	Vue 2, Vue 3 모두 지원하지만, Vue 3에서는 Pinia를 공식 추천.
-
-✅ Vuex 사용 예제
-
-// store/index.js
-import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment(state) {
-      state.count++;
-    }
-  },
-  actions: {
-    asyncIncrement({ commit }) {
-      setTimeout(() => {
-        commit('increment');
-      }, 1000);
-    }
-  },
-  getters: {
-    doubleCount: (state) => state.count * 2
-  }
-});
-
-🔹 컴포넌트에서 Vuex 사용
-
-<template>
-  <div>
-    <p>Count: {{ count }}</p>
-    <p>Double Count: {{ doubleCount }}</p>
-    <button @click="increment">+1 증가</button>
-    <button @click="asyncIncrement">비동기 증가</button>
-  </div>
-</template>
-
-<script>
-import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-
-export default {
-  computed: {
-    ...mapState(['count']),
-    ...mapGetters(['doubleCount'])
-  },
-  methods: {
-    ...mapMutations(['increment']),
-    ...mapActions(['asyncIncrement'])
-  }
-};
-</script>
-
-✅ Vuex의 문제점
-	•	mutations, actions을 따로 정의해야 하므로 코드가 복잡해짐.
-	•	mapState(), mapMutations() 등을 사용해야 하므로 가독성이 떨어짐.
-
-3. Pinia 개념 및 사용법
-
-✅ Pinia 특징
-	•	Vue 3 공식 상태 관리 라이브러리 (Vuex의 차세대 버전).
-	•	Composition API와 Reactivity 기반 (reactive, computed, ref).
-	•	mutations 없이 직접 상태 변경 가능.
-	•	Typescript 친화적이며 코드가 간결.
-	•	Vue DevTools와 기본적으로 통합됨.
-
-✅ Pinia 사용 예제
-
-// stores/counter.js
-import { defineStore } from 'pinia';
-
-export const useCounterStore = defineStore('counter', {
-  state: () => ({
-    count: 0
-  }),
-  actions: {
-    increment() {
-      this.count++;
-    },
-    asyncIncrement() {
-      setTimeout(() => {
-        this.increment();
-      }, 1000);
-    }
-  },
-  getters: {
-    doubleCount: (state) => state.count * 2
-  }
-});
-
-🔹 컴포넌트에서 Pinia 사용
-
-<template>
-  <div>
-    <p>Count: {{ counterStore.count }}</p>
-    <p>Double Count: {{ counterStore.doubleCount }}</p>
-    <button @click="counterStore.increment">+1 증가</button>
-    <button @click="counterStore.asyncIncrement">비동기 증가</button>
-  </div>
-</template>
-
-<script>
-import { defineComponent } from 'vue';
-import { useCounterStore } from '../stores/counter';
-
-export default defineComponent({
-  setup() {
-    const counterStore = useCounterStore();
-    return { counterStore };
-  }
-});
-</script>
-
-✅ Pinia의 장점
-	•	mutations 없이 상태 직접 변경 가능.
-	•	Composition API를 활용하여 사용법이 직관적.
-	•	코드가 간결하고 유지보수하기 쉬움.
-
-4. Vuex vs Pinia 비교 요약
-
-비교 항목	Vuex	Pinia
-상태 저장 방식	중앙 집중식 (store 객체)	모듈 기반 (defineStore())
-상태 변경 방식	mutations을 통해서만 가능	state를 직접 수정 가능
-비동기 처리	actions을 사용	actions에서 직접 state 수정 가능
-반응형(reactivity)	Vue.observable 기반	reactive(), ref() 기반
-타입스크립트 지원	코드가 복잡함	기본적으로 TS 친화적
-코드 작성 방식	mapState, mapMutations 필요	useStore()로 간결한 사용 가능
-Vue 지원 버전	Vue 2 & Vue 3	Vue 3 공식 지원
-
-5. Vuex와 Pinia 선택 기준
-
-사용 사례	추천 라이브러리
-Vue 2 프로젝트 유지보수	✅ Vuex
-Vue 3 프로젝트 개발	✅ Pinia (공식 추천)
-Composition API 사용	✅ Pinia
-타입스크립트 사용	✅ Pinia (TS 친화적)
-중앙 집중식 상태 관리 필요	✅ Vuex
-간단한 상태 관리 필요	✅ Pinia
-
-6. 결론
-
-✅ Vuex는 Vue 2 시절부터 사용된 전통적인 상태 관리 라이브러리지만, 보일러플레이트 코드가 많아 유지보수가 어려움.
-✅ Pinia는 Vue 3 공식 상태 관리 라이브러리로, 코드가 간결하고 TypeScript 지원이 뛰어나며 Composition API와 잘 어울림.
-✅ Vue 3에서는 Pinia를 기본 선택으로 고려하는 것이 좋으며, 기존 Vuex 프로젝트는 필요 시 마이그레이션 가능. 🚀
+- 결론
+  - Vuex는 Vue 2 시절부터 사용된 전통적인 상태 관리 라이브러리지만, 보일러플레이트 코드가 많아 유지보수가 어려움
+  - Pinia는 Vue 3 공식 상태 관리 라이브러리로, 코드가 간결하고 TypeScript 지원이 뛰어나며 Composition API와 잘 어울림
+  - Vue 3에서는 Pinia를 기본 선택으로 고려하는 것이 좋으며, 기존 Vuex 프로젝트는 필요 시 마이그레이션 가능
 
 - Vue.js의 Computed Property와 Watcher의 차이점은?
 - Vue.js에서 Composition API와 Options API의 차이점은?
