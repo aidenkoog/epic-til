@@ -1318,7 +1318,117 @@ CPM	임계 경로 기반 일정 최적화	확정적 (단일 값 사용)	프로�
 📌 리스크를 사전에 예측하고, 발생했을 때 빠르게 대응하는 것이 중요!
 📌 체계적인 리스크 분석 및 대응 전략이 프로젝트 성공을 결정짓는다! 🚀
 
-- 소프트웨어 형상 관리(Configuration Management)의 개념과 주요 기능을 설명하시오.
+- 소프트웨어 형상 관리(Configuration Management)의 개념과 주요 기능
+
+소프트웨어 형상 관리(Configuration Management) 개념 및 주요 기능
+
+1. 소프트웨어 형상 관리(Configuration Management)란?
+
+소프트웨어 형상 관리(SCM, Software Configuration Management)는 소프트웨어 개발 과정에서 변경 사항을 체계적으로 관리하는 방법론 및 프로세스를 의미합니다.
+즉, 소프트웨어의 코드, 문서, 설정, 빌드 정보 등 모든 구성 요소를 추적하고 제어하는 과정입니다.
+
+📌 목적:
+✅ 소프트웨어 개발 변경 사항을 체계적으로 관리
+✅ 여러 개발자가 동시에 작업할 때 충돌 방지
+✅ 소프트웨어의 일관성 유지 및 품질 보장
+✅ 문제 발생 시 이전 버전으로 복구 가능
+
+2. 소프트웨어 형상 관리 주요 기능
+
+소프트웨어 형상 관리는 다음과 같은 5가지 주요 기능을 포함합니다.
+
+기능	설명
+① 형상 식별(Configuration Identification)	관리할 소프트웨어 구성 요소(코드, 문서, 설정 파일 등)를 정의하고 식별
+② 형상 통제(Configuration Control)	변경 사항이 발생할 때 이를 승인하고 적용하는 프로세스
+③ 형상 감사(Configuration Audit)	변경된 항목이 제대로 적용되었는지 검토 및 검증
+④ 형상 기록(Configuration Status Accounting)	변경 이력 및 버전 관리 정보를 문서화
+⑤ 형상 관리 도구(Configuration Management Tools)	Git, SVN, Jenkins 등 형상 관리를 지원하는 도구 활용
+
+3. 소프트웨어 형상 관리 기능 상세 설명
+
+① 형상 식별 (Configuration Identification)
+
+📌 관리할 항목을 정의하고 명확하게 식별하는 과정
+✅ 소프트웨어 구성 요소(코드, 라이브러리, 설정 파일, 문서 등) 목록화
+✅ 버전별로 태그(Tag) 또는 브랜치(Branch) 생성
+
+✔ 예제:
+	•	v1.0.0 → 초기 배포 버전
+	•	v1.0.1 → 버그 수정
+	•	v2.0.0 → 주요 기능 추가
+
+② 형상 통제 (Configuration Control)
+
+📌 변경 사항을 체계적으로 관리하여 혼란을 방지하는 과정
+✅ 변경 요청(Change Request) 프로세스 설정
+✅ 변경 사항 승인 및 검토 후 적용
+
+✔ 예제:
+	1.	개발자가 기능 추가 요청(PR, Pull Request)
+	2.	코드 리뷰 및 변경 승인
+	3.	테스트 후 메인 브랜치(Master)로 병합
+
+③ 형상 감사 (Configuration Audit)
+
+📌 변경된 사항이 올바르게 적용되었는지 검토하는 과정
+✅ 코드 변경이 사전 승인된 사항과 일치하는지 확인
+✅ 테스트 및 품질 검증 수행
+
+✔ 예제:
+	•	최신 릴리즈 버전(v2.0.0)이 요구사항을 정확히 반영했는지 검토
+	•	배포 전 테스트 수행(자동화 테스트, CI/CD)
+
+④ 형상 기록 (Configuration Status Accounting)
+
+📌 소프트웨어 변경 이력 및 버전 정보를 문서화하는 과정
+✅ 변경된 코드, 버전, 배포 이력 기록
+✅ 버전별 기능 및 수정 내용 정리
+
+✔ 예제 (Git commit 메시지 & 릴리즈 노트):
+
+git commit -m "fix: 로그인 오류 수정 (#1023)"
+
+## v1.1.0 (2025-02-22)
+- 로그인 버그 수정
+- UI 개선
+- 데이터 동기화 기능 추가
+
+⑤ 형상 관리 도구 (Configuration Management Tools)
+
+📌 소프트웨어 형상 관리를 자동화하고 효율적으로 운영할 수 있도록 지원하는 도구
+
+✅ 소스 코드 관리:
+	•	Git (GitHub, GitLab, Bitbucket)
+	•	SVN (Subversion)
+
+✅ CI/CD & 자동화 빌드:
+	•	Jenkins, GitHub Actions, CircleCI
+
+✅ 이슈 트래킹:
+	•	JIRA, Redmine, Trello
+
+✅ 버전 관리 전략:
+	•	Git Flow, GitHub Flow, Trunk-based Development
+
+✔ 예제:
+	•	git branch feature/login → 로그인 기능 개발 브랜치 생성
+	•	git merge feature/login → 기능 완료 후 메인 브랜치 병합
+
+4. 소프트웨어 형상 관리의 장점
+
+✔ 효율적인 변경 관리 → 개발 중 코드 충돌 방지
+✔ 버전 이력 관리 → 이전 상태로 쉽게 복구 가능
+✔ 자동화된 빌드 및 배포 → CI/CD 파이프라인 구축
+✔ 품질 및 보안 향상 → 코드 리뷰, 형상 감사 적용
+
+5. 결론
+
+📌 소프트웨어 형상 관리(SCM)는 변경 사항을 체계적으로 관리하여 프로젝트의 안정성과 품질을 높이는 필수 과정
+📌 Git, SVN 같은 도구를 활용하여 코드 및 버전 관리를 효율적으로 수행 가능
+📌 CI/CD, 코드 리뷰, 테스트 자동화를 적용하면 형상 관리 효과 극대화
+
+🚀 개발팀이 협업할 때 필수적인 핵심 프로세스!
+
 - CI/CD(Continuous Integration / Continuous Deployment)의 개념과 활용 사례를 설명하시오.
 - 요구사항 분석(Requirement Analysis)의 개념과 주요 기법을 설명하시오.
 - 요구사항 명세(Requirement Specification) 작성 시 고려해야 할 사항을 설명하시오.
