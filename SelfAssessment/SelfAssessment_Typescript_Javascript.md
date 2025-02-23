@@ -66,166 +66,57 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 	        - JavaScript 코드가 실행될 때 호출되는 함수가 쌓이는 스택(Stack)
 	        - 함수 실행이 끝나면 스택에서 제거(Pop)
 
-✅ (2) Web APIs (비동기 작업 처리)
-	•	setTimeout, DOM 이벤트, AJAX 요청 등 비동기 작업은 Web API를 통해 처리됨.
-	•	완료된 작업은 콜백 큐(Callback Queue) 또는 마이크로태스크 큐(Microtask Queue)에 추가.
+        - (2) Web APIs (비동기 작업 처리)
+	        - setTimeout, DOM 이벤트, AJAX 요청 등 비동기 작업은 Web API를 통해 처리
+	        - 완료된 작업은 콜백 큐(Callback Queue) 또는 마이크로태스크 큐(Microtask Queue)에 추가
 
-✅ (3) Task Queue (콜백 큐 & 마이크로태스크 큐)
-	•	마이크로태스크 큐 (Microtask Queue): Promise.then(), MutationObserver 등이 들어감.
-	•	콜백 큐 (Callback Queue): setTimeout(), setInterval(), event listeners 등이 들어감.
+        - (3) Task Queue (콜백 큐 & 마이크로태스크 큐)
+	        - 마이크로태스크 큐 (Microtask Queue): Promise.then(), MutationObserver 등이 들어감.
+	        - 콜백 큐 (Callback Queue): setTimeout(), setInterval(), event listeners 등이 들어감.
 
-✅ (4) Rendering (렌더링)
-	•	이벤트 루프는 각 주기(Tick)마다 태스크 실행 후 렌더링을 수행.
-	•	프레임 단위로 UI를 업데이트하며, 성능을 유지하기 위해 16.6ms(60FPS 기준) 이내에 처리.
+        - (4) Rendering (렌더링)
+	        - 이벤트 루프는 각 주기(Tick)마다 태스크 실행 후 렌더링을 수행.
+	        - 프레임 단위로 UI를 업데이트하며, 성능을 유지하기 위해 16.6ms(60FPS 기준) 이내에 처리.
 
-3. 이벤트 루프와 렌더링 최적화
+    - 이벤트 루프와 렌더링 최적화
+        - (1) requestAnimationFrame()을 사용한 부드러운 애니메이션
+	        - setTimeout()이나 setInterval()은 고정된 시간 간격으로 실행되며, 화면 리프레시 속도와 동기화되지 않음.
+	        - 브라우저는 60FPS 기준으로 16.6ms마다 화면을 업데이트하는데, requestAnimationFrame()을 사용하면 브라우저의 렌더링 주기에 맞춰 실행됨.
+            - 예제: setTimeout() vs requestAnimationFrame()
+            - 렌더링 최적화 효과
+	            - FPS(Frame Per Second)와 동기화되어 CPU 부하 최소화
+	            - 성능이 저하될 경우 프레임 조절이 가능하여 화면 끊김 방지
+            
+        - (2) 비동기 작업을 setTimeout(0) 대신 Promise.then()으로 처리
+	        - 마이크로태스크 큐(Microtask Queue)가 콜백 큐보다 먼저 실행되므로, UI 업데이트 전에 실행이 보장됨.
+            - 예제: setTimeout(0) vs Promise.then()
+            - 렌더링 최적화 효과
+	            - Promise는 마이크로태스크 큐에서 즉시 실행되므로 UI 업데이트 전에 작업 가능.
+	            - setTimeout(0)은 다음 이벤트 루프에서 실행되므로 UI 업데이트 이후에 실행됨.
 
-이벤트 루프는 렌더링 성능을 최적화하는 데 중요한 역할을 합니다.
-렌더링 최적화를 위해 다음과 같은 기법을 활용할 수 있습니다.
+        - (3) Heavy Task(무거운 연산) 분할 실행
+	        - 무거운 연산이 실행되면 Call Stack이 차단(blocking)되어 UI가 멈출 수 있음
+	        - Chunking(작은 작업 단위로 나누어 실행) 또는 Web Worker 사용
+            - 예제: Chunking 기법 (setTimeout())
+            - 렌더링 최적화 효과
+	            - 긴 연산을 여러 개의 작은 청크(chunk)로 나누어 UI가 멈추지 않도록 함
+	            - setTimeout(0)으로 이벤트 루프의 다음 Tick에서 실행하여 UI 업데이트 보장
 
-✅ (1) requestAnimationFrame()을 사용한 부드러운 애니메이션
-	•	setTimeout()이나 setInterval()은 고정된 시간 간격으로 실행되며, 화면 리프레시 속도와 동기화되지 않음.
-	•	브라우저는 60FPS 기준으로 16.6ms마다 화면을 업데이트하는데, requestAnimationFrame()을 사용하면 브라우저의 렌더링 주기에 맞춰 실행됨.
+        - (4) Debouncing & Throttling 기법 활용
+            - Debouncing (연속 호출 방지)
+	            - 사용자의 입력이 멈춘 후 일정 시간 후에 실행
+	            - ex. 검색 자동완성, 입력값 검증
 
-🔹 예제: setTimeout() vs requestAnimationFrame()
+            - Throttling (지정된 시간 간격으로 실행)
+	            - 일정 시간마다 한 번만 실행됨
+	            - ex. 스크롤 이벤트, 리사이즈 이벤트 최적화.
 
-// ❌ setTimeout() 방식 (부드럽지 않은 애니메이션)
-function animate() {
-    box.style.left = (parseInt(box.style.left) + 5) + 'px';
-    setTimeout(animate, 16);
-}
+            - 렌더링 최적화 효과
+	            - 불필요한 UI 업데이트 방지
+	            - 성능 저하 없이 부드러운 애니메이션 & 이벤트 처리 가능.
 
-// ✅ requestAnimationFrame() 방식 (최적화된 애니메이션)
-function animate() {
-    box.style.left = (parseInt(box.style.left) + 5) + 'px';
-    requestAnimationFrame(animate);
-}
-
-✅ 렌더링 최적화 효과:
-	•	FPS(Frame Per Second)와 동기화되어 CPU 부하 최소화.
-	•	성능이 저하될 경우 프레임 조절이 가능하여 화면 끊김 방지.
-
-✅ (2) 비동기 작업을 setTimeout(0) 대신 Promise.then()으로 처리
-	•	마이크로태스크 큐(Microtask Queue)가 콜백 큐보다 먼저 실행되므로, UI 업데이트 전에 실행이 보장됨.
-
-🔹 예제: setTimeout(0) vs Promise.then()
-
-console.log("Start");
-
-// setTimeout(0)은 이벤트 루프의 다음 Tick에서 실행됨
-setTimeout(() => {
-    console.log("setTimeout");
-}, 0);
-
-// Promise.then()은 마이크로태스크 큐에서 즉시 실행됨 (렌더링 전에 실행)
-Promise.resolve().then(() => {
-    console.log("Promise");
-});
-
-console.log("End");
-
-// 예상 출력 결과
-// Start
-// End
-// Promise
-// setTimeout
-
-✅ 렌더링 최적화 효과:
-	•	Promise는 마이크로태스크 큐에서 즉시 실행되므로 UI 업데이트 전에 작업 가능.
-	•	setTimeout(0)은 다음 이벤트 루프에서 실행되므로 UI 업데이트 이후에 실행됨.
-
-✅ (3) Heavy Task(무거운 연산) 분할 실행
-	•	무거운 연산이 실행되면 Call Stack이 차단(blocking)되어 UI가 멈출 수 있음.
-	•	Chunking(작은 작업 단위로 나누어 실행) 또는 Web Worker 사용.
-
-🔹 예제: Chunking 기법 (setTimeout())
-
-function heavyTask() {
-    for (let i = 0; i < 1000000000; i++) {
-        // CPU 부하를 주는 연산
-    }
-}
-
-// ❌ UI가 멈춤 (Blocking)
-heavyTask();
-console.log("완료!");
-
-// ✅ UI가 멈추지 않도록 작은 작업 단위로 실행
-function chunkedTask() {
-    let count = 0;
-    function processChunk() {
-        for (let i = 0; i < 100000; i++) {
-            count++;
-        }
-        if (count < 1000000000) {
-            setTimeout(processChunk, 0); // 다음 이벤트 루프에서 실행
-        }
-    }
-    processChunk();
-}
-
-chunkedTask();
-console.log("UI가 멈추지 않음!");
-
-✅ 렌더링 최적화 효과:
-	•	긴 연산을 여러 개의 작은 청크(chunk)로 나누어 UI가 멈추지 않도록 함.
-	•	setTimeout(0)으로 이벤트 루프의 다음 Tick에서 실행하여 UI 업데이트 보장.
-
-✅ (4) Debouncing & Throttling 기법 활용
-
-✅ Debouncing (연속 호출 방지)
-	•	사용자의 입력이 멈춘 후 일정 시간 후에 실행.
-	•	ex) 검색 자동완성, 입력값 검증.
-
-🔹 예제
-
-function debounce(func, delay) {
-    let timer;
-    return function (...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(this, args), delay);
-    };
-}
-
-const searchInput = document.getElementById("search");
-searchInput.addEventListener("input", debounce(() => {
-    console.log("검색 요청");
-}, 500));
-
-✅ Throttling (지정된 시간 간격으로 실행)
-	•	일정 시간마다 한 번만 실행됨.
-	•	ex) 스크롤 이벤트, 리사이즈 이벤트 최적화.
-
-🔹 예제
-
-function throttle(func, limit) {
-    let lastCall = 0;
-    return function (...args) {
-        let now = Date.now();
-        if (now - lastCall >= limit) {
-            lastCall = now;
-            func.apply(this, args);
-        }
-    };
-}
-
-window.addEventListener("scroll", throttle(() => {
-    console.log("스크롤 이벤트 발생");
-}, 200));
-
-✅ 렌더링 최적화 효과:
-	•	불필요한 UI 업데이트 방지.
-	•	성능 저하 없이 부드러운 애니메이션 & 이벤트 처리 가능.
-
-4. 결론
-
-최적화 기법	이벤트 루프와의 관계	렌더링 최적화 효과
-requestAnimationFrame()	브라우저 렌더링 주기에 맞춰 실행	FPS 유지, 끊김 없는 애니메이션
-Promise.then() 사용	마이크로태스크 큐에서 즉시 실행	UI 업데이트 전 코드 실행 가능
-Chunking 기법 (setTimeout())	긴 연산을 여러 개의 작은 작업으로 분할	UI 멈춤 방지
-Debouncing & Throttling	이벤트 루프 내에서 실행 횟수 조절	성능 최적화 & 불필요한 연산 방지
-
-➡ 이벤트 루프를 이해하고 활용하면 웹 애플리케이션의 성능을 향상시키고 부드러운 UI 렌더링을 제공할 수 있음! 🚀
+    - 결론
+        ➡ 이벤트 루프를 이해하고 활용하면 웹 애플리케이션의 성능을 향상시키고 부드러운 UI 렌더링을 제공 가능
 
 - JavaScript에서 메모리 누수를 방지하는 방법
 
