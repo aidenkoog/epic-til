@@ -1429,7 +1429,167 @@ git commit -m "fix: 로그인 오류 수정 (#1023)"
 
 🚀 개발팀이 협업할 때 필수적인 핵심 프로세스!
 
-- CI/CD(Continuous Integration / Continuous Deployment)의 개념과 활용 사례를 설명하시오.
+- CI/CD(Continuous Integration / Continuous Deployment)의 개념과 활용 사례
+
+CI/CD (Continuous Integration / Continuous Deployment) 개념과 활용 사례
+
+1. CI/CD란?
+
+CI/CD는 소프트웨어 개발 프로세스를 자동화하여 빠르고 안정적인 배포를 가능하게 하는 방법론입니다.
+	•	CI (Continuous Integration, 지속적 통합)
+→ 코드 변경 사항을 자주 병합하고 자동으로 빌드/테스트하여 코드 품질을 유지하는 프로세스
+	•	CD (Continuous Deployment, 지속적 배포)
+→ 자동화된 배포 시스템을 통해 변경된 코드가 테스트를 통과하면 운영 환경에 자동으로 배포되는 프로세스
+
+✅ CI/CD 도입 목적:
+✔ 코드 변경 사항을 신속하게 반영하여 빠른 배포
+✔ 수동 개입을 줄여 개발 생산성 향상
+✔ 자동화된 테스트를 통해 버그 최소화 및 코드 품질 유지
+
+2. CI/CD 주요 개념
+
+① CI (Continuous Integration, 지속적 통합)
+
+📌 목적: 개발자가 코드를 자주 병합하고, 자동화된 빌드 & 테스트를 수행하여 오류를 조기에 감지
+
+✅ CI 주요 과정:
+	1.	개발자가 Git에 코드 푸시 (Pull Request)
+	2.	CI 시스템이 자동으로 빌드 & 테스트 실행
+	3.	테스트가 통과하면 메인 브랜치에 병합 가능
+
+✔ 사용 도구:
+	•	Jenkins, GitHub Actions, GitLab CI/CD, CircleCI, Travis CI
+
+✔ 예제 (GitHub Actions 사용)
+
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Tests
+        run: npm test
+
+② CD (Continuous Deployment, 지속적 배포)
+
+📌 목적: 코드 변경 사항이 자동화된 테스트를 통과하면 운영 환경(Production)에 자동 배포
+
+✅ CD 주요 과정:
+	1.	CI가 완료된 코드를 배포 환경에 자동 적용
+	2.	운영 환경(Production)으로 배포 후 서비스 정상 작동 확인
+	3.	롤백(Rollback) 기능을 통해 배포 실패 시 원상 복구 가능
+
+✔ 사용 도구:
+	•	Kubernetes, Docker, AWS CodeDeploy, ArgoCD, Jenkins, GitLab CI/CD
+
+✔ 예제 (Kubernetes + ArgoCD 배포 자동화)
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: my-app:v2
+          ports:
+            - containerPort: 8080
+
+③ CI/CD 파이프라인 (전체 프로세스)
+
+✅ CI/CD 전체 흐름
+	1.	코드 푸시 (Git push) → CI 시스템에서 자동 빌드 & 테스트 → 성공 시 배포 (CD) → 운영 서버 반영
+
+✔ 예제: GitHub Actions + Docker + Kubernetes 기반의 CI/CD 파이프라인
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build -t my-app:v2 .
+      - name: Push Docker Image
+        run: docker push my-app:v2
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-test
+    steps:
+      - name: Apply Kubernetes Deployment
+        run: kubectl apply -f deployment.yaml
+
+3. CI/CD 활용 사례
+
+① 애자일(Agile) 기반 소프트웨어 개발
+
+✅ CI/CD를 적용하여 소프트웨어 배포 주기를 단축하고, 자동화된 테스트를 통해 코드 품질을 유지
+✔ 활용 사례:
+	•	스타트업에서 빠르게 기능 업데이트 배포
+	•	웹 서비스 운영팀이 매일 배포 가능하도록 설정
+
+② 모바일 앱 개발 (Android/iOS)
+
+✅ CI/CD를 활용하여 모바일 앱을 자동 빌드 및 배포 (Firebase, App Store, Play Store)
+✔ 활용 사례:
+	•	Fastlane을 활용하여 앱 스토어 자동 배포
+	•	Bitrise, Jenkins를 사용하여 iOS/Android CI/CD 구축
+
+③ 마이크로서비스 아키텍처 (MSA)
+
+✅ 마이크로서비스는 작은 서비스 단위로 배포되기 때문에 CI/CD가 필수적
+✔ 활용 사례:
+	•	Docker + Kubernetes + GitHub Actions 조합으로 자동화된 배포 구축
+	•	ArgoCD를 사용하여 Kubernetes 기반 GitOps CI/CD 운영
+
+④ DevOps & 클라우드 환경
+
+✅ AWS, Azure, GCP 같은 클라우드 환경에서 DevOps CI/CD 파이프라인 구축
+✔ 활용 사례:
+	•	AWS CodePipeline + Lambda 자동 배포
+	•	Terraform을 사용하여 인프라 변경을 자동화
+
+4. CI/CD 도입의 장점
+
+✔ 배포 속도 향상 → 자동화된 빌드 & 테스트로 개발 주기 단축
+✔ 코드 품질 유지 → 자동 테스트로 버그 최소화
+✔ 인적 오류 감소 → 배포 과정 자동화로 수동 작업 최소화
+✔ 개발자 생산성 증가 → 코드 변경 후 즉시 배포 가능
+✔ 롤백 기능 지원 → 배포 실패 시 자동 복구 가능
+
+5. 결론
+
+📌 CI/CD는 현대 소프트웨어 개발에서 필수적인 자동화 시스템
+📌 빠른 배포, 높은 코드 품질, 개발 생산성 향상을 위해 도입
+📌 GitHub Actions, Jenkins, Kubernetes, Docker 등을 활용하여 다양한 CI/CD 구축 가능
+
+🚀 CI/CD를 적극 활용하면 신속하고 안정적인 서비스 운영이 가능해집니다!
+
 - 요구사항 분석(Requirement Analysis)의 개념과 주요 기법을 설명하시오.
 - 요구사항 명세(Requirement Specification) 작성 시 고려해야 할 사항을 설명하시오.
 - 요구사항 추적성(Requirement Traceability)의 개념과 필요성을 설명하시오.
