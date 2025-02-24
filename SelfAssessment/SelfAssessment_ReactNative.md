@@ -140,7 +140,7 @@ Organized expected questions & answers
       - npm install react-native-vector-icons
 
     - 예제: Bottom Tab Navigation 구현
-      ```
+      ```javascript
       import React from 'react';
       import { View, Text } from 'react-native';
       import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -194,7 +194,7 @@ Organized expected questions & answers
       - npm install @react-navigation/drawer
 
     - 예제: Drawer Navigation 구현
-      ```
+      ```javascript
       import React from 'react';
       import { View, Text } from 'react-native';
       import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -233,7 +233,7 @@ Organized expected questions & answers
     - 개요
       - 여러 개의 내비게이션을 조합하여 사용 가능
       - 예제: Stack + Tab Navigation 혼합
-        ```
+        ```javascript
         import React from 'react';
         import { View, Text } from 'react-native';
         import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

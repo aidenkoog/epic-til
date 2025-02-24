@@ -228,11 +228,11 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
 - Immutable 데이터 패턴을 사용하면 어떤 이점이 있는가?
 - 프론트엔드 성능 최적화를 위해 JavaScript에서 할 수 있는 것들은?
-- TypeScript의 **제네릭(Generic)**을 사용하면 어떤 장점이 있는가?
+- TypeScript의 제네릭(Generic)을 사용하면 어떤 장점이 있는가?
 - TypeScript의 strict 옵션을 활성화하면 어떤 이점이 있는가?
 - TypeScript의 Decorator 패턴은 무엇이며, 실제로 어떻게 사용하는가?
 - JavaScript와 TypeScript를 비교했을 때 TypeScript를 사용하면 유지보수성이 개선되는 이유는?
-- JavaScript에서 **CSR(Client Side Rendering)과 SSR(Server Side Rendering)**의 차이점은?
+- JavaScript에서 CSR(Client Side Rendering)과 SSR(Server Side Rendering)의 차이점은?
 - JavaScript의 this 바인딩 원리는?
 - JavaScript의 Promise와 async/await의 차이는?
 - TypeScript의 interface와 type의 차이는?
@@ -326,7 +326,7 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 - JavaScript에서 Web Workers를 활용한 성능 최적화 방법은?
 - JavaScript에서 debounce()와 throttle()을 내부적으로 구현하는 방법은?
 - JavaScript에서 async function을 Promise 없이 사용할 수 있는가?
-- JavaScript에서 **마이크로태스크(microtask)와 매크로태스크(macrotask)**의 차이점은?
+- JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점은?
 - JavaScript에서 Optional Chaining (?.) 연산자는 어떤 경우에 유용한가?
 - JavaScript에서 Nullish Coalescing (??) 연산자는 어떻게 동작하는가?
 - JavaScript에서 Promise.allSettled()의 사용 사례는?
