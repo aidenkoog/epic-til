@@ -455,105 +455,86 @@ Organized expected questions & answers
     - IT 투자의 효과적인 관리는 조직의 디지털 전환을 성공적으로 이끌고, 장기적인 경쟁력을 확보하는 핵심 요소로 작용할 것으로 예상
 
 - IT 거버넌스(IT Governance)의 주요 프레임워크(COBIT, ITIL, ISO 38500) 비교
+  - IT 거버넌스(IT Governance) 개념
+	  - 기업이 IT를 효과적으로 활용하여 비즈니스 목표를 달성할 수 있도록 관리하는 체계
+	  - IT 전략과 비즈니스 목표를 정렬하고, 리스크 관리, 성과 평가, 규제 준수 등을 보장하는 역할
+	  - 주요 IT 거버넌스 프레임워크에는 COBIT, ITIL, ISO 38500 등 존재
 
-IT 거버넌스(IT Governance)와 주요 프레임워크 비교
+  - 주요 IT 거버넌스 프레임워크 비교
+    - (1) COBIT (Control Objectives for Information and Related Technologies)
+      - 개념
+	      - IT 거버넌스 및 관리의 베스트 프랙티스(Best Practice)를 제공하는 프레임워크
+	      - ISACA(정보 시스템 감사 및 통제 협회)에서 개발
+	      - 기업이 IT 프로세스를 효과적으로 관리하고 리스크를 최소화하면서 비즈니스 목표를 지원할 수 있도록 함
 
-1. IT 거버넌스(IT Governance)란?
-	•	**IT 거버넌스(IT Governance)**는 기업이 IT를 효과적으로 활용하여 비즈니스 목표를 달성할 수 있도록 관리하는 체계이다.
-	•	IT 전략과 비즈니스 목표를 정렬하고, 리스크 관리, 성과 평가, 규제 준수 등을 보장하는 역할을 함.
-	•	주요 IT 거버넌스 프레임워크에는 COBIT, ITIL, ISO 38500 등이 있음.
+      - 특징
+	      - 비즈니스와 IT의 정렬(Alignment) 중점
+	      - 리스크 관리, 성과 측정, 규제 준수를 강조
+	      - IT 프로세스를 5개의 도메인과 40개 이상의 프로세스로 정의
 
-2. 주요 IT 거버넌스 프레임워크 비교
+      - COBIT 5 / COBIT 2019 주요 원칙
+	      - 이해관계자의 필요 충족 (Meeting Stakeholder Needs)
+	      - 기업의 목표와 IT 거버넌스 연계 (Covering the Enterprise End-to-End)
+	      - 단일 통합 프레임워크 제공 (Applying a Single Integrated Framework)
+	      - 거버넌스와 관리 구분 (Enabling a Holistic Approach)
+	      - 거버넌스 및 관리 평가 (Separating Governance from Management)
 
-(1) COBIT (Control Objectives for Information and Related Technologies)
+      - 활용 분야
+	      - IT 감사, 리스크 관리, 규제 준수(SOX, GDPR 등)
+	      - 기업의 IT 프로세스 성숙도 평가 및 개선
 
-✅ 개념
-	•	IT 거버넌스 및 관리의 베스트 프랙티스(Best Practice)를 제공하는 프레임워크
-	•	**ISACA(정보 시스템 감사 및 통제 협회)**에서 개발
-	•	기업이 IT 프로세스를 효과적으로 관리하고 리스크를 최소화하면서 비즈니스 목표를 지원할 수 있도록 함
+    - (2) ITIL (Information Technology Infrastructure Library)
+      - 개념
+	      - IT 서비스 관리(ITSM, IT Service Management)의 베스트 프랙티스를 제공하는 프레임워크
+	      - IT 서비스를 설계, 운영, 관리, 개선하는 데 초점
+	      - 영국 정부(OGC)가 개발했으며, 현재는 AXELOS에서 관리
 
-✅ 특징
-	•	비즈니스와 IT의 정렬(Alignment) 중점
-	•	리스크 관리, 성과 측정, 규제 준수를 강조
-	•	IT 프로세스를 5개의 도메인과 40개 이상의 프로세스로 정의
+      - 특징
+	      - IT 서비스 관리(ITSM)에 최적화된 프레임워크
+	      - 고객 중심의 IT 서비스 제공과 지속적 개선(Continual Improvement) 강조
+	      - IT 서비스를 5단계 라이프사이클로 관리
 
-✅ COBIT 5 / COBIT 2019 주요 원칙
-	1.	이해관계자의 필요 충족 (Meeting Stakeholder Needs)
-	2.	기업의 목표와 IT 거버넌스 연계 (Covering the Enterprise End-to-End)
-	3.	단일 통합 프레임워크 제공 (Applying a Single Integrated Framework)
-	4.	거버넌스와 관리 구분 (Enabling a Holistic Approach)
-	5.	거버넌스 및 관리 평가 (Separating Governance from Management)
+      - ITIL 서비스 라이프사이클
+        - 서비스 전략(Service Strategy): IT 서비스의 목표와 비즈니스 연계
+        - 서비스 설계(Service Design): IT 서비스의 설계 및 아키텍처
+        - 서비스 전환(Service Transition): 서비스 변경, 배포, 릴리스 관리
+        - 서비스 운영(Service Operation): 서비스 제공 및 모니터링
+        - 지속적 서비스 개선(Continual Service Improvement, CSI): 지속적인 성능 개선
 
-✅ 활용 분야
-	•	IT 감사, 리스크 관리, 규제 준수(SOX, GDPR 등)
-	•	기업의 IT 프로세스 성숙도 평가 및 개선
+      - 활용 분야
+	      - IT 서비스 운영 및 관리, 헬프데스크 운영
+	      - ITIL 기반 ITSM 도입 (예: ServiceNow, Remedy)
+	      - IT 서비스 성과 개선 및 SLA(Service Level Agreement) 관리
 
-(2) ITIL (Information Technology Infrastructure Library)
+    - (3) ISO/IEC 38500 (IT 거버넌스 국제 표준)
+      - 개념
+	      - IT 거버넌스의 국제 표준(ISO/IEC 38500)
+	      - 기업이 IT를 효과적으로 사용하고 IT 의사결정을 평가할 수 있도록 하는 가이드라인
+	      - IT의 책임, 전략적 목표 정렬, 리스크 관리 등을 다룸
 
-✅ 개념
-	•	IT 서비스 관리(ITSM, IT Service Management)의 베스트 프랙티스를 제공하는 프레임워크
-	•	IT 서비스를 설계, 운영, 관리, 개선하는 데 초점
-	•	영국 정부(OGC)가 개발했으며, 현재는 AXELOS에서 관리
+      - 특징
+	      - 비즈니스 경영진과 IT 의사결정자를 위한 지침 제공
+	      - IT 거버넌스의 6가지 원칙을 정의
+	      - IT 거버넌스의 평가(Evaluate), 지시(Direct), 모니터링(Monitor) 역할 강조
 
-✅ 특징
-	•	IT 서비스 관리(ITSM)에 최적화된 프레임워크
-	•	고객 중심의 IT 서비스 제공과 지속적 개선(Continual Improvement) 강조
-	•	IT 서비스를 5단계 라이프사이클로 관리
+      - ISO 38500의 6대 원칙
+        - 책임 (Responsibility): IT 사용에 대한 명확한 책임 정의
+        - 전략 (Strategy): IT가 비즈니스 전략과 정렬
+        - 획득 (Acquisition): IT 투자와 조달이 비즈니스 요구에 맞게 수행됨
+        - 성능 (Performance): IT가 기대하는 성과를 제공
+        - 준수 (Conformance): 법규 및 정책을 준수
+        - 인적 행위 (Human Behavior): IT 활용이 조직 내 올바르게 수행됨
 
-✅ ITIL 서비스 라이프사이클
+      - 활용 분야
+	      - IT 거버넌스 원칙 정립 및 평가
+	      - 기업 IT 의사결정 기준 설정
+	      - 규제 준수 및 IT 성과 측정
 
-단계	설명
-서비스 전략(Service Strategy)	IT 서비스의 목표와 비즈니스 연계
-서비스 설계(Service Design)	IT 서비스의 설계 및 아키텍처
-서비스 전환(Service Transition)	서비스 변경, 배포, 릴리스 관리
-서비스 운영(Service Operation)	서비스 제공 및 모니터링
-지속적 서비스 개선(Continual Service Improvement, CSI)	지속적인 성능 개선
-
-✅ 활용 분야
-	•	IT 서비스 운영 및 관리, 헬프데스크 운영
-	•	ITIL 기반 ITSM 도입 (예: ServiceNow, Remedy)
-	•	IT 서비스 성과 개선 및 SLA(Service Level Agreement) 관리
-
-(3) ISO/IEC 38500 (IT 거버넌스 국제 표준)
-
-✅ 개념
-	•	IT 거버넌스의 국제 표준(ISO/IEC 38500)
-	•	기업이 IT를 효과적으로 사용하고 IT 의사결정을 평가할 수 있도록 하는 가이드라인
-	•	IT의 책임, 전략적 목표 정렬, 리스크 관리 등을 다룸
-
-✅ 특징
-	•	비즈니스 경영진과 IT 의사결정자를 위한 지침 제공
-	•	IT 거버넌스의 6가지 원칙을 정의
-	•	IT 거버넌스의 평가(Evaluate), 지시(Direct), 모니터링(Monitor) 역할 강조
-
-✅ ISO 38500의 6대 원칙
-
-원칙	설명
-책임 (Responsibility)	IT 사용에 대한 명확한 책임 정의
-전략 (Strategy)	IT가 비즈니스 전략과 정렬
-획득 (Acquisition)	IT 투자와 조달이 비즈니스 요구에 맞게 수행됨
-성능 (Performance)	IT가 기대하는 성과를 제공
-준수 (Conformance)	법규 및 정책을 준수
-인적 행위 (Human Behavior)	IT 활용이 조직 내 올바르게 수행됨
-
-✅ 활용 분야
-	•	IT 거버넌스 원칙 정립 및 평가
-	•	기업 IT 의사결정 기준 설정
-	•	규제 준수 및 IT 성과 측정
-
-3. 주요 IT 거버넌스 프레임워크 비교 정리
-
-프레임워크	주요 목적	특징	주요 적용 분야
-COBIT	IT 거버넌스 및 관리	IT와 비즈니스 정렬, 리스크 관리 및 규제 준수	IT 감사, 내부 통제, 성숙도 평가
-ITIL	IT 서비스 관리(ITSM)	IT 서비스의 운영 및 지속적 개선	IT 서비스 운영, 헬프데스크, SLA 관리
-ISO 38500	IT 거버넌스 국제 표준	IT 의사결정 평가 및 전략 정렬	기업 IT 거버넌스 원칙 정립, IT 성과 평가
-
-4. 결론
-	•	COBIT: IT 프로세스 관리, IT 감사, 리스크 관리 및 규제 준수 중심
-	•	ITIL: IT 서비스 관리(ITSM), 서비스 운영 및 개선 중심
-	•	ISO 38500: IT 거버넌스 원칙 설정 및 기업 IT 전략 정렬 중심
-
-➡ 조직의 목적에 따라 적절한 프레임워크를 선택하거나, 여러 프레임워크를 조합하여 활용 가능.
+  - 결론
+	  - COBIT: IT 프로세스 관리, IT 감사, 리스크 관리 및 규제 준수 중심
+	  - ITIL: IT 서비스 관리(ITSM), 서비스 운영 및 개선 중심
+	  - ISO 38500: IT 거버넌스 원칙 설정 및 기업 IT 전략 정렬 중심
+    - 조직의 목적에 따라 적절한 프레임워크를 선택하거나, 여러 프레임워크를 조합하여 활용 가능
 
 - IT 경영에서 IT 위험 관리(IT Risk Management)의 개념과 주요 기법을 설명하시오.
 - IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)를 설명하시오.
