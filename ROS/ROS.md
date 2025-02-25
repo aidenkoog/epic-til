@@ -109,147 +109,22 @@
 
   - ROS 노드(Node) 작성
     - (1) Python 노드 작성
+    - (2) C++ 노드 작성
 
-#!/usr/bin/env python3
-import rospy  # ROS 라이브러리
-from std_msgs.msg import String  # 메시지 타입
+  - ROS 토픽(Topic) 통신
+    - 1) Python 노드에서 토픽 구독 (Subscriber)
 
-def talker():
-    pub = rospy.Publisher('chatter', String, queue_size=10)  # 토픽 생성
-    rospy.init_node('talker_node', anonymous=True)  # 노드 초기화
-    rate = rospy.Rate(10)  # 10Hz 주기로 실행
+  - ROS 서비스(Service)
+    - (1) 서비스 서버 (Python)
+    - (2) 서비스 클라이언트 (Python)
 
-    while not rospy.is_shutdown():
-        message = "Hello ROS! %s" % rospy.get_time()
-        rospy.loginfo(message)
-        pub.publish(message)  # 메시지 전송
-        rate.sleep()  # 주기 맞추기
+  - ROS 실행 및 테스트
+    - (1) ROS 시스템 실행
+    - (2) 노드 실행
+    - (3) 메시지 확인
+    - (4) 서비스 호출
 
-if __name__ == '__main__':
-    try:
-        talker()
-    except rospy.ROSInterruptException:
-        pass
-
-✅ 설명
-	•	rospy.Publisher를 사용하여 chatter라는 토픽을 생성하고 문자열 데이터를 전송.
-	•	rospy.init_node('talker_node')를 통해 노드 이름을 설정.
-
-✅ 2) C++ 노드 작성
-
-#include "ros/ros.h"
-#include "std_msgs/String.h"
-
-int main(int argc, char **argv) {
-    ros::init(argc, argv, "talker_node"); // 노드 초기화
-    ros::NodeHandle nh; // 노드 핸들 생성
-    ros::Publisher pub = nh.advertise<std_msgs::String>("chatter", 10); // 토픽 생성
-
-    ros::Rate loop_rate(10); // 10Hz
-    while (ros::ok()) {
-        std_msgs::String msg;
-        msg.data = "Hello ROS from C++!";
-        ROS_INFO("%s", msg.data.c_str());
-        pub.publish(msg);
-        ros::spinOnce();
-        loop_rate.sleep();
-    }
-    return 0;
-}
-
-✅ 설명
-	•	C++에서는 ros::Publisher를 사용하여 “chatter” 토픽을 생성하고 메시지를 발행.
-	•	ros::spinOnce()로 ROS 콜백을 실행.
-
-5. ROS 토픽(Topic) 통신
-
-✅ 1) Python 노드에서 토픽 구독 (Subscriber)
-
-#!/usr/bin/env python3
-import rospy
-from std_msgs.msg import String
-
-def callback(msg):
-    rospy.loginfo("Received: %s", msg.data)
-
-def listener():
-    rospy.init_node('listener_node', anonymous=True)
-    rospy.Subscriber("chatter", String, callback)
-    rospy.spin()
-
-if __name__ == '__main__':
-    listener()
-
-✅ 설명
-	•	rospy.Subscriber("chatter", String, callback)로 “chatter” 토픽을 구독하여 메시지를 수신.
-
-6. ROS 서비스(Service)
-
-✅ 1) 서비스 서버 (Python)
-
-#!/usr/bin/env python3
-import rospy
-from std_srvs.srv import SetBool, SetBoolResponse
-
-def handle_request(req):
-    return SetBoolResponse(success=True, message="Service Executed!")
-
-def service_server():
-    rospy.init_node('service_server')
-    service = rospy.Service('my_service', SetBool, handle_request)
-    rospy.spin()
-
-if __name__ == "__main__":
-    service_server()
-
-✅ 설명
-	•	rospy.Service('my_service', SetBool, handle_request)로 서비스 생성.
-
-✅ 2) 서비스 클라이언트 (Python)
-
-#!/usr/bin/env python3
-import rospy
-from std_srvs.srv import SetBool, SetBoolRequest
-
-def service_client():
-    rospy.wait_for_service('my_service')
-    try:
-        my_service = rospy.ServiceProxy('my_service', SetBool)
-        response = my_service(SetBoolRequest(data=True))
-        rospy.loginfo("Response: %s", response.message)
-    except rospy.ServiceException as e:
-        rospy.logerr("Service call failed: %s", e)
-
-if __name__ == "__main__":
-    rospy.init_node('service_client')
-    service_client()
-
-✅ 설명
-	•	rospy.ServiceProxy('my_service', SetBool)을 사용하여 서비스 호출.
-
-7. ROS 실행 및 테스트
-
-✅ 1) ROS 시스템 실행
-
-roscore  # ROS 마스터 실행
-
-✅ 2) 노드 실행
-
-rosrun my_robot talker.py   # 노드 실행 (퍼블리셔)
-rosrun my_robot listener.py # 노드 실행 (서브스크라이버)
-
-✅ 3) 메시지 확인
-
-rostopic echo /chatter
-
-✅ 4) 서비스 호출
-
-rosservice call /my_service "data: true"
-
-8. 결론
-
-✅ ROS는 노드 기반의 분산 시스템으로, 노드 간 통신(Topic), 요청-응답(Service), 장기 실행(Action) 등의 개념을 이해하는 것이 필수
-✅ Python을 활용한 노드 구현이 기본이며, C++을 사용할 수도 있음
-✅ rostopic, rosnode, rosservice 등 기본 명령어를 익히고, catkin_make를 활용한 빌드 프로세스를 이해하는 것이 중요
-
-🚀 초보자는 ROS 환경 설정, 노드 실행, 토픽 퍼블리셔 & 서브스크라이버 구현부터 시작하면 좋음!
+  - 결론
+    - ROS는 노드 기반의 분산 시스템으로, 노드 간 통신(Topic), 요청-응답(Service), 장기 실행(Action) 등의 개념을 이해하는 것이 필수
+    - Python을 활용한 노드 구현이 기본이며, C++을 사용할 수도 있음
+    - rostopic, rosnode, rosservice 등 기본 명령어를 익히고, catkin_make를 활용한 빌드 프로세스를 이해하는 것이 중요
