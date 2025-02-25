@@ -4,7 +4,6 @@
 
 - 개념 / 용어 정의, 사용 이유
 - 성능, 메모리 등 이슈 해결 방법
-- Interview Question, Answer
 
 ## Flutter 사용 이유
 

@@ -4,7 +4,7 @@
 
 - 개념 / 용어 정의, 사용 이유
 - 블록체인, 관련 파생 기술 등
-- Interview Question, Answer
+
 
 #### 블록체인 (Blockchain) 개념
 

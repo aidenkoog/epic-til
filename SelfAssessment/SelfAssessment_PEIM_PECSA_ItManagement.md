@@ -1,6 +1,6 @@
-# Expected Questions
+# Concepts, Features, Types and Pros and Cons
 
-Organized expected questions & answers
+Organize concepts, features, types and Pros and Cons
 
 ## IT Management
 
@@ -573,7 +573,7 @@ Organized expected questions & answers
       - 예: IT 개발, 고객 서비스, 제조업 생산 아웃소싱 등
     - 크라우드소싱은 개방적이고 참여형 방식이라 창의성과 혁신이 필요한 분야에서 강점을 가지며, 아웃소싱은 신뢰성과 전문성을 요구하는 업무에 적합
 
-    
+
 - IT 경영에서 IT 위험 관리(IT Risk Management)의 개념과 주요 기법을 설명하시오.
 - IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)를 설명하시오.
 - IT 비용 관리(IT Cost Management)의 개념과 TCO(Total Cost of Ownership)의 중요성을 설명하시오.

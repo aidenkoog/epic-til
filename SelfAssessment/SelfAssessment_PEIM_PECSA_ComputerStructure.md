@@ -1,6 +1,6 @@
-# Expected Questions
+# Concepts, Features, Types and Pros and Cons
 
-Organized expected questions & answers
+Organize concepts, features, types and Pros and Cons
 
 ## Computer Structure
 

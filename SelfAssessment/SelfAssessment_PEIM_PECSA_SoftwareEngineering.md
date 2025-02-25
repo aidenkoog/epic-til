@@ -1,6 +1,6 @@
-# Expected Questions
+# Concepts, Features, Types and Pros and Cons
 
-Organized expected questions & answers
+Organize concepts, features, types and Pros and Cons
 
 - 소프트웨어공학(Software Engineering)의 개념과 목적
   - 소프트웨어공학(Software Engineering)의 개념

@@ -4,7 +4,7 @@
 
 - 개념 / 용어 정의, 사용 이유
 - 경력관리 방법론, 관리 예
-- Interview Question, Answer
+
 
 ### How to manage career
 

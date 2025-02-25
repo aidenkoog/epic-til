@@ -4,7 +4,7 @@
 
 - 개념 / 용어 정의, 사용 이유
 - 백엔드 관련 기술, 개념 정리 등
-- Interview Question, Answer
+
 
 #### 백엔드 개념
 
