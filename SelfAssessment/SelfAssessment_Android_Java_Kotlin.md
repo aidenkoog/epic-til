@@ -461,6 +461,11 @@ Organized expected questions & answers
         - ListAdapter를 활용하면 DiffUtil을 자동 적용할 수 있어 더욱 간편한 코드 작성이 가능
         - RecyclerView에서 DiffUtil을 활용하는 것이 필수적인 이유는 성능, 애니메이션, 코드 유지보수 측면에서 강력한 장점을 제공하기 때문임.
 
+- 안드로이드 파편화
+    - 구글이 아무리 업데이트를 발 빠르게 한다할지라도 해당 단말 제조사에서 업데이트를 해주지 않게 되면
+    - 안드로이드 플랫폼 버전의 파편화가 발생
+    - iOS는 애플이 모든것을 관리하므로 파편화가 적음
+
 - Android 앱의 백그라운드 작업을 효율적으로 수행하는 방법
 - Android에서 WorkManager와 JobScheduler의 차이점
 - Android TV 앱에서 Leanback 라이브러리의 역할
