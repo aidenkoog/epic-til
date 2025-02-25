@@ -95,10 +95,6 @@
 
 - [Linux](https://github.com/aidenkoog/TIL/blob/master/Linux/Linux.md)
 
-### Foreign languages
-
-- [ForeignLanguages](https://github.com/aidenkoog/TIL/blob/master/ForeignLanguages)
-
 ### Algorithm, Data structure
 
 - [Algorithm](https://github.com/aidenkoog/TIL/blob/master/DataStructureAlgorithm/DataStructureAlgorithm.md)
