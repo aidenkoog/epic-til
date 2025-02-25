@@ -5,102 +5,20 @@ Organized expected questions & answers
 ## HTML, CSS (+Javascript)
 
 - Flexbox와 Grid의 차이점
+  - 개념
+    - Flexbox (Flexible Box Layout): 1차원(행 또는 열) 레이아웃을 효율적으로 배치하는 CSS 레이아웃 방식
+    - Grid (CSS Grid Layout): 2차원(행 + 열) 레이아웃을 설계할 수 있는 CSS 레이아웃 방식
 
-Flexbox와 Grid의 차이점
+  - Flexbox와 Grid의 선택 기준
+    - 단순한 메뉴, 버튼 정렬, 카드 레이아웃: Flexbox
+    - 복잡한 페이지 전체 레이아웃: Grid
+    - 동적인 요소 배치 (예: 유동적인 UI 구성): Flexbox
+    - 행과 열을 동시에 다루는 레이아웃 (예: 대시보드, 테이블): Grid
 
-1. 개념
-
-개념	설명
-Flexbox (Flexible Box Layout)	1차원(행 또는 열) 레이아웃을 효율적으로 배치하는 CSS 레이아웃 방식
-Grid (CSS Grid Layout)	2차원(행 + 열) 레이아웃을 설계할 수 있는 CSS 레이아웃 방식
-
-2. 주요 차이점
-
-비교 항목	Flexbox	Grid
-레이아웃 차원	1차원 (가로 또는 세로)	2차원 (가로 + 세로)
-주 사용 목적	요소 정렬 및 배치	복잡한 레이아웃 구성
-기본 축	메인 축(Main Axis) 기준 정렬	행(Row)과 열(Column) 조합
-배치 방식	플렉스 컨테이너의 flex-direction에 따라 요소 배치	grid-template-rows와 grid-template-columns을 사용하여 행과 열을 정의
-주 사용 속성	display: flex;, flex-direction, justify-content, align-items	display: grid;, grid-template-columns, grid-template-rows, grid-gap
-콘텐츠 크기 조절	요소 크기가 자동 조정되며 유연하게 배치	명확한 행과 열의 크기 설정 가능
-정렬 방식	개별 아이템을 자유롭게 배치 가능	격자(grid) 형태로 아이템 배치
-반응형 웹 적합성	가변적인 요소 배치에 적합	페이지 전체 레이아웃 구성에 적합
-브라우저 지원	모든 최신 브라우저 지원	모든 최신 브라우저 지원 (Flexbox보다 늦게 도입됨)
-
-3. 사용 예제
-
-(1) Flexbox 예제 (1차원 정렬)
-
-.container {
-  display: flex;
-  flex-direction: row; /* 가로 정렬 */
-  justify-content: space-between; /* 아이템 간 간격 배분 */
-  align-items: center; /* 세로 중앙 정렬 */
-  height: 100px;
-  background-color: lightgray;
-}
-
-.item {
-  width: 100px;
-  height: 50px;
-  background-color: skyblue;
-  text-align: center;
-  line-height: 50px;
-}
-
-<div class="container">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-</div>
-
-✅ 설명
-	•	display: flex;를 사용하여 아이템들을 가로(row)로 정렬.
-	•	justify-content: space-between;을 사용해 아이템 간 간격을 균등하게 배분.
-	•	align-items: center;를 사용해 세로 중앙 정렬.
-
-(2) Grid 예제 (2차원 정렬)
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 크기의 열 */
-  grid-template-rows: 100px 100px; /* 2개의 행 */
-  gap: 10px;
-  background-color: lightgray;
-}
-
-.item {
-  background-color: lightcoral;
-  text-align: center;
-  line-height: 100px;
-}
-
-<div class="container">
-  <div class="item">1</div>
-  <div class="item">2</div>
-  <div class="item">3</div>
-  <div class="item">4</div>
-  <div class="item">5</div>
-  <div class="item">6</div>
-</div>
-
-✅ 설명
-	•	display: grid;를 사용하여 2차원 레이아웃(행과 열)으로 배치.
-	•	grid-template-columns: repeat(3, 1fr);를 사용하여 3개의 동일한 열을 생성.
-	•	grid-template-rows: 100px 100px;을 사용하여 2개의 행을 생성.
-
-4. Flexbox와 Grid의 선택 기준
-
-사용 사례	적합한 레이아웃 방식
-단순한 메뉴, 버튼 정렬, 카드 레이아웃	Flexbox
-복잡한 페이지 전체 레이아웃	Grid
-동적인 요소 배치 (예: 유동적인 UI 구성)	Flexbox
-행과 열을 동시에 다루는 레이아웃 (예: 대시보드, 테이블)	Grid
-
-5. 결론
-	•	Flexbox는 1차원(가로 또는 세로) 정렬에 적합하고, Grid는 2차원(행과 열) 정렬에 최적화됨.
-	•	UI의 유연성이 필요한 경우 → Flexbox, 전체적인 페이지 레이아웃을 설계할 경우 → Grid를 선택하는 것이 적절함.
-	•	복합적인 UI에서는 Flexbox와 Grid를 함께 사용하여 최적화 가능.
+  - 결론
+	  - Flexbox는 1차원(가로 또는 세로) 정렬에 적합하고, Grid는 2차원(행과 열) 정렬에 최적화됨.
+	  - UI의 유연성이 필요한 경우 → Flexbox, 전체적인 페이지 레이아웃을 설계할 경우 → Grid를 선택하는 것이 적절
+	  - 복합적인 UI에서는 Flexbox와 Grid를 함께 사용하여 최적화 가능
 
 - CSS의 position: absolute와 position: fixed의 차이는?
 - CSS의 z-index는 어떻게 동작하는가?

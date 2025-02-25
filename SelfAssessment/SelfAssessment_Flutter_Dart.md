@@ -214,338 +214,85 @@ Organized expected questions & answers
 
 
 - Flutter에서 Adaptive UI를 구현하는 방법
+  - Adaptive UI 개요
+	  - Adaptive UI는 다양한 디바이스(스마트폰, 태블릿, 데스크톱, 웹)에 따라 자동으로 UI가 적응하는 인터페이스
+	  - 반응형(Responsive UI)과 차이점
+	    - Responsive UI: 같은 UI 구성 요소를 크기만 조정하여 화면에 맞춤
+	    - Adaptive UI: 플랫폼과 디바이스 종류에 따라 완전히 다른 UI 구성을 사용
 
-Flutter에서 Adaptive UI 구현 방법
+  - Flutter의 Adaptive UI 특징
+	  - 단일 코드베이스로 Android, iOS, 웹, 데스크톱, 태블릿 등 다양한 플랫폼을 지원
+	  - MediaQuery, LayoutBuilder, OrientationBuilder, AdaptiveLayout, Platform.isAndroid 등의 API를 활용하여 구현
 
-1. Adaptive UI란?
-	•	Adaptive UI는 다양한 디바이스(스마트폰, 태블릿, 데스크톱, 웹)에 따라 자동으로 UI가 적응하는 인터페이스를 의미함.
-	•	반응형(Responsive UI)과 차이점:
-	•	Responsive UI: 같은 UI 구성 요소를 크기만 조정하여 화면에 맞춤.
-	•	Adaptive UI: 플랫폼과 디바이스 종류에 따라 완전히 다른 UI 구성을 사용.
+  - Adaptive UI를 구현하는 방법
+    - 방법 1: MediaQuery 사용 (디바이스 크기 기반)
+    - 방법 2: LayoutBuilder 사용 (위젯 크기 기반)
+    - 방법 3: OrientationBuilder 사용 (가로/세로 모드 대응)
+    - 방법 4: Platform.isAndroid & Platform.isIOS (플랫폼별 UI 차별화)
+    - 방법 5: AdaptiveLayout 패키지 사용 (멀티 디바이스 대응)
 
-✅ Flutter의 Adaptive UI 특징
-	•	단일 코드베이스로 Android, iOS, 웹, 데스크톱, 태블릿 등 다양한 플랫폼을 지원.
-	•	MediaQuery, LayoutBuilder, OrientationBuilder, AdaptiveLayout, Platform.isAndroid 등의 API를 활용하여 구현.
+  - 결론
+    - Flutter에서 Adaptive UI를 구현하는 방법
+      - MediaQuery: 디바이스의 화면 크기 기반, 화면 크기에 따라 UI 변경
+      - LayoutBuilder: 부모 위젯 크기 기반, 동적 UI 조정
+      - OrientationBuilder: 가로/세로 모드 대응, 세로/가로 모드별 UI 변경
+      - Platform.isAndroid / isIOS:	운영체제 기반 UI 변경, Android와 iOS에서 다른 UI 적용
+      - AdaptiveLayout: 패키지	자동 크기 대응, 스마트폰/태블릿/데스크탑 UI 자동 조정
 
-2. Adaptive UI를 구현하는 방법
+  - 추천 조합
+	  - 반응형 UI: MediaQuery + LayoutBuilder
+	  - 플랫폼별 UI 변경: Platform.isAndroid / isIOS
+	  - 다양한 디바이스 지원: AdaptiveLayout 패키지 사용
+    - Adaptive UI를 사용하면 다양한 기기에서 최적의 사용자 경험을 제공할 수 있으며, Flutter에서는 여러 방법을 조합하여 효과적으로 구현 가능
 
-방법 1: MediaQuery 사용 (디바이스 크기 기반)
-
-✅ 설명
-	•	MediaQuery.of(context).size를 사용하여 현재 디바이스의 화면 크기 및 해상도를 가져와 UI 조정.
-
-✅ 예제
-
-import 'package:flutter/material.dart';
-
-class AdaptiveScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      appBar: AppBar(title: Text("Adaptive UI")),
-      body: screenWidth > 600 ? wideLayout() : narrowLayout(),
-    );
-  }
-
-  Widget wideLayout() {
-    return Center(child: Text("태블릿 UI"));
-  }
-
-  Widget narrowLayout() {
-    return Center(child: Text("스마트폰 UI"));
-  }
-}
-
-✅ 설명
-	•	화면 너비가 600px 이상이면 태블릿 UI, 그보다 작으면 스마트폰 UI를 표시.
-
-방법 2: LayoutBuilder 사용 (위젯 크기 기반)
-
-✅ 설명
-	•	LayoutBuilder는 부모 위젯의 크기에 따라 자식 위젯을 동적으로 조정하는 방식.
-
-✅ 예제
-
-import 'package:flutter/material.dart';
-
-class AdaptiveLayoutScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Adaptive UI")),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            return wideLayout();
-          } else {
-            return narrowLayout();
-          }
-        },
-      ),
-    );
-  }
-
-  Widget wideLayout() {
-    return Center(child: Text("태블릿 레이아웃"));
-  }
-
-  Widget narrowLayout() {
-    return Center(child: Text("스마트폰 레이아웃"));
-  }
-}
-
-✅ 설명
-	•	constraints.maxWidth 값에 따라 UI를 조정 (600px 기준으로 태블릿과 스마트폰 구분).
-
-방법 3: OrientationBuilder 사용 (가로/세로 모드 대응)
-
-✅ 설명
-	•	OrientationBuilder를 사용하면 디바이스가 세로(Portrait)인지 가로(Landscape)인지에 따라 UI를 변경 가능.
-
-✅ 예제
-
-import 'package:flutter/material.dart';
-
-class AdaptiveOrientationScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Adaptive UI")),
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          if (orientation == Orientation.landscape) {
-            return landscapeLayout();
-          } else {
-            return portraitLayout();
-          }
-        },
-      ),
-    );
-  }
-
-  Widget landscapeLayout() {
-    return Center(child: Text("가로 모드 UI"));
-  }
-
-  Widget portraitLayout() {
-    return Center(child: Text("세로 모드 UI"));
-  }
-}
-
-✅ 설명
-	•	OrientationBuilder를 사용하여 가로/세로 화면 전환 시 UI가 자동으로 변경.
-
-방법 4: Platform.isAndroid & Platform.isIOS (플랫폼별 UI 차별화)
-
-✅ 설명
-	•	dart:io의 Platform 클래스를 사용하면 Android, iOS, Windows, Mac, Linux 등에 맞는 UI를 다르게 설정 가능.
-
-✅ 예제
-
-import 'dart:io';
-import 'package:flutter/material.dart';
-
-class PlatformAdaptiveScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Platform Adaptive UI")),
-      body: Center(
-        child: Platform.isAndroid ? androidLayout() : iosLayout(),
-      ),
-    );
-  }
-
-  Widget androidLayout() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text("Android 버튼"),
-    );
-  }
-
-  Widget iosLayout() {
-    return CupertinoButton(
-      onPressed: () {},
-      child: Text("iOS 버튼"),
-    );
-  }
-}
-
-✅ 설명
-	•	Platform.isAndroid와 Platform.isIOS를 활용하여 Android에서는 ElevatedButton, **iOS에서는 CupertinoButton**을 사용.
-
-방법 5: AdaptiveLayout 패키지 사용 (멀티 디바이스 대응)
-
-✅ 설명
-	•	adaptive_layout 패키지는 디바이스 크기에 따라 자동으로 UI를 변경하는 Flutter 패키지.
-	•	SmallLayout, MediumLayout, LargeLayout을 지원.
-
-✅ 설치
-
-dependencies:
-  adaptive_layout: ^0.0.1
-
-✅ 예제
-
-import 'package:flutter/material.dart';
-import 'package:adaptive_layout/adaptive_layout.dart';
-
-class AdaptiveLayoutExample extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Adaptive Layout")),
-      body: AdaptiveLayout(
-        smallLayout: (context) => Center(child: Text("스마트폰 UI")),
-        mediumLayout: (context) => Center(child: Text("태블릿 UI")),
-        largeLayout: (context) => Center(child: Text("데스크탑 UI")),
-      ),
-    );
-  }
-}
-
-✅ 설명
-	•	AdaptiveLayout을 사용하면 자동으로 스마트폰, 태블릿, 데스크탑에 맞춰 UI를 조정.
-
-3. 결론
-
-✅ Flutter에서 Adaptive UI를 구현하는 방법
-
-방법	설명	사용 예시
-MediaQuery	디바이스의 화면 크기 기반	화면 크기에 따라 UI 변경
-LayoutBuilder	부모 위젯 크기 기반	동적 UI 조정
-OrientationBuilder	가로/세로 모드 대응	세로/가로 모드별 UI 변경
-Platform.isAndroid / isIOS	운영체제 기반 UI 변경	Android와 iOS에서 다른 UI 적용
-AdaptiveLayout 패키지	자동 크기 대응	스마트폰/태블릿/데스크탑 UI 자동 조정
-
-✅ 추천 조합
-	•	반응형 UI: MediaQuery + LayoutBuilder
-	•	플랫폼별 UI 변경: Platform.isAndroid / isIOS
-	•	다양한 디바이스 지원: AdaptiveLayout 패키지 사용
-
-➡ Adaptive UI를 사용하면 다양한 기기에서 최적의 사용자 경험을 제공할 수 있으며, Flutter에서는 여러 방법을 조합하여 효과적으로 구현 가능!
-
-- Flutter에서 태블릿, 일반폰의 화면 사이즈 대응 방법
 - Isolate 설명
+  - 개요
+    - Isolate.run() – Flutter 3.7부터 도입된 간단한 비동기 Isolate 실행 방법
+    - Flutter 3.7부터 새로운 API Isolate.run()이 도입됨
+    - compute()와 유사하지만 더 직관적이고 사용이 편리한 방식
 
-Isolate.run() – Flutter 3.7부터 도입된 간단한 비동기 Isolate 실행 방법
+  - Isolate.run()이란?
+    - 기존 compute()와 비슷한 방식으로 백그라운드에서 무거운 연산을 실행하는 기능을 제공
+    - Isolate.run()을 사용하면 별도의 Isolate를 생성하여 코드 실행 후 결과를 반환받을 수 있음
 
-Flutter 3.7부터 **새로운 API Isolate.run()**이 도입되었습니다.
-✅ compute()와 유사하지만 더 직관적이고 사용이 편리한 방식입니다.
-
-1. Isolate.run()이란?
-
-기존 compute()와 비슷한 방식으로 백그라운드에서 무거운 연산을 실행하는 기능을 제공합니다.
-📌 Isolate.run()을 사용하면 별도의 Isolate를 생성하여 코드 실행 후 결과를 반환받을 수 있습니다.
-
-✔ 장점
-	•	compute()보다 더 직관적인 문법
-	•	async/await을 지원하여 비동기 방식으로 사용 가능
-	•	일회성 작업에 적합 (사용 후 자동 종료)
+  - 장점
+	  - compute()보다 더 직관적인 문법
+	  - async/await을 지원하여 비동기 방식으로 사용 가능
+	  - 일회성 작업에 적합 (사용 후 자동 종료)
 
 2. Isolate.run() 기본 사용법
-
-💡 기존의 compute()와 비슷하지만, async/await을 직접 사용할 수 있어서 코드가 더 간결합니다.
-
-import 'dart:async';
-import 'dart:isolate';
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: IsolateRunExample(),
-    );
-  }
-}
-
-class IsolateRunExample extends StatefulWidget {
-  @override
-  _IsolateRunExampleState createState() => _IsolateRunExampleState();
-}
-
-class _IsolateRunExampleState extends State<IsolateRunExample> {
-  String _result = "계산 전";
-
-  Future<void> runHeavyTask() async {
-    int result = await Isolate.run(() => heavyCalculation(1000000000));
-    setState(() {
-      _result = "결과: $result";
-    });
-  }
-
-  static int heavyCalculation(int count) {
-    int sum = 0;
-    for (int i = 0; i < count; i++) {
-      sum += i;
+  - 예제 (기존의 compute()와 비슷하지만, async/await을 직접 사용할 수 있어서 코드가 더 간결)
+    ```dart
+    Future<void> runHeavyTask() async {
+      int result = await Isolate.run(() => heavyCalculation(1000000000));
+      setState(() {
+        _result = "결과: $result";
+      });
     }
-    return sum;
-  }
+    ```
+  - 코드 설명
+	  - Isolate.run(() => heavyCalculation(1000000000))
+    - 백그라운드에서 heavyCalculation 실행 후 결과 반환
+	    - UI가 멈추지 않고 정상적으로 작동
+	    - async/await을 활용하여 코드를 깔끔하게 작성 가능
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Flutter Isolate.run() 예제")),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(_result),
-            ElevatedButton(
-              onPressed: runHeavyTask,
-              child: Text("계산 시작"),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+  - 정리
+	  - Isolate.run() → compute()보다 더 직관적인 방식, async/await 지원, compute의 진화판
+	  - compute() → 기존 방식, 단순한 연산에 적합
+	  - Isolate.spawn() → SendPort/ReceivePort를 이용해 데이터 송수신이 필요한 경우 사용
+    - Isolate.run() 사용 시 주의할 점
+      - UI 관련 코드를 실행할 수 없음
+	      - Isolate.run()은 메인 스레드에서 실행되지 않으므로 setState() 호출 불가
+	      - UI 업데이트는 반환된 값으로 메인 스레드에서 실행해야 함
 
-✅ 코드 설명
-	•	Isolate.run(() => heavyCalculation(1000000000))
-→ 백그라운드에서 heavyCalculation 실행 후 결과 반환
-	•	UI가 멈추지 않고 정상적으로 작동
-	•	async/await을 활용하여 코드를 깔끔하게 작성 가능
+      - 데이터 공유 불가
+	      - Isolate는 메모리를 공유하지 않음 → 복사된 데이터만 사용 가능
+	      - 대용량 데이터 전달 시 성능 저하 가능
 
-3. Isolate.run() vs compute() vs Isolate.spawn() 비교
-
-기능	Isolate.run()	compute()	Isolate.spawn()
-데이터 교환	단일 입력값, 단일 결과	단일 입력값, 단일 결과	SendPort/ReceivePort 사용
-실행 방식	백그라운드에서 함수 실행 후 종료	백그라운드에서 함수 실행 후 종료	장기 실행 가능, 여러 개의 메시지 송수신 가능
-사용 방법	await Isolate.run() (async 지원)	await compute()	Isolate.spawn() + 포트 통신
-활용 예	단순한 연산 작업	단순한 연산 작업	장기 실행 작업 (파일 다운로드, 네트워크 통신 등)
-메모리 사용	적음	적음	더 많은 메모리 사용 가능
-
-✅ 정리
-	•	Isolate.run() → compute()보다 더 직관적인 방식, async/await 지원
-	•	compute() → 기존 방식, 단순한 연산에 적합
-	•	Isolate.spawn() → SendPort/ReceivePort를 이용해 데이터 송수신이 필요한 경우 사용
-
-4. Isolate.run() 사용 시 주의할 점
-
-🚨 UI 관련 코드를 실행할 수 없다.
-	•	Isolate.run()은 메인 스레드에서 실행되지 않으므로 setState() 호출 불가
-	•	UI 업데이트는 반환된 값으로 메인 스레드에서 실행해야 함
-
-🚨 데이터 공유 불가
-	•	Isolate는 메모리를 공유하지 않음 → 복사된 데이터만 사용 가능
-	•	대용량 데이터 전달 시 성능 저하 가능
-
-5. 결론
-
-✅ Flutter 3.7 이상에서는 Isolate.run()을 적극 활용!
-✅ compute()보다 직관적이며, async/await 지원으로 코드가 간결!
-✅ 장기 실행 작업이 아니라면 Isolate.spawn()보다 간편하게 사용 가능!
-
-📌 Flutter에서 백그라운드 작업을 쉽게 실행하려면 Isolate.run()을 사용하세요! 🚀
+  - 결론
+    - Flutter 3.7 이상에서는 Isolate.run()을 적극 활용
+    - compute()보다 직관적이며, async/await 지원으로 코드가 간결
+    - 장기 실행 작업이 아니라면 Isolate.spawn()보다 간편하게 사용 가능
 
 - Flutter에서 BLoC 패턴을 사용하는 이유는?
 - Flutter에서 Sliver Widgets을 사용하는 이유는?

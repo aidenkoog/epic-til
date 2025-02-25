@@ -418,7 +418,7 @@ Organized expected questions & answers
 	  - 위협(Threat)은 취약점(Vulnerability)을 악용하여 자산(Asset)에 피해를 주는 상황을 발생
 	  - 따라서 취약점이 존재하고, 위협이 발생할 가능성이 있을 때 위험(Risk)이 존재한다고 판단할 수 있음
 
-  - 위험(Risk)을 관리하는 방법
+  - 위험(Risk)을 관리하는 방법 (감소, 회피, 전가, 수용)
 	  - 위험 감소(Risk Reduction) → 방화벽 설치, 보안 패치 적용 등 취약점 제거
 	  - 위험 회피(Risk Avoidance) → 특정 서비스나 기술 사용 중단
 	  - 위험 전가(Risk Transfer) → 사이버 보험 가입, 외부 보안 업체 활용

@@ -254,109 +254,59 @@ Organized expected questions & answers
             - 가능하면 ?를 사용하고, if let 또는 guard let을 활용하여 안전하게 언래핑하는 것이 좋은 방향
 
 - guard와 if let의 차이
+    - 개요
+        - Swift에서 옵셔널 바인딩(Optional Binding)을 사용할 때, guard let과 if let은 모두 옵셔널 값을 안전하게 언래핑하는 방법
 
-Swift에서 guard와 if let의 차이점
+    - if let
+        - if let은 옵셔널 값이 존재할 경우 블록 내에서 안전하게 사용할 수 있도록 바인딩하는 방식
+        - 예제
+            - 설명
+                - if let unwrappedName = name에서 name이 nil이 아닐 경우 unwrappedName에 값을 할당하고, 블록 내에서 사용 가능
+	            - nil이면 else 블록이 실행됨.
+                - 옵셔널 값이 있을 경우 블록 내에서만 사용 가능.
+	            - 중첩된 로직이 많아질 경우 가독성이 떨어질 수 있음.
+            - 코드
+                ```swift
+                let name: String? = "Swift"
+                if let unwrappedName = name {
+                    print("이름은 \(unwrappedName)입니다.")
+                } else {
+                    print("이름이 없습니다.")
+                }
+                ```
 
-Swift에서 **옵셔널 바인딩(Optional Binding)**을 사용할 때, **guard let**과 **if let**은 모두 옵셔널 값을 안전하게 언래핑하는 방법입니다. 하지만 두 개념의 사용 목적과 흐름이 다릅니다.
+    - guard let
+        - 옵셔널 값이 없을 경우 즉시 함수를 빠져나가거나 오류를 반환하는 방식
+        - 예제
+            - 설명
+                - guard let을 사용하면 nil일 경우 즉시 return을 실행하여 코드의 흐름을 빠르게 정리할 수 있음.
+	            - unwrappedName은 guard let 이후의 코드 블록에서 계속 사용 가능
+                - 함수 초기에 nil을 검사하고 조기 반환(Early Exit)하여 가독성을 높임
+	            - 이후의 코드에서 unwrappedName을 계속 사용할 수 있음
+            - 코드
+                ```swift
+                func greet(name: String?) {
+                    guard let unwrappedName = name else {
+                        print("이름이 없습니다.") // `nil`이면 즉시 종료
+                        return
+                    }
+                    
+                    print("안녕하세요, \(unwrappedName)님!") // 옵셔널 값이 있을 때 실행
+                }
+                reet(name: "Swift")     // 출력: 안녕하세요, Swift님!
+                greet(name: nil)        // 출력: 이름이 없습니다.
+                ```
 
-1. if let과 guard let의 기본 개념
+    - if let vs guard let 선택 기준
+        - 옵셔널 값이 존재할 때만 특정 작업을 수행해야 하는 경우: if let 사용
+        - 옵셔널 값이 없을 경우 빠르게 종료해야 하는 경우 (Early Exit): guard let 사용
+        - 중첩을 줄이고 가독성을 높이고 싶은 경우: guard let 사용
+        - else 블록에서 return, throw, fatalError() 등을 호출해야 하는 경우: guard let 사용
 
-구분	if let	guard let
-사용 목적	옵셔널이 nil이 아닐 때 코드 실행	옵셔널이 nil이면 빠른 종료 (early exit)
-동작 방식	값이 존재하면 {} 블록 내부에서 사용	값이 없으면 즉시 return, throw, fatalError() 등으로 종료
-코드 가독성	중첩이 발생할 가능성이 있음	코드의 흐름이 명확함
-스코프	{} 내부에서만 바인딩된 값 사용 가능	guard 이후의 코드 블록 전체에서 사용 가능
-
-2. if let 예제
-
-if let은 옵셔널 값이 존재할 경우 블록 내에서 안전하게 사용할 수 있도록 바인딩하는 방식입니다.
-
-🔹 예제
-
-let name: String? = "Swift"
-
-if let unwrappedName = name {
-    print("이름은 \(unwrappedName)입니다.") // ✅ 옵셔널 값이 있을 때 실행
-} else {
-    print("이름이 없습니다.") // ❌ `nil`이면 실행
-}
-
-✅ 설명
-	•	if let unwrappedName = name에서 name이 nil이 아닐 경우 unwrappedName에 값을 할당하고, 블록 내에서 사용 가능.
-	•	nil이면 else 블록이 실행됨.
-
-3. guard let 예제
-
-guard let은 옵셔널 값이 없을 경우 즉시 함수를 빠져나가거나 오류를 반환하는 방식입니다.
-
-🔹 예제
-
-func greet(name: String?) {
-    guard let unwrappedName = name else {
-        print("이름이 없습니다.") // `nil`이면 즉시 종료
-        return
-    }
-    
-    print("안녕하세요, \(unwrappedName)님!") // ✅ 옵셔널 값이 있을 때 실행
-}
-
-greet(name: "Swift")  // 출력: 안녕하세요, Swift님!
-greet(name: nil)      // 출력: 이름이 없습니다.
-
-✅ 설명
-	•	guard let을 사용하면 nil일 경우 즉시 return을 실행하여 코드의 흐름을 빠르게 정리할 수 있음.
-	•	unwrappedName은 guard let 이후의 코드 블록에서 계속 사용 가능.
-
-4. if let vs guard let 비교
-
-비교 항목	if let	guard let
-옵셔널 값이 nil이면?	else 블록 실행	else 블록 실행 후 함수 종료 (return, throw 등)
-언래핑된 값 사용 범위	{} 블록 내부에서만 사용 가능	guard 이후의 코드 블록 전체에서 사용 가능
-코드 가독성	중첩이 많아질 가능성이 있음	빠른 종료(Early Exit)로 코드 흐름이 명확
-사용 추천 사례	특정 블록 내부에서만 옵셔널 값을 사용할 때	함수 초기에 입력값을 검증하고 빠르게 종료할 때
-
-5. if let vs guard let 선택 기준
-
-사용 상황	추천 방법
-✅ 옵셔널 값이 존재할 때만 특정 작업을 수행해야 하는 경우	if let 사용
-✅ 옵셔널 값이 없을 경우 빠르게 종료해야 하는 경우 (Early Exit)	guard let 사용
-✅ 중첩을 줄이고 가독성을 높이고 싶은 경우	guard let 사용
-✅ else 블록에서 return, throw, fatalError() 등을 호출해야 하는 경우	guard let 사용
-
-6. 실전 예제 비교
-
-✅ (1) if let을 사용할 경우
-
-func processUser(name: String?) {
-    if let unwrappedName = name {
-        print("사용자 이름: \(unwrappedName)")
-    } else {
-        print("이름이 없습니다.")
-    }
-}
-
-	•	옵셔널 값이 있을 경우 블록 내에서만 사용 가능.
-	•	중첩된 로직이 많아질 경우 가독성이 떨어질 수 있음.
-
-✅ (2) guard let을 사용할 경우
-
-func processUser(name: String?) {
-    guard let unwrappedName = name else {
-        print("이름이 없습니다.")
-        return
-    }
-    
-    print("사용자 이름: \(unwrappedName)") // `guard` 이후의 블록에서도 사용 가능
-}
-
-	•	함수 초기에 nil을 검사하고 조기 반환(Early Exit)하여 가독성을 높임.
-	•	이후의 코드에서 unwrappedName을 계속 사용할 수 있음.
-
-7. 결론
-
-✅ if let은 옵셔널 값이 존재할 경우 특정 블록 내에서만 사용할 때 적합.
-✅ guard let은 옵셔널 값이 없을 경우 즉시 함수나 루프를 종료할 때 적합 (Early Exit 패턴).
-✅ Swift에서는 가독성과 유지보수를 고려할 때, 대부분 guard let을 선호하는 경우가 많음. 🚀
+    - 결론
+        - if let은 옵셔널 값이 존재할 경우 특정 블록 내에서만 사용할 때 적합
+        - guard let은 옵셔널 값이 없을 경우 즉시 함수나 루프를 종료할 때 적합 (Early Exit 패턴)
+        - Swift에서는 가독성과 유지보수를 고려할 때, 대부분 guard let을 선호하는 경우가 많음
 
 - weak, strong, unowned의 차이는?
 - ARC(Automatic Reference Counting)란 무엇인가?
