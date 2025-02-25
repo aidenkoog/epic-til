@@ -247,6 +247,97 @@ Organize concepts, features, types and Pros and Cons
     - Pythonic한 코드 스타일 지원: @decorator 문법으로 가독성이 뛰어남
     - Decorator는 Python에서 매우 유용한 기능으로, 함수나 클래스의 동작을 수정하거나 기능을 확장하는 데 자주 사용됨
 
+- input과 sys.stdin.readline 차이
+
+input()과 sys.stdin.readline()의 차이는 다음과 같습니다.
+
+1. 속도 차이
+	•	input()은 Python에서 기본 제공되는 입력 함수로, 표준 입력에서 한 줄을 읽습니다.
+	•	sys.stdin.readline()은 sys 모듈을 사용하여 입력을 받으며, input()보다 훨씬 빠릅니다.
+
+이유:
+	•	input()은 내부적으로 입력받은 값을 str.strip()을 호출하여 개행 문자(\n)를 제거합니다.
+	•	sys.stdin.readline()은 개행 문자를 포함한 그대로 반환하므로 추가적인 처리 없이 더 빠르게 입력을 받을 수 있습니다.
+
+예시 (속도 비교):
+
+import sys
+import time
+
+# input() 사용
+start = time.time()
+data = [input() for _ in range(100000)]
+print("input() time:", time.time() - start)
+
+# sys.stdin.readline() 사용
+start = time.time()
+data = [sys.stdin.readline() for _ in range(100000)]
+print("sys.stdin.readline() time:", time.time() - start)
+
+	sys.stdin.readline()이 훨씬 빠르게 실행됨.
+
+2. 개행 문자 포함 여부
+	•	input()은 입력을 받을 때 자동으로 개행 문자(\n)를 제거합니다.
+	•	sys.stdin.readline()은 개행 문자를 포함하여 반환합니다.
+
+예시:
+
+import sys
+
+a = input()  # 사용자가 "hello" 입력 후 엔터
+print(f"'{a}'")  # 출력: 'hello' (개행 없음)
+
+b = sys.stdin.readline()
+print(f"'{b}'")  # 출력: 'hello\n' (개행 포함)
+
+	•	sys.stdin.readline()을 사용할 때 개행 문자를 제거하려면 .strip()을 추가해야 합니다.
+
+b = sys.stdin.readline().strip()  # 개행 문자 제거
+
+3. 여러 줄 입력 받을 때
+	•	sys.stdin.read()를 사용하면 여러 줄 입력을 한꺼번에 받을 수 있습니다.
+	•	sys.stdin.readline()은 한 줄씩 읽을 때 사용됩니다.
+	•	sys.stdin.readlines()는 여러 줄을 리스트 형태로 가져옵니다.
+
+예시 (여러 줄 입력 받기):
+
+import sys
+
+# 여러 줄 입력을 한 번에 읽고 리스트로 저장
+lines = sys.stdin.readlines()
+print(lines)
+
+	•	사용자가 입력한 모든 줄을 리스트 형태로 저장합니다.
+	•	input()을 사용하면 여러 줄 입력을 한 번에 받을 수 없고, 반복문을 사용해야 합니다.
+
+4. 대량의 입력을 받을 때
+	•	input()은 한 줄씩 읽으므로, 반복문을 통해 여러 줄을 받을 경우 속도가 느립니다.
+	•	sys.stdin.readline()을 사용하면 빠르게 읽을 수 있습니다.
+	•	sys.stdin.read()는 전체 입력을 한 번에 읽어와 splitlines()로 처리하면 효율적입니다.
+
+예시 (대량 입력 처리):
+
+import sys
+
+# n개의 정수를 입력받아 리스트로 변환
+n = int(sys.stdin.readline())  # 첫 줄에 입력 개수
+numbers = list(map(int, sys.stdin.read().split()))  # 한 번에 입력받고 split()
+print(numbers)
+
+5. 사용 목적별 정리
+
+사용 방식	input()	sys.stdin.readline()
+속도	느림	빠름
+개행 문자 포함 여부	제거됨	포함됨
+여러 줄 입력	반복문 필요	sys.stdin.read(), sys.stdin.readlines() 사용 가능
+대량 입력 처리	비효율적	효율적
+사용 예시	간단한 입력	문제 풀이, 대량 입력
+
+6. 결론
+	•	입력 데이터가 많거나 반복문을 사용해야 할 때는 **sys.stdin.readline()**을 사용하면 성능이 개선됩니다.
+	•	개행 문자가 필요 없는 경우, **.strip()**을 추가하는 것이 좋습니다.
+	•	간단한 입력은 **input()**으로 충분하지만, 성능이 중요한 경우 **sys.stdin.readline()**을 사용하는 것이 더 좋습니다.
+
 - Python의 Pandas와 NumPy의 차이점은?
 - Python에서 Lambda 함수는 어떻게 동작하는가?
 - Python에서 리스트와 제너레이터의 차이점은?
