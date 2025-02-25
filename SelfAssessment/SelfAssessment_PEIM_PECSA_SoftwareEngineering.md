@@ -3120,7 +3120,188 @@ def check(e):
 
 즉, 클린 코드를 작성하는 것은 개발자의 기본적인 책임이자, 좋은 소프트웨어를 만들기 위한 필수 요소입니다.
 
-- 코드 리팩토링(Refactoring)의 개념과 주요 기법을 설명하시오.
+- 코드 리팩토링(Refactoring)의 개념과 주요 기법
+
+코드 리팩토링(Refactoring)의 개념과 주요 기법
+
+1. 코드 리팩토링(Refactoring)의 개념
+
+**코드 리팩토링(Refactoring)**이란 기능은 그대로 유지하면서 코드의 구조를 개선하는 작업을 의미합니다.
+즉, 소프트웨어의 가독성, 유지보수성, 성능, 확장성을 향상시키기 위해 코드를 개선하는 과정입니다.
+
+리팩토링을 수행하면 코드가 더 읽기 쉽고, 중복이 제거되며, 버그 발생 가능성이 줄어들고, 성능이 최적화됩니다.
+
+🔹 리팩토링의 핵심 목표
+	•	가독성(Readability) 향상 → 코드가 더 직관적이고 이해하기 쉬워짐
+	•	유지보수성(Maintainability) 증가 → 코드 변경 시 오류 발생 확률 감소
+	•	재사용성(Reusability) 개선 → 중복 코드 제거 및 코드 구조 개선
+	•	성능 최적화(Optimization) → 불필요한 연산 감소 및 실행 속도 향상
+	•	버그 감소(Bug Reduction) → 코드가 명확해지고 예외 처리가 용이해짐
+
+2. 코드 리팩토링의 주요 기법
+
+리팩토링 기법에는 다양한 방법이 있으며, 대표적인 기법을 설명하겠습니다.
+
+🔹 1) 메서드(함수) 추출 (Extract Method)
+	•	여러 곳에서 중복되는 코드를 하나의 함수(메서드)로 분리하여 중복을 제거함.
+	•	목적: 코드의 가독성을 높이고, 재사용성을 증가시킴.
+
+✅ 리팩토링 전 (중복 코드 존재):
+
+def print_invoice():
+    print("===== Invoice =====")
+    print(f"Total Amount: {calculate_total()}")
+    print(f"Tax: {calculate_total() * 0.1}")
+    print("===================")
+    
+def print_receipt():
+    print("===== Receipt =====")
+    print(f"Total Amount: {calculate_total()}")
+    print(f"Tax: {calculate_total() * 0.1}")
+    print("===================")
+
+🚀 리팩토링 후 (중복 제거):
+
+def print_document(title):
+    print(f"===== {title} =====")
+    print(f"Total Amount: {calculate_total()}")
+    print(f"Tax: {calculate_total() * 0.1}")
+    print("===================")
+
+def print_invoice():
+    print_document("Invoice")
+
+def print_receipt():
+    print_document("Receipt")
+
+🔹 2) 변수 이름 변경 (Rename Variable)
+	•	의미 없는 변수명을 의미가 명확한 이름으로 변경하여 가독성을 높임.
+	•	목적: 코드의 목적을 직관적으로 이해할 수 있도록 개선.
+
+✅ 리팩토링 전 (이해하기 어려운 변수명):
+
+a = 5000
+b = a * 0.1
+print(f"Tax: {b}")
+
+🚀 리팩토링 후 (가독성 향상):
+
+price = 5000
+tax = price * 0.1
+print(f"Tax: {tax}")
+
+🔹 3) 매직 넘버 제거 (Replace Magic Number with Named Constant)
+	•	코드에서 직접 숫자를 사용하지 않고, 의미 있는 상수 변수로 치환.
+	•	목적: 숫자의 의미를 명확하게 하고, 코드 수정이 용이하도록 함.
+
+✅ 리팩토링 전 (매직 넘버 사용):
+
+def calculate_final_price(price):
+    return price + (price * 0.1)  # 0.1이 무엇을 의미하는지 알기 어려움
+
+🚀 리팩토링 후 (명확한 상수 사용):
+
+TAX_RATE = 0.1
+
+def calculate_final_price(price):
+    return price + (price * TAX_RATE)
+
+🔹 4) 긴 함수 분리 (Split Long Method)
+	•	긴 함수는 여러 개의 작은 함수로 나누어 가독성을 높이고, 유지보수를 쉽게 함.
+	•	목적: 코드의 이해도를 높이고, 각 함수가 하나의 역할만 하도록 개선.
+
+✅ 리팩토링 전 (긴 함수 사용):
+
+def process_order(order):
+    print("Processing order...")
+    if order == "coffee":
+        print("Making coffee...")
+        print("Adding sugar and milk...")
+    elif order == "tea":
+        print("Brewing tea...")
+        print("Adding lemon...")
+    print("Order complete!")
+
+🚀 리팩토링 후 (함수 분리):
+
+def process_order(order):
+    print("Processing order...")
+    if order == "coffee":
+        make_coffee()
+    elif order == "tea":
+        brew_tea()
+    print("Order complete!")
+
+def make_coffee():
+    print("Making coffee...")
+    print("Adding sugar and milk...")
+
+def brew_tea():
+    print("Brewing tea...")
+    print("Adding lemon...")
+
+🔹 5) 조건문 단순화 (Simplify Conditional Expressions)
+	•	복잡한 조건문을 단순화하여 가독성을 높임.
+	•	목적: 이해하기 어려운 조건식을 직관적으로 변환.
+
+✅ 리팩토링 전 (복잡한 조건문 사용):
+
+if status == "active" or status == "enabled" or status == "running":
+    print("Service is active")
+
+🚀 리팩토링 후 (리스트 활용):
+
+ACTIVE_STATUSES = {"active", "enabled", "running"}
+
+if status in ACTIVE_STATUSES:
+    print("Service is active")
+
+🔹 6) 클래스 도입 (Introduce Class)
+	•	관련된 데이터와 기능을 클래스로 묶어 구조화.
+	•	목적: 데이터와 기능을 객체로 묶어 유지보수를 용이하게 함.
+
+✅ 리팩토링 전 (전역 변수 사용):
+
+name = "John"
+age = 30
+
+def print_info():
+    print(f"Name: {name}, Age: {age}")
+
+🚀 리팩토링 후 (클래스 도입):
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def print_info(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+person = Person("John", 30)
+person.print_info()
+
+3. 코드 리팩토링의 장점
+
+장점	설명
+가독성 향상	코드가 직관적이므로 새로운 개발자가 쉽게 이해할 수 있음
+유지보수성 증가	코드 수정 시 영향을 받는 부분이 줄어들어 수정이 용이
+중복 코드 제거	동일한 기능을 재사용 가능하도록 개선하여 코드 중복을 방지
+버그 발생 감소	코드가 명확해지면서 논리적 오류를 쉽게 발견할 수 있음
+성능 최적화	불필요한 연산을 줄이고, 더 효율적인 알고리즘으로 개선 가능
+
+4. 코드 리팩토링 시 주의할 점
+	•	기능이 변경되지 않도록 주의할 것 (리팩토링은 코드 개선이지, 기능 변경이 아님)
+	•	리팩토링 후 테스트를 반드시 수행할 것 (버그 발생 여부 확인)
+	•	점진적으로 리팩토링할 것 (한 번에 대규모 리팩토링을 하면 유지보수하기 어려움)
+
+5. 결론
+
+코드 리팩토링은 코드 품질을 향상시키고, 유지보수를 쉽게 만드는 필수적인 과정입니다.
+특히, 가독성 향상, 중복 코드 제거, 유지보수성 증가 등의 효과를 제공하므로, 개발자가 지속적으로 신경 써야 합니다.
+
+➡ “리팩토링은 코드를 정리하는 것이 아니라, 더 나은 코드로 개선하는 과정이다.”
+
 - 디자인 패턴 중 싱글턴(Singleton) 패턴의 개념과 구현 방법을 설명하시오.
 - 디자인 패턴 중 팩토리 메소드(Factory Method) 패턴의 개념과 활용 사례를 설명하시오.
 - 소프트웨어 유지보수(Maintenance)의 개념과 유형(수정, 적응, 예방, 완전 유지보수)을 설명하시오.
