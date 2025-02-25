@@ -2786,7 +2786,140 @@ DIP를 적용하여 DataManager가 특정 DB 구현체에 의존하지 않고, �
 
 SOLID 원칙을 따르면 유지보수성, 확장성, 유연성이 높은 소프트웨어를 개발할 수 있다. 실제 프로젝트에서 SOLID 원칙을 적용하려면 객체 지향 설계 패턴과 함께 고려하면 더욱 효과적이다.
 
-- 소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)을 설명하시오.
+- 소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)
+
+소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형
+
+1. 소프트웨어 설계 패턴(Design Pattern) 개념
+
+소프트웨어 설계 패턴은 소프트웨어 개발 과정에서 자주 발생하는 문제를 해결하기 위해 검증된 재사용 가능한 설계 방법을 의미합니다. 이는 단순한 코드 조각이 아니라 객체 지향 설계 원칙을 기반으로 한 일반적인 해결책입니다.
+
+설계 패턴을 사용하는 이유
+	•	코드 재사용성 증가: 검증된 패턴을 활용하여 개발 시간을 단축
+	•	유지보수 용이성 증가: 코드의 일관성과 가독성 향상
+	•	설계 유연성 증대: 변경 및 확장이 쉬운 구조 설계 가능
+	•	객체지향 원칙 준수: SOLID 원칙과 같은 좋은 설계 기법 활용 가능
+
+2. 설계 패턴의 주요 유형
+
+설계 패턴은 목적에 따라 크게 생성(Creational), 구조(Structural), 행위(Behavioral) 패턴으로 분류됩니다.
+
+① 생성(Creational) 패턴
+
+객체 생성 방식과 관련된 패턴으로, 객체 생성을 캡슐화하여 유연성을 높이고, 의존성을 줄이는 역할을 합니다.
+
+패턴명	설명
+싱글톤(Singleton)	하나의 인스턴스만 생성되도록 제한하고, 전역적으로 접근 가능하게 함
+팩토리 메서드(Factory Method)	객체 생성을 하위 클래스에서 결정하도록 캡슐화하여 유연성 제공
+추상 팩토리(Abstract Factory)	연관된 객체 군을 생성할 수 있도록 인터페이스 제공
+빌더(Builder)	복잡한 객체 생성을 단계적으로 수행하여 가독성과 유지보수성 향상
+프로토타입(Prototype)	기존 객체를 복사하여 새로운 객체를 생성하는 방식
+
+📌 생성 패턴 예제 (싱글톤 패턴 - Python)
+
+class Singleton:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(Singleton, cls).__new__(cls)
+        return cls._instance
+
+# 사용 예시
+s1 = Singleton()
+s2 = Singleton()
+print(s1 is s2)  # True (같은 객체)
+
+② 구조(Structural) 패턴
+
+객체와 클래스의 구조를 정의하여 코드의 유연성을 높이고, 객체 간 관계를 효율적으로 구성하는 패턴입니다.
+
+패턴명	설명
+어댑터(Adapter)	서로 다른 인터페이스를 가진 클래스 간의 호환성을 제공
+브리지(Bridge)	구현부와 추상화 계층을 분리하여 독립적으로 변경 가능하게 함
+컴포지트(Composite)	객체를 트리 구조로 구성하여 계층적인 관계를 표현
+데코레이터(Decorator)	기존 객체의 기능을 확장할 때 상속 대신 사용
+퍼사드(Facade)	복잡한 서브 시스템을 단순화하는 인터페이스 제공
+플라이웨이트(Flyweight)	많은 객체를 효율적으로 공유하여 메모리 사용 절감
+프록시(Proxy)	접근 제어, 로깅 등의 역할을 하는 대리 객체 사용
+
+📌 구조 패턴 예제 (어댑터 패턴 - Python)
+
+class OldSystem:
+    def old_method(self):
+        return "Old System Method"
+
+class Adapter:
+    def __init__(self, old_system):
+        self.old_system = old_system
+
+    def new_method(self):
+        return self.old_system.old_method()
+
+# 사용 예시
+old_system = OldSystem()
+adapter = Adapter(old_system)
+print(adapter.new_method())  # "Old System Method"
+
+③ 행위(Behavioral) 패턴
+
+객체 간의 효율적인 상호작용을 관리하고, 역할과 책임을 분리하는 패턴입니다.
+
+패턴명	설명
+책임 연쇄(Chain of Responsibility)	요청을 처리할 수 있는 객체를 체인으로 연결하여 순차적으로 처리
+커맨드(Command)	요청을 객체로 캡슐화하여 실행, 취소, 로그 기능 추가 가능
+인터프리터(Interpreter)	특정 언어의 문법과 해석을 정의
+이터레이터(Iterator)	컬렉션 요소를 순차적으로 접근하는 방법 제공
+미디에이터(Mediator)	객체 간 직접 통신을 방지하고 중앙에서 제어
+메멘토(Memento)	객체의 상태를 저장하고 복원 가능
+옵저버(Observer)	한 객체의 상태 변화가 다른 객체에 자동으로 반영되도록 함
+상태(State)	객체의 상태에 따라 동작을 변경할 수 있도록 함
+전략(Strategy)	실행할 알고리즘을 동적으로 선택 가능
+템플릿 메서드(Template Method)	알고리즘의 구조를 정의하고 일부 단계를 하위 클래스에서 구현
+비지터(Visitor)	기존 클래스를 변경하지 않고 새로운 기능을 추가
+
+📌 행위 패턴 예제 (옵저버 패턴 - Python)
+
+class Observer:
+    def update(self, message):
+        pass
+
+class ConcreteObserver(Observer):
+    def update(self, message):
+        print(f"Observer received: {message}")
+
+class Subject:
+    def __init__(self):
+        self.observers = []
+
+    def add_observer(self, observer):
+        self.observers.append(observer)
+
+    def notify_observers(self, message):
+        for observer in self.observers:
+            observer.update(message)
+
+# 사용 예시
+subject = Subject()
+observer1 = ConcreteObserver()
+subject.add_observer(observer1)
+subject.notify_observers("New Event!")  # Observer received: New Event!
+
+3. 설계 패턴 활용 시 주의할 점
+	1.	과도한 사용을 피할 것: 불필요한 패턴 사용은 코드 복잡도를 증가시킴.
+	2.	적절한 패턴 선택: 프로젝트의 요구 사항에 맞는 패턴을 적용해야 함.
+	3.	객체 지향 원칙 적용: SOLID 원칙을 준수하며 패턴을 활용해야 효과적임.
+	4.	유지보수성과 확장성 고려: 코드 변경이 발생할 때 쉽게 확장 가능해야 함.
+
+4. 결론
+
+설계 패턴은 소프트웨어 개발에서 재사용성과 유지보수성을 높이는 중요한 도구입니다.
+	•	생성 패턴은 객체 생성 방식을 개선하고,
+	•	구조 패턴은 객체 간 관계를 정리하며,
+	•	행위 패턴은 객체 간의 상호작용을 최적화합니다.
+
+각 패턴을 이해하고 적절하게 활용하면 더 좋은 품질의 소프트웨어를 개발할 수 있습니다.
+
 - 마이크로서비스 아키텍처(MSA: Microservices Architecture)의 개념과 장점을 설명하시오.
 - 클린 코드(Clean Code)의 개념과 중요성을 설명하시오.
 - 코드 리팩토링(Refactoring)의 개념과 주요 기법을 설명하시오.
