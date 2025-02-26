@@ -2168,232 +2168,43 @@ Organize concepts, features, types and Pros and Cons
     - API 설계, 소프트웨어 기능 모델링, 이벤트 흐름 분석 등 다양한 개발 과정에서 활용됨
 
 - 소프트웨어 설계 원칙(SOLID)의 개념과 각 원칙
-
-SOLID 원칙 개념 및 설명
-
-SOLID 원칙은 객체 지향 프로그래밍(OOP)에서 유지보수성과 확장성을 고려한 좋은 설계를 하기 위한 5가지 핵심 원칙입니다. SOLID는 각 원칙의 첫 글자를 따서 만든 용어입니다.
-
-1. 단일 책임 원칙 (Single Responsibility Principle, SRP)
-
-	“하나의 클래스는 하나의 책임만 가져야 한다.”
-
-	•	클래스가 오직 하나의 기능만 수행해야 하며, 하나의 변경 이유만 가져야 한다.
-	•	즉, 변경이 필요할 때 단 하나의 이유로만 수정되도록 설계해야 한다.
-	•	위반 사례: 한 클래스가 데이터베이스 연결, UI 출력, 로깅 등의 다양한 기능을 포함하는 경우.
-	•	개선 방법: 각 기능을 별도의 클래스로 분리하여 변경이 한 곳에만 영향을 주도록 한다.
-
-✅ 예시 (잘못된 코드)
-
-class Report:
-    def generate_report(self):
-        print("Report Generated")
-    
-    def save_to_file(self, filename):
-        with open(filename, 'w') as f:
-            f.write("Report Data")
-
-위 코드에서 Report 클래스는 보고서 생성 및 파일 저장 두 가지 역할을 하므로 SRP를 위반한다.
-
-✅ 개선된 코드
-
-class Report:
-    def generate_report(self):
-        return "Report Data"
-
-class FileManager:
-    def save_to_file(self, filename, data):
-        with open(filename, 'w') as f:
-            f.write(data)
-
-이제 Report 클래스는 보고서 생성만 담당하고, FileManager 클래스는 파일 저장을 담당하므로 SRP를 준수한다.
-
-2. 개방-폐쇄 원칙 (Open-Closed Principle, OCP)
-
-	“확장에는 열려 있어야 하고, 수정에는 닫혀 있어야 한다.”
-
-	•	기존 코드를 수정하지 않고도 기능을 확장할 수 있도록 설계해야 한다.
-	•	주로 추상 클래스, 인터페이스, 다형성(Polymorphism) 을 활용하여 구현한다.
-	•	위반 사례: 기존 클래스를 변경해야만 새로운 기능을 추가할 수 있는 경우.
-
-✅ 예시 (잘못된 코드)
-
-class PaymentProcessor:
-    def process_payment(self, payment_type, amount):
-        if payment_type == "credit_card":
-            print(f"Processing credit card payment of {amount}")
-        elif payment_type == "paypal":
-            print(f"Processing PayPal payment of {amount}")
-
-새로운 결제 방법이 추가될 때마다 if-elif 문을 수정해야 하므로 OCP를 위반한다.
-
-✅ 개선된 코드
-
-from abc import ABC, abstractmethod
-
-class PaymentProcessor(ABC):
-    @abstractmethod
-    def process_payment(self, amount):
-        pass
-
-class CreditCardPayment(PaymentProcessor):
-    def process_payment(self, amount):
-        print(f"Processing credit card payment of {amount}")
-
-class PayPalPayment(PaymentProcessor):
-    def process_payment(self, amount):
-        print(f"Processing PayPal payment of {amount}")
-
-def process_payment(payment: PaymentProcessor, amount):
-    payment.process_payment(amount)
-
-# 새로운 결제 수단 추가 시 기존 코드 수정 없이 확장 가능
-process_payment(CreditCardPayment(), 100)
-process_payment(PayPalPayment(), 200)
-
-이제 PaymentProcessor를 상속받는 새로운 결제 클래스를 만들면 기존 코드를 수정하지 않고도 기능을 확장할 수 있다.
-
-3. 리스코프 치환 원칙 (Liskov Substitution Principle, LSP)
-
-	“하위 클래스는 기반 클래스(부모 클래스)를 대체할 수 있어야 한다.”
-
-	•	자식 클래스는 부모 클래스의 기능을 깨지 않고 대체 가능해야 한다.
-	•	위반 사례: 하위 클래스가 부모 클래스의 기능을 일부 변경하거나, 부모 클래스의 메서드를 무력화하는 경우.
-
-✅ 예시 (잘못된 코드)
-
-class Bird:
-    def fly(self):
-        print("Bird is flying")
-
-class Penguin(Bird):
-    def fly(self):
-        raise Exception("Penguins cannot fly")
-
-여기서 Penguin 클래스는 fly() 메서드를 정상적으로 실행할 수 없으므로 LSP를 위반한다.
-
-✅ 개선된 코드
-
-from abc import ABC, abstractmethod
-
-class Bird(ABC):
-    @abstractmethod
-    def move(self):
-        pass
-
-class FlyingBird(Bird):
-    def move(self):
-        print("Bird is flying")
-
-class Penguin(Bird):
-    def move(self):
-        print("Penguin is swimming")
-
-이제 move() 메서드를 통해 Penguin도 자연스럽게 동작할 수 있으므로 LSP를 준수한다.
-
-4. 인터페이스 분리 원칙 (Interface Segregation Principle, ISP)
-
-	“클라이언트는 자신이 사용하지 않는 인터페이스에 의존하지 않아야 한다.”
-
-	•	하나의 거대한 인터페이스보다 작고 명확한 인터페이스 여러 개로 나누는 것이 좋다.
-	•	위반 사례: 하나의 인터페이스가 너무 많은 기능을 포함하여, 일부 클래스가 사용하지 않는 메서드까지 구현해야 하는 경우.
-
-✅ 예시 (잘못된 코드)
-
-class Worker:
-    def work(self):
-        pass
-
-    def eat(self):
-        pass
-
-class Robot(Worker):
-    def work(self):
-        print("Robot is working")
-
-    def eat(self):
-        raise Exception("Robot does not eat")
-
-Robot은 eat() 메서드를 구현할 필요가 없지만 Worker 인터페이스를 따르기 때문에 강제된다.
-
-✅ 개선된 코드
-
-from abc import ABC, abstractmethod
-
-class Workable(ABC):
-    @abstractmethod
-    def work(self):
-        pass
-
-class Eatable(ABC):
-    @abstractmethod
-    def eat(self):
-        pass
-
-class Human(Workable, Eatable):
-    def work(self):
-        print("Human is working")
-    
-    def eat(self):
-        print("Human is eating")
-
-class Robot(Workable):
-    def work(self):
-        print("Robot is working")
-
-이제 Robot은 불필요한 eat() 메서드를 가지지 않아도 되므로 ISP를 준수한다.
-
-5. 의존 역전 원칙 (Dependency Inversion Principle, DIP)
-
-	“고수준 모듈(비즈니스 로직)은 저수준 모듈(구현)에 의존하지 말고, 추상화(인터페이스)에 의존해야 한다.”
-
-	•	구체적인 구현 클래스가 아닌 인터페이스 또는 추상 클래스에 의존하도록 설계해야 한다.
-	•	위반 사례: 상위 클래스가 하위 클래스의 구체적인 구현을 직접 참조하는 경우.
-
-✅ 예시 (잘못된 코드)
-
-class MySQLDatabase:
-    def connect(self):
-        print("Connected to MySQL")
-
-class DataManager:
-    def __init__(self):
-        self.db = MySQLDatabase()  # 특정 구현체(MySQLDatabase)에 의존
-
-    def get_data(self):
-        self.db.connect()
-
-이제 MySQLDatabase를 PostgreSQLDatabase로 바꾸려면 DataManager 코드를 수정해야 한다.
-
-✅ 개선된 코드
-
-from abc import ABC, abstractmethod
-
-class Database(ABC):
-    @abstractmethod
-    def connect(self):
-        pass
-
-class MySQLDatabase(Database):
-    def connect(self):
-        print("Connected to MySQL")
-
-class DataManager:
-    def __init__(self, db: Database):
-        self.db = db  # 추상 클래스(Database)에 의존
-
-    def get_data(self):
-        self.db.connect()
-
-# 이제 다른 DB로 쉽게 교체 가능
-db = MySQLDatabase()
-data_manager = DataManager(db)
-data_manager.get_data()
-
-DIP를 적용하여 DataManager가 특정 DB 구현체에 의존하지 않고, 유연하게 확장 가능하도록 설계했다.
-
-결론
-
-SOLID 원칙을 따르면 유지보수성, 확장성, 유연성이 높은 소프트웨어를 개발할 수 있다. 실제 프로젝트에서 SOLID 원칙을 적용하려면 객체 지향 설계 패턴과 함께 고려하면 더욱 효과적이다.
+  - SOLID 원칙 개념 및 설명
+    - 객체 지향 프로그래밍(OOP)에서 유지보수성과 확장성을 고려한 좋은 설계를 하기 위한 5가지 핵심 원칙
+    - SOLID는 각 원칙의 첫 글자를 따서 만든 용어
+
+  - SOLID 원칙 상세 설명
+    - 단일 책임 원칙 (Single Responsibility Principle, SRP)
+      - “하나의 클래스는 하나의 책임만 가져야 한다.”
+      - 클래스가 오직 하나의 기능만 수행해야 하며, 하나의 변경 이유만 가져야 함
+      - 즉, 변경이 필요할 때 단 하나의 이유로만 수정되도록 설계해야 함
+      - 위반 사례: 한 클래스가 데이터베이스 연결, UI 출력, 로깅 등의 다양한 기능을 포함하는 경우
+      - 개선 방법: 각 기능을 별도의 클래스로 분리하여 변경이 한 곳에만 영향을 주도록 한다
+
+    - 개방-폐쇄 원칙 (Open-Closed Principle, OCP)
+      - “확장에는 열려 있어야 하고, 수정에는 닫혀 있어야 한다.”
+	    - 기존 코드를 수정하지 않고도 기능을 확장할 수 있도록 설계해야 한다.
+	    - 주로 추상 클래스, 인터페이스, 다형성(Polymorphism) 을 활용하여 구현한다.
+	    - 위반 사례: 기존 클래스를 변경해야만 새로운 기능을 추가할 수 있는 경우 / 무엇인가 추가될 때마다 if, elif, else 등을 추가해야 하는 문제
+
+    - 리스코프 치환 원칙 (Liskov Substitution Principle, LSP)
+      - “하위 클래스는 기반 클래스(부모 클래스)를 대체할 수 있어야 한다.”
+      - 자식 클래스는 부모 클래스의 기능을 깨지 않고 대체 가능해야 한다.
+	    - 위반 사례: 하위 클래스가 부모 클래스의 기능을 일부 변경하거나, 부모 클래스의 메서드를 무력화하는 경우.
+
+    - 인터페이스 분리 원칙 (Interface Segregation Principle, ISP)
+	    - “클라이언트는 자신이 사용하지 않는 인터페이스에 의존하지 않아야 한다.”
+	    - 하나의 거대한 인터페이스보다 작고 명확한 인터페이스 여러 개로 나누는 것이 좋다.
+	    - 위반 사례: 하나의 인터페이스가 너무 많은 기능을 포함하여, 일부 클래스가 사용하지 않는 메서드까지 구현해야 하는 경우.
+
+    - 의존 역전 원칙 (Dependency Inversion Principle, DIP)
+      - “고수준 모듈(비즈니스 로직)은 저수준 모듈(구현)에 의존하지 말고, 추상화(인터페이스)에 의존해야 한다.”
+      - 구체적인 구현 클래스가 아닌 인터페이스 또는 추상 클래스에 의존하도록 설계해야 한다.
+	    - 위반 사례: 상위 클래스가 하위 클래스의 구체적인 구현을 직접 참조하는 경우.
+      - 적용/개선: 특정 DB 구현체에 의존하지 않고, 유연하게 확장 가능하도록 설계
+
+  - 결론
+    - SOLID 원칙을 따르면 유지보수성, 확장성, 유연성이 높은 소프트웨어를 개발할 수 있음
+    - 실제 프로젝트에서 SOLID 원칙을 적용하려면 객체 지향 설계 패턴과 함께 고려하면 더욱 효과적
 
 - 소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)
 
