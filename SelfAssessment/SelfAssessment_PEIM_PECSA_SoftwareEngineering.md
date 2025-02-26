@@ -2207,52 +2207,45 @@ Organize concepts, features, types and Pros and Cons
     - 실제 프로젝트에서 SOLID 원칙을 적용하려면 객체 지향 설계 패턴과 함께 고려하면 더욱 효과적
 
 - 소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)
+  - 소프트웨어 설계 패턴(Design Pattern) 개념
+    - 소프트웨어 설계 패턴 = 디자인 패턴 = Design Pattern
+    - 소프트웨어 개발 과정에서 자주 발생하는 문제를 해결하기 위해 검증된 재사용 가능한 설계 방법
+    - 단순한 코드 조각이 아니라 객체 지향 설계 원칙을 기반으로 한 일반적인 해결책
 
-소프트웨어 설계 패턴(Design Pattern)의 개념과 주요 유형
+  - 설계 패턴을 사용하는 이유
+	  - 코드 재사용성 증가: 검증된 패턴을 활용하여 개발 시간을 단축
+	  - 유지보수 용이성 증가: 코드의 일관성과 가독성 향상
+	  - 설계 유연성 증대: 변경 및 확장이 쉬운 구조 설계 가능
+	  - 객체지향 원칙 준수: SOLID 원칙과 같은 좋은 설계 기법 활용 가능
 
-1. 소프트웨어 설계 패턴(Design Pattern) 개념
+  - 설계 패턴의 주요 유형
+    - ① 생성(Creational) 패턴
+      - 개요: 객체 생성 방식과 관련된 패턴으로, 객체 생성을 캡슐화하여 유연성을 높이고, 의존성을 줄이는 역할
+      - 주요 유형
+        - 싱글톤(Singleton): 하나의 인스턴스만 생성되도록 제한하고, 전역적으로 접근 가능하게 함
+        - 팩토리 메서드(Factory Method): 객체 생성을 하위 클래스에서 결정하도록 캡슐화하여 유연성 제공
+        - 추상 팩토리(Abstract Factory): 연관된 객체 군을 생성할 수 있도록 인터페이스 제공
+        - 빌더(Builder): 복잡한 객체 생성을 단계적으로 수행하여 가독성과 유지보수성 향상
+        - 프로토타입(Prototype): 기존 객체를 복사하여 새로운 객체를 생성하는 방식
 
-소프트웨어 설계 패턴은 소프트웨어 개발 과정에서 자주 발생하는 문제를 해결하기 위해 검증된 재사용 가능한 설계 방법을 의미합니다. 이는 단순한 코드 조각이 아니라 객체 지향 설계 원칙을 기반으로 한 일반적인 해결책입니다.
+      - 생성 패턴 예제 (싱글톤 패턴 - Python)
+        ```python
+        class Singleton:
+            _instance = None
+            
+            def __new__(cls):
+                if cls._instance is None:
+                    cls._instance = super(Singleton, cls).__new__(cls)
+                return cls._instance
 
-설계 패턴을 사용하는 이유
-	•	코드 재사용성 증가: 검증된 패턴을 활용하여 개발 시간을 단축
-	•	유지보수 용이성 증가: 코드의 일관성과 가독성 향상
-	•	설계 유연성 증대: 변경 및 확장이 쉬운 구조 설계 가능
-	•	객체지향 원칙 준수: SOLID 원칙과 같은 좋은 설계 기법 활용 가능
+        # 사용 예시
+        s1 = Singleton()
+        s2 = Singleton()
+        print(s1 is s2)  # True (같은 객체)
+        ```
 
-2. 설계 패턴의 주요 유형
-
-설계 패턴은 목적에 따라 크게 생성(Creational), 구조(Structural), 행위(Behavioral) 패턴으로 분류됩니다.
-
-① 생성(Creational) 패턴
-
-객체 생성 방식과 관련된 패턴으로, 객체 생성을 캡슐화하여 유연성을 높이고, 의존성을 줄이는 역할을 합니다.
-
-패턴명	설명
-싱글톤(Singleton)	하나의 인스턴스만 생성되도록 제한하고, 전역적으로 접근 가능하게 함
-팩토리 메서드(Factory Method)	객체 생성을 하위 클래스에서 결정하도록 캡슐화하여 유연성 제공
-추상 팩토리(Abstract Factory)	연관된 객체 군을 생성할 수 있도록 인터페이스 제공
-빌더(Builder)	복잡한 객체 생성을 단계적으로 수행하여 가독성과 유지보수성 향상
-프로토타입(Prototype)	기존 객체를 복사하여 새로운 객체를 생성하는 방식
-
-📌 생성 패턴 예제 (싱글톤 패턴 - Python)
-
-class Singleton:
-    _instance = None
-    
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(Singleton, cls).__new__(cls)
-        return cls._instance
-
-# 사용 예시
-s1 = Singleton()
-s2 = Singleton()
-print(s1 is s2)  # True (같은 객체)
-
-② 구조(Structural) 패턴
-
-객체와 클래스의 구조를 정의하여 코드의 유연성을 높이고, 객체 간 관계를 효율적으로 구성하는 패턴입니다.
+    - ② 구조(Structural) 패턴
+      - 개요: 객체와 클래스의 구조를 정의하여 코드의 유연성을 높이고, 객체 간 관계를 효율적으로 구성하는 패턴
 
 패턴명	설명
 어댑터(Adapter)	서로 다른 인터페이스를 가진 클래스 간의 호환성을 제공
