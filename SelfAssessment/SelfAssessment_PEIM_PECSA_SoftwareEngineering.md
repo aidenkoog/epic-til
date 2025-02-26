@@ -2246,92 +2246,88 @@ Organize concepts, features, types and Pros and Cons
 
     - ② 구조(Structural) 패턴
       - 개요: 객체와 클래스의 구조를 정의하여 코드의 유연성을 높이고, 객체 간 관계를 효율적으로 구성하는 패턴
+      - 주요 유형
+        - 어댑터(Adapter): 서로 다른 인터페이스를 가진 클래스 간의 호환성을 제공
+        - 브리지(Bridge): 구현부와 추상화 계층을 분리하여 독립적으로 변경 가능하게 함
+        - 컴포지트(Composite): 객체를 트리 구조로 구성하여 계층적인 관계를 표현
+        - 데코레이터(Decorator): 기존 객체의 기능을 확장할 때 상속 대신 사용
+        - 퍼사드(Facade): 복잡한 서브 시스템을 단순화하는 인터페이스 제공
+        - 플라이웨이트(Flyweight): 많은 객체를 효율적으로 공유하여 메모리 사용 절감
+        - 프록시(Proxy): 접근 제어, 로깅 등의 역할을 하는 대리 객체 사용
 
-패턴명	설명
-어댑터(Adapter)	서로 다른 인터페이스를 가진 클래스 간의 호환성을 제공
-브리지(Bridge)	구현부와 추상화 계층을 분리하여 독립적으로 변경 가능하게 함
-컴포지트(Composite)	객체를 트리 구조로 구성하여 계층적인 관계를 표현
-데코레이터(Decorator)	기존 객체의 기능을 확장할 때 상속 대신 사용
-퍼사드(Facade)	복잡한 서브 시스템을 단순화하는 인터페이스 제공
-플라이웨이트(Flyweight)	많은 객체를 효율적으로 공유하여 메모리 사용 절감
-프록시(Proxy)	접근 제어, 로깅 등의 역할을 하는 대리 객체 사용
+      - 구조 패턴 예제 (어댑터 패턴 - Python)
+        ```python
+        class OldSystem:
+            def old_method(self):
+                return "Old System Method"
 
-📌 구조 패턴 예제 (어댑터 패턴 - Python)
+        class Adapter:
+            def __init__(self, old_system):
+                self.old_system = old_system
 
-class OldSystem:
-    def old_method(self):
-        return "Old System Method"
+            def new_method(self):
+                return self.old_system.old_method()
 
-class Adapter:
-    def __init__(self, old_system):
-        self.old_system = old_system
+        # 사용 예시
+        old_system = OldSystem()
+        adapter = Adapter(old_system)
+        print(adapter.new_method())  # "Old System Method"
+        ```
 
-    def new_method(self):
-        return self.old_system.old_method()
+    - ③ 행위(Behavioral) 패턴
+      - 개요: 객체 간의 효율적인 상호작용을 관리하고, 역할과 책임을 분리하는 패턴
+      - 주요 유형
+        - 책임 연쇄(Chain of Responsibility): 요청을 처리할 수 있는 객체를 체인으로 연결하여 순차적으로 처리
+        - 커맨드(Command): 요청을 객체로 캡슐화하여 실행, 취소, 로그 기능 추가 가능
+        - 인터프리터(Interpreter): 특정 언어의 문법과 해석을 정의
+        - 이터레이터(Iterator): 컬렉션 요소를 순차적으로 접근하는 방법 제공
+        - 미디에이터(Mediator): 객체 간 직접 통신을 방지하고 중앙에서 제어
+        - 메멘토(Memento): 객체의 상태를 저장하고 복원 가능
+        - 옵저버(Observer): 한 객체의 상태 변화가 다른 객체에 자동으로 반영되도록 함
+        - 상태(State): 객체의 상태에 따라 동작을 변경할 수 있도록 함
+        - 전략(Strategy): 실행할 알고리즘을 동적으로 선택 가능
+        - 템플릿 메서드(Template Method): 알고리즘의 구조를 정의하고 일부 단계를 하위 클래스에서 구현
+        - 비지터(Visitor): 기존 클래스를 변경하지 않고 새로운 기능을 추가
 
-# 사용 예시
-old_system = OldSystem()
-adapter = Adapter(old_system)
-print(adapter.new_method())  # "Old System Method"
+      - 행위 패턴 예제 (옵저버 패턴 - Python)
+        ```python
+        class Observer:
+            def update(self, message):
+                pass
 
-③ 행위(Behavioral) 패턴
+        class ConcreteObserver(Observer):
+            def update(self, message):
+                print(f"Observer received: {message}")
 
-객체 간의 효율적인 상호작용을 관리하고, 역할과 책임을 분리하는 패턴입니다.
+        class Subject:
+            def __init__(self):
+                self.observers = []
 
-패턴명	설명
-책임 연쇄(Chain of Responsibility)	요청을 처리할 수 있는 객체를 체인으로 연결하여 순차적으로 처리
-커맨드(Command)	요청을 객체로 캡슐화하여 실행, 취소, 로그 기능 추가 가능
-인터프리터(Interpreter)	특정 언어의 문법과 해석을 정의
-이터레이터(Iterator)	컬렉션 요소를 순차적으로 접근하는 방법 제공
-미디에이터(Mediator)	객체 간 직접 통신을 방지하고 중앙에서 제어
-메멘토(Memento)	객체의 상태를 저장하고 복원 가능
-옵저버(Observer)	한 객체의 상태 변화가 다른 객체에 자동으로 반영되도록 함
-상태(State)	객체의 상태에 따라 동작을 변경할 수 있도록 함
-전략(Strategy)	실행할 알고리즘을 동적으로 선택 가능
-템플릿 메서드(Template Method)	알고리즘의 구조를 정의하고 일부 단계를 하위 클래스에서 구현
-비지터(Visitor)	기존 클래스를 변경하지 않고 새로운 기능을 추가
+            def add_observer(self, observer):
+                self.observers.append(observer)
 
-📌 행위 패턴 예제 (옵저버 패턴 - Python)
+            def notify_observers(self, message):
+                for observer in self.observers:
+                    observer.update(message)
 
-class Observer:
-    def update(self, message):
-        pass
+        # 사용 예시
+        subject = Subject()
+        observer1 = ConcreteObserver()
+        subject.add_observer(observer1)
+        subject.notify_observers("New Event!")  # Observer received: New Event!
+        ```
 
-class ConcreteObserver(Observer):
-    def update(self, message):
-        print(f"Observer received: {message}")
+  - 설계 패턴 활용 시 주의할 점
+	  - 과도한 사용을 피할 것: 불필요한 패턴 사용은 코드 복잡도를 증가시킴.
+	  - 적절한 패턴 선택: 프로젝트의 요구 사항에 맞는 패턴을 적용해야 함.
+	  - 객체 지향 원칙 적용: SOLID 원칙을 준수하며 패턴을 활용해야 효과적임.
+	  - 유지보수성과 확장성 고려: 코드 변경이 발생할 때 쉽게 확장 가능해야 함.
 
-class Subject:
-    def __init__(self):
-        self.observers = []
-
-    def add_observer(self, observer):
-        self.observers.append(observer)
-
-    def notify_observers(self, message):
-        for observer in self.observers:
-            observer.update(message)
-
-# 사용 예시
-subject = Subject()
-observer1 = ConcreteObserver()
-subject.add_observer(observer1)
-subject.notify_observers("New Event!")  # Observer received: New Event!
-
-3. 설계 패턴 활용 시 주의할 점
-	1.	과도한 사용을 피할 것: 불필요한 패턴 사용은 코드 복잡도를 증가시킴.
-	2.	적절한 패턴 선택: 프로젝트의 요구 사항에 맞는 패턴을 적용해야 함.
-	3.	객체 지향 원칙 적용: SOLID 원칙을 준수하며 패턴을 활용해야 효과적임.
-	4.	유지보수성과 확장성 고려: 코드 변경이 발생할 때 쉽게 확장 가능해야 함.
-
-4. 결론
-
-설계 패턴은 소프트웨어 개발에서 재사용성과 유지보수성을 높이는 중요한 도구입니다.
-	•	생성 패턴은 객체 생성 방식을 개선하고,
-	•	구조 패턴은 객체 간 관계를 정리하며,
-	•	행위 패턴은 객체 간의 상호작용을 최적화합니다.
-
-각 패턴을 이해하고 적절하게 활용하면 더 좋은 품질의 소프트웨어를 개발할 수 있습니다.
+  - 결론
+    - 설계 패턴은 소프트웨어 개발에서 재사용성과 유지보수성을 높이는 중요한 도구
+	    - 생성 패턴은 객체 생성 방식을 개선
+	    - 구조 패턴은 객체 간 관계를 정리
+	    - 행위 패턴은 객체 간의 상호작용을 최적화
 
 - 마이크로서비스 아키텍처(MSA: Microservices Architecture)의 개념과 장점
 
