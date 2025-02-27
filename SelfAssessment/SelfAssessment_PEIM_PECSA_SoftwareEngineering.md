@@ -3284,68 +3284,63 @@ Organize concepts, features, types and Pros and Cons
     - 효과적인 소프트웨어 개발과 운영을 위해 문서화 프로세스를 적극적으로 활용하는 것이 중요
 
 - 소프트웨어 품질(Software Quality)의 정의와 주요 특성
+  - 소프트웨어 품질(Software Quality)의 정의
+    - 소프트웨어가 주어진 요구사항을 얼마나 잘 충족하는지를 나타내는 개념
+    - 기능적 요구사항(Functional Requirements)과 비기능적 요구사항(Non-Functional Requirements)을 만족하는 정도를 의미
+    - ISO/IEC 25010(소프트웨어 품질 모델)에서는 소프트웨어 품질을 명시된 요구사항 및 암묵적인 기대를 충족하는 능력으로 정의
+    - 소프트웨어 품질은 단순히 결함이 없는 것뿐만 아니라 사용자 기대에 부합하고, 유지보수가 용이하며, 성능과 보안성이 뛰어난 소프트웨어를 의미
 
-소프트웨어 품질(Software Quality)의 정의와 주요 특성
+  - 소프트웨어 품질의 주요 특성 (ISO/IEC 25010)
+    - 개요: ISO/IEC 25010(Software Product Quality Model)은 소프트웨어 품질을 8개의 주요 특성으로 정의
+    - 주요 특성
+      - (1) 기능적 적합성 (Functional Suitability)
+        - 소프트웨어가 주어진 요구사항을 얼마나 잘 수행하는지를 나타냄.
+        - 하위 특성: 정확성(Functional Correctness), 적절성(Functional Appropriateness), 상호 운용성(Interoperability)
 
-1. 소프트웨어 품질(Software Quality)의 정의
+      - (2) 성능 효율성 (Performance Efficiency)
+        - 소프트웨어가 자원을 효율적으로 사용하며 요구된 성능 수준을 유지하는 정도.
+        - 하위 특성: 응답 시간(Response Time), 처리량(Throughput), 리소스 활용성(Resource Utilization)
 
-소프트웨어 품질은 소프트웨어가 주어진 요구사항을 얼마나 잘 충족하는지를 나타내는 개념으로, 기능적 요구사항(Functional Requirements)과 비기능적 요구사항(Non-Functional Requirements)을 만족하는 정도를 의미한다.
+      - (3) 호환성 (Compatibility)
+        - 다양한 환경(운영체제, 하드웨어, 네트워크 등)에서 정상적으로 동작하는 정도.
+        - 하위 특성: 상호 운용성(Interoperability), 공존성(Co-existence)
 
-ISO/IEC 25010(소프트웨어 품질 모델)에서는 소프트웨어 품질을 **“명시된 요구사항 및 암묵적인 기대를 충족하는 능력”**으로 정의하고 있다. 소프트웨어 품질은 단순히 결함이 없는 것뿐만 아니라 사용자 기대에 부합하고, 유지보수가 용이하며, 성능과 보안성이 뛰어난 소프트웨어를 의미한다.
+      - (4) 사용성 (Usability)
+        - 사용자가 쉽게 이해하고 학습하며 사용할 수 있는 정도.
+        - 하위 특성: 학습 용이성(Learnability), 사용성(Operability), 접근성(Accessibility)
 
-2. 소프트웨어 품질의 주요 특성 (ISO/IEC 25010)
+      - (5) 신뢰성 (Reliability)
+        - 소프트웨어가 일정한 환경에서 오류 없이 지속적으로 동작할 수 있는 정도.
+        - 하위 특성: 성숙도(Maturity), 장애 허용성(Fault Tolerance), 복구 가능성(Recoverability)
 
-ISO/IEC 25010(Software Product Quality Model)은 소프트웨어 품질을 8개의 주요 특성으로 정의하고 있다. 각 특성은 여러 하위 특성으로 세분화된다.
+      - (6) 보안성 (Security)
+        - 소프트웨어가 외부 위협으로부터 데이터를 보호하고, 권한이 없는 사용자의 접근을 차단하는 능력.
+        - 하위 특성: 기밀성(Confidentiality), 무결성(Integrity), 인증(Authentication), 접근 통제(Authorization)
 
-1) 기능적 적합성 (Functional Suitability)
-	•	소프트웨어가 주어진 요구사항을 얼마나 잘 수행하는지를 나타냄.
-	•	하위 특성: 정확성(Functional Correctness), 적절성(Functional Appropriateness), 상호 운용성(Interoperability)
+      - (7) 유지보수성 (Maintainability)
+        - 소프트웨어를 쉽게 수정, 개선, 확장할 수 있는 정도.
+        - 하위 특성: 모듈성(Modularity), 재사용성(Reusability), 분석 가능성(Analyzability)
 
-2) 성능 효율성 (Performance Efficiency)
-	•	소프트웨어가 자원을 효율적으로 사용하며 요구된 성능 수준을 유지하는 정도.
-	•	하위 특성: 응답 시간(Response Time), 처리량(Throughput), 리소스 활용성(Resource Utilization)
+      - (8) 이식성 (Portability)
+        - 소프트웨어가 다른 환경(운영체제, 하드웨어, 플랫폼)에서도 쉽게 사용할 수 있는 정도.
+        - 하위 특성: 환경 적응성(Adaptability), 설치 가능성(Installability), 교체 가능성(Replaceability)
 
-3) 호환성 (Compatibility)
-	•	다양한 환경(운영체제, 하드웨어, 네트워크 등)에서 정상적으로 동작하는 정도.
-	•	하위 특성: 상호 운용성(Interoperability), 공존성(Co-existence)
+  - 소프트웨어 품질 향상을 위한 방안
+    - 소프트웨어 개발 프로세스 개선
+      - 소프트웨어 품질 관리를 위한 CMMI(Capability Maturity Model Integration), ISO 9001, Agile 개발 방법론을 적용
+    - 정형 검증 및 테스트 강화
+      - 유닛 테스트(Unit Testing), 통합 테스트(Integration Testing), 시스템 테스트(System Testing), 자동화 테스트(Auto Testing) 등을 수행하여 품질을 검증
+    - 코드 품질 유지 및 리팩토링
+      - 코드 리뷰(Code Review), 정적 분석(Static Analysis), 코드 표준화(Coding Standard) 등을 통해 유지보수성을 향상
+    - 보안 강화
+      - OWASP(웹 애플리케이션 보안 가이드라인) 준수, 암호화 기술 적용, 접근 제어 및 인증 강화 등으로 보안성을 확보
+    - 사용자 피드백 반영
+      - 사용자 테스트(Usability Testing)와 고객 피드백을 적극 반영하여 사용자 경험(UX)을 향상
 
-4) 사용성 (Usability)
-	•	사용자가 쉽게 이해하고 학습하며 사용할 수 있는 정도.
-	•	하위 특성: 학습 용이성(Learnability), 사용성(Operability), 접근성(Accessibility)
+  - 결론
+    - 소프트웨어 품질은 단순히 버그가 없는 것이 아니라, 사용자의 요구를 만족시키고 유지보수 및 운영이 용이한 소프트웨어를 만드는 것을 목표
+    - ISO/IEC 25010에서 정의한 8가지 품질 특성(기능적 적합성, 성능 효율성, 호환성, 사용성, 신뢰성, 보안성, 유지보수성, 이식성)을 고려하여 품질을 지속적으로 관리 필요
 
-5) 신뢰성 (Reliability)
-	•	소프트웨어가 일정한 환경에서 오류 없이 지속적으로 동작할 수 있는 정도.
-	•	하위 특성: 성숙도(Maturity), 장애 허용성(Fault Tolerance), 복구 가능성(Recoverability)
-
-6) 보안성 (Security)
-	•	소프트웨어가 외부 위협으로부터 데이터를 보호하고, 권한이 없는 사용자의 접근을 차단하는 능력.
-	•	하위 특성: 기밀성(Confidentiality), 무결성(Integrity), 인증(Authentication), 접근 통제(Authorization)
-
-7) 유지보수성 (Maintainability)
-	•	소프트웨어를 쉽게 수정, 개선, 확장할 수 있는 정도.
-	•	하위 특성: 모듈성(Modularity), 재사용성(Reusability), 분석 가능성(Analyzability)
-
-8) 이식성 (Portability)
-	•	소프트웨어가 다른 환경(운영체제, 하드웨어, 플랫폼)에서도 쉽게 사용할 수 있는 정도.
-	•	하위 특성: 환경 적응성(Adaptability), 설치 가능성(Installability), 교체 가능성(Replaceability)
-
-3. 소프트웨어 품질 향상을 위한 방안
-
-소프트웨어 품질을 향상시키기 위해서는 다음과 같은 전략이 필요하다.
-	1.	소프트웨어 개발 프로세스 개선
-	•	소프트웨어 품질 관리를 위한 CMMI(Capability Maturity Model Integration), ISO 9001, Agile 개발 방법론을 적용한다.
-	2.	정형 검증 및 테스트 강화
-	•	유닛 테스트(Unit Testing), 통합 테스트(Integration Testing), 시스템 테스트(System Testing), 자동화 테스트(Auto Testing) 등을 수행하여 품질을 검증한다.
-	3.	코드 품질 유지 및 리팩토링
-	•	코드 리뷰(Code Review), 정적 분석(Static Analysis), 코드 표준화(Coding Standard) 등을 통해 유지보수성을 향상시킨다.
-	4.	보안 강화
-	•	OWASP(웹 애플리케이션 보안 가이드라인) 준수, 암호화 기술 적용, 접근 제어 및 인증 강화 등으로 보안성을 확보한다.
-	5.	사용자 피드백 반영
-	•	사용자 테스트(Usability Testing)와 고객 피드백을 적극 반영하여 사용자 경험(UX)을 향상시킨다.
-
-4. 결론
-
-소프트웨어 품질은 단순히 버그가 없는 것이 아니라, 사용자의 요구를 만족시키고 유지보수 및 운영이 용이한 소프트웨어를 만드는 것을 목표로 한다. ISO/IEC 25010에서 정의한 **8가지 품질 특성(기능적 적합성, 성능 효율성, 호환성, 사용성, 신뢰성, 보안성, 유지보수성, 이식성)**을 고려하여 품질을 지속적으로 관리해야 한다.
 
 - ISO/IEC 25010(소프트웨어 품질 모델)의 개념과 주요 품질 특성을 설명하시오.
 - 소프트웨어 품질 보증(QA: Quality Assurance)과 품질 통제(QC: Quality Control)의 차이를 설명하시오.
