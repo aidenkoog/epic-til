@@ -3189,28 +3189,13 @@ Organize concepts, features, types and Pros and Cons
 	      - API 호출이 정상적으로 응답하는지 확인.
 	      - 프론트엔드와 백엔드 간의 데이터 연동 테스트.
 
-3. UI 테스트(End-to-End Test, E2E)
-	•	사용자의 행동을 웹/앱 UI에서 자동화하여 검증하는 테스트.
-	•	브라우저에서 버튼 클릭, 입력, 페이지 이동 등을 자동으로 테스트.
-
-✅ 도구: Selenium, Cypress, Playwright, Appium
-✅ 예제 (Selenium + Python 웹 테스트):
-
-from selenium import webdriver
-
-driver = webdriver.Chrome()
-driver.get("https://www.google.com")
-
-search_box = driver.find_element("name", "q")
-search_box.send_keys("Selenium Python")
-search_box.submit()
-
-assert "Selenium" in driver.title
-driver.quit()
-
-✅ 사용 사례:
-	•	웹사이트에서 로그인/회원가입 기능 자동화 테스트.
-	•	모바일 앱에서 버튼 클릭 후 화면 전환 테스트.
+    - UI 테스트(End-to-End Test, E2E)
+	    - 사용자의 행동을 웹/앱 UI에서 자동화하여 검증하는 테스트.
+	    - 브라우저에서 버튼 클릭, 입력, 페이지 이동 등을 자동으로 테스트.
+      - 도구: Selenium, Cypress, Playwright, Appium
+      - 사용 사례:
+	      - 웹사이트에서 로그인/회원가입 기능 자동화 테스트.
+	      - 모바일 앱에서 버튼 클릭 후 화면 전환 테스트.
 
 4. 성능 테스트(Performance Test)
 	•	시스템의 성능을 측정하고 부하(Load) 및 스트레스(Stress) 테스트를 수행.
