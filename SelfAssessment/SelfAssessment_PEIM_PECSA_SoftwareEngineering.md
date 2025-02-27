@@ -2690,185 +2690,145 @@ Organize concepts, features, types and Pros and Cons
 	    - 객체의 상태 변화가 많아야 하는 경우
 
 - 디자인 패턴 중 팩토리 메소드(Factory Method) 패턴의 개념과 활용 사례
+  - 팩토리 메소드(Factory Method) 패턴 개념
+    - 객체 생성 로직을 서브클래스에서 정의하도록 하는 생성(Creational) 패턴
+    - 즉, 객체를 생성할 때 직접 생성(new 키워드 사용)을 피하고, 서브클래스가 객체 생성을 결정하도록 유도하는 방식
 
-팩토리 메소드(Factory Method) 패턴 개념
+  - 핵심 개념
+	  - 객체 생성을 위한 인터페이스(팩토리 메소드)를 정의하고, 실제 객체 생성은 이를 구현한 서브클래스에서 수행
+      - Interface < InterfaceImpl < new Object
+	  - 클라이언트 코드에서는 구체적인 클래스 이름을 알 필요 없이 인터페이스(추상 클래스)만을 사용하여 객체를 생성하고 사용 가능
+	  - 새로운 객체 유형이 추가되더라도 기존 코드에 영향을 최소화하여 유지보수성과 확장성이 뛰어남
 
-팩토리 메소드(Factory Method) 패턴은 객체 생성 로직을 서브클래스에서 정의하도록 하는 생성(Creational) 패턴이다. 즉, 객체를 생성할 때 직접 생성(new 키워드 사용)을 피하고, 서브클래스가 객체 생성을 결정하도록 유도하는 방식이다.
+  - 팩토리 메소드 패턴의 구조
+	  - Product (제품 인터페이스 또는 추상 클래스)
+	    - 팩토리 메소드가 생성할 객체의 타입을 정의하는 인터페이스 또는 추상 클래스.
+	  - ConcreteProduct (구체적인 제품)
+	    - Product 인터페이스를 구현하는 실제 객체.
+	  - Creator (팩토리 인터페이스 또는 추상 클래스)
+	    - 팩토리 메소드를 선언하는 클래스. 기본적인 동작을 포함할 수 있으며, 객체 생성을 서브클래스에서 결정하도록 위임.
+	  - ConcreteCreator (구체적인 팩토리)
+	    - 팩토리 메소드를 오버라이딩하여 실제로 ConcreteProduct 객체를 생성하는 서브클래스.
 
-핵심 개념
-	•	객체 생성을 위한 인터페이스(팩토리 메소드)를 정의하고, 실제 객체 생성은 이를 구현한 서브클래스에서 수행한다.
-	•	클라이언트 코드에서는 구체적인 클래스 이름을 알 필요 없이 인터페이스(추상 클래스)만을 사용하여 객체를 생성하고 사용할 수 있다.
-	•	새로운 객체 유형이 추가되더라도 기존 코드에 영향을 최소화하여 유지보수성과 확장성이 뛰어나다.
+  - 팩토리 메소드 패턴 예제
+    - 간단한 예제 (커피 주문 시스템)
+      - 커피를 주문할 때, 팩토리 메소드 패턴을 사용하여 Americano 또는 Latte를 생성하는 구조 예제
+      - 파이썬 예제
+        ```python
+        from abc import ABC, abstractmethod
 
-팩토리 메소드 패턴의 구조
+        # 1. Product 인터페이스 정의
+        class Coffee(ABC):
+            @abstractmethod
+            def serve(self):
+                pass
 
-팩토리 메소드 패턴은 다음과 같은 주요 구성 요소를 가진다.
-	1.	Product (제품 인터페이스 또는 추상 클래스)
-	•	팩토리 메소드가 생성할 객체의 타입을 정의하는 인터페이스 또는 추상 클래스.
-	2.	ConcreteProduct (구체적인 제품)
-	•	Product 인터페이스를 구현하는 실제 객체.
-	3.	Creator (팩토리 인터페이스 또는 추상 클래스)
-	•	팩토리 메소드를 선언하는 클래스. 기본적인 동작을 포함할 수 있으며, 객체 생성을 서브클래스에서 결정하도록 위임.
-	4.	ConcreteCreator (구체적인 팩토리)
-	•	팩토리 메소드를 오버라이딩하여 실제로 ConcreteProduct 객체를 생성하는 서브클래스.
+        # 2. ConcreteProduct (구체적인 제품) 정의
+        class Americano(Coffee):
+            def serve(self):
+                return "아메리카노를 제공합니다."
 
-팩토리 메소드 패턴 예제
+        class Latte(Coffee):
+            def serve(self):
+                return "라떼를 제공합니다."
 
-1. 간단한 예제 (커피 주문 시스템)
+        # 3. Creator (팩토리 메소드가 있는 클래스) 정의
+        class CoffeeFactory(ABC):
+            @abstractmethod
+            def create_coffee(self) -> Coffee:
+                pass
 
-커피를 주문할 때, 팩토리 메소드 패턴을 사용하여 Americano 또는 Latte를 생성하는 구조를 만들어 보자.
+        # 4. ConcreteCreator (구체적인 팩토리 클래스)
+        class AmericanoFactory(CoffeeFactory):
+            def create_coffee(self) -> Coffee:
+                return Americano()
 
-from abc import ABC, abstractmethod
+        class LatteFactory(CoffeeFactory):
+            def create_coffee(self) -> Coffee:
+                return Latte()
 
-# 1. Product 인터페이스 정의
-class Coffee(ABC):
-    @abstractmethod
-    def serve(self):
-        pass
+        # 5. 클라이언트 코드 (팩토리 사용)
+        def order_coffee(factory: CoffeeFactory):
+            coffee = factory.create_coffee()
+            return coffee.serve()
 
-# 2. ConcreteProduct (구체적인 제품) 정의
-class Americano(Coffee):
-    def serve(self):
-        return "아메리카노를 제공합니다."
+        # 사용 예시
+        americano_factory = AmericanoFactory()
+        latte_factory = LatteFactory()
 
-class Latte(Coffee):
-    def serve(self):
-        return "라떼를 제공합니다."
+        print(order_coffee(americano_factory))  # 출력: 아메리카노를 제공합니다.
+        print(order_coffee(latte_factory))  # 출력: 라떼를 제공합니다.
+        ```
+      - 예제 설명
+	      - Coffee(인터페이스) → Americano, Latte(구체적인 제품)
+	      - CoffeeFactory(팩토리 메소드) → AmericanoFactory, LatteFactory(구체적인 팩토리)
+	      - order_coffee(factory: CoffeeFactory)에서 어떤 종류의 커피를 만들지 factory.create_coffee()가 결정
+	      - 이렇게 하면 새로운 커피 종류(예: Mocha)를 추가해도 기존 코드 수정 없이 새로운 팩토리 클래스를 만들면 된다.
 
-# 3. Creator (팩토리 메소드가 있는 클래스) 정의
-class CoffeeFactory(ABC):
-    @abstractmethod
-    def create_coffee(self) -> Coffee:
-        pass
+  - 팩토리 메소드 패턴의 활용 사례
+    - GUI 라이브러리에서 버튼 생성
+	    - Windows, macOS, Linux 등 운영체제별로 다른 UI 요소를 제공할 때, 팩토리 메소드 패턴을 사용하면 클라이언트 코드가 특정 플랫폼을 신경 쓰지 않고 UI를 생성 가능
+      - 예제
+        ```python
+        class Button(ABC):
+            @abstractmethod
+            def render(self):
+                pass
 
-# 4. ConcreteCreator (구체적인 팩토리 클래스)
-class AmericanoFactory(CoffeeFactory):
-    def create_coffee(self) -> Coffee:
-        return Americano()
+        class WindowsButton(Button):
+            def render(self):
+                print("윈도우 스타일 버튼")
 
-class LatteFactory(CoffeeFactory):
-    def create_coffee(self) -> Coffee:
-        return Latte()
+        class MacOSButton(Button):
+            def render(self):
+                print("맥OS 스타일 버튼")
 
-# 5. 클라이언트 코드 (팩토리 사용)
-def order_coffee(factory: CoffeeFactory):
-    coffee = factory.create_coffee()
-    return coffee.serve()
+        class ButtonFactory(ABC):
+            @abstractmethod
+            def create_button(self) -> Button:
+                pass
 
-# 사용 예시
-americano_factory = AmericanoFactory()
-latte_factory = LatteFactory()
+        class WindowsButtonFactory(ButtonFactory):
+            def create_button(self) -> Button:
+                return WindowsButton()
 
-print(order_coffee(americano_factory))  # 출력: 아메리카노를 제공합니다.
-print(order_coffee(latte_factory))  # 출력: 라떼를 제공합니다.
+        class MacOSButtonFactory(ButtonFactory):
+            def create_button(self) -> Button:
+                return MacOSButton()
 
-설명
-	•	Coffee(인터페이스) → Americano, Latte(구체적인 제품)
-	•	CoffeeFactory(팩토리 메소드) → AmericanoFactory, LatteFactory(구체적인 팩토리)
-	•	order_coffee(factory: CoffeeFactory)에서 어떤 종류의 커피를 만들지 factory.create_coffee()가 결정한다.
-	•	이렇게 하면 새로운 커피 종류(예: Mocha)를 추가해도 기존 코드 수정 없이 새로운 팩토리 클래스를 만들면 된다.
+        # 사용 예시
+        windows_factory = WindowsButtonFactory()
+        mac_factory = MacOSButtonFactory()
 
-팩토리 메소드 패턴의 활용 사례
+        windows_button = windows_factory.create_button()
+        mac_button = mac_factory.create_button()
 
-1. GUI 라이브러리에서 버튼 생성
-	•	Windows, macOS, Linux 등 운영체제별로 다른 UI 요소를 제공할 때, 팩토리 메소드 패턴을 사용하면 클라이언트 코드가 특정 플랫폼을 신경 쓰지 않고 UI를 생성할 수 있다.
+        windows_button.render()  # 출력: 윈도우 스타일 버튼
+        mac_button.render()  # 출력: 맥OS 스타일 버튼
+        ```
 
-class Button(ABC):
-    @abstractmethod
-    def render(self):
-        pass
+    - 데이터베이스 드라이버 연결
+	    - 데이터베이스(MySQL, PostgreSQL, SQLite 등)마다 연결 방식이 다를 때, 팩토리 메소드 패턴을 사용하면 클라이언트가 특정 데이터베이스에 종속되지 않고 객체를 생성할 수 있음
 
-class WindowsButton(Button):
-    def render(self):
-        print("윈도우 스타일 버튼")
+  - 팩토리 메소드 패턴의 장점과 단점
+    - 장점
+	    - 객체 생성 코드를 분리하여 유지보수성이 향상됨
+	      - 객체를 직접 생성하는 것이 아니라 팩토리에서 생성하므로 변경이 필요할 때도 팩토리 메소드만 수정하면 된다.
+	    - 새로운 객체 유형을 쉽게 추가할 수 있음
+	      - 새로운 클래스(예: 새로운 커피 종류)를 추가할 때 기존 코드를 수정하지 않고 새로운 팩토리 클래스를 만들면 된다.
+	    - 코드의 결합도를 낮추고 유연성을 증가시킴
+	      - 클라이언트 코드가 특정 구현 클래스에 의존하지 않고, 상위 인터페이스(추상 클래스)만 참조하기 때문에 코드가 유연해진다.
 
-class MacOSButton(Button):
-    def render(self):
-        print("맥OS 스타일 버튼")
+    - 단점
+	    - 클래스 수 증가
+	      - 팩토리 클래스와 구체적인 제품 클래스를 추가로 만들어야 하므로 클래스 수가 많아질 수 있다.
+	    - 단순한 객체 생성에는 오히려 복잡도를 증가시킬 수 있음
+	      - 단순한 객체 생성에는 굳이 팩토리 패턴을 사용할 필요 없이 new를 직접 호출하는 것이 더 직관적일 수 있다.
 
-class ButtonFactory(ABC):
-    @abstractmethod
-    def create_button(self) -> Button:
-        pass
-
-class WindowsButtonFactory(ButtonFactory):
-    def create_button(self) -> Button:
-        return WindowsButton()
-
-class MacOSButtonFactory(ButtonFactory):
-    def create_button(self) -> Button:
-        return MacOSButton()
-
-# 사용 예시
-windows_factory = WindowsButtonFactory()
-mac_factory = MacOSButtonFactory()
-
-windows_button = windows_factory.create_button()
-mac_button = mac_factory.create_button()
-
-windows_button.render()  # 출력: 윈도우 스타일 버튼
-mac_button.render()  # 출력: 맥OS 스타일 버튼
-
-2. 데이터베이스 드라이버 연결
-	•	데이터베이스(MySQL, PostgreSQL, SQLite 등)마다 연결 방식이 다를 때, 팩토리 메소드 패턴을 사용하면 클라이언트가 특정 데이터베이스에 종속되지 않고 객체를 생성할 수 있다.
-
-class DatabaseConnection(ABC):
-    @abstractmethod
-    def connect(self):
-        pass
-
-class MySQLConnection(DatabaseConnection):
-    def connect(self):
-        return "MySQL에 연결"
-
-class PostgreSQLConnection(DatabaseConnection):
-    def connect(self):
-        return "PostgreSQL에 연결"
-
-class DatabaseFactory(ABC):
-    @abstractmethod
-    def create_connection(self) -> DatabaseConnection:
-        pass
-
-class MySQLFactory(DatabaseFactory):
-    def create_connection(self) -> DatabaseConnection:
-        return MySQLConnection()
-
-class PostgreSQLFactory(DatabaseFactory):
-    def create_connection(self) -> DatabaseConnection:
-        return PostgreSQLConnection()
-
-# 사용 예시
-mysql_factory = MySQLFactory()
-postgresql_factory = PostgreSQLFactory()
-
-mysql_conn = mysql_factory.create_connection()
-postgresql_conn = postgresql_factory.create_connection()
-
-print(mysql_conn.connect())  # 출력: MySQL에 연결
-print(postgresql_conn.connect())  # 출력: PostgreSQL에 연결
-
-팩토리 메소드 패턴의 장점과 단점
-
-✅ 장점
-	1.	객체 생성 코드를 분리하여 유지보수성이 향상됨
-	•	객체를 직접 생성하는 것이 아니라 팩토리에서 생성하므로 변경이 필요할 때도 팩토리 메소드만 수정하면 된다.
-	2.	새로운 객체 유형을 쉽게 추가할 수 있음
-	•	새로운 클래스(예: 새로운 커피 종류)를 추가할 때 기존 코드를 수정하지 않고 새로운 팩토리 클래스를 만들면 된다.
-	3.	코드의 결합도를 낮추고 유연성을 증가시킴
-	•	클라이언트 코드가 특정 구현 클래스에 의존하지 않고, 상위 인터페이스(추상 클래스)만 참조하기 때문에 코드가 유연해진다.
-
-❌ 단점
-	1.	클래스 수 증가
-	•	팩토리 클래스와 구체적인 제품 클래스를 추가로 만들어야 하므로 클래스 수가 많아질 수 있다.
-	2.	단순한 객체 생성에는 오히려 복잡도를 증가시킬 수 있음
-	•	단순한 객체 생성에는 굳이 팩토리 패턴을 사용할 필요 없이 new를 직접 호출하는 것이 더 직관적일 수 있다.
-
-결론
-
-팩토리 메소드 패턴은 객체 생성 책임을 서브클래스로 분리하여 확장성과 유지보수성을 높이는 패턴이다.
-GUI, 데이터베이스 연결, 네트워크 드라이버, 게임 개발 등 다양한 분야에서 활용되며,
-새로운 객체 유형이 자주 추가되는 경우 특히 유용하다.
+  - 결론
+    - 팩토리 메소드 패턴은 객체 생성 책임을 서브클래스로 분리하여 확장성과 유지보수성을 높이는 패턴
+    - GUI, 데이터베이스 연결, 네트워크 드라이버, 게임 개발 등 다양한 분야에서 활용
+    - 새로운 객체 유형이 자주 추가되는 경우 특히 유용
 
 - 소프트웨어 유지보수(Maintenance)의 개념과 유형(수정, 적응, 예방, 완전 유지보수)을 설명하시오.
 
