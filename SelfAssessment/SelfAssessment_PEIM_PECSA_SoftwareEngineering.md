@@ -2512,229 +2512,182 @@ Organize concepts, features, types and Pros and Cons
     - 리팩토링은 코드를 정리하는 것이 아니라, 더 나은 코드로 개선하는 과정
 
 - 디자인 패턴 중 싱글턴(Singleton) 패턴의 개념과 구현 방법
+  - 싱글턴(Singleton) 패턴의 개념
+    - 클래스의 인스턴스를 단 하나만 생성하고, 이를 전역적으로 접근할 수 있도록 보장하는 디자인 패턴
 
-싱글턴(Singleton) 패턴의 개념과 구현 방법
+  - 싱글턴 패턴의 주요 특징
+	  - 단일 인스턴스 보장: 특정 클래스의 인스턴스가 프로그램 실행 중 오직 하나만 존재함.
+	  - 전역 접근 가능: 어디서든 동일한 객체를 사용할 수 있음.
+	  - 객체 생성을 제한: 불필요한 메모리 낭비를 줄이고, 동일한 데이터를 공유하여 효율성을 높임.
 
-1. 싱글턴(Singleton) 패턴의 개념
+  - 싱글턴 패턴이 필요한 경우
+	  - 데이터베이스 연결 객체 (DB Connection)
+	  - 로그 관리자 (Logger)
+	  - 설정 관리 클래스 (Configuration Manager)
+	  - 스레드 풀(Thread Pool)
+	  - 캐시(Cache) 시스템
+	  - 운영 체제와 상호작용하는 객체 (프린터 스풀러, 파일 시스템)
 
-**싱글턴 패턴(Singleton Pattern)**은 클래스의 인스턴스를 단 하나만 생성하고, 이를 전역적으로 접근할 수 있도록 보장하는 디자인 패턴입니다.
+  - 싱글턴 패턴 구현 방법
+    - (1) Python에서 싱글턴 패턴 구현
+      - 방법 1: __new__() 메서드 활용
+        ```python
+        class Singleton:
+          _instance = None  # 단일 인스턴스를 저장할 클래스 변수
 
-🔹 싱글턴 패턴의 주요 특징
-	1.	단일 인스턴스 보장: 특정 클래스의 인스턴스가 프로그램 실행 중 오직 하나만 존재함.
-	2.	전역 접근 가능: 어디서든 동일한 객체를 사용할 수 있음.
-	3.	객체 생성을 제한: 불필요한 메모리 낭비를 줄이고, 동일한 데이터를 공유하여 효율성을 높임.
+          # __new__()는 객체가 생성될 때 실행되며, _instance가 이미 존재하면 새로운 객체 생성을 막고 기존 객체를 반환
+          def __new__(cls, *args, **kwargs):
+              if cls._instance is None:
+                  cls._instance = super().__new__(cls)
+              return cls._instance
 
-🔹 싱글턴 패턴이 필요한 경우
-	•	데이터베이스 연결 객체 (DB Connection)
-	•	로그 관리자 (Logger)
-	•	설정 관리 클래스 (Configuration Manager)
-	•	스레드 풀(Thread Pool)
-	•	캐시(Cache) 시스템
-	•	운영 체제와 상호작용하는 객체 (e.g., 프린터 스풀러, 파일 시스템)
+        s1 = Singleton()
+        s2 = Singleton()
+        print(s1 is s2)  # True (같은 객체를 참조)
+        ```
 
-2. 싱글턴 패턴 구현 방법
+      - 방법 2: 데코레이터 활용
+        ```python
+        def singleton(cls):
+            instances = {}
 
-각 언어별로 싱글턴 패턴을 구현하는 방법이 다를 수 있지만, 대표적으로 Python, Kotlin, Java에서의 구현 방법을 설명하겠습니다.
+            def get_instance(*args, **kwargs):
+                if cls not in instances:
+                    instances[cls] = cls(*args, **kwargs)
+                return instances[cls]
+            
+            return get_instance
 
-🔹 1) Python에서 싱글턴 패턴 구현
+        # @singleton 데코레이터를 사용하여 싱글턴을 적용할 수 있음
+        @singleton
+        class Singleton:
+            pass
 
-Python에서는 싱글턴을 여러 방법으로 구현할 수 있습니다.
+        s1 = Singleton()
+        s2 = Singleton()
+        print(s1 is s2)  # True
+        ```
 
-✅ 방법 1: __new__() 메서드 활용
+      - 방법 3: 모듈(Module) 활용
+        ```python
+        # singleton_module.py
+        class Singleton:
+            def __init__(self):
+                print("Singleton instance created")
 
-class Singleton:
-    _instance = None  # 단일 인스턴스를 저장할 클래스 변수
+        singleton_instance = Singleton()
 
-    def __new__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
+        # main.py
+        from singleton_module import singleton_instance
 
-# 사용 예시
-s1 = Singleton()
-s2 = Singleton()
-print(s1 is s2)  # True (같은 객체를 참조)
+        print(singleton_instance)  # 어디서든 동일한 객체 사용 가능
+        # Python의 모듈은 한 번만 로드되므로, singleton_instance는 애플리케이션 전체에서 공유 가능
+        ```
 
-	•	__new__()는 객체가 생성될 때 실행되며, _instance가 이미 존재하면 새로운 객체 생성을 막고 기존 객체를 반환합니다.
 
-✅ 방법 2: 데코레이터 활용
-
-def singleton(cls):
-    instances = {}
-
-    def get_instance(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-    
-    return get_instance
-
-@singleton
-class Singleton:
-    pass
-
-s1 = Singleton()
-s2 = Singleton()
-print(s1 is s2)  # True
-
-	•	@singleton 데코레이터를 사용하여 싱글턴을 적용할 수 있음.
-
-✅ 방법 3: 모듈(Module) 활용
-
-# singleton_module.py
-class Singleton:
-    def __init__(self):
-        print("Singleton instance created")
-
-singleton_instance = Singleton()
-
-# main.py
-from singleton_module import singleton_instance
-
-print(singleton_instance)  # 어디서든 동일한 객체 사용 가능
-
-	•	Python의 모듈은 한 번만 로드되므로, singleton_instance는 애플리케이션 전체에서 공유됩니다.
-
-🔹 2) Kotlin에서 싱글턴 패턴 구현
-
-Kotlin에서는 object 키워드를 사용하여 싱글턴을 간단하게 구현할 수 있습니다.
-
-✅ 방법 1: object 키워드 사용
-
-object Singleton {
-    var data: String = "Singleton Data"
-    fun showData() {
-        println(data)
-    }
-}
-
-// 사용 예시
-fun main() {
-    val s1 = Singleton
-    val s2 = Singleton
-    println(s1 === s2)  // true (같은 객체)
-}
-
-	•	Kotlin에서 object 선언을 사용하면 자동으로 싱글턴이 보장됨.
-
-✅ 방법 2: companion object 사용
-
-class Singleton private constructor() {
-    companion object {
-        private var instance: Singleton? = null
-        fun getInstance(): Singleton {
-            if (instance == null) {
-                instance = Singleton()
-            }
-            return instance!!
-        }
-    }
-}
-
-// 사용 예시
-fun main() {
-    val s1 = Singleton.getInstance()
-    val s2 = Singleton.getInstance()
-    println(s1 === s2)  // true
-}
-
-	•	companion object를 활용하여 싱글턴 객체를 생성하고 반환하는 방식.
-
-🔹 3) Java에서 싱글턴 패턴 구현
-
-Java에서는 다양한 방식으로 싱글턴을 구현할 수 있습니다.
-
-✅ 방법 1: static 변수 활용 (Eager Initialization)
-
-public class Singleton {
-    private static final Singleton instance = new Singleton();  // 미리 생성
-
-    private Singleton() {}  // 생성자 private
-
-    public static Singleton getInstance() {
-        return instance;
-    }
-}
-
-	•	단점: 클래스가 로드될 때 무조건 인스턴스를 생성하므로, 사용하지 않을 경우 불필요한 메모리 낭비가 발생할 수 있음.
-
-✅ 방법 2: synchronized 키워드 활용 (Lazy Initialization)
-
-public class Singleton {
-    private static Singleton instance;
-
-    private Singleton() {}  // 생성자 private
-
-    public static synchronized Singleton getInstance() {
-        if (instance == null) {
-            instance = new Singleton();
-        }
-        return instance;
-    }
-}
-
-	•	단점: synchronized 키워드는 동기화를 보장하지만 성능이 저하될 수 있음.
-
-✅ 방법 3: Double-Checked Locking 방식 (효율적인 동기화)
-
-public class Singleton {
-    private static volatile Singleton instance;
-
-    private Singleton() {}
-
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null) {
-                    instance = new Singleton();
+    - (2) Kotlin에서 싱글턴 패턴 구현
+      - 방법 1: object 키워드 사용
+      - 방법 2: companion object 사용
+        ```kotlin
+        class Singleton private constructor() {
+            companion object {
+                private var instance: Singleton? = null
+                fun getInstance(): Singleton {
+                    if (instance == null) {
+                        instance = Singleton()
+                    }
+                    return instance!!
                 }
             }
         }
-        return instance;
-    }
-}
+        ```
 
-	•	volatile 키워드를 사용하여 CPU 캐시 문제를 방지하며, synchronized 블록을 최소화하여 성능을 개선.
+    - (3) Java에서 싱글턴 패턴 구현
+      - 방법 1: static 변수 활용 (Eager Initialization)
+        ```java
+        // 클래스가 로드될 때 무조건 인스턴스를 생성하므로, 사용하지 않을 경우 불필요한 메모리 낭비가 발생할 수 있음
+        public class Singleton {
+            private static final Singleton instance = new Singleton();  // 미리 생성
 
-✅ 방법 4: Enum을 활용한 싱글턴
+            private Singleton() {}  // 생성자 private
 
-public enum Singleton {
-    INSTANCE;
-    public void showMessage() {
-        System.out.println("Singleton using Enum");
-    }
-}
+            public static Singleton getInstance() {
+                return instance;
+            }
+        }
+        ```
 
-	•	Enum을 사용하면 스레드 안전성과 직렬화 문제를 자동으로 해결할 수 있음.
+      - 방법 2: synchronized 키워드 활용 (Lazy Initialization)
+        ```java
+        public class Singleton {
+            private static Singleton instance;
 
-3. 싱글턴 패턴 사용 시 주의할 점
-	1.	멀티스레드 환경에서 동기화 문제 방지
-	•	Java의 경우 synchronized, volatile을 사용하거나 Enum을 활용할 수 있음.
-	•	Python에서는 threading.Lock()을 활용 가능.
-	2.	메모리 누수 방지
-	•	싱글턴 객체가 너무 많은 리소스를 점유하지 않도록 주의해야 함.
-	•	특히 context(Android)나 database connection 같은 객체를 싱글턴으로 유지할 경우 메모리 누수 가능성이 있음.
-	3.	단위 테스트 어려움
-	•	싱글턴은 전역적으로 하나의 객체만 존재하므로, 유닛 테스트 시 객체를 초기화하기 어려울 수 있음.
-	•	의존성 주입(DI)을 활용하여 해결 가능.
+            private Singleton() {}  // 생성자 private
+            // synchronized 키워드는 동기화를 보장하지만 성능이 저하될 수 있음
+            public static synchronized Singleton getInstance() {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+                return instance;
+            }
+        }
+        ```
 
-4. 결론
+      - 방법 3: Double-Checked Locking 방식 (효율적인 동기화)
+        ```java
+        public class Singleton {
+            // volatile 키워드를 사용하여 CPU 캐시 문제를 방지하며, synchronized 블록을 최소화하여 성능을 개선
+            private static volatile Singleton instance;
 
-싱글턴 패턴은 전역적으로 하나의 객체만 유지해야 하는 경우 유용한 디자인 패턴입니다.
-하지만, 무분별하게 사용하면 메모리 누수, 테스트 어려움, 유연성 부족 등의 문제가 발생할 수 있으므로, 신중하게 적용해야 합니다.
+            private Singleton() {}
 
-✅ 싱글턴이 필요한 경우:
-	•	설정 값 관리
-	•	데이터베이스 연결
-	•	로깅 시스템
-	•	캐싱 시스템
+            public static Singleton getInstance() {
+                if (instance == null) {
+                    synchronized (Singleton.class) {
+                        if (instance == null) {
+                            instance = new Singleton();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
+        ```
 
-⚠️ 싱글턴을 피해야 할 경우:
-	•	멀티스레드 환경에서 인스턴스 분리가 필요한 경우
-	•	단위 테스트가 중요한 시스템
-	•	객체의 상태 변화가 많아야 하는 경우
+      - 방법 4: Enum을 활용한 싱글턴
+        ```java
+        // Enum을 사용하면 스레드 안전성과 직렬화 문제를 자동으로 해결할 수 있음
+        public enum Singleton {
+            INSTANCE;
+            public void showMessage() {
+                System.out.println("Singleton using Enum");
+            }
+        }
+        ```
+  - 싱글턴 패턴 사용 시 주의할 점
+	  - 멀티스레드 환경에서 동기화 문제 방지
+	    - Java의 경우 synchronized, volatile을 사용하거나 Enum을 활용할 수 있음.
+	    - Python에서는 threading.Lock()을 활용 가능.
+	  - 메모리 누수 방지
+	    - 싱글턴 객체가 너무 많은 리소스를 점유하지 않도록 주의해야 함.
+	    - 특히 context(Android)나 database connection 같은 객체를 싱글턴으로 유지할 경우 메모리 누수 가능성이 있음.
+	  - 단위 테스트 어려움
+	    - 싱글턴은 전역적으로 하나의 객체만 존재하므로, 유닛 테스트 시 객체를 초기화하기 어려울 수 있음.
+	    - 의존성 주입(DI)을 활용하여 해결 가능.
 
-	“싱글턴은 강력한 패턴이지만, 적절한 상황에서 신중하게 사용해야 한다.”
+  - 결론
+    - 싱글턴 패턴은 전역적으로 하나의 객체만 유지해야 하는 경우 유용한 디자인 패턴
+    - 무분별하게 사용하면 메모리 누수, 테스트 어려움, 유연성 부족 등의 문제가 발생할 수 있으므로, 신중하게 적용 필요
+    - 싱글턴이 필요한 경우:
+	    - 설정 값 관리
+	    - 데이터베이스 연결
+	    - 로깅 시스템
+	    - 캐싱 시스템
+
+    - 싱글턴을 피해야 할 경우:
+	    - 멀티스레드 환경에서 인스턴스 분리가 필요한 경우
+	    - 단위 테스트가 중요한 시스템
+	    - 객체의 상태 변화가 많아야 하는 경우
 
 - 디자인 패턴 중 팩토리 메소드(Factory Method) 패턴의 개념과 활용 사례
 
