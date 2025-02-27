@@ -3342,7 +3342,110 @@ Organize concepts, features, types and Pros and Cons
     - ISO/IEC 25010에서 정의한 8가지 품질 특성(기능적 적합성, 성능 효율성, 호환성, 사용성, 신뢰성, 보안성, 유지보수성, 이식성)을 고려하여 품질을 지속적으로 관리 필요
 
 
-- ISO/IEC 25010(소프트웨어 품질 모델)의 개념과 주요 품질 특성을 설명하시오.
+- ISO/IEC 25010(소프트웨어 품질 모델)의 개념과 주요 품질 특성
+  - ISO/IEC 25010의 개념
+    - 국제표준화기구(ISO)와 국제전기기술위원회(IEC)에서 제정한 소프트웨어 제품 및 시스템의 품질 평가 모델
+    - 기존의 ISO/IEC 9126을 개정한 것으로, 소프트웨어 제품의 품질을 정의하고 평가하기 위한 기준을 제공
+
+ISO/IEC 25010은 소프트웨어 품질을 평가하는 두 가지 주요 관점으로 구성된다.
+	1.	소프트웨어 제품 품질(Software Product Quality)
+	•	소프트웨어 제품 자체의 품질 특성을 정의하며, 개발 및 유지보수 과정에서 고려해야 할 요소를 포함한다.
+	2.	소프트웨어 품질 사용성(Quality in Use)
+	•	소프트웨어가 실제 사용 환경에서 얼마나 효과적이고 효율적으로 작동하는지를 평가하는 기준이다.
+
+2. ISO/IEC 25010의 주요 품질 특성
+
+(1) 소프트웨어 제품 품질 (Software Product Quality)
+
+소프트웨어 제품 품질은 8가지 주요 특성으로 구성된다.
+
+품질 특성	설명
+1. 기능적 적합성 (Functional Suitability)	소프트웨어가 요구된 기능을 얼마나 정확하게 수행하는가
+2. 성능 효율성 (Performance Efficiency)	응답 시간, 처리 속도, 자원 활용도가 적절한가
+3. 호환성 (Compatibility)	다양한 환경에서 다른 시스템과의 상호운용성이 있는가
+4. 사용성 (Usability)	사용자가 쉽게 학습하고 사용할 수 있는가
+5. 신뢰성 (Reliability)	오류 없이 지속적으로 동작할 수 있는가
+6. 보안성 (Security)	시스템이 외부 위협으로부터 데이터를 안전하게 보호하는가
+7. 유지보수성 (Maintainability)	소프트웨어가 쉽게 수정, 개선, 확장될 수 있는가
+8. 이식성 (Portability)	다양한 플랫폼에서 원활히 실행될 수 있는가
+
+1) 기능적 적합성 (Functional Suitability)
+	•	소프트웨어가 사용자 요구사항을 충족하는지 평가
+	•	주요 하위 특성:
+	•	기능 완전성(Functional Completeness): 요구된 모든 기능을 제공하는가
+	•	기능 정확성(Functional Correctness): 기능이 정확하게 동작하는가
+	•	기능 적절성(Functional Appropriateness): 제공된 기능이 적절한 목적을 수행하는가
+
+2) 성능 효율성 (Performance Efficiency)
+	•	제한된 하드웨어, 네트워크 자원을 얼마나 효율적으로 사용하는가
+	•	주요 하위 특성:
+	•	시간 효율성(Time Behavior): 응답 속도 및 처리량
+	•	자원 활용성(Resource Utilization): CPU, 메모리, 네트워크 자원 소비량
+	•	용량(Capacity): 시스템이 처리할 수 있는 최대 작업량
+
+3) 호환성 (Compatibility)
+	•	다른 시스템과의 상호 운용성과 공존 가능성 평가
+	•	주요 하위 특성:
+	•	상호 운용성(Interoperability): 다른 시스템과 원활히 통신 가능한가
+	•	공존성(Co-existence): 같은 환경에서 다른 소프트웨어와 충돌 없이 동작 가능한가
+
+4) 사용성 (Usability)
+	•	사용자가 소프트웨어를 쉽게 학습하고 사용할 수 있는지 평가
+	•	주요 하위 특성:
+	•	인지 용이성(Appropriateness Recognizability): 사용자에게 적절한 정보 제공
+	•	학습 용이성(Learnability): 사용자가 쉽게 학습할 수 있는가
+	•	운영 가능성(Operability): 사용자가 편리하게 조작할 수 있는가
+	•	사용 오류 보호성(User Error Protection): 사용자의 실수를 방지할 수 있는가
+	•	사용자 인터페이스 미학(UI Aesthetics): UI 디자인이 직관적인가
+	•	접근성(Accessibility): 장애인을 포함한 다양한 사용자가 접근 가능한가
+
+5) 신뢰성 (Reliability)
+	•	소프트웨어가 얼마나 안정적으로 동작하는가
+	•	주요 하위 특성:
+	•	성숙도(Maturity): 오류가 적고 안정적으로 실행되는가
+	•	장애 허용성(Fault Tolerance): 오류 발생 시 정상적인 운영이 가능한가
+	•	복구 가능성(Recoverability): 장애 발생 후 신속하게 복구할 수 있는가
+
+6) 보안성 (Security)
+	•	소프트웨어가 악의적인 공격과 보안 위협으로부터 안전한가
+	•	주요 하위 특성:
+	•	기밀성(Confidentiality): 데이터가 허가되지 않은 사용자에게 노출되지 않는가
+	•	무결성(Integrity): 데이터가 변조되지 않는가
+	•	인증(Authentication): 사용자 및 시스템을 인증할 수 있는가
+	•	권한 관리(Authorization): 적절한 사용자 권한을 설정할 수 있는가
+	•	감사 추적성(Accountability): 보안 로그 및 기록을 남길 수 있는가
+
+7) 유지보수성 (Maintainability)
+	•	시스템이 얼마나 쉽게 수정, 확장될 수 있는가
+	•	주요 하위 특성:
+	•	모듈성(Modularity): 시스템이 논리적으로 분리되어 있는가
+	•	재사용성(Reusability): 코드나 기능이 재사용 가능한가
+	•	분석 가능성(Analyzability): 시스템 변경이 얼마나 쉬운가
+	•	수정 가능성(Changeability): 오류 수정 및 개선이 쉬운가
+	•	시험성(Testability): 테스트가 용이한가
+
+8) 이식성 (Portability)
+	•	다양한 환경에서 실행될 수 있는가
+	•	주요 하위 특성:
+	•	적응성(Adaptability): 환경 변화에 유연하게 적응 가능한가
+	•	설치 용이성(Installability): 쉽게 설치 및 배포할 수 있는가
+	•	대체 가능성(Replaceability): 기존 시스템과 교체가 용이한가
+
+(2) 소프트웨어 품질 사용성 (Quality in Use)
+
+소프트웨어가 실제 사용 환경에서 품질이 어떻게 평가되는가를 의미하며, 5가지 주요 특성이 있다.
+
+품질 특성	설명
+1. 효과성 (Effectiveness)	소프트웨어가 사용자 목표를 얼마나 잘 달성하는가
+2. 효율성 (Efficiency)	사용자가 목표를 달성하는 데 필요한 자원이 최적화되어 있는가
+3. 만족도 (Satisfaction)	사용자가 소프트웨어를 얼마나 만족스럽게 사용할 수 있는가
+4. 리스크 회피 (Freedom from Risk)	소프트웨어가 사용자의 데이터 및 안전을 보호하는가
+5. 맥락 적용성 (Context Coverage)	다양한 사용 환경에서 적절히 동작하는가
+
+3. 결론
+
+ISO/IEC 25010은 소프트웨어 품질을 평가하는 표준적인 모델로, 소프트웨어 제품 자체의 품질(8가지 특성)과 사용성(5가지 특성)을 기준으로 평가한다. 이를 활용하여 소프트웨어의 품질을 개선하고, 사용자의 요구사항을 효과적으로 충족시킬 수 있다.
+
 - 소프트웨어 품질 보증(QA: Quality Assurance)과 품질 통제(QC: Quality Control)의 차이를 설명하시오.
 - 정적 분석(Static Analysis)과 동적 분석(Dynamic Analysis)의 개념과 차이를 설명하시오.
 - 코드 리뷰(Code Review)의 개념과 주요 방법(동료 검토, 워크스루, 인스펙션 등)을 설명하시오.
