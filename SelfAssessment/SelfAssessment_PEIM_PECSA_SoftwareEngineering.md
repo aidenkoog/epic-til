@@ -3518,7 +3518,37 @@ Organize concepts, features, types and Pros and Cons
       - 두 가지가 조화를 이루어야 소프트웨어의 높은 품질 유지 가능
 
 
-- 정적 분석(Static Analysis)과 동적 분석(Dynamic Analysis)의 개념과 차이를 설명하시오.
+- 정적 분석(Static Analysis)과 동적 분석(Dynamic Analysis)의 개념과 차이
+  - 개념
+    - 정적 분석(Static Analysis)
+      - 프로그램을 실행하지 않고 소스 코드, 바이트코드, 실행 파일 등을 분석하는 기법
+      - 코드의 구조적 오류, 보안 취약점, 코드 품질 등을 검토
+      - 정적 분석 도구(예: SonarQube, Coverity, Fortify)를 활용하여 코드 검증
+      - 컴파일 타임에 코드의 문제점을 미리 발견할 수 있음
+    - 동적 분석(Dynamic Analysis)
+      - 프로그램을 실제로 실행한 상태에서 동작을 분석하는 기법
+      - 메모리 사용, 성능, 보안 취약점(런타임 공격) 등을 분석
+      - 보통 테스트 케이스, 디버거, 프로파일러, 퍼징(Fuzzing) 도구 등을 활용
+      - 실행 환경에서 발생하는 오류나 보안 취약점을 탐지할 수 있음
+
+  - 정적 분석과 동적 분석의 활용 사례
+    - 정적 분석 활용
+      - 코드 리뷰 및 정적 코드 분석 도구 활용
+        - (예) SonarQube를 이용한 코드 품질 검토, 보안 취약점 탐지
+      - 보안 검증 (SAST: Static Application Security Testing)
+        - (예) SQL 인젝션, XSS와 같은 보안 취약점을 코드 레벨에서 탐지
+    - 동적 분석 활용
+      - 실행 중 버그 및 성능 문제 탐지
+        - (예) 메모리 누수 검사(Valgrind, AddressSanitizer), CPU 사용량 모니터링
+      - 보안 테스트 (DAST: Dynamic Application Security Testing)
+        - (예) 웹 애플리케이션 퍼징(Fuzzing) 테스트로 보안 취약점 공격
+
+  - 결론 및 정리
+    - 정적 분석은 개발 초기에 코드 품질을 향상시키고, 코드 상의 오류 및 보안 취약점을 사전에 탐지하는 데 효과적
+    - 동적 분석은 실행 환경에서 실제 문제가 발생하는지 확인하는 데 유용하며, 메모리 문제 및 성능 최적화에 필수
+    - 최적의 소프트웨어 품질을 유지하려면 정적 분석과 동적 분석을 병행하여 사용하는 것이 가장 효과적인 접근법
+
+
 - 코드 리뷰(Code Review)의 개념과 주요 방법(동료 검토, 워크스루, 인스펙션 등)을 설명하시오.
 - 소프트웨어의 신뢰성(Reliability)과 가용성(Availability)의 차이를 설명하시오.
 - 소프트웨어의 유지보수성(Maintainability)을 높이기 위한 설계 기법을 설명하시오.
