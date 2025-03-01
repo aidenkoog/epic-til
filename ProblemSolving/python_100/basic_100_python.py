@@ -707,3 +707,14 @@ n,m = map(int, input().split())
 for i in range(1, n+1):
     for j in range(1, m+1):
         print(i, j)
+
+# -----------------------------------------------------------------------------------------
+# 6081, 16진수 구구단 출력하기
+# 분석: 중첩 for문, map(int, [])
+# -----------------------------------------------------------------------------------------
+hex_input = input()
+num = int(hex_input, 16)    # 16진수형 정수로 변환
+for i in range(1, 16):
+    hex_result = format(num * i, "X")   # 16진수 대문자로 변환
+    hex_i = format(i, "X")  # 곱하는 i 즉, int 형 i도 대문자형 16진수로 변환
+    print(f"{hex_input}*{hex_i}={hex_result}")
