@@ -3998,65 +3998,25 @@ Organize concepts, features, types and Pros and Cons
         ```
 
       - 멀티스레딩 & 비동기 처리
-🔹 방법:
+        - 방법
+          - CPU 바운드 작업 → 멀티프로세싱(Multiprocessing) 사용
+          - I/O 바운드 작업 → 비동기(async/await) 처리
+            - async/await을 사용하면 I/O 작업을 병렬로 수행하여 성능 향상
 
-CPU 바운드 작업 → 멀티프로세싱(Multiprocessing) 사용
-I/O 바운드 작업 → 비동기(async/await) 처리
-🔹 예제 (Python, 비동기)
+  - 프로파일링 도구 활용
+    - 대표적인 프로파일링 도구
+      - Python: cProfile, line_profiler, memory_profiler
+        - 참고: cProfile을 사용하면 함수 실행 시간과 호출 횟수를 분석 가능
+      - Java: JProfiler, VisualVM, Java Flight Recorder
+      - C/C++: gprof, Valgrind, Intel VTune
+      - JavaScript: Chrome DevTools, Lighthouse
+      - Linux: perf, strace, iostat, dstat
 
-python
-복사
-import asyncio
-
-async def fetch_data():
-    print("데이터 가져오는 중...")
-    await asyncio.sleep(2)
-    print("데이터 완료!")
-
-async def main():
-    await asyncio.gather(fetch_data(), fetch_data())
-
-asyncio.run(main())
-✅ async/await을 사용하면 I/O 작업을 병렬로 수행하여 성능 향상
-
-5. 프로파일링 도구 활용
-🔹 대표적인 프로파일링 도구
-
-언어	프로파일링 도구
-Python	cProfile, line_profiler, memory_profiler
-Java	JProfiler, VisualVM, Java Flight Recorder
-C/C++	gprof, Valgrind, Intel VTune
-JavaScript	Chrome DevTools, Lighthouse
-Linux	perf, strace, iostat, dstat
-✅ Python 성능 프로파일링 예제
-python
-복사
-import cProfile
-
-def slow_function():
-    total = 0
-    for i in range(1000000):
-        total += i
-    return total
-
-cProfile.run('slow_function()')
-✅ cProfile을 사용하면 함수 실행 시간과 호출 횟수를 분석 가능
-
-6. 결론
-✅ 프로파일링 기법을 활용하면 소프트웨어의 성능 병목을 효과적으로 분석 가능
-✅ 코드 최적화, 메모리 사용 개선, I/O 성능 향상, 멀티스레딩 활용 등 다양한 방식으로 성능 개선 가능
-✅ 적절한 프로파일링 도구를 선택하여 분석하고, 효율적인 최적화 기법을 적용하는 것이 중요
-
-🚀 결국, 성능 최적화의 핵심은 프로파일링을 통해 병목을 정확히 찾아내고, 그에 맞는 최적화 전략을 적용하는 것이다.
-
-
-
-
-
-
-
-
-
+  - 결론
+    - 프로파일링 기법을 활용하면 소프트웨어의 성능 병목을 효과적으로 분석 가능
+    - 코드 최적화, 메모리 사용 개선, I/O 성능 향상, 멀티스레딩 활용 등 다양한 방식으로 성능 개선 가능
+    - 적절한 프로파일링 도구를 선택하여 분석하고, 효율적인 최적화 기법을 적용하는 것이 중요
+    - 성능 최적화의 핵심은 프로파일링을 통해 병목을 정확히 찾아내고, 그에 맞는 최적화 전략을 적용하는 것
 
 
 - 소프트웨어 품질 향상을 위한 결함 예방 기법(Defect Prevention)을 설명하시오.
