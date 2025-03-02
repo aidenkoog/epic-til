@@ -1,2 +1,0 @@
-﻿value=input()
-print(value)

@@ -1,1 +1,0 @@
-﻿print("print(\"Hello\\nWorld\")")
