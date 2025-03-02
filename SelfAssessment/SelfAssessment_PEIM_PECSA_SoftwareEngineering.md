@@ -3733,7 +3733,129 @@ Organize concepts, features, types and Pros and Cons
 	    - 자율주행 자동차 시스템 (항상 작동 가능해야 하며, 고장이 나면 치명적)
     - 신뢰성과 가용성은 독립적인 개념이지만, 안정적인 시스템 운영을 위해서는 두 가지를 동시에 고려하여 설계 및 운영해야 함
 
-- 소프트웨어의 유지보수성(Maintainability)을 높이기 위한 설계 기법을 설명하시오.
+- 소프트웨어의 유지보수성(Maintainability)을 높이기 위한 설계 기법
+  - 소프트웨어의 유지보수성(Maintainability)
+    - 소프트웨어가 변경 요구사항(기능 추가, 수정, 오류 수정 등)에 얼마나 쉽게 대응할 수 있는지를 의미
+    - ISO/IEC 25010 품질 모델에 따르면, 유지보수성은 아래 요소로 구성
+      - 분석성(Analyzability)
+      - 변경성(Modifiability)
+      - 안정성(Stability)
+      - 시험성(Testability)
+      - 재사용성(Reusability) 등
+
+  - 유지보수성을 높이기 위한 주요 설계 기법
+    - ① 모듈화(Modularization)
+      - 설계 개념: 시스템을 독립적인 모듈(컴포넌트) 단위로 분리하여 개발
+      - 적용 기법
+        - SRP (Single Responsibility Principle, 단일 책임 원칙): 하나의 모듈은 단 하나의 기능만 담당
+        - SoC (Separation of Concerns, 관심사의 분리): UI, 비즈니스 로직, 데이터 처리를 분리
+        - 레이어드 아키텍처(Layered Architecture): 프레젠테이션, 비즈니스, 데이터 액세스 계층으로 분리
+      - 예제
+        ```python
+        # 관심사 분리를 적용한 코드 예제
+        class OrderProcessor:
+            def process_order(self, order):
+                PaymentService().process_payment(order)
+                InventoryService().update_stock(order)
+                NotificationService().send_confirmation(order)
+        ```
+      - 잘못된 예시: 모든 로직이 한 클래스에 몰려 있음 → 유지보수 어려움
+      - 개선된 예시: 결제, 재고 관리, 알림 모듈을 별도로 분리하여 유지보수성 향상
+    - ② 캡슐화(Encapsulation)
+      - 설계 개념: 클래스 내부 데이터를 은닉하여 외부에서 직접 접근하지 못하게 함
+      - 적용 기법
+        - Getter/Setter 활용: 객체의 상태를 외부에서 직접 변경하지 않도록 제한
+        - private/protected 변수 활용: 외부 접근을 차단하고 내부에서만 변경 가능하게 설정
+      - 예제
+        ```python
+        class User:
+          def __init__(self, name, email):
+              self.__name = name  # private 변수
+              self.__email = email
+
+          def get_email(self):
+              return self.__email  # 외부에서는 직접 접근 불가
+        ```
+        - 데이터를 직접 변경하지 못하도록 보호하여 코드 안정성 및 유지보수성 향상
+    - ③ SOLID 원칙 적용
+      - 설계 개념: 객체 지향 프로그래밍(OOP)에서 유지보수성을 높이는 5가지 원칙
+        - SRP (단일 책임 원칙): 하나의 클래스는 하나의 기능만 담당해야 함
+        - OCP (개방-폐쇄 원칙): 기존 코드를 수정하지 않고 기능을 확장할 수 있어야 함
+        - LSP (리스코프 치환 원칙): 서브클래스는 부모 클래스의 기능을 변경하지 않고 확장해야 함
+        - ISP (인터페이스 분리 원칙): 클라이언트가 사용하지 않는 인터페이스에 의존하지 않아야 함
+        - DIP (의존성 역전 원칙): 고수준 모듈이 저수준 모듈에 의존하지 않아야 함 (인터페이스를 활용)
+      - OCP 적용 예제 (개방-폐쇄 원칙)
+        ```python
+        class PaymentProcessor:
+            def process(self, payment_method):
+                payment_method.pay()
+
+        class CreditCardPayment:
+            def pay(self):
+                print("Credit Card Payment Processed")
+
+        class PayPalPayment:
+            def pay(self):
+                print("PayPal Payment Processed")
+
+        # 새로운 결제 방식 추가 시 기존 코드 수정 없이 확장 가능
+        processor = PaymentProcessor()
+        processor.process(CreditCardPayment())
+        processor.process(PayPalPayment())
+        ```
+        - 기존 코드 수정 없이 새로운 결제 방식 추가 가능 → 유지보수 용이
+    - ④ 디자인 패턴(Design Patterns) 활용
+      - 설계 개념: 검증된 소프트웨어 설계 패턴을 활용하여 유지보수성 향상
+      - 적용 패턴
+        - 팩토리 패턴(Factory Pattern): 객체 생성을 캡슐화하여 코드 수정 없이 확장 가능
+        - 싱글턴 패턴(Singleton Pattern): 객체가 단 하나만 존재하도록 제한하여 일관성 유지
+        - MVC 패턴(Model-View-Controller): UI와 비즈니스 로직을 분리하여 유지보수성 향상
+      - 팩토리 패턴 예제
+        ```python
+        class PaymentFactory:
+            @staticmethod
+            def get_payment_method(type):
+                if type == "credit":
+                    return CreditCardPayment()
+                elif type == "paypal":
+                    return PayPalPayment()
+        ```
+        - 클라이언트 코드 수정 없이 새로운 결제 방식 추가 가능 → 유지보수성 향상
+    - ⑤ 코드 가독성(Code Readability) 향상
+      - 설계 개념: 유지보수를 쉽게 하기 위해 가독성이 높은 코드 작성
+      - 적용 기법
+        - 명확한 네이밍 규칙 준수 (calculateTotal() vs. ct())
+        - 주석(Comment) 최소화, 하지만 필요한 경우 명확하게 작성
+        - 일관된 코드 스타일 유지 (PEP 8, Google Java Style Guide 등)
+        - 명확한 함수명과 의미 있는 변수명을 사용하여 유지보수성 개선 가능
+    - ⑥ 자동화된 테스트(Automated Testing) 도입
+      - 설계 개념: 코드 변경 시 기존 기능이 정상 동작하는지 자동으로 검증
+      - 적용 기법
+        - 유닛 테스트(Unit Test): 작은 단위의 기능을 개별적으로 테스트
+        - 통합 테스트(Integration Test): 여러 모듈이 함께 동작하는지 검증
+        - CI/CD 연계: GitHub Actions, Jenkins 등을 활용하여 테스트 자동화
+      - 유닛 테스트 예제
+        ```python
+        import unittest
+
+        def add(a, b):
+            return a + b
+
+        class TestMathFunctions(unittest.TestCase):
+            def test_add(self):
+                self.assertEqual(add(2, 3), 5)
+
+        if __name__ == '__main__':
+            unittest.main()
+        ```
+        - 테스트 코드가 유지보수성을 높이는 핵심 도구
+        - 코드 변경 시 즉각적으로 문제를 감지 가능 → 버그 방지 효과
+  - 결론
+    - 유지보수성이 높은 소프트웨어를 개발하려면 설계 단계부터 체계적인 기법 적용 필수
+    - 모듈화, 캡슐화, SOLID 원칙, 디자인 패턴, 코드 가독성, 자동화 테스트를 적용하면 유지보수성이 대폭 향상
+    - 이를 통해 소프트웨어의 품질을 높이고, 개발 비용을 절감하며, 장기적으로 생산성을 극대화할 수 있음
+
+
 - 성능 테스트(Performance Testing)와 부하 테스트(Load Testing), 스트레스 테스트(Stress Testing)의 차이를 설명하시오.
 - 프로파일링(Profiling) 기법을 이용한 소프트웨어 성능 최적화 방법을 설명하시오.
 - 소프트웨어 품질 향상을 위한 결함 예방 기법(Defect Prevention)을 설명하시오.
