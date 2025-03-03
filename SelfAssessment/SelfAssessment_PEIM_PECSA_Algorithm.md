@@ -3614,8 +3614,8 @@ Organize concepts, features, types and Pros and Cons
                 - Java의 객체 정렬에서도 팀 정렬이 기본 적용됨
                 - 참고: Android의 Collections.sort()는 팀 정렬을 사용 (모바일 환경에서 성능 최적화를 위해 팀 정렬 적용)
                     ```java
-                    Arrays.sort(array);  // Timsort 사용 (Object 배열)
-                    Collections.sort(list);  // 내부적으로 Timsort 적용
+                    Arrays.sort(array);         // Timsort 사용 (Object 배열)
+                    Collections.sort(list);     // 내부적으로 Timsort 적용
                     ```
 
         - (3) Swift의 기본 정렬
@@ -3644,6 +3644,48 @@ Organize concepts, features, types and Pros and Cons
         - 부분적으로 정렬된 데이터를 빠르게 처리할 수 있어 현실 세계의 데이터 정렬에 적합
         - 안정 정렬(Stable)이며, 최악의 경우에도 O(n log n) 성능을 보장
         - 팀 정렬은 실제 환경에서 가장 효율적인 정렬 알고리즘으로 채택 되고 있음
+
+- 런(Run)에 대한 설명
+    - 개념
+        - 정렬된 부분 배열(서브배열, Subarray) 을 의미
+        - Timsort에서 사용되는 개념으로, 원본 배열 내에서 이미 정렬된 연속된 요소들의 그룹
+    - 추가 설명
+        - Timsort는 먼저 원본 배열에서 "런(Run)"을 찾은 후, 이를 병합하여 정렬 속도를 최적화
+        - 런이 길수록 Timsort의 성능이 향상됨 (O(n) 가능)
+        - 일반적으로 최소 런 크기는 32~64로 설정됨
+
+    - 런(Run)의 예시
+        - 예제 배열
+            - [ 5, 1, 4, 7, 9, 2, 3, 6, 8, 10 ]
+            - Timsort는 먼저 "런(Run)"을 찾음 (이미 정렬된 부분을 "런(Run)"으로 인식)
+                - [ 1, 4, 7, 9 ] → Run 1 (정렬된 부분)
+                - [ 2, 3, 6, 8, 10 ] → Run 2 (정렬된 부분)
+            - 각 런(Run)을 정렬하고, 병합 정렬(Merge Sort)로 합침
+            - [ 1, 2, 3, 4, 6, 7, 8, 9, 10 ]
+            - 결과적으로 원본 배열이 정렬됨
+                - 이미 정렬된 부분을 활용하여 불필요한 연산을 줄임
+
+    - 런(Run)의 크기 (최소 런 크기)
+        - Timsort는 최소 런 크기를 설정하여 최적화된 정렬을 수행
+        - 보통 32 ~ 64 요소 크기를 기본 최소 런 크기로 사용
+        - 작은 런(Run)은 삽입 정렬(Insertion Sort)로 정렬
+        - 큰 런(Run)은 병합 정렬(Merge Sort)로 합병
+
+    - 런(Run)의 특징
+        - 정렬된 부분 배열(서브배열): 이미 정렬된 데이터를 찾아서 런(Run)으로 인식
+        - 작은 런(Run)은 삽입 정렬 사용: 작은 배열은 Insertion Sort가 효율적
+        - 큰 런(Run)은 병합 정렬 사용: 큰 배열은 Merge Sort로 합병
+        - 실제 데이터에서 최적화 가능: 현실적인 데이터는 대부분 부분적으로 정렬됨
+
+    - 런(Run) 사용 이유
+        - 현실 세계의 데이터는 이미 부분적으로 정렬된 경우가 많음
+        - 정렬된 부분(Run)을 활용하면 O(n) 시간 복잡도로 정렬 가능
+        - 불필요한 비교 연산을 줄여 정렬 속도 향상
+
+    - 결론
+        - 런(Run)은 Timsort에서 "이미 정렬된 부분 배열"을 의미
+        - 런을 활용하면 삽입 정렬 & 병합 정렬을 조합하여 최적의 성능을 낼 수 있음
+        - Timsort가 Python, Java, Android에서 기본 정렬 알고리즘으로 사용되는 이유 중 하나임
 
 
 - 셸 정렬(Shell Sort)의 개념과 시간 복잡도를 설명하시오.
