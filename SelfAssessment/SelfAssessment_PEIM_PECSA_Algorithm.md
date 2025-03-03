@@ -3568,7 +3568,84 @@ Organize concepts, features, types and Pros and Cons
         - 즉, 데이터의 원래 순서를 유지해야 한다면 "안정 정렬"을 선택하는 것이 중요
 
 
-- 팀 정렬(Timsort)의 개념과 활용 사례를 설명하시오.
+- 팀 정렬(Timsort)의 개념과 활용 사례
+    - 팀 정렬(Timsort) 개념 (삽입 + 병합)
+        - 삽입 정렬(Insertion Sort)과 병합 정렬(Merge Sort)을 결합하여 최적의 성능을 제공하는 정렬 알고리즘
+        - Python, Java, Android, Swift 등 주요 프로그래밍 언어의 기본 정렬 알고리즘으로 사용되고 있음
+        - 안정 정렬(Stable Sort) → 같은 값의 순서가 유지됨
+        - 최악의 경우에도 O(n log n) 보장
+        - 이미 부분적으로 정렬된 데이터에서 매우 빠름 (O(n) 성능 가능)
+
+    - 팀 정렬(Timsort)의 동작 원리
+        - (1) 분할 (Runs Detection)
+            - 원본 배열에서 부분적으로 정렬된 "런(Run)"을 찾음
+            - 이미 정렬된 데이터는 그대로 유지하여 불필요한 연산을 줄임
+            - 최소 런 크기는 32~64 (보통 32)로 설정됨
+        - (2) 삽입 정렬(Insertion Sort) 적용
+            - 작은 런(Run)을 정렬할 때는 삽입 정렬 사용 (O(n²))
+            - 이유: 작은 데이터에서는 삽입 정렬이 캐시 친화적이고 빠름
+        - (3) 병합 정렬(Merge Sort) 적용
+            - 정렬된 런(Run)을 병합할 때 병합 정렬 사용 (O(n log n))
+            - 병합할 때 균형을 유지하여 성능 최적화
+            - 즉, 팀 정렬은 데이터가 정렬된 정도에 따라 삽입 정렬과 병합 정렬을 조합하여 최적의 성능을 보장함
+
+    - 팀 정렬(Timsort)의 시간 복잡도
+        - 최선의 경우 (거의 정렬됨): O(n)
+            - 이미 정렬된 데이터에 대해 매우 빠른 O(n) 성능을 낼 수 있음
+        - 평균적인 경우: O(n log n)
+        - 최악의 경우: O(n log n)
+        - 참고: 일반적인 정렬과 다르게, 부분 정렬된 데이터를 활용하는 점이 핵심
+
+    - 팀 정렬(Timsort)의 활용 사례
+        - (1) Python 기본 정렬 (sorted(), list.sort())
+            - Python의 sorted() 및 list.sort()는 내부적으로 팀 정렬을 사용
+            - 팀 정렬은 파이썬의 공식 정렬 알고리즘으로 채택됨
+            - 데이터가 부분적으로 정렬되어 있으면 더욱 빠르게 동작
+                ```python
+                numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5]
+                sorted_numbers = sorted(numbers)  # Timsort 사용
+                print(sorted_numbers)
+                ```
+
+        - (2) Java의 Arrays.sort() (Object 배열)
+            - Java에서 Arrays.sort()
+                - 기본형 배열(int[], double[])은 QuickSort 사용
+                - 객체 배열(Object[])은 Timsort 사용
+                - Java의 객체 정렬에서도 팀 정렬이 기본 적용됨
+                - 참고: Android의 Collections.sort()는 팀 정렬을 사용 (모바일 환경에서 성능 최적화를 위해 팀 정렬 적용)
+                    ```java
+                    Arrays.sort(array);  // Timsort 사용 (Object 배열)
+                    Collections.sort(list);  // 내부적으로 Timsort 적용
+                    ```
+
+        - (3) Swift의 기본 정렬
+            - Swift에서도 기본 정렬 알고리즘으로 Timsort를 사용
+                ```swift
+                var numbers = [3, 1, 4, 1, 5, 9]
+                numbers.sort()  // Timsort 사용
+                ```
+
+    - 팀 정렬(Timsort)의 장점과 단점
+        - 장점
+            - 안정 정렬(Stable Sort) → 같은 값을 가진 요소들의 순서를 유지
+            - 부분적으로 정렬된 데이터에서 매우 빠름 (O(n))
+            - 최악의 경우에도 O(n log n) 보장
+            - 캐시 친화적 → CPU 성능 최적화
+
+        - 단점
+            - 추가 메모리 사용(O(n)) → 제자리 정렬(in-place)이 아님
+            - 매우 작은 데이터에서는 QuickSort보다 약간 느릴 수 있음
+            - 설계가 복잡하여 직접 구현하기 어려움
+
+    - 결론
+        - 팀 정렬(Timsort)은 삽입 정렬 + 병합 정렬을 결합한 강력한 정렬 알고리즘
+            - 삽입 + 병합 정렬 결합
+        - Python, Java, Android, Swift 등 다양한 환경에서 기본 정렬 알고리즘으로 사용
+        - 부분적으로 정렬된 데이터를 빠르게 처리할 수 있어 현실 세계의 데이터 정렬에 적합
+        - 안정 정렬(Stable)이며, 최악의 경우에도 O(n log n) 성능을 보장
+        - 팀 정렬은 실제 환경에서 가장 효율적인 정렬 알고리즘으로 채택 되고 있음
+
+
 - 셸 정렬(Shell Sort)의 개념과 시간 복잡도를 설명하시오.
 - Pigeonhole 정렬 알고리즘의 개념과 사용 사례를 설명하시오.
 - 내부 정렬(Internal Sorting)과 외부 정렬(External Sorting)의 차이점을 설명하시오.
