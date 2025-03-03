@@ -603,6 +603,63 @@ Organize concepts, features, types and Pros and Cons
         - 최신 Android 백그라운드 작업은 WorkManager + Coroutine을 적극 활용하는 것이 핵심
 
 - Android에서 WorkManager와 JobScheduler의 차이점
+    - 개요
+        - Android에서 백그라운드 작업을 수행할 때 가장 많이 사용되는 두 가지 API는 WorkManager와 JobScheduler
+        - 두 API는 작업(Job)을 예약하고 실행하는 기능을 제공하지만, 몇 가지 차이점 존재
+
+    - WorkManager vs JobScheduler 개념 비교
+        - 주요 목적	
+            - WorkManager: 장기 실행 백그라운드 작업 (데이터 동기화, 로그 전송 등)
+            - JobScheduler: 특정 조건에서 실행되는 작업 (WiFi 연결 시 데이터 업로드 등)
+        - Android 지원 버전
+            - WorkManager: API 14 (Android 4.0) 이상
+            - JobScheduler: API 21 (Android 5.0) 이상
+        - Doze 모드 대응
+            - WorkManager: 자동 지원 (OS가 최적화)
+            - JobScheduler: 자동 지원 (OS가 최적화)
+        - 네트워크 및 충전 조건 제어
+            - WorkManager: 가능 (Constraints.Builder())
+            - JobScheduler: 가능 (setRequiredNetworkType(), setRequiresCharging())
+        - 작업 스케줄링 방식
+            - WorkManager: 내부적으로 JobScheduler & AlarmManager 사용
+            - JobScheduler: JobScheduler 사용
+        - 앱이 종료된 경우
+            - WorkManager: 다시 실행 보장
+            - JobScheduler: 일부 조건에서 재실행 보장 X
+        - 즉시 실행 가능 여부
+            - WorkManager: 가능 (OneTimeWorkRequest)
+            - JobScheduler: 즉시 실행 불가능
+        - 주기적 실행 가능 여부	
+            - WorkManager: 가능 (PeriodicWorkRequest)
+            - JobScheduler: 가능 (setPeriodic())
+        - 백그라운드 제한 영향
+            - WorkManager: 제한 적음
+            - JobScheduler: 제한이 많음 (Doze 모드 & 앱 대기 영향)
+
+    - WorkManager vs JobScheduler 사용 시점
+        - WorkManager를 사용해야 하는 경우 (권장)
+            - 반복적으로 실행해야 하는 작업 (주기적인 데이터 동기화, 로그 저장)
+            - 앱이 종료되더라도 반드시 실행해야 하는 작업
+            - 저장소에 데이터 백업, 네트워크 연결 시 데이터 업로드
+            - 모든 Android 버전에서 동작해야 하는 경우 (API 14 이상 지원)
+        - JobScheduler를 사용해야 하는 경우
+            - Android 5.0 (API 21) 이상을 대상으로 특정 조건에서 실행할 때
+            - 네트워크 연결, 충전 중, 기기 유휴 상태에서 실행해야 하는 경우
+            - 즉시 실행이 필요하지 않은 예약된 작업
+
+    - WorkManager와 JobScheduler 선택 가이드
+        - 앱이 종료되어도 작업을 유지해야 함: WorkManager
+        - Wi-Fi, 충전 중 등 특정 조건에서만 실행: JobScheduler
+        - 특정 시간 간격으로 반복 실행: WorkManager
+        - Android 4.0(API 14) 이상 지원 필요: WorkManager
+        - 즉시 실행 가능해야 함: WorkManager
+        - 앱이 백그라운드 실행 제한을 받지 않아야 함: WorkManager
+    - 결론
+        - WorkManager는 Android 4.0(API 14) 이상 지원 + JobScheduler & AlarmManager를 내부적으로 활용하는 최신 API로, 대부분의 경우 WorkManager가 권장됨
+        - JobScheduler는 특정 네트워크, 충전 상태 조건이 필요한 작업을 예약할 때 유용하지만, 즉시 실행이 필요하거나 앱이 종료된 후 작업이 유지되어야 하는 경우에는 WorkManager가 더 적합
+        - 최신 Android 앱 개발에서는 대부분 WorkManager를 활용하는 것이 가장 좋은 선택
+
+
 - Android TV 앱에서 Leanback 라이브러리의 역할
 - Android TV 앱 개발 시 D-pad(방향키) 네비게이션을 처리하는 방법
 - Android에서 Jetpack DataStore를 사용하는 이유
