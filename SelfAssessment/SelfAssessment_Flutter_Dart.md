@@ -434,148 +434,134 @@ Organize concepts, features, types and Pros and Cons
 
 - Flutter 공식 추천 및 지원하는 상태 관리 라이브러리 (2024년 기준)
   - Flutter 공식 문서 및 커뮤니티에서 가장 많이 사용되고, 유지보수되는 라이브러리들 정보
-    Riverpod	✅ (Flutter 공식 문서에 소개됨)	✅ (Google I/O에서 언급됨)
-    Provider	✅ (Flutter 공식 문서에서 소개됨)	✅ (Flutter 팀이 초기에 지원한 패턴)
-    BLoC (flutter_bloc)	✅ (Flutter 공식 문서에서 소개됨)	✅ (Google I/O에서 언급됨)
-    GetX	❌ (Flutter 공식 문서에서 소개되지 않음)	❌ (Google 공식 컨퍼런스에서 언급되지 않음)
+    - Riverpod: Flutter 공식 문서에 소개됨, Google I/O에서 언급됨
+    - Provider:	Flutter 공식 문서에서 소개됨,	Flutter 팀이 초기에 지원한 패턴
+    - BLoC (flutter_bloc): Flutter 공식 문서에서 소개됨, Google I/O에서 언급됨
+    - GetX: Flutter 공식 문서에서 소개되지 않음, Google 공식 컨퍼런스에서 언급되지 않음
 
   - Flutter 공식 문서에서 추천하는 상태 관리 라이브러리
     - Riverpod
     - Provider
     - BLoC (flutter_bloc)
-    
-📌 Flutter 공식 문서: State Management
-2️⃣ 현재 가장 많이 사용되는 상태 관리 라이브러리
-✅ 1) Riverpod (Flutter 공식 문서에서 적극 추천)
-Riverpod은 Provider의 단점을 개선한 상태 관리 라이브러리로, Flutter 공식 문서에서도 추천하는 패턴 중 하나입니다.
 
-✔ Flutter 공식 문서에서 소개됨
-✔ Provider의 단점을 개선
-✔ Flutter 독립 실행형(Standalone) 상태 관리 가능 (위젯과 분리)
-✔ 컴파일 타임에서 오류 감지 가능 (안전한 상태 관리)
+  - Flutter 공식 문서: State Management
+    - 현재 가장 많이 사용되는 상태 관리 라이브러리
+      - (1) Riverpod (Flutter 공식 문서에서 적극 추천)
+        - Riverpod은 Provider의 단점을 개선한 상태 관리 라이브러리
+        - Flutter 공식 문서에서도 추천하는 패턴 중 하나
+        - Flutter 공식 문서에서 소개됨
+        - Provider의 단점을 개선
+        - Flutter 독립 실행형(Standalone) 상태 관리 가능 (위젯과 분리)
+        - 컴파일 타임에서 오류 감지 가능 (안전한 상태 관리)
+        - Provider보다 성능 최적화, 위젯 독립성 증가
+        - Riverpod 사용 예제
+          ```dart
+          import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-📌 Riverpod 사용 예제
+          final counterProvider = StateProvider<int>((ref) => 0);
 
-dart
-복사
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+          class CounterScreen extends ConsumerWidget {
+            @override
+            Widget build(BuildContext context, WidgetRef ref) {
+              final counter = ref.watch(counterProvider);
 
-final counterProvider = StateProvider<int>((ref) => 0);
+              return Scaffold(
+                body: Center(child: Text('$counter')),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () => ref.read(counterProvider.notifier).state++,
+                  child: Icon(Icons.add),
+                ),
+              );
+            }
+          }
+          ```
 
-class CounterScreen extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(counterProvider);
+      - (2) Provider (초기 Flutter 공식 추천, 여전히 많이 사용됨)
+        - Provider는 Flutter 팀이 공식적으로 지원했던 상태 관리 라이브러리로, 가장 많이 사용되었음
+        - Riverpod이 등장하면서 단점(위젯 의존성, DI 어려움 등)이 개선
+        - Flutter 공식 문서에서 여전히 추천하지만, 최신 프로젝트에서는 Riverpod으로 이동하는 추세
+        - Provider는 기존 코드베이스에서 유지보수할 때 유용
+        - Provider 사용 예제
+          ```dart
+          final counterProvider = ChangeNotifierProvider((_) => CounterModel());
 
-    return Scaffold(
-      body: Center(child: Text('$counter')),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => ref.read(counterProvider.notifier).state++,
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
-📌 결론:
-🚀 Flutter 공식 문서에서 강력히 추천 & 최신 상태 관리 라이브러리
-🚀 Provider보다 성능 최적화, 위젯 독립성 증가
+          class CounterModel extends ChangeNotifier {
+            int count = 0;
 
-✅ 2) Provider (초기 Flutter 공식 추천, 여전히 많이 사용됨)
-Provider는 Flutter 팀이 공식적으로 지원했던 상태 관리 라이브러리로, 가장 많이 사용되었습니다.
-하지만 Riverpod이 등장하면서 단점(위젯 의존성, DI 어려움 등)이 개선됨.
+            void increment() {
+              count++;
+              notifyListeners();
+            }
+          }
+          ```
 
-📌 Provider 사용 예제
+      - (3) BLoC (flutter_bloc) - 대규모 프로젝트에서 추천
+        - BLoC 패턴은 Google의 공식 컨퍼런스 (Google I/O)에서 소개된 상태 관리 패턴
+        - 이벤트(Event) → 상태(State)로 변환하여 UI를 업데이트하는 방식이며, 대규모 프로젝트에서 가장 많이 사용
+        - 대규모 앱(기업용, 복잡한 앱)에서 강력한 상태 관리 기능 제공
+        - Flutter 공식 문서 & Google I/O에서 추천됨
+        - 작은 앱에서는 코드가 복잡해질 수 있음 (Riverpod보다 코드량 많음)
+        - BLoC 사용 예제
+          ```dart
+          class CounterBloc extends Bloc<CounterEvent, CounterState> {
+            CounterBloc() : super(CounterInitial()) {
+              on<Increment>((event, emit) => emit(CounterUpdated(state.counter + 1)));
+            }
+          }
+          ```
 
-dart
-복사
-final counterProvider = ChangeNotifierProvider((_) => CounterModel());
+      - (4) GetX (Flutter 공식 문서에서는 추천하지 않음)
+        - GetX는 가장 간결한 상태 관리 라이브러리이지만, 공식적으로 추천되지 않는 이유가 있음.
+        - Flutter 공식 문서에서 소개되지 않음
+        - Google I/O 등 공식 컨퍼런스에서 언급되지 않음
+        - 설계 방식이 일반적인 상태 관리 패턴과 다름 (의존성 관리와 상태 관리가 혼합됨)
+        - 메모리 누수 및 유지보수 어려움이 보고됨
+        - Flutter 공식 문서에서 언급되지 않으며, 장기적인 유지보수가 어려운 편
+        - 기업 및 대규모 프로젝트에서 추천되지 않음 (메모리 누수 이슈 존재)
+        - 작은 프로젝트에서는 코드가 간결해 빠르게 개발 가능
+        - GetX 사용 예제
+          ```dart
+          class CounterController extends GetxController {
+            var count = 0.obs;
 
-class CounterModel extends ChangeNotifier {
-  int count = 0;
+            void increment() => count++;
+          }
 
-  void increment() {
-    count++;
-    notifyListeners();
-  }
-}
-📌 결론:
-✅ Flutter 공식 문서에서 여전히 추천하지만, 최신 프로젝트에서는 Riverpod으로 이동하는 추세
-✅ Provider는 기존 코드베이스에서 유지보수할 때 유용
+          class CounterScreen extends StatelessWidget {
+            final CounterController controller = Get.put(CounterController());
 
-✅ 3) BLoC (flutter_bloc) - 대규모 프로젝트에서 추천
-BLoC 패턴은 Google의 공식 컨퍼런스 (Google I/O)에서 소개된 상태 관리 패턴입니다.
-이벤트(Event) → 상태(State)로 변환하여 UI를 업데이트하는 방식이며, 대규모 프로젝트에서 가장 많이 사용됩니다.
+            @override
+            Widget build(BuildContext context) {
+              return Scaffold(
+                body: Center(child: Obx(() => Text("${controller.count}"))),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: controller.increment,
+                  child: Icon(Icons.add),
+                ),
+              );
+            }
+          }
+          ```
 
-📌 BLoC 사용 예제
+  - 결론: 2024년 가장 추천되는 Flutter 상태 관리 라이브러리
+    - Riverpod (최신 추천), 가장 추천됨 (Flutter 공식 문서 추천),	Provider 개선, 성능 최적화, 유지보수 용이
+    - Provider (기존 추천), 여전히 많이 사용됨, 초기 Flutter 공식 추천 방식, 유지보수 용이
+    - BLoC (대규모 앱 추천), Google I/O에서 추천됨, 대규모 프로젝트에서 강력한 상태 관리
+    - GetX (공식 추천 아님), Flutter 공식 문서 미포함, 빠른 개발 가능하지만 유지보수 어려움
 
-dart
-복사
-class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  CounterBloc() : super(CounterInitial()) {
-    on<Increment>((event, emit) => emit(CounterUpdated(state.counter + 1)));
-  }
-}
-📌 결론:
-✅ 대규모 앱(기업용, 복잡한 앱)에서 강력한 상태 관리 기능 제공
-✅ Flutter 공식 문서 & Google I/O에서 추천됨
-✅ 작은 앱에서는 코드가 복잡해질 수 있음 (Riverpod보다 코드량 많음)
+  - 결론 요약
+    - 최신 Flutter 프로젝트에서는 Riverpod을 사용하는 것이 가장 적절함
+    - 기존 코드베이스에서 Provider를 유지보수하는 것은 문제 없음
+    - 대규모 프로젝트에서는 BLoC이 강력한 상태 관리 솔루션 제공
+    - GetX는 Flutter 공식 문서에서 추천되지 않으며, 장기적인 유지보수에 어려움이 있음
 
-❌ 4) GetX (Flutter 공식 문서에서는 추천하지 않음)
-GetX는 가장 간결한 상태 관리 라이브러리이지만, 공식적으로 추천되지 않는 이유가 있음.
-
-Flutter 공식 문서에서 소개되지 않음
-Google I/O 등 공식 컨퍼런스에서 언급되지 않음
-설계 방식이 일반적인 상태 관리 패턴과 다름 (의존성 관리와 상태 관리가 혼합됨)
-메모리 누수 및 유지보수 어려움이 보고됨
-📌 GetX 사용 예제
-
-dart
-복사
-class CounterController extends GetxController {
-  var count = 0.obs;
-
-  void increment() => count++;
-}
-
-class CounterScreen extends StatelessWidget {
-  final CounterController controller = Get.put(CounterController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Obx(() => Text("${controller.count}"))),
-      floatingActionButton: FloatingActionButton(
-        onPressed: controller.increment,
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
-📌 결론:
-❌ Flutter 공식 문서에서 언급되지 않으며, 장기적인 유지보수가 어려운 편
-❌ 기업 및 대규모 프로젝트에서 추천되지 않음 (메모리 누수 이슈 존재)
-✅ 작은 프로젝트에서는 코드가 간결해 빠르게 개발 가능
-
-3️⃣ 결론: 2024년 가장 추천되는 Flutter 상태 관리 라이브러리는?
-라이브러리	추천 여부	특징
-✅ Riverpod (최신 추천)	✅ 가장 추천됨 (Flutter 공식 문서 추천)	Provider 개선, 성능 최적화, 유지보수 용이
-✅ Provider (기존 추천)	✅ 여전히 많이 사용됨	초기 Flutter 공식 추천 방식, 유지보수 용이
-✅ BLoC (대규모 앱 추천)	✅ Google I/O에서 추천됨	대규모 프로젝트에서 강력한 상태 관리
-❌ GetX (공식 추천 아님)	❌ Flutter 공식 문서 미포함	빠른 개발 가능하지만 유지보수 어려움
-📌 결론 요약:
-🚀 최신 Flutter 프로젝트에서는 Riverpod을 사용하는 것이 가장 적절함
-🚀 기존 코드베이스에서 Provider를 유지보수하는 것은 문제 없음
-🚀 대규모 프로젝트에서는 BLoC이 강력한 상태 관리 솔루션 제공
-❌ GetX는 Flutter 공식 문서에서 추천되지 않으며, 장기적인 유지보수에 어려움이 있음
-
-4️⃣ 개인/기업용 Flutter 프로젝트 상태 관리 선택 가이드
-프로젝트 유형	추천 라이브러리	이유
-소규모 앱 (빠른 개발)	✅ Riverpod / GetX	Riverpod은 유지보수 용이, GetX는 간결함
-중규모 앱 (스타트업, 개인 프로젝트)	✅ Riverpod / Provider	Provider는 사용법이 간단하고 안정적
-대규모 앱 (기업, 금융, 커머스 등)	✅ BLoC / Riverpod	복잡한 상태 관리 최적화 가능
-기존 Provider 프로젝트 유지보수	✅ Provider 유지	큰 문제 없으면 유지
-새로운 Flutter 프로젝트	✅ Riverpod 추천	최신 기술, 안정적인 구조
-🚀 즉, 2024년 Flutter 상태 관리는 Riverpod이 가장 유망한 선택! 🚀
+  - 개인/기업용 Flutter 프로젝트 상태 관리 선택 가이드
+    - 소규모 앱 (빠른 개발): Riverpod / GetX (Riverpod은 유지보수 용이, GetX는 간결함)
+    - 중규모 앱 (스타트업, 개인 프로젝트): Riverpod / Provider (Provider는 사용법이 간단하고 안정적)
+    - 대규모 앱 (기업, 금융, 커머스 등): BLoC / Riverpod (복잡한 상태 관리 최적화 가능)
+    - 기존 Provider 프로젝트 유지보수: Provider 유지, 큰 문제 없으면 유지
+    - 새로운 Flutter 프로젝트: Riverpod 추천 (최신 기술, 안정적인 구조)
+    - 2024년 Flutter 상태 관리는 Riverpod이 가장 유망한 선택이라 생각됨
 
 - Flutter에서 Sliver Widgets을 사용하는 이유는?
 - Flutter에서 Navigator 1.0과 2.0의 차이점은?
