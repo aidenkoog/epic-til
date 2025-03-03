@@ -3416,7 +3416,118 @@ Organize concepts, features, types and Pros and Cons
         - 최적 부분 구조와 중복되는 하위 문제를 만족하는 문제에서 활용 가능하며, 성능 및 코드 효율성을 크게 향상 가능
 
 
-- 원형 연결 리스트(Circular Linked List)의 개념과 활용 방안을 설명하시오.
+- 원형 연결 리스트(Circular Linked List)의 개념과 활용 방안
+    - 원형 연결 리스트(Circular Linked List) 개념
+        - 원형 연결 리스트(Circular Linked List)는 마지막 노드가 첫 번째 노드를 가리키도록 구성된 연결 리스트
+        - 즉, 리스트의 끝이 다시 리스트의 시작과 연결되어 있어 데이터를 순환 구조로 관리 가능
+        - 단순 연결 리스트(Singly Linked List): 마지막 노드의 next가 NULL을 가리킴
+        - 원형 연결 리스트(Circular Linked List): 마지막 노드의 next가 다시 첫 번째 노드(head) 를 가리킴
+
+    - 원형 연결 리스트의 종류
+        - 단일 원형 연결 리스트 (Singly Circular Linked List)
+            - 노드가 하나의 방향(다음 노드)으로만 연결되며, 마지막 노드가 첫 번째 노드를 가리킴
+        - 이중 원형 연결 리스트 (Doubly Circular Linked List)	노드가 앞뒤로 연결되며, 마지막 노드의 next가 첫 번째 노드를, 첫 번째 노드의 prev가 마지막 노드를 가리킴
+3. 원형 연결 리스트의 주요 특징
+마지막 노드가 첫 번째 노드와 연결되어 있음 → 리스트의 끝이 존재하지 않음
+임의의 위치에서 리스트를 순환하면서 처리 가능 → 선형 리스트보다 유연한 구조
+메모리 효율성이 높음 → NULL을 저장할 필요가 없음
+원형 구조 활용 가능 → 운영 체제의 프로세스 스케줄링 등에서 사용됨
+4. 원형 연결 리스트의 주요 연산
+연산	설명
+삽입 (Insertion)	리스트의 처음, 중간, 마지막 위치에 노드를 삽입
+삭제 (Deletion)	특정 노드 제거 후 리스트 유지
+순회 (Traversal)	처음부터 끝까지 순환하며 데이터 검색
+검색 (Search)	특정 값을 가진 노드 찾기
+5. 원형 연결 리스트의 구현 (Python)
+✅ (1) 단일 원형 연결 리스트 구현
+python
+복사
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None  # 다음 노드를 가리키는 포인터
+
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None  # 첫 번째 노드 (head)
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:  # 첫 번째 노드라면
+            self.head = new_node
+            self.head.next = self.head  # 원형 연결 리스트이므로 자신을 가리킴
+        else:
+            temp = self.head
+            while temp.next != self.head:
+                temp = temp.next  # 마지막 노드 찾기
+            temp.next = new_node
+            new_node.next = self.head  # 마지막 노드의 next를 head로 설정
+
+    def display(self):
+        if not self.head:
+            print("리스트가 비어 있습니다.")
+            return
+        temp = self.head
+        while True:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+            if temp == self.head:  # 한 바퀴 돌면 종료
+                break
+        print("(다시 head로)")
+
+# 사용 예시
+cll = CircularLinkedList()
+cll.append(1)
+cll.append(2)
+cll.append(3)
+cll.display()
+✅ 출력 결과
+
+rust
+복사
+1 -> 2 -> 3 -> (다시 head로)
+🔹 원형 연결 리스트의 특성: 마지막 노드가 다시 첫 번째 노드(head) 를 가리킴
+
+6. 원형 연결 리스트의 활용 방안
+✅ (1) 운영 체제의 프로세스 스케줄링 (CPU Scheduling)
+라운드 로빈(Round Robin) 스케줄링
+원형 연결 리스트를 이용하여 프로세스를 순환하며 실행
+time quantum이 지나면 다음 프로세스로 전환
+마지막 프로세스가 실행된 후 다시 첫 번째 프로세스로 돌아옴
+🔹 예제:
+
+python
+복사
+processes = CircularLinkedList()
+processes.append("P1")
+processes.append("P2")
+processes.append("P3")
+processes.display()
+✅ 프로세스가 순환하며 실행됨 → P1 → P2 → P3 → P1 ...
+
+✅ (2) 네트워크 토큰 링 프로토콜 (Token Ring)
+네트워크 통신 방식 중 토큰 링(Token Ring) 프로토콜은 원형 연결 리스트와 유사한 방식으로 동작
+데이터 전송을 위한 토큰(Token) 이 네트워크 노드 사이를 순환
+✅ (3) 멀티플레이어 게임에서 턴 기반 시스템
+보드 게임, 카드 게임과 같은 멀티플레이어 게임에서 턴(Turn)이 원형으로 돌아감
+플레이어가 순서대로 턴을 가지며, 마지막 플레이어의 다음 차례가 첫 번째 플레이어로 돌아감
+✅ (4) 데이터 버퍼 (Circular Buffer)
+원형 연결 리스트를 활용하여 메모리 버퍼 관리
+데이터가 가득 차면 가장 오래된 데이터를 덮어씀
+예: 오디오/비디오 스트리밍, 실시간 데이터 로깅
+7. 원형 연결 리스트 vs 일반 연결 리스트 비교
+구분	일반 연결 리스트 (Singly Linked List)	원형 연결 리스트 (Circular Linked List)
+마지막 노드	NULL을 가리킴	첫 번째 노드를 가리킴 (head)
+순회	끝에 도달하면 중단	무한 순환 가능
+활용 사례	일반적인 리스트 구조	스케줄링, 토큰 링, 게임 로직
+삽입/삭제	상대적으로 간단	끝에서 연결하는 추가 작업 필요
+8. 결론
+✅ 원형 연결 리스트는 마지막 노드가 첫 번째 노드를 가리키는 구조
+✅ 운영 체제의 CPU 스케줄링, 네트워크 토큰 링, 게임 로직, 버퍼 관리 등에서 활용
+✅ 연결 리스트와 달리 끝이 없으므로 순환하며 데이터를 처리하는 경우 유용
+
+🚀 결론: "원형 연결 리스트는 특정 문제(순환 구조) 해결에 최적화된 자료구조!"
+
 - 정렬 알고리즘에서 안정 정렬(Stable Sort)과 불안정 정렬(Unstable Sort)의 차이점을 설명하시오.
 - 팀 정렬(Timsort)의 개념과 활용 사례를 설명하시오.
 - 셸 정렬(Shell Sort)의 개념과 시간 복잡도를 설명하시오.
