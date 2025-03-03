@@ -4165,7 +4165,136 @@ Organize concepts, features, types and Pros and Cons
     - CI/CD 파이프라인과 연계하여 자동화 테스트를 적용하면 품질 향상 및 배포 속도 증가
     - 소프트웨어 테스트는 단순한 디버깅이 아니라, 신뢰성 있는 소프트웨어를 제공하기 위한 필수 과정
 
-- 단위 테스트(Unit Test), 통합 테스트(Integration Test), 시스템 테스트(System Test), 인수 테스트(Acceptance Test)의 차이를 설명하시오.
+- 단위 테스트(Unit Test), 통합 테스트(Integration Test), 시스템 테스트(System Test), 인수 테스트(Acceptance Test)의 차이
+  - 개요
+    - 소프트웨어 테스트는 개발 과정에서 발생할 수 있는 오류를 조기에 발견하고, 최종적으로 품질을 보장하기 위해 여러 단계로 진행
+    - 단위(Unit) → 통합(Integration) → 시스템(System) → 인수(Acceptance) 테스트 순서로 점진적으로 수행
+
+  - 단위 테스트(Unit Test)
+    - 개별 모듈(클래스, 함수, 메서드)을 독립적으로 테스트
+    - 소스 코드의 가장 작은 단위를 검증
+    - Mock 객체나 Stub을 사용하여 외부 의존성을 제거하고 테스트 수행
+    - 특징
+      - 가장 낮은 수준의 테스트
+      - 독립적인 모듈(클래스, 함수)이 올바르게 동작하는지 확인
+      - 개발자가 직접 수행하며, 보통 테스트 프레임워크(JUnit, PyTest, Jest 등) 를 사용
+    - 예제 (Python, pytest 사용)
+      ```python
+      import unittest
+      from my_module import add
+
+      class TestAddition(unittest.TestCase):
+          def test_add(self):
+              self.assertEqual(add(2, 3), 5)  # add 함수가 올바르게 동작하는지 확인
+
+      if __name__ == '__main__':
+          unittest.main()
+      ```
+      - 사용 도구
+        - Java: JUnit, Mockito
+        - Python: pytest, unittest
+        - JavaScript: Jest, Mocha
+
+  - 통합 테스트(Integration Test)
+    - 개별 모듈이 서로 올바르게 동작하는지 확인
+    - 모듈 간의 인터페이스(API 호출, 데이터베이스 연동 등) 검증
+    - Mock 객체 사용 가능하지만, 실제 환경과 유사하게 테스트하는 것이 중요
+    - 특징
+      - 단위 테스트가 통과한 후 수행됨
+      - 모듈 간의 데이터 흐름을 확인하는 것이 목적
+      - API, DB, 네트워크, 파일 시스템 간의 상호작용을 검증
+    - 예제 (Spring Boot, 통합 테스트)
+      ```java
+      @SpringBootTest
+      @RunWith(SpringRunner.class)
+      public class UserServiceIntegrationTest {
+
+          @Autowired
+          private UserService userService;
+
+          @Test
+          public void testCreateUser() {
+              User user = new User("Alice");
+              userService.save(user);
+              assertNotNull(userService.findByName("Alice"));
+          }
+      }
+      ```
+      - 사용 도구
+        - Java: Spring Boot Test, TestContainers
+        - Python: pytest-django, pytest-flask
+        - JavaScript: SuperTest, Cypress
+
+  - 시스템 테스트(System Test)
+    - 완성된 시스템(전체 소프트웨어)의 동작을 검증
+    - 실제 사용자 환경에서 소프트웨어가 정상적으로 동작하는지 확인
+    - 기능 테스트, 보안 테스트, 성능 테스트, UI 테스트 등을 포함
+    - 특징
+      - 모든 모듈을 통합한 상태에서 테스트 진행
+      - 실사용자의 시나리오를 기반으로 수행
+      - QA 팀이 주로 담당하며, 실제 운영 환경과 유사한 환경에서 수행
+    - 예제 (Selenium을 이용한 UI 테스트)
+      ```python
+      from selenium import webdriver
+
+      driver = webdriver.Chrome()
+      driver.get("http://example.com/login")
+      assert "Login" in driver.title
+      driver.quit()
+      ```
+    - 사용 도구
+      - 기능 테스트: Selenium, Appium
+      - 부하 테스트: JMeter, Locust
+      - 보안 테스트: OWASP ZAP, Burp Suite
+
+  - 인수 테스트(Acceptance Test)
+    - 사용자(클라이언트, 고객) 요구사항이 충족되었는지 확인
+    - 시스템을 실제 사용자 입장에서 검증
+    - 테스트를 통과해야 제품이 배포 가능
+    - 특징
+      - 개발자, QA, 고객(또는 PO, BA)이 함께 수행
+      - 기능이 요구사항을 충족하는지 검증
+      - UAT(User Acceptance Test)와 동일한 개념
+      - 베타 테스트, A/B 테스트 등도 포함 가능
+    - 예제 (BDD 기반 인수 테스트 - Cucumber)
+      ```python
+      Feature: User Login
+      Scenario: Successful login
+        Given User is on login page
+        When User enters valid credentials
+        Then User should see the dashboard
+      ```
+    - 사용 도구:
+      - BDD (Behavior-Driven Development): Cucumber, SpecFlow
+      - 자동화 테스트: Cypress, Selenium
+      - UI/UX 테스트: Hotjar, Google Optimize
+
+  - 최적의 테스트 전략
+    - 단위 테스트(Unit Test)
+      - 모든 코드(비즈니스 로직)에 대해 70~90% 이상의 커버리지 확보
+      - Mocking 활용하여 독립적인 테스트 수행
+      - 빠른 피드백을 제공하여 개발 단계에서 오류 조기 발견
+
+    - 통합 테스트(Integration Test)
+      - API, DB, 서비스 간의 연동을 테스트
+      - Stub, TestContainers 활용하여 외부 의존성 최소화
+
+    - 시스템 테스트(System Test)
+      - 실제 운영 환경과 유사한 환경에서 테스트 수행
+      - 부하 테스트, UI 테스트, 보안 테스트 포함
+
+    - 인수 테스트(Acceptance Test)
+      - 사용자의 실제 요구사항을 검증
+      - UAT(User Acceptance Test)로 최종 승인 후 배포
+
+  - 결론
+    - 단위 테스트(Unit Test): 개별 모듈(클래스, 함수)의 정확성을 검증하는 테스트
+    - 통합 테스트(Integration Test): 여러 모듈(API, DB 등)이 정상적으로 연동되는지 검증
+    - 시스템 테스트(System Test): 전체 소프트웨어가 정상적으로 동작하는지 확인
+    - 인수 테스트(Acceptance Test): 사용자가 기대한 대로 소프트웨어가 동작하는지 검증
+    - 소프트웨어 품질을 높이기 위해 ①단위 → ②통합 → ③시스템 → ④인수 테스트를 체계적으로 수행해야 함
+
+
 - 화이트박스 테스트(White-Box Testing)와 블랙박스 테스트(Black-Box Testing)의 차이를 설명하시오.
 - 테스트 자동화(Test Automation)의 개념과 주요 도구(Selenium, JUnit, TestNG 등)를 설명하시오.
 - 회귀 테스트(Regression Testing)의 개념과 필요성을 설명하시오.
