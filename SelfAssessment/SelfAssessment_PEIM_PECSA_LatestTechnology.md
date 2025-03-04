@@ -4,6 +4,84 @@ Organize concepts, features, types and Pros and Cons
 
 ## Latest Technology
 
+- i18n (Internationalization) & l10n (Localization) 설명
+  - 개요
+    - i18n과 l10n은 소프트웨어에서 다국어 지원을 위해 사용되는 개념
+    - "Internationalization"이라는 단어에서 앞 글자 I와 마지막 글자 N 사이에 18개의 문자가 있어서 "i18n"이라고 줄여씀
+    - i18n은 애플리케이션을 여러 언어와 지역에서 쉽게 사용할 수 있도록 설계하는 과정
+
+  - i18n 주요 개념
+    - 다국어 및 다문화 지원을 위한 앱 설계 및 개발
+    - 하드코딩된 언어(예: 영어 "Hello"등)를 사용하지 않고, 외부 번역 파일을 사용하는 방식
+    - 날짜, 시간, 숫자, 통화 형식 지원
+    - LTR / RTL 언어 지원 (예: 영어, 아랍어)
+    - UI가 언어에 따라 적절히 조정되도록 설계
+
+  - i18n 예제
+    ```dart
+    Text("Hello, world!"); // 영어로만 출력 (다국어 미지원)
+    Text(AppLocalizations.of(context)!.helloWorld); //번역 파일에서 가져옴
+    ```
+  - l10n (Localization, 현지화)
+    - 개요
+      - "Localization"이라는 단어에서 앞 글자 L과 마지막 글자 N 사이에 10개의 문자가 있어서 "l10n"이라고 줄여씀
+      - l10n은 특정 언어 및 문화에 맞게 텍스트와 UI를 변환하는 과정
+    
+    - l10n 주요 개념
+      - i18n이 준비된 애플리케이션을 특정 언어로 변환
+      - 텍스트 번역(Hello -> 안녕하세요)
+      - 날짜/시간 형식 변환 (YYYY-MM-DD -> DD/MM/YYYY)
+      - 숫자 및 통화 단위 변환($100.00 → ₩130,000)
+
+    - l10n 예제
+      - Flutter 에서 arb 파일 사용
+      - lib/l10n/app_en.arg (영어)
+        - 현재 앱의 언어 설정이 en이면 "Hello, World!"가 표시
+        ```json
+        {
+          "helloWorld": "Hello, World!"
+        }
+        ```
+        ```dart
+        Text(AppLocalizations.of(context)!.helloWorld);
+        ```
+
+    - i18n, l10n 차이점
+      - i18n
+        - 국제화
+        - 앱이 다국어를 지원할 수 있도록 설계 (여러 언어를 지원하도록 앱을 설계)
+        - 앱이 다국어를 쉽게 지원하도록 준비하는 과정
+        - 앱이 여러 언어를 지원하도록 설계하는 과정
+      - l10n
+        - 현지화
+        - 앱이 특정 언어로 변환되는 과정 (특정 언어 및 문화에 맞게 변환)
+        - 실제로 한국어, 일본어, 영어 등으로 변환하는 과정
+        - 특정 언어로 번역 및 적용하는 과정
+
+    - Flutter 에서 i18n, l10n 적용 방법
+      - arb 번역 파일 추가 후 flutter gen-l10n 실행하여 자동 생성
+      ```dart
+      dependencies:
+        flutter:
+          sdk: flutter
+        flutter_localizations:
+          sdk: flutter
+        intl: ^0.18.0
+
+      MaterialApp(
+        supportedLocales: [
+          Locale('en', ''), // 영어
+          Locale('ko', ''), // 한국어
+        ],
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        home: MyHomePage(),
+      );
+      ```
+
 - 인공지능(AI)의 개념과 주요 기술(머신러닝, 딥러닝, 강화학습 등)을 설명
   - AI 개념
     - Artificial Intelligence, 인공지능

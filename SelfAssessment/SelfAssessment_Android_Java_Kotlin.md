@@ -659,8 +659,101 @@ Organize concepts, features, types and Pros and Cons
         - JobScheduler는 특정 네트워크, 충전 상태 조건이 필요한 작업을 예약할 때 유용하지만, 즉시 실행이 필요하거나 앱이 종료된 후 작업이 유지되어야 하는 경우에는 WorkManager가 더 적합
         - 최신 Android 앱 개발에서는 대부분 WorkManager를 활용하는 것이 가장 좋은 선택
 
-
 - Android TV 앱에서 Leanback 라이브러리의 역할
+    - 개요
+        - Leanback 라이브러리는 Android TV 앱을 개발할 때, TV 환경에 최적화된 UI 및 기능을 쉽게 구현할 수 있도록 도와주는 라이브러리
+        - Android TV에서는 리모컨 기반의 탐색(Navigation)과 10-foot UI(멀리서도 쉽게 보이는 UI)가 중요하기 때문에, Leanback 라이브러리는 TV 환경에 맞는 UI 컴포넌트와 탐색 기능을 제공
+
+    - Leanback 라이브러리의 주요 역할
+        - TV에 최적화된 UI 제공
+            - Android TV는 모바일과는 다른 화면 크기와 입력 방식(리모컨, 게임패드 등)을 사용하기 때문에, Leanback 라이브러리는 TV 친화적인 UI 컴포넌트를 제공
+            - 대표적인 UI 컴포넌트
+                - BrowseSupportFragment: TV의 메인 화면에서 카테고리별 콘텐츠(예: 영화, 드라마)를 표시하는 UI
+                - RowsSupportFragment: BrowseSupportFragment 내부에서 콘텐츠를 가로 행(Row) 형태로 배치하는 UI
+                - DetailsSupportFragment: 특정 콘텐츠를 선택했을 때 상세 정보를 보여주는 UI
+                - PlaybackSupportFragment: 동영상 재생을 위한 UI
+                - SearchSupportFragment: TV에서 키보드 입력 없이 음성 검색을 지원하는 UI
+
+        - 리모컨 네비게이션 지원
+            - Leanback 라이브러리는 D-Pad(방향키), OK 버튼, 백 버튼 등을 활용한 리모컨 탐색을 쉽게 구현할 수 있도록 함
+            - Leanback에서 제공하는 포커스 관리 시스템
+                - TV 앱에서는 터치 대신 방향키(↑ ↓ ← →)로 이동해야 함
+                - Leanback의 UI 컴포넌트는 자동으로 포커스를 관리해주므로 개발자가 직접 UI 포커스를 조정할 필요 없음
+                - 사용자가 방향키를 눌렀을 때 자동으로 다음 UI 요소로 이동하는 기능을 기본 지원
+
+        - 추천 및 검색 기능 (Recommendations & Search)
+            - Leanback 라이브러리는 Android TV의 기본 홈 화면과 연동하여 콘텐츠를 추천하고, 검색 기능을 구현할 수 있도록 지원
+            - 추천(Recommendations) API
+                - TvRecommendationManager를 사용하여 사용자 맞춤 추천 콘텐츠를 Android TV 홈 화면에 표시할 수 있음.
+            - 음성 검색 지원
+                - SearchSupportFragment를 활용하여 음성 검색 기능을 추가할 수 있음
+                - Android TV에서는 리모컨의 마이크 버튼을 통해 음성 검색 가능
+                - onSearchRequested()를 사용하여 검색 실행 가능
+
+        - 미디어 재생 기능 강화
+            - Leanback 라이브러리는 TV 환경에서 동영상 재생을 쉽게 구현할 수 있도록 미디어 플레이어 관련 UI와 API를 제공
+            - PlaybackSupportFragment
+                - Android TV에서 비디오 플레이어 UI를 쉽게 구현할 수 있음.
+                - 미디어 컨트롤(재생, 일시정지, 빨리 감기, 뒤로 감기)을 기본 제공.
+            - VideoSupportFragment
+                - ExoPlayer 또는 MediaPlayer와 연동하여 비디오 스트리밍을 쉽게 지원
+
+        - TV 스타일 애니메이션 및 UI 트랜지션 지원
+            - Leanback 라이브러리는 TV 환경에 적합한 UI 애니메이션과 트랜지션을 기본 제공하여, 부드러운 사용자 경험을 보장
+            - 대표적인 UI 트랜지션
+                - Slide, Fade, Explode 등의 애니메이션 효과를 활용하여 화면 전환을 부드럽게 처리 가능
+
+    - Leanback 라이브러리의 핵심 컴포넌트
+        - BrowseSupportFragment: TV 앱의 메인 화면 구성 (카테고리별 콘텐츠 목록)
+        - RowsSupportFragment: 가로로 정렬된 콘텐츠 리스트
+        - DetailsSupportFragment: 특정 콘텐츠의 상세 정보 화면
+        - PlaybackSupportFragment: 동영상 재생을 위한 UI
+        - SearchSupportFragment: 음성 및 텍스트 검색 기능
+        - HeadersSupportFragment: 좌측 메뉴 (카테고리, 설정 등)
+        - VerticalGridSupportFragment: 세로형 그리드 UI 지원
+        - GuidedStepSupportFragment: TV 설정 화면 또는 단계별 가이드 화면
+
+    - Leanback 라이브러리 사용 예제
+        - BrowseSupportFragment를 활용하여 카테고리별 콘텐츠 목록을 가로로 표시하는 TV UI를 구성하는 예제
+        ```kotlin
+        class MainFragment : BrowseSupportFragment() {
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+
+                title = "My TV App"
+                headersState = HEADERS_ENABLED
+                isHeadersTransitionOnBackEnabled = true
+
+                loadRows()
+            }
+
+            private fun loadRows() {
+                val rowsAdapter = ArrayObjectAdapter(ListRowPresenter())
+                val cardPresenter = CardPresenter()
+
+                val movieList = listOf("Movie 1", "Movie 2", "Movie 3")
+                val movieAdapter = ArrayObjectAdapter(cardPresenter)
+                movieList.forEach { movieAdapter.add(it) }
+
+                val header = HeaderItem(0, "Movies")
+                rowsAdapter.add(ListRow(header, movieAdapter))
+
+                adapter = rowsAdapter
+            }
+        }
+        ```
+    - Leanback 라이브러리의 장점
+        - TV UI에 최적화된 디자인을 제공 → 별도로 UI를 개발할 필요 없이 기본 제공되는 UI 컴포넌트를 활용 가능
+        - 리모컨 네비게이션을 기본 지원 → 포커스 이동 및 버튼 입력을 직접 처리할 필요 없음
+        - 추천 및 검색 기능 쉽게 구현 가능 → Android TV의 홈 화면과 연동하여 추천 콘텐츠 제공 가능
+        - 미디어 재생 기능 강화 → PlaybackSupportFragment를 활용하여 동영상 재생 UI를 쉽게 구성 가능
+        - 애니메이션 및 전환 효과 제공 → TV 앱에 적합한 부드러운 화면 전환을 기본 제공
+
+    - 결론
+        - Android TV 앱을 개발할 때 Leanback 라이브러리를 사용하면, TV 환경에 적합한 UI/UX를 쉽게 구현 가능
+        - 리모컨 탐색, 콘텐츠 추천, 음성 검색, 동영상 재생 UI 등의 기능을 최소한의 코드 변경으로 구현할 수 있기 때문에, 효율적인 개발이 가능
+        - Leanback은 Android TV 앱 개발을 쉽게 해주는 TV 최적화 UI 라이브러리
+
 - Android TV 앱 개발 시 D-pad(방향키) 네비게이션을 처리하는 방법
 - Android에서 Jetpack DataStore를 사용하는 이유
 - Android에서 Jetpack Hilt와 Dagger의 차이점
