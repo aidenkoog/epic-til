@@ -4364,7 +4364,91 @@ Organize concepts, features, types and Pros and Cons
 
 즉, 소프트웨어의 신뢰성과 품질을 높이기 위해서는 두 가지 테스트를 적절히 조합하여 수행해야 한다.
 
-- 테스트 자동화(Test Automation)의 개념과 주요 도구(Selenium, JUnit, TestNG 등)를 설명하시오.
+- 테스트 자동화(Test Automation)의 개념과 주요 도구(Selenium, JUnit, TestNG 등)
+
+1. 테스트 자동화(Test Automation)의 개념
+
+테스트 자동화(Test Automation)는 소프트웨어의 기능, 성능, 보안 등을 자동으로 검증하기 위해 테스트 케이스를 자동 실행하고 결과를 비교하는 프로세스를 의미한다. 이는 수동 테스트의 반복 작업을 줄이고, 테스트 정확성을 향상하며, 지속적인 통합 및 배포(Continuous Integration & Continuous Deployment, CI/CD) 환경에서 빠른 피드백을 제공하는 데 중요한 역할을 한다.
+
+테스트 자동화의 주요 목적은 다음과 같다.
+	•	테스트 효율성 향상: 반복적인 테스트를 자동화하여 시간과 비용 절감
+	•	정확성 향상: 사람이 놓칠 수 있는 오류를 감지
+	•	빠른 피드백 제공: CI/CD 파이프라인에서 신속한 코드 검증
+	•	테스트 커버리지 확장: 다양한 환경과 플랫폼에서 테스트 가능
+
+테스트 자동화는 단위(Unit), 통합(Integration), 시스템(System), UI(User Interface) 테스트 등 여러 단계에서 적용되며, 다양한 테스트 자동화 도구를 활용한다.
+
+2. 주요 테스트 자동화 도구
+
+다양한 테스트 자동화 도구가 존재하지만, 대표적인 도구로 Selenium, JUnit, TestNG 등을 들 수 있다.
+
+① Selenium (셀레니움)
+	•	종류: 웹 애플리케이션 UI 테스트 자동화 도구
+	•	특징:
+	•	웹 브라우저 자동화 지원 (Chrome, Firefox, Edge 등)
+	•	다양한 언어(Java, Python, C#, JavaScript 등) 지원
+	•	Selenium WebDriver를 이용하여 브라우저의 동작을 직접 제어 가능
+	•	Selenium Grid를 통해 병렬 테스트 수행 가능
+	•	주요 구성 요소:
+	•	Selenium WebDriver: 브라우저를 직접 제어하는 API
+	•	Selenium IDE: 테스트 스크립트를 기록하고 재생하는 기능
+	•	Selenium Grid: 여러 환경에서 병렬 테스트 실행
+
+	예제 (Python Selenium)
+
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get("https://www.example.com")
+assert "Example Domain" in driver.title
+driver.quit()
+
+② JUnit
+	•	종류: Java 기반의 단위 테스트(Unit Test) 프레임워크
+	•	특징:
+	•	테스트 주도 개발(Test-Driven Development, TDD) 지원
+	•	어노테이션(@Test, @Before, @After)을 활용한 간단한 테스트 작성
+	•	CI/CD 환경에서 널리 사용됨
+	•	단위 테스트를 위한 기본적인 테스트 실행 및 결과 검증 기능 제공
+
+	예제 (JUnit 5)
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+    @Test
+    void testAddition() {
+        assertEquals(5, 2 + 3);
+    }
+}
+
+③ TestNG
+	•	종류: Java 기반의 테스트 프레임워크 (JUnit의 확장)
+	•	특징:
+	•	병렬 테스트 및 그룹화 기능 제공
+	•	다양한 리포트 기능 지원
+	•	JUnit보다 유연한 테스트 설정 가능
+	•	@Test, @BeforeSuite, @AfterSuite 등의 어노테이션 활용 가능
+
+	예제 (TestNG)
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+
+public class ExampleTest {
+    @Test
+    public void testAddition() {
+        assertEquals(2 + 3, 5);
+    }
+}
+3. 결론
+
+테스트 자동화는 소프트웨어 개발의 생산성과 품질을 높이는 중요한 기술이며, 다양한 도구를 활용하여 효율적으로 테스트를 수행할 수 있다.
+	•	Selenium: 웹 애플리케이션 UI 자동화
+	•	JUnit: Java 기반의 단위 테스트
+	•	TestNG: JUnit보다 확장된 기능을 제공하는 테스트 프레임워크
+
+테스트 자동화를 도입하면 지속적인 테스트 실행, 빠른 피드백, 신뢰성 있는 배포가 가능해지므로, CI/CD 환경에서 필수적인 요소로 자리 잡고 있다.
+
 - 회귀 테스트(Regression Testing)의 개념과 필요성을 설명하시오.
 - 테스트 커버리지(Test Coverage)의 개념과 측정 지표(구문, 분기, 조건, 경로 커버리지 등)를 설명하시오.
 - 동등 분할 테스트(Equivalence Partitioning)와 경계값 분석(Boundary Value Analysis)의 개념과 활용 사례를 설명하시오.
