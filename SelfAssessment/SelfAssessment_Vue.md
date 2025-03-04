@@ -264,7 +264,10 @@ This page summarizes the main concepts, features, pros and cons of Vue.js.
   - isRaw(): reactive 객체를 원래 객체로 변환
 
 - Vue.js에서 dynamic component를 렌더링하는 방법
-  - <component :is="currentComponent" />
+  - 예제 코드
+    ```javascript
+    <component :is="currentComponent" />
+    ```
 
 - Vue.js에서 key 속성을 활용하여 리스트 렌더링 시 발생할 수 있는 문제를 방지하는 방법
   - 각 항목에 key 속성을 추가하여 가상 DOM이 변경 사항을 올바르게 감지할 수 있도록 함
