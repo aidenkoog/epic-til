@@ -939,24 +939,185 @@ This page summarizes the main concepts, features, pros and cons of Vue.js.
     - HTTP 응답 헤더에서 Cache-Control 설정
   - API 호출 횟수를 줄이고 성능을 최적화 가능
 
-- Vue.js의 Composition API에서 Pinia를 활용한 고급 상태 관리 패턴은?
-- Vue.js에서 Teleport와 Suspense를 조합하여 최적화하는 방법은?
-- Vue.js에서 Vite와 Webpack의 차이점 및 성능 비교는?
-- Vue.js에서 isRef(), shallowRef(), customRef()의 차이점은?
-- Vue.js에서 SSR(Server-Side Rendering)과 SSG(Static Site Generation)의 차이점은?
-- Vue.js의 주요 특징과 React와의 차이점은 무엇인가요?
-- Vuex를 사용한 상태 관리 경험을 설명해주세요.
-- Vue.js에서의 라우팅 처리 방법을 설명해주세요.
-- Vue.js의 Reactivity 시스템 내부 동작 원리를 설명해주세요.
-- Vue.js의 Composition API와 Options API의 차이점은 무엇인가요?
-- Vue.js의 Virtual DOM Diffing 알고리즘에 대해 설명해주세요.
-- Vue.js의 Server-Side Rendering(SSR)과 Static Site Generation(SSG) 경험이 있다면 설명해주세요.
-- Vue.js의 단방향 데이터 흐름(One-way data flow)과 양방향 바인딩(Two-way binding)의 차이점은?
-- Vue.js에서 v-model과 @input 이벤트의 차이는?
-- Vue.js에서 v-bind와 v-on을 단축해서 사용할 수 있는 방법은?
-- Vue.js에서 ref()와 reactive()를 사용하는 기준은?
-- Vue.js에서 computed() 속성을 사용할 때 성능 최적화 효과가 있는 이유는?
-- Vue.js의 watch()와 watchEffect()의 차이점과 각각의 사용 사례는?
+- Vue.js의 Composition API에서 Pinia를 활용한 고급 상태 관리 패턴
+  - Pinia는 Vue 3의 공식 상태 관리 라이브러리로, Composition API와 자연스럽게 결합
+  - Composition API + Pinia를 활용하면 모듈화된 스토어를 생성하고, setup() 내에서 직접 상태를 관리 가능
+  - Pinia의 고급 패턴
+    - Getter + Computed 활용 (반응형 상태 관리)
+    - Action에서 비동기 작업 수행
+    - State Persist(로컬 스토리지 저장)
+    - Setup Store vs Option Store 패턴 활용
+
+- Vue.js에서 Teleport와 Suspense를 조합하여 최적화하는 방법
+  - Teleport: 특정 요소를 DOM의 원하는 위치로 이동시키는 기능
+  - Suspense: 비동기 컴포넌트가 데이터를 로드할 때 로딩 상태를 표시하는 기능
+  - 조합 예제
+    ```javascript
+    <template>
+      <Teleport to="body">
+        <Suspense>
+          <template #default>
+            <AsyncComponent />
+          </template>
+          <template #fallback>
+            <p>Loading...</p>
+          </template>
+        </Suspense>
+      </Teleport>
+    </template>
+    ```
+    - 활용 시나리오
+      - Teleport → 모달, 알림창을 body로 이동해 레이아웃 문제 해결
+      - Suspense → 데이터 로딩 시 깜빡임 없이 스켈레톤 UI 구현 가능
+
+- Vue.js에서 Vite와 Webpack의 차이점 및 성능 비교
+  - 번들링 방식
+    - Vite: ES 모듈 기반
+    - Webpack: 모든 파일을 하나로 번들링
+  - 빌드 속도	
+    - Vite: 매우 빠름 (HMR 즉시 반영)
+    - Webpack: 느림 (번들링 후 HMR)
+  - 개발 서버
+    - Vite: ESM 기반 핫 리로드 (HMR) 지원
+    - Webpack: 번들링 후 서버 실행
+  - 코드 스플리팅
+    - Vite: 자동 지원
+    - Webpack: 설정 필요
+  - SSR 지원
+    - Vite: 기본 지원
+    - Webpack: 추가 설정 필요
+  - Vite는 ES 모듈(ESM) 기반으로 개발 서버가 즉시 실행되어 빠른 개발 경험을 제공
+  - Webpack은 대규모 프로젝트에서 여전히 강력한 설정이 가능하지만, 느림
+  - Vue 3 공식 도구는 Vite 기반이므로 최신 프로젝트는 Vite 사용을 추천
+
+- Vue.js에서 isRef(), shallowRef(), customRef()의 차이점
+  - isRef(value): value가 ref()인지 확인 (true/false 반환)
+  - shallowRef(value): 객체 내부까지 반응형이 아님 (깊은 반응성 X)
+  - customRef(): 사용자 정의 Ref 생성 가능 (디바운스 적용 가능)
+
+- Vue.js에서 SSR(Server-Side Rendering)과 SSG(Static Site Generation)의 차이점
+  - 렌더링 시점
+    - SSR: 요청 시 서버에서 HTML 생성
+    - SSG: 빌드 시 정적인 HTML 생성
+  - 초기 로딩 속도
+    - SSR: 빠름 (SEO 최적화)
+    - SSG: 매우 빠름 (캐시 가능)
+  - 동적 데이터
+    - SSR: 가능 (실시간 API 호출)
+    - SSG: 제한적 (사전 빌드된 데이터)
+  - 사용 예시
+    - SSR: Vue + Nuxt 3
+    - SSG: Vue + Nuxt 3 (Static Mode)
+  - SEO(검색 엔진 최적화) 목적이라면 SSR을, 빠른 정적 페이지 제공이 목표라면 SSG를 선택
+
+- Vue.js의 주요 특징과 React와의 차이점
+  - 렌더링 방식
+    - Vue.js: 가상 DOM + 템플릿
+    - React: 가상 DOM + JSX
+  - 상태 관리
+    - Vue.js: Pinia, Vuex
+    - React: Redux, Zustand
+  - 컴포넌트 스타일
+    - Vue.js: SFC (Single File Component)
+    - React: JSX 스타일
+  - 라우팅
+    - Vue.js: Vue Router
+    - React: React Router
+  - Vue는 SFC 기반으로 HTML/CSS/JS를 분리하여 사용이 직관적
+  - React는 JSX를 활용하여 동적 UI 구현이 유연함
+
+- Vuex를 사용한 상태 관리 경험을 설명
+  - Vuex는 Vue 2/3에서 공식 상태 관리 라이브러리 (현재는 Pinia가 권장됨)
+  - Mutation을 활용한 상태 변경, Action을 통한 비동기 처리 경험
+  - Vuex는 중앙 집중식 상태 관리가 가능하지만, 코드가 많아져 Pinia로 대체되는 추세
+
+- Vue.js에서의 라우팅 처리 방법
+  - Vue Router를 사용하여 페이지 간 네비게이션 관리
+  - SPA(Single Page Application)에서 동적 라우팅을 제공하여 효율적인 내비게이션 구현 가능
+
+- Vue.js의 Reactivity 시스템 내부 동작 원리
+  - Vue는 Proxy API를 활용하여 반응형(Reactivity) 시스템을 구현
+  - effect() 함수를 사용하여 의존성 추적 및 자동 업데이트
+  - Vue 3의 Proxy 기반 반응형 시스템은 성능이 개선됨
+
+- Vue.js의 Composition API와 Options API의 차이점
+  - 코드 구조
+    - Composition API: setup() 함수 사용
+    - Options API: data, methods, computed 사용
+  - 재사용성
+    - Composition API: Composable 함수 활용
+    - Options API: Mixin 사용
+  - Vue 3 최적화
+    - Composition API: 권장
+    - Options API: 기존 방식 유지
+  - Composition API는 더 유연하고, Vue 3에서 공식적으로 권장됨
+
+- Vue.js의 Virtual DOM Diffing 알고리즘
+  - Vue.js는 Virtual DOM을 사용하여 효율적인 렌더링을 수행
+  - Vue 3에서는 "Block Tree Optimization"과 "Static Hoisting"을 추가하여 최적화
+  - Diffing 알고리즘 주요 과정
+    - 새로운 Virtual DOM을 생성 (render())
+    - 이전 Virtual DOM과 비교하여 변경 사항을 찾음 (patch())
+    - 변경된 부분만 실제 DOM에 적용하여 성능 최적화
+  - Vue 3의 최적화 기법
+    - Block Tree Optimization → 변경된 노드만 업데이트하여 속도 향상
+    - Static Hoisting → 변하지 않는 정적 노드는 재사용하여 성능 개선
+
+- Vue.js의 Server-Side Rendering(SSR)과 Static Site Generation(SSG)
+  - SSR (서버사이드 렌더링) → Nuxt.js 활용
+  - SSG (정적 사이트 생성) → Nuxt.js target: static 활용
+  - SEO 최적화 필요 시 SSR 사용, 속도 최적화 필요 시 SSG 사용
+
+- Vue.js의 단방향 데이터 흐름(One-way data flow)과 양방향 바인딩(Two-way binding)의 차이점
+  - 설명
+    - 단방향 데이터 흐름: 부모 → 자식 데이터 전달
+    - 양방향 바인딩: 부모 ↔ 자식 데이터 동기화
+  - 사용 예제
+    - 단방향 데이터 흐름: props 사용
+    - 양방향 바인딩: v-model 사용
+  - 장점
+    - 단방향 데이터 흐름: 데이터 흐름이 명확
+    - 양방향 바인딩: 편리한 양방향 데이터 처리
+  - 단점
+    - 단방향 데이터 흐름: 수동적으로 값 변경해야 함
+    - 양방향 바인딩: 데이터 흐름이 복잡해질 수 있음
+
+- Vue.js에서 v-model과 @input 이벤트의 차이
+  - v-model은 내부적으로 @input과 :value를 조합한 것
+  - @input 이벤트를 직접 사용할 수도 있음
+
+- Vue.js에서 v-bind와 v-on을 단축해서 사용할 수 있는 방법
+  - v-bind → : (콜론)으로 단축
+  - v-on → @ (골뱅이)로 단축
+
+- Vue.js에서 ref()와 reactive()를 사용하는 기준
+  - 반응형 대상
+    - ref(): 기본형 (String, Number)
+    - reactive(): 객체 & 배열
+  - 접근 방식
+    - ref(); .value 사용
+    - reactive(): 직접 접근 가능
+  - Vue 3에서 추천
+    - ref(): 기본 데이터 타입 관리
+    - reactive(): 객체 상태 관리
+
+- Vue.js에서 computed() 속성을 사용할 때 성능 최적화 효과가 있는 이유
+  - computed()는 종속된 값이 변경될 때만 재계산됨
+  - watch()와 다르게 캐싱(Cache) 기능 제공
+  - 반응형 데이터가 변경될 때만 실행되므로 성능 최적화 효과가 있음
+
+- Vue.js의 watch()와 watchEffect()의 차이점과 각각의 사용 사례
+  - 트리거 방식
+    - watch(): 특정 데이터 변경 감지
+    - watchEffect(): 내부에서 자동 감지
+  - 반응형 데이터 접근 방식
+    - watch(): 명시적으로 지정
+    - watchEffect(): 자동으로 종속성 추적
+  - 사용 예제	
+    - watch(): watch(count, (newVal) => {})
+    - watchEffect(): watchEffect(() => console.log(count.value))
+  - watchEffect()는 자동으로 종속성을 추적하여 더 유연하게 사용 가능
+
 - Vue.js의 v-if, v-else-if, v-show의 차이점은?
 - Vue.js에서 v-for와 key 속성을 함께 사용하는 이유는?
 - Vue.js에서 setup() 함수 내부에서 this를 사용할 수 없는 이유는?
