@@ -226,7 +226,10 @@ This page summarizes the main concepts, features, pros and cons of Vue.js.
 
 - Vue.js에서 v-model을 활용하여 양방향 바인딩을 구현하는 방법
   - 아래와 같이 사용하면 text 값이 자동으로 업데이트됨
-  - <input v-model="text" />
+  - 예제 코드
+    ```javascript
+    <input v-model="text" />
+    ```
 
 - Vue.js에서 async setup()을 사용할 때의 주의점
   - 비동기 데이터를 가져오면서 초기 로딩 처리가 필요
