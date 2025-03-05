@@ -4967,7 +4967,77 @@ Organize concepts, features, types and Pros and Cons
     - TDD, BDD, UI 테스트, 성능 테스트 등을 통해 전체적인 소프트웨어 품질을 보장
     - 즉, 애자일 테스트는 "빠른 개발 + 품질 유지 + 자동화"를 목표로 하는 현대적인 소프트웨어 테스트 전략
 
-- 소프트웨어 아키텍처(Software Architecture)의 개념과 중요성을 설명하시오.
+- 소프트웨어 아키텍처(Software Architecture)의 개념과 중요성
+  - 소프트웨어 아키텍처(Software Architecture) 개요
+    - 소프트웨어 시스템의 구조와 설계를 정의하는 청사진(blueprint)
+    - 시스템의 구성 요소(components), 이들 간의 관계(relationships), 그리고 이를 설계하는 원칙(principles)을 포함
+    - 즉, 소프트웨어가 어떻게 구성되고, 어떻게 동작하며, 어떻게 유지보수될 것인가를 결정하는 핵심 설계 구조를 의미
+    - 주요 정의
+      - IEEE 1471: "소프트웨어 시스템의 기본 구조, 구성 요소, 그들 간의 관계 및 설계 원칙을 정의하는 기술(articulation)이다."
+      - Bass, Clements, Kazman: "소프트웨어 아키텍처는 시스템의 구조를 구성하는 요소와 요소 간의 관계 및 이들을 설계하는 지침을 포함한다."
+
+  - 소프트웨어 아키텍처의 주요 개념
+    - 컴포넌트(Component)
+      - 독립적으로 동작하는 소프트웨어 모듈
+      - 예: UI, 비즈니스 로직, 데이터베이스 관리 모듈
+    - 연결자(Connector)
+      - 컴포넌트 간의 통신을 담당하는 인터페이스
+      - 예: API, 메시지 큐, RPC(Remote Procedure Call)
+    - 설계 원칙(Design Principles)
+      - 모듈화(Modularity)
+      - 캡슐화(Encapsulation)
+      - 낮은 결합도(Low Coupling) & 높은 응집도(High Cohesion)
+      - 확장성(Scalability)
+      - 가용성(Availability) & 성능(Performance)
+    - 아키텍처 스타일(Architecture Style)
+      - 계층형(Layered)
+      - 클라이언트-서버(Client-Server)
+      - 마이크로서비스(Microservices)
+      - 이벤트 기반(Event-Driven)
+      - 서버리스(Serverless)
+      - MVC(Model-View-Controller)
+
+  - 소프트웨어 아키텍처의 중요성
+    - 시스템의 품질(Quality) 결정
+      - 성능(Performance), 보안(Security), 확장성(Scalability), 유지보수성(Maintainability) 등의 품질 속성을 결정
+    - 개발 비용 절감 및 생산성 향상
+      - 체계적인 구조 설계로 개발 시간과 비용 절감
+      - 코드의 재사용성 증가로 생산성 향상
+    - 변경 용이성 및 유지보수성 개선
+      - 소프트웨어의 변경 사항을 쉽게 적용할 수 있음
+      - 유지보수 시 시스템 전체를 수정하지 않고도 일부만 변경 가능
+    - 기술적 리스크 최소화
+      - 초기 설계 단계에서 기술적 문제를 사전에 예측하고 해결
+      - 확장성과 성능을 고려한 구조를 통해 장기적인 안정성을 확보
+    - 비즈니스 목표와 정렬
+      - 아키텍처가 비즈니스 요구사항과 정렬되면 경쟁력 있는 제품을 제공할 수 있음
+      - 클라우드, AI, 빅데이터 등 최신 기술 트렌드를 반영하여 지속적인 발전 가능
+
+  - 소프트웨어 아키텍처의 대표 패턴
+    - 계층형(Layered Architecture): 여러 계층으로 분리 (UI, 서비스, 데이터), 유지보수 용이, 확장성 높음
+    - 클라이언트-서버(Client-Server): 클라이언트와 서버가 분리되어 동작, 네트워크를 통한 요청/응답
+    - 마이크로서비스(Microservices): 독립적으로 배포 가능한 작은 서비스들의 조합, 확장성 뛰어남, DevOps 친화적
+    - 이벤트 기반(Event-Driven): 이벤트가 발생할 때 시스템이 반응, 비동기 처리, 고성능 요구 시스템에 적합
+    - MVC(Model-View-Controller): UI와 비즈니스 로직을 분리, 유지보수 용이, 재사용성 높음
+    - 서버리스(Serverless): 서버 관리 없이 클라우드 환경에서 실행, 비용 효율적, 자동 확장 가능
+
+  - 소프트웨어 아키텍처 설계 시 고려해야 할 요소
+    - 기술 스택(Technology Stack)
+      - Java, Kotlin, Python, Node.js, Spring Boot, Django 등 선택
+    - 배포 전략(Deployment Strategy)
+      - 컨테이너(Docker, Kubernetes), 클라우드(AWS, GCP, Azure) 고려
+    - 보안(Security)
+      - 인증(Authentication), 권한 관리(Authorization), 데이터 암호화
+    - 확장성(Scalability)
+      - 수평 확장(Horizontal Scaling) vs 수직 확장(Vertical Scaling)
+    - 운영 및 모니터링(Operations & Monitoring)
+      - 로그(Log), APM(Application Performance Monitoring), 장애 대응 전략
+
+  - 결론
+    - 소프트웨어 아키텍처는 소프트웨어 시스템의 설계를 체계적으로 정의하고 품질을 보장하는 핵심 요소
+    - 적절한 아키텍처를 설계하면 유지보수성, 확장성, 성능, 보안 등을 고려한 안정적인 시스템을 구축할 수 있음
+    - 좋은 아키텍처는 단순한 설계가 아닌, 변화에 유연하게 대응할 수 있는 구조를 의미
+
 - 계층형 아키텍처(Layered Architecture)와 클라이언트-서버 아키텍처(Client-Server Architecture)의 차이를 설명하시오.
 - MVC(Model-View-Controller) 패턴의 개념과 주요 구성 요소를 설명하시오.
 - MVVM(Model-View-ViewModel) 패턴의 개념과 활용 사례를 설명하시오.
