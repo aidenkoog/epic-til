@@ -755,9 +755,371 @@ Organize concepts, features, types and Pros and Cons
         - Leanback은 Android TV 앱 개발을 쉽게 해주는 TV 최적화 UI 라이브러리
 
 - Android TV 앱 개발 시 D-pad(방향키) 네비게이션을 처리하는 방법
+    - 개요
+        - Android TV 앱을 개발할 때, D-pad(방향키) 네비게이션을 올바르게 처리하는 것이 중요
+        - Android TV는 터치스크린이 아닌 리모컨의 방향키(D-pad)와 Enter 버튼을 활용한 조작 방식이므로, 앱 내 UI 요소가 원활하게 이동하고 선택될 수 있도록 처리해야 함
+    - D-Pad 네비게이션 개요
+        - D-pad는 방향키(Up, Down, Left, Right) 및 선택(Enter, OK 버튼)으로 구성Android TV 앱에서는 기본적으로 포커스(focus) 기반 UI 시스템을 사용하며, RecyclerView, Button, ImageView 등 다양한 뷰에 대한 포커스 이동 제어 필요
+
+        - D-pad 입력 이벤트
+            - Android TV에서 D-pad 입력 이벤트는 KeyEvent를 통해 감지 가능
+                - KeyEvent.KEYCODE_DPAD_UP → 위 방향키
+                - KeyEvent.KEYCODE_DPAD_DOWN → 아래 방향키
+                - KeyEvent.KEYCODE_DPAD_LEFT → 왼쪽 방향키
+                - KeyEvent.KEYCODE_DPAD_RIGHT → 오른쪽 방향키
+                - KeyEvent.KEYCODE_DPAD_CENTER → 선택(Enter)
+                - KeyEvent.KEYCODE_ENTER → Enter 버튼
+
+    - 기본적인 포커스 처리
+        - 개요
+            - Android TV에서는 기본적으로 포커스를 자동으로 관리
+            - android:focusable="true" 속성을 설정하면 기본적인 포커스 이동이 가능
+
+        - XML에서 포커스 설정
+            ```xml
+            <Button
+                android:id="@+id/myButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+            ```
+            - android:focusable="true" → 뷰가 포커스를 받을 수 있도록 설정
+            - android:focusableInTouchMode="true" → 터치 모드에서도 포커스를 받을 수 있도록 설정
+        - Button, TextView, ImageView 같은 뷰는 기본적으로 포커스를 받을 수 있지만, LinearLayout, FrameLayout 같은 레이아웃은 기본적으로 포커스를 받지 않음
+            - 포커스 이동을 원할 경우 android:focusable="true" 속성을 명시적으로 추가 필요
+
+    -  커스텀 D-pad 네비게이션 처리
+        - 개요
+            - 기본적으로 Android의 포커스 자동 이동 기능을 사용할 수 있지만, 커스텀 네비게이션을 적용해야 할 경우 setOnKeyListener 또는 dispatchKeyEvent() 활용 가능
+
+        - setOnKeyListener를 활용한 방향키 이벤트 처리
+            ```java
+            myButton.setOnKeyListener { v, keyCode, event ->
+                if (event.action == KeyEvent.ACTION_DOWN) {
+                    when (keyCode) {
+                        KeyEvent.KEYCODE_DPAD_UP -> {
+                            Log.d("D-pad", "위 방향키 눌림")
+                            return@setOnKeyListener true
+                        }
+                        KeyEvent.KEYCODE_DPAD_DOWN -> {
+                            Log.d("D-pad", "아래 방향키 눌림")
+                            return@setOnKeyListener true
+                        }
+                        KeyEvent.KEYCODE_DPAD_LEFT -> {
+                            Log.d("D-pad", "왼쪽 방향키 눌림")
+                            return@setOnKeyListener true
+                        }
+                        KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                            Log.d("D-pad", "오른쪽 방향키 눌림")
+                            return@setOnKeyListener true
+                        }
+                        KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                            Log.d("D-pad", "Enter(선택) 버튼 눌림")
+                            return@setOnKeyListener true
+                        }
+                    }
+                }
+                return@setOnKeyListener false
+            }
+            ```
+            - KeyEvent를 활용하여 방향키 입력을 감지하고, 원하는 동작을 정의할 수 있음.
+            - (중요) return true를 사용하면 이벤트가 소비되고, return false를 사용하면 다른 UI 요소로 이벤트가 전달
+
+    - 포커스 이동 방향 지정하기
+        - 개요
+            - D-pad를 사용할 때 UI 요소 간 포커스 이동 방향을 명확하게 지정해야 함
+                - android:nextFocusUp, android:nextFocusDown, android:nextFocusLeft, android:nextFocusRight 속성 활용 가능
+
+        - XML에서 포커스 이동 방향 지정
+            ```xml
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 1"
+                android:focusable="true"
+                android:nextFocusDown="@id/button2"/>
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 2"
+                android:focusable="true"
+                android:nextFocusUp="@id/button1"/>
+            ```
+            - button1에서 아래 방향키(↓)를 누르면 button2로 이동
+            - button2에서 위 방향키(↑)를 누르면 button1으로 이동
+                - 명시적인 포커스 이동을 설정하면 불필요한 포커스 이동 문제 방지 가능
+
+    - RecyclerView에서 D-pad 네비게이션 처리
+        - 개요
+            - Android TV에서는 RecyclerView에서 방향키 이동을 최적화하는 것이 중요
+
+        - RecyclerView의 포커스 처리 방법
+            - 뷰 홀더(ViewHolder)에 focusable 속성을 추가
+            - descendantFocusability="afterDescendants" 설정
+            - 포커스 이동을 위해 requestFocus() 사용
+                ```xml
+                <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:descendantFocusability="afterDescendants"/>
+                ```
+                - descendantFocusability="afterDescendants" → 리스트 아이템 내부 뷰에 포커스를 우선 부여
+
+                ```java
+                override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+                    val item = items[position]
+                    holder.itemView.isFocusable = true
+                    holder.itemView.setOnFocusChangeListener { v, hasFocus ->
+                        if (hasFocus) {
+                            Log.d("RecyclerView", "포커스 이동: $position")
+                        }
+                    }
+                }
+                ```
+                - itemView.isFocusable = true → 각 아이템이 포커스를 받을 수 있도록 설정
+                - setOnFocusChangeListener → 포커스가 이동할 때 이벤트 감지
+
+    - Android TV Leanback 라이브러리를 활용한 D-pad 네비게이션
+        - 개요
+            - Android TV 앱에서는 Leanback 라이브러리를 활용하면 더 쉽게 D-pad 네비게이션 구현 가능
+
+        - Leanback 라이브러리 사용
+            - BrowseSupportFragment, RowsSupportFragment, GuidedStepFragment 등을 제공하여 자동으로 D-pad 네비게이션을 지원
+            - Presenter 클래스를 활용하여 UI 요소 렌더링 가능
+                ```groovy
+                dependencies {
+                    implementation 'androidx.leanback:leanback:1.2.0'
+                }
+                ```
+                - RecyclerView를 직접 제어하는 것보다 더 최적화된 방식으로 포커스를 관리할 수 있음
+
+    - 결론
+        - D-pad(방향키) 입력을 처리하는 주요 방법
+            - KeyEvent를 활용하여 방향키 이벤트 감지
+            - android:focusable="true"를 사용하여 포커스 가능하게 설정
+            - android:nextFocusUp / nextFocusDown / nextFocusLeft / nextFocusRight 속성을 활용하여 포커스 이동 제어
+            - RecyclerView에서 isFocusable=true 설정하여 리스트 아이템이 포커스를 받을 수 있도록 처리
+            - Android TV의 Leanback 라이브러리를 활용하면 더 쉽게 TV 앱을 개발할 수 있음
+        - 올바른 포커스 이동을 구현하면 Android TV 앱의 사용자 경험(UX)을 크게 향상시킬 수 있음
+
 - Android에서 Jetpack DataStore를 사용하는 이유
+    - Jetpack DataStore 개념
+        - Jetpack DataStore는 Android에서 데이터를 저장 및 관리하기 위한 최신 라이브러리
+        - 기존 SharedPreferences의 단점을 해결하고 더 나은 성능과 안정성을 제공
+        - DataStore는 두 가지 방식으로 데이터를 저장 가능
+            - Preferences DataStore → Key-Value 기반 데이터 저장 (SharedPreferences 대체)
+            - Proto DataStore → Protobuf을 사용한 구조화된 데이터 저장 (타입 안정성 제공)
+
+    - DataStore를 사용하는 주요 이유
+        - (1) SharedPreferences의 단점 해결
+            - 기존 SharedPreferences는 동기식(I/O Blocking)으로 동작하며, 다음과 같은 문제점 존재
+                - ANR(Application Not Responding) 발생 가능: apply()와 commit()은 메인 스레드에서 실행될 경우 성능 저하 및 UI 지연을 초래
+                - 비동기 저장 시 데이터 손실 가능: apply()는 비동기 저장을 수행하므로, 강제 종료 시 데이터가 저장되지 않을 수 있음
+                - 읽기/쓰기 성능 저하: 데이터를 XML 파일로 저장하기 때문에 대량의 데이터를 다룰 때 속도가 느림
+                - DataStore는 비동기 처리와 코루틴(Flow)을 활용하여 이러한 문제를 해결
+
+        - (2) 비동기(Asynchronous) & 코루틴(Flow) 지원
+            - DataStore는 Kotlin Coroutine과 Flow를 사용하여 비동기적으로 데이터 저장 및 로드할 수 있음
+
+            - 메인 스레드에서 블로킹 없이 데이터 처리 가능
+            - Flow 기반 데이터 스트림 제공 → 데이터 변경 시 자동 업데이트됨
+                ```java
+                val exampleCounterFlow: Flow<Int> = dataStore.data
+                .map { preferences ->
+                    preferences[EXAMPLE_COUNTER] ?: 0
+                }
+                ```
+                - Flow를 통해 데이터를 실시간으로 감지하고 자동으로 업데이트할 수 있음
+
+        - (3) 트랜잭션(Atomic Operation) 지원
+            - SharedPreferences에서는 데이터 업데이트가 중간에 실패할 경우 데이터가 일관되지 않을 수 있음
+            - DataStore는 트랜잭션을 보장하는 API를 제공하여 데이터가 안전하게 저장
+                ```java
+                suspend fun incrementCounter() {
+                    dataStore.edit { preferences ->
+                        val currentCounterValue = preferences[EXAMPLE_COUNTER] ?: 0
+                        preferences[EXAMPLE_COUNTER] = currentCounterValue + 1
+                    }
+                }
+                ```
+                - edit {} 블록 내부에서 원자적(Atomic)으로 데이터가 변경되므로 데이터 정합성이 보장
+
+        - (4) 데이터 변환과 검증 가능 (Proto DataStore)
+            - Proto DataStore는 Protobuf을 사용하여 데이터를 저장하므로, 데이터의 타입 안정성(Type Safety)을 보장
+            - SharedPreferences는 String, Int, Boolean 등 기본 타입만 저장할 수 있지만, Proto DataStore를 사용하면 객체 데이터를 정의하고 변환하여 저장 가능
+                ```java
+                syntax = "proto3";
+
+                message UserPreferences {
+                int32 user_id = 1;
+                string username = 2;
+                bool notifications_enabled = 3;
+                }
+                ```
+                - 기존 SharedPreferences는 Key-Value만 저장할 수 있었지만, Proto DataStore를 사용하면 구조화된 데이터를 저장할 수 있음
+
+        - (5) LiveData가 아닌 Flow를 활용하여 실시간 데이터 변경 감지
+            - SharedPreferences에서는 값이 변경될 때 SharedPreferences.OnSharedPreferenceChangeListener를 사용해야 했지만, DataStore는 Flow를 사용하여 자동으로 UI가 업데이트
+                ```java
+                val usernameFlow: Flow<String> = dataStore.data
+                    .map { preferences -> preferences[USERNAME_KEY] ?: "Unknown" }
+                ```
+                - UI에서 Flow를 collectAsState()로 감지하면 자동으로 변경 사항을 적용할 수 있음.
+
+    - 결론
+        - Jetpack DataStore는 기존 SharedPreferences의 단점을 보완하며, 비동기 데이터 저장, 트랜잭션 보장, Flow 기반 실시간 데이터 감지 등의 이점을 제공
+        - 특히 Proto DataStore를 활용하면 타입 안정성이 보장되는 구조화된 데이터 저장이 가능하므로, 안드로이드에서 로컬 데이터 저장을 할 때 가장 권장되는 솔루션
+
+
 - Android에서 Jetpack Hilt와 Dagger의 차이점
+    - 개요
+        - Jetpack Hilt와 Dagger는 모두 의존성 주입(Dependency Injection, DI)을 위한 프레임워크이지만, Hilt는 Dagger를 기반으로 한 Android 전용 DI 라이브러리
+
+    - 개념적인 차이
+        - 개발 목적
+            - Hilt: Android 전용 DI 프레임워크
+            - Dagger: 범용 DI 프레임워크
+        - 구글 공식 지원
+            - Hilt: Jetpack 라이브러리로 공식 지원	- Dagger: 구글이 지원하지만 Android에 최적화되지 않음
+        - 사용 편의성
+            - Hilt: 간결한 문법과 자동 구성
+            - Dagger: 복잡한 설정이 필요
+        - 생산성
+            - Hilt: 코드 양이 적고, 간편한 사용 가능	- Dagger: Boilerplate 코드가 많고, 관리가 어렵지만 유연성 제공
+
+    - Jetpack Hilt의 특징
+        - 개요
+            - Hilt는 Dagger 기반으로 만들어졌지만, Android 앱 개발을 쉽게 할 수 있도록 설계된 Jetpack 라이브러리
+
+        - Hilt의 주요 특징
+            - Android Lifecycle과 통합 → Application, Activity, Fragment, ViewModel, Service, WorkManager 등과 호환
+            - 자동적으로 Android 진입점(Entry Points) 제공 → @AndroidEntryPoint로 간단히 DI 설정 가능
+            - 모듈 정의가 간편함 → @Module과 @InstallIn을 사용하여 구성
+            - ViewModel 지원 → @HiltViewModel을 사용하여 ViewModel 내에서 DI 가능
+            - Application Scope 제공 → 전역적으로 사용할 객체를 @Singleton으로 관리
+
+    - Dagger의 특징
+        - 개요
+            - Dagger는 Android뿐만 아니라 Java, Kotlin 프로젝트 전반에서 활용할 수 있는 DI 프레임워크
+
+        - Dagger의 주요 특징
+            - 강력한 의존성 관리 기능 → 사용자가 세부적으로 DI를 제어할 수 있음
+            - 컴파일 타임 의존성 주입 → 런타임 오버헤드가 적고 빠름
+            - 안정성과 최적화된 성능 → Reflection 없이 컴파일 시점에서 코드 생성
+            - 커스텀 스코프 지원 → Hilt보다 더 유연한 스코프를 설정 가능
+            - 수동 구성 필요 → Component, Module, Provides 등을 직접 정의해야 하므로 코드가 길어질 수 있음
+
+    - 예제 코드 비교
+        - Hilt 사용 예제
+            - @HiltAndroidApp, @AndroidEntryPoint를 사용하여 간단하게 DI 적용 가능
+            ```java
+            @HiltAndroidApp
+            class MyApplication : Application()
+
+            @AndroidEntryPoint
+            class MainActivity : AppCompatActivity() {
+                @Inject lateinit var repository: UserRepository
+            }
+            ```
+
+        - Dagger 사용 예제
+            ```java
+            /* Component, inject 함수 직접 정의 필요 */
+            @Component
+            interface AppComponent {
+                fun inject(activity: MainActivity)
+            }
+
+            class MainActivity : AppCompatActivity() {
+                @Inject lateinit var repository: UserRepository
+
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    DaggerAppComponent.create().inject(this)
+                }
+            }
+            ```
+
+    - 결론
+        - Hilt는 Android 개발에서 DI를 간편하게 적용할 수 있도록 만든 Jetpack 라이브러리이
+        - 일반적인 Android 개발에서는 Hilt를 사용하는 것이 권장
+        - 보다 정교한 의존성 관리를 원하거나, Android 외 환경에서도 사용하려면 Dagger를 선택하는 것이 좋음
+
 - Android에서 Shared Preferences보다 Encrypted Shared Preferences가 필요한 이유
+    - 개요
+        - Android의 Shared Preferences는 간단한 Key-Value 형태의 데이터를 로컬 저장소에 저장하는 기능을 제공
+        - 기본적으로 암호화되지 않은 상태로 저장되기 때문에 민감한 데이터를 저장하는 데 보안적인 문제 존재
+        - 보안 문제 해결을 위해 Encrypted Shared Preferences가 제공되며, 보안 강화를 위해 데이터 암호화 기능을 포함하고 있음
+
+    - Shared Preferences의 문제점
+        - 데이터가 평문(Plaintext)으로 저장
+            - 일반적인 Shared Preferences 파일(.xml)은 Android 파일 시스템 내부에 저장되지만, 루팅된 기기나 악성 앱이 접근하면 데이터가 그대로 노출될 위험이 있음.
+        - 보안 규정 준수 문제
+            - 금융, 헬스케어, 기업 애플리케이션에서는 데이터 암호화가 필수적.
+            - GDPR, HIPAA, PCI-DSS 같은 보안 규정을 준수해야 하는 경우, Shared Preferences를 그대로 사용할 수 없음
+        - 앱 백업 및 마이그레이션 시 데이터 유출 가능성
+            - 앱을 백업하거나 마이그레이션할 때, 암호화되지 않은 Shared Preferences 데이터가 외부로 노출될 수 있음
+
+    - Encrypted Shared Preferences의 필요성
+        - Jetpack Security 라이브러리에서 제공하는 EncryptedSharedPreferences
+        - Encrypted Shared Preferences의 주요 특징
+            - AES-256 암호화
+                - 저장된 데이터는 AES-256-GCM 알고리즘으로 암호화되어 보안성이 높음
+            - 자동 키 관리
+                - MasterKey를 사용하여 암호화 키를 자동으로 생성 및 관리 (Android Keystore System 활용).
+            - 이전 Shared Preferences와 호환 가능
+                - 기존 Shared Preferences API와 사용법이 거의 동일하여 쉽게 적용 가능.
+            - 데이터 보호 강화
+                - 앱 백업/복구 시 암호화된 상태로 저장되므로 보안성을 유지할 수 있음
+
+    - 적용 예제
+        ```java
+        import androidx.security.crypto.EncryptedSharedPreferences
+        import androidx.security.crypto.MasterKey
+
+        val masterKey = MasterKey.Builder(this)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val encryptedSharedPreferences = EncryptedSharedPreferences.create(
+            this,
+            "secure_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+
+        val editor = encryptedSharedPreferences.edit()
+        editor.putString("username", "myUser123")  // 암호화된 데이터 저장
+        editor.apply()
+        ```
+        - AES-256-GCM 암호화를 사용하여 데이터를 안전하게 저장
+        - 루팅된 기기에서도 데이터가 암호화된 상태로 저장되므로, 해킹 위험이 줄어듬
+
+    - 결론
+        - Encrypted Shared Preferences를 사용해야 하는 경우
+            - 로그인 정보 (JWT 토큰, 사용자 ID 등)를 저장할 때
+            - API 키, 암호 등 민감한 데이터를 저장할 때
+            - 사용자의 금융, 헬스케어 데이터를 저장할 때
+            - 루팅된 기기에서도 데이터를 보호해야 할 때
+            - 앱이 보안 규정을 준수해야 할 때 (GDPR, PCI-DSS, HIPAA 등)
+        - Shared Preferences만 사용해도 되는 경우
+            - 단순한 앱 설정 값 (ex: 다크 모드 ON/OFF, 언어 설정 등) 저장 시
+            - 민감하지 않은 일반적인 UI 상태 저장 시
+        - 최종 정리
+            - 기존 Shared Preferences는 보안성이 낮아 중요한 정보를 저장하면 안 됨
+            - Encrypted Shared Preferences는 AES-256 암호화를 사용하여 데이터를 보호할 수 있음
+            - Jetpack Security 라이브러리를 활용하여 기존 Shared Preferences와 유사한 방식으로 사용 가능
+            - 보안이 중요한 데이터(로그인 정보, API 키 등)는 반드시 Encrypted Shared Preferences를 활용하여 보호해야 함
+            - 민감한 데이터를 저장해야 한다면, 반드시 Encrypted Shared Preferences를 사용 권장
+
 - Android에서 CameraX와 기존 Camera API의 차이점
 - Android에서 Jetpack WorkManager와 Foreground Service의 차이점
 - Android에서 Jetpack Paging을 사용하는 이유

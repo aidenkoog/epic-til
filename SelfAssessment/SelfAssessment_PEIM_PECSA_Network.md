@@ -448,8 +448,275 @@ Organize concepts, features, types and Pros and Cons
 	  - IPv6는 보다 많은 주소를 제공하며, 보안 및 성능이 향상되었지만, 기존 시스템과의 호환성 문제로 보급이 더딘 상황
 	  - 현재는 IPv4와 IPv6가 공존하는 Dual Stack 방식으로 운영되며, 점차적으로 IPv6로 전환될 전망.
 
-- 전송 계층(Transport Layer)에서 TCP와 UDP의 차이점을 설명하시오.
-- 응용 계층(Application Layer)에서 사용하는 주요 프로토콜(HTTP, FTP, SMTP 등)을 설명하시오.
+- 전송 계층(Transport Layer)에서 TCP와 UDP의 차이점
+  - 개요
+    - 전송 계층(Transport Layer)은 애플리케이션 계층과 네트워크 계층 간의 데이터 전송을 담당하는 계층
+    - 대표적으로 TCP(Transmission Control Protocol)와 UDP(User Datagram Protocol)가 존재
+    - 두 프로토콜은 데이터 전송 방식, 신뢰성, 연결 방식 등에 차이 존재
+
+  - TCP(Transmission Control Protocol) 개념
+    - TCP는 신뢰성이 중요한 데이터 전송을 위해 설계된 연결 지향(Connection-Oriented) 프로토콜
+    - 3-way Handshake를 통해 연결을 설정하고, 데이터의 정확성과 순서를 보장하며, 흐름 제어, 혼잡 제어, 오류 검출 및 재전송 등의 기능 제공
+
+    - TCP의 주요 특징
+      - 연결 지향(Connection-Oriented)
+        - 데이터를 전송하기 전에 3-way Handshake 과정을 통해 연결을 설정하고, 통신이 끝나면 4-way Handshake를 통해 연결을 해제
+      - 신뢰성 보장(Reliability)
+        - 데이터 손실, 중복, 순서 오류가 발생하지 않도록 보장하며, 손실된 패킷은 재전송(Retransmission)
+      - 흐름 제어(Flow Control)
+        - 송신자와 수신자의 데이터 처리 속도를 조절하여 수신자가 처리할 수 있는 만큼만 데이터를 전송
+      - 혼잡 제어(Congestion Control)
+        - 네트워크의 혼잡 상태를 감지하고 전송 속도를 조절하여 네트워크 과부하를 방지
+      - 패킷 순서 보장(Ordered Delivery)
+        - 패킷이 전송된 순서대로 도착하도록 보장
+
+    - TCP가 적합한 사용 사례
+      - 데이터의 정확성 및 순서 보장이 중요한 경우
+      - 웹 브라우징(HTTP, HTTPS), 이메일(POP3, IMAP, SMTP), 파일 전송(FTP), 원격 접속(SSH, Telnet) 등에 사용됨
+
+  - UDP(User Datagram Protocol) 개념
+    - UDP는 빠른 데이터 전송이 필요한 경우 사용되는 비연결형(Connectionless) 프로토콜로, TCP와 달리 신뢰성을 보장하지 않음
+    - 데이터 전송 속도가 빠르지만, 패킷 손실이나 순서 오류가 발생할 가능성 존재
+
+    - UDP의 주요 특징
+      - 비연결형(Connectionless)
+        - 데이터 전송 전 연결 설정 과정이 없으며, 즉시 패킷을 전송함
+      - 신뢰성 없음(Unreliable)
+        - 패킷 손실, 중복, 순서 오류 발생 가능하며, 재전송 기능이 없음
+      - 빠른 데이터 전송(Fast Transmission)
+        - 추가적인 오버헤드가 없어 TCP보다 속도가 빠름.
+      - 패킷 순서 미보장(No Ordered Delivery)
+        - 패킷이 네트워크를 통해 임의의 순서로 도착할 수 있음
+      - 흐름 제어 및 혼잡 제어 없음
+        - 송신자는 수신자의 상태를 고려하지 않고 계속 데이터를 전송
+
+    - UDP가 적합한 사용 사례
+      - 실시간 스트리밍 및 빠른 응답이 필요한 서비스
+        - VoIP(음성 통신), 비디오 스트리밍(YouTube, Netflix, Twitch)
+        - 온라인 게임(빠른 반응이 중요한 FPS, MOBA 등)
+        - 라이브 방송, IPTV
+      - 네트워크 오버헤드를 줄이고 빠른 전송이 필요한 경우
+        - DNS 요청 (도메인 네임 조회)
+        - DHCP (IP 주소 할당)
+        - SNMP (네트워크 장비 모니터링)
+
+  - TCP와 UDP의 선택 기준
+    - TCP를 사용해야 하는 경우
+      - 데이터 손실이 허용되지 않는 서비스
+        - 예: 웹사이트 접속(HTTP, HTTPS), 파일 전송(FTP), 이메일(SMTP, IMAP, POP3)
+      - 데이터 전송 순서가 중요한 경우
+        - 예: 온라인 쇼핑, 은행 거래, 결제 시스템
+      - 보안 및 신뢰성이 중요한 경우
+        - 예: VPN, 원격 접속(SSH, Telnet)
+
+    - UDP를 사용해야 하는 경우
+      - 빠른 전송 속도가 중요한 경우
+        - 예: VoIP(음성 통신), 화상 회의, IPTV, 실시간 스트리밍
+      - 일부 패킷 손실이 허용되는 경우
+        - 예: 온라인 게임(지연을 줄이기 위해 일부 데이터 손실 허용)
+      - 네트워크 부하를 최소화해야 하는 경우
+        - 예: DNS 조회, DHCP IP 할당, SNMP 네트워크 모니터링
+
+  - 결론
+    - TCP는 신뢰성, 데이터 순서 보장, 흐름/혼잡 제어 기능이 필요할 때 사용
+    - UDP는 빠른 전송 속도, 낮은 오버헤드, 실시간성이 중요한 경우 사용
+    - 애플리케이션의 특성에 맞춰 TCP와 UDP를 적절히 선택해야 함
+    - 신뢰성이 필요하면 TCP, 속도가 중요하면 UDP를 선택
+
+
+- 응용 계층(Application Layer)에서 사용하는 주요 프로토콜(HTTP, FTP, SMTP 등)
+  - 사전 지식
+    - OSI 7계층 정리 (응용 > 표현 > 세션 > 전송 > 네트워크 > 데이터 링크 > 물리)
+      - 응용 계층: 사용자 인터페이스 제공 / HTTP, FTP, SMTP, DNS
+      - 표현 계층: 데이터 인코딩, 암호화 / JPEG, ASCII, SSL/TLS
+      - 세션 계층: 세션 설정, 유지, 종료 / RPC, PPTP
+      - 전송 계층: 포트 기반 데이터 전송, 오류 복구 / TCP, UDP
+      - 네트워크 계층: IP 주소 기반 라우팅 / IP, ICMP, ARP, 라우터
+      - 데이터 링크 계층: MAC 주소 기반 프레임 전송 / Ethernet, 스위치, 브리지
+      - 물리 계층: 비트 단위 데이터 전송 / 케이블, 리피터, 허브
+
+  - 개요
+    - 응용 계층(Application Layer)은 사용자와 네트워크 간의 인터페이스를 제공하는 계층으로, 인터넷 상에서 데이터를 송수신할 때 애플리케이션이 직접 사용하는 프로토콜이 포함
+    - 대표적으로 HTTP, FTP, SMTP, DNS, Telnet, SSH 등 다양한 프로토콜이 존재
+
+  - 프로토콜 상세
+    - (1) HTTP (HyperText Transfer Protocol)
+      - 역할
+        - 웹 브라우저와 웹 서버 간의 데이터(웹페이지, 이미지, 동영상 등)를 주고받는 프로토콜
+
+      - 주요 특징
+        - 비연결형(Connectionless) → 요청(Request) 후 응답(Response)을 받고 바로 연결 해제
+        - 무상태(Stateless) → 각 요청(Request)은 독립적으로 처리됨 (즉, 저장하지 않음)
+        - 기본적으로 보안 기능 없음 → HTTPS(SSL/TLS)로 보안 강화 가능
+
+      - 사용 예
+        - 웹 브라우저(Chrome, Edge, Firefox 등)가 웹 서버에서 HTML 문서를 가져올 때 사용
+
+    - (2) HTTPS (HyperText Transfer Protocol Secure)
+      - 역할
+        - HTTP + SSL/TLS로 암호화된 보안 HTTP 프로토콜
+
+      - 주요 특징
+        - HTTP의 단점을 보완하여 데이터 암호화 및 무결성 제공
+        - SSL/TLS 기반의 보안 연결을 통해 데이터 보호
+        - 웹사이트 보안(로그인, 결제 시스템 등) 필수 적용
+
+      - 사용 예
+        - 온라인 쇼핑몰, 인터넷 뱅킹, 로그인 페이지 등 보안이 중요한 서비스
+
+    - (3) FTP (File Transfer Protocol)
+      - 역할
+        - 서버와 클라이언트 간의 파일 전송(업로드/다운로드) 기능 제공
+
+      - 주요 특징
+        - 명령 채널(Control Channel)과 데이터 채널(Data Channel)로 구성
+        - Active Mode & Passive Mode 지원
+        - 보안이 취약하여 FTPS, SFTP(SSH 기반 FTP)로 보완 가능
+
+      - 사용 예
+        - 웹 서버로 파일 업로드 (웹 개발자들이 많이 사용)
+        - 대용량 파일 전송
+
+    - (4) SMTP (Simple Mail Transfer Protocol)
+      - 역할: 이메일을 발송할 때 사용되는 프로토콜
+      - 주요 특징
+        - 이메일 발송 전용 프로토콜 (수신 시에는 POP3/IMAP 사용)
+        - TCP 포트 25 사용 (TLS 적용 시 465 또는 587 사용)
+        - 메일 서버 간의 전송을 담당
+
+      - 사용 예
+        - Gmail, Outlook, Naver 등 이메일 서비스에서 메일 발송
+        - 자동 이메일 전송 시스템 구축
+
+    - (5) POP3 (Post Office Protocol v3)
+      - 역할
+        - 이메일 수신 시 메일 서버에서 메일을 다운로드하여 로컬 PC에 저장하는 프로토콜
+
+      - 주요 특징
+        - 메일을 다운로드 후 서버에서 삭제 (서버 공간 절약)
+        - 오프라인에서도 이메일 확인 가능
+        - 동기화가 불가능하여 여러 기기에서 동일한 이메일 관리 어려움
+
+      - 사용 예
+        - 일반적인 이메일 클라이언트에서 서버의 메일을 로컬로 저장할 때 사용
+
+    - (6) IMAP (Internet Message Access Protocol)
+      - 역할
+        - 이메일 수신 시 메일을 서버에 그대로 둔 채 클라이언트에서 관리하는 프로토콜
+
+      - 주요 특징
+        - 서버에 이메일이 저장되어 여러 기기에서 동기화 가능
+        - 오프라인에서는 이메일 확인 불가능 (다운로드해야 확인 가능)
+        - Gmail, Outlook 등 클라우드 기반 이메일 서비스에서 사용
+
+      - 사용 예
+        - 스마트폰, 태블릿, PC에서 동일한 이메일을 관리할 때 유용
+
+    - (7) DNS (Domain Name System)
+      - 역할
+        - 도메인(www.google.com) → IP 주소(142.250.190.78) 변환하는 역할
+
+      - 주요 특징
+        - 사람이 이해하기 쉬운 도메인을 IP 주소로 변환
+        - 계층적 구조 (Root, TLD, Second-Level 도메인)
+        - 캐싱 기능을 통해 속도 최적화
+
+      - 사용 예
+        - 웹사이트 접속 시 도메인을 입력하면 IP 주소로 변환되어 접속됨
+        - 서버 네트워크 구성 시 도메인 기반으로 접근 가능
+
+    - (8) Telnet (Teletype Network)
+      - 역할
+        - 원격 서버(네트워크 장비 포함)에 접속하여 명령어를 실행하는 프로토콜
+
+      - 주요 특징
+        - TCP 포트 23 사용
+        - 보안 기능이 없어 패킷 스니핑에 취약
+        - SSH(Secure Shell)로 대체됨
+
+      - 사용 예
+        - 옛날 원격 서버 접속 (현재는 SSH 사용)
+        - 네트워크 장비(라우터, 스위치) 설정 변경
+
+    - (9) SSH (Secure Shell)
+      - 역할
+        - 보안이 강화된 원격 접속 프로토콜 (Telnet의 보안 버전)
+
+      - 주요 특징
+        - 데이터 암호화 (보안성이 강함)
+        - 공개 키(Public Key) & 개인 키(Private Key) 기반 인증
+        - TCP 포트 22 사용
+
+      - 사용 예
+        - 리눅스 서버 원격 접속 및 관리
+        - GitHub, GitLab 등에서 SSH 키를 이용한 보안 접속
+
+    - (10) SNMP (Simple Network Management Protocol)
+      - 역할
+        - 네트워크 장비(라우터, 스위치, 서버 등)의 상태를 모니터링하고 관리하는 프로토콜
+
+      - 주요 특징
+        - UDP 포트 161 사용
+        - 네트워크 장비의 CPU 사용량, 트래픽 상태, 장애 정보 수집
+        - MIB(Management Information Base) 구조 사용
+
+      - 사용 예
+        - 네트워크 장비 장애 감지 및 트래픽 모니터링
+        - 서버의 상태 정보 수집
+
+    - (11) NTP (Network Time Protocol)
+      - 역할
+        - 네트워크 상의 시간 동기화를 수행하는 프로토콜
+
+      - 주요 특징
+        - UDP 포트 123 사용
+        - 서버와 클라이언트 간의 정확한 시간 유지
+        - 밀리초(ms) 단위까지 시간 조정 가능
+
+      - 사용 예
+        - 서버 및 네트워크 장비의 시간 동기화
+        - 보안 로그 및 트랜잭션의 시간 일관성 유지
+
+    - (12) MQTT (Message Queuing Telemetry Transport)
+      - 역할
+        - IoT 기기 간의 경량 메시지 송수신 프로토콜
+
+      - 주요 특징
+        - 브로커(Publisher-Subscriber) 모델 사용
+        - TCP 포트 1883 (TLS 적용 시 8883)
+        - 낮은 대역폭으로 효율적인 메시징 가능
+
+      - 사용 예
+        - IoT(스마트홈, 공장 자동화)
+        - 센서 데이터 수집 및 실시간 모니터링
+
+  - 응용 계층 프로토콜 정리
+    - HTTP (80)
+      - 웹 데이터 전송, 무상태(Stateless), 텍스트 기반
+    - HTTPS (443)
+      - 보안 웹 데이터 전송, SSL/TLS 암호화
+    - FTP (21)
+      - 파일 전송, Active/Passive 모드 지원
+    - SMTP (25/465/587)
+      - 이메일 발송, 메일 서버 간 전송
+    - POP3 (110)
+      - 이메일 수신 (다운로드), 서버에서 삭제
+    - IMAP (143)
+      - 이메일 수신 (동기화), 여러 기기에서 이메일 동기화
+    - DNS (53)
+      - 도메인→IP 변환, 네트워크 계층과 연동
+    - SSH (22)
+      - 보안 원격 접속, 암호화된 통신
+    - SNMP (161)
+      - 네트워크 장비 관리, 트래픽 및 장비 모니터링
+    - NTP	(123)
+      - 시간 동기화, 서버 간 시간 정렬
+    - MQTT (1883/8883)
+      - IoT 메시징, 경량 메시지 프로토콜
+
+  - 결론
+    - 응용 계층 프로토콜은 각각의 목적에 맞춰 선택적으로 사용해야 하며, 보안이 중요한 경우 HTTPS, FTPS, SSH 등을 사용하고, 빠른 응답이 중요한 경우 DNS, MQTT, NTP 등을 고려해야 함
+
 - OSI 모델에서 흐름 제어(Flow Control)와 오류 제어(Error Control)의 개념을 설명하시오.
 - 네트워크 토폴로지(Network Topology)의 개념과 주요 유형(Star, Bus, Ring, Mesh)을 설명하시오.
 - LAN(Local Area Network)과 WAN(Wide Area Network)의 개념과 차이를 설명하시오.

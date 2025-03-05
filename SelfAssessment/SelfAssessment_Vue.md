@@ -1,6 +1,7 @@
 # Self-Assessment Vue.js
 
 This page summarizes the main concepts, features, pros and cons of Vue.js.
+All Vue.js related content on this page has been organized.
 
 ## Vue.js의 반응형(Reactive) 시스템 동작 설명
   - 개요
@@ -683,6 +684,7 @@ This page summarizes the main concepts, features, pros and cons of Vue.js.
     - Web Workers 생성
     - Vue 컴포넌트에서 Worker 사용
   - 복잡한 연산을 별도의 스레드에서 처리하여 UI성능을 유지 가능
+  - Web Workers는 무거운 작업을 분리하여 메인 스레드를 최적화
 
 - Vue.js에서 Optimistic UI 패턴을 활용하여 성능을 개선하는 방법
   - Optimistic UI
@@ -1118,71 +1120,461 @@ This page summarizes the main concepts, features, pros and cons of Vue.js.
     - watchEffect(): watchEffect(() => console.log(count.value))
   - watchEffect()는 자동으로 종속성을 추적하여 더 유연하게 사용 가능
 
-- Vue.js의 v-if, v-else-if, v-show의 차이점은?
-- Vue.js에서 v-for와 key 속성을 함께 사용하는 이유는?
-- Vue.js에서 setup() 함수 내부에서 this를 사용할 수 없는 이유는?
-- Vuex와 Pinia의 차이점과 Pinia가 Vuex보다 유리한 점은?
-- Vue.js에서 Vuex modules를 사용하는 이유는?
-- Vue.js에서 Vuex getters와 actions의 차이점은?
-- Vue.js에서 Vuex mutations과 actions의 차이점은?
-- Vue.js에서 Vuex의 비동기 처리를 할 때 고려해야 할 사항은?
-- Vue.js에서 Pinia를 활용하여 전역 상태를 관리하는 방법은?
-- Vue.js에서 localStorage, sessionStorage, cookies를 활용한 상태 관리 방법은?
-- Vue.js에서 reactivity transform이 상태 관리에서 어떤 역할을 하는가?
-- Vue.js에서 shallowRef()와 shallowReactive()를 사용하는 이유는?
-- Vue.js에서 props와 emit을 활용한 컴포넌트 간 데이터 전달 방법은?
-- Vue.js에서 slot과 scoped slot의 차이점은?
-- Vue.js에서 Teleport의 역할과 사용 사례는?
-- Vue.js에서 keep-alive의 역할과 사용 예제는?
-- Vue.js에서 mixins과 composables의 차이점은?
-- Vue.js에서 Fragment 기능을 활용하는 이유는?
-- Vue.js에서 dynamic component를 렌더링하는 방법은?
-- Vue.js에서 key 속성을 활용하여 리스트 렌더링 성능을 최적화하는 방법은?
-- Vue.js에서 lazy loading을 구현하는 방법은?
-- Vue.js에서 template refs를 활용하여 DOM 요소에 접근하는 방법은?
-- Vue.js에서 watch()를 과도하게 사용할 때 발생할 수 있는 문제는?
-- Vue.js에서 ref()와 computed()를 활용하여 성능을 개선하는 방법은?
-- Vue.js에서 Vue DevTools을 활용하여 성능을 분석하는 방법은?
-- Vue.js에서 Virtual Scroll을 활용하여 성능을 최적화하는 방법은?
-- Vue.js에서 Intersection Observer API를 활용하여 Lazy Loading을 구현하는 방법은?
-- Vue.js에서 async setup()을 사용할 때 성능 최적화하는 방법은?
-- Vue.js에서 Tree Shaking을 활용하여 불필요한 코드 제거하는 방법은?
-- Vue.js에서 debounce와 throttle을 활용하여 이벤트 핸들링을 최적화하는 방법은?
-- Vue.js에서 memoization을 활용하여 성능을 최적화하는 방법은?
-- Vue.js에서 Prefetching과 Preloading의 차이점은?
-- Vue.js에서 History Mode와 Hash Mode의 차이점은?
-- Vue.js에서 beforeEnter()와 beforeEach()의 차이점은?
-- Vue.js에서 Navigation Guards를 활용한 인증 처리 방법은?
-- Vue.js에서 Lazy Loading Routes를 적용하는 방법은?
-- Vue.js에서 Dynamic Route Matching을 활용하는 방법은?
-- Vue.js에서 keep-alive를 활용하여 페이지 상태를 유지하는 방법은?
-- Vue.js에서 REST API와 GraphQL을 비교했을 때의 차이점은?
-- Vue.js에서 Axios를 활용한 API 호출 방법은?
-- Vue.js에서 fetch()와 Axios의 차이점은?
-- Vue.js에서 CORS 오류를 해결하는 방법은?
-- Vue.js에서 JWT를 활용하여 인증을 구현하는 방법은?
-- Vue.js에서 Vue Query를 활용한 데이터 페칭 방법은?
-- Vue.js에서 WebSockets을 활용한 실시간 데이터 업데이트 방법은?
-- Vue.js에서 API 응답을 캐싱하는 방법은?
-- Vue.js에서 SSR(Server-Side Rendering)을 활용하는 이유는?
-- Vue.js에서 CSR(Client-Side Rendering)과 SSR(Server-Side Rendering)의 차이점은?
-- Vue.js에서 Static Site Generation(SSG)과 Server-Side Rendering(SSR)의 차이점은?
-- Vue.js에서 Hydration 개념과 성능 최적화 방법은?
-- Vue.js에서 Nuxt.js를 활용하여 SEO를 최적화하는 방법은?
-- Vue.js에서 Prefetching을 활용하여 네트워크 요청을 최적화하는 방법은?
-- Vue.js에서 Incremental Static Regeneration(ISR)이란 무엇인가?
-- Vue.js에서 Edge Functions를 사용하면 어떤 장점이 있는가?
-- Vue.js에서 Static Rendering과 Streaming SSR의 차이는?
-- Vue.js에서 Composition API와 Options API의 차이점은?
-- Vue.js에서 Suspense와 async setup()을 활용하는 방법은?
-- Vue.js에서 Teleport와 Suspense를 조합하여 성능을 최적화하는 방법은?
-- Vue.js에서 Vite와 Webpack의 차이점 및 성능 비교는?
-- Vue.js에서 isRef(), shallowRef(), customRef()의 차이점은?
-- Vue.js에서 Service Worker를 활용하여 PWA를 구현하는 방법은?
-- Vue.js에서 Vue Resource와 Axios의 차이점은?
-- Vue.js에서 Web Workers를 활용하여 무거운 연산을 최적화하는 방법은?
-- Vue.js에서 Optimistic UI 패턴을 활용하여 성능을 개선하는 방법은?
-- Vue.js에서 Server Components를 활용하면 어떤 이점이 있는가?
-- Vue.js에서 Tree Shaking과 Dead Code Elimination의 차이점은?
-- Vue.js에서 Vue 3.3 이후 추가된 주요 기능은 무엇인가?
-- Vue.js에서 GraphQL을 사용할 때 고려해야 할 보안 이슈는?
+- Vue.js의 v-if, v-else-if, v-show의 차이점
+  - v-if는 DOM 조작 비용이 크지만 성능이 좋고, v-show는 초기 렌더링 비용이 있지만 빠르게 토글 가능
+
+- Vue.js에서 v-for와 key 속성을 함께 사용하는 이유
+  - v-for는 리스트를 렌더링할 때 새로운 항목을 추가하거나 삭제할 경우 기존 DOM을 재사용
+  - key 속성이 없으면 Vue가 DOM 요소를 효율적으로 업데이트하지 못하고 예상치 못한 UI 버그가 발생할 수 있음
+  - key를 고유한 값(예: ID)으로 지정하면 Vue가 변경된 요소를 올바르게 감지하고, 최소한의 DOM 변경으로 성능을 최적화할 수 있음
+  - 올바른 key 설정을 통해 리스트 렌더링 성능을 최적화하고 UI 오류를 방지
+
+- Vue.js에서 setup() 함수 내부에서 this를 사용할 수 없는 이유
+  - setup()은 Vue 3의 Composition API에서 사용되며, Options API의 this와는 완전히 다른 개념.
+  - Options API에서는 this가 Vue 인스턴스를 가리키지만, setup()에서는 Vue 인스턴스가 생성되기 전이므로 this를 사용할 수 없음.
+  - 대신 ref(), reactive(), computed() 등을 활용하여 상태를 관리하고 반환해야 함
+  - setup 내부에서는 this를 사용할 수 없으며, 상태를 반환하여 템플릿에서 사용해야 함
+
+- Vuex와 Pinia의 차이점과 Pinia가 Vuex보다 유리한 점
+  - Pinia는 더 간단한 API, 자동 타입 지원, Composition API 친화적인 구조로 Vuex보다 사용하기 쉽고 효율적
+
+- Vue.js에서 Vuex modules를 사용하는 이유
+  - 대규모 애플리케이션에서 상태 관리를 모듈 단위로 분리하여 유지보수성과 가독성을 높이기 위함
+  - 전역 스토어가 한 파일에 모든 데이터를 관리하면 복잡성이 증가 → 모듈을 사용하면 기능별로 분리 가능.
+  - 네임스페이스(namespace) 지정 가능 → 특정 모듈에서만 접근할 수 있도록 관리 가능.
+  - 모듈화를 통해 상태 관리의 복잡성을 줄이고, 유지보수를 용이하게 함
+
+- Vue.js에서 Vuex getters와 actions의 차이점
+  - Getters는 상태를 가공하여 제공하고, Actions는 비동기 작업을 처리하는 역할
+
+- Vue.js에서 Vuex mutations과 actions의 차이점
+  - Mutations는 동기적으로 상태를 변경하고, Actions는 비동기 처리를 담당
+
+- Vue.js에서 Vuex의 비동기 처리를 할 때 고려해야 할 사항
+  - 비동기 작업은 반드시 Actions에서 처리
+    - Mutations는 동기적으로 작동하므로, 비동기 처리 후 상태 변경 시 문제 발생 가능
+    - Actions 내부에서 API 요청을 실행한 후, commit()을 통해 Mutation을 호출해야 함
+
+  - Promise 또는 async/await을 활용하여 오류 처리
+    - API 요청 실패 시 try-catch 블록을 활용하여 예외를 처리해야 함.
+  - 비동기 처리는 Actions에서 수행하고, 오류 처리를 고려해야 함
+
+- Vue.js에서 Pinia를 활용하여 전역 상태를 관리하는 방법
+  - Pinia는 Vuex보다 간결하고, TypeScript 지원이 우수하며, Composition API 친화적
+    - Pinia 스토어 생성 (store.js)
+    - 스토어 사용 (App.vue)
+
+- Vue.js에서 localStorage, sessionStorage, cookies를 활용한 상태 관리 방법
+  - localStorage는 장기 저장
+  - sessionStorage는 탭 종료 시 삭제
+  - cookies는 서버와 인증 정보 공유에 적합
+
+- Vue.js에서 reactivity transform이 상태 관리에서 어떤 역할
+  - Vue 3.3에서 도입된 Reactivity Transform은 ref()를 더 간편하게 사용할 수 있도록 개선된 기능
+  - ref()를 사용할 때 .value를 명시적으로 호출해야 하지만, Reactivity Transform을 사용하면 이를 생략할 수 있음.
+  - 자동 reactive() 변환 기능을 통해 ref()와 reactive()를 혼합하여 사용할 수 있어 코드를 더 직관적이고 간결하게 유지할 수 있음.
+  - Reactivity Transform을 사용하면 ref()의 .value를 생략할 수 있어 코드 가독성과 유지보수성이 향상
+
+- Vue.js에서 shallowRef()와 shallowReactive()를 사용하는 이유
+  - shallowRef(): 값이 변경될 때만 반응하고, 내부 객체 변경은 감지하지 않음
+  - shallowReactive(): 객체의 최상위 속성만 반응형으로 처리됨
+  - shallowRef()와 shallowReactive()는 성능 최적화를 위해 필요하며, 불필요한 반응형 상태를 줄일 수 있음
+
+- Vue.js에서 props와 emit을 활용한 컴포넌트 간 데이터 전달 방법
+  - Props는 부모 → 자식, emit은 자식 → 부모 데이터 전달을 위해 사용됨 (defineEmits)
+
+- Vue.js에서 slot과 scoped slot의 차이점
+  - 일반 slot: 부모가 제공하는 HTML이 자식 컴포넌트 내부에 삽입됨
+  - Scoped slot: 자식이 제공하는 데이터를 부모가 활용할 수 있음	
+  - Scoped slot을 활용하면 자식 컴포넌트의 데이터를 부모가 활용할 수 있어 유연한 UI 구성이 가능
+
+- Vue.js에서 Teleport의 역할과 사용 사례
+  - Teleport는 특정 HTML 요소로 직접 렌더링할 수 있도록 도와주는 기능
+  - 사용 사례: 모달, 툴팁, 드롭다운 등 특정 DOM 계층에서 벗어나야 하는 요소
+  - Teleport를 사용하면 특정 요소를 원하는 DOM 위치에 렌더링할 수 있어 UI가 더 깔끔해짐
+
+- Vue.js에서 keep-alive의 역할
+  - keep-alive는 동적으로 변경되는 컴포넌트를 메모리에 유지하여 성능을 최적화
+  - 사용 사례: 탭 전환 시 이전 상태 유지
+  - keep-alive를 사용하면 컴포넌트가 재랜더링될 때 상태를 유지할 수 있어 성능이 향상됨
+
+- Vue.js에서 mixins과 composables의 차이점
+  - Vue 3에서는 Mixins보다 Composables를 사용하여 상태와 로직을 더 직관적으로 분리할 수 있음
+
+- Vue.js에서 Fragment 기능을 활용하는 이유
+  - Fragment는 불필요한 부모 태그 없이 여러 요소를 렌더링할 수 있도록 지원
+  - Vue 2에서는 div 등의 부모 요소가 필요했지만, Vue 3에서는 불필요한 wrapping을 제거 가능
+  - Fragment를 사용하면 불필요한 wrapping을 제거하여 코드가 더 깔끔해짐
+
+- Vue.js에서 dynamic component를 렌더링하는 방법
+  - component 태그를 사용하여 동적으로 컴포넌트를 변경 가능
+  - Dynamic Component를 사용하면 상태에 따라 컴포넌트를 동적으로 변경 가능
+
+- Vue.js에서 key 속성을 활용하여 리스트 렌더링 성능을 최적화하는 방법
+  - key 속성은 리스트가 변경될 때 기존 요소를 효율적으로 재사용하는 데 도움을 줌.
+  - index를 key로 사용하면 성능이 저하될 수 있으므로 고유한 값(예: id)을 사용해야 함
+  - 고유한 key 값을 사용하면 리스트 업데이트 성능을 최적화할 수 있음
+
+- Vue.js에서 lazy loading을 구현하는 방법
+  - Vue 3에서는 dynamic import를 활용하여 Lazy Loading을 구현 가능
+
+- Vue.js에서 template refs를 활용하여 DOM 요소에 접근하는 방법
+  - template refs를 활용하면 특정 DOM 요소에 직접 접근할 수 있음
+
+- Vue.js에서 watch()를 과도하게 사용할 때 발생할 수 있는 문제
+  - 불필요한 watch 사용으로 인해 렌더링 성능 저하 가능
+  - watch 내부에서 상태를 변경하면 무한 루프가 발생할 위험 있음.
+  - watch()를 남용하면 성능이 저하될 수 있으므로, computed() 또는 watchEffect()를 고려해야 함
+
+- Vue.js에서 ref()와 computed()를 활용하여 성능을 개선하는 방법
+  - ref(): 단순 상태 저장
+  - computed(): 계산된 값을 캐싱하여 불필요한 연산 방지
+  - computed()를 사용하면 성능을 최적화하고 불필요한 연산을 방지할 수 있음
+
+- Vue.js에서 Vue DevTools을 활용하여 성능을 분석하는 방법
+  - Vue DevTools는 Vue 애플리케이션의 상태 및 성능을 분석하는 Chrome/Firefox 확장 프로그램
+  - 주요 기능
+    - Component Tree: 현재 렌더링된 모든 컴포넌트의 상태를 확인 가능
+    - Vuex/Pinia 상태 확인: Vuex 및 Pinia의 상태 변화를 실시간으로 추적
+    - Performance Timeline: 컴포넌트 렌더링 시간을 측정하여 최적화 포인트 파악
+    - Event Inspector: 컴포넌트 간 이벤트 흐름을 분석
+  - Vue DevTools를 활용하면 상태 변경 및 성능 병목을 직관적으로 파악할 수 있음
+
+- Vue.js에서 Virtual Scroll을 활용하여 성능을 최적화하는 방법
+  - Virtual Scroll은 대량의 리스트를 렌더링할 때 보이는 항목만 동적으로 렌더링하여 성능을 최적화하는 기법.
+  - vue-virtual-scroller 또는 vue3-virtual-scroller 같은 라이브러리를 사용 가능
+  - Virtual Scroll을 사용하면 DOM에 렌더링되는 엘리먼트 수를 줄여 성능이 향상됨
+
+- Vue.js에서 Intersection Observer API를 활용하여 Lazy Loading을 구현하는 방법
+  - Intersection Observer API를 사용하면 요소가 화면에 보이는 순간만 렌더링하도록 설정 가능
+  - Intersection Observer API를 사용하면 불필요한 렌더링을 방지하고, 성능을 최적화할 수 있음
+  - 구현 방법
+    ```javascript
+    <template>
+      <img v-if="isVisible" src="image.jpg" />
+    </template>
+
+    <script setup>
+    import { ref, onMounted } from 'vue';
+
+    const isVisible = ref(false);
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible.value = entry.isIntersecting;
+    });
+
+    onMounted(() => {
+      observer.observe(document.querySelector('img'));
+    });
+    </script>
+    ```
+
+- Vue.js에서 async setup()을 사용할 때 성능 최적화하는 방법
+  - async setup() 내부에서 비동기 데이터를 병렬로 가져오거나 Suspense와 함께 사용
+  - Suspense와 함께 사용하면 초기 로딩 경험이 개선됨
+
+- Vue.js에서 Tree Shaking을 활용하여 불필요한 코드 제거하는 방법
+  - 사용하지 않는 모듈을 제거하여 번들 크기를 줄이는 최적화 기법
+  - Vite나 Webpack에서 자동 적용되지만, import { specificFunction } from 'lodash-es' 같은 방식으로 모듈 단위로 가져와야 함
+  - Tree Shaking을 활용하면 앱 번들 크기가 줄어들고, 성능이 향상됨
+
+- Vue.js에서 debounce와 throttle을 활용하여 이벤트 핸들링을 최적화
+  - debounce: 일정 시간 동안 입력이 없으면 실행
+  - throttle: 일정 시간 간격으로 실행
+  - Debounce와 Throttle을 활용하면 불필요한 연산을 줄여 성능을 최적화할 수 있음
+
+- Vue.js에서 memoization을 활용하여 성능을 최적화하는 방법
+  - computed()를 사용하여 불필요한 재계산을 방지
+  - Memoization을 활용하면 동일한 입력에 대해 결과를 캐싱하여 성능을 최적화할 수 있음
+
+- Vue.js에서 Prefetching과 Preloading의 차이점
+  - Preloading은 즉시 로드, Prefetching은 사용 가능성을 고려한 로드
+  - Prefetching: 사용자 요청 전에 리소스를 미리 로드
+    - 페이지 전환 시 미리 불러오기
+  - Preloading: 페이지가 로드될 때 즉시 로드 (우선순위 높음)
+    - 중요한 리소스 미리 로드
+
+- Vue.js에서 History Mode와 Hash Mode의 차이점
+  - History Mode
+    - example.com/page URL 구조
+    - SEO 가능
+    - 설정 방법: mode: 'history'
+      - 깔끔한 URL 제공 가능하나 서버 설정이 필요
+  - Hash Mode
+    - example.com/#/page URL 구조
+    - SEO 불가능
+    - 설정 방법: 기본 설정
+
+- Vue.js에서 beforeEnter()와 beforeEach()의 차이점
+  - beforeEach(): 모든 라우트 전환마다 실행
+  - beforeEnter(): 특정 라우트로 진입할 때만 실행
+  - beforeEach()는 전역, beforeEnter()는 특정 라우트에서 실행됨
+
+- Vue.js에서 Navigation Guards를 활용한 인증 처리 방법
+  - 예를 들어 로그인 여부 확인 후 특정 페이지 접근 제한 처리
+  - Navigation Guards를 사용하면 인증이 필요한 페이지에 대한 접근 제어 가능
+
+- Vue.js에서 Lazy Loading Routes를 적용하는 방법
+  - defineAsyncComponent 또는 import()를 활용
+  - Lazy Loading을 적용하면 초기 번들 크기를 줄일 수 있음
+
+- Vue.js에서 Dynamic Route Matching을 활용하는 방법
+  - 동적인 값(:id)을 포함하는 라우트 정의
+    - 예: '/user/:id'
+  - Dynamic Route Matching을 활용하면 특정 데이터 기반의 URL을 만들 수 있음
+
+- Vue.js에서 keep-alive를 활용하여 페이지 상태를 유지하는 방법
+  - 예제 코드
+    ```javascript
+    <keep-alive>
+      <component :is="activeComponent" />
+    </keep-alive>
+    ```
+  - keep-alive를 사용하면 컴포넌트의 상태를 유지하면서 성능을 최적화할 수 있음
+
+- Vue.js에서 REST API와 GraphQL을 비교했을 때의 차이점
+  - GraphQL은 필요한 데이터만 요청할 수 있어 성능 최적화에 유리함
+  - GraphQL은 유연성이 높으며 필요한 데이터만 요청 가능
+
+- Vue.js에서 Axios를 활용한 API 호출 방법
+  - 예제
+    ```javascript
+    import axios from 'axios';
+
+    axios.get('/api/data')
+      .then(response => console.log(response.data));
+    ```
+  - Axios는 직관적인 API 요청을 지원하며, Vue.js와 함께 사용하기 편리함
+
+- Vue.js에서 fetch()와 Axios의 차이점
+  - fetch는 기본 제공(기본 내장), Axios는 별도 설치 필요
+  - Axios는 자동 JSON 변환 기능 탑재, 요청 취소 가능
+  - Axios는 JSON 변환이 편리하며, 추가 기능이 많아 Vue 프로젝트에서 자주 사용
+
+- Vue.js에서 CORS 오류를 해결하는 방법
+  - CORS(교차 출처 리소스 공유) 오류는 서버와 클라이언트의 도메인이 다를 때 발생
+  - 해결 방법
+    - 백엔드에서 CORS 허용하는 방법 (권장 해결책)
+      ```javascript
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      ```
+    - 프록시 서버 설정 (vue.config.js)
+      ```javascript
+      module.exports = {
+        devServer: {
+          proxy: 'http://backend.com'
+        }
+      };
+      ```
+
+- Vue.js에서 JWT를 활용하여 인증을 구현하는 방법
+  - 개요
+    - JWT(JSON Web Token)은 사용자 인증 및 상태를 유지하는 방식
+  - 구현 방법
+    - 사용자가 로그인 → 백엔드에서 JWT 발급
+    - Vue.js에서 JWT를 localStorage 또는 Vuex에 저장
+    - 모든 API 요청 시 Authorization 헤더에 JWT 포함
+    - 백엔드에서 JWT 검증 후 응답
+  - JWT는 토큰 기반 인증 방식으로, 세션을 저장할 필요 없이 사용 가능
+
+- Vue.js에서 Vue Query를 활용한 데이터 페칭 방법
+  - Vue Query는 데이터를 자동으로 캐싱하고 업데이트하는 라이브러리
+  - 예제 코드
+    ```javascript
+    import { useQuery } from '@tanstack/vue-query';
+
+    const { data, isLoading } = useQuery(['todos'], fetchTodos);
+    ```
+  - 캐싱, 자동 갱신, 비동기 상태 관리를 간편하게 구현 가능
+
+- Vue.js에서 WebSockets을 활용한 실시간 데이터 업데이트
+  - 개요
+    - WebSockets은 클라이언트와 서버 간 양방향 통신 가능
+    - 실시간 채팅, 주식가격 업데이트 등에 사용
+  - 구현 방법: socket 생성 > onmessage 로 이벤트 감지
+  - HTTP 요청 없이 실시간 데이터 업데이트 가능
+
+- Vue.js에서 API 응답을 캐싱하는 방법
+  - Vue Query 또는 localStorage 를 사용
+  - Vue Query
+    ```javascript
+    useQuery(['users'], fetchUsers, { staleTime: 60000 });
+    ```
+  - Axios 캐싱
+    ```javascript
+    const cache = new Map();
+    function fetchData(url) {
+      if (cache.has(url)) return Promise.resolve(cache.get(url));
+      return axios.get(url).then(response => {
+        cache.set(url, response.data);
+        return response.data;
+      });
+    }
+    ```
+  - 캐싱을 활용하면 네트워크 요청을 줄여 성능을 최적화할 수 있음
+
+- Vue.js에서 SSR(Server-Side Rendering)을 활용하는 이유
+  - SEO 최적화 (서버 부하 증가의 이슈는 존재)
+  - 초기 로딩 속도 빠름 (개발 복잡도 증가 이슈는 존재)
+  - 소셜 미디어 미리보기 지원
+  - SSR은 SEO가 중요한 경우 필수
+
+- Vue.js에서 CSR(Client-Side Rendering)과 SSR(Server-Side Rendering)의 차이점
+  - CSR은 브라우저, SSR은 서버 렌더링
+  - CSR은 SEO 지원 약하며, SSR은 SEO 지원 좋음
+  - 초기 로딩 속도는 SSR이 빠름
+  - SEO가 필요하면 SSR, 인터렉션이 많으면 CSR 선택
+
+- Vue.js에서 Static Site Generation(SSG)과 Server-Side Rendering(SSR)의 차이점
+  - SSG는 빌드 시 페이지 생성, SSR은 요청할 때 생성
+  - SSG는 속도가 매우 빠르며 SSR은 느릴 수도 있음
+  - SSG는 유지보수 쉬우며 SSR은 어려움
+  - 정적인 블로그는 SSG, 동적인 데이터는 SSR 사용
+
+- Vue.js에서 Hydration 개념과 성능 최적화 방법
+  - Hydration: SSR로 렌더링된 HTML을 브라우저에서 다시 활성화하는 과정
+  - 최적화 방법
+    - defer 또는 async 스크립트 로드
+    - lazy 속성을 사용해 필요한 부분만 활성화
+    - Suspense 활용
+  - Hydration 최적화하면 초기 로딩 속도가 개선됨
+
+- Vue.js에서 Nuxt.js를 활용하여 SEO를 최적화하는 방법
+  - Nuxt.js는 SEO 최적화가 가능한 SSR 지원 Vue 프레임워크.
+  - Meta 태그 설정
+    ```javascript
+    useHead({
+      title: 'SEO 최적화',
+      meta: [{ name: 'description', content: 'Nuxt.js를 사용한 SEO' }]
+    });
+    ```
+  - Nuxt.js는 SEO 필수 프로젝트에서 유용함
+
+- Vue.js에서 Incremental Static Regeneration(ISR)
+  - 기존 SSG에서 특정 페이지만 동적으로 재생성 가능
+  - Next.js에서는 지원하지만 Nuxt.js는 아직 미지원.
+  - ISR은 정적 페이지를 동적으로 업데이트할 수 있는 기능
+
+- Vue.js에서 Edge Functions를 사용 시 장점
+  - 서버리스 환경에서 실행 가능
+  - CDN 가까운 곳에서 실행되어 성능 향상
+  - 예시: Vercel Edge Functions, Cloudflare Workers
+  - 사용자 위치 기반으로 빠른 응답 가능
+
+- Vue.js에서 Static Rendering과 Streaming SSR의 차이
+  - Streaming SSR은 초기 로딩을 빠르게 함
+
+- Vue.js에서 Composition API와 Options API의 차이점
+  - Composition API: 함수 기반 코드 구조, 복잡한 로직 > 효율적
+  - Options API: 객체 기반의 코드 구조, 복잡한 로직 > 가독성 낮음
+
+- Vue.js에서 Teleport와 Suspense를 조합하여 성능을 최적화하는 방법
+  - Teleport + Suspense를 사용하면 비동기 로딩을 최적화 가능
+  - 예제 코드
+    ```javascript
+    <Suspense>
+      <template #default>
+        <AsyncComponent />
+      </template>
+      <template #fallback>
+        Loading...
+      </template>
+    </Suspense>
+    ```
+
+- Vue.js에서 Vite와 Webpack의 차이점 및 성능 비교
+  - Vite: 속도 매우 빠름, 모듈 기반 빌드 방식
+  - Webpack: 속도 느림, 번들링 빌드 방식
+  - 개발 속도가 중요하다면 Vite 사용 권장
+
+- Vue.js에서 Server Components를 활용 시 이점
+  - 개요
+    - 서버에서 컴포넌트를 렌더링하여 클라이언트로 전달하는 방식
+    - React의 Server Components 개념과 유사하며, Vue에서도 연구 중
+  - 이점
+    - 클라이언트에서 JavaScript 실행 최소화 → 초기 로딩 속도 개선.
+    - 서버에서 직접 데이터 가져오기 가능 → API 호출 최소화.
+    - 보안 강화 → 클라이언트에 노출되지 않는 서버 전용 컴포넌트 활용 가능.
+    - SEO 최적화 가능 → HTML을 서버에서 완성하여 전달.
+  - 단점
+    - 현재 Vue 공식 지원은 부족하며, Nuxt 3와 같은 SSR 기반 프레임워크 활용이 필요
+
+- Vue.js에서 Tree Shaking과 Dead Code Elimination의 차이점
+  - Tree Shaking
+    - 사용되지 않는 코드를 제거하는 최적화 기법
+    - 번들링 단계(웹팩, 바이트) 때 실행
+    - import 된 모듈을 분석하여 불필요한 코드 제거
+  - Dead Code Elimination
+    - 컴파일러가 실행되지 않는 코드를 자동 제거
+    - 컴파일 단계 (JS 엔진, Terser) 때 실행
+    - 실행되지 않는 코드를 정적으로 분석하여 제거
+  - 정리
+    - Tree Shaking은 번들러(Webpack, Vite)가 불필요한 코드를 제거하는 기법
+    - Dead Code Elimination은 컴파일러 레벨에서 실행되지 않는 코드를 제거하는 최적화 기법
+
+- Vue.js에서 Vue 3.3 이후 추가된 주요 기능
+  - (1) defineModel()
+  - (2) v-memo
+  - (3) Suspense 개선
+
+- Vue.js에서 GraphQL을 사용할 때 고려해야 할 보안 이슈
+  - 과도한 요청(Over-fetching)
+    - 클라이언트가 불필요한 데이터까지 요청
+    - Schema를 최소화하고 필요 데이터만 반환하여 해결
+  - 무한 반복 쿼리(Recursive Query Attack)
+    - 쿼리가 무한 중첩되어 서버 과부하 발생
+    - Query Depth 제한하여 해결
+  - 배치 요청으로 인한 DDoS 위험
+    - 하나의 요청으로 과도한 데이터 요청 가능
+    - 요청당 rate limit 적용하여 해결
+  - GraphQL Injection
+    - SQL Injection과 유사하게 악성 쿼리 삽입 가능
+    - 입력 데이터 검증(GraphQL Shield 사용) 통한 해결
+
+- SSR이 SEO(Search Engine Optimization)에 효과적인 이유
+  - 웹사이트가 사용자에게 보여지는 과정 (2가지 방식)
+    - CSR: 웹페이지가 브라우저에서 만들어짐 (사용자 PC에서)
+    - SSR: 웹페이지가 서버에서 먼저 만들어져 사용자에게 전달됨
+  - 검색엔진(구글, 네이버)에서 웹사이트를 잘 인식할 수 있는지 여부에서 큰 차이가 있음
+
+  - CSR 방식의 문제점
+    - 개념: CSR 방식은 웹사이트를 사용자의 브라우저에서 직접 만들어서 보여주는 방식
+    - 예제
+      - 사용자가 www.example.com을 방문하면, 처음에는 빈 화면이 나오고, 이후에 자바스크립트(JS) 가 실행되면서 페이지 내용이 채워짐
+    - 문제는 구글, 네이버 같은 검색엔진도 웹사이트를 방문할 때 이와 같은 방식으로 본다는 것
+      - 즉, 검색엔진이 웹사이트를 방문했을 때 아무것도 없는 빈 화면을 보게 됨
+    - 그러면 웹사이트의 내용을 제대로 이해할 수 없고, 검색결과에 잘 노출되지 않음
+
+    - CSR이 SEO에 불리한 이유
+      - 검색엔진이 웹사이트를 방문했을 때 콘텐츠가 보이지 않음
+      - 검색엔진이 제대로 웹사이트 내용을 색인(indexing)하지 못함
+      - 검색결과에서 순위가 낮아짐 (SEO 성능 저하)
+
+  - SSR (Server-Side Rendering, 서버 렌더링)이 SEO에 효과적인 이유
+    - 개념: SSR 방식은 웹페이지를 먼저 서버에서 만들어서 사용자에게 보내는 방식
+    - 예제
+      - 사용자가 www.example.com을 방문하면, 서버가 미리 완성된 HTML 페이지를 만들어 바로 보여줌
+    - 이 방식은 검색엔진이 웹사이트를 방문할 때도 똑같이 적용됨
+      - 즉, 검색엔진이 방문했을 때, 웹사이트의 모든 내용을 바로 볼 수 있음
+    - 그러면 검색엔진이 웹사이트 내용을 제대로 이해하고 색인할 수 있음
+    - 검색결과에서 높은 순위에 노출될 가능성이 커짐
+
+    - SSR이 SEO에 효과적인 이유
+      - 검색엔진이 웹사이트를 방문하면 이미 완성된 콘텐츠를 확인 가능
+      - 검색엔진이 웹사이트를 빠르게 색인(indexing) 할 수 있음
+      - 검색결과에서 순위가 높아질 가능성이 커짐 (SEO 성능 향상)
+
+  - SSR이 꼭 필요한 경우
+    - 검색엔진 최적화(SEO)가 중요한 블로그, 뉴스 사이트
+    - 네이버, 구글 등에서 검색 노출이 중요한 웹사이트
+    - 빠른 첫 화면 로딩이 중요한 웹사이트
+
+  - CSR이 더 나은 경우
+    - 검색이 필요 없는 내부 관리자 페이지
+    - 매우 동적인 인터페이스를 가진 애플리케이션 (예: 채팅앱, 대시보드)
+    - SPA (Single Page Application, 단일 페이지 앱)
+
+  - 정리
+    - SSR은 검색엔진이 웹사이트를 방문했을 때 이미 완성된 페이지를 제공하여, 검색 결과에서 상위에 노출될 가능성이 커짐
+    - CSR은 검색엔진이 웹사이트를 방문했을 때 빈 화면을 보게 되어 검색 순위가 낮아질 수 있음
+    - 결론: "검색에 잘 걸리는 웹사이트를 만들고 싶다면 SSR이 필수"
+    - (구글, 네이버에서 내 웹사이트가 잘 검색되게 하려면 SSR을 사용해야 함)
