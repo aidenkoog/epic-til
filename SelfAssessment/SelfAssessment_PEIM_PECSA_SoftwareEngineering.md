@@ -4853,7 +4853,120 @@ Organize concepts, features, types and Pros and Cons
     - 항공, 원자력, 금융 등 안전성이 중요한 시스템에서 필수적으로 사용됨
     - 자동화된 도구들이 발전하면서 점점 더 많은 분야에서 활용 가능해지고 있음
 
-- 애자일 테스트(Agile Testing)의 개념과 주요 원칙을 설명하시오.
+- 애자일 테스트(Agile Testing)의 개념과 주요 원칙
+  - 애자일 테스트(Agile Testing) 개념
+    - 애자일 개발 방법론을 기반으로 하는 소프트웨어 테스트 기법
+    - 기존의 "개발 후 테스트" 방식이 아닌, 개발 과정에서 지속적으로 테스트를 수행하는 것이 핵심
+    - 개발팀과 테스트팀이 협력하여 짧은 주기의 반복적(Iterative) 개발을 지원
+    - 기존 전통적인 테스트와의 차이점
+      - 테스트 시점
+        - 기존: 개발 완료 후 수행
+        - 애자일: 개발과 동시에 수행
+      - 테스트 주기
+        - 기존: 프로젝트 종료 단계에서 집중 수행
+        - 애자일: 지속적 테스트 (CI/CD 연계)
+      - 책임 주체
+        - 기존: 전담 QA 팀이 수행
+        - 애자일: 개발자 + QA + 사용자
+      - 문서화
+        - 기존: 상세한 테스트 계획 필요
+        - 애자일: 최소 문서화, 자동화 테스트
+
+  - 애자일 테스트의 주요 원칙
+    - (1) 지속적인 피드백(Continuous Feedback)
+      - 개발과 동시에 지속적인 테스트 수행
+      - 테스트 결과를 즉시 피드백하여 품질 향상
+      - 스프린트 단위(1~2주)로 개발과 테스트를 반복
+        - 예제: CI/CD 파이프라인에서 지속적 테스트 적용
+        - CI/CD 파이프라인을 통해 자동화된 테스트를 실행하여 지속적인 피드백을 제공
+
+    - (2) 짧은 개발 주기(Iterative Development)
+      - 애자일 스프린트마다 새로운 기능이 추가되므로 반복적(Iterative) 테스트 필요
+      - 기능별 단위 테스트, 통합 테스트, 인수 테스트를 지속적으로 수행
+      - Scrum 개발 프로세스에서의 테스트 적용
+        - 1.Sprint 계획 → 2. 개발 & 단위 테스트 → 3. 기능 테스트 → 4. 제품 릴리스
+      - 짧은 개발 주기마다 테스트를 수행하여 점진적으로 품질을 향상
+
+    - (3) 협업 및 팀 중심 테스트(Collaborative Testing)
+      - 테스트는 개발자, QA, 사용자, 제품 책임자(Product Owner) 등과 함께 수행
+      - 애자일 팀 내에서 "QA 역할"은 단순한 오류 검출이 아니라 품질 보장을 담당
+      - 예제: BDD(Behavior-Driven Development) 기반 테스트 협업
+        ```
+        Feature: User Login
+        Scenario: Successful login
+          Given User is on login page
+          When User enters valid credentials
+          Then User should see the dashboard
+        ```
+      - 테스트를 개발자와 QA가 함께 설계하여 협업을 강화
+
+    - (4) 고객 중심 테스트(Customer-Oriented Testing)
+      - 사용자의 요구사항을 반영한 테스트 수행
+      - UI/UX 테스트, 사용자 스토리 기반의 테스트를 적극 활용
+      - 사용자 스토리 기반 테스트 예제: "사용자가 로그인하면 대시보드로 이동해야 한다."
+      - 테스트 목표가 명확하며, 최종 사용자 경험을 중심으로 테스트 설계
+
+    - (5) 자동화 테스트 우선(Automated Testing Priority)
+      - 테스트 자동화를 통해 반복적인 테스트 작업을 줄이고, 신속한 검증 수행
+      - 단위 테스트(Unit Test), UI 테스트(E2E Test), API 테스트를 자동화
+      - Jest 기반 자동화 테스트 예제
+        ```
+        test('adds 1 + 2 to equal 3', () => {
+          expect(sum(1, 2)).toBe(3);
+        });
+        ```
+        - 자동화된 테스트는 지속적 통합(CI)과 결합하여 신속한 피드백을 제공
+
+    - (6) 회귀 테스트(Regression Testing) 강화
+      - 새로운 기능이 추가될 때 기존 기능이 정상 작동하는지 지속적으로 검증
+      - 테스트 케이스를 재사용하여 코드 변경으로 인한 문제 방지
+      - Cypress 기반 회귀 테스트 예제
+        ```
+        describe('Login Test', () => {
+          it('should log in successfully', () => {
+            cy.visit('/login')
+            cy.get('#username').type('user')
+            cy.get('#password').type('password')
+            cy.get('#login-button').click()
+            cy.url().should('include', '/dashboard')
+          })
+        })
+        ```
+        - 회귀 테스트를 자동화하여 코드 변경 후에도 안정성을 유지
+
+  - 애자일 테스트의 단계
+    - 단위 테스트(Unit Test): 개별 모듈/함수를 테스트
+    - 통합 테스트(Integration Test): 모듈 간 상호작용 테스트
+    - 기능 테스트(Functional Test): 사용자 요구사항 기반 테스트
+    - 성능 테스트(Performance Test): 부하 및 속도 측정 테스트
+    - UI 테스트(UI/UX Test): 사용자 경험 검증
+      - 애자일 테스트는 이 모든 테스트를 자동화하여 빠른 피드백을 제공하는 것이 핵심
+
+  - 애자일 테스트 적용 사례
+    - DevOps 환경에서 CI/CD 파이프라인과 연계하여 지속적인 테스트 수행
+    - Agile Scrum, Kanban 환경에서 스프린트 단위로 기능 검증
+    - TDD(Test-Driven Development), BDD(Behavior-Driven Development) 적용
+    - CI/CD 파이프라인에서 자동화 테스트 실행
+    - 테스트 자동화를 통해 빠른 배포(Continuous Deployment)를 지원
+
+  - 애자일 테스트의 장점과 도전 과제
+    - 장점
+      - 빠른 피드백 제공 → 개발과 테스트를 동시에 수행
+      - 높은 품질 유지 → 지속적인 자동화 테스트로 버그 감소
+      - 유연한 테스트 전략 → 변화하는 요구사항에 빠르게 대응
+      - 협업 중심 → 개발자, QA, PO가 함께 테스트 수행
+
+    - 도전 과제
+      - 초기 자동화 테스트 구축 비용이 높음
+      - 테스트 환경이 빠르게 변하는 경우 유지보수가 어려움
+      - 테스트 범위를 정하는 것이 어려울 수 있음
+
+  - 결론
+    - 애자일 테스트(Agile Testing)는 개발과 테스트를 병행하여 빠른 피드백과 높은 품질을 유지하는 테스트 기법
+    - Scrum, CI/CD, 자동화 테스트와 결합하여 지속적인 개선을 지원
+    - TDD, BDD, UI 테스트, 성능 테스트 등을 통해 전체적인 소프트웨어 품질을 보장
+    - 즉, 애자일 테스트는 "빠른 개발 + 품질 유지 + 자동화"를 목표로 하는 현대적인 소프트웨어 테스트 전략
+
 - 소프트웨어 아키텍처(Software Architecture)의 개념과 중요성을 설명하시오.
 - 계층형 아키텍처(Layered Architecture)와 클라이언트-서버 아키텍처(Client-Server Architecture)의 차이를 설명하시오.
 - MVC(Model-View-Controller) 패턴의 개념과 주요 구성 요소를 설명하시오.
