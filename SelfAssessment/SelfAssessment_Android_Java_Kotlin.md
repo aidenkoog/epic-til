@@ -1121,6 +1121,66 @@ Organize concepts, features, types and Pros and Cons
             - 민감한 데이터를 저장해야 한다면, 반드시 Encrypted Shared Preferences를 사용 권장
 
 - Android에서 CameraX와 기존 Camera API의 차이점
+    - CameraX vs Camera2 API
+        - 개발 난이도
+            - CameraX: 매우 간단 (Jetpack 라이브러리)
+            - Camera2 API: 복잡한 설정 필요
+        - 호환성		
+            - CameraX: 다양한 기기에서 일관된 성능 제공
+            - Camera2 API: 기기별로 동작이 다를 수 있음
+        - 라이프사이클 관리		
+            - CameraX: LifecycleOwner와 통합되어 자동 관리
+            - Camera2 API: 수동으로 상태 관리 필요
+        - 자동 기능 지원		
+            - CameraX: 자동 노출, 화이트 밸런스, 포커스 등 지원
+            - Camera2 API: 직접 구현해야 함
+        - 성능		
+            - CameraX: 최적화된 내부 동작으로 높은 성능 제공
+            - Camera2 API: 성능 최적화를 직접 해야 함
+        - 미리보기(Preview)		
+            - CameraX: PreviewView 지원으로 간편 구현
+            - Camera2 API: Surface 처리, TextureView 사용 필요
+        - 이미지 캡처		
+            - CameraX: ImageCapture API 제공
+            - Camera2 API: 직접 캡처 및 후처리 필요
+        - 영상 녹화		
+            - CameraX: VideoCapture API 제공
+            - Camera2 API: 직접 MediaRecorder 설정 필요
+        - ML Kit 및 AI 기능		
+            - CameraX: 쉽게 통합 가능
+            - Camera2 API: 직접 프레임을 처리해야 함
+
+    - CameraX vs Camera1 API
+        - Camera1 API는 Android 5.0(Lollipop) 이전 버전에서 사용되던 API로, 현재는 거의 사용되지 않음
+        - 지원 Android 버전		
+            - CameraX: Android 5.0 이상
+            - Camera1 API: Android 4.x 이하에서 사용 가능
+        - 멀티 카메라 지원		
+            - CameraX: 기본 지원
+            - Camera1 API: 직접 처리해야 함
+        - 자동 기능 지원		
+            - CameraX: 자동 초점, 노출 조절 등 지원
+            - Camera1 API: 직접 제어 필요
+        - 미리보기 처리		
+            - CameraX: PreviewView 사용 가능
+            - Camera1 API: SurfaceView, TextureView 직접 처리 필요
+        - 성능 및 유지보수		
+            - CameraX: 최신 기기 최적화
+            - Camera1 API: 오래된 API, 유지보수 어려움
+
+    - CameraX의 주요 장점
+        - 간편한 개발 → PreviewView, ImageCapture, VideoCapture API 제공
+        - 기기 호환성 개선 → 다양한 제조사의 기기에서 일관된 동작 보장
+        - Jetpack 라이브러리 통합 → LifecycleOwner, ViewModel 등과 쉽게 연동 가능
+        - ML Kit 등과 쉽게 연동 → 얼굴 인식, 바코드 스캔 등 다양한 기능 활용 가능
+        - 자동 조정 기능 지원 → 자동 초점(AF), 자동 노출(AE), 자동 화이트 밸런스(AWB)
+    - 결론
+        - 새로운 프로젝트라면 → CameraX 사용 추천 (간편한 개발 & 최적화된 성능)
+        - 고급 기능이 필요하거나 특정 기기 최적화가 필수라면 → Camera2 API 고려
+        - 아주 오래된 기기(Android 4.x 이하) 지원이 필요하다면 → Camera1 API 사용 가능
+
+
+
 - Android에서 Jetpack WorkManager와 Foreground Service의 차이점
 - Android에서 Jetpack Paging을 사용하는 이유
 - Android에서 App Bundle과 APK의 차이점
