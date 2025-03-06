@@ -1179,9 +1179,81 @@ Organize concepts, features, types and Pros and Cons
         - 고급 기능이 필요하거나 특정 기기 최적화가 필수라면 → Camera2 API 고려
         - 아주 오래된 기기(Android 4.x 이하) 지원이 필요하다면 → Camera1 API 사용 가능
 
-
-
 - Android에서 Jetpack WorkManager와 Foreground Service의 차이점
+    - Jetpack WorkManager
+        - 개념
+            - 백그라운드 작업을 일정한 조건(네트워크 연결, 충전 중 등)에 따라 실행할 수 있도록 하는 Jetpack 라이브러리
+            - 오래 실행되는 비동기 작업을 OS의 제약 없이 보장
+            - 앱이 종료되거나 기기가 재부팅되더라도 작업을 지속할 수 있음
+        - 주요 특징 
+            - 백그라운드에서 실행 (UI와 무관한 작업)
+            - 앱이 종료되거나 기기가 재부팅되어도 작업 유지 가능
+            - 제약 조건(Constraints) 설정 가능 (예: 네트워크 필요, 충전 중 실행 등)
+            - JobScheduler, AlarmManager, Firebase JobDispatcher 등을 내부적으로 활용
+            - 단기 및 장기 작업 모두 가능 (최소 10분 이상의 딜레이 가능)
+        - 사용 사례
+            - 주기적인 데이터 동기화 (예: 백업, 클라우드 업로드)
+            - 네트워크가 가능할 때 파일 업로드
+            - 일정한 조건에서 실행해야 하는 작업 (예: 배터리가 충분할 때)
+            - 사용자와 직접적인 상호작용이 필요하지 않은 작업
+        - 예제
+            ```java
+            class MyWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
+                override fun doWork(): Result {
+                    Log.d("WorkManager", "작업 실행 중...")
+                    return Result.success()
+                }
+            }
+            // Work 요청
+            val workRequest = OneTimeWorkRequestBuilder<MyWorker>().build()
+            WorkManager.getInstance(context).enqueue(workRequest)
+            ```
+
+    - Foreground Service
+        - 개념
+            - 사용자가 인식할 수 있는(즉, Notification과 함께 실행되는) 백그라운드 작업
+            - 장시간 실행되는 작업을 유지하기 위해 사용됨
+            - 사용자가 작업 진행 상태를 확인할 수 있어야 하므로 알림(Notification) 필수
+        - 주요 특징
+            - 작업이 실행되는 동안 시스템에 의해 종료되지 않음
+            - 백그라운드에서 실행되지만, Notification을 통해 사용자에게 표시됨
+            - 사용자가 즉시 인식할 수 있는 작업에 적합
+            - Android 8.0 (Oreo) 이상에서는 Foreground Service 실행 시 알림(Notification)이 필수
+        - 사용 사례
+            - 음악 재생 서비스 (Spotify, YouTube Music)
+            - 실시간 위치 추적 (Google Maps Navigation)
+            - 다운로드 진행 상태 표시
+            - 네트워크 스트리밍 (영상, 오디오)
+            - 사용자가 직접 실행 중인 작업을 인식해야 하는 경우
+        - 예제
+            ```java
+            class MyForegroundService : Service() {
+                override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+                    val notification = NotificationCompat.Builder(this, "channel_id")
+                        .setContentTitle("Foreground Service 실행 중")
+                        .setContentText("작업을 수행하고 있습니다.")
+                        .setSmallIcon(R.drawable.ic_notification)
+                        .build()
+
+                    startForeground(1, notification) // Foreground Service 시작
+                    return START_STICKY
+                }
+
+                override fun onBind(intent: Intent?): IBinder? = null
+            }
+            ```
+    - 결론
+        - 사용자가 직접 작업을 인식해야 함: Foreground Service
+        - 네트워크 동기화, 백업, 클라우드 업로드 등: WorkManager
+        - 앱이 종료되거나 기기가 재부팅되어도 작업을 유지해야 함: WorkManager
+        - 사용자가 UI에서 직접 실행하는 작업 (음악, 다운로드 등): Foreground Service
+        - OS가 백그라운드 작업을 자동 관리하도록 하고 싶음: WorkManager
+        - 정리
+            - 사용자가 직접 확인해야 하는 장기 실행 작업 → Foreground Service 사용
+            - 앱 종료 후에도 실행되어야 하는 백그라운드 작업 → WorkManager 사용
+            - Android 8.0(Oreo) 이상에서는 Foreground Service에 반드시 Notification 필요
+
+
 - Android에서 Jetpack Paging을 사용하는 이유
 - Android에서 App Bundle과 APK의 차이점
 - Android에서 Jetpack Compose와 기존 XML 기반 UI의 차이점
