@@ -5210,11 +5210,186 @@ Organize concepts, features, types and Pros and Cons
     - 대규모 프로젝트 & 확장성 필요 → 마이크로서비스 아키텍처가 유리 (유연한 배포 및 확장 가능)
     - Netflix, Amazon, Uber 등 대형 IT 기업들은 마이크로서비스 아키텍처를 활용하여 확장성과 유지보수성을 극대화하고 있음
 
-- 디자인 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)을 설명하시오.
-- 싱글턴 패턴(Singleton Pattern)의 개념과 활용 사례를 설명하시오.
-- 팩토리 패턴(Factory Pattern)과 빌더 패턴(Builder Pattern)의 차이를 설명하시오.
-- 옵저버 패턴(Observer Pattern)과 퍼블리셔-서브스크라이버 패턴(Pub-Sub Pattern)의 차이를 설명하시오.
-- 전략 패턴(Strategy Pattern)과 상태 패턴(State Pattern)의 차이를 설명하시오.
+- 디자인 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)
+  - 디자인 패턴(Design Pattern) 개념
+    - 소프트웨어 설계에서 자주 발생하는 문제를 해결하기 위한 재사용 가능한 설계 방법
+    - 객체지향 프로그래밍(OOP) 원칙을 기반으로 설계
+    - 코드의 유지보수성, 확장성, 가독성을 향상
+
+  - 디자인 패턴의 주요 유형
+    - 생성 패턴(Creational Pattern) → 객체 생성 관련
+      - 싱글턴 패턴 (Singleton Pattern) → 단 하나의 인스턴스만 생성
+      - 팩토리 패턴 (Factory Pattern) → 객체 생성을 캡슐화
+      - 빌더 패턴 (Builder Pattern) → 복잡한 객체 생성을 단계적으로 수행
+      - 프로토타입 패턴 (Prototype Pattern) → 기존 객체를 복제하여 생성
+      - 추상 팩토리 패턴 (Abstract Factory Pattern) → 관련된 객체들을 묶어서 생성
+
+    - 구조 패턴(Structural Pattern) → 클래스 및 객체의 관계를 정의
+      - 어댑터 패턴(Adapter Pattern) → 인터페이스 변환
+      - 브리지 패턴(Bridge Pattern) → 구현과 인터페이스를 분리
+      - 컴포지트 패턴(Composite Pattern) → 객체를 트리 구조로 구성
+      - 데코레이터 패턴(Decorator Pattern) → 동적으로 기능 추가
+      - 프록시 패턴(Proxy Pattern) → 객체 접근을 제어하는 대리자 사용
+
+    - 행위 패턴(Behavioral Pattern) → 객체 간의 상호작용
+      - 옵저버 패턴 (Observer Pattern) → 이벤트 기반 알림
+      - 퍼블리셔-서브스크라이버 패턴 (Pub-Sub Pattern) → 비동기 메시지 기반 이벤트
+      - 전략 패턴 (Strategy Pattern) → 알고리즘을 동적으로 변경
+      - 상태 패턴 (State Pattern) → 객체의 상태 변화에 따른 동작 관리
+      - 커맨드 패턴 (Command Pattern) → 요청을 객체로 캡슐화
+      - 템플릿 메서드 패턴 (Template Method Pattern) → 상속을 활용한 코드 재사용
+
+- 싱글턴 패턴(Singleton Pattern)의 개념과 활용 사례
+  - 개념
+    - 클래스의 인스턴스를 하나만 생성하여 공유하는 패턴
+    - 전역적으로 동일한 객체를 사용해야 할 때 사용
+    - 객체 생성 비용을 줄이고, 상태를 일관되게 유지할 수 있음
+  - 활용 사례
+    - 데이터베이스 연결 객체 (Connection Pool)
+    - 로그 시스템 (Logger)
+    - 환경 설정 관리 (Configuration Manager)
+    - 캐싱 시스템
+
+- 팩토리 패턴(Factory Pattern)과 빌더 패턴(Builder Pattern)의 차이
+  - 팩토리 패턴, 빌더 패턴 차이
+    - 목적
+      - 팩토리 패턴: 객체 생성을 캡슐화하여 다양한 서브 클래스 반환
+      - 빌더 패턴: 복잡한 객체 생성을 단계적으로 수행
+    - 사용 방법
+      - 팩토리 패턴: 객체 생성을 위한 팩토리 메서드 제공
+      - 빌더 패턴: 객체의 속성을 하나씩 설정하며 생성
+    - 유연성
+      - 팩토리 패턴: 특정 조건에 따라 다양한 객체 반환 가능
+      - 빌더 패턴: 가독성이 높고, 객체 변경이 용이
+    - 예제
+      - 팩토리 패턴: CarFactory.createCar("Sedan")
+      - 빌더 패턴: CarBuilder().setEngine("V8").setColor("Red").build()
+
+  - 예제
+    - 팩토리 패턴 예제
+      ```java
+      interface Car {
+          fun drive()
+      }
+
+      class Sedan : Car {
+          override fun drive() = println("Sedan 주행")
+      }
+
+      class Suv : Car {
+          override fun drive() = println("SUV 주행")
+      }
+
+      class CarFactory {
+          companion object {
+              fun createCar(type: String): Car {
+                  return when (type) {
+                      "Sedan" -> Sedan()
+                      "Suv" -> Suv()
+                      else -> throw IllegalArgumentException("알 수 없는 타입")
+                  }
+              }
+          }
+      }
+
+      fun main() {
+          val car = CarFactory.createCar("Sedan")
+          car.drive() // "Sedan 주행"
+      }
+      ```
+    - 빌더 패턴 예제
+      ```java
+      class CarBuilder {
+          private var engine: String = ""
+          private var color: String = ""
+
+          fun setEngine(engine: String) = apply { this.engine = engine }
+          fun setColor(color: String) = apply { this.color = color }
+          fun build() = Car(engine, color)
+      }
+
+      data class Car(val engine: String, val color: String)
+
+      fun main() {
+          val car = CarBuilder().setEngine("V8").setColor("Red").build()
+          println(car) // Car(engine=V8, color=Red)
+      }
+      ```
+  - 결론: 팩토리 패턴은 객체 생성의 캡슐화, 빌더 패턴은 복잡한 객체 생성에 유리
+
+- 옵저버 패턴(Observer Pattern)과 퍼블리셔-서브스크라이버 패턴(Pub-Sub Pattern)의 차이
+  - 구조	
+    - 옵저버 패턴: Subject(발행자)와 Observer(구독자) 간 1:N 관계
+    - 퍼블리셔-서브스크라이버 패턴: Publisher(발행자)와 Subscriber(구독자)가 직접 연결되지 않음
+  - 통신 방식
+    - 옵저버 패턴: 동기적(Synchronous), 즉시 알림
+    - 퍼블리셔-서브스크라이버 패턴: 비동기적(Asynchronous), 메시지 큐 활용
+  - 사용 사례
+    - 옵저버 패턴: UI 이벤트 리스너, 상태 변경 감지
+    - 퍼블리셔-서브스크라이버 패턴: 대규모 메시징 시스템 (Kafka, RabbitMQ)
+💡 - 결론
+    - 옵저버 패턴은 직접적인 관계, 퍼블리셔-서브스크라이버는 메시지 큐 기반
+
+- 전략 패턴(Strategy Pattern)과 상태 패턴(State Pattern)의 차이
+  - 목적
+    - 전략 패턴: 알고리즘을 동적으로 변경
+    - 상태 패턴: 객체의 상태 변화에 따라 동작 변경
+  - 사용 방법
+    - 전략 패턴: 인터페이스로 알고리즘을 캡슐화하고, 실행 시 동적으로 교체
+    - 상태 패턴: 상태를 클래스로 분리하여, 객체의 상태에 따라 행동 변경
+  - 예제
+    - 전략 패턴: 결제 방법(카드, 페이팔, 계좌이체) 선택
+    - 상태 패턴: TCP 연결 상태 (Connected, Disconnected) 관리
+  - 코드예제
+    - 전략 패턴 예제
+      ```java
+      interface PaymentStrategy {
+          fun pay(amount: Int)
+      }
+
+      class CreditCardPayment : PaymentStrategy {
+          override fun pay(amount: Int) = println("신용카드로 $amount 원 결제")
+      }
+
+      class PayPalPayment : PaymentStrategy {
+          override fun pay(amount: Int) = println("PayPal로 $amount 원 결제")
+      }
+
+      class PaymentContext(private var strategy: PaymentStrategy) {
+          fun setStrategy(strategy: PaymentStrategy) {
+              this.strategy = strategy
+          }
+          fun executePayment(amount: Int) {
+              strategy.pay(amount)
+          }
+      }
+      ```
+
+    - 상태 패턴 예제
+      ```java
+      interface State {
+          fun handle()
+      }
+
+      class Connected : State {
+          override fun handle() = println("네트워크 연결됨")
+      }
+
+      class Disconnected : State {
+          override fun handle() = println("네트워크 끊김")
+      }
+
+      class NetworkContext(var state: State) {
+          fun setState(state: State) {
+              this.state = state
+          }
+          fun request() {
+              state.handle()
+          }
+      }
+      ```
+  - 결론: 전략 패턴은 알고리즘 교체, 상태 패턴은 객체의 상태 변화에 따른 동작 변경
+
 - 소프트웨어 유지보수(Software Maintenance)의 개념과 주요 유형(수정, 적응, 예방, 완전 유지보수)을 설명하시오.
 - 기술 부채(Technical Debt)의 개념과 해결 방법을 설명하시오.
 - 리팩토링(Refactoring)의 개념과 주요 기법(Extract Method, Inline Variable 등)을 설명하시오.
