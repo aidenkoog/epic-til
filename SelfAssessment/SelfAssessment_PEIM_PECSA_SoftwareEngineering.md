@@ -5093,8 +5093,74 @@ Organize concepts, features, types and Pros and Cons
     - 클라이언트-서버 아키텍처는 웹 서비스 및 모바일 백엔드처럼 단순한 요청-응답 구조가 필요한 경우 적합
     - 대부분의 웹 애플리케이션은 계층형 아키텍처를 기반으로 클라이언트-서버 구조를 포함하고 있음
 
-- MVC(Model-View-Controller) 패턴의 개념과 주요 구성 요소를 설명하시오.
-- MVVM(Model-View-ViewModel) 패턴의 개념과 활용 사례를 설명하시오.
+- MVC(Model-View-Controller) 패턴의 개념과 주요 구성 요소
+  - 개념
+    - MVC(Model-View-Controller) 패턴은 애플리케이션을 모델(Model), 뷰(View), 컨트롤러(Controller)로 분리하여 설계하는 패턴
+    - UI와 비즈니스 로직을 분리하여 유지보수성을 높이고, 코드의 재사용성을 극대화하는 것이 목표
+
+  - 주요 구성 요소
+    - Model (모델)
+      - 애플리케이션의 데이터 및 비즈니스 로직을 처리하는 부분
+      - 데이터베이스와 상호작용하고, 상태를 관리
+    - View (뷰)	
+      - 사용자에게 화면(UI)을 렌더링하는 역할
+      - Model의 데이터를 표시하고 사용자 입력을 전달
+    - Controller (컨트롤러)
+      - 사용자 입력을 받아 Model과 View를 연결하는 역할
+      - Model의 데이터를 가공하여 View에 전달
+
+  - 동작 과정
+    - 사용자가 View에서 입력을 수행
+    - Controller가 입력을 처리하고 Model을 갱신
+    - Model이 변경되면 View에 반영되어 사용자에게 업데이트됨
+
+  - 활용 사례
+    - 웹 애플리케이션 (Spring MVC, Django, ASP.NET MVC)
+    - 모바일 애플리케이션 (Android의 일부 구조, iOS UIKit 기반 개발)
+
+- MVVM(Model-View-ViewModel) 패턴의 개념과 활용 사례
+  - 개념
+    - MVVM(Model-View-ViewModel) 패턴은 UI 로직(View)과 비즈니스 로직(Model)을 완전히 분리하여 ViewModel을 통해 데이터를 바인딩하는 패턴
+    - 특히, 데이터 바인딩(Data Binding)과 양방향 데이터 흐름을 지원하는 프레임워크에서 많이 사용
+
+  - 주요 구성 요소
+    - Model (모델)
+      - 데이터 및 비즈니스 로직을 처리하는 부분
+    - View (뷰)
+      - UI 요소를 정의하고 ViewModel의 데이터와 자동으로 연결 (Data Binding 사용)
+    - ViewModel (뷰모델)
+      - View와 Model 사이에서 데이터를 가공하고 UI 상태를 관리
+      - LiveData, StateFlow 등을 활용해 View와 바인딩
+
+  - 동작 과정
+    - View가 ViewModel과 데이터 바인딩을 설정
+    - ViewModel이 Model을 호출하여 데이터를 가져옴
+    - ViewModel이 데이터를 가공하여 LiveData 등으로 View에 전달
+    - View가 자동으로 ViewModel의 데이터를 감지하여 UI를 업데이트
+
+  - 활용 사례
+    - Android 개발 (Jetpack Compose, Android ViewModel, LiveData, StateFlow)
+    - WPF(Windows Presentation Foundation) 및 Xamarin
+
+  - MVC vs MVVM 비교
+    - 구성 요소 
+      - MVC: Model, View, Controller
+      - MVVM: Model, View, ViewModel
+    - UI와 로직의 분리
+      - MVC: View와 Controller가 밀접하게 연결됨
+      - MVVM: ViewModel이 UI 로직을 분리하여 처리
+    - 데이터 바인딩
+      - MVC: 수동 처리 (이벤트 리스너, 콜백)
+      - MVVM: 자동 처리 (LiveData, RxJava, Data Binding)
+    - 사용 사례
+      - MVC: 전통적인 웹 애플리케이션
+      - MVVM: 모바일 앱, 현대적인 UI 개발 (Android, WPF)
+
+  - 결론
+    - MVC는 웹 애플리케이션에서 흔히 사용되며, UI와 비즈니스 로직을 명확히 분리하는 구조
+    - MVVM은 모바일 및 데스크톱 애플리케이션에서 더 적합하며, 데이터 바인딩을 활용해 UI와 로직을 완전히 분리 가능
+    - Android 개발에서는 MVVM이 표준 패턴으로 자리 잡았으며, Jetpack Compose 및 StateFlow와 함께 사용하면 더 효율적인 UI 관리가 가능
+
 - 마이크로서비스 아키텍처(Microservices Architecture)와 모놀리식 아키텍처(Monolithic Architecture)의 차이를 설명하시오.
 - 디자인 패턴(Design Pattern)의 개념과 주요 유형(생성, 구조, 행위 패턴)을 설명하시오.
 - 싱글턴 패턴(Singleton Pattern)의 개념과 활용 사례를 설명하시오.
