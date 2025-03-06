@@ -3941,7 +3941,7 @@ Organize concepts, features, types and Pros and Cons
             - 디스크 기반 정렬 방식으로, 데이터를 여러 블록으로 나눠 정렬 후 병합
             - RAM 크기에 맞게 버퍼 크기를 조정 가능
             - DBMS, 대용량 데이터 처리에 널리 사용
-        - Hadoop / Spark 기반 정렬 (MapReduce Sort)
+        - Hadoop / Spark 기반 정렬 (MapReduce Sort, 맵리듀스 정렬)
             - 병렬 처리(Big Data 환경)에서 최적
             - 여러 개의 노드에서 데이터 정렬 가능
         - 디스크 기반 퀵 정렬(Modified Quick Sort)
@@ -3953,21 +3953,118 @@ Organize concepts, features, types and Pros and Cons
         - 빅데이터 환경에서는 → Hadoop / Spark 기반 MapReduce 정렬이 최적
         - 즉, 1억 개의 데이터라면 외부 병합 정렬이 가장 현실적인 선택
 
+- 선형 탐색(Linear Search)와 이진 탐색(Binary Search)의 차이
+    - 선형 탐색 (Linear Search)
+        - 개념
+            - 배열(리스트)의 처음부터 끝까지 순차적으로 탐색하는 방식
+            - 정렬이 필요 없음 → 정렬되지 않은 데이터에서도 탐색 가능
+            - 단순하지만, 탐색 속도가 느림 (특히 데이터가 많을 경우 비효율적)
+        - 시간 복잡도
+            - 최악의 경우(O(N)): 배열의 끝까지 탐색해야 함
+            - 평균 시간 복잡도: O(N)
+        - 예제
+            ```python
+            def linear_search(arr, target):
+                for i in range(len(arr)):
+                    if arr[i] == target:
+                        return i  # 인덱스 반환
+                return -1  # 찾지 못하면 -1 반환
 
-- 페르마의 소정리(Fermat’s Little Theorem)란 무엇인가?
-- RSA 암호화 알고리즘에서 소수를 이용하는 이유를 설명하시오.
+            arr = [10, 20, 30, 40, 50]
+            target = 30
+            print(linear_search(arr, target))  # 출력: 2
+            ```
+        - 장점
+            - 정렬이 필요 없음
+            - 간단하고 구현이 쉬움
+            - 작은 데이터에서 적절히 사용 가능
+        - 단점
+            - 데이터가 많을 경우 비효율적 (O(N) 시간이 소요됨)
+
+    - 이진 탐색 (Binary Search)
+        - 개념
+            - 배열이 "정렬된 상태"여야 함
+            - 중앙 값을 기준으로 탐색 범위를 절반씩 줄여나가는 방식
+            - 탐색 속도가 빠름 (대량의 데이터에서도 효율적)
+        - 시간 복잡도
+            - 최악의 경우(O(log N)): 탐색 범위를 절반씩 줄이므로 매우 빠름
+            - 평균 시간 복잡도: O(log N)
+        - 예제 (반복문)
+            ```python
+            def binary_search(arr, target):
+                left, right = 0, len(arr) - 1
+
+                while left <= right:
+                    mid = (left + right) // 2  # 중앙값
+                    if arr[mid] == target:
+                        return mid
+                    elif arr[mid] < target:
+                        left = mid + 1
+                    else:
+                        right = mid - 1
+                return -1  # 찾지 못하면 -1 반환
+
+            arr = [10, 20, 30, 40, 50]
+            target = 30
+            print(binary_search(arr, target))  # 출력: 2
+            ```
+        - 예제 (재귀)
+            ```python
+            def binary_search_recursive(arr, target, left, right):
+                if left > right:
+                    return -1
+                
+                mid = (left + right) // 2
+                if arr[mid] == target:
+                    return mid
+                elif arr[mid] < target:
+                    return binary_search_recursive(arr, target, mid + 1, right)
+                else:
+                    return binary_search_recursive(arr, target, left, mid - 1)
+
+            arr = [10, 20, 30, 40, 50]
+            target = 30
+            print(binary_search_recursive(arr, target, 0, len(arr) - 1))  # 출력: 2
+            ```
+        - 장점
+            - 탐색 속도가 빠름 (O(log N))
+            - 데이터가 많을수록 성능이 더욱 향상됨
+        - 단점
+            - 정렬된 배열에서만 사용 가능
+            - 데이터가 정렬되지 않은 경우, 먼저 정렬해야 하므로 O(N log N)의 추가 비용 발생
+    - 결론
+        - 정렬되지 않은 데이터 → 선형 탐색(Linear Search) 사용
+        - 정렬된 데이터 → 이진 탐색(Binary Search) 사용
+        - 데이터가 많고 빠른 검색이 필요 → 이진 탐색(Binary Search)이 훨씬 유리
+
+- 점프 탐색(Jump Search)와 보간 탐색(Interpolation Search)의 개념과 차이점을 설명하시오.
 - 해시 함수(Hash Function)의 개념과 이상적인 조건을 설명하시오.
 - 체이닝(Chaining)과 개방 주소법(Open Addressing)의 차이점을 설명하시오.
+- 그래프 탐색에서 DFS가 BFS보다 유리한 경우와 반대의 경우를 설명하시오.
+- 이중 연결 그래프(Biconnected Graph)란 무엇인가?
+- 트리(Tree)란 무엇이며, 트리의 주요 특징을 설명하시오.
+- 분할 정복과 동적 계획법의 차이점을 실제 사례와 함께 설명하시오.
+- BFS와 DFS를 이용한 문제 해결 사례를 설명하시오.
+- 메모이제이션(Memoization) 기법이 필요한 경우와 그 장점을 설명하시오.
+- 문제 해결을 위해 알고리즘을 선택할 때 고려해야 할 요소는 무엇인가?
+- 문제 해결 전략에서 탐욕 알고리즘을 적용할 수 있는 조건은 무엇인가?
+- 이진 탐색 트리(BST)의 개념과 탐색, 삽입, 삭제 연산의 시간 복잡도를 설명하시오.
+- AVL 트리와 레드-블랙 트리(Red-Black Tree)의 차이점을 설명하시오.
+- 분할 정복(Divide and Conquer)과 동적 계획법(Dynamic Programming)의 차이점을 설명하시오.
+- 탐욕 알고리즘(Greedy Algorithm)의 특징과 한계를 설명하시오.
+- 동적 계획법에서 "중복 계산 방지"를 위한 메모이제이션(Memoization)과 탑다운(Top-Down) 방식의 차이를 설명하시오.
+- 동적 계획법과 그리디 알고리즘의 차이를 설명하고, 각각을 적용할 수 있는 대표적인 문제를 설명하시오.
+- 행렬 체인 곱셈(Matrix Chain Multiplication) 알고리즘을 설명하시오.
+- 배낭 문제(Knapsack Problem)에서 0-1 Knapsack과 Fractional Knapsack의 차이를 설명하시오.
+- 탐욕 알고리즘(Greedy Algorithm)이 NP-완전 문제에서 최적해를 보장할 수 있는 경우를 설명하시오.
+- 최소 스패닝 트리(MST)에서 크루스칼 알고리즘과 프림 알고리즘의 차이점을 설명하시오.
+- 페르마의 소정리(Fermat’s Little Theorem)란 무엇인가?
+- RSA 암호화 알고리즘에서 소수를 이용하는 이유를 설명하시오.
 - 퍼펙트 해시(Perfect Hashing)란 무엇인가?
 - 블룸 필터(Bloom Filter)의 개념과 사용 사례를 설명하시오.
-- 선형 탐색(Linear Search)와 이진 탐색(Binary Search)의 차이를 설명하시오.
-- 점프 탐색(Jump Search)와 보간 탐색(Interpolation Search)의 개념과 차이점을 설명하시오.
-- 그래프 탐색에서 DFS가 BFS보다 유리한 경우와 반대의 경우를 설명하시오.
 - 위상 정렬(Topological Sorting)의 개념과 구현 방법을 설명하시오.
 - 유니온-파인드(Union-Find) 알고리즘의 개념과 활용 사례를 설명하시오.
-- 최소 스패닝 트리(MST)에서 크루스칼 알고리즘과 프림 알고리즘의 차이점을 설명하시오.
 - 네트워크 플로우(Network Flow) 문제를 해결하는 방법을 설명하시오.
-- 이중 연결 그래프(Biconnected Graph)란 무엇인가?
 - 그래프에서 강한 연결 요소(Strongly Connected Components, SCC)의 개념을 설명하시오.
 - Z-알고리즘(Z-Algorithm)의 개념과 활용 사례를 설명하시오.
 - 라빈-카프(Rabin-Karp) 알고리즘의 시간 복잡도를 분석하시오.
@@ -3987,15 +4084,10 @@ Organize concepts, features, types and Pros and Cons
 - 서포트 벡터 머신(SVM)의 개념과 커널 트릭(Kernel Trick)의 활용을 설명하시오.
 - K-최근접 이웃(K-Nearest Neighbor, KNN) 알고리즘의 개념과 단점을 설명하시오.
 - 유전자 알고리즘(Genetic Algorithm)의 개념과 적용 사례를 설명하시오.
-- 분할 정복(Divide and Conquer)과 동적 계획법(Dynamic Programming)의 차이점을 설명하시오.
-- 탐욕 알고리즘(Greedy Algorithm)의 특징과 한계를 설명하시오.
 - 메타휴리스틱 알고리즘(Metaheuristic Algorithm)의 개념과 예제를 설명하시오.
 - 근사 알고리즘(Approximation Algorithm)의 개념과 활용 사례를 설명하시오.
 - NP-완전 문제(NP-Complete)의 개념과 대표적인 문제를 설명하시오.
 - 시뮬레이티드 어닐링(Simulated Annealing)의 개념과 활용 사례를 설명하시오.
-- 트리(Tree)란 무엇이며, 트리의 주요 특징을 설명하시오.
-- 이진 탐색 트리(BST)의 개념과 탐색, 삽입, 삭제 연산의 시간 복잡도를 설명하시오.
-- AVL 트리와 레드-블랙 트리(Red-Black Tree)의 차이점을 설명하시오.
 - B-트리(B-Tree)의 구조와 활용 사례를 설명하시오.
 - B+ 트리(B+ Tree)와 B-트리의 차이점을 설명하시오.
 - 트리 순회(Tree Traversal) 방식인 전위 순회(Preorder), 중위 순회(Inorder), 후위 순회(Postorder)의 차이점을 설명하시오.
@@ -4035,11 +4127,6 @@ Organize concepts, features, types and Pros and Cons
 - 신경망(Neural Network)의 활성화 함수(Activation Function) 개념을 설명하시오.
 - 그래디언트 부스팅(Gradient Boosting)과 XGBoost의 차이점을 설명하시오.
 - 딥러닝에서 CNN(Convolutional Neural Network)과 RNN(Recurrent Neural Network)의 차이점을 설명하시오.
-- 분할 정복과 동적 계획법의 차이점을 실제 사례와 함께 설명하시오.
-- BFS와 DFS를 이용한 문제 해결 사례를 설명하시오.
-- 메모이제이션(Memoization) 기법이 필요한 경우와 그 장점을 설명하시오.
-- 문제 해결을 위해 알고리즘을 선택할 때 고려해야 할 요소는 무엇인가?
-- 문제 해결 전략에서 탐욕 알고리즘을 적용할 수 있는 조건은 무엇인가?
 - 최소 공통 조상(Lowest Common Ancestor, LCA) 문제의 개념과 해결 방법을 설명하시오.
 - 세그먼트 트리(Segment Tree)의 개념과 활용 사례를 설명하시오.
 - 펜윅 트리(Fenwick Tree, Binary Indexed Tree)의 개념과 구현 방법을 설명하시오.
@@ -4224,12 +4311,7 @@ Organize concepts, features, types and Pros and Cons
 - 롤링 해시(Rolling Hash)와 해밍 거리(Hamming Distance)의 개념을 설명하시오.
 - 접미사 배열(Suffix Array)과 접미사 트리(Suffix Tree)의 차이점을 설명하시오.
 - LCS(Longest Common Subsequence)와 LCS(Longest Common Substring)의 차이점을 설명하시오.
-- 동적 계획법에서 "중복 계산 방지"를 위한 메모이제이션(Memoization)과 탑다운(Top-Down) 방식의 차이를 설명하시오.
-- 동적 계획법과 그리디 알고리즘의 차이를 설명하고, 각각을 적용할 수 있는 대표적인 문제를 설명하시오.
-- 행렬 체인 곱셈(Matrix Chain Multiplication) 알고리즘을 설명하시오.
-- 배낭 문제(Knapsack Problem)에서 0-1 Knapsack과 Fractional Knapsack의 차이를 설명하시오.
 - Floyd-Warshall 알고리즘을 동적 계획법으로 해결하는 과정과 시간 복잡도를 설명하시오.
-- 탐욕 알고리즘(Greedy Algorithm)이 NP-완전 문제에서 최적해를 보장할 수 있는 경우를 설명하시오.
 - 근사 알고리즘(Approximation Algorithm)의 개념과 대표적인 예제(TSP, Vertex Cover 문제)를 설명하시오.
 - 유전 알고리즘(Genetic Algorithm)의 개념과 최적화 문제에서의 활용 사례를 설명하시오.
 - 시뮬레이티드 어닐링(Simulated Annealing) 알고리즘이 지역 최적해(Local Optimum) 문제를 해결하는 방법을 설명하시오.
