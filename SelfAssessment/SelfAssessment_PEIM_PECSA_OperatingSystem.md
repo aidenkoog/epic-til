@@ -489,6 +489,129 @@ Organize concepts, features, types and Pros and Cons
     - 커널 모드(Kernel Mode): OS가 실행되는 모드로, 모든 리소스를 관리할 수 있지만 오류 발생 시 시스템 전체가 다운될 위험이 있음
     - 시스템 콜을 통해 사용자 모드와 커널 모드 간 전환이 이루어지며, 이를 최적화하는 것이 OS의 성능과 보안 측면에서 매우 중요
 
+- 블로킹(Blocking) vs. 논블로킹(Non-blocking), 동기(Synchronous) vs. 비동기(Asynchronous)
+  - 개요
+    - 소프트웨어 개발에서 블로킹(Blocking)과 논블로킹(Non-blocking), 동기(Synchronous)와 비동기(Asynchronous)는 작업 처리 방식과 흐름 제어와 관련된 중요한 개념
+
+  - 블로킹(Blocking) vs. 논블로킹(Non-blocking)
+    - 함수(작업)가 실행되는 동안 CPU가 대기 상태에 있는지 여부를 의미
+    - 블로킹 (Blocking)
+      - 요청한 작업이 완료될 때까지 현재 스레드가 대기하는 방식
+      - 즉, 작업이 끝날 때까지 다음 코드가 실행되지 않음
+      - 자원을 사용하고 있지 않더라도 CPU가 대기 상태가 됨
+      - 예: Thread.sleep(), Scanner.nextLine(), read() I/O 호출
+      - 예제
+        ```java
+        InputStream inputStream = new FileInputStream("file.txt");
+        int data = inputStream.read();  // 파일에서 데이터 읽을 때까지 블로킹됨
+        System.out.println("데이터 읽기 완료");  // 작업 완료 후 실행됨
+        ```
+        - 데이터를 읽을 때까지 실행이 멈추므로 이후 코드가 지연됨
+
+    - 논블로킹(Non-blocking)
+      - 요청한 작업이 즉시 실행되거나 진행 상태에 따라 바로 반환하는 방식
+      - CPU가 작업을 기다리지 않고 다른 작업을 수행할 수 있음
+      - 즉, 현재 작업이 끝나지 않아도 다른 코드가 실행됨
+      - 예: select(), poll(), epoll() (비동기 네트워크 처리에서 많이 사용됨)
+      - 예제
+        ```java
+        SocketChannel socketChannel = SocketChannel.open();
+        socketChannel.configureBlocking(false);  // 논블로킹 모드 설정
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+
+        int bytesRead = socketChannel.read(buffer);  // 즉시 반환, 읽을 데이터가 없으면 -1 반환
+        if (bytesRead == -1) {
+            System.out.println("데이터가 아직 없음, 다른 작업 수행");
+        }
+        ```
+        - 데이터가 없더라도 다른 작업을 할 수 있도록 즉시 반환됨
+
+  - 동기(Synchronous) vs. 비동기(Asynchronous)
+    - 작업의 완료 여부를 어떻게 처리하는지를 의미
+    - 동기 (Synchronous)
+      - 요청을 보내면 결과가 반환될 때까지 기다리는 방식
+      - 즉, 요청-응답이 순차적으로 진행됨
+      - 블로킹과 함께 사용되는 경우가 많지만, 항상 블로킹이 되는 것은 아님
+      - 예: 전통적인 HTTP 요청, 파일 읽기, 데이터베이스 쿼리
+      - 에제
+        ```java
+        System.out.println("작업 시작");
+        Thread.sleep(2000);  // 2초 동안 대기 (Blocking)
+        System.out.println("작업 완료");
+        ```
+        - 작업이 끝나기 전까지 다음 코드가 실행되지 않음
+
+    - 비동기 (Asynchronous)
+      - 작업을 요청한 후, 결과가 나올 때까지 기다리지 않고 다른 작업을 수행하는 방식
+      - 즉, 요청-응답이 독립적으로 실행되며, 작업이 끝나면 콜백을 통해 결과를 전달받음
+      - 논블로킹과 함께 사용되는 경우가 많지만, 항상 논블로킹이 되는 것은 아님
+      - 예: AJAX 요청, CompletableFuture, Kotlin Coroutines, RxJava
+      - 예제
+        ```java
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(2000); // 2초 후 실행 (비동기)
+                System.out.println("비동기 작업 완료");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        System.out.println("메인 스레드는 즉시 실행됨");
+        ```
+        - 작업이 끝날 때까지 기다리지 않고 다음 코드가 바로 실행됨
+
+  - 블로킹/논블로킹 & 동기/비동기 관계
+    - 동기, 블로킹: 현재 작업이 끝날 때까지 기다리고, 완료 후 다음 작업 실행
+    - 동기, 논블로킹: 요청을 보낸 후 즉시 다른 작업 수행, 하지만 직접 결과 확인 필요
+    - 비동기, 블로킹: 요청 후 대기 상태지만, 결과가 콜백을 통해 전달됨
+    - 비동기, 논블로킹: 요청 후 즉시 다른 작업 수행하고, 완료되면 이벤트 핸들러 실행
+
+  - 예제 시나리오
+    - 블로킹, 동기
+      ```java
+      // 요청이 끝날 때까지 다른 작업을 할 수 없음 (CPU 대기)
+      void fetchData() {
+          String data = blockingHttpRequest(); // 요청 후 응답을 기다림
+          System.out.println("데이터: " + data);
+      }
+      ```
+
+    - 논블로킹, 동기
+      ```java
+      // 비동기적으로 요청을 보내지만, 결과를 직접 가져오기 때문에 논블로킹 + 동기
+      void fetchData() {
+          Future<String> futureData = asyncHttpRequest();  // 즉시 반환
+          while (!futureData.isDone()) {
+              // 다른 작업 수행 가능
+          }
+          System.out.println("데이터: " + futureData.get()); // 완료 후 직접 가져옴
+      }
+      ```
+
+    - 논블로킹, 비동기
+      ```java
+      // 요청 후 즉시 반환되며, 응답이 오면 콜백을 통해 처리됨 (최고의 성능)
+      void fetchData() {
+          asyncHttpRequest(response -> {
+              System.out.println("데이터: " + response);
+          });
+      }
+      ```
+    
+    - 상황에 따른 방식 선택
+      - 단순한 작업 (ex. 파일 읽기, 작은 연산): 블로킹 동기 (Blocking Sync)
+      - 대량의 요청을 처리하는 서버: 논블로킹 비동기 (Non-blocking Async)
+      - HTTP API 요청 (ex. REST API, GraphQL): 비동기 방식 사용 (Async)
+      - 네트워크 소켓 프로그래밍 (ex. 채팅 서버, 게임 서버): 논블로킹 방식 사용 (Non-blocking)
+
+  - 결론
+    - 블로킹(Blocking): 작업이 완료될 때까지 기다림
+    - 논블로킹(Non-blocking): 결과가 바로 반환되며 기다리지 않음
+    - 동기(Synchronous): 요청-응답이 순차적으로 진행됨
+    - 비동기(Asynchronous): 요청 후 즉시 반환, 작업 완료 시 콜백을 통해 응답 처리
+      - 즉, 블로킹-비동기와 논블로킹-동기도 존재할 수 있음
+      - 최적의 방식은 상황에 따라 다르며, 서버 개발에서는 논블로킹 비동기가 가장 효율적
+
 - 운영체제의 구조(Layered OS, Monolithic OS, Microkernel 등)를 비교하여 설명하시오.
 - 운영체제의 주요 발전 과정과 역사(일괄 처리 → 다중 프로그래밍 → 시분할 → 분산 시스템)를 설명하시오.
 - 프로세스(Process)와 스레드(Thread)의 차이를 설명하시오.
