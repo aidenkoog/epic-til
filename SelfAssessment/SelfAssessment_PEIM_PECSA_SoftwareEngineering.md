@@ -5502,7 +5502,78 @@ Organize concepts, features, types and Pros and Cons
     - 따라서 기술 부채를 지속적으로 관리하고 줄여 나가는 것이 소프트웨어 품질과 개발 생산성을 유지하는 핵심 전략
 
 
-- 리팩토링(Refactoring)의 개념과 주요 기법(Extract Method, Inline Variable 등)을 설명하시오.
+- 리팩토링(Refactoring)의 개념과 주요 기법(Extract Method, Inline Variable 등)
+  - 리팩토링(Refactoring) 개념
+    - 리팩토링이란 기능은 유지하면서 코드의 구조를 개선하는 과정을 의미
+    - 즉, 코드의 가독성, 유지보수성, 확장성을 높이면서도 외부적으로 동일한 동작을 보장하는 리팩토링 기법을 적용하는 것
+
+  - 리팩토링의 필요성
+    - 코드 가독성 향상 (Clean Code)
+    - 유지보수 용이 (코드 중복 제거, 모듈화)
+    - 성능 최적화
+    - 버그 발생 가능성 감소
+    - 새로운 기능 추가 시 코드 복잡도 감소
+
+  - 주요 리팩토링 기법
+    - 대표적인 리팩토링 기법에는 메서드 추출(Extract Method), 인라인 변수(Inline Variable) 등 존재
+      - (1) Extract Method (메서드 추출)
+        - 개념: 긴 메서드에서 특정 기능을 하는 코드 블록을 별도의 메서드로 분리하는 기법
+        - 목적: 코드 중복 제거, 가독성 향상, 모듈화 강화
+      - (2) Inline Variable (인라인 변수)
+        - 개념: 의미 없는 변수를 제거하고 직접 표현식을 사용하는 기법
+        - 목적: 불필요한 변수 제거, 코드 간결화
+        - 예제
+          ```dart
+          // 리팩토링 전
+          double getDiscountPrice(double price) {
+            double discount = price * 0.1;
+            return price - discount;
+          }
+
+          // 리팩토링 후 (변수 제거)
+          double getDiscountPrice(double price) {
+            return price - (price * 0.1);
+          }
+          ```
+          - 변수 없이 직관적인 코드 유지
+          - 코드 길이 감소 → 유지보수성 향상
+      - (3) Replace Temp with Query (임시 변수를 질의로 변경)
+        - 개념: 메서드 내부에서만 사용되는 임시 변수를 메서드로 추출하여 중복 제거 및 재사용성 향상
+        - 예제
+          ```dart
+          // 리팩토링 전
+          double getFinalPrice(double basePrice, int quantity) {
+            double discount = (basePrice > 100) ? 0.1 : 0.05;
+            return basePrice * quantity * (1 - discount);
+          }
+
+          // 리팩토링 후 (임시 변수를 메서드로 변경)
+          double getFinalPrice(double basePrice, int quantity) {
+            return basePrice * quantity * (1 - getDiscountRate(basePrice));
+          }
+
+          double getDiscountRate(double basePrice) {
+            return (basePrice > 100) ? 0.1 : 0.05;
+          }
+          ```
+          - getDiscountRate()를 분리하여 재사용 가능
+          - getFinalPrice()의 가독성 및 유지보수성 증가
+      - (4) Extract Class (클래스 추출)
+        - 개념: 하나의 클래스가 너무 많은 책임(Responsibility)을 가지면 새로운 클래스로 분리하는 기법
+        - 목적: 단일 책임 원칙(SRP) 적용, 코드 복잡도 감소
+      - (5) Replace Magic Number with Constant (매직 넘버 제거)
+        - 개념: 코드 내에서 숫자를 직접 사용하지 않고 상수(Constant)로 변환
+
+  - 리팩토링 적용 시 주의할 점
+    - 테스트 코드 작성 후 진행: 기능 변경이 없어야 하므로 리팩토링 전후 결과를 비교
+    - 작은 단위로 진행: 한 번에 너무 많은 코드를 변경하면 버그 발생 가능성 증가
+    - 성능 저하 여부 확인: 일부 리팩토링(메서드 분리 등)이 성능에 영향을 줄 수 있음
+
+  - 결론
+    - 리팩토링은 코드의 유지보수성을 높이고 가독성을 향상시키는 중요한 과정
+    - 대표적인 기법에는 메서드 추출(Extract Method), 인라인 변수(Inline Variable), 클래스 추출(Extract Class) 등이 있으며, 이러한 기법을 활용하면 코드 품질을 높이고 유지보수를 쉽게 만들 수 있음
+    - 리팩토링을 통해 가독성이 좋은 코드, 유지보수가 쉬운 코드, 확장성이 높은 코드를 작성은 필수 요소
+
 - 소프트웨어 회귀(Software Regression)의 개념과 방지 방법을 설명하시오.
 - 소프트웨어 릴리즈 관리(Release Management)의 개념과 주요 단계(빌드, 배포, 운영)를 설명하시오.
 - 블루-그린 배포(Blue-Green Deployment)의 개념과 활용 사례를 설명하시오.
