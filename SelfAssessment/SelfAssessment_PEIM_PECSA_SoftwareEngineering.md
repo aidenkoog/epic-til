@@ -5574,7 +5574,53 @@ Organize concepts, features, types and Pros and Cons
     - 대표적인 기법에는 메서드 추출(Extract Method), 인라인 변수(Inline Variable), 클래스 추출(Extract Class) 등이 있으며, 이러한 기법을 활용하면 코드 품질을 높이고 유지보수를 쉽게 만들 수 있음
     - 리팩토링을 통해 가독성이 좋은 코드, 유지보수가 쉬운 코드, 확장성이 높은 코드를 작성은 필수 요소
 
-- 소프트웨어 회귀(Software Regression)의 개념과 방지 방법을 설명하시오.
+- 소프트웨어 회귀(Software Regression)의 개념과 방지 방법
+  - 소프트웨어 회귀(Software Regression) 개념
+    - 기존에 정상적으로 동작하던 기능이 새로운 코드 변경, 버그 수정, 기능 추가, 환경 변화 등에 의해 의도치 않게 오작동하는 현상
+
+  - 회귀 유형 (기능, 성능, 보안, 환경)
+    - 기능 회귀(Functional Regression): 기존 기능이 정상적으로 동작하지 않음
+    - 성능 회귀(Performance Regression): 성능 저하(응답 시간 증가, 처리 속도 감소 등)
+    - 보안 회귀(Security Regression): 보안 취약점이 재발 또는 새로 추가됨
+    - 환경 회귀(Environmental Regression): 특정 운영체제, 하드웨어, 네트워크 환경에서 오류 발생
+
+  - 소프트웨어 회귀 방지 방법
+    - (1) 회귀 테스트(Regression Testing) 수행
+      - 코드 변경 후 기존 기능이 정상적으로 동작하는지 검증하는 테스트
+      - 자동화 테스트(Automated Testing) 도입하여 반복적인 테스트 수행
+        - 단위 테스트(Unit Test)
+        - 통합 테스트(Integration Test)
+        - UI 테스트(End-to-End Test)
+        - 성능 테스트(Performance Test)
+      - CI/CD(Continuous Integration/Continuous Deployment) 파이프라인에서 자동 실행하도록 구성
+
+    - (2) 테스트 커버리지(Test Coverage) 향상
+      - 코드 변경 사항이 기존 기능에 미치는 영향을 최소화하기 위해 테스트 케이스를 광범위하게 작성
+      - 코드 변경 시 변경된 코드와 관련된 테스트 케이스 자동 실행
+      - 코드 커버리지(Code Coverage) 도구 활용 (예: JaCoCo, pytest-cov)
+
+    - (3) 코드 리뷰(Code Review) 강화
+      - 변경된 코드가 기존 기능에 미치는 영향을 확인하기 위해 동료 개발자 리뷰(Peer Review) 수행
+      - 코드 리뷰 과정에서 회귀 가능성이 높은 코드에 대한 추가적인 테스트 요구
+
+    - (4) 변경 영향 분석(Impact Analysis) 수행
+      - 코드 변경이 다른 모듈에 영향을 미칠 가능성이 있는 경우 의존성 분석(Dependency Analysis) 수행
+      - 영향도를 분석하여 테스트 우선순위 결정 (예: Critical Path Testing)
+
+    - (5) 안정적인 배포 전략 채택
+      - 블루-그린 배포(Blue-Green Deployment): 새로운 버전을 특정 사용자 그룹에 먼저 배포하여 테스트 후 전체 배포
+      - 카나리아 배포(Canary Deployment): 일부 사용자에게만 새로운 버전을 적용한 후 문제가 없을 경우 점진적으로 배포
+      - 롤백 전략(Rollback Strategy) 준비: 회귀 발생 시 신속하게 이전 버전으로 복구할 수 있도록 준비
+
+    - (6) 코드 품질 도구 활용
+      - 정적 분석 도구(Static Analysis Tools) 활용하여 코드 변경 시 문제 발생 가능성 조기 발견
+      - 예: SonarQube, Checkstyle, ESLint, Pylint
+
+  - 결론
+    - 소프트웨어 회귀는 새로운 기능 추가 및 코드 변경 시 필연적으로 발생할 수 있는 문제
+    - 이를 방지하기 위해서는 자동화된 회귀 테스트, 코드 리뷰 강화, 영향 분석, 안정적인 배포 전략 등을 체계적으로 적용하는 것이 중요
+
+
 - 소프트웨어 릴리즈 관리(Release Management)의 개념과 주요 단계(빌드, 배포, 운영)를 설명하시오.
 - 블루-그린 배포(Blue-Green Deployment)의 개념과 활용 사례를 설명하시오.
 - 카나리아 배포(Canary Deployment)와 롤링 배포(Rolling Deployment)의 차이를 설명하시오.
