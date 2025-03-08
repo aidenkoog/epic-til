@@ -5917,8 +5917,92 @@ Organize concepts, features, types and Pros and Cons
     - 복잡도가 높은 코드 → 리팩토링 필요 / 결합도가 높은 코드 → 모듈화 필요
     - SonarQube, PMD, ESLint 등을 활용하여 코드 품질을 자동 분석하면 효과적
 
-- 변경 관리(Change Management) 프로세스와 주요 기법을 설명하시오.
-- 최신 소프트웨어 개발 트렌드(Cloud, AI, DevOps, Serverless 등)를 설명하시오.
+- 변경 관리(Change Management) 프로세스와 주요 기법
+  - 개요
+    - 소프트웨어, 시스템, 인프라 등의 변경이 발생할 때 비즈니스 연속성과 안정성을 보장하며 변경을 효과적으로 수행하는 프로세스
+    - 소프트웨어 개발, 운영, IT 서비스 관리(ITSM)에서 필수적인 요소
+  - 변경 관리 프로세스
+    - ITIL(IT Infrastructure Library)과 같은 표준 프레임워크를 기반으로 수행
+    - 변경 관리 단계
+      - (1) 변경 요청 (Request for Change, RFC): 변경 사항을 공식적으로 요청 (개발팀, 운영팀, 고객 등)
+      - (2) 변경 평가 및 분석: 변경의 필요성, 영향도, 리스크 분석
+      - (3) 변경 승인 (Change Approval): CAB (Change Advisory Board) 또는 승인 프로세스를 통해 승인
+      - (4) 변경 계획 수립: 롤백 계획 포함, 일정 조율 및 테스트 계획 수립
+      - (5) 변경 실행: 개발/운영 환경에서 변경 사항 적용
+      - (6) 변경 검증 및 모니터링: 변경 후 정상 동작 여부 확인 및 모니터링
+      - (7) 변경 완료 및 문서화: 변경 이력 기록 및 후속 조치 수행
+
+  - 변경 관리 주요 기법
+    - 버전 관리 (Version Control)
+      - Git, SVN, Mercurial 등을 활용하여 변경 사항을 추적 및 관리
+      - Git Flow, GitHub Flow, GitLab Flow 등 브랜치 전략 활용
+    - CI/CD (Continuous Integration / Continuous Deployment)
+      - 변경 사항을 지속적으로 빌드, 테스트, 배포하여 변경 리스크 최소화
+      - Jenkins, GitHub Actions, GitLab CI/CD, CircleCI 등 활용
+    - 변경 영향도 분석 (Impact Analysis)
+      - 변경 사항이 시스템 및 사용자에 미치는 영향을 사전 분석
+      - Dependency Mapping, 서비스 영향 분석 활용
+    - A/B 테스트 및 Canary 배포
+      - A/B 테스트: 일부 사용자에게 변경 사항 적용 후 성능 비교
+      - Canary 배포: 일부 서버에만 배포 후 안정성 확인 후 전체 배포
+    - 자동화된 테스트 (Automated Testing)
+      - 변경 후 시스템이 정상적으로 동작하는지 검증
+      - 유닛 테스트, 통합 테스트, 성능 테스트, 보안 테스트 수행
+    - 롤백 전략 (Rollback Strategy)
+      - 변경 후 문제가 발생하면 즉시 이전 상태로 복구할 수 있도록 설계
+      - 블루-그린 배포, 롤링 배포, 데이터베이스 백업 활용
+
+  - 최신 소프트웨어 개발 트렌드
+    - (1) 클라우드 컴퓨팅 (Cloud Computing)
+      - 클라우드 기반 개발 및 운영이 표준화됨
+        - 기존 온프레미스(On-Premise)에서 클라우드(Cloud) 환경으로 전환
+        - 클라우드를 활용한 확장성(Scalability), 탄력성(Elasticity), 비용 절감
+
+    - (2) 인공지능(AI) 및 머신러닝(ML)
+      - AI/ML을 활용한 소프트웨어 개발 자동화 및 최적화
+        - AI 기반 코드 자동 생성 (GitHub Copilot, ChatGPT Code Assistant)
+        - AI 기반 소프트웨어 테스트 및 오류 분석 (DeepCode, SonarQube)
+        - AutoML (자동화된 머신러닝 모델 개발)
+        - AI/ML을 활용한 주요 서비스
+          - AI 기반 챗봇: 자연어 처리 기반 고객 응대 자동화, ChatGPT, Google Dialogflow
+          - 이미지/음성 인식: AI를 활용한 이미지 및 음성 분석, Google Vision AI, Amazon Rekognition
+          - 예측 분석: 머신러닝을 활용한 데이터 예측, TensorFlow, Scikit-learn
+
+    - (3) DevOps 및 GitOps
+      - DevOps (Development + Operations)
+        - 개발과 운영을 통합하여 자동화 및 협업 강화
+        - CI/CD, IaC(Infrastructure as Code), 모니터링 도구 활용
+      - GitOps (Git + Operations)
+        - Git을 기반으로 인프라 및 배포 자동화 관리
+        - Kubernetes 및 클라우드 네이티브 환경에서 사용
+        - ArgoCD, FluxCD 등을 활용한 운영 자동화
+
+    - (4) 서버리스(Serverless)
+      - 서버리스(Serverless) 아키텍처 개념
+        - 서버 인프라를 직접 관리하지 않고 클라우드에서 자동 실행되는 방식
+        - 서버리스 환경에서는 자동 확장(Auto Scaling) 및 비용 최적화 가능
+      - 서버리스의 장점
+        - 서버 관리 불필요
+        - 자동 확장 가능
+        - 이벤트 기반 실행으로 비용 최적화
+      - 서버리스의 단점
+        - 실행 시간이 길면 비용 증가
+        - 특정 클라우드 벤더에 종속(Vendor Lock-in)
+
+    - (5) 컨테이너(Container) & Kubernetes
+      - 컨테이너(Container) 기술
+        - 애플리케이션을 경량화하여 실행하는 기술
+        - Docker를 활용하여 환경 독립적인 배포 가능
+      - Kubernetes (K8s)
+        - 컨테이너 오케스트레이션 플랫폼
+        - 자동 배포, 스케일링, 로드 밸런싱 지원
+
+  - 결론
+    - 변경 관리는 소프트웨어 안정성과 품질을 유지하기 위해 필수적인 프로세스
+    - 최신 소프트웨어 개발 트렌드는 클라우드, AI, DevOps, 서버리스로 빠르게 변화
+    - 자동화 및 확장성을 고려한 클라우드 네이티브 아키텍처가 대세
+
+- 최신 소프트웨어 개발 트렌드(Cloud, AI, DevOps, Serverless 등)
 - DevOps(Development & Operations)의 개념과 주요 원칙을 설명하시오.
 - MLOps(Machine Learning Operations)의 개념과 필요성을 설명하시오.
 - 서버리스(Serverless) 컴퓨팅의 개념과 기존 클라우드 컴퓨팅과의 차이를 설명하시오.
