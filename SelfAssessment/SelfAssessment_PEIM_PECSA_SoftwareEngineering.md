@@ -5839,7 +5839,84 @@ Organize concepts, features, types and Pros and Cons
     - 최적의 배포 전략을 위해 "블루-그린 배포" 또는 "카나리 배포"와 함께 사용하면 효과적
 
 
-- 소프트웨어 유지보수를 위한 코드 메트릭(Code Metrics)의 개념과 활용을 설명하시오.
+- 소프트웨어 유지보수를 위한 코드 메트릭(Code Metrics)의 개념과 활용
+  - 코드 메트릭(Code Metrics) 개념
+    - 소프트웨어 코드의 품질을 객관적으로 평가하기 위한 정량적인 지표
+    - 유지보수성(maintainability), 복잡도(complexity), 성능(performance), 가독성(readability) 등을 분석하는 데 사용
+  
+  - 코드 메트릭 활용
+    - 버그 발생 가능성이 높은 코드 식별
+    - 리팩토링 및 성능 최적화 방향 결정
+    - 코드 품질 표준 유지 및 코드 리뷰 개선
+
+  - 주요 코드 메트릭 유형과 활용
+    - (1) 코드 크기(Code Size) 메트릭
+      - 코드의 길이, 함수/클래스의 개수, 코드 라인 수(LOC, Lines of Code) 측정
+      - 활용: 코드가 지나치게 크면 리팩토링 또는 모듈화 개선 필요
+        - LOC (Lines of Code): 코드의 총 라인 수, 지나치게 크면 복잡도 증가
+        - NOM (Number of Methods): 클래스 내 메서드 개수, 특정 클래스에 메서드가 너무 많으면 분리 고려
+
+    - (2) 코드 복잡도(Complexity) 메트릭
+      - 코드의 복잡도를 측정하여 버그 발생 가능성을 예측
+      - 복잡도가 높을수록 가독성 저하 및 유지보수 어려움
+      - 복잡도 매트릭 종류
+        - Cyclomatic Complexity (순환 복잡도)
+          - 코드 내 제어 흐름의 복잡도 측정 (if, loop 개수 기반), 10 이상이면 코드 단순화 필요
+        - Cognitive Complexity (인지 복잡도)
+          - 사람이 코드를 이해하는 난이도 측정, 가독성이 떨어지는 코드 식별
+      - 예제
+        ```java
+        void checkNumber(int num) {
+            if (num > 0) {
+                System.out.println("Positive");
+            } else if (num < 0) {
+                System.out.println("Negative");
+            } else {
+                System.out.println("Zero");
+            }
+        }
+        ```
+        - Cyclomatic Complexity = 3
+          - (if + else if + else → 복잡도 증가)
+          - 복잡도를 낮추려면? → 메서드 분리, switch-case 활용
+
+    - (3) 코드 재사용성 및 결합도(Coupling & Cohesion)
+      - 결합도(Coupling): 모듈 간의 의존성 측정 (낮을수록 좋음)
+      - 응집도(Cohesion): 클래스 또는 모듈 내의 관련성이 얼마나 높은지 측정 (높을수록 좋음)
+      - 예제
+        ```java
+        class User {
+            void saveToDatabase() { /* DB 연결 및 저장 */ }
+            void sendEmail() { /* 이메일 전송 로직 */ }
+        }
+        ```
+        - 결합도를 줄이려면? → UserRepository와 EmailService로 분리
+
+    - (4) 유지보수성(Maintainability) 메트릭
+      - 코드 수정 및 기능 추가가 얼마나 쉬운지 측정
+      - 코드가 복잡할수록 유지보수가 어려움
+      - 매트릭
+        - Maintainability Index (유지보수 지수)
+          - 코드의 가독성, 복잡도, 크기 등을 고려한 지표, 50 미만이면 리팩토링 필요
+        - Code Churn (코드 변경량)
+          - 특정 기간 동안 변경된 코드의 비율, 변경량이 많으면 코드 안정성이 낮을 가능성
+
+  - 코드 메트릭 활용 도구
+    - 정적 분석 도구 (Static Analysis Tools)
+      - SonarQube: 코드 품질 및 유지보수성 분석
+      - PMD: Java 코드 스타일 및 버그 탐지
+      - ESLint: JavaScript 코드 품질 및 규칙 검사
+      - Ktlint: Kotlin 코드 스타일 체크
+    - 복잡도 분석 도구
+      - JArchitect: Java 코드 복잡도 및 결합도 분석
+      - Code Climate: 코드 복잡도, 보안 취약점 분석
+      - Visual Studio Code Metrics: C#, .NET 코드 품질 분석
+
+  - 결론
+    - 코드 메트릭을 활용하면 코드 품질을 정량적으로 분석하여 유지보수성을 향상할 수 있음
+    - 복잡도가 높은 코드 → 리팩토링 필요 / 결합도가 높은 코드 → 모듈화 필요
+    - SonarQube, PMD, ESLint 등을 활용하여 코드 품질을 자동 분석하면 효과적
+
 - 변경 관리(Change Management) 프로세스와 주요 기법을 설명하시오.
 - 최신 소프트웨어 개발 트렌드(Cloud, AI, DevOps, Serverless 등)를 설명하시오.
 - DevOps(Development & Operations)의 개념과 주요 원칙을 설명하시오.
