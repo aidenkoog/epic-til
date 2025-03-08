@@ -1255,6 +1255,48 @@ Organize concepts, features, types and Pros and Cons
 
 
 - Android에서 Jetpack Paging을 사용하는 이유
+    - Jetpack Paging
+        - 대량의 데이터를 효율적으로 로드하고 표시하기 위한 라이브러리
+        - RecyclerView + Room + Network API에서 페이징 처리를 쉽게 구현할 수 있도록 지원함
+
+    - Jetpack Paging을 사용하는 이유
+        - (1) 성능 최적화 (메모리 사용 감소)
+            - 대량의 데이터를 한꺼번에 로드하면 메모리 사용량이 증가하고, 앱 성능이 저하됨
+            - Jetpack Paging은 필요한 데이터만 로드하여 메모리 사용을 최적화
+
+        - (2) 자동 페이징 처리
+            - 사용자가 스크롤할 때 자동으로 다음 페이지를 로드
+            - 네트워크 및 데이터베이스 페이징 처리 간소화
+            - Room, Retrofit 등과 쉽게 통합 가능
+
+        - (3) 네트워크 및 데이터베이스 연동 가능
+            - 네트워크 API에서 데이터를 페이징 처리 가능 (예: Retrofit)
+            - 로컬 데이터베이스(Room)와 결합 가능
+            - 오프라인 캐싱 및 네트워크 동기화 지원
+
+        - (4) Lifecycle-Aware 지원
+            - LiveData, Flow, RxJava와 통합 가능
+            - ViewModel과 함께 사용하여 메모리 누수 방지
+            - UI가 변경될 때 자동으로 데이터 로드 유지
+
+        - (5) DiffUtil 내장 지원
+            - 리스트가 변경될 때 DiffUtil 자동 적용 → 성능 최적화
+            - RecyclerView가 불필요한 View 재사용을 최소화하여 렌더링 성능 향상
+
+    - Jetpack Paging 구성 요소
+        - PagingSource: 데이터를 로드하는 기본 클래스 (Room/Retrofit 연동)
+        - PagingData: 페이징된 데이터 컨테이너 (RecyclerView 연동)
+        - Pager: PagingData를 생성 및 관리
+        - PagingDataAdapter: RecyclerView에서 DiffUtil 자동 적용
+
+    - 결론
+        - Jetpack Paging을 사용 시
+            - 대량의 데이터를 효율적으로 로드 가능
+            - 자동 페이징 처리 및 성능 최적화
+            - 네트워크 API + 로컬 DB(Room)과 쉽게 통합
+            - ViewModel + LiveData / Flow와 함께 사용 가능
+        - RecyclerView에서 데이터를 페이징하여 로드해야 하는 경우, Jetpack Paging이 가장 효과적인 솔루션
+
 - Android에서 App Bundle과 APK의 차이점
 - Android에서 Jetpack Compose와 기존 XML 기반 UI의 차이점
 - Android에서 ViewModel과 SavedStateHandle의 차이점
