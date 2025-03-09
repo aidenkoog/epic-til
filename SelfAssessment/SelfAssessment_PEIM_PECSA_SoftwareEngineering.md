@@ -6657,7 +6657,24 @@ Organize concepts, features, types and Pros and Cons
       - 지속적인 유지보수 및 성능 개선
 
 
-- DDD(Domain-Driven Design)의 개념과 주요 전략(Tactical Design, Strategic Design)을 설명하시오.
+- DDD(Domain-Driven Design)의 개념과 주요 전략(Tactical Design, Strategic Design)
+  - DDD(Domain-Driven Design) 개념
+    - 비즈니스 도메인을 중심으로 소프트웨어를 설계하는 방법론
+    - 비즈니스 로직을 도메인 모델(Domain Model)로 구조화하고, 실제 업무 개념을 코드에 반영하는 방식을 사용
+
+  - DDD의 주요 전략
+    - ① 전략적 설계(Strategic Design)
+      - 소프트웨어를 비즈니스 도메인 관점에서 구조화하는 방법
+      - Bounded Context(경계 컨텍스트)를 정의하여 시스템을 분리
+      - Strategic Design 예제
+        - Order Bounded Context, Payment Bounded Context로 분리하여 각 컨텍스트가 독립적으로 동작
+
+    - ② 전술적 설계(Tactical Design)
+      - 도메인 모델을 구성하는 Entity, Value Object, Aggregate, Repository, Service 등의 개념을 활용하여 객체 지향적으로 설계하는 방식
+      - Tactical Design 예제
+        - Order 엔티티, Address 값 객체, OrderRepository를 활용하여 도메인 모델을 설계
+
+
 - BDD(Behavior-Driven Development)의 개념과 주요 차이점을 설명하시오.
 - ATDD(Acceptance Test-Driven Development)와 TDD(Test-Driven Development)의 차이를 설명하시오.
 - 폭포수 모델(Waterfall Model)과 애자일 모델(Agile Model)의 차이를 설명하시오.
