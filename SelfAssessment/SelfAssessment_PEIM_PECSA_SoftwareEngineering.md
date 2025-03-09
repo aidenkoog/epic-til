@@ -6602,7 +6602,34 @@ Organize concepts, features, types and Pros and Cons
     - XP와 스크럼은 함께 사용할 수도 있으며, XP의 엔지니어링 기법을 스크럼 개발 프로세스에 적용하는 것이 일반적
 
 
-- 린(Lean) 소프트웨어 개발 방법론의 개념과 주요 원칙을 설명하시오.
+- 린(Lean) 소프트웨어 개발 방법론의 개념과 주요 원칙
+  - 린(Lean) 소프트웨어 개발 방법론 개념
+    - 도요타의 Lean Manufacturing(린 제조) 원칙을 소프트웨어 개발에 적용한 방법론
+    - 주요 목표는 낭비(Waste)를 제거하고, 개발 프로세스를 최적화하여 효율성을 극대화하는 것
+    - 애자일(Agile)과 유사하지만, 린은 소프트웨어 개발 프로세스 전반에서 최적화를 강조
+
+  - 린(Lean) 소프트웨어 개발의 7가지 원칙
+    - ① 낭비 제거(Eliminate Waste)
+      - 소프트웨어 개발에서 중복된 코드, 불필요한 문서, 과도한 기능 개발 등을 제거하여 효율성을 높임
+
+    - ② 품질 내재화(Build Quality In)
+      - 초기부터 테스트 자동화, 코드 리뷰, 지속적 통합(CI)을 활용하여 버그를 최소화
+
+    - ③ 지식 창출(Create Knowledge)
+      - 문서화뿐만 아니라 코드 리뷰, 공유 미팅, 실험을 통해 개발자 간 지식을 공유
+
+    - ④ 결정 지연(Defer Commitment)
+      - 불확실한 요소가 많을 경우 최대한 나중에 결정을 내리고, 유연성을 유지
+
+    - ⑤ 빠른 전달(Deliver Fast)
+      - 애자일 방식처럼 짧은 개발 주기를 통해 고객에게 빠르게 기능을 제공하고, 피드백을 반영
+
+    - ⑥ 존중과 협업(Respect People)
+      - 팀원 간 자율성을 존중하며, 개발자와 고객 간 협업을 강화
+
+    - ⑦ 전체 최적화(Optimize the Whole)
+      - 팀과 조직 전체의 개발 프로세스를 최적화하고, 병목 현상을 해결하여 전체적인 생산성을 높임
+
 - RUP(Rational Unified Process)의 개념과 주요 단계(Inception, Elaboration, Construction, Transition)를 설명하시오.
 - DDD(Domain-Driven Design)의 개념과 주요 전략(Tactical Design, Strategic Design)을 설명하시오.
 - BDD(Behavior-Driven Development)의 개념과 주요 차이점을 설명하시오.
