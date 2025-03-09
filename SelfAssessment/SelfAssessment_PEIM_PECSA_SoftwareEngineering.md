@@ -6630,7 +6630,33 @@ Organize concepts, features, types and Pros and Cons
     - ⑦ 전체 최적화(Optimize the Whole)
       - 팀과 조직 전체의 개발 프로세스를 최적화하고, 병목 현상을 해결하여 전체적인 생산성을 높임
 
-- RUP(Rational Unified Process)의 개념과 주요 단계(Inception, Elaboration, Construction, Transition)를 설명하시오.
+- RUP(Rational Unified Process)의 개념과 주요 단계(Inception, Elaboration, Construction, Transition)
+  - RUP(Rational Unified Process) 개념
+    - IBM Rational에서 개발한 소프트웨어 개발 프로세스 모델로, 객체 지향(Object-Oriented)과 반복적 개발(Iterative Development)을 기반으로 함
+    - RUP는 프로젝트를 4단계(Inception, Elaboration, Construction, Transition)로 나누어 점진적으로 개발하는 특징
+
+  - RUP의 4가지 주요 단계 (착수 > 정교화 > 구축 > 전환)
+    - ① 착수 단계(Inception) – 프로젝트 기획 및 요구사항 분석
+      - 프로젝트의 목표, 범위, 주요 기능을 정의
+      - 비즈니스 모델 분석 및 핵심 이해관계자 정의
+      - 프로젝트의 비용과 일정 예측, 위험 요소 분석
+
+    - ② 정교화 단계(Elaboration) – 아키텍처 설계 및 프로토타입 개발
+      - 프로젝트의 기본 아키텍처 설계
+      - 핵심 기능의 프로토타입 개발
+      - 주요 기술과 시스템 구조를 검증
+
+    - ③ 구축 단계(Construction) – 실제 개발 및 기능 구현
+      - 애플리케이션의 기능을 반복적으로 구현 및 테스트
+      - 버전별 릴리즈 및 기능 통합
+      - 사용자의 피드백을 반영하여 지속적으로 개선
+
+    - ④ 전환 단계(Transition) – 배포 및 유지보수
+      - 실제 운영 환경에 배포(Deploy)
+      - 사용자 교육 및 지원 제공
+      - 지속적인 유지보수 및 성능 개선
+
+
 - DDD(Domain-Driven Design)의 개념과 주요 전략(Tactical Design, Strategic Design)을 설명하시오.
 - BDD(Behavior-Driven Development)의 개념과 주요 차이점을 설명하시오.
 - ATDD(Acceptance Test-Driven Development)와 TDD(Test-Driven Development)의 차이를 설명하시오.
