@@ -6692,7 +6692,42 @@ Organize concepts, features, types and Pros and Cons
         Then 로그인에 성공해야 한다
       ```
 
-- ATDD(Acceptance Test-Driven Development)와 TDD(Test-Driven Development)의 차이를 설명하시오.
+- ATDD(Acceptance Test-Driven Development)와 TDD(Test-Driven Development)의 차이
+  - ATDD(Acceptance Test-Driven Development) 개념
+    - ATDD는 사용자의 요구사항을 기반으로 인수 테스트(Acceptance Test)를 먼저 작성하고, 이를 통과하는 코드를 개발하는 방식
+    - 개발자가 아닌 제품 소유자(Product Owner), QA, 고객과 협업하여 테스트를 정의하는 특징이 있음
+    - ATDD는 TDD와 다르게, 기능이 최종적으로 사용자 요구사항을 만족하는지 검증하는 테스트에 초점을 둠
+
+  - ATDD와 TDD의 차이점
+    - TDD는 코드 레벨에서 유닛 테스트를 먼저 작성한 후 개발
+    - ATDD는 비즈니스 요구사항을 기준으로 인수 테스트를 먼저 작성
+    - TDD는 개발자 중심, ATDD는 비즈니스 요구사항을 기반으로 QA 및 비즈니스 분석가도 참여 가능
+
+  - ATDD 예제 (비즈니스 요구사항 기반 테스트)
+    ```
+    Scenario: 상품 결제
+      Given 사용자가 장바구니에 상품을 추가하고
+      When 결제를 진행하면
+      Then 결제가 완료되어야 한다
+    ```
+
+  - TDD 예제 (단위 테스트 기반 테스트)
+    ```java
+    @Test
+    public void testAddToCart() {
+        Cart cart = new Cart();
+        cart.addItem("Product1");
+        assertEquals(1, cart.getSize());
+    }
+    ```
+
+  - 결론
+    - Lean 소프트웨어 개발은 낭비를 제거하고 효율성을 극대화하는 철학을 기반
+    - RUP는 4단계 개발 프로세스(Inception, Elaboration, Construction, Transition)를 적용하여 점진적으로 개발
+    - DDD는 도메인 중심의 설계를 통해 비즈니스 모델을 코드에 반영하는 전략을 사용
+    - BDD는 비즈니스 요구사항을 시나리오 기반 테스트로 변환하며, TDD와 달리 비즈니스 분석가도 참여
+    - ATDD는 인수 테스트 기반의 개발 방식이며, TDD보다 비즈니스 요구사항에 집중하는 접근 방식
+
 - 폭포수 모델(Waterfall Model)과 애자일 모델(Agile Model)의 차이를 설명하시오.
 - 애자일과 DevOps의 개념적 차이를 설명하시오.
 - 소프트웨어 형상관리(Configuration Management)의 개념과 주요 기능을 설명하시오.
