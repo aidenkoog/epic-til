@@ -6675,7 +6675,23 @@ Organize concepts, features, types and Pros and Cons
         - Order 엔티티, Address 값 객체, OrderRepository를 활용하여 도메인 모델을 설계
 
 
-- BDD(Behavior-Driven Development)의 개념과 주요 차이점을 설명하시오.
+- BDD(Behavior-Driven Development)의 개념과 주요 차이점
+  - BDD(Behavior-Driven Development) 개념
+    - 테스트 주도 개발(TDD)의 확장된 개념으로, 소프트웨어의 동작(Behavior)을 기반으로 테스트를 작성하는 방법
+    - 주로 Given-When-Then 형식의 시나리오 기반 테스트를 사용하여 비즈니스 요구사항을 정의
+
+  - BDD와 TDD의 차이점
+    - TDD는 코드 단위의 테스트를 중점적으로 작성, BDD는 비즈니스 요구사항을 이해하기 쉬운 테스트 시나리오로 작성
+    - BDD는 개발자뿐만 아니라 비즈니스 분석가, QA가 이해할 수 있는 테스트 작성 방식
+    - BDD 예제 (Given-When-Then 방식)
+      ```
+      Feature: 회원 로그인
+      Scenario: 유효한 계정으로 로그인
+        Given 회원이 로그인 페이지를 방문했을 때
+        When 올바른 아이디와 비밀번호를 입력하면
+        Then 로그인에 성공해야 한다
+      ```
+
 - ATDD(Acceptance Test-Driven Development)와 TDD(Test-Driven Development)의 차이를 설명하시오.
 - 폭포수 모델(Waterfall Model)과 애자일 모델(Agile Model)의 차이를 설명하시오.
 - 애자일과 DevOps의 개념적 차이를 설명하시오.
