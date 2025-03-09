@@ -6299,8 +6299,123 @@ Organize concepts, features, types and Pros and Cons
     - IoT, 스마트팩토리, 자율주행 등 실시간 응답이 중요한 경우 엣지 컴퓨팅이 유리
     - 웹 서비스, 빅데이터 분석, AI 모델 훈련 등의 작업은 클라우드 컴퓨팅이 더 적합
 
-- 최신 API 설계 기법(RESTful, GraphQL, gRPC 등)의 개념과 차이를 설명하시오.
-- 지속적 테스트(Continuous Testing)의 개념과 필요성을 설명하시오.
+- 최신 API 설계 기법(RESTful, GraphQL, gRPC 등)의 개념과 차이
+  - RESTful API
+    - RESTful API는 Representational State Transfer(REST) 원칙을 따르는 HTTP 기반 API 설계 방식
+    - 각 리소스(Resource)에 고유한 URL(엔드포인트)을 부여하고, HTTP 메서드(GET, POST, PUT, DELETE 등)를 활용하여 요청을 처리
+    - REST는 클라이언트-서버 간의 무상태(Stateless) 통신을 기반으로 하며, JSON 또는 XML 형식의 데이터를 주고받음
+
+    - RESTful API 특징
+      - HTTP 프로토콜을 기반으로 동작
+      - 리소스 기반 URL 설계 (/users, /products/1)
+      - GET(조회), POST(생성), PUT/PATCH(수정), DELETE(삭제) 사용
+      - 무상태(Stateless) 아키텍처 적용
+      - 캐싱(Caching) 가능
+
+    - RESTful API의 장점
+      - 구조가 단순하여 널리 사용됨
+      - 웹 브라우저 및 다양한 플랫폼에서 지원
+      - 캐싱을 통한 성능 최적화 가능
+
+    - RESTful API의 단점
+      - 요청할 때마다 전체 데이터를 전송해야 하므로 불필요한 데이터가 포함될 수 있음
+      - 클라이언트가 원하는 데이터를 맞춤형으로 요청하기 어려움
+      - 대량의 데이터를 여러 API 호출로 받아야 할 수도 있음
+
+  - GraphQL
+    - Facebook이 개발한 API 쿼리 언어로, 클라이언트가 필요한 데이터만 요청할 수 있도록 설계된 API 방식
+    - REST와 달리 단일 엔드포인트(/graphql)를 사용하며, 원하는 데이터 구조를 쿼리(Query)로 정의할 수 있음
+    - GraphQL은 클라이언트가 필요한 데이터만 받아오기 때문에 네트워크 비용이 절감
+    - GraphQL 특징
+      - 단일 엔드포인트(/graphql) 사용
+      - 클라이언트가 필요한 데이터 구조를 직접 정의하여 요청
+      - 요청 시 중첩된 관계 데이터(Fetching)를 한 번에 조회 가능
+      - JSON 형식으로 응답
+
+    - GraphQL의 장점
+      - 클라이언트가 필요한 데이터만 요청할 수 있어 네트워크 최적화
+      - 여러 API 호출 없이 한 번의 요청으로 복합 데이터 조회 가능
+      - REST API 대비 오버페치(Overfetching) 및 언더페치(Underfetching) 문제 해결
+
+    - GraphQL의 단점
+      - 복잡한 쿼리는 성능 저하를 유발할 수 있음
+      - 캐싱(Cache) 처리 방식이 RESTful보다 어려움
+      - 서버에서 요청을 분석하고 실행해야 하므로 부하 증가 가능
+
+  - gRPC
+    - Google에서 개발한 원격 프로시저 호출(Remote Procedure Call, RPC) 프레임워크
+    - 고성능 API 통신을 위해 바이너리 프로토콜(Buffer Protocol)인 Protocol Buffers(ProtoBuf)를 사용
+    - REST 및 GraphQL과 달리 텍스트 기반이 아니라 바이너리(Binary) 데이터 전송을 사용하므로 처리 속도가 빠르고 네트워크 사용량이 적음
+
+    - gRPC 특징
+      - HTTP/2 기반의 API 통신
+      - Protocol Buffers(ProtoBuf) 사용 → 데이터 직렬화(Serialization) 최적화
+      - 양방향 스트리밍(Bidirectional Streaming) 지원
+      - 다중 언어 지원 (Java, Python, Go, C++ 등)
+
+    - gRPC의 장점
+      - 고속 데이터 전송 가능 (바이너리 포맷 사용)
+      - 양방향 스트리밍 및 실시간 데이터 처리 가능
+      - 다양한 언어 및 플랫폼 간의 통신 지원
+
+    - gRPC의 단점
+      - JSON이 아닌 바이너리 데이터 사용 → 디버깅 및 개발 편의성이 낮음
+      - 웹 브라우저 직접 호출이 어렵고, Proxy 또는 게이트웨이 필요
+      - RESTful 및 GraphQL 대비 학습 곡선이 높음
+
+  - RESTful, GraphQL, gRPC 차이점 요약
+    - RESTful API: HTTP 기반의 일반적인 API, 간단하지만 오버페치 가능
+    - GraphQL: 클라이언트가 원하는 데이터를 효율적으로 가져올 수 있음, 그러나 캐싱이 어려움
+    - gRPC: 고속 바이너리 데이터 전송 및 실시간 스트리밍 지원, 하지만 브라우저 직접 호출이 어렵고 설정이 복잡함
+    - 각 방식은 사용 목적에 따라 선택해야 하며, REST는 일반적인 API, GraphQL은 데이터 최적화, gRPC는 고속 및 실시간 데이터 전송에 적합
+
+- 지속적 테스트(Continuous Testing)의 개념과 필요성
+  - 지속적 테스트(Continuous Testing) 개념
+    - 소프트웨어 개발 과정에서 자동화된 테스트를 지속적으로 수행하여 품질을 보장하는 방식
+    - DevOps 및 CI/CD(Continuous Integration & Continuous Deployment) 환경에서 코드 변경이 발생할 때마다 자동으로 테스트가 실행되며, 문제를 조기에 발견하고 수정할 수 있음
+
+  - 지속적 테스트의 필요성
+    - ① 빠른 피드백 제공
+      - 지속적 테스트를 통해 코드 변경 후 즉시 테스트 결과를 확인할 수 있어 버그 및 오류를 빠르게 수정할 수 있음
+      - 이로 인해 개발 속도가 빨라지고, 품질 유지가 용이
+
+    - ② 코드 안정성 및 품질 향상
+      - 테스트 자동화를 통해 새로운 코드가 기존 기능을 깨뜨리지 않는지 검증할 수 있음
+      - 이전 코드와의 호환성을 보장하며, 배포 후 장애 발생을 최소화할 수 있음
+
+    - ③ 배포 속도 증가 (CI/CD 연계)
+      - CI/CD 파이프라인에서 지속적 테스트는 코드 변경 후 자동으로 빌드, 테스트, 배포를 수행할 수 있도록 지원
+      - 이로 인해 배포 속도가 증가하고, 안정적인 릴리스가 가능
+
+    - ④ 비용 절감
+      - 초기에 버그를 발견하여 수정하면, 운영 환경에서 발견된 오류를 수정하는 것보다 비용이 훨씬 적게 듦
+      - 지속적 테스트는 품질 보증 비용을 절감하며, 유지보수 효율성을 높임
+
+  - 지속적 테스트에서 수행되는 주요 테스트 유형
+    - ① 단위 테스트(Unit Test)
+      - 개별 모듈 또는 기능이 정상적으로 동작하는지 확인하는 테스트
+      - Junit (Java), PyTest (Python) 등의 프레임워크를 사용
+
+    - ② 통합 테스트(Integration Test)
+      - 각 모듈 간의 상호작용을 확인하는 테스트.
+      - 예를 들어, 데이터베이스와 API가 정상적으로 연동되는지 검증
+
+    - ③ 기능 테스트(Functional Test)
+      - 사용자 요구사항을 충족하는지 확인하는 테스트
+      - UI 테스트, API 응답 테스트 등이 포함
+
+    - ④ 성능 테스트(Performance Test)
+      - 애플리케이션이 부하(트래픽) 증가 시 정상적으로 동작하는지 검증하는 테스트.
+      - JMeter, Gatling 같은 도구를 사용
+
+    - ⑤ 보안 테스트(Security Test)
+      - 애플리케이션이 보안 취약점에 노출되지 않았는지 검증하는 테스트
+      - OWASP ZAP, SonarQube 등을 사용
+
+  - 결론
+    - 지속적 테스트는 자동화된 테스트를 지속적으로 수행하여 품질을 보장하는 필수적인 과정
+    - CI/CD와 연계하여 빠른 배포가 가능하며, 개발 단계에서 오류를 조기에 발견하여 코드 품질과 유지보수성을 높이는 데 기여
+
 - 최신 소프트웨어 보안 취약점과 대응 방안을 설명하시오.
 - 소프트웨어 엔지니어링 원칙(Simplicity, Modularity, Abstraction 등)을 설명하시오.
 - XP(eXtreme Programming)의 개념과 주요 기법(TDD, Pair Programming 등)을 설명하시오.
