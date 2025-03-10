@@ -7151,7 +7151,32 @@ Organize concepts, features, types and Pros and Cons
   - (7) 요구사항 변경 관리(Change Management)
     - 요구사항 변경 절차 및 승인 프로세스 정의
 
-- 요구사항 변경 관리(Change Management)의 개념과 프로세스를 설명하시오.
+- 요구사항 변경 관리(Change Management)의 개념과 프로세스
+  - 요구사항 변경 관리(Change Management) 개념
+    - 요구사항 변경 관리는 소프트웨어 개발 중 변경되는 요구사항을 체계적으로 관리하는 프로세스
+    - 프로젝트 진행 중 요구사항이 변경될 경우, 개발 일정, 비용, 품질에 영향을 미칠 수 있으므로 요구사항 변경을 체계적으로 평가하고 승인 절차를 거쳐 반영해야 함
+
+  - 요구사항 변경 관리 프로세스
+    - ① 변경 요청(Requirement Change Request, RCR) 제출
+      - 이해관계자(고객, 개발팀, QA 팀 등)가 변경 요청을 제출
+      - 변경 요청서(Change Request Form)에 변경 이유, 기대 효과, 영향을 문서화
+
+    - ② 변경 영향 분석(Impact Analysis)
+      - 변경이 기능, 성능, 보안, 일정, 비용 등에 미치는 영향을 분석
+      - 기존 요구사항과의 충돌 여부, 기술적 구현 가능성을 평가
+
+    - ③ 변경 승인(Approval & Decision Making)
+      - 프로젝트 관리자, 고객, 개발팀이 변경 승인 여부 결정
+      - 비용 증가 및 일정 지연이 발생할 경우, 추가 협의 진행
+
+    - ④ 변경 적용(Implementation)
+      - 승인된 변경 사항을 개발 및 테스트 과정에 반영
+      - 문서화 및 개발팀, QA 팀과 공유
+
+    - ⑤ 변경 검토 및 추적(Review & Tracking)
+      - 변경된 요구사항이 정상적으로 적용되었는지 검토
+      - 향후 유지보수를 위한 변경 이력 기록(Change History) 관리
+
 - 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소를 설명하시오.
 - 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
 - UML의 구성 요소(Class Diagram, Sequence Diagram, Activity Diagram 등)와 역할을 설명하시오.
