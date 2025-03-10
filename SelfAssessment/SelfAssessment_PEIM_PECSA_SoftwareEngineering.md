@@ -6827,6 +6827,64 @@ Organize concepts, features, types and Pros and Cons
     - Git은 CLI(명령줄 인터페이스)를 통해 사용되지만, GitHub/GitLab은 웹 기반 UI도 제공하여 접근성이 높음
 
 - Git 브랜칭 전략(Git Flow, GitHub Flow, Trunk-based Development)의 차이
+  - Git Flow
+    - 개념
+      - Git Flow는 브랜치 기반 개발 전략으로, 주요 브랜치(master, develop)와 기능별 브랜치(feature, release, hotfix)를 사용하여 코드 변경을 관리하는 방식
+
+    - 특징
+      - master 브랜치는 배포용이며, 안정적인 코드만 존재
+      - develop 브랜치는 개발 브랜치로, 새로운 기능이 추가되기 전에 테스트되는 브랜치
+      - feature 브랜치는 새로운 기능을 개발할 때 develop 브랜치에서 생성되며, 완료되면 develop으로 병합
+      - release 브랜치는 배포 준비 단계에서 사용되며, 안정화 작업이 끝나면 master로 병합 (stage와 유사)
+      - hotfix 브랜치는 긴급한 버그 수정이 필요할 때 사용되며, 수정 후 master와 develop에 반영
+
+    - 장점
+      - 구조가 체계적이어서 여러 개발자가 협업하기 쉬움.
+      - 안정적인 배포를 보장할 수 있음.
+    - 단점
+      - 브랜치가 많아 관리가 복잡할 수 있음.
+      - 빠르게 배포해야 하는 환경에서는 비효율적일 수 있음.
+
+  - GitHub Flow (보통 많이 사용하는 방식)
+    - 개념
+      - GitHub Flow는 Git Flow보다 단순한 브랜칭 전략으로, master 브랜치에서 바로 feature 브랜치를 생성하여 작업 후 PR(Pull Request)을 통해 병합하는 방식
+
+    - 특징
+      - master 브랜치는 항상 배포 가능한 상태여야 함
+      - 기능 개발은 feature 브랜치에서 진행하며, 완료되면 master에 병합
+      - CI/CD를 통해 master에 병합되면 자동으로 배포되는 경우가 많음
+
+    - 장점
+      - 브랜치 구조가 간단하여 학습 곡선이 낮음.
+      - 빠른 개발 및 배포가 가능함.
+    - 단점
+      - 큰 규모의 프로젝트에서는 브랜치 관리가 어려울 수 있음.
+      - 코드 안정성을 보장하기 위해 강력한 코드 리뷰 및 테스트 프로세스가 필요함.
+
+  - Trunk-based Development
+    - 개념
+      - Trunk-based Development는 모든 개발자가 하나의 main 또는 trunk 브랜치에서 작업하며, 작은 단위의 변경 사항을 자주 병합하는 방식
+
+    - 특징
+      - 별도의 develop 브랜치 없이 main 브랜치에서 직접 작업
+      - feature 브랜치는 최대 며칠 이내로 빠르게 병합되며, 장기간 유지되지 않음
+      - CI/CD를 활용하여 지속적으로 코드가 배포
+
+    - 장점
+      - 빠른 피드백과 지속적인 배포가 가능
+      - 브랜치 관리가 단순하여 협업이 쉬움
+
+    - 단점
+      - 안정성이 낮을 수 있으므로 철저한 자동화 테스트와 코드 리뷰가 필요
+      - 대규모 팀에서 충돌이 자주 발생할 수 있음
+
+    - 정리
+      - Git Flow: 브랜치가 체계적으로 나뉘어 있어 안정적인 배포와 협업이 가능하지만, 브랜치 관리가 복잡함
+      - GitHub Flow: 간단한 브랜칭 전략으로 빠른 개발과 배포가 가능하지만, 코드 안정성을 보장하기 어려울 수 있음
+      - Trunk-based Development: 빠른 피드백과 배포가 가능하지만, 철저한 테스트 및 코드 품질 관리가 필요함
+      - 각 브랜칭 전략은 프로젝트 규모와 배포 주기, 협업 방식에 따라 선택해야 하며, 필요에 따라 변형하여 사용할 수도 있음
+
+
 - CI(Continuous Integration)와 CD(Continuous Deployment)의 개념과 차이
 - 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할
 - 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명
