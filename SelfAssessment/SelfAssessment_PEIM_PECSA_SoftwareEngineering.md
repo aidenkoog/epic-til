@@ -7177,7 +7177,28 @@ Organize concepts, features, types and Pros and Cons
       - 변경된 요구사항이 정상적으로 적용되었는지 검토
       - 향후 유지보수를 위한 변경 이력 기록(Change History) 관리
 
-- 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소를 설명하시오.
+- 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소
+  - 유스케이스 모델링(Use Case Modeling) 개념
+    - 유스케이스 모델링은 시스템이 사용자(Actor)와 상호작용하는 기능을 시각적으로 표현하는 기법
+    - 주로 UML(Unified Modeling Language)에서 사용되며, 시스템의 기능을 사용자의 관점에서 정의하는 데 도움을 줌
+
+  - 유스케이스 모델링의 주요 구성 요소
+    - ① 액터(Actor)
+      - 시스템과 상호작용하는 사용자 또는 외부 시스템
+      - 예: "고객", "관리자", "결제 시스템"
+
+    - ② 유스케이스(Use Case)
+      - 특정 기능을 수행하는 단위 작업
+      - 예: "로그인", "상품 주문", "결제 처리"
+
+    - ③ 관계(Relationships)
+      - 액터와 유스케이스 간의 관계를 정의
+      - extends (확장), includes (포함) 관계 사용
+
+    - ④ 시스템(System Boundary)
+      - 시스템의 범위를 나타내는 경계
+      - 어떤 기능이 포함되며, 어떤 것이 외부 시스템인지 정의
+
 - 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
 - UML의 구성 요소(Class Diagram, Sequence Diagram, Activity Diagram 등)와 역할을 설명하시오.
 - ERD(Entity-Relationship Diagram)의 개념과 정규화(Normalization) 과정의 중요성을 설명하시오.
