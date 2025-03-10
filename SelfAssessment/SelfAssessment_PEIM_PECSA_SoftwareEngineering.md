@@ -7300,8 +7300,31 @@ Organize concepts, features, types and Pros and Cons
     - 테스트 커버리지 보장: 모든 요구사항이 테스트 항목과 연결되어 테스트되지 않은 기능을 식별 가능
     - 프로젝트 품질 보증: 최종 제품이 고객의 요구사항을 충족하는지 검증
 
+- 소프트웨어 성능 최적화(Performance Optimization)의 주요 기법
+  - (1) 코드 최적화(Code Optimization)
+    - 불필요한 연산 제거, 반복문 최소화, 데이터 구조 개선 등을 통해 코드 실행 속도를 향상
+    - 예: 정렬 알고리즘 최적화, 캐시(Cache) 활용
 
-- 소프트웨어 성능 최적화(Performance Optimization)의 주요 기법을 설명하시오.
+  - (2) 데이터베이스 최적화(Database Optimization)
+    - 인덱스(Index) 사용, 쿼리 성능 개선, 캐싱(Cache) 적용 등을 통해 데이터 조회 속도 향상
+    - 예: JOIN 최소화, 불필요한 SELECT * 사용 지양, 데이터 정규화
+
+  - (3) 네트워크 및 API 최적화(Network & API Optimization)
+    - API 응답 크기 축소, 요청 병렬 처리, HTTP Keep-Alive 설정 등을 통해 네트워크 성능 개선
+    - 예: GraphQL 사용하여 필요한 데이터만 요청, Gzip 압축 적용
+
+  - (4) 메모리 관리 및 가비지 컬렉션 최적화(Memory Management & GC Optimization)
+    - 객체 재사용, 메모리 누수 방지, 가비지 컬렉션(GC) 튜닝 등을 통해 메모리 성능 개선
+    - 예: Java의 GC 튜닝, Android에서 불필요한 메모리 할당 방지
+
+  - (5) 캐싱(Cache) 전략 활용
+    - 자주 사용하는 데이터를 캐싱하여 DB 및 API 호출을 최소화
+    - 예: Redis, Memcached 활용하여 DB 부하 감소
+
+  - (6) 로드 밸런싱(Load Balancing) 적용
+    - 여러 서버로 트래픽을 분산하여 시스템 과부하 방지
+    - 예: AWS ELB(Elastic Load Balancer) 사용하여 트래픽 균등 분배
+
 - 소프트웨어 성능 테스트(Performance Testing)의 개념과 주요 지표(응답 시간, 처리량, 가용성 등)를 설명하시오.
 - 부하 테스트(Load Testing), 스트레스 테스트(Stress Testing), 내구성 테스트(Endurance Testing)의 차이를 설명하시오.
 - 코드 프로파일링(Code Profiling)과 CPU/메모리 최적화 방법을 설명하시오.
