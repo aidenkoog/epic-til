@@ -6886,6 +6886,42 @@ Organize concepts, features, types and Pros and Cons
 
 
 - CI(Continuous Integration)와 CD(Continuous Deployment)의 개념과 차이
+  - CI (Continuous Integration, 지속적 통합)
+    - CI는 개발자가 코드 변경 사항을 주기적으로(하루에 여러 번) 중앙 저장소에 병합하는 개발 방식
+    - 병합 시 자동으로 빌드(Build) 및 테스트(Test)가 실행되어 코드 품질을 검증하고, 문제를 조기에 발견하여 빠르게 수정할 수 있도록 함
+    - 일반적으로 GitHub Actions, Jenkins, GitLab CI/CD, Travis CI 등의 도구를 활용하여 구현
+
+    - 주요 특징
+      - 코드 변경 사항이 중앙 저장소에 푸시될 때마다 자동으로 빌드 및 테스트 수행.
+      - 코드 품질 유지와 버그 조기 발견이 가능.
+      - 병합 충돌을 최소화하고 협업을 원활하게 진행할 수 있음.
+
+  - CD (Continuous Deployment, 지속적 배포)
+    - CD는 CI 이후의 과정으로, CI를 통해 검증된 코드를 자동으로 운영 환경(Production)에 배포하는 방식
+    - CD는 Continuous Delivery(지속적 제공)와 Continuous Deployment(지속적 배포)로 나뉨
+
+    - Continuous Delivery(지속적 제공)
+      - CI 이후, 자동으로 스테이징(테스트) 환경까지 배포되지만, 실제 운영 환경 배포는 수동 승인이 필요
+      - 배포 시 인적 검토가 필요한 기업 환경에서 많이 사용됨.
+    
+    - Continuous Deployment(지속적 배포)
+      - CI 이후, 테스트를 통과한 코드가 자동으로 운영 환경까지 배포
+      - 운영 환경에서 사용자가 즉시 새로운 기능을 사용할 수 있음.
+      - 테스트 자동화가 필수적이며, Netflix, Facebook 등 빠른 배포가 필요한 기업에서 사용됨.
+
+    - 주요 특징
+      - CI가 완료된 코드가 자동으로 배포되거나 승인 후 배포됨.
+      - 배포 시간을 줄이고 사용자 피드백을 빠르게 반영 가능.
+      - 안정적인 배포를 위해 철저한 테스트 및 모니터링 필요.
+
+  - CI와 CD의 차이점
+    - CI(지속적 통합)는 코드 변경 사항을 자동으로 빌드하고 테스트하는 과정까지 포함.
+    - CD(지속적 배포)는 CI 이후, 테스트가 완료된 코드를 운영 환경까지 자동으로 배포하는 과정.
+
+  - 정리
+    - CI: 코드 병합 → 자동 빌드 → 자동 테스트
+    - CD: CI 이후 운영 환경까지 배포 (Continuous Delivery는 수동 배포, Continuous Deployment는 자동 배포)
+
 - 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할
 - 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명
 - 롤링 업데이트(Rolling Update)와 재배포(Redeployment)의 차이를 설명
