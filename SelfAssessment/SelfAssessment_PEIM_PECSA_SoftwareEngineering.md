@@ -7199,7 +7199,23 @@ Organize concepts, features, types and Pros and Cons
       - 시스템의 범위를 나타내는 경계
       - 어떤 기능이 포함되며, 어떤 것이 외부 시스템인지 정의
 
-- 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
+- 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이
+  - 스토리보드(Storyboard) 개념
+    - 스토리보드는 UI/UX 설계를 위한 화면 흐름과 사용자 동작을 시각적으로 표현한 문서
+      - 사용자 경험(User Experience, UX)과 화면 간 이동(Flow)을 설계하는 데 중점을 둔다.
+      - 화면 간의 연결 관계와 동작을 설명하는 흐름도 형태로 표현됨.
+    - 사용 사례
+      - 모바일 앱 또는 웹사이트의 사용자 동선을 설계할 때 사용
+      - UI/UX 기획 단계에서 기능을 설명하는 문서로 활용
+
+  - 와이어프레임(Wireframe) 개념
+    - 와이어프레임은 웹페이지 또는 애플리케이션 UI의 기본적인 레이아웃을 설계하는 화면 구조도이다.
+      - 색상, 스타일, 실제 콘텐츠 없이 기능 배치와 레이아웃을 단순한 박스로 표현한다.
+      - UI 설계의 초안 역할을 하며, 디자이너 및 개발자 간의 협업 도구로 활용된다.
+    - 사용 사례
+      - UX 디자이너가 UI 요소의 배치를 기획할 때 사용
+      - 초기 UI 설계 단계에서 화면 구성 요소를 시각적으로 표현
+
 - UML의 구성 요소(Class Diagram, Sequence Diagram, Activity Diagram 등)와 역할을 설명하시오.
 - ERD(Entity-Relationship Diagram)의 개념과 정규화(Normalization) 과정의 중요성을 설명하시오.
 - 기능적 요구사항과 비기능적 요구사항의 차이를 설명하시오.
