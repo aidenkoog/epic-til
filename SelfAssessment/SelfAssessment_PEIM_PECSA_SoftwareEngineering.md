@@ -6785,18 +6785,42 @@ Organize concepts, features, types and Pros and Cons
       - 소프트웨어 빌드(컴파일 및 배포) 과정을 자동화하고, 배포된 버전들을 관리.
       - 예: CI/CD(Continuous Integration & Continuous Deployment)와 연계하여 자동 배포.
 
-- 버전 관리 시스템(VCS: Version Control System)의 개념과 중앙 집중형(CVS, SVN)과 분산형(Git)의 차이를 설명하시오.
-- Git과 GitHub/GitLab의 개념과 차이를 설명하시오.
-- Git 브랜칭 전략(Git Flow, GitHub Flow, Trunk-based Development)의 차이를 설명하시오.
-- CI(Continuous Integration)와 CD(Continuous Deployment)의 개념과 차이를 설명하시오.
-- 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할을 설명하시오.
-- 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명하시오.
-- 롤링 업데이트(Rolling Update)와 재배포(Redeployment)의 차이를 설명하시오.
-- 소프트웨어 배포 전략(Feature Toggles, A/B Testing, Dark Launching 등)의 개념을 설명하시오.
-- 운영 환경에서의 모니터링 및 장애 대응 전략을 설명하시오.
-- 요구사항 정의(Requirement Definition)와 요구사항 수집(Requirement Elicitation)의 차이를 설명하시오.
-- 요구사항 검토(Requirement Review) 기법(Inspection, Walkthrough, Peer Review)을 설명하시오.
-- 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소를 설명하시오.
+- 버전 관리 시스템(VCS: Version Control System)의 개념과 중앙 집중형(CVS, SVN)과 분산형(Git)의 차이
+
+
+- Git과 GitHub/GitLab의 개념과 차이
+
+
+- Git 브랜칭 전략(Git Flow, GitHub Flow, Trunk-based Development)의 차이
+
+
+- CI(Continuous Integration)와 CD(Continuous Deployment)의 개념과 차이
+
+
+- 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할
+
+
+- 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명
+
+
+- 롤링 업데이트(Rolling Update)와 재배포(Redeployment)의 차이를 설명
+
+
+- 소프트웨어 배포 전략(Feature Toggles, A/B Testing, Dark Launching 등)의 개념
+
+
+- 운영 환경에서의 모니터링 및 장애 대응 전략
+
+
+- 요구사항 정의(Requirement Definition)와 요구사항 수집(Requirement Elicitation)의 차이
+
+
+- 요구사항 검토(Requirement Review) 기법(Inspection, Walkthrough, Peer Review)
+
+
+- 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소
+
+
 - 요구사항 변경 관리(Change Management)의 개념과 프로세스를 설명하시오.
 - 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소를 설명하시오.
 - 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
