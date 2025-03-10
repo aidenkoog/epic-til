@@ -6923,6 +6923,134 @@ Organize concepts, features, types and Pros and Cons
     - CD: CI 이후 운영 환경까지 배포 (Continuous Delivery는 수동 배포, Continuous Deployment는 자동 배포)
 
 - 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할
+  - 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구의 역할
+1. 빌드(Build) 프로세스란?
+소프트웨어 빌드(Build) 는 소스 코드(Source Code)를 실행 가능한 프로그램(바이너리 파일)으로 변환하는 과정을 의미한다.
+빌드 과정은 다음과 같은 단계로 구성된다:
+
+컴파일(Compile):
+
+고수준 언어(C, C++, Java, Kotlin 등)의 소스 코드를 기계어로 변환.
+Java/Kotlin의 경우 바이트코드로 변환하여 JVM에서 실행 가능하게 함.
+링킹(Linking):
+
+여러 개의 오브젝트 파일을 연결하여 하나의 실행 가능한 프로그램 생성.
+동적 링크(shared library) 또는 정적 링크(static library) 방식 사용.
+패키징(Packaging):
+
+생성된 실행 파일과 라이브러리, 설정 파일 등을 묶어 배포 가능 형태로 만듦.
+예: Android 앱(APK, AAB), Java JAR/WAR 파일, Docker 이미지 등.
+의존성 관리(Dependency Management):
+
+외부 라이브러리(예: Retrofit, OkHttp, Glide 등)를 프로젝트에 포함.
+빌드 도구가 자동으로 라이브러리를 다운로드 및 연결.
+테스트 실행(Test Execution):
+
+빌드 과정에서 자동으로 단위 테스트(Unit Test) 및 통합 테스트(Integration Test) 실행.
+실패한 테스트가 있으면 빌드 실패 처리.
+배포(Deployment):
+
+빌드된 결과물을 서버나 앱스토어에 배포.
+CI/CD 도구(Jenkins, GitHub Actions 등)와 연계하여 자동화 가능.
+2. 빌드 자동화 도구의 역할
+소프트웨어 개발에서는 빌드 과정을 수동으로 수행하면 비효율적이고 오류가 발생할 가능성이 높다.
+이를 해결하기 위해 빌드 자동화 도구가 사용된다.
+
+① Gradle (Android, Java/Kotlin)
+특징:
+
+Groovy 또는 Kotlin DSL 기반의 설정 파일 사용.
+의존성 관리(Maven Central, JCenter 등과 연동).
+병렬 빌드 지원 → 빠른 빌드 속도 제공.
+Android 스튜디오의 공식 빌드 도구.
+예제 (Gradle 설정 - build.gradle.kts)
+
+kotlin
+복사
+편집
+plugins {
+    id("com.android.application")
+    kotlin("android")
+}
+
+android {
+    compileSdk = 33
+    defaultConfig {
+        applicationId = "com.example.app"
+        minSdk = 24
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+    }
+}
+
+dependencies {
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.0")
+}
+② Maven (Java, Spring)
+특징:
+
+XML 기반의 pom.xml 설정 파일 사용.
+프로젝트 의존성을 선언하면 자동으로 다운로드 및 관리.
+Spring Boot 프로젝트에서 자주 사용됨.
+예제 (Maven 설정 - pom.xml)
+
+xml
+복사
+편집
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>myapp</artifactId>
+    <version>1.0</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+    </dependencies>
+</project>
+③ Makefile (C, C++)
+특징:
+
+Unix/Linux 환경에서 사용.
+컴파일 과정에서 특정 규칙을 정의하여 빌드 자동화 가능.
+make 명령어를 사용하여 실행.
+예제 (Makefile)
+
+make
+복사
+편집
+CC=gcc
+CFLAGS=-Wall
+TARGET=app
+
+all: $(TARGET)
+
+$(TARGET): main.o utils.o
+    $(CC) -o $(TARGET) main.o utils.o
+
+%.o: %.c
+    $(CC) $(CFLAGS) -c $<
+
+clean:
+    rm -f *.o $(TARGET)
+make → app 실행 파일 생성.
+make clean → 빌드된 파일 삭제.
+3. 빌드 자동화 도구의 주요 역할 정리
+도구	주요 사용 언어	특징
+Gradle	Java, Kotlin (Android)	빠른 빌드 속도, Kotlin DSL 지원
+Maven	Java, Spring	XML 기반, 의존성 자동 관리
+Makefile	C, C++	Unix/Linux 기반 빌드 자동화
+4. 결론
+빌드 프로세스는 소스 코드 → 실행 파일로 변환하는 과정.
+빌드 자동화 도구(Gradle, Maven, Makefile 등)를 사용하면 의존성 관리, 테스트 실행, 패키징, 배포까지 자동화 가능.
+개발 생산성을 높이기 위해 프로젝트에 적합한 빌드 도구를 선택하는 것이 중요함.
+
 - 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명
 - 롤링 업데이트(Rolling Update)와 재배포(Redeployment)의 차이를 설명
 - 소프트웨어 배포 전략(Feature Toggles, A/B Testing, Dark Launching 등)의 개념
