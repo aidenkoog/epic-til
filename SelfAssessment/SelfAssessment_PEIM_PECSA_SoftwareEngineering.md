@@ -7125,6 +7125,32 @@ Organize concepts, features, types and Pros and Cons
       - 개발팀 내부에서 자율적으로 진행 가능
 
 - 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소
+  - (1) 소개(Introduction)
+    - 문서 목적, 대상 독자, 시스템 개요 설명
+    - 관련 문서 및 용어 정의 포함
+
+  - (2) 전반적인 설명(Overall Description)
+    - 시스템의 전반적인 개요 및 동작 방식
+    - 주요 시스템 제약사항
+
+  - (3) 기능 요구사항(Functional Requirements)
+    - 시스템이 수행해야 하는 핵심 기능 명세
+    - 예: 로그인 기능, 결제 기능, 검색 기능
+
+  - (4) 비기능 요구사항(Non-functional Requirements)
+    - 성능, 보안, 확장성, 가용성 등의 요구사항
+    - 예: 응답 시간 1초 이내, 99.99% 가용성 유지
+
+  - (5) 인터페이스 요구사항(Interface Requirements)
+    - 시스템 간 연동을 위한 API, 데이터 포맷, UI 요구사항
+    - 예: RESTful API 명세, JSON 데이터 구조
+
+  - (6) 시스템 속성(System Attributes)
+    - 가용성, 보안, 확장성, 유지보수성 등의 특성 명세
+
+  - (7) 요구사항 변경 관리(Change Management)
+    - 요구사항 변경 절차 및 승인 프로세스 정의
+
 - 요구사항 변경 관리(Change Management)의 개념과 프로세스를 설명하시오.
 - 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소를 설명하시오.
 - 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
