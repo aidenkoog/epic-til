@@ -7075,6 +7075,20 @@ Organize concepts, features, types and Pros and Cons
       - 전체 트래픽의 1% 사용자에게만 기능 제공 후 점진적 확장
 
 - 운영 환경에서의 모니터링 및 장애 대응 전략
+  - 실시간 모니터링 도구 활용
+    - 운영 환경에서의 문제를 조기에 발견하기 위해 Prometheus, Grafana, Datadog, New Relic 같은 모니터링 도구를 사용
+    - CPU, 메모리, 네트워크, 애플리케이션 오류 로그 등을 지속적으로 수집 및 분석
+
+  - 장애 감지 및 자동화된 대응
+    - 알림 시스템(Slack, PagerDuty, OpsGenie 등)을 활용하여 실시간으로 장애 감지
+    - 자동 복구(Auto Healing) 및 오토 스케일링(Auto Scaling) 적용
+
+  - 장애 대응 프로세스
+    - 장애 감지(Detection): 모니터링 시스템이 장애를 감지하고 경고 발생
+    - 장애 분석(Analysis): 로그 및 성능 지표 분석하여 원인 파악
+    - 장애 조치(Response): 장애를 완화하기 위한 조치 수행 (재시작, 롤백 등)
+    - 사후 분석(Post-mortem): 장애 원인을 문서화하고, 재발 방지를 위한 개선책 수립
+    
 - 요구사항 정의(Requirement Definition)와 요구사항 수집(Requirement Elicitation)의 차이
 - 요구사항 검토(Requirement Review) 기법(Inspection, Walkthrough, Peer Review)
 - 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소
