@@ -7216,7 +7216,29 @@ Organize concepts, features, types and Pros and Cons
       - UX 디자이너가 UI 요소의 배치를 기획할 때 사용
       - 초기 UI 설계 단계에서 화면 구성 요소를 시각적으로 표현
 
-- UML의 구성 요소(Class Diagram, Sequence Diagram, Activity Diagram 등)와 역할을 설명하시오.
+- UML의 구성 요소(Class Diagram, Sequence Diagram, Activity Diagram 등)와 역할
+  - 클래스 다이어그램(Class Diagram)
+    - 시스템의 객체(Object) 간의 관계와 구조를 정의하는 다이어그램
+    - 클래스, 속성(Attribute), 메서드(Method), 관계(연관, 상속, 의존성) 등을 표현
+    - 객체 지향 설계를 기반으로 하는 시스템에서 필수적
+    - 사용 사례
+      - 소프트웨어의 클래스 구조를 정의하고 설계하는 단계에서 사용
+      - 도메인 모델 설계 및 시스템 아키텍처 문서화
+
+  - 시퀀스 다이어그램(Sequence Diagram)
+    - 객체 간 메시지 흐름을 시간 순서대로 표현하는 다이어그램
+    - 시스템의 동적 행위를 모델링하고, 메서드 호출 및 응답을 시각화
+    - 사용 사례
+      - API 호출 흐름, 사용자 요청 처리 과정 설계
+      - 마이크로서비스 간의 인터랙션 설계
+
+  - 활동 다이어그램(Activity Diagram)
+    - 프로세스 흐름(Workflow)을 표현하는 다이어그램
+    - 상태(State) 및 조건(Condition)에 따른 동작을 모델링
+    - 사용 사례
+      - 결제 프로세스, 로그인 흐름과 같은 비즈니스 로직 설계
+      - 상태 기반의 업무 프로세스 정의
+
 - ERD(Entity-Relationship Diagram)의 개념과 정규화(Normalization) 과정의 중요성을 설명하시오.
 - 기능적 요구사항과 비기능적 요구사항의 차이를 설명하시오.
 - 소프트웨어 프로젝트에서 요구사항 추적 매트릭스(Traceability Matrix)의 개념과 필요성을 설명하시오.
