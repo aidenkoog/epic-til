@@ -7239,7 +7239,36 @@ Organize concepts, features, types and Pros and Cons
       - 결제 프로세스, 로그인 흐름과 같은 비즈니스 로직 설계
       - 상태 기반의 업무 프로세스 정의
 
-- ERD(Entity-Relationship Diagram)의 개념과 정규화(Normalization) 과정의 중요성을 설명하시오.
+- ERD(Entity-Relationship Diagram)의 개념과 정규화(Normalization) 과정의 중요성
+  - ERD(Entity-Relationship Diagram) 개념
+    - ERD는 데이터베이스 설계를 위한 개체(Entity)와 관계(Relationship)를 도식화한 모델
+      - 데이터베이스에서 어떤 개체가 존재하며, 이들 간의 관계가 어떻게 연결되는지 표현한다.
+      - 엔터티(Entity), 속성(Attribute), 관계(Relationship)으로 구성되며, 논리적 데이터 모델링에 사용된다.
+    - 사용 사례
+      - 관계형 데이터베이스(RDBMS) 설계
+      - 비즈니스 로직을 반영한 데이터 모델링
+
+  - 정규화(Normalization) 과정의 중요성
+    - 정규화는 데이터 중복을 최소화하고, 데이터 무결성을 유지하기 위한 데이터베이스 설계 기법이다.
+    - 잘못된 데이터 설계로 인해 중복 데이터, 이상 현상(Anomalies)이 발생할 수 있으므로 이를 방지하는 것이 목적이다.
+    - 정규화의 주요 단계
+      - ① 1차 정규화(1NF)
+        - 테이블 내의 모든 컬럼이 원자적(Atomic) 값을 갖도록 변환
+        - 중복된 데이터가 있는 컬럼을 제거하고, 개별 값으로 분리
+
+      - ② 2차 정규화(2NF)
+        - 1NF를 만족하면서, 부분 함수 종속(Partial Dependency)을 제거
+        - 기본 키(Primary Key) 외의 속성이 부분적으로만 의존하는 경우 테이블을 분리
+
+      - ③ 3차 정규화(3NF)
+        - 2NF를 만족하면서, 이행적 종속(Transitive Dependency)을 제거
+        - 한 속성이 다른 속성을 종속하는 경우, 별도의 테이블로 분리
+
+      - 정규화의 장점
+        - 데이터 중복 감소 → 저장 공간 절약
+        - 데이터 무결성 보장 → 데이터 일관성 유지
+        - 데이터 수정 시 오류 방지 → 이상(Anomaly) 현상 제거
+
 - 기능적 요구사항과 비기능적 요구사항의 차이를 설명하시오.
 - 소프트웨어 프로젝트에서 요구사항 추적 매트릭스(Traceability Matrix)의 개념과 필요성을 설명하시오.
 - 소프트웨어 성능 최적화(Performance Optimization)의 주요 기법을 설명하시오.
