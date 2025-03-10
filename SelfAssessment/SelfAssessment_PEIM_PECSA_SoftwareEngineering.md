@@ -6759,7 +6759,32 @@ Organize concepts, features, types and Pros and Cons
     - 애자일과 DevOps는 상호보완적 관계: 애자일이 개발 방식을 최적화하는 방법론이라면, DevOps는 개발된 소프트웨어를 효과적으로 운영하고 배포하는 데 집중
     - 애자일을 통해 빠른 개발을 하고, DevOps를 활용하여 이를 신속하고 안정적으로 운영 환경에 배포하는 것이 일반적인 흐름
 
-- 소프트웨어 형상관리(Configuration Management)의 개념과 주요 기능을 설명하시오.
+- 소프트웨어 형상관리(Configuration Management)의 개념과 주요 기능
+  - 개념
+    - 소프트웨어 형상관리(Configuration Management, CM)는 소프트웨어 개발 과정에서 변경 사항을 체계적으로 관리하고 추적하는 활동
+    - 개발 과정에서 요구사항 변경, 코드 수정, 환경 설정 변경 등의 요소를 효과적으로 관리하여 일관성과 품질을 유지하는 것이 목적
+
+  - 주요 기능
+    - 형상 식별(Configuration Identification)
+      - 관리할 소프트웨어 구성 요소(소스 코드, 문서, 라이브러리, 설정 파일 등)를 정의하고 체계적으로 구분하는 작업
+      - 예: 버전 번호, 태깅(Tagging) 등의 방식으로 특정 시점의 소프트웨어를 구별
+
+    - 형상 통제(Configuration Control)
+      - 변경 사항이 발생할 때, 이를 승인하고 적용하는 절차를 관리
+      - 예: 코드 변경 요청(Change Request, CR)에 대한 승인 프로세스
+
+    - 형상 감사(Configuration Audit)
+      - 소프트웨어가 올바르게 변경되었는지, 설정이 일관성을 유지하는지 확인하는 활동
+      - 예: 특정 릴리즈 버전이 요구사항을 충족하는지 검증
+
+    - 형상 기록 및 보고(Configuration Status Accounting)
+      - 변경 이력과 형상 관련 데이터를 기록하고 관리하는 기능.
+      - 예: 누가, 언제, 어떤 파일을 변경했는지 로그를 남김.
+
+    - 빌드 및 릴리즈 관리(Build & Release Management)
+      - 소프트웨어 빌드(컴파일 및 배포) 과정을 자동화하고, 배포된 버전들을 관리.
+      - 예: CI/CD(Continuous Integration & Continuous Deployment)와 연계하여 자동 배포.
+
 - 버전 관리 시스템(VCS: Version Control System)의 개념과 중앙 집중형(CVS, SVN)과 분산형(Git)의 차이를 설명하시오.
 - Git과 GitHub/GitLab의 개념과 차이를 설명하시오.
 - Git 브랜칭 전략(Git Flow, GitHub Flow, Trunk-based Development)의 차이를 설명하시오.
