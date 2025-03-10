@@ -6809,38 +6809,33 @@ Organize concepts, features, types and Pros and Cons
     - 프로젝트의 특성에 따라 적절한 버전 관리 시스템을 선택하는 것이 중요
 
 - Git과 GitHub/GitLab의 개념과 차이
+  - Git의 개념
+    - 분산형 버전 관리 시스템(DVCS, Distributed Version Control System)
+    - 로컬과 원격 저장소를 이용하여 파일 변경 사항을 추적하고 협업할 수 있음
+    - 개발자는 로컬 저장소에서 작업을 수행한 후, 원격 저장소에 변경 사항을 반영할 수 있음
+    - 주요 기능으로는 커밋(commit), 브랜치(branch), 병합(merge), 푸시(push), 풀(pull) 등
 
+  - GitHub/GitLab의 개념
+    - GitHub와 GitLab은 Git을 기반으로 한 원격 저장소 호스팅 서비스
+    - 단순한 코드 저장소가 아니라 코드 리뷰, 이슈 트래킹, CI/CD, 권한 관리 등의 기능을 제공하여 협업과 자동화를 지원
+    - GitHub는 마이크로소프트(Microsoft)에서 운영하며, 오픈소스 프로젝트 및 기업들이 많이 사용
+    - GitLab은 자체 호스팅이 가능하며, GitHub보다 보안 및 CI/CD 기능이 더 강력한 점이 특징
+
+  - Git과 GitHub/GitLab의 차이
+    - Git은 버전 관리 시스템(VCS) 자체, GitHub/GitLab은 Git 저장소를 호스팅하는 서비스
+    - Git을 사용하면 로컬에서도 버전 관리가 가능하지만, GitHub/GitLab은 원격에서 저장소를 공유하고 협업할 수 있도록 지원
+    - Git은 CLI(명령줄 인터페이스)를 통해 사용되지만, GitHub/GitLab은 웹 기반 UI도 제공하여 접근성이 높음
 
 - Git 브랜칭 전략(Git Flow, GitHub Flow, Trunk-based Development)의 차이
-
-
 - CI(Continuous Integration)와 CD(Continuous Deployment)의 개념과 차이
-
-
 - 소프트웨어 빌드(Build) 프로세스의 개념과 빌드 자동화 도구(Gradle, Maven, Makefile 등)의 역할
-
-
 - 블루-그린 배포(Blue-Green Deployment)와 카나리아 배포(Canary Deployment)의 차이를 설명
-
-
 - 롤링 업데이트(Rolling Update)와 재배포(Redeployment)의 차이를 설명
-
-
 - 소프트웨어 배포 전략(Feature Toggles, A/B Testing, Dark Launching 등)의 개념
-
-
 - 운영 환경에서의 모니터링 및 장애 대응 전략
-
-
 - 요구사항 정의(Requirement Definition)와 요구사항 수집(Requirement Elicitation)의 차이
-
-
 - 요구사항 검토(Requirement Review) 기법(Inspection, Walkthrough, Peer Review)
-
-
 - 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소
-
-
 - 요구사항 변경 관리(Change Management)의 개념과 프로세스를 설명하시오.
 - 유스케이스 모델링(Use Case Modeling)의 개념과 주요 구성 요소를 설명하시오.
 - 스토리보드(Storyboard)와 와이어프레임(Wireframe)의 차이를 설명하시오.
