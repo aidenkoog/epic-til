@@ -6786,6 +6786,14 @@ Organize concepts, features, types and Pros and Cons
       - 예: CI/CD(Continuous Integration & Continuous Deployment)와 연계하여 자동 배포.
 
 - 버전 관리 시스템(VCS: Version Control System)의 개념과 중앙 집중형(CVS, SVN)과 분산형(Git)의 차이
+  - 개념
+    - 중앙 집중형 VCS (Centralized VCS, CVS/SVN)
+      - 하나의 중앙 저장소(Repository)를 사용하여 모든 변경 사항을 관리
+      - 개발자는 중앙 서버에서 파일을 가져오고(commit) 변경 사항을 서버에 저장
+      - 서버가 다운되면 모든 버전 관리 기능이 중단됨.
+    - 분산형 VCS (Distributed VCS, Git)
+      - 중앙 저장소뿐만 아니라 개발자 개인 로컬 저장소(Local Repository)에도 전체 이력이 저장됨.
+      - 인터넷 연결 없이도 버전 관리 가능하며, 중앙 서버가 손실되더라도 복구 가능.
 
 
 - Git과 GitHub/GitLab의 개념과 차이
