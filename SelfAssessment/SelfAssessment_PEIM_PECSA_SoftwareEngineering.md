@@ -7088,8 +7088,20 @@ Organize concepts, features, types and Pros and Cons
     - 장애 분석(Analysis): 로그 및 성능 지표 분석하여 원인 파악
     - 장애 조치(Response): 장애를 완화하기 위한 조치 수행 (재시작, 롤백 등)
     - 사후 분석(Post-mortem): 장애 원인을 문서화하고, 재발 방지를 위한 개선책 수립
-    
+
 - 요구사항 정의(Requirement Definition)와 요구사항 수집(Requirement Elicitation)의 차이
+  - 요구사항 정의(Requirement Definition)
+    - 요구사항 정의는 사용자의 요구를 공식 문서(SRS)로 정리하고, 명확한 시스템 요구사항으로 변환하는 과정이다.
+    - 요구사항을 기능 요구사항(Functional Requirements)과 비기능 요구사항(Non-functional Requirements)으로 나누어 문서화한다.
+    - 일반적으로 개발 착수 전에 이루어지며, 개발팀과 고객 간의 합의된 명세서 역할을 한다.
+      - 출력물: 소프트웨어 요구사항 명세서(SRS, Software Requirement Specification)
+
+  - 요구사항 수집(Requirement Elicitation)
+    - 요구사항 수집은 사용자, 이해관계자, 고객 인터뷰, 워크숍 등을 통해 요구사항을 발굴하는 과정이다.
+    - 요구사항 정의에 앞서 수행되며, 기존 시스템 분석, 문서 리뷰, 설문조사 등을 통해 요구사항을 식별한다.
+    - 애자일 환경에서는 사용자 스토리(User Story) 방식으로 요구사항을 수집하는 경우가 많다.
+      - 출력물: 요구사항 목록(Requirement List), 사용자 스토리(User Story)
+
 - 요구사항 검토(Requirement Review) 기법(Inspection, Walkthrough, Peer Review)
 - 소프트웨어 요구사항 명세(Software Requirement Specification, SRS) 문서의 구성 요소
 - 요구사항 변경 관리(Change Management)의 개념과 프로세스를 설명하시오.
