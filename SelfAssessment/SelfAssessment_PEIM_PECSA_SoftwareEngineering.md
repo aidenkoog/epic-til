@@ -7631,7 +7631,31 @@ Organize concepts, features, types and Pros and Cons
     - CI/CD는 코드 변경 시 자동으로 빌드, 테스트, 배포를 수행하여 품질을 개선하고, 배포 오류 발생 시 신속한 롤백이 가능하도록 지원
 
 
-- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술을 설명하시오.
+- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술
+  - (1) 클라우드 네이티브 소프트웨어 개발 개념
+    - 클라우드 네이티브(Cloud-Native)란 클라우드 환경을 최적화하여 애플리케이션을 개발하고 운영하는 방식
+    - 가상 머신(VM) 기반이 아닌 컨테이너(Container) 기반으로, 자동 확장(Scaling), 장애 복구(Self-Healing) 등의 기능을 활용
+
+  - (2) 클라우드 네이티브 주요 기술
+    - 컨테이너(Container) 기반 개발
+      - 개념: 소프트웨어를 경량 컨테이너(Docker)로 배포하여 환경 종속성을 제거
+      - 기술 예시: Docker, Podman
+
+    - 마이크로서비스 아키텍처(MSA)
+      - 개념: 애플리케이션을 독립적으로 배포 가능한 작은 서비스들로 나눠 운영하는 방식.
+      - 기술 예시: Spring Boot + Kubernetes 기반 마이크로서비스
+      
+    - Kubernetes를 활용한 오케스트레이션
+      - 개념: 컨테이너 애플리케이션을 자동으로 배포, 확장, 관리하는 플랫폼.
+      - 기술 예시: Kubernetes, Helm, Istio
+
+    - 서버리스(Serverless) 컴퓨팅 (On-premise 에서 AWS 사용하는 요즘 추세 생각)
+      - 개념: 개발자가 인프라를 관리하지 않고, 클라우드 제공업체가 실행 환경을 자동으로 운영하는 방식.
+      - 기술 예시: AWS Lambda, Google Cloud Functions, Azure Functions
+
+  - 요약
+    - 클라우드 네이티브 개발은 컨테이너(Docker)와 Kubernetes를 활용한 자동화, 마이크로서비스를 통한 유연한 확장성, 서버리스 기반 컴퓨팅을 통해 비용 최적화를 목표로 한다.
+
 - 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이를 설명하시오.
 - 마이크로서비스 아키텍처(MSA)와 서비스 메시(Service Mesh)의 개념과 필요성을 설명하시오.
 - GraphQL과 REST API의 차이를 설명하시오.
