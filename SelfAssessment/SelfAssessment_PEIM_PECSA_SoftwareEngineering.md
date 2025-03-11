@@ -7715,8 +7715,33 @@ Organize concepts, features, types and Pros and Cons
     - 서비스 메시를 적용하면 MSA에서 발생하는 복잡한 네트워크 문제를 해결할 수 있음.
 
 
+- GraphQL과 REST API의 차이
+  - REST API 개념
+    - REST API는 HTTP 프로토콜을 기반으로 한 대표적인 API 설계 방식
+    - 클라이언트가 서버에서 데이터를 요청할 때, 정해진 엔드포인트(예: /users, /orders 등)를 사용하여 데이터를 가져온다.
 
-- GraphQL과 REST API의 차이를 설명하시오.
+    - REST API의 주요 특징
+      - GET, POST, PUT, DELETE 등의 HTTP 메서드 사용
+      - 고정된 엔드포인트(URI)를 사용하여 데이터 요청
+      - 요청 시마다 필요한 모든 데이터를 받아야 함 (오버페칭 문제 발생 가능)
+      - 스케일링과 캐싱이 용이하지만, 불필요한 데이터까지 가져올 가능성이 있음
+
+  - GraphQL 개념
+    - GraphQL은 클라이언트가 원하는 데이터만 요청할 수 있도록 하는 쿼리 언어이다.
+    - 하나의 엔드포인트(/graphql)를 통해 원하는 데이터 필드만 선택적으로 가져올 수 있다.
+
+    - GraphQL의 주요 특징
+      - 단일 엔드포인트(/graphql)에서 여러 개의 데이터 요청 가능
+      - 클라이언트가 원하는 필드만 요청하여 오버페칭 방지
+      - API 응답 크기 감소 및 성능 최적화 가능
+      - 강력한 타입 시스템 지원 (스키마 기반)
+
+  - REST API vs. GraphQL 차이점
+    - REST API는 고정된 엔드포인트를 사용하지만, GraphQL은 유연한 쿼리를 제공한다.
+    - REST API는 클라이언트가 필요 없는 데이터까지 받는 경우(오버페칭)가 많지만, GraphQL은 필요한 데이터만 요청 가능(최적화)하다.
+    - REST API는 캐싱이 쉬운 반면, GraphQL은 클라이언트마다 요청이 다를 수 있어 캐싱이 어렵다.
+    - REST API는 사용이 단순하지만, GraphQL은 스키마를 정의해야 하므로 초기 설정이 복잡할 수 있다.
+
 - 블록체인(Blockchain) 기반 소프트웨어 개발의 개념과 보안 이슈를 설명하시오.
 - 양자 컴퓨팅(Quantum Computing) 소프트웨어의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
 - 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이를 설명하시오.
