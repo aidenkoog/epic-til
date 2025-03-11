@@ -7895,7 +7895,28 @@ Organize concepts, features, types and Pros and Cons
 	•	해결책: MPC(Multi-Party Computation), 하드웨어 지갑(Hardware Wallet) 사용
 
 
-- 양자 컴퓨팅(Quantum Computing) 소프트웨어의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
+- 양자 컴퓨팅(Quantum Computing) 소프트웨어의 개념과 기존 컴퓨팅과의 차이
+  - 📌 양자 컴퓨팅(Quantum Computing) 개념
+	•	**양자 컴퓨팅(Quantum Computing)**은 기존 컴퓨터(고전 컴퓨터)와 달리 양자 역학 원리를 이용하여 데이터를 처리하는 방식.
+	•	기존 컴퓨터는 비트(Bit) 단위로 데이터를 처리하지만, 양자 컴퓨터는 **큐비트(Qubit)**을 사용하여 동시에 여러 계산을 수행할 수 있음.
+	•	중첩(Superposition), 얽힘(Entanglement), 간섭(Interference) 등의 원리를 활용하여 병렬 연산이 가능.
+
+✅ 양자 컴퓨팅의 핵심 개념
+	•	큐비트(Qubit): 0과 1의 상태를 동시에 가질 수 있는 단위.
+	•	양자 중첩(Superposition): 여러 상태를 동시에 연산 가능.
+	•	양자 얽힘(Entanglement): 두 개 이상의 큐비트가 서로 연관되어 하나의 상태 변화가 다른 큐비트에도 영향을 미침.
+
+✅ 응용 분야
+	•	암호 해킹: 기존 암호화 알고리즘(RSA, ECC 등) 해킹 가능 → 양자 암호화 필요
+	•	최적화 문제: 금융, 물류, AI 최적화
+	•	신약 개발: 분자 구조 분석 및 단백질 시뮬레이션
+
+결론
+	•	양자 컴퓨팅은 기존 컴퓨터보다 특정 문제에서 매우 빠른 연산을 수행할 수 있음.
+	•	하지만 **양자 오류 수정(Quantum Error Correction)**이 필요하고, 아직 실용화 단계는 아님.
+	•	기존 암호화 방식이 깨질 가능성이 있어, 양자 내성 암호(Post-Quantum Cryptography) 연구가 진행 중.
+
+
 - 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이를 설명하시오.
 - 최신 AI/ML 소프트웨어 개발 기법과 MLOps의 개념을 설명하시오.
 - 소프트웨어 개발에서 데이터 중심 접근 방식(Data-Driven Development)의 필요성을 설명하시오.
