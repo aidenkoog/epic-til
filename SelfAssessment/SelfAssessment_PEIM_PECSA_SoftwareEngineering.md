@@ -7609,7 +7609,28 @@ Organize concepts, features, types and Pros and Cons
     - Cypress는 프론트엔드 애플리케이션의 사용자 흐름을 검증하는 E2E 테스트에 사용
 
 
-- DevOps에서 CI/CD 파이프라인을 활용한 품질 개선 방법을 설명하시오.
+- DevOps에서 CI/CD 파이프라인을 활용한 품질 개선 방법
+  - (1) CI/CD 개념
+    - CI(Continuous Integration, 지속적 통합): 개발자가 새로운 코드를 공유 저장소에 자주 푸시하고, 이를 자동으로 빌드 및 테스트하는 과정 (젠킨스 CI Job)
+    - CD(Continuous Delivery/Continuous Deployment, 지속적 배포): CI 이후 자동으로 애플리케이션을 테스트하고 운영 환경에 배포하는 과정
+
+  - (2) CI/CD 파이프라인을 활용한 품질 개선 방법
+    - 자동화된 빌드 및 테스트:
+      - 코드를 변경하면 자동으로 유닛 테스트, 통합 테스트가 실행되므로 버그를 조기에 발견할 수 있음
+      - 예: GitHub Actions, Jenkins, GitLab CI/CD를 활용한 빌드 및 테스트 자동화
+
+    - 코드 리뷰 및 정적 분석 자동화:
+      - 정적 분석 도구(SonarQube, ESLint)와 CI/CD를 연동하여 코드 품질을 자동으로 점검
+      - 예: Pull Request(PR)가 생성되면 코드 리뷰와 정적 분석이 자동 실행됨.
+
+    - 배포 자동화 및 롤백 지원:
+      - 코드가 검증되면 자동으로 운영 서버에 배포하고, 문제가 발생하면 이전 버전으로 롤백 가능.
+      - 예: ArgoCD, Spinnaker와 같은 툴을 사용하여 Kubernetes 환경에서 배포 자동화.
+
+  - 결론
+    - CI/CD는 코드 변경 시 자동으로 빌드, 테스트, 배포를 수행하여 품질을 개선하고, 배포 오류 발생 시 신속한 롤백이 가능하도록 지원
+
+
 - 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술을 설명하시오.
 - 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이를 설명하시오.
 - 마이크로서비스 아키텍처(MSA)와 서비스 메시(Service Mesh)의 개념과 필요성을 설명하시오.
