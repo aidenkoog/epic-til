@@ -7556,7 +7556,20 @@ Organize concepts, features, types and Pros and Cons
       - 스크린샷 및 로그 첨부: 오류 발생 시 캡처한 화면, 로그 파일, 시스템 정보 등을 포함하면 문제 해결 속도가 빨라진다.
       - 명확한 기대 결과와 실제 결과 기술: 예상되는 동작과 실제 발생한 동작을 비교하여 설명한다.
 
-- 정적 코드 분석(Static Code Analysis)과 동적 코드 분석(Dynamic Code Analysis)의 차이를 설명하시오.
+- 정적 코드 분석(Static Code Analysis)과 동적 코드 분석(Dynamic Code Analysis)의 차이
+  - (1) 정적 코드 분석 (Static Code Analysis): 소스코드 자체
+    - 프로그램을 실행하지 않고, 소스 코드만을 분석하여 문제를 식별하는 방법
+    - 주로 Lint, SonarQube, PMD, FindBugs 같은 도구를 사용하여 코드의 구조, 스타일, 보안 취약점을 검토한다.
+    - 장점: 빠르게 코드 검사를 수행할 수 있으며, 실행 전에 코드 품질을 개선할 수 있음.
+    - 단점: 실제 실행 중 발생하는 런타임 오류를 잡아내지 못함
+
+  - (2) 동적 코드 분석 (Dynamic Code Analysis): 런타임
+    - 프로그램을 실제로 실행하면서 성능, 보안, 오류를 검사하는 방법.
+    - Profiler, Debugger, Application Monitoring Tools 등을 사용하여 런타임 시의 실행 흐름, 메모리 사용량, 성능 병목 현상 등을 분석한다.
+    - 장점: 런타임 오류와 메모리 누수 같은 실행 중 발생하는 문제를 파악할 수 있음.
+    - 단점: 실행 환경에 따라 테스트 결과가 다를 수 있으며, 수행 시간이 오래 걸릴 수 있음.
+
+
 - 코드 리뷰(Code Review)의 개념과 주요 방법(Peer Review, Walkthrough, Inspection 등)을 설명하시오.
 - 테스트 자동화 도구(JUnit, Selenium, Cypress 등)의 개념과 활용 사례를 설명하시오.
 - DevOps에서 CI/CD 파이프라인을 활용한 품질 개선 방법을 설명하시오.
