@@ -66,12 +66,27 @@
   - develop 에서 상시로 버그를 수정한 커밋 추가
   - 새로운 기능 추가 작업이 있는 경우 develop 브랜치에서 feature 브랜치 생성
     - feature 브랜치는 항상 develop 브랜치에서부터 시작
+    - 예: feature/xxx 형태로 추가
   - 기능 추가 완료 후 feature 브랜치 내용을 develop 브랜치로 Merge
   - develop 에 이번 릴리즈 버전에 포함되는 모든 기능이 Merge 완료되었는 지 확인
   - 완료되었다면, QA 진행을 위해 develop 브랜치에서 release 브랜치 생성
+    - 과거에 나의 경우는 stage 라고 이름 지었었음
   - QA 진행 중 발생한 버그들에 대한 수정사항은 release 브랜치에 추가
   - QA 완료 후 release 브랜치를 master와 develop로 Merge
   - master 브랜치에서 버전에 대한 태그 추가
+
+- 흐름 다시 정리
+  - 초기 master 브랜치 생성
+  - master 기반으로 develop 브랜치 생성
+  - develop 에서 feature/xxx 브랜치 생성 후 작업 완료 > develop 적용
+  - develop 에서 release/xxx 브랜치 생성 후 테스트 > 수정 내용은 release/xxx에 적용
+  - release/xxx 내용을 master & develop 둘 다 Merge
+  - master 에서 태깅
+
+- 핫픽스 건
+  - hotfix 브랜치는 main(또는 master)을 기반으로 생성 (hotfix/xxx 로 형식으로 생성)
+  - 수정 완료 / 테스트 완료 후 master과 develop 브랜치에 병합
+  - master 에서 태깅
 
 #### Git, GitHub에 대한 설명
 
