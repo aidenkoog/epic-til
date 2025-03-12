@@ -428,34 +428,31 @@ Organize concepts, features, types and Pros and Cons
 		- Story Points 설정: 복잡도, 리스크, 기준 작업을 고려한 상대적 난이도 측정.
 
 
-- 프로젝트에서 Technical Debt(기술 부채)를 관리하는 방법은?
+- 프로젝트에서 Technical Debt(기술 부채)를 관리하는 방법
+	- (1) 기술 부채(Technical Debt) 개념
+		- 단기적인 개발 속도를 높이기 위해 코드 품질, 테스트, 아키텍처 설계를 희생하는 경우 발생하는 기술적 부채.
+		- 장기적으로 유지보수 비용 증가, 성능 저하, 확장성 문제를 초래.
+
+	- (2) 기술 부채 관리 방법
+		- 기술 부채 식별 및 문서화
+			- 코드 스멜(Code Smell), 중복 코드, 낮은 테스트 커버리지 등을 지속적으로 문서화.
+			- 기술 부채 백로그(Technical Debt Backlog) 운영.
+		- 정기적인 리팩토링(Refactoring)
+			- 애자일 스프린트마다 일정 비율의 시간을 리팩토링에 할당.
+			- 예: 10~20%의 시간을 코드 품질 개선에 사용.
+		- 자동화된 테스트 도입
+			- 유닛 테스트(Unit Test), 통합 테스트(Integration Test), 코드 리뷰(Code Review)를 강화하여 부채 발생 방지.
+		- CI/CD 파이프라인 구축
+			- 지속적 통합(Continuous Integration)과 지속적 배포(Continuous Deployment)를 통해 코드 품질 유지.
+		- 기술 부채 모니터링
+			- SonarQube, Code Climate 등의 정적 분석 도구를 활용하여 코드 품질 측정.
+			
 - 프로젝트 Kickoff Meeting에서 논의해야 할 주요 사항은?
 - 프로젝트에서 Scope Creep(스코프 변동)을 방지하는 방법은?
 - Sprint Planning과 Sprint Review의 차이점은?
 - 프로젝트에서 Burn Down Chart를 사용하는 이유는?
 - 프로젝트 일정이 변경될 때 팀을 조율하는 방법은?
-	- 1. 프로젝트에서 Technical Debt(기술 부채)를 관리하는 방법
-1.1 기술 부채(Technical Debt) 개념
-단기적인 개발 속도를 높이기 위해 코드 품질, 테스트, 아키텍처 설계를 희생하는 경우 발생하는 기술적 부채.
-장기적으로 유지보수 비용 증가, 성능 저하, 확장성 문제를 초래.
-1.2 기술 부채 관리 방법
-기술 부채 식별 및 문서화
-
-코드 스멜(Code Smell), 중복 코드, 낮은 테스트 커버리지 등을 지속적으로 문서화.
-기술 부채 백로그(Technical Debt Backlog) 운영.
-정기적인 리팩토링(Refactoring)
-
-애자일 스프린트마다 일정 비율의 시간을 리팩토링에 할당.
-예: 10~20%의 시간을 코드 품질 개선에 사용.
-자동화된 테스트 도입
-
-유닛 테스트(Unit Test), 통합 테스트(Integration Test), 코드 리뷰(Code Review)를 강화하여 부채 발생 방지.
-CI/CD 파이프라인 구축
-
-지속적 통합(Continuous Integration)과 지속적 배포(Continuous Deployment)를 통해 코드 품질 유지.
-기술 부채 모니터링
-
-SonarQube, Code Climate 등의 정적 분석 도구를 활용하여 코드 품질 측정.
+	
 2. 프로젝트 Kickoff Meeting에서 논의해야 할 주요 사항
 2.1 Kickoff Meeting 개념
 프로젝트 착수 시 모든 이해관계자(Project Stakeholders)가 모여 목표, 일정, 역할을 정리하는 회의.
