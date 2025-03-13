@@ -715,42 +715,38 @@ Organize concepts, features, types and Pros and Cons
 	- (5) 실행 및 모니터링
 		- 변경 사항을 적용하고 성과 추적
 
-- 프로젝트에서 Milestone 설정이 중요한 이유는?
+- 프로젝트에서 Milestone 설정이 중요한 이유
+	- Milestone 개념
+		- 프로젝트의 주요 단계(중간 목표)를 나타내는 특정 시점
 
-프로젝트에서 Milestone 설정이 중요한 이유
+	- 중요한 이유
+		- 프로젝트 진행 상황을 객관적으로 평가
+		- 일정 관리 및 지연 방지
+		- 팀원 및 이해관계자와의 원활한 커뮤니케이션
+		- 주요 의사결정 시점 제공 (예: 요구사항 확정, 개발 완료, 테스트 완료 등)
+		- 리스크 식별 및 대응을 용이하게 함
 
-Milestone 개념:
-프로젝트의 주요 단계(중간 목표)를 나타내는 특정 시점
+- 프로젝트 관리에서 Cost Variance(CV)와 Schedule Variance(SV)의 의미
+	- Cost Variance (CV):
+		- 공식: CV = Earned Value (EV) - Actual Cost (AC)
+		- 의미: 프로젝트의 예산 초과 또는 절감 여부를 측정하는 지표
+		- CV > 0: 예산 절감 (비용이 계획보다 적게 사용됨)
+		- CV < 0: 예산 초과 (비용이 계획보다 많이 사용됨)
+		- CV = 0: 계획대로 진행됨
 
-중요한 이유:
-	•	프로젝트 진행 상황을 객관적으로 평가
-	•	일정 관리 및 지연 방지
-	•	팀원 및 이해관계자와의 원활한 커뮤니케이션
-	•	주요 의사결정 시점 제공 (예: 요구사항 확정, 개발 완료, 테스트 완료 등)
-	•	리스크 식별 및 대응을 용이하게 함
+	- Schedule Variance (SV):
+		- 공식: SV = Earned Value (EV) - Planned Value (PV)
+		- 의미: 프로젝트의 일정이 계획 대비 얼마나 진행되었는지 측정
+		- SV > 0: 일정보다 앞서 진행됨
+		- SV < 0: 일정보다 지연됨
+		- SV = 0: 계획대로 진행됨
 
-
-- 프로젝트 관리에서 Cost Variance(CV)와 Schedule Variance(SV)의 의미는?
 - 프로젝트에서 Resource Allocation을 최적화하는 방법은?
 - 프로젝트의 최종 산출물(Deliverables)을 정의하는 방법은?
 - 프로젝트에서 Lessons Learned를 효과적으로 수집하는 방법은?
 - 프로젝트 관리에서 Risk Probability와 Impact Matrix의 활용 방법은?
 - 프로젝트에서 Communication Plan을 수립하는 방법은?
-  - 1. 프로젝트 관리에서 Cost Variance(CV)와 Schedule Variance(SV)의 의미
 
-Cost Variance (CV):
-	•	공식: CV = Earned Value (EV) - Actual Cost (AC)
-	•	의미: 프로젝트의 예산 초과 또는 절감 여부를 측정하는 지표
-	•	CV > 0: 예산 절감 (비용이 계획보다 적게 사용됨)
-	•	CV < 0: 예산 초과 (비용이 계획보다 많이 사용됨)
-	•	CV = 0: 계획대로 진행됨
-
-Schedule Variance (SV):
-	•	공식: SV = Earned Value (EV) - Planned Value (PV)
-	•	의미: 프로젝트의 일정이 계획 대비 얼마나 진행되었는지 측정
-	•	SV > 0: 일정보다 앞서 진행됨
-	•	SV < 0: 일정보다 지연됨
-	•	SV = 0: 계획대로 진행됨
 
 ⸻
 
