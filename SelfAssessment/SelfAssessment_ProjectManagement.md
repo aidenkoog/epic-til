@@ -693,7 +693,16 @@ Organize concepts, features, types and Pros and Cons
 		- 가장 긴 경로(크리티컬 패스) 식별
 		- 여유 시간(Float) 분석
 
-- 프로젝트에서 Baseline을 설정하는 이유는?
+- 프로젝트에서 Baseline을 설정하는 이유
+	- Baseline 개념
+		- 프로젝트의 일정(Schedule), 비용(Cost), 범위(Scope) 등의 원래 계획을 기준점으로 설정하는 것
+
+	- 설정 이유
+		- 프로젝트 진행 상황을 평가하는 기준 역할
+		- 계획 대비 실제 성과를 비교하여 문제 조기 발견
+		- Change Management 시 원래 계획과 변경 사항을 추적 가능
+		- 성과 보고서 작성 및 이해관계자와의 커뮤니케이션 수월
+
 - 프로젝트에서 Change Request가 발생했을 때 처리 방법은?
 - 프로젝트에서 Milestone 설정이 중요한 이유는?
 
