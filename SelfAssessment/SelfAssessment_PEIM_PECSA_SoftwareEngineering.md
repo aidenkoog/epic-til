@@ -8246,47 +8246,43 @@ Organize concepts, features, types and Pros and Cons
     - ITIL은 IT 서비스를 효율적으로 운영하고 관리하기 위한 표준화된 프레임워크이며, 비즈니스 목표와 IT 운영을 효과적으로 연계하는 역할 수행
 
 
-- TDD(Test-Driven Development)와 BDD(Behavior-Driven Development)의 차이를 설명하시오.
+- TDD(Test-Driven Development)와 BDD(Behavior-Driven Development)
+  - TDD (Test-Driven Development, 테스트 주도 개발) 개념
+	  - TDD는 테스트 케이스를 먼저 작성하고, 해당 테스트를 통과하는 최소한의 코드를 작성한 후, 이를 점진적으로 개선하는 개발 방법론이다.
+	  - 개발자는 Red(실패) → Green(성공) → Refactor(리팩토링)의 3단계를 반복하면서 코드를 개선한다.
+
+  - TDD의 주요 특징
+	  - 코드 구현 전에 테스트 코드 작성
+	  - 단위 테스트(Unit Test) 기반
+	  - 빠른 피드백과 지속적 개선
+	  - 코드 품질 향상 및 유지보수 용이
+
+  - TDD의 활용 사례
+	  - 금융 시스템에서 계산 로직이 정확한지 검증
+	  - API 개발 시 요청 및 응답 데이터 검증
+	  - 마이크로서비스 환경에서 각 서비스의 독립적 테스트
+
+  - BDD (Behavior-Driven Development, 행위 주도 개발) 개념
+	  - BDD는 사용자의 행동(Behavior)에 초점을 맞춰 테스트를 작성하는 개발 방법론이다.
+	  - 자연어(Gherkin 문법)를 사용하여 Given(주어진 상황) → When(조건) → Then(결과) 형식으로 테스트 시나리오를 작성한다.
+
+  - BDD의 주요 특징
+	  - 사용자의 기대 동작(Behavior)을 기반으로 개발
+	  - 비즈니스 분석가, 기획자, 개발자, QA 팀이 협업 가능
+	  - 자연어 기반의 테스트 문법 사용
+	  - 예: “Given 사용자가 로그인 페이지를 방문했을 때, When 올바른 아이디와 비밀번호를 입력하면, Then 홈 화면이 표시되어야 한다.”
+
+  - BDD의 활용 사례
+	  - 웹 애플리케이션의 UI/UX 동작 검증
+	  - e-커머스 플랫폼에서 장바구니 기능 테스트
+	  - REST API의 예상 응답 값 검증
+
+  - 정리
+    - TDD는 코드 구현 전에 테스트를 작성하는 개발자 중심의 방식이고, BDD는 사용자 요구사항을 중심으로 협업하는 방식이다.
+
 - 모델 기반 개발(MBD, Model-Based Development)의 개념과 활용 사례를 설명하시오.
 - 소프트웨어 공학에서 CASE(Computer-Aided Software Engineering) 도구의 개념과 활용 사례를 설명하시오.
 - 유지보수 비용을 줄이기 위한 소프트웨어 개발 방법론을 설명하시오.
-  - 1. TDD(Test-Driven Development)와 BDD(Behavior-Driven Development)의 차이
-
-📌 TDD (Test-Driven Development, 테스트 주도 개발) 개념
-	•	TDD는 테스트 케이스를 먼저 작성하고, 해당 테스트를 통과하는 최소한의 코드를 작성한 후, 이를 점진적으로 개선하는 개발 방법론이다.
-	•	개발자는 **Red(실패) → Green(성공) → Refactor(리팩토링)**의 3단계를 반복하면서 코드를 개선한다.
-
-✅ TDD의 주요 특징
-	•	코드 구현 전에 테스트 코드 작성
-	•	단위 테스트(Unit Test) 기반
-	•	빠른 피드백과 지속적 개선
-	•	코드 품질 향상 및 유지보수 용이
-
-✅ TDD의 활용 사례
-	•	금융 시스템에서 계산 로직이 정확한지 검증
-	•	API 개발 시 요청 및 응답 데이터 검증
-	•	마이크로서비스 환경에서 각 서비스의 독립적 테스트
-
-⸻
-
-📌 BDD (Behavior-Driven Development, 행위 주도 개발) 개념
-	•	BDD는 사용자의 행동(Behavior)에 초점을 맞춰 테스트를 작성하는 개발 방법론이다.
-	•	자연어(Gherkin 문법)를 사용하여 Given(주어진 상황) → When(조건) → Then(결과) 형식으로 테스트 시나리오를 작성한다.
-
-✅ BDD의 주요 특징
-	•	사용자의 기대 동작(Behavior)을 기반으로 개발
-	•	비즈니스 분석가, 기획자, 개발자, QA 팀이 협업 가능
-	•	자연어 기반의 테스트 문법 사용
-	•	예: “Given 사용자가 로그인 페이지를 방문했을 때, When 올바른 아이디와 비밀번호를 입력하면, Then 홈 화면이 표시되어야 한다.”
-
-✅ BDD의 활용 사례
-	•	웹 애플리케이션의 UI/UX 동작 검증
-	•	e-커머스 플랫폼에서 장바구니 기능 테스트
-	•	REST API의 예상 응답 값 검증
-
-✅ TDD는 코드 구현 전에 테스트를 작성하는 개발자 중심의 방식이고, BDD는 사용자 요구사항을 중심으로 협업하는 방식이다.
-
-⸻
 
 2. 모델 기반 개발(MBD, Model-Based Development)의 개념과 활용 사례
 
