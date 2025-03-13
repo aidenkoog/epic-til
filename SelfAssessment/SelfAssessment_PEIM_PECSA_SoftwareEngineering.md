@@ -8344,14 +8344,9 @@ Organize concepts, features, types and Pros and Cons
     - DevOps, Agile과 같은 현대적인 개발 방법론을 적용하면 유지보수 비용을 더욱 절감할 수 있다.
 
 
-- 정적 테스트(Static Testing)와 동적 테스트(Dynamic Testing)의 차이를 설명하시오.
-- 소프트웨어 테스팅 원칙(Software Testing Principles) 7가지를 설명하시오.
-- ISO/IEC/IEEE 29119 소프트웨어 테스트 표준의 개념과 주요 내용(테스트 프로세스, 문서화, 기술)을 설명하시오.
-- 회귀 테스트(Regression Testing)의 개념과 자동화 도구(Selenium, JUnit 등)를 설명하시오.
-  - 1. 정적 테스트(Static Testing)와 동적 테스트(Dynamic Testing)의 차이
-
-📌 정적 테스트(Static Testing) 개념
-	•	정적 테스트는 소프트웨어 실행 없이 코드, 문서, 설계를 분석하여 오류를 찾는 방법이다.
+- 정적 테스트(Static Testing)와 동적 테스트(Dynamic Testing)의 차이
+  - 정적 테스트(Static Testing) 개념
+	  - 정적 테스트는 소프트웨어 실행 없이 코드, 문서, 설계를 분석하여 오류를 찾는 방법이다.
 	•	코드 검토(Code Review), 정적 분석(Static Analysis), 워크스루(Walkthrough), 인스펙션(Inspection) 등의 방법을 포함한다.
 
 ✅ 정적 테스트의 주요 특징
@@ -8382,7 +8377,11 @@ Organize concepts, features, types and Pros and Cons
 
 ✅ 결론: 정적 테스트는 코드 실행 없이 문제를 발견하는 반면, 동적 테스트는 실행을 통해 소프트웨어의 실제 동작을 검증하는 방법이다.
 
-⸻
+- 소프트웨어 테스팅 원칙(Software Testing Principles) 7가지를 설명하시오.
+- ISO/IEC/IEEE 29119 소프트웨어 테스트 표준의 개념과 주요 내용(테스트 프로세스, 문서화, 기술)을 설명하시오.
+- 회귀 테스트(Regression Testing)의 개념과 자동화 도구(Selenium, JUnit 등)를 설명하시오.
+
+
 
 2. 소프트웨어 테스팅 원칙(Software Testing Principles) 7가지
 
