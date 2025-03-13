@@ -1002,38 +1002,35 @@ Organize concepts, features, types and Pros and Cons
 		- (6) 교육 및 컨설팅 제공:
 			- 프로젝트 매니저 및 팀원들에게 프로젝트 관리 교육 제공
 
-- 프로젝트 팀의 생산성을 높이는 방법은?
+- 프로젝트 팀의 생산성을 높이는 방법
+	- 명확한 목표 설정
+		- 팀원들이 프로젝트의 목표와 방향성을 명확히 이해하도록 공유
+		- OKR(Objectives and Key Results) 또는 SMART 목표 설정
+
+	- 효율적인 커뮤니케이션 체계 구축
+		- 정기적인 스탠드업 미팅(예: 데일리 스크럼)으로 업무 진행 상황 점검
+		- Slack, Microsoft Teams, Jira 등의 협업 도구를 활용하여 실시간 커뮤니케이션 강화
+
+	- 역할과 책임(RACI Matrix) 명확화
+		- 각 팀원의 역할과 책임을 명확히 정의하여 혼선을 방지
+		- 업무 오너십을 강화하여 책임감 있는 업무 수행 유도
+
+	- 업무 자동화 및 최적화
+		- 반복적인 작업은 자동화하여 비효율적인 업무 제거
+		- CI/CD 도구(Jenkins, GitHub Actions)를 활용하여 배포 자동화
+
+	- 생산성 측정을 통한 개선
+		- Key Performance Indicators(KPI) 설정 및 주기적인 리뷰
+		- 업무 진행 상황과 병목 구간을 데이터 기반으로 분석하여 개선
+
+	- 동기 부여 및 팀 문화 강화
+		- 성과에 대한 피드백 및 보상을 통해 팀원의 동기 부여
+		- 워크숍, 해커톤 등 팀 협업 및 스킬 향상을 위한 활동 지원
+
 - 프로젝트 관리에서 RAID(Risks, Assumptions, Issues, Dependencies) 로그의 역할은?
 - 프로젝트 관리에서 Earned Value Analysis(EVA)를 활용하는 방법은?
 - 프로젝트에서 의사결정 트리(Decision Tree)를 활용하는 방법은?
 - 프로젝트에서 Stakeholder Management의 핵심 요소는?
-  - 1. 프로젝트 팀의 생산성을 높이는 방법
-
-명확한 목표 설정
-	•	팀원들이 프로젝트의 목표와 방향성을 명확히 이해하도록 공유
-	•	OKR(Objectives and Key Results) 또는 SMART 목표 설정
-
-효율적인 커뮤니케이션 체계 구축
-	•	정기적인 스탠드업 미팅(예: 데일리 스크럼)으로 업무 진행 상황 점검
-	•	Slack, Microsoft Teams, Jira 등의 협업 도구를 활용하여 실시간 커뮤니케이션 강화
-
-역할과 책임(RACI Matrix) 명확화
-	•	각 팀원의 역할과 책임을 명확히 정의하여 혼선을 방지
-	•	업무 오너십을 강화하여 책임감 있는 업무 수행 유도
-
-업무 자동화 및 최적화
-	•	반복적인 작업은 자동화하여 비효율적인 업무 제거
-	•	CI/CD 도구(Jenkins, GitHub Actions)를 활용하여 배포 자동화
-
-생산성 측정을 통한 개선
-	•	Key Performance Indicators(KPI) 설정 및 주기적인 리뷰
-	•	업무 진행 상황과 병목 구간을 데이터 기반으로 분석하여 개선
-
-동기 부여 및 팀 문화 강화
-	•	성과에 대한 피드백 및 보상을 통해 팀원의 동기 부여
-	•	워크숍, 해커톤 등 팀 협업 및 스킬 향상을 위한 활동 지원
-
-⸻
 
 2. 프로젝트 관리에서 RAID(Risks, Assumptions, Issues, Dependencies) 로그의 역할
 
