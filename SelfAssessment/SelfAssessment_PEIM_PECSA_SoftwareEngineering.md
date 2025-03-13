@@ -8298,30 +8298,29 @@ Organize concepts, features, types and Pros and Cons
 
   - MBD는 물리적 시스템의 동작을 정밀하게 모델링하고 검증할 수 있어, 임베디드 시스템 및 안전이 중요한 분야에서 활용
 
-- 소프트웨어 공학에서 CASE(Computer-Aided Software Engineering) 도구의 개념과 활용 사례를 설명하시오.
+- 소프트웨어 공학에서 CASE(Computer-Aided Software Engineering) 도구의 개념과 활용 사례
+  - CASE 도구 개념
+	  - CASE(Computer-Aided Software Engineering) 도구는 소프트웨어 개발의 생산성을 높이고 오류를 줄이기 위해 자동화된 도구를 제공하는 소프트웨어 엔지니어링 기법
+	  - 소프트웨어 개발 과정(요구사항 분석, 설계, 구현, 테스트, 유지보수) 전반에서 활용된다.
+
+  - CASE 도구의 주요 특징
+	  - 모델링 및 설계 자동화 (UML, ERD 작성)
+	  - 코드 자동 생성 및 분석
+	  - 테스트 및 디버깅 자동화
+	  - 프로젝트 관리 및 문서화 지원
+
+  - CASE 도구의 활용 사례
+	  - UML 모델링: StarUML, Enterprise Architect
+	  - 코드 자동 생성: MATLAB Simulink, Rational Rose
+	  - 테스트 자동화: Selenium, JUnit
+	  - 소프트웨어 프로젝트 관리: Jira, Redmine
+
+  - 정리
+    - CASE 도구는 개발 생산성을 향상시키고, 프로젝트 관리 및 품질 보증을 체계적으로 수행하는 데 중요한 역할
+
 - 유지보수 비용을 줄이기 위한 소프트웨어 개발 방법론을 설명하시오.
 
 3. 소프트웨어 공학에서 CASE(Computer-Aided Software Engineering) 도구의 개념과 활용 사례
-
-📌 CASE 도구 개념
-	•	CASE(Computer-Aided Software Engineering) 도구는 소프트웨어 개발의 생산성을 높이고 오류를 줄이기 위해 자동화된 도구를 제공하는 소프트웨어 엔지니어링 기법이다.
-	•	소프트웨어 개발 과정(요구사항 분석, 설계, 구현, 테스트, 유지보수) 전반에서 활용된다.
-
-✅ CASE 도구의 주요 특징
-	•	모델링 및 설계 자동화 (UML, ERD 작성)
-	•	코드 자동 생성 및 분석
-	•	테스트 및 디버깅 자동화
-	•	프로젝트 관리 및 문서화 지원
-
-✅ CASE 도구의 활용 사례
-	•	UML 모델링: StarUML, Enterprise Architect
-	•	코드 자동 생성: MATLAB Simulink, Rational Rose
-	•	테스트 자동화: Selenium, JUnit
-	•	소프트웨어 프로젝트 관리: Jira, Redmine
-
-✅ CASE 도구는 개발 생산성을 향상시키고, 프로젝트 관리 및 품질 보증을 체계적으로 수행하는 데 중요한 역할을 한다.
-
-⸻
 
 4. 유지보수 비용을 줄이기 위한 소프트웨어 개발 방법론
 
