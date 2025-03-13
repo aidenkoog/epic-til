@@ -894,42 +894,37 @@ Organize concepts, features, types and Pros and Cons
 		- QA는 “올바른 프로세스를 따르고 있는가?“를 검토하는 활동이고, QC는 “결과물이 기대한 품질을 충족하는가?“를 평가하는 활동
 
 
-- 프로젝트 관리에서 Six Sigma와 Lean의 차이점은?
-- 프로젝트에서 OKR(Objectives and Key Results)을 설정하는 방법은?
-- 프로젝트에서 MoSCoW 우선순위 기법을 적용하는 방법은?
-- 프로젝트 일정 지연을 방지하기 위한 Fast Tracking과 Crashing의 차이점은?
-- 프로젝트에서 고객 요구사항이 변경될 때 대응하는 방법은?
-- 프로젝트 관리에서 PMO(Project Management Office)의 역할은?
-  - 1. 프로젝트 관리에서 Six Sigma와 Lean의 차이점
+- 프로젝트 관리에서 Six Sigma와 Lean의 차이점
+	- Six Sigma (데이터 기반)
+		- 개념
+			- 결함을 최소화하고 품질을 향상시키기 위한 데이터 기반의 프로세스 개선 방법론
+			- 통계적 기법을 활용하여 변동성을 줄이고, 목표 수준의 품질을 달성하는 것이 목적
 
-Six Sigma
+		- 핵심 요소
+			- DMAIC(Define, Measure, Analyze, Improve, Control): 기존 프로세스를 개선하는 절차
+			- DMADV(Define, Measure, Analyze, Design, Verify): 새로운 프로세스를 설계하는 절차
+			- 변동성 제거 및 결함률(Defect Rate) 최소화에 중점
 
-개념:
-	•	결함을 최소화하고 품질을 향상시키기 위한 데이터 기반의 프로세스 개선 방법론
-	•	통계적 기법을 활용하여 변동성을 줄이고, 목표 수준의 품질을 달성하는 것이 목적
+	- Lean (프로세스 흐름)
+		- 개념
+			- 낭비(불필요한 공정, 대기 시간, 과잉 생산 등)를 제거하여 효율성을 극대화하는 방법론
+			- 생산성과 고객 가치를 극대화하는 것이 목적
 
-핵심 요소:
-	•	DMAIC(Define, Measure, Analyze, Improve, Control): 기존 프로세스를 개선하는 절차
-	•	DMADV(Define, Measure, Analyze, Design, Verify): 새로운 프로세스를 설계하는 절차
-	•	변동성 제거 및 결함률(Defect Rate) 최소화에 중점
+		- 핵심 요소
+			- 5S(정리, 정돈, 청소, 청결, 습관화): 작업 환경 개선
+			- Kaizen(카이젠, 지속적 개선): 작은 변화를 지속적으로 적용하여 효율성 향상
+			- Just-In-Time(JIT): 필요한 시점에 필요한 만큼 생산하여 낭비 제거
 
-Lean
+	- 차이점 요약
+		- Six Sigma는 품질 개선 및 변동성 감소에 중점을 둠
+		- Lean은 낭비 제거 및 프로세스 최적화에 초점을 맞춤
+		- Six Sigma는 데이터 기반의 통계 분석을 활용하지만, Lean은 프로세스 흐름을 개선하여 효율성을 높임
 
-개념:
-	•	낭비(불필요한 공정, 대기 시간, 과잉 생산 등)를 제거하여 효율성을 극대화하는 방법론
-	•	생산성과 고객 가치를 극대화하는 것이 목적
-
-핵심 요소:
-	•	5S(정리, 정돈, 청소, 청결, 습관화): 작업 환경 개선
-	•	Kaizen(카이젠, 지속적 개선): 작은 변화를 지속적으로 적용하여 효율성 향상
-	•	Just-In-Time(JIT): 필요한 시점에 필요한 만큼 생산하여 낭비 제거
-
-차이점 요약
-	•	Six Sigma는 품질 개선 및 변동성 감소에 중점을 둠
-	•	Lean은 낭비 제거 및 프로세스 최적화에 초점을 맞춤
-	•	Six Sigma는 데이터 기반의 통계 분석을 활용하지만, Lean은 프로세스 흐름을 개선하여 효율성을 높임
-
-⸻
+- 프로젝트에서 OKR(Objectives and Key Results)을 설정하는 방법
+- 프로젝트에서 MoSCoW 우선순위 기법을 적용하는 방법
+- 프로젝트 일정 지연을 방지하기 위한 Fast Tracking과 Crashing의 차이점
+- 프로젝트에서 고객 요구사항이 변경될 때 대응하는 방법
+- 프로젝트 관리에서 PMO(Project Management Office)의 역할
 
 2. 프로젝트에서 OKR(Objectives and Key Results)을 설정하는 방법
 
