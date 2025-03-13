@@ -625,70 +625,61 @@ Organize concepts, features, types and Pros and Cons
 			- 책임 소재가 명확해져 일정 지연 및 업무 미비 방지
 
 
-- 프로젝트 관리에서 Earned Value Management(EVM)의 개념과 활용 방법은?
-- 프로젝트에서 Agile과 Waterfall 모델의 장단점은?
-- 프로젝트에서 Risk Management Plan을 수립하는 방법은?
+- 프로젝트 관리에서 Earned Value Management(EVM)의 개념과 활용 방법
+	- 개념
+		- EVM은 프로젝트 진행 상황을 정량적으로 측정하고, 원가 및 일정 성과를 평가하는 기법
+		- 계획 대비 실제 수행 결과를 평가하여 프로젝트의 건강 상태를 파악하는 데 사용
+
+	- 활용 방법
+		- PV (Planned Value): 계획된 일정 시점까지 수행해야 할 작업의 가치
+		- EV (Earned Value): 실제로 수행된 작업의 가치
+		- AC (Actual Cost): 해당 작업을 수행하는 데 실제로 사용된 비용
+		- SV (Schedule Variance) = EV - PV: 일정 지연 여부 확인
+		- CV (Cost Variance) = EV - AC: 예산 초과 여부 확인
+		- SPI (Schedule Performance Index) = EV / PV: 일정 성과 평가
+		- CPI (Cost Performance Index) = EV / AC: 비용 성과 평가
+		- EAC (Estimate at Completion) = BAC / CPI: 프로젝트 완료 예상 비용 예측
+
+- 프로젝트에서 Agile과 Waterfall 모델의 장단점
+	- Agile 모델
+		- 장점:
+			- 유연한 요구사항 변경 가능
+			- 지속적인 피드백을 통한 품질 향상
+			- 고객과의 지속적인 협업
+			- 빠른 프로토타이핑 가능
+
+		- 단점:
+			- 문서화가 부족할 수 있음
+			- 명확한 계획 없이 진행 시 혼란 발생 가능
+			- 고객의 적극적인 참여 필요
+
+	- Waterfall 모델
+		- 장점
+			- 프로젝트 범위와 일정이 명확
+			- 문서화가 철저하여 유지보수 용이
+			- 개발 프로세스가 체계적이고 예측 가능
+
+		- 단점
+			- 요구사항 변경이 어렵고 비용이 큼
+			- 완료 후에야 결과물이 나와 리스크가 큼
+			- 개발 초기 오류가 후반부까지 이어질 가능성 높음
+
+- 프로젝트에서 Risk Management Plan을 수립하는 방법
+	- (1) 리스크 식별: 프로젝트 목표에 영향을 미칠 수 있는 잠재적 위험 요소 파악
+	- (2) 리스크 분석:
+		- 정성적 분석: 발생 가능성과 영향을 평가 (High, Medium, Low)
+		- 정량적 분석: 수치 기반 평가 (예: 몬테카를로 시뮬레이션 활용)
+	- (3) 대응 계획 수립:
+		- 회피(Avoid): 리스크 자체를 제거
+		- 완화(Mitigate): 리스크 영향을 줄이기 위한 조치
+		- 전가(Transfer): 보험 또는 계약을 통해 리스크를 외부에 넘김
+		- 수용(Accept): 리스크를 감수하고 대비책 마련
+	- (4) 모니터링 및 대응: 지속적으로 리스크를 추적하고 필요 시 대응
+
 - 프로젝트에서 Critical Path Method(CPM)를 활용하는 이유는?
 - 프로젝트에서 Baseline을 설정하는 이유는?
 - 프로젝트에서 Change Request가 발생했을 때 처리 방법은?
 - 프로젝트에서 Milestone 설정이 중요한 이유는?
-  - 프로젝트 관리에서 Earned Value Management(EVM)의 개념과 활용 방법
-
-개념:
-EVM은 프로젝트 진행 상황을 정량적으로 측정하고, 원가 및 일정 성과를 평가하는 기법이다. 계획 대비 실제 수행 결과를 평가하여 프로젝트의 건강 상태를 파악하는 데 사용된다.
-
-활용 방법:
-	•	PV (Planned Value): 계획된 일정 시점까지 수행해야 할 작업의 가치
-	•	EV (Earned Value): 실제로 수행된 작업의 가치
-	•	AC (Actual Cost): 해당 작업을 수행하는 데 실제로 사용된 비용
-	•	SV (Schedule Variance) = EV - PV: 일정 지연 여부 확인
-	•	CV (Cost Variance) = EV - AC: 예산 초과 여부 확인
-	•	SPI (Schedule Performance Index) = EV / PV: 일정 성과 평가
-	•	CPI (Cost Performance Index) = EV / AC: 비용 성과 평가
-	•	EAC (Estimate at Completion) = BAC / CPI: 프로젝트 완료 예상 비용 예측
-
-⸻
-
-프로젝트에서 Agile과 Waterfall 모델의 장단점
-
-Agile 모델:
-✅ 장점:
-	•	유연한 요구사항 변경 가능
-	•	지속적인 피드백을 통한 품질 향상
-	•	고객과의 지속적인 협업
-	•	빠른 프로토타이핑 가능
-
-❌ 단점:
-	•	문서화가 부족할 수 있음
-	•	명확한 계획 없이 진행 시 혼란 발생 가능
-	•	고객의 적극적인 참여 필요
-
-Waterfall 모델:
-✅ 장점:
-	•	프로젝트 범위와 일정이 명확
-	•	문서화가 철저하여 유지보수 용이
-	•	개발 프로세스가 체계적이고 예측 가능
-
-❌ 단점:
-	•	요구사항 변경이 어렵고 비용이 큼
-	•	완료 후에야 결과물이 나와 리스크가 큼
-	•	개발 초기 오류가 후반부까지 이어질 가능성 높음
-
-⸻
-
-프로젝트에서 Risk Management Plan을 수립하는 방법
-	1.	리스크 식별: 프로젝트 목표에 영향을 미칠 수 있는 잠재적 위험 요소 파악
-	2.	리스크 분석:
-	•	정성적 분석: 발생 가능성과 영향을 평가 (High, Medium, Low)
-	•	정량적 분석: 수치 기반 평가 (예: 몬테카를로 시뮬레이션 활용)
-	3.	대응 계획 수립:
-	•	회피(Avoid): 리스크 자체를 제거
-	•	완화(Mitigate): 리스크 영향을 줄이기 위한 조치
-	•	전가(Transfer): 보험 또는 계약을 통해 리스크를 외부에 넘김
-	•	수용(Accept): 리스크를 감수하고 대비책 마련
-	4.	모니터링 및 대응: 지속적으로 리스크를 추적하고 필요 시 대응
-
-⸻
 
 프로젝트에서 Critical Path Method(CPM)를 활용하는 이유
 
