@@ -826,21 +826,22 @@ Organize concepts, features, types and Pros and Cons
 		- 프로젝트 성공 기준을 설정하고 주요 결과물을 명시하여 프로젝트가 올바르게 진행되고 있는지 평가하는 기준을 제공
 		- 이해관계자 간의 공통된 이해를 구축하여 원활한 협업을 도움
 
-- 프로젝트에서 Critical Chain Project Management(CCPM)와 Critical Path의 차이점은?
+- 프로젝트에서 Critical Chain Project Management(CCPM)와 Critical Path의 차이점
+	- Critical Path Method(CPM)와 Critical Chain Project Management(CCPM)는 프로젝트 일정 관리 기법이지만 초점이 다르다.
+
+	- CPM (가장 빠른 완료 경로 분석)
+		- 프로젝트 일정을 가장 빠르게 완료할 수 있는 경로를 분석하는 방법
+		- 작업 간의 의존성을 분석하여 프로젝트의 크리티컬 패스를 식별하고, 일정 지연을 최소화하는 데 초점
+		- 주어진 작업의 소요 기간을 기준으로 전체 프로젝트의 완료 일정을 결정
+
+	- CCPM (제약 고려한 일정 최적화 기법)
+		- 리소스 제약을 고려하여 프로젝트 일정을 최적화하는 기법
+		- 크리티컬 패스뿐만 아니라 리소스가 일정에 미치는 영향을 분석하고, 여유 시간을 버퍼로 설정하여 일정 단축과 리스크 대응을 동시에 수행
+		- 즉, 리소스 부족으로 인해 일정이 지연되지 않도록 자원 배분을 최적화하고, 전략적인 버퍼를 활용하여 프로젝트의 안정적인 수행을 보장
+
 - 프로젝트 관리에서 Float(유동 시간)의 개념은 무엇인가?
 - 프로젝트에서 Issue Tracking을 체계적으로 수행하는 방법은?
 - 프로젝트 관리에서 Quality Assurance(QA)와 Quality Control(QC)의 차이점은?
-
-
-2. 프로젝트에서 Critical Chain Project Management(CCPM)와 Critical Path의 차이점
-
-Critical Path Method(CPM)와 Critical Chain Project Management(CCPM)는 프로젝트 일정 관리 기법이지만 초점이 다르다.
-
-CPM은 프로젝트 일정을 가장 빠르게 완료할 수 있는 경로를 분석하는 방법이다. 작업 간의 의존성을 분석하여 프로젝트의 크리티컬 패스를 식별하고, 일정 지연을 최소화하는 데 초점을 둔다. 주어진 작업의 소요 기간을 기준으로 전체 프로젝트의 완료 일정을 결정한다.
-
-CCPM은 리소스 제약을 고려하여 프로젝트 일정을 최적화하는 기법이다. 크리티컬 패스뿐만 아니라 리소스가 일정에 미치는 영향을 분석하고, 여유 시간을 버퍼로 설정하여 일정 단축과 리스크 대응을 동시에 수행한다. 즉, 리소스 부족으로 인해 일정이 지연되지 않도록 자원 배분을 최적화하고, 전략적인 버퍼를 활용하여 프로젝트의 안정적인 수행을 보장한다.
-
-⸻
 
 3. 프로젝트 관리에서 Float(유동 시간)의 개념
 
