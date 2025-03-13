@@ -8097,41 +8097,36 @@ Organize concepts, features, types and Pros and Cons
         - UML과 같은 모델링 도구를 사용하여 시스템을 설계하고 개발하는 방식.
         - 장점: 유지보수 용이 및 문서화 자동화.
 
-- 정보 시스템 아키텍처(EA, Enterprise Architecture)의 개념과 구성 요소(Business, Data, Application, Technology)를 설명하시오.
+- 정보 시스템 아키텍처(EA, Enterprise Architecture)의 개념과 구성 요소(Business, Data, Application, Technology)
+  - EA(Enterprise Architecture)의 개념
+	  - EA(Enterprise Architecture, 기업 아키텍처)는 기업의 비즈니스 목표를 효과적으로 지원하기 위해 IT 시스템을 전략적으로 설계하고 관리하는 체계
+	  - 조직의 비즈니스, 데이터, 애플리케이션, 기술을 체계적으로 정리하여 효율적인 IT 자원 관리 및 최적화를 목표
+	  - 주요 프레임워크: TOGAF(The Open Group Architecture Framework), Zachman Framework
+
+  - EA의 주요 구성 요소
+    - (1) 비즈니스 아키텍처(Business Architecture)
+        - 조직의 비즈니스 목표, 전략, 프로세스를 정의.
+        - IT 시스템이 비즈니스 요구사항을 어떻게 지원하는지를 모델링.
+        - 예: 업무 프로세스 모델링(BPM), 조직 구조 분석.
+
+    - (2) 데이터 아키텍처(Data Architecture)
+      - 기업에서 사용하는 데이터 모델, 데이터 흐름, 데이터 저장소를 설계.
+      - 데이터의 일관성 유지, 보안, 무결성을 고려.
+      - 예: 데이터 웨어하우스, 메타데이터 관리.
+
+    - (3) 애플리케이션 아키텍처(Application Architecture)
+      - 조직의 비즈니스 프로세스를 지원하는 애플리케이션 구성 및 연계 구조를 정의.
+      - 예: ERP, CRM, API 연계 방식.
+
+    - (4) 기술 아키텍처(Technology Architecture)
+      - 시스템을 실행하기 위한 서버, 네트워크, 데이터베이스, 보안 기술 스택을 설계.
+      - 예: 클라우드 컴퓨팅(AWS, Azure), 컨테이너 기술(Docker, Kubernetes).
+
+  - 결론
+    - EA는 기업의 IT 자원을 체계적으로 관리하고, 비즈니스 목표와 IT 전략을 정렬하여 효율적인 IT 운영을 가능하게 한다.
+
+
 - 소프트웨어 프로토타이핑(Prototyping) 기법의 개념과 유형(Rapid, Evolutionary, Throwaway)을 설명하시오.
-
-2. 정보 시스템 아키텍처(EA, Enterprise Architecture)의 개념과 구성 요소
-
-📌 EA(Enterprise Architecture)의 개념
-	•	**EA(Enterprise Architecture, 기업 아키텍처)**는 기업의 비즈니스 목표를 효과적으로 지원하기 위해 IT 시스템을 전략적으로 설계하고 관리하는 체계이다.
-	•	조직의 비즈니스, 데이터, 애플리케이션, 기술을 체계적으로 정리하여 효율적인 IT 자원 관리 및 최적화를 목표로 한다.
-	•	주요 프레임워크: TOGAF(The Open Group Architecture Framework), Zachman Framework
-
-⸻
-
-📌 EA의 주요 구성 요소
-
-1️⃣ 비즈니스 아키텍처(Business Architecture)
-	•	조직의 비즈니스 목표, 전략, 프로세스를 정의.
-	•	IT 시스템이 비즈니스 요구사항을 어떻게 지원하는지를 모델링.
-	•	예: 업무 프로세스 모델링(BPM), 조직 구조 분석.
-
-2️⃣ 데이터 아키텍처(Data Architecture)
-	•	기업에서 사용하는 데이터 모델, 데이터 흐름, 데이터 저장소를 설계.
-	•	데이터의 일관성 유지, 보안, 무결성을 고려.
-	•	예: 데이터 웨어하우스, 메타데이터 관리.
-
-3️⃣ 애플리케이션 아키텍처(Application Architecture)
-	•	조직의 비즈니스 프로세스를 지원하는 애플리케이션 구성 및 연계 구조를 정의.
-	•	예: ERP, CRM, API 연계 방식.
-
-4️⃣ 기술 아키텍처(Technology Architecture)
-	•	시스템을 실행하기 위한 서버, 네트워크, 데이터베이스, 보안 기술 스택을 설계.
-	•	예: 클라우드 컴퓨팅(AWS, Azure), 컨테이너 기술(Docker, Kubernetes).
-
-✅ 결론: EA는 기업의 IT 자원을 체계적으로 관리하고, 비즈니스 목표와 IT 전략을 정렬하여 효율적인 IT 운영을 가능하게 한다.
-
-⸻
 
 3. 소프트웨어 프로토타이핑(Prototyping) 기법의 개념과 유형
 
