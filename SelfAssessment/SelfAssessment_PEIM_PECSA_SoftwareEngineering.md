@@ -8214,38 +8214,36 @@ Organize concepts, features, types and Pros and Cons
     - 결론
       - DevOps는 소프트웨어 개발과 운영을 자동화하여 빠른 배포, 높은 안정성, 지속적인 개선을 가능하게 하는 방법론
 
+- ITIL(Information Technology Infrastructure Library)의 개념과 주요 프로세스
+  - ITIL 개념
+	  - ITIL(Information Technology Infrastructure Library)
+    - IT 서비스 관리를 위한 표준 프레임워크로, 조직이 IT 서비스를 효과적으로 제공하고 운영할 수 있도록 체계적인 프로세스를 정의한 모델
+	  - ITIL은 기업이 IT 서비스 품질을 향상하고, 비즈니스 목표와 IT 운영을 정렬하는 것을 목표
+	  - 현재 ITIL은 ITIL v4 버전까지 발전하였으며, 최신 버전은 애자일(Agile), DevOps, 클라우드 기반 환경과의 통합을 강조
 
-- ITIL(Information Technology Infrastructure Library)의 개념과 주요 프로세스를 설명하시오.
-📌 ITIL 개념
-	•	**ITIL(Information Technology Infrastructure Library)**은 IT 서비스 관리를 위한 표준 프레임워크로, 조직이 IT 서비스를 효과적으로 제공하고 운영할 수 있도록 체계적인 프로세스를 정의한 모델이다.
-	•	ITIL은 기업이 IT 서비스 품질을 향상하고, 비즈니스 목표와 IT 운영을 정렬하는 것을 목표로 한다.
-	•	현재 ITIL은 ITIL v4 버전까지 발전하였으며, 최신 버전은 애자일(Agile), DevOps, 클라우드 기반 환경과의 통합을 강조한다.
+  - ITIL의 주요 프로세스
+    - 서비스 전략(Service Strategy)
+	    - IT 서비스가 비즈니스 목표에 부합하도록 전략을 수립하는 과정.
+	    - 핵심 요소: 서비스 포트폴리오 관리, 수익 모델 분석, IT 투자 계획 수립.
 
-⸻
+    - 서비스 설계(Service Design)
+	    - IT 서비스를 설계 및 계획하여 안정적인 운영이 가능하도록 준비하는 단계.
+	    - 핵심 요소: 서비스 수준 관리(SLA), 용량 계획, 보안 관리, IT 아키텍처 설계.
 
-📌 ITIL의 주요 프로세스
+    - 서비스 전환(Service Transition)
+	    - 새로운 IT 서비스를 테스트하고 배포하는 단계로, 변경을 안전하게 적용.
+	    - 핵심 요소: 변경 관리(Change Management), 배포 및 릴리스 관리, 지식 관리.
 
-1️⃣ 서비스 전략(Service Strategy)
-	•	IT 서비스가 비즈니스 목표에 부합하도록 전략을 수립하는 과정.
-	•	핵심 요소: 서비스 포트폴리오 관리, 수익 모델 분석, IT 투자 계획 수립.
+    - 서비스 운영(Service Operation)
+	    - IT 서비스가 안정적으로 운영되도록 유지 및 관리하는 단계.
+	    - 핵심 요소: 인시던트 관리(Incident Management), 문제 관리, IT 헬프데스크 운영.
 
-2️⃣ 서비스 설계(Service Design)
-	•	IT 서비스를 설계 및 계획하여 안정적인 운영이 가능하도록 준비하는 단계.
-	•	핵심 요소: 서비스 수준 관리(SLA), 용량 계획, 보안 관리, IT 아키텍처 설계.
+    - 지속적 서비스 개선(Continual Service Improvement, CSI)
+	    - IT 서비스의 품질을 지속적으로 개선하여 비즈니스 요구사항을 충족.
+	    - 핵심 요소: 서비스 리뷰, 성과 분석, 최적화 방안 도출.
 
-3️⃣ 서비스 전환(Service Transition)
-	•	새로운 IT 서비스를 테스트하고 배포하는 단계로, 변경을 안전하게 적용.
-	•	핵심 요소: 변경 관리(Change Management), 배포 및 릴리스 관리, 지식 관리.
-
-4️⃣ 서비스 운영(Service Operation)
-	•	IT 서비스가 안정적으로 운영되도록 유지 및 관리하는 단계.
-	•	핵심 요소: 인시던트 관리(Incident Management), 문제 관리, IT 헬프데스크 운영.
-
-5️⃣ 지속적 서비스 개선(Continual Service Improvement, CSI)
-	•	IT 서비스의 품질을 지속적으로 개선하여 비즈니스 요구사항을 충족.
-	•	핵심 요소: 서비스 리뷰, 성과 분석, 최적화 방안 도출.
-
-✅ 결론: ITIL은 IT 서비스를 효율적으로 운영하고 관리하기 위한 표준화된 프레임워크이며, 비즈니스 목표와 IT 운영을 효과적으로 연계하는 역할을 한다.
+  - 결론
+    - ITIL은 IT 서비스를 효율적으로 운영하고 관리하기 위한 표준화된 프레임워크이며, 비즈니스 목표와 IT 운영을 효과적으로 연계하는 역할 수행
 
 
 - TDD(Test-Driven Development)와 BDD(Behavior-Driven Development)의 차이를 설명하시오.
