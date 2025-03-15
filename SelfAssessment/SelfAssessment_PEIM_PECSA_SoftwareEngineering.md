@@ -8919,57 +8919,46 @@ Organize concepts, features, types and Pros and Cons
 	  - 예: 컨테이너를 단독으로 실행하면 Docker CLI를 사용하지만, 쿠버네티스를 사용하면 수백 개의 컨테이너를 효율적으로 운영할 수 있음.
 
   - 결론: Docker는 컨테이너를 실행하는 기술이고, Kubernetes는 컨테이너를 대규모로 관리하는 오케스트레이션 도구이다.
-
-
-- API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이를 설명하시오.
   
-4. API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이
+- API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이
+  - API 중심 개발(API-First Development) 개념
+	  - API 중심 개발은 소프트웨어의 핵심 기능을 API로 먼저 설계하고, API를 기반으로 애플리케이션을 개발하는 방법론.
+	  - 프론트엔드, 백엔드, 모바일 등 다양한 클라이언트가 일관된 API를 사용할 수 있도록 설계.
 
-📌 API 중심 개발(API-First Development) 개념
-	•	API 중심 개발은 소프트웨어의 핵심 기능을 API로 먼저 설계하고, API를 기반으로 애플리케이션을 개발하는 방법론.
-	•	프론트엔드, 백엔드, 모바일 등 다양한 클라이언트가 일관된 API를 사용할 수 있도록 설계.
+  - REST API, GraphQL, gRPC의 개념과 차이
+    - REST API (Representational State Transfer API)
+      - HTTP 기반의 API 설계 원칙으로, JSON, XML 등을 사용하여 데이터를 주고받음
+      - 특징:
+        - HTTP 메서드 사용(GET, POST, PUT, DELETE)
+        - 클라이언트-서버 구조
+        - 캐싱 및 확장성 우수
+      - 단점:
+        - 과다한 데이터 요청(Over-fetching) 문제 발생
+        - 필요하지 않은 데이터까지 수신할 수 있음
 
-⸻
+    - GraphQL
+      - Facebook에서 개발한 API 쿼리 언어로, 클라이언트가 원하는 데이터만 요청 가능
+      - 특징:
+        - REST API의 Over-fetching/Under-fetching 문제 해결
+        - 단일 엔드포인트(/graphql)에서 모든 요청을 처리
+        - 동적 데이터 요청 가능
+      - 단점:
+        - 복잡한 쿼리 구조
+        - 캐싱이 어렵고 성능 최적화 필요
 
-📌 REST API, GraphQL, gRPC의 개념과 차이
+    - gRPC (Google Remote Procedure Call)
+      - Google에서 개발한 고성능 API 통신 프레임워크로, HTTP/2 기반의 바이너리 프로토콜 사용.
+      - 특징:
+        - 빠른 데이터 전송 속도.
+        - 다중 언어 지원 (C++, Java, Python, Go 등).
+        - 양방향 스트리밍(Bidirectional Streaming) 가능.
+      - 단점:
+        - 브라우저 지원 부족 (웹에서는 REST API보다 활용 어려움).
 
-1️⃣ REST API (Representational State Transfer API)
-	•	HTTP 기반의 API 설계 원칙으로, JSON, XML 등을 사용하여 데이터를 주고받음.
-	•	특징:
-	•	HTTP 메서드 사용(GET, POST, PUT, DELETE).
-	•	클라이언트-서버 구조.
-	•	캐싱 및 확장성 우수.
-	•	단점:
-	•	과다한 데이터 요청(Over-fetching) 문제 발생.
-	•	필요하지 않은 데이터까지 수신할 수 있음.
-
-2️⃣ GraphQL
-	•	Facebook에서 개발한 API 쿼리 언어로, 클라이언트가 원하는 데이터만 요청 가능.
-	•	특징:
-	•	REST API의 Over-fetching/Under-fetching 문제 해결.
-	•	단일 엔드포인트(/graphql)에서 모든 요청을 처리.
-	•	동적 데이터 요청 가능.
-	•	단점:
-	•	복잡한 쿼리 구조.
-	•	캐싱이 어렵고 성능 최적화 필요.
-
-3️⃣ gRPC (Google Remote Procedure Call)
-	•	Google에서 개발한 고성능 API 통신 프레임워크로, HTTP/2 기반의 바이너리 프로토콜 사용.
-	•	특징:
-	•	빠른 데이터 전송 속도.
-	•	다중 언어 지원 (C++, Java, Python, Go 등).
-	•	양방향 스트리밍(Bidirectional Streaming) 가능.
-	•	단점:
-	•	브라우저 지원 부족 (웹에서는 REST API보다 활용 어려움).
-
-✅ 결론:
-	•	REST API는 가장 널리 사용되는 표준적인 방식.
-	•	GraphQL은 데이터 요청을 최적화할 수 있지만, 서버 부담이 증가.
-	•	gRPC는 고속 데이터 통신이 필요한 서비스 간 통신(Microservices)에 적합.
-
-✅ API 중심 개발에서는 REST API, GraphQL, gRPC를 적절히 활용하여 효율적인 API 설계를 해야 한다.
-
-
+  - 결론:
+	  - REST API는 가장 널리 사용되는 표준적인 방식.
+	  - GraphQL은 데이터 요청을 최적화할 수 있지만, 서버 부담이 증가.
+	  - gRPC는 고속 데이터 통신이 필요한 서비스 간 통신(Microservices)에 적합.
 
 - 데이터 중심 소프트웨어 개발(Data-Driven Development)의 개념과 필요성을 설명하시오.
 - 양자 컴퓨팅(Quantum Computing) 소프트웨어의 개념과 기존 컴퓨팅과의 차이를 설명하시오.
