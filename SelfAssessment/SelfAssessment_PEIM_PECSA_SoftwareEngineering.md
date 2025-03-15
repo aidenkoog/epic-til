@@ -8663,48 +8663,42 @@ Organize concepts, features, types and Pros and Cons
   - 결론
     - 보안이 고려된 소프트웨어 개발을 위해 최소 권한 원칙, 다중 보안, 입력 검증, 안전한 코드 작성이 필수적이다.
 
+- OWASP(Top 10 Security Risks)의 주요 보안 취약점
+  - OWASP 개념
+	  - OWASP(Open Web Application Security Project)는 웹 애플리케이션 보안 강화를 위한 비영리 단체이며, 주요 보안 위협을 정리한 “OWASP Top 10”을 발표
+	  - 최신 보안 트렌드 및 위협 요소를 반영하여 주기적으로 갱신
 
-- OWASP(Top 10 Security Risks)의 주요 보안 취약점을 설명하시오.
+  - OWASP Top 10 주요 보안 취약점 (2021 기준)
+    - (1) A01 – 권한 관리 취약점(Broken Access Control)
+	    - 사용자 권한이 제대로 설정되지 않아, 비인가 사용자가 관리자 기능을 수행할 수 있는 취약점.
+	    - 해결책: 최소 권한 원칙 적용, 접근 제어 정책 강화.
 
-4. OWASP(Top 10 Security Risks)의 주요 보안 취약점
+    - (2) A02 – 암호화 실패(Cryptographic Failures)
+	    - 데이터 보호를 위한 암호화가 올바르게 적용되지 않은 경우.
+	    - 해결책: 강력한 암호화 알고리즘 사용, 민감한 데이터 암호화 저장.
 
-📌 OWASP 개념
-	•	**OWASP(Open Web Application Security Project)**는 웹 애플리케이션 보안 강화를 위한 비영리 단체이며, 주요 보안 위협을 정리한 “OWASP Top 10”을 발표한다.
-	•	최신 보안 트렌드 및 위협 요소를 반영하여 주기적으로 갱신된다.
+    - (3) A03 – SQL Injection 및 XSS 취약점 (Injection Flaws)
+	    - 공격자가 SQL, JavaScript 등을 삽입하여 시스템을 조작하는 취약점.
+	    - 해결책: 입력값 검증, Prepared Statements 사용.
 
-⸻
+    - (4) A04 – 불안전한 설계(Insecure Design)
+	    - 보안 고려 없이 설계된 시스템은 해킹에 취약함.
+	    - 해결책: 보안 아키텍처 리뷰 및 위협 모델링 적용.
 
-📌 OWASP Top 10 주요 보안 취약점 (2021 기준)
+    - (5) A05 – 취약한 보안 설정(Security Misconfiguration)
+	    - 기본 비밀번호 사용, 불필요한 기능 활성화 등으로 발생하는 보안 문제.
+	    - 해결책: 보안 정책 강화, 최소한의 기능만 활성화.
 
-1️⃣ A01 – 권한 관리 취약점(Broken Access Control)
-	•	사용자 권한이 제대로 설정되지 않아, 비인가 사용자가 관리자 기능을 수행할 수 있는 취약점.
-	•	해결책: 최소 권한 원칙 적용, 접근 제어 정책 강화.
+    - (6) A06 – 취약한 인증(Identification & Authentication Failures)
+	    - 비밀번호 복잡성 부족, 다중 인증 미적용 등의 문제.
+	    - 해결책: 강력한 인증 정책 적용, MFA(다중 인증) 도입.
 
-2️⃣ A02 – 암호화 실패(Cryptographic Failures)
-	•	데이터 보호를 위한 암호화가 올바르게 적용되지 않은 경우.
-	•	해결책: 강력한 암호화 알고리즘 사용, 민감한 데이터 암호화 저장.
+    - (7) A07 – 소프트웨어 및 데이터 무결성 문제
+	    - 신뢰할 수 없는 소스의 라이브러리를 사용하는 경우.
+	    - 해결책: 코드 서명 및 보안 검증 수행.
 
-3️⃣ A03 – SQL Injection 및 XSS 취약점 (Injection Flaws)
-	•	공격자가 SQL, JavaScript 등을 삽입하여 시스템을 조작하는 취약점.
-	•	해결책: 입력값 검증, Prepared Statements 사용.
-
-4️⃣ A04 – 불안전한 설계(Insecure Design)
-	•	보안 고려 없이 설계된 시스템은 해킹에 취약함.
-	•	해결책: 보안 아키텍처 리뷰 및 위협 모델링 적용.
-
-5️⃣ A05 – 취약한 보안 설정(Security Misconfiguration)
-	•	기본 비밀번호 사용, 불필요한 기능 활성화 등으로 발생하는 보안 문제.
-	•	해결책: 보안 정책 강화, 최소한의 기능만 활성화.
-
-6️⃣ A06 – 취약한 인증(Identification & Authentication Failures)
-	•	비밀번호 복잡성 부족, 다중 인증 미적용 등의 문제.
-	•	해결책: 강력한 인증 정책 적용, MFA(다중 인증) 도입.
-
-7️⃣ A07 – 소프트웨어 및 데이터 무결성 문제
-	•	신뢰할 수 없는 소스의 라이브러리를 사용하는 경우.
-	•	해결책: 코드 서명 및 보안 검증 수행.
-
-✅ 결론: OWASP Top 10은 웹 보안에서 가장 중요한 취약점을 정리한 가이드라인으로, 보안 강화에 반드시 참고해야 한다.
+  - 결론
+    - OWASP Top 10은 웹 보안에서 가장 중요한 취약점을 정리한 가이드라인으로, 보안 강화에 반드시 참고해야 한다.
 
 
 - Secure SDLC(Secure Software Development Life Cycle)의 개념과 주요 단계(Security by Design 포함)를 설명하시오.
