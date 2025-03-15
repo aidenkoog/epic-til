@@ -8856,42 +8856,37 @@ Organize concepts, features, types and Pros and Cons
   - 결론
     - 블록체인은 금융, 의료, 인증 시스템 등 다양한 분야에서 보안 강화를 위한 핵심 기술로 활용될 수 있다.
 
+- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술
+  - 클라우드 네이티브 개발(Cloud-Native Development) 개념
+	  - 클라우드 네이티브 개발은 클라우드 환경에서 최적화된 소프트웨어를 개발하는 접근 방식
+	  - 단순히 클라우드에서 실행하는 것이 아니라, 클라우드 인프라의 장점을 최대한 활용하는 아키텍처 및 개발 방법론을 의미
+	  - 유연성(Flexibility), 확장성(Scalability), 자동화(Auto-scaling), 고가용성(High Availability)을 제공해야 한다.
 
-- 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술을 설명하시오.
+  - 클라우드 네이티브의 주요 기술
+    - (1) 마이크로서비스 아키텍처(Microservices Architecture)
+	    - 단일 애플리케이션을 여러 개의 독립적인 서비스로 분리하여 개발하는 방식.
+	    - 각 서비스는 독립적으로 배포 및 확장 가능하며, REST API, gRPC 등을 통해 통신.
+	    - 예: Netflix, Uber 등의 글로벌 서비스에서 활용.
+
+    - (2) 컨테이너(Container) 및 오케스트레이션(Kubernetes)
+      - 컨테이너(Docker)를 활용하여 애플리케이션을 가상화하고, Kubernetes로 자동 배포 및 확장
+      - 무중단 배포, 자동 복구, 자원 최적화 등의 기능 제공
+
+    - (3) DevOps 및 CI/CD(Continuous Integration & Continuous Deployment)
+      - 자동화된 빌드, 테스트, 배포 프로세스를 통해 지속적인 서비스 업데이트 지원.
+      - 예: GitHub Actions, Jenkins, GitLab CI/CD.
+
+    - (4) 서버리스 컴퓨팅(Serverless Computing)
+      - 클라우드 제공업체(AWS Lambda, Google Cloud Functions)가 자동으로 서버를 관리하여 개발자는 애플리케이션 로직에 집중 가능.
+      - 서버 유지보수 없이 코드 실행 가능 → 비용 절감 및 운영 부담 감소.
+
+  - 결론
+    - 클라우드 네이티브 개발은 마이크로서비스, 컨테이너, DevOps, 서버리스 등 클라우드 친화적인 기술을 활용하여 확장성과 유연성을 극대화하는 방식
+
 - Serverless Computing(서버리스 컴퓨팅)의 개념과 기존 클라우드 컴퓨팅과의 차이를 설명하시오.
 - 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이를 설명하시오.
 - API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이를 설명하시오.
-  - 1. 클라우드 네이티브 소프트웨어 개발(Cloud-Native Development)의 개념과 주요 기술
-
-📌 클라우드 네이티브 개발(Cloud-Native Development) 개념
-	•	클라우드 네이티브 개발은 클라우드 환경에서 최적화된 소프트웨어를 개발하는 접근 방식이다.
-	•	단순히 클라우드에서 실행하는 것이 아니라, 클라우드 인프라의 장점을 최대한 활용하는 아키텍처 및 개발 방법론을 의미한다.
-	•	클라우드 네이티브 소프트웨어는 **유연성(Flexibility), 확장성(Scalability), 자동화(Auto-scaling), 고가용성(High Availability)**을 제공해야 한다.
-
-⸻
-
-📌 클라우드 네이티브의 주요 기술
-
-1️⃣ 마이크로서비스 아키텍처(Microservices Architecture)
-	•	단일 애플리케이션을 여러 개의 독립적인 서비스로 분리하여 개발하는 방식.
-	•	각 서비스는 독립적으로 배포 및 확장 가능하며, REST API, gRPC 등을 통해 통신.
-	•	예: Netflix, Uber 등의 글로벌 서비스에서 활용.
-
-2️⃣ 컨테이너(Container) 및 오케스트레이션(Kubernetes)
-	•	컨테이너(Docker)를 활용하여 애플리케이션을 가상화하고, Kubernetes로 자동 배포 및 확장.
-	•	무중단 배포, 자동 복구, 자원 최적화 등의 기능 제공.
-
-3️⃣ DevOps 및 CI/CD(Continuous Integration & Continuous Deployment)
-	•	자동화된 빌드, 테스트, 배포 프로세스를 통해 지속적인 서비스 업데이트 지원.
-	•	예: GitHub Actions, Jenkins, GitLab CI/CD.
-
-4️⃣ 서버리스 컴퓨팅(Serverless Computing)
-	•	클라우드 제공업체(AWS Lambda, Google Cloud Functions)가 자동으로 서버를 관리하여 개발자는 애플리케이션 로직에 집중 가능.
-	•	서버 유지보수 없이 코드 실행 가능 → 비용 절감 및 운영 부담 감소.
-
-✅ 결론: 클라우드 네이티브 개발은 마이크로서비스, 컨테이너, DevOps, 서버리스 등 클라우드 친화적인 기술을 활용하여 확장성과 유연성을 극대화하는 방식이다.
-
-⸻
+  
 
 2. Serverless Computing(서버리스 컴퓨팅)의 개념과 기존 클라우드 컴퓨팅과의 차이
 
@@ -12011,3 +12006,8 @@ NFT, 메타버스 등 디지털 자산 경제 성장.
 소프트웨어 개발 혁신 연구 트렌드는 AI 자동화, 지속 가능성, 양자 컴퓨팅 기술이 핵심.
 **글로벌 소프트웨어 개발(GSD)**은 협업 도구, 보안, 문화적 차이 극복이 중요.
 소프트웨어 공학과 IT 산업 발전은 사회적 변화(디지털 전환, 일자리 변화)와 경제적 혁신(SaaS, 스타트업 성장)에 영향을 미침.
+
+
+- 보안 취약점 분석 도구(Static Analysis, Dynamic Analysis)의 개념과 활용 사례를 설명하시오.
+- 보안 코딩(Secure Coding)의 개념과 주요 원칙을 설명하시오.
+- GDPR(General Data Protection Regulation)과 소프트웨어 개발의 관계를 설명하시오.
