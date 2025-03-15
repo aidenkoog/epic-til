@@ -8883,35 +8883,29 @@ Organize concepts, features, types and Pros and Cons
   - 결론
     - 클라우드 네이티브 개발은 마이크로서비스, 컨테이너, DevOps, 서버리스 등 클라우드 친화적인 기술을 활용하여 확장성과 유연성을 극대화하는 방식
 
-- Serverless Computing(서버리스 컴퓨팅)의 개념과 기존 클라우드 컴퓨팅과의 차이를 설명하시오.
+- Serverless Computing(서버리스 컴퓨팅)의 개념과 기존 클라우드 컴퓨팅과의 차이
+  - 서버리스 컴퓨팅(Serverless Computing) 개념
+	  - 서버리스 컴퓨팅은 개발자가 서버 인프라를 직접 관리하지 않고, 클라우드 플랫폼이 자동으로 인프라를 관리하는 컴퓨팅 모델이다.
+	  - 사용한 만큼 비용을 지불하는 Pay-as-you-go 방식.
+	  - 대표적인 서비스: AWS Lambda, Google Cloud Functions, Azure Functions.
+
+  - 기존 클라우드 컴퓨팅과 서버리스 컴퓨팅의 차이
+    - (1) 기존 클라우드 컴퓨팅(IaaS, PaaS)
+	    - 사용자가 서버를 프로비저닝하고, 운영 시스템(OS), 네트워크, 스토리지를 직접 관리.
+	    - 예: AWS EC2, Google Compute Engine(GCE).
+	    - 비용: 사용한 서버 시간에 따라 요금 부과.
+
+    - (2) 서버리스 컴퓨팅(Serverless Computing)
+	    - 서버 운영 부담이 없으며, 이벤트가 발생할 때만 실행되는 방식.
+	    - 예: AWS Lambda (이벤트 기반 코드 실행).
+	    - 비용: 사용한 함수 실행 시간(초 단위) 및 요청 수에 따라 요금 부과.
+
+  - 결론
+    - 기존 클라우드 컴퓨팅은 서버를 직접 관리해야 하지만, 서버리스는 코드 실행만 신경 쓰면 되는 방식으로, 비용 최적화 및 운영 부담 감소에 유리하다.
+
 - 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이를 설명하시오.
 - API 중심 개발(API-First Development)의 개념과 REST API, GraphQL, gRPC의 차이를 설명하시오.
   
-
-2. Serverless Computing(서버리스 컴퓨팅)의 개념과 기존 클라우드 컴퓨팅과의 차이
-
-📌 서버리스 컴퓨팅(Serverless Computing) 개념
-	•	서버리스 컴퓨팅은 개발자가 서버 인프라를 직접 관리하지 않고, 클라우드 플랫폼이 자동으로 인프라를 관리하는 컴퓨팅 모델이다.
-	•	사용한 만큼 비용을 지불하는 Pay-as-you-go 방식.
-	•	대표적인 서비스: AWS Lambda, Google Cloud Functions, Azure Functions.
-
-⸻
-
-📌 기존 클라우드 컴퓨팅과 서버리스 컴퓨팅의 차이
-
-1️⃣ 기존 클라우드 컴퓨팅(IaaS, PaaS)
-	•	사용자가 서버를 프로비저닝하고, 운영 시스템(OS), 네트워크, 스토리지를 직접 관리.
-	•	예: AWS EC2, Google Compute Engine(GCE).
-	•	비용: 사용한 서버 시간에 따라 요금 부과.
-
-2️⃣ 서버리스 컴퓨팅(Serverless Computing)
-	•	서버 운영 부담이 없으며, 이벤트가 발생할 때만 실행되는 방식.
-	•	예: AWS Lambda (이벤트 기반 코드 실행).
-	•	비용: 사용한 함수 실행 시간(초 단위) 및 요청 수에 따라 요금 부과.
-
-✅ 결론: 기존 클라우드 컴퓨팅은 서버를 직접 관리해야 하지만, 서버리스는 코드 실행만 신경 쓰면 되는 방식으로, 비용 최적화 및 운영 부담 감소에 유리하다.
-
-⸻
 
 3. 컨테이너(Container)와 쿠버네티스(Kubernetes)의 개념과 차이
 
