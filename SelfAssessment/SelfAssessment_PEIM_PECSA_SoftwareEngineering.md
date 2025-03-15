@@ -8665,7 +8665,8 @@ Organize concepts, features, types and Pros and Cons
 
 - OWASP(Top 10 Security Risks)의 주요 보안 취약점
   - OWASP 개념
-	  - OWASP(Open Web Application Security Project)는 웹 애플리케이션 보안 강화를 위한 비영리 단체이며, 주요 보안 위협을 정리한 “OWASP Top 10”을 발표
+	  - OWASP(Open Web Application Security Project)는 웹 애플리케이션 보안 강화를 위한 비영리 단체
+    - 주요 보안 위협을 정리한 “OWASP Top 10”을 발표
 	  - 최신 보안 트렌드 및 위협 요소를 반영하여 주기적으로 갱신
 
   - OWASP Top 10 주요 보안 취약점 (2021 기준)
@@ -8701,7 +8702,44 @@ Organize concepts, features, types and Pros and Cons
     - OWASP Top 10은 웹 보안에서 가장 중요한 취약점을 정리한 가이드라인으로, 보안 강화에 반드시 참고해야 한다.
 
 
-- Secure SDLC(Secure Software Development Life Cycle)의 개념과 주요 단계(Security by Design 포함)를 설명하시오.
+- Secure SDLC(Secure Software Development Life Cycle)의 개념과 주요 단계(Security by Design 포함)
+  - 개요
+    - Secure SDLC(보안 소프트웨어 개발 생명주기)는 소프트웨어 개발 프로세스 전반에서 보안 요구사항을 고려하여 설계, 개발, 배포하는 접근 방식
+    - Security by Design 개념을 포함하며, 소프트웨어가 처음부터 보안을 내재화하도록 보안 정책과 프로세스를 도입하는 것이 핵심
+
+  - Secure SDLC의 주요 단계
+    - (1) 요구사항 분석(Requirements Analysis)
+      - 보안 요구사항 정의 (예: 개인정보 보호, 접근 제어, 암호화)
+      - 법규 및 표준 준수 요구사항 확인 (예: GDPR, ISO 27001, OWASP)
+      - 위협 모델링 수행 (Threat Modeling)하여 잠재적 보안 위협 식별
+
+    - (2) 설계(Design)
+      - 보안 아키텍처 수립 (예: Zero Trust 모델, 원칙 기반 접근 제어)
+      - 데이터 흐름 분석 및 보안 위험 평가 (Data Flow Analysis)
+      - 보안 강화된 코딩 가이드라인 적용 (예: 안전한 API 설계, 인증/인가 방식 설계)
+
+    - (3) 개발(Implementation)
+      - 보안 코딩 가이드 준수 (예: OWASP Secure Coding Practices)
+      - 정적 분석 도구 활용 (예: SonarQube, Checkmarx)
+      - 입력 검증 및 오류 처리 강화 (예: 정규식, 화이트리스트 검증)
+
+    - (4) 테스트(Testing)
+      - 정적 코드 분석 (Static Code Analysis)
+      - 동적 보안 테스트 (DAST: Dynamic Application Security Testing)
+      - 침투 테스트(Penetration Testing) 수행
+      - 퍼징(Fuzzing) 테스트 적용
+
+    - (5) 배포(Deployment)
+      - 안전한 배포 프로세스 (예: CI/CD 보안 강화, 코드 서명)
+      - 컨테이너 보안 및 취약점 검사 (예: Docker Security, Kubernetes Security)
+      - 보안 모니터링 시스템 구축 (예: SIEM 도입)
+
+    - (6) 운영 및 유지보수(Maintenance & Monitoring)
+      - 보안 패치 및 업데이트 관리 (예: CVE 기반 보안 패치)
+      - 실시간 위협 탐지 및 대응 (예: IDS/IPS, WAF 적용)
+      - 로그 모니터링 및 이상 탐지 시스템 운영
+
+
 - 코드 인젝션(Code Injection) 공격(SQL Injection, XSS 등)의 개념과 대응 방안을 설명하시오.
 - 소프트웨어에서 인증(Authentication)과 인가(Authorization)의 차이를 설명하시오.
 - 데이터 암호화 알고리즘(AES, RSA, SHA 등)의 개념과 활용 사례를 설명하시오.
