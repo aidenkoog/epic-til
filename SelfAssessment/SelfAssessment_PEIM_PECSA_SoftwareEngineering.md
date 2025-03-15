@@ -8636,40 +8636,35 @@ Organize concepts, features, types and Pros and Cons
     - 애자일 테스팅은 개발과 동시에 진행되며, 자동화 및 지속적인 피드백을 활용하는 것이 핵심이다.
 
 
-- 소프트웨어 개발 보안(Secure Software Development)의 개념과 주요 원칙을 설명하시오.
+- 소프트웨어 개발 보안(Secure Software Development)의 개념과 주요 원칙
+  - 소프트웨어 개발 보안 개념
+	  - 소프트웨어 개발 보안은 보안 취약점을 최소화하고, 해킹 및 악의적인 공격을 방지하기 위해 보안 요소를 포함하여 소프트웨어를 개발하는 방법론
+	  - 보안이 고려되지 않은 소프트웨어는 데이터 유출, 시스템 장애 등 다양한 보안 위협에 노출될 수 있다.
+
+  - 소프트웨어 개발 보안의 주요 원칙
+    - (1) 최소 권한 원칙 (Principle of Least Privilege, PoLP)
+	    - 사용자 및 프로세스가 최소한의 권한만 가지도록 제한하여 보안 위험을 감소.
+
+    - (2) 보안 기능 강화 (Defense in Depth)
+	    - 여러 계층에 보안 정책을 적용하여 다중 보안 방어 체계를 구축.
+
+    - (3) 입력 검증 및 데이터 보호 (Input Validation & Data Protection)
+	    - SQL Injection, XSS 등의 보안 취약점을 방지하기 위해 입력값 검증 수행.
+	    - 암호화 및 해싱(Hashing)을 활용하여 데이터 보호.
+
+    - (4) 안전한 코드 작성 (Secure Coding)
+	    - 보안 취약점을 최소화하는 코딩 기법 적용.
+	    - 예: SQL Injection 방지 → Prepared Statements 사용
+
+    - (5) 지속적인 보안 테스트 및 감사 (Continuous Security Testing & Auditing)
+	    - 정적 분석(Static Analysis), 동적 분석(Dynamic Analysis) 도구 활용.
+	    - 보안 패치 및 코드 리뷰를 통해 지속적인 보안 강화.
+
+  - 결론
+    - 보안이 고려된 소프트웨어 개발을 위해 최소 권한 원칙, 다중 보안, 입력 검증, 안전한 코드 작성이 필수적이다.
+
+
 - OWASP(Top 10 Security Risks)의 주요 보안 취약점을 설명하시오.
-
-3. 소프트웨어 개발 보안(Secure Software Development)의 개념과 주요 원칙
-
-📌 소프트웨어 개발 보안 개념
-	•	소프트웨어 개발 보안은 보안 취약점을 최소화하고, 해킹 및 악의적인 공격을 방지하기 위해 보안 요소를 포함하여 소프트웨어를 개발하는 방법론이다.
-	•	보안이 고려되지 않은 소프트웨어는 데이터 유출, 시스템 장애 등 다양한 보안 위협에 노출될 수 있다.
-
-⸻
-
-📌 소프트웨어 개발 보안의 주요 원칙
-
-1️⃣ 최소 권한 원칙 (Principle of Least Privilege, PoLP)
-	•	사용자 및 프로세스가 최소한의 권한만 가지도록 제한하여 보안 위험을 감소.
-
-2️⃣ 보안 기능 강화 (Defense in Depth)
-	•	여러 계층에 보안 정책을 적용하여 다중 보안 방어 체계를 구축.
-
-3️⃣ 입력 검증 및 데이터 보호 (Input Validation & Data Protection)
-	•	SQL Injection, XSS 등의 보안 취약점을 방지하기 위해 입력값 검증 수행.
-	•	암호화 및 해싱(Hashing)을 활용하여 데이터 보호.
-
-4️⃣ 안전한 코드 작성 (Secure Coding)
-	•	보안 취약점을 최소화하는 코딩 기법 적용.
-	•	예: SQL Injection 방지 → Prepared Statements 사용
-
-5️⃣ 지속적인 보안 테스트 및 감사 (Continuous Security Testing & Auditing)
-	•	정적 분석(Static Analysis), 동적 분석(Dynamic Analysis) 도구 활용.
-	•	보안 패치 및 코드 리뷰를 통해 지속적인 보안 강화.
-
-✅ 결론: 보안이 고려된 소프트웨어 개발을 위해 최소 권한 원칙, 다중 보안, 입력 검증, 안전한 코드 작성이 필수적이다.
-
-⸻
 
 4. OWASP(Top 10 Security Risks)의 주요 보안 취약점
 
