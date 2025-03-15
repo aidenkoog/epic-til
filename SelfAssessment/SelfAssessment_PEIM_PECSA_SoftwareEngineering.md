@@ -8740,28 +8740,62 @@ Organize concepts, features, types and Pros and Cons
       - 로그 모니터링 및 이상 탐지 시스템 운영
 
 
-- 코드 인젝션(Code Injection) 공격(SQL Injection, XSS 등)의 개념과 대응 방안을 설명하시오.
+- 코드 인젝션(Code Injection) 공격(SQL Injection, XSS 등)의 개념과 대응 방안을 설명
+  - SQL Injection
+    - 개념
+      - SQL Injection은 웹 애플리케이션이 사용자 입력값을 적절히 검증하지 않고 SQL 쿼리에 삽입할 때 발생하는 공격이다.
+      - 공격자는 데이터베이스를 조작하여 데이터 유출, 삭제, 계정 탈취 등을 수행할 수 있다.
+
+    - 공격 예시 (MySQL)
+      - ' OR '1'='1'를 추가하여 로그인 우회가 가능해짐.
+      ```sql
+      SELECT * FROM users WHERE username = 'admin' AND password = ' ' OR '1'='1';
+      ```
+    
+    - 대응 방안
+      - Prepared Statement(준비된 문) 사용 (변수 바인딩을 통해 직접 SQL 실행을 방지)
+      - ORM(Object-Relational Mapping) 사용
+        - Django ORM, Hibernate 등 ORM을 사용하여 직접 SQL 쿼리 작성 회피
+      - 입력값 검증(Validation)
+        - 화이트리스트 기반 입력 검증 적용 (예: 정규식 사용)
+        - 데이터 타입 및 길이 제한 (예: username VARCHAR(20))
+      - 최소 권한 원칙 적용(Least Privilege)
+        - DB 계정에 최소한의 권한 부여 (예: SELECT 권한만 부여)
+
+  - XSS(Cross-Site Scripting)
+    - 개요
+      - XSS는 악의적인 JavaScript를 웹 페이지에 삽입하여 사용자의 쿠키 탈취, 세션 하이재킹, 피싱 공격 등을 수행하는 공격 기법
+      - 반사형(Reflected), 저장형(Stored), DOM 기반(DOM-based) XSS 유형이 있다.
+
+    - 대응 방안
+      - 입력값 필터링(Sanitization)
+        - HTML 특수문자 이스케이프 (<, >, ', " → &lt;, &gt;, &#39;, &quot;)
+        - OWASP ESAPI 라이브러리 활용
+      - 출력 시 이스케이프(Escaping)
+        - 템플릿 엔진에서 자동 이스케이프 사용 (예: Django, Thymeleaf)
+      - CSP(Content Security Policy) 적용
+      - HttpOnly & Secure 플래그 설정
+
+  - Command Injection
+    - 개요
+      - 서버가 사용자 입력값을 운영체제 명령어로 실행할 때 공격자가 시스템 명령어를 주입하여 파일 접근, 시스템 제어 등의 행위를 수행하는 공격 기법.
+      
+    - 공격 예시
+      - ping 127.0.0.1; rm -rf /
+      - 웹 애플리케이션에서 ping 명령어 실행 후, rm -rf / 명령어 실행하여 시스템을 삭제하는 공격
+
+    - 대응 방안
+      - 사용자 입력 검증
+        - 화이트리스트 기반 필터링 적용 (예: ping 명령어 뒤에 숫자만 허용)
+        - 정규 표현식 적용 (^[0-9.]+$)
+      - OS 명령어 실행 금지
+        - 가능하면 직접 OS 명령 실행을 피하고 API 사용
+      - 권한 제한
+        - 애플리케이션이 root 권한 없이 동작하도록 설정
+
+
 - 소프트웨어에서 인증(Authentication)과 인가(Authorization)의 차이를 설명하시오.
 - 데이터 암호화 알고리즘(AES, RSA, SHA 등)의 개념과 활용 사례를 설명하시오.
-  - → 공격자가 ' OR '1'='1 입력 시, 전체 데이터 노출.
-
-✅ 대응 방안:
-	•	Prepared Statements(준비된 문) 또는 ORM(Object-Relational Mapping) 사용
-	•	입력값 검증 및 필터링
-
-⸻
-
-2️⃣ XSS (Cross-Site Scripting, 크로스 사이트 스크립팅)
-	•	공격자가 웹 페이지에 악성 스크립트를 삽입하여 사용자의 브라우저에서 실행되도록 하는 공격.
-	•	예: 공격자가 <script>alert('Hacked!')</script> 삽입하여 피해자의 세션 탈취.
-
-✅ 대응 방안:
-	•	HTML, JavaScript 입력값 필터링 및 이스케이프 처리
-	•	Content Security Policy(CSP) 적용
-
-✅ 결론: 코드 인젝션 공격을 방지하려면 입력값 검증, Prepared Statements, 보안 정책 적용이 필수적이다.
-
-⸻
 
 3. 소프트웨어에서 인증(Authentication)과 인가(Authorization)의 차이
 
