@@ -683,7 +683,7 @@ Organize concepts, features, types and Pros and Cons
     - 컨텍스트 스위칭 비용이 낮으며, 프로세스보다 빠른 데이터 공유 가능.
     - 단점: 하나의 스레드에서 오류가 발생하면 전체 프로세스에 영향을 줄 수 있음.
 
-- 로세스의 생명 주기 (Process Life Cycle)
+- 프로세스의 생명 주기 (Process Life Cycle)
   - (1) New (생성): 프로세스가 생성된 상태.
   - (2) Ready (준비): CPU 할당을 기다리는 상태.
 	- (3) Running (실행): CPU를 할당받아 실행 중인 상태.
@@ -729,34 +729,25 @@ Organize concepts, features, types and Pros and Cons
     - exec()이 호출되면 현재 프로세스의 코드가 새로운 코드로 완전히 덮어씌워짐.
     - fork()와 다르게 새로운 프로세스를 만들지 않고 기존 프로세스를 새로운 프로그램으로 변경.
 
-- 동기식(Synchronous)과 비동기식(Asynchronous) 프로세스의 차이를 설명하시오.
-- 사용자 수준 스레드(User-Level Thread)와 커널 수준 스레드(Kernel-Level Thread)의 차이를 설명하시오.
-- 멀티스레딩(Multi-threading)의 장점과 단점을 설명하시오.
-- 프로세스 동기화(Process Synchronization)의 필요성과 주요 기법을 설명하시오.
-- 크리티컬 섹션(Critical Section) 문제와 이를 해결하는 방법을 설명하시오.
-- CPU 스케줄링이 필요한 이유를 설명하시오.
-  - 1. 동기식(Synchronous)과 비동기식(Asynchronous) 프로세스
+- 동기식(Synchronous)과 비동기식(Asynchronous) 프로세스의 차이
+  - (1) 동기식 프로세스 (Synchronous Process)
+    - 하나의 작업이 끝날 때까지 다음 작업을 시작하지 않는 방식.
+    - 작업이 완료될 때까지 CPU가 대기해야 함.
+    - 특징:
+      - 실행 순서가 보장됨.
+      - 실행 흐름이 직관적이며 디버깅이 쉬움.
+      - 응답 속도가 느릴 수 있음.
+    - 예시: 파일 읽기, 데이터베이스 쿼리 등에서 결과를 반환받을 때까지 기다리는 방식.
 
-(1) 동기식 프로세스 (Synchronous Process)
-	- 하나의 작업이 끝날 때까지 다음 작업을 시작하지 않는 방식.
-	- 작업이 완료될 때까지 CPU가 대기해야 함.
-	- 특징:
-	- 실행 순서가 보장됨.
-	- 실행 흐름이 직관적이며 디버깅이 쉬움.
-	- 응답 속도가 느릴 수 있음.
-	- 예시: 파일 읽기, 데이터베이스 쿼리 등에서 결과를 반환받을 때까지 기다리는 방식.
-
-(2) 비동기식 프로세스 (Asynchronous Process)
-	- 하나의 작업이 끝나지 않아도 다음 작업을 실행할 수 있는 방식.
-	- 작업이 완료되면 콜백(callback) 함수나 이벤트를 통해 결과를 받아 처리.
-	- 특징:
-	- CPU 활용도가 높아 성능이 향상됨.
-	- 실행 흐름이 복잡해지고 디버깅이 어려울 수 있음.
-	- 예시:
-	- 네트워크 요청(HTTP 요청, API 호출).
-	- 이벤트 기반 프로그래밍(JavaScript의 setTimeout 등).
-
-⸻
+  - (2) 비동기식 프로세스 (Asynchronous Process)
+    - 하나의 작업이 끝나지 않아도 다음 작업을 실행할 수 있는 방식.
+    - 작업이 완료되면 콜백(callback) 함수나 이벤트를 통해 결과를 받아 처리.
+    - 특징:
+      - CPU 활용도가 높아 성능이 향상됨.
+      - 실행 흐름이 복잡해지고 디버깅이 어려울 수 있음.
+    - 예시:
+      - 네트워크 요청(HTTP 요청, API 호출).
+      - 이벤트 기반 프로그래밍(JavaScript의 setTimeout 등).
 
 2. 사용자 수준 스레드(User-Level Thread)와 커널 수준 스레드(Kernel-Level Thread)
 
