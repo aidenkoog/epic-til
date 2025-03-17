@@ -829,33 +829,31 @@ Organize concepts, features, types and Pros and Cons
 		- (5) Multilevel Queue Scheduling: 프로세스를 여러 개의 우선순위 큐로 나누어 실행.
 
 - 선점형(Preemptive)과 비선점형(Non-Preemptive) 스케줄링의 차이
-(1) 선점형 스케줄링 (Preemptive Scheduling)
-	- 운영체제가 CPU를 강제로 회수하고 다른 프로세스에 할당할 수 있는 방식.
-	- 높은 우선순위를 가진 프로세스가 실행 중인 프로세스를 중단하고 CPU를 차지할 수 있음.
-	- 예시: Round Robin, Priority Scheduling(선점형), SJF(선점형), Multilevel Queue
+	- (1) 선점형 스케줄링 (Preemptive Scheduling)
+		- 운영체제가 CPU를 강제로 회수하고 다른 프로세스에 할당할 수 있는 방식.
+		- 높은 우선순위를 가진 프로세스가 실행 중인 프로세스를 중단하고 CPU를 차지할 수 있음.
+		- 예시: Round Robin, Priority Scheduling(선점형), SJF(선점형), Multilevel Queue
 
-✅ 장점:
-	- 응답 시간이 빠르고, 실시간 시스템에서 적합함.
-	- 여러 프로세스를 공정하게 스케줄링할 수 있음.
+		- 장점:
+			- 응답 시간이 빠르고, 실시간 시스템에서 적합함.
+			- 여러 프로세스를 공정하게 스케줄링할 수 있음.
 
-❌ 단점:
-	- 컨텍스트 스위칭 비용이 증가하여 CPU 오버헤드 발생.
-	- 공유 자원 사용 시 동기화 문제가 발생할 수 있음.
+		- 단점:
+			- 컨텍스트 스위칭 비용이 증가하여 CPU 오버헤드 발생.
+			- 공유 자원 사용 시 동기화 문제가 발생할 수 있음.
 
-(2) 비선점형 스케줄링 (Non-Preemptive Scheduling)
-	- 한 번 CPU를 할당받은 프로세스는 자신의 작업을 끝낼 때까지 CPU를 독점.
-	- 다른 프로세스는 현재 프로세스가 종료될 때까지 기다려야 함.
-	- 예시: FCFS, SJF(비선점형), Priority Scheduling(비선점형)
+	- (2) 비선점형 스케줄링 (Non-Preemptive Scheduling)
+		- 한 번 CPU를 할당받은 프로세스는 자신의 작업을 끝낼 때까지 CPU를 독점.
+		- 다른 프로세스는 현재 프로세스가 종료될 때까지 기다려야 함.
+		- 예시: FCFS, SJF(비선점형), Priority Scheduling(비선점형)
 
-✅ 장점:
-	- 컨텍스트 스위칭이 적어 오버헤드가 낮음.
-	- 공유 자원(예: 파일, 메모리)을 다룰 때 안정적임.
+		- 장점:
+			- 컨텍스트 스위칭이 적어 오버헤드가 낮음.
+			- 공유 자원(예: 파일, 메모리)을 다룰 때 안정적임.
 
-❌ 단점:
-	- 긴 작업이 있으면 대기 시간이 길어짐 (Starvation 가능).
-	- 실시간 시스템에서는 사용하기 어려움.
-
-⸻
+		- 단점:
+			- 긴 작업이 있으면 대기 시간이 길어짐 (Starvation 가능).
+			- 실시간 시스템에서는 사용하기 어려움.
 
 2. 주요 CPU 스케줄링 알고리즘
 
