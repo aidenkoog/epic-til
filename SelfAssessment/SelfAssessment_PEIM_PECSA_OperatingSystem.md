@@ -1078,18 +1078,15 @@ Organize concepts, features, types and Pros and Cons
     - 자동 동기화 제공: 특정 객체를 사용하면 자동으로 동기화됨.
     - Java, C++ 등에서 객체 기반 동기화에 사용됨.
 
-6. 데드락(Deadlock) 개념과 발생 조건 (Coffman Condition)
+- 데드락(Deadlock) 개념과 발생 조건 (Coffman Condition)
+  - (1) 데드락(Deadlock) 개념
+	  - 두 개 이상의 프로세스가 서로 자원을 기다리면서 영원히 진행되지 못하는 상태.
 
-(1) 데드락(Deadlock) 개념
-	- 두 개 이상의 프로세스가 서로 자원을 기다리면서 영원히 진행되지 못하는 상태.
-
-(2) 데드락 발생 조건 (Coffman Condition, 4가지)
-	- (1) 상호 배제(Mutual Exclusion): 한 번에 하나의 프로세스만 자원을 사용 가능.
-	- (2) 점유와 대기(Hold and Wait): 자원을 점유한 상태에서 추가 자원을 기다림.
-	- (3) 비선점(No Preemption): 프로세스가 점유한 자원을 강제로 빼앗을 수 없음.
-	- (4) 순환 대기(Circular Wait): 여러 프로세스가 서로 자원을 점유하고 다음 자원을 기다리며 순환 관계를 형성.
-
-⸻
+  - (2) 데드락 발생 조건 (Coffman Condition, 4가지)
+    - (1) 상호 배제(Mutual Exclusion): 한 번에 하나의 프로세스만 자원을 사용 가능.
+    - (2) 점유와 대기(Hold and Wait): 자원을 점유한 상태에서 추가 자원을 기다림.
+    - (3) 비선점(No Preemption): 프로세스가 점유한 자원을 강제로 빼앗을 수 없음.
+    - (4) 순환 대기(Circular Wait): 여러 프로세스가 서로 자원을 점유하고 다음 자원을 기다리며 순환 관계를 형성.
 
 7. 데드락 해결 기법
 
