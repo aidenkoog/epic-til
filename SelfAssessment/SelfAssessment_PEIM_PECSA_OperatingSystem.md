@@ -2072,7 +2072,7 @@ Organize concepts, features, types and Pros and Cons
     - 운영체제와 보안 시스템은 접근 제어를 통해 불법적인 접근 및 데이터 유출을 방지.
 
   - (2) 주요 접근 제어 모델: MAC, DAC, RBAC
-    - MAC (Mandatory Access Control, 강제 접근 제어): 시스템
+    - (A) MAC (Mandatory Access Control, 강제 접근 제어): 시스템
       - 시스템이 사용자 및 프로세스의 접근 권한을 결정하는 방식.
       - 모든 객체(파일, 디렉토리 등)에 보안 등급(Security Label)이 지정되며, 사용자는 지정된 보안 등급 이하의 객체만 접근 가능.
 
@@ -2080,7 +2080,7 @@ Organize concepts, features, types and Pros and Cons
         - 정부, 군사 기관에서 주로 사용 (예: SELinux, Windows의 보안 정책).
         - 사용자가 직접 접근 권한을 변경할 수 없음 (보안이 강력함).
 
-    - DAC (Discretionary Access Control, 임의 접근 제어): 파일 소유자
+    - (B) DAC (Discretionary Access Control, 임의 접근 제어): 파일 소유자
       - 파일 소유자가 다른 사용자에게 접근 권한을 부여할 수 있는 방식.
       - UNIX, Windows 등 대부분의 운영체제가 기본적으로 사용.
 
@@ -2088,7 +2088,7 @@ Organize concepts, features, types and Pros and Cons
         - 사용자가 직접 권한을 관리할 수 있어 유연함.
         - 잘못된 권한 설정으로 인해 보안 취약점이 발생할 가능성 있음.
 
-    - RBAC (Role-Based Access Control, 역할 기반 접근 제어): 역할
+    - (C) RBAC (Role-Based Access Control, 역할 기반 접근 제어): 역할
       - 사용자가 속한 역할(Role)에 따라 접근 권한이 부여되는 방식.
       - 기업 및 조직에서 관리 효율성을 높이기 위해 사용.
 
@@ -2096,24 +2096,20 @@ Organize concepts, features, types and Pros and Cons
         - 사용자에게 직접 권한을 부여하는 대신 역할(Role) 단위로 관리하여 보안 및 관리 효율성 증가.
         - 대규모 시스템에서 사용자 권한을 효과적으로 관리 가능.
 
-2. 리눅스 파일 권한 관리 (Owner, Group, Others) 및 chmod 명령어
+- 리눅스 파일 권한 관리 (Owner, Group, Others) 및 chmod 명령어
+  - (1) 리눅스 파일 권한 구조
+	  - 파일과 디렉토리는 소유자(Owner), 그룹(Group), 기타 사용자(Others)에게 각각 다른 권한을 부여할 수 있음.
+	  - 권한은 읽기(r), 쓰기(w), 실행(x) 세 가지로 구분됨.
 
-(1) 리눅스 파일 권한 구조
-	- 파일과 디렉토리는 소유자(Owner), 그룹(Group), 기타 사용자(Others)에게 각각 다른 권한을 부여할 수 있음.
-	- 권한은 읽기(r), 쓰기(w), 실행(x) 세 가지로 구분됨.
+  - (2) chmod 명령어
+	  - 파일 권한을 변경하는 명령어.
+    - 명령어 예시:
+      - chmod 755 filename → 소유자는 rwx, 그룹과 다른 사용자는 rx 권한.
+      - chmod u+x filename → 소유자에게 실행 권한 추가.
+      - chmod g-w filename → 그룹의 쓰기 권한 제거.
 
-(2) chmod 명령어
-	- 파일 권한을 변경하는 명령어.
-
-명령어 예시:
-	- chmod 755 filename → 소유자는 rwx, 그룹과 다른 사용자는 rx 권한.
-	- chmod u+x filename → 소유자에게 실행 권한 추가.
-	- chmod g-w filename → 그룹의 쓰기 권한 제거.
-
-- 파일 권한 관리의 중요성
-	- 잘못된 권한 설정은 보안 취약점을 초래할 수 있음 (예: 모든 사용자가 중요한 파일을 수정 가능하게 설정).
-
-⸻
+  - 파일 권한 관리의 중요성
+	  - 잘못된 권한 설정은 보안 취약점을 초래할 수 있음 (예: 모든 사용자가 중요한 파일을 수정 가능하게 설정).
 
 3. 보안 공격 유형
 
