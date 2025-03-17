@@ -810,39 +810,25 @@ Organize concepts, features, types and Pros and Cons
     - (3) 스핀락(Spinlock): 짧은 임계 구역에서는 스레드가 CPU를 점유한 채로 대기하도록 함.
     - (4) 모니터(Monitor) 사용: 객체 수준에서 동기화 제공.
 
-6. CPU 스케줄링이 필요한 이유
+- CPU 스케줄링이 필요한 이유
+	- (1) 필요성
+		- CPU를 효율적으로 사용하기 위해 여러 프로세스를 적절히 배분해야 함.
+		- 다중 프로그래밍 환경에서는 여러 프로세스가 CPU를 동시에 요구하므로, 적절한 스케줄링이 없으면 특정 프로세스가 과도하게 실행되거나, 다른 프로세스가 지나치게 오래 대기하는 문제 발생.
 
-(1) 필요성
-	- CPU를 효율적으로 사용하기 위해 여러 프로세스를 적절히 배분해야 함.
-	- 다중 프로그래밍 환경에서는 여러 프로세스가 CPU를 동시에 요구하므로, 적절한 스케줄링이 없으면 특정 프로세스가 과도하게 실행되거나, 다른 프로세스가 지나치게 오래 대기하는 문제 발생.
+	- (2) 주요 목적
+		- (1) 공정성(Fairness): 모든 프로세스가 CPU를 공정하게 할당받아야 함.
+		- (2) CPU 이용률 극대화: CPU가 최대한 쉬지 않고 동작하도록 스케줄링.
+		- (3) 응답 시간 최소화: 대화형 시스템에서는 빠른 응답이 중요.
+		- (4) 처리량(Throughput) 증가: 단위 시간당 실행 가능한 프로세스 수를 증가.
 
-(2) 주요 목적
-	1.	공정성(Fairness): 모든 프로세스가 CPU를 공정하게 할당받아야 함.
-	2.	CPU 이용률 극대화: CPU가 최대한 쉬지 않고 동작하도록 스케줄링.
-	3.	응답 시간 최소화: 대화형 시스템에서는 빠른 응답이 중요.
-	4.	처리량(Throughput) 증가: 단위 시간당 실행 가능한 프로세스 수를 증가.
+	- (3) 주요 스케줄링 알고리즘
+		- (1) FCFS (First Come First Serve): 먼저 도착한 프로세스를 먼저 실행.
+		- (2) SJF (Shortest Job First): 실행 시간이 가장 짧은 프로세스를 먼저 실행.
+		- (3) Round Robin: 일정한 시간(Time Slice) 동안 프로세스를 번갈아가며 실행.
+		- (4) Priority Scheduling: 우선순위가 높은 프로세스를 먼저 실행.
+		- (5) Multilevel Queue Scheduling: 프로세스를 여러 개의 우선순위 큐로 나누어 실행.
 
-(3) 주요 스케줄링 알고리즘
-	1.	FCFS (First Come First Serve): 먼저 도착한 프로세스를 먼저 실행.
-	2.	SJF (Shortest Job First): 실행 시간이 가장 짧은 프로세스를 먼저 실행.
-	3.	Round Robin: 일정한 시간(Time Slice) 동안 프로세스를 번갈아가며 실행.
-	4.	Priority Scheduling: 우선순위가 높은 프로세스를 먼저 실행.
-	5.	Multilevel Queue Scheduling: 프로세스를 여러 개의 우선순위 큐로 나누어 실행.
-
-⸻
-
-정리
-
-운영체제에서 동기/비동기 방식, 스레드 모델, 멀티스레딩, 동기화 기법, 크리티컬 섹션 문제, CPU 스케줄링의 필요성까지 정리했다. 추가로 궁금한 점 있으면 질문해줘!
-
-- 선점형(Preemptive)과 비선점형(Non-Preemptive) 스케줄링의 차이를 설명하시오.
-- 주요 CPU 스케줄링 알고리즘(FCFS, SJF, RR, Priority Scheduling, Multilevel Queue)을 설명하고 장단점을 비교하시오.
-- 라운드 로빈(Round Robin) 스케줄링의 개념과 시간 할당(Time Quantum)의 영향을 설명하시오.
-- SJF(Shortest Job First) 스케줄링의 개념과 "Starvation(기아 문제)" 발생 가능성을 설명하시오.
-- 우선순위(Priority) 스케줄링에서 Priority Inversion(우선순위 역전) 문제와 해결 방법을 설명하시오.
-- 다단계 큐(Multilevel Queue) 및 다단계 피드백 큐(Multilevel Feedback Queue) 스케줄링의 개념을 설명하시오.
-  - 1. 선점형(Preemptive)과 비선점형(Non-Preemptive) 스케줄링
-
+- 선점형(Preemptive)과 비선점형(Non-Preemptive) 스케줄링의 차이
 (1) 선점형 스케줄링 (Preemptive Scheduling)
 	- 운영체제가 CPU를 강제로 회수하고 다른 프로세스에 할당할 수 있는 방식.
 	- 높은 우선순위를 가진 프로세스가 실행 중인 프로세스를 중단하고 CPU를 차지할 수 있음.
