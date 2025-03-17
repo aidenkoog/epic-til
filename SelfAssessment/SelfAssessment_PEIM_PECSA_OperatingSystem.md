@@ -925,19 +925,16 @@ Organize concepts, features, types and Pros and Cons
 	- 해결 방법:
 		- Aging(에이징): 대기 시간이 길어진 프로세스의 우선순위를 점진적으로 높이는 기법.
 
-5. Priority Scheduling과 Priority Inversion(우선순위 역전) 문제
+- Priority Scheduling과 Priority Inversion(우선순위 역전) 문제
+  - (1) Priority Inversion(우선순위 역전) 개념
+	  - 우선순위가 낮은 프로세스가 자원을 점유하고 있어, 우선순위가 높은 프로세스가 대기하는 현상.
+	  - 실시간 시스템에서 심각한 성능 저하를 유발할 수 있음.
 
-(1) Priority Inversion(우선순위 역전) 개념
-	- 우선순위가 낮은 프로세스가 자원을 점유하고 있어, 우선순위가 높은 프로세스가 대기하는 현상.
-	- 실시간 시스템에서 심각한 성능 저하를 유발할 수 있음.
-
-(2) 해결 방법
-	1.	Priority Inheritance (우선순위 상속)
-	- 낮은 우선순위 프로세스가 일시적으로 높은 우선순위를 상속받아 빠르게 실행 완료하도록 함.
-	2.	Priority Ceiling (우선순위 천장)
-	- 공유 자원에 접근하는 프로세스가 가장 높은 우선순위를 미리 지정하여 역전을 방지함.
-
-⸻
+  - (2) 해결 방법
+	  - (1) Priority Inheritance (우선순위 상속)
+	    - 낮은 우선순위 프로세스가 일시적으로 높은 우선순위를 상속받아 빠르게 실행 완료하도록 함.
+	  - (2) Priority Ceiling (우선순위 천장)
+	    - 공유 자원에 접근하는 프로세스가 가장 높은 우선순위를 미리 지정하여 역전을 방지함.
 
 6. 다단계 큐(Multilevel Queue) 및 다단계 피드백 큐(Multilevel Feedback Queue)
 
