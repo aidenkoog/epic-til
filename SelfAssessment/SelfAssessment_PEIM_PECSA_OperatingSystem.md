@@ -936,39 +936,26 @@ Organize concepts, features, types and Pros and Cons
 	  - (2) Priority Ceiling (우선순위 천장)
 	    - 공유 자원에 접근하는 프로세스가 가장 높은 우선순위를 미리 지정하여 역전을 방지함.
 
-6. 다단계 큐(Multilevel Queue) 및 다단계 피드백 큐(Multilevel Feedback Queue)
+- 다단계 큐(Multilevel Queue) 및 다단계 피드백 큐(Multilevel Feedback Queue)
+  - (1) 다단계 큐 (Multilevel Queue)
+    - 프로세스를 여러 개의 큐로 분류하고, 각 큐마다 다른 스케줄링 방식을 적용.
+    - 예
+      - 시스템 프로세스 → 높은 우선순위 큐 (FCFS)
+      - 사용자 프로세스 → 낮은 우선순위 큐 (Round Robin)
+    - 장점:
+      - 프로세스 특성에 맞는 스케줄링이 가능.
+    - 단점:
+      - 우선순위가 낮은 큐의 프로세스는 실행되기 어려울 수 있음.
 
-(1) 다단계 큐 (Multilevel Queue)
-	- 프로세스를 여러 개의 큐로 분류하고, 각 큐마다 다른 스케줄링 방식을 적용.
-	- 예를 들어,
-	- 시스템 프로세스 → 높은 우선순위 큐 (FCFS)
-	- 사용자 프로세스 → 낮은 우선순위 큐 (Round Robin)
-
-- 장점:
-	- 프로세스 특성에 맞는 스케줄링이 가능.
-- 단점:
-	- 우선순위가 낮은 큐의 프로세스는 실행되기 어려울 수 있음.
-
-(2) 다단계 피드백 큐 (Multilevel Feedback Queue)
-	- 다단계 큐를 확장한 형태로, 프로세스가 실행 도중 다른 큐로 이동 가능.
-	- 대기 시간이 길어지면 우선순위를 동적으로 조정하여 Starvation을 방지.
-
-- 장점:
-	- 유연성이 높으며, 적응형 스케줄링이 가능.
-- 단점:
-	- 설계가 복잡하며, 튜닝이 필요함.
-
-⸻
-
-정리
-
-운영체제의 CPU 스케줄링 기법과 관련 개념(선점형/비선점형, Round Robin, Starvation, Priority Inversion, 다단계 큐 등)을 정리했다. 추가로 궁금한 점 있으면 질문해줘!
-
+  - (2) 다단계 피드백 큐 (Multilevel Feedback Queue)
+    - 다단계 큐를 확장한 형태로, 프로세스가 실행 도중 다른 큐로 이동 가능.
+    - 대기 시간이 길어지면 우선순위를 동적으로 조정하여 Starvation을 방지.
+    - 장점:
+      - 유연성이 높으며, 적응형 스케줄링이 가능.
+    - 단점:
+      - 설계가 복잡하며, 튜닝이 필요함.
 
 - 가중치 라운드 로빈(Weighted Round Robin, WRR) 스케줄링을 설명하시오.
-- 리눅스에서 사용하는 CFS(Completely Fair Scheduler)의 개념을 설명하시오.
-  - 1. 가중치 라운드 로빈(Weighted Round Robin, WRR) 스케줄링
-
 (1) 개념
 	- 라운드 로빈(Round Robin, RR) 스케줄링을 확장한 방식으로, 각 프로세스에 가중치를 부여하여 CPU 시간을 차등할당하는 방식.
 	- 기본적인 RR 방식에서는 모든 프로세스가 동일한 Time Quantum(시간 할당량) 을 받지만, WRR에서는 프로세스의 중요도(우선순위)에 따라 더 많은 시간을 할당할 수 있음.
