@@ -855,64 +855,51 @@ Organize concepts, features, types and Pros and Cons
 			- 긴 작업이 있으면 대기 시간이 길어짐 (Starvation 가능).
 			- 실시간 시스템에서는 사용하기 어려움.
 
-2. 주요 CPU 스케줄링 알고리즘
+- 주요 CPU 스케줄링 알고리즘
+	- (1) FCFS (First Come, First Serve, 선입선출)
+		- 먼저 도착한 프로세스가 먼저 실행됨.
+		- 비선점형 스케줄링 방식.
+		- 장점:
+			- 단순하고 구현이 쉬움.
+			- 공정한 방식으로, 한 프로세스가 중간에 방해받지 않음.
+		- 단점:
+			- Convoy Effect(호위 효과) 발생 가능 → 긴 프로세스가 앞에 있으면 뒤의 짧은 프로세스들이 오래 기다려야 함.
 
-(1) FCFS (First Come, First Serve, 선입선출)
-	- 먼저 도착한 프로세스가 먼저 실행됨.
-	- 비선점형 스케줄링 방식.
+	- (2) SJF (Shortest Job First, 최단 작업 우선)
+		- 실행 시간이 가장 짧은 프로세스를 먼저 실행.
+		- 선점형과 비선점형 방식 모두 가능.
+		- 장점:
+			- 평균 대기 시간이 가장 짧음 → 시스템 효율이 높음.
+		- 단점:
+			- 긴 작업이 계속 뒤로 밀려 Starvation(기아 문제) 발생 가능.
+			- 실행 시간을 미리 알아야 하므로, 정확한 예측이 어려움.
 
-✅ 장점:
-	- 단순하고 구현이 쉬움.
-	- 공정한 방식으로, 한 프로세스가 중간에 방해받지 않음.
+	- (3) RR (Round Robin, 라운드 로빈)
+		- 각 프로세스가 일정한 시간 할당(Time Quantum)을 받으며 순환 실행.
+		- 선점형 방식.
+		- 장점:
+			- 응답 시간이 빠름 → 대화형 시스템(Interactive System)에 적합.
+			- 특정 프로세스가 독점하지 못하므로 공정함.
+		- 단점:
+			- 시간 할당이 너무 짧으면 컨텍스트 스위칭 오버헤드 증가.
+			- 시간 할당이 너무 길면 FCFS와 유사하게 동작.
 
-❌ 단점:
-	- Convoy Effect(호위 효과) 발생 가능 → 긴 프로세스가 앞에 있으면 뒤의 짧은 프로세스들이 오래 기다려야 함.
+	- (4) Priority Scheduling (우선순위 스케줄링)
+		- 프로세스에 우선순위를 부여하고, 우선순위가 높은 프로세스를 먼저 실행.
+		- 선점형과 비선점형 방식 모두 가능.
+		- 장점:
+			- 중요한 작업을 빠르게 처리할 수 있음.
+		- 단점:
+			- Priority Inversion(우선순위 역전) 문제 발생 가능.
+			- 낮은 우선순위 프로세스가 계속 실행되지 못하는 Starvation 가능성 존재.
 
-(2) SJF (Shortest Job First, 최단 작업 우선)
-	- 실행 시간이 가장 짧은 프로세스를 먼저 실행.
-	- 선점형과 비선점형 방식 모두 가능.
-
-✅ 장점:
-	- 평균 대기 시간이 가장 짧음 → 시스템 효율이 높음.
-
-❌ 단점:
-	- 긴 작업이 계속 뒤로 밀려 Starvation(기아 문제) 발생 가능.
-	- 실행 시간을 미리 알아야 하므로, 정확한 예측이 어려움.
-
-(3) RR (Round Robin, 라운드 로빈)
-	- 각 프로세스가 일정한 시간 할당(Time Quantum)을 받으며 순환 실행.
-	- 선점형 방식.
-
-✅ 장점:
-	- 응답 시간이 빠름 → 대화형 시스템(Interactive System)에 적합.
-	- 특정 프로세스가 독점하지 못하므로 공정함.
-
-❌ 단점:
-	- 시간 할당이 너무 짧으면 컨텍스트 스위칭 오버헤드 증가.
-	- 시간 할당이 너무 길면 FCFS와 유사하게 동작.
-
-(4) Priority Scheduling (우선순위 스케줄링)
-	- 프로세스에 우선순위를 부여하고, 우선순위가 높은 프로세스를 먼저 실행.
-	- 선점형과 비선점형 방식 모두 가능.
-
-✅ 장점:
-	- 중요한 작업을 빠르게 처리할 수 있음.
-
-❌ 단점:
-	- Priority Inversion(우선순위 역전) 문제 발생 가능.
-	- 낮은 우선순위 프로세스가 계속 실행되지 못하는 Starvation 가능성 존재.
-
-(5) Multilevel Queue (다단계 큐)
-	- 프로세스를 여러 개의 큐로 나누고, 큐마다 다른 스케줄링 알고리즘을 적용.
-	- 우선순위가 높은 큐부터 실행되며, 낮은 큐는 대기 시간이 길어질 수 있음.
-
-✅ 장점:
-	- 다양한 유형의 프로세스를 효과적으로 관리 가능.
-
-❌ 단점:
-	- 큐의 우선순위를 미리 결정해야 하므로 유연성이 떨어짐.
-
-⸻
+	- (5) Multilevel Queue (다단계 큐)
+		- 프로세스를 여러 개의 큐로 나누고, 큐마다 다른 스케줄링 알고리즘을 적용.
+		- 우선순위가 높은 큐부터 실행되며, 낮은 큐는 대기 시간이 길어질 수 있음.
+		- 장점:
+			- 다양한 유형의 프로세스를 효과적으로 관리 가능.
+		- 단점:
+			- 큐의 우선순위를 미리 결정해야 하므로 유연성이 떨어짐.
 
 3. 라운드 로빈(Round Robin) 스케줄링과 시간 할당(Time Quantum)의 영향
 
@@ -939,7 +926,7 @@ Organize concepts, features, types and Pros and Cons
 	- 긴 실행 시간을 가진 프로세스가 계속 뒤로 밀려서 실행되지 못하는 문제.
 	- 짧은 작업이 계속해서 들어오면 긴 작업이 무한정 대기할 가능성이 있음.
 
-✅ 해결 방법:
+- 해결 방법:
 	- Aging(에이징): 대기 시간이 길어진 프로세스의 우선순위를 점진적으로 높이는 기법.
 
 ⸻
@@ -966,18 +953,18 @@ Organize concepts, features, types and Pros and Cons
 	- 시스템 프로세스 → 높은 우선순위 큐 (FCFS)
 	- 사용자 프로세스 → 낮은 우선순위 큐 (Round Robin)
 
-✅ 장점:
+- 장점:
 	- 프로세스 특성에 맞는 스케줄링이 가능.
-❌ 단점:
+- 단점:
 	- 우선순위가 낮은 큐의 프로세스는 실행되기 어려울 수 있음.
 
 (2) 다단계 피드백 큐 (Multilevel Feedback Queue)
 	- 다단계 큐를 확장한 형태로, 프로세스가 실행 도중 다른 큐로 이동 가능.
 	- 대기 시간이 길어지면 우선순위를 동적으로 조정하여 Starvation을 방지.
 
-✅ 장점:
+- 장점:
 	- 유연성이 높으며, 적응형 스케줄링이 가능.
-❌ 단점:
+- 단점:
 	- 설계가 복잡하며, 튜닝이 필요함.
 
 ⸻
@@ -1003,13 +990,13 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 장점
 
-✅ CPU 리소스를 중요도가 높은 프로세스에 더 많이 할당 가능 → 실시간 시스템에 유리함.
-✅ RR의 공정성을 유지하면서도 우선순위 조정이 가능.
+- CPU 리소스를 중요도가 높은 프로세스에 더 많이 할당 가능 → 실시간 시스템에 유리함.
+- RR의 공정성을 유지하면서도 우선순위 조정이 가능.
 
 (4) 단점
 
-❌ 적절한 가중치를 설정해야 함 → 가중치 설정이 잘못되면 특정 프로세스가 과도한 CPU 시간을 차지할 수 있음.
-❌ 컨텍스트 스위칭 오버헤드가 존재 → 가중치를 계산하는 과정에서 추가적인 연산이 필요함.
+- 적절한 가중치를 설정해야 함 → 가중치 설정이 잘못되면 특정 프로세스가 과도한 CPU 시간을 차지할 수 있음.
+- 컨텍스트 스위칭 오버헤드가 존재 → 가중치를 계산하는 과정에서 추가적인 연산이 필요함.
 
 (5) 사용 사례
 	- 네트워크 트래픽 관리: 패킷을 우선순위에 따라 처리.
@@ -1039,14 +1026,14 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 장점
 
-✅ 공정성(Fairness)이 높음 → 모든 프로세스가 일정하게 CPU를 사용 가능.
-✅ Starvation(기아 문제)이 발생하지 않음 → VRuntime을 기준으로 실행 순서를 조정하므로, 오래 대기한 프로세스가 우선 실행됨.
-✅ O(log N) 시간 복잡도로 높은 성능 제공 → Red-Black Tree를 사용하여 효율적인 프로세스 정렬 가능.
+- 공정성(Fairness)이 높음 → 모든 프로세스가 일정하게 CPU를 사용 가능.
+- Starvation(기아 문제)이 발생하지 않음 → VRuntime을 기준으로 실행 순서를 조정하므로, 오래 대기한 프로세스가 우선 실행됨.
+- O(log N) 시간 복잡도로 높은 성능 제공 → Red-Black Tree를 사용하여 효율적인 프로세스 정렬 가능.
 
 (4) 단점
 
-❌ 실시간 시스템에 적합하지 않음 → 우선순위 기반이 아닌 공정성을 기준으로 스케줄링하므로, 실시간 프로세스 처리가 어려움.
-❌ VRuntime 계산과 Red-Black Tree 관리로 인해 오버헤드 발생.
+- 실시간 시스템에 적합하지 않음 → 우선순위 기반이 아닌 공정성을 기준으로 스케줄링하므로, 실시간 프로세스 처리가 어려움.
+- VRuntime 계산과 Red-Black Tree 관리로 인해 오버헤드 발생.
 
 (5) 사용 사례
 	- 일반적인 리눅스 데스크톱 및 서버 환경에서 사용됨.
@@ -1107,9 +1094,9 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 필요성
 
-✅ 데이터의 일관성을 보장함.
-✅ Race Condition(경쟁 상태) 방지.
-✅ 여러 프로세스가 동시에 실행될 때, 데이터 손상 방지.
+- 데이터의 일관성을 보장함.
+- Race Condition(경쟁 상태) 방지.
+- 여러 프로세스가 동시에 실행될 때, 데이터 손상 방지.
 
 ⸻
 
@@ -1119,10 +1106,10 @@ Organize concepts, features, types and Pros and Cons
 	- 하나의 프로세스 또는 스레드만 접근 가능한 Locking 메커니즘.
 	- Lock을 얻은 프로세스만 공유 자원 사용 가능 → Release(해제)해야 다른 프로세스가 사용 가능.
 
-✅ 장점:
+- 장점:
 	- 단순한 구조로 상호 배제를 효과적으로 보장.
 
-❌ 단점:
+- 단점:
 	- 한 번에 하나의 프로세스만 접근 가능하므로, 동시성(Concurrency)이 떨어질 수 있음.
 
 (2) 세마포어(Semaphore)
@@ -1130,11 +1117,11 @@ Organize concepts, features, types and Pros and Cons
 	- Binary Semaphore(이진 세마포어): 뮤텍스처럼 0 또는 1 값만 가짐.
 	- Counting Semaphore(카운팅 세마포어): 특정 개수의 프로세스가 동시에 자원 사용 가능.
 
-✅ 장점:
+- 장점:
 	- 여러 개의 프로세스가 동시에 자원 접근 가능.
 	- 동기화뿐만 아니라 자원 관리에도 활용 가능.
 
-❌ 단점:
+- 단점:
 	- 프로그래머가 적절히 사용하지 않으면 데드락(Deadlock) 위험 존재.
 
 ⸻
@@ -1168,21 +1155,21 @@ Organize concepts, features, types and Pros and Cons
 
 (1) 예방(Prevention)
 	- 데드락 발생 조건 4가지 중 하나 이상을 제거하는 방식.
-✅ 자원 선점(Preemption) 허용: 한 프로세스가 자원을 너무 오래 점유하지 못하도록 함.
-✅ 순환 대기 방지: 자원을 할당할 때 항상 정해진 순서대로 요청하도록 제한.
+- 자원 선점(Preemption) 허용: 한 프로세스가 자원을 너무 오래 점유하지 못하도록 함.
+- 순환 대기 방지: 자원을 할당할 때 항상 정해진 순서대로 요청하도록 제한.
 
 (2) 회피(Avoidance)
 	- 데드락이 발생할 가능성이 있는지 사전에 검사하고, 안전한 경우에만 자원 할당.
-✅ 은행가 알고리즘(Banker’s Algorithm): 프로세스의 최대 자원 요구량을 미리 예측하고, 데드락이 발생하지 않도록 스케줄링.
+- 은행가 알고리즘(Banker’s Algorithm): 프로세스의 최대 자원 요구량을 미리 예측하고, 데드락이 발생하지 않도록 스케줄링.
 
 (3) 탐지(Detection)
 	- 데드락이 발생했는지 검사하고, 발생하면 해결하는 방식.
-✅ 자원 할당 그래프(Resource Allocation Graph, RAG) 를 사용하여 데드락 발생 여부를 탐지.
+- 자원 할당 그래프(Resource Allocation Graph, RAG) 를 사용하여 데드락 발생 여부를 탐지.
 
 (4) 복구(Recovery)
 	- 데드락이 발생한 후 해결하는 방법.
-✅ 프로세스 종료(Kill Process): 데드락에 걸린 프로세스를 강제로 종료.
-✅ 자원 선점(Resource Preemption): 자원을 강제로 회수하여 다른 프로세스에게 할당.
+- 프로세스 종료(Kill Process): 데드락에 걸린 프로세스를 강제로 종료.
+- 자원 선점(Resource Preemption): 자원을 강제로 회수하여 다른 프로세스에게 할당.
 
 ⸻
 
@@ -1218,11 +1205,11 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 장단점
 
-✅ 장점
+- 장점
 	- 데드락을 예방하지 않고도 데드락을 방지할 수 있어 자원의 활용도가 높음.
 	- 불필요한 자원 제한 없이 효율적으로 자원을 할당할 수 있음.
 
-❌ 단점
+- 단점
 	- 프로세스가 사전에 자원 요구량을 명확히 정의해야 한다.
 	- 실시간 시스템에서는 적용하기 어렵다.
 	- 추가적인 계산이 필요하므로 CPU 오버헤드가 증가할 수 있다.
@@ -1248,11 +1235,11 @@ Organize concepts, features, types and Pros and Cons
 
 (4) 장단점
 
-✅ 장점
+- 장점
 	- 그래프 구조를 사용해 데드락 발생 가능성을 시각적으로 분석 가능하다.
 	- 데드락 탐지를 위한 자동화된 분석 도구로 활용 가능하다.
 
-❌ 단점
+- 단점
 	- 자원의 개수가 많아지면 그래프의 복잡도가 증가하여 실시간 적용이 어려움.
 	- 동적인 환경에서는 자원 할당이 빈번하게 변경되므로 분석이 어려울 수 있음.
 
@@ -1287,11 +1274,11 @@ Organize concepts, features, types and Pros and Cons
 	- 대표적인 기법: 뱅커 알고리즘(Banker’s Algorithm).
 	- 실행 중에 자원을 동적으로 관리하여 필요할 때만 자원을 할당함.
 
-✅ 장점
+- 장점
 	- 자원을 보다 효율적으로 활용할 수 있음.
 	- 프로세스가 실행되면서 동적으로 자원을 관리할 수 있음.
 
-❌ 단점
+- 단점
 	- 추가적인 계산이 필요하므로 CPU 오버헤드 증가.
 	- 실시간 시스템에서는 적용하기 어려움.
 
@@ -1299,11 +1286,11 @@ Organize concepts, features, types and Pros and Cons
 	- 데드락 발생 조건(4가지 중 하나)을 사전에 제거하여 데드락을 원천적으로 차단하는 방식.
 	- 대표적인 기법: 자원 선점 허용, 순환 대기 방지 등.
 
-✅ 장점
+- 장점
 	- 데드락이 절대 발생하지 않음.
 	- 데드락 탐지 알고리즘이 필요 없음.
 
-❌ 단점
+- 단점
 	- 자원 활용도가 낮아질 수 있음.
 	- 시스템이 불필요하게 자원을 제한할 수 있음.
 
@@ -1356,11 +1343,11 @@ Organize concepts, features, types and Pros and Cons
 	- 하나의 프로세스만 실행할 수 있도록 메모리를 전체 할당하는 방식.
 	- 운영체제(OS) 영역을 제외한 남은 메모리 전체를 단일 프로세스가 차지함.
 
-✅ 장점
+- 장점
 	- 구조가 단순하여 메모리 관리 오버헤드가 없음.
 	- 프로세스 간 충돌이 발생하지 않음.
 
-❌ 단점
+- 단점
 	- 하나의 프로세스만 실행 가능하여 멀티태스킹이 불가능.
 	- 메모리 낭비가 심할 수 있음.
 
@@ -1369,11 +1356,11 @@ Organize concepts, features, types and Pros and Cons
 	- 프로세스가 필요로 하는 메모리 크기만큼 블록을 할당함.
 	- 정적 분할(Static Partitioning)과 동적 분할(Dynamic Partitioning) 방식이 있음.
 
-✅ 장점
+- 장점
 	- 여러 개의 프로세스가 동시에 실행 가능하여 멀티태스킹이 가능.
 	- 메모리 활용도가 높아짐.
 
-❌ 단점
+- 단점
 	- 내부 단편화(Internal Fragmentation) 또는 외부 단편화(External Fragmentation) 문제가 발생할 수 있음.
 	- 메모리 할당 및 관리 오버헤드가 발생함.
 
@@ -1386,11 +1373,11 @@ Organize concepts, features, types and Pros and Cons
 	- 프로세스도 동일한 크기의 페이지(Page)로 분할되며, 물리 메모리에서는 프레임(Frame)이라는 동일 크기의 블록으로 관리됨.
 	- 논리 주소와 물리 주소 간의 매핑을 페이지 테이블(Page Table)이 수행.
 
-✅ 장점
+- 장점
 	- 외부 단편화(External Fragmentation) 문제가 없음.
 	- 효율적인 메모리 활용 가능.
 
-❌ 단점
+- 단점
 	- 내부 단편화(Internal Fragmentation) 문제 발생 가능 (할당된 페이지 크기보다 프로세스가 작은 경우).
 	- 페이지 테이블 관리 오버헤드가 발생.
 
@@ -1398,11 +1385,11 @@ Organize concepts, features, types and Pros and Cons
 	- 메모리를 논리적인 단위(세그먼트, Segment)로 나누어 관리하는 방식.
 	- 프로세스를 논리적인 작업 단위(코드, 데이터, 스택 등)로 나누어 가변 크기의 세그먼트로 관리.
 
-✅ 장점
+- 장점
 	- 사용자 관점에서 논리적인 메모리 할당이 가능.
 	- 내부 단편화가 발생하지 않음.
 
-❌ 단점
+- 단점
 	- 외부 단편화(External Fragmentation) 문제가 발생할 수 있음.
 	- 세그먼트 테이블 관리가 필요하여 오버헤드가 증가.
 
@@ -1419,11 +1406,11 @@ Organize concepts, features, types and Pros and Cons
 	2.	페이지 단위로 메모리에 로드되며, 필요하지 않은 페이지는 디스크로 이동(Swap Out)하고 필요한 페이지는 다시 불러옴(Swap In).
 	3.	페이지 폴트(Page Fault) 가 발생하면, 운영체제가 디스크에서 해당 페이지를 가져와 메모리에 적재함.
 
-✅ 장점
+- 장점
 	- 프로그램 실행을 위해 전체를 메모리에 로드할 필요가 없어 메모리 활용도가 높음.
 	- 멀티태스킹 지원이 용이.
 
-❌ 단점
+- 단점
 	- 페이지 폴트가 자주 발생하면 성능 저하(Thrashing) 가능성이 있음.
 	- 디스크 접근이 많아지면 I/O 오버헤드 증가.
 
@@ -1435,30 +1422,30 @@ Organize concepts, features, types and Pros and Cons
 	- 가장 먼저 들어온 페이지를 먼저 교체하는 방식.
 	- 큐(Queue) 자료구조를 사용.
 
-✅ 장점
+- 장점
 	- 구현이 단순함.
 
-❌ 단점
+- 단점
 	- Belady’s Anomaly(벨라디의 모순): 페이지 프레임 수가 증가해도 페이지 폴트가 줄어들지 않고 증가할 수 있음.
 
 (2) LRU (Least Recently Used)
 	- 가장 오랫동안 사용되지 않은 페이지를 교체하는 방식.
 	- 시간 기반으로 최근 사용된 데이터를 추적해야 함.
 
-✅ 장점
+- 장점
 	- 실험적으로 FIFO보다 성능이 좋음.
 
-❌ 단점
+- 단점
 	- 최근 사용 여부를 기록해야 하므로 오버헤드 발생 가능.
 
 (3) Optimal (OPT)
 	- 가장 나중에 사용될 페이지를 교체하는 방식.
 	- 이론적으로 가장 성능이 좋지만, 미래의 페이지 참조를 예측해야 하므로 실제 구현이 어려움.
 
-✅ 장점
+- 장점
 	- 가장 적은 페이지 폴트를 발생시킴.
 
-❌ 단점
+- 단점
 	- 실제 시스템에서는 구현할 수 없음.
 
 ⸻
@@ -1469,20 +1456,20 @@ Organize concepts, features, types and Pros and Cons
 	- CPU와 메인 메모리 사이에서 데이터를 빠르게 제공하는 소형 고속 메모리.
 	- 최근 자주 사용된 데이터를 저장하여 메인 메모리 접근을 최소화.
 
-✅ 장점
+- 장점
 	- CPU 속도를 최대한 활용할 수 있도록 도와줌.
 
-❌ 단점
+- 단점
 	- 용량이 작고 비용이 비쌈.
 
 (2) 메인 메모리(Main Memory)
 	- 프로그램 실행을 위해 데이터를 저장하는 기본 메모리(RAM).
 	- CPU가 직접 접근하는 주요 기억장치.
 
-✅ 장점
+- 장점
 	- 대용량 데이터를 저장 가능.
 
-❌ 단점
+- 단점
 	- 속도가 캐시보다 느림.
 
 ⸻
@@ -1495,11 +1482,11 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 장단점
 
-✅ 장점
+- 장점
 	- 메모리 부족 시 추가적인 프로세스 실행 가능.
 	- 여러 프로세스를 실행할 수 있어 멀티태스킹 지원이 가능.
 
-❌ 단점
+- 단점
 	- 디스크 입출력(I/O) 발생으로 성능 저하 발생 가능.
 	- 스와핑이 자주 발생하면 Thrashing(스와핑 과다 현상) 발생 가능.
 
@@ -1555,7 +1542,7 @@ Organize concepts, features, types and Pros and Cons
 	- 할당된 메모리 블록 내에서 사용되지 않는 공간이 발생하는 현상.
 	- 페이징 시스템에서 주로 발생하며, 프로세스가 필요한 크기보다 큰 고정 크기 블록을 할당받을 때 빈 공간이 남는 문제.
 
-✅ 해결 방법
+- 해결 방법
 	- 메모리 블록 크기를 줄이거나 동적 할당을 사용하여 최소한의 공간 낭비.
 	- 페이징 기법을 최적화하여 페이지 크기를 적절히 설정.
 
@@ -1563,7 +1550,7 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 개의 작은 빈 공간이 메모리에 흩어져 있어 새로운 프로세스를 수용할 수 없는 현상.
 	- 세그먼테이션 시스템에서 주로 발생하며, 프로세스가 종료되면서 메모리의 연속성이 깨지는 경우 발생.
 
-✅ 해결 방법
+- 해결 방법
 	- 압축(Compaction): 메모리를 재정렬하여 연속된 공간을 확보.
 	- 페이징(Paging) 또는 세그먼테이션 사용: 프로세스를 분할하여 단편화 문제 해결.
 
@@ -1593,11 +1580,11 @@ Organize concepts, features, types and Pros and Cons
 	3.	페이지 프레임이 메모리에 존재하면 변환된 물리 주소로 접근, 없으면 페이지 폴트(Page Fault) 발생.
 	4.	페이지 폴트 발생 시 디스크에서 필요한 페이지를 로드한 후 테이블을 업데이트.
 
-✅ 장점
+- 장점
 	- 페이징 기법을 활용하여 외부 단편화 문제 해결 가능.
 	- 가상 메모리 환경에서 프로세스를 효율적으로 관리할 수 있음.
 
-❌ 단점
+- 단점
 	- 페이지 테이블 크기가 크면 메모리 오버헤드 발생.
 	- 페이지 조회 속도를 높이기 위해 TLB(Translation Lookaside Buffer) 활용 필요.
 
@@ -1614,11 +1601,11 @@ Organize concepts, features, types and Pros and Cons
 	2.	각 레벨에 필요한 페이지 테이블만 메모리에 유지하여 메모리 절약 가능.
 	3.	TLB(Translation Lookaside Buffer)와 함께 사용하여 속도를 최적화.
 
-✅ 장점
+- 장점
 	- 페이지 테이블을 효율적으로 관리하여 메모리 사용량 절감.
 	- 대형 메모리 시스템에서 성능 향상.
 
-❌ 단점
+- 단점
 	- 주소 변환 속도가 느려질 수 있음 (여러 단계 테이블을 탐색해야 함).
 	- 추가적인 메모리 접근이 필요하여 성능 저하 발생 가능.
 
@@ -1632,16 +1619,16 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 장점
 
-✅ 메모리 사용량 절감
+- 메모리 사용량 절감
 	- 기존 페이지 테이블보다 작은 크기로 메모리를 절약할 수 있음.
-✅ 큰 주소 공간을 관리하는 데 효과적
+- 큰 주소 공간을 관리하는 데 효과적
 	- 대형 시스템에서 페이징 테이블이 너무 커지는 문제를 해결할 수 있음.
 
 (3) 단점
 
-❌ 주소 변환 속도 저하
+- 주소 변환 속도 저하
 	- 페이지 테이블이 압축되면서 빠른 조회를 위해 해시(Hash) 기법이 필요.
-❌ TLB(Translation Lookaside Buffer) 필요
+- TLB(Translation Lookaside Buffer) 필요
 	- 변환 속도를 높이기 위해 TLB와 함께 사용해야 성능을 보장할 수 있음.
 
 ⸻
@@ -1710,7 +1697,7 @@ Organize concepts, features, types and Pros and Cons
 	4.	TLB에 새롭게 추가된 정보를 이용하여 주소 변환 수행.
 	5.	만약 해당 페이지가 물리 메모리에 없으면 페이지 폴트(Page Fault) 발생 → 디스크에서 메모리로 로드 후 TLB 업데이트.
 
-✅ 최적화 방법
+- 최적화 방법
 	- TLB Hit 비율을 높이기 위해 적절한 페이지 크기 및 캐시 정책 사용.
 	- 소프트웨어적으로 메모리 접근 패턴을 최적화하여 TLB Miss 빈도를 줄임.
 
@@ -1730,11 +1717,11 @@ Organize concepts, features, types and Pros and Cons
 	- 세그먼트 테이블을 먼저 조회하여 세그먼트 시작 위치를 찾음.
 	- 세그먼트 내에서 페이지 테이블을 조회하여 물리 주소를 변환.
 
-✅ 장점
+- 장점
 	- 세그먼테이션의 논리적 구조를 유지하면서도 외부 단편화를 방지할 수 있음.
 	- 페이징 기법을 활용하여 물리 메모리를 효율적으로 관리 가능.
 
-❌ 단점
+- 단점
 	- 주소 변환 과정이 복잡하여 추가적인 계산 및 성능 저하 가능.
 	- 세그먼트 테이블과 페이지 테이블을 모두 관리해야 하므로 메모리 오버헤드 발생.
 
@@ -1751,7 +1738,7 @@ Organize concepts, features, types and Pros and Cons
 	- 실제 RAM에서 사용되는 주소.
 	- CPU가 직접 접근할 수 있는 메모리 주소이며, MMU(Memory Management Unit)가 가상 주소를 변환하여 얻음.
 
-✅ 차이점 요약
+- 차이점 요약
 	- 가상 주소: 사용자 프로그램이 인식하는 주소.
 	- 물리 주소: 실제 메모리에서 접근하는 주소.
 	- MMU와 페이지 테이블을 통해 가상 주소를 물리 주소로 변환.
@@ -1765,22 +1752,22 @@ Organize concepts, features, types and Pros and Cons
 	- 필요할 때만 페이지를 불러오기 때문에 초기 메모리 사용량을 줄일 수 있음.
 	- 페이지 폴트(Page Fault) 발생 가능성이 높음.
 
-✅ 장점
+- 장점
 	- 초기 로딩 시간이 단축됨.
 	- 사용하지 않는 페이지는 불러오지 않으므로 메모리 낭비가 줄어듦.
 
-❌ 단점
+- 단점
 	- 페이지 폴트로 인해 성능 저하 발생 가능.
 
 (2) 사전 페이징(Pre-Paging)
 	- 프로세스 실행 전에 미리 여러 개의 페이지를 불러오는 방식.
 	- 요구 페이징과 달리 앞으로 필요할 페이지를 예측하여 미리 적재.
 
-✅ 장점
+- 장점
 	- 페이지 폴트를 줄여 성능 향상 가능.
 	- 메모리 접근 속도가 빨라질 수 있음.
 
-❌ 단점
+- 단점
 	- 필요하지 않은 페이지를 미리 로드하면 메모리 낭비 가능.
 	- 예측이 잘못되면 불필요한 디스크 I/O 증가.
 
@@ -1800,11 +1787,11 @@ Organize concepts, features, types and Pros and Cons
 	3.	스레싱(Thrashing) 방지
 	- Working Set을 조절하여 불필요한 페이지 폴트 감소.
 
-✅ 장점
+- 장점
 	- 프로세스의 메모리 요구량을 동적으로 조정하여 성능 최적화.
 	- 필요한 페이지만 유지하여 메모리 낭비 방지.
 
-❌ 단점
+- 단점
 	- Working Set을 계산하는 오버헤드가 발생.
 	- 사용 패턴이 예측하기 어려운 경우 정확한 관리가 어려울 수 있음.
 
@@ -1848,7 +1835,7 @@ Organize concepts, features, types and Pros and Cons
 	5.	페이지 테이블을 업데이트하여 새로운 페이지의 물리 주소를 기록.
 	6.	CPU가 다시 해당 페이지를 참조하여 정상 실행.
 
-✅ 최적화 방법
+- 최적화 방법
 	- 페이지 폴트 발생을 줄이기 위해 Working Set Model 사용.
 	- TLB(Translation Lookaside Buffer) 캐시 활용.
 	- 페이지 교체 알고리즘(FIFO, LRU, OPT) 최적화.
@@ -1881,32 +1868,32 @@ Organize concepts, features, types and Pros and Cons
 (1) 연속 할당(Contiguous Allocation)
 	- 파일이 디스크 상에서 연속된 블록에 저장되는 방식.
 
-✅ 장점
+- 장점
 	- 읽기/쓰기 속도가 빠름 (연속된 블록이므로 탐색 시간이 적음).
 
-❌ 단점
+- 단점
 	- 외부 단편화 발생 (파일 삭제 후 빈 공간이 생길 수 있음).
 	- 파일 크기 변경이 어려움 (새로운 공간이 필요하면 이동해야 함).
 
 (2) 링크드 할당(Linked Allocation)
 	- 각 파일이 여러 개의 블록으로 나누어지고, 블록들이 링크드 리스트로 연결되는 방식.
 
-✅ 장점
+- 장점
 	- 연속적인 공간이 필요하지 않아 단편화 문제 해결.
 	- 파일 크기 변경이 용이함.
 
-❌ 단점
+- 단점
 	- 임의 접근(Random Access)이 느림 (블록을 순차적으로 탐색해야 함).
 	- 추가적인 포인터 저장 공간 필요.
 
 (3) 인덱스 할당(Indexed Allocation)
 	- 파일의 블록 주소를 별도의 인덱스 블록에 저장하는 방식.
 
-✅ 장점
+- 장점
 	- 임의 접근이 빠름 (인덱스 블록에서 직접 참조 가능).
 	- 파일 크기 변경이 용이.
 
-❌ 단점
+- 단점
 	- 인덱스 블록을 위한 추가 공간 필요.
 	- 큰 파일의 경우 인덱스 테이블이 커질 수 있음.
 
@@ -1918,11 +1905,11 @@ Organize concepts, features, types and Pros and Cons
 	- 파일이 할당된 디스크 블록 정보를 FAT 테이블에 저장하는 방식.
 	- MS-DOS, Windows의 FAT16, FAT32 등이 해당.
 
-✅ 장점
+- 장점
 	- 구조가 단순하여 구현이 쉬움.
 	- 저용량 디스크 환경에서 적합.
 
-❌ 단점
+- 단점
 	- 파일 크기가 커지면 FAT 테이블이 커져서 탐색 속도 저하.
 	- 파일 조각화(Fragmentation) 발생 가능성이 높음.
 
@@ -1930,11 +1917,11 @@ Organize concepts, features, types and Pros and Cons
 	- 파일의 메타데이터(파일 크기, 생성일, 블록 정보 등)를 i-node에 저장하는 방식.
 	- Unix, Linux의 Ext4, XFS 등이 해당.
 
-✅ 장점
+- 장점
 	- 파일 크기와 무관하게 일정한 검색 속도 제공.
 	- 파일 조각화 문제를 줄일 수 있음.
 
-❌ 단점
+- 단점
 	- i-node 개수가 제한되어 너무 많은 파일을 저장하면 문제가 발생할 수 있음.
 	- 추가적인 메모리 공간이 필요.
 
@@ -1953,18 +1940,18 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 장점
 
-✅ 데이터 무결성 보장
+- 데이터 무결성 보장
 	- 갑작스러운 전원 차단, 시스템 충돌 발생 시 저널을 이용하여 파일 복구 가능.
-✅ 빠른 복구 시간
+- 빠른 복구 시간
 	- 전통적인 파일 시스템보다 파일 손상 시 복구 속도가 빠름.
-✅ 시스템 안정성 향상
+- 시스템 안정성 향상
 	- 시스템 충돌 시 파일 손상이 최소화됨.
 
 (4) 단점
 
-❌ 저널링으로 인한 오버헤드 발생
+- 저널링으로 인한 오버헤드 발생
 	- 변경 사항을 먼저 기록하는 과정에서 추가적인 디스크 입출력 발생.
-❌ 디스크 공간 추가 사용
+- 디스크 공간 추가 사용
 	- 저널 데이터를 저장하기 위한 별도의 공간이 필요.
 
 (5) 대표적인 저널링 파일 시스템
@@ -2004,10 +1991,10 @@ Organize concepts, features, types and Pros and Cons
 	- 모든 파일이 하나의 디렉토리에 저장되는 구조.
 	- 사용자가 많아질수록 파일 관리가 어려워지는 단점이 있음.
 
-✅ 장점
+- 장점
 	- 구조가 단순하여 구현과 탐색 속도가 빠름.
 
-❌ 단점
+- 단점
 	- 파일 이름 충돌(Name Conflict) 문제 발생 (모든 사용자가 동일한 디렉토리에서 작업).
 	- 파일 수가 많아지면 탐색 속도가 저하될 수 있음.
 
@@ -2017,11 +2004,11 @@ Organize concepts, features, types and Pros and Cons
 	- 각 사용자가 독립적인 디렉토리를 가질 수 있도록 계층을 두는 구조.
 	- 사용자별 디렉토리를 구분하여 이름 충돌 문제를 해결.
 
-✅ 장점
+- 장점
 	- 사용자가 각자 독립적인 공간을 가질 수 있어 파일 이름 충돌 방지.
 	- 관리가 용이함.
 
-❌ 단점
+- 단점
 	- 파일을 사용자 간 공유하기 어려움 (파일 공유를 위해 추가적인 링크 필요).
 
 ⸻
@@ -2030,11 +2017,11 @@ Organize concepts, features, types and Pros and Cons
 	- 루트 디렉토리를 가지며, 하위 디렉토리를 계속 확장할 수 있는 계층 구조.
 	- UNIX, Windows의 기본 디렉토리 구조.
 
-✅ 장점
+- 장점
 	- 파일을 논리적으로 그룹화하여 관리 가능.
 	- 계층적 탐색이 용이.
 
-❌ 단점
+- 단점
 	- 디렉토리 탐색이 깊어지면 접근 속도가 느려질 수 있음.
 
 ⸻
@@ -2043,10 +2030,10 @@ Organize concepts, features, types and Pros and Cons
 	- 파일 및 디렉토리를 공유할 수 있도록 설계된 구조.
 	- 하드 링크(Hard Link) 또는 심볼릭 링크(Symbolic Link)를 활용하여 여러 위치에서 같은 파일을 참조 가능.
 
-✅ 장점
+- 장점
 	- 파일 공유가 가능하여 중복 저장을 줄일 수 있음.
 
-❌ 단점
+- 단점
 	- 링크를 통해 접근하는 과정에서 탐색 속도가 저하될 수 있음.
 
 ⸻
@@ -2055,11 +2042,11 @@ Organize concepts, features, types and Pros and Cons
 	- 사이클(Loop)을 허용하는 디렉토리 구조.
 	- 파일 공유와 중복 방지가 가능하지만, 복잡한 순환 문제(Circular References)가 발생할 수 있음.
 
-✅ 장점
+- 장점
 	- 가장 유연한 파일 시스템 구조.
 	- 파일 및 디렉토리 공유가 자유로움.
 
-❌ 단점
+- 단점
 	- 순환 참조 문제를 해결하기 위한 추가적인 메커니즘 필요 (예: 참조 카운팅 사용).
 
 ⸻
@@ -2070,10 +2057,10 @@ Organize concepts, features, types and Pros and Cons
 	- 파일을 처음부터 순서대로 접근하는 방식.
 	- 테이프(Tape) 기반 저장 장치에서 주로 사용됨.
 
-✅ 장점
+- 장점
 	- 구현이 간단하고 연속적인 데이터 처리가 빠름.
 
-❌ 단점
+- 단점
 	- 특정 위치에 있는 데이터를 찾기 위해 처음부터 읽어야 하므로 접근 속도가 느림.
 
 ⸻
@@ -2082,10 +2069,10 @@ Organize concepts, features, types and Pros and Cons
 	- 파일의 특정 블록을 즉시 접근할 수 있는 방식.
 	- 디스크 기반 저장 장치에서 주로 사용됨.
 
-✅ 장점
+- 장점
 	- 랜덤 액세스(Random Access)가 가능하여 속도가 빠름.
 
-❌ 단점
+- 단점
 	- 파일이 조각나면 성능이 저하될 수 있음.
 
 ⸻
@@ -2096,11 +2083,11 @@ Organize concepts, features, types and Pros and Cons
 	- 파일의 실제 데이터 블록을 공유하는 방식.
 	- 동일한 inode를 참조하며 원본 파일이 삭제되어도 하드 링크는 유지됨.
 
-✅ 장점
+- 장점
 	- 원본 파일과 동일한 데이터 유지.
 	- 원본 파일이 삭제되어도 하드 링크 파일을 통해 접근 가능.
 
-❌ 단점
+- 단점
 	- 다른 파일 시스템이나 디렉토리 간 링크가 불가능.
 
 ⸻
@@ -2109,11 +2096,11 @@ Organize concepts, features, types and Pros and Cons
 	- 파일의 실제 위치를 가리키는 별도의 파일을 생성하는 방식.
 	- 원본 파일이 삭제되면 심볼릭 링크는 깨진 링크(Broken Link)가 됨.
 
-✅ 장점
+- 장점
 	- 다른 파일 시스템 간에도 링크가 가능.
 	- 디렉토리에도 링크 생성 가능.
 
-❌ 단점
+- 단점
 	- 원본 파일이 삭제되면 링크가 깨짐.
 
 ⸻
@@ -2211,7 +2198,7 @@ Organize concepts, features, types and Pros and Cons
 	- 데이터를 고정된 크기의 블록 단위로 읽고 쓰는 장치.
 	- HDD, SSD, USB 드라이브, CD-ROM 등이 블록 장치에 해당.
 
-✅ 특징
+- 특징
 	- 랜덤 액세스(Random Access) 가능 (파일의 특정 블록만 읽거나 쓸 수 있음).
 	- 운영체제가 버퍼링(Buffering), 캐싱(Caching)을 활용하여 성능 최적화 가능.
 
@@ -2221,7 +2208,7 @@ Organize concepts, features, types and Pros and Cons
 	- 데이터를 연속적인 스트림(Stream) 형태로 읽고 쓰는 장치.
 	- 키보드, 마우스, 프린터, 시리얼 포트 등이 문자 장치에 해당.
 
-✅ 특징
+- 특징
 	- 순차적으로만 접근 가능 (특정 위치로 점프하여 접근하는 것이 어려움).
 	- 운영체제가 캐싱을 거의 수행하지 않음 (데이터가 실시간으로 처리됨).
 
@@ -2238,11 +2225,11 @@ Organize concepts, features, types and Pros and Cons
 	2.	DMA 컨트롤러가 입출력 장치와 메모리 간 데이터를 직접 전송.
 	3.	데이터 전송이 완료되면 인터럽트를 발생시켜 CPU에 알림.
 
-✅ 장점
+- 장점
 	- CPU 부하를 줄이고, 시스템 성능을 향상시킴.
 	- 빠른 데이터 전송 가능 (메모리와 직접 연결됨).
 
-❌ 단점
+- 단점
 	- DMA 컨트롤러와 CPU 간 충돌이 발생할 수 있음 (버스 마스터링 조정 필요).
 	- 복잡한 하드웨어 제어가 필요.
 
@@ -2260,11 +2247,11 @@ Organize concepts, features, types and Pros and Cons
 	3.	인터럽트 서비스 루틴(ISR, Interrupt Service Routine)이 해당 인터럽트를 처리.
 	4.	처리 완료 후 원래 작업을 복원하고 실행을 재개.
 
-✅ 장점
+- 장점
 	- CPU가 불필요한 감시(폴링)를 하지 않아도 됨.
 	- 여러 개의 장치가 동시에 동작 가능.
 
-❌ 단점
+- 단점
 	- 과도한 인터럽트가 발생하면 성능 저하 가능 (인터럽트 스톰).
 
 ⸻
@@ -2283,7 +2270,7 @@ Organize concepts, features, types and Pros and Cons
 	- 프로그램이 실행 도중 오류 또는 예외(Exception)가 발생하여 발생하는 인터럽트.
 	- 예: 0으로 나누기 오류, 페이지 폴트, 접근 권한 오류.
 
-✅ 차이점 요약
+- 차이점 요약
 	- 하드웨어 인터럽트: 외부 장치(키보드, 디스크)에서 발생.
 	- 소프트웨어 인터럽트: 시스템 콜 호출 시 발생.
 	- 트랩: 오류 또는 예외가 발생할 때 실행.
@@ -2295,10 +2282,10 @@ Organize concepts, features, types and Pros and Cons
 (1) FCFS (First Come First Serve)
 	- 요청 순서대로 처리하는 방식.
 
-✅ 장점
+- 장점
 	- 구현이 간단하고 공정함.
 
-❌ 단점
+- 단점
 	- 디스크 헤드 이동 거리가 최적화되지 않아 탐색 시간이 길어질 수 있음.
 
 ⸻
@@ -2306,10 +2293,10 @@ Organize concepts, features, types and Pros and Cons
 (2) SSTF (Shortest Seek Time First)
 	- 현재 위치에서 가장 가까운 요청을 먼저 처리하는 방식.
 
-✅ 장점
+- 장점
 	- 디스크 탐색 시간이 줄어들어 성능 향상 가능.
 
-❌ 단점
+- 단점
 	- 기아(Starvation) 문제 발생 가능 (멀리 있는 요청이 계속 무시될 수 있음).
 
 ⸻
@@ -2317,10 +2304,10 @@ Organize concepts, features, types and Pros and Cons
 (3) SCAN (엘리베이터 알고리즘)
 	- 디스크 헤드가 한 방향으로 이동하며 요청을 처리하고, 끝까지 도달하면 방향을 바꿔 처리.
 
-✅ 장점
+- 장점
 	- SSTF보다 기아 문제를 해결할 수 있음.
 
-❌ 단점
+- 단점
 	- 끝에 있는 요청들이 불리할 수 있음 (디스크 끝에서 대기 시간이 길어질 수 있음).
 
 ⸻
@@ -2328,10 +2315,10 @@ Organize concepts, features, types and Pros and Cons
 (4) C-SCAN (Circular SCAN)
 	- 디스크 헤드가 한 방향으로 이동하며 요청을 처리한 후, 끝까지 도달하면 처음으로 돌아가 다시 시작.
 
-✅ 장점
+- 장점
 	- SCAN보다 공정한 서비스 제공.
 
-❌ 단점
+- 단점
 	- 디스크 끝에서 처음으로 되돌아갈 때 불필요한 이동이 발생할 수 있음.
 
 ⸻
@@ -2339,7 +2326,7 @@ Organize concepts, features, types and Pros and Cons
 (5) LOOK
 	- SCAN과 유사하지만, 끝까지 이동하지 않고 마지막 요청까지 도달하면 방향을 바꿈.
 
-✅ 장점
+- 장점
 	- 불필요한 이동을 줄여 성능 향상 가능.
 
 ⸻
@@ -2347,7 +2334,7 @@ Organize concepts, features, types and Pros and Cons
 (6) C-LOOK
 	- C-SCAN과 유사하지만, 마지막 요청을 처리한 후 처음 요청 위치로 바로 이동.
 
-✅ 장점
+- 장점
 	- C-SCAN보다 이동 거리를 줄여 성능 최적화 가능.
 
 ⸻
@@ -2383,11 +2370,11 @@ Organize concepts, features, types and Pros and Cons
 	3.	네트워크 데이터 송수신
 	- 대량의 데이터를 한 번에 송수신하지 않고, 버퍼에 저장한 후 순차적으로 전송.
 
-✅ 장점
+- 장점
 	- 입출력 장치와 CPU의 속도 차이를 해결하여 성능을 향상.
 	- 여러 개의 작업을 동시에 처리 가능.
 
-❌ 단점
+- 단점
 	- 디스크 공간을 추가로 사용해야 함.
 	- 실시간 처리가 어려울 수 있음.
 
@@ -2400,7 +2387,7 @@ Organize concepts, features, types and Pros and Cons
 	- 데이터를 순차적으로 저장하고, 처리 속도를 최적화.
 	- 주로 입출력(I/O)에서 사용됨 (예: 키보드 입력, 네트워크 송수신).
 
-✅ 특징
+- 특징
 	- 속도 차이를 해결하여 데이터 손실 방지.
 	- 일괄 처리(Batch Processing) 시 유용함.
 
@@ -2410,7 +2397,7 @@ Organize concepts, features, types and Pros and Cons
 	- 자주 사용되는 데이터를 빠르게 접근할 수 있도록 저장하는 고속 메모리.
 	- CPU 캐시, 디스크 캐시, 웹 브라우저 캐시 등이 있음.
 
-✅ 특징
+- 특징
 	- 데이터 접근 속도를 최적화하여 성능을 향상.
 	- 메모리 또는 디스크 접근 시간을 줄임.
 
@@ -2434,11 +2421,11 @@ Organize concepts, features, types and Pros and Cons
 	3.	프리페칭(Pre-Fetching)
 	- 사용자가 요청하기 전에 예측하여 미리 데이터를 불러오는 방식.
 
-✅ 장점
+- 장점
 	- 디스크 I/O 성능이 크게 향상됨.
 	- 응답 속도가 빨라짐.
 
-❌ 단점
+- 단점
 	- 캐시가 손실되면 데이터 무결성 문제가 발생할 수 있음.
 
 ⸻
@@ -2455,7 +2442,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 블록 I/O 스케줄링
 	- CFQ(Completely Fair Queuing), NOOP, Deadline 등 다양한 알고리즘을 사용하여 디스크 I/O 성능 최적화.
 
-✅ 특징
+- 특징
 	- I/O 요청을 효과적으로 처리하여 디스크 부하를 줄임.
 	- 비동기 처리로 CPU의 사용률을 최적화.
 
@@ -2475,7 +2462,7 @@ Organize concepts, features, types and Pros and Cons
 	- 정상적인 사용자가 언제든지 시스템을 사용할 수 있도록 보장.
 	- 예: DDoS 방어, 백업 시스템 운영, 장애 복구 시스템 구축.
 
-✅ 운영체제 보안 목표 요약
+- 운영체제 보안 목표 요약
 	- 기밀성: 정보 접근 통제.
 	- 무결성: 데이터 변조 방지.
 	- 가용성: 시스템을 지속적으로 사용할 수 있도록 유지.
@@ -2487,10 +2474,10 @@ Organize concepts, features, types and Pros and Cons
 (1) 비밀번호 기반 인증(Password Authentication)
 	- 사용자가 설정한 비밀번호를 입력하여 인증하는 방식.
 
-✅ 장점
+- 장점
 	- 구현이 간단하고 보편적으로 사용됨.
 
-❌ 단점
+- 단점
 	- 비밀번호 유출 가능성 (사전 공격, 브루트포스 공격).
 	- 사용자가 보안에 취약한 비밀번호를 설정할 가능성.
 
@@ -2499,11 +2486,11 @@ Organize concepts, features, types and Pros and Cons
 (2) 생체 인증(Biometric Authentication)
 	- 지문, 홍채, 얼굴 인식 등의 생체 정보를 활용한 인증 방식.
 
-✅ 장점
+- 장점
 	- 보안성이 높고 위조가 어려움.
 	- 사용자가 비밀번호를 기억할 필요 없음.
 
-❌ 단점
+- 단점
 	- 생체 정보가 유출되면 변경이 불가능.
 	- 특정 환경(조명, 지문 손상 등)에서 인식 오류 발생 가능.
 
@@ -2512,11 +2499,11 @@ Organize concepts, features, types and Pros and Cons
 (3) 토큰 기반 인증(Token-Based Authentication)
 	- OTP(One-Time Password), 스마트 카드, 보안 키를 활용한 인증 방식.
 
-✅ 장점
+- 장점
 	- 단순한 비밀번호보다 보안성이 높음.
 	- 사용자 인증이 보다 강력해짐.
 
-❌ 단점
+- 단점
 	- 토큰이 분실되면 인증이 어려움.
 	- 추가적인 하드웨어가 필요할 수 있음.
 
@@ -2559,7 +2546,7 @@ Organize concepts, features, types and Pros and Cons
 	- 모든 객체(파일, 디렉토리 등)에 보안 등급(Security Label)이 지정되며,
 사용자는 지정된 보안 등급 이하의 객체만 접근 가능.
 
-✅ 특징
+- 특징
 	- 정부, 군사 기관에서 주로 사용 (예: SELinux, Windows의 보안 정책).
 	- 사용자가 직접 접근 권한을 변경할 수 없음 (보안이 강력함).
 
@@ -2569,7 +2556,7 @@ Organize concepts, features, types and Pros and Cons
 	- 파일 소유자가 다른 사용자에게 접근 권한을 부여할 수 있는 방식.
 	- UNIX, Windows 등 대부분의 운영체제가 기본적으로 사용.
 
-✅ 특징
+- 특징
 	- 사용자가 직접 권한을 관리할 수 있어 유연함.
 	- 잘못된 권한 설정으로 인해 보안 취약점이 발생할 가능성 있음.
 
@@ -2579,7 +2566,7 @@ Organize concepts, features, types and Pros and Cons
 	- 사용자가 속한 역할(Role)에 따라 접근 권한이 부여되는 방식.
 	- 기업 및 조직에서 관리 효율성을 높이기 위해 사용.
 
-✅ 특징
+- 특징
 	- 사용자에게 직접 권한을 부여하는 대신 역할(Role) 단위로 관리하여 보안 및 관리 효율성 증가.
 	- 대규모 시스템에서 사용자 권한을 효과적으로 관리 가능.
 
@@ -2599,7 +2586,7 @@ Organize concepts, features, types and Pros and Cons
 	- chmod u+x filename → 소유자에게 실행 권한 추가.
 	- chmod g-w filename → 그룹의 쓰기 권한 제거.
 
-✅ 파일 권한 관리의 중요성
+- 파일 권한 관리의 중요성
 	- 잘못된 권한 설정은 보안 취약점을 초래할 수 있음 (예: 모든 사용자가 중요한 파일을 수정 가능하게 설정).
 
 ⸻
@@ -2610,7 +2597,7 @@ Organize concepts, features, types and Pros and Cons
 	- 입력 값이 버퍼 크기를 초과하여 메모리를 덮어쓰는 공격 기법.
 	- 공격자는 이를 이용해 악성 코드 실행 또는 권한 상승을 시도.
 
-✅ 대응 방안
+- 대응 방안
 	- 입력 길이 제한 및 유효성 검사 수행.
 	- 메모리 보호 기술(DEP, ASLR) 활용.
 
@@ -2620,7 +2607,7 @@ Organize concepts, features, types and Pros and Cons
 	- 운영체제의 커널 또는 시스템 파일을 변조하여 백도어를 설치하는 악성 코드.
 	- 공격자는 루트킷을 사용하여 보안 감시 시스템을 우회하고 장기간 시스템을 제어.
 
-✅ 대응 방안
+- 대응 방안
 	- 안티 루트킷 도구를 사용하여 주기적으로 검사.
 	- 운영체제의 보안 업데이트를 유지.
 
@@ -2630,7 +2617,7 @@ Organize concepts, features, types and Pros and Cons
 	- CPU의 하드웨어 취약점을 이용한 공격 기법.
 	- 캐시 메모리를 통해 권한이 없는 데이터에 접근할 수 있도록 유도.
 
-✅ 대응 방안
+- 대응 방안
 	- 운영체제 및 CPU 제조사의 보안 패치 적용.
 	- 보안 프로세스 격리 기술 활용.
 
@@ -2650,10 +2637,10 @@ Organize concepts, features, types and Pros and Cons
 	3.	Disabled Mode (비활성화 모드)
 	- SELinux가 완전히 비활성화됨.
 
-✅ 장점
+- 장점
 	- 시스템의 보안 강화를 통해 루트킷 및 권한 상승 공격을 방지.
 
-❌ 단점
+- 단점
 	- 초기 설정이 어렵고 관리가 복잡함.
 
 ⸻
@@ -2664,7 +2651,7 @@ Organize concepts, features, types and Pros and Cons
 	- 네트워크 트래픽을 필터링하여 불법적인 접근을 차단하는 보안 시스템.
 	- IP 주소, 포트 번호, 프로토콜 기반으로 패킷을 허용하거나 차단.
 
-✅ 특징
+- 특징
 	- 사전 예방적인 보안 시스템.
 	- 허용된 트래픽만 내부 네트워크로 유입됨.
 
@@ -2674,7 +2661,7 @@ Organize concepts, features, types and Pros and Cons
 	- 네트워크 또는 시스템의 이상 징후를 탐지하여 관리자에게 경고.
 	- 방화벽이 차단하지 못하는 공격을 탐지하고 분석.
 
-✅ 특징
+- 특징
 	- 침입 시도를 감지하지만 차단 기능은 없음.
 	- 로그 분석을 통해 공격 유형을 파악 가능.
 
@@ -2704,7 +2691,7 @@ Organize concepts, features, types and Pros and Cons
 	3.	고성능 악성 코드 회피 기법
 	- 루트킷, 난독화된 코드 등이 백신 탐지를 우회할 수 있음.
 
-✅ 보안 강화를 위한 추가 대책
+- 보안 강화를 위한 추가 대책
 	- 운영체제 및 소프트웨어 업데이트 유지.
 	- 방화벽, IDS와 결합하여 다중 보안 체계를 구축.
 
@@ -2739,7 +2726,7 @@ Organize concepts, features, types and Pros and Cons
 	- 반복적인 로그인 실패는 계정 탈취 시도의 징후 (예: 브루트포스 공격).
 	- /var/log/auth.log (Linux), Event Viewer (Windows)에서 확인 가능.
 
-✅ 대응 방안
+- 대응 방안
 	- 다중 인증(MFA) 활성화.
 	- 일정 횟수 이상 실패 시 계정 잠금 정책 적용.
 
@@ -2749,7 +2736,7 @@ Organize concepts, features, types and Pros and Cons
 	- 새로운 IP 주소에서 관리자 계정 로그인 시도 감지.
 	- 특정 사용자 권한 상승(sudo su)이 빈번할 경우 의심.
 
-✅ 대응 방안
+- 대응 방안
 	- auditd, fail2ban 같은 보안 도구 활용.
 	- 관리자 계정의 원격 로그인 제한.
 
@@ -2759,7 +2746,7 @@ Organize concepts, features, types and Pros and Cons
 	- 평소보다 많은 트래픽이 특정 포트로 발생하면 DDoS 공격 가능성 있음.
 	- /var/log/syslog, iptables log 확인.
 
-✅ 대응 방안
+- 대응 방안
 	- 비정상적인 트래픽 차단 및 방화벽 강화.
 	- 네트워크 IDS(침입 탐지 시스템) 연동.
 
@@ -2777,10 +2764,10 @@ Organize concepts, features, types and Pros and Cons
 	- AES(Advanced Encryption Standard), DES(Data Encryption Standard) 등이 사용됨.
 	- 같은 키(Secret Key)로 암호화 및 복호화.
 
-✅ 장점
+- 장점
 	- 속도가 빠름.
 
-❌ 단점
+- 단점
 	- 키 관리가 어려움 (키가 유출되면 보안이 취약해짐).
 
 ⸻
@@ -2789,10 +2776,10 @@ Organize concepts, features, types and Pros and Cons
 	- RSA, ECC(Elliptic Curve Cryptography) 사용.
 	- 공개 키(Public Key)로 암호화, 개인 키(Private Key)로 복호화.
 
-✅ 장점
+- 장점
 	- 안전한 키 교환 가능.
 
-❌ 단점
+- 단점
 	- 연산 속도가 느림.
 
 ⸻
@@ -2801,7 +2788,7 @@ Organize concepts, features, types and Pros and Cons
 	- 파일 시스템에서 암호화(EFS, BitLocker, LUKS) 적용 가능.
 	- 사용자 권한과 암호화 키를 결합하여 보안 강화.
 
-✅ 예시
+- 예시
 	- Linux → LUKS (Linux Unified Key Setup) 사용.
 	- Windows → BitLocker 활성화.
 
@@ -2825,7 +2812,7 @@ Organize concepts, features, types and Pros and Cons
 	- 애플리케이션을 격리하여 실행하는 가상화 방식.
 	- 커널을 공유하며, 각 컨테이너는 독립적인 환경을 가짐.
 
-✅ 차이점 요약
+- 차이점 요약
 	- 하이퍼바이저 기반: 전체 OS를 가상화 → 무겁지만 완전한 격리 제공.
 	- 컨테이너 기반: OS 커널 공유 → 빠르고 경량이지만 격리 수준이 낮음.
 
@@ -2843,10 +2830,10 @@ Organize concepts, features, types and Pros and Cons
 	- 하드웨어 위에서 직접 실행되는 하이퍼바이저.
 	- VMware ESXi, Microsoft Hyper-V, KVM 등이 포함됨.
 
-✅ 장점
+- 장점
 	- 성능이 뛰어나며 보안성이 높음.
 
-❌ 단점
+- 단점
 	- 별도의 관리 소프트웨어 필요.
 
 ⸻
@@ -2855,10 +2842,10 @@ Organize concepts, features, types and Pros and Cons
 	- 운영체제 위에서 실행되는 소프트웨어 기반 하이퍼바이저.
 	- VirtualBox, VMware Workstation, Parallels 등이 포함됨.
 
-✅ 장점
+- 장점
 	- 설치 및 사용이 쉬움.
 
-❌ 단점
+- 단점
 	- 성능이 Type 1보다 낮음.
 
 ⸻
@@ -2869,11 +2856,11 @@ Organize concepts, features, types and Pros and Cons
 	- 애플리케이션을 격리하여 실행하며, OS 커널을 공유.
 	- 대표적인 기술: Docker, Kubernetes.
 
-✅ 장점
+- 장점
 	- 가볍고 빠름 (부팅 시간 짧음).
 	- 리소스 사용량이 적음.
 
-❌ 단점
+- 단점
 	- 완전한 OS 격리를 제공하지 못함 (보안 이슈 가능).
 
 ⸻
@@ -2882,11 +2869,11 @@ Organize concepts, features, types and Pros and Cons
 	- 각 VM은 독립적인 OS를 실행.
 	- 하드웨어 리소스를 가상화하여 각 VM에 할당.
 
-✅ 장점
+- 장점
 	- 높은 수준의 격리 보장.
 	- 다양한 OS 실행 가능.
 
-❌ 단점
+- 단점
 	- 부팅 속도가 느리고 리소스 사용량이 많음.
 
 ⸻
@@ -2912,7 +2899,7 @@ Organize concepts, features, types and Pros and Cons
 3. 보안 및 접근 제어
 	- 사용자 인증, 데이터 암호화, 방화벽 적용.
 
-✅ 예시
+- 예시
 	- AWS → EC2 인스턴스, Lambda(서버리스).
 	- Google Cloud → Kubernetes Engine(GKE).
 
@@ -2941,7 +2928,7 @@ Organize concepts, features, types and Pros and Cons
 	- 서버리스(Serverless) 환경에서는 운영체제가 직접적으로 노출되지 않고, 사용자는 실행 환경만 제공받음.
 	- 서버리스 컴퓨팅(예: AWS Lambda, Google Cloud Functions)에서는 운영체제가 컨테이너 기반으로 동작하며, 함수 호출 단위로 리소스를 자동 할당.
 
-✅ 특징
+- 특징
 	- 애플리케이션 코드 실행에 필요한 최소한의 환경만 유지하여 운영 비용 절감.
 	- 동적 확장(Scaling)이 자동으로 이루어짐.
 
@@ -2951,7 +2938,7 @@ Organize concepts, features, types and Pros and Cons
 	- 클라우드 환경에서 컨테이너 및 분산 시스템을 지원하는 최적화된 운영체제.
 	- 대표적인 예: CoreOS, Google Container-Optimized OS, AWS Bottlerocket.
 
-✅ 특징
+- 특징
 	- 컨테이너 기반 운영을 위해 설계됨.
 	- 일반적인 운영체제보다 가벼우며 필요한 서비스만 실행.
 	- 보안이 강화된 구조 (불필요한 시스템 콤포넌트를 제거).
@@ -2964,7 +2951,7 @@ Organize concepts, features, types and Pros and Cons
 	- 하나의 물리적 CPU를 여러 개의 가상 CPU(vCPU)로 분할하여 사용.
 	- 하이퍼바이저(Type 1, Type 2)가 가상 머신(VM)별로 CPU 스케줄링을 관리.
 
-✅ 기법
+- 기법
 	- VT-x(Intel) / AMD-V(AMD) 기술 활용.
 	- CPU 시간 분배 및 컨텍스트 스위칭 수행.
 
@@ -2974,7 +2961,7 @@ Organize concepts, features, types and Pros and Cons
 	- 물리적 메모리를 논리적으로 분리하여 여러 VM이 사용할 수 있도록 관리.
 	- 각 가상 머신이 독립적인 주소 공간을 사용하도록 가상 메모리를 제공.
 
-✅ 기법
+- 기법
 	- 페이징(Paging) 을 통해 VM마다 독립된 메모리 주소를 유지.
 	- Ballooning 기법을 사용하여 필요할 때 동적으로 메모리 할당.
 
@@ -2983,7 +2970,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 네트워크 가상화
 	- 물리적 네트워크를 논리적으로 분리하여 여러 VM 및 컨테이너가 독립적인 네트워크를 사용하는 환경을 제공.
 
-✅ 기법
+- 기법
 	- SDN(Software-Defined Networking): 가상 네트워크를 중앙에서 제어.
 	- VXLAN(Virtual eXtensible LAN): 여러 VM 간 네트워크 격리.
 
@@ -2995,7 +2982,7 @@ Organize concepts, features, types and Pros and Cons
 	- 컨테이너를 생성하고 실행하는 플랫폼.
 	- 애플리케이션과 그 실행 환경(라이브러리, 설정)을 패키징하여 배포 가능.
 
-✅ 운영체제와의 관계
+- 운영체제와의 관계
 	- 커널을 공유하는 컨테이너 기반 가상화 기술.
 	- 리눅스의 네임스페이스(Namespaces), Cgroups를 이용하여 격리.
 
@@ -3005,7 +2992,7 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 개의 컨테이너를 관리하는 오케스트레이션 플랫폼.
 	- 컨테이너의 배포, 스케일링, 네트워크 연결을 자동화.
 
-✅ 운영체제와의 관계
+- 운영체제와의 관계
 	- 클러스터 노드에서 컨테이너를 실행하는 OS 역할 수행.
 	- 가상화된 네트워크 및 리소스 관리.
 
@@ -3065,7 +3052,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 가상 네트워크 격리
 	- VXLAN, Open vSwitch 등의 소프트웨어 정의 네트워크(SDN) 기술을 활용하여 네트워크 격리.
 
-✅ 보안 강화 효과
+- 보안 강화 효과
 	- 한 가상 머신에서 발생한 보안 사고가 다른 VM으로 확산되는 것을 차단.
 
 ⸻
@@ -3112,7 +3099,7 @@ Organize concepts, features, types and Pros and Cons
 4. 경량 커널(Lightweight Kernel)
 	- 불필요한 프로세스 관리 기능을 제거하여 성능을 극대화.
 
-✅ 사용 예시
+- 사용 예시
 	- 항공기 제어 시스템, 자동차 ECU(전자제어장치), 의료 기기, 로봇 제어 시스템 등.
 
 ⸻
@@ -3123,10 +3110,10 @@ Organize concepts, features, types and Pros and Cons
 	- 모든 작업이 정해진 시간 내에 반드시 완료되어야 하는 시스템.
 	- 기한(Deadline)을 초과하면 시스템 전체가 오류 상태에 빠질 수 있음.
 
-✅ 예시
+- 예시
 	- 항공기 엔진 제어 시스템, 원자로 제어 시스템, 의료 생명 유지 장치.
 
-❌ 특징
+- 특징
 	- 우선순위 기반 스케줄링이 필수적이며, 절대적인 시간 보장이 필요.
 
 ⸻
@@ -3135,10 +3122,10 @@ Organize concepts, features, types and Pros and Cons
 	- 일정 시간 내에 실행되는 것이 중요하지만, 기한을 초과해도 치명적인 문제는 발생하지 않는 시스템.
 	- 다만, 응답 시간이 길어질 경우 성능 저하가 발생할 수 있음.
 
-✅ 예시
+- 예시
 	- 동영상 스트리밍, 온라인 게임, 로봇 제어 시스템(비필수적 부분).
 
-❌ 특징
+- 특징
 	- 기한을 초과해도 시스템이 계속 동작 가능하지만, 품질 저하가 발생할 수 있음.
 
 ⸻
@@ -3148,11 +3135,11 @@ Organize concepts, features, types and Pros and Cons
 (1) RMS (Rate Monotonic Scheduling)
 	- 태스크 주기(Period)가 짧을수록 높은 우선순위를 부여하는 정적 스케줄링 알고리즘.
 
-✅ 특징
+- 특징
 	- 태스크의 실행 주기가 일정할 때 성능이 좋음.
 	- 우선순위가 고정되므로 오버헤드가 적음.
 
-❌ 단점
+- 단점
 	- 시스템의 CPU 사용률이 69% 이상이 되면 일정 태스크가 기한을 초과할 위험 있음.
 
 ⸻
@@ -3160,11 +3147,11 @@ Organize concepts, features, types and Pros and Cons
 (2) EDF (Earliest Deadline First)
 	- 기한(Deadline)이 가까운 태스크를 우선 실행하는 동적 스케줄링 방식.
 
-✅ 특징
+- 특징
 	- 기한이 촉박한 작업을 먼저 실행하여 유연한 태스크 처리 가능.
 	- RMS보다 CPU 사용률을 높일 수 있음(이론적으로 100% 사용 가능).
 
-❌ 단점
+- 단점
 	- 태스크 우선순위가 동적으로 변하기 때문에 관리 오버헤드가 발생할 수 있음.
 
 ⸻
@@ -3175,7 +3162,7 @@ Organize concepts, features, types and Pros and Cons
 	- 공정성을 우선시하는 스케줄링 (예: 라운드 로빈, 멀티레벨 큐).
 	- 태스크의 우선순위보다 CPU 활용도를 최적화하는 것이 목표.
 
-✅ 특징
+- 특징
 	- 사용자 경험을 고려하여 응답성을 최적화.
 	- 특정 프로세스가 오래 실행되지 않도록 CPU 점유 시간을 조절.
 
@@ -3185,7 +3172,7 @@ Organize concepts, features, types and Pros and Cons
 	- 우선순위 기반 스케줄링이 필수적이며, 기한 내에 태스크가 완료되는 것이 핵심.
 	- 일반 OS처럼 공정성을 보장하지 않으며, 중요한 태스크가 반드시 먼저 실행됨.
 
-✅ 특징
+- 특징
 	- 선점형(Preemptive) 방식으로 동작하여 높은 우선순위 태스크가 즉시 실행됨.
 	- 특정 태스크가 다른 태스크의 실행을 방해하지 않도록 자원 접근 관리가 중요.
 
@@ -3197,7 +3184,7 @@ Organize concepts, features, types and Pros and Cons
 	- 우선순위가 낮은 태스크가 공유 자원을 점유하고 있을 때, 우선순위가 높은 태스크가 대기해야 하는 상황.
 	- 우선순위가 높은 태스크가 실행되지 못하는 문제가 발생할 수 있음.
 
-✅ 예시
+- 예시
 	- NASA의 마스 패스파인더(Mars Pathfinder)에서 실제로 발생한 문제.
 	- 낮은 우선순위의 태스크가 버스를 점유하면서, 중요한 태스크가 대기하는 상황 발생.
 
@@ -3208,7 +3195,7 @@ Organize concepts, features, types and Pros and Cons
 1. 우선순위 상속(Priority Inheritance)
 	- 낮은 우선순위 태스크가 공유 자원을 점유하고 있을 경우, 해당 태스크의 우선순위를 일시적으로 상승시켜 빠르게 실행 완료하도록 함.
 
-✅ 장점
+- 장점
 	- 우선순위 반전을 방지하여 시스템 안정성을 높임.
 
 ⸻
@@ -3216,7 +3203,7 @@ Organize concepts, features, types and Pros and Cons
 2. 우선순위 천장(Priority Ceiling Protocol)
 	- 공유 자원을 사용할 때 해당 자원에 대한 가장 높은 우선순위를 미리 할당하여, 낮은 우선순위 태스크가 해당 자원을 점유하지 못하게 함.
 
-✅ 장점
+- 장점
 	- 우선순위 상속보다 더 강력한 보호 제공.
 	- 태스크가 실행되기 전에 미리 조정할 수 있음.
 
@@ -3258,10 +3245,10 @@ Organize concepts, features, types and Pros and Cons
 	- 한 번에 하나의 태스크만 공유 자원에 접근할 수 있도록 제한하는 동기화 기법.
 	- 자원 점유 후 반드시 해제해야 함 (lock(), unlock()).
 
-✅ 특징
+- 특징
 	- 우선순위 반전(Priority Inversion) 문제 발생 가능 → 우선순위 상속(Priority Inheritance) 기법과 함께 사용.
 
-✅ 사용 예시
+- 사용 예시
 	- 임베디드 시스템에서 하드웨어 레지스터 보호.
 
 ⸻
@@ -3271,11 +3258,11 @@ Organize concepts, features, types and Pros and Cons
 	- 카운팅 세마포어(Counting Semaphore): 여러 개의 자원을 동시에 제어.
 	- 바이너리 세마포어(Binary Semaphore): 뮤텍스처럼 동작하지만 소유 개념이 없음.
 
-✅ 특징
+- 특징
 	- 뮤텍스보다 더 유연한 동기화 제공.
 	- 우선순위 반전 문제 방지를 위한 기법이 필요.
 
-✅ 사용 예시
+- 사용 예시
 	- 다중 센서 데이터 접근 제어.
 
 ⸻
@@ -3284,11 +3271,11 @@ Organize concepts, features, types and Pros and Cons
 	- 태스크 간 메시지를 주고받을 수 있도록 하는 비동기 통신 방식.
 	- 데이터가 큐에 저장되며, 태스크가 필요할 때 메시지를 읽음.
 
-✅ 특징
+- 특징
 	- 공유 메모리보다 안전하며, 태스크 간 독립성을 유지할 수 있음.
 	- 우선순위 기반 메시지 처리 가능.
 
-✅ 사용 예시
+- 사용 예시
 	- RTOS 기반 네트워크 패킷 처리.
 
 ⸻
@@ -3304,7 +3291,7 @@ Organize concepts, features, types and Pros and Cons
 1. 선점형 스케줄링(Preemptive Scheduling) 사용
 	- 우선순위가 높은 태스크가 즉시 실행될 수 있도록 낮은 우선순위 태스크를 중단(preempt)하는 기법.
 
-✅ 특징
+- 특징
 	- 우선순위 기반 스케줄링(RMS, EDF)과 함께 사용.
 
 ⸻
@@ -3313,7 +3300,7 @@ Organize concepts, features, types and Pros and Cons
 	- RTOS는 하드웨어 인터럽트 처리 시간을 최소화해야 함.
 	- 인터럽트 핸들러(Interrupt Handler)를 사용하여 CPU 점유 시간을 줄임.
 
-✅ 특징
+- 특징
 	- 짧고 빠른 ISR(Interrupt Service Routine)을 작성하여 응답 속도를 개선.
 
 ⸻
@@ -3321,7 +3308,7 @@ Organize concepts, features, types and Pros and Cons
 3. 리소스 블로킹 시간 제한
 	- 공유 자원 접근 시 최대 점유 시간을 제한하여 우선순위가 높은 태스크의 대기 시간을 줄임.
 
-✅ 특징
+- 특징
 	- 우선순위 반전 문제 해결을 위해 우선순위 상속 기법을 사용.
 
 ⸻
@@ -3332,7 +3319,7 @@ Organize concepts, features, types and Pros and Cons
 	- RTOS의 모든 시간 관련 작업을 제어하는 기본 타이머.
 	- 주기적인 태스크 실행, 시간 초과 감지 등에 사용.
 
-✅ 사용 예시
+- 사용 예시
 	- 주기적인 센서 데이터 수집.
 
 ⸻
@@ -3341,7 +3328,7 @@ Organize concepts, features, types and Pros and Cons
 	- OS 내부에서 소프트웨어적으로 구현된 가상 타이머.
 	- 여러 개의 타이머를 동시에 실행 가능.
 
-✅ 사용 예시
+- 사용 예시
 	- 태스크 지연(Delay) 처리, 일정 시간 후 특정 작업 실행.
 
 ⸻
@@ -3349,7 +3336,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 하드웨어 타이머(Hardware Timer)
 	- CPU의 내장 타이머를 이용하여 일정 주기마다 인터럽트를 발생시키는 방식.
 
-✅ 사용 예시
+- 사용 예시
 	- 정확한 주기의 PWM(Pulse Width Modulation) 신호 생성.
 
 ⸻
@@ -3378,36 +3365,36 @@ Organize concepts, features, types and Pros and Cons
 
 (1) VxWorks
 
-✅ 특징
+- 특징
 	- Wind River에서 개발한 경성 실시간 RTOS.
 	- 항공우주, 국방, 자동차 시스템에서 널리 사용됨.
 	- POSIX 및 실시간 네트워크 지원.
 
-✅ 사용 예시
+- 사용 예시
 	- NASA의 우주 탐사선, 군사 드론, 통신 장비.
 
 ⸻
 
 (2) FreeRTOS
 
-✅ 특징
+- 특징
 	- 오픈소스 RTOS로, 임베디드 시스템에서 널리 사용됨.
 	- ARM Cortex-M 기반의 마이크로컨트롤러에서 실행 가능.
 	- 가볍고, 코드 크기가 작아 리소스가 제한된 환경에서 최적화.
 
-✅ 사용 예시
+- 사용 예시
 	- 스마트 IoT 기기, 산업용 컨트롤러, 웨어러블 기기.
 
 ⸻
 
 (3) QNX
 
-✅ 특징
+- 특징
 	- 마이크로커널 기반의 RTOS.
 	- 고가용성(High Availability)을 지원하며, 안전이 중요한 시스템에서 사용됨.
 	- POSIX 지원으로 리눅스 기반 애플리케이션과 호환 가능.
 
-✅ 사용 예시
+- 사용 예시
 	- 자동차 인포테인먼트 시스템(IVI), 의료 기기, 네트워크 장비.
 
 ⸻
@@ -3458,7 +3445,7 @@ Organize concepts, features, types and Pros and Cons
 4. 장애 허용성(Fault Tolerance)
 	- 특정 노드가 고장 나더라도 다른 노드가 대신 작업을 수행하여 시스템이 계속 동작할 수 있도록 보장.
 
-✅ 사용 예시
+- 사용 예시
 	- 클라우드 컴퓨팅(AWS, Google Cloud)
 	- 데이터센터 및 슈퍼컴퓨터 시스템
 
@@ -3470,7 +3457,7 @@ Organize concepts, features, types and Pros and Cons
 	- 하나의 중앙 서버에서 모든 데이터를 관리하고 처리하는 방식.
 	- 클라이언트는 중앙 서버에 요청을 보내고 결과를 받아옴.
 
-✅ 특징
+- 특징
 	- 관리가 간편하지만 서버 과부하 문제 발생 가능.
 	- 단일 장애점(Single Point of Failure, SPOF)으로 인해 서버 장애 시 전체 시스템 중단.
 
@@ -3480,11 +3467,11 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 개의 독립적인 노드가 네트워크를 통해 협력하여 작업을 수행하는 방식.
 	- 서버가 여러 대 분산되어 있기 때문에 부하 분산과 장애 대응이 가능.
 
-✅ 특징
+- 특징
 	- 확장성이 뛰어남(Scalability) → 노드를 추가하면 성능이 향상됨.
 	- 장애 허용성(Fault Tolerance) 높음 → 특정 노드가 다운되어도 시스템이 계속 운영됨.
 
-✅ 예시
+- 예시
 	- 중앙 집중식: 은행의 단일 서버 시스템.
 	- 분산 시스템: 블록체인, P2P 네트워크.
 
@@ -3502,7 +3489,7 @@ Organize concepts, features, types and Pros and Cons
 	- 프로세스 간 데이터를 메시지 형태로 교환.
 	- 네트워크를 통한 원격 프로시저 호출(RPC) 활용 가능.
 
-✅ 사용 예시
+- 사용 예시
 	- 클라이언트-서버 모델에서 네트워크 패킷 전송.
 
 ⸻
@@ -3511,7 +3498,7 @@ Organize concepts, features, types and Pros and Cons
 	- 한 프로세스가 다른 노드의 프로세스를 로컬 함수처럼 호출.
 	- 프로세스 간 네트워크 통신을 투명하게 수행할 수 있음.
 
-✅ 사용 예시
+- 사용 예시
 	- 클라우드 API, 마이크로서비스 아키텍처(MSA).
 
 ⸻
@@ -3520,7 +3507,7 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 프로세스가 공유 메모리 공간을 사용하여 데이터를 주고받는 방식.
 	- 동일 노드 내에서만 사용 가능하며, 분산 환경에서는 일반적으로 사용되지 않음.
 
-✅ 사용 예시
+- 사용 예시
 	- 다중 코어 CPU에서 공유 메모리를 이용한 프로세스 간 통신.
 
 ⸻
@@ -3530,10 +3517,10 @@ Organize concepts, features, types and Pros and Cons
 (1) 동기 메시지 전달(Synchronous Message Passing)
 	- 송신 프로세스가 메시지를 보낸 후 응답을 받을 때까지 대기.
 
-✅ 장점
+- 장점
 	- 데이터 무결성이 보장됨.
 
-❌ 단점
+- 단점
 	- 응답 속도가 느려질 수 있음.
 
 ⸻
@@ -3542,10 +3529,10 @@ Organize concepts, features, types and Pros and Cons
 	- 송신 프로세스가 메시지를 보낸 후 즉시 다음 작업을 수행.
 	- 수신 프로세스는 필요할 때 메시지를 가져옴.
 
-✅ 장점
+- 장점
 	- 성능이 뛰어나고 병렬 처리가 가능.
 
-❌ 단점
+- 단점
 	- 데이터 일관성을 보장하기 어려울 수 있음.
 
 ⸻
@@ -3556,7 +3543,7 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 개의 노드에서 동일한 데이터를 동시에 수정하면 충돌이 발생할 수 있음.
 	- 분산 환경에서는 클럭 동기화 문제도 존재함.
 
-✅ 예시
+- 예시
 	- 은행 계좌의 잔액 동기화 문제: 두 개의 트랜잭션이 동시에 잔액을 갱신하면 데이터 충돌 발생 가능.
 
 ⸻
@@ -3574,10 +3561,10 @@ Organize concepts, features, types and Pros and Cons
 	- 1단계: 모든 노드에서 트랜잭션 준비(Prepare).
 	- 2단계: 모든 노드에서 동의하면 최종 커밋(Commit) 수행.
 
-✅ 장점
+- 장점
 	- 데이터 일관성을 보장할 수 있음.
 
-❌ 단점
+- 단점
 	- 네트워크 지연이 발생하면 트랜잭션 속도가 느려질 수 있음.
 
 ⸻
@@ -3588,7 +3575,7 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 개의 노드가 동일한 파일 시스템을 공유하도록 구성된 시스템.
 	- 사용자는 네트워크를 통해 접근하지만, 로컬 파일처럼 사용할 수 있음.
 
-✅ 예시
+- 예시
 	- Google File System (GFS)
 	- Hadoop Distributed File System (HDFS)
 
@@ -3641,7 +3628,7 @@ Organize concepts, features, types and Pros and Cons
 	- 네트워크 패킷을 도착한 순서대로 처리하는 방식.
 	- 단순한 구조지만, 트래픽이 증가하면 특정 패킷의 대기 시간이 길어질 수 있음.
 
-✅ 사용 예시
+- 사용 예시
 	- 작은 규모의 네트워크 환경.
 
 ⸻
@@ -3650,7 +3637,7 @@ Organize concepts, features, types and Pros and Cons
 	- 모든 요청을 균등하게 처리하여 특정 요청이 오래 대기하지 않도록 보장.
 	- 네트워크 대역폭을 균등하게 할당하여 공정성을 유지.
 
-✅ 사용 예시
+- 사용 예시
 	- 클라우드 데이터 센터의 네트워크 트래픽 분산.
 
 ⸻
@@ -3659,7 +3646,7 @@ Organize concepts, features, types and Pros and Cons
 	- 중요도가 높은 패킷을 우선적으로 전송하는 방식.
 	- QoS(Quality of Service) 보장을 위해 스트리밍, 화상회의 같은 실시간 트래픽을 우선 처리.
 
-✅ 사용 예시
+- 사용 예시
 	- VoIP(인터넷 전화), 온라인 게임 서버.
 
 ⸻
@@ -3668,7 +3655,7 @@ Organize concepts, features, types and Pros and Cons
 	- 각 패킷의 대기 시간을 고려하여 공정하게 전송하는 기법.
 	- 특정 사용자나 서비스가 과도한 네트워크 자원을 차지하는 것을 방지.
 
-✅ 사용 예시
+- 사용 예시
 	- ISP(인터넷 서비스 제공업체)의 트래픽 관리.
 
 ⸻
@@ -3684,7 +3671,7 @@ Organize concepts, features, types and Pros and Cons
 1. 중복성(Redundancy) 활용
 	- 중요한 데이터를 여러 개의 노드에 복제(Replication) 하여 장애 발생 시 다른 노드가 처리 가능하도록 함.
 
-✅ 사용 예시
+- 사용 예시
 	- 클라우드 스토리지(예: AWS S3, Google Cloud Storage).
 
 ⸻
@@ -3692,7 +3679,7 @@ Organize concepts, features, types and Pros and Cons
 2. 체크포인트(Checkpointing) 기법
 	- 시스템이 특정 시점의 상태를 저장하고, 장애 발생 시 저장된 상태에서 다시 시작.
 
-✅ 사용 예시
+- 사용 예시
 	- 과학 연구용 슈퍼컴퓨터 (장시간 실행되는 작업을 보호).
 
 ⸻
@@ -3700,7 +3687,7 @@ Organize concepts, features, types and Pros and Cons
 3. 리더 선출(Leader Election) 기법
 	- 특정 노드가 다운되면 새로운 리더(마스터 노드)를 선출하여 운영 지속.
 
-✅ 사용 예시
+- 사용 예시
 	- 분산 데이터베이스 시스템(Zookeeper, Raft Consensus Algorithm).
 
 ⸻
@@ -3708,7 +3695,7 @@ Organize concepts, features, types and Pros and Cons
 4. Failover 시스템
 	- 메인 서버가 다운되면 자동으로 대체 서버로 전환되는 방식.
 
-✅ 사용 예시
+- 사용 예시
 	- 고가용성(HA, High Availability) 클러스터.
 
 ⸻
@@ -3729,7 +3716,7 @@ Organize concepts, features, types and Pros and Cons
 	- 여러 노드에서 데이터가 정확하게 반영되도록 보장.
 	- 예: 분산 데이터베이스(MySQL, Cassandra)의 ACID 특성 유지.
 
-✅ 해결 방법
+- 해결 방법
 	- 락(Lock) 메커니즘 사용.
 	- Two-Phase Commit(2PC) 프로토콜 적용.
 
@@ -3739,33 +3726,33 @@ Organize concepts, features, types and Pros and Cons
 
 (1) Amoeba
 
-✅ 특징
+- 특징
 	- 분산 컴퓨팅을 하나의 가상 머신처럼 운영.
 	- 마이크로커널 구조로 설계되어 효율적.
 
-✅ 사용 예시
+- 사용 예시
 	- 슈퍼컴퓨터 및 고성능 분산 시스템.
 
 ⸻
 
 (2) Chorus
 
-✅ 특징
+- 특징
 	- 실시간 분산 운영체제로, 모듈화된 마이크로커널 아키텍처를 사용.
 	- 높은 신뢰성이 요구되는 시스템(항공기, 자동차 제어 시스템)에서 활용.
 
-✅ 사용 예시
+- 사용 예시
 	- 임베디드 시스템, 통신 장비.
 
 ⸻
 
 (3) LOCUS
 
-✅ 특징
+- 특징
 	- 분산 파일 시스템(DFS)을 강력하게 지원하는 분산 운영체제.
 	- 위치 투명성을 제공하여 사용자가 파일이 어디에 있는지 신경 쓰지 않아도 됨.
 
-✅ 사용 예시
+- 사용 예시
 	- 클라우드 기반 파일 시스템, 대형 네트워크 스토리지.
 
 ⸻
@@ -3776,7 +3763,7 @@ Organize concepts, features, types and Pros and Cons
 	- 클라우드 환경에서 최적화된 OS 연구가 활발히 진행됨.
 	- 예: AWS Bottlerocket, Google Container-Optimized OS.
 
-✅ 이슈
+- 이슈
 	- 컨테이너, 마이크로서비스를 지원하는 경량 OS 설계.
 
 ⸻
@@ -3784,7 +3771,7 @@ Organize concepts, features, types and Pros and Cons
 (2) 보안 강화(Security-Enhanced OS)
 	- 운영체제 보안이 점점 더 중요해지면서 SELinux, AppArmor 같은 보안 기능이 강화됨.
 
-✅ 이슈
+- 이슈
 	- 커널 보안 취약점 공격을 방지하기 위한 메모리 격리 및 강화된 접근 제어 연구.
 
 ⸻
@@ -3792,7 +3779,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 분산 및 블록체인 운영체제
 	- 블록체인을 기반으로 한 분산형 운영체제(DOS, Decentralized OS) 연구.
 
-✅ 이슈
+- 이슈
 	- 블록체인을 활용한 분산 컴퓨팅 자원 관리 및 보안 강화.
 
 ⸻
@@ -3800,7 +3787,7 @@ Organize concepts, features, types and Pros and Cons
 (4) 양자 컴퓨팅 운영체제
 	- 기존 운영체제가 양자 컴퓨터를 효율적으로 제어할 수 있도록 연구 중.
 
-✅ 이슈
+- 이슈
 	- 고전 컴퓨터와 양자 컴퓨터 간의 효율적인 데이터 교환.
 
 ⸻
@@ -3833,7 +3820,7 @@ Organize concepts, features, types and Pros and Cons
 	- CPU와 메모리 사이의 속도 차이를 줄이기 위해 캐시 메모리를 활용.
 	- L1, L2, L3 캐시를 효율적으로 사용하여 데이터 접근 속도 향상.
 
-✅ 기법
+- 기법
 	- 캐시 정책 최적화: LRU(Least Recently Used) 또는 LFU(Least Frequently Used) 알고리즘 적용.
 	- 프리페칭(Prefetching): 자주 사용될 데이터를 미리 캐시에 로드.
 
@@ -3842,7 +3829,7 @@ Organize concepts, features, types and Pros and Cons
 (2) I/O 성능 최적화
 	- 디스크 및 네트워크 입출력 성능을 높여 시스템 응답 속도를 개선.
 
-✅ 기법
+- 기법
 	- 비동기 I/O(Asynchronous I/O, AIO) 활용: CPU가 입출력 대기 없이 다른 작업 수행 가능.
 	- 버퍼링(Buffering) 및 캐싱(Caching) 활용: 메모리에 데이터를 임시 저장하여 디스크 접근 최소화.
 	- RAID(Redundant Array of Independent Disks) 활용: 병렬 데이터 저장을 통해 I/O 속도 향상.
@@ -3852,7 +3839,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 프로세스 및 스레드 관리 최적화
 	- 멀티태스킹과 멀티스레딩을 효과적으로 활용하여 CPU 활용도를 극대화.
 
-✅ 기법
+- 기법
 	- 스레드 풀(Thread Pool) 사용: 새로운 스레드를 생성하는 비용 절감.
 	- CPU 바운드(CPU-bound) vs I/O 바운드(I/O-bound) 작업 분리.
 	- 적응형 스케줄링(Adaptive Scheduling): 실행 중인 작업의 특성에 맞춰 스케줄링 방식 조정.
@@ -3864,7 +3851,7 @@ Organize concepts, features, types and Pros and Cons
 (1) 멀티스레드 프로그래밍
 	- 하나의 프로세스에서 여러 개의 스레드를 실행하여 병렬 연산 수행.
 
-✅ 기법
+- 기법
 	- Pthreads, OpenMP, CUDA 등 사용.
 	- 태스크 병렬화(Task Parallelism)와 데이터 병렬화(Data Parallelism) 적용.
 
@@ -3873,7 +3860,7 @@ Organize concepts, features, types and Pros and Cons
 (2) CPU 부하 분산(Load Balancing)
 	- 멀티코어 환경에서 CPU 자원을 효율적으로 배분.
 
-✅ 기법
+- 기법
 	- Work Stealing: 작업량이 적은 코어가 다른 코어의 태스크를 가져와 실행.
 	- NUMA-aware Scheduling: CPU와 가까운 메모리 영역을 우선 사용하도록 스케줄링.
 
@@ -3882,7 +3869,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 캐시 친화적 프로그래밍(Cache-Friendly Programming)
 	- 멀티코어 환경에서는 캐시 일관성(Cache Coherency) 문제 해결이 중요.
 
-✅ 기법
+- 기법
 	- False Sharing 방지: 서로 다른 스레드가 같은 캐시 라인에 접근하지 않도록 데이터 구조 설계.
 	- 데이터 로컬리티(Data Locality) 향상: 동일한 데이터를 사용하는 연산을 동일 코어에서 수행.
 
@@ -3894,7 +3881,7 @@ Organize concepts, features, types and Pros and Cons
 	- 멀티코어 시스템에서 각 CPU가 특정 메모리 노드에 직접 접근할 수 있도록 설계된 구조.
 	- CPU가 자신과 가까운 메모리 영역을 사용할 때 성능이 최적화됨.
 
-✅ NUMA 환경에서 성능을 극대화하는 기법
+- NUMA 환경에서 성능을 극대화하는 기법
 
 1. 메모리 지역성(Locality) 유지
 	- CPU가 가까운 메모리 노드에서 데이터를 가져오도록 보장.
@@ -3912,7 +3899,7 @@ Organize concepts, features, types and Pros and Cons
 
 (1) CPU 전력 관리
 
-✅ 기법
+- 기법
 	- DVFS (Dynamic Voltage and Frequency Scaling): 필요할 때만 CPU 클럭 속도를 높이고, 사용량이 적을 때 낮춤.
 	- Core Parking: 사용하지 않는 CPU 코어를 비활성화하여 전력 절감.
 
@@ -3920,7 +3907,7 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 디스크 및 네트워크 전력 최적화
 
-✅ 기법
+- 기법
 	- SSD 사용: HDD보다 소비 전력이 적고 성능이 우수함.
 	- 네트워크 인터페이스의 전력 절감: Wake-on-LAN, 에너지 효율적인 이더넷(EEE) 사용.
 
@@ -3928,7 +3915,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 프로세스 및 스레드 최적화
 
-✅ 기법
+- 기법
 	- 불필요한 백그라운드 작업 최소화.
 	- 리소스 사용이 적은 프로세스를 우선 실행하도록 스케줄링 조정.
 
@@ -3940,14 +3927,14 @@ Organize concepts, features, types and Pros and Cons
 	- 부팅 시 여러 시스템 서비스를 동시에 로드하여 부팅 시간을 단축.
 	- Systemd, Upstart 같은 병렬 초기화 시스템 사용.
 
-✅ 기법
+- 기법
 	- 네트워크 및 GUI 서비스 지연 로드(Delayed Load) 적용.
 
 ⸻
 
 (2) 커널 최적화
 
-✅ 기법
+- 기법
 	- 부팅에 불필요한 모듈 제거.
 	- 압축된 커널 이미지 사용하여 로드 시간 단축.
 
@@ -3955,7 +3942,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 빠른 저장 장치 사용
 
-✅ 기법
+- 기법
 	- SSD 또는 NVMe 기반의 저장장치로 전환.
 	- Fast Boot(빠른 시작) 기능 활성화.
 
@@ -3966,7 +3953,7 @@ Organize concepts, features, types and Pros and Cons
 (1) 모듈화된 커널 설계
 	- 커널의 기능을 필요할 때만 로드할 수 있도록 동적 모듈화 지원.
 
-✅ 기법
+- 기법
 	- Monolithic Kernel 대신 Microkernel 구조 사용.
 	- Loadable Kernel Module(LKM) 활용하여 필요할 때만 커널 기능 활성화.
 
@@ -3974,7 +3961,7 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 불필요한 기능 제거
 
-✅ 기법
+- 기법
 	- 특정 하드웨어 지원 모듈 비활성화.
 	- 사용하지 않는 시스템 콜(System Call) 제거.
 
@@ -3982,7 +3969,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 메모리 최적화
 
-✅ 기법
+- 기법
 	- 슬랩 할당기(Slab Allocator) 최적화: 커널 객체의 메모리 관리 효율성 향상.
 	- 압축 메모리(Zswap, ZRAM) 사용: 스왑 영역을 압축하여 성능 향상.
 
@@ -4015,7 +4002,7 @@ Organize concepts, features, types and Pros and Cons
 (1) 캐시 정책 최적화
 	- 운영체제는 데이터 접근 패턴을 분석하여 가장 적절한 캐시 정책을 적용해야 함.
 
-✅ 기법
+- 기법
 	- LRU(Least Recently Used): 최근에 사용하지 않은 데이터를 캐시에서 제거.
 	- LFU(Least Frequently Used): 사용 빈도가 가장 낮은 데이터를 제거.
 	- ARC(Adaptive Replacement Cache): LRU와 LFU의 장점을 결합하여 최적화.
@@ -4025,7 +4012,7 @@ Organize concepts, features, types and Pros and Cons
 (2) 프리페칭(Prefetching) 기법
 	- 운영체제가 데이터 접근 패턴을 예측하여 미리 필요한 데이터를 로드.
 
-✅ 기법
+- 기법
 	- 선형 프리페칭: 연속된 데이터 블록을 미리 로드.
 	- 확률적 프리페칭: 머신러닝을 이용해 다음에 필요한 데이터를 예측.
 
@@ -4035,7 +4022,7 @@ Organize concepts, features, types and Pros and Cons
 	- L1, L2, L3 캐시를 최적화하여 데이터 접근 속도 향상.
 	- CPU 캐시뿐만 아니라 디스크 캐싱(Disk Caching) 및 파일 시스템 캐싱(File System Caching)도 고려.
 
-✅ 기법
+- 기법
 	- 메모리 계층 구조에 따른 캐시 크기 및 전략 조정.
 	- 캐시 일관성(Cache Coherency) 유지 기법 적용.
 
@@ -4046,7 +4033,7 @@ Organize concepts, features, types and Pros and Cons
 (1) 병렬 처리 지원
 	- HPC 시스템은 대규모 병렬 처리가 필요하므로, 운영체제는 멀티스레딩 및 분산 처리를 지원해야 함.
 
-✅ 기법
+- 기법
 	- MPI(Message Passing Interface) 및 OpenMP 지원.
 	- GPU 병렬 연산을 위한 CUDA, ROCm 등의 최적화.
 
@@ -4055,7 +4042,7 @@ Organize concepts, features, types and Pros and Cons
 (2) 자원 관리 및 스케줄링
 	- HPC 클러스터에서 CPU, 메모리, 네트워크 자원을 최적화하여 할당.
 
-✅ 기법
+- 기법
 	- Slurm, PBS, Kubernetes 같은 HPC 스케줄러 활용.
 	- NUMA-aware 스케줄링 적용.
 
@@ -4064,7 +4051,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 입출력 최적화
 	- 고속 데이터 처리를 위한 I/O 최적화 필요.
 
-✅ 기법
+- 기법
 	- 병렬 파일 시스템(PVFS, Lustre) 사용.
 	- 비동기 I/O(AIO) 및 RDMA(Remote Direct Memory Access) 활용.
 
@@ -4074,7 +4061,7 @@ Organize concepts, features, types and Pros and Cons
 
 (1) 메모리 보호 기법
 
-✅ 기법
+- 기법
 	- ASLR(Address Space Layout Randomization): 실행 파일 및 라이브러리의 메모리 주소를 무작위로 배치.
 	- Stack Canaries: 버퍼 오버플로우 방지를 위한 보호 기법.
 
@@ -4082,7 +4069,7 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 커널 보안 강화
 
-✅ 기법
+- 기법
 	- SELinux, AppArmor: 커널 레벨에서 애플리케이션 권한을 제한.
 	- KASLR(Kernel Address Space Layout Randomization): 커널 영역의 메모리 주소를 무작위화.
 
@@ -4090,7 +4077,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 하드웨어 기반 보안
 
-✅ 기법
+- 기법
 	- Intel SGX (Software Guard Extensions): 하드웨어 기반 메모리 암호화.
 	- TPM(Trusted Platform Module): 보안 키 저장 및 검증 기능 제공.
 
@@ -4100,7 +4087,7 @@ Organize concepts, features, types and Pros and Cons
 
 (1) 클라우드 네이티브 운영체제
 
-✅ 특징
+- 특징
 	- 컨테이너 기반 환경 최적화.
 	- 경량 운영체제(CoreOS, AWS Bottlerocket) 개발 증가.
 
@@ -4108,7 +4095,7 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 엣지 컴퓨팅 최적화
 
-✅ 특징
+- 특징
 	- 엣지 장치에서 AI 및 데이터 처리를 지원하는 경량 OS 연구.
 	- 실시간 데이터 처리를 위한 RTOS 및 마이크로커널 기반 OS 설계.
 
@@ -4116,7 +4103,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 양자 컴퓨팅 운영체제
 
-✅ 특징
+- 특징
 	- 양자 프로세서와 기존 CPU 간의 데이터 처리 최적화 연구.
 	- Microsoft QDK 및 IBM Qiskit 기반 양자 운영체제 개발.
 
@@ -4126,7 +4113,7 @@ Organize concepts, features, types and Pros and Cons
 
 (1) 프로세스 및 자원 스케줄링 최적화
 
-✅ 기법
+- 기법
 	- 머신러닝을 이용해 CPU 및 GPU 작업 부하 예측.
 	- Reinforcement Learning 기반 자원 할당 최적화.
 
@@ -4134,7 +4121,7 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 캐시 및 메모리 관리
 
-✅ 기법
+- 기법
 	- 메모리 접근 패턴을 학습하여 캐시 미스를 줄이는 알고리즘 적용.
 	- Page Swapping을 최적화하여 디스크 I/O 성능 향상.
 
@@ -4142,7 +4129,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 보안 탐지 및 예방
 
-✅ 기법
+- 기법
 	- 머신러닝을 활용한 이상 탐지(Anomaly Detection) 기반 악성 코드 탐지.
 	- 자동화된 보안 패치 및 취약점 분석 시스템 개발.
 
@@ -4152,7 +4139,7 @@ Organize concepts, features, types and Pros and Cons
 
 (1) 실시간 데이터 처리 지원
 
-✅ 기법
+- 기법
 	- RTOS 기반 경량 운영체제 활용.
 	- AI/ML 가속기 연동 최적화.
 
@@ -4160,7 +4147,7 @@ Organize concepts, features, types and Pros and Cons
 
 (2) 네트워크 최적화
 
-✅ 기법
+- 기법
 	- 5G 네트워크와의 최적화 연동.
 	- SD-WAN 기반 네트워크 트래픽 관리.
 
@@ -4168,7 +4155,7 @@ Organize concepts, features, types and Pros and Cons
 
 (3) 보안 및 프라이버시 보호
 
-✅ 기법
+- 기법
 	- 데이터 암호화 및 분산 처리 방식 적용.
 	- IoT 보안 프로토콜(Edge TPM) 연동.
 
@@ -4213,7 +4200,7 @@ Organize concepts, features, types and Pros and Cons
 3. 자원 관리 및 최적화
 	- 블록체인 노드는 연산량이 많은 작업(예: PoW, PoS, BFT 합의 알고리즘)을 수행하므로 CPU, 메모리, 네트워크 최적화가 필요.
 
-✅ 사용 예시
+- 사용 예시
 	- 블록체인 기반 클라우드 운영체제 (예: DFINITY, Filecoin).
 
 ⸻
@@ -4238,7 +4225,7 @@ Organize concepts, features, types and Pros and Cons
 	- TPM, Secure Boot 등 하드웨어 기반 보안 기능 지원.
 	- IoT 기기 간 데이터 암호화 및 인증(End-to-End Encryption) 지원.
 
-✅ 사용 예시
+- 사용 예시
 	- 스마트 홈, 산업용 IoT(IIoT), 헬스케어 디바이스.
 
 ⸻
@@ -4260,7 +4247,7 @@ Organize concepts, features, types and Pros and Cons
 3. 음성 및 자연어 인터페이스 통합
 	- AI OS는 음성 비서(Alexa, Siri, Google Assistant)와 긴밀하게 통합됨.
 
-✅ 활용 가능성
+- 활용 가능성
 	- AI 데이터센터, 스마트폰, 엣지 AI 기기, 자율주행 시스템.
 
 ⸻
@@ -4277,11 +4264,11 @@ Organize concepts, features, types and Pros and Cons
 	- Darwin 커널 기반, Swift 및 Objective-C 사용.
 	- 보안 강화(Sandboxing, App Store 검증).
 
-✅ 공통점
+- 공통점
 	- 배터리 효율 최적화 필수.
 	- 터치스크린 기반 UI, 앱 스토어 중심 앱 관리.
 
-✅ 데스크톱 OS와 차이점
+- 데스크톱 OS와 차이점
 	- 리소스 제한적(CPU, RAM, 스토리지) → 전력 관리 필수.
 	- 멀티태스킹 제한적 → 백그라운드 프로세스 관리 강화.
 
@@ -4304,7 +4291,7 @@ Organize concepts, features, types and Pros and Cons
 3. 네트워크 및 보안 관리
 	- 서버리스 함수 간 네트워크 라우팅 최적화 (VPC, API Gateway 연동).
 
-✅ 사용 예시
+- 사용 예시
 	- AWS Lambda, Google Cloud Functions, Azure Functions.
 
 ⸻
@@ -4326,7 +4313,7 @@ Organize concepts, features, types and Pros and Cons
 3. 자동화된 업데이트 및 보안 강화
 	- 롤링 업데이트, 불변 인프라(Immutable Infrastructure) 지원.
 
-✅ 사용 예시
+- 사용 예시
 	- AWS Bottlerocket, Google Container-Optimized OS, Flatcar Linux.
 
 ⸻
@@ -4373,7 +4360,7 @@ Organize concepts, features, types and Pros and Cons
 	- 운영체제가 Shor’s Algorithm, Grover’s Algorithm 같은 양자 알고리즘을 효율적으로 실행할 수 있도록 스케줄링.
 	- 양자 오류 보정(Quantum Error Correction, QEC) 기술을 운영체제 수준에서 지원해야 함.
 
-✅ 사용 예시
+- 사용 예시
 	- IBM Qiskit, Google Cirq, Microsoft QDK(Quantum Development Kit) 등의 양자 컴퓨팅 프레임워크.
 
 ⸻
@@ -4383,7 +4370,7 @@ Organize concepts, features, types and Pros and Cons
 (1) 효율성(Efficiency)
 	- 운영체제는 CPU, 메모리, 스토리지, 네트워크 등의 자원을 최적화하여 빠르게 실행해야 함.
 
-✅ 기법
+- 기법
 	- 멀티태스킹 지원, 캐시 최적화, 비동기 I/O 처리.
 
 ⸻
@@ -4391,7 +4378,7 @@ Organize concepts, features, types and Pros and Cons
 (2) 보안성(Security)
 	- 운영체제는 사용자 데이터와 시스템을 보호하는 기능을 제공해야 함.
 
-✅ 기법
+- 기법
 	- 접근 제어(Access Control), 파일 암호화, 메모리 보호(ASLR, Stack Canaries).
 
 ⸻
@@ -4399,7 +4386,7 @@ Organize concepts, features, types and Pros and Cons
 (3) 확장성(Scalability)
 	- 운영체제는 작은 임베디드 장치부터 대규모 클라우드 서버까지 확장 가능해야 함.
 
-✅ 기법
+- 기법
 	- 모듈화된 커널 구조, 클러스터 및 분산 처리 지원.
 
 ⸻
@@ -4407,7 +4394,7 @@ Organize concepts, features, types and Pros and Cons
 (4) 신뢰성(Reliability)
 	- 운영체제는 예기치 않은 장애 발생 시에도 복구할 수 있도록 설계되어야 함.
 
-✅ 기법
+- 기법
 	- 장애 감지 및 복구(Failover), 체크포인트(Checkpointing), 트랜잭션 롤백.
 
 ⸻
@@ -4418,10 +4405,10 @@ Organize concepts, features, types and Pros and Cons
 	- 운영체제를 여러 개의 계층으로 나누어 설계하는 방식.
 	- 각 계층은 독립적으로 동작하며, 하위 계층이 상위 계층에 서비스를 제공.
 
-✅ 장점
+- 장점
 	- 유지보수가 용이하며 확장성이 높음.
 
-❌ 단점
+- 단점
 	- 성능이 상대적으로 낮으며, 계층 간 호출 오버헤드 발생.
 
 ⸻
@@ -4430,13 +4417,13 @@ Organize concepts, features, types and Pros and Cons
 	- 운영체제의 모든 기능이 하나의 커널에서 실행되는 방식.
 	- 모든 서비스가 커널 공간에서 직접 실행되므로 속도가 빠름.
 
-✅ 장점
+- 장점
 	- 실행 속도가 빠르고, 시스템 호출 오버헤드가 적음.
 
-❌ 단점
+- 단점
 	- 오류 발생 시 전체 시스템이 영향을 받을 수 있음.
 
-✅ 사용 예시
+- 사용 예시
 	- Linux, Windows 등 기존의 전통적인 운영체제.
 
 ⸻
@@ -4447,15 +4434,15 @@ Organize concepts, features, types and Pros and Cons
 	- 모놀리식 커널과 마이크로커널의 장점을 결합한 형태의 운영체제 커널 구조.
 	- 주요 시스템 서비스(파일 시스템, 네트워크 등)는 커널 모드에서 실행되지만, 일부는 사용자 모드에서 동작.
 
-✅ 사용 예시
+- 사용 예시
 	- Windows NT 커널, macOS XNU 커널.
 
 (2) 장단점
 
-✅ 장점
+- 장점
 	- 모놀리식 커널의 성능과 마이크로커널의 안정성을 결합.
 
-❌ 단점
+- 단점
 	- 설계 및 구현이 복잡하며, 일부 성능 손실이 발생할 수 있음.
 
 ⸻
@@ -4465,13 +4452,13 @@ Organize concepts, features, types and Pros and Cons
 (1) 이벤트 기반(Event-Driven) 설계
 	- 이벤트(Interrupt)가 발생할 때만 작업을 수행하는 방식.
 
-✅ 장점
+- 장점
 	- CPU를 효율적으로 사용하며, 불필요한 연산을 줄임.
 
-❌ 단점
+- 단점
 	- 이벤트 핸들러가 복잡할 수 있으며, 우선순위 설정이 필요함.
 
-✅ 사용 예시
+- 사용 예시
 	- GUI 시스템, 비동기 네트워크 서버(Nginx, Node.js).
 
 ⸻
@@ -4479,13 +4466,13 @@ Organize concepts, features, types and Pros and Cons
 (2) 폴링 기반(Polling) 설계
 	- 운영체제가 주기적으로 특정 상태를 확인하여 작업을 수행하는 방식.
 
-✅ 장점
+- 장점
 	- 설계가 단순하며, 예측 가능함.
 
-❌ 단점
+- 단점
 	- 불필요한 CPU 사용으로 인해 전력 소모가 많아질 수 있음.
 
-✅ 사용 예시
+- 사용 예시
 	- 키보드 입력 감지, 네트워크 패킷 모니터링.
 
 ⸻
@@ -4508,10 +4495,10 @@ Organize concepts, features, types and Pros and Cons
 3. 결과 반환 및 모드 전환
 	- 작업이 완료되면 커널 모드에서 사용자 모드로 다시 전환하고 결과를 반환.
 
-✅ 사용 예시
+- 사용 예시
 	- open(), read(), write(), fork(), exec().
 
-✅ 보안 고려 사항
+- 보안 고려 사항
 	- 커널과 사용자 간의 권한 격리(Security Isolation) 필요.
 
 ⸻
@@ -4533,7 +4520,7 @@ Organize concepts, features, types and Pros and Cons
 
 
 1. 동적 링커(Dynamic Linker)와 정적 링커(Static Linker)의 차이
-✅ (1) 정적 링커 (Static Linker)
+- (1) 정적 링커 (Static Linker)
 컴파일된 오브젝트 파일을 실행 파일로 만들 때, 필요한 라이브러리를 실행 파일 내부에 포함
 실행 파일이 독립적으로 실행되며, 별도의 외부 라이브러리 로딩 과정이 필요 없음
 실행 파일 크기가 커지지만, 실행 속도가 빠름 (라이브러리 로딩 과정 불필요)
@@ -4542,7 +4529,7 @@ Organize concepts, features, types and Pros and Cons
 🔹 활용 사례
 
 임베디드 시스템, OS 커널, 독립적인 배포가 필요한 애플리케이션 (예: Go 언어의 정적 링크된 바이너리)
-✅ (2) 동적 링커 (Dynamic Linker)
+- (2) 동적 링커 (Dynamic Linker)
 실행 시점에서 필요한 라이브러리를 동적으로 로딩하여 실행
 실행 파일 크기가 작아지고, 여러 프로그램이 동일한 라이브러리를 공유하여 메모리 사용량 감소
 OS가 라이브러리 업데이트를 관리할 수 있어 유지보수가 용이
@@ -4552,11 +4539,11 @@ OS가 라이브러리 업데이트를 관리할 수 있어 유지보수가 용�
 
 일반적인 운영체제 애플리케이션, 공유 라이브러리를 사용하는 프로그램 (예: C, C++ 애플리케이션)
 2. 운영체제에서 제공하는 API(Application Programming Interface)의 역할과 활용 사례
-✅ (1) 운영체제 API의 역할
+- (1) 운영체제 API의 역할
 응용 프로그램과 운영체제 간의 인터페이스 역할 수행
 하드웨어에 직접 접근하지 않고, OS가 제공하는 기능을 사용하도록 지원
 시스템 자원(메모리, 파일, 네트워크 등)에 대한 관리 및 보안성 보장
-✅ (2) 주요 API 유형과 활용 사례
+- (2) 주요 API 유형과 활용 사례
 🔹 파일 시스템 API
 
 파일 읽기/쓰기, 생성, 삭제, 디렉터리 관리
@@ -4578,10 +4565,10 @@ OS가 라이브러리 업데이트를 관리할 수 있어 유지보수가 용�
 하드웨어 장치(USB, 키보드, 마우스 등) 제어
 활용 사례: ioctl(), sysfs
 3. 운영체제의 부팅 과정(Boot Process) 주요 단계
-✅ (1) 부팅 과정 개요
+- (1) 부팅 과정 개요
 전원이 켜진 후 OS가 로드되어 실행되는 과정
 하드웨어 초기화 → 부트로더 실행 → 커널 로딩 → 사용자 프로세스 실행
-✅ (2) 부팅 과정 단계별 설명
+- (2) 부팅 과정 단계별 설명
 🔹 1단계: 전원 및 하드웨어 초기화
 
 전원이 켜지면 BIOS/UEFI가 실행됨
@@ -4603,7 +4590,7 @@ init 또는 systemd가 실행되어 백그라운드 서비스(데몬) 시작
 
 GUI 또는 CLI 환경이 실행되고 사용자가 로그인하여 시스템 사용 가능
 4. 펌웨어(Firmware)와 운영체제(OS)의 차이
-✅ (1) 펌웨어(Firmware)의 개념 및 특징
+- (1) 펌웨어(Firmware)의 개념 및 특징
 하드웨어를 제어하는 저수준 소프트웨어
 ROM, EEPROM, Flash 메모리에 저장되어 부팅 시 자동 실행
 업데이트 가능하지만, 일반적으로 OS만큼 자주 변경되지 않음
@@ -4612,7 +4599,7 @@ ROM, EEPROM, Flash 메모리에 저장되어 부팅 시 자동 실행
 BIOS/UEFI (컴퓨터 부팅 제어)
 마우스, 키보드, SSD 컨트롤러의 내장 소프트웨어
 임베디드 시스템 (공장 자동화 장비, IoT 기기)
-✅ (2) 운영체제(OS)의 개념 및 특징
+- (2) 운영체제(OS)의 개념 및 특징
 응용 프로그램과 하드웨어를 관리하는 중간 계층 소프트웨어
 사용자 인터페이스 제공 (CLI, GUI)
 메모리, 파일 시스템, 네트워크 등 다양한 기능을 제공
@@ -4620,7 +4607,7 @@ BIOS/UEFI (컴퓨터 부팅 제어)
 
 Windows, Linux, macOS, Android, iOS
 5. 운영체제의 커널 공간(Kernel Space)과 사용자 공간(User Space)의 차이
-✅ (1) 커널 공간 (Kernel Space)
+- (1) 커널 공간 (Kernel Space)
 운영체제의 핵심 코드가 실행되는 메모리 영역
 하드웨어 자원(메모리, CPU, 네트워크 등)을 직접 제어 가능
 높은 권한(Privileged Mode)에서 실행되며, 안정성과 보안이 중요
@@ -4629,7 +4616,7 @@ Windows, Linux, macOS, Android, iOS
 시스템 콜 처리
 프로세스 스케줄링
 메모리 관리 및 가상 메모리
-✅ (2) 사용자 공간 (User Space)
+- (2) 사용자 공간 (User Space)
 응용 프로그램이 실행되는 공간
 시스템 콜을 통해 커널 기능을 요청해야 하며, 직접 하드웨어 접근 불가능
 크래시 발생 시 OS 전체가 멈추지 않도록 격리됨
@@ -4638,10 +4625,10 @@ Windows, Linux, macOS, Android, iOS
 웹 브라우저, 게임, 오피스 프로그램
 사용자 실행 프로세스
 6. 메모리 계층(Memory Hierarchy)의 개념과 주요 계층
-✅ (1) 메모리 계층 개념
+- (1) 메모리 계층 개념
 속도와 용량에 따라 계층 구조를 이루며, 빠를수록 용량이 작고, 느릴수록 용량이 큼
 캐시 메모리를 활용하여 속도와 비용 균형 유지
-✅ (2) 주요 메모리 계층
+- (2) 주요 메모리 계층
 🔹 1. 레지스터(Register)
 
 CPU 내부의 초고속 메모리
@@ -4674,11 +4661,11 @@ RAM이 부족할 때 일부 저장 장치를 메모리처럼 사용
 - NUMA(Non-Uniform Memory Access)와 UMA(Uniform Memory Access)의 차이를 설명하시오.
 - 페이지 폴트(Page Fault) 발생 시 운영체제의 처리 과정을 설명하시오.
   - 1. 운영체제에서 사용되는 메모리 압축(Memory Compression) 기법
-✅ (1) 메모리 압축(Memory Compression)의 개념
+- (1) 메모리 압축(Memory Compression)의 개념
 메모리가 부족할 때 데이터를 압축하여 RAM 내에서 공간을 절약하는 기법
 스왑(Swap)보다 빠른 접근이 가능하므로 성능 저하를 최소화할 수 있음
 압축된 데이터를 다시 사용할 때는 압축 해제(Decompression) 후 접근
-✅ (2) 주요 활용 사례
+- (2) 주요 활용 사례
 🔹 Linux의 zswap, zram
 
 zswap: 페이지를 압축 후 저장하여 Swap 디스크 사용을 줄임
@@ -4690,10 +4677,10 @@ zram: 압축된 블록 디바이스를 생성하여 RAM을 효율적으로 활�
 
 Windows 10부터 기본적으로 메모리 압축 기능 사용
 2. 현대 운영체제에서 사용하는 메모리 오버커밋(Overcommitment) 기법
-✅ (1) 메모리 오버커밋(Overcommitment)의 개념
+- (1) 메모리 오버커밋(Overcommitment)의 개념
 운영체제가 실제 물리 메모리보다 더 많은 메모리를 프로세스에 할당하는 기법
 실제로 사용되지 않는 메모리는 할당하지 않고, 필요할 때만 물리 메모리를 제공
-✅ (2) 주요 활용 사례
+- (2) 주요 활용 사례
 🔹 Linux의 vm.overcommit_memory 옵션
 
 0: 기본 모드, 안전한 수준에서 오버커밋 허용
@@ -4703,10 +4690,10 @@ Windows 10부터 기본적으로 메모리 압축 기능 사용
 
 하나의 물리적 호스트에서 다수의 VM 또는 컨테이너가 실행될 때, 할당된 메모리보다 실제 사용량이 적기 때문에 오버커밋을 활용하여 효율성을 증가
 3. SWAP 공간과 스왑 파일(Swap File)의 개념과 활용 사례
-✅ (1) SWAP 공간의 개념
+- (1) SWAP 공간의 개념
 RAM이 부족할 때, 디스크의 일부를 가상 메모리로 사용하여 시스템이 계속 동작하도록 지원
 페이지 단위로 관리되며, 필요할 때 RAM으로 다시 불러옴 (Page Swapping)
-✅ (2) 스왑 공간의 종류 및 활용 사례
+- (2) 스왑 공간의 종류 및 활용 사례
 🔹 스왑 파티션(Swap Partition)
 
 물리적 디스크의 특정 파티션을 스왑 공간으로 지정
@@ -4719,10 +4706,10 @@ RAM이 부족할 때, 디스크의 일부를 가상 메모리로 사용하여 �
 
 Windows 환경에서 스왑 공간과 동일한 역할 수행
 4. Copy-on-Write(CoW) 기법의 개념과 활용 사례
-✅ (1) Copy-on-Write(CoW) 개념
+- (1) Copy-on-Write(CoW) 개념
 메모리 페이지를 공유하다가, 변경이 발생하면 그 시점에서 새로운 메모리를 할당하는 기법
 성능 최적화 및 메모리 사용량 절감을 위한 핵심 기법
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 프로세스 포크(Fork) 시 메모리 공유
 
 fork() 호출 시 부모 프로세스의 메모리를 자식 프로세스가 초기에는 공유
@@ -4734,11 +4721,11 @@ ZFS, Btrfs와 같은 파일 시스템은 파일이 변경될 때만 새로운 �
 
 KVM, Docker 등에서 메모리 공유를 통한 성능 향상
 5. NUMA(Non-Uniform Memory Access)와 UMA(Uniform Memory Access)의 차이
-✅ (1) UMA (Uniform Memory Access)
+- (1) UMA (Uniform Memory Access)
 모든 CPU가 동일한 속도로 메모리에 접근하는 구조
 메모리 접근 속도가 균일하며, SMP(Symmetric Multi-Processing) 시스템에서 주로 사용됨
 예: 일반적인 데스크탑 PC, 워크스테이션
-✅ (2) NUMA (Non-Uniform Memory Access)
+- (2) NUMA (Non-Uniform Memory Access)
 CPU마다 할당된 지역 메모리가 있으며, 다른 노드의 메모리에 접근할 때 속도 차이가 발생
 대규모 멀티코어 서버 및 고성능 컴퓨팅(HPC) 환경에서 사용
 성능 최적화를 위해 NUMA-aware 스케줄링 필요
@@ -4747,10 +4734,10 @@ CPU마다 할당된 지역 메모리가 있으며, 다른 노드의 메모리에
 데이터베이스 서버 (Oracle, PostgreSQL)
 가상화 환경 (VMware, KVM)
 6. 페이지 폴트(Page Fault) 발생 시 운영체제의 처리 과정
-✅ (1) 페이지 폴트(Page Fault)의 개념
+- (1) 페이지 폴트(Page Fault)의 개념
 프로세스가 필요한 메모리 페이지를 요청했지만, 현재 RAM에 존재하지 않는 경우 발생
 가상 메모리 시스템에서 디스크에서 데이터를 로드해야 하는 상황
-✅ (2) 운영체제의 처리 과정
+- (2) 운영체제의 처리 과정
 🔹 1. 페이지 폴트 발생 감지
 
 CPU가 메모리 참조 시, 해당 페이지가 페이지 테이블(Page Table)에 존재하지 않음을 감지
@@ -4777,11 +4764,11 @@ RAM에 빈 공간이 있는 경우 → 해당 페이지를 RAM으로 로드
 - POSIX 스레드(POSIX Threads, Pthreads)의 개념과 활용 사례를 설명하시오.
 - 프로세스 컨텍스트 스위칭(Context Switching)의 개념과 최적화 방법을 설명하시오.
   - 1. 메모리 가상화(Memory Virtualization)의 개념과 주요 기술
-✅ (1) 메모리 가상화(Memory Virtualization)의 개념
+- (1) 메모리 가상화(Memory Virtualization)의 개념
 물리적 메모리를 논리적(가상) 메모리로 추상화하여 각 프로세스가 독립된 메모리 공간을 사용하는 것
 운영체제가 가상 주소(Virtual Address)를 물리 주소(Physical Address)로 변환하여 메모리를 관리
 여러 프로세스가 동시에 실행될 수 있도록 하여 메모리 보호 및 자원 활용 최적화
-✅ (2) 주요 기술
+- (2) 주요 기술
 🔹 가상 메모리 (Virtual Memory)
 
 실제 물리 메모리보다 더 큰 주소 공간을 제공
@@ -4799,10 +4786,10 @@ CPU에서 가상 주소를 물리 주소로 변환하는 하드웨어 모듈
 
 멀티코어 시스템에서 CPU와 가까운 메모리를 우선 사용하여 메모리 접근 속도 최적화
 2. 리눅스에서 HugePages의 개념과 활용
-✅ (1) HugePages의 개념
+- (1) HugePages의 개념
 일반적인 메모리 페이지 크기(4KB)보다 훨씬 큰 페이지(2MB~1GB)를 사용하여 TLB 성능을 개선하는 기법
 TLB Miss를 줄이고, 메모리 접근 속도를 향상
-✅ (2) HugePages 활용 사례
+- (2) HugePages 활용 사례
 🔹 데이터베이스(DBMS) 성능 최적화
 
 Oracle, MySQL, PostgreSQL 등에서 대규모 메모리 캐시 관리 최적화
@@ -4813,35 +4800,35 @@ KVM, VMware에서 Guest OS 성능 향상
 
 대규모 행렬 연산, 머신러닝, 금융 계산 등 메모리 연산이 많은 애플리케이션에서 사용
 3. 메모리 단편화 문제(내부 단편화, 외부 단편화) 해결 방법
-✅ (1) 내부 단편화(Internal Fragmentation) 해결 방법
+- (1) 내부 단편화(Internal Fragmentation) 해결 방법
 메모리 블록이 고정 크기로 할당될 때, 사용하지 않는 공간이 낭비되는 문제
 해결 방법:
 Slab Allocator: 리눅스 커널에서 자주 사용하는 크기의 객체를 미리 할당
 메모리 풀(Pool Memory) 기법: 유사한 크기의 객체를 그룹화하여 관리
-✅ (2) 외부 단편화(External Fragmentation) 해결 방법
+- (2) 외부 단편화(External Fragmentation) 해결 방법
 메모리가 작은 조각으로 분산되어 가용 공간이 비효율적으로 사용되는 문제
 해결 방법:
 페이징(Paging): 메모리를 고정 크기의 페이지로 관리하여 외부 단편화 방지
 Compaction(압축): 사용 중인 메모리를 재배열하여 연속된 공간 확보
 버디 메모리 할당(Buddy System): 메모리 요청 크기에 따라 이진 트리 구조로 메모리 관리
 4. 운영체제에서 다중 프로세스(Multiprocessing)와 다중 스레드(Multithreading)의 차이
-✅ (1) 다중 프로세스(Multiprocessing)
+- (1) 다중 프로세스(Multiprocessing)
 여러 개의 프로세스를 병렬로 실행하는 방식
 각 프로세스는 독립된 메모리 공간을 가지므로 메모리 보호가 뛰어나지만, 프로세스 간 통신(IPC)이 복잡
 활용 사례:
 웹 서버(Apache, Nginx)에서 각 요청을 별도 프로세스로 처리
 멀티코어 CPU에서 프로세스를 병렬 실행하여 성능 향상
-✅ (2) 다중 스레드(Multithreading)
+- (2) 다중 스레드(Multithreading)
 하나의 프로세스 내에서 여러 개의 스레드를 실행하는 방식
 메모리와 자원을 공유하여 오버헤드가 적지만, 동기화 문제가 발생할 수 있음
 활용 사례:
 웹 브라우저(Chrome, Firefox)에서 각 탭을 스레드로 관리
 게임 엔진에서 렌더링, 물리 엔진, 네트워크 처리를 분리하여 실행
 5. POSIX 스레드(POSIX Threads, Pthreads)의 개념과 활용 사례
-✅ (1) POSIX 스레드(Pthreads) 개념
+- (1) POSIX 스레드(Pthreads) 개념
 유닉스 기반 운영체제에서 멀티스레딩을 구현하기 위한 표준 API
 C, C++에서 사용되며, pthread_create(), pthread_join(), pthread_mutex_lock() 등의 함수 제공
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 멀티스레드 기반 서버
 
 Apache HTTP 서버에서 클라이언트 요청을 Pthreads를 활용하여 멀티스레딩 처리
@@ -4852,10 +4839,10 @@ Apache HTTP 서버에서 클라이언트 요청을 Pthreads를 활용하여 멀�
 
 커널의 프로세스 스케줄링에서 pthread 기반의 사용자 스레드 실행
 6. 프로세스 컨텍스트 스위칭(Context Switching)의 개념과 최적화 방법
-✅ (1) 컨텍스트 스위칭(Context Switching) 개념
+- (1) 컨텍스트 스위칭(Context Switching) 개념
 CPU가 실행 중인 프로세스를 변경할 때, 기존 프로세스의 상태를 저장하고 새로운 프로세스의 상태를 복원하는 과정
 프로세스 간 문맥(Context)에는 레지스터, 프로그램 카운터, 스택 포인터, 페이지 테이블 정보 등이 포함됨
-✅ (2) 컨텍스트 스위칭 최적화 방법
+- (2) 컨텍스트 스위칭 최적화 방법
 🔹 스레드 사용(Threading) 최적화
 
 컨텍스트 스위칭 비용이 높은 프로세스 대신 스레드를 활용하여 자원 공유
@@ -4877,7 +4864,7 @@ OS의 스케줄러(Scheduler)가 프로세스 우선순위를 조정하여 불�
 - 프로세스 상태 전이(Process State Transition)의 개념과 주요 상태(Ready, Running, Blocked 등)를 설명하시오.
 - 비동기 프로세스(Asynchronous Process)와 동기 프로세스(Synchronous Process)의 차이를 설명하시오.
   - 1. 사용자 수준 스레드(User-Level Threads)와 커널 수준 스레드(Kernel-Level Threads)의 차이
-✅ (1) 사용자 수준 스레드(User-Level Threads, ULT)
+- (1) 사용자 수준 스레드(User-Level Threads, ULT)
 운영체제 커널의 개입 없이 사용자 공간에서 관리되는 스레드
 컨텍스트 스위칭이 빠르고, 커널 호출 없이 스케줄링 가능
 하지만, 하나의 스레드가 블록되면 해당 프로세스의 모든 스레드가 블록됨
@@ -4885,7 +4872,7 @@ OS의 스케줄러(Scheduler)가 프로세스 우선순위를 조정하여 불�
 
 Green Threads: JVM에서 제공하는 사용자 수준 스레드
 User-Level Thread 라이브러리: Pthreads의 일부 구현
-✅ (2) 커널 수준 스레드(Kernel-Level Threads, KLT)
+- (2) 커널 수준 스레드(Kernel-Level Threads, KLT)
 운영체제 커널이 직접 관리하는 스레드
 스레드 간 독립적인 실행이 가능하며, 멀티코어 환경에서 성능이 뛰어남
 하지만, 컨텍스트 스위칭 시 커널 개입이 필요하여 비용이 증가
@@ -4895,10 +4882,10 @@ Linux의 pthreads
 Windows의 Win32 Threads
 멀티코어 프로세서 기반의 운영체제
 2. 프로세스 우선순위 스케줄링에서 Aging 기법의 개념과 활용
-✅ (1) Aging 기법의 개념
+- (1) Aging 기법의 개념
 우선순위 기반 스케줄링에서 낮은 우선순위를 가진 프로세스가 무한정 대기하는 문제(기아 현상, Starvation)를 방지하는 기법
 대기 시간이 길어질수록 프로세스의 우선순위를 점진적으로 증가시킴
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 우선순위 기반 스케줄링
 
 프로세스 우선순위를 일정 주기마다 상승시켜 기아 현상 방지
@@ -4909,11 +4896,11 @@ Windows의 Win32 Threads
 
 실시간 시스템에서 긴급하지 않은 작업도 결국 실행되도록 보장
 3. 스레드 풀(Thread Pool) 기법의 개념과 운영체제에서의 활용
-✅ (1) 스레드 풀(Thread Pool) 개념
+- (1) 스레드 풀(Thread Pool) 개념
 미리 생성된 스레드 그룹을 유지하며, 작업이 들어오면 즉시 사용할 수 있도록 관리하는 기법
 스레드 생성 및 제거 비용을 절감하여 성능을 향상
 과도한 스레드 생성으로 인한 리소스 낭비 방지
-✅ (2) 운영체제에서의 활용 사례
+- (2) 운영체제에서의 활용 사례
 🔹 웹 서버 및 네트워크 서버
 
 Apache, Nginx 같은 웹 서버에서 요청을 빠르게 처리
@@ -4924,13 +4911,13 @@ MySQL, PostgreSQL에서 쿼리 요청을 효율적으로 처리
 
 백그라운드 작업을 처리하는 비동기 작업 관리
 4. 태스크(Task)와 스레드(Thread)의 차이
-✅ (1) 태스크(Task)의 개념
+- (1) 태스크(Task)의 개념
 CPU에서 실행 가능한 독립적인 작업 단위
 하나의 태스크는 하나 이상의 스레드로 구성될 수 있음
-✅ (2) 스레드(Thread)의 개념
+- (2) 스레드(Thread)의 개념
 프로세스 내에서 실행되는 작은 실행 단위
 같은 프로세스 내의 다른 스레드들과 메모리를 공유
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 🔹 태스크는 논리적 개념, 스레드는 실행 단위
 
 태스크(Task)는 하나의 작업 개념
@@ -4942,9 +4929,9 @@ CPU에서 실행 가능한 독립적인 작업 단위
 
 스레드는 OS가 관리하는 반면, 태스크는 애플리케이션이 직접 스케줄링 가능
 5. 프로세스 상태 전이(Process State Transition)의 개념과 주요 상태
-✅ (1) 프로세스 상태 전이 개념
+- (1) 프로세스 상태 전이 개념
 프로세스는 실행 중 여러 상태를 거치며 운영체제의 스케줄링과 자원 할당에 따라 상태가 변경됨
-✅ (2) 주요 상태
+- (2) 주요 상태
 🔹 Ready (준비 상태)
 
 실행 가능하지만 CPU를 할당받지 못한 상태
@@ -4962,14 +4949,14 @@ I/O 작업이나 특정 이벤트를 기다리는 상태
 프로세스가 작업을 완료하거나 비정상적으로 종료된 상태
 메모리와 자원이 해제됨
 6. 비동기 프로세스(Asynchronous Process)와 동기 프로세스(Synchronous Process)의 차이
-✅ (1) 동기 프로세스(Synchronous Process)
+- (1) 동기 프로세스(Synchronous Process)
 작업이 순차적으로 실행되며, 하나의 작업이 끝나야 다음 작업이 시작됨
 CPU 또는 리소스를 공유할 때 대기 시간이 발생할 수 있음
 🔹 활용 사례
 
 전통적인 파일 I/O (Blocking I/O)
 데이터베이스 트랜잭션 처리 (완료될 때까지 대기)
-✅ (2) 비동기 프로세스(Asynchronous Process)
+- (2) 비동기 프로세스(Asynchronous Process)
 여러 개의 작업이 동시에 실행될 수 있으며, 특정 작업이 완료되지 않아도 다음 작업이 진행됨
 이벤트 기반 방식으로 I/O 작업과 병렬 처리가 가능
 🔹 활용 사례
@@ -4986,11 +4973,11 @@ JavaScript의 async/await, Node.js의 이벤트 루프
 - 데드락(Deadlock) 탐지(Detection) 알고리즘의 개념과 활용을 설명하시오.
 - Banker's Algorithm을 활용한 데드락 회피(Avoidance) 기법을 설명하시오.
   - 1. 경량 프로세스(Lightweight Process, LWP)의 개념과 활용
-✅ (1) 경량 프로세스(LWP) 개념
+- (1) 경량 프로세스(LWP) 개념
 일반 프로세스보다 적은 자원을 사용하면서도 독립적인 실행 흐름을 가지는 개체
 스레드(Thread)와 프로세스의 중간 형태로, 운영체제의 커널 수준에서 관리됨
 다중 프로세싱 환경에서 효율적인 병렬 처리를 위해 사용
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 멀티스레드 프로그래밍 모델
 
 LWP는 스레드를 커널이 직접 스케줄링할 수 있도록 지원
@@ -5000,26 +4987,26 @@ Windows의 Win32 Thread, Linux의 pthreads (POSIX Threads) 가 대표적인 LWP 
 LWP를 활용하여 컨테이너 내의 프로세스를 효율적으로 관리
 Linux의 Namespaces와 Cgroups 기반 컨테이너 기술에서 활용됨
 2. 세마포어(Semaphore)와 뮤텍스(Mutex)의 차이점과 활용 사례
-✅ (1) 세마포어(Semaphore) 개념
+- (1) 세마포어(Semaphore) 개념
 멀티스레드 환경에서 공유 자원에 대한 접근을 제한하는 동기화 도구
 카운터를 기반으로 다중 스레드가 접근을 조절하며, n개의 스레드가 동시에 접근 가능
 🔹 활용 사례
 
 제한된 자원(예: DB Connection Pool) 관리
 프로세스 간 동기화(IPC) 및 공유 메모리 관리
-✅ (2) 뮤텍스(Mutex) 개념
+- (2) 뮤텍스(Mutex) 개념
 단일 스레드만이 공유 자원에 접근할 수 있도록 보장하는 동기화 기법
 한 번에 하나의 스레드만 뮤텍스를 획득(Lock)하고, 사용 후 해제(Unlock)
 🔹 활용 사례
 
 멀티스레드 환경에서 크리티컬 섹션 보호
 OS 커널 내부에서 자원 동기화 (예: 파일 시스템 락)
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 세마포어는 여러 개의 스레드가 접근 가능하지만, 뮤텍스는 한 번에 하나의 스레드만 접근 가능
 세마포어는 신호(Signaling) 방식, 뮤텍스는 소유권(Ownership) 기반
 세마포어는 프로세스 간 동기화도 가능하지만, 뮤텍스는 일반적으로 한 프로세스 내에서만 사용됨
 3. 크리티컬 섹션(Critical Section) 문제 해결을 위한 Dekker’s Algorithm과 Peterson’s Algorithm
-✅ (1) Dekker’s Algorithm 개념
+- (1) Dekker’s Algorithm 개념
 두 개의 프로세스가 크리티컬 섹션을 안전하게 사용하도록 보장하는 최초의 소프트웨어 기반 알고리즘
 상호 배제(Mutual Exclusion) 보장
 🔹 방식
@@ -5027,7 +5014,7 @@ OS 커널 내부에서 자원 동기화 (예: 파일 시스템 락)
 각 프로세스는 실행을 원한다고 플래그를 설정
 상대방이 실행 중이라면 대기
 선택적 우선순위 부여로 교착 상태 방지
-✅ (2) Peterson’s Algorithm 개념
+- (2) Peterson’s Algorithm 개념
 Dekker’s Algorithm을 개선하여 더 간결한 방식으로 구현
 프로세스 간의 우선권을 조절하여 데드락과 기아 현상을 방지
 🔹 방식
@@ -5040,14 +5027,14 @@ Dekker’s Algorithm을 개선하여 더 간결한 방식으로 구현
 멀티코어 환경에서 간단한 소프트웨어 기반 동기화 구현
 OS 커널 및 리얼타임 시스템에서의 동기화 기법
 4. 커널에서 제공하는 동기화 기법(Spinlock, Futex 등)
-✅ (1) Spinlock
+- (1) Spinlock
 락을 획득할 때 Busy-Waiting을 수행하는 락 기법
 빠른 락 해제가 예상될 때 사용 (CPU 자원을 낭비하지만 컨텍스트 스위칭 비용이 없음)
 🔹 활용 사례
 
 OS 커널 내에서 짧은 크리티컬 섹션 보호
 멀티코어 시스템에서 낮은 지연시간(Low Latency) 요구 작업
-✅ (2) Futex (Fast Userspace Mutex)
+- (2) Futex (Fast Userspace Mutex)
 유저 공간과 커널 공간을 혼합하여 동기화 비용을 최소화한 동기화 기법
 스레드 간 경합이 적을 경우 커널 호출 없이 유저 공간에서 해결
 🔹 활용 사례
@@ -5055,10 +5042,10 @@ OS 커널 내에서 짧은 크리티컬 섹션 보호
 리눅스 기반의 pthread 동기화 구현
 고성능 멀티스레드 애플리케이션 (예: 데이터베이스, 웹 서버)
 5. 데드락(Deadlock) 탐지(Detection) 알고리즘의 개념과 활용
-✅ (1) 데드락 탐지 개념
+- (1) 데드락 탐지 개념
 프로세스가 자원을 기다리면서 서로 교착 상태에 빠졌는지 확인하는 기법
 시스템 내에서 자원 할당 그래프(Resource Allocation Graph, RAG) 를 분석하여 데드락을 탐지
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 은행 시스템 및 데이터베이스 관리 시스템(DBMS)
 
 트랜잭션에서 교착 상태 발생 여부를 모니터링
@@ -5067,16 +5054,16 @@ OS 커널 내에서 짧은 크리티컬 섹션 보호
 
 커널에서 데드락을 탐지하고 프로세스를 종료하거나 강제 자원 해제
 6. Banker's Algorithm을 활용한 데드락 회피(Avoidance) 기법
-✅ (1) Banker's Algorithm 개념
+- (1) Banker's Algorithm 개념
 프로세스가 자원을 요청할 때 안전 여부를 판단하여 할당 여부를 결정하는 기법
 시스템이 항상 "안전 상태(Safe State)"를 유지하도록 보장
-✅ (2) 알고리즘 동작 방식
+- (2) 알고리즘 동작 방식
 각 프로세스가 필요로 하는 최대 자원을 정의
 현재 사용 가능한 자원을 확인
 자원을 할당하면 안전 상태인지 검사
 안전하면 할당 진행
 불안전하면 요청을 거부하고 대기
-✅ (3) 활용 사례
+- (3) 활용 사례
 🔹 운영체제의 자원 관리
 
 메모리 및 CPU 할당 시 안정적인 상태 유지
@@ -5095,14 +5082,14 @@ VM(가상 머신)과 컨테이너의 리소스 할당을 최적화
 - Readers-Writers 문제와 해결 방법을 설명하시오.
 - 최근 운영체제 연구에서 가장 중요한 이슈(마이크로커널, 보안 강화 등)를 설명하시오.
   - 1. 교착 상태(Deadlock) 해결을 위한 우선순위 할당 및 자원 요청 순서 방법
-✅ (1) 교착 상태 해결을 위한 우선순위 할당(Priority Allocation)
+- (1) 교착 상태 해결을 위한 우선순위 할당(Priority Allocation)
 프로세스의 중요도(우선순위) 를 기준으로 자원을 할당하여 우선순위가 낮은 프로세스가 고우선순위 프로세스의 진행을 방해하지 않도록 하는 기법
 특정 프로세스가 오래 대기하면 우선순위를 점진적으로 상승(Aging)하여 기아(Starvation) 방지
 🔹 활용 사례
 
 실시간 시스템(Real-Time OS)에서 긴급한 프로세스가 먼저 실행되도록 보장
 멀티태스킹 운영체제에서 CPU 자원을 배분할 때 우선순위 기반 스케줄링 적용
-✅ (2) 자원 요청 순서(Resource Request Order) 방법
+- (2) 자원 요청 순서(Resource Request Order) 방법
 모든 프로세스가 자원을 특정 순서대로 요청하도록 제한하여 순환적 대기(Circular Wait) 조건을 방지
 교착 상태 발생을 원천적으로 차단하는 기법
 🔹 활용 사례
@@ -5110,10 +5097,10 @@ VM(가상 머신)과 컨테이너의 리소스 할당을 최적화
 데이터베이스 트랜잭션에서 Lock을 특정 순서로 요청하여 Deadlock 방지
 멀티스레딩 환경에서 파일 및 메모리 자원 접근 순서 정의
 2. 이벤트 기반 동기화(Event-Driven Synchronization)의 개념과 활용 사례
-✅ (1) 이벤트 기반 동기화 개념
+- (1) 이벤트 기반 동기화 개념
 특정 이벤트가 발생할 때까지 대기하는 방식으로, 폴링(Polling) 없이 효율적으로 동기화
 CPU 리소스를 절약하면서 프로세스 간 통신을 최적화
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 GUI 이벤트 핸들링
 
 Windows, macOS, Android 등의 이벤트 루프(Event Loop)
@@ -5127,10 +5114,10 @@ epoll, select, kqueue 같은 비동기 이벤트 처리 방식
 하드웨어 인터럽트 발생 시 OS가 이벤트 기반으로 처리
 키보드, 마우스, 네트워크 패킷 수신 등
 3. 커널에서 동기화 문제 해결을 위해 사용하는 원자적 연산(Atomic Operation)
-✅ (1) 원자적 연산(Atomic Operation) 개념
+- (1) 원자적 연산(Atomic Operation) 개념
 하나의 연산이 중단 없이 한 번에 실행되는 것을 보장하여 동시 접근 문제를 방지
 CPU의 하드웨어 명령어(Compare-And-Swap, Test-And-Set 등) 를 사용하여 구현
-✅ (2) 활용 사례
+- (2) 활용 사례
 🔹 멀티스레딩 환경에서 락(Spinlock) 없이 동기화
 
 atomic_fetch_add(), atomic_compare_exchange() 같은 함수 활용
@@ -5142,10 +5129,10 @@ Windows의 InterlockedIncrement() 함수 사용
 
 ACID 보장을 위한 원자적 연산 활용
 4. Producer-Consumer 문제와 해결 방법(세마포어, 큐 등)
-✅ (1) Producer-Consumer 문제 개념
+- (1) Producer-Consumer 문제 개념
 하나의 프로세스(Producer)가 데이터를 생산하고, 다른 프로세스(Consumer)가 이를 소비하는 모델
 동기화가 없으면 데이터 충돌 또는 경쟁 조건(Race Condition)이 발생할 수 있음
-✅ (2) 해결 방법
+- (2) 해결 방법
 🔹 세마포어(Semaphore) 활용
 
 생산자는 빈 버퍼 공간을 확인 후 데이터 추가
@@ -5157,9 +5144,9 @@ Circular Buffer(환형 버퍼)를 활용하여 데이터 관리
 
 pthread_cond_wait(), pthread_cond_signal() 을 사용하여 소비자가 데이터가 준비될 때까지 대기
 5. Readers-Writers 문제와 해결 방법
-✅ (1) Readers-Writers 문제 개념
+- (1) Readers-Writers 문제 개념
 다수의 Reader(읽기 프로세스)는 동시에 접근 가능하지만, Writer(쓰기 프로세스)는 단독으로 접근해야 하는 문제
-✅ (2) 해결 방법
+- (2) 해결 방법
 🔹 우선순위 정책 적용
 
 Reader 우선 정책: Reader가 많을 경우 Writer가 기아(Starvation)에 빠질 가능성 있음
@@ -5171,28 +5158,28 @@ pthread_rwlock_t을 사용하여 읽기와 쓰기 락을 다르게 관리
 
 Shared Lock(공유 락)과 Exclusive Lock(배타적 락) 활용
 6. 최근 운영체제 연구에서 가장 중요한 이슈(마이크로커널, 보안 강화 등)
-✅ (1) 마이크로커널(Microkernel) 기반 OS
+- (1) 마이크로커널(Microkernel) 기반 OS
 커널 기능을 최소화하여 보안성과 안정성을 강화하는 아키텍처
 기존 모놀리식 커널(Linux, Windows) 대비 커널 크기를 줄여 공격 표면을 최소화
 🔹 활용 사례
 
 QNX (임베디드 시스템)
 seL4 (고신뢰성 OS)
-✅ (2) 보안 강화(Security Hardening)
+- (2) 보안 강화(Security Hardening)
 운영체제 보안 취약점을 최소화하기 위한 연구
 하드웨어 보안(ARM TrustZone, Intel SGX), 메모리 보호기법(ASLR, DEP) 등이 포함됨
 🔹 활용 사례
 
 Windows 11의 TPM 2.0 보안 강화
 Linux의 SELinux, AppArmor 보안 정책 적용
-✅ (3) OS 가상화 및 컨테이너 기술 발전
+- (3) OS 가상화 및 컨테이너 기술 발전
 가상화 기술(KVM, Hyper-V)과 컨테이너 기술(Docker, Kubernetes) 최적화 연구
 리눅스의 Cgroup, Namespaces를 활용한 경량 가상화 기술
 🔹 활용 사례
 
 Google의 Borg, Kubernetes 기반 클러스터 운영
 AWS Firecracker (경량 가상화 기술)
-✅ (4) 실시간 운영체제(RTOS) 및 Edge Computing OS
+- (4) 실시간 운영체제(RTOS) 및 Edge Computing OS
 실시간 응답을 요구하는 임베디드 시스템 및 IoT 환경에서 경량 OS 연구
 딥러닝 기반 Edge AI 기기의 최적화 OS 개발
 🔹 활용 사례
@@ -5208,7 +5195,7 @@ Tesla 자율주행 차량의 실시간 OS
 - 블록체인(Blockchain)과 운영체제 보안의 연관성을 설명하시오.
 - 클라우드 네이티브 운영체제(Cloud-Native OS)의 개념과 필요성을 설명하시오.
   - 1. 리눅스 커널의 주요 발전 과정과 최신 버전에서 추가된 기능
-✅ (1) 리눅스 커널의 주요 발전 과정
+- (1) 리눅스 커널의 주요 발전 과정
 1991년 리누스 토발즈(Linus Torvalds)에 의해 개발 시작
 Unix 기반의 오픈소스 커널로 개발되었으며, GNU 프로젝트와 결합하여 빠르게 성장
 모놀리식 커널(Monolithic Kernel) 구조 채택
@@ -5220,7 +5207,7 @@ GPL(GNU General Public License) 라이선스 채택
 3.x: ARM 아키텍처 최적화, 네트워크 스택 성능 개선
 4.x: 새로운 스케줄러, Cgroups 및 네임스페이스(Container 지원) 개선
 5.x: BPF(eBPF) 확장, io_uring(비동기 I/O) 추가, 메모리 압축 기술 개선
-✅ (2) 최신 버전에서 추가된 기능
+- (2) 최신 버전에서 추가된 기능
 보안 강화
 SELinux, AppArmor 등 보안 정책 관리 기능 개선
 LSM(Linux Security Modules) 확장으로 보안 기능 강화
@@ -5229,10 +5216,10 @@ LSM(Linux Security Modules) 확장으로 보안 기능 강화
 컨테이너 및 가상화 지원 강화
 Cgroups v2, KVM(QEMU) 최적화, Btrfs/ZFS 파일 시스템 지원 개선
 2. 운영체제에서 머신러닝(ML) 기법을 활용한 최적화 사례
-✅ (1) 머신러닝을 활용한 운영체제 최적화 개념
+- (1) 머신러닝을 활용한 운영체제 최적화 개념
 머신러닝 기법을 활용하여 CPU, 메모리, I/O, 보안 등 시스템 자원의 효율성을 향상
 패턴 분석 및 예측 기반으로 시스템 성능 최적화 및 보안 위협 감지
-✅ (2) 운영체제에서의 활용 사례
+- (2) 운영체제에서의 활용 사례
 자원 관리 최적화
 머신러닝을 이용한 스케줄링 최적화(CPU 및 I/O 우선순위 조정)
 메모리 관리에서 불필요한 캐시 데이터 제거 및 가상 메모리 최적화
@@ -5242,31 +5229,31 @@ Cgroups v2, KVM(QEMU) 최적화, Btrfs/ZFS 파일 시스템 지원 개선
 전력 효율성 개선
 사용 패턴을 분석하여 배터리 및 전력 소모를 최적화하는 알고리즘 적용
 3. 운영체제의 보안 강화를 위한 최신 기법
-✅ (1) 커널 무결성 검사(Kernel Integrity Checking)
+- (1) 커널 무결성 검사(Kernel Integrity Checking)
 커널의 코드와 데이터 무결성을 검사하여 루트킷 및 악성코드 감지
 TPM(Trusted Platform Module)과 연계하여 부팅 시 커널 상태 검증
-✅ (2) 보안 부팅(Secure Boot)
+- (2) 보안 부팅(Secure Boot)
 UEFI 기반으로 부팅 단계에서 서명된 운영체제 및 커널만 실행하도록 보장
 부팅 과정에서의 악성코드 및 루트킷 공격 방지
-✅ (3) ASLR(Address Space Layout Randomization) 적용
+- (3) ASLR(Address Space Layout Randomization) 적용
 프로세스의 메모리 주소 배치를 무작위화하여 버퍼 오버플로우 공격 방어
-✅ (4) eBPF(Extended Berkeley Packet Filter) 기반 보안 강화
+- (4) eBPF(Extended Berkeley Packet Filter) 기반 보안 강화
 커널 내에서 네트워크 패킷 필터링 및 보안 정책을 동적으로 적용
 4. 운영체제에서 적용되는 새로운 메모리 기술
-✅ (1) 인텔 옵테인(Intel Optane) 메모리
+- (1) 인텔 옵테인(Intel Optane) 메모리
 DRAM보다 저렴하고 SSD보다 빠른 비휘발성 메모리(NVMe 기반 스토리지)
 메모리 확장이 어려운 서버 및 데이터베이스에서 저비용 고효율 메모리 확장 기술
-✅ (2) 지속성 메모리(Persistent Memory, PMEM)
+- (2) 지속성 메모리(Persistent Memory, PMEM)
 전원이 꺼져도 데이터가 유지되는 비휘발성 메모리(NVDIMM, 3D XPoint 기반)
 데이터베이스 및 인메모리 컴퓨팅 환경에서 데이터 복구 시간 단축
-✅ (3) CXL(Compute Express Link) 메모리 표준
+- (3) CXL(Compute Express Link) 메모리 표준
 CPU와 가속기(GPU, FPGA) 간 메모리 공유 최적화
 대규모 머신러닝 및 AI 연산에 활용
 5. 블록체인과 운영체제 보안의 연관성
-✅ (1) 블록체인을 활용한 운영체제 보안 개념
+- (1) 블록체인을 활용한 운영체제 보안 개념
 블록체인의 분산 원장 기술을 활용하여 시스템 로그 및 파일 무결성 검증
 중앙 관리 서버 없이 보안성이 강화된 인증 및 접근 제어 제공
-✅ (2) 운영체제에서의 활용 사례
+- (2) 운영체제에서의 활용 사례
 시스템 로그 및 감사(Audit) 데이터 무결성 보장
 OS에서 실행된 모든 이벤트를 블록체인에 기록하여 변조 방지
 분산 인증 및 접근 제어
@@ -5274,10 +5261,10 @@ OS에서 실행된 모든 이벤트를 블록체인에 기록하여 변조 방�
 소프트웨어 서명 및 배포 보안 강화
 블록체인으로 소프트웨어 업데이트 내역을 관리하여 공급망 공격(Supply Chain Attack) 방지
 6. 클라우드 네이티브 운영체제(Cloud-Native OS)의 개념과 필요성
-✅ (1) 클라우드 네이티브 운영체제 개념
+- (1) 클라우드 네이티브 운영체제 개념
 클라우드 환경에서 최적화된 컨테이너 중심의 운영체제
 마이크로서비스 아키텍처(MSA), 컨테이너 오케스트레이션(Kubernetes)과 긴밀하게 연동됨
-✅ (2) 클라우드 네이티브 운영체제의 필요성
+- (2) 클라우드 네이티브 운영체제의 필요성
 경량화된 OS 구조
 불필요한 기능을 제거하고 컨테이너 실행에 최적화
 자동 확장(Scaling) 지원
@@ -5286,7 +5273,7 @@ OS에서 실행된 모든 이벤트를 블록체인에 기록하여 변조 방�
 Cgroups, Namespaces, SELinux 등을 활용한 컨테이너 보안 강화
 빠른 배포 및 업데이트 지원
 롤링 업데이트 및 블루그린 배포를 통한 무중단 운영 가능
-✅ (3) 클라우드 네이티브 운영체제의 대표 사례
+- (3) 클라우드 네이티브 운영체제의 대표 사례
 CoreOS: 컨테이너 중심으로 설계된 Linux 배포판
 Bottlerocket (AWS): Amazon이 개발한 컨테이너 전용 OS
 Google’s gVisor: 샌드박싱을 통한 보안 강화
@@ -5299,11 +5286,11 @@ Google’s gVisor: 샌드박싱을 통한 보안 강화
 - 운영체제의 성능 병목(Bottleneck)을 분석하는 방법을 설명하시오.
 - 운영체제에서 사용되는 프로파일링(Profiling) 기법을 설명하시오.
   - 1. 양자 컴퓨팅(Quantum Computing) 운영체제의 개념과 기존 운영체제와의 차이
-✅ (1) 양자 컴퓨팅 운영체제 개념
+- (1) 양자 컴퓨팅 운영체제 개념
 양자 컴퓨터를 운영하고 제어하는 특수한 운영체제
 기존 컴퓨터가 비트(Binary) 기반(0과 1) 인 반면, 양자 컴퓨터는 큐비트(Qubit) 를 사용하여 양자 중첩(Superposition) 과 얽힘(Entanglement) 을 활용한 병렬 연산 가능
 기존 OS처럼 사용자 인터페이스, 자원 관리 기능이 있지만 양자 회로(Quantum Circuit) 실행을 위한 최적화된 스케줄링과 연산 모델을 지원
-✅ (2) 기존 운영체제와의 차이점
+- (2) 기존 운영체제와의 차이점
 🔹 연산 방식의 차이
 
 기존 OS는 순차적 연산(Sequential Execution)을 수행하는 반면, 양자 OS는 병렬 연산을 극대화
@@ -5320,10 +5307,10 @@ Google’s gVisor: 샌드박싱을 통한 보안 강화
 
 IBM Qiskit, Google Cirq, Microsoft Quantum Development Kit, D-Wave Leap OS
 2. 운영체제에서 실시간 데이터 분석을 위한 최적화 기법
-✅ (1) 실시간 데이터 분석 개념
+- (1) 실시간 데이터 분석 개념
 대량의 데이터가 지속적으로 생성될 때, 즉시 분석하여 의사결정에 활용하는 기법
 금융(주식 거래), IoT(센서 데이터 분석), 네트워크 보안(침입 탐지) 등에서 활용
-✅ (2) 운영체제 최적화 기법
+- (2) 운영체제 최적화 기법
 🔹 메모리 최적화
 
 데이터 스트리밍을 지원하기 위해 메모리 캐싱과 버퍼 관리 최적화
@@ -5340,7 +5327,7 @@ DMA(Direct Memory Access) 기술 적용으로 CPU 개입 최소화
 
 Apache Kafka, Spark Streaming 과 같은 분산 컴퓨팅 플랫폼과 연계하여 운영체제에서 부하 분산
 3. 모바일 운영체제(Android, iOS)의 메모리 관리 기법
-✅ (1) 안드로이드(Android)의 메모리 관리
+- (1) 안드로이드(Android)의 메모리 관리
 🔹 Garbage Collection (GC) 활용
 
 ART(Android Runtime)에서 GC를 사용하여 불필요한 메모리 자동 해제
@@ -5352,7 +5339,7 @@ ZRAM(압축된 Swap 메모리)를 활용하여 메모리 부족 시 RAM 압축
 🔹 프로세스 우선순위 관리
 
 백그라운드 프로세스는 우선순위가 낮아지며, 메모리 부족 시 LRU 정책으로 제거
-✅ (2) iOS의 메모리 관리
+- (2) iOS의 메모리 관리
 🔹 ARC (Automatic Reference Counting) 활용
 
 iOS는 Garbage Collection을 사용하지 않고 ARC를 통해 객체 참조 관리
@@ -5366,35 +5353,35 @@ iOS는 Garbage Collection을 사용하지 않고 ARC를 통해 객체 참조 관
 iOS는 Swap을 지원하지 않으며, 오직 RAM 내에서만 앱이 실행됨
 메모리 부족 시 앱 강제 종료(OOM, Out of Memory) 발생
 4. 운영체제의 성능을 평가하는 주요 지표
-✅ (1) CPU 사용률 (CPU Utilization)
+- (1) CPU 사용률 (CPU Utilization)
 프로세스가 CPU를 사용하는 비율
 높을수록 CPU 리소스 활용이 잘 되고 있지만, 과부하 시 성능 저하 발생
-✅ (2) 메모리 사용률 (Memory Usage)
+- (2) 메모리 사용률 (Memory Usage)
 RAM 사용량 및 Swap 사용량 분석
 캐시 및 버퍼 활용률도 중요한 평가 요소
-✅ (3) I/O 성능 (Disk & Network I/O Performance)
+- (3) I/O 성능 (Disk & Network I/O Performance)
 디스크 읽기/쓰기 속도, 네트워크 처리 속도
 SSD vs HDD, NVMe 등 저장 장치별 성능 비교
-✅ (4) 시스템 응답 시간 (Response Time)
+- (4) 시스템 응답 시간 (Response Time)
 특정 작업을 요청한 후, 응답을 받기까지 걸리는 시간
 실시간 시스템에서는 낮은 응답 시간이 필수적
 5. 운영체제의 성능 병목(Bottleneck) 분석 방법
-✅ (1) CPU 병목 분석
+- (1) CPU 병목 분석
 top, htop, vmstat 명령어로 CPU 사용률과 스레드 상태 확인
 특정 프로세스가 CPU를 과도하게 사용하면 문제 발생
-✅ (2) 메모리 병목 분석
+- (2) 메모리 병목 분석
 free -m, vmstat 명령어로 메모리 부족 여부 확인
 Swap 사용률이 과다할 경우, 메모리 부족 문제 발생 가능
-✅ (3) I/O 병목 분석
+- (3) I/O 병목 분석
 iostat, iotop 명령어로 디스크 I/O 대기율 및 읽기/쓰기 속도 분석
 netstat, iftop 을 활용하여 네트워크 병목 확인
-✅ (4) 컨텍스트 스위칭 문제
+- (4) 컨텍스트 스위칭 문제
 mpstat 명령어로 컨텍스트 스위칭이 과도한 경우 스레드 최적화 필요
 6. 운영체제에서 사용되는 프로파일링(Profiling) 기법
-✅ (1) 정적 프로파일링 (Static Profiling)
+- (1) 정적 프로파일링 (Static Profiling)
 소스 코드 분석을 통해 비효율적인 코드 패턴을 미리 탐지
 gcc -pg, clang -ftime-report 등을 사용하여 컴파일 단계에서 코드 최적화
-✅ (2) 동적 프로파일링 (Dynamic Profiling)
+- (2) 동적 프로파일링 (Dynamic Profiling)
 프로그램 실행 중 성능 측정
 실제 환경에서 CPU, 메모리, I/O 등의 사용 패턴 분석
 🔹 대표적인 도구
@@ -5412,22 +5399,22 @@ strace → 시스템 호출(Syscall) 분석
 - 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법을 설명하시오.
 - 운영체제에서 사용되는 동적 적응형 스케줄링(Dynamic Adaptive Scheduling) 기법을 설명하시오.
   - 1. CPU 바운드(CPU-Bound)와 I/O 바운드(I/O-Bound) 프로세스의 차이
-✅ (1) CPU 바운드(CPU-Bound) 프로세스
+- (1) CPU 바운드(CPU-Bound) 프로세스
 CPU 연산을 많이 수행하는 프로세스로, 연산이 주로 CPU에서 이루어짐
 메모리 접근 및 I/O 작업이 적으며, CPU에서 실행되는 시간이 대부분
 예: 과학 연산, 암호화 연산, 머신러닝 트레이닝, 데이터 분석
-✅ (2) I/O 바운드(I/O-Bound) 프로세스
+- (2) I/O 바운드(I/O-Bound) 프로세스
 주로 디스크, 네트워크, 입출력 장치와의 상호작용을 많이 수행하는 프로세스
 CPU 사용보다는 I/O 요청 대기 시간이 길어 병목이 발생
 예: 데이터베이스 쿼리, 웹 서버, 파일 읽기/쓰기 작업
-✅ (3) 최적화 방법
+- (3) 최적화 방법
 CPU 바운드 프로세스: 멀티코어 및 병렬 프로그래밍을 통해 최적화
 I/O 바운드 프로세스: 비동기 I/O, DMA(Direct Memory Access) 활용
 2. 운영체제에서 캐시(Cache) 효율성을 최적화하는 방법
-✅ (1) 캐시 최적화 개념
+- (1) 캐시 최적화 개념
 CPU와 메모리 간 속도 차이를 줄이기 위해 자주 사용되는 데이터를 캐시에 저장하여 빠르게 접근
 L1, L2, L3 캐시 활용
-✅ (2) 캐시 효율성을 최적화하는 방법
+- (2) 캐시 효율성을 최적화하는 방법
 로컬리티(Locality) 활용:
 
 시간 지역성(Temporal Locality) → 최근 사용된 데이터 재사용
@@ -5442,22 +5429,22 @@ CPU가 미리 데이터를 로드하여 캐시 적중률(Cache Hit Rate) 증가
 
 배열 기반 데이터 접근이 유리(연속된 메모리 접근)
 3. I/O 성능을 최적화하는 주요 기법
-✅ (1) DMA(Direct Memory Access)
+- (1) DMA(Direct Memory Access)
 CPU 개입 없이 메모리와 I/O 장치 간 직접 데이터 전송
 CPU 부하 감소 및 빠른 데이터 전송 가능
-✅ (2) 프리페칭(Prefetching)
+- (2) 프리페칭(Prefetching)
 CPU 또는 I/O 컨트롤러가 미리 데이터를 읽어 캐시에 적재
 디스크 및 네트워크 읽기 성능 향상
-✅ (3) 버퍼링(Buffering)
+- (3) 버퍼링(Buffering)
 데이터를 메모리에 임시 저장 후 처리하여 성능 최적화
 I/O 요청을 버퍼에 모아 한번에 전송하여 시스템 부하 감소
-✅ (4) 비동기 I/O(Asynchronous I/O)
+- (4) 비동기 I/O(Asynchronous I/O)
 I/O 작업을 요청한 후, 즉시 다른 작업을 수행할 수 있도록 지원
 예: aio_read(), aio_write() 사용
 4. 운영체제에서 페이지 폴트(Page Fault)를 최소화하는 기법
-✅ (1) 페이지 폴트(Page Fault) 개념
+- (1) 페이지 폴트(Page Fault) 개념
 프로세스가 필요한 데이터가 메모리에 없고 디스크에서 데이터를 로드해야 할 때 발생
-✅ (2) 페이지 폴트 최소화 기법
+- (2) 페이지 폴트 최소화 기법
 페이지 교체 알고리즘 최적화
 
 LRU(Least Recently Used), LFU(Least Frequently Used), CLOCK 알고리즘 적용
@@ -5471,9 +5458,9 @@ LRU(Least Recently Used), LFU(Least Frequently Used), CLOCK 알고리즘 적용
 
 스왑 공간을 SSD에 배치하여 접근 속도 향상
 5. 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법
-✅ (1) 컨텍스트 스위칭(Context Switching) 개념
+- (1) 컨텍스트 스위칭(Context Switching) 개념
 CPU가 한 프로세스에서 다른 프로세스로 전환될 때 레지스터, 메모리, 스택 정보를 저장하고 불러오는 과정
-✅ (2) 최적화 기법
+- (2) 최적화 기법
 스레드 사용(Threading) 최적화
 
 프로세스 간 전환보다 스레드 간 전환이 비용이 적음
@@ -5488,10 +5475,10 @@ NUMA(Node-Local Memory Access) 최적화
 
 멀티코어 시스템에서 프로세스를 해당 CPU의 메모리와 연결하여 빠르게 처리
 6. 운영체제에서 사용되는 동적 적응형 스케줄링(Dynamic Adaptive Scheduling) 기법
-✅ (1) 동적 적응형 스케줄링 개념
+- (1) 동적 적응형 스케줄링 개념
 시스템 상태에 따라 실시간으로 스케줄링 방식을 조정하여 성능 최적화
 작업 부하 변화에 따라 우선순위를 동적으로 변경
-✅ (2) 주요 기법
+- (2) 주요 기법
 🔹 멀티큐(Multi-Level Feedback Queue, MLFQ) 스케줄링
 
 프로세스의 실행 시간에 따라 우선순위 동적으로 조정
@@ -5514,77 +5501,77 @@ CPU 부하에 따라 전력 효율을 고려하여 스케줄링 정책을 실시
 - 운영체제에서 투명한 대체 메모리(Transparent Huge Pages, THP)의 개념과 장점을 설명하시오.
 - 프로세스 간 공유 메모리(Shared Memory) 기법을 설명하시오.
   - 1. 리눅스(Linux)에서 시스템 성능을 모니터링하는 명령어
-✅ (1) top 명령어
+- (1) top 명령어
 CPU 사용률, 메모리 사용률, 실행 중인 프로세스를 실시간으로 모니터링
 주요 옵션
 -d <초>: 화면 갱신 주기 설정
 -u <사용자>: 특정 사용자의 프로세스만 표시
-✅ (2) vmstat 명령어
+- (2) vmstat 명령어
 시스템의 메모리, CPU, I/O 상태를 실시간으로 확인
 주요 필드
 r: 실행 대기 중인 프로세스 수
 free: 사용 가능한 메모리 양
 si/so: Swap In/Out 비율
-✅ (3) iostat 명령어
+- (3) iostat 명령어
 디스크 I/O 성능을 모니터링
 주요 필드
 tps: 초당 전송 요청 수
 await: 평균 응답 시간(ms)
-✅ (4) free 명령어
+- (4) free 명령어
 메모리 사용량 확인
 주요 옵션
 -m: 메가바이트 단위로 표시
 -h: 사람이 읽기 쉬운 형식으로 표시
-✅ (5) netstat / ss 명령어
+- (5) netstat / ss 명령어
 네트워크 연결 및 트래픽 모니터링
 ss -tulpn → 현재 열려 있는 포트 및 프로세스 확인
 2. 운영체제에서 메모리 오버커밋(Overcommitment) 기법이 사용되는 이유
-✅ (1) 메모리 오버커밋 개념
+- (1) 메모리 오버커밋 개념
 운영체제가 실제 물리 메모리보다 더 많은 가상 메모리를 할당하는 기법
 모든 프로세스가 할당된 메모리를 항상 100% 사용하는 것이 아니기 때문에 가능한 기법
-✅ (2) 사용 이유
+- (2) 사용 이유
 메모리 활용 최적화: 프로세스가 필요 이상으로 메모리를 요청하는 경우, 낭비 방지
 가상화 및 컨테이너 환경에서 유용: 다수의 VM/컨테이너가 실행될 때, 효율적인 자원 사용 가능
 Swap과 연계하여 성능 최적화: 물리 메모리 부족 시 스왑(Swap) 공간을 활용
-✅ (3) 오버커밋 설정 조정 (vm.overcommit_memory)
+- (3) 오버커밋 설정 조정 (vm.overcommit_memory)
 0: 기본값, 힙(Heap) 크기 기반 판단
 1: 무제한 오버커밋 허용
 2: 엄격한 정책 적용 (할당된 메모리 초과 요청 불가)
 3. 메모리 압축(Memory Compression) 기법이 운영체제에서 활용되는 방식
-✅ (1) 메모리 압축 개념
+- (1) 메모리 압축 개념
 물리 메모리가 부족할 때, 페이지를 디스크(Swap)로 보내기 전에 압축하여 저장하는 기법
 CPU 성능을 이용해 메모리 사용량을 줄여 Swap I/O 성능 저하를 방지
-✅ (2) 리눅스에서 활용 사례
+- (2) 리눅스에서 활용 사례
 zram: RAM 내에서 압축된 Swap 영역을 생성하여 메모리 부족 시 성능 저하를 최소화
 zswap: 기존 Swap 메모리를 압축하여 디스크 접근을 최소화
-✅ (3) 장점
+- (3) 장점
 디스크 I/O 감소
 Swap 속도 향상
 낮은 메모리 대역폭 활용 가능
 4. 가상 메모리에서 페이지 크기(Page Size)가 시스템 성능에 미치는 영향
-✅ (1) 페이지 크기의 역할
+- (1) 페이지 크기의 역할
 운영체제는 가상 메모리를 작은 블록(페이지)으로 관리
 페이지 크기가 클수록 TLB(Translation Lookaside Buffer) 활용 최적화
-✅ (2) 작은 페이지 크기의 장점
+- (2) 작은 페이지 크기의 장점
 메모리 낭비 방지: 작은 프로세스도 적은 메모리 사용 가능
 세밀한 메모리 관리 가능
-✅ (3) 큰 페이지 크기의 장점
+- (3) 큰 페이지 크기의 장점
 TLB 캐시 적중률 증가 → 주소 변환 속도 향상
 페이지 테이블 크기 감소
 I/O 성능 개선 (한 번에 많은 데이터 읽기 가능)
-✅ (4) 최적의 페이지 크기 선택
+- (4) 최적의 페이지 크기 선택
 데이터베이스, 머신러닝처럼 대량 데이터 처리 시스템은 큰 페이지 사용이 유리
 일반적인 환경에서는 기본 페이지 크기(4KB~16KB)가 적절
 
 5. 운영체제에서 투명한 대체 메모리(Transparent Huge Pages, THP)의 개념과 장점
-✅ (1) THP(Transparent Huge Pages) 개념
+- (1) THP(Transparent Huge Pages) 개념
 운영체제가 자동으로 큰 페이지(예: 2MB, 1GB)를 사용하여 메모리 성능을 최적화
 응용 프로그램의 수정 없이 페이지 테이블 관리 비용을 줄일 수 있음
-✅ (2) THP의 장점
+- (2) THP의 장점
 TLB 성능 향상: 큰 페이지를 사용하여 TLB 캐시 미스 감소
 페이지 테이블 크기 감소: 메모리 사용량 절감
 CPU 오버헤드 감소: 페이지 테이블 관리 연산 감소
-✅ (3) 사용 여부 확인 및 설정
+- (3) 사용 여부 확인 및 설정
 THP 활성화 확인:
 bash
 복사
@@ -5597,13 +5584,13 @@ bash
 echo always > /sys/kernel/mm/transparent_hugepage/enabled
 
 6. 프로세스 간 공유 메모리(Shared Memory) 기법
-✅ (1) 공유 메모리 개념
+- (1) 공유 메모리 개념
 두 개 이상의 프로세스가 동일한 메모리 공간을 공유하여 데이터를 주고받는 방식
 프로세스 간 통신(IPC, Inter-Process Communication) 기법 중 하나
-✅ (2) 공유 메모리의 장점
+- (2) 공유 메모리의 장점
 빠른 데이터 교환 가능: 프로세스 간 별도의 데이터 복사 없이 메모리 직접 공유 가능
 CPU 및 I/O 부하 감소: 파일 기반 통신 대비 낮은 오버헤드
-✅ (3) 공유 메모리 사용 방법 (리눅스 기준)
+- (3) 공유 메모리 사용 방법 (리눅스 기준)
 메모리 영역 생성 (shmget)
 c
 복사
@@ -5621,7 +5608,7 @@ c
 편집
 shmdt(shared_mem);
 shmctl(shmid, IPC_RMID, NULL);
-✅ (4) 공유 메모리 활용 사례
+- (4) 공유 메모리 활용 사례
 멀티프로세스 기반 애플리케이션 (데이터베이스, 웹 서버)
 고속 IPC 필요 시스템 (영상 처리, 실시간 분석 시스템)
 
@@ -5633,30 +5620,30 @@ shmctl(shmid, IPC_RMID, NULL);
 - 현대 운영체제에서 발생하는 메모리 단편화(Fragmentation) 문제 해결 방법을 설명하시오.
 - 운영체제에서 메모리 보호 기법(Memory Protection)과 접근 제어(Access Control) 방식을 설명하시오.
   - 1. KSM(Kernel Samepage Merging) 기법을 활용한 메모리 최적화 방법
-✅ (1) KSM(Kernel Samepage Merging) 개념
+- (1) KSM(Kernel Samepage Merging) 개념
 동일한 메모리 페이지를 공유하여 메모리 사용량을 줄이는 기술
 가상화 환경이나 멀티프로세스 시스템에서 중복된 메모리 페이지를 하나로 병합하여 메모리 활용도를 증가
-✅ (2) KSM 동작 방식
+- (2) KSM 동작 방식
 커널이 주기적으로 메모리 페이지를 스캔하여 동일한 페이지를 찾아 병합
 메모리 매핑된 모든 페이지를 비교하고 동일한 페이지를 하나의 공유 페이지로 변경
 프로세스가 해당 메모리를 수정하면 Copy-on-Write(CoW) 기법을 사용하여 새로운 페이지를 생성
-✅ (3) 활용 사례
+- (3) 활용 사례
 가상화 환경(KVM, QEMU) → 동일한 OS를 실행하는 다수의 VM이 존재할 때, 메모리 사용량 최적화
 클라우드 서버 → 여러 사용자 세션에서 동일한 라이브러리를 로드할 경우, KSM을 활용하여 메모리 절약
-✅ (4) KSM 활성화 및 설정 (리눅스)
+- (4) KSM 활성화 및 설정 (리눅스)
 bash
 복사
 편집
 echo 1 > /sys/kernel/mm/ksm/run      # KSM 활성화
 echo 1000 > /sys/kernel/mm/ksm/sleep_millisecs  # 스캔 주기(1000ms)
 2. 스왑(Swap) 공간의 활용과 최적화 방법
-✅ (1) 스왑(Swap) 개념
+- (1) 스왑(Swap) 개념
 메모리가 부족할 때 디스크에 임시 저장하여 가상 메모리처럼 사용하는 기술
 RAM이 가득 차면 일부 비활성 메모리 페이지를 스왑 공간으로 이동하여 RAM을 확보
-✅ (2) 스왑의 장점과 단점
+- (2) 스왑의 장점과 단점
 장점: RAM 부족 시 프로세스 종료 없이 시스템 유지 가능
 단점: 디스크 I/O 속도가 RAM보다 느려 과도한 스왑 사용 시 성능 저하(OOM 발생 가능)
-✅ (3) 스왑 최적화 방법
+- (3) 스왑 최적화 방법
 스왑 사용량 조정 (swappiness 값 조절)
 bash
 복사
@@ -5665,13 +5652,13 @@ sysctl vm.swappiness=10  # 스왑 사용 빈도를 낮춤 (기본값: 60)
 zswap / zram 사용: 압축된 메모리 캐시 활용하여 디스크 I/O 부담 감소
 SSD 기반 스왑 활용: HDD보다 빠른 SSD를 스왑 공간으로 설정하여 성능 향상
 3. 운영체제에서 NUMA(Non-Uniform Memory Access) 아키텍처가 적용되는 방식
-✅ (1) NUMA 개념
+- (1) NUMA 개념
 멀티 프로세서 시스템에서 CPU와 메모리를 그룹화하여 성능을 최적화하는 기술
 프로세서별로 로컬 메모리(Node-Local Memory) 를 사용하여 메모리 접근 속도를 향상
-✅ (2) NUMA 구조의 동작 방식
+- (2) NUMA 구조의 동작 방식
 CPU가 자신의 로컬 메모리에 접근하는 것이 가장 빠름
 다른 NUMA 노드(Node)의 메모리에 접근하면 성능이 저하됨
-✅ (3) NUMA 최적화 기법
+- (3) NUMA 최적화 기법
 프로세스를 로컬 메모리에 배치 (numactl 사용)
 bash
 복사
@@ -5679,31 +5666,31 @@ bash
 numactl --cpunodebind=0 --membind=0 ./program
 메모리 정책 조정 (/proc/sys/kernel/numa_balancing)
 NUMA-Aware 스케줄링 → OS가 프로세스와 데이터를 동일한 NUMA 노드에 배치
-✅ (4) 활용 사례
+- (4) 활용 사례
 데이터베이스(MySQL, PostgreSQL)
 HPC(고성능 컴퓨팅) 및 클라우드 서버
 4. 가상화 환경에서의 메모리 관리 기법
-✅ (1) Ballooning (메모리 풍선 기법)
+- (1) Ballooning (메모리 풍선 기법)
 VM에서 메모리가 부족할 때, 불필요한 메모리를 호스트로 반환하는 기법
 가상화 플랫폼(KVM, VMware)에서 동적으로 VM의 메모리 크기를 조정하여 전체적인 메모리 활용 최적화
-✅ (2) Deduplication (중복 제거)
+- (2) Deduplication (중복 제거)
 여러 VM이 동일한 메모리 데이터를 사용할 경우, KSM(Kernel Samepage Merging) 기법을 활용하여 메모리 병합
 중복 페이지를 하나의 물리적 페이지로 통합하여 메모리 낭비를 줄임
-✅ (3) Swapping (스왑 사용)
+- (3) Swapping (스왑 사용)
 VM이 사용하지 않는 메모리를 디스크로 내보내어 메모리를 확보하는 방법
 성능 저하를 막기 위해 zswap/zram 등의 압축 기술 활용
 5. 현대 운영체제에서 발생하는 메모리 단편화(Fragmentation) 문제 해결 방법
-✅ (1) 내부 단편화 해결 방법
+- (1) 내부 단편화 해결 방법
 적절한 페이지 크기 선택 → 너무 작은 페이지는 관리 비용 증가, 너무 크면 낭비 발생
 메모리 풀(Pool) 관리 기법 사용 → 고정 크기 블록을 할당하여 단편화 방지
-✅ (2) 외부 단편화 해결 방법
+- (2) 외부 단편화 해결 방법
 Compaction (메모리 압축 및 정리) → 메모리 블록을 재정렬하여 단편화 제거
 Buddy System (버디 시스템 할당 기법) → 2의 거듭제곱 크기로 메모리를 할당하여 단편화 방지
-✅ (3) 메모리 할당 방식 최적화
+- (3) 메모리 할당 방식 최적화
 Slab Allocator 사용 → 커널에서 효율적인 메모리 할당을 위해 작은 객체를 미리 할당
 Huge Pages 사용 → 큰 페이지 크기를 사용하여 테이블 오버헤드 감소
 6. 운영체제에서 메모리 보호 기법(Memory Protection)과 접근 제어(Access Control) 방식
-✅ (1) 메모리 보호 기법
+- (1) 메모리 보호 기법
 🔹 주소 공간 분리
 
 각 프로세스는 독립된 주소 공간을 가지며, 다른 프로세스의 메모리에 접근 불가
@@ -5721,7 +5708,7 @@ mprotect(addr, size, PROT_READ | PROT_WRITE);
 🔹 NX(No eXecute) 비트
 
 실행 불가능한 영역을 명확하게 설정하여 코드 인젝션 공격 방지
-✅ (2) 접근 제어(Access Control) 방식
+- (2) 접근 제어(Access Control) 방식
 🔹 ACL(Access Control List)
 
 파일 및 프로세스 권한을 설정하여 특정 사용자 또는 그룹의 접근을 제어
@@ -5743,14 +5730,14 @@ mprotect(addr, size, PROT_READ | PROT_WRITE);
 - 리눅스에서 SELinux(Security-Enhanced Linux)와 AppArmor의 차이를 설명하시오.
 - 운영체제에서 루트킷(Rootkit) 탐지 및 제거 방법을 설명하시오.
   - 1. 운영체제에서 주소 공간 배치 난수화(Address Space Layout Randomization, ASLR)의 개념과 역할
-✅ (1) ASLR 개념
+- (1) ASLR 개념
 악성 코드가 특정 메모리 주소를 공격하는 것을 어렵게 하기 위한 보안 기법
 실행 파일, 공유 라이브러리, 스택, 힙 등의 메모리 주소를 실행할 때마다 난수화하여 배치
-✅ (2) ASLR의 역할
+- (2) ASLR의 역할
 버퍼 오버플로우 및 ROP(Return-Oriented Programming) 공격 방지
 악성 코드가 특정 주소를 예측하여 공격하는 것을 차단
 각 실행 시마다 다른 메모리 주소를 사용하여 보안성 향상
-✅ (3) ASLR 적용 확인 및 설정(리눅스)
+- (3) ASLR 적용 확인 및 설정(리눅스)
 현재 ASLR 설정 확인
 bash
 복사
@@ -5762,14 +5749,14 @@ bash
 편집
 echo 2 > /proc/sys/kernel/randomize_va_space
 2. 운영체제에서 실행 방지(XD/NX, eXecute Disable/No eXecute) 비트의 역할
-✅ (1) XD/NX 비트 개념
+- (1) XD/NX 비트 개념
 메모리 영역을 실행 불가능(Non-Executable)하도록 설정하여 악성 코드 실행을 방지
 CPU 하드웨어 기반 보안 기법으로, 코드 실행이 불가능한 영역(데이터, 스택 등)을 보호
-✅ (2) XD/NX 비트의 역할
+- (2) XD/NX 비트의 역할
 버퍼 오버플로우 공격을 방어하여 악성 코드 실행 방지
 스택, 힙 영역에서 쉘코드 실행 차단
 운영체제와 CPU가 협력하여 보호 기능 제공
-✅ (3) XD/NX 비트 활성화 확인(리눅스)
+- (3) XD/NX 비트 활성화 확인(리눅스)
 현재 상태 확인
 bash
 복사
@@ -5781,43 +5768,43 @@ bash
 편집
 cat /proc/cpuinfo | grep nx
 3. Secure Boot의 개념과 운영체제 보안에서의 역할
-✅ (1) Secure Boot 개념
+- (1) Secure Boot 개념
 운영체제 부팅 과정에서 승인된 소프트웨어만 실행하도록 보장하는 보안 기능
 UEFI(Unified Extensible Firmware Interface)에서 제공하는 기능
-✅ (2) Secure Boot의 역할
+- (2) Secure Boot의 역할
 부팅 과정에서 악성 코드(루트킷, 부트킷) 실행 방지
 운영체제 커널과 드라이버의 무결성 확인
 공급망 공격(Supply Chain Attack) 방지
-✅ (3) Secure Boot 활성화 확인(리눅스)
+- (3) Secure Boot 활성화 확인(리눅스)
 현재 Secure Boot 상태 확인
 bash
 복사
 편집
 mokutil --sb-state
 4. 운영체제에서 마이크로 커널 기반 보안 강화 기법
-✅ (1) 마이크로 커널 개념
+- (1) 마이크로 커널 개념
 운영체제의 핵심 기능(프로세스 관리, 메모리 관리 등)만 커널에 포함하고, 나머지 기능은 사용자 공간에서 실행
 보안, 안정성을 강화하기 위해 최소한의 기능만 포함
-✅ (2) 보안 강화 기법
+- (2) 보안 강화 기법
 커널 공격 표면 감소: 핵심 기능을 최소화하여 보안 취약점 감소
 격리된 보안 모듈 사용: 보안 기능을 독립적인 프로세스로 실행하여 보호
 비정상적인 접근 제한: 하이퍼바이저 및 보안 모듈과 연계하여 프로세스 격리 강화
-✅ (3) 마이크로 커널 기반 운영체제 예시
+- (3) 마이크로 커널 기반 운영체제 예시
 QNX: 임베디드 시스템에서 보안성 강화를 위해 사용
 seL4: 높은 보안성을 요구하는 시스템에서 활용
 5. 리눅스에서 SELinux(Security-Enhanced Linux)와 AppArmor의 차이
-✅ (1) SELinux 개념과 특징
+- (1) SELinux 개념과 특징
 강력한 Mandatory Access Control (MAC) 기반 보안 정책 적용
 RBAC(Role-Based Access Control) 및 MCS(Multi-Category Security) 지원
 파일, 프로세스, 소켓 등에 대한 세밀한 접근 제어
-✅ (2) AppArmor 개념과 특징
+- (2) AppArmor 개념과 특징
 경량 보안 정책 프레임워크로, 애플리케이션별 접근 제어 제공
 파일 경로 기반 접근 제어(Policy Enforcement)
 설정이 SELinux보다 간단하고 우분투(Ubuntu)에서 기본 적용
-✅ (3) SELinux vs AppArmor 비교
+- (3) SELinux vs AppArmor 비교
 SELinux: 시스템 전체 보안을 관리하는 강력한 접근 제어 정책 제공 (Red Hat, Fedora 등에서 사용)
 AppArmor: 애플리케이션 중심 보안 정책 적용 (Ubuntu에서 기본 사용)
-✅ (4) SELinux 설정 확인 및 변경
+- (4) SELinux 설정 확인 및 변경
 현재 모드 확인
 bash
 복사
@@ -5829,10 +5816,10 @@ bash
 편집
 setenforce 1
 6. 운영체제에서 루트킷(Rootkit) 탐지 및 제거 방법
-✅ (1) 루트킷(Rootkit) 개념
+- (1) 루트킷(Rootkit) 개념
 운영체제 내부에 은밀히 숨겨져 악성 코드를 실행하고 백도어를 생성하는 악성 프로그램
 일반적인 보안 소프트웨어로 탐지가 어렵고, 커널 모드에서 실행될 수 있음
-✅ (2) 루트킷 탐지 방법
+- (2) 루트킷 탐지 방법
 🔹 chkrootkit 사용
 
 루트킷 감염 여부 확인
@@ -5854,7 +5841,7 @@ bash
 복사
 편집
 lsmod | grep suspicious_module
-✅ (3) 루트킷 제거 방법
+- (3) 루트킷 제거 방법
 감염된 시스템 클린 부팅 후 루트킷 제거
 신뢰할 수 있는 커널 및 시스템 파일로 복구
 Secure Boot 및 SELinux 활용하여 사전 예방
@@ -5868,75 +5855,75 @@ Secure Boot 및 SELinux 활용하여 사전 예방
 - 운영체제에서 AI 기반 스케줄링 기법의 개념과 적용 사례를 설명하시오.
 - AI 기반 운영체제의 개념과 기존 운영체제와의 차이를 설명하시오.
   - 1. 운영체제에서 사용되는 샌드박스(Sandbox) 기법
-✅ (1) 샌드박스 개념
+- (1) 샌드박스 개념
 애플리케이션을 격리된 환경에서 실행하여 시스템을 보호하는 보안 기법
 실행되는 프로그램이 파일 시스템, 네트워크, 메모리 등의 리소스에 직접 접근하지 못하도록 제한
-✅ (2) 샌드박스의 역할
+- (2) 샌드박스의 역할
 악성 코드 실행 방지: 의심스러운 코드가 시스템에 영향을 주지 않도록 격리
 보안 위협 분석: 샌드박스 환경에서 악성 코드의 동작을 분석하여 보안 강화
 브라우저 보안: 웹사이트에서 실행되는 JavaScript 및 플러그인 격리
-✅ (3) 샌드박스 활용 사례
+- (3) 샌드박스 활용 사례
 Android 앱 샌드박스: 각 앱을 독립된 공간에서 실행하여 다른 앱에 영향을 주지 않음
 Google Chrome 샌드박스: 웹 브라우저 프로세스를 격리하여 보안 강화
 Windows Defender Application Guard: 의심스러운 문서나 웹사이트를 격리된 환경에서 실행
 2. 운영체제에서 악성 코드 방어를 위한 최신 기술
-✅ (1) AI 기반 악성 코드 탐지
+- (1) AI 기반 악성 코드 탐지
 머신러닝을 이용하여 비정상적인 행동을 탐지하고 악성 코드 여부를 판단
 기존의 서명(Signature) 기반 탐지 방식보다 제로데이 공격에 대한 대응력이 높음
-✅ (2) 메모리 보호 기술
+- (2) 메모리 보호 기술
 Control Flow Integrity (CFI): 코드 실행 흐름을 보호하여 ROP(Return-Oriented Programming) 공격 방지
 Stack Canaries: 스택 오버플로우 공격 방지
-✅ (3) 하드웨어 기반 보안 기술
+- (3) 하드웨어 기반 보안 기술
 Intel SGX (Software Guard Extensions): 민감한 데이터를 격리된 메모리 공간에서 보호
 ARM TrustZone: 보안 환경과 일반 환경을 분리하여 실행
-✅ (4) 행위 기반 탐지
+- (4) 행위 기반 탐지
 실행되는 프로그램의 이상 행위를 감지하여 악성 코드 여부 판단
 예: Windows Defender ATP, CrowdStrike Falcon
 3. 운영체제에서 비밀번호 보호를 위한 최신 해싱(Hashing) 알고리즘의 역할
-✅ (1) 비밀번호 해싱의 역할
+- (1) 비밀번호 해싱의 역할
 비밀번호를 안전하게 저장하기 위해 복호화할 수 없는 단방향 함수 사용
 해커가 데이터베이스를 탈취해도 원래 비밀번호를 쉽게 복구할 수 없음
-✅ (2) 최신 해싱 알고리즘
+- (2) 최신 해싱 알고리즘
 Argon2: 메모리 집약적인 연산을 요구하여 GPU 및 FPGA 기반 공격 방어
 bcrypt: 가변적인 연산 비용을 적용하여 공격 난이도 증가
 PBKDF2: 다수의 해시 반복 적용으로 공격 속도 저하
-✅ (3) 솔트(Salt)와 페퍼(Pepper) 기법
+- (3) 솔트(Salt)와 페퍼(Pepper) 기법
 Salt: 각 비밀번호에 랜덤 데이터를 추가하여 무작위성을 높임
 Pepper: 추가적인 비밀 키를 이용하여 해시 강화
 4. 운영체제에서 머신러닝을 활용한 성능 최적화 사례
-✅ (1) CPU 및 스케줄링 최적화
+- (1) CPU 및 스케줄링 최적화
 머신러닝 기반 CPU 부하 예측 및 자원 할당 최적화
 예: Google의 Borg 시스템 → 클러스터 스케줄링 최적화
-✅ (2) 메모리 관리 최적화
+- (2) 메모리 관리 최적화
 머신러닝을 활용하여 페이지 폴트 예측 및 페이지 교체 알고리즘 개선
 예: Facebook의 TCMalloc
-✅ (3) 네트워크 트래픽 관리
+- (3) 네트워크 트래픽 관리
 머신러닝을 통해 DDoS 공격 패턴을 탐지하고 차단
 예: AWS Shield
-✅ (4) 전력 관리 최적화
+- (4) 전력 관리 최적화
 머신러닝을 사용하여 시스템 사용 패턴을 분석하고 전력 효율 최적화
 예: Intel RAPL (Running Average Power Limit)
 5. 운영체제에서 AI 기반 스케줄링 기법의 개념과 적용 사례
-✅ (1) AI 기반 스케줄링 개념
+- (1) AI 기반 스케줄링 개념
 머신러닝을 이용하여 프로세스 실행 우선순위를 동적으로 조정
 사용자 패턴 및 시스템 상태를 학습하여 최적의 스케줄링 결정
-✅ (2) AI 기반 스케줄링의 역할
+- (2) AI 기반 스케줄링의 역할
 CPU 자원 활용 최적화: 실시간 부하를 분석하여 멀티코어 및 스레드 할당 자동 조정
 응답 시간 단축: AI가 예측적으로 리소스를 할당하여 대기 시간 최소화
-✅ (3) AI 기반 스케줄링 적용 사례
+- (3) AI 기반 스케줄링 적용 사례
 Google Cloud Spanner: AI 기반 부하 분산 스케줄링 적용
 Linux BBR (Bottleneck Bandwidth and RTT): AI를 활용한 네트워크 트래픽 최적화
 6. AI 기반 운영체제의 개념과 기존 운영체제와의 차이
-✅ (1) AI 기반 운영체제 개념
+- (1) AI 기반 운영체제 개념
 AI 및 머신러닝을 활용하여 시스템 리소스, 보안, 전력 관리, 성능 최적화 자동화
 기존 OS는 정적 규칙 기반 운영, AI 기반 OS는 실시간 학습 및 조정 가능
-✅ (2) 기존 운영체제와 AI 기반 운영체제의 차이
+- (2) 기존 운영체제와 AI 기반 운영체제의 차이
 비교 항목	기존 운영체제	AI 기반 운영체제
 스케줄링 방식	고정된 알고리즘 사용	실시간 학습 기반 동적 스케줄링
 보안 정책	정적 접근 제어	AI 기반 이상 탐지 및 자동 차단
 전력 관리	단순한 CPU 부하 기반	사용 패턴 학습 및 최적화
 자원 관리	사전 정의된 규칙	실시간 AI 분석 및 최적 자원 할당
-✅ (3) AI 기반 운영체제의 활용 사례
+- (3) AI 기반 운영체제의 활용 사례
 Google Fuchsia OS: 머신러닝 기반 자원 최적화 기능 포함
 Microsoft Azure AI OS: 클라우드 기반 AI 최적화 적용
 Facebook AI-driven Load Balancer: 머신러닝을 활용한 부하 분산
@@ -5949,74 +5936,74 @@ Facebook AI-driven Load Balancer: 머신러닝을 활용한 부하 분산
 - AI 기반 운영체제 보안 강화 기술의 개념과 활용 사례를 설명하시오.
 - 최신 연구에서 AI가 운영체제 설계 및 최적화에 미치는 영향을 설명하시오.
   - 1. 운영체제에서 AI를 활용한 이상 탐지(Anomaly Detection) 기법
-✅ (1) AI 기반 이상 탐지 개념
+- (1) AI 기반 이상 탐지 개념
 운영체제에서 비정상적인 활동(Anomaly)을 자동으로 감지하고 대응하는 기술
 머신러닝 및 딥러닝 모델을 활용하여 정상적인 시스템 동작 패턴을 학습하고, 이를 벗어나는 행동을 탐지
-✅ (2) AI 기반 이상 탐지 방법
+- (2) AI 기반 이상 탐지 방법
 Supervised Learning(지도 학습): 정상 데이터와 이상 데이터를 학습한 후 실시간 탐지
 Unsupervised Learning(비지도 학습): 데이터의 패턴을 분석하여 이상 징후 자동 탐지
 Reinforcement Learning(강화 학습): 반복적인 학습을 통해 탐지 모델 최적화
-✅ (3) 활용 사례
+- (3) 활용 사례
 네트워크 보안: AI 기반 DDoS 공격 탐지 및 자동 차단
 시스템 로그 분석: 비정상적인 프로세스 실행 감지 (예: SIEM(Security Information and Event Management) 시스템)
 프로세스 및 리소스 이상 탐지: CPU, 메모리, I/O 사용 패턴 분석하여 과부하 또는 악성 코드 탐지
 2. 운영체제에서 사용되는 AI 기반 전력 관리 최적화 기법
-✅ (1) AI 기반 전력 관리 개념
+- (1) AI 기반 전력 관리 개념
 머신러닝을 이용하여 시스템의 전력 소비 패턴을 분석하고, 전력 효율을 최적화하는 기술
 CPU/GPU/스토리지 등의 하드웨어 사용을 분석하여 불필요한 전력 낭비를 줄이고, 성능을 유지하면서 소비 전력을 최소화
-✅ (2) AI 기반 전력 관리 방법
+- (2) AI 기반 전력 관리 방법
 Dynamic Voltage and Frequency Scaling (DVFS): 머신러닝을 활용하여 CPU/GPU의 클럭 속도를 실시간으로 조정하여 전력 절약
 전력 예측 및 부하 조정: AI가 사용자 패턴을 학습하여 저전력 모드 적용
 서버 및 데이터센터의 AI 기반 냉각 시스템 최적화
-✅ (3) 활용 사례
+- (3) 활용 사례
 Google DeepMind AI: 데이터센터 전력 소비 최적화 (최대 40% 절감)
 Intel RAPL (Running Average Power Limit): AI 기반 CPU 전력 조절
 Windows AI 기반 전력 모드 조정: 사용자 패턴 학습을 통한 배터리 수명 연장
 3. AI 기반 운영체제에서 리소스 할당을 최적화하는 방식
-✅ (1) AI 기반 리소스 할당 개념
+- (1) AI 기반 리소스 할당 개념
 AI가 CPU, 메모리, 네트워크, I/O 자원의 사용량을 예측하고 동적으로 조정
 최적의 성능과 최소한의 전력 소비를 보장
-✅ (2) AI 기반 리소스 할당 방식
+- (2) AI 기반 리소스 할당 방식
 AI 기반 프로세스 스케줄링: 사용자의 작업 패턴을 학습하여 우선순위 조정
 메모리 관리 최적화: 페이지 교체 알고리즘을 AI로 학습하여 페이지 폴트 최소화
 컨테이너 및 VM 최적화: 머신러닝을 활용하여 컨테이너 및 가상 머신 리소스 동적 할당
-✅ (3) 활용 사례
+- (3) 활용 사례
 Kubernetes AI 기반 자동 확장(Auto-scaling)
 Google Borg 시스템: 머신러닝을 활용하여 데이터센터 리소스 최적화
 AWS AI 기반 EC2 인스턴스 최적화
 4. 운영체제에서 AI 기반 가상화(Virtualization) 기술의 역할
-✅ (1) AI 기반 가상화 개념
+- (1) AI 기반 가상화 개념
 AI를 활용하여 가상 머신(VM) 및 컨테이너 환경을 최적화
 자동 자원 할당, 네트워크 최적화, 보안 강화 등의 기능 수행
-✅ (2) AI 기반 가상화의 역할
+- (2) AI 기반 가상화의 역할
 자동 리소스 조정: VM 및 컨테이너의 부하를 학습하여 자동 크기 조정(Auto-scaling)
 가상화된 네트워크 최적화: AI를 이용하여 소프트웨어 정의 네트워크(SDN)의 성능을 동적으로 조정
 보안 강화: AI 기반 가상 환경 내 이상 탐지 및 악성 코드 차단
-✅ (3) 활용 사례
+- (3) 활용 사례
 VMware AI 기반 가상 머신 관리(VMware vSphere AI)
 AWS Nitro AI 기반 가상화 보안 최적화
 Google Anthos AI 기반 하이브리드 클라우드 관리
 5. AI 기반 운영체제 보안 강화 기술의 개념과 활용 사례
-✅ (1) AI 기반 보안 강화 개념
+- (1) AI 기반 보안 강화 개념
 AI를 활용하여 운영체제 보안 위협을 실시간으로 감지하고 방어하는 기술
 머신러닝을 통해 이상 탐지, 행위 기반 분석, 자동 대응 가능
-✅ (2) AI 기반 보안 기술
+- (2) AI 기반 보안 기술
 AI 기반 침입 탐지 시스템(IDS, Intrusion Detection System)
 행위 기반 악성 코드 탐지
 Zero Trust 보안 모델 최적화
-✅ (3) 활용 사례
+- (3) 활용 사례
 Microsoft Defender AI 기반 악성 코드 탐지
 Google Chronicle AI 기반 보안 로그 분석
 IBM Watson Security AI
 6. 최신 연구에서 AI가 운영체제 설계 및 최적화에 미치는 영향
-✅ (1) AI가 운영체제 설계에 미치는 변화
+- (1) AI가 운영체제 설계에 미치는 변화
 기존 운영체제는 고정된 규칙 기반, AI 기반 운영체제는 실시간 분석 및 적응형 동작
 AI를 활용한 운영체제는 자동화된 리소스 관리, 보안 강화, 사용자 맞춤 설정 지원
-✅ (2) AI가 운영체제 최적화에 미치는 영향
+- (2) AI가 운영체제 최적화에 미치는 영향
 예측 기반 자원 관리: AI가 시스템 성능을 분석하여 CPU, 메모리, 네트워크 활용 최적화
 보안 패턴 분석 및 자동 대응: AI 기반 보안 엔진이 실시간 탐지 및 대응
 지능형 사용자 경험 제공: 사용자의 행동을 학습하여 최적의 UX 제공
-✅ (3) 최신 연구 및 적용 사례
+- (3) 최신 연구 및 적용 사례
 Google Fuchsia OS: AI 기반 운영체제 개발 중
 Facebook AI-driven System Optimization: AI를 활용한 서버 성능 최적화
 Red Hat AI-based Linux Optimization: AI를 활용한 커널 성능 개선
@@ -6029,10 +6016,10 @@ Red Hat AI-based Linux Optimization: AI를 활용한 커널 성능 개선
 - 블록체인(Blockchain)과 운영체제의 관계 및 적용 사례를 설명하시오.
 - 클라우드 네이티브 운영체제(Cloud-Native OS)의 개념과 필요성을 설명하시오.
   - 1. AI 기반 운영체제에서 실시간 데이터 분석을 활용한 최적화 기법
-✅ (1) 실시간 데이터 분석의 역할
+- (1) 실시간 데이터 분석의 역할
 운영체제(OS)가 AI 기반 실시간 데이터 분석을 활용하여 시스템 성능을 자동 최적화
 사용자 및 프로세스의 행동 패턴을 학습하여 자원 할당 및 성능 조정을 실시간으로 수행
-✅ (2) 주요 최적화 기법
+- (2) 주요 최적화 기법
 🔹 AI 기반 CPU 및 프로세스 스케줄링
 
 AI 모델이 CPU 사용 패턴을 분석하여 가장 적절한 스케줄링 정책을 적용
@@ -6045,68 +6032,68 @@ AI 모델이 CPU 사용 패턴을 분석하여 가장 적절한 스케줄링 정
 
 AI가 트래픽 패턴을 분석하여 최적의 네트워크 경로 및 QoS(Quality of Service) 정책을 조정
 예: 클라우드 데이터센터에서 AI 기반 부하 분산 시스템 적용
-✅ (3) 활용 사례
+- (3) 활용 사례
 Google Borg: AI 기반 클러스터 관리 및 리소스 자동 최적화
 Microsoft Windows AI Task Manager: 실시간 AI 분석으로 프로세스 우선순위 조정
 Linux BPF (Berkeley Packet Filter): AI 기반 네트워크 패킷 분석 및 보안 최적화
 2. 최신 운영체제에서 가장 주목받는 기술 트렌드
-✅ (1) AI 및 머신러닝 기반 운영체제
+- (1) AI 및 머신러닝 기반 운영체제
 AI를 활용한 자동화된 자원 관리, 스케줄링, 보안 강화
 AI가 운영체제 내장형 시스템 튜닝을 수행
-✅ (2) 클라우드 네이티브 운영체제
+- (2) 클라우드 네이티브 운영체제
 컨테이너 및 마이크로서비스 아키텍처를 기반으로 분산 환경에 최적화
 대표 사례: Google Fuchsia, AWS Bottlerocket, Red Hat CoreOS
-✅ (3) 보안 강화 및 Zero Trust Architecture
+- (3) 보안 강화 및 Zero Trust Architecture
 Secure Boot, TPM(Trusted Platform Module), AI 기반 보안 탐지 적용
 Immutable OS (변경 불가능한 운영체제) 채택 증가
-✅ (4) 블록체인 및 분산 운영체제 기술
+- (4) 블록체인 및 분산 운영체제 기술
 블록체인을 활용하여 운영체제 무결성 검증 및 보안 강화
 대표 사례: Hyperledger 기반 블록체인 OS
 3. 차세대 운영체제(Next-Gen OS)의 주요 설계 방향
-✅ (1) AI 중심 운영체제
+- (1) AI 중심 운영체제
 머신러닝 기반 자율적 리소스 관리 및 실시간 최적화
 사용자 맞춤형 UX 제공 (예: AI가 사용자 행동을 학습하여 OS 설정 자동 조정)
-✅ (2) 보안 중심 설계
+- (2) 보안 중심 설계
 Zero Trust 기반의 보안 모델 도입
 Secure Boot, TPM, End-to-End 암호화 기능 기본 제공
-✅ (3) 클라우드 네이티브 및 경량 운영체제
+- (3) 클라우드 네이티브 및 경량 운영체제
 마이크로커널 및 컨테이너 최적화
 Edge Computing 및 IoT 디바이스에 적합한 경량 OS 설계
-✅ (4) 블록체인과 운영체제 융합
+- (4) 블록체인과 운영체제 융합
 블록체인 기반 보안 및 데이터 무결성 보장
 분산 ID 시스템 및 암호화된 데이터 관리
 4. 리눅스 기반의 새로운 운영체제 설계 동향
-✅ (1) Immutable Linux OS (불변 운영체제)
+- (1) Immutable Linux OS (불변 운영체제)
 파일 시스템 변경을 금지하여 보안성을 높이고 롤백 기능 제공
 대표 사례: Fedora Silverblue, Ubuntu Core
-✅ (2) 클라우드 네이티브 OS
+- (2) 클라우드 네이티브 OS
 컨테이너 및 Kubernetes 최적화
 대표 사례: Google Fuchsia, AWS Bottlerocket, Flatcar Linux
-✅ (3) AI 및 머신러닝 기반 시스템 최적화
+- (3) AI 및 머신러닝 기반 시스템 최적화
 실시간 AI 분석을 활용한 CPU, 메모리, 네트워크 성능 조정
 예: Facebook AI-driven 시스템 튜닝
 5. 블록체인(Blockchain)과 운영체제의 관계 및 적용 사례
-✅ (1) 블록체인을 운영체제에 적용하는 이유
+- (1) 블록체인을 운영체제에 적용하는 이유
 데이터 무결성 보장: 운영체제 설정 및 커널 변경 내역을 블록체인으로 기록
 보안 강화: 블록체인을 활용한 루트킷 탐지 및 방어
-✅ (2) 블록체인 기반 운영체제의 역할
+- (2) 블록체인 기반 운영체제의 역할
 분산 인증 시스템: 중앙 서버 없이 사용자 인증 가능
 블록체인 스마트 컨트랙트와 연계한 시스템 자동화
-✅ (3) 실제 적용 사례
+- (3) 실제 적용 사례
 Hyperledger 기반 블록체인 운영체제
 Dfinity Internet Computer: 분산 OS 개념 적용
 Ethereum 기반 분산 운영체제 연구
 6. 클라우드 네이티브 운영체제(Cloud-Native OS)의 개념과 필요성
-✅ (1) 클라우드 네이티브 운영체제 개념
+- (1) 클라우드 네이티브 운영체제 개념
 클라우드 환경에서 최적화된 컨테이너 기반 운영체제
 기존 OS와 달리 가상 머신 대신 컨테이너 및 마이크로서비스 기반
-✅ (2) 클라우드 네이티브 운영체제가 필요한 이유
+- (2) 클라우드 네이티브 운영체제가 필요한 이유
 자동 확장(Auto Scaling) 및 부하 분산 최적화
 서버리스(Serverless) 및 컨테이너 기반 애플리케이션 지원
-✅ (3) 주요 특징
+- (3) 주요 특징
 경량 운영체제: 최소한의 커널 및 필수 패키지만 포함
 Immutable (불변성) 운영체제: 업데이트 후 롤백 가능
-✅ (4) 대표적인 클라우드 네이티브 운영체제
+- (4) 대표적인 클라우드 네이티브 운영체제
 AWS Bottlerocket: 컨테이너 전용 OS
 Google Fuchsia OS: 마이크로서비스 기반 차세대 OS
 Flatcar Linux: 컨테이너 최적화 Linux OS
@@ -6119,47 +6106,47 @@ Flatcar Linux: 컨테이너 최적화 Linux OS
 - 최근 운영체제 연구에서 가장 중요한 보안 위협과 대응 방안을 설명하시오.
 - 파일 시스템의 주요 기능과 역할을 설명하시오.
   - 1. 운영체제에서 5G 네트워크와 엣지 컴퓨팅(Edge Computing)이 미치는 영향
-✅ (1) 5G 네트워크가 운영체제에 미치는 영향
+- (1) 5G 네트워크가 운영체제에 미치는 영향
 초고속, 초저지연 통신을 지원하는 5G 네트워크가 운영체제의 자원 관리 방식에 큰 변화 초래
 운영체제는 네트워크 인터페이스 최적화 및 실시간 데이터 처리를 위한 개선이 필요
-✅ (2) 운영체제에서 5G 지원을 위한 최적화 기법
+- (2) 운영체제에서 5G 지원을 위한 최적화 기법
 네트워크 프로토콜 스택 최적화: 초고속 데이터 전송을 위한 UDP 기반 프로토콜 강화 (QUIC 등)
 실시간 QoS(Quality of Service) 관리: AI 기반 네트워크 트래픽 최적화
 5G MEC(Multi-access Edge Computing) 지원: 운영체제가 엣지 서버와 빠르게 통신할 수 있도록 지원
-✅ (3) 엣지 컴퓨팅이 운영체제에 미치는 영향
+- (3) 엣지 컴퓨팅이 운영체제에 미치는 영향
 데이터센터가 아닌 엣지 디바이스에서 직접 연산을 수행하여 네트워크 부하 감소
 운영체제는 엣지 디바이스에서 경량화된 리소스 관리 및 실시간 처리를 지원해야 함
-✅ (4) 엣지 컴퓨팅 지원을 위한 운영체제 최적화 기법
+- (4) 엣지 컴퓨팅 지원을 위한 운영체제 최적화 기법
 경량 운영체제 설계: 엣지 디바이스에서 구동 가능한 OS 개발 (예: Ubuntu Core, AWS Greengrass)
 컨테이너 기반 애플리케이션 실행 최적화: 엣지 환경에서 Docker, Kubernetes 등 지원
 AI 모델의 로컬 실행 지원: 운영체제에서 ONNX, TensorFlow Lite 등을 기본 지원
 2. 양자 컴퓨팅(Quantum Computing) 운영체제의 개념과 기존 운영체제와의 차이
-✅ (1) 양자 컴퓨팅 운영체제 개념
+- (1) 양자 컴퓨팅 운영체제 개념
 기존 운영체제는 클래식 비트(0과 1) 기반, 양자 운영체제는 큐비트(Qubit) 기반
 양자 게이트(Quantum Gate)를 활용하여 병렬 연산 수행
-✅ (2) 기존 운영체제와의 차이점
+- (2) 기존 운영체제와의 차이점
 전통적 OS: 프로세스, 메모리 관리, 파일 시스템 중심
 양자 OS: 양자 알고리즘 실행, 큐비트 상태 유지 및 오류 보정(QEC) 지원
-✅ (3) 대표적인 양자 운영체제
+- (3) 대표적인 양자 운영체제
 IBM Qiskit, Google Cirq, Microsoft Quantum Development Kit
 3. 서버리스(Serverless) 환경에서 운영체제의 역할
-✅ (1) 서버리스 개념
+- (1) 서버리스 개념
 물리적 서버를 직접 관리하지 않고, 클라우드 기반에서 자동으로 실행되는 함수(FaaS) 실행 환경
 예: AWS Lambda, Google Cloud Functions, Azure Functions
-✅ (2) 서버리스 환경에서 운영체제의 역할
+- (2) 서버리스 환경에서 운영체제의 역할
 컨테이너 실행 및 리소스 관리: 서버리스 실행 환경에서는 컨테이너가 빠르게 생성 및 소멸됨
 자동 스케일링 지원: 요청에 따라 OS가 동적으로 프로세스를 생성 및 제거
 보안 및 격리 기능 강화: 각 요청이 별도의 환경에서 실행되도록 샌드박싱(Sandboxing) 지원
 4. IoT(Internet of Things) 운영체제의 개념과 설계 원리
-✅ (1) IoT 운영체제 개념
+- (1) IoT 운영체제 개념
 IoT 디바이스에서 저전력, 실시간 데이터 처리 및 네트워크 연결을 지원하는 경량 운영체제
 예: FreeRTOS, RIOT OS, Contiki OS
-✅ (2) IoT 운영체제의 설계 원리
+- (2) IoT 운영체제의 설계 원리
 경량화된 커널: 메모리 및 CPU 사용량을 최소화하여 소형 디바이스에서도 동작
 네트워크 프로토콜 최적화: 저전력 통신을 지원하는 6LoWPAN, MQTT, CoAP 지원
 실시간 처리 지원: RTOS(Real-Time Operating System) 기능 포함하여 센서 데이터 실시간 분석 가능
 5. 최근 운영체제 연구에서 가장 중요한 보안 위협과 대응 방안
-✅ (1) 주요 보안 위협
+- (1) 주요 보안 위협
 🔹 사이버 공격 증가
 
 랜섬웨어, 공급망 공격, 루트킷(Rootkit) 및 부트킷(Bootkit) 위협 증가
@@ -6169,7 +6156,7 @@ IoT 디바이스에서 저전력, 실시간 데이터 처리 및 네트워크 �
 🔹 클라우드 및 컨테이너 보안 위협
 
 컨테이너 보안 취약점 및 도커 이미지 공급망 공격
-✅ (2) 대응 방안
+- (2) 대응 방안
 🔹 AI 기반 이상 탐지 시스템 도입
 
 머신러닝을 활용한 실시간 보안 이벤트 분석
@@ -6180,9 +6167,9 @@ IoT 디바이스에서 저전력, 실시간 데이터 처리 및 네트워크 �
 
 모든 시스템 접근 요청을 검증하고, 최소 권한 원칙 적용
 6. 파일 시스템의 주요 기능과 역할
-✅ (1) 파일 시스템의 개념
+- (1) 파일 시스템의 개념
 데이터를 효율적으로 저장, 검색, 관리하기 위한 운영체제의 핵심 구성 요소
-✅ (2) 파일 시스템의 주요 기능
+- (2) 파일 시스템의 주요 기능
 🔹 데이터 저장 및 관리
 
 파일과 디렉토리를 구조화하여 저장
@@ -6192,7 +6179,7 @@ ACL(Access Control List) 및 SELinux 기반 보안 정책 적용
 🔹 데이터 무결성 및 복구 기능 제공
 
 저널링(Journaling) 기능을 통해 데이터 손실 방지
-✅ (3) 대표적인 파일 시스템
+- (3) 대표적인 파일 시스템
 ext4 (Linux 기본 파일 시스템)
 NTFS (Windows 기본 파일 시스템)
 ZFS (고성능 및 무결성 보장)
@@ -6206,10 +6193,10 @@ Btrfs (스냅샷 및 RAID 지원)
 - 파일 시스템에서 데이터 무결성(Data Integrity) 보장을 위한 기법을 설명하시오.
 - SSD와 HDD의 차이점과 운영체제에서 SSD를 효율적으로 관리하는 방법을 설명하시오.
   - 1. 저널링 파일 시스템(Journaling File System)의 개념과 주요 기능
-✅ (1) 저널링 파일 시스템 개념
+- (1) 저널링 파일 시스템 개념
 파일 시스템의 변경 사항을 기록하는 저널(Journal) 로그를 유지하여 데이터 손실을 방지하는 파일 시스템
 비정상적인 종료(정전, 시스템 충돌 등) 발생 시 파일 시스템 복구를 빠르게 수행
-✅ (2) 주요 기능
+- (2) 주요 기능
 🔹 저널링(Journaling) 메커니즘
 
 파일 시스템 변경 사항을 실제 데이터에 적용하기 전에 로그(Journal)에 먼저 기록
@@ -6221,15 +6208,15 @@ Btrfs (스냅샷 및 RAID 지원)
 🔹 빠른 복구 기능
 
 비정상 종료 후 파일 시스템 검사가 필요 없거나 최소화됨
-✅ (3) 대표적인 저널링 파일 시스템
+- (3) 대표적인 저널링 파일 시스템
 ext3/ext4 (Linux)
 NTFS (Windows)
 XFS, Btrfs (고성능 지원)
 2. 로그 기반 파일 시스템(Log-Structured File System)의 개념과 특징
-✅ (1) 로그 기반 파일 시스템 개념
+- (1) 로그 기반 파일 시스템 개념
 모든 데이터를 연속적인 로그(Log) 형태로 저장하여 디스크 성능을 향상
 기존 파일 시스템과 달리 쓰기(write) 성능을 극대화하도록 설계됨
-✅ (2) 주요 특징
+- (2) 주요 특징
 🔹 연속적 데이터 쓰기
 
 파일을 디스크의 빈 공간에 순차적으로 기록
@@ -6240,14 +6227,14 @@ HDD의 랜덤 접근 성능 저하 문제 해결
 🔹 SSD 친화적인 설계
 
 SSD에서는 쓰기 작업을 줄이고, 가비지 컬렉션(Garbage Collection) 효율을 향상
-✅ (3) 대표적인 로그 기반 파일 시스템
+- (3) 대표적인 로그 기반 파일 시스템
 F2FS (Flash-Friendly File System)
 LFS (Log-Structured File System)
 3. 분산 파일 시스템(Distributed File System, DFS)의 개념과 주요 사례
-✅ (1) 분산 파일 시스템 개념
+- (1) 분산 파일 시스템 개념
 여러 개의 서버 또는 노드에서 데이터를 분산 저장하고 관리하는 파일 시스템
 대규모 데이터 처리 및 고가용성(High Availability) 제공
-✅ (2) 주요 특징
+- (2) 주요 특징
 🔹 데이터 분산 및 중복 저장
 
 데이터를 여러 노드에 저장하여 내결함성(Fault Tolerance) 향상
@@ -6257,29 +6244,29 @@ LFS (Log-Structured File System)
 🔹 네트워크 기반 파일 액세스
 
 클라이언트가 네트워크를 통해 원격 파일 시스템을 마치 로컬 파일처럼 사용 가능
-✅ (3) 대표적인 분산 파일 시스템
+- (3) 대표적인 분산 파일 시스템
 HDFS (Hadoop Distributed File System) → 빅데이터 처리
 CephFS → 고성능 클러스터 파일 시스템
 Google File System (GFS) → Google의 대규모 데이터 처리용
 4. NFS(Network File System)와 SMB(Server Message Block)의 차이
-✅ (1) NFS(Network File System)
+- (1) NFS(Network File System)
 Unix/Linux 기반 네트워크 파일 공유 프로토콜
 클라이언트가 원격 파일을 로컬 파일 시스템처럼 마운트하여 사용 가능
 비연결형(stateless) 프로토콜 → 서버 장애 시 복구 속도가 빠름
-✅ (2) SMB(Server Message Block)
+- (2) SMB(Server Message Block)
 Windows 기반 파일 공유 프로토콜
 파일뿐만 아니라 프린터, 네트워크 장치도 공유 가능
 연결형(stateful) 프로토콜 → 서버 장애 시 연결 복구가 필요
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 비교 항목	NFS	SMB
 운영체제	Linux, Unix	Windows
 프로토콜 유형	비연결형(stateless)	연결형(stateful)
 보안 방식	Kerberos, 인증서	NTLM, Kerberos
 주요 용도	서버 간 파일 공유	사용자 간 파일 및 프린터 공유
 5. 파일 시스템에서 데이터 무결성(Data Integrity) 보장을 위한 기법
-✅ (1) 데이터 무결성 보장의 필요성
+- (1) 데이터 무결성 보장의 필요성
 파일 시스템은 데이터 손상 및 변조를 방지해야 하며, 장애 발생 시 복구 가능해야 함
-✅ (2) 주요 기법
+- (2) 주요 기법
 🔹 체크섬(Checksum) 및 해시(Hash) 사용
 
 데이터를 저장할 때 해시값(SHA, CRC 등)을 생성하여 무결성 검증
@@ -6293,13 +6280,13 @@ RAID 1(미러링), RAID 5(패리티) 등을 활용하여 디스크 장애 시 �
 
 데이터를 덮어쓰기 전에 새로운 위치에 복사하여 무결성을 보장 (예: Btrfs, ZFS)
 6. SSD와 HDD의 차이점과 운영체제에서 SSD를 효율적으로 관리하는 방법
-✅ (1) SSD와 HDD의 주요 차이점
+- (1) SSD와 HDD의 주요 차이점
 비교 항목	SSD (Solid State Drive)	HDD (Hard Disk Drive)
 구조	반도체 메모리(Flash)	회전 디스크(Platter)
 속도	빠름(초당 500MB 이상)	느림(초당 100~200MB)
 내구성	쓰기 제한 존재 (Wear Leveling 필요)	기계적 부품으로 인한 고장 가능성
 전력 소비	낮음	높음
-✅ (2) 운영체제에서 SSD를 효율적으로 관리하는 방법
+- (2) 운영체제에서 SSD를 효율적으로 관리하는 방법
 🔹 TRIM 명령어 사용
 
 SSD에서 삭제된 데이터의 블록을 즉시 해제하여 성능 유지
@@ -6331,10 +6318,10 @@ SSD의 수명 연장을 위해 Swap 사용 최소화
 - RTOS에서 사용되는 하드웨어 인터럽트 처리 기법을 설명하시오.
 - 실시간 시스템에서 태스크(Task)와 스레드(Thread)의 차이를 설명하시오.
   - 1. RAID(Redundant Array of Independent Disks)의 개념과 RAID 레벨별 특징
-✅ (1) RAID 개념
+- (1) RAID 개념
 여러 개의 디스크를 하나의 논리적 단위로 묶어 성능 향상, 데이터 보호, 또는 둘 다를 제공하는 기술
 디스크 장애 발생 시 데이터 손실을 방지하고 시스템 가용성을 높이는 목적
-✅ (2) RAID 레벨별 특징
+- (2) RAID 레벨별 특징
 🔹 RAID 0 (Striping, 스트라이핑)
 
 데이터를 여러 디스크에 분산 저장하여 읽기/쓰기 성능 향상
@@ -6360,45 +6347,45 @@ RAID 5보다 높은 안정성 제공, 하지만 쓰기 성능은 약간 저하�
 RAID 1과 RAID 0의 조합 → 데이터를 미러링하면서 스트라이핑하여 성능과 안정성 제공
 주요 용도: 빠른 데이터 접근 속도와 높은 신뢰성이 필요한 환경 (예: 금융 및 트랜잭션 시스템)**
 2. 파일 시스템에서 캐시(Cache)와 버퍼(Buffer)의 차이
-✅ (1) 캐시(Cache) 개념
+- (1) 캐시(Cache) 개념
 자주 접근하는 데이터를 빠르게 읽기 위해 RAM에 저장하는 임시 저장 공간
 목적: 데이터 접근 속도 향상 및 CPU 부하 감소
 예시: 디스크 캐시, CPU 캐시, 웹 브라우저 캐시
-✅ (2) 버퍼(Buffer) 개념
+- (2) 버퍼(Buffer) 개념
 입출력(I/O) 연산을 효율적으로 수행하기 위해 데이터를 일시적으로 저장하는 공간
 목적: 입출력 장치 간 데이터 전송 속도 차이를 보완
 예시: 키보드 입력 버퍼, 프린터 스풀링, 네트워크 패킷 버퍼
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 캐시(Cache): CPU 또는 디스크 접근 속도를 향상시키기 위해 데이터를 저장
 버퍼(Buffer): 데이터를 일정량 모아서 입출력(I/O) 작업을 최적화
 3. 운영체제에서 데이터 손상을 방지하기 위한 스냅샷(Snapshot) 기술
-✅ (1) 스냅샷(Snapshot) 개념
+- (1) 스냅샷(Snapshot) 개념
 특정 시점의 파일 시스템이나 데이터를 그대로 저장하여 복구 가능한 상태를 유지하는 기술
 데이터 백업 및 시스템 복구에 활용
-✅ (2) 주요 기능
+- (2) 주요 기능
 🔹 Copy-on-Write(CoW) 방식
 
 데이터를 직접 복사하는 것이 아니라 변경된 블록만 저장하여 성능 및 저장 공간 최적화
 🔹 정기적인 자동 백업 지원
 
 운영체제 또는 스토리지 시스템이 주기적으로 자동 생성하여 데이터 보호
-✅ (3) 활용 사례
+- (3) 활용 사례
 Btrfs, ZFS, LVM: 파일 시스템에서 기본적으로 스냅샷 기능 제공
 클라우드 백업 시스템: AWS EBS 스냅샷, VMware 스냅샷
 4. 실시간 운영체제(RTOS)에서 스케줄링 방식(RMS, EDF)의 차이
-✅ (1) RMS (Rate Monotonic Scheduling, 주기 단조 스케줄링)
+- (1) RMS (Rate Monotonic Scheduling, 주기 단조 스케줄링)
 주기가 짧은 태스크에 높은 우선순위를 부여하는 정적 스케줄링 기법
 태스크의 실행 시간이 짧고 주기가 짧을수록 우선순위가 높음
-✅ (2) EDF (Earliest Deadline First, 기한 우선 스케줄링)
+- (2) EDF (Earliest Deadline First, 기한 우선 스케줄링)
 가장 마감 기한이 가까운 태스크를 우선 실행하는 동적 스케줄링 기법
 태스크가 실행될 때마다 우선순위가 변경됨
-✅ (3) 차이점 요약
+- (3) 차이점 요약
 RMS: 정적 스케줄링 → CPU 부하 예측 가능하지만 유연성이 낮음
 EDF: 동적 스케줄링 → CPU 활용도를 극대화하지만 스케줄링 오버헤드 증가
 5. RTOS에서 사용되는 하드웨어 인터럽트 처리 기법
-✅ (1) 인터럽트 처리 개념
+- (1) 인터럽트 처리 개념
 실시간 운영체제(RTOS)는 응답 시간이 중요한 환경에서 인터럽트를 빠르게 처리해야 함
-✅ (2) 주요 인터럽트 처리 기법
+- (2) 주요 인터럽트 처리 기법
 🔹 선점형 인터럽트(Premptive Interrupts)
 
 높은 우선순위의 태스크가 실행 중이라도 더 중요한 인터럽트가 발생하면 즉시 처리
@@ -6409,13 +6396,13 @@ EDF: 동적 스케줄링 → CPU 활용도를 극대화하지만 스케줄링 �
 
 다중 인터럽트가 발생할 경우 우선순위에 따라 처리 순서를 결정
 6. 실시간 시스템에서 태스크(Task)와 스레드(Thread)의 차이
-✅ (1) 태스크(Task) 개념
+- (1) 태스크(Task) 개념
 실시간 시스템에서 독립적으로 실행되는 최상위 실행 단위
 하나의 태스크는 여러 개의 스레드를 포함할 수 있음
-✅ (2) 스레드(Thread) 개념
+- (2) 스레드(Thread) 개념
 태스크 내부에서 실행되는 독립적인 실행 흐름
 동일한 주소 공간을 공유하며, 태스크의 자원과 데이터를 함께 사용
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 태스크(Task): 독립적인 실행 단위로 별도의 자원을 가짐
 스레드(Thread): 태스크 내부에서 실행되며 메모리 및 자원 공유
 
@@ -6427,10 +6414,10 @@ EDF: 동적 스케줄링 → CPU 활용도를 극대화하지만 스케줄링 �
 - 자동차용 운영체제(AUTOSAR)의 개념과 주요 기능을 설명하시오.
 - 임베디드 시스템에서 운영체제의 부팅 속도를 최적화하는 방법을 설명하시오.
   - 1. RTOS의 주요 사례(VxWorks, FreeRTOS, QNX 등)와 특징
-✅ (1) RTOS(Real-Time Operating System) 개념
+- (1) RTOS(Real-Time Operating System) 개념
 실시간 시스템에서 정확한 응답 시간 보장을 위해 설계된 운영체제
 미션 크리티컬 시스템(항공기, 자동차, 산업 자동화 등)에서 사용됨
-✅ (2) 주요 RTOS 사례 및 특징
+- (2) 주요 RTOS 사례 및 특징
 🔹 VxWorks
 
 Wind River에서 개발한 상용 RTOS
@@ -6447,10 +6434,10 @@ Amazon Web Services(AWS)에 통합되어 IoT 환경에서도 활용
 마이크로커널 기반으로 높은 안정성과 보안성 제공
 POSIX 호환성 지원으로 유닉스 및 리눅스와 유사한 API 사용 가능
 2. 임베디드 시스템(Embedded System) 운영체제의 개념과 주요 특징
-✅ (1) 임베디드 운영체제 개념
+- (1) 임베디드 운영체제 개념
 특정 기능을 수행하는 하드웨어에 최적화된 경량 운영체제
 자동차, 가전제품, 의료기기, 네트워크 장비 등에서 사용
-✅ (2) 주요 특징
+- (2) 주요 특징
 🔹 경량화 및 최적화
 
 제한된 CPU, RAM, 저장공간 환경에서도 원활히 실행 가능
@@ -6463,15 +6450,15 @@ RTOS 기반 시스템은 정해진 시간 내 작업을 완료해야 함
 🔹 특정 하드웨어 최적화
 
 특정 마이크로컨트롤러(MCU) 및 DSP(Digital Signal Processor)에 맞춰 설계됨
-✅ (3) 대표적인 임베디드 운영체제
+- (3) 대표적인 임베디드 운영체제
 FreeRTOS, Zephyr OS → 소형 마이크로컨트롤러
 Android Things → IoT 및 스마트 디바이스
 Tizen, Ubuntu Core → 스마트 TV, 웨어러블 기기
 3. RTOS에서 데드라인(Deadline) 미스 발생 시 해결 방법
-✅ (1) 데드라인 미스(Deadline Miss) 개념
+- (1) 데드라인 미스(Deadline Miss) 개념
 RTOS에서 태스크(Task)가 정해진 시간 내에 실행되지 못하는 상황
 하드 실시간 시스템(예: 항공기 제어)에서는 치명적인 결과 발생 가능
-✅ (2) 해결 방법
+- (2) 해결 방법
 🔹 우선순위 조정(Priority Adjustment)
 
 RMS(Rate Monotonic Scheduling), EDF(Earliest Deadline First) 등 적절한 스케줄링 알고리즘 선택
@@ -6486,9 +6473,9 @@ CPU 사용량을 모니터링하고 임계값을 초과하는 경우 비필수 �
 
 태스크가 응답하지 않을 경우 자동으로 시스템을 리셋
 4. RTOS에서 멀티태스킹과 스레드 동기화를 위한 주요 기법
-✅ (1) 멀티태스킹 개념
+- (1) 멀티태스킹 개념
 여러 개의 태스크(Task)를 병렬적으로 실행하는 기법
-✅ (2) 스레드 동기화 기법
+- (2) 스레드 동기화 기법
 🔹 세마포어(Semaphore)
 
 다중 태스크 간 공유 자원 접근을 조정하는 기법
@@ -6504,10 +6491,10 @@ CPU 사용량을 모니터링하고 임계값을 초과하는 경우 비필수 �
 
 태스크 간 이벤트 신호를 전달하여 동기화
 5. 자동차용 운영체제(AUTOSAR)의 개념과 주요 기능
-✅ (1) AUTOSAR 개념
+- (1) AUTOSAR 개념
 자동차 전자제어장치(ECU)를 위한 표준화된 소프트웨어 아키텍처
 자동차 제조업체와 소프트웨어 공급업체 간 호환성을 높이고 유지보수를 용이하게 하기 위해 개발
-✅ (2) 주요 기능
+- (2) 주요 기능
 🔹 계층화된 소프트웨어 아키텍처
 
 Basic Software (BSW): 하드웨어 제어 및 OS 기능 제공
@@ -6519,12 +6506,12 @@ Application Layer: 차량 제어 및 자율 주행 기능
 🔹 하드웨어 추상화
 
 특정 하드웨어에 종속되지 않고 ECU 간 코드 재사용 가능
-✅ (3) AUTOSAR 활용 사례
+- (3) AUTOSAR 활용 사례
 자율주행 시스템, 전자식 파워 스티어링, ADAS(Advanced Driver Assistance System)
 6. 임베디드 시스템에서 운영체제의 부팅 속도를 최적화하는 방법
-✅ (1) 부팅 속도 최적화의 필요성
+- (1) 부팅 속도 최적화의 필요성
 자동차, 의료기기, 산업용 로봇 등에서는 신속한 부팅이 필수
-✅ (2) 주요 최적화 기법
+- (2) 주요 최적화 기법
 🔹 커널 초기화 최적화
 
 필요하지 않은 커널 모듈 제거
@@ -6540,7 +6527,7 @@ JFFS2, YAFFS 같은 플래시 메모리 최적화된 파일 시스템 사용
 🔹 Suspend-to-RAM(S2R) 및 Hibernate 활용
 
 RAM 상태를 유지하면서 빠른 재부팅 가능하도록 설정
-✅ (3) 사례
+- (3) 사례
 자동차 ECU에서 2초 이내 부팅 목표 설정
 스마트 TV, IoT 기기에서 빠른 사용자 경험 제공
 
@@ -6551,11 +6538,11 @@ RAM 상태를 유지하면서 빠른 재부팅 가능하도록 설정
 - 운영체제에서 NAT(Network Address Translation)의 개념과 역할을 설명하시오.
 - 운영체제에서 VPN(Virtual Private Network)의 개념과 동작 방식을 설명하시오.
   - 1. IoT(Internet of Things) 운영체제의 개념과 설계 원리
-✅ (1) IoT 운영체제 개념
+- (1) IoT 운영체제 개념
 사물인터넷(IoT) 기기에서 실행되는 경량화된 운영체제
 센서, 네트워크, 클라우드 통신을 지원하며, 저전력 및 실시간 처리가 가능해야 함
 IoT 디바이스는 일반적인 컴퓨터와 달리 CPU, 메모리, 저장공간이 제한적이므로 최소한의 리소스로 동작
-✅ (2) IoT 운영체제의 설계 원리
+- (2) IoT 운영체제의 설계 원리
 🔹 경량화된 커널 구조
 
 일반 OS보다 작고 효율적인 커널 사용 (예: Microkernel, Monolithic Kernel)
@@ -6571,30 +6558,30 @@ RTOS(Real-Time Operating System) 기반으로, IoT 디바이스의 실시간 데
 
 경량 암호화 기법 적용하여 데이터 보호 (예: AES, ECC, DTLS 등)
 OTA(Over-The-Air) 업데이트 지원을 통해 보안 패치 가능
-✅ (3) 대표적인 IoT 운영체제
+- (3) 대표적인 IoT 운영체제
 FreeRTOS → 아두이노, ESP32와 같은 마이크로컨트롤러에서 사용
 RIOT OS → 저전력 무선 IoT 네트워크 지원
 Contiki OS → 6LoWPAN, IPv6 지원, 스마트홈 및 산업 IoT에 최적화
 2. 운영체제에서 네트워크 프로토콜(TCP/IP, UDP)의 차이
-✅ (1) TCP/IP 개념
+- (1) TCP/IP 개념
 TCP(Transmission Control Protocol): 신뢰성이 필요한 데이터 전송에 사용
 IP(Internet Protocol): 데이터를 목적지로 라우팅하는 역할
-✅ (2) TCP의 특징
+- (2) TCP의 특징
 연결 지향(Connection-Oriented): 통신을 시작하기 전에 3-Way Handshake로 연결을 설정
 데이터 순서 보장: 패킷이 순서대로 도착하도록 재조합
 데이터 손실 복구: 패킷이 손실되면 재전송 (Retransmission)
-✅ (3) UDP의 특징
+- (3) UDP의 특징
 비연결형(Connectionless): 별도의 연결 과정 없이 데이터 전송
 빠른 전송 속도: TCP보다 가볍고 지연 시간이 짧음
 데이터 손실 가능: 패킷 손실 시 재전송 없음
-✅ (4) TCP vs UDP 사용 사례
+- (4) TCP vs UDP 사용 사례
 TCP → 웹 브라우징(HTTP, HTTPS), 이메일(SMTP, IMAP), 파일 전송(FTP)
 UDP → 스트리밍(VIDEO, AUDIO), VoIP, 온라인 게임, DNS
 3. 운영체제에서 사용되는 네트워크 스택(Network Stack)의 개념과 동작
-✅ (1) 네트워크 스택 개념
+- (1) 네트워크 스택 개념
 운영체제(OS)에서 네트워크 프로토콜(TCP/IP, UDP)을 처리하는 계층 구조
 애플리케이션이 네트워크를 통해 데이터를 송수신할 수 있도록 지원
-✅ (2) 네트워크 스택의 계층 구조
+- (2) 네트워크 스택의 계층 구조
 🔹 애플리케이션 계층 (Application Layer)
 
 사용자 프로그램이 네트워크를 통해 데이터를 송·수신
@@ -6611,45 +6598,45 @@ IP 주소를 기반으로 패킷을 라우팅
 
 물리적인 네트워크 장치 간의 데이터 전송 (MAC 주소 사용)
 예: Ethernet, Wi-Fi, ARP
-✅ (3) 네트워크 스택의 동작 과정
+- (3) 네트워크 스택의 동작 과정
 애플리케이션이 데이터를 전송 요청
 전송 계층(TCP/UDP)이 데이터를 패킷화
 네트워크 계층이 목적지 IP 주소를 설정하여 패킷을 라우팅
 데이터 링크 계층이 패킷을 프레임으로 변환하여 전송
 4. 운영체제에서 NAT(Network Address Translation)의 개념과 역할
-✅ (1) NAT 개념
+- (1) NAT 개념
 사설 네트워크(Private Network)와 공인 IP(Public IP) 간 주소 변환을 수행하는 기술
 IPv4 주소 부족 문제 해결 및 보안 강화
-✅ (2) NAT의 역할
+- (2) NAT의 역할
 🔹 IP 주소 변환
 
 여러 개의 사설 IP(192.168.x.x 등)를 하나의 공인 IP로 변환하여 인터넷에 연결
 🔹 방화벽 역할 수행
 
 외부에서 직접적으로 사설 네트워크에 접근하지 못하도록 보호
-✅ (3) NAT 유형
+- (3) NAT 유형
 Static NAT: 특정 내부 IP를 특정 공인 IP에 매핑
 Dynamic NAT: 내부 IP를 할당된 공인 IP 풀에서 자동 매핑
 PAT (Port Address Translation, NAT Overload): 여러 내부 IP를 하나의 공인 IP로 변환 (가장 일반적)
 5. 운영체제에서 VPN(Virtual Private Network)의 개념과 동작 방식
-✅ (1) VPN 개념
+- (1) VPN 개념
 공용 네트워크(인터넷)를 통해 사설 네트워크를 안전하게 연결하는 기술
 암호화된 터널을 생성하여 데이터를 보호
-✅ (2) VPN의 주요 기능
+- (2) VPN의 주요 기능
 🔹 보안성 강화
 
 데이터가 암호화된 터널을 통해 전송되어 보안 유지
 🔹 원격 접속 지원
 
 외부에서도 내부 네트워크(회사, 기관 등)에 보안 연결 가능
-✅ (3) VPN 동작 방식
+- (3) VPN 동작 방식
 🔹 VPN 터널링 기술
 
 PPTP (Point-to-Point Tunneling Protocol): 빠르지만 보안성이 낮음
 L2TP/IPsec: 높은 보안 수준 제공
 OpenVPN: 오픈소스 기반, 강력한 암호화 제공
 WireGuard: 최신 VPN 프로토콜, 속도와 보안성 우수
-✅ (4) VPN 활용 사례
+- (4) VPN 활용 사례
 원격 근무 → 기업 내부 시스템에 안전하게 접속
 공공 Wi-Fi 보호 → 공용 네트워크 사용 시 암호화된 연결 제공
 차단된 사이트 우회 → 특정 지역에서 접근이 제한된 서비스 이용
@@ -6661,7 +6648,7 @@ WireGuard: 최신 VPN 프로토콜, 속도와 보안성 우수
 - 운영체제에서 SDN(Software-Defined Networking)의 개념과 활용 사례를 설명하시오.
 - 운영체제에서 방화벽(Firewall)과 IDS(침입 탐지 시스템)의 차이를 설명하시오.
   - 1. 클라우드 환경에서의 운영체제 역할과 컨테이너 기반 네트워크 관리 방식
-✅ (1) 클라우드 환경에서 운영체제의 역할
+- (1) 클라우드 환경에서 운영체제의 역할
 클라우드 환경에서 운영체제(OS)는 전통적인 역할 외에도 가상화, 컨테이너 관리, 네트워크 최적화 등의 추가적인 기능을 수행해야 한다.
 
 🔹 가상화(Virtualization) 지원
@@ -6676,7 +6663,7 @@ WireGuard: 최신 VPN 프로토콜, 속도와 보안성 우수
 
 가상 네트워크(VPC, SDN)와 네트워크 정책 적용
 데이터 암호화 및 보안 그룹(Security Group) 설정
-✅ (2) 컨테이너 기반 네트워크 관리 방식
+- (2) 컨테이너 기반 네트워크 관리 방식
 🔹 컨테이너 네트워크 모델 (Container Networking Model, CNM)
 
 컨테이너가 다른 컨테이너, 호스트, 외부 네트워크와 통신하는 방법 정의
@@ -6690,10 +6677,10 @@ Overlay Network: 여러 호스트에 걸쳐 컨테이너 간 통신을 가능하
 CNI (Container Network Interface): Kubernetes에서 Pod 간 네트워크 설정 및 관리
 Service Mesh (Istio, Linkerd): 컨테이너 간 네트워크 트래픽을 최적화하고 보안을 강화
 2. 운영체제에서 분산 시스템(Distributed System)의 개념과 주요 설계 원칙
-✅ (1) 분산 시스템 개념
+- (1) 분산 시스템 개념
 여러 개의 독립적인 노드(서버, 디바이스)가 네트워크를 통해 연결되어 하나의 시스템처럼 동작하는 구조
 예: Google Cloud, AWS, Hadoop, Kafka
-✅ (2) 주요 설계 원칙
+- (2) 주요 설계 원칙
 🔹 확장성(Scalability)
 
 수천 개 이상의 노드가 증가해도 성능 저하 없이 운영 가능해야 함
@@ -6707,9 +6694,9 @@ CAP 이론: 네트워크 파티션이 존재하는 경우 일관성(Consistency)
 
 분산 데이터 저장소(예: HDFS, Cassandra, MongoDB)를 사용하여 데이터 중복 저장 및 부하 분산
 3. 운영체제에서 네트워크 부하 분산(Load Balancing) 기법
-✅ (1) 네트워크 부하 분산 개념
+- (1) 네트워크 부하 분산 개념
 여러 서버에 트래픽을 분산하여 시스템 성능을 최적화하고 장애를 방지하는 기법
-✅ (2) 주요 부하 분산 기법
+- (2) 주요 부하 분산 기법
 🔹 L4 (전송 계층) 부하 분산
 
 TCP/UDP 기반 부하 분산
@@ -6725,12 +6712,12 @@ HTTP, HTTPS, WebSocket 요청을 분석하여 부하를 분산
 
 Kubernetes Ingress Controller, Service Mesh (Istio) 활용
 4. 운영체제에서 SDN(Software-Defined Networking)의 개념과 활용 사례
-✅ (1) SDN 개념
+- (1) SDN 개념
 네트워크의 제어(Control Plane)와 데이터 전달(Data Plane)을 분리하여 소프트웨어 기반으로 네트워크를 관리하는 기술
-✅ (2) SDN의 주요 기능
+- (2) SDN의 주요 기능
 중앙 집중식 네트워크 관리: 네트워크 장비(스위치, 라우터)를 소프트웨어에서 제어
 자동화된 트래픽 관리: 동적 라우팅 및 QoS(Quality of Service) 적용
-✅ (3) SDN 활용 사례
+- (3) SDN 활용 사례
 🔹 데이터센터 네트워크 최적화
 
 Google B4 → SDN을 이용하여 데이터센터 간 트래픽 최적화
@@ -6741,21 +6728,21 @@ OpenStack Neutron → SDN 기반 가상 네트워크 생성
 
 SD-WAN(Software-Defined WAN) → 보안 정책을 소프트웨어 기반으로 자동 적용
 5. 운영체제에서 방화벽(Firewall)과 IDS(침입 탐지 시스템)의 차이
-✅ (1) 방화벽(Firewall)의 개념과 역할
+- (1) 방화벽(Firewall)의 개념과 역할
 네트워크 트래픽을 모니터링하고 특정 규칙에 따라 차단 또는 허용하는 보안 장치
 IP 주소, 포트, 프로토콜 기반으로 접근 제어
 🔹 주요 기능
 
 패킷 필터링(Packet Filtering) → IP, 포트 기반 트래픽 제어
 스테이트풀 인스펙션(Stateful Inspection) → 세션 상태 유지하며 트래픽 분석
-✅ (2) IDS(침입 탐지 시스템)의 개념과 역할
+- (2) IDS(침입 탐지 시스템)의 개념과 역할
 네트워크 또는 시스템 내의 악성 트래픽을 탐지하여 관리자에게 경고
 방화벽이 트래픽 차단 역할이라면 IDS는 탐지 및 경고 역할
 🔹 주요 기능
 
 서명 기반 탐지(Signature-based Detection) → 기존 공격 패턴을 비교하여 탐지
 행위 기반 탐지(Anomaly-based Detection) → 비정상적인 네트워크 트래픽을 분석하여 경고
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 구분	방화벽 (Firewall)	IDS (Intrusion Detection System)
 목적	네트워크 트래픽 차단 및 제어	보안 위협 탐지 및 경고
 동작 방식	사전에 정의된 규칙 기반	서명 또는 이상 행위 분석
@@ -6770,10 +6757,10 @@ IP 주소, 포트, 프로토콜 기반으로 접근 제어
 - 머신러닝(ML)을 활용한 운영체제 최적화 사례를 설명하시오.
 - 리눅스 기반의 새로운 운영체제 설계 동향을 설명하시오.
   - 1. 운영체제에서 DDoS 공격을 탐지하고 방어하는 주요 기법
-✅ (1) DDoS 공격 개념
+- (1) DDoS 공격 개념
 **분산 서비스 거부 공격(Distributed Denial of Service, DDoS)**은 여러 개의 시스템이 특정 서버를 동시에 공격하여 서비스 마비를 일으키는 공격 기법
 대량의 트래픽을 생성하여 네트워크, CPU, 메모리, 스토리지를 과부하 상태로 만들어 서비스 장애 발생
-✅ (2) DDoS 탐지 및 방어 기법
+- (2) DDoS 탐지 및 방어 기법
 🔹 네트워크 계층 방어 기법
 
 IP 필터링(IP Blacklist): 특정 국가 또는 악성 IP를 차단
@@ -6788,19 +6775,19 @@ Web Application Firewall (WAF): SQL Injection, XSS 등의 공격 필터링
 비정상적인 트래픽 패턴을 분석하여 실시간 DDoS 탐지
 AI 기반 자동 방어 시스템 적용 (예: AWS Shield, Cloudflare)
 2. 최신 운영체제 연구에서 가장 주목받는 기술 트렌드
-✅ (1) AI 기반 운영체제 최적화
+- (1) AI 기반 운영체제 최적화
 머신러닝을 활용한 자동 자원 할당, 스케줄링 최적화, 네트워크 보안 강화
 예: Google Fuchsia, AI 기반 Windows 자동 조정
-✅ (2) 클라우드 네이티브 운영체제
+- (2) 클라우드 네이티브 운영체제
 컨테이너 중심으로 설계된 경량화된 OS (예: AWS Bottlerocket, Google COS)
 Immutable OS: 시스템이 변경되지 않고 항상 동일한 상태 유지 (예: Fedora Silverblue)
-✅ (3) 강화된 운영체제 보안
+- (3) 강화된 운영체제 보안
 Secure Boot, TPM, Zero Trust 기반 OS 보안 모델 적용
 Confidential Computing: 운영체제 수준에서 데이터 암호화 (Intel SGX, AMD SEV)
-✅ (4) 경량 운영체제 및 IoT 최적화
+- (4) 경량 운영체제 및 IoT 최적화
 초소형 임베디드 시스템 및 IoT 디바이스에 최적화된 OS 개발 증가 (예: Zephyr OS, FreeRTOS)
 3. 마이크로커널(Microkernel)과 모놀리식 커널(Monolithic Kernel)의 차이
-✅ (1) 마이크로커널(Microkernel) 개념과 특징
+- (1) 마이크로커널(Microkernel) 개념과 특징
 운영체제의 핵심 기능(IPC, 스케줄러, 메모리 관리)만 커널 공간에서 실행
 나머지 기능(파일 시스템, 드라이버 등)은 유저 공간에서 실행
 🔹 장점
@@ -6813,7 +6800,7 @@ Confidential Computing: 운영체제 수준에서 데이터 암호화 (Intel SGX
 🔹 예제
 
 QNX, MINIX, Google Fuchsia
-✅ (2) 모놀리식 커널(Monolithic Kernel) 개념과 특징
+- (2) 모놀리식 커널(Monolithic Kernel) 개념과 특징
 운영체제의 모든 기능(파일 시스템, 드라이버, 네트워크 등)이 커널 공간에서 실행
 🔹 장점
 
@@ -6827,39 +6814,39 @@ QNX, MINIX, Google Fuchsia
 
 Linux, Windows, macOS
 4. 차세대 운영체제(Next-Gen OS)의 주요 설계 방향
-✅ (1) AI와 자동화 기반 운영체제
+- (1) AI와 자동화 기반 운영체제
 AI 기반 자율적 시스템 최적화 및 관리
 머신러닝을 활용한 CPU, 메모리, 네트워크 리소스 동적 조정
-✅ (2) 클라우드 네이티브 및 컨테이너 중심 운영체제
+- (2) 클라우드 네이티브 및 컨테이너 중심 운영체제
 Immutable OS: 시스템 파일을 변경하지 않고 배포 및 롤백 가능
 서버리스(Serverless) 환경 최적화
-✅ (3) 강화된 보안 아키텍처
+- (3) 강화된 보안 아키텍처
 Zero Trust 보안 모델 적용
 TPM, Secure Boot, AI 기반 실시간 보안 분석
-✅ (4) 경량화된 커널 및 모듈형 OS
+- (4) 경량화된 커널 및 모듈형 OS
 모놀리식 커널에서 마이크로커널 구조로 이동
 IoT 및 엣지 디바이스 최적화를 위한 경량 OS 개발
 5. 머신러닝(ML)을 활용한 운영체제 최적화 사례
-✅ (1) AI 기반 성능 최적화
+- (1) AI 기반 성능 최적화
 Google Borg: 머신러닝을 활용한 서버 클러스터 자동 조정
 Windows AI Task Manager: 백그라운드 프로세스 자동 최적화
-✅ (2) 자율 네트워크 최적화
+- (2) 자율 네트워크 최적화
 SDN 기반 AI 네트워크 트래픽 분석 및 부하 분산
 AWS AI 기반 라우팅 최적화
-✅ (3) AI 기반 보안 강화
+- (3) AI 기반 보안 강화
 AI 기반 실시간 악성 코드 탐지 및 이상 탐지 시스템 적용
 Microsoft Defender AI, IBM Watson Security
 6. 리눅스 기반의 새로운 운영체제 설계 동향
-✅ (1) 클라우드 최적화된 경량 운영체제
+- (1) 클라우드 최적화된 경량 운영체제
 AWS Bottlerocket, Google COS
 Kubernetes, 컨테이너 실행을 위한 최소한의 OS
-✅ (2) Immutable OS (불변 운영체제)
+- (2) Immutable OS (불변 운영체제)
 Fedora Silverblue, Ubuntu Core
 OS가 변경되지 않고 항상 동일한 상태 유지 (Rollback 기능 제공)
-✅ (3) 강화된 보안 중심 리눅스 OS
+- (3) 강화된 보안 중심 리눅스 OS
 SELinux, AppArmor 기반의 커널 보안 강화
 TPM, Secure Boot, 메모리 격리 기능 기본 제공
-✅ (4) 경량화 및 실시간 처리 최적화
+- (4) 경량화 및 실시간 처리 최적화
 IoT 및 임베디드 디바이스 최적화를 위한 Zephyr OS, RTLinux
 마이크로커널 구조 적용 (ex. Google Fuchsia, MINIX)
 
@@ -6872,24 +6859,24 @@ IoT 및 임베디드 디바이스 최적화를 위한 Zephyr OS, RTLinux
 - 양자 컴퓨팅(Quantum Computing) 운영체제의 개념과 기존 운영체제와의 차이를 설명하시오.
 - 운영체제에서 커널 패닉(Kernel Panic) 발생 원인과 해결 방법을 설명하시오.
   - 1. AI 기반 운영체제의 개념과 기존 운영체제와의 차이
-✅ (1) AI 기반 운영체제 개념
+- (1) AI 기반 운영체제 개념
 AI가 운영체제의 핵심 기능(자원 관리, 스케줄링, 보안, 네트워크) 최적화를 자동으로 수행하는 OS
 머신러닝 및 딥러닝 모델을 활용하여 운영체제 성능을 동적으로 조정
-✅ (2) 기존 운영체제와의 차이점
+- (2) 기존 운영체제와의 차이점
 항목	기존 운영체제	AI 기반 운영체제
 자원 관리	고정된 정책 기반	머신러닝을 활용한 동적 최적화
 성능 최적화	수동 설정 필요	AI가 자동으로 CPU, 메모리, 네트워크 튜닝
 보안	패턴 기반 탐지	AI 기반 이상 탐지 및 자동 방어
 스케줄링	정적인 알고리즘 사용	AI가 작업 부하를 분석하여 동적 조정
-✅ (3) AI 기반 운영체제의 활용 사례
+- (3) AI 기반 운영체제의 활용 사례
 Google Fuchsia OS: 머신러닝을 활용한 자율 운영체제
 Windows AI Task Manager: 백그라운드 프로세스를 AI가 자동 관리
 AWS AI 기반 인스턴스 최적화: 클라우드 환경에서 머신러닝 기반 리소스 조정
 2. 블록체인(Blockchain)과 운영체제의 관계 및 적용 사례
-✅ (1) 블록체인과 운영체제의 관계
+- (1) 블록체인과 운영체제의 관계
 운영체제는 데이터 보안, 인증, 무결성을 보장하기 위해 블록체인을 활용할 수 있음
 **분산 원장 기술(DLT, Distributed Ledger Technology)**을 적용하여 운영체제의 보안 및 투명성 강화
-✅ (2) 블록체인 기반 운영체제 적용 사례
+- (2) 블록체인 기반 운영체제 적용 사례
 🔹 데이터 무결성 보장
 
 블록체인을 활용하여 운영체제 내 시스템 로그 및 설정 변경 내역을 영구적으로 저장
@@ -6905,10 +6892,10 @@ Hyperledger 기반 블록체인 OS
 Dfinity Internet Computer: 블록체인 기반 분산 운영체제
 Ethereum 기반 분산 운영체제 연구 프로젝트
 3. 운영체제에서 AI 기반 이상 탐지(Anomaly Detection) 기법
-✅ (1) AI 기반 이상 탐지 개념
+- (1) AI 기반 이상 탐지 개념
 운영체제의 보안 및 성능 모니터링에서 비정상적인 행동을 감지하는 기법
 머신러닝 모델이 정상적인 시스템 동작 패턴을 학습하고, 이를 벗어나는 행동을 탐지
-✅ (2) AI 기반 이상 탐지 방식
+- (2) AI 기반 이상 탐지 방식
 🔹 Supervised Learning(지도 학습)
 
 정상 데이터와 비정상 데이터를 학습하여 분류 모델 생성
@@ -6918,39 +6905,39 @@ Ethereum 기반 분산 운영체제 연구 프로젝트
 🔹 Reinforcement Learning(강화 학습)
 
 반복적인 학습을 통해 탐지 모델 최적화
-✅ (3) 활용 사례
+- (3) 활용 사례
 AI 기반 침입 탐지 시스템(IDS, Intrusion Detection System)
 시스템 로그 분석을 통한 이상 탐지
 네트워크 트래픽 모니터링 및 비정상적인 접근 차단
 4. 클라우드 네이티브 운영체제(Cloud-Native OS)의 개념과 필요성
-✅ (1) 클라우드 네이티브 운영체제 개념
+- (1) 클라우드 네이티브 운영체제 개념
 클라우드 환경에서 가상화 및 컨테이너 기반 워크로드를 효율적으로 실행하는 운영체제
 기존 OS보다 경량화, 자동 확장, 보안 강화에 초점
-✅ (2) 필요성
+- (2) 필요성
 컨테이너 및 마이크로서비스 아키텍처 지원
 자동 확장(Auto Scaling) 및 부하 분산 최적화
 Immutable OS 적용 → 시스템 무결성을 유지하고 자동 업데이트 지원
-✅ (3) 대표적인 클라우드 네이티브 운영체제
+- (3) 대표적인 클라우드 네이티브 운영체제
 AWS Bottlerocket: 컨테이너 전용 운영체제
 Google Fuchsia OS: 마이크로커널 기반 차세대 OS
 Flatcar Linux: 컨테이너 최적화된 리눅스 배포판
 5. 양자 컴퓨팅(Quantum Computing) 운영체제의 개념과 기존 운영체제와의 차이
-✅ (1) 양자 컴퓨팅 운영체제 개념
+- (1) 양자 컴퓨팅 운영체제 개념
 큐비트(Qubit)를 활용하여 기존의 이진 연산을 초월하는 병렬 연산을 수행하는 OS
 양자 게이트(Quantum Gate) 및 양자 병렬성(Quantum Parallelism)을 활용한 초고속 연산
-✅ (2) 기존 운영체제와의 차이
+- (2) 기존 운영체제와의 차이
 항목	기존 운영체제	양자 운영체제
 연산 단위	비트 (0,1)	큐비트(Qubit)
 프로세스 실행	순차적 연산	병렬 연산
 메모리 관리	전통적인 가상 메모리	양자 중첩 기반 메모리 관리
 보안	암호화 알고리즘 적용	양자 암호 적용 (Quantum Encryption)
-✅ (3) 대표적인 양자 운영체제
+- (3) 대표적인 양자 운영체제
 IBM Qiskit, Google Cirq, Microsoft Quantum Development Kit
 6. 운영체제에서 커널 패닉(Kernel Panic) 발생 원인과 해결 방법
-✅ (1) 커널 패닉(Kernel Panic) 개념
+- (1) 커널 패닉(Kernel Panic) 개념
 운영체제 커널이 치명적인 오류를 감지하고 시스템을 중단시키는 현상
 시스템이 복구 불가능한 상태가 되어 강제 종료 및 재부팅 필요
-✅ (2) 커널 패닉 발생 원인
+- (2) 커널 패닉 발생 원인
 🔹 하드웨어 오류
 
 RAM, CPU, 디스크 등의 물리적 결함
@@ -6963,7 +6950,7 @@ RAM, CPU, 디스크 등의 물리적 결함
 
 악성 코드로 인한 메모리 변조
 스택 오버플로우(Stack Overflow), 버퍼 오버플로우(Buffer Overflow) 발생
-✅ (3) 해결 방법
+- (3) 해결 방법
 🔹 하드웨어 점검
 
 RAM 및 디스크 오류 검사 (memtest, fsck 실행)
@@ -6985,10 +6972,10 @@ RAM 및 디스크 오류 검사 (memtest, fsck 실행)
 - 운영체제에서 비밀번호 보호를 위한 최신 해싱(Hashing) 알고리즘의 역할을 설명하시오.
 - 운영체제에서 루트킷(Rootkit) 탐지 및 제거 방법을 설명하시오.
   - 1. 운영체제에서 악성 코드(Malware) 탐지 및 제거 기법
-✅ (1) 악성 코드 개념
+- (1) 악성 코드 개념
 운영체제 및 사용자 데이터를 손상시키거나 시스템을 조작하는 악성 소프트웨어
 주요 유형: 바이러스, 웜(Worm), 트로이목마(Trojan), 랜섬웨어(Ransomware), 스파이웨어(Spyware), 루트킷(Rootkit)
-✅ (2) 악성 코드 탐지 기법
+- (2) 악성 코드 탐지 기법
 🔹 시그니처 기반 탐지(Signature-Based Detection)
 
 알려진 악성 코드의 고유 패턴(서명, 해시값)을 비교하여 탐지
@@ -7000,7 +6987,7 @@ AI 기반 탐지 모델 활용 가능
 🔹 샌드박스(Sandbox) 실행 기법
 
 의심 파일을 격리된 환경에서 실행하여 악성 여부 분석
-✅ (3) 악성 코드 제거 기법
+- (3) 악성 코드 제거 기법
 🔹 수동 제거 (Manual Removal)
 
 안전 모드에서 부팅 후 의심스러운 프로세스 종료 및 파일 삭제
@@ -7011,33 +6998,33 @@ Windows Defender, Kaspersky, CrowdStrike 등 활용
 
 치명적인 감염 발생 시 OS 재설치 및 백업 데이터 복구
 2. 운영체제에서 사용되는 최신 취약점 공격 기법(Spectre, Meltdown 등)
-✅ (1) Spectre 공격
+- (1) Spectre 공격
 CPU의 분기 예측(Branch Prediction)을 악용하여 메모리 데이터를 유출
 공격 방식: 프로세서가 캐시된 데이터를 예측 실행하는 과정에서 보안이 약한 메모리 접근
-✅ (2) Meltdown 공격
+- (2) Meltdown 공격
 커널 메모리를 직접 읽어 시스템 정보를 탈취하는 공격 기법
 사용자 모드 프로세스가 커널 메모리에 접근할 수 있도록 허점 이용
-✅ (3) L1TF (Level 1 Terminal Fault) 및 Foreshadow 공격
+- (3) L1TF (Level 1 Terminal Fault) 및 Foreshadow 공격
 Intel 프로세서의 가상화 기술을 이용하여 L1 캐시에서 민감한 데이터 유출
-✅ (4) 최신 CPU 공격 기법 방어 방법
+- (4) 최신 CPU 공격 기법 방어 방법
 소프트웨어 패치 (Kernel Page Table Isolation, Retpoline 적용)
 하드웨어 보안 기능 강화 (Intel SGX, AMD SEV 사용)
 마이크로코드 업데이트
 3. 커널 모드(Kernel Mode)와 사용자 모드(User Mode)의 차이
-✅ (1) 커널 모드(Kernel Mode) 개념
+- (1) 커널 모드(Kernel Mode) 개념
 운영체제의 핵심 기능이 실행되는 특권 모드
 하드웨어 직접 접근 가능 (CPU, RAM, 디스크)
-✅ (2) 사용자 모드(User Mode) 개념
+- (2) 사용자 모드(User Mode) 개념
 일반 애플리케이션이 실행되는 제한된 환경
 운영체제 커널을 통해 하드웨어 자원 접근
-✅ (3) 주요 차이점
+- (3) 주요 차이점
 비교 항목	커널 모드(Kernel Mode)	사용자 모드(User Mode)
 권한 수준	최고 권한	제한된 권한
 하드웨어 접근	직접 가능	OS 커널을 통해 접근
 프로세스 충돌 영향	시스템 전체에 영향	해당 프로세스에만 영향
 실행 주체	OS 커널 및 드라이버	애플리케이션
 4. 운영체제에서 메모리 보호 기법(Memory Protection)과 접근 제어(Access Control) 방식
-✅ (1) 메모리 보호 기법
+- (1) 메모리 보호 기법
 🔹 가상 메모리(Virtual Memory) 및 페이지 보호
 
 프로세스마다 독립적인 주소 공간 할당
@@ -7049,7 +7036,7 @@ Intel 프로세서의 가상화 기술을 이용하여 L1 캐시에서 민감한
 🔹 ASLR (Address Space Layout Randomization)
 
 메모리 주소를 무작위 배치하여 메모리 기반 공격 방어
-✅ (2) 접근 제어 방식
+- (2) 접근 제어 방식
 🔹 ACL (Access Control List)
 
 파일 및 리소스에 대한 사용자별 접근 권한 설정
@@ -7060,10 +7047,10 @@ Intel 프로세서의 가상화 기술을 이용하여 L1 캐시에서 민감한
 
 리눅스에서 프로세스 및 파일 접근 권한을 강화하는 보안 모듈
 5. 운영체제에서 비밀번호 보호를 위한 최신 해싱(Hashing) 알고리즘의 역할
-✅ (1) 비밀번호 해싱의 필요성
+- (1) 비밀번호 해싱의 필요성
 운영체제는 비밀번호를 직접 저장하지 않고 해시값을 저장하여 보안성을 강화
 해싱된 값은 단방향 암호화되어 원본 복원이 불가능
-✅ (2) 최신 비밀번호 해싱 알고리즘
+- (2) 최신 비밀번호 해싱 알고리즘
 🔹 Argon2 (최신, OWASP 권장)
 
 메모리 소비형 해싱 알고리즘으로 GPU 기반 공격 방어
@@ -7074,10 +7061,10 @@ Salt 값을 포함하여 무작위성을 강화
 
 반복 연산을 통해 연산 비용 증가 (Brute Force 공격 방어)
 6. 운영체제에서 루트킷(Rootkit) 탐지 및 제거 방법
-✅ (1) 루트킷(Rootkit) 개념
+- (1) 루트킷(Rootkit) 개념
 운영체제 깊숙이 숨겨져 관리자 권한을 탈취하고 악성 코드 감지를 우회하는 공격 기법
 파일, 네트워크 연결, 로그를 조작하여 탐지를 어렵게 함
-✅ (2) 루트킷 탐지 방법
+- (2) 루트킷 탐지 방법
 🔹 동작 이상 감지
 
 CPU 사용률, 네트워크 활동 이상 감지
@@ -7088,7 +7075,7 @@ CPU 사용률, 네트워크 활동 이상 감지
 
 chkrootkit, rkhunter (Linux)
 Windows Defender ATP, GMER (Windows)
-✅ (3) 루트킷 제거 방법
+- (3) 루트킷 제거 방법
 🔹 수동 제거
 
 안전 모드에서 의심 프로세스 및 드라이버 정지
@@ -7105,10 +7092,10 @@ Windows Defender ATP, GMER (Windows)
 - 운영체제에서 페이지 폴트(Page Fault)를 최소화하는 기법을 설명하시오.
 - 운영체제에서 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법을 설명하시오.
   - 1. 운영체제에서 샌드박스(Sandbox) 기술을 활용한 보안 강화 기법
-✅ (1) 샌드박스(Sandbox) 개념
+- (1) 샌드박스(Sandbox) 개념
 애플리케이션을 격리된 환경에서 실행하여 시스템의 보안을 강화하는 기술
 악성 코드 및 보안 취약점이 있는 프로그램이 운영체제에 영향을 주지 않도록 보호
-✅ (2) 주요 샌드박스 보안 기법
+- (2) 주요 샌드박스 보안 기법
 🔹 가상화 기반 샌드박스
 
 가상 머신(VM)을 활용하여 격리된 환경에서 애플리케이션 실행
@@ -7125,23 +7112,23 @@ Docker, Kubernetes를 사용하여 애플리케이션을 독립된 컨테이너�
 모바일 앱 및 특정 프로그램을 격리된 환경에서 실행하여 악성 코드 차단
 예: Android 앱 샌드박스, Apple iOS의 App Sandbox
 2. 운영체제에서 보안 강화를 위한 최신 기술(Kernel Integrity Checking, Secure Boot 등)
-✅ (1) Kernel Integrity Checking
+- (1) Kernel Integrity Checking
 운영체제 커널이 변조되지 않았는지 확인하는 보안 기술
 주요 기법: Windows Kernel Patch Protection (PatchGuard), Linux Integrity Measurement Architecture (IMA)
-✅ (2) Secure Boot
+- (2) Secure Boot
 부팅 과정에서 신뢰할 수 없는 OS 및 커널 로딩을 차단하는 보안 기능
 UEFI (Unified Extensible Firmware Interface) 기반으로 동작하며, 운영체제 부팅 과정에서 디지털 서명 확인
-✅ (3) TPM (Trusted Platform Module) 활용
+- (3) TPM (Trusted Platform Module) 활용
 하드웨어 기반의 보안 모듈로 디스크 암호화(BitLocker), 부팅 보안 강화
-✅ (4) ASLR (Address Space Layout Randomization)
+- (4) ASLR (Address Space Layout Randomization)
 메모리 주소를 무작위화하여 버퍼 오버플로우 공격 방어
-✅ (5) Control Flow Integrity (CFI)
+- (5) Control Flow Integrity (CFI)
 악성 코드가 제어 흐름을 조작하여 공격하는 것을 방지하는 기술
 3. 운영체제에서 실행 방지(XD/NX, eXecute Disable/No eXecute) 비트의 역할
-✅ (1) XD/NX 비트 개념
+- (1) XD/NX 비트 개념
 데이터 영역(Heap, Stack)에서 코드 실행을 차단하여 보안 공격을 방어하는 하드웨어 기능
 악성 코드가 버퍼 오버플로우를 이용해 임의의 코드를 실행하는 것을 방지
-✅ (2) 주요 역할
+- (2) 주요 역할
 🔹 버퍼 오버플로우 공격 방지
 
 공격자가 메모리에 악성 코드 삽입 후 실행하는 행위 차단
@@ -7152,9 +7139,9 @@ Windows 및 Linux에서 NX 비트를 활용하여 실행 방지 기능 제공
 
 JavaScript 엔진 내에서 NX 비트를 사용하여 JIT 기반 공격 방어
 4. 운영체제에서 캐시(Cache) 성능을 최적화하는 방법
-✅ (1) 캐시(Cache) 개념
+- (1) 캐시(Cache) 개념
 CPU와 RAM 간의 속도 차이를 줄이기 위해 자주 사용하는 데이터를 저장하는 메모리 구조
-✅ (2) 캐시 성능 최적화 기법
+- (2) 캐시 성능 최적화 기법
 🔹 캐시 일관성 유지(Cache Coherency) 기법
 
 멀티코어 환경에서 캐시 데이터 동기화를 유지하여 성능 최적화
@@ -7169,10 +7156,10 @@ CPU가 미리 데이터를 캐시에 로드하여 메모리 대기 시간을 줄
 
 가장 오랫동안 사용되지 않은 데이터를 제거하여 캐시 활용 최적화
 5. 운영체제에서 페이지 폴트(Page Fault)를 최소화하는 기법
-✅ (1) 페이지 폴트(Page Fault) 개념
+- (1) 페이지 폴트(Page Fault) 개념
 프로세스가 물리 메모리에 없는 페이지를 접근할 때 발생하는 예외
 자주 발생하면 성능 저하의 원인이 됨
-✅ (2) 페이지 폴트 최소화 기법
+- (2) 페이지 폴트 최소화 기법
 🔹 적절한 페이지 교체 알고리즘 적용
 
 LRU (Least Recently Used), LFU (Least Frequently Used) 등 효율적인 페이지 교체 정책 활용
@@ -7186,10 +7173,10 @@ OS가 앞으로 사용할 페이지를 미리 로드하여 페이지 폴트 감�
 
 적절한 스왑 공간 설정 및 메모리 압축(Memory Compression) 기법 활용
 6. 운영체제에서 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법
-✅ (1) 컨텍스트 스위칭(Context Switching) 개념
+- (1) 컨텍스트 스위칭(Context Switching) 개념
 CPU가 하나의 프로세스를 중단하고 다른 프로세스로 전환하는 과정
 스케줄러가 레지스터, 스택, 메모리 상태를 저장하고 복구하는 과정이 포함됨
-✅ (2) 컨텍스트 스위칭 비용 최적화 기법
+- (2) 컨텍스트 스위칭 비용 최적화 기법
 🔹 스레드(Thread) 기반 멀티태스킹 활용
 
 프로세스 간 전환보다 스레드 간 전환이 오버헤드가 적음
@@ -7211,10 +7198,10 @@ CPU가 하나의 프로세스를 중단하고 다른 프로세스로 전환하�
 - 운영체제에서 I/O 성능을 최적화하는 주요 기법(DMA, Prefetching, Buffering 등)을 설명하시오.
 - 운영체제에서 동적 적응형 스케줄링(Dynamic Adaptive Scheduling) 기법을 설명하시오.
   - 1. 운영체제에서 사용되는 프로파일링(Profiling) 기법
-✅ (1) 프로파일링(Profiling) 개념
+- (1) 프로파일링(Profiling) 개념
 프로그램의 실행 시간, CPU 사용률, 메모리 소비량 등을 분석하여 성능을 최적화하는 기법
 성능 병목(Bottleneck)을 파악하여 최적화 포인트를 식별
-✅ (2) 주요 프로파일링 기법
+- (2) 주요 프로파일링 기법
 🔹 이벤트 기반 프로파일링(Event-Based Profiling)
 
 특정 이벤트(함수 호출, 시스템 호출, 메모리 할당 등)를 추적하여 성능 분석
@@ -7228,7 +7215,7 @@ CPU가 하나의 프로세스를 중단하고 다른 프로세스로 전환하�
 실행되는 코드에 추적 코드 삽입하여 함수 호출 시간 및 실행 횟수 분석
 예: Valgrind (Linux), PIN (Intel)
 2. 운영체제에서 사용되는 성능 모니터링 도구
-✅ (1) Linux 성능 모니터링 도구
+- (1) Linux 성능 모니터링 도구
 🔹 top
 
 실시간 CPU, 메모리 사용량, 프로세스 상태를 모니터링
@@ -7241,7 +7228,7 @@ CPU가 하나의 프로세스를 중단하고 다른 프로세스로 전환하�
 
 메모리, 스왑, CPU, I/O 성능을 종합적으로 분석
 주요 지표: 메모리 사용량, 페이지 폴트, CPU Idle 비율
-✅ (2) Windows 성능 모니터링 도구
+- (2) Windows 성능 모니터링 도구
 🔹 Task Manager (작업 관리자)
 
 CPU, 메모리, 디스크, 네트워크 사용량을 실시간으로 모니터링
@@ -7255,10 +7242,10 @@ Task Manager보다 더 상세한 프로세스 및 I/O 활동 모니터링 가능
 CPU, 메모리, 네트워크 성능 카운터를 장기적으로 기록 및 분석 가능
 성능 로그 저장 후 장기적인 트렌드 분석
 3. 운영체제에서 CPU 부하(Load Average) 분석 및 최적화 기법
-✅ (1) Load Average 개념
+- (1) Load Average 개념
 CPU가 동시에 처리해야 하는 평균 프로세스 수를 나타내는 지표
 예: uptime, top 명령어에서 확인 가능 (1분, 5분, 15분 평균 부하 표시)
-✅ (2) CPU 부하 분석 방법
+- (2) CPU 부하 분석 방법
 🔹 정상적인 Load Average 값
 
 싱글코어 시스템: Load Average 1.0 → CPU가 가득 찼음을 의미
@@ -7268,7 +7255,7 @@ CPU가 동시에 처리해야 하는 평균 프로세스 수를 나타내는 지
 과도한 프로세스 실행 → top, ps aux를 활용하여 CPU 사용률 높은 프로세스 식별
 I/O 대기 증가 → iostat, vmstat을 이용해 디스크 대기율 분석
 스레드 경쟁 → 멀티스레딩 구조 최적화 필요
-✅ (3) CPU 부하 최적화 기법
+- (3) CPU 부하 최적화 기법
 🔹 프로세스 우선순위 조정
 
 nice, renice 명령어를 사용하여 CPU 부하가 높은 프로세스의 우선순위를 낮춤
@@ -7279,7 +7266,7 @@ CPU 코어 바인딩(Affinity) 설정하여 특정 프로세스를 특정 코어
 
 kill, pkill 명령어를 사용하여 CPU 부하가 높은 프로세스를 종료
 4. 운영체제에서 I/O 성능을 최적화하는 주요 기법
-✅ (1) 주요 I/O 성능 최적화 기법
+- (1) 주요 I/O 성능 최적화 기법
 🔹 DMA (Direct Memory Access) 활용
 
 CPU 개입 없이 메모리와 I/O 장치 간 데이터를 직접 전송
@@ -7300,9 +7287,9 @@ epoll, select 시스템 콜을 사용하여 CPU가 대기 없이 작업을 수�
 HDD보다 빠른 SSD(Storage) 사용
 RAID 0, RAID 10을 사용하여 I/O 성능 향상
 5. 운영체제에서 동적 적응형 스케줄링(Dynamic Adaptive Scheduling) 기법
-✅ (1) 동적 적응형 스케줄링 개념
+- (1) 동적 적응형 스케줄링 개념
 운영체제가 실행 중인 작업의 특성을 분석하여 스케줄링 알고리즘을 동적으로 조정
-✅ (2) 주요 동적 적응형 스케줄링 기법
+- (2) 주요 동적 적응형 스케줄링 기법
 🔹 CPU 부하 기반 스케줄링 조정
 
 CPU 사용률이 높으면 선점형(Preemptive) 방식으로 전환
@@ -7322,10 +7309,10 @@ EDF (Earliest Deadline First): 프로세스의 마감 시간을 분석하여 실
 - 운영체제에서 네트워크 부하(Network Load) 분석 및 최적화 기법을 설명하시오.
 - 최신 운영체제에서 전력 소비를 최적화하기 위한 기법을 설명하시오.
   - 1. 운영체제에서 네트워크 부하(Network Load) 분석 및 최적화 기법
-✅ (1) 네트워크 부하(Network Load) 개념
+- (1) 네트워크 부하(Network Load) 개념
 네트워크 부하는 서버, 애플리케이션 또는 네트워크 장치에서 처리해야 하는 데이터 전송량을 의미
 높은 부하는 지연(Latency) 증가, 패킷 손실(Packet Loss), 네트워크 혼잡(Network Congestion) 등의 문제를 유발
-✅ (2) 네트워크 부하 분석 방법
+- (2) 네트워크 부하 분석 방법
 🔹 트래픽 모니터링 및 분석
 
 Wireshark, tcpdump → 패킷 캡처 및 네트워크 트래픽 분석
@@ -7336,7 +7323,7 @@ NetFlow, sFlow → 네트워크 트래픽 흐름 분석
 과도한 TCP 연결(High TCP Connection Rate) → 많은 동시 접속으로 인한 부하
 네트워크 I/O 병목(Network I/O Bottleneck) → 데이터 전송량이 네트워크 장비의 처리 한계를 초과
 패킷 손실 및 재전송(Packet Loss & Retransmission) → 혼잡이 발생하여 TCP 재전송 증가
-✅ (3) 네트워크 부하 최적화 기법
+- (3) 네트워크 부하 최적화 기법
 🔹 부하 분산(Load Balancing) 적용
 
 L4 (TCP/UDP) 부하 분산 → HAProxy, Linux IPVS
@@ -7359,10 +7346,10 @@ TCP Fast Open (TFO) 활성화 → 연결 속도 향상
 윈도우 크기 조정 (TCP Window Scaling) → 대역폭 활용 최적화
 BPF (Berkeley Packet Filter) → 특정 패킷만 처리하여 부하 감소
 2. 최신 운영체제에서 전력 소비를 최적화하기 위한 기법
-✅ (1) 운영체제에서 전력 최적화의 필요성
+- (1) 운영체제에서 전력 최적화의 필요성
 배터리 기반 디바이스(모바일, IoT, 노트북)에서 배터리 수명을 연장
 데이터센터 및 클라우드 서버에서 전력 소비 감소 및 운영 비용 절감
-✅ (2) 전력 최적화 기법
+- (2) 전력 최적화 기법
 🔹 동적 전력 관리(Dynamic Power Management, DPM)
 
 CPU, GPU, 메모리 등의 전력 사용량을 동적으로 조정
