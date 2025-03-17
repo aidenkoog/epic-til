@@ -1217,40 +1217,27 @@ Organize concepts, features, types and Pros and Cons
     - (3) 스와핑(Swapping)
       - 실행 중인 프로세스를 디스크로 이동시키고, 필요할 때 다시 메모리로 불러오는 방식.
 
-- 단일 연속 메모리 할당(Single Contiguous Memory Allocation)과 다중 분할 메모리 할당(Multiple Partition Allocation)의 차이를 설명하시오.
-- 페이징(Paging)과 세그먼테이션(Segmentation)의 차이를 설명하시오.
-- 가상 메모리(Virtual Memory)의 개념과 동작 원리를 설명하시오.
-- 페이지 교체(Page Replacement) 알고리즘(FIFO, LRU, Optimal 등)의 개념과 성능을 비교하시오.
-- 캐시 메모리(Cache Memory)와 메인 메모리(Main Memory)의 차이를 설명하시오.
-- 스와핑(Swapping)의 개념과 장단점을 설명하시오.
-  - 1. 단일 연속 메모리 할당(Single Contiguous Memory Allocation)과 다중 분할 메모리 할당(Multiple Partition Allocation)
+- 단일 연속 메모리 할당(Single Contiguous Memory Allocation)과 다중 분할 메모리 할당(Multiple Partition Allocation)의 차이
+  - (1) 단일 연속 메모리 할당 (Single Contiguous Memory Allocation)
+	  - 하나의 프로세스만 실행할 수 있도록 메모리를 전체 할당하는 방식.
+	  - 운영체제(OS) 영역을 제외한 남은 메모리 전체를 단일 프로세스가 차지함.
+    - 장점
+      - 구조가 단순하여 메모리 관리 오버헤드가 없음.
+      - 프로세스 간 충돌이 발생하지 않음.
+    - 단점
+      - 하나의 프로세스만 실행 가능하여 멀티태스킹이 불가능.
+      - 메모리 낭비가 심할 수 있음.
 
-(1) 단일 연속 메모리 할당 (Single Contiguous Memory Allocation)
-	- 하나의 프로세스만 실행할 수 있도록 메모리를 전체 할당하는 방식.
-	- 운영체제(OS) 영역을 제외한 남은 메모리 전체를 단일 프로세스가 차지함.
-
-- 장점
-	- 구조가 단순하여 메모리 관리 오버헤드가 없음.
-	- 프로세스 간 충돌이 발생하지 않음.
-
-- 단점
-	- 하나의 프로세스만 실행 가능하여 멀티태스킹이 불가능.
-	- 메모리 낭비가 심할 수 있음.
-
-(2) 다중 분할 메모리 할당 (Multiple Partition Allocation)
-	- 메모리를 여러 개의 블록(Partition)으로 나누어 여러 프로세스가 실행될 수 있도록 관리하는 방식.
-	- 프로세스가 필요로 하는 메모리 크기만큼 블록을 할당함.
-	- 정적 분할(Static Partitioning)과 동적 분할(Dynamic Partitioning) 방식이 있음.
-
-- 장점
-	- 여러 개의 프로세스가 동시에 실행 가능하여 멀티태스킹이 가능.
-	- 메모리 활용도가 높아짐.
-
-- 단점
-	- 내부 단편화(Internal Fragmentation) 또는 외부 단편화(External Fragmentation) 문제가 발생할 수 있음.
-	- 메모리 할당 및 관리 오버헤드가 발생함.
-
-⸻
+  - (2) 다중 분할 메모리 할당 (Multiple Partition Allocation)
+    - 메모리를 여러 개의 블록(Partition)으로 나누어 여러 프로세스가 실행될 수 있도록 관리하는 방식.
+    - 프로세스가 필요로 하는 메모리 크기만큼 블록을 할당함.
+    - 정적 분할(Static Partitioning)과 동적 분할(Dynamic Partitioning) 방식이 있음.
+    - 장점
+      - 여러 개의 프로세스가 동시에 실행 가능하여 멀티태스킹이 가능.
+      - 메모리 활용도가 높아짐.
+    - 단점
+      - 내부 단편화(Internal Fragmentation) 또는 외부 단편화(External Fragmentation) 문제가 발생할 수 있음.
+      - 메모리 할당 및 관리 오버헤드가 발생함.
 
 2. 페이징(Paging)과 세그먼테이션(Segmentation)
 
