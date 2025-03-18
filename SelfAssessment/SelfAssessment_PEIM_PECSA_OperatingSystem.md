@@ -3965,27 +3965,25 @@ Organize concepts, features, types and Pros and Cons
     - Bottlerocket (AWS): Amazon이 개발한 컨테이너 전용 OS
     - Google’s gVisor: 샌드박싱을 통한 보안 강화
 
-- 양자 컴퓨팅(Quantum Computing) 운영체제의 개념과 기존 운영체제와의 차이를 설명하시오.
-- (1) 양자 컴퓨팅 운영체제 개념
-양자 컴퓨터를 운영하고 제어하는 특수한 운영체제
-기존 컴퓨터가 비트(Binary) 기반(0과 1) 인 반면, 양자 컴퓨터는 큐비트(Qubit) 를 사용하여 양자 중첩(Superposition) 과 얽힘(Entanglement) 을 활용한 병렬 연산 가능
-기존 OS처럼 사용자 인터페이스, 자원 관리 기능이 있지만 양자 회로(Quantum Circuit) 실행을 위한 최적화된 스케줄링과 연산 모델을 지원
-- (2) 기존 운영체제와의 차이점
-🔹 연산 방식의 차이
+- 양자 컴퓨팅(Quantum Computing) 운영체제의 개념과 기존 운영체제와의 차이
+  - (1) 양자 컴퓨팅 운영체제 개념
+    - 양자 컴퓨터를 운영하고 제어하는 특수한 운영체제
+    - 기존 컴퓨터가 비트(Binary) 기반(0과 1) 인 반면, 양자 컴퓨터는 큐비트(Qubit) 를 사용하여 양자 중첩(Superposition) 과 얽힘(Entanglement) 을 활용한 병렬 연산 가능
+    - 기존 OS처럼 사용자 인터페이스, 자원 관리 기능이 있지만 양자 회로(Quantum Circuit) 실행을 위한 최적화된 스케줄링과 연산 모델을 지원
 
-기존 OS는 순차적 연산(Sequential Execution)을 수행하는 반면, 양자 OS는 병렬 연산을 극대화
-양자 게이트를 활용한 연산을 실행하며 고전적 알고리즘이 적용되지 않음
-🔹 메모리 관리 차이
-
-기존 OS는 DRAM, SSD, HDD 등의 메모리 계층 구조를 사용
-양자 OS는 양자 메모리(Quantum Memory) 를 활용하여 정보 저장 방식이 다름
-🔹 프로세스 및 스케줄링 차이
-
-기존 OS는 멀티태스킹 및 프로세스 기반 스케줄링
-양자 OS는 양자 회로(Quantum Circuit) 기반의 실행 스케줄링
-🔹 대표적인 양자 운영체제
-
-IBM Qiskit, Google Cirq, Microsoft Quantum Development Kit, D-Wave Leap OS
+  - (2) 기존 운영체제와의 차이점
+    - 연산 방식의 차이
+      - 기존 OS는 순차적 연산(Sequential Execution)을 수행하는 반면, 양자 OS는 병렬 연산을 극대화
+      - 양자 게이트를 활용한 연산을 실행하며 고전적 알고리즘이 적용되지 않음
+    - 메모리 관리 차이
+      - 기존 OS는 DRAM, SSD, HDD 등의 메모리 계층 구조를 사용
+      - 양자 OS는 양자 메모리(Quantum Memory) 를 활용하여 정보 저장 방식이 다름
+    - 프로세스 및 스케줄링 차이
+      - 기존 OS는 멀티태스킹 및 프로세스 기반 스케줄링
+      - 양자 OS는 양자 회로(Quantum Circuit) 기반의 실행 스케줄링
+    - 대표적인 양자 운영체제
+      - IBM Qiskit, Google Cirq, Microsoft Quantum Development Kit, D-Wave Leap OS
+      
 2. 운영체제에서 실시간 데이터 분석을 위한 최적화 기법
 - (1) 실시간 데이터 분석 개념
 대량의 데이터가 지속적으로 생성될 때, 즉시 분석하여 의사결정에 활용하는 기법
