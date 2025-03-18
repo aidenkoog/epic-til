@@ -4132,24 +4132,21 @@ Organize concepts, features, types and Pros and Cons
       - 예상되는 데이터 페이지를 미리 메모리에 적재
     - 스왑 공간 최적화
       - 스왑 공간을 SSD에 배치하여 접근 속도 향상
+
+- 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법
+  - (1) 컨텍스트 스위칭(Context Switching) 개념
+    - CPU가 한 프로세스에서 다른 프로세스로 전환될 때 레지스터, 메모리, 스택 정보를 저장하고 불러오는 과정
+  - (2) 최적화 기법
+    - 스레드 사용(Threading) 최적화
+      - 프로세스 간 전환보다 스레드 간 전환이 비용이 적음
+    - 커널 모드 스위칭 감소
+      - Zero-Copy 기술 사용하여 커널 모드 전환 줄이기
+      - mmap(), sendfile() 활용
+    - TLB(Translation Lookaside Buffer) 활용 최적화
+      - Huge Pages 적용하여 페이지 테이블 관리 비용 감소
+    - NUMA(Node-Local Memory Access) 최적화
+      - 멀티코어 시스템에서 프로세스를 해당 CPU의 메모리와 연결하여 빠르게 처리
       
-5. 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법
-- (1) 컨텍스트 스위칭(Context Switching) 개념
-CPU가 한 프로세스에서 다른 프로세스로 전환될 때 레지스터, 메모리, 스택 정보를 저장하고 불러오는 과정
-- (2) 최적화 기법
-스레드 사용(Threading) 최적화
-
-프로세스 간 전환보다 스레드 간 전환이 비용이 적음
-커널 모드 스위칭 감소
-
-Zero-Copy 기술 사용하여 커널 모드 전환 줄이기
-mmap(), sendfile() 활용
-TLB(Translation Lookaside Buffer) 활용 최적화
-
-Huge Pages 적용하여 페이지 테이블 관리 비용 감소
-NUMA(Node-Local Memory Access) 최적화
-
-멀티코어 시스템에서 프로세스를 해당 CPU의 메모리와 연결하여 빠르게 처리
 6. 운영체제에서 사용되는 동적 적응형 스케줄링(Dynamic Adaptive Scheduling) 기법
 - (1) 동적 적응형 스케줄링 개념
 시스템 상태에 따라 실시간으로 스케줄링 방식을 조정하여 성능 최적화
