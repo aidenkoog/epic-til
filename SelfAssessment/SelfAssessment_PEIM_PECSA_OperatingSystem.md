@@ -3423,52 +3423,53 @@ Organize concepts, features, types and Pros and Cons
 			- 2: 엄격한 모드, 실제 사용 가능한 메모리만 할당
 		- 가상화 환경(VM, Docker)
 			- 하나의 물리적 호스트에서 다수의 VM 또는 컨테이너가 실행될 때, 할당된 메모리보다 실제 사용량이 적기 때문에 오버커밋을 활용하여 효율성을 증가
-			
-3. SWAP 공간과 스왑 파일(Swap File)의 개념과 활용 사례
-- (1) SWAP 공간의 개념
-RAM이 부족할 때, 디스크의 일부를 가상 메모리로 사용하여 시스템이 계속 동작하도록 지원
-페이지 단위로 관리되며, 필요할 때 RAM으로 다시 불러옴 (Page Swapping)
-- (2) 스왑 공간의 종류 및 활용 사례
-🔹 스왑 파티션(Swap Partition)
 
-물리적 디스크의 특정 파티션을 스왑 공간으로 지정
-서버 환경에서 많이 사용됨 (고정된 크기의 스왑 공간 설정)
-🔹 스왑 파일(Swap File)
+- SWAP 공간과 스왑 파일(Swap File)의 개념과 활용 사례
+	- (1) SWAP 공간의 개념
+		- RAM이 부족할 때, 디스크의 일부를 가상 메모리로 사용하여 시스템이 계속 동작하도록 지원
+		- 페이지 단위로 관리되며, 필요할 때 RAM으로 다시 불러옴 (Page Swapping)
 
-특정 파일을 스왑 공간으로 사용
-동적으로 크기를 조절할 수 있어 유연성이 높음 (예: swapoff → fallocate → swapon)
-🔹 Windows의 페이징 파일(Pagefile.sys)
+	- (2) 스왑 공간의 종류 및 활용 사례 (스왑 파티션, 스왑파일, 윈도우 페이징 파일)
+		- 스왑 파티션(Swap Partition)
+			- 물리적 디스크의 특정 파티션을 스왑 공간으로 지정
+			- 서버 환경에서 많이 사용됨 (고정된 크기의 스왑 공간 설정)
+		- 스왑 파일(Swap File)
+			- 특정 파일을 스왑 공간으로 사용
+			- 동적으로 크기를 조절할 수 있어 유연성이 높음 (예: swapoff → fallocate → swapon)
+		- Windows의 페이징 파일(Pagefile.sys)
+			- Windows 환경에서 스왑 공간과 동일한 역할 수행
 
-Windows 환경에서 스왑 공간과 동일한 역할 수행
-4. Copy-on-Write(CoW) 기법의 개념과 활용 사례
-- (1) Copy-on-Write(CoW) 개념
-메모리 페이지를 공유하다가, 변경이 발생하면 그 시점에서 새로운 메모리를 할당하는 기법
-성능 최적화 및 메모리 사용량 절감을 위한 핵심 기법
-- (2) 활용 사례
-🔹 프로세스 포크(Fork) 시 메모리 공유
+- Copy-on-Write(CoW) 기법의 개념과 활용 사례
+	- (1) Copy-on-Write(CoW) 개념
+		- 메모리 페이지를 공유하다가, 변경이 발생하면 그 시점에서 새로운 메모리를 할당하는 기법
+		- 성능 최적화 및 메모리 사용량 절감을 위한 핵심 기법
 
-fork() 호출 시 부모 프로세스의 메모리를 자식 프로세스가 초기에는 공유
-변경이 발생하면 해당 페이지만 복사하여 새로운 메모리를 할당
-🔹 파일 시스템의 CoW 기법
+	- (2) 활용 사례
+		- 프로세스 포크(Fork) 시 메모리 공유
+			- fork() 호출 시 부모 프로세스의 메모리를 자식 프로세스가 초기에는 공유
+			- 변경이 발생하면 해당 페이지만 복사하여 새로운 메모리를 할당
 
-ZFS, Btrfs와 같은 파일 시스템은 파일이 변경될 때만 새로운 블록을 할당하여 저장 공간 절약
-🔹 가상화 및 컨테이너 환경
+		- 파일 시스템의 CoW 기법
+			- ZFS, Btrfs와 같은 파일 시스템은 파일이 변경될 때만 새로운 블록을 할당하여 저장 공간 절약
 
-KVM, Docker 등에서 메모리 공유를 통한 성능 향상
-5. NUMA(Non-Uniform Memory Access)와 UMA(Uniform Memory Access)의 차이
-- (1) UMA (Uniform Memory Access)
-모든 CPU가 동일한 속도로 메모리에 접근하는 구조
-메모리 접근 속도가 균일하며, SMP(Symmetric Multi-Processing) 시스템에서 주로 사용됨
-예: 일반적인 데스크탑 PC, 워크스테이션
-- (2) NUMA (Non-Uniform Memory Access)
-CPU마다 할당된 지역 메모리가 있으며, 다른 노드의 메모리에 접근할 때 속도 차이가 발생
-대규모 멀티코어 서버 및 고성능 컴퓨팅(HPC) 환경에서 사용
-성능 최적화를 위해 NUMA-aware 스케줄링 필요
-🔹 활용 사례
+		- 가상화 및 컨테이너 환경
+			- KVM, Docker 등에서 메모리 공유를 통한 성능 향상
 
-데이터베이스 서버 (Oracle, PostgreSQL)
-가상화 환경 (VMware, KVM)
-6. 페이지 폴트(Page Fault) 발생 시 운영체제의 처리 과정
+- NUMA(Non-Uniform Memory Access)와 UMA(Uniform Memory Access)의 차이
+	- (1) UMA (Uniform Memory Access)
+		- 모든 CPU가 동일한 속도로 메모리에 접근하는 구조
+		- 메모리 접근 속도가 균일하며, SMP(Symmetric Multi-Processing) 시스템에서 주로 사용됨
+		- 예: 일반적인 데스크탑 PC, 워크스테이션
+
+	- (2) NUMA (Non-Uniform Memory Access)
+		- CPU마다 할당된 지역 메모리가 있으며, 다른 노드의 메모리에 접근할 때 속도 차이가 발생
+		- 대규모 멀티코어 서버 및 고성능 컴퓨팅(HPC) 환경에서 사용
+		- 성능 최적화를 위해 NUMA-aware 스케줄링 필요
+		- 활용 사례
+			- 데이터베이스 서버 (Oracle, PostgreSQL)
+			- 가상화 환경 (VMware, KVM)
+
+- 페이지 폴트(Page Fault) 발생 시 운영체제의 처리 과정
 - (1) 페이지 폴트(Page Fault)의 개념
 프로세스가 필요한 메모리 페이지를 요청했지만, 현재 RAM에 존재하지 않는 경우 발생
 가상 메모리 시스템에서 디스크에서 데이터를 로드해야 하는 상황
