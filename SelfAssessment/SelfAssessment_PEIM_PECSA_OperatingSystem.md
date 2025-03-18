@@ -4257,34 +4257,25 @@ Organize concepts, features, types and Pros and Cons
       echo always > /sys/kernel/mm/transparent_hugepage/enabled
       ```
 
-6. 프로세스 간 공유 메모리(Shared Memory) 기법
-- (1) 공유 메모리 개념
-두 개 이상의 프로세스가 동일한 메모리 공간을 공유하여 데이터를 주고받는 방식
-프로세스 간 통신(IPC, Inter-Process Communication) 기법 중 하나
-- (2) 공유 메모리의 장점
-빠른 데이터 교환 가능: 프로세스 간 별도의 데이터 복사 없이 메모리 직접 공유 가능
-CPU 및 I/O 부하 감소: 파일 기반 통신 대비 낮은 오버헤드
-- (3) 공유 메모리 사용 방법 (리눅스 기준)
-메모리 영역 생성 (shmget)
-c
-복사
-편집
-int shmid = shmget(IPC_PRIVATE, 1024, IPC_CREAT | 0666);
-메모리 영역 연결 (shmat)
-c
-복사
-편집
-char *shared_mem = (char *) shmat(shmid, NULL, 0);
-데이터 공유 및 사용
-메모리 해제 (shmdt, shmctl)
-c
-복사
-편집
-shmdt(shared_mem);
-shmctl(shmid, IPC_RMID, NULL);
-- (4) 공유 메모리 활용 사례
-멀티프로세스 기반 애플리케이션 (데이터베이스, 웹 서버)
-고속 IPC 필요 시스템 (영상 처리, 실시간 분석 시스템)
+- 프로세스 간 공유 메모리(Shared Memory) 기법
+  - (1) 공유 메모리 개념
+    - 두 개 이상의 프로세스가 동일한 메모리 공간을 공유하여 데이터를 주고받는 방식
+    - 프로세스 간 통신(IPC, Inter-Process Communication) 기법 중 하나
+  - (2) 공유 메모리의 장점
+    - 빠른 데이터 교환 가능: 프로세스 간 별도의 데이터 복사 없이 메모리 직접 공유 가능
+    - CPU 및 I/O 부하 감소: 파일 기반 통신 대비 낮은 오버헤드
+  - (3) 공유 메모리 사용 방법 (리눅스 기준)
+    - 메모리 영역 생성 (shmget)
+      ```
+      int shmid = shmget(IPC_PRIVATE, 1024, IPC_CREAT | 0666);
+      ```
+    - 메모리 영역 연결 (shmat)
+      ```
+      char *shared_mem = (char *) shmat(shmid, NULL, 0);
+      ```
+  - (4) 공유 메모리 활용 사례
+    - 멀티프로세스 기반 애플리케이션 (데이터베이스, 웹 서버)
+    - 고속 IPC 필요 시스템 (영상 처리, 실시간 분석 시스템)
 
 
 - KSM(Kernel Samepage Merging) 기법을 활용한 메모리 최적화 방법을 설명하시오.
