@@ -3983,27 +3983,25 @@ Organize concepts, features, types and Pros and Cons
       - 양자 OS는 양자 회로(Quantum Circuit) 기반의 실행 스케줄링
     - 대표적인 양자 운영체제
       - IBM Qiskit, Google Cirq, Microsoft Quantum Development Kit, D-Wave Leap OS
+
+- 운영체제에서 실시간 데이터 분석을 위한 최적화 기법
+  - (1) 실시간 데이터 분석 개념
+    - 대량의 데이터가 지속적으로 생성될 때, 즉시 분석하여 의사결정에 활용하는 기법
+    - 금융(주식 거래), IoT(센서 데이터 분석), 네트워크 보안(침입 탐지) 등에서 활용
+
+  - (2) 운영체제 최적화 기법
+    - 메모리 최적화
+      - 데이터 스트리밍을 지원하기 위해 메모리 캐싱과 버퍼 관리 최적화
+      - LRU(Least Recently Used) 알고리즘을 사용하여 메모리 활용 효율 극대화
+    - CPU 및 스케줄링 최적화
+      - 멀티코어 및 멀티스레딩 활용
+      - 실시간 데이터 분석 프로세스를 우선순위 기반 스케줄링 적용
+    - I/O 성능 최적화
+      - SSD, NVMe 기반 고속 스토리지 활용
+      - DMA(Direct Memory Access) 기술 적용으로 CPU 개입 최소화
+    - 분산 처리 지원
+      - Apache Kafka, Spark Streaming 과 같은 분산 컴퓨팅 플랫폼과 연계하여 운영체제에서 부하 분산
       
-2. 운영체제에서 실시간 데이터 분석을 위한 최적화 기법
-- (1) 실시간 데이터 분석 개념
-대량의 데이터가 지속적으로 생성될 때, 즉시 분석하여 의사결정에 활용하는 기법
-금융(주식 거래), IoT(센서 데이터 분석), 네트워크 보안(침입 탐지) 등에서 활용
-- (2) 운영체제 최적화 기법
-🔹 메모리 최적화
-
-데이터 스트리밍을 지원하기 위해 메모리 캐싱과 버퍼 관리 최적화
-LRU(Least Recently Used) 알고리즘을 사용하여 메모리 활용 효율 극대화
-🔹 CPU 및 스케줄링 최적화
-
-멀티코어 및 멀티스레딩 활용
-실시간 데이터 분석 프로세스를 우선순위 기반 스케줄링 적용
-🔹 I/O 성능 최적화
-
-SSD, NVMe 기반 고속 스토리지 활용
-DMA(Direct Memory Access) 기술 적용으로 CPU 개입 최소화
-🔹 분산 처리 지원
-
-Apache Kafka, Spark Streaming 과 같은 분산 컴퓨팅 플랫폼과 연계하여 운영체제에서 부하 분산
 3. 모바일 운영체제(Android, iOS)의 메모리 관리 기법
 - (1) 안드로이드(Android)의 메모리 관리
 🔹 Garbage Collection (GC) 활용
