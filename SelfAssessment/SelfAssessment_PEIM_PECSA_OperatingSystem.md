@@ -4056,40 +4056,37 @@ Organize concepts, features, types and Pros and Cons
 
   - (4) 컨텍스트 스위칭 문제
     - mpstat 명령어로 컨텍스트 스위칭이 과도한 경우 스레드 최적화 필요
+
+- 운영체제에서 사용되는 프로파일링(Profiling) 기법
+  - (1) 정적 프로파일링 (Static Profiling)
+    - 소스 코드 분석을 통해 비효율적인 코드 패턴을 미리 탐지
+    - gcc -pg, clang -ftime-report 등을 사용하여 컴파일 단계에서 코드 최적화
+
+  - (2) 동적 프로파일링 (Dynamic Profiling)
+    - 프로그램 실행 중 성능 측정
+    - 실제 환경에서 CPU, 메모리, I/O 등의 사용 패턴 분석
+
+  - 대표적인 도구
+    - Linux Perf (perf stat, perf record) → CPU 사용량 및 함수 호출 트레이싱
+    - gprof → 실행 시간 기반 함수 프로파일링
+    - Valgrind → 메모리 누수 및 메모리 액세스 분석
+    - strace → 시스템 호출(Syscall) 분석
+
+- CPU 바운드(CPU-Bound)와 I/O 바운드(I/O-Bound) 프로세스
+  - (1) CPU 바운드(CPU-Bound) 프로세스
+    - CPU 연산을 많이 수행하는 프로세스로, 연산이 주로 CPU에서 이루어짐
+    - 메모리 접근 및 I/O 작업이 적으며, CPU에서 실행되는 시간이 대부분
+    - 예: 과학 연산, 암호화 연산, 머신러닝 트레이닝, 데이터 분석
+
+  - (2) I/O 바운드(I/O-Bound) 프로세스
+    - 주로 디스크, 네트워크, 입출력 장치와의 상호작용을 많이 수행하는 프로세스
+    - CPU 사용보다는 I/O 요청 대기 시간이 길어 병목이 발생
+    - 예: 데이터베이스 쿼리, 웹 서버, 파일 읽기/쓰기 작업
+
+  - (3) 최적화 방법
+    - CPU 바운드 프로세스: 멀티코어 및 병렬 프로그래밍을 통해 최적화
+    - I/O 바운드 프로세스: 비동기 I/O, DMA(Direct Memory Access) 활용
     
-6. 운영체제에서 사용되는 프로파일링(Profiling) 기법
-- (1) 정적 프로파일링 (Static Profiling)
-소스 코드 분석을 통해 비효율적인 코드 패턴을 미리 탐지
-gcc -pg, clang -ftime-report 등을 사용하여 컴파일 단계에서 코드 최적화
-- (2) 동적 프로파일링 (Dynamic Profiling)
-프로그램 실행 중 성능 측정
-실제 환경에서 CPU, 메모리, I/O 등의 사용 패턴 분석
-🔹 대표적인 도구
-
-Linux Perf (perf stat, perf record) → CPU 사용량 및 함수 호출 트레이싱
-gprof → 실행 시간 기반 함수 프로파일링
-Valgrind → 메모리 누수 및 메모리 액세스 분석
-strace → 시스템 호출(Syscall) 분석
-
-
-- CPU 바운드(CPU-Bound)와 I/O 바운드(I/O-Bound) 프로세스의 차이를 설명하시오.
-- 운영체제에서 캐시(Cache) 효율성을 최적화하는 방법을 설명하시오.
-- I/O 성능을 최적화하는 주요 기법(DMA, Prefetching, Buffering 등)을 설명하시오.
-- 운영체제에서 페이지 폴트(Page Fault)를 최소화하는 기법을 설명하시오.
-- 컨텍스트 스위칭(Context Switching) 비용을 줄이기 위한 최적화 기법을 설명하시오.
-- 운영체제에서 사용되는 동적 적응형 스케줄링(Dynamic Adaptive Scheduling) 기법을 설명하시오.
-  - 1. CPU 바운드(CPU-Bound)와 I/O 바운드(I/O-Bound) 프로세스의 차이
-- (1) CPU 바운드(CPU-Bound) 프로세스
-CPU 연산을 많이 수행하는 프로세스로, 연산이 주로 CPU에서 이루어짐
-메모리 접근 및 I/O 작업이 적으며, CPU에서 실행되는 시간이 대부분
-예: 과학 연산, 암호화 연산, 머신러닝 트레이닝, 데이터 분석
-- (2) I/O 바운드(I/O-Bound) 프로세스
-주로 디스크, 네트워크, 입출력 장치와의 상호작용을 많이 수행하는 프로세스
-CPU 사용보다는 I/O 요청 대기 시간이 길어 병목이 발생
-예: 데이터베이스 쿼리, 웹 서버, 파일 읽기/쓰기 작업
-- (3) 최적화 방법
-CPU 바운드 프로세스: 멀티코어 및 병렬 프로그래밍을 통해 최적화
-I/O 바운드 프로세스: 비동기 I/O, DMA(Direct Memory Access) 활용
 2. 운영체제에서 캐시(Cache) 효율성을 최적화하는 방법
 - (1) 캐시 최적화 개념
 CPU와 메모리 간 속도 차이를 줄이기 위해 자주 사용되는 데이터를 캐시에 저장하여 빠르게 접근
