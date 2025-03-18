@@ -4001,33 +4001,29 @@ Organize concepts, features, types and Pros and Cons
       - DMA(Direct Memory Access) 기술 적용으로 CPU 개입 최소화
     - 분산 처리 지원
       - Apache Kafka, Spark Streaming 과 같은 분산 컴퓨팅 플랫폼과 연계하여 운영체제에서 부하 분산
+
+- 모바일 운영체제(Android, iOS)의 메모리 관리 기법
+  - (1) 안드로이드(Android)의 메모리 관리
+    - Garbage Collection (GC) 활용
+      - ART(Android Runtime)에서 GC를 사용하여 불필요한 메모리 자동 해제
+      - Stop-The-World(일시 정지) 현상을 최소화하기 위한 Incremental GC, Concurrent GC 적용
+    - 메모리 캐시와 페이지 압축
+      - ZRAM(압축된 Swap 메모리)를 활용하여 메모리 부족 시 RAM 압축
+      - 최근 버전에서 KSM(Kernel Same-page Merging) 을 사용하여 중복 메모리 절약
+    - 프로세스 우선순위 관리
+      - 백그라운드 프로세스는 우선순위가 낮아지며, 메모리 부족 시 LRU 정책으로 제거
+
+  - (2) iOS의 메모리 관리
+    - ARC (Automatic Reference Counting) 활용
+      - iOS는 Garbage Collection을 사용하지 않고 ARC를 통해 객체 참조 관리
+      - 객체 참조 횟수가 0이 되면 자동으로 메모리 해제
+    - Background Task Management
+      - 백그라운드 앱은 일정 시간 후 자동 종료
+      - 앱이 필요 없는 리소스를 명시적으로 해제해야 함
+    - iOS의 가상 메모리 정책
+      - iOS는 Swap을 지원하지 않으며, 오직 RAM 내에서만 앱이 실행됨
+      - 메모리 부족 시 앱 강제 종료(OOM, Out of Memory) 발생
       
-3. 모바일 운영체제(Android, iOS)의 메모리 관리 기법
-- (1) 안드로이드(Android)의 메모리 관리
-🔹 Garbage Collection (GC) 활용
-
-ART(Android Runtime)에서 GC를 사용하여 불필요한 메모리 자동 해제
-Stop-The-World(일시 정지) 현상을 최소화하기 위한 Incremental GC, Concurrent GC 적용
-🔹 메모리 캐시와 페이지 압축
-
-ZRAM(압축된 Swap 메모리)를 활용하여 메모리 부족 시 RAM 압축
-최근 버전에서 KSM(Kernel Same-page Merging) 을 사용하여 중복 메모리 절약
-🔹 프로세스 우선순위 관리
-
-백그라운드 프로세스는 우선순위가 낮아지며, 메모리 부족 시 LRU 정책으로 제거
-- (2) iOS의 메모리 관리
-🔹 ARC (Automatic Reference Counting) 활용
-
-iOS는 Garbage Collection을 사용하지 않고 ARC를 통해 객체 참조 관리
-객체 참조 횟수가 0이 되면 자동으로 메모리 해제
-🔹 Background Task Management
-
-백그라운드 앱은 일정 시간 후 자동 종료
-앱이 필요 없는 리소스를 명시적으로 해제해야 함
-🔹 iOS의 가상 메모리 정책
-
-iOS는 Swap을 지원하지 않으며, 오직 RAM 내에서만 앱이 실행됨
-메모리 부족 시 앱 강제 종료(OOM, Out of Memory) 발생
 4. 운영체제의 성능을 평가하는 주요 지표
 - (1) CPU 사용률 (CPU Utilization)
 프로세스가 CPU를 사용하는 비율
