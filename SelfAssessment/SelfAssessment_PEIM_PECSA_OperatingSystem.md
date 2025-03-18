@@ -4023,20 +4023,24 @@ Organize concepts, features, types and Pros and Cons
     - iOS의 가상 메모리 정책
       - iOS는 Swap을 지원하지 않으며, 오직 RAM 내에서만 앱이 실행됨
       - 메모리 부족 시 앱 강제 종료(OOM, Out of Memory) 발생
-      
-4. 운영체제의 성능을 평가하는 주요 지표
-- (1) CPU 사용률 (CPU Utilization)
-프로세스가 CPU를 사용하는 비율
-높을수록 CPU 리소스 활용이 잘 되고 있지만, 과부하 시 성능 저하 발생
-- (2) 메모리 사용률 (Memory Usage)
-RAM 사용량 및 Swap 사용량 분석
-캐시 및 버퍼 활용률도 중요한 평가 요소
-- (3) I/O 성능 (Disk & Network I/O Performance)
-디스크 읽기/쓰기 속도, 네트워크 처리 속도
-SSD vs HDD, NVMe 등 저장 장치별 성능 비교
-- (4) 시스템 응답 시간 (Response Time)
-특정 작업을 요청한 후, 응답을 받기까지 걸리는 시간
-실시간 시스템에서는 낮은 응답 시간이 필수적
+
+- 운영체제의 성능을 평가하는 주요 지표
+  - (1) CPU 사용률 (CPU Utilization)
+    - 프로세스가 CPU를 사용하는 비율
+    - 높을수록 CPU 리소스 활용이 잘 되고 있지만, 과부하 시 성능 저하 발생
+
+  - (2) 메모리 사용률 (Memory Usage)
+    - RAM 사용량 및 Swap 사용량 분석
+    - 캐시 및 버퍼 활용률도 중요한 평가 요소
+
+  - (3) I/O 성능 (Disk & Network I/O Performance)
+    - 디스크 읽기/쓰기 속도, 네트워크 처리 속도
+    - SSD vs HDD, NVMe 등 저장 장치별 성능 비교
+
+  - (4) 시스템 응답 시간 (Response Time)
+    - 특정 작업을 요청한 후, 응답을 받기까지 걸리는 시간
+    - 실시간 시스템에서는 낮은 응답 시간이 필수적
+    
 5. 운영체제의 성능 병목(Bottleneck) 분석 방법
 - (1) CPU 병목 분석
 top, htop, vmstat 명령어로 CPU 사용률과 스레드 상태 확인
