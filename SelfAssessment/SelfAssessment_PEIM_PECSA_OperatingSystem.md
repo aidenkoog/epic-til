@@ -4086,25 +4086,23 @@ Organize concepts, features, types and Pros and Cons
   - (3) 최적화 방법
     - CPU 바운드 프로세스: 멀티코어 및 병렬 프로그래밍을 통해 최적화
     - I/O 바운드 프로세스: 비동기 I/O, DMA(Direct Memory Access) 활용
-    
-2. 운영체제에서 캐시(Cache) 효율성을 최적화하는 방법
-- (1) 캐시 최적화 개념
-CPU와 메모리 간 속도 차이를 줄이기 위해 자주 사용되는 데이터를 캐시에 저장하여 빠르게 접근
-L1, L2, L3 캐시 활용
-- (2) 캐시 효율성을 최적화하는 방법
-로컬리티(Locality) 활용:
 
-시간 지역성(Temporal Locality) → 최근 사용된 데이터 재사용
-공간 지역성(Spatial Locality) → 인접한 메모리 블록 미리 로드
-프리페칭(Prefetching) 적용
+- 운영체제에서 캐시(Cache) 효율성을 최적화하는 방법
+  - (1) 캐시 최적화 개념
+    - CPU와 메모리 간 속도 차이를 줄이기 위해 자주 사용되는 데이터를 캐시에 저장하여 빠르게 접근
+    - L1, L2, L3 캐시 활용
 
-CPU가 미리 데이터를 로드하여 캐시 적중률(Cache Hit Rate) 증가
-캐시 일관성 유지(Cache Coherency) 기법 적용
-
-멀티코어 시스템에서는 MESI 프로토콜을 통해 캐시 일관성 유지
-메모리 정렬 및 캐시 친화적 코드 작성
-
-배열 기반 데이터 접근이 유리(연속된 메모리 접근)
+  - (2) 캐시 효율성을 최적화하는 방법
+    - 로컬리티(Locality) 활용
+      - 시간 지역성(Temporal Locality) → 최근 사용된 데이터 재사용
+      - 공간 지역성(Spatial Locality) → 인접한 메모리 블록 미리 로드
+    - 프리페칭(Prefetching) 적용
+      - CPU가 미리 데이터를 로드하여 캐시 적중률(Cache Hit Rate) 증가
+    - 캐시 일관성 유지(Cache Coherency) 기법 적용
+      - 멀티코어 시스템에서는 MESI 프로토콜을 통해 캐시 일관성 유지
+    - 메모리 정렬 및 캐시 친화적 코드 작성
+      - 배열 기반 데이터 접근이 유리(연속된 메모리 접근)
+      
 3. I/O 성능을 최적화하는 주요 기법
 - (1) DMA(Direct Memory Access)
 CPU 개입 없이 메모리와 I/O 장치 간 직접 데이터 전송
