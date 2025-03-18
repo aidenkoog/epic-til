@@ -4040,19 +4040,23 @@ Organize concepts, features, types and Pros and Cons
   - (4) 시스템 응답 시간 (Response Time)
     - 특정 작업을 요청한 후, 응답을 받기까지 걸리는 시간
     - 실시간 시스템에서는 낮은 응답 시간이 필수적
+
+- 운영체제의 성능 병목(Bottleneck) 분석 방법
+  - (1) CPU 병목 분석
+    - top, htop, vmstat 명령어로 CPU 사용률과 스레드 상태 확인
+    - 특정 프로세스가 CPU를 과도하게 사용하면 문제 발생
+
+  - (2) 메모리 병목 분석
+    - free -m, vmstat 명령어로 메모리 부족 여부 확인
+    - Swap 사용률이 과다할 경우, 메모리 부족 문제 발생 가능
+
+  - (3) I/O 병목 분석
+    - iostat, iotop 명령어로 디스크 I/O 대기율 및 읽기/쓰기 속도 분석
+    - netstat, iftop 을 활용하여 네트워크 병목 확인
+
+  - (4) 컨텍스트 스위칭 문제
+    - mpstat 명령어로 컨텍스트 스위칭이 과도한 경우 스레드 최적화 필요
     
-5. 운영체제의 성능 병목(Bottleneck) 분석 방법
-- (1) CPU 병목 분석
-top, htop, vmstat 명령어로 CPU 사용률과 스레드 상태 확인
-특정 프로세스가 CPU를 과도하게 사용하면 문제 발생
-- (2) 메모리 병목 분석
-free -m, vmstat 명령어로 메모리 부족 여부 확인
-Swap 사용률이 과다할 경우, 메모리 부족 문제 발생 가능
-- (3) I/O 병목 분석
-iostat, iotop 명령어로 디스크 I/O 대기율 및 읽기/쓰기 속도 분석
-netstat, iftop 을 활용하여 네트워크 병목 확인
-- (4) 컨텍스트 스위칭 문제
-mpstat 명령어로 컨텍스트 스위칭이 과도한 경우 스레드 최적화 필요
 6. 운영체제에서 사용되는 프로파일링(Profiling) 기법
 - (1) 정적 프로파일링 (Static Profiling)
 소스 코드 분석을 통해 비효율적인 코드 패턴을 미리 탐지
