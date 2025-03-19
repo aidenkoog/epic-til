@@ -4358,39 +4358,32 @@ Organize concepts, features, types and Pros and Cons
 	- (3) 메모리 할당 방식 최적화
 		- Slab Allocator 사용 → 커널에서 효율적인 메모리 할당을 위해 작은 객체를 미리 할당
 		- Huge Pages 사용 → 큰 페이지 크기를 사용하여 테이블 오버헤드 감소
-6. 운영체제에서 메모리 보호 기법(Memory Protection)과 접근 제어(Access Control) 방식
-- (1) 메모리 보호 기법
-🔹 주소 공간 분리
 
-각 프로세스는 독립된 주소 공간을 가지며, 다른 프로세스의 메모리에 접근 불가
-페이지 테이블을 활용하여 논리적 메모리 보호
-🔹 페이지 권한 설정 (Read, Write, Execute)
+- 운영체제에서 메모리 보호 기법(Memory Protection)과 접근 제어(Access Control) 방식
+	- (1) 메모리 보호 기법
+		- 주소 공간 분리
+			- 각 프로세스는 독립된 주소 공간을 가지며, 다른 프로세스의 메모리에 접근 불가
+			- 페이지 테이블을 활용하여 논리적 메모리 보호
+		- 페이지 권한 설정 (Read, Write, Execute)
+			- mprotect()를 사용하여 메모리 영역별 접근 권한(Read/Write/Execute) 제한
+				```
+				mprotect(addr, size, PROT_READ | PROT_WRITE);
+				```
+		- 스택 보호 (Stack Guard, Canaries)
+			- 버퍼 오버플로우 방지를 위해 스택 프레임 보호
+		- NX(No eXecute) 비트
+			- 실행 불가능한 영역을 명확하게 설정하여 코드 인젝션 공격 방지
 
-mprotect()를 사용하여 메모리 영역별 접근 권한(Read/Write/Execute) 제한
-c
-복사
-편집
-mprotect(addr, size, PROT_READ | PROT_WRITE);
-🔹 스택 보호 (Stack Guard, Canaries)
-
-버퍼 오버플로우 방지를 위해 스택 프레임 보호
-🔹 NX(No eXecute) 비트
-
-실행 불가능한 영역을 명확하게 설정하여 코드 인젝션 공격 방지
-- (2) 접근 제어(Access Control) 방식
-🔹 ACL(Access Control List)
-
-파일 및 프로세스 권한을 설정하여 특정 사용자 또는 그룹의 접근을 제어
-예: chmod, chown, setfacl 사용
-🔹 SELinux/AppArmor 보안 정책 적용
-
-프로세스별 허용된 동작을 미리 정의하여 보안 강화
-예: getenforce 명령어로 SELinux 상태 확인
-🔹 Capability 기반 접근 제어
-
-프로세스가 특정한 시스템 리소스를 제한적으로 사용할 수 있도록 설정
-예: capsh --print 명령어로 현재 권한 확인
-
+	- (2) 접근 제어(Access Control) 방식
+		- ACL(Access Control List)
+			- 파일 및 프로세스 권한을 설정하여 특정 사용자 또는 그룹의 접근을 제어
+			- 예: chmod, chown, setfacl 사용
+		- SELinux/AppArmor 보안 정책 적용
+			- 프로세스별 허용된 동작을 미리 정의하여 보안 강화
+			- 예: getenforce 명령어로 SELinux 상태 확인
+		- Capability 기반 접근 제어
+			- 프로세스가 특정한 시스템 리소스를 제한적으로 사용할 수 있도록 설정
+			- 예: capsh --print 명령어로 현재 권한 확인
 
 - 운영체제에서 주소 공간 배치 난수화(Address Space Layout Randomization, ASLR)의 개념과 역할을 설명하시오.
 - (1) ASLR 개념
