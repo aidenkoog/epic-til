@@ -1763,12 +1763,100 @@ Organize concepts, features, types and Pros and Cons
 			- 스프린트 회의 또는 정기 미팅에서 작업 진행 상태 점검
 			- 주요 산출물(Deliverable)의 품질 검토를 통해 계획한 범위와 일치하는지 확인
 
-- 프로젝트에서 Sprint Velocity를 측정하는 방법은?
-- 프로젝트에서 Sprint Planning Meeting을 효과적으로 운영하는 방법은?
-- 프로젝트에서 Release Planning을 수행하는 방법은?
-- 프로젝트에서 Continuous Integration(CI)과 Continuous Deployment(CD)의 차이점은?
+- 프로젝트에서 Sprint Velocity를 측정하는 방법
+	- (1) Sprint Velocity 개념
+		- Scrum 및 Agile 환경에서 팀이 한 Sprint 동안 완료한 작업량을 측정하는 지표
+		- 스토리 포인트(Story Points) 또는 작업 개수(Task Count) 단위로 측정
+		- Velocity가 일정하면 예측 가능한 일정 관리 가능
 
+	- (2) Sprint Velocity 측정 방법
+		- 완료된 User Story의 스토리 포인트 합산
+			- 한 Sprint에서 완료된 User Story의 스토리 포인트를 합하여 측정
+			- 예: Sprint 1에서 20포인트, Sprint 2에서 25포인트 → 평균 Velocity = (20+25)/2 = 22.5
 
+		- 일정 기간 동안의 평균 Velocity 계산
+			- 최소 3~5개 Sprint의 Velocity를 측정하여 평균 값을 산출
+			- 이를 바탕으로 향후 Sprint에서 완료할 수 있는 작업량을 예측
+
+		- Velocity 기반 프로젝트 일정 예측
+			- 예: 프로젝트 백로그가 총 200포인트, 팀의 평균 Velocity가 25포인트 → 8 Sprint(200/25) 필요
+
+		- Velocity의 변동성 분석
+			- Sprint마다 Velocity가 크게 변하면 병목(Bottleneck) 원인 분석 필요
+			- 예: 팀원 부족, 기술 난이도 증가, 외부 의존성 등
+
+- 프로젝트에서 Sprint Planning Meeting을 효과적으로 운영하는 방법
+	- (1) Sprint Planning Meeting 개념
+		- 스프린트 시작 전 개발팀이 백로그에서 작업을 선택하고 계획을 수립하는 회의
+		- 목표(Sprint Goal) 및 예상 작업량을 정하여 Sprint를 효과적으로 진행
+
+	- (2) Sprint Planning Meeting 운영 방법
+		- Sprint 목표(Sprint Goal) 정의
+			- Product Owner(PO)와 개발팀이 협력하여 이번 Sprint에서 달성할 핵심 목표 결정
+			- SMART 원칙 적용하여 구체적이고 측정 가능한 목표 설정
+
+		- 백로그 아이템 우선순위 조정
+			- PO가 우선순위가 높은 Product Backlog Item(PBI)을 개발팀과 공유
+			- 개발팀은 기술적 난이도, 예상 개발 시간 등을 고려하여 작업 선택
+
+		- 팀 Capacity 및 Velocity 고려
+			- 이전 Sprint의 Velocity 및 현재 Sprint의 팀 가용 인원 확인
+			- 작업량이 팀의 Capacity를 초과하지 않도록 적절히 조정
+
+		- Definition of Done(DoD) 재확인
+			- 개발 완료 기준(코드 리뷰, 테스트, 문서화 등)을 팀 내에서 명확히 정의
+
+		- Task Breakdown 수행
+			- User Story를 더 작은 작업(Task) 단위로 세분화
+			- 예: "로그인 기능 개발" → "UI 디자인", "백엔드 API 개발", "테스트 코드 작성"
+
+- 프로젝트에서 Release Planning을 수행하는 방법
+	- (1) Release Planning 개념
+		- 프로젝트 목표와 일정을 기반으로 제품 또는 기능을 배포하는 전략을 수립하는 과정
+		- 마일스톤(Milestone) 설정 및 단계별 배포 계획 수립
+
+	- (2) Release Planning 수행 방법
+		- Product Roadmap 기반 Release 일정 설정
+			- 제품 로드맵을 참고하여 주요 기능의 출시 일정을 결정
+			- 예: MVP(최소 기능 제품) → 베타 버전 → 정식 버전 순으로 단계적 배포
+
+		- 백로그 정리 및 우선순위 조정
+			- Product Owner와 개발팀이 협력하여 필수 기능을 선별하여 릴리스 백로그 작성
+			- 사용자 피드백을 반영하여 핵심 기능을 먼저 출시
+
+		- Sprint 단위 릴리스 일정 조정
+			- Agile 프로젝트에서는 Sprint 단위로 기능을 점진적으로 배포
+			- 예: 2주 Sprint 3개 → 한 달 반 후 Major Release
+
+		- 품질 기준 및 안정성 확보
+			- 릴리스 전 통합 테스트(Integration Test), 성능 테스트 수행
+			- 운영 환경 배포 전 Stage 환경에서 최종 점검
+
+		- 롤백 계획 수립
+			- 배포 실패 시를 대비하여 Rollback(이전 버전 복구) 전략 마련
+			- 예: Canary Release 또는 Blue-Green Deployment 활용
+
+- 프로젝트에서 Continuous Integration(CI)과 Continuous Deployment(CD)의 차이점
+	- (1) CI/CD 개념
+		- CI (Continuous Integration, 지속적 통합)
+			- 개발자가 변경한 코드가 자동으로 빌드, 테스트되어 통합되는 과정
+			- 코드 품질 및 충돌 최소화
+		- CD (Continuous Deployment, 지속적 배포)
+			- CI 이후 코드를 자동으로 운영 환경(Production)까지 배포하는 과정
+			- 배포 자동화를 통해 지속적인 제품 업데이트 가능
+	- (2) CI/CD 도입 효과
+		- 개발 생산성 향상 → 코드 변경 후 빠르게 검증 가능
+		- 버그 감소 → 작은 단위로 지속적인 테스트 수행
+		- 릴리스 속도 향상 → 제품 업데이트 주기 단축
+
+	- (3) CI/CD 도구 및 적용 사례
+		- CI 도구
+			- Jenkins: 오픈소스 CI/CD 자동화 툴
+			- GitHub Actions: GitHub 기반의 CI/CD 환경 구축
+			- GitLab CI/CD: GitLab 통합 CI/CD 환경
+		- CD 도구
+			- ArgoCD: Kubernetes 기반 GitOps 방식 CD 도구
+			- Spinnaker: 클라우드 네이티브 애플리케이션 배포 자동화
 
 - 프로젝트에서 Cost Control을 수행하는 방법은?
 - 프로젝트에서 Feature Flag를 활용하는 방법은?
