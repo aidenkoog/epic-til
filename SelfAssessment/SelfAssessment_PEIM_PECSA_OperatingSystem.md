@@ -4315,24 +4315,24 @@ Organize concepts, features, types and Pros and Cons
     - zswap / zram 사용: 압축된 메모리 캐시 활용하여 디스크 I/O 부담 감소
     - SSD 기반 스왑 활용: HDD보다 빠른 SSD를 스왑 공간으로 설정하여 성능 향상
     
-3. 운영체제에서 NUMA(Non-Uniform Memory Access) 아키텍처가 적용되는 방식
-- (1) NUMA 개념
-멀티 프로세서 시스템에서 CPU와 메모리를 그룹화하여 성능을 최적화하는 기술
-프로세서별로 로컬 메모리(Node-Local Memory) 를 사용하여 메모리 접근 속도를 향상
-- (2) NUMA 구조의 동작 방식
-CPU가 자신의 로컬 메모리에 접근하는 것이 가장 빠름
-다른 NUMA 노드(Node)의 메모리에 접근하면 성능이 저하됨
-- (3) NUMA 최적화 기법
-프로세스를 로컬 메모리에 배치 (numactl 사용)
-bash
-복사
-편집
-numactl --cpunodebind=0 --membind=0 ./program
-메모리 정책 조정 (/proc/sys/kernel/numa_balancing)
-NUMA-Aware 스케줄링 → OS가 프로세스와 데이터를 동일한 NUMA 노드에 배치
-- (4) 활용 사례
-데이터베이스(MySQL, PostgreSQL)
-HPC(고성능 컴퓨팅) 및 클라우드 서버
+- 운영체제에서 NUMA(Non-Uniform Memory Access) 아키텍처가 적용되는 방식
+	- (1) NUMA 개념
+		- 멀티 프로세서 시스템에서 CPU와 메모리를 그룹화하여 성능을 최적화하는 기술
+		- 프로세서별로 로컬 메모리(Node-Local Memory) 를 사용하여 메모리 접근 속도를 향상
+
+	- (2) NUMA 구조의 동작 방식
+		- CPU가 자신의 로컬 메모리에 접근하는 것이 가장 빠름
+		- 다른 NUMA 노드(Node)의 메모리에 접근하면 성능이 저하됨
+
+	- (3) NUMA 최적화 기법
+		- 프로세스를 로컬 메모리에 배치 (numactl 사용)
+		- 메모리 정책 조정 (/proc/sys/kernel/numa_balancing)
+		- NUMA-Aware 스케줄링 → OS가 프로세스와 데이터를 동일한 NUMA 노드에 배치
+
+	- (4) 활용 사례
+		- 데이터베이스(MySQL, PostgreSQL)
+		- HPC(고성능 컴퓨팅) 및 클라우드 서버
+		
 4. 가상화 환경에서의 메모리 관리 기법
 - (1) Ballooning (메모리 풍선 기법)
 VM에서 메모리가 부족할 때, 불필요한 메모리를 호스트로 반환하는 기법
