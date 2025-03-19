@@ -1927,8 +1927,30 @@ Organize concepts, features, types and Pros and Cons
 			- 프로젝트 완료 후 성과 측정 및 개선 사항 도출
 			- 주요 평가 항목: ROI(투자 대비 효과), 일정 준수율, 예산 사용률, 고객 만족도
 
-- 프로젝트에서 Agile Transformation을 성공적으로 수행하는 방법은?
-- 프로젝트 관리에서 프로젝트 실패 원인을 분석하는 방법은?
+- 프로젝트에서 Agile Transformation을 성공적으로 수행하는 방법
+	- (1) Agile Transformation 개념
+		- 기존의 전통적인 프로젝트 관리 방식에서 Agile 방식으로 전환하는 과정
+		- 빠른 피드백, 지속적인 개선, 고객 중심 개발을 통해 조직 전체의 유연성을 강화
+
+	- (2) Agile Transformation 성공 요인
+		- 조직 문화 변화(Cultural Shift)
+			- "실패를 허용하고 빠르게 학습하는 문화" 정착
+			- 기존의 계층적인 의사결정을 탈피하여 팀 중심의 협업 강화
+
+		- Agile Framework 도입
+			- Scrum, Kanban, SAFe(Scaled Agile Framework) 등 조직에 적합한 프레임워크 적용
+			- 반복적인 개발과 지속적 피드백을 반영하는 방식 정착
+
+		- Agile Mindset 교육 및 코칭
+			- 전사적으로 Agile 방식에 대한 교육 및 워크숍 진행
+			- Agile Coach를 활용하여 조직의 Agile Adoption 지원
+
+		- 성과 측정 및 지속적인 개선
+			- Velocity, Cycle Time, Lead Time 등의 Agile Metrics를 활용하여 성과 측정
+			- 피드백 루프(Feedback Loop)를 통해 지속적으로 개선할 수 있는 환경 조성
+
+
+- 프로젝트 관리에서 프로젝트 실패 원인을 분석하는 방법
 
 
 
