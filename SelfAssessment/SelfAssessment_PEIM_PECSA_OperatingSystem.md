@@ -4385,25 +4385,20 @@ Organize concepts, features, types and Pros and Cons
 			- 프로세스가 특정한 시스템 리소스를 제한적으로 사용할 수 있도록 설정
 			- 예: capsh --print 명령어로 현재 권한 확인
 
-- 운영체제에서 주소 공간 배치 난수화(Address Space Layout Randomization, ASLR)의 개념과 역할을 설명하시오.
-- (1) ASLR 개념
-악성 코드가 특정 메모리 주소를 공격하는 것을 어렵게 하기 위한 보안 기법
-실행 파일, 공유 라이브러리, 스택, 힙 등의 메모리 주소를 실행할 때마다 난수화하여 배치
-- (2) ASLR의 역할
-버퍼 오버플로우 및 ROP(Return-Oriented Programming) 공격 방지
-악성 코드가 특정 주소를 예측하여 공격하는 것을 차단
-각 실행 시마다 다른 메모리 주소를 사용하여 보안성 향상
-- (3) ASLR 적용 확인 및 설정(리눅스)
-현재 ASLR 설정 확인
-bash
-복사
-편집
-cat /proc/sys/kernel/randomize_va_space
-ASLR 활성화
-bash
-복사
-편집
-echo 2 > /proc/sys/kernel/randomize_va_space
+- 운영체제에서 주소 공간 배치 난수화(Address Space Layout Randomization, ASLR)의 개념과 역할
+	- (1) ASLR 개념
+		- 악성 코드가 특정 메모리 주소를 공격하는 것을 어렵게 하기 위한 보안 기법
+		- 실행 파일, 공유 라이브러리, 스택, 힙 등의 메모리 주소를 실행할 때마다 난수화하여 배치
+
+	- (2) ASLR의 역할
+		- 버퍼 오버플로우 및 ROP(Return-Oriented Programming) 공격 방지
+		- 악성 코드가 특정 주소를 예측하여 공격하는 것을 차단
+		- 각 실행 시마다 다른 메모리 주소를 사용하여 보안성 향상
+
+	- (3) ASLR 적용 확인 및 설정(리눅스)
+		- 현재 ASLR 설정 확인 (cat /proc/sys/kernel/randomize_va_space)
+		- ASLR 활성화 (echo 2 > /proc/sys/kernel/randomize_va_space)
+		
 2. 운영체제에서 실행 방지(XD/NX, eXecute Disable/No eXecute) 비트의 역할
 - (1) XD/NX 비트 개념
 메모리 영역을 실행 불가능(Non-Executable)하도록 설정하여 악성 코드 실행을 방지
