@@ -4398,26 +4398,21 @@ Organize concepts, features, types and Pros and Cons
 	- (3) ASLR 적용 확인 및 설정(리눅스)
 		- 현재 ASLR 설정 확인 (cat /proc/sys/kernel/randomize_va_space)
 		- ASLR 활성화 (echo 2 > /proc/sys/kernel/randomize_va_space)
+
+- 운영체제에서 실행 방지(XD/NX, eXecute Disable/No eXecute) 비트의 역할
+	- (1) XD/NX 비트 개념
+		- 메모리 영역을 실행 불가능(Non-Executable)하도록 설정하여 악성 코드 실행을 방지
+		- CPU 하드웨어 기반 보안 기법으로, 코드 실행이 불가능한 영역(데이터, 스택 등)을 보호
+
+	- (2) XD/NX 비트의 역할
+		- 버퍼 오버플로우 공격을 방어하여 악성 코드 실행 방지
+		- 스택, 힙 영역에서 쉘코드 실행 차단
+		- 운영체제와 CPU가 협력하여 보호 기능 제공
+
+	- (3) XD/NX 비트 활성화 확인(리눅스)
+		- 현재 상태 확인 (dmesg | grep NX)
+		- 커널에서 활성화 여부 확인 (cat /proc/cpuinfo | grep nx)
 		
-2. 운영체제에서 실행 방지(XD/NX, eXecute Disable/No eXecute) 비트의 역할
-- (1) XD/NX 비트 개념
-메모리 영역을 실행 불가능(Non-Executable)하도록 설정하여 악성 코드 실행을 방지
-CPU 하드웨어 기반 보안 기법으로, 코드 실행이 불가능한 영역(데이터, 스택 등)을 보호
-- (2) XD/NX 비트의 역할
-버퍼 오버플로우 공격을 방어하여 악성 코드 실행 방지
-스택, 힙 영역에서 쉘코드 실행 차단
-운영체제와 CPU가 협력하여 보호 기능 제공
-- (3) XD/NX 비트 활성화 확인(리눅스)
-현재 상태 확인
-bash
-복사
-편집
-dmesg | grep NX
-커널에서 활성화 여부 확인
-bash
-복사
-편집
-cat /proc/cpuinfo | grep nx
 3. Secure Boot의 개념과 운영체제 보안에서의 역할
 - (1) Secure Boot 개념
 운영체제 부팅 과정에서 승인된 소프트웨어만 실행하도록 보장하는 보안 기능
