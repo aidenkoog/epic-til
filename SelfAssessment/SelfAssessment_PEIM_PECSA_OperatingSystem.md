@@ -4412,21 +4412,20 @@ Organize concepts, features, types and Pros and Cons
 	- (3) XD/NX 비트 활성화 확인(리눅스)
 		- 현재 상태 확인 (dmesg | grep NX)
 		- 커널에서 활성화 여부 확인 (cat /proc/cpuinfo | grep nx)
+
+- Secure Boot의 개념과 운영체제 보안에서의 역할
+	- (1) Secure Boot 개념
+		- 운영체제 부팅 과정에서 승인된 소프트웨어만 실행하도록 보장하는 보안 기능
+		- UEFI(Unified Extensible Firmware Interface)에서 제공하는 기능
+
+	- (2) Secure Boot의 역할
+		- 부팅 과정에서 악성 코드(루트킷, 부트킷) 실행 방지
+		- 운영체제 커널과 드라이버의 무결성 확인
+		- 공급망 공격(Supply Chain Attack) 방지
+
+	- (3) Secure Boot 활성화 확인(리눅스)
+		- 현재 Secure Boot 상태 확인 (mokutil --sb-state)
 		
-3. Secure Boot의 개념과 운영체제 보안에서의 역할
-- (1) Secure Boot 개념
-운영체제 부팅 과정에서 승인된 소프트웨어만 실행하도록 보장하는 보안 기능
-UEFI(Unified Extensible Firmware Interface)에서 제공하는 기능
-- (2) Secure Boot의 역할
-부팅 과정에서 악성 코드(루트킷, 부트킷) 실행 방지
-운영체제 커널과 드라이버의 무결성 확인
-공급망 공격(Supply Chain Attack) 방지
-- (3) Secure Boot 활성화 확인(리눅스)
-현재 Secure Boot 상태 확인
-bash
-복사
-편집
-mokutil --sb-state
 4. 운영체제에서 마이크로 커널 기반 보안 강화 기법
 - (1) 마이크로 커널 개념
 운영체제의 핵심 기능(프로세스 관리, 메모리 관리 등)만 커널에 포함하고, 나머지 기능은 사용자 공간에서 실행
