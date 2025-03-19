@@ -1951,8 +1951,30 @@ Organize concepts, features, types and Pros and Cons
 
 
 - 프로젝트 관리에서 프로젝트 실패 원인을 분석하는 방법
+	- (1) 프로젝트 실패 분석의 필요성
+		- 실패 원인을 분석하여 향후 프로젝트에서 동일한 실수를 방지하고 개선
+		- 프로젝트 종료 후 Post-Mortem Meeting(사후 분석 회의) 또는 Lessons Learned Session 수행
 
+	- (2) 프로젝트 실패 주요 원인 분석 방법
+		- 범위 문제(Scope Issues)
+			- 명확한 요구사항이 정의되지 않거나, 스코프 크리프(Scope Creep, 요구사항 증가) 발생
+			- 해결 방법: Change Control 프로세스 도입, 요구사항 우선순위 명확화
 
+		- 일정 지연(Schedule Delays)
+			- 비현실적인 일정 계획, 의존성 높은 작업 간 충돌로 인해 일정이 지연됨
+			- 해결 방법: Critical Path Method(CPM) 활용, 일정 조정 및 리스크 완화
+
+		- 예산 초과(Cost Overrun)
+			- 초기 예산 계획이 부정확하거나, 예상보다 비용이 많이 소요됨
+			- 해결 방법: Cost Baseline 수립, 비용 추적 및 조기 경고 시스템 적용
+
+		- 팀 역량 부족(Team Skill Gap)
+			- 팀원들의 역량이 부족하여 생산성이 저하되고 일정이 지연됨
+			- 해결 방법: 사전 교육(Training), 기술 코칭 및 적절한 인력 배치
+
+		- 커뮤니케이션 문제(Communication Issues)
+			- 프로젝트 팀 간 정보 공유 부족, 이해관계자와의 기대 불일치
+			- 해결 방법: Daily Stand-up, Weekly Status Meeting을 통한 정기적인 커뮤니케이션 강화
 
 - 프로젝트에서 Agile Manifesto의 핵심 원칙은?
 - 프로젝트에서 Sprint Review Meeting을 효과적으로 운영하는 방법은?
