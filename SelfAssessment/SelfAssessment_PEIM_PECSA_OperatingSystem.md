@@ -4317,7 +4317,7 @@ Organize concepts, features, types and Pros and Cons
     
 - 운영체제에서 NUMA(Non-Uniform Memory Access) 아키텍처가 적용되는 방식
 	- (1) NUMA 개념
-		- 멀티 프로세서 시스템에서 CPU와 메모리를 그룹화하여 성능을 최적화하는 기술
+		- 멀티 프로세서 시스템에서 CPU와 메모리를 그룹화하여 성능을 최적화하는 기술 (CPU + Memory Grouping)
 		- 프로세서별로 로컬 메모리(Node-Local Memory) 를 사용하여 메모리 접근 속도를 향상
 
 	- (2) NUMA 구조의 동작 방식
@@ -4332,17 +4332,20 @@ Organize concepts, features, types and Pros and Cons
 	- (4) 활용 사례
 		- 데이터베이스(MySQL, PostgreSQL)
 		- HPC(고성능 컴퓨팅) 및 클라우드 서버
+
+- 가상화 환경에서의 메모리 관리 기법
+	- (1) Ballooning (메모리 풍선 기법)
+		- VM에서 메모리가 부족할 때, 불필요한 메모리를 호스트로 반환하는 기법
+		- 가상화 플랫폼(KVM, VMware)에서 동적으로 VM의 메모리 크기를 조정하여 전체적인 메모리 활용 최적화
+
+	- (2) Deduplication (중복 제거)
+		- 여러 VM이 동일한 메모리 데이터를 사용할 경우, KSM(Kernel Samepage Merging) 기법을 활용하여 메모리 병합
+		- 중복 페이지를 하나의 물리적 페이지로 통합하여 메모리 낭비를 줄임
+
+	- (3) Swapping (스왑 사용)
+		- VM이 사용하지 않는 메모리를 디스크로 내보내어 메모리를 확보하는 방법
+		- 성능 저하를 막기 위해 zswap/zram 등의 압축 기술 활용
 		
-4. 가상화 환경에서의 메모리 관리 기법
-- (1) Ballooning (메모리 풍선 기법)
-VM에서 메모리가 부족할 때, 불필요한 메모리를 호스트로 반환하는 기법
-가상화 플랫폼(KVM, VMware)에서 동적으로 VM의 메모리 크기를 조정하여 전체적인 메모리 활용 최적화
-- (2) Deduplication (중복 제거)
-여러 VM이 동일한 메모리 데이터를 사용할 경우, KSM(Kernel Samepage Merging) 기법을 활용하여 메모리 병합
-중복 페이지를 하나의 물리적 페이지로 통합하여 메모리 낭비를 줄임
-- (3) Swapping (스왑 사용)
-VM이 사용하지 않는 메모리를 디스크로 내보내어 메모리를 확보하는 방법
-성능 저하를 막기 위해 zswap/zram 등의 압축 기술 활용
 5. 현대 운영체제에서 발생하는 메모리 단편화(Fragmentation) 문제 해결 방법
 - (1) 내부 단편화 해결 방법
 적절한 페이지 크기 선택 → 너무 작은 페이지는 관리 비용 증가, 너무 크면 낭비 발생
