@@ -1976,13 +1976,129 @@ Organize concepts, features, types and Pros and Cons
 			- 프로젝트 팀 간 정보 공유 부족, 이해관계자와의 기대 불일치
 			- 해결 방법: Daily Stand-up, Weekly Status Meeting을 통한 정기적인 커뮤니케이션 강화
 
-- 프로젝트에서 Agile Manifesto의 핵심 원칙은?
-- 프로젝트에서 Sprint Review Meeting을 효과적으로 운영하는 방법은?
-- 프로젝트에서 Work Breakdown Structure(WBS)를 활용하는 방법은?
-- 프로젝트에서 Product Roadmap을 수립하는 방법은?
-- 프로젝트에서 Defect Management를 수행하는 방법은?
+- 프로젝트에서 Agile Manifesto의 핵심 원칙
+	- (1) Agile Manifesto 개념
+		- 2001년 발표된 애자일 소프트웨어 개발 선언으로, 유연한 개발 및 고객 중심 접근 방식을 강조
+		- 4가지 핵심 가치 및 12가지 원칙으로 구성
 
+	- (2) Agile Manifesto의 4가지 핵심 가치
+		- 개인 및 상호작용(Individuals and Interactions) > 프로세스와 도구(Processes and Tools)
+			- 개발자는 도구보다 효율적인 팀 협업과 커뮤니케이션이 중요
 
+		- 동작하는 소프트웨어(Working Software) > 포괄적인 문서화(Comprehensive Documentation)
+			- 완벽한 문서보다는 작동하는 소프트웨어를 지속적으로 제공하는 것이 핵심
+
+		- 고객과의 협력(Customer Collaboration) > 계약 협상(Contract Negotiation)
+			- 고객과의 지속적인 협업을 통해 요구사항을 조정하고 개선하는 접근 방식이 중요
+
+		- 변화에 대한 대응(Responding to Change) > 계획을 따르는 것(Following a Plan)
+			- 초기 계획보다는 변화하는 요구사항을 빠르게 반영하는 것이 효과적
+
+	- (3) Agile Manifesto의 12가지 핵심 원칙
+		- 고객 만족 우선 → 지속적인 가치 제공
+		- 요구사항 변경 수용 → 변화는 경쟁력을 높이는 요소
+		- 짧은 주기의 제품 출시 → 주기적으로 동작하는 소프트웨어 제공
+		- 비즈니스와 개발팀 협업 → 고객과 긴밀한 커뮤니케이션
+		- 동기부여된 개인 중심 개발 → 신뢰를 바탕으로 자율적인 팀 운영
+		- 대면 커뮤니케이션 우선 → 이메일보다 직접적인 협업 선호
+		- 작동하는 소프트웨어가 핵심 지표 → 문서보다 실제 기능이 중요
+		- 지속 가능한 개발 속도 유지 → 장기적인 생산성을 고려한 워크로드 조정
+		- 기술적 우수성과 좋은 설계 강조 → 코드 품질 유지
+		- 단순함(Simple Design) 추구 → 불필요한 복잡성을 줄임
+		- 자율적인 팀 운영 → 팀이 최적의 해결책을 찾을 수 있도록 지원
+		- 지속적인 피드백 반영 → 팀이 효율적으로 개선하고 적응
+
+- 프로젝트에서 Sprint Review Meeting을 효과적으로 운영하는 방법
+	- (1) Sprint Review Meeting 개념
+		- Sprint 종료 시 팀이 완료한 작업을 시연하고, 이해관계자와 피드백을 논의하는 회의
+		- Product Owner(PO), Scrum Master, 개발팀, 이해관계자가 참여
+
+	- (2) Sprint Review Meeting 운영 방법
+		- Sprint Goal 달성 여부 평가
+			- Sprint 시작 시 설정한 목표가 얼마나 달성되었는지 확인
+			- 완료된 User Story를 기반으로 기능 시연(Demo) 진행
+
+		- 동작하는 제품(Working Software) 시연
+			- 개발된 기능을 직접 데모(Demo)로 보여주며 사용자 피드백 수집
+			- 테스트 환경 또는 실제 환경에서 기능 작동 여부 확인
+
+		- 이해관계자의 피드백 수렴
+			- 고객, 사용자, 경영진이 기능의 유용성 및 개선 사항을 제안할 기회 제공
+			- 중요한 피드백은 다음 Sprint의 백로그에 반영
+
+		- 프로젝트 진행 현황 공유
+			- 남은 작업량, 예상 출시 일정 등 프로젝트의 전반적인 상태를 업데이트
+			- 다음 Sprint의 우선순위 및 주요 변경 사항 논의
+
+		- 회고 및 개선점 도출
+			- 개발팀이 직면한 문제와 해결책 공유
+			- "이번 Sprint에서 잘된 점 / 개선할 점" 논의
+
+- 프로젝트에서 Work Breakdown Structure(WBS)를 활용하는 방법
+	- (1) WBS 개념
+		- 프로젝트 작업을 논리적으로 세분화하여 구조화한 계층적 분류 체계
+		- 프로젝트 전체 범위를 작고 관리 가능한 단위(Task)로 분할
+
+	- (2) WBS 활용 방법
+		- 단계별 WBS 구성
+			- 프로젝트 → 주요 단계(Phase) → 작업 패키지(Work Package) → 세부 작업(Task)
+			- 예:
+				- 프로젝트: 모바일 앱 개발
+				- 단계: UI 디자인, 백엔드 개발, 테스트
+				- 작업 패키지: 로그인 화면 개발, 결제 기능 구현
+
+		- WBS를 기반으로 일정 및 리소스 계획 수립
+			- 각 작업에 예상 소요 시간 및 담당자 배정
+			- 일정 간소화를 위해 병렬 수행 가능한 작업 식별
+
+		- 위험 요소(Risks) 식별 및 대응 계획 수립
+			- 프로젝트 초기에 고위험 작업(Task)에 대해 사전 리스크 관리 적용
+			- 예: 외부 API 연동 시 기술적 난이도 평가 후 예비 일정 추가
+
+- 프로젝트에서 Product Roadmap을 수립하는 방법
+	- (1) Product Roadmap 개념
+		- 제품 개발 일정과 주요 기능을 시각적으로 정리한 단기 및 장기 계획 문서
+		- 제품 비전과 전략을 기반으로 기능 배포 계획을 수립
+
+	- (2) Product Roadmap 수립 방법
+		- 제품 목표 및 비전 설정
+			- 제품이 해결하려는 핵심 문제 정의
+			- 예: "이커머스 플랫폼에서 빠르고 안전한 결제 경험 제공"
+
+		- 주요 기능 및 출시 계획 수립
+			- 기능의 우선순위 결정 → 고객 가치가 높은 기능부터 개발
+			- MVP(Minimum Viable Product) 단계부터 점진적 기능 확장
+
+		- 제품 개발 일정 관리
+			- 분기별(Quarterly) 또는 Sprint별 Roadmap을 작성하여 단계적 배포 일정 계획
+
+		- 이해관계자와 협업하여 지속적 개선
+			- 고객 피드백, 시장 변화에 따라 유연하게 일정 조정
+
+- 프로젝트에서 Defect Management를 수행하는 방법
+	- (1) Defect Management 개념
+		- 소프트웨어 개발 중 발생하는 버그(Bug) 및 결함(Defect)을 관리하는 프로세스
+		- 버그를 추적, 우선순위 지정, 수정 및 검증을 수행
+
+	- (2) Defect Management 수행 방법
+		- 결함 발견 및 등록
+			- QA 테스트 또는 사용자 피드백을 통해 결함 발견
+			- Bug Tracking Tool(JIRA, Redmine, Bugzilla 등) 활용하여 결함 등록
+
+		- 결함 우선순위 지정
+			- 긴급도(Urgency) 및 중요도(Severity) 기준으로 우선순위 결정
+				- Critical: 시스템 장애 발생
+				- High: 핵심 기능 오류
+				- Medium: 사용자 경험 저하
+				- Low: 사소한 UI 버그
+
+		- 결함 수정 및 재테스트 수행
+			- 개발팀이 수정 후 QA팀이 Regression Test(회귀 테스트) 진행
+			- 테스트 자동화 도구(Selenium, JUnit 등) 활용 가능
+
+		- Root Cause Analysis(근본 원인 분석)
+			- 동일한 결함이 반복되지 않도록 결함의 원인을 분석하여 프로세스 개선
+			- 예: 코드 리뷰 강화, 테스트 커버리지 확대
 
 - 프로젝트에서 Knowledge Management를 효과적으로 수행하는 방법은?
 - 프로젝트 관리에서 RFP(Request for Proposal)를 작성하는 방법은?
