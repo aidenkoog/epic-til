@@ -1858,9 +1858,75 @@ Organize concepts, features, types and Pros and Cons
 			- ArgoCD: Kubernetes 기반 GitOps 방식 CD 도구
 			- Spinnaker: 클라우드 네이티브 애플리케이션 배포 자동화
 
-- 프로젝트에서 Cost Control을 수행하는 방법은?
-- 프로젝트에서 Feature Flag를 활용하는 방법은?
-- 프로젝트 관리에서 Project Governance의 역할은?
+- 프로젝트에서 Cost Control을 수행하는 방법
+	- (1) Cost Control 개념
+		- 예산 초과를 방지하고 프로젝트 비용을 효과적으로 관리하는 프로세스
+		- 프로젝트 진행 중 비용을 추적, 분석, 조정하여 예산을 최적화
+
+	- (2) Cost Control 수행 방법
+		- 프로젝트 예산 수립 및 기준선(Baseline) 설정
+			- WBS(Work Breakdown Structure)를 기반으로 각 작업에 대한 예상 비용 산출
+			- 비용 기준선(Cost Baseline) 설정 → 예산 초과 여부를 지속적으로 비교
+
+		- 비용 추적 및 모니터링
+			- Earned Value Management(EVM) 기법을 사용하여 예산 대비 실제 비용 추적
+			- 주요 지표:
+				- Planned Value (PV) → 계획된 예산
+				- Actual Cost (AC) → 실제 사용된 비용
+				- Earned Value (EV) → 현재까지 완료된 작업의 예상 가치
+
+		- 비용 절감 전략 적용
+			- 자원 최적화(Resource Optimization) → 과도한 리소스 사용 방지
+			- 범위 조정(Scope Adjustment) → 불필요한 기능 개발 방지
+			- 아웃소싱(Outsourcing) → 비용 대비 효율성이 높은 외부 리소스 활용
+
+		- 변경 관리(Change Management) 적용
+			- 예산 초과가 예상될 경우, 변경 요청(Change Request) 프로세스를 거쳐 승인 후 조정
+			- 모든 변경 사항을 Cost Impact 분석 후 적용
+
+- 프로젝트에서 Feature Flag를 활용하는 방법
+	- (1) Feature Flag 개념
+		- 코드를 배포한 후에도 특정 기능의 활성화 여부를 제어할 수 있는 기법
+		- 운영 환경에서 직접 코드 변경 없이 기능을 켜거나 끌 수 있음
+
+	- (2) Feature Flag 활용 방법
+		- 점진적 기능 배포(Gradual Rollout)
+			- A/B 테스트 또는 특정 사용자 그룹에게만 기능을 활성화
+			- 예: 10% 사용자에게 새로운 결제 기능을 적용한 후 피드백 반영
+
+		- 긴급 대응 및 롤백(Fast Rollback)
+			- 운영 환경에서 문제가 발생할 경우 즉시 기능을 비활성화하여 영향 최소화
+			- 예: 오류가 있는 기능을 코드 수정 없이 Feature Flag를 통해 비활성화
+
+		- 지속적 배포(Continuous Deployment) 지원
+			- 기능이 준비되지 않은 상태에서도 코드를 미리 배포하고 필요할 때 활성화 가능
+			- 예: 백엔드에서 기능을 완성한 후 프론트엔드에서 연동 완료 후 활성화
+
+		- 환경 기반 기능 활성화(Environment-Based Activation)
+			- 개발, 스테이징, 프로덕션 환경별로 기능 활성화 여부를 분리하여 관리
+
+- 프로젝트 관리에서 Project Governance의 역할
+	- (1) Project Governance 개념
+		- 프로젝트가 조직의 목표 및 전략과 일치하도록 운영되는 관리 체계
+		- 프로젝트 진행 중 의사 결정, 위험 관리, 품질 보장 등의 역할 수행
+
+	- (2) Project Governance 주요 역할
+		- 프로젝트 의사 결정 구조 수립
+			- 이해관계자(Stakeholder)와 의사결정 권한을 명확히 정의
+			- 예: Steering Committee, Sponsor, PMO(Project Management Office) 등
+
+		- 프로젝트 기준 및 프로세스 설정
+			- 프로젝트 관리 프레임워크(Agile, Waterfall 등) 정의
+			- 품질 기준, 리스크 관리, 예산 운영 프로세스 설정
+
+		- 리스크 및 문제 해결(Risk & Issue Management)
+			- 프로젝트 중 발생하는 위험 요소를 분석하고 대응 전략을 마련
+			- 예: 프로젝트 지연 위험이 발생할 경우 일정 조정 및 추가 리소스 확보
+
+		- 프로젝트 감사 및 성과 평가(Project Audit & Evaluation)
+			- 프로젝트 완료 후 성과 측정 및 개선 사항 도출
+			- 주요 평가 항목: ROI(투자 대비 효과), 일정 준수율, 예산 사용률, 고객 만족도
+
 - 프로젝트에서 Agile Transformation을 성공적으로 수행하는 방법은?
 - 프로젝트 관리에서 프로젝트 실패 원인을 분석하는 방법은?
 
