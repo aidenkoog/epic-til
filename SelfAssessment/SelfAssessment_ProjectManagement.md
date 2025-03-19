@@ -1642,13 +1642,126 @@ Organize concepts, features, types and Pros and Cons
 			- Predictive: 모든 계획을 사전에 결정하고 진행.
 			- Adaptive: 프로젝트 진행 중에도 변경을 반영하여 유연하게 조정
 
-- 프로젝트에서 고객 요구사항을 명확히 정의하는 방법은?
-- 프로젝트에서 Design Thinking을 활용하는 방법은?
-- 프로젝트에서 Sprint Goal을 설정하는 방법은?
-- 프로젝트에서 Risk Register를 작성하는 방법은?
-- 프로젝트에서 프로젝트 범위를 효과적으로 관리하는 방법은?
+- 프로젝트에서 고객 요구사항을 명확히 정의하는 방법
+	- (1) 고객 요구사항 정의의 중요성
+		- 프로젝트 성공의 핵심 요소는 고객의 요구사항을 정확히 이해하고 반영하는 것
+		- 요구사항이 명확하지 않으면 범위 증가(Scope Creep), 일정 지연, 예산 초과 등의 문제가 발생
 
+	- (2) 고객 요구사항 정의 방법
+		- 이해관계자 분석 (Stakeholder Analysis)
+			- 프로젝트와 관련된 고객, 사용자, 경영진, 개발팀 등 주요 이해관계자를 식별
+			- 각 이해관계자의 니즈(Needs)와 기대사항을 명확히 문서화
 
+		- 요구사항 수집 기법
+			- 인터뷰(Interview): 주요 이해관계자와 직접 대화하여 요구사항 파악
+			- 설문조사(Survey): 대규모 이해관계자로부터 피드백 수집
+			- 워크숍(Workshop): 팀과 고객이 함께 브레인스토밍을 통해 요구사항 도출
+			- 관찰(Observation): 실제 사용 환경을 분석하여 숨겨진 요구사항 식별
+
+		- 요구사항 문서화 (Requirements Documentation)
+			- SRS(Software Requirements Specification) 작성
+			- 요구사항을 기능적 요구사항(Functional)과 비기능적 요구사항(Non-Functional)으로 구분
+			- 모델링 기법 (Use Case, User Story, Flowchart) 활용
+
+		- 요구사항 검증 (Validation & Verification)
+			- 프로토타입(Prototype) 또는 와이어프레임(Wireframe) 제작 후 고객 피드백 반영
+			- 정기적인 리뷰 회의(Requirement Review Meeting) 진행
+
+- 프로젝트에서 Design Thinking을 활용하는 방법
+	- (1) Design Thinking 개념
+		- 사용자 중심(User-Centered)의 문제 해결 접근 방식
+		- 창의적 아이디어 도출과 빠른 프로토타이핑을 통한 솔루션 개발
+
+	- (2) Design Thinking 프로세스
+		- 공감 (Empathize)
+			- 고객의 니즈를 깊이 이해하기 위해 인터뷰, 설문조사, 관찰 수행
+			- 페르소나(Persona) 작성하여 사용자 유형 정의
+				- 대상 고객을 나타내는 가상의 인물
+				- 실제 인터뷰, 설문 조사 및 기타 형태의 사용자 연구를 통해 얻은 데이터와 사실을 기반으로 생성
+
+		- 문제 정의 (Define)
+			- 수집한 데이터를 바탕으로 핵심 문제(HMW, How Might We Statements)를 정의
+			- 예: "사용자가 로그인 없이 더 편리하게 서비스를 이용할 방법은?"
+
+		- 아이디어 도출 (Ideate)
+			- 브레인스토밍을 통해 창의적인 해결책을 다각도로 탐색
+			- SCAMPER 기법(대체, 결합, 수정, 활용, 제거, 재배열) 활용
+
+		- 프로토타이핑 (Prototype)
+			- 빠르게 시제품(Mockup, Wireframe) 제작하여 사용자 피드백 수집
+			- 저비용으로 반복적인 테스트 수행 가능
+
+		- 테스트 (Test)
+			- 실제 사용자와 함께 프로토타입을 테스트하고 개선 사항 반영
+			- 반복적(Iterative)으로 개선하여 최종 제품 품질 향상
+
+- 프로젝트에서 Sprint Goal을 설정하는 방법
+	- (1) Sprint Goal의 중요성
+		- 애자일(Agile) 방식에서 Sprint의 목표를 명확히 정의하여 팀이 집중할 수 있도록 유도
+		- 불필요한 작업을 줄이고 효율적인 우선순위 설정 가능
+
+	- (2) Sprint Goal 설정 프로세스
+		- Product Owner와 협업하여 목표 수립
+			- 백로그(Backlog)에서 우선순위 높은 작업 선정
+			- Sprint 동안 팀이 달성할 수 있는 현실적인 목표 설정
+
+		- SMART 원칙 적용
+			- Specific (구체적인 목표) → "결제 프로세스를 20% 단축하는 기능 추가"
+			- Measurable (측정 가능) → "페이지 로딩 속도를 1초 이내로 줄이기"
+			- Achievable (달성 가능) → "기존 API를 개선하여 데이터 처리 속도 향상"
+			- Relevant (관련성 있는 목표) → "사용자 경험 향상을 위한 UI 개선"
+			- Time-bound (기한 설정) → "이번 Sprint 내에 완료"
+
+		- 팀과 함께 Sprint Goal 검토 및 조정
+			- 스프린트 시작 전 팀 전체가 Sprint Goal을 이해하고 동의하도록 조정
+			- Daily Standup에서 진행 상황 점검
+
+- 프로젝트에서 Risk Register를 작성하는 방법
+	- (1) Risk Register 개념
+		- 프로젝트에서 발생할 수 있는 리스크(위험 요소)를 체계적으로 관리하기 위한 문서
+		- 리스크를 예측, 평가, 대응 전략을 포함하여 관리
+
+	- (2) Risk Register 작성 프로세스
+		- 리스크 식별 (Risk Identification)
+			- 기술적 리스크: 신규 기술 도입, 성능 문제
+			- 비즈니스 리스크: 시장 변화, 예산 초과
+			- 운영 리스크: 팀원 부족, 일정 지연
+
+		- 리스크 평가 (Risk Assessment)
+			- 확률(Probability)과 영향(Impact)을 기반으로 우선순위 지정
+			- 예: Low, Medium, High
+
+		- 리스크 대응 전략 (Risk Response Strategy)
+			- 회피(Avoidance): 위험 요소 제거 (예: 기술 변경)
+			- 완화(Mitigation): 발생 가능성을 낮춤 (예: 백업 시스템 구축)
+			- 전가(Transfer): 제3자에게 리스크 이전 (예: 보험 가입)
+			- 수용(Acceptance): 대응하지 않고 발생 시 대처
+
+		- 정기적인 모니터링 및 업데이트
+			- 주간 회의에서 리스크 상태 점검 및 조치 진행
+			- 새로운 리스크가 발생하면 즉시 문서화 및 조치 계획 수립
+
+- 프로젝트에서 프로젝트 범위를 효과적으로 관리하는 방법
+	- (1) 프로젝트 범위 관리의 중요성
+		- 스코프 크리프(Scope Creep)를 방지하고 일정 및 예산을 준수하기 위한 핵심 요소
+		- 명확한 프로젝트 목표와 우선순위 설정이 필요
+
+	- (2) 프로젝트 범위 관리 방법
+		- 프로젝트 범위 명확화 (Scope Definition)
+			- WBS(Work Breakdown Structure) 작성 → 전체 작업을 작은 단위로 세분화
+			- 기능적 요구사항 vs 비기능적 요구사항 분리
+
+		- 변경 관리 프로세스 (Change Control Process)
+			- 모든 변경 요청은 공식적으로 검토 후 승인
+			- 변경 요청이 프로젝트 일정 및 예산에 미치는 영향 평가
+
+		- 범위 검증 (Scope Verification)
+			- 고객과 이해관계자에게 일정한 간격으로 검토받고 승인 절차 진행
+			- 프로젝트 완료 시 요구사항 충족 여부 확인 후 인수(User Acceptance Test, UAT)
+
+		- 범위 모니터링 및 통제 (Scope Monitoring & Control)
+			- 스프린트 회의 또는 정기 미팅에서 작업 진행 상태 점검
+			- 주요 산출물(Deliverable)의 품질 검토를 통해 계획한 범위와 일치하는지 확인
 
 - 프로젝트에서 Sprint Velocity를 측정하는 방법은?
 - 프로젝트에서 Sprint Planning Meeting을 효과적으로 운영하는 방법은?
