@@ -2100,43 +2100,33 @@ Organize concepts, features, types and Pros and Cons
 			- 동일한 결함이 반복되지 않도록 결함의 원인을 분석하여 프로세스 개선
 			- 예: 코드 리뷰 강화, 테스트 커버리지 확대
 
-- 프로젝트에서 Knowledge Management를 효과적으로 수행하는 방법은?
-- 프로젝트 관리에서 RFP(Request for Proposal)를 작성하는 방법은?
-- 프로젝트에서 Agile Estimation 기법을 적용하는 방법은?
-- 프로젝트에서 프로젝트 스폰서(Project Sponsor)의 역할은?
-- 프로젝트에서 FMEA(Failure Mode and Effects Analysis)를 활용하는 방법은?
-- 프로젝트에서 ITIL 프레임워크를 적용하는 방법은?
-  - Knowledge Management(KM) 수행 방법
-	1.	지식 수집 (Knowledge Capture)
-	•	프로젝트 진행 중 발생하는 경험, 노하우, 문서를 체계적으로 수집
-	•	주요 산출물(코드, 문서, 회의록, 피드백 등) 저장
-	2.	지식 저장 및 공유 (Knowledge Storage & Sharing)
-	•	Wiki, Confluence, Notion, SharePoint 등의 협업 툴 활용
-	•	사내 지식 관리 시스템(KMS) 구축
-	3.	지식 활용 및 적용 (Knowledge Utilization)
-	•	기존 프로젝트의 베스트 프랙티스를 신입 직원 및 신규 프로젝트에 적용
-	•	지식 문서화 후 사내 교육 자료로 활용
-	4.	지식 유지 및 업데이트 (Knowledge Maintenance)
-	•	정기적으로 문서를 검토 및 업데이트하여 최신 정보 유지
-	•	퇴사자 또는 프로젝트 변경 시 인수인계 프로세스 강화
+- 프로젝트에서 Knowledge Management(KM)를 효과적으로 수행하는 방법
+	- (1) 지식 수집 (Knowledge Capture)
+		- 프로젝트 진행 중 발생하는 경험, 노하우, 문서를 체계적으로 수집
+		- 주요 산출물(코드, 문서, 회의록, 피드백 등) 저장
+	- (2) 지식 저장 및 공유 (Knowledge Storage & Sharing)
+		- Wiki, Confluence, Notion, SharePoint 등의 협업 툴 활용
+		- 사내 지식 관리 시스템(KMS) 구축
+	- (3) 지식 활용 및 적용 (Knowledge Utilization)
+		- 기존 프로젝트의 베스트 프랙티스를 신입 직원 및 신규 프로젝트에 적용
+		- 지식 문서화 후 사내 교육 자료로 활용
+	- (4) 지식 유지 및 업데이트 (Knowledge Maintenance)
+		- 정기적으로 문서를 검토 및 업데이트하여 최신 정보 유지
+		- 퇴사자 또는 프로젝트 변경 시 인수인계 프로세스 강화
 
-
-
-RFP(Request for Proposal) 작성 방법
-	1.	요구사항 정의
-	•	프로젝트 목표 및 비즈니스 필요성 설명
-	•	기능 및 비기능 요구사항 정의
-	2.	제안 요청 사항 기술
-	•	기대하는 솔루션 및 기술 스택 명시
-	•	프로젝트 범위(Scope), 일정, 예산, 성과 지표 정의
-	3.	평가 기준 및 선정 절차 명시
-	•	공급업체 평가 기준(기술력, 경험, 가격 등) 정의
-	•	제안서 제출 마감일 및 심사 방법 명시
-	4.	기술 및 계약 조건 기재
-	•	지적 재산권, 보안 요구사항, SLA(Service Level Agreement) 포함
-	•	계약 조건(비용, 유지보수, 위약금 등) 명시
-
-
+- RFP(Request for Proposal) 작성 방법
+	- (1) 요구사항 정의
+		- 프로젝트 목표 및 비즈니스 필요성 설명
+		- 기능 및 비기능 요구사항 정의
+	- (2) 제안 요청 사항 기술
+		- 기대하는 솔루션 및 기술 스택 명시
+		- 프로젝트 범위(Scope), 일정, 예산, 성과 지표 정의
+	- (3) 평가 기준 및 선정 절차 명시
+		- 공급업체 평가 기준(기술력, 경험, 가격 등) 정의
+		- 제안서 제출 마감일 및 심사 방법 명시
+	- (4) 기술 및 계약 조건 기재
+		- 지적 재산권, 보안 요구사항, SLA(Service Level Agreement) 포함
+		- 계약 조건(비용, 유지보수, 위약금 등) 명시
 
 Agile Estimation 기법 적용 방법
 	1.	스토리 포인트(Story Point) 사용
