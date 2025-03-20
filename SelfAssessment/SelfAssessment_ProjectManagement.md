@@ -3463,207 +3463,187 @@ Organize concepts, features, types and Pros and Cons
 			- 정기적인 위기 대응 훈련(Drill) 수행
 
 - 프로젝트에서 Stakeholder Resistance(이해관계자의 저항)를 극복하는 방법
-이해관계자의 저항이 발생하는 이유
-	•	변화에 대한 두려움 → 기존 프로세스나 역할이 바뀔 가능성
-	•	이해 부족 → 프로젝트의 목표와 기대 효과를 정확히 알지 못함
-	•	기술적 불안감 → 새로운 시스템이나 기술 도입에 대한 걱정
-	•	리소스 및 예산 문제 → 추가적인 인력 및 예산이 필요할 가능성
+	- 이해관계자의 저항이 발생하는 이유
+		- 변화에 대한 두려움 → 기존 프로세스나 역할이 바뀔 가능성
+		- 이해 부족 → 프로젝트의 목표와 기대 효과를 정확히 알지 못함
+		- 기술적 불안감 → 새로운 시스템이나 기술 도입에 대한 걱정
+		- 리소스 및 예산 문제 → 추가적인 인력 및 예산이 필요할 가능성
 
-저항 극복 방법
-	1.	Stakeholder Engagement Plan 수립
-	•	주요 이해관계자를 식별하고 각자의 관심사 및 우려 사항을 분석
-	•	초기 단계부터 이해관계자를 참여시켜 의견을 반영
-	2.	명확한 커뮤니케이션 및 투명성 유지
-	•	프로젝트 목표, 기대 효과, 진행 상황을 정기적으로 공유
-	•	문서화된 근거를 바탕으로 변경 사항에 대한 명확한 설명 제공
-	3.	작은 성공 사례를 통해 신뢰 형성
-	•	초기 단계에서 작은 성과를 빠르게 달성하여 신뢰 확보
-	•	Pilot 프로젝트를 실행하고 실제 성과 데이터를 공유
-	4.	맞춤형 설득 전략 적용
-	•	경영진: ROI, 비즈니스 가치 강조
-	•	개발팀: 기술적 이점과 생산성 향상 설명
-	•	운영팀: 유지보수 및 프로세스 개선 효과 강조
-	5.	피드백 루프 설정 및 지속적 개선
-	•	정기적인 피드백 세션을 통해 이해관계자의 의견을 반영
-	•	저항을 줄이기 위해 점진적 변화(Incremental Change) 적용
+	- 저항 극복 방법
+		- Stakeholder Engagement Plan 수립
+			- 주요 이해관계자를 식별하고 각자의 관심사 및 우려 사항을 분석
+			- 초기 단계부터 이해관계자를 참여시켜 의견을 반영
 
+		- 명확한 커뮤니케이션 및 투명성 유지
+			- 프로젝트 목표, 기대 효과, 진행 상황을 정기적으로 공유
+			- 문서화된 근거를 바탕으로 변경 사항에 대한 명확한 설명 제공
 
+		- 작은 성공 사례를 통해 신뢰 형성
+			- 초기 단계에서 작은 성과를 빠르게 달성하여 신뢰 확보
+			- Pilot 프로젝트를 실행하고 실제 성과 데이터를 공유
 
-2. Scrum@Scale과 SAFe(Scaled Agile Framework)의 차이점
+		- 맞춤형 설득 전략 적용
+			- 경영진: ROI, 비즈니스 가치 강조
+			- 개발팀: 기술적 이점과 생산성 향상 설명
+			- 운영팀: 유지보수 및 프로세스 개선 효과 강조
 
-Scrum@Scale 개념
-	•	Scrum을 여러 팀에 확장하는 프레임워크
-	•	팀 간 조정을 위해 Scrum of Scrums(SoS) 및 Executive Action Team(EAT) 활용
-	•	Self-managing 팀 중심의 유연한 구조
+		- 피드백 루프 설정 및 지속적 개선
+			- 정기적인 피드백 세션을 통해 이해관계자의 의견을 반영
+			- 저항을 줄이기 위해 점진적 변화(Incremental Change) 적용
 
-SAFe(Scaled Agile Framework) 개념
-	•	대규모 조직을 위한 Agile 확장 프레임워크
-	•	Agile Release Train(ART) 개념을 사용하여 여러 팀이 동기화된 방식으로 개발
-	•	Lean Portfolio Management, DevOps 등 기업 수준의 프로세스 포함
+- Scrum@Scale과 SAFe(Scaled Agile Framework)의 차이점
+	- Scrum@Scale 개념
+		- Scrum을 여러 팀에 확장하는 프레임워크
+		- 팀 간 조정을 위해 Scrum of Scrums(SoS) 및 Executive Action Team(EAT) 활용
+		- Self-managing 팀 중심의 유연한 구조
 
-핵심 차이점
-	1.	조직 구조
-	•	Scrum@Scale: 팀 중심으로 유연하게 확장
-	•	SAFe: 계층적 구조(Portfolio → Large Solution → Program → Team)
-	2.	확장 방식
-	•	Scrum@Scale: 팀 간 협업을 위한 Scrum of Scrums 활용
-	•	SAFe: Agile Release Train(ART)을 활용하여 여러 팀 동기화
-	3.	적용 환경
-	•	Scrum@Scale: 스타트업, 유연한 조직에 적합
-	•	SAFe: 대기업, 복잡한 프로젝트 관리에 적합
+	- SAFe(Scaled Agile Framework) 개념
+		- 대규모 조직을 위한 Agile 확장 프레임워크
+		- Agile Release Train(ART) 개념을 사용하여 여러 팀이 동기화된 방식으로 개발
+		- Lean Portfolio Management, DevOps 등 기업 수준의 프로세스 포함
 
+	- 핵심 차이점
+		- 조직 구조
+			- Scrum@Scale: 팀 중심으로 유연하게 확장
+			- SAFe: 계층적 구조(Portfolio → Large Solution → Program → Team)
+		- 확장 방식
+			- Scrum@Scale: 팀 간 협업을 위한 Scrum of Scrums 활용
+			- SAFe: Agile Release Train(ART)을 활용하여 여러 팀 동기화
+		- 적용 환경
+			- Scrum@Scale: 스타트업, 유연한 조직에 적합
+			- SAFe: 대기업, 복잡한 프로젝트 관리에 적합
 
+- Lean Portfolio Management 적용 방법
+	- Lean Portfolio Management 개념
+		- 조직의 전략과 자원 배분을 Agile 방식으로 최적화
+		- 고객 가치 중심의 투자 → 가장 중요한 프로젝트에 자원을 집중
 
-3. Lean Portfolio Management 적용 방법
+	- Lean Portfolio Management 적용 방법
+		- (1) 전략적 목표와 연계된 투자 결정
+			- 비즈니스 OKR(Objectives & Key Results)와 연계하여 프로젝트 우선순위 결정
+			- 가치 흐름(Value Stream) 중심의 의사결정
 
-Lean Portfolio Management 개념
-	•	조직의 전략과 자원 배분을 Agile 방식으로 최적화
-	•	고객 가치 중심의 투자 → 가장 중요한 프로젝트에 자원을 집중
+		- (2) 가변적 예산 배분(Flexible Budgeting)
+			- 연간 고정 예산이 아닌 분기별/월별 예산 조정 가능
+			- MVP 검증 후 투자 확대 또는 축소 결정
 
-Lean Portfolio Management 적용 방법
-	1.	전략적 목표와 연계된 투자 결정
-	•	비즈니스 OKR(Objectives & Key Results)와 연계하여 프로젝트 우선순위 결정
-	•	가치 흐름(Value Stream) 중심의 의사결정
-	2.	가변적 예산 배분(Flexible Budgeting)
-	•	연간 고정 예산이 아닌 분기별/월별 예산 조정 가능
-	•	MVP 검증 후 투자 확대 또는 축소 결정
-	3.	Lean Funding Model 구축
-	•	전통적인 프로젝트 단위가 아닌 제품(Product) 또는 Value Stream 중심으로 자원 배분
-	•	Lean Startup 방식으로 PoC(Proof of Concept) 검증 후 본격적 투자
-	4.	계속적인 포트폴리오 최적화
-	•	비즈니스 환경 변화에 따라 프로젝트 조정 가능
-	•	KPI 및 데이터 분석을 통해 성과 평가 후 개선
+		- (3) Lean Funding Model 구축
+			- 전통적인 프로젝트 단위가 아닌 제품(Product) 또는 Value Stream 중심으로 자원 배분
+			- Lean Startup 방식으로 PoC(Proof of Concept) 검증 후 본격적 투자
 
+		- (4) 계속적인 포트폴리오 최적화
+			- 비즈니스 환경 변화에 따라 프로젝트 조정 가능
+			- KPI 및 데이터 분석을 통해 성과 평가 후 개선
 
+- Scrum of Scrums을 활용한 여러 팀 간 협업 최적화
+	- Scrum of Scrums 개념
+		- 여러 개의 Scrum 팀이 협업할 때 Scrum Master들이 모여 진행 상황을 조율하는 프레임워크
+		- 각 팀의 장애 요소를 빠르게 해결하고 일정 조율
 
-4. Scrum of Scrums을 활용한 여러 팀 간 협업 최적화
+	- Scrum of Scrums 최적화 방법
+		- (1) Scrum Master 간 정기적인 Sync Meeting 운영
+			- Daily Stand-up 후 Scrum Master들이 모여 진행 상황 공유
+			- 팀 간 종속성(Dependency) 조정 및 병목 현상 해결
 
-Scrum of Scrums 개념
-	•	여러 개의 Scrum 팀이 협업할 때 Scrum Master들이 모여 진행 상황을 조율하는 프레임워크
-	•	각 팀의 장애 요소를 빠르게 해결하고 일정 조율
+		- (2) 백로그 정렬 및 우선순위 조정
+			- 여러 팀이 같은 목표를 공유할 수 있도록 Product Owner들과 협업
+			- 중복 작업을 방지하고 병렬 개발 가능하도록 설계
 
-Scrum of Scrums 최적화 방법
-	1.	Scrum Master 간 정기적인 Sync Meeting 운영
-	•	Daily Stand-up 후 Scrum Master들이 모여 진행 상황 공유
-	•	팀 간 종속성(Dependency) 조정 및 병목 현상 해결
-	2.	백로그 정렬 및 우선순위 조정
-	•	여러 팀이 같은 목표를 공유할 수 있도록 Product Owner들과 협업
-	•	중복 작업을 방지하고 병렬 개발 가능하도록 설계
-	3.	Cross-team Dependency 관리
-	•	특정 팀이 다른 팀의 작업 완료를 기다리지 않도록 병렬 작업 수행 가능하도록 계획
-	•	Kanban 보드를 활용하여 종속성을 시각적으로 관리
-	4.	Scrum of Scrums Master 역할 추가
-	•	일반 Scrum Master가 아닌 SoS Master(팀 간 조율 담당자) 지정
-	•	전체적인 일정 및 리스크 관리 수행
+		- (3) Cross-team Dependency 관리
+			- 특정 팀이 다른 팀의 작업 완료를 기다리지 않도록 병렬 작업 수행 가능하도록 계획
+			- Kanban 보드를 활용하여 종속성을 시각적으로 관리
 
+		- (4) Scrum of Scrums Master 역할 추가
+			- 일반 Scrum Master가 아닌 SoS Master(팀 간 조율 담당자) 지정
+			- 전체적인 일정 및 리스크 관리 수행
 
+- Dual-track Agile을 프로젝트에 적용하는 방법
+	- Dual-track Agile 개념
+		- “Discovery Track(탐색 트랙)“과 “Delivery Track(개발 트랙)“을 병행하여 운영하는 방식
+		- Discovery Track: 고객 요구사항 및 기능 검증 (UX Research, Prototyping)
+		- Delivery Track: 실제 제품 개발 및 배포
 
-5. Dual-track Agile을 프로젝트에 적용하는 방법
+	- Dual-track Agile 적용 방법
+		- (1) Discovery Track과 Delivery Track 팀 구성
+			- Discovery Team: UX 디자이너, 기획자, 데이터 분석가
+			- Delivery Team: 개발자, QA, DevOps
 
-Dual-track Agile 개념
-	•	“Discovery Track(탐색 트랙)“과 “Delivery Track(개발 트랙)“을 병행하여 운영하는 방식
-	•	Discovery Track: 고객 요구사항 및 기능 검증 (UX Research, Prototyping)
-	•	Delivery Track: 실제 제품 개발 및 배포
+		- (2) 빠른 피드백 루프 구축
+			- Discovery Track에서 만든 Prototype을 실사용자 테스트 후 Delivery Track으로 전달
+			- Scrum Sprint 내에서 연구(Discovery)와 개발(Delivery) 동시 진행
 
-Dual-track Agile 적용 방법
-	1.	Discovery Track과 Delivery Track 팀 구성
-	•	Discovery Team: UX 디자이너, 기획자, 데이터 분석가
-	•	Delivery Team: 개발자, QA, DevOps
-	2.	빠른 피드백 루프 구축
-	•	Discovery Track에서 만든 Prototype을 실사용자 테스트 후 Delivery Track으로 전달
-	•	Scrum Sprint 내에서 연구(Discovery)와 개발(Delivery) 동시 진행
-	3.	우선순위 높은 기능 먼저 개발
-	•	연구 결과를 바탕으로 MVP를 설정하고 먼저 개발
-	•	Agile Backlog를 기반으로 Discovery → Delivery 순환
-	4.	효율적인 협업을 위한 도구 활용
-	•	UX & 기획: Figma, Miro, Notion 활용
-	•	개발: Jira, Trello로 Task 관리
+		- (3) 우선순위 높은 기능 먼저 개발
+			- 연구 결과를 바탕으로 MVP를 설정하고 먼저 개발
+			- Agile Backlog를 기반으로 Discovery → Delivery 순환
 
-Dual-track Agile의 장점
+		- (4) 효율적인 협업을 위한 도구 활용
+			- UX & 기획: Figma, Miro, Notion 활용
+			- 개발: Jira, Trello로 Task 관리
 
-✅ 잘못된 기능 개발 방지 → 사전 검증 후 개발 진행
-✅ 고객 중심 개발 → 사용자 피드백을 즉시 반영 가능
-✅ 병렬 작업을 통한 속도 향상 → 기획과 개발이 동시에 진행
+	- Dual-track Agile의 장점
+		- 잘못된 기능 개발 방지 → 사전 검증 후 개발 진행
+		- 고객 중심 개발 → 사용자 피드백을 즉시 반영 가능
+		- 병렬 작업을 통한 속도 향상 → 기획과 개발이 동시에 진행
 
+- Spotify Model을 적용하여 애자일 팀을 운영하는 방법
+	- Spotify Model 개념
+		- Spotify Model은 대규모 조직에서 애자일을 효과적으로 운영하기 위해 고안된 구조로, 팀의 자율성과 협업을 극대화하는 방식이다.
 
+	- Spotify Model의 핵심 요소
+		- (1) Squad (자율적인 팀 단위)
+			- 하나의 Squad는 Scrum 팀과 유사하지만 더 자율적이며, 특정 제품 또는 기능을 책임짐 (토스 사내 문화)
+			- 자율적인 의사결정 → Product Owner와 개발팀이 직접 목표 설정
 
-결론
+		- (2) Tribe (Squad 그룹화)
+			- 비슷한 목표를 가진 여러 Squad가 모여 Tribe을 형성
+			- Tribe Leader가 있으며, 팀 간 협업과 시너지 극대화를 담당
 
-1️⃣ Stakeholder Resistance 극복 → 이해관계자 참여, 커뮤니케이션 강화, 작은 성공 사례로 신뢰 확보
-2️⃣ Scrum@Scale vs. SAFe 차이점 → Scrum@Scale은 유연한 팀 중심, SAFe는 대규모 조직에 적합
-3️⃣ Lean Portfolio Management 적용 → 고객 가치 중심의 투자, 가변적 예산 배분, 지속적 최적화
-4️⃣ Scrum of Scrums 최적화 → Scrum Master 간 Sync Meeting 운영, 종속성 조율, Scrum of Scrums Master 도입
-5️⃣ Dual-track Agile 적용 → Discovery(탐색)과 Delivery(개발) 트랙을 분리하여 사용자 검증 후 개발 진행
+		- (3) Chapter (전문 분야 그룹)
+			- 같은 기술을 사용하는 Squad 멤버들이 모여 지식 공유
+			- 예: Android 개발자들이 모여 Best Practice 공유
 
-이렇게 적용하면 대규모 프로젝트에서도 Agile을 효과적으로 운영할 수 있어! 🚀
+		- (4) Guild (자발적 커뮤니티)
+			- 특정 관심사를 가진 멤버들이 조직 경계를 넘어서 협업
+			- 예: CI/CD 개선 Guild → 전체 조직에서 DevOps 프로세스 개선
 
+	- Spotify Model 적용 방법
+		- (1) 조직의 크기에 맞춰 Tribe & Squad 구성
+			- 작은 규모에서는 Squad 중심으로 운영 → 조직이 커지면 Tribe 형성
 
+		- (2) 자율성과 정렬(Balanced Autonomy & Alignment)
+			- Squad는 독립적으로 운영하지만 회사의 목표(Alignment)에 맞춰 조정
 
-- Spotify Model을 적용하여 애자일 팀을 운영하는 방법은?
-- 애자일 환경에서 Velocity를 신뢰할 수 있는 지표로 만들기 위한 전략은?
-- Mob Programming과 Pair Programming의 차이점과 효과적인 활용 방법은?
-- Agile at Scale을 구현할 때 가장 큰 도전 과제는 무엇인가?
-- 애자일에서 Definition of Ready(DoR)와 Definition of Done(DoD)의 차이점은?
-  - 1. Spotify Model을 적용하여 애자일 팀 운영하는 방법
+		- (3) Chapter 및 Guild 운영을 통해 지속적인 성장 지원
+			- 코드 리뷰 및 기술 세션 활성화
+			- Guild 활동을 통한 새로운 기술 도입 검토
 
-Spotify Model 개념
+		- (4) Squad 간 협업을 위한 Sync Meeting 운영
+			- Squad 간 의존성 조율 → Scrum of Scrums 활용 가능
 
-Spotify Model은 대규모 조직에서 애자일을 효과적으로 운영하기 위해 고안된 구조로, 팀의 자율성과 협업을 극대화하는 방식이다.
+- 애자일 환경에서 Velocity를 신뢰할 수 있는 지표로 만들기 위한 전략
+	- Velocity 개념
+		- Velocity는 한 스프린트에서 완료한 Story Point의 평균값
+		- 신뢰할 수 있는 Velocity는 일관성 있고 예측 가능한 개발 속도를 제공
 
-Spotify Model의 핵심 요소
+	- Velocity를 신뢰할 수 있도록 만드는 전략
+		- (1) Story Point 측정 기준 표준화
+			- 팀 내에서 Story Point 산정 기준을 일관되게 적용
+			- 예: “1 Story Point = 1~2일 작업량”과 같은 가이드라인 설정
+			
+		- (2) 기능이 아닌 “완료된 작업”만 포함
+			- Definition of Done(DoD)에 맞게 완료된 항목만 Velocity에 반영
+			- “거의 완료됨” 상태의 작업은 포함하지 않음
 
-1) Squad (자율적인 팀 단위)
-	•	하나의 Squad는 Scrum 팀과 유사하지만 더 자율적이며, 특정 제품 또는 기능을 책임짐
-	•	자율적인 의사결정 → Product Owner와 개발팀이 직접 목표 설정
+		- (3) 안정적인 팀 구성 유지
+			- 팀원의 변동이 잦으면 Velocity의 신뢰도가 떨어짐
+			- 핵심 멤버 유지 및 신규 팀원 Onboarding 프로세스 구축
 
-2) Tribe (Squad 그룹화)
-	•	비슷한 목표를 가진 여러 Squad가 모여 Tribe을 형성
-	•	Tribe Leader가 있으며, 팀 간 협업과 시너지 극대화를 담당
+		- (4) 이전 스프린트 데이터를 기반으로 평균 Velocity 도출
+			- 최소 3~5개 스프린트의 데이터를 기반으로 평균 계산
+			- 예측 가능한 일정 관리를 위해 과거 데이터를 지속적으로 검토
 
-3) Chapter (전문 분야 그룹)
-	•	같은 기술을 사용하는 Squad 멤버들이 모여 지식 공유
-	•	예: Android 개발자들이 모여 Best Practice 공유
-
-4) Guild (자발적 커뮤니티)
-	•	특정 관심사를 가진 멤버들이 조직 경계를 넘어서 협업
-	•	예: CI/CD 개선 Guild → 전체 조직에서 DevOps 프로세스 개선
-
-Spotify Model 적용 방법
-	1.	조직의 크기에 맞춰 Tribe & Squad 구성
-	•	작은 규모에서는 Squad 중심으로 운영 → 조직이 커지면 Tribe 형성
-	2.	자율성과 정렬(Balanced Autonomy & Alignment)
-	•	Squad는 독립적으로 운영하지만 회사의 목표(Alignment)에 맞춰 조정
-	3.	Chapter 및 Guild 운영을 통해 지속적인 성장 지원
-	•	코드 리뷰 및 기술 세션 활성화
-	•	Guild 활동을 통한 새로운 기술 도입 검토
-	4.	Squad 간 협업을 위한 Sync Meeting 운영
-	•	Squad 간 의존성 조율 → Scrum of Scrums 활용 가능
-
-
-
-2. 애자일 환경에서 Velocity를 신뢰할 수 있는 지표로 만들기 위한 전략
-
-Velocity 개념
-	•	Velocity는 한 스프린트에서 완료한 Story Point의 평균값
-	•	신뢰할 수 있는 Velocity는 일관성 있고 예측 가능한 개발 속도를 제공
-
-Velocity를 신뢰할 수 있도록 만드는 전략
-	1.	Story Point 측정 기준 표준화
-	•	팀 내에서 Story Point 산정 기준을 일관되게 적용
-	•	예: “1 Story Point = 1~2일 작업량”과 같은 가이드라인 설정
-	2.	기능이 아닌 “완료된 작업”만 포함
-	•	Definition of Done(DoD)에 맞게 완료된 항목만 Velocity에 반영
-	•	“거의 완료됨” 상태의 작업은 포함하지 않음
-	3.	안정적인 팀 구성 유지
-	•	팀원의 변동이 잦으면 Velocity의 신뢰도가 떨어짐
-	•	핵심 멤버 유지 및 신규 팀원 Onboarding 프로세스 구축
-	4.	이전 스프린트 데이터를 기반으로 평균 Velocity 도출
-	•	최소 3~5개 스프린트의 데이터를 기반으로 평균 계산
-	•	예측 가능한 일정 관리를 위해 과거 데이터를 지속적으로 검토
-	5.	버그 수정 및 예측 불가능한 작업을 Velocity에서 분리
-	•	긴급한 핫픽스나 예측 불가능한 작업(Ops 관련 이슈)은 별도로 관리
-
-
+		- (5) 버그 수정 및 예측 불가능한 작업을 Velocity에서 분리
+			- 긴급한 핫픽스나 예측 불가능한 작업(Ops 관련 이슈)은 별도로 관리
 
 3. Mob Programming과 Pair Programming의 차이점과 효과적인 활용 방법
 
