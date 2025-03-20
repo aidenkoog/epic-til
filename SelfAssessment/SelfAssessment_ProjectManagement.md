@@ -2128,21 +2128,19 @@ Organize concepts, features, types and Pros and Cons
 		- 지적 재산권, 보안 요구사항, SLA(Service Level Agreement) 포함
 		- 계약 조건(비용, 유지보수, 위약금 등) 명시
 
-Agile Estimation 기법 적용 방법
-	1.	스토리 포인트(Story Point) 사용
-	•	개발 복잡도, 리스크, 작업량을 기준으로 상대적 크기 산정
-	•	피보나치 수열(1, 2, 3, 5, 8…)을 활용한 상대적 평가
-	2.	플래닝 포커(Planning Poker)
-	•	팀원이 각자 예상하는 스토리 포인트를 비공개로 선정 후 공개
-	•	의견 차이가 크면 토론 후 조정
-	3.	T-Shirt Sizing
-	•	작업을 S, M, L, XL 크기로 나눠 개략적 평가
-	•	초기에 거친 추정을 할 때 유용
-	4.	Ideal Days & Velocity
-	•	개발자가 예상하는 순수 작업일(Ideal Day)로 산정
-	•	과거 스프린트 속도(Velocity) 기반으로 향후 일정 예측
-
-
+- Agile Estimation 기법 적용 방법
+	- (1) 스토리 포인트(Story Point) 사용
+		- 개발 복잡도, 리스크, 작업량을 기준으로 상대적 크기 산정
+		- 피보나치 수열(1, 2, 3, 5, 8…)을 활용한 상대적 평가
+	- (2) 플래닝 포커(Planning Poker)
+		- 팀원이 각자 예상하는 스토리 포인트를 비공개로 선정 후 공개
+		- 의견 차이가 크면 토론 후 조정
+	- (3) T-Shirt Sizing
+		- 작업을 S, M, L, XL 크기로 나눠 개략적 평가
+		- 초기에 거친 추정을 할 때 유용
+	- (4) Ideal Days & Velocity
+		- 개발자가 예상하는 순수 작업일(Ideal Day)로 산정
+		- 과거 스프린트 속도(Velocity) 기반으로 향후 일정 예측
 
 프로젝트 스폰서(Project Sponsor)의 역할
 	1.	프로젝트 비전 및 목표 설정
