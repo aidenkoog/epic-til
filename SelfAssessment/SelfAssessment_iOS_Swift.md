@@ -3670,6 +3670,73 @@ SwiftSyntax/SwiftDiagnostics 강화로 IDE에서의 정적 분석 더 강화됨
 - Metal을 활용하여 iOS 앱에서 그래픽 성능을 최적화하는 방법은?
 - ARKit과 RealityKit의 차이점은?
 - iOS에서 Passkeys를 지원하는 방법은?
+    - ✅ 1. Swift Concurrency의 Structured Concurrency란?
+Structured Concurrency는 비동기 작업을 계층적 구조로 관리할 수 있도록 하는 Swift의 개념입니다.
+기존의 GCD나 Completion Handler는 비동기 작업의 흐름이 코드 구조와 분리되어 유지보수가 어렵고, 리소스 누수나 충돌의 위험이 있었습니다.
+이에 반해 Structured Concurrency는 async/await, Task, TaskGroup 등의 요소를 통해, 비동기 작업을 코드 블록 내에서 구조적으로 관리합니다.
+
+핵심 개념은 다음과 같습니다:
+
+부모-자식 Task 관계: Task 안에서 생성된 하위 작업은 부모의 생명 주기 내에서만 존재합니다. 부모 작업이 종료되면 자식도 자동 취소됩니다.
+
+자동 정리 및 오류 전파: 자식 작업에서 오류가 발생하면 부모 작업도 오류를 감지하여 대응할 수 있습니다.
+
+withTaskGroup / withThrowingTaskGroup 등을 통해 여러 작업을 병렬로 실행하고, 그 결과를 병합할 수 있습니다.
+
+➡️ 이 구조는 안정적인 자원 관리와 명확한 오류 처리를 가능하게 하며, 코드의 가독성과 안정성을 높입니다.
+
+✅ 2. Metal을 활용한 iOS 앱 그래픽 성능 최적화
+Metal은 Apple이 제공하는 고성능 저수준 그래픽 및 계산 API로, OpenGL보다 훨씬 효율적인 하드웨어 접근이 가능합니다.
+iOS 앱에서 Metal을 활용해 그래픽 성능을 최적화하는 방법은 다음과 같습니다:
+
+Command Queue 최적화: MTLCommandQueue를 통해 GPU 명령을 일괄적으로 처리하고, 가능한 한 많은 작업을 묶어서 보냅니다.
+
+Triple Buffering 사용: 렌더링 지연 없이 부드러운 화면 전환을 위해 triple buffering을 적용하여 frame drop 방지
+
+Vertex & Fragment Shader 최적화: GPU에서 실행되는 쉐이더 코드를 최적화하여 병목을 줄입니다.
+
+Resource Preloading: 텍스처, 버퍼 등의 자원을 미리 로딩하거나 Metal heap을 사용해 메모리 관리를 효율적으로 수행
+
+Render Pass 활용: 여러 렌더링 작업을 하나의 MTLRenderPassDescriptor에 묶어 효율적으로 처리
+
+GPU/CPU 동기화 최소화: blit encoder 등을 이용해 GPU 내부 복사를 수행하고, CPU와의 동기화를 최소화함으로써 성능 향상
+
+➡️ Metal을 잘 활용하면 복잡한 3D 그래픽이나 실시간 애니메이션 처리 시에도 매우 부드러운 사용자 경험을 제공할 수 있습니다.
+
+✅ 3. ARKit과 RealityKit의 차이점
+ARKit과 RealityKit은 iOS에서 증강현실(AR)을 구현하기 위한 프레임워크입니다. 둘의 목적과 역할은 유사하지만, 사용 편의성과 렌더링 처리 방식에서 차이가 납니다.
+
+구분	ARKit	RealityKit
+목적	저수준 AR 기능 제어	고수준 AR 콘텐츠 렌더링
+접근 방식	SceneKit 또는 Metal과 결합 필요	자체 렌더링 엔진 사용
+복잡성	복잡하고 유연한 설정 가능	간단한 API로 빠른 개발 가능
+물리 엔진	직접 설정 필요	기본 내장 (충돌, 중력 등)
+애니메이션	수동 설정	내장 애니메이션 지원
+객체 배치	수작업 배치	앵커 기반 자동 배치 가능
+➡️ ARKit은 유연한 커스터마이징이 가능하고, RealityKit은 쉽고 빠르게 AR 앱을 개발할 수 있는 현대적인 프레임워크입니다.
+
+✅ 4. iOS에서 Passkeys 지원 방법
+Passkeys는 Apple이 FIDO2/WebAuthn 기반으로 구현한 비밀번호 없는 인증 방식입니다. Face ID 또는 Touch ID로 인증하며, 사용자 기기에 키 쌍이 저장됩니다.
+서버에는 공개키만 저장되고, 인증 시 기기가 서명하여 검증합니다.
+
+iOS에서 Passkeys를 지원하려면 다음 단계를 따릅니다:
+
+iCloud Keychain 설정 활성화: 사용자 기기에 iCloud Keychain이 켜져 있어야 함
+
+ASAuthorizationPlatformPublicKeyCredentialProvider 사용: Passkey 생성 및 등록을 위한 클래스
+
+ASAuthorizationController를 통한 인증:
+
+ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest → 등록
+
+ASAuthorizationPlatformPublicKeyCredentialAssertionRequest → 로그인
+
+WebAuthn 호환 서버 구현: 서버는 WebAuthn 기반 인증 로직을 지원해야 하며, 등록된 공개키로 서명된 challenge를 검증
+
+또한, WebView 또는 Safari에서도 Passkeys on the Web을 지원할 수 있으며, 공유 키체인과 자동 동기화도 함께 지원됩니다.
+
+➡️ 사용자는 비밀번호를 기억할 필요 없이 생체 인증만으로 안전하게 로그인할 수 있으며, 개발자는 사용자 경험과 보안을 동시에 향상시킬 수 있습니다.
+
 
 
 - Live Activities를 구현하는 방법은?
