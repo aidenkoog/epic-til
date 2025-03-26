@@ -1687,19 +1687,278 @@ Crashlytics: 안정성과 사용자 경험 개선을 위한 핵심 도구
 - iOS에서 HTTPS를 강제하는 방법은?
 - 앱의 보안을 강화하는 방법은?
 - Face ID 및 Touch ID를 활용하는 방법은?
+    - ✅ 1. Keychain을 활용하여 민감한 데이터를 저장하는 방법
+Keychain은 iOS에서 제공하는 암호화된 보안 저장소로, 사용자의 로그인 정보, 토큰, 인증서 등을 안전하게 저장할 수 있다. 시스템 차원에서 암호화되며, 앱 간 공유 제한, 잠금 연동 등 매우 높은 보안성을 제공한다.
 
+주요 특징
+iOS 보안 프레임워크(Security framework) 기반
+
+데이터는 암호화되어 저장
+
+Touch ID, Face ID와 연동 가능
+
+앱 삭제 시 기본적으로 함께 삭제됨
+
+저장 예시 (Swift)
+swift
+복사
+편집
+let account = "user@example.com"
+let password = "mypassword"
+
+let query: [String: Any] = [
+    kSecClass as String: kSecClassGenericPassword,
+    kSecAttrAccount as String: account,
+    kSecValueData as String: password.data(using: .utf8)!
+]
+
+SecItemAdd(query as CFDictionary, nil)
+조회 예시
+swift
+복사
+편집
+let query: [String: Any] = [
+    kSecClass as String: kSecClassGenericPassword,
+    kSecAttrAccount as String: account,
+    kSecReturnData as String: kCFBooleanTrue!,
+    kSecMatchLimit as String: kSecMatchLimitOne
+]
+
+var dataTypeRef: AnyObject?
+SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+
+if let data = dataTypeRef as? Data {
+    let password = String(decoding: data, as: UTF8.self)
+}
+✅ 2. iOS에서 HTTPS를 강제하는 방법
+iOS는 보안 강화를 위해 앱 내 모든 네트워크 요청을 HTTPS로 강제하는 ATS(App Transport Security) 기능을 제공한다.
+
+기본 설정
+iOS 9 이상에서는 기본적으로 HTTP를 차단
+
+HTTPS만 허용됨
+
+예외 설정 (비추천)
+Info.plist에 다음과 같은 설정으로 특정 도메인에 대해 HTTP를 허용할 수 있다:
+
+xml
+복사
+편집
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>example.com</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>
+하지만 이 방식은 보안 취약점이 발생할 수 있으므로, 가급적 서버에서 HTTPS 인증서를 적용하는 방식이 권장된다.
+
+✅ 3. 앱의 보안을 강화하는 방법
+iOS 앱에서 보안을 강화하기 위한 전략은 여러 계층에서 적용될 수 있다.
+
+애플리케이션 레벨
+민감 정보(Key, Token 등)는 Keychain에 저장
+
+앱 내 디버깅 로그에 개인정보 출력 금지
+
+Jailbreak 감지 및 차단 (예: 파일 시스템 체크, cydia.app 여부 등)
+
+네트워크 레벨
+HTTPS + SSL Pinning 적용 (인증서 위조 방지)
+
+OAuth2 기반 인증 토큰 활용
+
+민감 요청은 POST 방식 + 매번 새로운 토큰 생성
+
+사용자 인증 강화
+Face ID / Touch ID 연동
+
+2차 인증 적용 (SMS, OTP 등)
+
+기타
+코드 난독화 (Obfuscation)
+
+앱 무결성 체크 (앱이 변조되지 않았는지 검증)
+
+✅ 4. Face ID 및 Touch ID를 활용하는 방법
+iOS에서는 LocalAuthentication 프레임워크를 통해 생체 인증 기능을 사용할 수 있다. 사용자는 Face ID 또는 Touch ID로 인증하고, 앱은 사용자 인증을 대신 신뢰할 수 있다.
+
+기본 흐름
+LAContext 인스턴스 생성
+
+생체 인증 가능 여부 확인
+
+인증 요청 및 결과 처리
+
+사용 예시
+swift
+복사
+편집
+import LocalAuthentication
+
+let context = LAContext()
+var error: NSError?
+
+if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+    context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "앱 접근을 위해 인증하세요") { success, error in
+        if success {
+            // 인증 성공 처리
+        } else {
+            // 실패 또는 취소 처리
+        }
+    }
+}
+장점
+사용자 경험 향상
+
+민감 정보 접근 제한
+
+Keychain과 연동하여 자동 잠금 가능 (kSecAccessControlBiometryCurrentSet)
+
+✅ 요약
+Keychain: 민감 정보를 안전하게 저장하는 보안 저장소
+
+HTTPS 강제: ATS로 인해 기본적으로 HTTPS만 허용
+
+보안 강화 전략: 저장, 전송, 인증 모든 계층에서 보안 조치 적용 필요
+
+Face ID / Touch ID: 생체 인증으로 앱 보안과 UX 동시 향상 가능
 
 - Dynamic Type과 VoiceOver를 지원하는 방법은?
 - iOS 앱에서 사용자 데이터를 보호하기 위한 방법은?
 - iOS 최신 버전에서 추가된 주요 기능은?
 - Swift Concurrency(async/await)와 기존 GCD의 차이점은?
+    - 1. Dynamic Type과 VoiceOver를 지원하는 방법은?
+⬛ Dynamic Type
+사용자가 설정한 글꼴 크기에 따라 텍스트 크기를 자동으로 조절해주는 기능.
 
+UIFont.preferredFont(forTextStyle:) 또는 SwiftUI의 .font(.body) 같은 접근 방식으로 대응 가능.
+
+Interface Builder에서도 Automatically Adjusts Font 옵션을 체크하거나, 코드에서 adjustsFontForContentSizeCategory = true 설정 필요.
+
+⬛ VoiceOver
+시각 장애인을 위한 화면 낭독 기능.
+
+모든 UI 요소에 accessibilityLabel, accessibilityHint, accessibilityTraits 등을 설정하여 설명을 제공.
+
+예: myButton.accessibilityLabel = "설정 버튼"
+
+이미지에는 isAccessibilityElement = true와 함께 의미 있는 label 부여 필요.
+
+2. iOS 앱에서 사용자 데이터를 보호하기 위한 방법은?
+Keychain 사용: 로그인 정보, 인증 토큰 등 민감한 데이터 저장.
+
+App Transport Security (ATS): HTTPS만 허용하도록 설정해 데이터 전송 보호.
+
+Data Protection API: 앱이 백그라운드에 있을 때 데이터 암호화 (NSFileProtectionComplete 등 설정).
+
+Biometric 인증: Face ID, Touch ID 등으로 민감 기능 접근 제한.
+
+Privacy Manifest, 개인정보 정책: 앱의 데이터 수집 및 사용 항목 명시.
+
+3. iOS 최신 버전에서 추가된 주요 기능은? (예: iOS 17, 16 기준)
+SwiftUI 개선: 더 강력한 Animation, Transition, NavigationStack 도입.
+
+Swift Concurrency 강화: nonisolated, @MainActor, Sendable 등 도입.
+
+SwiftData: CoreData의 SwiftUI 친화적 대체 프레임워크.
+
+Lock Screen 위젯 / Live Activities: 동적인 정보 제공 UI 가능.
+
+App Intents: Siri Shortcuts와 연계된 사용자 명령 정의 프레임워크.
+
+Privacy 강화: 앱 추적 투명성, 카메라/마이크 사용 기록 표시 강화.
+
+4. Swift Concurrency (async/await)와 기존 GCD의 차이점은?
+⬛ GCD (Grand Central Dispatch)
+DispatchQueue.global().async { ... } 구조로 백그라운드 작업 수행.
+
+클로저 기반이며, 콜백 지옥(callback hell)에 빠지기 쉬움.
+
+직접 큐 설정, 동기/비동기 구분 필요.
+
+⬛ Swift Concurrency (async/await)
+구조적 비동기 프로그래밍 도입으로 코드 흐름이 간결하고 읽기 쉬움.
+
+async, await, Task, actor 등을 통해 데이터 경쟁을 방지하고 예측 가능한 동시성 제공.
+
+예외 처리도 try와 do-catch를 통해 동기식처럼 처리 가능.
+
+Swift 컴파일러가 Task 간 의존성과 스케줄링을 최적화함.
 
 - Apple Silicon에서 iOS 앱이 어떻게 동작하는가?
 - WidgetKit, App Clips, Swift Charts 등 최신 프레임워크를 활용하는 방법은?
 - Vision, ARKit, CoreML 등 최신 기술을 프로젝트에서 어떻게 활용할 수 있는가?
 - Swift에서 copy-on-write(COW)란? 어떤 자료형에서 활용되는가?
+    - 1. Apple Silicon에서 iOS 앱이 어떻게 동작하는가?
+**Apple Silicon(M1, M2 등)**은 iOS와 macOS 모두에서 사용되는 ARM 기반 아키텍처로, iOS 앱을 macOS에서 직접 실행할 수 있게 함.
 
+iOS 앱을 Mac App Store에 배포하지 않더라도, 사용자는 Mac에서 App Store를 통해 iOS 앱을 다운로드 가능.
+
+개발자는 특별한 작업 없이도 iOS 앱을 Mac에서 동작하도록 할 수 있지만, Mac에서 UI/UX가 맞지 않는 경우 "Mac 지원 제외" 설정 가능.
+
+Apple Silicon 기반 Mac에서는 iOS의 UIKit 앱이 UIKit for Mac을 통해 런타임 호환성 확보.
+
+단, 앱에서 카메라, GPS, 모션 센서 등을 사용하는 경우, Mac에서 해당 기능이 없거나 다르게 동작할 수 있음.
+
+2. WidgetKit, App Clips, Swift Charts 등 최신 프레임워크를 활용하는 방법은?
+⬛ WidgetKit
+홈 화면/잠금 화면에 위젯을 추가할 수 있도록 지원.
+
+SwiftUI 기반이며 TimelineProvider, WidgetConfiguration, Entry 구조 사용.
+
+배경 작업을 통한 데이터 업데이트는 제한적이며, snapshot 기반으로 동작함.
+
+⬛ App Clips
+앱의 경량화 버전으로, QR 코드, NFC, Safari 등으로 앱의 일부분만 빠르게 실행 가능.
+
+최대 용량은 15MB 이하이며, 필요한 기능만 최소화해서 구성함.
+
+일반적으로 결제, 로그인, 예약 등 핵심 기능만 노출.
+
+⬛ Swift Charts
+iOS 16부터 제공된 데이터 시각화용 SwiftUI 프레임워크.
+
+매우 직관적인 문법으로 Chart { BarMark(...) } 형태의 코드로 막대, 선형, 영역 차트 등 표현 가능.
+
+ForEach, LineMark, RuleMark 등을 조합해 인터랙티브한 시각화 구현 가능.
+
+3. Vision, ARKit, CoreML 등 최신 기술을 프로젝트에서 어떻게 활용할 수 있는가?
+⬛ Vision
+얼굴 인식, 객체 추적, 바코드 인식 등 이미지 기반 분석 기능 제공.
+
+CoreML과 함께 사용해 실시간 카메라 분석, AR 연동, OCR 기능 구현 가능.
+
+⬛ ARKit
+증강현실(AR) 기능을 제공하는 프레임워크.
+
+평면 감지, 사람 인식, 위치 기반 오버레이, 3D 오브젝트 배치 등 지원.
+
+RealityKit과 함께 사용하여 물리 기반 렌더링과 애니메이션 구현 가능.
+
+⬛ CoreML
+머신러닝 모델을 앱에 내장하거나 서버 없이 동작하도록 지원.
+
+Vision과 결합해 사진, 동영상 분석에서 객체 인식, 이미지 분류, 텍스트 추출 등에 활용.
+
+mlmodel 파일을 Xcode에 추가하고, VNCoreMLRequest나 MLModel 객체를 통해 예측 수행.
+
+4. Swift에서 copy-on-write(COW)란? 어떤 자료형에서 활용되는가?
+**Copy-on-write(COW)**는 값 타입이 불필요한 복사를 방지하고, 변경이 필요한 시점에만 복사되는 최적화 기법.
+
+Swift에서 Array, Dictionary, Set, String 등 기본 값 타입(Struct) 컬렉션에서 사용됨.
+
+예를 들어, 두 개의 배열 변수가 동일한 인스턴스를 참조할 때, 둘 중 하나가 수정되기 전까지는 복사하지 않고 참조만 공유함.
+
+실제 수정이 발생하는 순간에 새로운 메모리를 할당해서 데이터를 복사함 (실제 복사는 지연됨).
+
+이는 메모리 효율성을 높이면서도 값 타입의 특성을 유지하기 위한 핵심 기술임.
 
 - Swift에서 dynamic 키워드는 언제 사용되는가?
 - associatedtype을 활용한 제네릭 프로토콜을 정의하는 방법은?
