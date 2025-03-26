@@ -3228,6 +3228,119 @@ CI/CD에서 dSYM을 보관하거나 업로드 (Crashlytics, Sentry 등)
 - XCTestCase에서 setUp()과 tearDown()은 각각 언제 호출되는가?
 - iOS에서 Fastlane을 활용한 자동 배포 방법은?
 - iOS 앱의 크기를 최적화하는 방법은?
+    - 1. Xcode의 Build Phases에서 Run Script를 활용하는 방법은?
+개요
+Build Phases → Run Script는 빌드 도중 특정 작업(스크립트 실행)을 수행할 수 있는 단계야.
+
+쉘 스크립트를 직접 작성해서 다양한 작업을 자동화할 수 있음.
+
+대표적인 사용 예
+앱 빌드 시 버전 넘버 자동 갱신
+
+빌드 후 dSYM 파일 백업 또는 업로드
+
+CodeGen 툴 실행 (예: SwiftGen, Sourcery 등)
+
+환경 변수로 특정 설정 적용 (e.g. APP_ENV=production)
+
+작성 위치
+Xcode 프로젝트 > Target > Build Phases > "+" > New Run Script Phase
+
+예제
+bash
+복사
+편집
+export PATH="$PATH:/opt/homebrew/bin"
+echo "🛠 빌드 후 스크립트 실행 중..."
+./scripts/upload-symbols.sh
+2. XCTestCase에서 setUp()과 tearDown()은 각각 언제 호출되는가?
+setUp()
+각 테스트 메서드가 실행되기 직전에 호출됨
+
+테스트 환경을 초기화하는 용도
+
+tearDown()
+각 테스트 메서드 실행 후에 호출됨
+
+테스트 후 리소스를 정리하거나 상태를 원래대로 되돌림
+
+예시
+swift
+복사
+편집
+override func setUp() {
+    super.setUp()
+    viewModel = MyViewModel()
+}
+
+override func tearDown() {
+    viewModel = nil
+    super.tearDown()
+}
+주의점
+테스트 간 상호 간섭을 방지하려면 반드시 상태 초기화 필요
+
+각 테스트마다 독립적인 환경을 보장하는 것이 핵심
+
+3. iOS에서 Fastlane을 활용한 자동 배포 방법은?
+Fastlane이란?
+iOS/Android 앱의 빌드, 테스트, 배포 과정을 자동화하는 도구
+
+Ruby 기반으로 구성되며, Fastfile에 각 작업 정의
+
+주요 기능
+match: 인증서 및 프로비저닝 프로파일 자동 관리
+
+gym: IPA 빌드
+
+pilot: TestFlight 업로드
+
+sigh, screengrab, supply 등 다양한 플러그인 존재
+
+기본 흐름
+bash
+복사
+편집
+fastlane init       // 프로젝트에 Fastlane 구성
+fastlane beta       // 예: TestFlight에 업로드하는 lane
+fastlane release    // App Store에 직접 배포하는 lane
+예시 (Fastfile)
+ruby
+복사
+편집
+lane :beta do
+  match(type: "appstore")
+  gym(scheme: "MyApp")
+  pilot(skip_submission: true)
+end
+4. iOS 앱의 크기를 최적화하는 방법은?
+앱 용량이 커지는 이유
+사용하지 않는 이미지나 리소스 포함
+
+비효율적인 외부 라이브러리 사용
+
+Fat Binary, Universal Build
+
+디버그 심볼 포함
+
+최적화 방법
+Asset Catalog 사용 및 이미지 압축 (PDF, SF Symbol 활용)
+
+Bitcode 비활성화 (특정 조건에서)
+
+Dynamic Framework 대신 Static Linking
+
+App Thinning 적용 (Slicing, Bitcode, On-Demand Resources)
+
+필요 없는 아키텍처 제거 (armv7, x86_64 등)
+
+Dead Code 제거 및 strip 설정
+
+도구
+Xcode Organizer → App Size 분석
+
+App Store Connect → 앱 다운로드 크기 비교
+
 
 
 - In-App Purchase에서 Receipt Validation을 처리하는 방법은?

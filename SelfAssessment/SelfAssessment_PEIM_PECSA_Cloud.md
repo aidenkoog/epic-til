@@ -1461,6 +1461,84 @@ DAC: 사용자 재량으로 권한 설정 가능 (전통적인 파일 시스템)
 - 클라우드 환경에서의 IAM(Identity and Access Management) 역할과 중요성은?
 - 클라우드에서 보안 로깅 및 감사(Audit Logging)의 필요성과 주요 로그 항목은?
 - 클라우드 환경에서 CDN(Content Delivery Network)의 개념과 동작 원리는?
+    - 1. 클라우드에서 SOAR(Security Orchestration, Automation, and Response)의 개념과 활용 사례
+개념
+
+SOAR는 보안 오케스트레이션, 자동화, 사고 대응을 통합한 플랫폼으로, 다양한 보안 시스템을 연결하고, 반복 가능한 대응을 자동화함으로써 보안 운영을 효율화하는 기술
+주요 기능
+
+다중 보안 솔루션 통합 (SIEM, EDR, Threat Intelligence 등)
+대응 워크플로우 자동화
+인시던트 티켓 생성 및 대응 로그화
+활용 사례
+
+AWS Security Hub + Lambda를 활용한 자동 차단 정책 실행
+Azure Sentinel에서 보안 경고 발생 시 Logic App으로 자동 격리
+IBM QRadar + SOAR 연동으로 피싱 메일 탐지 후 계정 비활성화
+2. 클라우드 환경에서 RASP(Runtime Application Self-Protection)의 개념과 활용 사례
+개념
+
+RASP는 애플리케이션 내부에서 실행 시간에 보안 위협을 탐지하고 대응하는 실행 기반 보안 기술
+코드 내부에 삽입되거나 프록시 형태로 동작하며 실행 중 위협을 실시간으로 차단
+특징
+
+코드 분석 + 실행 모니터링 기반 위협 탐지
+WAF보다 정밀한 애플리케이션 레벨 탐지 가능
+DevSecOps 파이프라인에 통합 가능
+활용 사례
+
+사용자 입력에서 SQL Injection 시도를 감지하고 즉시 실행 차단
+비정상 API 호출 시 애플리케이션 동작 중지 및 관리자 알림
+클라우드 네이티브 WAS(Spring Boot 등)과 통합하여 마이크로서비스 단위 보안 적용
+3. 클라우드 환경에서 IAM(Identity and Access Management)의 역할과 중요성
+역할
+
+IAM은 사용자 및 시스템의 식별, 인증, 권한 부여, 정책 관리를 통해 클라우드 자원에 대한 접근을 통제하는 핵심 서비스
+중요성
+
+클라우드 자원은 인터넷에 노출되기 쉬움 → 접근 제어 실패 시 대규모 사고 가능
+모든 리소스에 대한 세밀한 권한 설정(Least Privilege) 필요
+조직 정책에 맞는 역할 기반 권한 설계 및 권한 상속 구조 관리
+기능
+
+사용자 및 역할 생성
+MFA, SSO 연동
+정책(PBAC) 기반 권한 설정
+계정 활동 로그 및 모니터링
+4. 클라우드에서 보안 로깅 및 감사(Audit Logging)의 필요성과 주요 로그 항목
+필요성
+
+클라우드 환경은 자동화 및 분산 자원이 많아 보안 사고 발생 시 추적이 어려움
+따라서 모든 접근, 변경, 시스템 활동에 대해 행위 기반 기록이 필수
+주요 로그 항목
+
+사용자 로그인 및 API 호출
+IAM 권한 변경 및 정책 수정
+리소스 생성/삭제/변경
+보안 그룹 및 VPC 구성 변경
+데이터 접근 이력(S3, Blob 등)
+예시
+
+AWS: CloudTrail, CloudWatch Logs
+GCP: Cloud Audit Logs
+Azure: Azure Activity Log, Diagnostic Log
+5. 클라우드 환경에서 CDN(Content Delivery Network)의 개념과 동작 원리
+개념
+
+CDN은 전 세계에 분산된 캐시 서버를 통해 **정적 콘텐츠(이미지, JS, CSS 등)**를 사용자와 가까운 위치에서 빠르게 전송하는 콘텐츠 전송 최적화 네트워크
+동작 원리
+
+사용자 요청이 DNS를 통해 가장 가까운 CDN 엣지 서버로 전달됨
+엣지 서버에 캐시가 있으면 응답, 없으면 원본 서버에서 받아 캐시 후 응답
+TTL 설정에 따라 주기적 갱신
+효과
+
+지연 시간(Latency) 감소
+원본 서버 부하 감소
+DDoS 완화 및 웹 가용성 향상
+클라우드 예시
+
+AWS CloudFront, Azure CDN, Google Cloud CDN 등
 
 
 - 클라우드 네트워크에서 Anycast와 Unicast의 차이점과 활용 사례는?
@@ -1468,7 +1546,7 @@ DAC: 사용자 재량으로 권한 설정 가능 (전통적인 파일 시스템)
 - 클라우드에서 네트워크 격리(Network Isolation)의 개념과 주요 기법은?
 - 클라우드 환경에서 MPLS와 SD-WAN의 차이점은?
 - 클라우드 스토리지에서 Blob Storage와 Block Storage의 차이점은?
-
+    - 
 
 - 클라우드 데이터베이스에서 Sharding과 Replication의 차이점은?
 - 클라우드 환경에서 Data Governance(데이터 거버넌스)의 개념과 필요성은?
