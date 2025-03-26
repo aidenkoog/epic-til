@@ -1964,73 +1964,1265 @@ Swift에서 Array, Dictionary, Set, String 등 기본 값 타입(Struct) 컬렉�
 - associatedtype을 활용한 제네릭 프로토콜을 정의하는 방법은?
 - Swift의 Property Wrapper를 활용하는 방법과 사용 사례는?
 - lazy var와 computed property의 차이점은?
+    - 1. Swift에서 dynamic 키워드는 언제 사용되는가?
+dynamic 키워드는 런타임에 메서드 디스패치가 결정되도록 Swift에서 Objective-C의 동적 디스패치(dynamic dispatch) 메커니즘을 사용할 때 사용된다.
+
+Swift는 기본적으로 정적 디스패치(statical dispatch)를 사용하지만, 다음 조건을 만족하면 동적 디스패치를 사용할 수 있다:
+
+@objc와 함께 사용되며, Objective-C 런타임에 노출됨
+
+클래스에서 정의된 메서드나 프로퍼티에 적용 가능
+
+KVO(Key-Value Observing) 같은 런타임 기반 기능을 사용할 때 필요
+
+예시
+
+swift
+복사
+편집
+class Person: NSObject {
+    @objc dynamic var name: String = ""
+}
+위와 같이 정의된 프로퍼티는 KVO 감시 대상으로 사용할 수 있다.
+
+2. associatedtype을 활용한 제네릭 프로토콜 정의 방법
+associatedtype은 프로토콜 내에서 사용할 타입을 유연하게 정의하기 위해 사용된다.
+
+이 타입은 프로토콜을 채택한 구조체나 클래스에서 구체적으로 결정된다.
+
+Swift의 제네릭한 프로토콜 설계에 핵심적인 기능이다.
+
+예시
+
+swift
+복사
+편집
+protocol Container {
+    associatedtype Item
+    var items: [Item] { get set }
+    mutating func append(_ item: Item)
+}
+이 프로토콜을 채택한 타입은 Item 타입을 직접 명시해야 한다.
+
+swift
+복사
+편집
+struct IntContainer: Container {
+    var items = [Int]()
+    mutating func append(_ item: Int) {
+        items.append(item)
+    }
+}
+3. Property Wrapper의 활용 방법과 사용 사례
+Property Wrapper는 프로퍼티에 공통된 로직을 재사용하고, 캡슐화할 수 있도록 도와준다.
+
+@propertyWrapper 키워드로 정의하며, SwiftUI에서 @State, @Binding 등이 대표적인 사례이다.
+
+예시
+
+swift
+복사
+편집
+@propertyWrapper
+struct Clamped<Value: Comparable> {
+    var value: Value
+    let range: ClosedRange<Value>
+    
+    var wrappedValue: Value {
+        get { value }
+        set { value = min(max(range.lowerBound, newValue), range.upperBound) }
+    }
+    
+    init(wrappedValue: Value, _ range: ClosedRange<Value>) {
+        self.value = min(max(range.lowerBound, wrappedValue), range.upperBound)
+        self.range = range
+    }
+}
+사용:
+
+swift
+복사
+편집
+@Clamped(0...100) var volume: Int = 120  // 실제로는 100으로 제한됨
+이런 식으로 프로퍼티의 값을 제한하거나, 자동 저장/불러오기, 암호화 저장 등의 기능을 래핑할 수 있다.
+
+4. lazy var와 computed property의 차이점
+lazy var
+lazy var는 해당 프로퍼티가 처음 접근될 때 계산되고, 이후에는 캐시된 값을 재사용함.
+
+반드시 변수(var) 로 선언되어야 하며, 초기화 시점에 self를 참조해도 문제없음.
+
+무거운 연산이나 네트워크 초기화 같은 지연 계산에 적합.
+
+swift
+복사
+편집
+lazy var expensiveObject = HeavyObject()
+computed property
+항상 값을 계산하며, 매번 접근할 때마다 실행됨.
+
+캐시되지 않으며, 읽기 전용(get) 또는 읽기-쓰기(get/set) 모두 가능.
+
+var 또는 let으로 정의 가능하며 초기화된 저장 공간은 없음.
+
+swift
+복사
+편집
+var area: Double {
+    return width * height
+}
 
 
 - Swift에서 Equatable, Comparable 프로토콜을 직접 구현하는 방법은?
 - async let과 Task {}의 차이점은?
 - Swift의 Result<T, Error> 타입을 활용하는 방법은?
 - actor와 기존 DispatchQueue.sync를 비교하면 어떤 차이가 있는가?
+    - 1. Swift에서 Equatable, Comparable 프로토콜을 직접 구현하는 방법
+Equatable
+Equatable은 두 인스턴스가 같은지 비교할 수 있도록 해주는 프로토콜이다.
+
+== 연산자를 구현하면 된다.
+
+Swift 4.1 이상에서는 대부분의 경우 Equatable은 자동으로 합성(synthesized)된다. 하지만 커스텀 로직이 필요할 때는 직접 구현 가능하다.
+
+swift
+복사
+편집
+struct User: Equatable {
+    let id: Int
+    let name: String
+
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id && lhs.name == rhs.name
+    }
+}
+Comparable
+Comparable은 순서를 비교하기 위해 사용되며, <, <=, >, >= 연산자에 대응된다.
+
+최소한 < 하나만 구현하면 나머지는 자동 제공된다.
+
+swift
+복사
+편집
+struct Score: Comparable {
+    let value: Int
+
+    static func < (lhs: Score, rhs: Score) -> Bool {
+        return lhs.value < rhs.value
+    }
+}
+2. async let과 Task {}의 차이점
+async let
+구조화된 동시성(structured concurrency)의 일부로, 동시에 실행되지만 부모 스코프에 묶여 있는 작업이다.
+
+병렬로 작업을 실행하고, 나중에 await를 통해 결과를 사용할 수 있다.
+
+명확한 스코프 내에서 실행되므로 작업이 끝나기 전에 스코프를 벗어나면 에러가 발생한다.
+
+swift
+복사
+편집
+async let image = downloadImage()
+async let text = fetchText()
+
+let resultImage = await image
+let resultText = await text
+Task {}
+독립된 비동기 작업을 생성한다. 즉, 생명 주기가 호출한 함수와 독립적이다.
+
+주로 fire-and-forget 또는 별도 처리를 위해 사용된다.
+
+취소 가능하고, detached task도 생성할 수 있다.
+
+swift
+복사
+편집
+Task {
+    let data = await loadData()
+    print(data)
+}
+결론적으로 async let은 함수 내부의 안전한 병렬 처리용, Task {}는 독립적이고 유연한 비동기 처리용이다.
+
+3. Result<T, Error> 타입을 활용하는 방법
+Result는 성공 값(T) 또는 실패 값(Error) 중 하나를 가지는 열거형 타입이다.
+
+비동기 콜백이나 복잡한 오류 처리 로직을 단순화하는 데 적합하다.
+
+swift
+복사
+편집
+func divide(_ a: Int, by b: Int) -> Result<Int, DivisionError> {
+    guard b != 0 else {
+        return .failure(.divideByZero)
+    }
+    return .success(a / b)
+}
+
+enum DivisionError: Error {
+    case divideByZero
+}
+사용:
+
+swift
+복사
+편집
+let result = divide(10, by: 0)
+switch result {
+case .success(let quotient):
+    print("Result: \(quotient)")
+case .failure(let error):
+    print("Error: \(error)")
+}
+map, flatMap, get() 등을 활용해 더 간결하게 체이닝도 가능하다.
+
+4. actor와 DispatchQueue.sync의 차이점
+actor
+Swift의 동시성 안전(safe concurrency) 을 위한 타입.
+
+내부 상태는 자동으로 직렬화되어 동시 접근을 방지한다.
+
+데이터 경쟁 조건(race condition) 을 막고자 할 때 유용하며, 외부에서 접근 시 await가 필요하다.
+
+swift
+복사
+편집
+actor Counter {
+    var value = 0
+    func increment() {
+        value += 1
+    }
+}
+사용 시:
+
+swift
+복사
+편집
+let counter = Counter()
+await counter.increment()
+DispatchQueue.sync
+명시적으로 동기/비동기 큐에 작업을 보내는 방식.
+
+개발자가 직접 직렬 큐를 만들고 동기화를 관리해야 한다.
+
+코드가 복잡해지고, 실수로 데드락(deadlock)을 유발할 수 있다.
+
+swift
+복사
+편집
+let queue = DispatchQueue(label: "com.example.queue")
+queue.sync {
+    // 직렬 작업
+}
+차이 요약
+
+actor는 안전성과 코드 간결성 중심, Swift 동시성 시스템과 잘 통합됨.
+
+DispatchQueue.sync는 수동 제어가 가능하지만 오류 가능성이 높음.
+
 
 
 - Memory Layout<T>을 활용하여 메모리 구조를 확인하는 방법은?
 - UIBezierPath와 CAShapeLayer를 활용하여 커스텀 UI를 만드는 방법은?
 - UIView 애니메이션에서 spring damping이란 무엇이며 어떻게 활용하는가?
 - CALayer에서 shadowPath를 직접 설정하면 성능이 왜 향상되는가?
+    - 1. MemoryLayout<T>를 활용하여 메모리 구조를 확인하는 방법
+MemoryLayout<T>는 Swift에서 타입 T의 메모리 정보를 확인할 수 있도록 해주는 유틸리티다. 주로 성능 최적화, C 연동, 메모리 모델 확인 시 사용된다.
 
+주요 프로퍼티
+stride: 인스턴스 간의 간격 (메모리 정렬 포함한 크기)
+
+size: 실제 데이터 크기
+
+alignment: 메모리 정렬 크기
+
+swift
+복사
+편집
+struct Example {
+    var a: Int8
+    var b: Int32
+}
+
+print("size:", MemoryLayout<Example>.size)
+print("stride:", MemoryLayout<Example>.stride)
+print("alignment:", MemoryLayout<Example>.alignment)
+이 정보를 바탕으로 메모리 패딩, 정렬 등의 구조를 이해하고 최적화할 수 있다.
+
+2. UIBezierPath와 CAShapeLayer를 활용한 커스텀 UI 만들기
+UIBezierPath
+점과 곡선을 조합해 벡터 기반 경로를 그리는 클래스.
+
+사각형, 원, 곡선 등 복잡한 도형을 표현 가능.
+
+swift
+복사
+편집
+let path = UIBezierPath()
+path.move(to: CGPoint(x: 0, y: 0))
+path.addLine(to: CGPoint(x: 100, y: 0))
+path.addLine(to: CGPoint(x: 100, y: 100))
+path.close()
+CAShapeLayer
+UIBezierPath로 정의한 경로를 실제로 그리는 레이어.
+
+매우 효율적이고 GPU 기반으로 렌더링되어 성능이 좋음.
+
+swift
+복사
+편집
+let shapeLayer = CAShapeLayer()
+shapeLayer.path = path.cgPath
+shapeLayer.fillColor = UIColor.red.cgColor
+view.layer.addSublayer(shapeLayer)
+커스텀 버튼, 모서리 처리, 애니메이션 효과 등 다양한 UI 요소 제작에 활용된다.
+
+3. UIView 애니메이션에서 Spring Damping이란 무엇이며 활용법
+Spring Damping은 뷰가 애니메이션 후 정지할 때 얼마나 튀는지를 제어하는 값이다.
+
+dampingRatio: 0~1 사이의 값
+
+1에 가까울수록 덜 튀고 빨리 정지 (무감쇠)
+
+0에 가까울수록 진동이 많고 더 많이 튄다
+
+swift
+복사
+편집
+UIView.animate(withDuration: 0.8,
+               delay: 0,
+               usingSpringWithDamping: 0.5,
+               initialSpringVelocity: 0.8,
+               options: [],
+               animations: {
+    self.myView.transform = .identity
+})
+활용 예
+자연스러운 스케일 변경
+
+버튼 클릭 시 튀는 효과
+
+모달 등장 애니메이션 등
+
+Spring 기반 애니메이션은 기계적이 아닌 물리 기반 움직임을 만들어 사용자 경험을 향상시킨다.
+
+4. CALayer에서 shadowPath를 직접 설정하면 성능이 향상되는 이유
+기본적으로 그림자를 줄 때, CALayer는 콘텐츠 모양에 따라 자동으로 그림자 경로를 계산한다. 이 과정은 매우 비용이 많이 드는 연산이다. 특히 스크롤 중이거나 애니메이션 중일 때 성능 문제가 발생할 수 있다.
+
+해결 방법: shadowPath 지정
+swift
+복사
+편집
+let shadowLayer = CALayer()
+shadowLayer.shadowColor = UIColor.black.cgColor
+shadowLayer.shadowOpacity = 0.5
+shadowLayer.shadowOffset = CGSize(width: 0, height: 2)
+shadowLayer.shadowRadius = 4
+shadowLayer.shadowPath = UIBezierPath(roundedRect: shadowLayer.bounds, cornerRadius: 10).cgPath
+왜 성능이 좋아지나?
+shadowPath를 명시적으로 지정하면 시스템은 캐싱된 경로를 반복 재사용하므로 매 프레임마다 shape를 분석할 필요가 없다.
+
+특히 UITableViewCell이나 UICollectionViewCell처럼 재사용되는 뷰에서는 매우 큰 성능 차이를 낸다.
 
 - SwiftUI에서 PreferenceKey를 활용하는 방법과 사례는?
 - GeometryReader의 역할과 성능 최적화 방안은?
 - UIKit에서 layoutSubviews()와 draw(_:)의 차이는?
 - UIStackView가 실제로 내부에서 어떻게 동작하는가?
+    - 1. SwiftUI에서 PreferenceKey를 활용하는 방법과 사례
+PreferenceKey는 SwiftUI에서 하위 뷰의 값을 상위 뷰로 전달하는 데 사용된다. 일반적으로 레이아웃 정보(예: 위치, 크기)나 사용자 정의 데이터를 상위에서 반응형으로 활용하고 싶을 때 사용한다.
+
+기본 구조
+PreferenceKey 프로토콜을 구현하여 키를 정의
+
+하위 뷰에서 .anchorPreference() 또는 .preference()를 통해 값 설정
+
+상위 뷰에서 .onPreferenceChange()를 통해 값 감지
+
+swift
+복사
+편집
+struct MyPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+Text("Hello")
+    .background(GeometryReader { proxy in
+        Color.clear
+            .preference(key: MyPreferenceKey.self, value: proxy.size.height)
+    })
+.onPreferenceChange(MyPreferenceKey.self) { newHeight in
+    print("Text height: \(newHeight)")
+}
+활용 사례
+스크롤 위치 추적
+
+커스텀 탭바/네비게이션바 레이아웃 제어
+
+레이아웃 크기 동기화
+
+동적으로 하위 뷰의 위치를 기반으로 상위 뷰 UI 수정
+
+2. GeometryReader의 역할과 성능 최적화 방안
+GeometryReader는 해당 뷰의 좌표, 크기, 안전 영역 정보 등을 실시간으로 가져올 수 있는 컨테이너 뷰다. 뷰 내부에서 GeometryProxy를 통해 다양한 레이아웃 정보를 활용할 수 있다.
+
+기본 예시
+swift
+복사
+편집
+GeometryReader { geometry in
+    Text("Width: \(geometry.size.width)")
+}
+주의점 및 최적화
+Lazy View가 아님 → 사용 시 그 자체가 공간을 차지함
+
+GeometryReader는 기본적으로 최대 크기(.infinity)를 차지하려고 하므로 frame을 명시해주거나 alignment를 제어해야 함
+
+가급적 필요한 위치에만 감싸도록 제한적으로 사용
+
+뷰 계층이 깊을수록 리렌더링 비용 증가 → 필요 시 .background()나 .overlay()로 제한
+
+활용 사례
+화면 크기에 따라 뷰 동적 배치
+
+스크롤 위치 기반 애니메이션
+
+레이아웃 응답형 처리
+
+3. UIKit에서 layoutSubviews()와 draw(_:)의 차이
+두 메서드는 UIView의 생명주기에서 모두 뷰 렌더링과 관련 있지만, 용도와 동작 시점이 완전히 다르다.
+
+layoutSubviews()
+자식 뷰들의 프레임을 조정하는 데 사용
+
+setNeedsLayout() 호출 시 트리거됨
+
+뷰의 위치나 크기 등 레이아웃 변경을 할 때 override
+
+swift
+복사
+편집
+override func layoutSubviews() {
+    super.layoutSubviews()
+    label.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 50)
+}
+draw(_:)
+커스텀 그래픽이나 이미지, 텍스트 등을 직접 그릴 때 사용
+
+setNeedsDisplay() 호출 시 트리거됨
+
+Core Graphics 기반의 벡터 드로잉이나 그래프 그릴 때 활용
+
+swift
+복사
+편집
+override func draw(_ rect: CGRect) {
+    let context = UIGraphicsGetCurrentContext()
+    context?.setFillColor(UIColor.red.cgColor)
+    context?.fill(rect)
+}
+요약하면, layoutSubviews()는 서브뷰 배치용, draw(_:)는 커스텀 그래픽 그리기용이다.
+
+4. UIStackView가 실제로 내부에서 어떻게 동작하는가
+UIStackView는 컨테이너 뷰지만 실제로는 뷰가 아닌 레이아웃 도우미로 작동한다. 내부적으로는 Auto Layout 기반으로 동작하며, 자신이 가진 arrangedSubviews의 제약 조건을 관리한다.
+
+핵심 원리
+UIStackView는 자신의 arrangedSubviews 배열을 기준으로 각 뷰에 제약을 설정한다.
+
+실제 뷰 계층 구조에선 arrangedSubviews가 서브뷰로 포함되지만, StackView는 자체 콘텐츠를 그리지 않고 layout만 담당한다.
+
+뷰 추가/제거 시 자동으로 레이아웃이 갱신된다.
+
+distribution, alignment, spacing 등의 설정으로 레이아웃 방식이 결정됨
+
+성능 이점
+직접 Auto Layout 제약을 설정하지 않아도 되므로 개발 생산성이 높음
+
+뷰 계층 단순화, 코드 간결화
+
+하지만 복잡한 중첩 구조에서는 오히려 성능 저하의 원인이 될 수 있으므로 주의 필요
+
 
 
 - SwiftUI에서 ViewBuilder는 어떻게 작동하는가?
 - URLSessionDataTask, URLSessionDownloadTask, URLSessionUploadTask의 차이점은?
 - HTTP/2와 HTTP/3의 차이는?
 - URLCache를 활용하여 네트워크 응답을 캐싱하는 방법은?
+    - 1. SwiftUI에서 ViewBuilder는 어떻게 작동하는가?
+ViewBuilder는 SwiftUI에서 여러 개의 뷰를 반환할 수 있도록 도와주는 특수한 result builder다. 일반적인 함수는 하나의 반환값만 가질 수 있지만, SwiftUI의 body처럼 여러 View를 조건문과 반복문을 통해 표현하려면 ViewBuilder가 필요하다.
 
+작동 방식
+Swift 컴파일러는 @ViewBuilder 속성이 붙은 클로저 안의 여러 View를 내부적으로 묶어 하나의 View로 합성한다.
+
+조건문(if, else, switch), 반복문(ForEach)도 지원된다.
+
+swift
+복사
+편집
+@ViewBuilder
+func example(showText: Bool) -> some View {
+    if showText {
+        Text("Hello")
+    } else {
+        Text("Goodbye")
+    }
+}
+활용 예
+body 프로퍼티 내부
+
+NavigationStack, VStack, List 등의 자식 뷰 정의
+
+사용자 정의 컴포넌트에 다형적인 View 전달
+
+2. URLSessionDataTask, DownloadTask, UploadTask의 차이
+URLSession은 iOS의 대표적인 네트워킹 API이며, 세 가지 주요 Task 유형으로 나뉜다.
+
+URLSessionDataTask
+가장 일반적인 네트워크 요청 방식
+
+HTTP GET/POST 등으로 JSON, 텍스트 데이터를 요청/응답 받을 때 사용
+
+메모리 상에서 데이터를 주고받는다
+
+URLSessionDownloadTask
+서버에서 파일을 다운로드받아 임시 디렉토리에 저장
+
+대용량 파일, 백그라운드 다운로드에 적합
+
+완료 시 location: URL 형태로 전달되며, 직접 파일로 옮겨야 한다
+
+URLSessionUploadTask
+파일 또는 Form 데이터를 업로드할 때 사용
+
+보통 multipart/form-data 형식으로 서버에 전송
+
+파일 경로를 넘기거나 Data를 직접 전달할 수 있다
+
+3. HTTP/2와 HTTP/3의 차이
+HTTP/2
+단일 커넥션에서 다중 요청(multiplexing) 가능
+
+헤더 압축 (HPACK) 적용
+
+TCP 기반 → 전송 순서 보장하되, 하나의 패킷 손실이 전체 지연을 유발 (head-of-line blocking)
+
+HTTP/3
+UDP 기반의 QUIC 프로토콜 사용
+
+지연이 줄어들고 연결 설정 속도 향상
+
+손실된 패킷만 재전송 → 성능 향상
+
+더 나은 모바일 환경 대응력 (빠른 연결 재시도 등)
+
+요약하자면, HTTP/3는 모바일 최적화 + 속도 개선에 초점을 맞춘 진화된 버전이다.
+
+4. URLCache를 활용한 네트워크 응답 캐싱 방법
+URLCache는 네트워크 요청에 대한 응답을 메모리나 디스크에 저장해 재사용하는 기능을 제공한다. 이를 통해 동일한 요청에 대해 서버를 다시 호출하지 않고, 빠르게 데이터를 제공할 수 있다.
+
+설정 및 사용
+swift
+복사
+편집
+let cache = URLCache(memoryCapacity: 512000, diskCapacity: 10000000, diskPath: nil)
+URLCache.shared = cache
+캐시 저장 조건
+서버의 응답 헤더에 Cache-Control, Expires 같은 필드가 있어야 함
+
+요청 시 cachePolicy를 적절히 설정
+
+swift
+복사
+편집
+let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 10)
+활용 예
+뉴스 앱에서 자주 변경되지 않는 콘텐츠
+
+이미지, JSON, 데이터 리스트 등 반복 요청되는 리소스
+
+주의사항: 민감한 데이터는 캐싱하지 않아야 하며, 캐시 무효화 전략도 함께 고려해야 함.
 
 - WebSocket과 HTTP Long Polling의 차이점은?
 - multipart/form-data 요청을 iOS에서 처리하는 방법은?
 - Core Data의 NSPersistentContainer와 NSPersistentStoreCoordinator의 차이는?
 - Core Data의 merge policy 옵션이란?
+    - 1. WebSocket과 HTTP Long Polling의 차이점
+WebSocket
+양방향(Full-duplex) 통신이 가능한 프로토콜로, 클라이언트와 서버가 지속적으로 연결을 유지한다.
 
+초기 연결은 HTTP로 시작되며, 업그레이드 후 WebSocket 프로토콜로 전환된다.
+
+실시간성이 필요한 채팅, 게임, 실시간 알림에 적합하다.
+
+서버는 클라이언트에게 푸시(Push) 방식으로 자유롭게 데이터를 전송할 수 있다.
+
+연결 유지가 되므로 오버헤드가 적고 성능도 우수하다.
+
+HTTP Long Polling
+클라이언트가 서버에 요청을 보내고, 서버는 응답할 데이터가 생길 때까지 대기한 후 응답을 보내는 방식.
+
+응답 후 클라이언트는 다시 요청을 보내는 반복 방식이므로 실제로는 지속적인 재요청이다.
+
+서버 푸시처럼 동작하지만, 연결을 계속 맺고 끊기 때문에 오버헤드가 크고 지연이 발생할 수 있다.
+
+2. multipart/form-data 요청을 iOS에서 처리하는 방법
+multipart/form-data는 파일 업로드를 위한 HTTP 요청 포맷으로, 이미지나 동영상, 텍스트 필드를 함께 전송할 때 사용된다.
+
+직접 구현 방법
+URLRequest에 Content-Type: multipart/form-data; boundary=...를 지정
+
+boundary를 기준으로 각 필드의 헤더와 데이터를 직접 구성
+
+swift
+복사
+편집
+var request = URLRequest(url: url)
+request.httpMethod = "POST"
+request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+request.httpBody = bodyData
+라이브러리 활용
+Alamofire의 upload(multipartFormData:) API를 사용하면 훨씬 간편하다
+
+swift
+복사
+편집
+AF.upload(multipartFormData: { form in
+    form.append(imageData, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+    form.append("title".data(using: .utf8)!, withName: "title")
+}, to: "https://example.com/upload")
+3. Core Data의 NSPersistentContainer와 NSPersistentStoreCoordinator의 차이
+NSPersistentContainer
+Core Data를 더 쉽게 사용할 수 있도록 만든 고수준 추상화 클래스이다.
+
+내부적으로 NSManagedObjectModel, NSPersistentStoreCoordinator, NSManagedObjectContext를 자동으로 생성하고 관리한다.
+
+iOS 10 이상에서 도입되었으며, 개발자는 viewContext 또는 newBackgroundContext()만으로 데이터를 쉽게 관리할 수 있다.
+
+NSPersistentStoreCoordinator
+Core Data의 저장소를 실제로 관리하는 객체로, 다양한 저장 방식(SQL, InMemory 등)을 지원한다.
+
+직접 사용할 경우 모델 로딩, 저장소 연결, 에러 처리 등을 모두 수동으로 설정해야 한다.
+
+NSPersistentContainer가 내부적으로 이 Coordinator를 감싸서 사용하고 있다.
+
+요약하자면, NSPersistentContainer는 Core Data를 쉽게 쓰도록 도와주는 현대적인 클래스이고, NSPersistentStoreCoordinator는 그 기반이 되는 핵심 구성 요소이다.
+
+4. Core Data의 Merge Policy 옵션이란?
+Core Data에서 **병합 정책(Merge Policy)**은 여러 NSManagedObjectContext 간의 충돌이 발생할 때 어떤 방식으로 데이터를 통합할지를 정의한다.
+
+주요 정책 종류
+NSErrorMergePolicy
+충돌 시 에러를 발생시키고 저장을 중단한다. (기본값)
+
+MergeByPropertyStoreTrumpMergePolicy
+충돌 시 저장소(store)의 값이 우선. 기존 값 유지.
+
+MergeByPropertyObjectTrumpMergePolicy
+충돌 시 메모리(object)의 값이 우선. 변경된 값 유지.
+
+OverwriteMergePolicy
+충돌 시 저장소의 기존 값을 완전히 덮어씀.
+
+RollbackMergePolicy
+충돌 시 현재 변경 사항을 무시하고 롤백함.
+
+사용 예
+swift
+복사
+편집
+context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+이렇게 설정하면 병합 충돌 시 내가 편집한 변경 사항이 저장소 값을 덮어쓰게 된다.
+다수의 컨텍스트를 사용할 때 충돌을 제어하기 위해 반드시 필요하다.
 
 - Core Data에서 NSFetchedResultsController는 언제 사용되는가?
 - Realm을 사용할 때 @Persisted와 기존 List<>의 차이점은?
 - CloudKit을 활용한 데이터 동기화의 원리는?
 - RunLoop의 개념과 활용 사례는?
+    - 1. Core Data에서 NSFetchedResultsController는 언제 사용되는가?
+NSFetchedResultsController는 주로 UITableView 또는 UICollectionView와 함께 Core Data 데이터를 표시할 때 사용된다.
+특히 다음과 같은 경우에 유용하다:
 
+대량의 데이터를 효율적으로 관리할 때: 내부적으로 fetch 요청 결과를 캐싱하고 메모리 사용을 최적화한다.
+
+데이터 변경 시 UI를 자동으로 업데이트하고 싶을 때: insert, delete, update 등을 감지하여 delegate를 통해 뷰를 갱신한다.
+
+섹션이 있는 리스트를 구성할 때: sectionNameKeyPath를 이용해 자동으로 섹션별 데이터 정렬이 가능하다.
+
+실전 예시
+swift
+복사
+편집
+let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+
+let controller = NSFetchedResultsController(
+    fetchRequest: fetchRequest,
+    managedObjectContext: context,
+    sectionNameKeyPath: nil,
+    cacheName: nil
+)
+controller.delegate = self
+try? controller.performFetch()
+2. Realm을 사용할 때 @Persisted와 기존 List<>의 차이점은?
+Realm에서는 @Persisted 속성 래퍼가 도입되면서 코드가 더 간결하고 명확해졌다.
+
+@Persisted의 특징
+Realm 10부터 도입된 새로운 속성 선언 방식이다.
+
+타입 안전성과 SwiftUI 호환성을 개선했다.
+
+선언 시 dynamic var나 RealmOptional을 사용할 필요 없이 속성만 명시하면 된다.
+
+swift
+복사
+편집
+class Person: Object {
+    @Persisted var name: String
+    @Persisted var age: Int?
+    @Persisted var tags = List<String>() // 여전히 List 사용
+}
+List의 역할
+List<T>는 여전히 Realm에서 1:N 관계를 표현할 때 사용된다.
+
+@Persisted var items = List<Item>() 형태로 사용된다.
+
+즉, @Persisted는 속성을 선언하는 형식, List는 컬렉션 타입이므로 같이 쓰인다. 새로운 Realm 문법에서는 둘이 보완 관계에 있다고 보면 된다.
+
+3. CloudKit을 활용한 데이터 동기화의 원리는?
+CloudKit은 iCloud 기반의 데이터 저장 및 동기화 솔루션으로, Apple에서 제공하는 퍼블릭 및 프라이빗 데이터베이스를 앱에 연동할 수 있게 해준다.
+
+동기화 원리
+앱은 CKRecord 단위로 데이터를 저장하고, CloudKit은 이를 iCloud에 자동 저장 및 동기화한다.
+
+iCloud 계정에 로그인된 모든 기기에서 자동으로 데이터를 전파(sync) 한다.
+
+푸시 알림을 통해 다른 기기의 변경 사항을 실시간으로 감지할 수 있다.
+
+CKQuerySubscription을 활용하면 백그라운드에서 데이터 변경도 감지 가능하다.
+
+사용 시 고려사항
+네트워크 연결 필요
+
+iCloud 계정이 설정돼 있어야 동작
+
+데이터가 암호화되어 전송되고 저장됨
+
+CloudKit은 간단한 iCloud 연동 앱, 공유 캘린더, 노트 동기화 등에 적합하다.
+
+4. RunLoop의 개념과 활용 사례는?
+RunLoop는 iOS 시스템에서 이벤트를 처리하는 루프 기반의 메커니즘이다.
+while 루프처럼 반복적으로 돌면서, 이벤트나 입력이 있을 때만 작업을 수행한다.
+
+주요 개념
+앱이 유휴 상태일 때 CPU를 절약하기 위해 사용된다.
+
+입력 소스(input source), 타이머(timer), 디스플레이 링크(display link) 등 이벤트를 대기하고 처리한다.
+
+Thread 마다 RunLoop가 하나씩 있으며, 메인 스레드는 기본적으로 RunLoop가 동작 중이다.
+
+활용 예
+Timer: Timer.scheduledTimer는 RunLoop에 등록돼야 작동한다.
+
+DispatchSource, Network Event: 백그라운드 스레드에서 이벤트 수신 시 RunLoop 필요.
+
+ScrollView/Touch 이벤트 처리: 메인 스레드의 RunLoop에서 처리된다.
+
+실전 사용 예
+swift
+복사
+편집
+RunLoop.current.add(timer, forMode: .default)
+RunLoop는 iOS 내부 동작의 핵심으로, 이벤트 기반 UI 프레임워크를 이해하는 데 중요한 개념이다.
 
 - autoreleasepool이 필요한 경우는?
 - malloc과 free는 iOS에서 어떻게 동작하는가?
 - Object Graph와 Reference Counting의 관계는?
 - NSCache와 UserDefaults의 차이는?
+    - 1. autoreleasepool이 필요한 경우는?
+autoreleasepool은 ARC(Automatic Reference Counting) 기반의 메모리 관리에서 일시적으로 생성된 객체를 일정 시점에 정리하고 싶을 때 사용된다.
 
+사용 목적
+단기간에 많은 객체를 생성하는 루프 등에서 메모리 폭증 방지를 위해 사용
+
+비동기 백그라운드 작업에서 메모리 릴리즈 시점을 명확히 하고 싶을 때
+
+예시
+swift
+복사
+편집
+for i in 0..<10000 {
+    autoreleasepool {
+        let image = loadLargeImage(index: i)
+        processImage(image)
+    }
+}
+이런 방식으로 매 반복마다 불필요한 객체를 바로 해제시킬 수 있어 메모리 피크 감소에 효과적이다.
+
+2. malloc과 free는 iOS에서 어떻게 동작하는가?
+Swift와 Objective-C는 대부분 ARC를 사용하지만, 내부적으로는 여전히 C의 malloc과 free를 기반으로 동작한다.
+
+malloc
+동적 메모리 할당 함수로, 필요한 바이트 수만큼 힙(heap)에 메모리를 할당한다.
+
+반환값은 해당 메모리의 시작 주소 포인터이다.
+
+free
+malloc으로 할당한 메모리를 명시적으로 해제할 때 사용한다.
+
+사용하지 않으면 메모리 누수(memory leak)가 발생한다.
+
+iOS에서 malloc/free는 저수준 메모리 처리, 이미지 데이터 버퍼, C 기반 라이브러리 연동 시 주로 사용된다.
+
+예시
+c
+복사
+편집
+char *buffer = malloc(1024);
+strcpy(buffer, "Hello");
+// ...
+free(buffer);
+Swift에서도 UnsafePointer를 사용할 때 내부적으로 malloc/free를 활용할 수 있다.
+
+3. Object Graph와 Reference Counting의 관계는?
+Object Graph란?
+객체들이 서로 참조하고 있는 구조 전체를 그래프로 표현한 것이다.
+
+예를 들어 ViewController → View → SubView → Model 등으로 이어진 객체의 참조 관계가 그래프 형태를 이룬다.
+
+Reference Counting이란?
+ARC(Automatic Reference Counting)는 각 객체가 참조되는 횟수(Reference Count) 를 추적해 자동으로 메모리를 관리하는 방식이다.
+
+참조 수가 0이 되면 객체는 자동으로 해제된다.
+
+관계
+Object Graph를 통해 순환 참조(예: A → B → A)를 파악하고, 이를 해결하기 위해 weak, unowned 참조를 사용하게 된다.
+
+즉, Reference Counting 기반에서 메모리 누수를 피하려면 객체 간의 참조 구조(Object Graph) 를 이해하고 설계하는 것이 핵심이다.
+
+4. NSCache와 UserDefaults의 차이는?
+이 두 클래스는 모두 데이터를 저장하는 역할을 하지만, 사용 목적과 방식은 전혀 다르다.
+
+NSCache
+메모리 기반 캐시로, 메모리 여유에 따라 자동으로 데이터를 제거함
+
+이미지, 데이터 객체 등 일시적이고 빠르게 접근해야 하는 데이터를 저장
+
+Thread-safe 하게 설계되어 동시 접근에 강함
+
+LRU(Least Recently Used) 알고리즘 기반으로 메모리를 최적화
+
+UserDefaults
+영구 저장소로, 앱 설정값이나 간단한 데이터(예: Bool, String, Int)를 디스크에 저장
+
+앱을 재실행해도 데이터가 유지됨
+
+속도는 느리지만, 사용이 간단하며 적은 양의 데이터를 저장하기 적합
+
+간단한 구분
+NSCache는 "빠른 접근이 필요하지만 없어져도 되는 데이터"를 위해
+
+UserDefaults는 "앱 설정처럼 꼭 저장돼야 할 데이터"를 위해
 
 - NSOperationQueue와 DispatchQueue의 차이점과 적절한 사용 사례는?
 - Swift의 UnsafePointer<T>와 OpaquePointer의 차이는?
 - iOS에서 Lazy Loading을 구현하는 방법은?
 - NSThread와 pthread의 차이는?
+    - 1. NSOperationQueue와 DispatchQueue의 차이점과 사용 사례
+DispatchQueue
+GCD(Grand Central Dispatch) 기반의 API
+
+코드가 간단하고 직관적이며, 시스템 레벨에서 스레드 풀을 관리
+
+serial 또는 concurrent 큐를 쉽게 만들 수 있음
+
+동시성 제어나 우선순위 설정이 제한적임
+
+NSOperationQueue
+DispatchQueue보다 더 많은 기능을 제공
+
+작업 단위가 Operation 객체로 구성되어 의존성 설정, 취소, 우선순위 지정이 가능함
+
+큐에 작업을 추가하거나 제거할 수 있음
+
+Objective-C 시절부터 제공된 OOP 기반 API
+
+사용 사례
+간단한 백그라운드 처리: DispatchQueue.global().async { ... }
+
+복잡한 작업 흐름, 작업 간 의존성이 있는 경우: NSOperationQueue
+
+2. Swift의 UnsafePointer<T>와 OpaquePointer의 차이
+UnsafePointer<T>
+타입 정보가 있는 포인터
+
+UnsafePointer<Int>처럼 사용되며, 메모리 내의 값을 읽거나 쓸 수 있음
+
+메모리 안전성이 보장되지 않기 때문에 주의가 필요
+
+C 함수와 Swift를 연결할 때 주로 사용됨
+
+OpaquePointer
+타입 정보가 없는 포인터
+
+Swift가 내부 구조를 모르는 외부 구조체를 참조할 때 사용
+
+주로 C API 또는 Core Foundation 등에서 void *에 대응될 때 사용됨
+
+핵심 차이
+UnsafePointer<T>는 타입이 명확, 메모리 접근 가능
+
+OpaquePointer는 타입 정보 없음, 메모리 접근 불가, 단순 참조만 가능
+
+3. iOS에서 Lazy Loading을 구현하는 방법
+정의
+Lazy Loading은 필요할 때 데이터를 불러오는 방식으로, 성능과 메모리 최적화에 효과적이다.
+
+구현 방법
+lazy 키워드
+
+Swift에서 가장 간단한 Lazy Loading
+
+해당 속성이 처음 사용될 때 초기화됨
+
+swift
+복사
+편집
+lazy var image: UIImage = loadImage()
+스크롤 뷰 기반의 리스트
+
+예: TableView, CollectionView에서 cell이 화면에 나타날 때만 데이터를 로드
+
+cellForRowAt에서 이미지 다운로드 요청 등
+
+비동기 로딩 + 캐싱
+
+비동기 네트워크 요청으로 데이터 가져오기
+
+NSCache, URLCache 등을 활용해 중복 요청 방지
+
+4. NSThread와 pthread의 차이
+NSThread
+Foundation 프레임워크에서 제공하는 Objective-C 기반 스레드 클래스
+
+상대적으로 사용하기 쉬우며, start() 호출로 스레드 시작
+
+상태 추적, 우선순위 설정 등이 가능
+
+현재는 거의 사용되지 않고, GCD/OperationQueue로 대체됨
+
+pthread
+POSIX 기반의 저수준 C 라이브러리
+
+스레드를 직접 생성하고 관리하며, 더 많은 제어권을 가짐
+
+복잡하지만, 시스템 수준 조작이 필요할 때 사용
+
+차이점 요약
+NSThread: 고수준, 사용 편리, Swift/Obj-C 친화적
+
+pthread: 저수준, 복잡하지만 제어 가능성 높음
+
 
 
 - iOS에서 Backtrace를 활용하여 메모리 릭을 찾는 방법은?
 - Clean Architecture를 iOS 프로젝트에서 적용하는 방법은?
 - Interactor, Presenter, Repository는 각각 어떤 역할을 하는가?
 - RxSwift와 Combine의 차이점은?
+    - 1. iOS에서 Backtrace를 활용하여 메모리 릭을 찾는 방법
+Backtrace란?
+프로그램이 충돌하거나 예외가 발생했을 때 호출 스택(Call Stack) 을 추적하는 도구
 
+메모리 릭이나 크래시가 발생한 위치를 파악하는 데 유용함
+
+활용 방법
+Xcode에서 Debug Navigator > Memory Graph를 통해 누수 객체 추적
+
+Breakpoints > All Exceptions 설정 후 크래시 발생 시 백트레이스 확인
+
+lldb 명령어 bt, thread backtrace 등을 사용해 CLI에서 분석 가능
+
+Instruments와 연계
+Instruments의 Leaks나 Allocations와 함께 사용하면 누수 발생 지점을 추적 가능
+
+보통 retain cycle이나 강한 참조가 예상되는 클래스 확인 후 backtrace로 추적
+
+2. Clean Architecture를 iOS 프로젝트에서 적용하는 방법
+핵심 원칙
+의존성 역전 원칙(Dependency Inversion Principle) 적용
+
+계층 간 명확한 분리로 테스트 용이성, 유지보수성 확보
+
+주요 계층
+Presentation Layer
+
+View, ViewModel 또는 Presenter가 위치
+
+UI 로직 담당
+
+Domain Layer (Core Logic)
+
+UseCase, Entity 정의
+
+앱의 비즈니스 규칙 담당, 외부에 의존하지 않음
+
+Data Layer
+
+Repository 구현, API / DB 접근
+
+Domain 레이어에 데이터 제공
+
+적용 방식
+Protocol 기반 추상화를 통해 의존성 주입
+
+ex) UserRepositoryProtocol → 구현체는 Data Layer에서 제공
+
+3. Interactor, Presenter, Repository의 역할
+Interactor
+도메인 로직을 수행
+
+UseCase를 구현하며, 비즈니스 요구사항을 반영
+
+Presenter
+Interactor의 결과를 받아 View에 전달할 형식으로 가공
+
+보통 ViewModel을 만들어서 UI 업데이트에 최적화된 상태로 넘김
+
+Repository
+데이터 소스를 추상화
+
+DB, API, 캐시 등 여러 소스에서 데이터를 가져오고 이를 Interactor에 전달
+
+인터페이스를 통해 외부 의존성을 감춤
+
+4. RxSwift와 Combine의 차이점
+RxSwift
+iOS에서 널리 사용되는 리액티브 프로그래밍 라이브러리
+
+Observable, DisposeBag, Subjects, Schedulers 등 다양한 구성
+
+다양한 플랫폼 지원, 성숙도 높음
+
+Combine
+Apple 공식 리액티브 프레임워크
+
+Publisher, Subscriber, @Published, AnyCancellable 등이 핵심
+
+iOS 13 이상부터 지원, 최신 Swift 언어 기능과 자연스럽게 연동
+
+주요 차이점
+Combine은 표준 라이브러리, 외부 의존성 없음
+
+RxSwift는 더 많은 오퍼레이터와 멀티 플랫폼 지원
+
+Combine은 SwiftUI와의 연동에 강점 있음 (@Published, @ObservedObject 등)
 
 - Coordinator Pattern이 필요한 이유는?
 - Dependency Injection을 활용하여 ViewController의 의존성을 관리하는 방법은?
 - SOLID 원칙을 iOS 개발에서 적용하는 방법은?
 - Protocol-Oriented Programming(POP)이 객체 지향 프로그래밍(OOP)과 비교했을 때 가지는 장점은?
+    - 1. Coordinator Pattern이 필요한 이유는?
+목적
+ViewController 간의 네비게이션 로직을 분리하여 ViewController를 더 가볍게 유지
+
+ViewController가 UI 관리만 하도록 역할을 분리
+
+필요한 이유
+ViewController 내부에 present, push, dismiss 등의 네비게이션 코드가 많아지면 재사용성과 테스트가 어려움
+
+화면 전환을 중앙에서 관리함으로써 책임 분리, 유연성 확보
+
+복잡한 네비게이션 흐름(딥링크, 모달 스택 등)에 유리
+
+특징
+의존성 역전을 잘 활용함 (Child Coordinator → Parent에게 이벤트 위임)
+
+앱 흐름을 계층적으로 구성 가능 (AppCoordinator → AuthCoordinator → MainCoordinator 등)
+
+2. Dependency Injection을 활용하여 ViewController의 의존성을 관리하는 방법
+개념
+객체가 필요한 의존성(객체)을 직접 생성하지 않고 외부에서 주입받는 방식
+
+사용 방식
+생성자 주입 (Constructor Injection): 가장 일반적이고 테스트에 용이
+
+swift
+복사
+편집
+class MyViewController: UIViewController {
+    private let viewModel: MyViewModel
+    init(viewModel: MyViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+}
+프로퍼티 주입 (Property Injection): 런타임 이후 설정 가능하지만, 안정성 떨어질 수 있음
+
+장점
+테스트 가능성 향상: Mock 객체 주입 가능
+
+결합도 낮춤: 재사용성 향상
+
+SOLID의 DIP 원칙 실현
+
+3. SOLID 원칙을 iOS 개발에서 적용하는 방법
+1) 단일 책임 원칙 (SRP)
+하나의 클래스 또는 구조체는 하나의 책임만 가져야 함
+
+예: ViewController는 화면 UI만 관리, 로직은 ViewModel이나 UseCase로 분리
+
+2) 개방-폐쇄 원칙 (OCP)
+기능은 확장에는 열려 있어야 하고, 수정에는 닫혀 있어야 함
+
+예: 프로토콜과 확장 사용으로 새로운 기능을 덧붙임
+
+3) 리스코프 치환 원칙 (LSP)
+자식 클래스는 부모 클래스를 대체할 수 있어야 함
+
+예: 프로토콜 기반 설계에서, 구체 타입으로 교체해도 문제 없도록 구현
+
+4) 인터페이스 분리 원칙 (ISP)
+하나의 큰 인터페이스보다는 작고 명확한 인터페이스 분리
+
+예: 여러 기능을 포함한 Repository 인터페이스를 기능별로 나눔
+
+5) 의존 역전 원칙 (DIP)
+고수준 모듈이 저수준 모듈에 의존하지 않고, 둘 다 추상화에 의존
+
+예: ViewModel은 Repository 프로토콜에 의존하고, 실제 구현은 외부에서 주입
+
+4. Protocol-Oriented Programming(POP) vs 객체 지향 프로그래밍(OOP)의 차이점과 POP의 장점
+객체 지향(OOP)
+클래스 기반
+
+상속과 캡슐화를 중심으로 설계
+
+단일 상속 구조로 인해 확장에 한계 있음
+
+프로토콜 지향(POP)
+구조체 + 프로토콜 + 익스텐션 중심의 설계
+
+다중 프로토콜 채택 가능
+
+Swift의 강점에 최적화된 스타일
+
+POP의 장점
+구조체 사용 가능 → 값 타입 기반 설계 → 메모리 안정성 향상
+
+컴포지션을 통해 유연하게 기능 조합 가능
+
+Mock, Test 용이 (프로토콜 기반 설계)
+
+상속보다 유지보수와 확장성 뛰어남
+
 
 
 - Higher-Order Function이란 무엇이며 Swift에서 어떤 예제가 있는가?
 - State Restoration이란 무엇이며, iOS에서 어떻게 적용하는가?
 - Bitcode의 개념과 iOS 앱 빌드 과정에서의 역할은?
 - dSYM 파일의 역할과 Crash 로그 분석 방법은?
+    - 1. Higher-Order Function이란 무엇이며 Swift에서 어떤 예제가 있는가?
+개념
+함수를 인자로 받거나, 함수를 반환하는 함수
 
+Swift는 일급 객체로 함수도 값처럼 다룰 수 있어서 이 개념이 자연스럽게 적용됨
+
+주요 예제
+map: 배열의 각 요소를 변환
+
+swift
+복사
+편집
+let numbers = [1, 2, 3]
+let squared = numbers.map { $0 * $0 } // [1, 4, 9]
+filter: 조건에 맞는 요소만 추출
+
+swift
+복사
+편집
+let even = numbers.filter { $0 % 2 == 0 } // [2]
+reduce: 요소를 하나로 축약
+
+swift
+복사
+편집
+let sum = numbers.reduce(0, +) // 6
+sorted(by:), compactMap, flatMap, forEach 등도 대표적인 예
+
+장점
+가독성 향상, 불변성 유지, 함수형 프로그래밍 스타일 지원
+
+2. State Restoration이란 무엇이며, iOS에서 어떻게 적용하는가?
+개념
+앱이 종료되었다가 재실행될 때, 사용자의 이전 상태(UI 및 데이터)를 복원하는 기능
+
+예: 사용자가 특정 탭, 스크롤 위치, 텍스트 입력 상태에 머물러 있었던 경우 그 상태를 그대로 보여줌
+
+적용 방법 (UIKit 기준)
+Info.plist 설정
+
+UIApplicationSupportsStateRestoration → YES
+
+UIViewController에서 다음 메서드 오버라이드
+
+swift
+복사
+편집
+override func encodeRestorableState(with coder: NSCoder) { ... }
+override func decodeRestorableState(with coder: NSCoder) { ... }
+restorationIdentifier, restorationClass 설정
+
+주의점
+앱이 백그라운드에서 종료되었을 때만 복원됨
+
+UI 관련 데이터는 스냅샷이 아닌 코드 기반으로 복원
+
+3. Bitcode의 개념과 iOS 앱 빌드 과정에서의 역할은?
+Bitcode란?
+중간 바이너리 표현으로, Apple이 서버 측에서 앱을 다시 컴파일할 수 있게 해주는 형식
+
+LLVM 기반 컴파일러가 생성
+
+.app 바이너리가 아닌 중간 코드
+
+역할
+새로운 CPU 아키텍처(예: ARM64, Apple Silicon)가 나와도 개발자가 다시 빌드하지 않아도 앱 재컴파일 가능
+
+앱의 크기를 줄이는 데 도움은 안 되지만, 유연성과 호환성을 제공
+
+사용 시점
+앱스토어 제출 시 Bitcode를 포함할지 여부 선택 가능
+
+WatchOS 앱은 필수였지만, 현재는 iOS에서 선택적 기능
+
+4. dSYM 파일의 역할과 Crash 로그 분석 방법은?
+dSYM이란?
+Debug Symbol 파일
+
+기계어 주소를 사람이 읽을 수 있는 함수명, 라인 번호로 매핑해주는 정보 보유
+
+역할
+Crash 로그 분석 시 스택 트레이스를 디코딩하는 데 필수
+
+없으면 Crash log가 0x10452ad30처럼 무의미한 주소로만 나옴
+
+Crash 로그 분석 방법
+Xcode Organizer 사용 (디버깅 자동 매핑)
+
+명령줄에서 atos 명령어 사용
+
+bash
+복사
+편집
+atos -arch arm64 -o MyApp.dSYM/Contents/Resources/DWARF/MyApp -l LOAD_ADDRESS CRASH_ADDRESS
+Firebase Crashlytics와 연동 시 자동 심볼리케이션
+
+dSYM 관리 팁
+CI/CD에서 dSYM을 보관하거나 업로드 (Crashlytics, Sentry 등)
+
+비상 시 로컬 저장 필수
+
+이 블럭은 실무에서 디버깅, 유지보수, 안정성 확보에 있어 매우 중요한 주제들이 포함돼 있어. 특히 dSYM과 Crash 분석은 릴리즈 이후 장애 대응의 핵심이고, 상태 복원은 사용자 경험을 크게 좌우하지.
 
 - Xcode의 Build Phases에서 Run Script를 활용하는 방법은?
 - XCTestCase에서 setUp()과 tearDown()은 각각 언제 호출되는가?
