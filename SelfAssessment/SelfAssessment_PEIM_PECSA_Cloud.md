@@ -1698,6 +1698,77 @@ AWS에서 시작되어 여러 클라우드에서 채택된 클라우드 아키�
 - 클라우드 환경에서 비용 절감을 위한 Reserved Instance와 Spot Instance의 차이점은?
 - 클라우드에서 Infrastructure as Code(IaC)의 개념과 활용 사례는?
 - 클라우드 네이티브 환경에서 Event Sourcing 패턴의 개념과 활용 사례는?
+    - 1. CQRS (Command Query Responsibility Segregation) 패턴의 개념과 장점
+개념
+
+명령(Command): 데이터를 변경하는 작업 (예: 생성, 수정, 삭제)
+조회(Query): 데이터를 읽는 작업
+이 두 가지 책임을 분리하여 서로 다른 모델로 구성하는 아키텍처 패턴
+장점
+
+확장성 향상: 읽기와 쓰기 워크로드를 별도로 확장 가능
+성능 최적화: 각각의 요구사항에 맞게 DB를 최적화 가능 (예: NoSQL for Query, RDBMS for Command)
+복잡성 분리: 도메인 모델이 단순해지고 유지보수 용이
+이벤트 소싱과 잘 결합되어 변경 이력 추적 및 비동기 처리 가능
+활용 예
+
+금융 서비스, 주문 시스템, 마이크로서비스 기반 시스템 등
+2. Serverless Framework의 개념과 VM/컨테이너 방식과의 차이점
+Serverless Framework 개념
+
+개발자가 서버 관리 없이 함수 단위로 코드를 작성하고 클라우드가 자동으로 실행, 확장, 관리하는 아키텍처
+대표 서비스: AWS Lambda, Google Cloud Functions, Azure Functions
+기존 VM/컨테이너 방식과의 차이점
+
+서버 관리 불필요: 서버 인프라 설정/운영 없이 코드만 배포
+자동 확장: 이벤트 기반으로 필요할 때만 실행되어 자원 효율 극대화
+비용 구조: 사용한 만큼만 과금되는 종량제(Per Invocation)
+VM/컨테이너는 상시 인프라 구동, 서버 자원 점유 발생
+활용 사례
+
+실시간 이미지 변환, API Gateway 후단 처리, IoT 이벤트 처리 등
+3. Reserved Instance와 Spot Instance의 차이점
+Reserved Instance (RI)
+
+장기 사용을 전제로 사전에 예약된 인스턴스
+일반적으로 1년 또는 3년 단위 계약
+비용 절감 효과 큼 (최대 75%)
+항상 사용되는 서비스에 적합
+Spot Instance
+
+AWS 등에서 남는 리소스를 경매 방식으로 저렴하게 임시 제공
+최대 90%까지 저렴
+사용 중 중단될 수 있으므로 일시적, 비중요 작업에 적합 (예: 빅데이터 처리, 테스트 등)
+4. Infrastructure as Code(IaC)의 개념과 활용 사례
+개념
+
+인프라를 코드처럼 선언하고 자동화된 방식으로 배포 및 관리하는 개념
+예: Terraform, AWS CloudFormation, Pulumi, Ansible
+장점
+
+버전 관리 가능 (Git으로 추적)
+자동화 및 재현성 확보
+DevOps와 CI/CD 파이프라인에 최적화
+사람에 의한 실수 최소화
+활용 사례
+
+신규 클라우드 환경 자동 구축
+멀티 클라우드 인프라 동기화
+테스트 환경 신속 구축 및 폐기
+5. Event Sourcing 패턴의 개념과 활용 사례
+개념
+
+시스템의 상태를 데이터베이스에 저장하는 대신, 모든 상태 변경 이벤트를 순차적으로 저장
+최종 상태는 이벤트들의 집합을 재구성하여 생성
+장점
+
+변경 이력 추적 가능: 모든 상태 변화가 로그로 남음
+복구 용이: 이벤트를 다시 적용하면 시스템 복원 가능
+CQRS와 시너지: Command는 이벤트 저장, Query는 읽기 모델로 구성
+활용 사례
+
+회계 시스템, 결제 처리 시스템, 감사 추적이 필요한 시스템
+Kafka와 같은 메시지 브로커와 함께 활용되는 사례 많음
 
 
 - 클라우드 환경에서 Elastic Load Balancing(ELB)의 주요 알고리즘과 장점은?
@@ -1705,7 +1776,80 @@ AWS에서 시작되어 여러 클라우드에서 채택된 클라우드 아키�
 - 클라우드에서 CloudFormation과 Terraform의 차이점은?
 - 클라우드 기반 CI/CD 파이프라인 구축 시 고려해야 할 주요 사항은?
 - 클라우드 기반 AI 서비스(AWS SageMaker, Google Vertex AI, Azure AI)의 차이점과 활용 사례는?
+    - 1. Elastic Load Balancing(ELB)의 주요 알고리즘과 장점
+주요 알고리즘
 
+Round Robin: 순차적으로 트래픽을 분산. 상태를 고려하지 않음.
+Least Connections: 현재 연결 수가 가장 적은 인스턴스로 트래픽 전달.
+IP Hash: 클라이언트 IP 해시 값을 기준으로 동일 인스턴스에 연결 유지.
+Weighted Round Robin / Least Connections: 각 인스턴스에 가중치를 두고 분산.
+장점
+
+고가용성 보장: 장애 시 자동으로 다른 인스턴스로 전환
+확장성 향상: Auto Scaling과 연동하여 트래픽 증가 대응
+SSL 종료 지원: 보안 통신 처리 부담을 줄여줌
+다양한 프로토콜 지원: HTTP, HTTPS, TCP, UDP
+2. Blue-Green Deployment와 Canary Deployment의 차이점
+Blue-Green Deployment
+
+두 개의 동일한 환경(Blue와 Green)을 구성하고 배포 후 트래픽을 전환
+즉시 전환으로 롤백이 쉬움
+배포 시간 짧음, 하지만 리소스 비용이 큼
+Canary Deployment
+
+새로운 버전을 점진적으로 일부 사용자에게 먼저 배포
+문제 발생 시 빠르게 차단 가능
+실시간 피드백 기반의 안정적 배포, 운영 복잡도 높음
+핵심 차이점
+
+Blue-Green: 전체 트래픽을 전환
+Canary: 일부 트래픽만 전환 후 점진적으로 확장
+3. CloudFormation과 Terraform의 차이점
+공통점
+
+둘 다 Infrastructure as Code (IaC) 도구로, 코드로 인프라를 정의하고 자동화
+CloudFormation
+
+AWS에서 제공하는 전용 IaC 도구
+YAML/JSON 기반 템플릿
+AWS와의 통합성은 높지만 범용성은 낮음
+Terraform
+
+HashiCorp에서 만든 오픈소스 IaC 도구
+HCL(HashiCorp Configuration Language) 사용
+AWS, Azure, GCP 등 멀티 클라우드 지원
+커뮤니티, 플러그인 생태계 우수
+4. 클라우드 기반 CI/CD 파이프라인 구축 시 고려사항
+주요 고려사항
+
+버전 관리 시스템(Git 등) 연동
+자동화된 테스트 단계 구성 (단위, 통합, 보안 테스트 포함)
+비용 효율적인 인프라 활용 (서버리스 빌드, 캐시 전략 등)
+환경 분리 (dev/staging/prod)
+배포 전략 도입 (Blue-Green, Canary)
+보안 및 권한 관리 (CI/CD 도구 접근 권한, 코드서명)
+모니터링 및 알림 연동 (Slack, SNS, Email 등)
+5. 클라우드 기반 AI 서비스 비교와 활용 사례
+AWS SageMaker
+
+엔드투엔드 머신러닝 플랫폼
+자동 ML, 실시간 추론, MLOps 기능 제공
+기업용, 생산환경 최적화
+Google Vertex AI
+
+Google AI 기술(Google Brain, AutoML)을 바탕으로 함
+데이터 전처리부터 모델 배포까지 통합
+AutoML 및 TPU 연동 강점
+Azure AI
+
+Azure Machine Learning, Cognitive Services 포함
+Office 제품군과의 통합, B2B API 다양성 우수
+모델 설명 가능성(XAI), 책임감 있는 AI 기능 강화
+활용 사례
+
+예측 모델 배포 (수요 예측, 이상 탐지 등)
+챗봇, 이미지/음성 분석, 문서 분류
+실시간 개인화 추천, 고객 세분화 분석
 
 - 클라우드 환경에서 데이터 스트리밍 서비스(Kafka, AWS Kinesis, Google Pub/Sub)의 차이점은?
 - 클라우드에서 AI 모델 배포(AI Model Deployment) 시 고려해야 할 사항은?

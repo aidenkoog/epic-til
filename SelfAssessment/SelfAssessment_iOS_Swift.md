@@ -3569,6 +3569,101 @@ Secure Enclave와 연계 가능
 - iOS Sandboxing이란?
 - iOS Privacy Manifest와 앱 개인정보 보호 정책 작성 방법은?
 - Swift 5.9에서 추가된 주요 기능은?
+    - 1. 앱이 Background 상태에서 네트워크 통신을 보안적으로 유지하는 방법은?
+백그라운드 네트워크 통신 방식
+iOS에서는 앱이 백그라운드 상태에서도 제한된 네트워크 작업을 할 수 있도록 몇 가지 기능을 제공함.
+
+주요 방법
+Background Fetch
+
+UIApplication.shared.setMinimumBackgroundFetchInterval(_:)을 통해 설정
+
+시스템이 적절하다고 판단될 때 앱을 깨워서 작업 수행
+
+Background URLSession
+
+URLSessionConfiguration.background(withIdentifier:) 사용
+
+업로드/다운로드를 시스템이 관리하고, 완료 시 앱을 다시 깨움
+
+사용자가 앱을 종료해도 통신 유지 가능
+
+서버 응답은 delegate를 통해 수신 (URLSessionDownloadDelegate, URLSessionTaskDelegate 등)
+
+보안 유지 방법
+HTTPS 필수: ATS(App Transport Security) 적용, SSL 인증서 확인
+
+토큰 갱신 전략: refresh token 활용 또는 백그라운드에서 access token 재요청
+
+Keychain 사용: 통신에 필요한 토큰은 Keychain에 안전하게 저장
+
+2. iOS Sandboxing이란?
+개요
+iOS에서 Sandboxing은 각 앱이 자신만의 독립된 실행 환경에서 동작하도록 격리하는 보안 메커니즘임.
+
+목적
+앱 간 데이터 접근 방지
+
+시스템 리소스 무단 접근 차단
+
+악성 코드 실행 방지
+
+작동 방식
+앱마다 별도의 파일 시스템 경로 부여 (AppContainer)
+
+외부 접근은 권한 허용 (NSCameraUsageDescription, NSLocationWhenInUseUsageDescription 등)을 통해 명시적으로 요청해야 함
+
+외부 프로세스, 메모리, 네트워크 리소스에 제한적 접근
+
+3. iOS Privacy Manifest와 앱 개인정보 보호 정책 작성 방법은?
+Privacy Manifest란?
+iOS 17부터 도입된 기능으로, 앱이 수집하는 데이터의 종류와 사용 목적을 명시하는 선언 파일 (PrivacyInfo.xcprivacy)
+
+앱 내부에서 어떤 서드파티 SDK가 어떤 데이터를 수집하는지 명확하게 문서화
+
+작성 방법
+PrivacyInfo.xcprivacy JSON 파일에 다음 정보 명시:
+
+수집 데이터 유형 (예: 위치, 연락처, 사진 등)
+
+사용 목적 (예: 분석, 광고, 사용자 맞춤화)
+
+사용 주체 (앱 자체 vs 타사 SDK)
+
+개인정보 보호 정책 작성 시 고려사항
+앱의 개인정보 처리 방침 링크를 App Store Connect에 등록
+
+앱 내 설정 화면 또는 첫 실행 시 사용자 동의 유도
+
+수집 항목, 저장 주체, 보관 기간, 제3자 제공 여부 명확히 표기
+
+4. Swift 5.9에서 추가된 주요 기능은?
+주요 기능 요약
+매크로(Macros): 메타프로그래밍 기능이 도입되어 코드 생성 자동화 가능
+
+예: @AddAsyncMethods, @Observable, @CaseDetection
+
+Noncopyable Types (experimental): 복사 불가능한 타입을 정의하여 메모리 안정성 강화
+
+Improved Existentials: any 키워드와 함께 사용되는 existentials가 더 유연해짐
+
+any Equatable과 같은 복잡한 타입 조합 가능
+
+if / switch expressions: 더 간결하고 표현력 있는 제어 흐름 지원
+
+swift
+복사
+편집
+let value = if condition { "A" } else { "B" }
+Package Plugin Improvements: SwiftPM에서 빌드 도중 매크로 실행 가능
+
+더 나은 메모리 추적: 컴파일러가 참조 추적 및 ARC 성능 최적화 개선
+
+기타 개선
+성능 향상 (빌드 속도, 타입 추론)
+
+SwiftSyntax/SwiftDiagnostics 강화로 IDE에서의 정적 분석 더 강화됨
+
 
 
 - Swift Concurrency의 structured concurrency 개념이 무엇인가?
