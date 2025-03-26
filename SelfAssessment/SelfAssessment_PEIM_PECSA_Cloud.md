@@ -1625,7 +1625,73 @@ VM 및 DB와 같이 고속 I/O와 낮은 지연을 요구하는 서비스에 적
 - 클라우드 네트워크에서 BGP(Border Gateway Protocol)의 역할과 활용 사례는?
 - 클라우드 기반 데이터 전송 가속 기술(AWS DataSync, Google Transfer Appliance 등)의 개념과 사례는?
 - 클라우드 환경에서 Well-Architected Framework의 개념과 주요 원칙은?
+    - 1. 클라우드 데이터베이스에서 Sharding과 Replication의 차이점
+Sharding (샤딩)
 
+데이터를 수평적으로 분할하여 여러 데이터베이스(Shard)에 나눠 저장
+각 샤드는 독립된 서버에 위치하며, 특정 키(예: 사용자 ID)에 따라 분산 저장
+목적: 확장성 확보 및 트래픽 분산
+Replication (복제)
+
+동일한 데이터를 여러 서버에 복사하여 저장
+주로 Master-Slave 구조를 사용하여 읽기 부하 분산 및 장애 대비 용도로 사용
+목적: 고가용성 확보 및 데이터 무결성 유지
+주요 차이점
+
+Sharding은 성능과 확장성 중심, Replication은 안정성과 가용성 중심
+Sharding은 분산 저장, Replication은 동일 데이터의 다중 저장
+2. 클라우드 환경에서 Data Governance(데이터 거버넌스)의 개념과 필요성
+개념
+
+데이터의 정책, 표준, 책임, 품질, 보안, 접근 권한 등을 체계적으로 관리하는 조직적 활동
+클라우드 환경에서는 다양한 데이터 소스, 분산된 시스템, 외부 API와의 연계 등으로 인해 더욱 중요
+필요성
+
+데이터 품질 및 신뢰성 확보: 일관된 데이터 사용
+보안 및 규제 준수: GDPR, HIPAA 등 대응
+비용 통제: 중복 저장 방지 및 효율적 관리
+의사결정 지원: 정확하고 일관된 데이터 기반 인사이트 제공
+3. 클라우드 네트워크에서 BGP(Border Gateway Protocol)의 역할과 활용 사례
+개념
+
+BGP는 인터넷 상에서 AS(Autonomous System) 간 라우팅을 제어하는 핵심 프로토콜
+클라우드 환경에서는 온프레미스와 클라우드 간 하이브리드 연결 또는 멀티 리전 간 트래픽 제어에 사용
+역할
+
+동적 라우팅: 최적 경로 선택
+고가용성: 경로 장애 시 빠른 대체 경로 전환
+정책 기반 경로 제어: 우선순위, 비용 기반 트래픽 분산
+활용 사례
+
+AWS Direct Connect, Google Cloud Interconnect 등에서 기업 네트워크와 클라우드 간 연결 제어
+멀티 클라우드 연결 시 우회 경로 구성
+4. 클라우드 기반 데이터 전송 가속 기술(AWS DataSync, Google Transfer Appliance 등)의 개념과 사례
+개념
+
+대량의 데이터를 클라우드로 빠르고 안정적으로 전송하기 위한 전용 가속화 기술 또는 장비
+네트워크 제약이나 보안 이슈가 있는 경우 효과적
+주요 기술 및 사례
+
+AWS DataSync: 온프레미스에서 S3, EFS 등으로 데이터를 전송하며, 암호화 및 검증 기능 포함
+Google Transfer Appliance: 대용량 데이터를 디스크에 저장해 구글에 보내면, 클라우드로 직접 업로드해주는 하드웨어 기반 전송 서비스
+Azure Data Box: 마찬가지로 Microsoft의 오프라인 전송 서비스
+활용 목적
+
+백업 마이그레이션
+빅데이터 분석용 데이터 적재
+네트워크 비용 절감 및 보안 강화
+5. 클라우드 환경에서 Well-Architected Framework의 개념과 주요 원칙
+개념
+
+AWS에서 시작되어 여러 클라우드에서 채택된 클라우드 아키텍처 모범 사례 프레임워크
+시스템의 신뢰성, 효율성, 보안성, 운영성, 비용 최적화를 평가하고 개선하기 위한 가이드라인
+주요 원칙
+
+운영 우수성(Operational Excellence): 자동화, 모니터링, 운영 개선
+보안(Security): IAM, 로그, 데이터 보호 설계
+신뢰성(Reliability): 장애 복구, 고가용성 아키텍처
+성능 효율성(Performance Efficiency): 확장성과 최적화된 리소스 사용
+비용 최적화(Cost Optimization): 불필요한 리소스 제거 및 요금 절감
 
 - 클라우드 기반 애플리케이션에서 CQRS(Command Query Responsibility Segregation) 패턴의 개념과 장점은?
 - 클라우드에서 Serverless Framework의 개념과 기존 VM/컨테이너 방식과의 차이점은?

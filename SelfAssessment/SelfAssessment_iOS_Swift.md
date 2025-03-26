@@ -3471,6 +3471,98 @@ xml
 - iOS에서 Secure Enclave를 활용하는 방법은?
 - JWT (JSON Web Token)을 활용한 인증 방식은?
 - Biometric Authentication을 적용할 때 LocalAuthentication 프레임워크의 역할은?
+    - 1. Keychain을 활용하여 민감한 데이터를 저장할 때 고려해야 할 사항은?
+개요
+Keychain은 iOS에서 제공하는 암호화된 보안 저장소로, 비밀번호, 토큰, 인증 정보 등을 저장할 수 있음.
+
+시스템에서 암호화하여 저장하고, 앱 간 공유 및 접근 권한도 설정 가능.
+
+고려해야 할 사항
+접근 제어: kSecAttrAccessibleWhenUnlocked, kSecAttrAccessibleAfterFirstUnlock 등 상황별 보안 설정 필요
+
+Keychain 그룹 설정: 여러 앱 간 공유 시 Keychain Sharing 설정 필요
+
+중복 저장 방지: 저장 전 기존 키 값 존재 여부 확인
+
+사용자 삭제: 로그아웃 시 SecItemDelete로 확실히 제거
+
+보안 민감도: 사용자 비밀번호, access token 등만 저장 (단순 설정 값은 UserDefaults 활용)
+
+Secure Enclave 연계: 고도 보안이 필요한 경우, 키 생성 시 kSecAttrTokenIDSecureEnclave 사용
+
+2. iOS에서 Secure Enclave를 활용하는 방법은?
+개요
+**Secure Enclave(SE)**는 Apple SoC 내부의 별도 보안 프로세서로, 민감한 데이터의 암호화 및 저장, Touch ID/Face ID 인증 정보 관리를 담당함.
+
+사용 방법
+CryptoKit + Keychain 연동 시 SE 활용 가능
+
+키 생성 시 다음 속성을 사용:
+
+swift
+복사
+편집
+kSecAttrTokenID: kSecAttrTokenIDSecureEnclave
+활용 사례
+비대칭 키 쌍 생성 및 저장: 개인 키는 Secure Enclave에 보관
+
+Face ID 인증 + 개인 키 서명 조합
+
+생체 인증 기반 인증 흐름 구현
+
+3. JWT (JSON Web Token)을 활용한 인증 방식은?
+개요
+JWT는 JSON 기반의 토큰으로, 사용자 인증 시 서버가 클라이언트에 발급하고, 서버리스 방식으로 인증 상태를 유지할 수 있음.
+
+구성 요소
+Header: 서명 방식 (예: HS256)
+
+Payload: 사용자 정보, 권한 등
+
+Signature: 서버의 비밀키로 서명한 값
+
+사용 흐름
+로그인 성공 시 서버가 JWT 토큰 발급
+
+클라이언트는 이후 요청 시 Authorization: Bearer <token> 헤더로 전송
+
+서버는 토큰 유효성 검사 후 요청 처리
+
+iOS에서 활용
+JWT는 단순 문자열이므로 Keychain에 저장
+
+JWT 파싱은 라이브러리(JWTDecode, SwiftJWT) 또는 직접 분해하여 디코딩 가능
+
+4. Biometric Authentication을 적용할 때 LocalAuthentication 프레임워크의 역할은?
+개요
+LocalAuthentication은 Face ID, Touch ID, 디바이스 패턴/암호 인증을 위한 프레임워크야.
+
+주요 클래스 및 메서드
+LAContext: 인증을 수행하는 중심 객체
+
+evaluatePolicy(_:localizedReason:reply:): 인증 실행 메서드
+
+canEvaluatePolicy(_:error:): 생체 인증 가능 여부 확인
+
+예시 코드
+swift
+복사
+편집
+let context = LAContext()
+if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+    context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Face ID로 로그인하세요") { success, error in
+        if success {
+            // 인증 성공
+        }
+    }
+}
+활용 포인트
+보안 강화: Keychain 값 접근 전에 생체 인증 사용
+
+UX 향상: 자동 로그인 구현
+
+Secure Enclave와 연계 가능
+
 
 
 - 앱이 Background 상태에서 네트워크 통신을 보안적으로 유지하는 방법은?
