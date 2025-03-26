@@ -3347,7 +3347,125 @@ App Store Connect → 앱 다운로드 크기 비교
 - iOS의 On Demand Resources (ODR)란?
 - Xcode Cloud와 기존 CI/CD 도구(GitHub Actions, Bitrise) 비교 분석
 - App Transport Security (ATS)란?
+    - 1. In-App Purchase에서 Receipt Validation을 처리하는 방법은?
+개요
+인앱 결제(IAP)를 사용한 뒤, 결제 내역을 검증하는 과정을 Receipt Validation이라고 해.
 
+사용자가 실제로 결제했는지 앱이 검증해야 하는 중요한 보안 절차야.
+
+처리 방식
+로컬 검증
+
+Bundle.main.appStoreReceiptURL을 통해 receipt 파일을 얻고
+
+Base64로 인코딩 후 파싱하여 확인
+
+보안에 민감한 앱엔 권장되지 않음
+
+서버 측 검증 (권장)
+
+앱에서 수신한 receipt를 Base64 인코딩해 서버에 전송
+
+서버가 Apple의 검증 서버(https://buy.itunes.apple.com/verifyReceipt)로 전송
+
+Apple 응답의 status와 latest_receipt_info 등을 확인해 진위 판단
+
+주요 보안 포인트
+앱에서 직접 receipt를 검증하지 말고 중간 서버에서 검증해야 함
+
+테스트 시에는 Apple의 sandbox URL 사용 필요
+
+2. iOS의 On Demand Resources (ODR)란?
+개요
+앱의 전체 용량을 줄이고, 필요한 리소스만 실행 중 다운로드하는 기능
+
+iOS 9 이상에서 지원하며, 앱스토어에서 앱을 다운로드할 때 필요한 리소스만 포함
+
+특징
+리소스를 **태그(Tag)**로 그룹화
+
+NSBundleResourceRequest를 통해 동적으로 다운로드
+
+리소스는 시스템이 캐싱하며 공간 부족 시 제거될 수 있음
+
+사용 예
+게임의 다음 스테이지 배경
+
+특정 기능에서만 쓰는 이미지/동영상
+
+한 번만 보여주는 튜토리얼
+
+사용 방법
+Xcode에서 Assets > On Demand Resource 설정
+
+코드에서:
+
+swift
+복사
+편집
+let request = NSBundleResourceRequest(tags: ["Level2"])
+request.beginAccessingResources { error in
+    // 로딩 완료 후 처리
+}
+3. Xcode Cloud와 기존 CI/CD 도구(GitHub Actions, Bitrise) 비교 분석
+Xcode Cloud
+Apple이 만든 공식 CI/CD 플랫폼
+
+Xcode 및 App Store Connect와 깊게 통합
+
+TestFlight, Store 배포, 자동 빌드 등을 GUI에서 설정 가능
+
+GitHub Actions
+GitHub에서 제공하는 CI/CD 워크플로 도구
+
+YAML 파일 기반 설정
+
+Xcode 빌드, 테스트, 배포까지 가능하지만 직접 설정 필요
+
+Bitrise
+모바일 앱에 특화된 CI/CD 서비스
+
+GUI 기반으로 손쉬운 파이프라인 구성
+
+다양한 iOS 전용 스텝 제공 (Code Signing, Xcode Select, etc)
+
+비교 포인트
+통합성: Xcode Cloud > Bitrise > GitHub Actions
+
+유연성/커스터마이징: GitHub Actions > Bitrise > Xcode Cloud
+
+모바일 특화: Bitrise > Xcode Cloud > GitHub Actions
+
+4. App Transport Security (ATS)란?
+정의
+iOS 9부터 도입된 보안 정책으로, 앱에서 보안되지 않은 HTTP 연결을 차단하고 HTTPS 연결만 허용함
+
+기본 정책
+ATS는 앱 내 모든 URL 세션이 HTTPS + TLS 1.2 이상을 사용해야 함
+
+ATS 예외 처리 (Info.plist)
+특정 도메인에 예외를 적용하려면:
+
+xml
+복사
+편집
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSExceptionDomains</key>
+    <dict>
+        <key>example.com</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>
+보안 권장 사항
+되도록 모든 요청은 HTTPS로 처리
+
+예외 처리는 신중히 사용하며, App Store 심사에서 설명이 필요함
 
 - Keychain을 활용하여 민감한 데이터를 저장할 때 고려해야 할 사항은?
 - iOS에서 Secure Enclave를 활용하는 방법은?
