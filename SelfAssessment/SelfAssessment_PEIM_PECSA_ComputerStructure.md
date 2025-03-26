@@ -618,66 +618,88 @@ Organize concepts, features, types and Pros and Cons
 - IEEE 754 부동소수점 표준의 구조와 특징은?
 - Overflow와 Underflow의 개념과 발생 원인은?
 - Carry, Borrow, Overflow, Zero 플래그의 역할은?
+
+
 - CPU의 클럭 속도(Clock Speed)와 CPI(Cycles Per Instruction)의 관계를 설명하라.
 - 연산 속도를 높이기 위한 주요 기술(파이프라이닝, 슈퍼스칼라, VLIW 등)을 설명하라.
 - RISC에서 Load/Store 아키텍처의 의미와 장점은?
 - VLIW(Very Long Instruction Word) 구조의 개념과 장점은?
 - 캐시 메모리(Cache Memory)의 역할과 동작 원리는?
 - 캐시 메모리의 매핑 방식(직접 사상, 연관 사상, 집합 연관 사상)의 차이점은?
+
+
 - 캐시 히트(Cache Hit)와 캐시 미스(Cache Miss)의 개념과 영향을 설명하라.
 - 캐시 메모리에서 미스 패널티(Miss Penalty)란 무엇인가?
 - 캐시 교체 알고리즘(FIFO, LRU, LFU 등)의 종류와 특징은?
 - 캐시 일관성(Coherency) 문제와 이를 해결하는 방법은?
 - 멀티레벨 캐시(L1, L2, L3)의 개념과 필요성은?
 - 가상 메모리(Virtual Memory)의 개념과 동작 방식은?
+
+
 - 페이지 테이블(Page Table)과 TLB(Translation Lookaside Buffer)의 역할은?
 - MMU(Memory Management Unit)의 역할과 동작 방식은?
 - DRAM과 SRAM의 차이점은?
 - DRAM에서 Refresh가 필요한 이유는?
 - EEPROM과 Flash Memory의 차이점은?
 - HDD와 SSD의 구조적 차이와 장점, 단점은?
+
+
 - RAID의 개념과 다양한 RAID 수준(RAID 0, 1, 5, 10 등)의 차이점은?
 - 하드디스크의 주요 성능 지표(Access Time, Seek Time, Latency, RPM 등)를 설명하라.
 - 페이징(Paging)과 세그먼테이션(Segmentation)의 차이점은?
 - 페이지 폴트(Page Fault)란 무엇이며, 발생 시 처리 방식은?
 - Thrashing(스래싱)의 개념과 발생 원인은?
 - 메모리 단편화(내부 단편화, 외부 단편화)의 개념과 해결 방법은?
+
+
 - 멀티코어 프로세서(Multi-Core Processor)의 개념과 장점은?
 - SMT(Simultaneous Multithreading)와 하이퍼스레딩(Hyper-Threading)의 차이점은?
 - 다중 프로세서 시스템(Symmetric vs Asymmetric Multiprocessing)의 차이점은?
 - NUMA(Non-Uniform Memory Access) 구조란 무엇인가?
 - GPGPU(General-Purpose GPU)의 개념과 활용 사례는?
 - Flynn의 분류(SISD, SIMD, MISD, MIMD)에 대해 설명하라.
+
+
 - 멀티스레딩(Multithreading)의 개념과 장점은?
 - 병렬 프로세싱(Parallel Processing)에서 Amdahl’s Law란 무엇인가?
 - 데이터 흐름 컴퓨팅(Data Flow Computing)이란 무엇인가?
 - 분산 시스템(Distributed System)과 병렬 시스템(Parallel System)의 차이점은?
 - 시스템 버스(System Bus)의 개념과 역할은?
 - 버스 중재 방식(Arbitration)의 종류와 특징은?
+
+
 - PCI Express(PCIe)와 기존 PCI의 차이점은?
 - USB(Universal Serial Bus)의 특징과 동작 방식은?
 - 직렬 전송(Serial Transmission)과 병렬 전송(Parallel Transmission)의 차이점은?
 - DMA(Direct Memory Access)의 개념과 장점은?
 - 인터럽트(Interrupt)의 개념과 종류(하드웨어, 소프트웨어 인터럽트)는?
 - 인터럽트 벡터 테이블(Interrupt Vector Table)이란 무엇인가?
+
+
 - 메모리 매핑 방식(Memory-mapped I/O vs. Port-mapped I/O)의 차이점은?
 - I/O 방식(폴링, 인터럽트, DMA)의 차이점과 장점은?
 - 양자 컴퓨팅(Quantum Computing)의 개념과 기존 컴퓨터와의 차이점은?
 - 뉴로모픽 컴퓨팅(Neuromorphic Computing)이란 무엇인가?
 - 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이점은?
 - NVMe(Non-Volatile Memory Express)의 개념과 기존 SATA SSD와의 차이점은?
+
+
 - HBM(High Bandwidth Memory)과 GDDR의 차이점은?
 - 칩렛(Chiplet) 구조란 무엇이며, 기존 단일 다이(Die) 설계와의 차이점은?
 - TPU(Tensor Processing Unit)와 GPU의 차이점은?
 - AI 가속기(Neural Processing Unit, NPU)의 개념과 역할은?
 - 사이드 채널 공격(Side Channel Attack)의 개념과 방어 기법은?
 - 최신 CPU에서 보안 강화 기술(Meltdown, Spectre 방어 기법 등)은?
+
+
 - Out-of-Order Execution(명령어 비순차 실행)의 개념과 장점은?
 - 데이터 흐름 아키텍처(Data Flow Architecture)의 개념과 특징은?
 - 브랜치 프레딕션(Branch Prediction)의 개념과 중요성은?
 - 정적(Static) vs. 동적(Dynamic) 브랜치 예측 기법의 차이점은?
 - 투기 실행(Speculative Execution)이란 무엇인가?
 - VLIW(Very Long Instruction Word)와 EPIC(Explicitly Parallel Instruction Computing)의 차이점은?
+
+
 - CPU의 성능을 측정하는 주요 벤치마크(Benchmark) 지표는?
 - GPU와 CPU의 연산 처리 방식의 차이점은?
 - SIMD(Single Instruction Multiple Data)와 MIMD(Multiple Instruction Multiple Data)의 차이점은?
@@ -685,66 +707,89 @@ Organize concepts, features, types and Pros and Cons
 - 캐시 프리페칭(Cache Prefetching)의 개념과 장점은?
 - 캐시 코히어런시(Cache Coherency) 유지 기법에는 어떤 것이 있는가?
 - MESI 프로토콜의 개념과 역할은?
+
+
 - NUMA(Non-Uniform Memory Access)와 UMA(Uniform Memory Access)의 차이점은?
 - 가상 메모리의 주소 변환(Address Translation) 과정에서 발생하는 TLB 미스(TLB Miss) 처리 방식은?
 - 세그먼트(segment)와 페이지(page)의 차이점은?
 - TLB(Translation Lookaside Buffer)의 동작 방식과 성능 향상 기법은?
 - 캐시 메모리에서 쓰기 정책(Write Through, Write Back)의 차이점은?
 - 페이지 교체 알고리즘(LRU, FIFO, LFU, Optimal)의 비교와 장단점은?
+
+
 - Working Set Model(작업 집합 모델)의 개념과 역할은?
 - Amdahl’s Law와 Gustafson’s Law의 차이점은?
 - SIMD(벡터 프로세싱)와 MIMD(멀티프로세서)의 차이점은?
 - 스레드 기반 병렬 처리(Thread-level Parallelism)와 데이터 기반 병렬 처리(Data-level Parallelism)의 차이점은?
 - 다중 프로세서 시스템에서 캐시 일관성을 유지하는 방법은?
 - 멀티코어 프로세서에서 공유 메모리 접근 시 동기화 문제를 해결하는 방법은?
+
+
 - Spin Lock과 Mutex의 차이점은?
 - OpenMP와 MPI(Message Passing Interface)의 차이점과 사용 사례는?
 - Hyper-Threading의 개념과 장단점은?
 - 멀티코어 프로세서에서 Thread Affinity(스레드 결속)의 개념과 장점은?
 - NUMA 시스템에서 성능을 최적화하는 방법은?
 - MIPS와 ARM 아키텍처의 주요 차이점은?
+
+
 - x86과 ARM의 설계 철학과 차이점은?
 - CISC와 RISC의 차이점 및 대표적인 프로세서 아키텍처는?
 - ARM 프로세서의 Thumb 모드란 무엇인가?
 - PowerPC, SPARC, MIPS 아키텍처의 주요 특징과 차이점은?
 - Superscalar와 VLIW 아키텍처의 차이점은?
 - 프로세서에서 미시적 명령어(Microinstruction)와 매크로 명령어(Macroinstruction)의 차이점은?
+
+
 - Out-of-Order Execution과 In-Order Execution의 차이점은?
 - SIMD 아키텍처에서 벡터 레지스터(Vector Register)의 역할은?
 - 펜티엄(Pentium) 프로세서에서 MMX, SSE, AVX 명령어 세트의 차이점은?
 - I/O 서브시스템의 개념과 역할은?
 - DMA(Direct Memory Access)와 Programmed I/O의 차이점은?
 - 폴링(Polling)과 인터럽트(Interrupt)의 차이점과 장단점은?
+
+
 - 인터럽트 우선순위(Interrupt Priority)와 다중 인터럽트 처리 방식은?
 - PCI와 PCIe(PCI Express)의 차이점은?
 - USB의 데이터 전송 방식(Control, Bulk, Interrupt, Isochronous Transfer)의 차이점은?
 - SCSI, SATA, NVMe의 차이점과 특징은?
 - 하드디스크의 RAID 구성 방식과 장단점은?
 - SSD에서 TRIM 명령어의 역할은?
+
+
 - 캐시 메모리와 디스크 캐시의 차이점은?
 - 멜트다운(Meltdown)과 스펙터(Spectre) 취약점의 개념과 대응 방식은?
 - RISC-V의 특징과 기존 RISC 아키텍처와의 차이점은?
 - AI/딥러닝을 위한 TPU(Tensor Processing Unit)와 GPU의 차이점은?
 - 뉴로모픽 컴퓨팅(Neuromorphic Computing)의 개념과 특징은?
 - 퀀텀 컴퓨팅(Quantum Computing)에서 큐비트(Qubit)의 역할은?
+
+
 - FPGA(Field Programmable Gate Array)의 개념과 활용 사례는?
 - 칩렛(Chiplet) 설계 방식과 기존 단일 다이(Die) 설계와의 차이점은?
 - 비휘발성 메모리(NVM, Non-Volatile Memory)의 개념과 활용 사례는?
 - HBM(High Bandwidth Memory)과 GDDR 메모리의 차이점은?
 - 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이점은?
 - MIPS(Million Instructions Per Second)와 FLOPS(Floating Point Operations Per Second)의 차이점은?
+
+
 - SPEC Benchmark란 무엇이며, 어떤 목적으로 사용되는가?
 - CPU 성능을 높이기 위한 캐시 최적화 방법은?
 - 메모리 접근 속도를 향상시키기 위한 기법에는 어떤 것이 있는가?
 - 벤치마킹(Benchmarking) 시 고려해야 할 주요 요소는?
 - GPU 가속(Acceleration)을 활용한 컴퓨팅 성능 향상 기법은?
 - Branch Prediction Miss를 줄이기 위한 최적화 방법은?
+
+
+
 - 쓰레드 컨텍스트 스위칭(Context Switching)이 성능에 미치는 영향은?
 - 파이프라인 구조에서 구조적 해저드(Structural Hazard), 데이터 해저드(Data Hazard), 제어 해저드(Control Hazard)를 해결하는 방법은?
 - 멀티코어 시스템에서 성능 병목(Bottleneck)을 최소화하는 기법은?
 - 명령어 파이프라인(Instruction Pipeline)에서 발생할 수 있는 주요 해저드는 무엇이며, 해결 방법은?
 - 지연 슬롯(Delay Slot)의 개념과 효과는?
 - 점프 예측(Jump Prediction)과 분기 예측(Branch Prediction)의 차이점은?
+
+
 - 동적 브랜치 예측에서 Two-Level Adaptive Branch Prediction 기법이란?
 - 명령어 재배치(Instruction Reordering)의 개념과 성능 향상 방법은?
 - 레지스터 윈도우(Register Window)의 개념과 적용 사례는?
@@ -752,6 +797,8 @@ Organize concepts, features, types and Pros and Cons
 - 제어 흐름 그래프(Control Flow Graph, CFG)의 개념과 분석 방법은?
 - 명령어 인코딩(Instruction Encoding) 방식과 성능 영향은?
 - JIT(Just-In-Time) 컴파일러의 동작 원리와 컴퓨터 구조와의 관계는?
+
+
 - 페이지 크기(Page Size)를 결정할 때 고려해야 할 요소는?
 - 다중 프로세스 환경에서 TLB(Translation Lookaside Buffer) 관리 방법은?
 - 다중 페이지 테이블 구조(Inverted Page Table, Multi-Level Page Table)의 장단점은?
@@ -759,48 +806,64 @@ Organize concepts, features, types and Pros and Cons
 - Page Coloring 기법의 개념과 성능 향상 효과는?
 - 페이지 공유(Page Sharing)와 복사-온-라이트(Copy-On-Write)의 차이점은?
 - 메모리 압축(Memory Compression) 기법의 원리와 효과는?
+
+
 - Swap Space의 개념과 성능에 미치는 영향은?
 - 메모리 인터리빙(Memory Interleaving)의 개념과 효과는?
 - 하드웨어 지원 가상화(VT-x, AMD-V)의 원리와 필요성은?
 - SSD의 Wear Leveling 기법이란 무엇이며, 왜 필요한가?
 - SSD에서 Garbage Collection의 개념과 성능 최적화 방법은?
 - HDD의 ZBR(Zone Bit Recording) 기법이란?
+
+
 - Caching Disk와 Write Buffering의 개념과 차이점은?
 - NVMe over Fabrics(NVMe-oF)의 개념과 기존 NVMe와의 차이점은?
 - DAS(Direct Attached Storage), NAS(Network Attached Storage), SAN(Storage Area Network)의 차이점은?
 - 데이터 무결성(Data Integrity)을 보장하는 ECC(Error Correcting Code) 방식은?
 - CRC(Cyclic Redundancy Check)와 ECC(Error Correction Code)의 차이점은?
 - RAID 6에서 이중 패리티(Double Parity) 기법의 원리는?
+
+
 - 파일 시스템에서 저널링(Journaling) 기법의 원리와 장점은?
 - 분산 컴퓨팅(Distributed Computing)과 병렬 컴퓨팅(Parallel Computing)의 차이점은?
 - MapReduce의 개념과 동작 방식은?
 - CPU-GPU 공동 처리(Heterogeneous Computing)의 개념과 활용 사례는?
 - OpenCL과 CUDA의 차이점과 활용 사례는?
 - 클러스터(Cluster)와 그리드 컴퓨팅(Grid Computing)의 차이점은?
+
+
 - MPI(Message Passing Interface)에서 동기식(Synchronous) vs 비동기식(Asynchronous) 통신의 차이점은?
 - 병렬 프로그래밍에서 레이스 컨디션(Race Condition)과 이를 해결하는 방법은?
 - 다중 스레드 환경에서 데드락(Deadlock)의 원인과 해결 방법은?
 - NUMA 시스템에서 메모리 접근 최적화를 위한 방법은?
 - GPGPU(General-Purpose computing on Graphics Processing Units) 기술이란?
 - 하드웨어 기반 보안 기술인 TPM(Trusted Platform Module)이란?
+
+
 - Meltdown과 Spectre 보안 취약점이 발생하는 원리와 대응 방안은?
 - 사이드 채널 공격(Side-Channel Attack)의 종류와 대응 방법은?
 - CPU에서 보안 강화를 위한 ASLR(Address Space Layout Randomization) 기법이란?
 - 보안 강화 프로세서(Secure Enclave, TrustZone)의 개념과 역할은?
 - 데이터 보호를 위한 메모리 암호화(Memory Encryption) 기술이란?
 - 해시 기반 무결성 검증(Hash-Based Integrity Checking)의 원리와 활용 사례는?
+
+
 - 서버 CPU에서 Secure Boot의 원리와 필요성은?
 - 하드웨어 백도어(Hardware Backdoor)의 개념과 탐지 방법은?
 - 클라우드 컴퓨팅 환경에서 가상 머신(VM) 보안 강화를 위한 하드웨어 기술은?
 - 양자 컴퓨터(Quantum Computer)에서 큐비트(Qubit) 개념과 전통적인 비트(Bit)와의 차이점은?
 - 뉴로모픽 컴퓨팅(Neuromorphic Computing)의 원리와 활용 가능성은?
 - 광컴퓨터(Photonic Computing)의 개념과 기존 반도체 기반 컴퓨터와의 차이점은?
+
+
 - PIM(Processing-In-Memory) 기술의 개념과 장점은?
 - RISC-V가 기존 RISC/CISC 아키텍처와 비교하여 갖는 강점은?
 - AI 전용 칩(ASIC, FPGA, TPU)의 차이점과 활용 사례는?
 - 스마트NIC(Smart Network Interface Card)의 개념과 활용 사례는?
 - Edge AI 컴퓨팅의 개념과 기존 AI 모델과의 차이점은?
 - 소프트웨어 정의 하드웨어(Software-Defined Hardware)란 무엇이며, 활용 가능성은?
+
+
 - 차세대 메모리 기술(Optane, MRAM, ReRAM, PCM 등)의 개념과 기존 DRAM, NAND 플래시와의 차이점은?
 - 명령어 스케줄링(Instruction Scheduling)의 역할과 종류는?
 - Register Renaming(레지스터 리네이밍)의 개념과 Out-of-Order Execution에서의 역할은?
@@ -808,6 +871,8 @@ Organize concepts, features, types and Pros and Cons
 - VLIW(Very Long Instruction Word)에서 명령어 병렬성을 최대한 활용하는 방법은?
 - 멀티코어 시스템에서 False Sharing이란 무엇이며, 성능에 미치는 영향은?
 - CPU의 마이크로코드(Microcode)란 무엇이며, 어떤 역할을 하는가?
+
+
 - 실행 흐름 예측(Execution Flow Prediction)이란 무엇이며, 어떤 방식으로 이루어지는가?
 - Instruction Window의 개념과 크기를 조절할 때 고려해야 할 요소는?
 - Data Forwarding(데이터 포워딩)이란 무엇이며, 파이프라인에서 어떻게 활용되는가?
@@ -816,6 +881,8 @@ Organize concepts, features, types and Pros and Cons
 - Row Hammer 공격이란 무엇이며, 이를 방어하기 위한 하드웨어 기술은?
 - TLB Shootdown이란 무엇이며, 멀티프로세서 환경에서 이를 효율적으로 관리하는 방법은?
 - Memory Fence(메모리 펜스)란 무엇이며, 동기화에서 어떤 역할을 하는가?
+
+
 - Write Amplification(쓰기 증폭)이란 무엇이며, 이를 최소화하기 위한 SSD 최적화 방법은?
 - Near Memory Computing(NMC)의 개념과 기존 메모리 구조와의 차이점은?
 - Load/Store Queue의 개념과 역할은?
@@ -823,11 +890,15 @@ Organize concepts, features, types and Pros and Cons
 - 메모리 컨트롤러의 역할과 성능 최적화 방법은?
 - Prefetch Buffer(프리페치 버퍼)의 역할과 성능 향상 효과는?
 - CPU와 FPGA의 차이점과 FPGA의 장점은?
+
+
 - GPGPU에서 SIMD(Single Instruction Multiple Data)와 SIMT(Single Instruction Multiple Threads)의 차이점은?
 - Tensor Processing Unit(TPU)의 구조와 GPU와의 차이점은?
 - Pipelined ALU와 Non-Pipelined ALU의 차이점과 성능 비교는?
 - Coarse-Grained Multithreading과 Fine-Grained Multithreading의 차이점은?
 - Shared Memory와 Distributed Memory 모델의 차이점과 활용 사례는?
+
+
 - GPU에서 Thread Divergence(스레드 분기)란 무엇이며, 성능 저하를 방지하는 방법은?
 - Heterogeneous Computing(이기종 컴퓨팅)이란 무엇이며, 어떤 환경에서 사용되는가?
 - Asynchronous Execution(비동기 실행)과 동기 실행의 차이점은?
@@ -835,6 +906,8 @@ Organize concepts, features, types and Pros and Cons
 - PCIe(PCI Express)에서 Lane과 Bandwidth의 관계는?
 - Direct I/O와 Memory-Mapped I/O의 차이점은?
 - RDMA(Remote Direct Memory Access)의 개념과 기존 TCP/IP 기반 데이터 전송과의 차이점은?
+
+
 - Zero-Copy I/O 기술의 개념과 성능 향상 효과는?
 - 인터럽트의 벡터 처리 방식(Vector Interrupt Processing)이란?
 - NVMe Direct Storage의 개념과 기존 스토리지 방식과의 차이점은?
@@ -842,36 +915,48 @@ Organize concepts, features, types and Pros and Cons
 - Infiniband 네트워크의 개념과 고성능 컴퓨팅에서의 활용 사례는?
 - Host Channel Adapter(HCA)란 무엇이며, 고성능 네트워크에서 어떤 역할을 하는가?
 - 고속 네트워크에서 Jumbo Frame(점보 프레임)이란 무엇이며, 장점과 단점은?
+
+
 - CPI(Cycles Per Instruction)와 IPC(Instructions Per Cycle)의 차이점은?
 - Benchmarks(SPEC, TPC, LINPACK 등)의 종류와 사용 목적은?
 - Amdahl’s Law를 적용할 때, 병렬 처리 속도 향상 한계는?
 - Roofline Model이란 무엇이며, 프로세서 성능을 평가할 때 어떻게 활용되는가?
 - Hot Spot Analysis(핫스팟 분석)의 개념과 성능 최적화 기법은?
 - CPU 사용률(Usage)과 CPU Stall(스톨) 간의 관계는?
+
+
 - Performance Counter(성능 카운터)란 무엇이며, 이를 활용한 시스템 성능 분석 방법은?
 - Instruction Fusion이란 무엇이며, 어떻게 성능을 최적화하는가?
 - Latency와 Throughput의 차이점과 성능 측정 시 고려해야 할 요소는?
 - Processor Affinity(프로세서 친화도)란 무엇이며, 성능 최적화에 어떤 영향을 미치는가?
 - Quantum Supremacy(양자 우위)의 개념과 현재 연구 동향은?
 - Memristor의 개념과 기존 트랜지스터 기반 메모리와의 차이점은?
+
+
 - DNA Computing이란 무엇이며, 기존 컴퓨팅과의 차이점은?
 - RRAM(Resistive RAM)의 개념과 기존 NAND Flash와의 차이점은?
 - Optical Computing(광 컴퓨팅)의 원리와 기존 전자 기반 컴퓨팅과의 차이점은?
 - Edge AI 프로세서의 개념과 기존 클라우드 AI와의 차이점은?
 - 3D TSV(Through-Silicon Via) 기술이란 무엇이며, 기존 반도체 설계와의 차이점은?
 - Nanosheet Transistor(나노시트 트랜지스터)란 무엇이며, 기존 FinFET과의 차이점은?
+
+
 - 탄소 나노튜브 기반 트랜지스터의 개념과 기존 실리콘 반도체와의 차이점은?
 - Photonic Neural Networks(광 뉴럴 네트워크)의 개념과 활용 가능성은?
 - CPU에서 Instruction Fusion이란 무엇이며, 성능 최적화에 어떤 영향을 미치는가?
 - Tomasulo’s Algorithm이란 무엇이며, 명령어 스케줄링에서 어떤 역할을 하는가?
 - Value Prediction(값 예측)의 개념과 성능 최적화 기법은?
 - Micro-Op Cache(마이크로 연산 캐시)란 무엇이며, 성능 향상에 어떤 역할을 하는가?
+
+
 - Speculative Execution에서 Spectre와 Meltdown 공격이 발생하는 원리는?
 - Loop Unrolling(루프 언롤링)이란 무엇이며, CPU 성능 최적화에서 어떤 역할을 하는가?
 - Operand Forwarding(피연산자 포워딩)이란 무엇이며, 파이프라인 성능에 어떤 영향을 미치는가?
 - Register Bypassing(레지스터 바이패싱)이란 무엇이며, 연산 속도를 높이기 위한 전략은?
 - Shadow Register(섀도 레지스터)의 개념과 활용 사례는?
 - Stack Machine과 Register Machine의 차이점은?
+
+
 - DRAM에서 Bank Interleaving(뱅크 인터리빙)이란 무엇이며, 성능 향상 효과는?
 - DDR3, DDR4, DDR5의 차이점과 성능 개선 요소는?
 - Persistent Memory(지속성 메모리)와 기존 DRAM/NAND Flash의 차이점은?
@@ -879,42 +964,56 @@ Organize concepts, features, types and Pros and Cons
 - DRAM의 Row Buffer Hit과 Miss가 성능에 미치는 영향은?
 - Virtual Memory에서 Inverted Page Table 구조의 장점과 단점은?
 - 메모리 압축 기술(Memory Compression)의 원리와 성능 향상 효과는?
+
+
 - Software-Managed Cache와 Hardware-Managed Cache의 차이점은?
 - Address Alias(주소 중복) 문제와 이를 해결하는 방법은?
 - Memory Consistency Model(메모리 일관성 모델)이란 무엇이며, 대표적인 모델은?
 - Spinlock과 Mutex의 차이점과 활용 사례는?
 - Read-Copy-Update(RCU) 기법이란 무엇이며, 멀티스레드 환경에서 어떤 역할을 하는가?
 - Cache Coherence Protocol에서 MOESI와 MESI의 차이점은?
+
+
 - Directory-Based Cache Coherence의 개념과 장점은?
 - Thread-Level Speculation(TLS)란 무엇이며, 성능 최적화에서 어떻게 활용되는가?
 - Data Prefetching과 Instruction Prefetching의 차이점과 성능 최적화 효과는?
 - NUMA-aware Memory Allocation이란 무엇이며, 성능 최적화 방법은?
 - Weak Consistency와 Sequential Consistency의 차이점은?
 - Write Combining 기술이란 무엇이며, 메모리 쓰기 성능에 미치는 영향은?
+
+
 - Hardware Transactional Memory(HTM)란 무엇이며, 병렬 프로그래밍에서의 역할은?
 - I/O 성능 최적화를 위한 Direct Memory Access (DMA)와 RDMA의 차이점은?
 - PCIe에서 Link Width(x1, x4, x8, x16)가 성능에 미치는 영향은?
 - Non-Uniform Memory Access (NUMA)에서 I/O 디바이스 배치가 성능에 미치는 영향은?
 - I/O Bottleneck을 해결하기 위한 Overlapping I/O 기법이란?
 - Thunderbolt와 USB의 차이점과 성능 비교는?
+
+
 - Polling 기반 I/O와 Interrupt 기반 I/O의 차이점과 성능 비교는?
 - Persistent Storage에서 Write Cliff 현상이란 무엇이며, 해결 방법은?
 - Hot Plugging(핫 플러깅)이 가능한 인터페이스(USB, PCIe 등)에서 고려해야 할 요소는?
 - Network-on-Chip(NoC)의 개념과 기존 버스 아키텍처와의 차이점은?
 - Direct I/O와 Memory-Mapped I/O의 차이점과 성능 영향은?
 - CPU의 Superpipeline(슈퍼파이프라이닝)이란 무엇이며, 기존 파이프라인과의 차이점은?
+
+
 - Data Dependency Hazard(데이터 종속 해저드)의 종류와 해결 방법은?
 - Loop-Carried Dependency(루프 의존성)이란 무엇이며, 이를 해결하기 위한 기법은?
 - Register Windowing(레지스터 윈도잉) 기법이란 무엇이며, RISC 아키텍처에서 어떻게 활용되는가?
 - Fetch-Decode-Execute 사이클에서 각 단계의 주요 역할과 병목을 줄이기 위한 최적화 방법은?
 - Control Flow Graph(CFG) 기반 최적화 기법에는 어떤 것들이 있는가?
 - Hardware Prefetching과 Software Prefetching의 차이점은?
+
+
 - Instruction-Level Parallelism(ILP)과 Data-Level Parallelism(DLP)의 차이점은?
 - Out-of-Order Execution과 Speculative Execution의 차이점과 보완 관계는?
 - Branch Target Buffer(BTB)의 개념과 Branch Prediction 성능에 미치는 영향은?
 - 메모리 액세스에서 Temporal Locality와 Spatial Locality의 개념과 차이점은?
 - Adaptive Replacement Cache(ARC)와 Least Recently Used(LRU) 캐시 교체 알고리즘의 차이점은?
 - Cache Associativity와 Conflict Miss의 관계는?
+
+
 - Cache Write Allocation Policy(쓰기 할당 정책)에는 어떤 것이 있으며, 각각의 특징은?
 - Cache Partitioning(캐시 파티셔닝)의 개념과 멀티코어 환경에서의 활용 사례는?
 - Translation Lookaside Buffer(TLB)의 Multi-Level 구조가 필요한 이유는?
@@ -922,18 +1021,24 @@ Organize concepts, features, types and Pros and Cons
 - Memory Bandwidth(메모리 대역폭)과 Latency(지연시간)의 차이점과 성능 최적화 방법은?
 - ECC (Error Correcting Code) 메모리의 개념과 Single-Bit, Multi-Bit 오류를 처리하는 방법은?
 - Memory Scrubbing이란 무엇이며, 데이터 무결성을 유지하는 방법은?
+
+
 - False Sharing이 발생하는 원인과 이를 방지하는 방법은?
 - Multi-Threading 환경에서 Load Balancing(부하 균형) 기법에는 어떤 것들이 있는가?
 - Directory-Based Cache Coherence에서 Full Map과 Limited Map의 차이점은?
 - Prefetching이 캐시 일관성(Cache Coherency)에 미치는 영향은?
 - Lock-Free Data Structure(락 프리 자료구조)의 개념과 구현 방법은?
 - Parallel Reduction(병렬 축소)의 개념과 SIMD/SIMT에서의 활용 사례는?
+
+
 - HyperTransport와 QuickPath Interconnect(QPI)의 차이점은?
 - Synchronization Barrier(동기화 장벽)이란 무엇이며, 멀티스레딩 환경에서의 역할은?
 - Multi-Core 환경에서 Memory Contention을 줄이는 방법은?
 - CC-NUMA(Cache-Coherent Non-Uniform Memory Access)에서 성능을 최적화하는 기법은?
 - PCIe(Peripheral Component Interconnect Express)에서 Lane Width(x1, x4, x8, x16)와 대역폭 관계는?
 - Direct I/O와 Memory-Mapped I/O의 차이점과 성능 비교는?
+
+
 - Latency-Hiding Techniques(지연시간 은폐 기법)의 개념과 예시는?
 - USB 3.0과 USB 4.0의 차이점과 성능 비교는?
 - Storage Class Memory(SCM)란 무엇이며, 기존 DRAM 및 NAND 플래시와의 차이점은?
@@ -941,60 +1046,80 @@ Organize concepts, features, types and Pros and Cons
 - Hot Plugging(핫 플러깅) 지원 인터페이스에서 발생할 수 있는 기술적 문제와 해결 방법은?
 - M.2와 U.2 인터페이스의 차이점과 활용 사례는?
 - NVMe Queueing Mechanism이 기존 SATA 인터페이스와 비교했을 때 갖는 장점은?
+
+
 - Memory-Mapped I/O가 고속 I/O 처리에서 갖는 장점과 단점은?
 - DNA Computing이란 무엇이며, 기존 컴퓨터 아키텍처와의 차이점은?
 - Optical Computing(광 컴퓨팅)의 개념과 기존 전자기반 컴퓨팅과의 차이점은?
 - Zero Trust Architecture(제로 트러스트 아키텍처)가 하드웨어 보안에서 중요한 이유는?
 - Edge AI 프로세서의 개념과 기존 클라우드 AI와의 차이점은?
 - Near-Memory Computing(NMC)의 개념과 기존 메모리 계층구조와의 차이점은?
+
+
 - Neuromorphic Computing(뉴로모픽 컴퓨팅)이란 무엇이며, AI 연산에서 어떻게 활용되는가?
 - Quantum Error Correction(양자 오류 정정) 기술이란 무엇이며, 왜 필요한가?
 - Nanosheet Transistor(나노시트 트랜지스터)란 무엇이며, 기존 FinFET과의 차이점은?
 - 3D Heterogeneous Integration(3D 이기종 집적)의 개념과 활용 가능성은?
 - Human Brain-Inspired Computing(인간 뇌 모방 컴퓨팅)이란 무엇이며, 기존 AI 아키텍처와의 차이점은?
 - Instruction Window(명령어 윈도우) 크기가 성능에 미치는 영향은?
+
+
 - Indirect Branch Prediction(간접 분기 예측)의 개념과 최적화 방법은?
 - Register File의 크기와 CPU 성능 간의 관계는?
 - ALU Pipeline과 FPU Pipeline의 차이점과 활용 사례는?
 - Decoupled Access/Execute Architecture(분리형 접근/실행 아키텍처)란 무엇인가?
 - Hardware Loop Buffer(하드웨어 루프 버퍼)란 무엇이며, 성능 향상 효과는?
 - SIMD Execution Unit과 일반 ALU의 차이점과 장점은?
+
+
 - Power Gating과 Clock Gating의 개념과 전력 절감 효과는?
 - Register Scoreboarding이란 무엇이며, Out-of-Order Execution에서 어떤 역할을 하는가?
 - Hybrid Branch Prediction(하이브리드 분기 예측) 기술의 개념과 성능 최적화 방법은?
 - Page Coloring 기법의 개념과 캐시 활용도 향상 효과는?
 - Direct Mapped Cache에서 Conflict Miss를 줄이는 방법은?
 - Sub-Block Placement Policy(서브 블록 배치 정책)이란 무엇이며, 성능 최적화 방법은?
+
+
 - Page Walk Overhead(페이지 탐색 오버헤드)을 줄이기 위한 최적화 기법은?
 - Cache Write Throttling(캐시 쓰기 제어)이란 무엇이며, 성능에 미치는 영향은?
 - Cache Reuse Distance(캐시 재사용 거리) 분석이란 무엇이며, 이를 활용한 성능 최적화 방법은?
 - Virtual Memory에서 Zero Page Optimization이란 무엇이며, 성능 향상 효과는?
 - Flash Memory의 Program/Erase Cycle이 성능과 내구성에 미치는 영향은?
 - Adaptive Page Replacement Algorithm(적응형 페이지 교체 알고리즘)이란 무엇인가?
+
+
 - Memory Prefetching이 성능에 미치는 영향을 측정하는 방법은?
 - Shared Memory System에서 False Sharing을 방지하는 방법은?
 - MESIF(Cache Coherency Protocol)와 기존 MESI 프로토콜의 차이점은?
 - Distributed Shared Memory(분산 공유 메모리)의 개념과 활용 사례는?
 - Task-Level Parallelism(TLP)과 Data-Level Parallelism(DLP)의 차이점은?
 - Multi-Chip Module(MCM)과 단일 다이 프로세서의 성능 및 설계 차이점은?
+
+
 - Parallel Programming에서 Load Imbalance(부하 불균형)의 원인과 해결 방법은?
 - Work Stealing Algorithm(작업 도둑 알고리즘)이란 무엇이며, 성능 최적화 효과는?
 - Compute-Bound Task와 Memory-Bound Task의 차이점은?
 - CC-NUMA와 SC-NUMA의 차이점과 성능 최적화 방법은?
 - Parallel Reduction과 Scan Operation(스캔 연산)의 차이점은?
 - NVMe Over Fabrics(NVMe-oF)의 개념과 기존 스토리지 인터페이스와의 차이점은?
+
+
 - Persistent Memory에서 Read Disturbance 현상이란 무엇이며, 이를 해결하는 방법은?
 - DMA에서 Bounce Buffering이란 무엇이며, 성능에 미치는 영향은?
 - PCIe Atomics(PCIe 원자적 연산)의 개념과 활용 사례는?
 - I/O Virtualization(IOV)이란 무엇이며, 가상 환경에서의 역할은?
 - Adaptive Queue Depth Management(적응형 큐 깊이 관리)의 개념과 성능 최적화 효과는?
 - RDMA에서 On-Demand Paging의 개념과 메모리 관리 최적화 효과는?
+
+
 - DPDK(Data Plane Development Kit)의 개념과 고속 네트워크 성능 최적화에 미치는 영향은?
 - Queue Pair(QP) 기반 I/O 성능 최적화 기법이란 무엇인가?
 - SR-IOV(Single Root I/O Virtualization)와 MR-IOV(Multi-Root I/O Virtualization)의 차이점은?
 - Quantum Annealing(양자 어닐링)과 Gate-Based Quantum Computing의 차이점은?
 - DNA-Based Data Storage(생체 기반 데이터 저장 기술)의 개념과 기존 스토리지와의 차이점은?
 - Brain-Inspired Computing(뇌 모방 컴퓨팅)에서 Spiking Neural Network(SNN)의 개념과 활용 사례는?
+
+
 - Analog Computing의 개념과 기존 디지털 컴퓨팅과의 차이점은?
 - Near-Data Processing(NDP)의 개념과 기존 메모리 계층구조와의 차이점은?
 - Optane Persistent Memory와 기존 DRAM/NAND 플래시와의 차이점은?
@@ -1002,12 +1127,16 @@ Organize concepts, features, types and Pros and Cons
 - Quantum-Classical Hybrid Computing의 개념과 활용 사례는?
 - Multi-Tenant Accelerator(다중 사용자 가속기)의 개념과 클라우드 환경에서의 활용 사례는?
 - Space Computing(우주 컴퓨팅)의 개념과 기존 지구 기반 컴퓨팅과의 차이점은?
+
+
 - Instruction Packing(명령어 패킹)이란 무엇이며, 실행 효율성에 미치는 영향은?
 - Dynamic Binary Translation(동적 바이너리 변환)이란 무엇이며, 성능 최적화에서 어떻게 활용되는가?
 - Instruction Set Simulator(ISS)의 개념과 활용 사례는?
 - CPU 설계에서 Operand Fetch Optimization(피연산자 가져오기 최적화) 기법은?
 - Hardware Multithreading에서 Coarse-Grained과 Fine-Grained 기법의 차이점은?
 - Loop Perforation(루프 생략) 기법이란 무엇이며, 성능과 정확도 사이의 트레이드오프는?
+
+
 - CPU에서 Conditional Move(조건부 이동) 명령어의 개념과 활용 사례는?
 - Micro-Op Decomposition(마이크로 연산 분해)이란 무엇이며, 실행 효율성을 높이는 방법은?
 - Operand Bypass(피연산자 바이패스) 기법이란 무엇이며, 파이프라인 해저드를 줄이는 방법은?
@@ -1015,6 +1144,8 @@ Organize concepts, features, types and Pros and Cons
 - NUMA 환경에서 Thread Affinity(스레드 친화성)를 조정하는 방법은?
 - Page Rank Algorithm과 메모리 접근 패턴 간의 관계는?
 - Hardware Managed Prefetching과 Software Managed Prefetching의 차이점은?
+
+
 - Scratchpad Memory(스크래치패드 메모리)의 개념과 일반 캐시 메모리와의 차이점은?
 - Multi-Banked DRAM과 Single-Bank DRAM의 차이점과 성능 영향은?
 - Cache Coloring과 Heap Memory Allocation의 관계는?
@@ -1022,6 +1153,8 @@ Organize concepts, features, types and Pros and Cons
 - Subthreshold Leakage(서브스레숄 누설 전류)가 메모리 설계에서 문제가 되는 이유는?
 - Out-of-Bounds Memory Access(경계 초과 메모리 접근) 문제를 방지하는 하드웨어 기술은?
 - Page Frame Reclamation(페이지 프레임 회수) 기법이란 무엇이며, 성능에 미치는 영향은?
+
+
 - Dynamic Voltage and Frequency Scaling(DVFS)와 병렬 처리 성능 간의 관계는?
 - Spinning과 Blocking 동기화 기법의 차이점과 활용 사례는?
 - Load-Linked/Store-Conditional(LL/SC) 명령어의 개념과 원자적 연산에서의 역할은?
@@ -1029,6 +1162,8 @@ Organize concepts, features, types and Pros and Cons
 - Vector Processing Unit(VPU)와 일반 SIMD의 차이점은?
 - Hardware Transactional Memory(HTM)에서 Conflict Detection(충돌 감지) 기법의 종류는?
 - Deep Learning Accelerator(딥러닝 가속기)에서 Dataflow Optimization의 개념은?
+
+
 - Fine-Grained Synchronization(세밀한 동기화)의 개념과 성능 최적화 효과는?
 - Data Dependency Graph를 활용한 병렬 실행 최적화 기법은?
 - Dynamic Thread Migration(동적 스레드 이동) 기술이란 무엇이며, 성능 최적화 방법은?
@@ -1037,6 +1172,8 @@ Organize concepts, features, types and Pros and Cons
 - USB-C와 Thunderbolt 4의 차이점과 성능 비교는?
 - NVMe Namespace의 개념과 멀티 테넌트 환경에서의 활용 사례는?
 - PCIe Switch Fabric의 개념과 클라우드 환경에서의 활용 사례는?
+
+
 - Network I/O에서 Interrupt Coalescing(인터럽트 합병) 기법이 성능에 미치는 영향은?
 - SR-IOV(Single Root I/O Virtualization)에서 Virtual Function(VF)과 Physical Function(PF)의 차이점은?
 - Hardware Queueing(하드웨어 큐잉) 기법이 Storage I/O에서 성능에 미치는 영향은?
@@ -1044,6 +1181,8 @@ Organize concepts, features, types and Pros and Cons
 - RDMA에서 Zero Copy Data Transfer의 개념과 기존 TCP 기반 전송과의 차이점은?
 - Spintronics(스핀트로닉스) 기반 컴퓨팅의 개념과 기존 CMOS 기술과의 차이점은?
 - 3D-IC(3D 집적 회로)의 개념과 기존 2D IC 대비 장점과 단점은?
+
+
 - Probabilistic Computing(확률적 컴퓨팅)이란 무엇이며, 기존 불확정성 기반 컴퓨팅과의 차이점은?
 - Ising Model을 활용한 최적화 문제 해결 방법은?
 - Bio-Inspired Computing(생체 모방 컴퓨팅)의 개념과 활용 사례는?
@@ -1052,6 +1191,8 @@ Organize concepts, features, types and Pros and Cons
 - Resistive Switching Device(RRAM, Memristor)의 개념과 기존 NAND 플래시와의 차이점은?
 - Energy-Efficient AI Accelerator(저전력 AI 가속기)의 개념과 설계 원리는?
 - DNA Computing에서 Hybrid Molecular Electronics의 개념과 활용 가능성은?
+
+
 - Triple Modular Redundancy(TMR)이란 무엇이며, 신뢰성 향상을 위해 어떻게 활용되는가?
 - FPGA에서 Dynamic Partial Reconfiguration(DPR)의 개념과 활용 사례는?
 - VLIW 아키텍처에서 Bundled Execution(번들 실행) 방식이란 무엇인가?
@@ -1059,6 +1200,8 @@ Organize concepts, features, types and Pros and Cons
 - Wavefront Scheduling이란 무엇이며, GPU 연산에서 어떻게 활용되는가?
 - Cache Pipeline Stalls(캐시 파이프라인 스톨)이 발생하는 원인과 이를 해결하는 방법은?
 - Speculative Store Bypass(SB)와 보안 취약점의 관계는?
+
+
 - Hardware Prefetcher Throttling(하드웨어 프리패처 스로틀링)이 성능에 미치는 영향은?
 - Out-of-Order Execution에서 Load-Store Queue(LSQ)의 역할은?
 - Address Generation Interlock(주소 생성 인터록)이란 무엇이며, 이를 줄이기 위한 최적화 방법은?
@@ -1066,6 +1209,8 @@ Organize concepts, features, types and Pros and Cons
 - Direct Segment 기반 가상 메모리 구조의 개념과 기존 페이지 기반 메모리 관리 방식과의 차이점은?
 - Cache Miss Penalty를 최소화하기 위한 최적화 기법은?
 - Virtual Address Space Fragmentation(가상 주소 공간 단편화)의 원인과 해결 방법은?
+
+
 - Decoupled Access-Execute Memory Architecture(분리형 접근-실행 메모리 구조)의 개념과 활용 사례는?
 - Last-Level Cache(LLC)의 개념과 Multi-Core CPU에서의 역할은?
 - Bank-Level Parallelism(BLP)이 DRAM 성능에 미치는 영향은?
@@ -1073,24 +1218,32 @@ Organize concepts, features, types and Pros and Cons
 - Read Disturb Issue가 NAND Flash의 수명에 미치는 영향과 이를 해결하는 방법은?
 - Transparent Memory Compression(투명 메모리 압축)의 개념과 성능 최적화 방법은?
 - Multi-Threaded Processor에서 TLP(Thread-Level Parallelism)와 ILP(Instruction-Level Parallelism)의 관계는?
+
+
 - Graph Analytics에서 PageRank Algorithm이 병렬 실행에서 갖는 특수성은?
 - Global Synchronization(글로벌 동기화)이 대규모 병렬 시스템에서 성능 저하를 일으키는 이유는?
 - Scalable Weak Memory Consistency Model(확장 가능한 약한 메모리 일관성 모델)이란 무엇인가?
 - Persistent Memory 기반 시스템에서 데이터 일관성을 유지하는 방법은?
 - Cache Contention을 줄이기 위한 Cooperative Cache Management 기법이란?
 - Hierarchical Coherency Domains(계층적 일관성 도메인)이란 무엇이며, 멀티코어 CPU에서 어떻게 활용되는가?
+
+
 - Dynamic Voltage and Frequency Scaling(DVFS)과 캐시 성능의 관계는?
 - Hardware Barrier Synchronization(하드웨어 장벽 동기화)이란 무엇이며, 성능 향상 효과는?
 - NUMA와 GPU Unified Memory의 차이점과 각각의 활용 사례는?
 - PCIe Resizable BAR(Resizeable Base Address Register)의 개념과 성능 향상 효과는?
 - Adaptive Routing(적응형 라우팅)이 NoC(Network-on-Chip) 성능에 미치는 영향은?
 - Optically Interconnected Memory Systems(광 연결 메모리 시스템)의 개념과 기존 전자 기반 연결과의 차이점은?
+
+
 - RDMA에서 Memory Registration과 Key Caching이 성능에 미치는 영향은?
 - Next-Generation Storage Interfaces에서 Zoned Namespaces(ZNS) 기술의 개념과 기존 블록 스토리지와의 차이점은?
 - I/O Stack Bypassing(입출력 스택 우회)의 개념과 성능 최적화 사례는?
 - Zero Copy Networking(제로 카피 네트워킹)과 TCP/IP Offloading Engine(TOE)의 차이점은?
 - Persistent Memory 기반 스토리지에서 Mixed Workload Optimization(혼합 작업 부하 최적화)의 개념은?
 - Hardware Message Passing과 Software Message Passing의 차이점과 각각의 활용 사례는?
+
+
 - Inline Data Deduplication(인라인 데이터 중복 제거)이 SSD 성능에 미치는 영향은?
 - 3D TSV(Through-Silicon Via) 기술이 기존 2.5D 패키징 기술과 비교하여 갖는 장점과 단점은?
 - Coarse-Grained Reconfigurable Architecture(CGRA)란 무엇이며, FPGA와의 차이점은?
@@ -1098,6 +1251,8 @@ Organize concepts, features, types and Pros and Cons
 - Reversible Computing(가역 컴퓨팅)이란 무엇이며, 에너지 효율성에 미치는 영향은?
 - Quantum Tunneling Transistor(양자 터널링 트랜지스터)의 개념과 기존 CMOS 트랜지스터와의 차이점은?
 - DNA Storage에서 Information Density(정보 밀도) 증가가 기존 HDD 및 SSD와 비교했을 때 갖는 이점은?
+
+
 - Stochastic Computing(확률적 컴퓨팅)이란 무엇이며, AI 모델 학습에서 어떻게 활용되는가?
 - Self-Healing Hardware(자가 치유 하드웨어)의 개념과 고장 허용 컴퓨팅에서의 활용 가능성은?
 - Photonic Neuromorphic Computing(광 뉴로모픽 컴퓨팅)이란 무엇이며, 기존 디지털 뉴로모픽 시스템과의 차이점은?
