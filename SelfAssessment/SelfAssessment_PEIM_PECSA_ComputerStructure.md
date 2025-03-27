@@ -5479,6 +5479,71 @@ Software Managed Prefetching:
 - Subthreshold Leakage(서브스레숄 누설 전류)가 메모리 설계에서 문제가 되는 이유는?
 - Out-of-Bounds Memory Access(경계 초과 메모리 접근) 문제를 방지하는 하드웨어 기술은?
 - Page Frame Reclamation(페이지 프레임 회수) 기법이란 무엇이며, 성능에 미치는 영향은?
+    - 1. Scratchpad Memory(스크래치패드 메모리)의 개념과 일반 캐시 메모리와의 차이점
+개념:
+프로그래머 또는 컴파일러가 명시적으로 관리하는 고속 로컬 메모리로, 임시 데이터를 저장하는 데 사용됨.
+
+캐시와의 차이점:
+
+캐시: 하드웨어가 자동으로 데이터를 교체·관리 (투명성 있음)
+스크래치패드: 소프트웨어에서 직접 제어, 예측 가능한 성능 제공
+캐시 미스 없음, 실시간 시스템에서 시간 결정성 보장
+2. Multi-Banked DRAM vs Single-Bank DRAM의 차이점과 성능 영향
+Single-Bank DRAM:
+
+단일 메모리 뱅크로 구성
+동시에 하나의 접근만 처리 가능 → 병렬성 부족
+Multi-Banked DRAM:
+
+여러 뱅크가 독립적으로 동작 → 동시 접근 처리 가능
+**뱅크 충돌(Bank Conflict)**을 피하면 메모리 대역폭과 처리량 향상
+3. Cache Coloring과 Heap Memory Allocation의 관계
+Cache Coloring:
+
+메모리 주소를 **캐시 라인과 매핑되는 색상(color)**으로 구분하여 충돌을 방지
+Heap Allocation과의 관계:
+
+잘못된 힙 할당은 동일한 캐시 색상으로 몰려 Conflict Miss 유발
+색상 분산 정책(e.g. page coloring-aware allocator)을 사용하면 캐시 효율 개선
+4. DRAM Access Granularity(접근 단위 크기)가 성능에 미치는 영향
+Access Granularity: DRAM에서 한 번에 읽고 쓰는 최소 데이터 단위
+
+성능 영향:
+
+너무 작은 단위 → 과도한 오버헤드 발생
+너무 큰 단위 → 불필요한 데이터 이동으로 메모리 낭비 및 대역폭 포화
+워크로드에 맞는 최적 단위 선택 필요 (e.g., 스트리밍 vs 랜덤 접근)
+5. Subthreshold Leakage(서브스레숄 누설 전류)가 메모리 설계에서 문제가 되는 이유
+개념:
+트랜지스터가 꺼진 상태에서도 전자가 흐르며 발생하는 전력 소모
+
+문제점:
+
+고밀도 DRAM/캐시 구조에서는 누설 전류 누적 → 정전류 소모 급증
+모바일 및 IoT 장치에서 배터리 수명 단축, 발열 문제
+해결책: 전력 게이팅, 멀티 Vt 설계, FinFET 등 누설 억제 기술 필요
+6. Out-of-Bounds Memory Access(경계 초과 메모리 접근) 문제 방지 하드웨어 기술
+개념:
+버퍼나 배열의 유효 범위를 벗어난 메모리 접근
+
+방지 기술:
+
+Intel MPX(Memory Protection Extensions): 경계 레지스터 사용
+ARM MTE(Memory Tagging Extension): 각 메모리 블록에 태그 부여
+스택 보호 기법: Stack Canary, NX-Bit, AddressSanitizer 등 하드웨어/소프트웨어 연계 보호
+7. Page Frame Reclamation(페이지 프레임 회수) 기법이란 무엇이며, 성능에 미치는 영향
+개념:
+사용 빈도가 낮은 페이지 프레임을 회수하여 새로운 페이지에 재할당하는 메모리 관리 전략
+
+기법 종류:
+
+LRU (Least Recently Used)
+CLOCK
+Working Set Model 기반 알고리즘
+성능 영향:
+
+잘못된 회수 → 페이지 폴트 증가 → 디스크 접근 → 심각한 성능 저하
+효율적인 회수 정책은 스왑 최소화, 메모리 활용률 증가에 기여
 
 
 - Dynamic Voltage and Frequency Scaling(DVFS)와 병렬 처리 성능 간의 관계는?
