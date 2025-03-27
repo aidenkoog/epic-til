@@ -5553,7 +5553,82 @@ Working Set Model 기반 알고리즘
 - Vector Processing Unit(VPU)와 일반 SIMD의 차이점은?
 - Hardware Transactional Memory(HTM)에서 Conflict Detection(충돌 감지) 기법의 종류는?
 - Deep Learning Accelerator(딥러닝 가속기)에서 Dataflow Optimization의 개념은?
+    - 1. Dynamic Voltage and Frequency Scaling(DVFS)와 병렬 처리 성능 간의 관계
+DVFS란:
+CPU의 전압과 클럭 주파수를 동적으로 조절해 전력 소모를 줄이는 기술.
 
+병렬 처리 성능과의 관계:
+
+낮은 부하의 작업에서는 클럭을 낮춰 전력 절감 가능
+병렬 스레드 수가 많을수록 성능 병목 지점이 DVFS에 의해 제한될 수 있음
+멀티코어 DVFS 제어가 가능한 구조에서는 코어별로 효율 조절 가능 → 성능-전력 균형 최적화
+2. Spinning vs Blocking 동기화 기법의 차이점과 활용 사례
+Spinning (Busy Waiting):
+
+스레드가 락을 획득할 때까지 계속 루프를 돌며 기다림
+오버헤드 작지만 CPU 자원을 계속 사용
+짧은 대기 시간에 적합 (e.g., Spinlock, 경량 락)
+Blocking:
+
+락을 얻지 못하면 커널 수준에서 sleep 상태로 진입
+CPU 자원을 아끼지만 컨텍스트 스위칭 비용 존재
+긴 대기 시간이나 OS 수준 스케줄링 필요 시 적합
+3. Load-Linked / Store-Conditional (LL/SC) 명령어의 개념과 원자적 연산에서의 역할
+LL/SC란:
+
+LL: 메모리 주소에서 값을 읽고, 그 주소를 모니터링 상태로 설정
+SC: 해당 주소가 다른 쓰기로 변경되지 않은 경우에만 쓰기 성공
+역할:
+
+락 없이 **원자적 CAS(Compare-And-Swap)**와 유사한 동작 가능
+ABA 문제 회피, RISC 아키텍처에서 널리 사용
+4. Non-Blocking Synchronization(비차단 동기화) vs 락 기반 동기화
+비차단 동기화:
+
+시스템이 어떤 스레드의 지연이나 중단에도 계속 진전 가능
+대표적으로 CAS, LL/SC, Lock-free, Wait-free 기법 사용
+데드락·기아 상태 방지, 병렬성 극대화
+락 기반 동기화:
+
+리소스 보호를 위해 공유 자원 접근 제한
+데드락, 컨텍스트 스위칭, 우선순위 역전 등의 문제 존재
+5. Vector Processing Unit(VPU)와 일반 SIMD의 차이점
+VPU:
+
+전용 벡터 레지스터를 통해 연속된 데이터 스트림 처리 최적화
+벡터 명령어와 레지스터 기반, 고속 벡터 연산 특화
+일반 SIMD:
+
+범용 CPU 또는 GPU에서 제공되는 병렬 처리 단위
+VPU보다 유연성은 높지만 연산 효율은 다소 떨어질 수 있음
+차이 요약:
+
+VPU는 연산 집약적 고정된 데이터 구조에 적합
+SIMD는 범용 연산에서 병렬성 활용
+6. Hardware Transactional Memory(HTM)에서 Conflict Detection(충돌 감지) 기법
+Eager Conflict Detection:
+
+트랜잭션 도중 실시간 감지, 충돌 발생 즉시 중단
+빠른 롤백 가능하지만 불필요한 중단 가능성 있음
+Lazy Conflict Detection:
+
+트랜잭션 종료 시점에 충돌 여부 확인
+성공률은 높지만, 롤백 비용 증가 가능
+기타 구현 방식:
+
+주소 기반 충돌 추적, 캐시 라인 모니터링 등을 통해 수행
+7. Deep Learning Accelerator에서 Dataflow Optimization(데이터 흐름 최적화) 개념
+개념:
+
+딥러닝 연산 중 데이터 이동 경로를 최소화하여 연산 처리 효율을 높이는 설계 방법론
+주요 기법:
+
+Weight Stationary: 가중치 고정, 입력만 교체
+Output Stationary: 출력 위치 고정 후 누적
+Row/Column Stationary: DRAM 접근 줄이고 on-chip 데이터 재사용 극대화
+효과:
+
+에너지 소비 감소, 성능 향상, 온칩 버퍼 활용 극대화
 
 - Fine-Grained Synchronization(세밀한 동기화)의 개념과 성능 최적화 효과는?
 - Data Dependency Graph를 활용한 병렬 실행 최적화 기법은?
