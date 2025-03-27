@@ -5638,6 +5638,84 @@ Row/Column Stationary: DRAM 접근 줄이고 on-chip 데이터 재사용 극대�
 - USB-C와 Thunderbolt 4의 차이점과 성능 비교는?
 - NVMe Namespace의 개념과 멀티 테넌트 환경에서의 활용 사례는?
 - PCIe Switch Fabric의 개념과 클라우드 환경에서의 활용 사례는?
+    - 1. Fine-Grained Synchronization(세밀한 동기화)의 개념과 성능 최적화 효과
+개념:
+
+공유 자원의 일부만을 보호하여 병렬 처리를 세밀하게 제어하는 기법
+예: 자료구조의 각 노드 또는 버킷마다 별도의 락 적용
+성능 최적화 효과:
+
+락 충돌 최소화 및 병렬성 향상
+락 범위를 좁혀 컨텍스트 스위칭 및 스레드 대기 시간 감소
+다중 코어에서 스레드 간 독립적 작업 병렬 처리 가능
+2. Data Dependency Graph를 활용한 병렬 실행 최적화 기법
+개념:
+
+명령어나 작업 간의 의존 관계를 그래프로 표현하여 병렬 실행 가능성을 분석
+노드 = 작업 / 엣지 = 의존성
+활용 기법:
+
+Topological Sort 기반 실행 스케줄링
+동적 병렬 실행: 의존이 없는 노드들 병렬 실행
+컴파일러 최적화나 스케줄러에서 활용하여 ILP 및 TLP 최대화
+3. Dynamic Thread Migration(동적 스레드 이동) 기술과 성능 최적화 방법
+개념:
+
+실행 중인 스레드를 다른 코어로 이동시켜 자원 사용률을 최적화하는 기법
+성능 최적화 방법:
+
+부하 균형 유지: 과부하 코어에서 저부하 코어로 스레드 이동
+NUMA 최적화: 데이터 접근 위치에 따라 가까운 메모리 노드 쪽 코어로 이동
+전력 관리: 사용률 낮은 코어는 슬립 모드로 전환
+4. DMA에서 Descriptor Ring Buffer 방식 vs Linked List 방식의 차이점
+Descriptor Ring Buffer:
+
+고정 크기의 순환 버퍼 구조
+빠른 인덱스 처리, 예측 가능한 성능
+고정된 큐 크기 = 확장성 제한
+Linked List 방식:
+
+동적으로 연결된 구조, 크기 제한 없음
+유연하지만 오버헤드가 더 큼
+고성능 장비에서 확장 필요 시 주로 사용
+5. Non-Volatile Main Memory (NVMM)의 개념과 DRAM 대비 장점
+개념:
+
+전원이 꺼져도 데이터가 유지되는 주 메모리
+예: Intel Optane, ReRAM, PCM
+장점:
+
+데이터 영속성: DRAM 대비 데이터 복원성 우수
+빠른 액세스 속도: SSD보단 빠르고, DRAM보단 느림
+데이터 무결성 및 시스템 재시작 시 빠른 복구 가능
+6. USB-C와 Thunderbolt 4의 차이점과 성능 비교
+USB-C:
+
+물리적 포트 형태이며, USB 3.2/4 등 다양한 프로토콜 지원
+최대 20~40Gbps (USB4 기준)
+Thunderbolt 4:
+
+USB-C 기반 고속 인터페이스, 모든 TB4는 USB4 호환
+40Gbps 고정 속도, 다중 모니터/PCIe 전송 지원
+더 강력한 보안, 전력, 호환성 요건 포함
+7. NVMe Namespace의 개념과 멀티 테넌트 환경에서의 활용 사례
+개념:
+
+NVMe 장치 내에서 논리적으로 분리된 저장 공간 단위
+하나의 컨트롤러에서 여러 Namespace로 나눠 관리 가능
+활용 사례:
+
+멀티 테넌트 클라우드에서 테넌트별 분리된 저장 공간 제공
+보안, 성능 격리 가능하며, 컨테이너 또는 VM에 개별 할당
+8. PCIe Switch Fabric의 개념과 클라우드 환경에서의 활용 사례
+개념:
+
+여러 PCIe 장치를 하나의 Switch Fabric으로 연결하여 고속 통신 가능
+스토리지, 네트워크, GPU 등 리소스를 동적으로 할당
+활용 사례:
+
+클라우드 데이터센터에서 자원 가상화 및 동적 리소스 구성
+하나의 서버에 다수 GPU/SSD 연결, 리소스 공유 최적화
 
 
 - Network I/O에서 Interrupt Coalescing(인터럽트 합병) 기법이 성능에 미치는 영향은?
@@ -5647,6 +5725,77 @@ Row/Column Stationary: DRAM 접근 줄이고 on-chip 데이터 재사용 극대�
 - RDMA에서 Zero Copy Data Transfer의 개념과 기존 TCP 기반 전송과의 차이점은?
 - Spintronics(스핀트로닉스) 기반 컴퓨팅의 개념과 기존 CMOS 기술과의 차이점은?
 - 3D-IC(3D 집적 회로)의 개념과 기존 2D IC 대비 장점과 단점은?
+    - 1. Interrupt Coalescing(인터럽트 합병) 기법이 Network I/O 성능에 미치는 영향
+개념:
+
+네트워크 카드에서 수많은 패킷 수신 시 인터럽트를 패킷마다 발생시키는 대신, 여러 패킷을 모아 한 번에 처리하여 인터럽트 빈도를 줄이는 기법.
+성능 영향:
+
+CPU 부하 감소 및 인터럽트 오버헤드 최소화
+Throughput(처리량) 향상
+단점으로는 Latency(지연 시간) 증가 가능
+2. SR-IOV에서 Physical Function(PF)과 Virtual Function(VF)의 차이점
+Physical Function (PF):
+
+전체 하드웨어 기능을 제어할 수 있는 실제 하드웨어 장치의 기능.
+VF를 생성/관리하는 권한 보유
+Virtual Function (VF):
+
+PF에서 파생된 가상화된 하드웨어 기능
+각 VF는 VM이나 컨테이너에 할당되어 직접 네트워크 장치에 접근 가능
+PF는 VF보다 더 많은 권한과 설정 기능을 가짐
+3. Hardware Queueing(하드웨어 큐잉) 기법이 Storage I/O 성능에 미치는 영향
+개념:
+
+SSD나 NVMe 장치 내부에서 다중 명령어 큐를 병렬로 처리하여, I/O 병목을 줄이고 스루풋을 향상시키는 기술
+성능 영향:
+
+고속 SSD에서 수천 개의 IOPS를 효율적으로 스케줄링
+CPU 대기 시간 줄이고 동시 I/O 처리량 향상
+대용량 처리 시 지연 시간 감소
+4. Multi-Path I/O(MPIO)와 Storage Load Balancing의 개념과 차이점
+Multi-Path I/O (MPIO):
+
+저장장치까지 **여러 개의 경로(Path)**를 제공하여, 장애 시 자동 대체, 경로 병렬화로 성능 향상
+Storage Load Balancing:
+
+여러 저장장치나 경로에 부하를 분산하여 I/O 트래픽을 최적화
+차이점:
+
+MPIO는 장애 대비 및 다중 경로 중복성 확보 중심
+Load Balancing은 성능 최적화에 중점
+5. RDMA에서 Zero Copy Data Transfer의 개념과 기존 TCP 전송과의 차이점
+Zero Copy:
+
+데이터 복사 없이 직접 메모리 간 전송하는 방식
+CPU 개입 없이, NIC가 메모리에서 바로 읽고 씀
+기존 TCP 전송과의 차이점:
+
+TCP는 커널 버퍼 ↔ 사용자 공간 간 여러 번 복사
+RDMA는 낮은 지연 시간과 CPU 사용률 절감, 고성능 네트워킹 실현
+6. Spintronics(스핀트로닉스) 기반 컴퓨팅의 개념과 기존 CMOS 기술과의 차이점
+개념:
+
+전자의 전하가 아닌 스핀(Spin) 상태를 활용한 정보 처리 기술
+자기저항(Magnetoresistance)을 기반으로 동작
+기존 CMOS와 차이점:
+
+비휘발성 특성, 저전력 소모, 열 발생 적음
+CMOS는 전하 기반, Spintronics는 스핀 기반
+아직은 속도와 집적도 측면에서 CMOS에 비해 미성숙
+7. 3D-IC(3D 집적 회로)의 개념과 기존 2D IC 대비 장점과 단점
+개념:
+
+여러 개의 반도체 다이를 수직으로 쌓아 연결한 형태
+TSV(Through-Silicon Via)를 통해 층 간 통신
+장점:
+
+공간 절약 및 고대역폭, 저지연 연결
+전력 효율 및 성능 향상
+단점:
+
+열 방출 문제, 공정 복잡성, 테스트 및 수율 저하
+생산 비용 상승
 
 
 - Probabilistic Computing(확률적 컴퓨팅)이란 무엇이며, 기존 불확정성 기반 컴퓨팅과의 차이점은?
