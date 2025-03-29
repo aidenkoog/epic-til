@@ -717,33 +717,25 @@ Organize concepts, features, types and Pros and Cons
   - 결론
     - 응용 계층 프로토콜은 각각의 목적에 맞춰 선택적으로 사용해야 하며, 보안이 중요한 경우 HTTPS, FTPS, SSH 등을 사용하고, 빠른 응답이 중요한 경우 DNS, MQTT, NTP 등을 고려해야 함
 
-- OSI 모델에서 흐름 제어(Flow Control)와 오류 제어(Error Control)의 개념을 설명하시오.
-- 네트워크 토폴로지(Network Topology)의 개념과 주요 유형(Star, Bus, Ring, Mesh)을 설명하시오.
-- LAN(Local Area Network)과 WAN(Wide Area Network)의 개념과 차이를 설명하시오.
-- MAN(Metropolitan Area Network)과 PAN(Personal Area Network)의 개념과 활용 사례를 설명하시오.
-- SDN(Software-Defined Networking)의 개념과 기존 네트워크와의 차이를 설명하시오.
-  - 1. OSI 모델에서 흐름 제어(Flow Control)와 오류 제어(Error Control)의 개념
+- OSI 모델에서 흐름 제어(Flow Control)와 오류 제어(Error Control)의 개념
+  - 흐름 제어 (Flow Control)
+	  - 정의: 송신 측이 수신 측의 데이터 처리 속도를 초과하지 않도록 제어하는 메커니즘
+	  - 목적: 수신 측의 버퍼 오버플로우 방지 및 네트워크 혼잡 방지
+	  - 주요 기법:
+	    - Stop-and-Wait: 한 번에 하나의 프레임만 전송하고 ACK(응답) 수신 후 다음 프레임 전송
+	    - Sliding Window: 여러 프레임을 연속적으로 전송하고, ACK를 수신하면 윈도우를 이동
 
-흐름 제어 (Flow Control)
-	•	정의: 송신 측이 수신 측의 데이터 처리 속도를 초과하지 않도록 제어하는 메커니즘
-	•	목적: 수신 측의 버퍼 오버플로우 방지 및 네트워크 혼잡 방지
-	•	주요 기법:
-	•	Stop-and-Wait: 한 번에 하나의 프레임만 전송하고 ACK(응답) 수신 후 다음 프레임 전송
-	•	Sliding Window: 여러 프레임을 연속적으로 전송하고, ACK를 수신하면 윈도우를 이동
-
-오류 제어 (Error Control)
-	•	정의: 데이터 전송 중 발생한 오류를 감지하고 수정하는 과정
-	•	목적: 신뢰성 있는 데이터 전송 보장
-	•	주요 기법:
-	•	Parity Check: 데이터에 패리티 비트를 추가하여 오류 감지
-	•	Checksum: 데이터 블록의 합을 계산하여 오류 감지
-	•	Cyclic Redundancy Check (CRC): 다항식 연산을 통해 오류 감지
-	•	Automatic Repeat reQuest (ARQ): 오류가 감지된 경우 재전송 요청
-	•	Stop-and-Wait ARQ: 오류 발생 시 해당 프레임만 재전송
-	•	Go-Back-N ARQ: 오류 발생 프레임 이후의 모든 프레임을 재전송
-	•	Selective Repeat ARQ: 오류가 발생한 프레임만 선택적으로 재전송
-
-⸻
+  - 오류 제어 (Error Control)
+	  - 정의: 데이터 전송 중 발생한 오류를 감지하고 수정하는 과정
+	  - 목적: 신뢰성 있는 데이터 전송 보장
+	  - 주요 기법:
+	    - Parity Check: 데이터에 패리티 비트를 추가하여 오류 감지
+	    - Checksum: 데이터 블록의 합을 계산하여 오류 감지
+	    - Cyclic Redundancy Check (CRC): 다항식 연산을 통해 오류 감지
+	    - Automatic Repeat reQuest (ARQ): 오류가 감지된 경우 재전송 요청
+	    - Stop-and-Wait ARQ: 오류 발생 시 해당 프레임만 재전송
+	    - Go-Back-N ARQ: 오류 발생 프레임 이후의 모든 프레임을 재전송
+	    - Selective Repeat ARQ: 오류가 발생한 프레임만 선택적으로 재전송
 
 2. 네트워크 토폴로지(Network Topology) 개념과 주요 유형
 
