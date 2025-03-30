@@ -850,30 +850,27 @@ Organize concepts, features, types and Pros and Cons
     - 클라우드 기반 방화벽 및 VPN 서비스: 보안 기능을 클라우드에서 제공하여 빠른 확장 가능
     - 5G 네트워크 최적화: 서비스별 맞춤 네트워크 기능 제공 (예: 저지연 서비스용 전용 가상 네트워크)
 
-2. 멀티캐스트(Multicast), 유니캐스트(Unicast), 브로드캐스트(Broadcast)의 차이
+- 멀티캐스트(Multicast), 유니캐스트(Unicast), 브로드캐스트(Broadcast)의 차이
+  - (1) 유니캐스트 (Unicast)
+    - 정의: 단일 송신자가 하나의 특정 수신자에게 데이터를 전송하는 방식
+    - 특징:
+      - P2P(점대점) 연결
+      - 네트워크 대역폭을 많이 사용
+      - 예제: 일반적인 웹 브라우징, 이메일, HTTP 요청
 
-1) 유니캐스트 (Unicast)
-	•	정의: 단일 송신자가 하나의 특정 수신자에게 데이터를 전송하는 방식
-	•	특징:
-	•	P2P(점대점) 연결
-	•	네트워크 대역폭을 많이 사용
-	•	예제: 일반적인 웹 브라우징, 이메일, HTTP 요청
+  - (2) 멀티캐스트 (Multicast)
+    - 정의: 특정 그룹의 다수 수신자에게 데이터를 전송하는 방식
+    - 특징:
+      - IGMP(Internet Group Management Protocol)를 사용하여 그룹을 관리
+      - 네트워크 대역폭을 절약 가능
+      - 예제: 실시간 스트리밍, IPTV, 온라인 게임 서버
 
-2) 멀티캐스트 (Multicast)
-	•	정의: 특정 그룹의 다수 수신자에게 데이터를 전송하는 방식
-	•	특징:
-	•	IGMP(Internet Group Management Protocol)를 사용하여 그룹을 관리
-	•	네트워크 대역폭을 절약 가능
-	•	예제: 실시간 스트리밍, IPTV, 온라인 게임 서버
-
-3) 브로드캐스트 (Broadcast)
-	•	정의: 네트워크 내 모든 장치에게 데이터를 전송하는 방식
-	•	특징:
-	•	모든 장치가 데이터를 수신하지만, 필요 없는 장치에도 전송됨
-	•	네트워크 부하가 커질 수 있음
-	•	예제: ARP(Address Resolution Protocol), DHCP 서버의 IP 주소 할당
-
-⸻
+  - (3) 브로드캐스트 (Broadcast)
+    - 정의: 네트워크 내 모든 장치에게 데이터를 전송하는 방식
+    - 특징:
+      - 모든 장치가 데이터를 수신하지만, 필요 없는 장치에도 전송됨
+      - 네트워크 부하가 커질 수 있음
+      - 예제: ARP(Address Resolution Protocol), DHCP 서버의 IP 주소 할당
 
 3. CDN(Content Delivery Network)의 개념과 작동 방식
 
