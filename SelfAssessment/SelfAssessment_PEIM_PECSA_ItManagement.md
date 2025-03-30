@@ -573,22 +573,15 @@ Organize concepts, features, types and Pros and Cons
       - 예: IT 개발, 고객 서비스, 제조업 생산 아웃소싱 등
     - 크라우드소싱은 개방적이고 참여형 방식이라 창의성과 혁신이 필요한 분야에서 강점을 가지며, 아웃소싱은 신뢰성과 전문성을 요구하는 업무에 적합
 
-- IT 경영에서 IT 위험 관리(IT Risk Management)의 개념과 주요 기법을 설명하시오.
-- IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)를 설명하시오.
-- IT 비용 관리(IT Cost Management)의 개념과 TCO(Total Cost of Ownership)의 중요성을 설명하시오.
-- IT 거버넌스(IT Governance)의 개념과 기업에서의 필요성을 설명하시오.
-- COBIT(Control Objectives for Information and Related Technologies)의 개념과 주요 구성 요소를 설명하시오.
-- ITIL(Information Technology Infrastructure Library)의 개념과 주요 프로세스를 설명하시오.
-  - 좋아, 이번에는 첫 번째 블록이야. IT 경영의 핵심 프레임워크인 IT 리스크, 성과, 비용, 거버넌스, ITIL 등에 대한 개념과 주요 기법을 서술형으로 정리해줄게.
-
-1. IT 위험 관리(IT Risk Management)의 개념과 주요 기법
-IT 위험 관리는 조직이 직면할 수 있는 정보기술 관련 리스크(보안 침해, 시스템 오류, 프로젝트 실패 등)를 식별하고, 이를 예방·완화하기 위한 전략과 실행 체계를 의미한다.
-조직의 목표 달성을 방해할 수 있는 IT 리스크를 선제적으로 파악하고 관리함으로써, 안정적인 IT 운영과 비즈니스 연속성을 확보하는 것이 핵심이다.
-	•	주요 기법:
-	•	리스크 식별: 자산, 위협, 취약점 분석
-	•	리스크 평가: 정성적·정량적 분석, 영향도 × 발생 가능성
-	•	리스크 대응 전략: 회피(Avoid), 전가(Transfer), 완화(Mitigate), 수용(Accept)
-	•	모니터링 및 재평가: 지속적인 리스크 감시
+- IT 경영에서 IT 위험 관리(IT Risk Management)의 개념과 주요 기법
+	- 개념
+		- IT 위험 관리는 조직이 직면할 수 있는 정보기술 관련 리스크(보안 침해, 시스템 오류, 프로젝트 실패 등)를 식별하고, 이를 예방·완화하기 위한 전략과 실행 체계를 의미
+		- 조직의 목표 달성을 방해할 수 있는 IT 리스크를 선제적으로 파악하고 관리함으로써, 안정적인 IT 운영과 비즈니스 연속성을 확보하는 것이 핵심
+	- 주요 기법:
+		- 리스크 식별: 자산, 위협, 취약점 분석
+		- 리스크 평가: 정성적·정량적 분석, 영향도 × 발생 가능성
+		- 리스크 대응 전략: 회피(Avoid), 전가(Transfer), 완화(Mitigate), 수용(Accept)
+		- 모니터링 및 재평가: 지속적인 리스크 감시
 
 2. IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)
 IT 성과 관리는 정보기술 자원의 운영 성과를 측정하고 평가하여, IT 부서의 목표 달성 및 비즈니스 기여도를 정량적으로 관리하는 체계다.
