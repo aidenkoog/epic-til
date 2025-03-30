@@ -779,27 +779,20 @@ Organize concepts, features, types and Pros and Cons
 	      - 설치 및 유지보수 비용이 높음
 	      - 구성 복잡성 증가
 
-3. LAN(Local Area Network)과 WAN(Wide Area Network)의 개념과 차이
+- LAN(Local Area Network)과 WAN(Wide Area Network)의 개념과 차이
+  - LAN (Local Area Network)
+	  - 정의: 한정된 지역(사무실, 학교, 건물 등) 내에서 운영되는 네트워크
+	  - 특징:
+	    - 짧은 거리 내에서 빠른 데이터 전송 속도 제공
+	    - 일반적으로 이더넷(Ethernet) 또는 Wi-Fi 기반
+	    - 보안 및 관리가 상대적으로 용이
 
-LAN (Local Area Network)
-	•	정의: 한정된 지역(사무실, 학교, 건물 등) 내에서 운영되는 네트워크
-	•	특징:
-	•	짧은 거리 내에서 빠른 데이터 전송 속도 제공
-	•	일반적으로 이더넷(Ethernet) 또는 Wi-Fi 기반
-	•	보안 및 관리가 상대적으로 용이
-
-WAN (Wide Area Network)
-	•	정의: 도시, 국가, 대륙 등 광범위한 지역을 연결하는 네트워크
-	•	특징:
-	•	장거리 데이터 전송이 가능
-	•	속도가 LAN보다 상대적으로 느릴 수 있음
-	•	다양한 통신 기술(광섬유, 위성, MPLS, SD-WAN 등) 활용
-
-LAN과 WAN의 주요 차이점
-
-
-
-⸻
+  - WAN (Wide Area Network)
+	  - 정의: 도시, 국가, 대륙 등 광범위한 지역을 연결하는 네트워크
+	  - 특징:
+      - 장거리 데이터 전송이 가능
+      - 속도가 LAN보다 상대적으로 느릴 수 있음
+      - 다양한 통신 기술(광섬유, 위성, MPLS, SD-WAN 등) 활용
 
 4. MAN(Metropolitan Area Network)과 PAN(Personal Area Network)의 개념과 활용 사례
 
