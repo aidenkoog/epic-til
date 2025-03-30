@@ -794,29 +794,26 @@ Organize concepts, features, types and Pros and Cons
       - 속도가 LAN보다 상대적으로 느릴 수 있음
       - 다양한 통신 기술(광섬유, 위성, MPLS, SD-WAN 등) 활용
 
-4. MAN(Metropolitan Area Network)과 PAN(Personal Area Network)의 개념과 활용 사례
+- MAN(Metropolitan Area Network)과 PAN(Personal Area Network)의 개념과 활용 사례
+  - MAN (Metropolitan Area Network)
+	  - 정의: 한 도시 또는 대도시권 내에서 LAN과 WAN을 연결하는 네트워크
+	  - 특징:
+      - 광역 네트워크로 여러 건물이나 기관을 연결
+      - 기업, 대학, 공공기관이 공동으로 운영 가능
+	  - 활용 사례:
+      - 도시 내 공공 Wi-Fi 네트워크
+      - 대학 캠퍼스 내 통합 네트워크
+      - 도시 내 광통신망 구축
 
-MAN (Metropolitan Area Network)
-	•	정의: 한 도시 또는 대도시권 내에서 LAN과 WAN을 연결하는 네트워크
-	•	특징:
-	•	광역 네트워크로 여러 건물이나 기관을 연결
-	•	기업, 대학, 공공기관이 공동으로 운영 가능
-	•	활용 사례:
-	•	도시 내 공공 Wi-Fi 네트워크
-	•	대학 캠퍼스 내 통합 네트워크
-	•	도시 내 광통신망 구축
-
-PAN (Personal Area Network)
-	•	정의: 개인 영역 내에서 장치 간 연결을 위한 소규모 네트워크
-	•	특징:
-	•	단거리(1~10m) 내에서 운영
-	•	주로 Bluetooth, NFC, Zigbee 등 무선 기술 사용
-	•	활용 사례:
-	•	스마트폰과 스마트워치 간 데이터 전송
-	•	무선 이어폰, 키보드, 마우스 연결
-	•	NFC를 이용한 모바일 결제
-
-⸻
+  - PAN (Personal Area Network)
+	  - 정의: 개인 영역 내에서 장치 간 연결을 위한 소규모 네트워크
+	  - 특징:
+      - 단거리(1~10m) 내에서 운영
+      - 주로 Bluetooth, NFC, Zigbee 등 무선 기술 사용
+	  - 활용 사례:
+	    - 스마트폰과 스마트워치 간 데이터 전송
+	    - 무선 이어폰, 키보드, 마우스 연결
+	    - NFC를 이용한 모바일 결제
 
 5. SDN(Software-Defined Networking)의 개념과 기존 네트워크와의 차이
 
