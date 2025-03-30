@@ -837,27 +837,18 @@ Organize concepts, features, types and Pros and Cons
     - 클라우드 및 가상화 환경에서 강력한 확장성 제공
 
 - NFV(Network Functions Virtualization)의 개념과 주요 활용 사례를 설명하시오.
-- 멀티캐스트(Multicast)와 유니캐스트(Unicast), 브로드캐스트(Broadcast)의 차이를 설명하시오.
-- CDN(Content Delivery Network)의 개념과 작동 방식을 설명하시오.
-- 네트워크 슬라이싱(Network Slicing)의 개념과 5G에서의 활용 사례를 설명하시오.
-- SD-WAN(Software-Defined Wide Area Network)의 개념과 기존 WAN과의 차이를 설명하시오.
-- 네트워크 성능을 향상시키기 위한 주요 기술(QoS, MPLS, Traffic Shaping 등)을 설명하시오.
-  - 1. NFV(Network Functions Virtualization)의 개념과 주요 활용 사례
+  - NFV 개념
+    - 정의: 전통적인 네트워크 기능(라우터, 방화벽, 로드 밸런서 등)을 하드웨어에서 소프트웨어 기반 가상 머신(VM) 또는 컨테이너로 구현하는 기술
+    - 목적: 물리적 장비의 종속성을 줄이고, 네트워크 관리와 확장성을 높임
+    - 구성 요소:
+      - VNF (Virtualized Network Function): 가상화된 네트워크 기능 (예: 가상 방화벽, 가상 스위치)
+      - NFVI (NFV Infrastructure): NFV를 실행하는 서버, 스토리지, 네트워크 인프라
+      - MANO (Management and Orchestration): NFV의 자동화 및 관리를 담당하는 프레임워크
 
-NFV 개념
-	•	정의: 전통적인 네트워크 기능(라우터, 방화벽, 로드 밸런서 등)을 하드웨어에서 소프트웨어 기반 가상 머신(VM) 또는 컨테이너로 구현하는 기술
-	•	목적: 물리적 장비의 종속성을 줄이고, 네트워크 관리와 확장성을 높임
-	•	구성 요소:
-	•	VNF (Virtualized Network Function): 가상화된 네트워크 기능 (예: 가상 방화벽, 가상 스위치)
-	•	NFVI (NFV Infrastructure): NFV를 실행하는 서버, 스토리지, 네트워크 인프라
-	•	MANO (Management and Orchestration): NFV의 자동화 및 관리를 담당하는 프레임워크
-
-NFV 주요 활용 사례
-	•	통신사 네트워크 가상화: 물리적 장비 없이 네트워크 기능을 가상화하여 운영 비용 절감
-	•	클라우드 기반 방화벽 및 VPN 서비스: 보안 기능을 클라우드에서 제공하여 빠른 확장 가능
-	•	5G 네트워크 최적화: 서비스별 맞춤 네트워크 기능 제공 (예: 저지연 서비스용 전용 가상 네트워크)
-
-⸻
+  - NFV 주요 활용 사례
+    - 통신사 네트워크 가상화: 물리적 장비 없이 네트워크 기능을 가상화하여 운영 비용 절감
+    - 클라우드 기반 방화벽 및 VPN 서비스: 보안 기능을 클라우드에서 제공하여 빠른 확장 가능
+    - 5G 네트워크 최적화: 서비스별 맞춤 네트워크 기능 제공 (예: 저지연 서비스용 전용 가상 네트워크)
 
 2. 멀티캐스트(Multicast), 유니캐스트(Unicast), 브로드캐스트(Broadcast)의 차이
 
