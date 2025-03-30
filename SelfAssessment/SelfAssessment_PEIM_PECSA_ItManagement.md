@@ -583,13 +583,15 @@ Organize concepts, features, types and Pros and Cons
 		- 리스크 대응 전략: 회피(Avoid), 전가(Transfer), 완화(Mitigate), 수용(Accept)
 		- 모니터링 및 재평가: 지속적인 리스크 감시
 
-2. IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)
-IT 성과 관리는 정보기술 자원의 운영 성과를 측정하고 평가하여, IT 부서의 목표 달성 및 비즈니스 기여도를 정량적으로 관리하는 체계다.
-조직의 전략적 목표에 부합하는 성과 지표를 설정하고, 이를 기반으로 IT 서비스와 프로젝트의 운영 수준을 평가한다.
-	•	주요 지표:
-	•	KPI (Key Performance Indicator): 핵심 성과 지표 (e.g. 시스템 가동률, 응답 속도, 장애 처리율 등)
-	•	SLA (Service Level Agreement): 서비스 수준 계약서로, 고객과의 서비스 약속 지표
-성과 관리는 IT 자원의 낭비를 줄이고, 서비스 품질 향상과 사용자 만족도 제고에 기여한다.
+- IT 성과 관리(IT Performance Management)의 개념과 주요 지표(KPI, SLA)
+	- IT Performance Management 개념
+		- IT 성과 관리는 정보기술 자원의 운영 성과를 측정하고 평가하여, IT 부서의 목표 달성 및 비즈니스 기여도를 정량적으로 관리하는 체계다.
+		- 조직의 전략적 목표에 부합하는 성과 지표를 설정하고, 이를 기반으로 IT 서비스와 프로젝트의 운영 수준을 평가한다.
+	- 주요 지표:
+		- KPI (Key Performance Indicator): 핵심 성과 지표 (e.g. 시스템 가동률, 응답 속도, 장애 처리율 등)
+		- SLA (Service Level Agreement): 서비스 수준 계약서로, 고객과의 서비스 약속 지표
+	- 결론
+		- 성과 관리는 IT 자원의 낭비를 줄이고, 서비스 품질 향상과 사용자 만족도 제고에 기여한다.
 
 3. IT 비용 관리(IT Cost Management)의 개념과 TCO(Total Cost of Ownership)의 중요성
 IT 비용 관리는 정보기술 자원의 도입, 운영, 유지보수, 폐기까지 전 생애주기에 걸친 비용을 관리하고, 예산의 효율적 집행과 ROI 극대화를 도모하는 활동이다.
