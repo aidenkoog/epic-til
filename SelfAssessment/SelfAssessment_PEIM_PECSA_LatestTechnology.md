@@ -828,20 +828,15 @@ Organize concepts, features, types and Pros and Cons
     - PoS, Checkpointing, 거래소 보안 강화 등의 대책을 통해 51% 공격의 위험을 줄일 수 있다.
     - 결론적으로, 블록체인 보안 강화를 위해 “분산된 네트워크 유지”가 가장 중요한 핵심 요소
 
-- AutoML(Auto Machine Learning)의 개념과 주요 프레임워크(Google AutoML, H2O.ai 등)를 설명하시오.
-- AI 모델 경량화 기술(Knowledge Distillation, Pruning, Quantization)을 설명하시오.
-- AI의 Explainable AI(XAI) 기술과 신뢰성 확보 방안을 설명하시오.
-- 클라우드 컴퓨팅(Cloud Computing)의 개념과 주요 서비스 모델(IaaS, PaaS, SaaS)을 설명하시오.
-- 멀티 클라우드(Multi-Cloud)와 하이브리드 클라우드(Hybrid Cloud)의 차이를 설명하시오.
-- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅의 차이를 설명하시오.
-- 서버리스 컴퓨팅(Serverless Computing)의 개념과 주요 장점을 설명하시오.
-  - 좋아, 아래는 첫 번째 블록에 해당하는 질문들에 대한 정리된 서술형 답변이야. 각 항목은 개념과 관련 기술 혹은 차이점을 중심으로 설명했어.
+- AutoML(Auto Machine Learning)의 개념과 주요 프레임워크(Google AutoML, H2O.ai 등)
+  - 개념
+    - AutoML은 머신러닝 모델을 자동으로 설계, 선택, 학습 및 튜닝하는 기술
+    - 기존에는 데이터 전처리, 특징 추출, 모델 선택, 하이퍼파라미터 튜닝, 평가 등의 과정을 전문가가 수작업으로 해야 했지만, AutoML은 이 과정을 자동화해 비전문가도 손쉽게 고성능 모델을 구축할 수 있도록 지원
 
-1. AutoML(Auto Machine Learning)의 개념과 주요 프레임워크
-AutoML은 머신러닝 모델을 자동으로 설계, 선택, 학습 및 튜닝하는 기술이다. 기존에는 데이터 전처리, 특징 추출, 모델 선택, 하이퍼파라미터 튜닝, 평가 등의 과정을 전문가가 수작업으로 해야 했지만, AutoML은 이 과정을 자동화해 비전문가도 손쉽게 고성능 모델을 구축할 수 있도록 지원한다.
-	•	Google AutoML: Google Cloud에서 제공하는 AutoML 서비스로, 비전, 언어, 번역 등 특정 영역에 최적화된 자동 학습 파이프라인을 제공한다.
-	•	H2O.ai (H2O AutoML): 오픈소스 기반 AutoML 플랫폼으로, 다양한 알고리즘을 대상으로 모델을 자동 탐색하고 성능을 비교하여 최적의 모델을 제시한다.
-	•	Auto-sklearn, TPOT, MLJAR 등도 널리 사용되는 AutoML 도구들이다.
+  - 주요 프레임워크
+    - Google AutoML: Google Cloud에서 제공하는 AutoML 서비스로, 비전, 언어, 번역 등 특정 영역에 최적화된 자동 학습 파이프라인을 제공한다.
+    - H2O.ai (H2O AutoML): 오픈소스 기반 AutoML 플랫폼으로, 다양한 알고리즘을 대상으로 모델을 자동 탐색하고 성능을 비교하여 최적의 모델을 제시한다.
+    - Auto-sklearn, TPOT, MLJAR 등도 널리 사용되는 AutoML 도구들이다.
 
 2. AI 모델 경량화 기술: Knowledge Distillation, Pruning, Quantization
 	•	Knowledge Distillation (지식 증류)
