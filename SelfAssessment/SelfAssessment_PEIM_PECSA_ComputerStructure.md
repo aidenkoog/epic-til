@@ -612,25 +612,20 @@ Organize concepts, features, types and Pros and Cons
 	    - 각 레지스터는 특정 역할을 가지며, CPU가 효율적으로 작동할 수 있도록 지원
 	    - 범용(GPR)과 특수 목적(SP, PC, IR 등) 레지스터가 함께 동작하여 명령어 실행과 데이터 처리를 수행함
 
-- 산술논리연산장치(ALU)의 역할과 기능은?
-- CPU 내부의 주요 레지스터(PC, IR, MAR, MDR, ACC 등)의 역할을 설명하라.
-- 정수 연산과 부동소수점 연산의 차이점과 처리 방식은?
-- IEEE 754 부동소수점 표준의 구조와 특징은?
-- Overflow와 Underflow의 개념과 발생 원인은?
-- Carry, Borrow, Overflow, Zero 플래그의 역할은?
-    - 1. 산술논리연산장치(ALU)의 역할과 기능
-개념 및 역할
-산술논리연산장치(ALU, Arithmetic Logic Unit) 는 CPU 내에서 연산을 수행하는 핵심 부품으로, 컴퓨터 연산의 핵심 역할을 담당한다.
-CPU가 처리하는 모든 산술 및 논리 연산이 이 장치에서 실행된다.
-주요 기능
-산술 연산 (Arithmetic Operations)
-덧셈, 뺄셈, 곱셈, 나눗셈 등의 연산 수행
-논리 연산 (Logical Operations)
-AND, OR, NOT, XOR 등의 비트 단위 논리 연산 수행
-비교 연산 (Comparison Operations)
-두 데이터 값을 비교하고 결과를 플래그에 저장
-Shift 연산
-비트 이동(Shift Left, Shift Right)을 통한 데이터 처리
+- 산술논리연산장치(ALU)의 역할과 기능
+    - 개념 및 역할
+        - 산술논리연산장치(ALU, Arithmetic Logic Unit) 는 CPU 내에서 연산을 수행하는 핵심 부품으로, 컴퓨터 연산의 핵심 역할을 담당한다.
+        - CPU가 처리하는 모든 산술 및 논리 연산이 이 장치에서 실행된다.
+    - 주요 기능
+        - 산술 연산 (Arithmetic Operations)
+            - 덧셈, 뺄셈, 곱셈, 나눗셈 등의 연산 수행
+        - 논리 연산 (Logical Operations)
+            - AND, OR, NOT, XOR 등의 비트 단위 논리 연산 수행
+        - 비교 연산 (Comparison Operations)
+            - 두 데이터 값을 비교하고 결과를 플래그에 저장
+        - Shift 연산
+            - 비트 이동(Shift Left, Shift Right)을 통한 데이터 처리
+            
 2. CPU 내부의 주요 레지스터의 역할
 주요 레지스터와 역할
 PC (Program Counter)
@@ -6651,11 +6646,6 @@ Molecular Electronics는 개별 분자 또는 분자 집합체를 논리 게이�
 	•	전통 반도체와 달리 상온 안정성 확보와 신뢰성 확보가 관건
 
 궁극적으로는 모든 전자 회로를 화학적으로 합성하는 기술로 이어질 수 있으며, 유연 전자기기, 생체이식 디바이스 등에서 가능성을 보이고 있다.
-
-⸻
-
-이제 마지막 블록까지 마무리했어. 더 궁금한 것이 있으면 알려줘. 아니면 “요약해줘”라고 하면 핵심만 다시 정리해줄게.
-
 
 
 - Probabilistic Computing(확률적 컴퓨팅)이란 무엇이며, 기존 불확정성 기반 컴퓨팅과의 차이점은?
