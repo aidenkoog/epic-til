@@ -872,24 +872,21 @@ Organize concepts, features, types and Pros and Cons
       - 네트워크 부하가 커질 수 있음
       - 예제: ARP(Address Resolution Protocol), DHCP 서버의 IP 주소 할당
 
-3. CDN(Content Delivery Network)의 개념과 작동 방식
+- CDN(Content Delivery Network)의 개념과 작동 방식
+  - CDN 개념
+	  - 정의: 웹 콘텐츠(이미지, 비디오, HTML 페이지 등)를 사용자와 가까운 서버에서 제공하여 로딩 속도를 개선하는 기술
+	  - 목적: 콘텐츠 전송 속도 향상, 서버 부하 감소, 네트워크 혼잡 방지
 
-CDN 개념
-	•	정의: 웹 콘텐츠(이미지, 비디오, HTML 페이지 등)를 사용자와 가까운 서버에서 제공하여 로딩 속도를 개선하는 기술
-	•	목적: 콘텐츠 전송 속도 향상, 서버 부하 감소, 네트워크 혼잡 방지
+  - CDN 작동 방식
+	  - (1) 사용자가 웹사이트에 요청을 보냄
+	  - (2) DNS 라우팅을 통해 가장 가까운 CDN 엣지 서버로 요청 전달
+	  - (3) 엣지 서버가 캐시된 콘텐츠 제공 (없을 경우 원본 서버에서 가져옴)
+	  - (4) 콘텐츠가 사용자에게 빠르게 전달됨
 
-CDN 작동 방식
-	1.	사용자가 웹사이트에 요청을 보냄
-	2.	DNS 라우팅을 통해 가장 가까운 CDN 엣지 서버로 요청 전달
-	3.	엣지 서버가 캐시된 콘텐츠 제공 (없을 경우 원본 서버에서 가져옴)
-	4.	콘텐츠가 사용자에게 빠르게 전달됨
-
-CDN 주요 활용 사례
-	•	스트리밍 서비스 (Netflix, YouTube) → 전 세계 사용자에게 빠른 영상 제공
-	•	e-커머스 (Amazon, eBay) → 글로벌 사용자에게 최적의 쇼핑 경험 제공
-	•	게임 배포 (Steam, PlayStation Network) → 빠른 다운로드 속도 보장
-
-⸻
+  - CDN 주요 활용 사례
+	  - 스트리밍 서비스 (Netflix, YouTube) → 전 세계 사용자에게 빠른 영상 제공
+	  - e-커머스 (Amazon, eBay) → 글로벌 사용자에게 최적의 쇼핑 경험 제공
+	  - 게임 배포 (Steam, PlayStation Network) → 빠른 다운로드 속도 보장
 
 4. 네트워크 슬라이싱(Network Slicing)의 개념과 5G에서의 활용 사례
 
