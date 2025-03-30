@@ -513,23 +513,17 @@ Organize concepts, features, types and Pros and Cons
 	    - 지불은 추가적인 공격을 유발할 가능성 존재
 
 
-- 보안 사고 대응 프로세스(Incident Response Process)의 개념과 주요 단계(탐지, 분석, 대응, 복구)를 설명하시오.
-- 접근 통제(Access Control)의 개념과 주요 모델(MAC, DAC, RBAC)을 설명하시오.
-- 보안 프레임워크(NIST Cybersecurity Framework, ISO/IEC 27001)의 차이를 설명하시오.
-- 보안 컴플라이언스(Security Compliance)의 개념과 주요 규제(GDPR, PCI-DSS, HIPAA 등)를 설명하시오.
-- 네트워크 보안(Network Security)의 개념과 주요 위협 요소를 설명하시오.
-- 방화벽(Firewall)의 개념과 유형(Packet Filtering, Stateful Inspection, Proxy, UTM)을 설명하시오.
-  - - 1. 보안 사고 대응 프로세스(Incident Response Process)의 개념과 주요 단계
-개념
+- 보안 사고 대응 프로세스(Incident Response Process)의 개념과 주요 단계(탐지, 분석, 대응, 복구)
+  - 보안 사고 대응 프로세스 개념 (Incident Response Process)
+    - 보안 사고 발생 시 조직이 신속하고 체계적으로 탐지, 분석, 대응, 복구하기 위한 프로세스를 말하며, 정보 자산을 보호하고 손실을 최소화하는 데 목적이 있다.
 
-보안 사고 발생 시 조직이 신속하고 체계적으로 탐지, 분석, 대응, 복구하기 위한 프로세스를 말하며, 정보 자산을 보호하고 손실을 최소화하는 데 목적이 있다.
-주요 단계
+  - 주요 단계 (탐지, 분석, 대응, 복구)
+    - 탐지(Detection): 보안 로그, 알림, 사용자 신고 등을 통해 이상 징후 포착
+    - 분석(Analysis): 로그, 트래픽, 시스템 상태를 조사하여 사고의 성격, 범위, 영향도를 파악
+    - 대응(Response): 악성 코드 격리, 침입 경로 차단, 권한 회수 등 즉각적 조치 수행
+    - 복구(Recovery): 시스템 복원, 패치 적용, 운영 재개 전 상태 확인 및 정상화
+    - 사후 분석 및 개선(Post-incident Review): 재발 방지 대책 수립, 정책 보완, 교육 강화
 
-탐지(Detection): 보안 로그, 알림, 사용자 신고 등을 통해 이상 징후 포착
-분석(Analysis): 로그, 트래픽, 시스템 상태를 조사하여 사고의 성격, 범위, 영향도를 파악
-대응(Response): 악성 코드 격리, 침입 경로 차단, 권한 회수 등 즉각적 조치 수행
-복구(Recovery): 시스템 복원, 패치 적용, 운영 재개 전 상태 확인 및 정상화
-사후 분석 및 개선(Post-incident Review): 재발 방지 대책 수립, 정책 보완, 교육 강화
 2. 접근 통제(Access Control)의 개념과 주요 모델(MAC, DAC, RBAC)
 개념
 
