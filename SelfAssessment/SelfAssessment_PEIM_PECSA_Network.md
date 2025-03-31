@@ -1254,32 +1254,20 @@ Organize concepts, features, types and Pros and Cons
 	  - STP: 루프 방지 프로토콜, BPDU를 통한 루트 브리지 선정.
 	  - MPLS: 레이블 기반 라우팅으로 QoS 및 고속 데이터 전송 지원.
 
-- VRRP(Virtual Router Redundancy Protocol)의 개념과 역할을 설명하시오.
-- QoS(Quality of Service)의 개념과 네트워크에서의 중요성을 설명하시오.
-- 네트워크 보안(Network Security)의 개념과 주요 목표(무결성, 기밀성, 가용성)를 설명하시오.
-- 방화벽(Firewall)의 개념과 주요 유형(Stateless, Stateful, Proxy Firewall 등)을 설명하시오.
-- IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이를 설명하시오.
-- 네트워크에서 사용되는 VPN(Virtual Private Network)의 개념과 주요 암호화 프로토콜(IPSec, SSL VPN 등)을 설명하시오.
+- VRRP(Virtual Router Redundancy Protocol)의 개념과 역할
+  - VRRP의 개념
+    - VRRP(Virtual Router Redundancy Protocol)는 라우터의 가용성을 높이기 위한 네트워크 프로토콜이다.
+    - IP 게이트웨이(라우터)의 이중화를 통해, 하나의 라우터가 장애가 발생하더라도 자동으로 대체 라우터로 전환되어 네트워크 연결을 유지한다.
+    - 일반적으로 핫스탠바이(Hot Standby) 방식을 사용하여 한 대의 라우터가 동작하고, 나머지는 대기 상태로 유지된다.
 
-
-- DDoS(Distributed Denial of Service) 공격의 개념과 주요 대응 방안을 설명하시오.
-- 네트워크에서 사용하는 NAC(Network Access Control)의 개념과 주요 보안 정책을 설명하시오.
-- 네트워크에서 맥어드레스 스푸핑(MAC Address Spoofing)의 개념과 방어 기법을 설명하시오.
-- IEEE 802.1X 인증의 개념과 EAP(Extensible Authentication Protocol)의 역할을 설명하시오.
-- 네트워크에서 사용하는 침입 탐지 기법(시그니처 기반, 이상 탐지 기반)의 차이를 설명하시오.
-- 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 도구(Wireshark, Tcpdump 등)를 설명하시오.
-  - 📌 VRRP(Virtual Router Redundancy Protocol)의 개념과 역할
-1️⃣ VRRP의 개념
-VRRP(Virtual Router Redundancy Protocol)는 라우터의 가용성을 높이기 위한 네트워크 프로토콜이다.
-IP 게이트웨이(라우터)의 이중화를 통해, 하나의 라우터가 장애가 발생하더라도 자동으로 대체 라우터로 전환되어 네트워크 연결을 유지한다.
-일반적으로 핫스탠바이(Hot Standby) 방식을 사용하여 한 대의 라우터가 동작하고, 나머지는 대기 상태로 유지된다.
-2️⃣ VRRP의 역할
-고가용성(High Availability) 제공
-라우터 장애 시 즉시 대체 라우터로 전환되어 네트워크 다운타임을 최소화한다.
-자동 페일오버(Auto Failover) 기능
-기본(Default) 라우터가 다운되면, 대기(Backup) 라우터가 즉시 활성화되어 네트워크를 유지한다.
-IP 주소 공유를 통한 경로 유지
-클라이언트는 **고정된 가상 IP(Virtual IP)**를 사용하므로, 게이트웨이 변경 없이 백업 라우터로 전환 가능하다.
+  - VRRP의 역할
+    - 고가용성(High Availability) 제공
+      - 라우터 장애 시 즉시 대체 라우터로 전환되어 네트워크 다운타임을 최소화한다.
+    - 자동 페일오버(Auto Failover) 기능
+      - 기본(Default) 라우터가 다운되면, 대기(Backup) 라우터가 즉시 활성화되어 네트워크를 유지한다.
+    - IP 주소 공유를 통한 경로 유지
+      - 클라이언트는 고정된 가상 IP(Virtual IP)를 사용하므로, 게이트웨이 변경 없이 백업 라우터로 전환 가능하다.
+      
 📌 QoS(Quality of Service)의 개념과 중요성
 1️⃣ QoS의 개념
 QoS(Quality of Service)는 네트워크에서 특정 트래픽 유형의 우선순위를 설정하여 서비스 품질을 보장하는 기술이다.
@@ -4987,3 +4975,10 @@ DNS Resolver 강화: 보안 기능이 강화된 Resolver 사용
 게스트 네트워크 분리: 외부 장비는 별도의 VLAN 또는 SSID에 할당
 무결성 검사: 디바이스의 파일 시스템, 애플리케이션 상태 확인
 자동 차단 정책: 이상 행위 탐지 시 즉시 격리 조치
+
+- DDoS(Distributed Denial of Service) 공격의 개념과 주요 대응 방안을 설명하시오.
+- 네트워크에서 사용하는 NAC(Network Access Control)의 개념과 주요 보안 정책을 설명하시오.
+- 네트워크에서 맥어드레스 스푸핑(MAC Address Spoofing)의 개념과 방어 기법을 설명하시오.
+- IEEE 802.1X 인증의 개념과 EAP(Extensible Authentication Protocol)의 역할을 설명하시오.
+- 네트워크에서 사용하는 침입 탐지 기법(시그니처 기반, 이상 탐지 기반)의 차이를 설명하시오.
+- 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 도구(Wireshark, Tcpdump 등)를 설명하시오.
