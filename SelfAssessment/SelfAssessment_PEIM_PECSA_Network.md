@@ -994,23 +994,20 @@ Organize concepts, features, types and Pros and Cons
     - 클래스 기반: 고정된 서브넷 크기(Class A, B, C) → 유연성 부족
     - CIDR: 네트워크 크기에 맞춰 주소를 가변적으로 할당
 
-4. DHCP(Dynamic Host Configuration Protocol)의 개념과 작동 방식
+- DHCP(Dynamic Host Configuration Protocol)의 개념과 작동 방식
+  - DHCP 개념
+    - 정의: 네트워크 장치(클라이언트)에 자동으로 IP 주소를 할당하는 프로토콜
+    - 목적: IP 주소를 수동으로 설정할 필요 없이 자동 할당하여 네트워크 관리 효율성 증대
 
-DHCP 개념
-	•	정의: 네트워크 장치(클라이언트)에 자동으로 IP 주소를 할당하는 프로토콜
-	•	목적: IP 주소를 수동으로 설정할 필요 없이 자동 할당하여 네트워크 관리 효율성 증대
+  - DHCP 작동 방식 (DISCOVER -> OFFER -> REQUEST -> ACK)
+    - DISCOVER – 클라이언트가 IP 주소 요청(DHCP 브로드캐스트)
+    - OFFER – DHCP 서버가 사용 가능한 IP 주소를 제공
+    - REQUEST – 클라이언트가 특정 IP 주소 요청
+    - ACK (Acknowledge) – DHCP 서버가 최종적으로 IP 주소 할당
 
-DHCP 작동 방식
-	1.	DISCOVER – 클라이언트가 IP 주소 요청(DHCP 브로드캐스트)
-	2.	OFFER – DHCP 서버가 사용 가능한 IP 주소를 제공
-	3.	REQUEST – 클라이언트가 특정 IP 주소 요청
-	4.	ACK (Acknowledge) – DHCP 서버가 최종적으로 IP 주소 할당
-
-DHCP 활용 사례
-	•	기업 및 가정용 네트워크에서 동적 IP 할당
-	•	공공 Wi-Fi 환경에서 자동 네트워크 설정
-
-⸻
+  - DHCP 활용 사례
+    - 기업 및 가정용 네트워크에서 동적 IP 할당
+    - 공공 Wi-Fi 환경에서 자동 네트워크 설정
 
 5. NAT(Network Address Translation)의 개념과 주요 유형
 
