@@ -1506,20 +1506,21 @@ Organize concepts, features, types and Pros and Cons
     - 군사 감시: 적외선 센서 기반 침입 감지
 
 
-4. LoRaWAN과 NB-IoT의 개념과 차이
-✅ LoRaWAN 개념
-LoRa(Long Range)는 **비면허 대역(ISM Band)**을 사용하는 장거리 저전력 통신 기술이다.
-LoRaWAN은 이를 기반으로 한 오픈 표준 프로토콜 스택으로, 게이트웨이와 클라우드 간 네트워크를 구성한다.
-✅ NB-IoT 개념
-NB-IoT(Narrowband IoT)는 이동통신 기반의 저전력 광역 통신 기술로, LTE 또는 5G 망을 통해 동작한다.
-이동통신사가 제공하는 인프라를 활용하여 QoS와 보안성이 우수하다.
-✅ 주요 차이점
-운영 대역: LoRa는 비면허, NB-IoT는 면허
-통신 인프라: LoRa는 자체 게이트웨이, NB-IoT는 통신사 망
-비용 및 초기 투자: LoRa는 초기 장비 비용이 있으나 망 유지비 저렴, NB-IoT는 월 과금 기반
-커버리지: NB-IoT가 실내 및 지하 등 침투력이 강함
-전력 소비: 둘 다 저전력이나, LoRa가 좀 더 유리함
+- LoRaWAN과 NB-IoT의 개념과 차이
+  - LoRaWAN 개념
+    - LoRa(Long Range)는 비면허 대역(ISM Band)을 사용하는 장거리 저전력 통신 기술이다.
+    - LoRaWAN은 이를 기반으로 한 오픈 표준 프로토콜 스택으로, 게이트웨이와 클라우드 간 네트워크를 구성한다.
 
+  - NB-IoT 개념
+    - NB-IoT(Narrowband IoT)는 이동통신 기반의 저전력 광역 통신 기술로, LTE 또는 5G 망을 통해 동작한다.
+    - 이동통신사가 제공하는 인프라를 활용하여 QoS와 보안성이 우수하다.
+
+  - 주요 차이점
+    - 운영 대역: LoRa는 비면허, NB-IoT는 면허
+    - 통신 인프라: LoRa는 자체 게이트웨이, NB-IoT는 통신사 망
+    - 비용 및 초기 투자: LoRa는 초기 장비 비용이 있으나 망 유지비 저렴, NB-IoT는 월 과금 기반
+    - 커버리지: NB-IoT가 실내 및 지하 등 침투력이 강함
+    - 전력 소비: 둘 다 저전력이나, LoRa가 좀 더 유리함
 
 5. 클라우드 네트워크(Cloud Networking)의 개념과 기존 네트워크와의 차이
 ✅ 개념
