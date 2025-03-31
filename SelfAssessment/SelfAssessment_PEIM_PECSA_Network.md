@@ -1009,29 +1009,25 @@ Organize concepts, features, types and Pros and Cons
     - 기업 및 가정용 네트워크에서 동적 IP 할당
     - 공공 Wi-Fi 환경에서 자동 네트워크 설정
 
-5. NAT(Network Address Translation)의 개념과 주요 유형
+- NAT(Network Address Translation)의 개념과 주요 유형
+  - NAT 개념
+	  - 정의: 사설 IP 주소를 공인 IP 주소로 변환하여 인터넷 통신을 가능하게 하는 기술
+	  - 목적:
+	    - IPv4 주소 부족 문제 해결
+	    - 내부 네트워크 보안 강화
 
-NAT 개념
-	•	정의: 사설 IP 주소를 공인 IP 주소로 변환하여 인터넷 통신을 가능하게 하는 기술
-	•	목적:
-	•	IPv4 주소 부족 문제 해결
-	•	내부 네트워크 보안 강화
+  - NAT 주요 유형
+    - (1) Static NAT (정적 NAT): 1개 사설 IP 주소를 특정 공인 IP 주소로 변환
+      - 하나의 사설 IP 주소를 특정 공인 IP 주소로 변환
+      - 활용: 내부 서버를 외부에 고정된 IP로 노출할 때 사용 (예: 웹 서버)
 
-NAT 주요 유형
+    - (2) Dynamic NAT (동적 NAT): 여러 사설 IP 주소들을 공용 IP Pool 에서 동적 변환
+      - 여러 사설 IP 주소를 공용 IP 풀에서 동적으로 변환
+      - 활용: 내부 네트워크에서 유동적으로 인터넷 연결 시 사용
 
-1) Static NAT (정적 NAT)
-	•	하나의 사설 IP 주소를 특정 공인 IP 주소로 변환
-	•	활용: 내부 서버를 외부에 고정된 IP로 노출할 때 사용 (예: 웹 서버)
-
-2) Dynamic NAT (동적 NAT)
-	•	여러 사설 IP 주소를 공용 IP 풀에서 동적으로 변환
-	•	활용: 내부 네트워크에서 유동적으로 인터넷 연결 시 사용
-
-3) PAT (Port Address Translation, Overloaded NAT)
-	•	하나의 공인 IP 주소를 여러 사설 IP 주소가 공유하며 포트 번호로 구분
-	•	활용: 대부분의 가정 및 기업 네트워크에서 사용 (라우터의 기본 NAT 방식)
-
-⸻
+    - (3) PAT (Port Address Translation, Overloaded NAT)
+      - 하나의 공인 IP 주소를 여러 사설 IP 주소가 공유하며 포트 번호로 구분
+      - 활용: 대부분의 가정 및 기업 네트워크에서 사용 (라우터의 기본 NAT 방식)
 
 6. IPv6 주소 체계의 주요 특징과 주소 형식
 
