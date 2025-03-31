@@ -1208,18 +1208,15 @@ Organize concepts, features, types and Pros and Cons
 	  - 네트워크 효율성 증가: 불필요한 브로드캐스트 트래픽을 감소시켜 네트워크 부하 감소.
 	  - 유연한 네트워크 관리: 네트워크 장치를 변경하지 않고도 논리적으로 그룹 설정 가능.
 
-4. 트렁킹(Trunking)과 VLAN 간 통신
+- 트렁킹(Trunking)과 VLAN 간 통신
+  - 트렁킹 개념
+	  - 하나의 물리적 링크를 통해 여러 VLAN의 트래픽을 전달하는 기술.
+	  - 여러 VLAN을 하나의 연결로 통신 가능하도록 함.
 
-4.1 트렁킹 개념
-	•	하나의 물리적 링크를 통해 여러 VLAN의 트래픽을 전달하는 기술.
-	•	여러 VLAN을 하나의 연결로 통신 가능하도록 함.
-
-4.2 VLAN 간 통신 기술
-	•	라우터를 통한 VLAN 간 통신(Inter-VLAN Routing): 라우터를 사용하여 VLAN 간 트래픽을 전달.
-	•	Layer 3 스위치 활용: 라우팅 기능이 포함된 스위치를 사용하여 VLAN 간 패킷 전달.
-	•	802.1Q 태깅: VLAN 태그를 사용하여 트렁크 포트를 통해 여러 VLAN을 구분.
-
-⸻
+  - VLAN 간 통신 기술
+	  - 라우터를 통한 VLAN 간 통신(Inter-VLAN Routing): 라우터를 사용하여 VLAN 간 트래픽을 전달.
+	  - Layer 3 스위치 활용: 라우팅 기능이 포함된 스위치를 사용하여 VLAN 간 패킷 전달.
+	  - 802.1Q 태깅: VLAN 태그를 사용하여 트렁크 포트를 통해 여러 VLAN을 구분.
 
 5. STP(Spanning Tree Protocol)과 루프 방지 방법
 
