@@ -1312,20 +1312,23 @@ Organize concepts, features, types and Pros and Cons
     - Proxy Firewall (애플리케이션 계층 방화벽)
       - 클라이언트와 서버 사이에 중개자(Proxy) 역할을 수행하며, 애플리케이션 계층까지 검사한다.
       - 보안성이 가장 높지만 성능 저하 가능성 있음.
-      
-📌 IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이점
-1️⃣ IDS (침입 탐지 시스템)
-네트워크 트래픽을 감시하고 보안 위협을 탐지하는 시스템이다.
-공격 발생 여부를 로그로 기록하고 관리자에게 경고하지만, 직접 차단하지는 않는다.
-예) Snort, Suricata, OSSEC
-2️⃣ IPS (침입 방지 시스템)
-IDS와 달리 공격을 탐지한 후, 실시간으로 트래픽을 차단한다.
-보안 정책에 따라 자동으로 패킷을 차단하거나 세션을 종료할 수 있다.
-예) Cisco Firepower, Palo Alto IPS, Fortinet IPS
-3️⃣ IDS vs. IPS 차이점
-IDS는 탐지만, IPS는 탐지 후 차단
-IDS는 네트워크 성능에 영향을 덜 주지만, IPS는 적극적인 보안 조치를 수행
-보안성이 중요한 경우 IPS를 추가적으로 배치하여 방어 체계를 강화한다.
+
+- IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이점
+  - IDS (침입 탐지 시스템): 탐지만
+    - 네트워크 트래픽을 감시하고 보안 위협을 탐지하는 시스템이다.
+    - 공격 발생 여부를 로그로 기록하고 관리자에게 경고하지만, 직접 차단하지는 않는다.
+      - (예) Snort, Suricata, OSSEC
+
+  - IPS (침입 방지 시스템): 탐지 > 차단
+    - IDS와 달리 공격을 탐지한 후, 실시간으로 트래픽을 차단한다.
+    - 보안 정책에 따라 자동으로 패킷을 차단하거나 세션을 종료할 수 있다.
+      - (예) Cisco Firepower, Palo Alto IPS, Fortinet IPS
+
+  - IDS vs. IPS 차이점
+    - IDS는 탐지만, IPS는 탐지 후 차단
+    - IDS는 네트워크 성능에 영향을 덜 주지만, IPS는 적극적인 보안 조치를 수행
+    - 보안성이 중요한 경우 IPS를 추가적으로 배치하여 방어 체계를 강화한다.
+    
 📌 VPN(Virtual Private Network)의 개념과 주요 암호화 프로토콜
 1️⃣ VPN의 개념
 VPN은 공용 네트워크(인터넷)를 사용하여 사설 네트워크를 구축하는 기술이다.
