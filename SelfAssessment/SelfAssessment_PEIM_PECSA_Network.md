@@ -1418,20 +1418,20 @@ Organize concepts, features, types and Pros and Cons
     - 네트워크 구조
       - 4G LTE: 중앙 집중식 네트워크
       - 5G: 네트워크 슬라이싱(Network Slicing) 지원 → 맞춤형 네트워크 제공 가능
+
+- 이동통신 네트워크의 셀룰러 구조(Cellular Network)와 핸드오버(Handover) 방식
+  - 셀룰러 네트워크(Cellular Network) 개념
+    - 이동통신망을 일정한 크기의 셀(Cell)로 나누어 기지국이 각 셀을 담당하는 방식.
+    - 각 셀은 주파수를 재사용하여 많은 사용자를 지원할 수 있도록 설계됨.
+
+  - 핸드오버(Handover) 방식
+    - 하드 핸드오버(Hard Handover)
+      - 기존 기지국과의 연결을 끊고 새로운 기지국과 연결하는 방식.
+      - 단절 시간이 존재할 수 있음.
+    - 소프트 핸드오버(Soft Handover)
+      - 기존 기지국과 연결된 상태에서 새로운 기지국과 동시 연결 후 전환.
+      - 연결 단절 없이 원활한 핸드오버 가능.
       
-📌 이동통신 네트워크의 셀룰러 구조(Cellular Network)와 핸드오버(Handover) 방식
-1️⃣ 셀룰러 네트워크(Cellular Network) 개념
-이동통신망을 일정한 크기의 셀(Cell)로 나누어 기지국이 각 셀을 담당하는 방식.
-각 셀은 주파수를 재사용하여 많은 사용자를 지원할 수 있도록 설계됨.
-2️⃣ 핸드오버(Handover) 방식
-하드 핸드오버(Hard Handover)
-
-기존 기지국과의 연결을 끊고 새로운 기지국과 연결하는 방식.
-단절 시간이 존재할 수 있음.
-소프트 핸드오버(Soft Handover)
-
-기존 기지국과 연결된 상태에서 새로운 기지국과 동시 연결 후 전환.
-연결 단절 없이 원활한 핸드오버 가능.
 📌 Wi-Fi 보안 프로토콜(WEP, WPA, WPA2, WPA3)의 차이
 1️⃣ WEP (Wired Equivalent Privacy)
 초기 Wi-Fi 보안 프로토콜(1999년)
