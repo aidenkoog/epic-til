@@ -1218,22 +1218,19 @@ Organize concepts, features, types and Pros and Cons
 	  - Layer 3 스위치 활용: 라우팅 기능이 포함된 스위치를 사용하여 VLAN 간 패킷 전달.
 	  - 802.1Q 태깅: VLAN 태그를 사용하여 트렁크 포트를 통해 여러 VLAN을 구분.
 
-5. STP(Spanning Tree Protocol)과 루프 방지 방법
+- STP(Spanning Tree Protocol)과 루프 방지 방법
+  - STP 개념
+	  - 네트워크에서 루프(Loop)를 방지하기 위한 프로토콜.
+	  - 브리지 ID를 기준으로 루트 브리지를 선정하고, 루프가 발생할 가능성이 있는 링크를 차단.
 
-5.1 STP 개념
-	•	네트워크에서 루프(Loop)를 방지하기 위한 프로토콜.
-	•	브리지 ID를 기준으로 루트 브리지를 선정하고, 루프가 발생할 가능성이 있는 링크를 차단.
-
-5.2 루프 방지 방법
-	1.	루트 브리지 선정: 네트워크에서 가장 낮은 Bridge ID를 가진 스위치를 루트 브리지로 설정.
-	2.	포트 역할 지정:
-	•	Root Port: 루트 브리지와의 최단 경로 포트.
-	•	Designated Port: 각 네트워크 세그먼트에서 활성화된 포트.
-	•	Blocked Port: 루프 방지를 위해 차단된 포트.
-	3.	BPDU(Bridge Protocol Data Unit) 전송:
-	•	네트워크 변경 시 STP가 자동으로 재계산하여 새로운 루트 경로 설정.
-
-⸻
+  - 루프 방지 방법
+	  - (1) 루트 브리지 선정: 네트워크에서 가장 낮은 Bridge ID를 가진 스위치를 루트 브리지로 설정.
+	  - (2) 포트 역할 지정:
+      - Root Port: 루트 브리지와의 최단 경로 포트.
+      - Designated Port: 각 네트워크 세그먼트에서 활성화된 포트.
+      - Blocked Port: 루프 방지를 위해 차단된 포트.
+	  - (3) BPDU(Bridge Protocol Data Unit) 전송:
+	    - 네트워크 변경 시 STP가 자동으로 재계산하여 새로운 루트 경로 설정.
 
 6. MPLS(Multiprotocol Label Switching)와 기존 IP 라우팅의 차이
 
