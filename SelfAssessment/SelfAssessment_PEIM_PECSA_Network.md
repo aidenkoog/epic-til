@@ -1110,19 +1110,16 @@ Organize concepts, features, types and Pros and Cons
     - 자동 주소 생성: 중복 가능성이 낮아 충돌 위험 없음.
     - 프라이버시 확장 가능: 주기적으로 새로운 주소 생성 가능(임시 주소).
 
-5. 라우팅(Routing)
+- 라우팅(Routing)
+  - 개념
+    - 네트워크에서 목적지까지 데이터 패킷을 전달하는 과정.
+    - IP 주소 기반으로 최적의 경로를 결정하고 패킷을 포워딩함.
 
-개념
-	•	네트워크에서 목적지까지 데이터 패킷을 전달하는 과정.
-	•	IP 주소 기반으로 최적의 경로를 결정하고 패킷을 포워딩함.
-
-주요 역할
-	•	경로 선택(Path Selection): 최적의 경로를 선택하여 패킷을 목적지까지 전달.
-	•	패킷 포워딩(Packet Forwarding): 패킷을 다음 홉(Next Hop)으로 전송.
-	•	네트워크 분할(Network Segmentation): 트래픽을 관리하고 충돌 도메인 감소.
-	•	로드 밸런싱(Load Balancing): 여러 경로를 통해 네트워크 부하를 분산.
-
-⸻
+  - 주요 역할
+    - 경로 선택(Path Selection): 최적의 경로를 선택하여 패킷을 목적지까지 전달.
+    - 패킷 포워딩(Packet Forwarding): 패킷을 다음 홉(Next Hop)으로 전송.
+    - 네트워크 분할(Network Segmentation): 트래픽을 관리하고 충돌 도메인 감소.
+    - 로드 밸런싱(Load Balancing): 여러 경로를 통해 네트워크 부하를 분산.
 
 6. 정적 라우팅(Static Routing) vs. 동적 라우팅(Dynamic Routing)
 
