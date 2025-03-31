@@ -1181,25 +1181,22 @@ Organize concepts, features, types and Pros and Cons
         - 신뢰성이 높고 경로 최적화 기능이 뛰어남.
       - 사용 예시: ISP 간 인터넷 트래픽 라우팅.
 
-2. 내부 게이트웨이 프로토콜(IGP)과 외부 게이트웨이 프로토콜(EGP)
+- 내부 게이트웨이 프로토콜(IGP)과 외부 게이트웨이 프로토콜(EGP)
+  - (1) 내부 게이트웨이 프로토콜(IGP)
+    - 개념: 같은 자율 시스템(AS) 내에서 라우팅을 수행하는 프로토콜.
+    - 예시: RIP, OSPF, EIGRP(Enhanced Interior Gateway Routing Protocol).
+    - 특징:
+      - 단일 관리 도메인 내에서 사용.
+      - 네트워크 내부 경로 최적화 목적.
+      - 홉 수나 링크 비용을 기준으로 경로 선택.
 
-2.1 내부 게이트웨이 프로토콜(IGP)
-	•	개념: 같은 자율 시스템(AS) 내에서 라우팅을 수행하는 프로토콜.
-	•	예시: RIP, OSPF, EIGRP(Enhanced Interior Gateway Routing Protocol).
-	•	특징:
-	•	단일 관리 도메인 내에서 사용.
-	•	네트워크 내부 경로 최적화 목적.
-	•	홉 수나 링크 비용을 기준으로 경로 선택.
-
-2.2 외부 게이트웨이 프로토콜(EGP)
-	•	개념: 서로 다른 AS 간의 라우팅을 담당하는 프로토콜.
-	•	예시: BGP(Border Gateway Protocol).
-	•	특징:
-	•	대규모 네트워크(인터넷)에서 사용.
-	•	정책 기반 라우팅이 가능.
-	•	경로 벡터 방식을 사용하여 라우팅 최적화.
-
-⸻
+  - (2) 외부 게이트웨이 프로토콜(EGP)
+    - 개념: 서로 다른 AS 간의 라우팅을 담당하는 프로토콜.
+    - 예시: BGP(Border Gateway Protocol).
+    - 특징:
+      - 대규모 네트워크(인터넷)에서 사용.
+      - 정책 기반 라우팅이 가능.
+      - 경로 벡터 방식을 사용하여 라우팅 최적화.
 
 3. VLAN(Virtual Local Area Network)
 
