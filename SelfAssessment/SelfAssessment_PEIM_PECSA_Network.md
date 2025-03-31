@@ -1432,19 +1432,23 @@ Organize concepts, features, types and Pros and Cons
       - 기존 기지국과 연결된 상태에서 새로운 기지국과 동시 연결 후 전환.
       - 연결 단절 없이 원활한 핸드오버 가능.
       
-📌 Wi-Fi 보안 프로토콜(WEP, WPA, WPA2, WPA3)의 차이
-1️⃣ WEP (Wired Equivalent Privacy)
-초기 Wi-Fi 보안 프로토콜(1999년)
-RC4 기반 암호화를 사용하나 취약점이 많아 해킹이 가능.
-2️⃣ WPA (Wi-Fi Protected Access)
-WEP의 보안 취약점 개선
-TKIP(Temporal Key Integrity Protocol) 사용, 하지만 여전히 보안 취약.
-3️⃣ WPA2
-AES(Advanced Encryption Standard) 기반 보안 적용
-기업용에서는 802.1X 기반 인증을 지원하여 강력한 보안 제공.
-4️⃣ WPA3
-강화된 AES 암호화 및 개별 데이터 암호화 지원
-오픈 네트워크(비밀번호 없는 Wi-Fi)에서도 개별 암호화 적용.
+- Wi-Fi 보안 프로토콜(WEP, WPA, WPA2, WPA3)의 차이
+  - (1) WEP (Wired Equivalent Privacy)
+    - 초기 Wi-Fi 보안 프로토콜(1999년)
+    - RC4 기반 암호화를 사용하나 취약점이 많아 해킹이 가능.
+
+  - (2) WPA (Wi-Fi Protected Access)
+    - WEP의 보안 취약점 개선
+    - TKIP(Temporal Key Integrity Protocol) 사용, 하지만 여전히 보안 취약.
+
+  - (3) WPA2
+    - AES(Advanced Encryption Standard) 기반 보안 적용
+    - 기업용에서는 802.1X 기반 인증을 지원하여 강력한 보안 제공.
+
+  - (4) WPA3
+    - 강화된 AES 암호화 및 개별 데이터 암호화 지원
+    - 오픈 네트워크(비밀번호 없는 Wi-Fi)에서도 개별 암호화 적용.
+    
 📌 블루투스(Bluetooth)와 Wi-Fi의 차이
 1️⃣ 블루투스(Bluetooth) 개념
 단거리 무선 통신 기술, 2.4GHz 대역 사용.
