@@ -1050,28 +1050,22 @@ Organize concepts, features, types and Pros and Cons
     - 자동화된 주소 구성(SLAAC) 지원
     - IoT, 5G 등 차세대 네트워크에 최적화
 
-- IP 주소 충돌(IP Address Conflict)이 발생하는 원인과 해결 방법을 설명하시오.
-- 네트워크에서 프라이빗 IP(Private IP)와 퍼블릭 IP(Public IP)의 차이를 설명하시오.
-- IP 주소 서브넷 마스크(Subnet Mask)의 개념과 활용 방법을 설명하시오.
-- IPv6에서 사용되는 SLAAC(Stateless Address Autoconfiguration)의 개념을 설명하시오.
-- 라우팅(Routing)의 개념과 주요 역할을 설명하시오.
-- 정적 라우팅(Static Routing)과 동적 라우팅(Dynamic Routing)의 차이를 설명하시오.
-  - 1. IP 주소 충돌(IP Address Conflict)
+- IP 주소 충돌(IP Address Conflict)이 발생하는 원인과 해결 방법
+  - IP 주소 충돌(IP Address Conflict) 개념
+    - IP 주소 충돌이란 네트워크 내에서 동일한 IP 주소가 두 개 이상의 장치에 할당될 때 발생하는 문제
+    - 이는 네트워크 통신 장애를 유발할 수 있다.
 
-개념
-IP 주소 충돌이란 네트워크 내에서 동일한 IP 주소가 두 개 이상의 장치에 할당될 때 발생하는 문제이다. 이는 네트워크 통신 장애를 유발할 수 있다.
+  - 발생 원인
+    - 수동 설정 오류: 두 개 이상의 장치에 동일한 IP 주소를 수동으로 설정했을 때.
+    - DHCP 서버 오류: DHCP 서버가 동일한 IP 주소를 중복으로 할당할 때.
+    - MAC 주소 변경: 가상 머신 또는 네트워크 카드 교체로 인해 MAC 주소가 바뀌면서 DHCP 재할당이 정상적으로 이루어지지 않을 때.
+    - IP 예약 설정 오류: DHCP 서버에서 특정 IP를 예약했지만, 다른 장치가 이미 해당 IP를 사용 중일 때.
 
-발생 원인
-	•	수동 설정 오류: 두 개 이상의 장치에 동일한 IP 주소를 수동으로 설정했을 때.
-	•	DHCP 서버 오류: DHCP 서버가 동일한 IP 주소를 중복으로 할당할 때.
-	•	MAC 주소 변경: 가상 머신 또는 네트워크 카드 교체로 인해 MAC 주소가 바뀌면서 DHCP 재할당이 정상적으로 이루어지지 않을 때.
-	•	IP 예약 설정 오류: DHCP 서버에서 특정 IP를 예약했지만, 다른 장치가 이미 해당 IP를 사용 중일 때.
-
-해결 방법
-	•	충돌 감지 및 조치: Windows의 arp -a 또는 Linux의 ip neigh 명령어로 충돌 여부 확인.
-	•	DHCP 설정 확인: DHCP 서버에서 중복 할당 여부 확인 및 충돌하는 IP 주소 해제.
-	•	수동 IP 설정 변경: 충돌이 발생한 장치의 IP를 변경하거나 DHCP를 통해 자동 할당받도록 설정.
-	•	IP 예약 관리: 특정 장치에 예약된 IP 주소가 충돌하지 않도록 DHCP 설정을 조정.
+  해결 방법
+    •	충돌 감지 및 조치: Windows의 arp -a 또는 Linux의 ip neigh 명령어로 충돌 여부 확인.
+    •	DHCP 설정 확인: DHCP 서버에서 중복 할당 여부 확인 및 충돌하는 IP 주소 해제.
+    •	수동 IP 설정 변경: 충돌이 발생한 장치의 IP를 변경하거나 DHCP를 통해 자동 할당받도록 설정.
+    •	IP 예약 관리: 특정 장치에 예약된 IP 주소가 충돌하지 않도록 DHCP 설정을 조정.
 
 ⸻
 
