@@ -1469,22 +1469,18 @@ Organize concepts, features, types and Pros and Cons
       - 블루투스: 약 10m ~ 100m
       - Wi-Fi: 약 30m ~ 100m.
 
-- NFC(Near Field Communication)의 개념과 주요 활용 사례를 설명하시오.
-- 이동통신에서 OFDM(Orthogonal Frequency Division Multiplexing)의 개념과 주요 장점을 설명하시오.
-- 무선 센서 네트워크(WSN, Wireless Sensor Network)의 개념과 주요 활용 사례를 설명하시오.
-- LoRaWAN과 NB-IoT의 개념과 차이를 설명하시오.
-- 클라우드 네트워크(Cloud Networking)의 개념과 기존 네트워크와의 차이를 설명하시오.
-- 클라우드 환경에서 SDN(Software-Defined Networking)과 NFV(Network Functions Virtualization)의 역할을 설명하시오.
-  - 1. NFC(Near Field Communication)의 개념과 주요 활용 사례
-✅ 개념
-NFC는 근거리 무선 통신 기술로, 13.56MHz 주파수를 이용하여 10cm 이내 거리에서 데이터 통신이 가능한 비접촉식 통신 방식이다. RFID 기술을 발전시킨 형태로, 양방향 통신을 지원하며 빠른 페어링이 특징이다.
+- NFC(Near Field Communication)의 개념과 주요 활용 사례
+  - 개념
+    - NFC는 근거리 무선 통신 기술로, 13.56MHz 주파수를 이용하여 10cm 이내 거리에서 데이터 통신이 가능한 비접촉식 통신 방식
+    - RFID 기술을 발전시킨 형태로, 양방향 통신을 지원하며 빠른 페어링이 특징
 
-✅ 주요 활용 사례
-모바일 결제: Google Pay, Apple Pay, 삼성페이 등 스마트폰 기반 결제
-출입 인증: 사무실 출입, 전자 키카드, 호텔 키 시스템
-대중교통 요금 지불: 교통카드 기능 내장 스마트폰
-데이터 교환: 명함 공유, 설정 공유, 파일 전송
-스마트 포스터/광고: NFC 태그를 통해 URL, 쿠폰 정보 전달
+  - 주요 활용 사례
+    - 모바일 결제: Google Pay, Apple Pay, 삼성페이 등 스마트폰 기반 결제
+    - 출입 인증: 사무실 출입, 전자 키카드, 호텔 키 시스템
+    - 대중교통 요금 지불: 교통카드 기능 내장 스마트폰
+    - 데이터 교환: 명함 공유, 설정 공유, 파일 전송
+    - 스마트 포스터/광고: NFC 태그를 통해 URL, 쿠폰 정보 전달
+    
 2. OFDM(Orthogonal Frequency Division Multiplexing)의 개념과 주요 장점
 ✅ 개념
 OFDM은 직교 주파수 분할 다중화 방식으로, 고속 데이터를 여러 개의 좁은 주파수 대역(sub-carrier)에 나누어 동시에 전송하는 다중화 기술이다.
