@@ -1656,38 +1656,42 @@ Organize concepts, features, types and Pros and Cons
     - 24비트 ID로 최대 1,600만 개의 논리 네트워크 구성 가능
     - 오버레이 네트워크 방식으로 데이터센터 간 가상 네트워크 연결 가능
     - 클라우드, SDN, NFV 환경에서 필수적인 가상 네트워크 기술
+
+- 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 기법
+  - 개념
+    - 네트워크 상에서 흐르는 데이터 패킷의 흐름, 속도, 목적지, 프로토콜 등을 분석하여 보안, 성능, 이상 징후 등을 식별하는 기술이다.
+
+  - 주요 기법
+    - Deep Packet Inspection (DPI): 패킷의 Payload까지 검사하여 애플리케이션 식별
+    - Flow 기반 분석: NetFlow, sFlow 등을 활용한 트래픽 흐름 감시
+    - Signature 기반 탐지: 알려진 패턴과 비교하여 악성 트래픽 탐지
+    - Anomaly 기반 탐지: 정상 트래픽과 비교하여 비정상적 행위 식별
+    - 포렌식 분석: 저장된 패킷 로그를 통해 침해 사고 조사
+    - AI/ML 기반 예측 분석: 사용자 행동 분석(UEBA), 위협 인텔리전스 연동
+
+- QoS(Quality of Service)의 개념과 주요 메커니즘
+  - 개념
+    - QoS는 네트워크 자원을 우선순위에 따라 차별적으로 분배하여 서비스 품질을 보장하는 기술이다
+    - 음성, 영상, 실시간 통신에서 필수적이다.
+
+  - 주요 메커니즘
+    - DSCP (Differentiated Services Code Point): IP 헤더에 우선순위 태그를 부여하여 패킷을 분류하고 처리
+    - IntServ (Integrated Services): 자원 예약 프로토콜(RSVP)을 이용해 트래픽 흐름별로 대역폭 예약
+    - DiffServ (Differentiated Services): 트래픽을 클래스 단위로 구분하여 우선 처리
+    - Traffic Policing/Shaping: 허용된 대역폭 초과 트래픽을 제어
+    - Priority Queuing: 우선순위에 따라 트래픽 큐 처리
+
+- MPLS(Multiprotocol Label Switching)의 개념과 기존 IP 라우팅과의 차이
+  - MPLS 개념
+    - MPLS는 L3 네트워크에서 패킷에 라벨(Label)을 붙여 사전 정의된 경로로 고속 전달하는 기술이다.
+    - IP 주소 기반의 룩업 방식이 아닌, Label Switching 방식으로 네트워크 트래픽을 제어한다.
+
+  - 기존 IP 라우팅과의 차이
+    - IP 라우팅: 목적지 IP 기반으로 경로를 매번 계산
+    - MPLS: 경로 사전 정의 (Label Switched Path), 빠른 전달
+    - QoS 보장, VPN 지원, 트래픽 엔지니어링에 유리
+    - 통신사업자의 백본망에서 많이 활용
     
-3. 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 기법
-✅ 개념
-네트워크 상에서 흐르는 데이터 패킷의 흐름, 속도, 목적지, 프로토콜 등을 분석하여 보안, 성능, 이상 징후 등을 식별하는 기술이다.
-
-✅ 주요 기법
-Deep Packet Inspection (DPI): 패킷의 Payload까지 검사하여 애플리케이션 식별
-Flow 기반 분석: NetFlow, sFlow 등을 활용한 트래픽 흐름 감시
-Signature 기반 탐지: 알려진 패턴과 비교하여 악성 트래픽 탐지
-Anomaly 기반 탐지: 정상 트래픽과 비교하여 비정상적 행위 식별
-포렌식 분석: 저장된 패킷 로그를 통해 침해 사고 조사
-AI/ML 기반 예측 분석: 사용자 행동 분석(UEBA), 위협 인텔리전스 연동
-4. QoS(Quality of Service)의 개념과 주요 메커니즘
-✅ 개념
-QoS는 네트워크 자원을 우선순위에 따라 차별적으로 분배하여 서비스 품질을 보장하는 기술이다. 음성, 영상, 실시간 통신에서 필수적이다.
-
-✅ 주요 메커니즘
-DSCP (Differentiated Services Code Point): IP 헤더에 우선순위 태그를 부여하여 패킷을 분류하고 처리
-IntServ (Integrated Services): 자원 예약 프로토콜(RSVP)을 이용해 트래픽 흐름별로 대역폭 예약
-DiffServ (Differentiated Services): 트래픽을 클래스 단위로 구분하여 우선 처리
-Traffic Policing/Shaping: 허용된 대역폭 초과 트래픽을 제어
-Priority Queuing: 우선순위에 따라 트래픽 큐 처리
-5. MPLS(Multiprotocol Label Switching)의 개념과 기존 IP 라우팅과의 차이
-✅ MPLS 개념
-MPLS는 L3 네트워크에서 패킷에 라벨(Label)을 붙여 사전 정의된 경로로 고속 전달하는 기술이다.
-IP 주소 기반의 룩업 방식이 아닌, Label Switching 방식으로 네트워크 트래픽을 제어한다.
-
-✅ 기존 IP 라우팅과의 차이
-IP 라우팅: 목적지 IP 기반으로 경로를 매번 계산
-MPLS: 경로 사전 정의 (Label Switched Path), 빠른 전달
-QoS 보장, VPN 지원, 트래픽 엔지니어링에 유리
-통신사업자의 백본망에서 많이 활용
 6. 네트워크 로드 밸런싱(Load Balancing)의 개념과 주요 기법
 ✅ 개념
 로드 밸런싱은 다수의 서버 또는 노드에 네트워크 트래픽을 균등하게 분산하여 성능과 안정성을 향상시키는 기술이다. 고가용성과 트래픽 대응에 필수적이다.
