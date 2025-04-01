@@ -1574,18 +1574,21 @@ Organize concepts, features, types and Pros and Cons
     - 퍼블릭 클라우드 상에서 사용자가 논리적으로 격리된 자체 가상 네트워크를 구성할 수 있는 서비스
     - 서브넷, 라우팅, NAT, 방화벽, 게이트웨이 등을 통해 내부망처럼 네트워크 구성 가능
     - 퍼블릭 클라우드 자원을 프라이빗하게 사용할 수 있게 함
+
+- 클라우드에서 네트워크 트래픽을 최적화하는 방법
+  - 로드 밸런싱 (Load Balancing)
+    - 수신된 트래픽을 여러 서버나 리소스에 분산하여 시스템 과부하를 방지
+    - 트래픽 균형, 장애 조치(Failover), 성능 향상 등의 효과
+    - AWS Elastic Load Balancer(ELB), GCP Load Balancer 등 제공됨
+
+  - CDN (Content Delivery Network)
+    - 전 세계에 분산된 캐시 서버를 통해 정적/미디어 콘텐츠를 사용자와 가까운 위치에서 제공
+    - 응답 시간 단축, 트래픽 분산, 대규모 서비스의 확장성 보장
+    - AWS CloudFront, Azure CDN, Cloudflare 등에서 제공
+
+  - 오토스케일링 연계
+    - 로드 밸런싱과 함께 사용하면 트래픽 증가 시 자동으로 인스턴스 증설 가능
     
-3. 클라우드에서 네트워크 트래픽을 최적화하는 방법
-✅ 로드 밸런싱 (Load Balancing)
-수신된 트래픽을 여러 서버나 리소스에 분산하여 시스템 과부하를 방지
-트래픽 균형, 장애 조치(Failover), 성능 향상 등의 효과
-AWS Elastic Load Balancer(ELB), GCP Load Balancer 등 제공됨
-✅ CDN (Content Delivery Network)
-전 세계에 분산된 캐시 서버를 통해 정적/미디어 콘텐츠를 사용자와 가까운 위치에서 제공
-응답 시간 단축, 트래픽 분산, 대규모 서비스의 확장성 보장
-AWS CloudFront, Azure CDN, Cloudflare 등에서 제공
-✅ 오토스케일링 연계
-로드 밸런싱과 함께 사용하면 트래픽 증가 시 자동으로 인스턴스 증설 가능
 4. 서버리스(Serverless) 아키텍처에서 네트워크의 역할
 ✅ 개념
 서버리스는 인프라 관리를 사용자가 하지 않고, 클라우드 플랫폼이 자동으로 리소스를 할당, 실행, 스케일링하는 아키텍처
