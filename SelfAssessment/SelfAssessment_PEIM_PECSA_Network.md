@@ -1727,17 +1727,19 @@ Organize concepts, features, types and Pros and Cons
     - 클라이언트 및 서버 모두 확장 옵션을 지원해야 함
     - 고대역폭/고지연 환경에서 Throughput 향상 가능
     - 네트워크 장비 및 방화벽이 이 옵션을 차단하지 않도록 설정 필요
+
+- 대역폭(Bandwidth)과 레이턴시(Latency)의 개념과 성능 최적화 방법
+  - 개념
+    - 대역폭(Bandwidth): 단위 시간당 전송 가능한 데이터의 최대 양 (Mbps, Gbps 등)
+    - 레이턴시(Latency): 송신지에서 수신지까지 패킷이 도달하는 시간 지연 (ms)
+
+  - 성능 최적화 방법
+    - 대역폭 확장: 링크 업그레이드, 멀티 링크 집계(LAG, LACP)
+    - 레이턴시 감소: 네트워크 홉 수 최소화, 라우팅 최적화, DNS 응답 캐시
+    - TCP Tuning: 윈도우 크기 확장, Selective ACK 활성화
+    - Edge Computing: 데이터를 사용자 근처에서 처리
+    - QoS 적용: 지연 민감 트래픽에 우선순위 부여 (QoS, 우선순위)
     
-3. 대역폭(Bandwidth)과 레이턴시(Latency)의 개념과 성능 최적화 방법
-✅ 개념
-대역폭(Bandwidth): 단위 시간당 전송 가능한 데이터의 최대 양 (Mbps, Gbps 등)
-레이턴시(Latency): 송신지에서 수신지까지 패킷이 도달하는 시간 지연 (ms)
-✅ 성능 최적화 방법
-대역폭 확장: 링크 업그레이드, 멀티 링크 집계(LAG, LACP)
-레이턴시 감소: 네트워크 홉 수 최소화, 라우팅 최적화, DNS 응답 캐시
-TCP Tuning: 윈도우 크기 확장, Selective ACK 활성화
-Edge Computing: 데이터를 사용자 근처에서 처리
-QoS 적용: 지연 민감 트래픽에 우선순위 부여
 4. CDN(Content Delivery Network)의 개념과 성능 최적화 기법
 ✅ 개념
 CDN은 전 세계에 분산된 캐시 서버를 활용하여 콘텐츠를 사용자에게 가까운 위치에서 빠르게 전달하는 기술이다. 웹 서비스의 응답 속도, 안정성, 확장성을 개선한다.
