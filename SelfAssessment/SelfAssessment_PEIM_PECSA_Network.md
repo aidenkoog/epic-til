@@ -1588,15 +1588,17 @@ Organize concepts, features, types and Pros and Cons
 
   - 오토스케일링 연계
     - 로드 밸런싱과 함께 사용하면 트래픽 증가 시 자동으로 인스턴스 증설 가능
+
+- 서버리스(Serverless) 아키텍처에서 네트워크의 역할
+  - 개념
+    - 서버리스는 인프라 관리를 사용자가 하지 않고, 클라우드 플랫폼이 자동으로 리소스를 할당, 실행, 스케일링하는 아키텍처
+    - AWS Lambda, Google Cloud Functions, Azure Functions 등이 대표적
+
+  - 네트워크 역할
+    - 서버리스 함수 간의 통신은 내부 API Gateway, Event Bus, 메시지 큐 등을 통해 비동기 또는 이벤트 기반으로 이루어짐
+    - 외부 접속은 API Gateway, IAM 기반 인증, 가상 네트워크(VPC) 연결을 통해 제한
+    - 네트워크 보안 그룹과 서브넷 설정이 중요하며, VPC 내에서의 보안 정책과 격리 설정이 필수적
     
-4. 서버리스(Serverless) 아키텍처에서 네트워크의 역할
-✅ 개념
-서버리스는 인프라 관리를 사용자가 하지 않고, 클라우드 플랫폼이 자동으로 리소스를 할당, 실행, 스케일링하는 아키텍처
-AWS Lambda, Google Cloud Functions, Azure Functions 등이 대표적
-✅ 네트워크 역할
-서버리스 함수 간의 통신은 내부 API Gateway, Event Bus, 메시지 큐 등을 통해 비동기 또는 이벤트 기반으로 이루어짐
-외부 접속은 API Gateway, IAM 기반 인증, 가상 네트워크(VPC) 연결을 통해 제한
-네트워크 보안 그룹과 서브넷 설정이 중요하며, VPC 내에서의 보안 정책과 격리 설정이 필수적
 5. 클라우드 기반 보안 서비스(CASB)의 개념과 역할
 ✅ 개념
 CASB(Cloud Access Security Broker)는 클라우드 서비스와 사용자 사이에 위치하여 접근 제어, 데이터 보호, 보안 정책 적용, 이상 행위 탐지 등의 기능을 수행하는 중계 보안 솔루션
