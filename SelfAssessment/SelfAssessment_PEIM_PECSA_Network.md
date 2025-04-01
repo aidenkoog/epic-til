@@ -1628,37 +1628,35 @@ Organize concepts, features, types and Pros and Cons
     - Behavioral Analysis: 이상 트래픽 감지 및 자동 차단
     - CDN 연동: 엣지 서버에서 DDoS 공격 차단
 
-- 클라우드 기반 API Gateway의 개념과 역할을 설명하시오.
-- 네트워크 가상화(Network Virtualization)와 VLAN, VXLAN의 차이를 설명하시오.
-- 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 기법을 설명하시오.
-- QoS(Quality of Service)의 개념과 주요 메커니즘(DSCP, IntServ, DiffServ 등)을 설명하시오.
-- MPLS(Multiprotocol Label Switching)의 개념과 기존 IP 라우팅과의 차이를 설명하시오.
-- 네트워크 로드 밸런싱(Load Balancing)의 개념과 주요 기법(Round Robin, Least Connection 등)을 설명하시오.
-  - 1. 클라우드 기반 API Gateway의 개념과 역할
-✅ 개념
-API Gateway는 클라이언트와 백엔드 서비스 사이에서 API 요청을 관리·제어·중재하는 중간 계층 서비스이다.
-클라우드 환경에서는 다양한 마이크로서비스, 서버리스 함수, REST API 등을 통합적으로 관리할 수 있도록 한다.
+- 클라우드 기반 API Gateway의 개념과 역할
+  - 개념
+    - API Gateway는 클라이언트와 백엔드 서비스 사이에서 API 요청을 관리·제어·중재하는 중간 계층 서비스
+    - 클라우드 환경에서는 다양한 마이크로서비스, 서버리스 함수, REST API 등을 통합적으로 관리할 수 있도록 한다.
 
-✅ 역할
-요청 라우팅: 클라이언트 요청을 적절한 백엔드 서비스로 전달
-인증 및 권한 부여: OAuth, JWT, API Key 등을 통한 보안 기능
-속도 제한 및 할당량 관리: Abuse 방지 및 과부하 예방
-로깅 및 모니터링: API 사용량, 성능, 오류 추적
-변환 처리: 요청/응답 포맷(JSON ↔ XML) 변환
-서버리스 연동: AWS Lambda, Google Functions 등과 통합 사용
-2. 네트워크 가상화와 VLAN, VXLAN의 차이
-✅ 네트워크 가상화 개념
-물리적 네트워크 인프라 위에 논리적인 네트워크 인스턴스를 다수 생성하고 제어할 수 있는 기술. SDN, NFV 등과 연계되어 유연한 네트워크 구조를 가능하게 한다.
+  - 역할
+    - 요청 라우팅: 클라이언트 요청을 적절한 백엔드 서비스로 전달
+    - 인증 및 권한 부여: OAuth, JWT, API Key 등을 통한 보안 기능
+    - 속도 제한 및 할당량 관리: Abuse 방지 및 과부하 예방
+    - 로깅 및 모니터링: API 사용량, 성능, 오류 추적
+    - 변환 처리: 요청/응답 포맷(JSON ↔ XML) 변환
+    - 서버리스 연동: AWS Lambda, Google Functions 등과 통합 사용
 
-✅ VLAN (Virtual LAN)
-L2 계층에서 브로드캐스트 도메인을 논리적으로 분리
-스위치 기반이며 태그(VLAN ID)를 이용
-물리적인 제약이 남아 있음, 대규모 클라우드 환경에서는 확장성 부족
-✅ VXLAN (Virtual Extensible LAN)
-L3 기반에서 터널링을 통해 논리 네트워크를 확장
-24비트 ID로 최대 1,600만 개의 논리 네트워크 구성 가능
-오버레이 네트워크 방식으로 데이터센터 간 가상 네트워크 연결 가능
-클라우드, SDN, NFV 환경에서 필수적인 가상 네트워크 기술
+- 네트워크 가상화와 VLAN, VXLAN의 차이
+  - 네트워크 가상화 개념
+    - 물리적 네트워크 인프라 위에 논리적인 네트워크 인스턴스를 다수 생성하고 제어할 수 있는 기술
+    - SDN, NFV 등과 연계되어 유연한 네트워크 구조를 가능하게 한다.
+
+  - VLAN (Virtual LAN)
+    - L2 계층에서 브로드캐스트 도메인을 논리적으로 분리
+    - 스위치 기반이며 태그(VLAN ID)를 이용
+    - 물리적인 제약이 남아 있음, 대규모 클라우드 환경에서는 확장성 부족
+
+  - VXLAN (Virtual Extensible LAN)
+    - L3 기반에서 터널링을 통해 논리 네트워크를 확장
+    - 24비트 ID로 최대 1,600만 개의 논리 네트워크 구성 가능
+    - 오버레이 네트워크 방식으로 데이터센터 간 가상 네트워크 연결 가능
+    - 클라우드, SDN, NFV 환경에서 필수적인 가상 네트워크 기술
+    
 3. 네트워크 트래픽 분석(Network Traffic Analysis)의 개념과 주요 기법
 ✅ 개념
 네트워크 상에서 흐르는 데이터 패킷의 흐름, 속도, 목적지, 프로토콜 등을 분석하여 보안, 성능, 이상 징후 등을 식별하는 기술이다.
