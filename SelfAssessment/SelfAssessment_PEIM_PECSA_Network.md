@@ -1739,51 +1739,51 @@ Organize concepts, features, types and Pros and Cons
     - TCP Tuning: 윈도우 크기 확장, Selective ACK 활성화
     - Edge Computing: 데이터를 사용자 근처에서 처리
     - QoS 적용: 지연 민감 트래픽에 우선순위 부여 (QoS, 우선순위)
-    
-4. CDN(Content Delivery Network)의 개념과 성능 최적화 기법
-✅ 개념
-CDN은 전 세계에 분산된 캐시 서버를 활용하여 콘텐츠를 사용자에게 가까운 위치에서 빠르게 전달하는 기술이다. 웹 서비스의 응답 속도, 안정성, 확장성을 개선한다.
 
-✅ 성능 최적화 기법
-Edge Cache: 사용자 인접 지역 서버에 콘텐츠 미리 저장
-TTL 관리: 캐시된 콘텐츠의 유효 시간 설정을 통해 트래픽 최적화
-Gzip 압축 및 HTTP/2, QUIC 적용
-동적 콘텐츠 가속: TCP 최적화, 연결 재사용
-지리 기반 라우팅: 사용자 위치에 따라 가장 가까운 CDN 서버로 트래픽 분산
-오리진 서버 보호: 공격이나 트래픽 급증 시에도 본서버 부하 분산
-5. VoIP 서비스에서 QoS 보장을 위한 주요 기술
-✅ VoIP의 특성
-VoIP는 음성 데이터를 IP 기반 네트워크로 전송하기 때문에 지연, 패킷 손실, 지터(jitter)에 민감하다.
+- CDN(Content Delivery Network)의 개념과 성능 최적화 기법
+  - 개념
+    - CDN은 전 세계에 분산된 캐시 서버를 활용하여 콘텐츠를 사용자에게 가까운 위치에서 빠르게 전달하는 기술
+    - 웹 서비스의 응답 속도, 안정성, 확장성을 개선
 
-✅ QoS 보장 기술
-DiffServ/DSCP: VoIP 패킷에 높은 우선순위를 부여
-패킷 분류 및 마킹: RTP 트래픽 식별 후 정책 적용
-Traffic Shaping/Policing: 음성 트래픽의 안정적 대역폭 확보
-Priority Queuing (PQ): 음성 트래픽에 전용 대기열 할당
-RTCP (Real-Time Control Protocol): 품질 통계 수집 및 지터 보정
-Echo Cancellation, Packet Loss Concealment: 음질 향상 기술 적용
-6. 네트워크 성능 모니터링 도구의 개념과 활용 방안
-✅ SNMP (Simple Network Management Protocol)
-네트워크 장비의 상태 정보를 수집하고 제어하는 표준 프로토콜
-라우터, 스위치, 서버 등의 CPU, 메모리, 트래픽 정보 수집
-MIB 기반 정보 구조, SNMPv3는 보안 기능 강화
-✅ NetFlow
-Cisco가 개발한 트래픽 흐름(Flow) 기반 통계 수집 기술
-송수신 IP, 포트, 프로토콜, 패킷 수, 바이트 수 등을 기록
-트래픽 유형 분석, 사용자별 사용량 추적, 이상 징후 탐지에 활용
-✅ sFlow (Sampled Flow)
-표본 기반 트래픽 분석 기법으로 고속 네트워크에서 성능 저하 없이 트래픽 샘플링
-NetFlow보다 경량, 다양한 벤더 장비에서 사용
-실시간 트래픽 모니터링 및 대역폭 분석에 효과적
+  - 성능 최적화 기법
+    - Edge Cache: 사용자 인접 지역 서버에 콘텐츠 미리 저장
+    - TTL 관리: 캐시된 콘텐츠의 유효 시간 설정을 통해 트래픽 최적화
+    - Gzip 압축 및 HTTP/2, QUIC 적용
+    - 동적 콘텐츠 가속: TCP 최적화, 연결 재사용
+    - 지리 기반 라우팅: 사용자 위치에 따라 가장 가까운 CDN 서버로 트래픽 분산
+    - 오리진 서버 보호: 공격이나 트래픽 급증 시에도 본서버 부하 분산
+
+- VoIP 서비스에서 QoS 보장을 위한 주요 기술
+  - VoIP의 특성
+    - VoIP는 음성 데이터를 IP 기반 네트워크로 전송하기 때문에 지연, 패킷 손실, 지터(jitter)에 민감하다.
+
+  - QoS 보장 기술 (우선순위)
+    - DiffServ/DSCP: VoIP 패킷에 높은 우선순위를 부여
+    - 패킷 분류 및 마킹: RTP 트래픽 식별 후 정책 적용
+    - Traffic Shaping/Policing: 음성 트래픽의 안정적 대역폭 확보
+    - Priority Queuing (PQ): 음성 트래픽에 전용 대기열 할당
+    - RTCP (Real-Time Control Protocol): 품질 통계 수집 및 지터 보정
+    - Echo Cancellation, Packet Loss Concealment: 음질 향상 기술 적용
 
 
-- 6G 네트워크의 개념과 5G와의 차이를 설명하시오.
-- 차세대 이동통신 기술(Massive MIMO, Beamforming, THz Communication 등)의 개념을 설명하시오.
-- 양자 네트워크(Quantum Network)의 개념과 기존 네트워크와의 차이를 설명하시오.
-- 블록체인 기반 네트워크 보안(Blockchain for Network Security)의 개념과 활용 방안을 설명하시오.
-- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅의 차이를 설명하시오.
-- SD-WAN(Software-Defined Wide Area Network)의 개념과 기존 WAN과의 차이를 설명하시오.
-  - 1. 6G 네트워크의 개념과 5G와의 차이
+- 네트워크 성능 모니터링 도구의 개념과 활용 방안
+  - SNMP (Simple Network Management Protocol)
+    - 네트워크 장비의 상태 정보를 수집하고 제어하는 표준 프로토콜
+    - 라우터, 스위치, 서버 등의 CPU, 메모리, 트래픽 정보 수집
+    - MIB 기반 정보 구조, SNMPv3는 보안 기능 강화
+
+  - NetFlow
+    - Cisco가 개발한 트래픽 흐름(Flow) 기반 통계 수집 기술
+    - 송수신 IP, 포트, 프로토콜, 패킷 수, 바이트 수 등을 기록
+    - 트래픽 유형 분석, 사용자별 사용량 추적, 이상 징후 탐지에 활용
+
+  - sFlow (Sampled Flow)
+    - 표본 기반 트래픽 분석 기법으로 고속 네트워크에서 성능 저하 없이 트래픽 샘플링
+    - NetFlow보다 경량, 다양한 벤더 장비에서 사용
+    - 실시간 트래픽 모니터링 및 대역폭 분석에 효과적
+
+
+- 6G 네트워크의 개념과 5G와의 차이
 ✅ 6G 개념
 6G는 5G 이후의 6세대 이동통신 기술로, 2030년경 상용화를 목표로 연구 중이다.
 초고속, 초저지연, 초연결뿐 아니라 인공지능, 가상현실, 우주통신 등을 포괄하는 통신 인프라로 진화하고 있다.
