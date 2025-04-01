@@ -1610,22 +1610,23 @@ Organize concepts, features, types and Pros and Cons
     - 활동 모니터링: 사용 패턴 분석 및 이상 탐지
     - 규정 준수: GDPR, HIPAA 등 기준에 따른 감사 및 보고
     - 멀티 클라우드 관리: 다양한 클라우드 환경에서 일관된 보안 정책 적용
-    
-6. 클라우드 환경에서 DDoS 방어 기법
-✅ AWS Shield
-AWS에서 제공하는 DDoS 방어 전용 보안 서비스
-Shield Standard: 모든 AWS 고객에게 무료로 기본 제공
-Shield Advanced: 대규모 DDoS 공격 방어, 실시간 모니터링, 비용 보호 기능 제공
-✅ Google Cloud Armor
-Google Cloud에서 제공하는 WAF 및 DDoS 보호 서비스
-L3~L7 계층까지 정책 기반 접근 제어 및 애플리케이션 보호 가능
-IP 필터링, 사용자 정의 룰셋, geolocation 기반 접근 제어 등 제공
-✅ 기타 공통 방어 전략
-Anycast 기반 트래픽 분산: 전 세계 POP를 통한 흡수
-Rate Limiting: 요청 속도 제한으로 봇 차단
-Behavioral Analysis: 이상 트래픽 감지 및 자동 차단
-CDN 연동: 엣지 서버에서 DDoS 공격 차단
 
+- 클라우드 환경에서 DDoS 방어 기법
+  - AWS Shield
+    - AWS에서 제공하는 DDoS 방어 전용 보안 서비스
+      - Shield Standard: 모든 AWS 고객에게 무료로 기본 제공
+      - Shield Advanced: 대규모 DDoS 공격 방어, 실시간 모니터링, 비용 보호 기능 제공
+
+  - Google Cloud Armor
+    - Google Cloud에서 제공하는 WAF 및 DDoS 보호 서비스
+    - L3~L7 계층까지 정책 기반 접근 제어 및 애플리케이션 보호 가능
+    - IP 필터링, 사용자 정의 룰셋, geolocation 기반 접근 제어 등 제공
+
+  - 기타 공통 방어 전략
+    - Anycast 기반 트래픽 분산: 전 세계 POP를 통한 흡수
+    - Rate Limiting: 요청 속도 제한으로 봇 차단
+    - Behavioral Analysis: 이상 트래픽 감지 및 자동 차단
+    - CDN 연동: 엣지 서버에서 DDoS 공격 차단
 
 - 클라우드 기반 API Gateway의 개념과 역할을 설명하시오.
 - 네트워크 가상화(Network Virtualization)와 VLAN, VXLAN의 차이를 설명하시오.
