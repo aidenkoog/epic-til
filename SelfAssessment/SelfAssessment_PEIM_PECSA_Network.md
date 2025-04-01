@@ -1691,45 +1691,43 @@ Organize concepts, features, types and Pros and Cons
     - MPLS: 경로 사전 정의 (Label Switched Path), 빠른 전달
     - QoS 보장, VPN 지원, 트래픽 엔지니어링에 유리
     - 통신사업자의 백본망에서 많이 활용
+
+- 네트워크 로드 밸런싱(Load Balancing)의 개념과 주요 기법
+  - 개념
+    - 로드 밸런싱은 다수의 서버 또는 노드에 네트워크 트래픽을 균등하게 분산하여 성능과 안정성을 향상시키는 기술이다.
+    - 고가용성과 트래픽 대응에 필수적이다.
+
+  - 주요 기법
+    - Round Robin: 요청을 순차적으로 서버에 분산
+    - Least Connection: 현재 연결 수가 가장 적은 서버에 우선 분배
+    - IP Hash: 클라이언트 IP를 해시하여 특정 서버에 고정
+    - Weighted Round Robin: 서버 성능에 따라 가중치를 부여하여 분산
+    - Health Check: 서버 상태를 주기적으로 확인하여 비정상 노드는 제외
+    - L4 vs L7 Load Balancing: 전송 계층(L4)과 애플리케이션 계층(L7)의 분산 방식 구분 (예: HTTP 기반 분산)
+
+- 네트워크에서 사용되는 혼잡 제어(Congestion Control) 기법
+  - 개념
+    - 혼잡 제어는 네트워크 내 과도한 트래픽 유입으로 인한 패킷 손실, 지연 증가, 성능 저하를 방지하기 위한 메커니즘
+    - 주로 TCP 프로토콜에서 적용되며, 네트워크 전체의 안정성과 공정성을 확보하는 데 목적이 있다.
+
+  - 주요 기법
+    - Slow Start: 처음 전송 시 윈도우 크기를 지수적으로 증가시켜 안전하게 시작
+    - Congestion Avoidance: 특정 임계치 이후 선형적으로 윈도우 증가
+    - Fast Retransmit: 중복 ACK 3개 수신 시 재전송 수행 (패킷 손실 추정)
+    - Fast Recovery: 재전송 후 다시 Slow Start가 아닌 Congestion Avoidance로 진입
+    - Explicit Congestion Notification (ECN): 네트워크 장비가 혼잡 신호를 명시적으로 알려주는 방식
+
+- TCP 윈도우 크기 조정(TCP Window Scaling)의 개념과 성능 최적화 방법
+  - 개념
+    - TCP 윈도우 크기는 수신자가 한 번에 받아들일 수 있는 데이터의 최대 양을 나타내는 값이며, RTT가 긴 네트워크에서는 이 값이 제한되면 성능이 저하된다.
+    - TCP Window Scaling은 윈도우 크기를 확장(최대 1GB)할 수 있게 해주는 옵션으로, 고속/광역망에서 필수적이다.
+
+  - 최적화 방법
+    - RFC 7323 기반 Scaling Factor 설정
+    - 클라이언트 및 서버 모두 확장 옵션을 지원해야 함
+    - 고대역폭/고지연 환경에서 Throughput 향상 가능
+    - 네트워크 장비 및 방화벽이 이 옵션을 차단하지 않도록 설정 필요
     
-6. 네트워크 로드 밸런싱(Load Balancing)의 개념과 주요 기법
-✅ 개념
-로드 밸런싱은 다수의 서버 또는 노드에 네트워크 트래픽을 균등하게 분산하여 성능과 안정성을 향상시키는 기술이다. 고가용성과 트래픽 대응에 필수적이다.
-
-✅ 주요 기법
-Round Robin: 요청을 순차적으로 서버에 분산
-Least Connection: 현재 연결 수가 가장 적은 서버에 우선 분배
-IP Hash: 클라이언트 IP를 해시하여 특정 서버에 고정
-Weighted Round Robin: 서버 성능에 따라 가중치를 부여하여 분산
-Health Check: 서버 상태를 주기적으로 확인하여 비정상 노드는 제외
-L4 vs L7 Load Balancing: 전송 계층(L4)과 애플리케이션 계층(L7)의 분산 방식 구분 (예: HTTP 기반 분산)
-
-- 네트워크에서 사용되는 혼잡 제어(Congestion Control) 기법을 설명하시오.
-- TCP 윈도우 크기 조정(TCP Window Scaling)의 개념과 성능 최적화 방법을 설명하시오.
-- 네트워크 대역폭(Bandwidth)과 레이턴시(Latency)의 개념과 성능 최적화 방법을 설명하시오.
-- CDN(Content Delivery Network)의 개념과 성능 최적화 기법을 설명하시오.
-- VoIP(Voice over IP) 서비스에서 QoS 보장을 위한 주요 기술을 설명하시오.
-- 네트워크 성능 모니터링 도구(SNMP, NetFlow, sFlow 등)의 개념과 활용 방안을 설명하시오.
-  - 1. 혼잡 제어(Congestion Control) 기법
-✅ 개념
-혼잡 제어는 네트워크 내 과도한 트래픽 유입으로 인한 패킷 손실, 지연 증가, 성능 저하를 방지하기 위한 메커니즘이다. 주로 TCP 프로토콜에서 적용되며, 네트워크 전체의 안정성과 공정성을 확보하는 데 목적이 있다.
-
-✅ 주요 기법
-Slow Start: 처음 전송 시 윈도우 크기를 지수적으로 증가시켜 안전하게 시작
-Congestion Avoidance: 특정 임계치 이후 선형적으로 윈도우 증가
-Fast Retransmit: 중복 ACK 3개 수신 시 재전송 수행 (패킷 손실 추정)
-Fast Recovery: 재전송 후 다시 Slow Start가 아닌 Congestion Avoidance로 진입
-Explicit Congestion Notification (ECN): 네트워크 장비가 혼잡 신호를 명시적으로 알려주는 방식
-2. TCP 윈도우 크기 조정(TCP Window Scaling)의 개념과 성능 최적화 방법
-✅ 개념
-TCP 윈도우 크기는 수신자가 한 번에 받아들일 수 있는 데이터의 최대 양을 나타내는 값이며, RTT가 긴 네트워크에서는 이 값이 제한되면 성능이 저하된다.
-TCP Window Scaling은 윈도우 크기를 확장(최대 1GB)할 수 있게 해주는 옵션으로, 고속/광역망에서 필수적이다.
-
-✅ 최적화 방법
-RFC 7323 기반 Scaling Factor 설정
-클라이언트 및 서버 모두 확장 옵션을 지원해야 함
-고대역폭/고지연 환경에서 Throughput 향상 가능
-네트워크 장비 및 방화벽이 이 옵션을 차단하지 않도록 설정 필요
 3. 대역폭(Bandwidth)과 레이턴시(Latency)의 개념과 성능 최적화 방법
 ✅ 개념
 대역폭(Bandwidth): 단위 시간당 전송 가능한 데이터의 최대 양 (Mbps, Gbps 등)
