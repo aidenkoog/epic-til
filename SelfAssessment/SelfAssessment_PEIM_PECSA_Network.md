@@ -1856,22 +1856,18 @@ Organize concepts, features, types and Pros and Cons
     - 보안 기능 통합: 방화벽, 암호화, IDS/IPS 등 네트워크 보안 기능 내장
     - 비용 절감: MPLS 대신 일반 인터넷 회선 병행 사용 가능
 
-- 네트워크에서 AI/ML 기반 이상 탐지(Anomaly Detection)의 개념과 주요 기법을 설명하시오.
-- 5G MEC(Multi-access Edge Computing)의 개념과 주요 활용 사례를 설명하시오.
-- AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
-- IoT 네트워크에서 발생하는 주요 보안 위협과 대응 방안을 설명하시오.
-- 네트워크 관리(Network Management)의 개념과 주요 기능(FCAPS: Fault, Configuration, Accounting, Performance, Security)을 설명하시오.
-- SNMP(Simple Network Management Protocol)의 개념과 주요 메시지 유형(GET, SET, TRAP 등)을 설명하시오.
-  - 1. AI/ML 기반 이상 탐지(Anomaly Detection)의 개념과 주요 기법
-✅ 개념
-AI/ML 기반 이상 탐지(Anomaly Detection in Networking)는 네트워크에서 발생하는 트래픽, 사용자 행위, 장비 동작 등을 분석하여 정상 범위를 벗어난 이상 징후를 실시간으로 탐지하는 기술이다. 서명 기반 보안 기법으로 탐지하기 어려운 제로데이 공격, 변종 악성 코드, 비정상 사용자 행위 등을 탐지하는 데 강점을 가진다.
+- 네트워크에서 AI/ML 기반 이상 탐지(Anomaly Detection)의 개념과 주요 기법
+  - 개념
+    - AI/ML 기반 이상 탐지(Anomaly Detection in Networking)는 네트워크에서 발생하는 트래픽, 사용자 행위, 장비 동작 등을 분석하여 정상 범위를 벗어난 이상 징후를 실시간으로 탐지하는 기술
+    - 서명 기반 보안 기법으로 탐지하기 어려운 제로데이 공격, 변종 악성 코드, 비정상 사용자 행위 등을 탐지하는 데 강점을 가진다.
 
-✅ 주요 기법
-지도학습(Supervised Learning): 정상/비정상 데이터를 라벨링하여 분류 모델 학습 (예: Decision Tree, Random Forest)
-비지도학습(Unsupervised Learning): 클러스터링 또는 통계 기반으로 이상 패턴 식별 (예: K-means, Isolation Forest)
-딥러닝 기반: AutoEncoder, LSTM, CNN 등을 활용한 고차원 이상 탐지
-UEBA(User and Entity Behavior Analytics): 사용자 및 장비의 과거 행위와 비교해 이상 여부 판단
-실시간 스트림 분석: Kafka, Flink 등을 통한 실시간 로그 처리 및 탐지
+  - 주요 기법
+    - 지도학습(Supervised Learning): 정상/비정상 데이터를 라벨링하여 분류 모델 학습 (예: Decision Tree, Random Forest)
+    - 비지도학습(Unsupervised Learning): 클러스터링 또는 통계 기반으로 이상 패턴 식별 (예: K-means, Isolation Forest)
+    - 딥러닝 기반: AutoEncoder, LSTM, CNN 등을 활용한 고차원 이상 탐지
+    - UEBA(User and Entity Behavior Analytics): 사용자 및 장비의 과거 행위와 비교해 이상 여부 판단
+    - 실시간 스트림 분석: Kafka, Flink 등을 통한 실시간 로그 처리 및 탐지
+    
 2. 5G MEC(Multi-access Edge Computing)의 개념과 주요 활용 사례
 ✅ 개념
 MEC는 5G 네트워크의 핵심 기술 중 하나로, 통신사의 기지국 또는 엣지 노드 근처에 컴퓨팅 리소스를 분산 배치하여, 데이터 처리를 네트워크 말단에서 수행하는 아키텍처이다. 이를 통해 초저지연, 실시간 응답, 트래픽 분산이 가능해진다.
