@@ -2298,17 +2298,21 @@ Organize concepts, features, types and Pros and Cons
     - DNS 서버의 보안 강화: 권한 있는 서버만 요청 수용, 로그 분석, 접근 제어
 
 - Multi-Factor Authentication(MFA)의 개념과 활용 사례
-✅ 개념
-MFA는 하나 이상의 인증 요소를 결합하여 인증 보안을 강화하는 방식. 최소 2개 이상의 요소를 요구함.
-세 가지 인증 요소:
-지식 기반(Something you know): 비밀번호, PIN
-소지 기반(Something you have): OTP 토큰, 스마트폰
-생체 기반(Something you are): 지문, 얼굴, 홍채 등
-✅ 활용 사례
-VPN, SaaS 접속 시 MFA 적용으로 계정 탈취 방지
-은행/핀테크 서비스에서 OTP + 생체인증 조합 사용
-기업 내부 시스템 로그인 시 이메일 기반 OTP나 푸시 알림 인증
-3. IoT 보안 위협과 대응 방법
+  - 개념
+    - MFA는 하나 이상의 인증 요소를 결합하여 인증 보안을 강화하는 방식
+    - 최소 2개 이상의 요소를 요구함
+
+  - 세 가지 인증 요소:
+    - 지식 기반(Something you know): 비밀번호, PIN
+    - 소지 기반(Something you have): OTP 토큰, 스마트폰
+    - 생체 기반(Something you are): 지문, 얼굴, 홍채 등
+
+  - 활용 사례
+    - VPN, SaaS 접속 시 MFA 적용으로 계정 탈취 방지
+    - 은행/핀테크 서비스에서 OTP + 생체인증 조합 사용
+    - 기업 내부 시스템 로그인 시 이메일 기반 OTP나 푸시 알림 인증
+
+- IoT 보안 위협과 대응 방법
 ✅ 보안 위협
 약한 인증 체계: 기본 비밀번호, 인증 없음
 펌웨어 조작: OTA 업데이트 없이 취약점 노출
@@ -2319,6 +2323,7 @@ DDoS 악용: 봇넷에 감염되어 공격 자원으로 활용
 OTA 보안 업데이트 체계 구축 및 자동화
 네트워크 격리(망 분리) 및 최소 권한 네트워크 정책 적용
 IoT 보안 플랫폼 사용: IoT 보안 게이트웨이, 정책 관리 시스템 도입
+
 4. SIEM(Security Information and Event Management)의 개념과 활용
 ✅ 개념
 SIEM은 로그 수집, 분석, 상관관계 판단, 실시간 경고 등 보안 이벤트를 통합적으로 관리하는 시스템이다.
@@ -2328,6 +2333,7 @@ Security Information Management(SIM) + Security Event Management(SEM) = SIEM
 이상 탐지 및 대응: 정해진 정책 기반으로 경고 생성
 보안 감사 및 규정 준수: GDPR, ISO27001 등의 로그 관리 요구 사항 충족
 SOC 연계: 침해 사고 대응팀이 실시간 위협 탐지 및 대응 수행
+
 5. HTTP/2와 HTTP/3의 차이점
 ✅ HTTP/2 개요
 멀티플렉싱: 하나의 TCP 연결에서 여러 요청/응답 동시 처리
@@ -2340,6 +2346,7 @@ TLS 1.3 내장: 연결 시 자동 암호화 제공
 ✅ 주요 차이
 HTTP/2는 TCP 기반, HTTP/3는 QUIC(UDP 기반)
 HTTP/3는 전송 속도와 재전송 최적화로 실시간 서비스에 더 적합
+
 6. DNS 개념과 주요 구성 요소
 ✅ DNS 개념
 도메인 이름을 IP 주소로 변환하는 계층적 분산형 네임 서비스 시스템. 클라이언트가 도메인을 요청하면 DNS 서버가 해당 도메인의 IP 주소를 반환.
