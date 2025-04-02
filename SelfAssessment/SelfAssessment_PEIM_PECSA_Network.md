@@ -2110,75 +2110,84 @@ Organize concepts, features, types and Pros and Cons
     - 소프트웨어형: 오픈소스 또는 클라우드 기반 (예: Envoy, Istio)
 
 - 데이터센터 네트워크에서 사용되는 Overlay Network와 Underlay Network의 개념과 차이
-✅ Overlay Network 개념
-Overlay 네트워크는 기존 물리 네트워크(Underlay) 위에 구성된 가상 네트워크 계층으로, 터널링 기술을 통해 L2 또는 L3 네트워크를 가상으로 구현한다.
-예: VXLAN, GRE, NVGRE
+  - Overlay Network 개념
+    - Overlay 네트워크는 기존 물리 네트워크(Underlay) 위에 구성된 가상 네트워크 계층으로, 터널링 기술을 통해 L2 또는 L3 네트워크를 가상으로 구현한다.
+    - 예: VXLAN, GRE, NVGRE
 
-✅ Underlay Network 개념
-Underlay 네트워크는 실제 물리 장비(스위치, 라우터)와 링크로 구성된 기본 인프라 네트워크를 말하며, Overlay가 의존하는 기반 구조이다.
+  - Underlay Network 개념
+    - Underlay 네트워크는 실제 물리 장비(스위치, 라우터)와 링크로 구성된 기본 인프라 네트워크를 말하며, Overlay가 의존하는 기반 구조이다.
 
-✅ 주요 차이
-Underlay는 실제 IP 라우팅을 수행하고, Overlay는 터널을 통해 논리적 연결을 제공
-Overlay는 L2 확장, 멀티테넌시 지원에 유리하며, Underlay는 고속 전송과 안정성 중심
-Overlay는 SDN, 가상화 환경에서 유연한 네트워크 구성 가능
-2. 네트워크 자동화(Network Automation)의 개념과 주요 도구
-✅ 개념
-네트워크 자동화는 장비 구성, 업데이트, 정책 배포, 모니터링 등의 작업을 수작업이 아닌 코드 기반으로 자동화하는 방법론이다. DevOps와 NetOps 환경에서 필수 요소로 자리잡고 있다.
+  - 주요 차이
+    - Underlay는 실제 IP 라우팅을 수행하고, Overlay는 터널을 통해 논리적 연결을 제공
+    - Overlay는 L2 확장, 멀티테넌시 지원에 유리하며, Underlay는 고속 전송과 안정성 중심
+    - Overlay는 SDN, 가상화 환경에서 유연한 네트워크 구성 가능
 
-✅ 주요 도구
-Ansible: YAML을 기반으로 선언형 방식으로 네트워크 설정 자동화, 에이전트 없이 SSH 기반 작동
-Terraform: 인프라 코드(IaC)를 사용해 멀티벤더 인프라를 자동으로 구축 및 관리
-Netmiko: Python 라이브러리로 Cisco, Juniper 등 CLI 기반 장비에 자동 명령 수행 가능
-Nornir: Python 기반 동기화 자동화 프레임워크로 대규모 장비 제어에 적합
-SaltStack, Chef, Puppet: 일반 인프라 자동화에서 네트워크까지 확장 가능
-3. BGP(Border Gateway Protocol)의 개념과 주요 속성
-✅ 개념
-BGP는 인터넷 상의 자율 시스템(AS) 간 라우팅 정보를 교환하는 경로 벡터 프로토콜이다.
-ISP, 대규모 기업, 글로벌 네트워크에서 경로 선택과 정책 기반 라우팅에 사용된다.
+- 네트워크 자동화(Network Automation)의 개념과 주요 도구
+  - 개념
+    - 네트워크 자동화는 장비 구성, 업데이트, 정책 배포, 모니터링 등의 작업을 수작업이 아닌 코드 기반으로 자동화하는 방법론
+    - DevOps와 NetOps 환경에서 필수 요소로 자리잡고 있다.
 
-✅ 주요 속성 (Path Attribute)
-AS Path: 경로를 거친 AS 목록을 나타내며, 루프 방지 및 경로 선택 기준
-Local Preference: 내부 AS 내에서 라우팅 우선순위를 결정하는 값, 값이 클수록 우선
-MED (Multi Exit Discriminator): 동일 AS로 들어오는 경로 간 우선순위 지정, 값이 작을수록 우선
-Next-Hop: 다음 목적지 라우터의 IP 주소
-Origin: 경로 생성 방식 정보 (IGP, EGP, Incomplete)
-Community: 경로에 태그를 부여하여 정책 기반 라우팅 가능
-4. Anycast의 개념과 Unicast, Multicast, Broadcast와의 차이
-✅ Anycast 개념
-Anycast는 하나의 IP 주소를 여러 노드에 할당하고, 최적의 경로를 통해 가장 가까운 노드로 트래픽을 전달하는 통신 방식이다.
+  - 주요 도구
+    - Ansible: YAML을 기반으로 선언형 방식으로 네트워크 설정 자동화, 에이전트 없이 SSH 기반 작동
+    - Terraform: 인프라 코드(IaC)를 사용해 멀티벤더 인프라를 자동으로 구축 및 관리
+    - Netmiko: Python 라이브러리로 Cisco, Juniper 등 CLI 기반 장비에 자동 명령 수행 가능
+    - Nornir: Python 기반 동기화 자동화 프레임워크로 대규모 장비 제어에 적합
+    - SaltStack, Chef, Puppet: 일반 인프라 자동화에서 네트워크까지 확장 가능
 
-✅ 전통적 전송 방식과 차이
-Unicast: 하나의 송신자와 하나의 수신자 간 1:1 통신
-Multicast: 하나의 송신자가 다수의 수신자에게 1:N 통신 (가입자 그룹 대상)
-Broadcast: 같은 네트워크 상의 모든 장비에 데이터 전송
-Anycast: 여러 노드 중 가장 가까운 노드 1곳에만 전달 (1:1 지능형 라우팅)
-✅ 활용 사례
-DNS 서버 분산 (예: Google DNS 8.8.8.8)
-CDN 접속 최적화
-DDoS 방어를 위한 지리적 분산
-5. MPLS-VPN과 SD-WAN의 차이
-✅ MPLS-VPN 개념
-통신사의 MPLS 백본망을 이용하여 고객별로 논리적 분리된 VPN 제공
-높은 품질(QoS), 보안, 안정성을 제공하지만 구축 및 운영 비용이 높음
-✅ SD-WAN 개념
-소프트웨어 정의 기술로 인터넷, MPLS, LTE 등의 다양한 회선을 통합
-중앙에서 제어, 정책 기반으로 트래픽 경로를 자동 최적화
-유연성, 비용 효율성, 간편한 관리가 장점
-✅ 주요 차이점
-MPLS는 회선 기반 고정 경로, SD-WAN은 트래픽 상태 기반 동적 경로 선택
-SD-WAN은 인터넷 기반 저비용 회선도 사용 가능
-MPLS는 통신사 종속적, SD-WAN은 벤더에 따라 독립적으로 구성 가능
-6. Dual-Homing과 Multi-Homing의 개념과 활용 사례
-✅ Dual-Homing 개념
-하나의 네트워크 장비가 두 개의 상위 장비 또는 ISP와 이중 연결을 맺어 장애 시 전환 가능하도록 구성하는 방식이다.
+- BGP(Border Gateway Protocol)의 개념과 주요 속성
+  - 개념
+    - BGP는 인터넷 상의 자율 시스템(AS) 간 라우팅 정보를 교환하는 경로 벡터 프로토콜
+    - ISP, 대규모 기업, 글로벌 네트워크에서 경로 선택과 정책 기반 라우팅에 사용된다.
 
-✅ Multi-Homing 개념
-하나의 조직이나 데이터센터가 두 개 이상의 ISP 또는 상위 네트워크에 동시에 연결되어, 회선 이중화 및 경로冗長성 확보가 가능하다.
+  - 주요 속성 (Path Attribute)
+    - AS Path: 경로를 거친 AS 목록을 나타내며, 루프 방지 및 경로 선택 기준
+    - Local Preference: 내부 AS 내에서 라우팅 우선순위를 결정하는 값, 값이 클수록 우선
+    - MED (Multi Exit Discriminator): 동일 AS로 들어오는 경로 간 우선순위 지정, 값이 작을수록 우선
+    - Next-Hop: 다음 목적지 라우터의 IP 주소
+    - Origin: 경로 생성 방식 정보 (IGP, EGP, Incomplete)
+    - Community: 경로에 태그를 부여하여 정책 기반 라우팅 가능
 
-✅ 활용 사례
-Dual-Homing: 서버 → 두 개의 ToR 스위치에 연결 → 하나 장애 시 자동 전환
-Multi-Homing: 기업의 BGP 구성에서 두 ISP와 동시 연결하여 BGP 경로 선택, 재해 복구, 성능 향상 목적
-CDN, 금융, 게임 산업에서 고가용성과 고성능을 위해 자주 활용
+- Anycast의 개념과 Unicast, Multicast, Broadcast와의 차이
+  - Anycast 개념
+    - Anycast는 하나의 IP 주소를 여러 노드에 할당하고, 최적의 경로를 통해 가장 가까운 노드로 트래픽을 전달하는 통신 방식
+
+  - 전통적 전송 방식과 차이
+    - Unicast: 하나의 송신자와 하나의 수신자 간 1:1 통신
+    - Multicast: 하나의 송신자가 다수의 수신자에게 1:N 통신 (가입자 그룹 대상)
+    - Broadcast: 같은 네트워크 상의 모든 장비에 데이터 전송
+    - Anycast: 여러 노드 중 가장 가까운 노드 1곳에만 전달 (1:1 지능형 라우팅)
+
+  - 활용 사례
+    - DNS 서버 분산 (예: Google DNS 8.8.8.8)
+    - CDN 접속 최적화
+    - DDoS 방어를 위한 지리적 분산
+
+- MPLS-VPN과 SD-WAN의 차이
+  - MPLS-VPN 개념
+    - 통신사의 MPLS 백본망을 이용하여 고객별로 논리적 분리된 VPN 제공
+    - 높은 품질(QoS), 보안, 안정성을 제공하지만 구축 및 운영 비용이 높음
+
+  - SD-WAN 개념
+    - 소프트웨어 정의 기술로 인터넷, MPLS, LTE 등의 다양한 회선을 통합
+    - 중앙에서 제어, 정책 기반으로 트래픽 경로를 자동 최적화
+    - 유연성, 비용 효율성, 간편한 관리가 장점
+
+  - 주요 차이점
+    - MPLS는 회선 기반 고정 경로, SD-WAN은 트래픽 상태 기반 동적 경로 선택
+    - SD-WAN은 인터넷 기반 저비용 회선도 사용 가능
+    - MPLS는 통신사 종속적, SD-WAN은 벤더에 따라 독립적으로 구성 가능
+
+- Dual-Homing과 Multi-Homing의 개념과 활용 사례
+  - Dual-Homing 개념
+    - 하나의 네트워크 장비가 두 개의 상위 장비 또는 ISP와 이중 연결을 맺어 장애 시 전환 가능하도록 구성하는 방식이다.
+
+  - Multi-Homing 개념
+    - 하나의 조직이나 데이터센터가 두 개 이상의 ISP 또는 상위 네트워크에 동시에 연결되어, 회선 이중화 및 경로冗長성 확보가 가능하다.
+
+  - 활용 사례
+    - Dual-Homing: 서버 → 두 개의 ToR 스위치에 연결 → 하나 장애 시 자동 전환
+    - Multi-Homing: 기업의 BGP 구성에서 두 ISP와 동시 연결하여 BGP 경로 선택, 재해 복구, 성능 향상 목적
+    - CDN, 금융, 게임 산업에서 고가용성과 고성능을 위해 자주 활용
 
 
 - 네트워크에서 발생하는 주요 보안 위협(MITM, ARP Spoofing, DNS Spoofing 등)의 개념과 대응 방안을 설명하시오.
