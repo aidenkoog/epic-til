@@ -2212,23 +2212,25 @@ Organize concepts, features, types and Pros and Cons
       - DNSSEC 적용
       - 인증된 DNS 서버만 사용
       - DoH(HTTPS 기반 DNS), DoT(TLS 기반 DNS) 사용
+
+- VPN에서 사용하는 터널링 기법과 보안 프로토콜
+  - 터널링(Tunneling) 기법
+    - 개념: 공용 네트워크를 통해 사설 네트워크처럼 보안 통신을 하기 위해 데이터 패킷을 암호화하고 캡슐화하는 기술
+    - 기법:
+      - GRE (Generic Routing Encapsulation)
+      - PPTP (Point-to-Point Tunneling Protocol)
+      - L2TP (Layer 2 Tunneling Protocol)
+
+  - 보안 프로토콜
+    - IPSec VPN:
+      - L3 계층 보안 프로토콜
+      - ESP(Encapsulating Security Payload)와 AH(Authentication Header) 사용
+      - Site-to-Site 또는 Remote Access 환경에서 사용
+    - SSL VPN:
+      - L4/L7 계층 보안
+      - TLS 기반 암호화, 브라우저 기반 접속 가능
+      - 사용자 인증, 접근 제어에 유리하며 모바일 환경에 적합
       
-2. VPN에서 사용하는 터널링 기법과 보안 프로토콜
-✅ 터널링(Tunneling) 기법
-개념: 공용 네트워크를 통해 사설 네트워크처럼 보안 통신을 하기 위해 데이터 패킷을 암호화하고 캡슐화하는 기술
-기법:
-GRE (Generic Routing Encapsulation)
-PPTP (Point-to-Point Tunneling Protocol)
-L2TP (Layer 2 Tunneling Protocol)
-✅ 보안 프로토콜
-IPSec VPN:
-L3 계층 보안 프로토콜
-ESP(Encapsulating Security Payload)와 AH(Authentication Header) 사용
-Site-to-Site 또는 Remote Access 환경에서 사용
-SSL VPN:
-L4/L7 계층 보안
-TLS 기반 암호화, 브라우저 기반 접속 가능
-사용자 인증, 접근 제어에 유리하며 모바일 환경에 적합
 3. 제로 트러스트 보안(Zero Trust Security)의 개념과 기존 보안 모델과의 차이
 ✅ 제로 트러스트 보안 개념
 “아무도 신뢰하지 말고 항상 검증하라”는 철학에 기반한 보안 모델
