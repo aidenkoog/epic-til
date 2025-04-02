@@ -2483,19 +2483,22 @@ Organize concepts, features, types and Pros and Cons
     - IPv6 전용 환경에서 IPv6 ↔ IPv4 간 통신을 위해 주소 및 포트 변환 수행.
     - DNS64와 함께 사용되며, IPv4-only 서버와 IPv6-only 클라이언트 간 통신 지원.
     - 제한: 일부 프로토콜 호환성 문제 발생 가능.
-    
-3. 트래픽 관리: Traffic Shaping vs Traffic Policing
-✅ Traffic Shaping
-네트워크 출력 속도를 제어/조절하여 트래픽을 평탄화.
-버퍼를 활용해 패킷을 지연시켜 허용된 속도에 맞춰 전송.
-주요 목적: 혼잡 방지, QoS 유지, VoIP/영상 품질 향상.
-✅ Traffic Policing
-설정된 속도를 초과한 트래픽을 폐기하거나 마킹(Drop/Mark).
-실시간 제어를 통해 네트워크 과부하 방지.
-목적: 대역폭 제어 및 정책 위반 트래픽 제재.
-✅ 차이점
-Shaping은 지연 기반 제어, Policing은 버림 기반 제어.
-Shaping은 QoS 향상에 유리, Policing은 규정 위반 감시 중심.
+
+- 트래픽 관리: Traffic Shaping vs Traffic Policing
+  - Traffic Shaping (제어 / 조절)
+    - 네트워크 출력 속도를 제어/조절하여 트래픽을 평탄화.
+    - 버퍼를 활용해 패킷을 지연시켜 허용된 속도에 맞춰 전송.
+    - 주요 목적: 혼잡 방지, QoS 유지, VoIP/영상 품질 향상.
+
+  - Traffic Policing (삭제 / 마킹)
+    - 설정된 속도를 초과한 트래픽을 폐기하거나 마킹(Drop/Mark).
+    - 실시간 제어를 통해 네트워크 과부하 방지.
+    - 목적: 대역폭 제어 및 정책 위반 트래픽 제재
+
+  - 차이점
+    - Shaping은 지연 기반 제어, Policing은 버림 기반 제어.
+    - Shaping은 QoS 향상에 유리, Policing은 규정 위반 감시 중심.
+
 4. TCP 혼잡 제어 개념과 주요 알고리즘
 ✅ TCP Congestion Control 개념
 네트워크 혼잡 상황에서 성능 저하를 방지하기 위한 윈도우 기반의 전송 속도 조절 메커니즘.
