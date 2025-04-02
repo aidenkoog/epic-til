@@ -2251,11 +2251,11 @@ Organize concepts, features, types and Pros and Cons
     - 세션 정보를 유지하며 패킷의 흐름을 이해하고 판단
       - 예: TCP 3-way handshake 상태 추적
     - 고급 필터링 가능, 응용 계층 보안 지원
-    
-✅ Stateless Firewall (상태 비저장형)
-각 패킷을 개별적으로 처리하며 세션 상태를 저장하지 않음
-처리 속도는 빠르나 세부 제어 능력은 떨어짐
-보통 간단한 트래픽 제어 또는 DoS 방어에 사용
+
+  - Stateless Firewall (상태 비저장형)
+    - 각 패킷을 개별적으로 처리하며 세션 상태를 저장하지 않음
+    - 처리 속도는 빠르나 세부 제어 능력은 떨어짐
+    - 보통 간단한 트래픽 제어 또는 DoS 방어에 사용
 5. IDS(침입 탐지 시스템)와 IPS(침입 방지 시스템)의 차이
 ✅ IDS (Intrusion Detection System)
 네트워크나 시스템의 이상 징후 탐지 전용 시스템
