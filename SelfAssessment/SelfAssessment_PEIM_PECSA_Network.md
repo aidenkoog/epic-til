@@ -2377,15 +2377,17 @@ Organize concepts, features, types and Pros and Cons
     - 보안성: TLS 1.3은 모든 세션에 대해 전방 비밀성을 기본 제공.
 
 
-2. QUIC의 개념과 TCP와의 차이점
-✅ QUIC 개념
-Google에서 개발한 UDP 기반의 전송 프로토콜로, TLS와 스트림 다중화를 통합한 구조.
-HTTP/3의 전송 프로토콜로 채택되었으며, 지연 시간 최소화와 보안성 강화가 핵심 목적.
-✅ TCP와의 차이
-연결 수립 속도: TCP+TLS는 2~3번 왕복 필요, QUIC은 0-RTT 또는 1-RTT 연결로 빠름.
-헤드 오브 라인 블로킹(Head-of-Line Blocking): TCP는 하나의 패킷 손실이 전체 지연 유발. QUIC은 스트림 단위로 독립 전송.
-내장 보안: QUIC은 TLS 1.3을 기본 포함하여 암호화를 내장.
-UDP 기반이므로 NAT 트래버설과 사용자 정의 제어가 쉬움.
+- QUIC의 개념과 TCP와의 차이점
+  - QUIC 개념
+    - Google에서 개발한 UDP 기반의 전송 프로토콜로, TLS와 스트림 다중화를 통합한 구조.
+    - HTTP/3의 전송 프로토콜로 채택되었으며, 지연 시간 최소화와 보안성 강화가 핵심 목적.
+
+  - TCP와의 차이
+    - 연결 수립 속도: TCP+TLS는 2~3번 왕복 필요, QUIC은 0-RTT 또는 1-RTT 연결로 빠름.
+    - 헤드 오브 라인 블로킹(Head-of-Line Blocking): TCP는 하나의 패킷 손실이 전체 지연 유발. QUIC은 스트림 단위로 독립 전송.
+    - 내장 보안: QUIC은 TLS 1.3을 기본 포함하여 암호화를 내장.
+    - UDP 기반이므로 NAT 트래버설과 사용자 정의 제어가 쉬움
+    
 3. WebSocket과 Polling, Server-Sent Events(SSE)의 차이
 ✅ WebSocket 개념
 웹 브라우저와 서버 간의 양방향 실시간 통신을 가능하게 하는 프로토콜.
