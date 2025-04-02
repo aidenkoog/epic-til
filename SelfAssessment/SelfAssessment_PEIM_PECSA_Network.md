@@ -2508,38 +2508,35 @@ Organize concepts, features, types and Pros and Cons
     - Reno: AIMD(Additive Increase, Multiplicative Decrease) 방식, 손실 시 윈도우 절반 감소.
     - Cubic: TCP Reno보다 더 빠른 윈도우 증가 방식, 고대역폭/지연 환경에 유리.
     - BBR (Bottleneck Bandwidth and RTT): 손실 기반이 아닌 대역폭과 RTT 기반 전송 제어, 고속 환경에서 효율적이며 지연 최소화에 강점.
-    
-5. 패킷 손실이 네트워크 성능에 미치는 영향과 대응 방법
-✅ 영향
-TCP의 전송 속도 급감: 손실 발생 시 혼잡으로 판단하고 윈도우 크기를 줄임.
-VoIP, 스트리밍 품질 저하: 음성/영상 왜곡, 끊김 발생.
-서비스 응답 지연 증가 및 신뢰성 저하.
-✅ 손실 최소화 방안
-QoS 정책 적용: 트래픽 우선순위 지정 (DSCP 등)
-트래픽 Shaping과 Policing 적용
-혼잡 회피 알고리즘 사용 (TCP BBR 등)
-적절한 재시도 및 오류 복구 메커니즘 적용 (FEC, ARQ 등)
-6. Jitter 개념과 VoIP·비디오 스트리밍에 미치는 영향
-✅ Jitter 개념
-패킷 간 도착 시간 간격의 변동(지터).
-같은 스트림의 패킷들이 일정하지 않게 도착할 경우 발생.
-✅ VoIP/스트리밍 영향
-음성 끊김, 지연, 왜곡
-영상 끊김, 프레임 드롭
-실시간성 요구 서비스에 치명적
-✅ 대응 방안
-Jitter Buffer 사용: 패킷을 수집해 일정 시간 간격으로 재생
-QoS 보장 및 네트워크 안정화
-우선순위 기반 트래픽 관리 및 적절한 대역폭 확보
 
+- 패킷 손실이 네트워크 성능에 미치는 영향과 대응 방법
+  - 영향
+    - TCP의 전송 속도 급감: 손실 발생 시 혼잡으로 판단하고 윈도우 크기를 줄임.
+    - VoIP, 스트리밍 품질 저하: 음성/영상 왜곡, 끊김 발생.
+    - 서비스 응답 지연 증가 및 신뢰성 저하.
 
-- CDN(Content Delivery Network)의 개념과 트래픽 최적화 방식(Edge Caching, Pre-Fetching 등)을 설명하시오.
-- 5G 네트워크에서 Slicing 기법의 개념과 주요 활용 사례를 설명하시오.
-- L4, L7 로드 밸런서의 차이점을 설명하시오.
-- QoE(Quality of Experience)와 QoS(Quality of Service)의 차이를 설명하시오.
-- 엔터프라이즈 네트워크에서 Capacity Planning의 개념과 최적화 방법을 설명하시오.
-- 네트워크에서 Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 관계를 설명하시오.
-  - 1. CDN(Content Delivery Network)의 개념과 트래픽 최적화 방식
+  - 손실 최소화 방안
+    - QoS 정책 적용: 트래픽 우선순위 지정 (DSCP 등)
+    - 트래픽 Shaping과 Policing 적용
+    - 혼잡 회피 알고리즘 사용 (TCP BBR 등)
+    - 적절한 재시도 및 오류 복구 메커니즘 적용 (FEC, ARQ 등)
+
+- Jitter 개념과 VoIP·비디오 스트리밍에 미치는 영향
+  - Jitter 개념
+    - 패킷 간 도착 시간 간격의 변동(지터).
+    - 같은 스트림의 패킷들이 일정하지 않게 도착할 경우 발생.
+
+  - VoIP/스트리밍 영향
+    - 음성 끊김, 지연, 왜곡
+    - 영상 끊김, 프레임 드롭
+    - 실시간성 요구 서비스에 치명적
+
+  - 대응 방안
+    - Jitter Buffer 사용: 패킷을 수집해 일정 시간 간격으로 재생
+    - QoS 보장 및 네트워크 안정화
+    - 우선순위 기반 트래픽 관리 및 적절한 대역폭 확보
+
+- CDN(Content Delivery Network)의 개념과 트래픽 최적화 방식(Edge Caching, Pre-Fetching 등)
 ✅ CDN 개념
 CDN은 전 세계에 분산된 **캐시 서버(Edge Server)**를 통해 사용자에게 가장 가까운 위치에서 콘텐츠를 제공함으로써, 지연 최소화와 대역폭 절약, 서비스 안정성 향상을 실현하는 콘텐츠 전송 인프라이다.
 
