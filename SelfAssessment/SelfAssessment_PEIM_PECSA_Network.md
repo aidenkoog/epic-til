@@ -2499,14 +2499,16 @@ Organize concepts, features, types and Pros and Cons
     - Shaping은 지연 기반 제어, Policing은 버림 기반 제어.
     - Shaping은 QoS 향상에 유리, Policing은 규정 위반 감시 중심.
 
-4. TCP 혼잡 제어 개념과 주요 알고리즘
-✅ TCP Congestion Control 개념
-네트워크 혼잡 상황에서 성능 저하를 방지하기 위한 윈도우 기반의 전송 속도 조절 메커니즘.
-패킷 손실, RTT 변화 등을 통해 네트워크 상태를 간접적으로 파악하고 전송 속도를 조정.
-✅ 주요 알고리즘
-Reno: AIMD(Additive Increase, Multiplicative Decrease) 방식, 손실 시 윈도우 절반 감소.
-Cubic: TCP Reno보다 더 빠른 윈도우 증가 방식, 고대역폭/지연 환경에 유리.
-BBR (Bottleneck Bandwidth and RTT): 손실 기반이 아닌 대역폭과 RTT 기반 전송 제어, 고속 환경에서 효율적이며 지연 최소화에 강점.
+- TCP 혼잡 제어 개념과 주요 알고리즘
+  - TCP Congestion Control 개념 (TCP 혼잡 제어)
+    - 네트워크 혼잡 상황에서 성능 저하를 방지하기 위한 윈도우 기반의 전송 속도 조절 메커니즘.
+    - 패킷 손실, RTT 변화 등을 통해 네트워크 상태를 간접적으로 파악하고 전송 속도를 조정.
+
+  - 주요 알고리즘
+    - Reno: AIMD(Additive Increase, Multiplicative Decrease) 방식, 손실 시 윈도우 절반 감소.
+    - Cubic: TCP Reno보다 더 빠른 윈도우 증가 방식, 고대역폭/지연 환경에 유리.
+    - BBR (Bottleneck Bandwidth and RTT): 손실 기반이 아닌 대역폭과 RTT 기반 전송 제어, 고속 환경에서 효율적이며 지연 최소화에 강점.
+    
 5. 패킷 손실이 네트워크 성능에 미치는 영향과 대응 방법
 ✅ 영향
 TCP의 전송 속도 급감: 손실 발생 시 혼잡으로 판단하고 윈도우 크기를 줄임.
