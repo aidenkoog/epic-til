@@ -2443,19 +2443,19 @@ Organize concepts, features, types and Pros and Cons
     - IoT 기기 간 RESTful API 기반 통신 (기기 간 API 통신)
     - IPv6 기반 6LoWPAN 네트워크에서 주로 사용됨
 
-6. LISP의 개념과 기존 IP 라우팅과의 차이
-✅ LISP 개념
-Location/ID Separation Protocol은 네트워크 주소의 식별자(ID)와 위치(Location)를 분리하는 구조.
-현재 IP 주소는 위치와 식별자 역할을 동시에 수행하므로 모빌리티, 멀티호밍에 제약이 있음.
-✅ 구성 요소
-EID (Endpoint Identifier): 호스트 식별용 주소
-RLOC (Routing Locator): 실제 물리적 위치 식별자
-✅ 기존 라우팅과 차이
-기존 IP는 하나의 주소로 라우팅과 식별을 모두 수행 → 주소 변경 시 세션 단절 문제
-LISP은 주소 분리를 통해 모빌리티 지원, 트래픽 엔지니어링, 보안성 향상 가능
-트래픽 캡슐화 방식으로 기존 인프라와 호환 가능
+- LISP의 개념과 기존 IP 라우팅과의 차이
+  - LISP 개념 (Location/ID Separation Protocol - 주소의 아이디와 위치 정보 분리된 구조)
+    - Location/ID Separation Protocol은 네트워크 주소의 식별자(ID)와 위치(Location)를 분리하는 구조.
+    - 현재 IP 주소는 위치와 식별자 역할을 동시에 수행하므로 모빌리티, 멀티호밍에 제약이 있음.
 
+  - 구성 요소
+    - EID (Endpoint Identifier): 호스트 식별용 주소
+    - RLOC (Routing Locator): 실제 물리적 위치 식별자
 
+  - 기존 라우팅과 차이
+    - 기존 IP는 하나의 주소로 라우팅과 식별을 모두 수행 → 주소 변경 시 세션 단절 문제
+    - LISP은 주소 분리를 통해 모빌리티 지원, 트래픽 엔지니어링, 보안성 향상 가능
+    - 트래픽 캡슐화 방식으로 기존 인프라와 호환 가능
 
 - BGP(Border Gateway Protocol)에서 Route Reflector와 Confederation의 개념을 설명하시오.
 - 네트워크에서 IPv6 Migration 전략(Dual Stack, Tunneling, NAT64)의 개념과 차이를 설명하시오.
