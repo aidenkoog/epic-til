@@ -2364,23 +2364,19 @@ Organize concepts, features, types and Pros and Cons
     - PTR 레코드: IP 주소 → 도메인 이름 (역방향 DNS)
 
 
-- TLS(Transport Layer Security) 1.2와 TLS 1.3의 차이점을 설명하시오.
-- QUIC(Quick UDP Internet Connections)의 개념과 기존 TCP와의 차이를 설명하시오.
-- WebSocket의 개념과 HTTP Polling, Server-Sent Events(SSE)와의 차이를 설명하시오.
-- MQTT(Message Queuing Telemetry Transport)의 개념과 IoT 네트워크에서의 활용을 설명하시오.
-- CoAP(Constrained Application Protocol)의 개념과 주요 활용 사례를 설명하시오.
-- LISP(Location/ID Separation Protocol)의 개념과 기존 IP 라우팅과의 차이를 설명하시오.
-  - 1. TLS 1.2와 TLS 1.3의 차이점
-✅ TLS 1.2 개요
-HTTPS, VPN 등에서 널리 사용되는 보안 프로토콜.
-RSA 기반 핸드셰이크와 다양한 대칭 암호 스위트 지원.
-✅ TLS 1.3 개요
-보안성 향상과 성능 최적화를 목표로 설계된 최신 버전.
-암호 스위트 간소화, 핸드셰이크 단순화, 전방 비밀성(Forward Secrecy) 강화.
-✅ 주요 차이점
-핸드셰이크 과정: TLS 1.3은 핸드셰이크가 1-RTT로 단축되어 지연시간 감소.
-암호 스위트: TLS 1.3에서는 불안전하거나 느린 알고리즘(RC4, SHA-1, RSA key exchange 등)을 제거.
-보안성: TLS 1.3은 모든 세션에 대해 전방 비밀성을 기본 제공.
+- TLS(Transport Layer Security) 1.2와 TLS 1.3의 차이점
+  - TLS 1.2 개요
+    - HTTPS, VPN 등에서 널리 사용되는 보안 프로토콜.
+    - RSA 기반 핸드셰이크와 다양한 대칭 암호 스위트 지원.
+  - TLS 1.3 개요
+    - 보안성 향상과 성능 최적화를 목표로 설계된 최신 버전.
+    - 암호 스위트 간소화, 핸드셰이크 단순화, 전방 비밀성(Forward Secrecy) 강화.
+  - 주요 차이점
+    - 핸드셰이크 과정: TLS 1.3은 핸드셰이크가 1-RTT로 단축되어 지연시간 감소.
+    - 암호 스위트: TLS 1.3에서는 불안전하거나 느린 알고리즘(RC4, SHA-1, RSA key exchange 등)을 제거.
+    - 보안성: TLS 1.3은 모든 세션에 대해 전방 비밀성을 기본 제공.
+
+
 2. QUIC의 개념과 TCP와의 차이점
 ✅ QUIC 개념
 Google에서 개발한 UDP 기반의 전송 프로토콜로, TLS와 스트림 다중화를 통합한 구조.
