@@ -2190,32 +2190,29 @@ Organize concepts, features, types and Pros and Cons
     - CDN, 금융, 게임 산업에서 고가용성과 고성능을 위해 자주 활용
 
 
-- 네트워크에서 발생하는 주요 보안 위협(MITM, ARP Spoofing, DNS Spoofing 등)의 개념과 대응 방안을 설명하시오.
-- VPN(Virtual Private Network)에서 사용하는 터널링(Tunneling) 기법과 보안 프로토콜(IPSec, SSL VPN 등)을 설명하시오.
-- 제로 트러스트 보안(Zero Trust Security)의 개념과 기존 보안 모델과의 차이를 설명하시오.
-- 방화벽(Firewall)에서 사용하는 상태 저장(Stateful)과 상태 비저장(Stateless)의 차이를 설명하시오.
-- 네트워크에서 사용되는 침입 방지 시스템(IPS)과 침입 탐지 시스템(IDS)의 차이를 설명하시오.
-- 랜섬웨어(Ransomware) 공격의 개념과 네트워크 보안 측면에서의 방어 전략을 설명하시오.
-  - 1. 주요 네트워크 보안 위협과 대응 방안
-✅ MITM (Man-In-The-Middle, 중간자 공격)
-개념: 공격자가 송신자와 수신자 사이의 통신을 가로채거나 변조하는 공격
-대응 방안:
-통신 암호화 (HTTPS, TLS)
-인증서 검증
-VPN 사용
-DNSSEC 적용
-✅ ARP Spoofing
-개념: 공격자가 가짜 ARP 응답을 통해 자신의 MAC 주소를 게이트웨이로 위장해 트래픽을 가로채는 공격
-대응 방안:
-정적 ARP 설정
-ARP 감시 도구 사용 (Dai, ARPWatch 등)
-스위치 포트 보안 기능 활용
-✅ DNS Spoofing
-개념: 공격자가 DNS 응답을 위조하여 사용자를 악성 사이트로 유도하는 공격
-대응 방안:
-DNSSEC 적용
-인증된 DNS 서버만 사용
-DoH(HTTPS 기반 DNS), DoT(TLS 기반 DNS) 사용
+- 네트워크에서 발생하는 주요 보안 위협(MITM, ARP Spoofing, DNS Spoofing 등)의 개념과 대응 방안
+  - MITM (Man-In-The-Middle, 중간자 공격)
+    - 개념: 공격자가 송신자와 수신자 사이의 통신을 가로채거나 변조하는 공격
+    - 대응 방안:
+      - 통신 암호화 (HTTPS, TLS)
+      - 인증서 검증
+      - VPN 사용
+      - DNSSEC 적용
+
+  - ARP Spoofing
+    - 개념: 공격자가 가짜 ARP 응답을 통해 자신의 MAC 주소를 게이트웨이로 위장해 트래픽을 가로채는 공격
+    - 대응 방안:
+      - 정적 ARP 설정
+      - ARP 감시 도구 사용 (Dai, ARPWatch 등)
+      - 스위치 포트 보안 기능 활용
+
+  - DNS Spoofing
+    - 개념: 공격자가 DNS 응답을 위조하여 사용자를 악성 사이트로 유도하는 공격
+    - 대응 방안:
+      - DNSSEC 적용
+      - 인증된 DNS 서버만 사용
+      - DoH(HTTPS 기반 DNS), DoT(TLS 기반 DNS) 사용
+      
 2. VPN에서 사용하는 터널링 기법과 보안 프로토콜
 ✅ 터널링(Tunneling) 기법
 개념: 공용 네트워크를 통해 사설 네트워크처럼 보안 통신을 하기 위해 데이터 패킷을 암호화하고 캡슐화하는 기술
