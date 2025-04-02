@@ -2537,15 +2537,17 @@ Organize concepts, features, types and Pros and Cons
     - 우선순위 기반 트래픽 관리 및 적절한 대역폭 확보
 
 - CDN(Content Delivery Network)의 개념과 트래픽 최적화 방식(Edge Caching, Pre-Fetching 등)
-✅ CDN 개념
-CDN은 전 세계에 분산된 **캐시 서버(Edge Server)**를 통해 사용자에게 가장 가까운 위치에서 콘텐츠를 제공함으로써, 지연 최소화와 대역폭 절약, 서비스 안정성 향상을 실현하는 콘텐츠 전송 인프라이다.
+  - CDN 개념
+    - CDN은 전 세계에 분산된 캐시 서버(Edge Server)를 통해 사용자에게 가장 가까운 위치에서 콘텐츠를 제공함으로써
+    - 지연 최소화와 대역폭 절약, 서비스 안정성 향상을 실현하는 콘텐츠 전송 인프라이다.
 
-✅ 트래픽 최적화 방식
-Edge Caching: 사용자의 위치에서 가까운 서버에 정적 콘텐츠를 저장하여 빠르게 제공.
-Pre-Fetching: 예상되는 콘텐츠를 미리 Edge에 전송하여 요청 시 지연을 최소화.
-Load Balancing: 요청을 여러 CDN 서버로 분산하여 병목 현상 방지.
-Dynamic Acceleration: 동적 콘텐츠의 속도 향상을 위해 TCP 최적화, 경로 최적화 등을 적용.
-Origin Shielding: CDN 간 계층 구조로 원본 서버 요청을 최소화.
+  - 트래픽 최적화 방식
+    - Edge Caching: 사용자의 위치에서 가까운 서버에 정적 콘텐츠를 저장하여 빠르게 제공.
+    - Pre-Fetching: 예상되는 콘텐츠를 미리 Edge에 전송하여 요청 시 지연을 최소화.
+    - Load Balancing: 요청을 여러 CDN 서버로 분산하여 병목 현상 방지. (여러 서버로 분산)
+    - Dynamic Acceleration: 동적 콘텐츠의 속도 향상을 위해 TCP 최적화, 경로 최적화 등을 적용.
+    - Origin Shielding: CDN 간 계층 구조로 원본 서버 요청을 최소화.
+    
 2. 5G 네트워크에서 Slicing 기법의 개념과 활용 사례
 ✅ Slicing 개념
 5G 네트워크 Slicing은 물리적인 네트워크 인프라를 가상으로 분할하여 서로 다른 서비스 요구 사항을 만족하는 논리적 네트워크를 구성하는 기술이다.
