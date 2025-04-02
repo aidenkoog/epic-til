@@ -2457,34 +2457,33 @@ Organize concepts, features, types and Pros and Cons
     - LISP은 주소 분리를 통해 모빌리티 지원, 트래픽 엔지니어링, 보안성 향상 가능
     - 트래픽 캡슐화 방식으로 기존 인프라와 호환 가능
 
-- BGP(Border Gateway Protocol)에서 Route Reflector와 Confederation의 개념을 설명하시오.
-- 네트워크에서 IPv6 Migration 전략(Dual Stack, Tunneling, NAT64)의 개념과 차이를 설명하시오.
-- 네트워크 트래픽 관리(Traffic Shaping, Traffic Policing)의 개념과 차이를 설명하시오.
-- TCP Congestion Control의 개념과 주요 알고리즘(Reno, Cubic, BBR 등)을 설명하시오.
-- 패킷 손실(Packet Loss)이 네트워크 성능에 미치는 영향과 이를 줄이는 방법을 설명하시오.
-- 네트워크에서 Jitter의 개념과 VoIP, 비디오 스트리밍에 미치는 영향을 설명하시오.
-  - 1. BGP의 Route Reflector와 Confederation 개념
-✅ Route Reflector (RR)
-iBGP에서는 루프 방지를 위해 full-mesh 구성이 필요하지만, 노드 수 증가 시 비효율 발생.
-Route Reflector는 다른 iBGP 라우터의 경로 정보를 반사(Reflect) 하여 전파하는 라우터로, full-mesh 구성을 피하고 iBGP 스케일 확장에 유리.
-RR는 클라이언트와 비클라이언트 간 정책 기반 전달 가능.
-✅ Confederation
-BGP Autonomous System(AS)을 여러 개의 Sub-AS로 논리 분할하여 내부는 iBGP처럼 동작하지만, 외부에는 단일 AS로 보이게 함.
-정책 관리 및 경로 제어를 세분화할 수 있어 대규모 AS 구성에 유리함.
-내부는 Confederation eBGP로 구성하되, iBGP처럼 루프 방지를 완화할 수 있음.
-2. IPv6 Migration 전략: Dual Stack, Tunneling, NAT64
-✅ Dual Stack
-하나의 장비에 IPv4와 IPv6를 동시에 구성하여 두 프로토콜을 병행 운영.
-장점: 기존 IPv4 서비스 유지 가능, 점진적 전환 용이.
-단점: 장비 자원 소모, 복잡도 증가.
-✅ Tunneling
-IPv6 패킷을 IPv4 패킷으로 캡슐화하여 전송하는 방식.
-예: 6to4, ISATAP, GRE over IPv4
-단점: 지연 증가, 터널링 장비 필요.
-✅ NAT64
-IPv6 전용 환경에서 IPv6 ↔ IPv4 간 통신을 위해 주소 및 포트 변환 수행.
-DNS64와 함께 사용되며, IPv4-only 서버와 IPv6-only 클라이언트 간 통신 지원.
-제한: 일부 프로토콜 호환성 문제 발생 가능.
+- BGP(Border Gateway Protocol)에서 Route Reflector와 Confederation의 개념
+  - Route Reflector (RR)
+    - iBGP에서는 루프 방지를 위해 full-mesh 구성이 필요하지만, 노드 수 증가 시 비효율 발생.
+    - Route Reflector는 다른 iBGP 라우터의 경로 정보를 반사(Reflect) 하여 전파하는 라우터로, full-mesh 구성을 피하고 iBGP 스케일 확장에 유리.
+    - RR(Route Reflector)는 클라이언트와 비클라이언트 간 정책 기반 전달 가능
+
+  - Confederation
+    - BGP Autonomous System(AS)을 여러 개의 Sub-AS로 논리 분할하여 내부는 iBGP처럼 동작하지만, 외부에는 단일 AS로 보이게 함.
+    - 정책 관리 및 경로 제어를 세분화할 수 있어 대규모 AS 구성에 유리함.
+    - 내부는 Confederation eBGP로 구성하되, iBGP처럼 루프 방지를 완화할 수 있음
+
+- IPv6 Migration 전략: Dual Stack, Tunneling, NAT64
+  - Dual Stack
+    - 하나의 장비에 IPv4와 IPv6를 동시에 구성하여 두 프로토콜을 병행 운영.
+    - 장점: 기존 IPv4 서비스 유지 가능, 점진적 전환 용이.
+    - 단점: 장비 자원 소모, 복잡도 증가.
+
+  - Tunneling
+    - IPv6 패킷을 IPv4 패킷으로 캡슐화하여 전송하는 방식.
+    - 예: 6to4, ISATAP, GRE over IPv4
+    - 단점: 지연 증가, 터널링 장비 필요
+
+  - NAT64
+    - IPv6 전용 환경에서 IPv6 ↔ IPv4 간 통신을 위해 주소 및 포트 변환 수행.
+    - DNS64와 함께 사용되며, IPv4-only 서버와 IPv6-only 클라이언트 간 통신 지원.
+    - 제한: 일부 프로토콜 호환성 문제 발생 가능.
+    
 3. 트래픽 관리: Traffic Shaping vs Traffic Policing
 ✅ Traffic Shaping
 네트워크 출력 속도를 제어/조절하여 트래픽을 평탄화.
