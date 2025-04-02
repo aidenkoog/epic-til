@@ -2387,22 +2387,26 @@ Organize concepts, features, types and Pros and Cons
     - 헤드 오브 라인 블로킹(Head-of-Line Blocking): TCP는 하나의 패킷 손실이 전체 지연 유발. QUIC은 스트림 단위로 독립 전송.
     - 내장 보안: QUIC은 TLS 1.3을 기본 포함하여 암호화를 내장.
     - UDP 기반이므로 NAT 트래버설과 사용자 정의 제어가 쉬움
+
+- WebSocket과 Polling, Server-Sent Events(SSE)의 차이
+  - WebSocket 개념
+    - 웹 브라우저와 서버 간의 양방향 실시간 통신을 가능하게 하는 프로토콜.
+    - 초기에는 HTTP로 연결 설정, 이후 TCP 기반 독립 프로토콜로 전환됨.
+
+  - HTTP Polling
+    - 클라이언트가 주기적으로 서버에 요청을 보내 상태 확인.
+    - 불필요한 트래픽 증가, 실시간성 부족
+
+  - Server-Sent Events (SSE)
+    - 서버가 클라이언트로 일방향 스트리밍 데이터를 지속 전송 (HTTP 기반).
+    - 채팅 알림, 주식 가격 등 실시간 업데이트에 적합.
+    - 브라우저 친화적이나 양방향 통신은 불가
+
+  - 차이
+    - WebSocket은 양방향, 고빈도 통신,
+    - Polling은 지연 존재, 비효율적,
+    - SSE는 서버→클라이언트 단방향 전송에 최적화.
     
-3. WebSocket과 Polling, Server-Sent Events(SSE)의 차이
-✅ WebSocket 개념
-웹 브라우저와 서버 간의 양방향 실시간 통신을 가능하게 하는 프로토콜.
-초기에는 HTTP로 연결 설정, 이후 TCP 기반 독립 프로토콜로 전환됨.
-✅ HTTP Polling
-클라이언트가 주기적으로 서버에 요청을 보내 상태 확인.
-불필요한 트래픽 증가, 실시간성 부족.
-✅ Server-Sent Events (SSE)
-서버가 클라이언트로 일방향 스트리밍 데이터를 지속 전송 (HTTP 기반).
-채팅 알림, 주식 가격 등 실시간 업데이트에 적합.
-브라우저 친화적이나 양방향 통신은 불가.
-✅ 차이
-WebSocket은 양방향, 고빈도 통신,
-Polling은 지연 존재, 비효율적,
-SSE는 서버→클라이언트 단방향 전송에 최적화.
 4. MQTT의 개념과 IoT 네트워크에서의 활용
 ✅ MQTT 개념
 경량 메시지 전송 프로토콜로, 저대역폭·불안정 네트워크 환경에서 효율적.
