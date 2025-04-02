@@ -2427,19 +2427,22 @@ Organize concepts, features, types and Pros and Cons
     - 디바이스 <-> 서버 통신 구조에 사용, 브로커 중심으로 IoT 노드들이 간단하게 연결
     - QoS 설정(우선순위 설정)을 통해 전송의 신뢰도 제어 가능
     - 배터리 기반의 저전력 디바이스에 적합
-    
-5. CoAP의 개념과 주요 활용 사례
-✅ CoAP 개념
-Constrained Application Protocol은 제약된 IoT 장비를 위한 RESTful 프로토콜
-UDP 기반으로 동작하며, HTTP와 유사한 구조를 가짐 (GET, POST 등).
-✅ 주요 특징
-경량 구조로 저사양 장비에 적합
-DTLS 암호화 적용 가능 (UDP 기반 보안)
-메시지 확인, 재전송 기능 포함
-✅ 활용 사례
-스마트 미터, 스마트 홈 디바이스
-IoT 기기 간 RESTful API 기반 통신
-IPv6 기반 6LoWPAN 네트워크에서 주로 사용됨
+
+- CoAP의 개념과 주요 활용 사례
+  - CoAP 개념
+    - Constrained Application Protocol은 제약된 IoT 장비를 위한 RESTful 프로토콜
+    - UDP 기반으로 동작하며, HTTP와 유사한 구조를 가짐 (GET, POST 등).
+
+  - 주요 특징 (DTLS Encryption, UDP)
+    - 경량 구조로 저사양 장비에 적합
+    - DTLS 암호화 적용 가능 (UDP 기반 보안)
+    - 메시지 확인, 재전송 기능 포함
+
+  - 활용 사례
+    - 스마트 미터, 스마트 홈 디바이스
+    - IoT 기기 간 RESTful API 기반 통신 (기기 간 API 통신)
+    - IPv6 기반 6LoWPAN 네트워크에서 주로 사용됨
+
 6. LISP의 개념과 기존 IP 라우팅과의 차이
 ✅ LISP 개념
 Location/ID Separation Protocol은 네트워크 주소의 식별자(ID)와 위치(Location)를 분리하는 구조.
