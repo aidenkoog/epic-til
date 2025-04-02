@@ -2325,28 +2325,31 @@ Organize concepts, features, types and Pros and Cons
     - 네트워크 격리(망 분리) 및 최소 권한 네트워크 정책 적용
     - IoT 보안 플랫폼 사용: IoT 보안 게이트웨이, 정책 관리 시스템 도입
 
-4. SIEM(Security Information and Event Management)의 개념과 활용
-✅ 개념
-SIEM은 로그 수집, 분석, 상관관계 판단, 실시간 경고 등 보안 이벤트를 통합적으로 관리하는 시스템이다.
-Security Information Management(SIM) + Security Event Management(SEM) = SIEM
-✅ 활용 방안
-로그 통합 분석: 방화벽, IDS/IPS, 서버, 앱 로그 수집
-이상 탐지 및 대응: 정해진 정책 기반으로 경고 생성
-보안 감사 및 규정 준수: GDPR, ISO27001 등의 로그 관리 요구 사항 충족
-SOC 연계: 침해 사고 대응팀이 실시간 위협 탐지 및 대응 수행
+- SIEM(Security Information and Event Management)의 개념과 활용
+  - 개념 (SIM + SEM)
+    - SIEM은 로그 수집, 분석, 상관관계 판단, 실시간 경고 등 보안 이벤트를 통합적으로 관리하는 시스템이다.
+    - Security Information Management(SIM) + Security Event Management(SEM) = SIEM
 
-5. HTTP/2와 HTTP/3의 차이점
-✅ HTTP/2 개요
-멀티플렉싱: 하나의 TCP 연결에서 여러 요청/응답 동시 처리
-헤더 압축: HPACK 방식으로 중복 헤더 제거
-서버 푸시 지원: 클라이언트 요청 없이 리소스를 미리 전송
-✅ HTTP/3 개요
-QUIC 프로토콜 기반: TCP 대신 UDP 기반으로 전송
-지연 시간 단축: 연결 설정 속도가 빠르고, 패킷 손실 시 전체 연결 영향 없음
-TLS 1.3 내장: 연결 시 자동 암호화 제공
-✅ 주요 차이
-HTTP/2는 TCP 기반, HTTP/3는 QUIC(UDP 기반)
-HTTP/3는 전송 속도와 재전송 최적화로 실시간 서비스에 더 적합
+  - 활용 방안
+    - 로그 통합 분석: 방화벽, IDS/IPS, 서버, 앱 로그 수집
+    - 이상 탐지 및 대응: 정해진 정책 기반으로 경고 생성
+    - 보안 감사 및 규정 준수: GDPR, ISO27001 등의 로그 관리 요구 사항 충족
+    - SOC 연계: 침해 사고 대응팀이 실시간 위협 탐지 및 대응 수행
+
+- HTTP/2와 HTTP/3의 차이점
+  - HTTP/2 개요 (TCP Base)
+    - 멀티플렉싱: 하나의 TCP 연결에서 여러 요청/응답 동시 처리
+    - 헤더 압축: HPACK 방식으로 중복 헤더 제거
+    - 서버 푸시 지원: 클라이언트 요청 없이 리소스를 미리 전송
+
+  - HTTP/3 개요 (UDP Base)
+    - QUIC 프로토콜 기반: TCP 대신 UDP 기반으로 전송
+    - 지연 시간 단축: 연결 설정 속도가 빠르고, 패킷 손실 시 전체 연결 영향 없음
+    - TLS 1.3 내장: 연결 시 자동 암호화 제공
+
+  - 주요 차이
+    - HTTP/2는 TCP 기반, HTTP/3는 QUIC(UDP 기반)
+    - HTTP/3는 전송 속도와 재전송 최적화로 실시간 서비스에 더 적합
 
 6. DNS 개념과 주요 구성 요소
 ✅ DNS 개념
