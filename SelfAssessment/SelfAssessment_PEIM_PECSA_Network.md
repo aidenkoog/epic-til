@@ -2547,25 +2547,28 @@ Organize concepts, features, types and Pros and Cons
     - Load Balancing: 요청을 여러 CDN 서버로 분산하여 병목 현상 방지. (여러 서버로 분산)
     - Dynamic Acceleration: 동적 콘텐츠의 속도 향상을 위해 TCP 최적화, 경로 최적화 등을 적용.
     - Origin Shielding: CDN 간 계층 구조로 원본 서버 요청을 최소화.
-    
-2. 5G 네트워크에서 Slicing 기법의 개념과 활용 사례
-✅ Slicing 개념
-5G 네트워크 Slicing은 물리적인 네트워크 인프라를 가상으로 분할하여 서로 다른 서비스 요구 사항을 만족하는 논리적 네트워크를 구성하는 기술이다.
-각 슬라이스는 독립된 네트워크처럼 동작하며, 대역폭, 지연, 신뢰성 요구사항이 서로 다를 수 있다.
 
-✅ 주요 활용 사례
-eMBB (Enhanced Mobile Broadband): 고속 데이터 전송을 위한 슬라이스 (예: UHD 영상 스트리밍)
-URLLC (Ultra-Reliable Low Latency Communication): 초저지연·고신뢰 슬라이스 (예: 자율주행, 원격수술)
-mMTC (Massive Machine-Type Communication): 대규모 IoT 디바이스 연결을 위한 슬라이스 (예: 스마트시티 센서망)
-3. L4, L7 로드 밸런서의 차이점
-✅ L4 로드 밸런서 (전송 계층)
-TCP/UDP 포트, IP 주소 기반으로 트래픽 분산.
-상태 비저장 또는 연결 추적 방식으로 동작.
-빠른 처리 속도, 애플리케이션 계층 이해 불가.
-✅ L7 로드 밸런서 (애플리케이션 계층)
-HTTP 헤더, 쿠키, URL, Host 정보 등을 분석하여 트래픽 분산.
-복잡한 라우팅 정책, SSL 종료, 콘텐츠 기반 분기 가능.
-더 높은 지능과 유연성, 상대적으로 처리 부하 존재.
+- 5G 네트워크에서 Slicing 기법의 개념과 활용 사례
+  - Slicing 개념
+    - 5G 네트워크 Slicing은 물리적인 네트워크 인프라를 가상으로 분할하여 서로 다른 서비스 요구 사항을 만족하는 논리적 네트워크를 구성하는 기술이다.
+    - 각 슬라이스는 독립된 네트워크처럼 동작하며, 대역폭, 지연, 신뢰성 요구사항이 서로 다를 수 있다.
+
+  - 주요 활용 사례
+    - eMBB (Enhanced Mobile Broadband): 고속 데이터 전송을 위한 슬라이스 (예: UHD 영상 스트리밍)
+    - URLLC (Ultra-Reliable Low Latency Communication): 초저지연·고신뢰 슬라이스 (예: 자율주행, 원격수술)
+    - mMTC (Massive Machine-Type Communication): 대규모 IoT 디바이스 연결을 위한 슬라이스 (예: 스마트시티 센서망)
+
+- L4, L7 로드 밸런서의 차이점
+  - L4 로드 밸런서 (전송 계층)
+    - TCP/UDP 포트, IP 주소 기반으로 트래픽 분산.
+    - 상태 비저장 또는 연결 추적 방식으로 동작.
+    - 빠른 처리 속도, 애플리케이션 계층 이해 불가.
+
+  - L7 로드 밸런서 (애플리케이션 계층)
+    - HTTP 헤더, 쿠키, URL, Host 정보 등을 분석하여 트래픽 분산.
+    - 복잡한 라우팅 정책, SSL 종료, 콘텐츠 기반 분기 가능.
+    - 더 높은 지능과 유연성, 상대적으로 처리 부하 존재.
+    
 4. QoE와 QoS의 차이
 ✅ QoS (Quality of Service)
 네트워크 수준의 객관적인 품질 지표 (지연, 손실률, 대역폭 등)를 의미.
