@@ -3470,76 +3470,91 @@ Organize concepts, features, types and Pros and Cons
     - 네트워크 구성 시 물리적, 논리적 이중 연결에 주의하고 계층적 설계 적용
 
 - 네트워크에서 발생하는 IP 주소 충돌(Address Conflict)의 원인과 해결 방법
-✅ 개념
-동일한 IP 주소를 두 개 이상의 장비가 동시에 사용하려고 할 때 발생하는 문제
-네트워크에서 충돌이 발생하면 해당 장비는 네트워크에 정상 접속되지 않거나 간헐적으로 통신 장애 발생
-✅ 주요 원인
-수동(Static) IP 설정 시 실수로 중복된 IP 주소 할당
-DHCP 서버 미설정 또는 여러 DHCP 서버가 중복 주소를 할당
-IP 재활용 오류: IP 주소 할당 후 해제되지 않고 재사용됨
-임시 테스트 장비나 BYOD 환경에서 관리되지 않는 장치가 접속
-✅ 해결 방법
-DHCP 사용 시, DHCP 서버에서 충돌 탐지 및 관리 기능 활성화
-IP 주소 관리(IPAM) 도구 도입으로 중복 방지
-수동 IP 설정 시 계획된 주소 풀에서만 할당
-네트워크 세그먼트 분리 또는 VLAN 적용으로 범위 제한
-2. MTU(Minimum Transmission Unit) 관련 문제
-✅ 개념
-MTU는 한 번에 전송할 수 있는 최대 프레임 크기 (일반적으로 1500바이트)
-경로 중간에 MTU가 작은 구간이 존재할 경우 패킷 분할(Fragmentation)이나 손실 발생
-✅ 주요 문제
-경로 MTU가 작아도 패킷이 큰 경우 전송 실패
-ICMP 차단으로 인해 MTU 문제 감지 실패
-VPN, GRE, IPsec 터널 등에서 오버헤드로 인해 실제 MTU 감소 → 패킷 손실 또는 전송 지연
-✅ 해결 방법
-PMTUD(Path MTU Discovery) 활성화로 경로에 맞는 MTU 자동 조정
-애플리케이션이나 네트워크 장비에서 MTU 수동 조정
-터널링 환경에서는 MSS(Maximum Segment Size) 조정
-ICMP 차단 해제 또는 네트워크 경로 점검
-3. TCP Retransmission 문제
-✅ 개념
-송신자가 보낸 TCP 세그먼트가 수신자로부터 ACK 응답을 받지 못하면 재전송하는 현상
-재전송이 반복되면 네트워크 지연, 성능 저하 발생
-✅ 주요 원인
-패킷 손실: 네트워크 혼잡, 오류, 무선 환경의 불안정성
-지연(Delay): RTT가 긴 경우 재전송 오탐 발생
-네트워크 불안정: 경로 변화, 회선 품질 저하
-MTU 관련 오류로 인해 세그먼트가 도달하지 못함
-✅ 해결 방법
-RTT 및 패킷 손실률 모니터링 도구 사용 (예: Wireshark)
-QoS 정책 적용으로 지연 민감 트래픽 우선 처리
-TCP Congestion Control 알고리즘 조정
-중간 방화벽, NAT, 보안 장비 설정 점검
-4. BGP(Route Loop) 문제
-✅ 개념
-BGP에서 라우팅 루프가 형성되면 패킷이 무한히 순환하여 전송 실패
-글로벌 인터넷 연결에서 심각한 문제를 유발할 수 있음
-✅ 주요 원인
-AS Path 정보 오류: 잘못된 라우팅 업데이트 수신
-Incorrect Route Reflector 설정
-BGP Peer 간 Loop 방지 메커니즘 미적용
-Route Redistribution 설정 오류
-✅ 해결 방법
-AS_PATH 속성 확인 및 필터링 정책 적용
-Route Reflector 구성이 정확한지 확인
-Loop prevention 설정 적용 (e.g., TTL, Max Hop)
-BGP Session에서 Prefix List, Route Map으로 수신 경로 제어
-5. 브로드캐스트 스톰(Broadcast Storm)
-✅ 개념
-브로드캐스트 패킷이 네트워크 상에서 지속적으로 반복 전송되어 전체 대역폭을 점유
-스위치나 장비의 처리 능력을 초과하면 네트워크 전체 마비 가능성
-✅ 주요 원인
-스위치 루프(Loop) 발생
-STP(Spanning Tree Protocol) 비활성 또는 설정 오류
-잘못된 장비 구성이나 테스트 장비 오작동
-ARP 스푸핑으로 인한 무한 브로드캐스트
-✅ 해결 방법
-STP/RSTP/MSTP 활성화로 루프 자동 감지 및 차단
-포트 보안 및 BPDU Guard 설정으로 외부 장비의 루프 방지
-브로드캐스트 트래픽 제한 기능 활용
-네트워크 맵 작성 후 계층적 구조 설계
-6. Wi-Fi 전파 간섭(Interference)
-✅ 개념
+  - 개념
+    - 동일한 IP 주소를 두 개 이상의 장비가 동시에 사용하려고 할 때 발생하는 문제
+    - 네트워크에서 충돌이 발생하면 해당 장비는 네트워크에 정상 접속되지 않거나 간헐적으로 통신 장애 발생
+
+  - 주요 원인
+    - 수동(Static) IP 설정 시 실수로 중복된 IP 주소 할당
+    - DHCP 서버 미설정 또는 여러 DHCP 서버가 중복 주소를 할당
+    - IP 재활용 오류: IP 주소 할당 후 해제되지 않고 재사용됨
+    - 임시 테스트 장비나 BYOD 환경에서 관리되지 않는 장치가 접속
+
+  - 해결 방법
+    - DHCP 사용 시, DHCP 서버에서 충돌 탐지 및 관리 기능 활성화
+    - IP 주소 관리(IPAM) 도구 도입으로 중복 방지
+    - 수동 IP 설정 시 계획된 주소 풀에서만 할당
+    - 네트워크 세그먼트 분리 또는 VLAN 적용으로 범위 제한
+
+- MTU(Minimum Transmission Unit) 관련 문제
+  - 개념
+    - MTU는 한 번에 전송할 수 있는 최대 프레임 크기 (일반적으로 1500바이트)
+    - 경로 중간에 MTU가 작은 구간이 존재할 경우 패킷 분할(Fragmentation)이나 손실 발생
+
+  - 주요 문제
+    - 경로 MTU가 작아도 패킷이 큰 경우 전송 실패
+    - ICMP 차단으로 인해 MTU 문제 감지 실패
+    - VPN, GRE, IPsec 터널 등에서 오버헤드로 인해 실제 MTU 감소 → 패킷 손실 또는 전송 지연
+
+  - 해결 방법
+    - PMTUD(Path MTU Discovery) 활성화로 경로에 맞는 MTU 자동 조정
+    - 애플리케이션이나 네트워크 장비에서 MTU 수동 조정
+    - 터널링 환경에서는 MSS(Maximum Segment Size) 조정
+    - ICMP 차단 해제 또는 네트워크 경로 점검
+
+- TCP Retransmission 문제
+  - 개념
+    - 송신자가 보낸 TCP 세그먼트가 수신자로부터 ACK 응답을 받지 못하면 재전송하는 현상
+    - 재전송이 반복되면 네트워크 지연, 성능 저하 발생
+
+  - 주요 원인
+    - 패킷 손실: 네트워크 혼잡, 오류, 무선 환경의 불안정성
+    - 지연(Delay): RTT가 긴 경우 재전송 오탐 발생
+    - 네트워크 불안정: 경로 변화, 회선 품질 저하
+    - MTU 관련 오류로 인해 세그먼트가 도달하지 못함
+
+  - 해결 방법
+    - RTT 및 패킷 손실률 모니터링 도구 사용 (예: Wireshark)
+    - QoS 정책 적용으로 지연 민감 트래픽 우선 처리
+    - TCP Congestion Control 알고리즘 조정
+    - 중간 방화벽, NAT, 보안 장비 설정 점검
+
+- BGP(Route Loop) 문제
+  - 개념
+    - BGP에서 라우팅 루프가 형성되면 패킷이 무한히 순환하여 전송 실패
+    - 글로벌 인터넷 연결에서 심각한 문제를 유발할 수 있음
+
+  - 주요 원인
+    - AS Path 정보 오류: 잘못된 라우팅 업데이트 수신
+    - Incorrect Route Reflector 설정
+    - BGP Peer 간 Loop 방지 메커니즘 미적용
+    - Route Redistribution 설정 오류
+
+  - 해결 방법
+    - AS_PATH 속성 확인 및 필터링 정책 적용
+    - Route Reflector 구성이 정확한지 확인
+    - Loop prevention 설정 적용 (e.g., TTL, Max Hop)
+    - BGP Session에서 Prefix List, Route Map으로 수신 경로 제어
+
+- 브로드캐스트 스톰(Broadcast Storm)
+  - 개념
+    - 브로드캐스트 패킷이 네트워크 상에서 지속적으로 반복 전송되어 전체 대역폭을 점유
+    - 스위치나 장비의 처리 능력을 초과하면 네트워크 전체 마비 가능성
+
+  - 주요 원인
+    - 스위치 루프(Loop) 발생
+    - STP(Spanning Tree Protocol) 비활성 또는 설정 오류
+    - 잘못된 장비 구성이나 테스트 장비 오작동
+    - ARP 스푸핑으로 인한 무한 브로드캐스트
+
+  - 해결 방법
+    - STP/RSTP/MSTP 활성화로 루프 자동 감지 및 차단
+    - 포트 보안 및 BPDU Guard 설정으로 외부 장비의 루프 방지
+    - 브로드캐스트 트래픽 제한 기능 활용
+    - 네트워크 맵 작성 후 계층적 구조 설계
+
+- Wi-Fi 전파 간섭(Interference)
+  - 개념
 무선 주파수 대역(2.4GHz, 5GHz 등)에서 다른 장치와 주파수가 중첩되면 신호 품질 저하
 Wi-Fi 속도 저하, 끊김, 재접속 등의 문제가 발생
 ✅ 주요 원인
