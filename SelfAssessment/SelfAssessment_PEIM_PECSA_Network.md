@@ -3556,12 +3556,6 @@ AP 배치 최적화: 거리와 위치 고려
 
 
 - 네트워크에서 트래픽 엔지니어링(Traffic Engineering)의 개념과 필요성을 설명하시오.
-- QoS(Quality of Service)의 개념과 주요 트래픽 우선순위 정책을 설명하시오.
-- 네트워크에서 트래픽 쉐이핑(Traffic Shaping)과 트래픽 폴리싱(Traffic Policing)의 차이를 설명하시오.
-- MPLS(Multiprotocol Label Switching) 기반 트래픽 엔지니어링의 개념과 주요 기술을 설명하시오.
-- TCP Congestion Control의 개념과 주요 알고리즘(Reno, Cubic, BBR 등)을 설명하시오.
-- Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 차이를 설명하시오.
-  - 1. 트래픽 엔지니어링(Traffic Engineering)의 개념과 필요성
 ✅ 개념
 트래픽 엔지니어링은 네트워크 자원을 효율적으로 사용하고 트래픽 흐름을 최적화하기 위한 기술적 접근
 트래픽이 혼잡한 경로에 집중되지 않도록 분산하여 대역폭 낭비를 줄이고 QoS를 보장
@@ -3638,12 +3632,6 @@ HLS는 Apple 기반 생태계에 최적, MPEG-DASH는 다양한 플랫폼 지원
 둘 다 ABR을 구현하지만 컨테이너 포맷, 프로토콜 구조, 세그먼트 처리 방식이 다름
 
 - 네트워크에서 패킷 큐잉(Packet Queuing) 기법(FIFO, WFQ, CBWFQ, LLQ 등)의 개념을 설명하시오.
-- 로드 밸런싱(Load Balancing)에서 L4, L7 방식의 차이를 설명하시오.
-- 인터넷 트래픽을 최적화하는 캐싱 기술(Web Caching, Proxy Caching, Transparent Caching)의 개념을 설명하시오.
-- 네트워크에서 Jumbo Frame(9000 MTU) 사용의 개념과 장단점을 설명하시오.
-- 엔터프라이즈 네트워크(Enterprise Network)의 개념과 주요 구성 요소를 설명하시오.
-- 네트워크 설계에서 계층형 모델(Hierarchical Network Model)의 개념과 Access, Distribution, Core 계층의 역할을 설명하시오.
-  - 1. 패킷 큐잉(Packet Queuing) 기법의 개념
 ✅ FIFO (First-In First-Out)
 가장 기본적인 큐잉 방식으로, 먼저 도착한 패킷이 먼저 처리됨
 트래픽 유형에 관계없이 동일한 우선순위로 처리되어 실시간 트래픽 품질 보장 어려움
@@ -3917,12 +3905,6 @@ Wi-Fi HaLow는 **낮은 속도(수 Mbps)**지만 장거리 및 저전력 환경�
 
 
 - IoT 네트워크에서 CoAP(Constrained Application Protocol)과 MQTT의 차이를 설명하시오.
-- IoT 환경에서 사용되는 Edge Computing의 개념과 주요 활용 사례를 설명하시오.
-- 스마트 그리드(Smart Grid) 네트워크의 개념과 주요 기술을 설명하시오.
-- 스마트 시티(Smart City)에서 IoT 네트워크의 역할과 주요 기술을 설명하시오.
-- IoT 보안(Security)에서 발생할 수 있는 주요 위협과 해결 방안을 설명하시오.
-- 차세대 IoT 네트워크에서 AIoT(AI + IoT)의 개념과 활용 사례를 설명하시오.
-  - 1. CoAP(Constrained Application Protocol)과 MQTT의 차이
 ✅ (1) CoAP 개요
 경량형 IoT 디바이스를 위한 HTTP 유사 프로토콜 (REST 기반)
 UDP 기반으로 동작하며, 서버-클라이언트 구조
@@ -3997,12 +3979,6 @@ IoT 보안은 디바이스, 네트워크, 데이터의 전 주기적 보호가 �
 AIoT는 IoT로 수집된 데이터를 AI로 분석하여 예측과 자동화를 실현하는 진화된 IoT 모델
 
 - 6G 네트워크에서 테라헤르츠(THz) 대역의 개념과 활용 방안을 설명하시오.
-- 네트워크에서 FSO(Free-Space Optics)의 개념과 기존 광섬유 네트워크와의 차이를 설명하시오.
-- 양자 네트워크(Quantum Network)에서 QKD(Quantum Key Distribution)의 개념과 기존 암호화 방식과의 차이를 설명하시오.
-- 네트워크에서 Open RAN(Open Radio Access Network)의 개념과 기존 폐쇄형 RAN과의 차이를 설명하시오.
-- AI 기반 네트워크 자동화(AIOps)의 개념과 주요 활용 사례를 설명하시오.
-- 블록체인(Blockchain) 기반 네트워크 보안 기술과 주요 활용 사례를 설명하시오.
-  - 1. 6G에서 테라헤르츠(THz) 대역의 개념과 활용 방안
 개념
 
 테라헤르츠(THz) 대역은 0.1~10THz 범위의 초고주파 무선 주파수
@@ -4502,11 +4478,6 @@ Wi-Fi 6E, Wi-Fi 7에서 사용
 6GHz: 속도 최강, 커버리지 제한적 → 고성능 환경 적합
 
 - Wi-Fi 6(802.11ax)와 Wi-Fi 7의 차이점을 설명하시오.
-- LACP(Link Aggregation Control Protocol)의 개념과 네트워크 성능 향상 방법을 설명하시오.
-- 네트워크에서 패킷 손실(Packet Loss)이 발생하는 주요 원인과 해결 방법을 설명하시오.
-- 데이터센터 네트워크에서 EVPN(Extensible Virtual Private Network)의 개념과 활용 사례를 설명하시오.
-- VXLAN과 NVGRE(Network Virtualization using Generic Routing Encapsulation)의 차이를 설명하시오.
-  - 1. Wi-Fi 6 (802.11ax) vs Wi-Fi 7 차이점
 Wi-Fi 6 (802.11ax)
 
 2.4GHz와 5GHz 대역 지원
@@ -4597,11 +4568,6 @@ VXLAN보다 상용 지원 범위가 좁고 네트워크 장비 호환성 부족
 EVPN 등 차세대 구조와의 호환성 측면에서도 VXLAN이 우수
 
 - 클라우드 네트워크에서 SDN(Software-Defined Networking)의 개념과 기존 네트워크와의 차이를 설명하시오.
-- 클라우드 환경에서 네트워크 보안을 위한 주요 기법(VPC, Security Group, NACL 등)을 설명하시오.
-- SD-WAN(Software-Defined WAN)의 개념과 기존 MPLS 네트워크와의 차이를 설명하시오.
-- 클라우드 기반 로드 밸런싱(Cloud Load Balancer)의 개념과 주요 유형(L4, L7 Load Balancing)을 설명하시오.
-- 클라우드 네트워크에서 DDoS 방어 기법(AWS Shield, Google Cloud Armor 등)을 설명하시오.
-  - 1. 클라우드 네트워크에서 SDN의 개념과 기존 네트워크와의 차이
 SDN(Software-Defined Networking) 개념
 
 네트워크 제어 영역(Control Plane)을 데이터 전송 영역(Data Plane)과 분리하여, 중앙 집중적으로 네트워크를 제어하고 관리하는 방식
@@ -4701,11 +4667,6 @@ Cloud CDN과 통합되어 글로벌 규모 트래픽 분산 대응 가능
 
 
 - 클라우드 환경에서 네트워크 자동화(Network Automation) 도구(Terraform, Ansible, Netmiko 등)를 설명하시오.
-- Kubernetes 네트워크 모델에서 CNI(Container Network Interface)의 개념과 주요 플러그인(Calico, Flannel 등)의 차이를 설명하시오.
-- 클라우드 네트워크에서 Anycast의 개념과 기존 Unicast, Multicast와의 차이를 설명하시오.
-- 6G 네트워크에서 AI 기반 네트워크 최적화(AI-Driven Networking)의 개념과 주요 사례를 설명하시오.
-- 네트워크에서 사용되는 머신러닝 기반 이상 탐지(Anomaly Detection)의 개념과 주요 활용 사례를 설명하시오.
-  - 1. 클라우드 환경의 네트워크 자동화 도구
 Terraform
 
 인프라를 코드로 관리하는 IaC(Infrastructure as Code) 도구
@@ -4808,11 +4769,6 @@ DDoS 공격 탐지: 급격한 트래픽 증가 이상 징후 분석
 
 
 - 자율 네트워크(Self-Driving Network)의 개념과 주요 활용 사례를 설명하시오.
-- Intent-Based Networking(IBN)의 개념과 기존 네트워크 운영 방식과의 차이를 설명하시오.
-- 차세대 네트워크에서 B5G(Beyond 5G)의 개념과 주요 기술을 설명하시오.
-- AI와 네트워크 보안이 결합된 SOAR(Security Orchestration, Automation, and Response)의 개념과 역할을 설명하시오.
-- 네트워크에서 디지털 트윈(Digital Twin) 기술의 개념과 주요 활용 사례를 설명하시오.
-  - 1. 자율 네트워크 (Self-Driving Network)
 개념
 
 사람의 개입 없이 네트워크가 스스로 구성, 최적화, 운영, 복구하는 지능형 네트워크
@@ -4893,14 +4849,7 @@ AI가 이상 행위 판단 → 사용자 계정 잠금 조치
 자율 네트워크와의 연계: 예측 결과를 바탕으로 자율적 네트워크 재구성 수행
 스마트시티/스마트팩토리: 통신망 상태를 실시간 디지털 트윈으로 반영하여 설비 제어
 
-
-
 - 양자 네트워크(Quantum Network)와 기존 네트워크의 차이를 설명하시오.
-- 위성 인터넷(Starlink, OneWeb)과 기존 지상 네트워크의 차이를 설명하시오.
-- 메타버스(Metaverse)와 차세대 네트워크 인프라의 관계를 설명하시오.
-- 네트워크 자동화(Network Automation)의 개념과 필요성을 설명하시오.
-- Terraform과 Ansible을 이용한 네트워크 자동화의 개념과 주요 활용 사례를 설명하시오.
-  - 1. 양자 네트워크(Quantum Network) vs 기존 네트워크
 개념 차이
 
 기존 네트워크는 전기적 신호나 광신호 기반으로 데이터를 0과 1의 이진 비트로 전송
@@ -4986,11 +4935,6 @@ Terraform은 "인프라 구축" 중심, Ansible은 "운영 및 설정 관리" �
 두 도구를 병행 사용 시, Terraform으로 리소스 생성, Ansible로 설정 배포하는 워크플로우 구성 가능
 
 - Zero Touch Provisioning(ZTP)의 개념과 네트워크 장비 자동 설정에서의 활용 방안을 설명하시오.
-- 네트워크에서 AI 기반 AIOps(Artificial Intelligence for IT Operations)의 개념과 주요 활용 사례를 설명하시오.
-- SDN과 네트워크 자동화(Network Automation)의 관계를 설명하시오.
-- 네트워크 장비 운영에서 API 기반 관리와 CLI 기반 관리의 차이를 설명하시오.
-
-  - 1. Zero Touch Provisioning (ZTP)의 개념과 활용 방안
 개념
 
 ZTP는 네트워크 장비를 현장에 설치한 후 수동 설정 없이 자동으로 초기 구성 및 설정을 적용하는 기술
@@ -5049,11 +4993,6 @@ JSON, XML 등의 포맷을 이용하여 명령 전달 및 결과 수신
 
 
 - 네트워크 모니터링에서 SNMP(Simple Network Management Protocol)와 Telemetry의 차이를 설명하시오.
-- 네트워크에서 BGP Flapping 문제의 개념과 해결 방법을 설명하시오.
-- DNS에서 발생할 수 있는 캐시 포이즈닝(Cache Poisoning) 공격의 개념과 방어 방법을 설명하시오.
-- 기업 네트워크에서 네트워크 접근 제어(NAC, Network Access Control)의 개념과 주요 보안 정책을 설명하시오.
-
-  - 1. SNMP vs Telemetry (네트워크 모니터링 비교)
 개념 비교
 
 SNMP (Simple Network Management Protocol)
