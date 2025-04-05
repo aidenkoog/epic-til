@@ -3583,15 +3583,17 @@ Organize concepts, features, types and Pros and Cons
     - 서비스별 트래픽 제어를 통해 실시간 트래픽과 일반 데이터 트래픽의 공존을 가능하게 함
 
 - QoS(Quality of Service)의 개념과 주요 트래픽 우선순위 정책
-✅ QoS 개념
-네트워크 자원을 효과적으로 할당하여 특정 트래픽에 대한 서비스 품질(지연, 대역폭, 손실 등)을 보장하는 기술
-음성, 영상, 데이터 등 서비스 유형별로 처리 우선순위를 다르게 적용
-✅ 주요 트래픽 우선순위 정책
-Classification: 패킷을 유형에 따라 구분 (예: VoIP, 웹, 파일 전송 등)
-Marking: 패킷에 우선순위 태그(DiffServ Code Point, VLAN Priority 등)를 부여
-Queuing: 큐잉 방식(FIFO, WFQ, LLQ 등)을 적용하여 대기 순서를 조정
-Scheduling: 우선순위에 따라 트래픽 전송 순서 결정
-Congestion Avoidance: WRED(Weighted Random Early Detection) 등 혼잡 방지 정책 활용
+  - QoS 개념
+    - 네트워크 자원을 효과적으로 할당하여 특정 트래픽에 대한 서비스 품질(지연, 대역폭, 손실 등)을 보장하는 기술
+    - 음성, 영상, 데이터 등 서비스 유형별로 처리 우선순위를 다르게 적용
+
+  - 주요 트래픽 우선순위 정책
+    - Classification: 패킷을 유형에 따라 구분 (예: VoIP, 웹, 파일 전송 등)
+    - Marking: 패킷에 우선순위 태그(DiffServ Code Point, VLAN Priority 등)를 부여
+    - Queuing: 큐잉 방식(FIFO, WFQ, LLQ 등)을 적용하여 대기 순서를 조정
+    - Scheduling: 우선순위에 따라 트래픽 전송 순서 결정
+    - Congestion Avoidance: WRED(Weighted Random Early Detection) 등 혼잡 방지 정책 활용
+    
 3. 트래픽 쉐이핑(Traffic Shaping)과 트래픽 폴리싱(Traffic Policing)의 차이
 ✅ 트래픽 쉐이핑 (Traffic Shaping)
 트래픽이 초과할 경우, 패킷을 큐에 저장하고 일정 속도로 전송
