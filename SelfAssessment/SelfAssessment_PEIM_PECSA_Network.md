@@ -3608,35 +3608,36 @@ Organize concepts, features, types and Pros and Cons
   - 차이점
     - 쉐이핑은 버퍼를 이용해 트래픽을 늦춤, 폴리싱은 초과 트래픽을 폐기하거나 마킹
     - 쉐이핑은 QoS 보장에 유리, 폴리싱은 서비스 품질 유지보다는 제어 중심
-    
-4. MPLS 기반 트래픽 엔지니어링의 개념과 주요 기술
-✅ 개념
-MPLS(Multiprotocol Label Switching)는 레이블 기반으로 패킷을 전송하는 고속 포워딩 기술
-MPLS 트래픽 엔지니어링은 레이블 스위칭 경로(LSP)를 제어하여 트래픽을 최적 경로로 유도
-✅ 주요 기술
-Constraint-based Routing: 대역폭, 지연 등 조건 기반으로 경로를 설정
-Explicit Route (ER): 경로를 사전에 정의하여 예측 가능한 트래픽 분산 가능
-Fast Reroute (FRR): 장애 발생 시 빠르게 대체 경로로 전환
-RSVP-TE(Resource Reservation Protocol - Traffic Engineering): 자원 예약 기반 경로 설정 프로토콜
-IGP Metric 조작: 내부 라우팅 메트릭을 조정하여 트래픽 흐름 유도
-5. TCP Congestion Control 개념과 주요 알고리즘
-✅ TCP 혼잡 제어 개념
-TCP는 네트워크 혼잡을 방지하기 위해 전송 속도를 동적으로 조절
-지연 시간과 패킷 손실을 통해 혼잡 여부를 감지하고 전송 속도를 조정
-✅ 주요 알고리즘
-TCP Reno
 
-혼잡 발생 시 Congestion Window(CWND)를 절반으로 줄임
-지수 증가 + 곱셈 감소(Multiplicative Decrease) 방식
-TCP Cubic
+- MPLS 기반 트래픽 엔지니어링의 개념과 주요 기술
+  - 개념
+    - MPLS(Multiprotocol Label Switching)는 레이블 기반으로 패킷을 전송하는 고속 포워딩 기술
+    - MPLS 트래픽 엔지니어링은 레이블 스위칭 경로(LSP)를 제어하여 트래픽을 최적 경로로 유도
 
-주로 Linux 커널에서 사용
-RTT(왕복시간) 영향을 줄이고 네트워크 대역폭을 더욱 활용할 수 있도록 비선형 증가 방식 적용
-TCP BBR (Bottleneck Bandwidth and Round-trip propagation time)
+  - 주요 기술
+    - Constraint-based Routing: 대역폭, 지연 등 조건 기반으로 경로를 설정
+    - Explicit Route (ER): 경로를 사전에 정의하여 예측 가능한 트래픽 분산 가능
+    - Fast Reroute (FRR): 장애 발생 시 빠르게 대체 경로로 전환
+    - RSVP-TE(Resource Reservation Protocol - Traffic Engineering): 자원 예약 기반 경로 설정 프로토콜
+    - IGP Metric 조작: 내부 라우팅 메트릭을 조정하여 트래픽 흐름 유도
 
-구글이 개발한 최신 알고리즘
-RTT와 병목 대역폭을 직접 측정하여 최적 전송률 유지
-손실 기반이 아닌 지연 기반 제어로 혼잡에 더 유연하게 대응
+- TCP Congestion Control 개념과 주요 알고리즘
+  - TCP 혼잡 제어 개념
+    - TCP는 네트워크 혼잡을 방지하기 위해 전송 속도를 동적으로 조절
+    - 지연 시간과 패킷 손실을 통해 혼잡 여부를 감지하고 전송 속도를 조정
+
+  - 주요 알고리즘 (TCP Reno, TCP Cubic, TCP BBR)
+    - TCP Reno
+      - 혼잡 발생 시 Congestion Window(CWND)를 절반으로 줄임
+      - 지수 증가 + 곱셈 감소(Multiplicative Decrease) 방식
+    - TCP Cubic
+      - 주로 Linux 커널에서 사용
+      - RTT(왕복시간) 영향을 줄이고 네트워크 대역폭을 더욱 활용할 수 있도록 비선형 증가 방식 적용
+    - TCP BBR (Bottleneck Bandwidth and Round-trip propagation time)
+      - 구글이 개발한 최신 알고리즘
+      - RTT와 병목 대역폭을 직접 측정하여 최적 전송률 유지
+      - 손실 기반이 아닌 지연 기반 제어로 혼잡에 더 유연하게 대응
+
 6. Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 차이
 ✅ ABR 개념
 클라이언트 네트워크 상태에 따라 비디오 품질을 동적으로 조절하는 스트리밍 기법
