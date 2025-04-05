@@ -3638,22 +3638,25 @@ Organize concepts, features, types and Pros and Cons
       - RTT와 병목 대역폭을 직접 측정하여 최적 전송률 유지
       - 손실 기반이 아닌 지연 기반 제어로 혼잡에 더 유연하게 대응
 
-6. Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 차이
-✅ ABR 개념
-클라이언트 네트워크 상태에 따라 비디오 품질을 동적으로 조절하는 스트리밍 기법
-연결이 불안정하거나 대역폭이 낮을 경우 저화질 스트리밍으로 자동 전환, 끊김 방지
-연속적인 사용자 경험 보장
-✅ HLS (HTTP Live Streaming)
-Apple에서 개발
-TS(MPEG-2 Transport Stream) 기반, 널리 지원됨
-상대적으로 세그먼트 길이가 길어 지연 시간이 김
-✅ MPEG-DASH (Dynamic Adaptive Streaming over HTTP)
-ISO 표준 기반, 브라우저 호환성이 높음
-MP4 기반 세그먼트, 다양한 미디어 형식 지원
-HLS보다 유연하지만 구현이 더 복잡
-✅ 차이점
-HLS는 Apple 기반 생태계에 최적, MPEG-DASH는 다양한 플랫폼 지원
-둘 다 ABR을 구현하지만 컨테이너 포맷, 프로토콜 구조, 세그먼트 처리 방식이 다름
+- Adaptive Bitrate Streaming(ABR)의 개념과 HLS, MPEG-DASH와의 차이
+  - ABR 개념
+    - 클라이언트 네트워크 상태에 따라 비디오 품질을 동적으로 조절하는 스트리밍 기법
+    - 연결이 불안정하거나 대역폭이 낮을 경우 저화질 스트리밍으로 자동 전환, 끊김 방지
+    - 연속적인 사용자 경험 보장
+
+  - HLS (HTTP Live Streaming)
+    - Apple에서 개발
+    - TS(MPEG-2 Transport Stream) 기반, 널리 지원됨
+    - 상대적으로 세그먼트 길이가 길어 지연 시간이 김
+
+  - MPEG-DASH (Dynamic Adaptive Streaming over HTTP)
+    - ISO 표준 기반, 브라우저 호환성이 높음
+    - MP4 기반 세그먼트, 다양한 미디어 형식 지원
+    - HLS보다 유연하지만 구현이 더 복잡
+
+  - 차이점
+    - HLS는 Apple 기반 생태계에 최적, MPEG-DASH는 다양한 플랫폼 지원
+    - 둘 다 ABR을 구현하지만 컨테이너 포맷, 프로토콜 구조, 세그먼트 처리 방식이 다름
 
 - 네트워크에서 패킷 큐잉(Packet Queuing) 기법(FIFO, WFQ, CBWFQ, LLQ 등)의 개념을 설명하시오.
 ✅ FIFO (First-In First-Out)
