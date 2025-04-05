@@ -3593,19 +3593,22 @@ Organize concepts, features, types and Pros and Cons
     - Queuing: 큐잉 방식(FIFO, WFQ, LLQ 등)을 적용하여 대기 순서를 조정
     - Scheduling: 우선순위에 따라 트래픽 전송 순서 결정
     - Congestion Avoidance: WRED(Weighted Random Early Detection) 등 혼잡 방지 정책 활용
+
+- 트래픽 쉐이핑(Traffic Shaping)과 트래픽 폴리싱(Traffic Policing)의 차이
+  - 트래픽 쉐이핑 (Traffic Shaping)
+    - 트래픽이 초과할 경우, 패킷을 큐에 저장하고 일정 속도로 전송
+    - 전송률을 제한하여 지연은 발생하지만 패킷 손실을 방지
+    - 버스트성 트래픽 제어에 적합, 실시간 트래픽에 유리
+
+  - 트래픽 폴리싱 (Traffic Policing)
+    - 허용 대역폭을 초과하는 패킷은 즉시 폐기하거나 마킹 처리(Drop/Mark)
+    - 지연은 최소화되지만, 패킷 손실 발생 가능성 존재
+    - 통신사 환경이나 계약 속도 위반 탐지 및 제재에 적합
+
+  - 차이점
+    - 쉐이핑은 버퍼를 이용해 트래픽을 늦춤, 폴리싱은 초과 트래픽을 폐기하거나 마킹
+    - 쉐이핑은 QoS 보장에 유리, 폴리싱은 서비스 품질 유지보다는 제어 중심
     
-3. 트래픽 쉐이핑(Traffic Shaping)과 트래픽 폴리싱(Traffic Policing)의 차이
-✅ 트래픽 쉐이핑 (Traffic Shaping)
-트래픽이 초과할 경우, 패킷을 큐에 저장하고 일정 속도로 전송
-전송률을 제한하여 지연은 발생하지만 패킷 손실을 방지
-버스트성 트래픽 제어에 적합, 실시간 트래픽에 유리
-✅ 트래픽 폴리싱 (Traffic Policing)
-허용 대역폭을 초과하는 패킷은 즉시 폐기하거나 마킹 처리(Drop/Mark)
-지연은 최소화되지만, 패킷 손실 발생 가능성 존재
-통신사 환경이나 계약 속도 위반 탐지 및 제재에 적합
-✅ 차이점
-쉐이핑은 버퍼를 이용해 트래픽을 늦춤, 폴리싱은 초과 트래픽을 폐기하거나 마킹
-쉐이핑은 QoS 보장에 유리, 폴리싱은 서비스 품질 유지보다는 제어 중심
 4. MPLS 기반 트래픽 엔지니어링의 개념과 주요 기술
 ✅ 개념
 MPLS(Multiprotocol Label Switching)는 레이블 기반으로 패킷을 전송하는 고속 포워딩 기술
