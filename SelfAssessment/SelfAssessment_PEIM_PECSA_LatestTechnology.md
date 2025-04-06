@@ -1630,14 +1630,15 @@ Organize concepts, features, types and Pros and Cons
 		- 클라우드 내 고객 데이터의 완전한 보안 확보
 	- Confidential Computing은 데이터 보안의 사각지대였던 처리 과정의 보호를 실현하여, 제로 트러스트 보안 모델 강화에 기여한다.
 
-2. 데이터 프라이버시 강화 기술(PETs)의 개념과 주요 기법
-**PETs(Privacy Enhancing Technologies)**는 개인정보를 보호하면서도 데이터 활용을 가능하게 하는 기술들을 통칭한다.
+- 데이터 프라이버시 강화 기술(PETs)의 개념과 주요 기법
+	- 개요
+		- PETs(Privacy Enhancing Technologies)는 개인정보를 보호하면서도 데이터 활용을 가능하게 하는 기술들을 통칭한다.
 	- 주요 기법:
-	- Differential Privacy: 데이터에 노이즈를 추가해 개별 식별을 막고, 집계 수준에서는 정확한 통계를 제공
-	- Federated Learning: 데이터는 로컬에 두고 모델만 공유해 중앙 서버에 데이터가 모이지 않도록 학습
-	- Homomorphic Encryption: 암호화된 상태에서도 연산 가능
-	- Secure Multi-Party Computation(MPC): 다수의 참여자가 데이터는 비공개로 유지하면서 공동 계산 수행
-PETs는 AI·빅데이터 시대의 데이터 보호 핵심 기술군으로 부상하고 있다.
+		- Differential Privacy: 데이터에 노이즈를 추가해 개별 식별을 막고, 집계 수준에서는 정확한 통계를 제공
+		- Federated Learning: 데이터는 로컬에 두고 모델만 공유해 중앙 서버에 데이터가 모이지 않도록 학습
+		- Homomorphic Encryption: 암호화된 상태에서도 연산 가능
+		- Secure Multi-Party Computation(MPC): 다수의 참여자가 데이터는 비공개로 유지하면서 공동 계산 수행
+	- PETs는 AI·빅데이터 시대의 데이터 보호 핵심 기술군으로 부상하고 있다.
 
 3. FIDO2(WebAuthn)의 개념과 기존 패스워드 기반 인증 방식과의 차이
 FIDO2는 패스워드 없는 인증을 목표로 하는 인증 표준으로, **WebAuthn(웹 인증 API)**과 **CTAP(Client to Authenticator Protocol)**을 기반으로 한다.
