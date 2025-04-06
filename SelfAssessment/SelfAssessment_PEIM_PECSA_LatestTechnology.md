@@ -1621,13 +1621,14 @@ Organize concepts, features, types and Pros and Cons
 		- 격자 기반, 다변수 다항식 기반, 해시 기반, 코드 기반 암호 등
 	- 양자 내성 암호는 NIST 표준화가 진행 중이며, 금융, 국방, 정부기관 등에서 우선 적용이 논의되고 있다.
 
-1. Confidential Computing의 개념과 주요 활용 사례
-**Confidential Computing(기밀 컴퓨팅)**은 데이터가 **사용 중(in-use)**일 때도 암호화 상태를 유지해, 처리 과정에서도 보호할 수 있도록 하는 기술이다. 하드웨어 기반의 신뢰 실행 환경(TEE, Trusted Execution Environment)을 활용한다.
+- Confidential Computing의 개념과 주요 활용 사례
+	- 개요
+		- Confidential Computing(기밀 컴퓨팅)은 데이터가 사용 중(in-use)일 때도 암호화 상태를 유지해, 처리 과정에서도 보호할 수 있도록 하는 기술이다. 하드웨어 기반의 신뢰 실행 환경(TEE, Trusted Execution Environment)을 활용한다.
 	- 활용 사례:
-	- 민감 데이터 분석(의료, 금융)
-	- 다자간 공동 AI 학습 시 데이터 보호
-	- 클라우드 내 고객 데이터의 완전한 보안 확보
-Confidential Computing은 데이터 보안의 사각지대였던 처리 과정의 보호를 실현하여, 제로 트러스트 보안 모델 강화에 기여한다.
+		- 민감 데이터 분석(의료, 금융)
+		- 다자간 공동 AI 학습 시 데이터 보호
+		- 클라우드 내 고객 데이터의 완전한 보안 확보
+	- Confidential Computing은 데이터 보안의 사각지대였던 처리 과정의 보호를 실현하여, 제로 트러스트 보안 모델 강화에 기여한다.
 
 2. 데이터 프라이버시 강화 기술(PETs)의 개념과 주요 기법
 **PETs(Privacy Enhancing Technologies)**는 개인정보를 보호하면서도 데이터 활용을 가능하게 하는 기술들을 통칭한다.
