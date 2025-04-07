@@ -2852,52 +2852,45 @@ Organize concepts, features, types and Pros and Cons
 		- 다중 시스템 연계 분석: 온프레미스·클라우드 통합 모니터링
 
 - Help Desk와 Service Desk의 개념과 차이
-Help Desk
+	- Help Desk
+		- 사용자 문제에 대한 1차적인 기술 지원 중심
+		- 주로 장애 접수, 비밀번호 재설정, 장비 점검 등
+		- 수동적·반응적 대응이 중심
+	- Service Desk
+		- ITIL에서 정의한 IT 서비스 제공의 중심 접점
+		- 인시던트, 요청관리, 변경관리까지 포함한 통합 서비스 창구
+		- 프로세스 기반의 문제 해결, SLA 기반 운영, ITSM과 연계됨
+	- 차이점 정리
+		- Help Desk는 "문제 해결"에 초점, Service Desk는 "서비스 품질과 연속성 유지"에 초점
+		- Help Desk는 한정된 범위의 기술 지원, Service Desk는 IT 서비스 관리 전반을 포괄
 
-사용자 문제에 대한 1차적인 기술 지원 중심
-주로 장애 접수, 비밀번호 재설정, 장비 점검 등
-수동적·반응적 대응이 중심
-Service Desk
+- IT 서비스 운영 자동화의 개념과 주요 도구
+	- 개념
+		- 수동으로 처리되던 IT 운영 작업들을 자동화하여 효율성, 일관성, 가용성을 높이는 기술
+		- 반복 작업 제거, 실시간 대응, 인력 의존도 감소 목적
+	- 주요 자동화 대상
+		- 배포 자동화(CI/CD)
+		- 인프라 프로비저닝(IaC)
+		- 장애 탐지 및 알림 처리
+		- 티켓 생성 및 초기 대응
+	- 주요 도구
+		- Ansible, Chef, Puppet: 구성 자동화
+		- Terraform: 인프라 구성 자동화
+		- Jenkins, GitLab CI: 배포 자동화
+		- ServiceNow, BMC: 티켓 기반 서비스 자동화
+		- AIOps 플랫폼: 이상 탐지 및 자동 대응
 
-ITIL에서 정의한 IT 서비스 제공의 중심 접점
-인시던트, 요청관리, 변경관리까지 포함한 통합 서비스 창구
-프로세스 기반의 문제 해결, SLA 기반 운영, ITSM과 연계됨
-차이점 정리
-
-Help Desk는 "문제 해결"에 초점, Service Desk는 "서비스 품질과 연속성 유지"에 초점
-Help Desk는 한정된 범위의 기술 지원, Service Desk는 IT 서비스 관리 전반을 포괄
-5. IT 서비스 운영 자동화의 개념과 주요 도구
-개념
-
-수동으로 처리되던 IT 운영 작업들을 자동화하여 효율성, 일관성, 가용성을 높이는 기술
-반복 작업 제거, 실시간 대응, 인력 의존도 감소 목적
-주요 자동화 대상
-
-배포 자동화(CI/CD)
-인프라 프로비저닝(IaC)
-장애 탐지 및 알림 처리
-티켓 생성 및 초기 대응
-주요 도구
-
-Ansible, Chef, Puppet: 구성 자동화
-Terraform: 인프라 구성 자동화
-Jenkins, GitLab CI: 배포 자동화
-ServiceNow, BMC: 티켓 기반 서비스 자동화
-AIOps 플랫폼: 이상 탐지 및 자동 대응
-6. DevSecOps 개념과 기존 DevOps와의 차이
-DevOps 개념
-
-개발(Dev)과 운영(Ops)의 협업을 통해 소프트웨어를 신속하고 안정적으로 배포하는 문화 및 기술 체계
-자동화, 지속적 통합(CI), 지속적 배포(CD), 빠른 피드백이 핵심
-DevSecOps 개념
-
-DevOps에 보안(Security)를 통합하여 초기 개발 단계부터 보안을 내재화한 접근 방식
-‘Shift Left Security’ 원칙에 따라 보안 테스트를 개발 초기로 이동시킴
-보안 자동화(SAST/DAST, 취약점 분석 도구)와 보안 교육을 개발 파이프라인에 통합
-차이점 요약
-
-DevOps는 속도 중심, DevSecOps는 속도 + 보안 균형 중심
-보안을 별도 팀의 책임이 아닌 개발자의 공동 책임으로 전환
+- DevSecOps 개념과 기존 DevOps와의 차이
+	- DevOps 개념
+		- 개발(Dev)과 운영(Ops)의 협업을 통해 소프트웨어를 신속하고 안정적으로 배포하는 문화 및 기술 체계
+		- 자동화, 지속적 통합(CI), 지속적 배포(CD), 빠른 피드백이 핵심
+	- DevSecOps 개념
+		- DevOps에 보안(Security)를 통합하여 초기 개발 단계부터 보안을 내재화한 접근 방식
+		- ‘Shift Left Security’ 원칙에 따라 보안 테스트를 개발 초기로 이동시킴
+		- 보안 자동화(SAST/DAST, 취약점 분석 도구)와 보안 교육을 개발 파이프라인에 통합
+	- 차이점 요약
+		- DevOps는 속도 중심, DevSecOps는 속도 + 보안 균형 중심
+		- 보안을 별도 팀의 책임이 아닌 개발자의 공동 책임으로 전환
 
   - 1. SIAM(Service Integration and Management)의 개념과 활용 사례
 개념
