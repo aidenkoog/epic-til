@@ -1298,20 +1298,13 @@ Organize concepts, features, types and Pros and Cons
     - 행위 기반 탐지, 자동 로그 분석, 정책 생성 자동화 등이 핵심
 
   - 주요 활용 사례
+    - 이상 행위 탐지 (UEBA): 사용자/기기 행동을 학습하여 비정상 패턴 탐지
+    - 지능형 피싱 탐지: 이메일, 웹 트래픽 내 피싱 가능성 자동 분류
+    - AI 기반 보안 오케스트레이션(SOAR): 이벤트에 따라 자동 대응
+    - 지능형 안티바이러스: 정적·동적 분석 기반 악성코드 분류
+    - Ransomware 조기 탐지: 파일 암호화 패턴을 AI가 조기에 식별
 
-이상 행위 탐지 (UEBA): 사용자/기기 행동을 학습하여 비정상 패턴 탐지
-지능형 피싱 탐지: 이메일, 웹 트래픽 내 피싱 가능성 자동 분류
-AI 기반 보안 오케스트레이션(SOAR): 이벤트에 따라 자동 대응
-지능형 안티바이러스: 정적·동적 분석 기반 악성코드 분류
-Ransomware 조기 탐지: 파일 암호화 패턴을 AI가 조기에 식별
-
-- 머신러닝 모델 공격(Evasion Attack, Model Poisoning, Data Poisoning)의 개념과 방어 기법을 설명하시오.
-- AI 기반 이상 탐지(Anomaly Detection)의 개념과 주요 적용 사례를 설명하시오.
-- 딥페이크(Deepfake)의 개념과 보안 위협 및 대응 방안을 설명하시오.
-- AI 기반 피싱 공격(Phishing Attack with AI)의 개념과 방어 기법을 설명하시오.
-- AI 모델의 신뢰성 및 설명 가능성(XAI, Explainable AI)의 개념과 필요성을 설명하시오.
-- AI 윤리(AI Ethics)와 AI 사용 시 발생할 수 있는 보안 문제를 설명하시오.
-  - 1. 머신러닝 모델 공격(Evasion Attack, Model Poisoning, Data Poisoning)의 개념과 방어 기법
+- 머신러닝 모델 공격(Evasion Attack, Model Poisoning, Data Poisoning)의 개념과 방어 기법
 Evasion Attack (회피 공격)
 
 모델이 이미 학습된 상태에서, 공격자가 입력 데이터를 조작해 오답을 유도하는 공격
