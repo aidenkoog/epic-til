@@ -3199,39 +3199,35 @@ Organize concepts, features, types and Pros and Cons
 		- RTO는 시간(복구 속도) 중심, RPO는 데이터 손실량(백업 주기) 중심
 		- 둘 다 DR/BCP 설계 시 필수적인 기준
 
-  - 1. IT 서비스의 고가용성(High Availability, HA) 보장을 위한 주요 전략
-개념
+- IT 서비스의 고가용성(High Availability, HA) 보장을 위한 주요 전략
+	- 개념
+		- 시스템이나 서비스가 장애 없이 지속적으로 동작하는 능력을 확보하는 것
+		- 서비스 중단 최소화가 핵심 목표
+	- 주요 전략
+		- 이중화(Redundancy): 서버, 네트워크, 전원, 스토리지 등 구성 요소 이중화
+		- 페일오버(Failover): 장애 발생 시 자동으로 대체 시스템으로 전환
+		- 클러스터링: 서버 간 가상 하나처럼 동작하여 부하 분산 및 고가용성 확보
+		- 로드 밸런싱: 트래픽을 분산하여 하나의 서버에 과부하 방지
+		지속적인 모니터링: 장애를 사전에 감지하고 빠르게 대응
+		- 무중단 배포(Blue-Green, Canary 등): 배포 시 서비스 영향 최소화
 
-시스템이나 서비스가 장애 없이 지속적으로 동작하는 능력을 확보하는 것
-서비스 중단 최소화가 핵심 목표
-주요 전략
-
-이중화(Redundancy): 서버, 네트워크, 전원, 스토리지 등 구성 요소 이중화
-페일오버(Failover): 장애 발생 시 자동으로 대체 시스템으로 전환
-클러스터링: 서버 간 가상 하나처럼 동작하여 부하 분산 및 고가용성 확보
-로드 밸런싱: 트래픽을 분산하여 하나의 서버에 과부하 방지
-지속적인 모니터링: 장애를 사전에 감지하고 빠르게 대응
-무중단 배포(Blue-Green, Canary 등): 배포 시 서비스 영향 최소화
-2. 데이터 백업 전략(Full, Incremental, Differential)의 개념과 차이
-Full Backup
-
-전체 데이터를 모두 백업하는 방식
-복원 속도 빠름, 하지만 백업 용량과 시간은 가장 많이 소요됨
-Incremental Backup
-
-가장 최근 백업 이후 변경된 데이터만 백업
-백업 시간 및 용량 최소화
-복구 시 전체 + 모든 증분을 순차적으로 적용해야 함 → 복원 시간 증가 가능
-Differential Backup
-
-가장 최근 Full Backup 이후 변경된 전체 데이터를 백업
-백업 시간은 Full보다 짧고 Incremental보다는 김
-복구 시 Full + 마지막 Differential만 있으면 됨 → 복원 시간은 중간
-요약
-
-Full: 빠른 복구, 자원 부담 큼
-Incremental: 백업 효율 높음, 복구 복잡
-Differential: 복구 단순, 중간 성능
+- 데이터 백업 전략(Full, Incremental, Differential)의 개념과 차이
+	- Full Backup
+		- 전체 데이터를 모두 백업하는 방식
+		- 복원 속도 빠름, 하지만 백업 용량과 시간은 가장 많이 소요됨
+	- Incremental Backup
+		- 가장 최근 백업 이후 변경된 데이터만 백업
+		- 백업 시간 및 용량 최소화
+		- 복구 시 전체 + 모든 증분을 순차적으로 적용해야 함 → 복원 시간 증가 가능
+	- Differential Backup
+		- 가장 최근 Full Backup 이후 변경된 전체 데이터를 백업
+		- 백업 시간은 Full보다 짧고 Incremental보다는 김
+		- 복구 시 Full + 마지막 Differential만 있으면 됨 → 복원 시간은 중간
+	- 요약
+		- Full: 빠른 복구, 자원 부담 큼
+		- Incremental: 백업 효율 높음, 복구 복잡
+		- Differential: 복구 단순, 중간 성능
+		
 3. 클라우드 기반 재해 복구(DRaaS, Disaster Recovery as a Service)의 개념과 활용 사례
 개념
 
