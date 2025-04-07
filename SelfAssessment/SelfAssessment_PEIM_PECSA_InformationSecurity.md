@@ -568,26 +568,18 @@ Organize concepts, features, types and Pros and Cons
     - 스푸핑, 세션 하이재킹: 인증 및 데이터 위조
     - 제로데이 취약점: 미공개된 취약점 공격
     - 내부자 위협: 권한을 가진 사용자에 의한 악용
-    
-6. 방화벽(Firewall)의 개념과 유형
-개념
 
-네트워크 경계에서 허용된 트래픽만 통과시키고, 불법적 접근을 차단하는 보안 장비 혹은 소프트웨어
-주요 유형
+- 방화벽(Firewall)의 개념과 유형
+  - 개념
+    - 네트워크 경계에서 허용된 트래픽만 통과시키고, 불법적 접근을 차단하는 보안 장비 혹은 소프트웨어
+  - 주요 유형
+    - 패킷 필터링(Packet Filtering): IP, 포트, 프로토콜 기반 트래픽 허용/차단
+    - 상태 기반 검사(Stateful Inspection): 세션 상태를 추적하며 패킷 흐름 분석
+    - 프록시(Proxy Firewall): 클라이언트와 서버 사이에 위치하여 요청을 대신 수행
+    - 통합 위협 관리(UTM): 방화벽, IPS, 안티바이러스 등을 통합한 보안 어플라이언스
+    - 현대 보안에서 방화벽은 네트워크 보안의 가장 기본이자 필수적 구성 요소
 
-패킷 필터링(Packet Filtering): IP, 포트, 프로토콜 기반 트래픽 허용/차단
-상태 기반 검사(Stateful Inspection): 세션 상태를 추적하며 패킷 흐름 분석
-프록시(Proxy Firewall): 클라이언트와 서버 사이에 위치하여 요청을 대신 수행
-통합 위협 관리(UTM): 방화벽, IPS, 안티바이러스 등을 통합한 보안 어플라이언스
-현대 보안에서 방화벽은 네트워크 보안의 가장 기본이자 필수적 구성 요소
-
-- IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이를 설명하시오.
-- DDoS(Distributed Denial of Service) 공격의 개념과 주요 방어 기법을 설명하시오.
-- VPN(Virtual Private Network)의 개념과 주요 프로토콜(IPSec, SSL/TLS, L2TP)을 설명하시오.
-- 네트워크 보안에서 VLAN(Virtual LAN)과 NAC(Network Access Control)의 개념을 설명하시오.
-- Man-in-the-Middle Attack(MITM)의 개념과 주요 대응 기법을 설명하시오.
-- DNS 보안(DNSSEC, DNS Spoofing, Cache Poisoning)의 개념과 주요 방어 기법을 설명하시오.
-  - 1. IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이
+- IDS(Intrusion Detection System)와 IPS(Intrusion Prevention System)의 차이
 IDS 개념 (침입 탐지 시스템)
 
 네트워크나 시스템에서 발생하는 이상 징후 또는 침입 시도를 탐지하여 관리자에게 경고
