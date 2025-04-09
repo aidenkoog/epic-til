@@ -1214,47 +1214,43 @@ Organize concepts, features, types and Pros and Cons
         - 소프트웨어 인터럽트
             - 프로그램 실행 중 명령어(INT 등)을 통해 발생
             - 시스템 호출, 예외 처리 등에 사용
-            
-6. 인터럽트 벡터 테이블(Interrupt Vector Table)
-개념
-인터럽트 발생 시 해당 인터럽트의 처리 루틴(Handler)의 주소를 저장한 테이블
-CPU는 인터럽트 발생 시 이 테이블에서 해당 인터럽트 번호에 해당하는 주소를 읽고 해당 루틴으로 점프
-특징
-일반적으로 메모리의 낮은 주소에 위치
-운영체제 또는 펌웨어가 초기화 시 설정
-인터럽트 핸들러의 진입점을 효율적으로 관리
 
-- 메모리 매핑 방식(Memory-mapped I/O vs. Port-mapped I/O)의 차이점은?
-- I/O 방식(폴링, 인터럽트, DMA)의 차이점과 장점은?
-- 양자 컴퓨팅(Quantum Computing)의 개념과 기존 컴퓨터와의 차이점은?
-- 뉴로모픽 컴퓨팅(Neuromorphic Computing)이란 무엇인가?
-- 엣지 컴퓨팅(Edge Computing)과 클라우드 컴퓨팅(Cloud Computing)의 차이점은?
-- NVMe(Non-Volatile Memory Express)의 개념과 기존 SATA SSD와의 차이점은?
-    - 1. 메모리 매핑 방식: Memory-mapped I/O vs. Port-mapped I/O
-Memory-mapped I/O
-I/O 장치를 메모리 주소 공간의 일부처럼 할당하여 접근
-CPU는 일반 메모리 접근 명령어(MOV, LOAD, STORE)를 통해 장치와 통신
-명령어 집합이 단순하며 메모리 주소 공간을 일부 소모함
-RISC 구조 등에서 주로 사용
-Port-mapped I/O
-**I/O 전용 명령어(IN, OUT 등)**를 통해 장치 접근
-I/O 공간이 메모리 주소 공간과 분리되어 있음
-CISC 구조에서 주로 사용 (예: x86)
-차이점 요약
-메모리매핑은 명령어 호환성과 속도 측면에서 유리
-포트매핑은 주소 공간 절약에 유리
-2. I/O 방식: 폴링, 인터럽트, DMA
-폴링(Polling)
-CPU가 주기적으로 장치를 검사하여 작업 수행
-구현이 간단하지만 CPU 자원 낭비가 큼
-인터럽트(Interrupt-driven I/O)
-장치가 작업 준비가 되면 CPU에 인터럽트 요청
-CPU는 즉시 처리 루틴으로 전환
-효율적이지만 인터럽트 처리 비용 존재
-DMA(Direct Memory Access)
-장치가 CPU 개입 없이 메모리와 직접 통신
-CPU 부하 감소, 고속 데이터 전송에 유리
-DMA 컨트롤러 필요
+- 인터럽트 벡터 테이블(Interrupt Vector Table)
+    - 개념
+        - 인터럽트 발생 시 해당 인터럽트의 처리 루틴(Handler)의 주소를 저장한 테이블
+        - CPU는 인터럽트 발생 시 이 테이블에서 해당 인터럽트 번호에 해당하는 주소를 읽고 해당 루틴으로 점프
+    - 특징
+        - 일반적으로 메모리의 낮은 주소에 위치
+        - 운영체제 또는 펌웨어가 초기화 시 설정
+        - 인터럽트 핸들러의 진입점을 효율적으로 관리
+
+- 메모리 매핑 방식: Memory-mapped I/O vs. Port-mapped I/O
+    - Memory-mapped I/O
+        - I/O 장치를 메모리 주소 공간의 일부처럼 할당하여 접근
+        - CPU는 일반 메모리 접근 명령어(MOV, LOAD, STORE)를 통해 장치와 통신
+        - 명령어 집합이 단순하며 메모리 주소 공간을 일부 소모함
+        - RISC 구조 등에서 주로 사용
+    - Port-mapped I/O
+        - I/O 전용 명령어(IN, OUT 등)를 통해 장치 접근
+        - I/O 공간이 메모리 주소 공간과 분리되어 있음
+        - CISC 구조에서 주로 사용 (예: x86)
+    - 차이점 요약
+        - 메모리매핑은 명령어 호환성과 속도 측면에서 유리
+        - 포트매핑은 주소 공간 절약에 유리
+
+- I/O 방식: 폴링, 인터럽트, DMA
+    - 폴링(Polling)
+        - CPU가 주기적으로 장치를 검사하여 작업 수행
+        - 구현이 간단하지만 CPU 자원 낭비가 큼
+    - 인터럽트(Interrupt-driven I/O)
+        - 장치가 작업 준비가 되면 CPU에 인터럽트 요청
+        - CPU는 즉시 처리 루틴으로 전환
+        - 효율적이지만 인터럽트 처리 비용 존재
+    - DMA(Direct Memory Access)
+        - 장치가 CPU 개입 없이 메모리와 직접 통신
+        - CPU 부하 감소, 고속 데이터 전송에 유리
+        - DMA 컨트롤러 필요
+        
 3. 양자 컴퓨팅(Quantum Computing)의 개념과 기존 컴퓨터와의 차이점
 개념
 정보의 최소 단위를 **비트 대신 큐비트(Qubit)**로 표현
