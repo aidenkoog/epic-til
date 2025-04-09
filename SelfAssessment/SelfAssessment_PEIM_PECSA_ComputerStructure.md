@@ -626,40 +626,41 @@ Organize concepts, features, types and Pros and Cons
         - Shift 연산
             - 비트 이동(Shift Left, Shift Right)을 통한 데이터 처리
             
-2. CPU 내부의 주요 레지스터의 역할
-주요 레지스터와 역할
-PC (Program Counter)
-다음에 수행할 명령어의 주소를 저장하는 레지스터. 명령어의 실행 순서를 관리한다.
+- CPU 내부의 주요 레지스터의 역할
+    - PC (Program Counter)
+        - 다음에 수행할 명령어의 주소를 저장하는 레지스터. 명령어의 실행 순서를 관리한다.
 
-IR (Instruction Register)
-메모리에서 인출된 현재 실행 중인 명령어를 임시 저장하는 레지스터.
+    - IR (Instruction Register)
+        - 메모리에서 인출된 현재 실행 중인 명령어를 임시 저장하는 레지스터.
 
-MAR (Memory Address Register)
-메모리에 접근할 데이터의 주소를 임시 저장하는 레지스터.
+    - MAR (Memory Address Register)
+        - 메모리에 접근할 데이터의 주소를 임시 저장하는 레지스터.
 
-MDR (Memory Data Register)
-메모리에서 읽거나 쓸 데이터를 임시 저장하는 레지스터.
+    - MDR (Memory Data Register)
+        - 메모리에서 읽거나 쓸 데이터를 임시 저장하는 레지스터.
 
-ACC (Accumulator)
-산술 및 논리 연산의 결과를 저장하거나, 연산 시 데이터를 임시 저장하는 레지스터.
+    - ACC (Accumulator)
+        - 산술 및 논리 연산의 결과를 저장하거나, 연산 시 데이터를 임시 저장하는 레지스터.
 
-3. 정수 연산과 부동소수점 연산의 차이점과 처리 방식
-정수 연산(Integer Operation)
-특징: 고정된 크기의 이진 정수 데이터로 처리, 연산 속도가 빠름.
-처리 방식: 덧셈, 뺄셈 등의 기본 산술 연산을 단순한 비트 연산으로 처리.
-부동소수점 연산(Floating-point Operation)
-특징: 매우 큰 수나 매우 작은 수, 소수를 정밀하게 표현 가능, 처리 속도는 느림.
-처리 방식: 지수(Exponent)와 가수(Mantissa)로 나누어 연산 수행(IEEE 754 표준을 따름).
-4. IEEE 754 부동소수점 표준의 구조와 특징
-구조
-부호(Sign bit) + 지수(Exponent) + 가수(Mantissa or Fraction)로 구성됨.
-예시(32비트 단정밀도 기준): [1비트 부호 | 8비트 지수 | 23비트 가수]
-특징
-정규화된 표현: 가수를 정규화하여 표현함으로써 숫자의 표현 범위를 확대
-지수 편향(Bias): 지수를 표현할 때 Bias를 사용하여 음수 표현을 없애고 양수로 표현
-단정밀도는 Bias가 127, 배정밀도는 1023
-특수값 표현: 무한대(infinity), NaN(Not a Number), 0 등을 정의하여 예외 상황 처리 가능
-5. Overflow와 Underflow의 개념과 발생 원인
+- 정수 연산과 부동소수점 연산의 차이점과 처리 방식
+    - 정수 연산(Integer Operation)
+        - 특징: 고정된 크기의 이진 정수 데이터로 처리, 연산 속도가 빠름.
+        - 처리 방식: 덧셈, 뺄셈 등의 기본 산술 연산을 단순한 비트 연산으로 처리.
+    - 부동소수점 연산(Floating-point Operation)
+        - 특징: 매우 큰 수나 매우 작은 수, 소수를 정밀하게 표현 가능, 처리 속도는 느림.
+        - 처리 방식: 지수(Exponent)와 가수(Mantissa)로 나누어 연산 수행(IEEE 754 표준을 따름).
+
+- IEEE 754 부동소수점 표준의 구조와 특징
+    - 구조
+        - 부호(Sign bit) + 지수(Exponent) + 가수(Mantissa or Fraction)로 구성됨.
+        - 예시(32비트 단정밀도 기준): [1비트 부호 | 8비트 지수 | 23비트 가수]
+    - 특징
+        - 정규화된 표현: 가수를 정규화하여 표현함으로써 숫자의 표현 범위를 확대
+        - 지수 편향(Bias): 지수를 표현할 때 Bias를 사용하여 음수 표현을 없애고 양수로 표현
+        - 단정밀도는 Bias가 127, 배정밀도는 1023
+        - 특수값 표현: 무한대(infinity), NaN(Not a Number), 0 등을 정의하여 예외 상황 처리 가능
+
+- Overflow와 Underflow의 개념과 발생 원인
 Overflow (오버플로우)
 개념: 연산 결과가 CPU 레지스터가 표현 가능한 범위를 초과할 때 발생
 발생 원인: 덧셈/곱셈 등 연산의 결과 값이 자료형이 나타낼 수 있는 최대 범위를 초과할 때
