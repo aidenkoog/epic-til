@@ -3662,315 +3662,266 @@ Organize concepts, features, types and Pros and Cons
     - 에러 처리 및 로깅 보안
 
 - 버그 바운티(Bug Bounty)의 개념과 주요 보안 프로그램
-개념
+  - 개념
+    - 외부 보안 전문가 또는 해커에게 보안 취약점을 발견하고 제보하면 보상하는 프로그램
+    - 사전 허용된 테스트 범위에서만 취약점 분석 허용
+  - 주요 플랫폼 및 프로그램
+    - HackerOne, Bugcrowd: 글로벌 버그 바운티 플랫폼
+    - Google Vulnerability Reward Program
+    - Facebook Whitehat, Microsoft Bounty Program
+    - 기업은 보안성 향상, 대응 비용 절감 등의 효과를 얻음
 
-외부 보안 전문가 또는 해커에게 보안 취약점을 발견하고 제보하면 보상하는 프로그램
-사전 허용된 테스트 범위에서만 취약점 분석 허용
-주요 플랫폼 및 프로그램
+- 웹 애플리케이션 보안에서 OWASP ZAP과 Burp Suite의 차이
+  - OWASP ZAP (Zed Attack Proxy)
+    - 오픈소스 기반 웹 애플리케이션 보안 테스트 도구
+    - 자동화 기능이 강점이며, 초보자도 사용 용이
+    - 취약점 스캐닝, 프록시 기반 트래픽 분석, Fuzzer, Spider 등 제공
 
-HackerOne, Bugcrowd: 글로벌 버그 바운티 플랫폼
-Google Vulnerability Reward Program
-Facebook Whitehat, Microsoft Bounty Program
-기업은 보안성 향상, 대응 비용 절감 등의 효과를 얻음
+  - Burp Suite
+    - PortSwigger에서 개발한 상용 중심의 고급 보안 테스트 도구
+    - 강력한 수동 분석, 리퀘스트 조작, 익스플로잇 기능
+    - Professional 에디션에서는 Scanner, Intruder, Repeater 등 고급 기능 제공
+    - ZAP은 무료에 적합, Burp는 고급 테스터에게 적합
 
+- 취약점 공개 정책(Vulnerability Disclosure Policy, VDP)의 개념과 주요 사례
+  - 개념
+    - 외부 보안 연구자 또는 해커가 발견한 보안 취약점을 안전하게 보고할 수 있는 절차와 정책
+    - 명확한 보고 방법, 응답 시간, 보상 유무 등을 정의
+  - 주요 사례
+    - Google, Microsoft, Facebook 등은 VDP와 함께 버그 바운티 프로그램 운영
+    - 정부 기관도 CVD(조정된 취약점 공개) 정책을 통해 VDP 시행
+    
+- DevSecOps(Development, Security, and Operations)의 개념과 기존 DevOps와의 차이
+  - DevOps
+    - 개발(Dev)과 운영(Ops)의 통합을 통해 빠른 릴리즈와 자동화를 목표로 하는 문화/프로세스
+  - DevSecOps
+    - DevOps에 보안(Security)을 통합한 개념
+    - 보안을 초기 개발 단계부터 자동화된 방식으로 통합
+    - 코드 분석, 취약점 스캐너, 정책 검사 등을 CI/CD에 통합하여 Secure by Design 실현
 
-- 웹 애플리케이션 보안에서 OWASP ZAP과 Burp Suite의 차이를 설명하시오.
-- 취약점 공개 정책(Vulnerability Disclosure Policy, VDP)의 개념과 주요 사례를 설명하시오.
-- DevSecOps(Development, Security, and Operations)의 개념과 기존 DevOps와의 차이를 설명하시오.
-- 보안 코딩 가이드(Secure Coding Guidelines)에서 주요 보안 원칙을 설명하시오.
-- 보안 운영 센터(SOC, Security Operations Center)의 개념과 주요 운영 모델을 설명하시오.
-- 레드팀/블루팀 보안 훈련(Red Team vs. Blue Team)의 개념과 주요 차이를 설명하시오.
-  - 1. 웹 애플리케이션 보안에서 OWASP ZAP과 Burp Suite의 차이를 설명하시오.
-OWASP ZAP (Zed Attack Proxy)
+- 보안 코딩 가이드(Secure Coding Guidelines)에서 주요 보안 원칙
+  - 입력 검증(Input Validation)
+    - 사용자 입력에 대한 유효성 검사 필수
+    - SQL 인젝션, XSS, 명령어 삽입 방지
+  - 출력 인코딩(Output Encoding)
+    - 사용자 입력을 출력 전 안전하게 인코딩
+    - HTML, JavaScript, URL 등 컨텍스트별 인코딩 필요
+  - 인증 및 세션 관리
+    - 안전한 로그인 구현, 세션 타임아웃 적용, 쿠키 보안 설정
+  - 에러 처리
+    - 상세한 시스템 메시지 노출 방지
+    - 로깅은 필요하되 사용자에게는 일반 메시지 제공
+  - 암호화
+    - 민감 정보는 암호화 저장 및 전송
+    - 안전한 암호 알고리즘 사용
 
-오픈소스 기반 웹 애플리케이션 보안 테스트 도구
-자동화 기능이 강점이며, 초보자도 사용 용이
-취약점 스캐닝, 프록시 기반 트래픽 분석, Fuzzer, Spider 등 제공
-Burp Suite
+- 보안 운영 센터(SOC, Security Operations Center)의 개념과 주요 운영 모델
+  - 개념
+    - 조직의 IT 자산에 대한 보안 모니터링, 위협 분석, 대응을 수행하는 전담 조직
+  - 운영 모델
+    - 내부 구축형 SOC: 대기업, 공공기관 중심
+    - MSSP(Manged Security Service Provider): 외부 위탁 운영
+    - 하이브리드 SOC: 내부 인력 + 외부 전문가 병행
+    - 주로 SIEM, SOAR, Threat Intelligence 연계 시스템 운영
 
-PortSwigger에서 개발한 상용 중심의 고급 보안 테스트 도구
-강력한 수동 분석, 리퀘스트 조작, 익스플로잇 기능
-Professional 에디션에서는 Scanner, Intruder, Repeater 등 고급 기능 제공
-ZAP은 무료에 적합, Burp는 고급 테스터에게 적합
-2. 취약점 공개 정책(Vulnerability Disclosure Policy, VDP)의 개념과 주요 사례
-개념
+- 레드팀/블루팀 보안 훈련(Red Team vs. Blue Team)의 개념과 주요 차이
+  - 레드팀(Red Team)
+    - 모의 해커 역할
+    - 실제 공격자처럼 행동하여 침투 시나리오 수행, 취약점 식별
 
-외부 보안 연구자 또는 해커가 발견한 보안 취약점을 안전하게 보고할 수 있는 절차와 정책
-명확한 보고 방법, 응답 시간, 보상 유무 등을 정의
-주요 사례
+  - 블루팀(Blue Team)
+    - 방어팀 역할
+    - 시스템 모니터링, 위협 탐지, 대응 계획 수행
+    - 레드팀의 공격을 실시간 탐지 및 방어
 
-Google, Microsoft, Facebook 등은 VDP와 함께 버그 바운티 프로그램 운영
-정부 기관도 CVD(조정된 취약점 공개) 정책을 통해 VDP 시행
-3. DevSecOps(Development, Security, and Operations)의 개념과 기존 DevOps와의 차이를 설명하시오.
-DevOps
+  - 차이점
+    - 레드팀은 공격 시뮬레이션, 블루팀은 방어 및 복구 테스트
+    - 훈련을 통해 조직의 탐지 능력과 대응 체계 강화
 
-개발(Dev)과 운영(Ops)의 통합을 통해 빠른 릴리즈와 자동화를 목표로 하는 문화/프로세스
-DevSecOps
+- 보안 관제(Security Monitoring)의 개념과 주요 도구(SIEM, SOAR 등)
+  - 개념
+    - 정보 시스템에서 발생하는 보안 이벤트와 로그를 실시간 수집·분석하여 위협을 탐지하고 대응하는 활동
+    - 보안 사고를 조기에 감지하고, 사후 대응까지 포함
+  - 주요 도구
+    - SIEM(Security Information and Event Management): 로그 수집·분석, 경고, 대시보드 제공
+    - SOAR(Security Orchestration, Automation and Response): SIEM과 연동하여 자동화된 대응 시나리오 실행
+    - EDR, NDR, UEBA 등과 연계하여 정교한 위협 탐지 체계 구성
 
-DevOps에 보안(Security)을 통합한 개념
-보안을 초기 개발 단계부터 자동화된 방식으로 통합
-코드 분석, 취약점 스캐너, 정책 검사 등을 CI/CD에 통합하여 Secure by Design 실현
-4. 보안 코딩 가이드(Secure Coding Guidelines)에서 주요 보안 원칙을 설명하시오.
-입력 검증(Input Validation)
+- 위협 인텔리전스(Threat Intelligence)의 개념과 주요 활용 방안
+  - 개념
+    - 사이버 위협에 대한 정보 수집, 분석, 공유를 통해 대응력을 향상시키는 보안 전략
+    - 공격자 프로필, TTP(기술·기법·절차), IOC(Indicators of Compromise) 등이 포함됨
 
-사용자 입력에 대한 유효성 검사 필수
-SQL 인젝션, XSS, 명령어 삽입 방지
-출력 인코딩(Output Encoding)
+  - 활용 방안
+    - SIEM 연계를 통한 IOC 기반 탐지
+    - APT 대응 전략 수립, 보안 정책 자동화
+    - 위협 동향 분석 및 전파로 조직 보안 인식 제고
 
-사용자 입력을 출력 전 안전하게 인코딩
-HTML, JavaScript, URL 등 컨텍스트별 인코딩 필요
-인증 및 세션 관리
+- 보안 조직에서 내부 위협(Insider Threat)을 탐지하고 예방하는 방법
+  - 탐지 방법
+    - UEBA(User and Entity Behavior Analytics): 사용자 행동의 이상 탐지
+    - DLP(Data Loss Prevention): 중요 정보 유출 차단
+    - 로그 분석 및 SIEM 경고: 접근 이상 패턴 식별
 
-안전한 로그인 구현, 세션 타임아웃 적용, 쿠키 보안 설정
-에러 처리
+  - 예방 방안
+    - 최소 권한 원칙 적용 및 접근 통제 강화
+    - 보안 인식 교육 및 행동 지침 마련
+    - 직원 퇴사·이직 시 계정 즉시 폐쇄 및 로그 감사
 
-상세한 시스템 메시지 노출 방지
-로깅은 필요하되 사용자에게는 일반 메시지 제공
-암호화
+- 보안 조직에서 사고 대응 및 복구 계획(Security Incident Response and Recovery Plan)의 개념
+  - 개념
+    - 보안 사고 발생 시 신속한 탐지, 대응, 복구, 보고를 위한 사전 정의된 절차와 체계
+    - 비즈니스 연속성과 서비스 중단 최소화를 목적으로 함
+  - 주요 구성 요소
+    - 탐지 및 식별: 사고 인지 및 분류
+    - 대응 및 차단: 공격 차단, 격리 조치
+    - 복구 및 정상화: 시스템 복원, 위협 제거
+    - 사후 분석 및 보고: 근본 원인 분석, 재발 방지
 
-민감 정보는 암호화 저장 및 전송
-안전한 암호 알고리즘 사용
-5. 보안 운영 센터(SOC, Security Operations Center)의 개념과 주요 운영 모델을 설명하시오.
-개념
+- 보안 조직에서 KPI(Key Performance Indicator) 및 성과 평가 방법
+  - KPI 개념
+    - 보안 활동의 성과를 수치화하여 보안 수준, 대응 능력, 운영 효율성을 평가하는 지표
+  - 예시 지표
+    - 평균 탐지 시간(MTTD), 평균 대응 시간(MTTR), 차단된 공격 수
+    - 취약점 해결률, 보안 교육 이수율, 로그 분석 범위 등
+  - 활용 방법
+    - 보안 정책 개선에 활용
+    - 보안 인력 성과평가 기준으로 반영
+    - 경영진 보고 및 투자 설득 수단으로 사용
 
-조직의 IT 자산에 대한 보안 모니터링, 위협 분석, 대응을 수행하는 전담 조직
-운영 모델
+- 보안 조직에서 지속적인 위협 탐지 및 대응(Continuous Threat Hunting and Response)의 개념
+  - 개념
+    - 알려지지 않은 위협까지 능동적으로 찾아내고 선제적으로 대응하는 고도화된 보안 활동
+    알려지지 않은 위협까지 능동적으로 찾아내고 선제적으로 대응하는 고도화된 보안 활동
+    기존의 SIEM 및 자동 경고에만 의존하지 않고, 수동 분석·패턴 추론·가설 기반 추적 수행
+    알려지지 않은 위협까지 능동적으로 찾아내고 선제적으로 대응하는 고도화된 보안 활동
+  - 핵심 활동
+    - 행위 기반 분석, 공격자 TTP 추적
+    - YARA, Sigma 등 룰 기반 탐지
+    - 위협 발견 시 즉시 격리·차단·경보 전파
 
-내부 구축형 SOC: 대기업, 공공기관 중심
-MSSP(Manged Security Service Provider): 외부 위탁 운영
-하이브리드 SOC: 내부 인력 + 외부 전문가 병행
-주로 SIEM, SOAR, Threat Intelligence 연계 시스템 운영
-6. 레드팀/블루팀 보안 훈련(Red Team vs. Blue Team)의 개념과 주요 차이를 설명하시오.
-레드팀(Red Team)
+- 기업에서 보안 사고 발생 시 법적 대응과 언론 대응 전략
+  - 법적 대응
+    - 신속한 법적 보고 의무 이행 (예: GDPR, 개인정보 보호법 등)
+    - 관계 기관(KISA, 경찰청, 개인정보위원회 등)에 지체 없이 신고
+    - 사고 조사 및 법적 문서 기록 보존, 책임소재 분석
+  - 언론 대응 전략
+    - 투명한 커뮤니케이션: 사실 기반으로 피해 범위와 대응 조치 공유
+    - 공식 대변인 지정: 메시지 일관성 유지
+    - 사과 및 재발 방지 대책 발표: 신뢰 회복 노력 포함
 
-모의 해커 역할
-실제 공격자처럼 행동하여 침투 시나리오 수행, 취약점 식별
-블루팀(Blue Team)
+- 보안 조직에서 취약점 관리 프로세스(Vulnerability Management Process)의 개념
+  - 개념
+    - IT 자산의 취약점을 식별, 평가, 우선순위 지정, 수정하는 일련의 보안 활동
+    - 지속적으로 시스템을 안전하게 유지하기 위한 핵심 프로세스
+  - 주요 단계
+    - 자산 식별
+    - 취약점 스캔 및 평가
+    - 위험 분석 및 등급 지정(CVSS 등 활용)
+    - 조치 및 패치 배포
+    - 검증 및 반복 수행
 
-방어팀 역할
-시스템 모니터링, 위협 탐지, 대응 계획 수행
-레드팀의 공격을 실시간 탐지 및 방어
-차이점
+- Zero Trust Architecture(ZTA)의 개념과 기존 보안 모델과의 차이
+  - Zero Trust Architecture (ZTA)
+    - “신뢰하지 말고 항상 검증하라”는 원칙에 기반한 보안 아키텍처
+    - 사용자, 디바이스, 네트워크 내외부 구분 없이 모든 접근에 대해 검증, 최소 권한 원칙 적용
 
-레드팀은 공격 시뮬레이션, 블루팀은 방어 및 복구 테스트
-훈련을 통해 조직의 탐지 능력과 대응 체계 강화
+  - 기존 모델과의 차이
+    - 기존 보안은 경계 기반(Perimeter-Based)으로 내부를 신뢰
+    - ZTA는 내부도 신뢰하지 않고 항상 인증 및 권한 검증 수행
 
-- 보안 관제(Security Monitoring)의 개념과 주요 도구(SIEM, SOAR 등)를 설명하시오.
-- 위협 인텔리전스(Threat Intelligence)의 개념과 주요 활용 방안을 설명하시오.
-- 보안 조직에서 내부 위협(Insider Threat)을 탐지하고 예방하는 방법을 설명하시오.
-- 보안 조직에서 사고 대응 및 복구 계획(Security Incident Response and Recovery Plan)의 개념을 설명하시오.
-- 보안 조직에서 KPI(Key Performance Indicator) 및 성과 평가 방법을 설명하시오.
-- 보안 조직에서 지속적인 위협 탐지 및 대응(Continuous Threat Hunting and Response)의 개념을 설명하시오.
-  - 1. 보안 관제(Security Monitoring)의 개념과 주요 도구(SIEM, SOAR 등)를 설명하시오.
-개념
+- IT 및 보안 거버넌스에서 ESG(Environmental, Social, and Governance)와 보안의 연관성
+  - ESG와 보안의 연관성
+    - Environmental: 그린 IT, 에너지 효율적인 보안 시스템 설계
+    - Social: 개인정보 보호, 데이터 윤리, 이해관계자 보호
+    - Governance: 보안 정책, 감사 체계, 규제 준수
+  - 요점
+    - 보안은 ESG의 Social 및 Governance 핵심 요소
+    - 보안 리스크는 ESG 평가 시 중대 요소로 반영됨
 
-정보 시스템에서 발생하는 보안 이벤트와 로그를 실시간 수집·분석하여 위협을 탐지하고 대응하는 활동
-보안 사고를 조기에 감지하고, 사후 대응까지 포함
-주요 도구
+- 보안 운영에서 AI 기반 자동화 기술(AI-Driven Security Automation)의 역할과 전망
+  - 역할
+    - 알림 분류 자동화, 이상 징후 탐지, 자동 대응 시나리오 실행
+    - SIEM, SOAR, XDR 시스템에서 AI 활용 증가
+    - 보안 인력의 부담 경감 및 대규모 위협 대응 속도 향상
+  - 전망
+    - 위협 인텔리전스 자동 수집/분석, APT 대응 체계 고도화
+    - 보안 오케스트레이션 영역에서 AI + RPA 연계 확대
+    - 지속적인 학습 기반의 적응형 보안 체계 확산
 
-SIEM(Security Information and Event Management): 로그 수집·분석, 경고, 대시보드 제공
-SOAR(Security Orchestration, Automation and Response): SIEM과 연동하여 자동화된 대응 시나리오 실행
-EDR, NDR, UEBA 등과 연계하여 정교한 위협 탐지 체계 구성
-2. 위협 인텔리전스(Threat Intelligence)의 개념과 주요 활용 방안을 설명하시오.
-개념
+- 클라우드 환경에서 Confidential Computing의 개념과 주요 활용 사례
+  - 개념
+    - 클라우드에서 데이터가 사용 중인 상태(In-Use)에서도 암호화된 상태로 처리되도록 보장하는 기술
+    - 신뢰 실행 환경(TEE, Trusted Execution Environment)을 통해 외부 접근 차단
 
-사이버 위협에 대한 정보 수집, 분석, 공유를 통해 대응력을 향상시키는 보안 전략
-공격자 프로필, TTP(기술·기법·절차), IOC(Indicators of Compromise) 등이 포함됨
-활용 방안
+  - 주요 활용 사례
+    - 금융 데이터 처리 시 클라우드 벤더로부터의 보호
+    - AI 모델 학습 시 민감 데이터 보호
+    - 다중 조직 간 연산 협업(Multi-party computation)에 활용
 
-SIEM 연계를 통한 IOC 기반 탐지
-APT 대응 전략 수립, 보안 정책 자동화
-위협 동향 분석 및 전파로 조직 보안 인식 제고
-3. 보안 조직에서 내부 위협(Insider Threat)을 탐지하고 예방하는 방법을 설명하시오.
-탐지 방법
+- 사이버 물리 시스템 보안(Cyber-Physical System Security)의 개념과 주요 대응 방안
+  - 개념
+    - 물리적 시스템과 디지털 시스템이 융합된 인프라(예: 자율주행, 스마트 팩토리, 발전소 제어 등)의 보안
+    - 시스템 간 실시간 통신, 센서 및 액추에이터를 통해 물리적 세계와 상호작용함
 
-UEBA(User and Entity Behavior Analytics): 사용자 행동의 이상 탐지
-DLP(Data Loss Prevention): 중요 정보 유출 차단
-로그 분석 및 SIEM 경고: 접근 이상 패턴 식별
-예방 방안
+  - 주요 대응 방안
+    - 물리적 접근 통제 및 네트워크 분리
+    - 실시간 위협 탐지를 위한 IDS/IPS 적용
+    - 보안 표준 적용(IEC 62443, NIST CPS 프레임워크 등)
+    - 패치 관리, 취약점 모니터링, 무결성 검증
 
-최소 권한 원칙 적용 및 접근 통제 강화
-보안 인식 교육 및 행동 지침 마련
-직원 퇴사·이직 시 계정 즉시 폐쇄 및 로그 감사
-4. 보안 조직에서 사고 대응 및 복구 계획(Security Incident Response and Recovery Plan)의 개념을 설명하시오.
-개념
+- 미래의 보안 위협 전망(Next-Generation Cyber Threats)과 대응 전략
+  - 미래 위협
+    - AI 기반 자동화 공격, 자율 해킹 봇, 딥페이크 기반 사회공학 공격
+    - 공급망 공격(Supply Chain Attack) 고도화
+    - 양자 컴퓨팅으로 기존 암호화 기법 붕괴 우려
+    - 스마트시티, CPS, IoT 등 복합 기반 인프라 대상 공격 증가
 
-보안 사고 발생 시 신속한 탐지, 대응, 복구, 보고를 위한 사전 정의된 절차와 체계
-비즈니스 연속성과 서비스 중단 최소화를 목적으로 함
-주요 구성 요소
+  - 대응 전략
+    - AI/ML 기반 선제 탐지 체계 구축
+    - 양자내성암호(Post-Quantum Cryptography) 조기 도입
+    - 다계층 보안(Defense-in-Depth), 보안 거버넌스 강화
 
-탐지 및 식별: 사고 인지 및 분류
-대응 및 차단: 공격 차단, 격리 조치
-복구 및 정상화: 시스템 복원, 위협 제거
-사후 분석 및 보고: 근본 원인 분석, 재발 방지
-5. 보안 조직에서 KPI(Key Performance Indicator) 및 성과 평가 방법을 설명하시오.
-KPI 개념
+- 개인정보 보호를 위한 PETs(Privacy Enhancing Technologies)의 개념과 주요 기술(Differential Privacy, Federated Learning)
+  - PETs 개념
+    - 개인 식별 위험 없이 데이터를 활용하기 위해 고안된 프라이버시 보호 기술
+  - 주요 기술
+    - Differential Privacy: 데이터에 노이즈를 추가해 개인 식별 불가한 통계 분석 가능
+    - Federated Learning: 데이터를 로컬에 저장한 채로 학습하고, 모델만 서버에 공유
+    - Homomorphic Encryption: 암호화된 상태에서 연산 수행 가능
+    - Secure Multiparty Computation: 여러 주체가 민감 데이터를 공유하지 않고 연산 수행
 
-보안 활동의 성과를 수치화하여 보안 수준, 대응 능력, 운영 효율성을 평가하는 지표
-예시 지표
+- 스마트 시티 보안(Smart City Security)의 개념과 주요 보안 위협
+  - 개념
+    - 도시 인프라 전반이 ICT, IoT, AI, 데이터 기반으로 운영되는 스마트 시티에서의 디지털 보안
+  - 주요 보안 위협
+    - 교통, 에너지, 통신, 치안 시스템 해킹
+    - 시민 데이터 유출, 위치 기반 추적, CCTV 해킹
+    - 도시 전체 서비스 마비를 노리는 사이버 테러
+  - 대응 방안
+    - 보안 설계 기반 도시 아키텍처 수립
+    - 네트워크 분리, 위협 탐지 시스템 통합, AI 기반 보안 운영
 
-평균 탐지 시간(MTTD), 평균 대응 시간(MTTR), 차단된 공격 수
-취약점 해결률, 보안 교육 이수율, 로그 분석 범위 등
-활용 방법
+- 양자 컴퓨팅(Quantum Computing)이 사이버 보안에 미치는 영향과 대응 방안
+  - 영향
+    - RSA, ECC 등의 공개키 기반 암호체계가 붕괴될 위험
+    - Grover, Shor 알고리즘을 통한 암호 해독 가능성 증가
+    - 블록체인, 전자서명, 인증서 체계의 보안성 약화
 
-보안 정책 개선에 활용
-보안 인력 성과평가 기준으로 반영
-경영진 보고 및 투자 설득 수단으로 사용
-6. 보안 조직에서 지속적인 위협 탐지 및 대응(Continuous Threat Hunting and Response)의 개념을 설명하시오.
-개념
+  - 대응 방안
+    - Post-Quantum Cryptography(PQC) 도입 준비
+    - NIST PQC 표준화 진행에 맞춰 암호 알고리즘 교체 준비
+    - 양자 난수 생성(QRNG) 기술 활용 확대
 
-알려지지 않은 위협까지 능동적으로 찾아내고 선제적으로 대응하는 고도화된 보안 활동
-기존의 SIEM 및 자동 경고에만 의존하지 않고, 수동 분석·패턴 추론·가설 기반 추적 수행
-핵심 활동
+- 보안 전문가가 갖추어야 할 핵심 역량과 지속적인 학습 전략
+  - 핵심 역량
+    - 보안 아키텍처 설계 및 위험 분석 능력
+    - 실무 중심의 기술 이해 (네트워크, 시스템, 클라우드, OT/ICS)
+    - 사이버 위협 인텔리전스 활용 능력
+    - 법률, 컴플라이언스 이해 (GDPR, ISMS 등)
 
-행위 기반 분석, 공격자 TTP 추적
-YARA, Sigma 등 룰 기반 탐지
-위협 발견 시 즉시 격리·차단·경보 전파
-
-- 기업에서 보안 사고 발생 시 법적 대응과 언론 대응 전략을 설명하시오.
-- 보안 조직에서 취약점 관리 프로세스(Vulnerability Management Process)의 개념을 설명하시오.
-- Zero Trust Architecture(ZTA)의 개념과 기존 보안 모델과의 차이를 설명하시오.
-- IT 및 보안 거버넌스에서 ESG(Environmental, Social, and Governance)와 보안의 연관성을 설명하시오.
-- 보안 운영에서 AI 기반 자동화 기술(AI-Driven Security Automation)의 역할과 전망을 설명하시오.
-- 클라우드 환경에서 Confidential Computing의 개념과 주요 활용 사례를 설명하시오.
-  - 1. 기업에서 보안 사고 발생 시 법적 대응과 언론 대응 전략을 설명하시오.
-법적 대응
-
-신속한 법적 보고 의무 이행 (예: GDPR, 개인정보 보호법 등)
-관계 기관(KISA, 경찰청, 개인정보위원회 등)에 지체 없이 신고
-사고 조사 및 법적 문서 기록 보존, 책임소재 분석
-언론 대응 전략
-
-투명한 커뮤니케이션: 사실 기반으로 피해 범위와 대응 조치 공유
-공식 대변인 지정: 메시지 일관성 유지
-사과 및 재발 방지 대책 발표: 신뢰 회복 노력 포함
-2. 보안 조직에서 취약점 관리 프로세스(Vulnerability Management Process)의 개념을 설명하시오.
-개념
-
-IT 자산의 취약점을 식별, 평가, 우선순위 지정, 수정하는 일련의 보안 활동
-지속적으로 시스템을 안전하게 유지하기 위한 핵심 프로세스
-주요 단계
-
-자산 식별
-취약점 스캔 및 평가
-위험 분석 및 등급 지정(CVSS 등 활용)
-조치 및 패치 배포
-검증 및 반복 수행
-3. Zero Trust Architecture(ZTA)의 개념과 기존 보안 모델과의 차이를 설명하시오.
-Zero Trust Architecture (ZTA)
-
-“신뢰하지 말고 항상 검증하라”는 원칙에 기반한 보안 아키텍처
-사용자, 디바이스, 네트워크 내외부 구분 없이 모든 접근에 대해 검증, 최소 권한 원칙 적용
-기존 모델과의 차이
-
-기존 보안은 **경계 기반(Perimeter-Based)**으로 내부를 신뢰
-ZTA는 내부도 신뢰하지 않고 항상 인증 및 권한 검증 수행
-4. IT 및 보안 거버넌스에서 ESG(Environmental, Social, and Governance)와 보안의 연관성을 설명하시오.
-ESG와 보안의 연관성
-
-Environmental: 그린 IT, 에너지 효율적인 보안 시스템 설계
-Social: 개인정보 보호, 데이터 윤리, 이해관계자 보호
-Governance: 보안 정책, 감사 체계, 규제 준수
-요점
-
-보안은 ESG의 Social 및 Governance 핵심 요소
-보안 리스크는 ESG 평가 시 중대 요소로 반영됨
-5. 보안 운영에서 AI 기반 자동화 기술(AI-Driven Security Automation)의 역할과 전망을 설명하시오.
-역할
-
-알림 분류 자동화, 이상 징후 탐지, 자동 대응 시나리오 실행
-SIEM, SOAR, XDR 시스템에서 AI 활용 증가
-보안 인력의 부담 경감 및 대규모 위협 대응 속도 향상
-전망
-
-위협 인텔리전스 자동 수집/분석, APT 대응 체계 고도화
-보안 오케스트레이션 영역에서 AI + RPA 연계 확대
-지속적인 학습 기반의 적응형 보안 체계 확산
-6. 클라우드 환경에서 Confidential Computing의 개념과 주요 활용 사례를 설명하시오.
-개념
-
-클라우드에서 데이터가 **사용 중인 상태(In-Use)**에서도 암호화된 상태로 처리되도록 보장하는 기술
-**신뢰 실행 환경(TEE, Trusted Execution Environment)**을 통해 외부 접근 차단
-주요 활용 사례
-
-금융 데이터 처리 시 클라우드 벤더로부터의 보호
-AI 모델 학습 시 민감 데이터 보호
-**다중 조직 간 연산 협업(Multi-party computation)**에 활용
-
-
-- 사이버 물리 시스템 보안(Cyber-Physical System Security)의 개념과 주요 대응 방안을 설명하시오.
-- 미래의 보안 위협 전망(Next-Generation Cyber Threats)과 대응 전략을 설명하시오.
-- 개인정보 보호를 위한 PETs(Privacy Enhancing Technologies)의 개념과 주요 기술(Differential Privacy, Federated Learning)을 설명하시오.
-- 스마트 시티 보안(Smart City Security)의 개념과 주요 보안 위협을 설명하시오.
-- 양자 컴퓨팅(Quantum Computing)이 사이버 보안에 미치는 영향과 대응 방안을 설명하시오.
-- 보안 전문가가 갖추어야 할 핵심 역량과 지속적인 학습 전략을 설명하시오.
-  - 1. 사이버 물리 시스템 보안(Cyber-Physical System Security)의 개념과 주요 대응 방안을 설명하시오.
-개념
-
-물리적 시스템과 디지털 시스템이 융합된 인프라(예: 자율주행, 스마트 팩토리, 발전소 제어 등)의 보안
-시스템 간 실시간 통신, 센서 및 액추에이터를 통해 물리적 세계와 상호작용함
-주요 대응 방안
-
-물리적 접근 통제 및 네트워크 분리
-실시간 위협 탐지를 위한 IDS/IPS 적용
-보안 표준 적용(IEC 62443, NIST CPS 프레임워크 등)
-패치 관리, 취약점 모니터링, 무결성 검증
-2. 미래의 보안 위협 전망(Next-Generation Cyber Threats)과 대응 전략을 설명하시오.
-미래 위협
-
-AI 기반 자동화 공격, 자율 해킹 봇, 딥페이크 기반 사회공학 공격
-공급망 공격(Supply Chain Attack) 고도화
-양자 컴퓨팅으로 기존 암호화 기법 붕괴 우려
-스마트시티, CPS, IoT 등 복합 기반 인프라 대상 공격 증가
-대응 전략
-
-AI/ML 기반 선제 탐지 체계 구축
-양자내성암호(Post-Quantum Cryptography) 조기 도입
-다계층 보안(Defense-in-Depth), 보안 거버넌스 강화
-3. 개인정보 보호를 위한 PETs(Privacy Enhancing Technologies)의 개념과 주요 기술(Differential Privacy, Federated Learning)을 설명하시오.
-PETs 개념
-
-개인 식별 위험 없이 데이터를 활용하기 위해 고안된 프라이버시 보호 기술
-주요 기술
-
-Differential Privacy: 데이터에 노이즈를 추가해 개인 식별 불가한 통계 분석 가능
-Federated Learning: 데이터를 로컬에 저장한 채로 학습하고, 모델만 서버에 공유
-Homomorphic Encryption: 암호화된 상태에서 연산 수행 가능
-Secure Multiparty Computation: 여러 주체가 민감 데이터를 공유하지 않고 연산 수행
-4. 스마트 시티 보안(Smart City Security)의 개념과 주요 보안 위협을 설명하시오.
-개념
-
-도시 인프라 전반이 ICT, IoT, AI, 데이터 기반으로 운영되는 스마트 시티에서의 디지털 보안
-주요 보안 위협
-
-교통, 에너지, 통신, 치안 시스템 해킹
-시민 데이터 유출, 위치 기반 추적, CCTV 해킹
-도시 전체 서비스 마비를 노리는 사이버 테러
-대응 방안
-
-보안 설계 기반 도시 아키텍처 수립
-네트워크 분리, 위협 탐지 시스템 통합, AI 기반 보안 운영
-5. 양자 컴퓨팅(Quantum Computing)이 사이버 보안에 미치는 영향과 대응 방안을 설명하시오.
-영향
-
-RSA, ECC 등의 공개키 기반 암호체계가 붕괴될 위험
-Grover, Shor 알고리즘을 통한 암호 해독 가능성 증가
-블록체인, 전자서명, 인증서 체계의 보안성 약화
-대응 방안
-
-Post-Quantum Cryptography(PQC) 도입 준비
-NIST PQC 표준화 진행에 맞춰 암호 알고리즘 교체 준비
-양자 난수 생성(QRNG) 기술 활용 확대
-6. 보안 전문가가 갖추어야 할 핵심 역량과 지속적인 학습 전략을 설명하시오.
-핵심 역량
-
-보안 아키텍처 설계 및 위험 분석 능력
-실무 중심의 기술 이해 (네트워크, 시스템, 클라우드, OT/ICS)
-사이버 위협 인텔리전스 활용 능력
-법률, 컴플라이언스 이해 (GDPR, ISMS 등)
-지속적 학습 전략
-
-보안 자격증(CISSP, CISA, OSCP 등) 취득
-CTF, 모의해킹, 블루팀 트레이닝 참여
-업계 트렌드 및 보안 위협 리포트 정기적 분석
-커뮤니티·세미나·컨퍼런스 참여를 통한 최신 정보 습득
+  - 지속적 학습 전략
+    - 보안 자격증(CISSP, CISA, OSCP 등) 취득
+    - CTF, 모의해킹, 블루팀 트레이닝 참여
+    - 업계 트렌드 및 보안 위협 리포트 정기적 분석
+    - 커뮤니티·세미나·컨퍼런스 참여를 통한 최신 정보 습득
