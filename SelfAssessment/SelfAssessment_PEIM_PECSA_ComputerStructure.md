@@ -1251,204 +1251,213 @@ Organize concepts, features, types and Pros and Cons
         - CPU 부하 감소, 고속 데이터 전송에 유리
         - DMA 컨트롤러 필요
         
-3. 양자 컴퓨팅(Quantum Computing)의 개념과 기존 컴퓨터와의 차이점
-개념
-정보의 최소 단위를 **비트 대신 큐비트(Qubit)**로 표현
-큐비트는 **중첩(Superposition)**과 얽힘(Entanglement) 상태를 활용해 계산 수행
-기존 컴퓨터와의 차이
-기존 컴퓨터는 0 또는 1의 이진 상태만 표현
-양자 컴퓨터는 동시에 여러 상태를 표현할 수 있어 병렬 계산 능력이 탁월
-**특정 문제(암호 해독, 최적화, 양자 시뮬레이션)**에서 압도적 성능 기대
-4. 뉴로모픽 컴퓨팅(Neuromorphic Computing)
-개념
-인간의 뇌 신경망(뉴런, 시냅스) 구조를 모방한 컴퓨팅 구조
-비이진적, 비동기적 처리 중심
-신경망 기반 AI 처리에 특화된 아키텍처
-특징
-초저전력, 고속 처리, 병렬 처리 능력
-이미지 인식, 감지, 로보틱스 등 실시간 반응 요구되는 분야에 적합
-5. 엣지 컴퓨팅 vs. 클라우드 컴퓨팅
-엣지 컴퓨팅
-데이터 생성지 근처(센서, 기기)에서 처리
-지연(latency) 최소화, 실시간 반응성 필요 시 적합
-IoT, 자율주행, 스마트 팩토리 등에서 활용
-클라우드 컴퓨팅
-중앙 집중형 데이터 센터에서 처리
-확장성, 자원 활용 최적화에 유리
-대규모 데이터 처리, 저장, 분석에 적합
-차이점 요약
-엣지는 속도 중심, 클라우드는 규모 중심
-6. NVMe vs. SATA SSD
-NVMe (Non-Volatile Memory Express)
-PCIe 기반 고속 인터페이스
-병렬 처리 최적화, CPU와 직접 통신
-매우 낮은 레이턴시와 높은 처리량 제공
-SATA SSD
-전통적인 하드디스크 인터페이스(SATA) 사용
-속도 제한이 있으며, 병렬 처리에 약함
-핵심 차이
-NVMe는 성능 중심, SATA는 비용 효율 중심
-NVMe는 PCIe, SATA SSD는 SATA 인터페이스 사용
+- 양자 컴퓨팅(Quantum Computing)의 개념과 기존 컴퓨터와의 차이점
+    - 개념
+        - 정보의 최소 단위를 비트 대신 큐비트(Qubit)로 표현
+        - 큐비트는 중첩(Superposition)과 얽힘(Entanglement) 상태를 활용해 계산 수행
+    - 기존 컴퓨터와의 차이
+        - 기존 컴퓨터는 0 또는 1의 이진 상태만 표현
+        - 양자 컴퓨터는 동시에 여러 상태를 표현할 수 있어 병렬 계산 능력이 탁월
+        - 특정 문제(암호 해독, 최적화, 양자 시뮬레이션)에서 압도적 성능 기대
 
+- 뉴로모픽 컴퓨팅(Neuromorphic Computing)
+    - 개념
+        - 인간의 뇌 신경망(뉴런, 시냅스) 구조를 모방한 컴퓨팅 구조
+        - 비이진적, 비동기적 처리 중심
+        - 신경망 기반 AI 처리에 특화된 아키텍처
+    - 특징
+        - 초저전력, 고속 처리, 병렬 처리 능력
+        - 이미지 인식, 감지, 로보틱스 등 실시간 반응 요구되는 분야에 적합
 
-- HBM(High Bandwidth Memory)과 GDDR의 차이점은?
-- 칩렛(Chiplet) 구조란 무엇이며, 기존 단일 다이(Die) 설계와의 차이점은?
-- TPU(Tensor Processing Unit)와 GPU의 차이점은?
-- AI 가속기(Neural Processing Unit, NPU)의 개념과 역할은?
-- 사이드 채널 공격(Side Channel Attack)의 개념과 방어 기법은?
-- 최신 CPU에서 보안 강화 기술(Meltdown, Spectre 방어 기법 등)은?
-    - 1. HBM vs. GDDR의 차이점
-HBM (High Bandwidth Memory)
-3D 스택형 구조로 다이를 위로 적층하고 TSV(Through-Silicon Via)를 통해 통신
-메모리와 GPU/CPU를 패키지 내에서 근접 배치하여 초고속 대역폭과 낮은 지연 제공
-에너지 효율이 우수하며 고성능 AI/ML, HPC(고성능 컴퓨팅)에 사용
-GDDR (Graphics Double Data Rate)
-2D 평면 구조, 주로 그래픽 카드에 사용되는 고속 메모리
-HBM보다 저렴하고 범용성이 높음
-단일 모듈당 대역폭은 낮지만, 병렬 확장이 용이
-2. 칩렛(Chiplet) 구조의 개념과 기존 단일 다이 설계의 차이점
-칩렛 구조
-여러 개의 소형 다이(Chiplet)를 패키지로 통합한 설계 방식
-기능별로 분리된 칩(예: CPU 코어, I/O, 메모리 컨트롤러 등)을 고속 인터커넥트로 연결
-기존 단일 다이
-모든 기능이 하나의 거대한 다이에 집적되어 설계 및 제조
-차이점
-칩렛은 제조 효율성, 설계 유연성, 수율 개선에 유리
-단일 다이는 고속 내부 통신에 유리하지만 크기가 커질수록 생산 난이도 증가
-3. TPU vs. GPU의 차이점
-TPU (Tensor Processing Unit)
-Google이 설계한 AI 전용 칩셋으로, 특히 딥러닝 추론 및 학습에 최적화
-행렬 곱셈, 텐서 연산에 특화된 고정 기능 가속기
-전력 효율과 처리 속도 측면에서 GPU보다 뛰어남 (특정 작업에 한정)
-GPU (Graphics Processing Unit)
-범용 병렬 처리 장치로, AI 외에도 그래픽 렌더링, GPGPU 등 다양한 용도에 사용
-프로그래머블하고 유연하지만, 전용 하드웨어(TPU)보다 특정 AI 작업 속도는 낮을 수 있음
-4. AI 가속기 (NPU, Neural Processing Unit)의 개념과 역할
-개념
-인공지능 연산(특히 딥러닝)을 전용 하드웨어 회로로 처리하는 칩
-주요 기능은 행렬 곱셈, 컨볼루션, 정규화, 활성화 함수 등을 고속 병렬 수행
-역할
-스마트폰, IoT 디바이스, 엣지 컴퓨팅 등에서 로컬 AI 처리를 가능케 함
-GPU/TPU 대비 저전력 설계, 실시간 처리, 경량 AI 모델 처리에 적합
-5. 사이드 채널 공격(Side Channel Attack)의 개념과 방어 기법
-개념
-암호 알고리즘 자체가 아닌 **하드웨어 특성(전력, 시간, 전자파 등)**을 분석하여 정보를 탈취하는 공격 방식
-예: 전력 분석(Power Analysis), 타이밍 분석, 캐시 분석
-방어 기법
-무작위화(Randomization): 연산 순서/타이밍 무작위화
-마스킹(Masking): 데이터에 랜덤 값을 섞어 처리
-정적 타이밍 사용: 시간 기반 공격 방지
-차폐(Shielding): 전자파 차단
-6. 최신 CPU 보안 강화 기술 (Meltdown, Spectre 방어 기법 등)
-Meltdown & Spectre 개요
-**투기적 실행(Speculative Execution)**을 악용하여 권한이 없는 메모리 접근 가능
-캐시 타이밍을 통해 비인가 정보 유출 가능
-주요 방어 기술
-KPTI (Kernel Page Table Isolation): 커널 주소공간을 분리하여 Meltdown 방어
-Retpoline: 간접 분기 예측 차단으로 Spectre 방어
-Microcode 업데이트: 하드웨어 수준 보안 패치
-SMEP/SMAP: 사용자 공간에서 커널 영역 접근 차단
+- 엣지 컴퓨팅 vs. 클라우드 컴퓨팅
+    - 엣지 컴퓨팅
+        - 데이터 생성지 근처(센서, 기기)에서 처리
+        - 지연(latency) 최소화, 실시간 반응성 필요 시 적합
+        - IoT, 자율주행, 스마트 팩토리 등에서 활용
 
+    - 클라우드 컴퓨팅
+        - 중앙 집중형 데이터 센터에서 처리
+        - 확장성, 자원 활용 최적화에 유리
+        - 대규모 데이터 처리, 저장, 분석에 적합
 
-- Out-of-Order Execution(명령어 비순차 실행)의 개념과 장점은?
-- 데이터 흐름 아키텍처(Data Flow Architecture)의 개념과 특징은?
-- 브랜치 프레딕션(Branch Prediction)의 개념과 중요성은?
-- 정적(Static) vs. 동적(Dynamic) 브랜치 예측 기법의 차이점은?
+    - 차이점 요약
+        - 엣지는 속도 중심, 클라우드는 규모 중심
+
+- NVMe vs. SATA SSD
+    - NVMe (Non-Volatile Memory Express)
+        - PCIe 기반 고속 인터페이스
+        - 병렬 처리 최적화, CPU와 직접 통신
+        - 매우 낮은 레이턴시와 높은 처리량 제공
+
+    - SATA SSD
+        - 전통적인 하드디스크 인터페이스(SATA) 사용
+        - 속도 제한이 있으며, 병렬 처리에 약함
+    
+    - 핵심 차이
+        - NVMe는 성능 중심, SATA는 비용 효율 중심
+        - NVMe는 PCIe, SATA SSD는 SATA 인터페이스 사용
+
+- HBM vs. GDDR의 차이점
+    - HBM (High Bandwidth Memory)
+        - 3D 스택형 구조로 다이를 위로 적층하고 TSV(Through-Silicon Via)를 통해 통신
+        - 메모리와 GPU/CPU를 패키지 내에서 근접 배치하여 초고속 대역폭과 낮은 지연 제공
+        - 에너지 효율이 우수하며 고성능 AI/ML, HPC(고성능 컴퓨팅)에 사용
+
+    - GDDR (Graphics Double Data Rate)
+        - 2D 평면 구조, 주로 그래픽 카드에 사용되는 고속 메모리
+        - HBM보다 저렴하고 범용성이 높음
+        - 단일 모듈당 대역폭은 낮지만, 병렬 확장이 용이
+
+- 칩렛(Chiplet) 구조의 개념과 기존 단일 다이 설계의 차이점
+    - 칩렛 구조
+        - 여러 개의 소형 다이(Chiplet)를 패키지로 통합한 설계 방식
+        - 기능별로 분리된 칩(예: CPU 코어, I/O, 메모리 컨트롤러 등)을 고속 인터커넥트로 연결
+
+    - 기존 단일 다이
+        - 모든 기능이 하나의 거대한 다이에 집적되어 설계 및 제조
+    
+    - 차이점
+        - 칩렛은 제조 효율성, 설계 유연성, 수율 개선에 유리
+        - 단일 다이는 고속 내부 통신에 유리하지만 크기가 커질수록 생산 난이도 증가
+
+- TPU vs. GPU의 차이점
+    - TPU (Tensor Processing Unit)
+        - Google이 설계한 AI 전용 칩셋으로, 특히 딥러닝 추론 및 학습에 최적화
+        - 행렬 곱셈, 텐서 연산에 특화된 고정 기능 가속기
+        - 전력 효율과 처리 속도 측면에서 GPU보다 뛰어남 (특정 작업에 한정)
+
+    - GPU (Graphics Processing Unit)
+        - 범용 병렬 처리 장치로, AI 외에도 그래픽 렌더링, GPGPU 등 다양한 용도에 사용
+        - 프로그래머블하고 유연하지만, 전용 하드웨어(TPU)보다 특정 AI 작업 속도는 낮을 수 있음
+
+- AI 가속기 (NPU, Neural Processing Unit)의 개념과 역할
+    - 개념
+        - 인공지능 연산(특히 딥러닝)을 전용 하드웨어 회로로 처리하는 칩
+        - 주요 기능은 행렬 곱셈, 컨볼루션, 정규화, 활성화 함수 등을 고속 병렬 수행
+    - 역할
+        - 스마트폰, IoT 디바이스, 엣지 컴퓨팅 등에서 로컬 AI 처리를 가능케 함
+        - GPU/TPU 대비 저전력 설계, 실시간 처리, 경량 AI 모델 처리에 적합
+
+- 사이드 채널 공격(Side Channel Attack)의 개념과 방어 기법
+    - 개념
+        - 암호 알고리즘 자체가 아닌 하드웨어 특성(전력, 시간, 전자파 등)을 분석하여 정보를 탈취하는 공격 방식
+        - 예: 전력 분석(Power Analysis), 타이밍 분석, 캐시 분석
+
+    - 방어 기법
+        - 무작위화(Randomization): 연산 순서/타이밍 무작위화
+        - 마스킹(Masking): 데이터에 랜덤 값을 섞어 처리
+        - 정적 타이밍 사용: 시간 기반 공격 방지
+        - 차폐(Shielding): 전자파 차단
+
+- 최신 CPU 보안 강화 기술 (Meltdown, Spectre 방어 기법 등)
+    - Meltdown & Spectre 개요
+        - 투기적 실행(Speculative Execution)을 악용하여 권한이 없는 메모리 접근 가능
+        - 캐시 타이밍을 통해 비인가 정보 유출 가능
+    - 주요 방어 기술
+        - KPTI (Kernel Page Table Isolation): 커널 주소공간을 분리하여 Meltdown 방어
+        - Retpoline: 간접 분기 예측 차단으로 Spectre 방어
+        - Microcode 업데이트: 하드웨어 수준 보안 패치
+        - SMEP/SMAP: 사용자 공간에서 커널 영역 접근 차단
+
+- Out-of-Order Execution(명령어 비순차 실행)의 개념과 장점
+    - 개념
+        - 프로그램 순서가 아닌 CPU 내부에서 의존성 없는 명령어를 우선 실행하는 방식
+        - 데이터 의존성이 없는 명령어들을 먼저 실행시켜 유휴 시간 최소화
+    - 장점
+        - CPU 자원 활용도 향상 (파이프라인이 비는 시간 줄임)
+        - 전체 성능 개선 (특히 병목이 있는 프로그램에서 효율적으로 작동)
+        - 메모리 지연 등 외부 자원 대기 시간 중에도 실행 지속
+
+- 데이터 흐름 아키텍처(Data Flow Architecture)의 개념과 특징
+    - 개념
+        - 명령어 실행을 데이터의 흐름에 따라 결정하는 아키텍처
+        - 명령어는 입력 데이터가 준비되었을 때만 실행됨 (즉, 데이터가 흐르면 실행됨)
+    - 특징
+        - 완전한 병렬성 제공 가능 (명령 간 제어 흐름이 없음)
+        - 명령어 간의 의존성만으로 실행 순서 결정
+        - 제어 구조가 단순하지만 하드웨어 구현 복잡
+
+- 브랜치 프레딕션(Branch Prediction)의 개념과 중요성
+    - 개념
+        - 조건 분기(예: if, for, while 등) 명령어가 있을 때 분기 여부를 미리 예측하여 명령어 파이프라인의 끊김을 방지하는 기법
+    - 중요성
+        - 파이프라인의 깊이가 깊어질수록 잘못된 예측 시 성능 손실이 커짐
+        - 정확한 예측은 CPU 처리 속도 및 효율성에 직접적인 영향
+
+- 정적(Static) vs. 동적(Dynamic) 브랜치 예측 기법의 차이점
+    - 정적 브랜치 예측 (Static Branch Prediction)
+        - 컴파일 시점에 분기 방향을 고정된 규칙에 따라 예측
+        - 예: 항상 "분기 안 함"으로 예측
+        - 하드웨어 부담이 적지만 정확도가 낮음
+
+    - 동적 브랜치 예측 (Dynamic Branch Prediction)
+        - 실행 중 CPU가 분기 결과를 학습하여 예측
+        - 예: 1비트, 2비트 카운터, BHT(Branch History Table) 기반 예측
+        - 실행 기록을 바탕으로 예측 정확도 높임
+        - 하드웨어 복잡도는 증가하지만 성능 향상 효과 큼
+
 - 투기 실행(Speculative Execution)이란 무엇인가?
-- VLIW(Very Long Instruction Word)와 EPIC(Explicitly Parallel Instruction Computing)의 차이점은?
-    - 1. Out-of-Order Execution(명령어 비순차 실행)의 개념과 장점
-개념
-프로그램 순서가 아닌 CPU 내부에서 의존성 없는 명령어를 우선 실행하는 방식
-데이터 의존성이 없는 명령어들을 먼저 실행시켜 유휴 시간 최소화
-장점
-CPU 자원 활용도 향상 (파이프라인이 비는 시간 줄임)
-전체 성능 개선 (특히 병목이 있는 프로그램에서 효율적으로 작동)
-메모리 지연 등 외부 자원 대기 시간 중에도 실행 지속
-2. 데이터 흐름 아키텍처(Data Flow Architecture)의 개념과 특징
-개념
-명령어 실행을 데이터의 흐름에 따라 결정하는 아키텍처
-명령어는 입력 데이터가 준비되었을 때만 실행됨 (즉, 데이터가 흐르면 실행됨)
-특징
-완전한 병렬성 제공 가능 (명령 간 제어 흐름이 없음)
-명령어 간의 의존성만으로 실행 순서 결정
-제어 구조가 단순하지만 하드웨어 구현 복잡
-3. 브랜치 프레딕션(Branch Prediction)의 개념과 중요성
-개념
-조건 분기(예: if, for, while 등) 명령어가 있을 때 분기 여부를 미리 예측하여 명령어 파이프라인의 끊김을 방지하는 기법
-중요성
-파이프라인의 깊이가 깊어질수록 잘못된 예측 시 성능 손실이 커짐
-정확한 예측은 CPU 처리 속도 및 효율성에 직접적인 영향
-4. 정적(Static) vs. 동적(Dynamic) 브랜치 예측 기법의 차이점
-정적 브랜치 예측 (Static Branch Prediction)
-컴파일 시점에 분기 방향을 고정된 규칙에 따라 예측
-예: 항상 "분기 안 함"으로 예측
-하드웨어 부담이 적지만 정확도가 낮음
-동적 브랜치 예측 (Dynamic Branch Prediction)
-실행 중 CPU가 분기 결과를 학습하여 예측
-예: 1비트, 2비트 카운터, BHT(Branch History Table) 기반 예측
-실행 기록을 바탕으로 예측 정확도 높임
-하드웨어 복잡도는 증가하지만 성능 향상 효과 큼
-5. 투기 실행(Speculative Execution)이란 무엇인가?
-개념
-브랜치 명령 이후의 결과를 미리 예측하여 명령어를 실행하는 방식
-예측이 맞으면 그대로 진행하고, 틀리면 롤백(Rollback) 수행
-장점
-파이프라인 활용률을 극대화하여 성능 향상
-특히 Out-of-Order Execution 및 브랜치 예측과 결합 시 효과 극대화
-보안 측면
-Meltdown, Spectre와 같은 취약점이 이 기술을 악용
-6. VLIW vs. EPIC의 차이점
-VLIW (Very Long Instruction Word)
-여러 개의 연산을 하나의 긴 명령어로 구성하여 병렬 실행
-병렬 실행 명령어는 컴파일러가 정적으로 결정
-EPIC (Explicitly Parallel Instruction Computing)
-VLIW 개념을 기반으로 하되, 병렬성 정보와 명령 의존성까지 명시
-인텔의 Itanium 아키텍처에서 활용
-더 풍부한 병렬 실행 정보 제공, 성능 향상 가능
-차이점 요약
-VLIW는 단순한 병렬 실행에 초점을 두고 컴파일러 의존성이 높음
-EPIC은 명령 간 병렬성과 제약까지 포함한 명확한 실행 모델을 제시함
+    - 개념
+        - 브랜치 명령 이후의 결과를 미리 예측하여 명령어를 실행하는 방식
+        - 예측이 맞으면 그대로 진행하고, 틀리면 롤백(Rollback) 수행
+    - 장점
+        - 파이프라인 활용률을 극대화하여 성능 향상
+        - 특히 Out-of-Order Execution 및 브랜치 예측과 결합 시 효과 극대화
+    - 보안 측면
+        - Meltdown, Spectre와 같은 취약점이 이 기술을 악용
 
-- CPU의 성능을 측정하는 주요 벤치마크(Benchmark) 지표는?
-- GPU와 CPU의 연산 처리 방식의 차이점은?
-- SIMD(Single Instruction Multiple Data)와 MIMD(Multiple Instruction Multiple Data)의 차이점은?
-- ILP(Instruction Level Parallelism)과 TLP(Thread Level Parallelism)의 차이점은?
-- 캐시 프리페칭(Cache Prefetching)의 개념과 장점은?
-- 캐시 코히어런시(Cache Coherency) 유지 기법에는 어떤 것이 있는가?
-- MESI 프로토콜의 개념과 역할은?
-    - 1. CPU의 성능을 측정하는 주요 벤치마크(Benchmark) 지표는?
-주요 지표
-클럭 속도 (GHz): 초당 수행할 수 있는 사이클 수
-CPI (Cycles Per Instruction): 명령어 1개당 평균 사이클 수
-IPC (Instructions Per Cycle): 1사이클에 처리 가능한 명령어 수
-MIPS (Million Instructions Per Second): 초당 처리 가능한 명령어 수
-FLOPS (Floating Point Operations Per Second): 부동소수점 연산 성능
-SPECint / SPECfp: 실제 프로그램 기반의 표준 벤치마크
-2. GPU와 CPU의 연산 처리 방식의 차이점은?
-CPU (Central Processing Unit)
-소수의 고성능 코어로 일반적인 계산과 제어 흐름 처리
-복잡한 연산 처리에 최적화 (직렬 연산, 분기 등)
-다양한 캐시 계층과 분기 예측 기능 내장
-GPU (Graphics Processing Unit)
-수천 개의 단순한 코어로 대량 병렬 연산 처리에 최적화
-SIMD 방식 기반으로 행렬, 벡터, 이미지, AI 연산 등 대규모 병렬 연산에 강점
-복잡한 제어보다 데이터 중심 처리에 특화
-3. SIMD vs. MIMD의 차이점
-SIMD (Single Instruction Multiple Data)
-하나의 명령어로 여러 데이터를 동시에 처리
-병렬 데이터 처리에 효율적
-예: GPU, 벡터 프로세서, SSE/AVX 명령어
-MIMD (Multiple Instruction Multiple Data)
-각각 독립적인 명령어와 데이터를 처리하는 완전한 병렬 구조
-다중 프로세서 환경에서 사용됨 (예: 멀티코어 CPU, 클러스터 시스템)
-4. ILP vs. TLP의 차이점
-ILP (Instruction Level Parallelism)
-한 쓰레드 내에서 명령어 단위의 병렬성을 극대화
-파이프라이닝, 슈퍼스칼라, Out-of-Order 등의 기술로 구현
-TLP (Thread Level Parallelism)
-여러 쓰레드를 동시에 실행하여 병렬성 확보
-멀티코어, SMT, 하이퍼스레딩 등의 기술로 구현
-ILP는 미세 병렬성, TLP는 거시 병렬성에 해당
+- VLIW vs. EPIC의 차이점
+    - VLIW (Very Long Instruction Word)
+        - 여러 개의 연산을 하나의 긴 명령어로 구성하여 병렬 실행
+        - 병렬 실행 명령어는 컴파일러가 정적으로 결정
+    - EPIC (Explicitly Parallel Instruction Computing)
+        - VLIW 개념을 기반으로 하되, 병렬성 정보와 명령 의존성까지 명시
+        - 인텔의 Itanium 아키텍처에서 활용
+        - 더 풍부한 병렬 실행 정보 제공, 성능 향상 가능
+    - 차이점 요약
+        - VLIW는 단순한 병렬 실행에 초점을 두고 컴파일러 의존성이 높음
+        - EPIC은 명령 간 병렬성과 제약까지 포함한 명확한 실행 모델을 제시함
+
+- CPU의 성능을 측정하는 주요 벤치마크(Benchmark) 지표
+    - 주요 지표
+        - 클럭 속도 (GHz): 초당 수행할 수 있는 사이클 수
+        - CPI (Cycles Per Instruction): 명령어 1개당 평균 사이클 수
+        - IPC (Instructions Per Cycle): 1사이클에 처리 가능한 명령어 수
+        - MIPS (Million Instructions Per Second): 초당 처리 가능한 명령어 수
+        - FLOPS (Floating Point Operations Per Second): 부동소수점 연산 성능
+        - SPECint / SPECfp: 실제 프로그램 기반의 표준 벤치마크
+
+- GPU와 CPU의 연산 처리 방식의 차이점
+    - CPU (Central Processing Unit)
+        - 소수의 고성능 코어로 일반적인 계산과 제어 흐름 처리
+        - 복잡한 연산 처리에 최적화 (직렬 연산, 분기 등)
+        - 다양한 캐시 계층과 분기 예측 기능 내장
+
+    - GPU (Graphics Processing Unit)
+        - 수천 개의 단순한 코어로 대량 병렬 연산 처리에 최적화
+        - SIMD 방식 기반으로 행렬, 벡터, 이미지, AI 연산 등 대규모 병렬 연산에 강점
+        - 복잡한 제어보다 데이터 중심 처리에 특화
+
+- SIMD vs. MIMD의 차이점
+    - SIMD (Single Instruction Multiple Data)
+        - 하나의 명령어로 여러 데이터를 동시에 처리
+        - 병렬 데이터 처리에 효율적
+        - 예: GPU, 벡터 프로세서, SSE/AVX 명령어
+
+    - MIMD (Multiple Instruction Multiple Data)
+        - 각각 독립적인 명령어와 데이터를 처리하는 완전한 병렬 구조
+        - 다중 프로세서 환경에서 사용됨 (예: 멀티코어 CPU, 클러스터 시스템)
+
+- ILP vs. TLP의 차이점
+    - ILP (Instruction Level Parallelism)
+        - 한 쓰레드 내에서 명령어 단위의 병렬성을 극대화
+        - 파이프라이닝, 슈퍼스칼라, Out-of-Order 등의 기술로 구현
+    
+    - TLP (Thread Level Parallelism)
+        - 여러 쓰레드를 동시에 실행하여 병렬성 확보
+        - 멀티코어, SMT, 하이퍼스레딩 등의 기술로 구현
+        - ILP는 미세 병렬성, TLP는 거시 병렬성에 해당
+        
 5. 캐시 프리페칭(Cache Prefetching)의 개념과 장점
 개념
 CPU가 메모리에 접근하기 전, 앞으로 필요할 것으로 예상되는 데이터를 미리 캐시에 로드
