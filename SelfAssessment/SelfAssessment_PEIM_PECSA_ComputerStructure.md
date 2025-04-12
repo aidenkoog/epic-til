@@ -3381,33 +3381,30 @@ Organize concepts, features, types and Pros and Cons
         - 컴파일러 최적화: Register 기반 구조가 유리함.
 
 
-- DRAM에서 Bank Interleaving(뱅크 인터리빙)이란 무엇이며, 성능 향상 효과는?
-개념:
-DRAM 내부에는 여러 개의 뱅크(Bank)가 존재하며, Bank Interleaving은 여러 뱅크에 데이터를 분산 배치하고 병렬 접근을 가능하게 하는 기술입니다.
+- DRAM에서 Bank Interleaving(뱅크 인터리빙)이란 무엇이며, 성능 향상 효과
+    - 개념:
+        - DRAM 내부에는 여러 개의 뱅크(Bank)가 존재하며, Bank Interleaving은 여러 뱅크에 데이터를 분산 배치하고 병렬 접근을 가능하게 하는 기술입니다.
 
-성능 향상 효과:
+    - 성능 향상 효과:
+        - 명령어나 데이터 접근이 동시에 여러 뱅크에서 이루어지므로 메모리 접근 지연(latency) 감소.
+        - 메모리 대역폭 증가, 병렬 처리 성능 개선.
 
-명령어나 데이터 접근이 동시에 여러 뱅크에서 이루어지므로 메모리 접근 지연(latency) 감소.
-메모리 대역폭 증가, 병렬 처리 성능 개선.
-2. DDR3, DDR4, DDR5의 차이점과 성능 개선 요소는?
-DDR3:
-
-데이터 전송 속도: 최대 2133 MT/s
-전압: 1.5V
-기본 프리페치: 8n
-DDR4:
-
-속도 증가 (최대 3200 MT/s)
-전압 감소 (1.2V)
-Bank Group 구조 도입 → 병렬성 향상
-Command Bus 복잡도 향상
-DDR5:
-
-속도 대폭 향상 (최대 8400 MT/s 이상)
-전압 감소 (1.1V)
-Doubled Bank Group, Dual-Channel DIMM
-Power Management IC(PMIC) 모듈 통합
-주요 차이점 요약: 전송 속도, 전력 효율, 병렬 접근 구조 개선 등으로 고성능 및 고효율 달성.
+- DDR3, DDR4, DDR5의 차이점과 성능 개선 요소
+    - DDR3:
+        - 데이터 전송 속도: 최대 2133 MT/s
+        - 전압: 1.5V
+        - 기본 프리페치: 8n
+    - DDR4:
+        - 속도 증가 (최대 3200 MT/s)
+        - 전압 감소 (1.2V)
+        - Bank Group 구조 도입 → 병렬성 향상
+        - Command Bus 복잡도 향상
+    - DDR5:
+        - 속도 대폭 향상 (최대 8400 MT/s 이상)
+        - 전압 감소 (1.1V)
+        - Doubled Bank Group, Dual-Channel DIMM
+        - Power Management IC(PMIC) 모듈 통합
+    - 주요 차이점 요약: 전송 속도, 전력 효율, 병렬 접근 구조 개선 등으로 고성능 및 고효율 달성.
 
 3. Persistent Memory(지속성 메모리)와 기존 DRAM/NAND Flash의 차이점은?
 Persistent Memory (예: Intel Optane DC PMem):
