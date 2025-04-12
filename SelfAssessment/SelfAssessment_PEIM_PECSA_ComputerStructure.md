@@ -3638,89 +3638,78 @@ Organize concepts, features, types and Pros and Cons
         - Thunderbolt는 주로 고성능 워크스테이션, 전문가용 기기에서 사용.
 
 - Polling 기반 I/O vs Interrupt 기반 I/O
-Polling I/O:
+    - Polling I/O:
+        - CPU가 I/O 장치 상태를 반복적으로 확인하는 방식.
+        - 구현이 간단하지만, CPU 자원을 비효율적으로 소모함.
+        - 고속 장치보다 저속 주변기기에서 주로 사용.
+    - Interrupt I/O:
+        - 장치가 준비되면 인터럽트를 발생시켜 CPU에 알림.
+        - CPU는 다른 작업 수행 중에도 효율적 반응 가능.
+        - 고성능 시스템에서 선호, 처리량과 응답성이 뛰어남.
+    - 비교 요약:
+        - Polling: CPU 낭비 ↑, 구현 간단.
+        - Interrupt: 응답성 ↑, CPU 효율 ↑, 복잡도 ↑.
 
-CPU가 I/O 장치 상태를 반복적으로 확인하는 방식.
-구현이 간단하지만, CPU 자원을 비효율적으로 소모함.
-고속 장치보다 저속 주변기기에서 주로 사용.
-Interrupt I/O:
+- Write Cliff 현상 (Persistent Storage)
+    - 개념:
+        - SSD 등의 플래시 기반 저장장치에서 쓰기 성능이 갑자기 급격히 저하되는 현상.
+    - 원인:
+        - SLC 캐시 포화 후, TLC/QLC 등 느린 셀에 쓰기 전환.
+        - Garbage Collection, Wear Leveling에 의한 I/O 지연.
+    - 해결 방법:
+        - 지속적인 SLC 캐시 비우기, Over-Provisioning 증가.
+        - 호스트 기반 쓰기 패턴 최적화.
+        - SSD 펌웨어 최적화로 GC 간섭 최소화.
 
-장치가 준비되면 인터럽트를 발생시켜 CPU에 알림.
-CPU는 다른 작업 수행 중에도 효율적 반응 가능.
-고성능 시스템에서 선호, 처리량과 응답성이 뛰어남.
-비교 요약:
+- Hot Plugging 고려사항 (USB, PCIe 등)
+    - 개념:
+        - 시스템을 끄지 않고도 장치를 연결하거나 제거할 수 있는 기능.
+    - 기술적 고려 요소:
+        - 전력 공급의 안정성 확보 (전류 서지 방지).
+        - 신호 무결성 유지, ESD 보호 회로 필요.
+        - OS와 드라이버의 Hot-Plug 이벤트 처리 설계.
+        - PCIe의 경우 Hot-Plug 컨트롤러와 BIOS/UEFI 지원 필요.
 
-Polling: CPU 낭비 ↑, 구현 간단.
-Interrupt: 응답성 ↑, CPU 효율 ↑, 복잡도 ↑.
-2. Write Cliff 현상 (Persistent Storage)
-개념:
-SSD 등의 플래시 기반 저장장치에서 쓰기 성능이 갑자기 급격히 저하되는 현상.
+- Network-on-Chip (NoC)의 개념과 기존 버스 아키텍처와 차이점
+    - NoC (Network-on-Chip):
+        - 칩 내 컴포넌트 간 네트워크 기반 통신 아키텍처.
+        - 각 모듈이 라우터를 통해 메시지 교환.
+    - 버스 아키텍처와의 차이점:
+        - 버스는 공유 버스 방식 → 충돌 및 병목 발생.
+        - NoC는 병렬 데이터 전송 가능, 스케일 확장성 우수.
+        - NoC는 복잡한 멀티코어 및 AI 칩 설계에 필수.
 
-원인:
+- Direct I/O vs Memory-Mapped I/O
+    - Direct I/O (Port-Mapped I/O):
+        - CPU가 I/O 전용 명령어 (e.g., IN, OUT) 사용.
+        - I/O 공간과 메모리 공간이 분리되어 있음.
+    - Memory-Mapped I/O:
+        - I/O 장치를 메모리 공간에 매핑, LOAD/STORE로 접근.
+        - 캐시 사용 불가 설정 필요.
+        - 범용성, 코드 단순화에 유리, 고성능 시스템에서 선호.
+    - 성능 영향:
+        - Memory-Mapped는 더 높은 유연성과 범용 CPU 명령어 사용 가능.
+        - Direct I/O는 하드웨어가 단순하며 저성능 임베디드에 적합.
 
-SLC 캐시 포화 후, TLC/QLC 등 느린 셀에 쓰기 전환.
-Garbage Collection, Wear Leveling에 의한 I/O 지연.
-해결 방법:
-
-지속적인 SLC 캐시 비우기, Over-Provisioning 증가.
-호스트 기반 쓰기 패턴 최적화.
-SSD 펌웨어 최적화로 GC 간섭 최소화.
-3. Hot Plugging 고려사항 (USB, PCIe 등)
-개념:
-시스템을 끄지 않고도 장치를 연결하거나 제거할 수 있는 기능.
-
-기술적 고려 요소:
-
-전력 공급의 안정성 확보 (전류 서지 방지).
-신호 무결성 유지, ESD 보호 회로 필요.
-OS와 드라이버의 Hot-Plug 이벤트 처리 설계.
-PCIe의 경우 Hot-Plug 컨트롤러와 BIOS/UEFI 지원 필요.
-4. Network-on-Chip (NoC)의 개념과 기존 버스 아키텍처와 차이점
-NoC (Network-on-Chip):
-
-칩 내 컴포넌트 간 네트워크 기반 통신 아키텍처.
-각 모듈이 라우터를 통해 메시지 교환.
-버스 아키텍처와의 차이점:
-
-버스는 공유 버스 방식 → 충돌 및 병목 발생.
-NoC는 병렬 데이터 전송 가능, 스케일 확장성 우수.
-NoC는 복잡한 멀티코어 및 AI 칩 설계에 필수.
-5. Direct I/O vs Memory-Mapped I/O
-Direct I/O (Port-Mapped I/O):
-
-CPU가 I/O 전용 명령어 (e.g., IN, OUT) 사용.
-I/O 공간과 메모리 공간이 분리되어 있음.
-Memory-Mapped I/O:
-
-I/O 장치를 메모리 공간에 매핑, LOAD/STORE로 접근.
-캐시 사용 불가 설정 필요.
-범용성, 코드 단순화에 유리, 고성능 시스템에서 선호.
-성능 영향:
-
-Memory-Mapped는 더 높은 유연성과 범용 CPU 명령어 사용 가능.
-Direct I/O는 하드웨어가 단순하며 저성능 임베디드에 적합.
-6. Superpipeline(슈퍼파이프라이닝)의 개념과 차이점
-기본 개념:
-
-파이프라인 단계를 더 잘게 나누어, 클럭 사이클을 줄이고 처리량 증가.
-차이점:
-
-일반 파이프라인은 5~6단계, 슈퍼파이프라인은 10단계 이상.
-각 단계가 짧아져서 클럭 주파수 ↑ → 더 높은 CPI 성능 가능.
-단점: 해저드 민감도 증가, 분기 예측 실패 시 손실 증가.
+- Superpipeline(슈퍼파이프라이닝)의 개념과 차이점
+    - 기본 개념:
+        - 파이프라인 단계를 더 잘게 나누어, 클럭 사이클을 줄이고 처리량 증가.
+    - 차이점:
+        - 일반 파이프라인은 5~6단계, 슈퍼파이프라인은 10단계 이상.
+        - 각 단계가 짧아져서 클럭 주파수 ↑ → 더 높은 CPI 성능 가능.
+    - 단점: 해저드 민감도 증가, 분기 예측 실패 시 손실 증가.
 
 - Data Dependency Hazard(데이터 종속 해저드)의 종류와 해결 방법
-종류:
-
-RAW (Read After Write): 읽기 명령이 이전 쓰기 명령의 결과를 기다려야 함 → 진짜 의존성.
-WAR (Write After Read): 쓰기 명령이 이전 읽기 명령보다 먼저 실행될 수 없음.
-WAW (Write After Write): 두 쓰기 명령의 순서가 바뀌면 데이터 불일치 발생.
-해결 방법:
-
-파이프라인 스톨(Stall) 또는 NOP 삽입.
-레지스터 리네이밍(Register Renaming).
-데이터 포워딩(Forwarding, Bypassing).
-컴파일러 최적화 (Instruction Scheduling).
+    - 종류:
+        - RAW (Read After Write): 읽기 명령이 이전 쓰기 명령의 결과를 기다려야 함 → 진짜 의존성.
+        - WAR (Write After Read): 쓰기 명령이 이전 읽기 명령보다 먼저 실행될 수 없음.
+        - WAW (Write After Write): 두 쓰기 명령의 순서가 바뀌면 데이터 불일치 발생.
+    - 해결 방법:
+        - 파이프라인 스톨(Stall) 또는 NOP 삽입.
+        - 레지스터 리네이밍(Register Renaming).
+        - 데이터 포워딩(Forwarding, Bypassing).
+        - 컴파일러 최적화 (Instruction Scheduling).
+        
 2. Loop-Carried Dependency(루프 의존성)의 개념과 해결 기법
 개념:
 
