@@ -3749,76 +3749,67 @@ Organize concepts, features, types and Pros and Cons
         - 루프 불변 코드 이동 (Loop Invariant Code Motion).
         - 분기 병합/최소화 (Branch Folding, If Conversion).
         - 도달 가능성 분석을 통한 코드 제거.
-        
-6. Hardware Prefetching vs Software Prefetching
-Hardware Prefetching:
 
-CPU가 메모리 접근 패턴을 감지해 자동으로 미리 데이터를 로드.
-캐시 미스를 줄이고 투명한 성능 향상 제공.
-제어 불가능, 잘못된 예측 시 캐시 오염 가능성 존재.
-Software Prefetching:
-
-컴파일러 또는 개발자가 명시적으로 미리 로드 명령어를 삽입.
-더 정밀한 제어 가능, 특화된 루틴에 최적화 가능.
-단점: 프로그래머가 명확한 메모리 패턴을 파악해야 함.
+- Hardware Prefetching vs Software Prefetching
+    - Hardware Prefetching:
+        - CPU가 메모리 접근 패턴을 감지해 자동으로 미리 데이터를 로드.
+        - 캐시 미스를 줄이고 투명한 성능 향상 제공.
+        - 제어 불가능, 잘못된 예측 시 캐시 오염 가능성 존재.
+    - Software Prefetching:
+        - 컴파일러 또는 개발자가 명시적으로 미리 로드 명령어를 삽입.
+        - 더 정밀한 제어 가능, 특화된 루틴에 최적화 가능.
+        - 단점: 프로그래머가 명확한 메모리 패턴을 파악해야 함.
 
 - Instruction-Level Parallelism (ILP) vs Data-Level Parallelism (DLP)
-ILP (명령어 수준 병렬성):
+    - ILP (명령어 수준 병렬성):
+        - 하나의 스레드 내에서 상호 독립적인 명령어들을 동시에 실행하는 방식.
+        - 파이프라이닝, 슈퍼스칼라, VLIW, Out-of-Order Execution 등이 ILP 구현 방식.
+        - 제어 흐름 기반 성능 향상에 중점.
+    - DLP (데이터 수준 병렬성):
+        - 하나의 명령어가 다수의 데이터에 동시에 적용되는 병렬 처리 방식.
+        - SIMD(Single Instruction Multiple Data), GPU 기반 연산이 대표적.
+        - 벡터 연산이나 행렬 연산에서 강력한 성능 발휘.
 
-하나의 스레드 내에서 상호 독립적인 명령어들을 동시에 실행하는 방식.
-파이프라이닝, 슈퍼스칼라, VLIW, Out-of-Order Execution 등이 ILP 구현 방식.
-제어 흐름 기반 성능 향상에 중점.
-DLP (데이터 수준 병렬성):
+- Out-of-Order Execution vs Speculative Execution
+    - Out-of-Order Execution:
+        - 명령어들이 데이터 의존성에 따라 순서를 바꿔서 실행되지만, 결과는 순서대로 커밋.
+        - 성능 병목 해소를 위한 동적 명령어 스케줄링 기술.
+    - Speculative Execution:
+        - 프로그램 흐름상 결과가 확정되지 않았지만 예상(예측)을 기반으로 실행.
+        - 대표적으로 분기 예측 후의 명령어들을 미리 실행.
+        - 잘못된 예측 시 롤백 비용 존재.
+    - 보완 관계:
+        - 둘 다 ILP 향상을 위한 기술이며, 함께 사용되어 CPU 유휴 자원 활용 극대화.
+        - Out-of-Order는 명령 간 의존성 해소, Speculative은 제어 흐름 병목 해소.
 
-하나의 명령어가 다수의 데이터에 동시에 적용되는 병렬 처리 방식.
-SIMD(Single Instruction Multiple Data), GPU 기반 연산이 대표적.
-벡터 연산이나 행렬 연산에서 강력한 성능 발휘.
-2. Out-of-Order Execution vs Speculative Execution
-Out-of-Order Execution:
+- Branch Target Buffer (BTB) 개념과 Branch Prediction에 미치는 영향
+    - BTB(분기 대상 버퍼):
+        - 조건 분기 명령의 주소와 목표 주소를 저장하는 캐시형 테이블.
+        - 명령어 Fetch 단계에서 해당 주소의 분기가 이전에 어디로 이동했는지 빠르게 판단.
+    - Branch Prediction에 미치는 영향:
+        - BTB가 정확하면 분기 주소를 미리 알고 빠르게 Fetch 가능.
+        - 예측 실패율 감소 및 파이프라인 플러시 최소화.
+        - 고성능 CPU의 분기 예측 정확도를 결정짓는 핵심 요소 중 하나.
 
-명령어들이 데이터 의존성에 따라 순서를 바꿔서 실행되지만, 결과는 순서대로 커밋.
-성능 병목 해소를 위한 동적 명령어 스케줄링 기술.
-Speculative Execution:
+- Temporal Locality vs Spatial Locality
+    - Temporal Locality(시간 지역성):
+        - 최근에 접근한 데이터가 가까운 미래에 다시 접근될 확률이 높음.
+        - 예: 루프 내의 변수 참조, 함수 호출 스택.
+    - Spatial Locality(공간 지역성):
+        - 특정 주소가 접근되면, 그 주변 주소들도 곧 접근될 가능성이 높음.
+        - 예: 배열 순차 접근, 구조체 필드 접근.
+    - 차이점:
+        - 시간 vs 공간 개념으로 접근하며, 캐시 설계에서 다양한 블록 크기와 유지 정책을 결정하는 기준이 됨.
 
-프로그램 흐름상 결과가 확정되지 않았지만 예상(예측)을 기반으로 실행.
-대표적으로 분기 예측 후의 명령어들을 미리 실행.
-잘못된 예측 시 롤백 비용 존재.
-보완 관계:
-
-둘 다 ILP 향상을 위한 기술이며, 함께 사용되어 CPU 유휴 자원 활용 극대화.
-Out-of-Order는 명령 간 의존성 해소, Speculative은 제어 흐름 병목 해소.
-3. Branch Target Buffer (BTB) 개념과 Branch Prediction에 미치는 영향
-BTB(분기 대상 버퍼):
-
-조건 분기 명령의 주소와 목표 주소를 저장하는 캐시형 테이블.
-명령어 Fetch 단계에서 해당 주소의 분기가 이전에 어디로 이동했는지 빠르게 판단.
-Branch Prediction에 미치는 영향:
-
-BTB가 정확하면 분기 주소를 미리 알고 빠르게 Fetch 가능.
-예측 실패율 감소 및 파이프라인 플러시 최소화.
-고성능 CPU의 분기 예측 정확도를 결정짓는 핵심 요소 중 하나.
-4. Temporal Locality vs Spatial Locality
-Temporal Locality(시간 지역성):
-
-최근에 접근한 데이터가 가까운 미래에 다시 접근될 확률이 높음.
-예: 루프 내의 변수 참조, 함수 호출 스택.
-Spatial Locality(공간 지역성):
-
-특정 주소가 접근되면, 그 주변 주소들도 곧 접근될 가능성이 높음.
-예: 배열 순차 접근, 구조체 필드 접근.
-차이점:
-
-시간 vs 공간 개념으로 접근하며, 캐시 설계에서 다양한 블록 크기와 유지 정책을 결정하는 기준이 됨.
-5. ARC(Adaptive Replacement Cache) vs LRU(Least Recently Used)
-LRU (최소 최근 사용):
-
-가장 오래전에 사용된 캐시 블록을 제거.
-단순하고 널리 쓰이지만, 특정 워크로드에선 성능 저하 가능.
-ARC:
-
-LRU와 LFU(Least Frequently Used)를 동적으로 조합하여 캐시 적중률 향상.
-워킹 셋 변화가 심한 환경에서도 높은 적중률 유지.
-더 복잡한 알고리즘이지만 메모리 액세스 패턴 변화에 유연하게 대응.
+- ARC(Adaptive Replacement Cache) vs LRU(Least Recently Used)
+    - LRU (최소 최근 사용):
+        - 가장 오래전에 사용된 캐시 블록을 제거.
+        - 단순하고 널리 쓰이지만, 특정 워크로드에선 성능 저하 가능.
+    - ARC:
+        - LRU와 LFU(Least Frequently Used)를 동적으로 조합하여 캐시 적중률 향상.
+        - 워킹 셋 변화가 심한 환경에서도 높은 적중률 유지.
+        - 더 복잡한 알고리즘이지만 메모리 액세스 패턴 변화에 유연하게 대응.
+        
 6. Cache Associativity와 Conflict Miss의 관계
 Cache Associativity(연관도):
 
