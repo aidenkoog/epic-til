@@ -3597,51 +3597,45 @@ Organize concepts, features, types and Pros and Cons
     - 차이점:
         - DMA는 로컬, RDMA는 원격 메모리 접근.
         - RDMA는 네트워크 오버헤드 감소와 고속 데이터 이동에 효과적.
-        
-3. PCIe Link Width(x1, x4, x8, x16)의 성능 영향
-개념:
-PCIe는 레인(Lane) 단위로 데이터 전송이 이루어지며, x1은 1레인, x16은 16레인 사용을 의미.
 
-성능 영향:
+- PCIe Link Width(x1, x4, x8, x16)의 성능 영향
+    - 개념:
+        - PCIe는 레인(Lane) 단위로 데이터 전송이 이루어지며, x1은 1레인, x16은 16레인 사용을 의미.
 
-각 레인은 독립적인 직렬 통신 채널로, 레인 수가 많을수록 대역폭 증가.
-예: PCIe 4.0 기준으로 x1은 약 2GB/s, x16은 32GB/s 이상 지원.
-GPU, 고속 SSD, NIC 등은 x8 또는 x16 슬롯이 요구됨.
-4. NUMA 환경에서 I/O 디바이스 배치의 영향
-개념:
-NUMA 시스템에서는 CPU마다 메모리 뱅크와 I/O 버스 연결이 비균일하게 구성되어 있음.
+    - 성능 영향:
+        - 각 레인은 독립적인 직렬 통신 채널로, 레인 수가 많을수록 대역폭 증가.
+        - 예: PCIe 4.0 기준으로 x1은 약 2GB/s, x16은 32GB/s 이상 지원.
+        - GPU, 고속 SSD, NIC 등은 x8 또는 x16 슬롯이 요구됨.
 
-영향:
+- NUMA 환경에서 I/O 디바이스 배치의 영향
+    - 개념:
+        - NUMA 시스템에서는 CPU마다 메모리 뱅크와 I/O 버스 연결이 비균일하게 구성되어 있음.
+    - 영향:
+        - I/O 디바이스가 CPU와 가까운 노드에 연결될수록 레이턴시 감소.
+        - 잘못된 디바이스 배치는 원격 메모리 접근 유발 → 성능 저하.
+        - OS 또는 드라이버 수준에서의 I/O affinity 설정 필요.
 
-I/O 디바이스가 CPU와 가까운 노드에 연결될수록 레이턴시 감소.
-잘못된 디바이스 배치는 원격 메모리 접근 유발 → 성능 저하.
-OS 또는 드라이버 수준에서의 I/O affinity 설정 필요.
-5. Overlapping I/O 기법
-개념:
-I/O 작업과 계산(연산)을 동시에 겹쳐서 수행하여 시스템 전체 처리량을 향상시키는 방식.
+- Overlapping I/O 기법
+    - 개념:
+        - I/O 작업과 계산(연산)을 동시에 겹쳐서 수행하여 시스템 전체 처리량을 향상시키는 방식.
+    - 기법:
+        - 비동기 I/O (Async I/O) 사용으로 CPU는 I/O를 기다리지 않고 다음 작업 수행.
+        - 버퍼링 및 파이프라인 처리로 연산과 I/O가 병렬화됨.
+        - DMA 기반 I/O와 잘 결합되어 고성능 시스템에서 필수 기법.
+    - 효과:
+        - CPU 유휴 시간 최소화, I/O 병목 완화, 처리율 향상.
 
-기법:
-
-비동기 I/O (Async I/O) 사용으로 CPU는 I/O를 기다리지 않고 다음 작업 수행.
-버퍼링 및 파이프라인 처리로 연산과 I/O가 병렬화됨.
-DMA 기반 I/O와 잘 결합되어 고성능 시스템에서 필수 기법.
-효과:
-
-CPU 유휴 시간 최소화, I/O 병목 완화, 처리율 향상.
-6. Thunderbolt vs USB
-USB (Universal Serial Bus):
-
-범용 I/O 인터페이스로, 호환성 우수.
-USB 3.2 Gen 2x2 기준 최대 20Gbps, USB4에서는 40Gbps 지원.
-Thunderbolt:
-
-PCIe + DisplayPort + 전원 전송을 하나로 통합한 고속 인터페이스.
-Thunderbolt 4는 최대 40Gbps, 다중 모니터 및 고속 저장장치 연결에 최적.
-차이점:
-
-Thunderbolt는 직접 PCIe 통신, 데이지 체인 지원, 전력 공급 능력 우수.
-USB는 비용 효율적이고 광범위한 장치 지원.
-Thunderbolt는 주로 고성능 워크스테이션, 전문가용 기기에서 사용.
+- Thunderbolt vs USB
+    - USB (Universal Serial Bus):
+        - 범용 I/O 인터페이스로, 호환성 우수.
+        - USB 3.2 Gen 2x2 기준 최대 20Gbps, USB4에서는 40Gbps 지원.
+    - Thunderbolt:
+        - PCIe + DisplayPort + 전원 전송을 하나로 통합한 고속 인터페이스.
+        - Thunderbolt 4는 최대 40Gbps, 다중 모니터 및 고속 저장장치 연결에 최적.
+    - 차이점:
+        - Thunderbolt는 직접 PCIe 통신, 데이지 체인 지원, 전력 공급 능력 우수.
+        - USB는 비용 효율적이고 광범위한 장치 지원.
+        - Thunderbolt는 주로 고성능 워크스테이션, 전문가용 기기에서 사용.
 
 - Polling 기반 I/O vs Interrupt 기반 I/O
 Polling I/O:
