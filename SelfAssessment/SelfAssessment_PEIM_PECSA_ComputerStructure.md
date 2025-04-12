@@ -3406,72 +3406,61 @@ Organize concepts, features, types and Pros and Cons
         - Power Management IC(PMIC) 모듈 통합
     - 주요 차이점 요약: 전송 속도, 전력 효율, 병렬 접근 구조 개선 등으로 고성능 및 고효율 달성.
 
-3. Persistent Memory(지속성 메모리)와 기존 DRAM/NAND Flash의 차이점은?
-Persistent Memory (예: Intel Optane DC PMem):
+- Persistent Memory(지속성 메모리)와 기존 DRAM/NAND Flash의 차이점
+    - Persistent Memory (예: Intel Optane DC PMem):
+        - DRAM처럼 빠르면서도 비휘발성.
+        - 전원이 꺼져도 데이터 보존 가능.
+    - 차이점 정리:
+        - DRAM: 빠르고 휘발성
+        - NAND Flash: 느리지만 비휘발성
+        - Persistent Memory: 속도와 비휘발성을 절충한 메모리 계층
+    - 활용 사례:
+        - 인메모리 데이터베이스, Checkpointing, 빠른 재시작 등.
 
-DRAM처럼 빠르면서도 비휘발성.
-전원이 꺼져도 데이터 보존 가능.
-차이점 정리:
+- Hybrid Memory Cube(HMC)와 High Bandwidth Memory(HBM)의 차이점과 장점
+    - HMC (Hybrid Memory Cube):
+        - TSV(Through-Silicon Via) 기반 3D 구조로 DRAM 다이들을 스택.
+        - 별도 논리 컨트롤러 포함 → 고속 직렬 인터페이스 제공.
+        - 높은 병렬성과 속도.
+    - HBM (High Bandwidth Memory):
+        - GPU/AI용으로 특화된 메모리와 패키지 통합 설계.
+        - 낮은 전력 소비와 높은 대역폭 제공.
+    - 차이점 요약:
+        - HMC는 DRAM + 로직 컨트롤러 통합.
+        - HBM은 메모리 패키지 통합 중심.
+        - HMC는 범용성/속도에, HBM은 GPU/AI/그래픽 성능에 초점.
 
-DRAM: 빠르고 휘발성
-NAND Flash: 느리지만 비휘발성
-Persistent Memory: 속도와 비휘발성을 절충한 메모리 계층
-활용 사례:
+- DRAM의 Row Buffer Hit과 Miss가 성능에 미치는 영향
+    - Row Buffer Hit:
+        - 현재 액세스하려는 데이터가 이미 열린 행(Row)에 존재.
+        - 빠른 접근(낮은 latency) 가능.
+    - Row Buffer Miss:
+        - 새로운 행을 열기 위해 기존 행을 닫고 새로 활성화해야 함.
+        - Latency 증가, 전력 소모 증가.
+    - 성능 영향:
+        - Row Hit 비율이 높을수록 DRAM 액세스 성능이 향상됨.
+        - 메모리 컨트롤러 최적화로 Hit률을 높이기도 함.
 
-인메모리 데이터베이스, Checkpointing, 빠른 재시작 등.
-4. Hybrid Memory Cube(HMC)와 High Bandwidth Memory(HBM)의 차이점과 장점은?
-HMC (Hybrid Memory Cube):
+- Virtual Memory에서 Inverted Page Table 구조의 장점과 단점
+    - 개념:
+        - 기존 Page Table이 각 프로세스의 가상 페이지마다 존재하는 데 반해, Inverted Page Table은 물리 메모리의 각 프레임마다 하나의 엔트리만 유지하는 방식.
+    - 장점:
+        - 메모리 절약, 테이블 크기 작음.
+        - 시스템 전반의 관리가 효율적.
+    - 단점:
+        - 역방향 매핑이므로 가상 주소 → 물리 주소 검색이 느림.
+        - 해시 테이블 사용 필요 → 충돌 문제.
 
-TSV(Through-Silicon Via) 기반 3D 구조로 DRAM 다이들을 스택.
-별도 논리 컨트롤러 포함 → 고속 직렬 인터페이스 제공.
-높은 병렬성과 속도.
-HBM (High Bandwidth Memory):
-
-GPU/AI용으로 특화된 메모리와 패키지 통합 설계.
-낮은 전력 소비와 높은 대역폭 제공.
-차이점 요약:
-
-HMC는 DRAM + 로직 컨트롤러 통합.
-HBM은 메모리 패키지 통합 중심.
-HMC는 범용성/속도에, HBM은 GPU/AI/그래픽 성능에 초점.
-5. DRAM의 Row Buffer Hit과 Miss가 성능에 미치는 영향은?
-Row Buffer Hit:
-
-현재 액세스하려는 데이터가 이미 열린 행(Row)에 존재.
-빠른 접근(낮은 latency) 가능.
-Row Buffer Miss:
-
-새로운 행을 열기 위해 기존 행을 닫고 새로 활성화해야 함.
-Latency 증가, 전력 소모 증가.
-성능 영향:
-
-Row Hit 비율이 높을수록 DRAM 액세스 성능이 향상됨.
-메모리 컨트롤러 최적화로 Hit률을 높이기도 함.
-6. Virtual Memory에서 Inverted Page Table 구조의 장점과 단점은?
-개념:
-기존 Page Table이 각 프로세스의 가상 페이지마다 존재하는 데 반해, Inverted Page Table은 물리 메모리의 각 프레임마다 하나의 엔트리만 유지하는 방식.
-
-장점:
-
-메모리 절약, 테이블 크기 작음.
-시스템 전반의 관리가 효율적.
-단점:
-
-역방향 매핑이므로 가상 주소 → 물리 주소 검색이 느림.
-해시 테이블 사용 필요 → 충돌 문제.
-7. 메모리 압축 기술(Memory Compression)의 원리와 성능 향상 효과는?
-원리:
-
-DRAM에 데이터를 저장할 때, 데이터 패턴을 압축하여 더 많은 데이터를 저장함.
-메모리 용량을 논리적으로 확장하는 효과.
-성능 효과:
-
-페이지 교체 감소 → Page Fault 감소.
-물리 메모리 부족 상황에서 응답 속도 향상.
-가상 메모리 효율 증가.
-활용 사례:
-
-운영체제 수준의 압축(ZRAM, ZSwap), 하드웨어 메모리 컨트롤러 압축 등.
+- 메모리 압축 기술(Memory Compression)의 원리와 성능 향상 효과
+    - 원리:
+        - DRAM에 데이터를 저장할 때, 데이터 패턴을 압축하여 더 많은 데이터를 저장함.
+        - 메모리 용량을 논리적으로 확장하는 효과.
+    - 성능 효과:
+        - 페이지 교체 감소 → Page Fault 감소.
+        - 물리 메모리 부족 상황에서 응답 속도 향상.
+        - 가상 메모리 효율 증가.
+    - 활용 사례:
+        - 운영체제 수준의 압축(ZRAM, ZSwap), 하드웨어 메모리 컨트롤러 압축 등.
 
 - Software-Managed Cache와 Hardware-Managed Cache의 차이점
 Software-Managed Cache:
