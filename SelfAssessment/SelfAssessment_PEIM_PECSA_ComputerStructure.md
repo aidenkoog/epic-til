@@ -2312,30 +2312,28 @@ Organize concepts, features, types and Pros and Cons
         - 단점: 구축 복잡, 비용 높음
 
 - 데이터 무결성을 보장하는 ECC(Error Correcting Code) 방식
-ECC의 목적:
+    - ECC의 목적:
+        - 전송 중 또는 저장 중 비트 오류 감지 및 자동 정정
+        - 일반적으로 1비트 오류 정정, 2비트 오류 감지 가능
+    - 주요 방식:
+        - 해밍 코드(Hamming Code)
+        - SECDED (Single Error Correction, Double Error Detection)
+        - DRAM, CPU L1~L3 캐시, 서버 메모리 등에서 사용됨
+    - 효과:
+        - 시스템 안정성 향상, 메모리 오류로 인한 다운타임 방지
 
-전송 중 또는 저장 중 비트 오류 감지 및 자동 정정
-일반적으로 1비트 오류 정정, 2비트 오류 감지 가능
-주요 방식:
+- CRC와 ECC의 차이점
+    - CRC (Cyclic Redundancy Check)
+        - 오류 감지에 특화, 오류 정정은 불가
+        - 주로 네트워크 통신, 저장 매체의 전송 무결성 검사에 사용
 
-해밍 코드(Hamming Code)
-SECDED (Single Error Correction, Double Error Detection)
-DRAM, CPU L1~L3 캐시, 서버 메모리 등에서 사용됨
-효과:
+    - ECC (Error Correcting Code)
+        - 오류 감지뿐 아니라 자동 정정까지 가능
+        - 메모리, CPU, 저장 장치 등 고신뢰 환경에서 사용
 
-시스템 안정성 향상, 메모리 오류로 인한 다운타임 방지
-5. CRC와 ECC의 차이점
-CRC (Cyclic Redundancy Check)
-
-오류 감지에 특화, 오류 정정은 불가
-주로 네트워크 통신, 저장 매체의 전송 무결성 검사에 사용
-ECC (Error Correcting Code)
-
-오류 감지뿐 아니라 자동 정정까지 가능
-메모리, CPU, 저장 장치 등 고신뢰 환경에서 사용
-핵심 차이점:
-
-CRC는 오류 감지 전용, ECC는 감지 + 정정 모두 가능
+    - 핵심 차이점:
+        - CRC는 오류 감지 전용, ECC는 감지 + 정정 모두 가능
+        
 6. RAID 6에서 이중 패리티(Double Parity) 기법의 원리
 RAID 6:
 
