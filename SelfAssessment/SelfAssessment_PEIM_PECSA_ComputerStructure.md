@@ -2255,70 +2255,63 @@ Organize concepts, features, types and Pros and Cons
     - 효과:
         - SSD 수명 연장
         - 성능 균일성 유지
-        
-5. SSD의 Garbage Collection 개념과 최적화 방법
-개념:
 
-SSD는 데이터를 덮어쓸 수 없고, 기존 블록을 삭제 후 새로운 위치에 기록
-Garbage Collection은 유휴 시간에 불필요한 데이터를 정리하고, 유효한 데이터를 새로운 블록으로 이동
-성능 최적화 방법:
+- SSD의 Garbage Collection 개념과 최적화 방법
+    - 개념:
+        - SSD는 데이터를 덮어쓸 수 없고, 기존 블록을 삭제 후 새로운 위치에 기록
+        - Garbage Collection은 유휴 시간에 불필요한 데이터를 정리하고, 유효한 데이터를 새로운 블록으로 이동
+    - 성능 최적화 방법:
+        - TRIM 명령어 활용: OS가 삭제된 블록을 SSD에 알림
+        - Over-provisioning 영역 확보: 여유 블록을 미리 확보하여 GC 부담 완화
+        - GC 주기 조절: 유휴 시간에 수행되도록 설정
 
-TRIM 명령어 활용: OS가 삭제된 블록을 SSD에 알림
-Over-provisioning 영역 확보: 여유 블록을 미리 확보하여 GC 부담 완화
-GC 주기 조절: 유휴 시간에 수행되도록 설정
-6. HDD의 ZBR(Zone Bit Recording) 기법
-개념:
-
-HDD는 바깥쪽 트랙이 더 길기 때문에, 바깥쪽에 더 많은 섹터를 배치하는 기법
-트랙을 Zone으로 나누고, 각 Zone에 다른 수의 섹터를 배치하여 저장 효율을 높임
-효과:
-
-저장 용량 증가
-바깥쪽에서 더 빠른 데이터 전송 속도 가능
-다만, 트랙 간 처리 복잡성은 증가
+- HDD의 ZBR(Zone Bit Recording) 기법
+    - 개념:
+        - HDD는 바깥쪽 트랙이 더 길기 때문에, 바깥쪽에 더 많은 섹터를 배치하는 기법
+        - 트랙을 Zone으로 나누고, 각 Zone에 다른 수의 섹터를 배치하여 저장 효율을 높임
+    - 효과:
+        - 저장 용량 증가
+        - 바깥쪽에서 더 빠른 데이터 전송 속도 가능
+        - 다만, 트랙 간 처리 복잡성은 증가
 
 - Caching Disk와 Write Buffering의 개념과 차이점
-Caching Disk (디스크 캐싱)
+    - Caching Disk (디스크 캐싱)
+        - 디스크 내장 캐시 메모리나 운영체제 메모리를 이용해 자주 사용하는 데이터 블록을 읽기 중심으로 임시 저장
+        - 목적: 읽기 성능 향상 및 디스크 접근 최소화
+    - Write Buffering (쓰기 버퍼링)
+        - 쓰기 요청 데이터를 버퍼 메모리에 임시 저장 후, 실제 디스크에 나중에 기록하는 방식
+        - 목적: 쓰기 성능 향상 및 동시 요청 처리 능력 증가
+    - 차이점:
+        - Caching Disk는 읽기 중심, Write Buffering은 쓰기 중심 최적화
+        - Write Buffering은 정전 시 데이터 손실 위험이 있어 배터리 백업 캐시가 필요할 수 있음
 
-디스크 내장 캐시 메모리나 운영체제 메모리를 이용해 자주 사용하는 데이터 블록을 읽기 중심으로 임시 저장
-목적: 읽기 성능 향상 및 디스크 접근 최소화
-Write Buffering (쓰기 버퍼링)
+- NVMe over Fabrics(NVMe-oF)의 개념과 기존 NVMe와의 차이점
+    - NVMe (Non-Volatile Memory Express)
+        - 고속 SSD를 위해 개발된 PCIe 기반의 저장 장치 인터페이스
+    - NVMe-oF (over Fabrics)
+        - NVMe 프로토콜을 PCIe 대신 이더넷, 파이버 채널, 인피니밴드 등 네트워크 기반으로 확장한 것
+        - 원격 SSD 장치에 접근하면서도 로컬 NVMe에 준하는 속도 제공
+    - 차이점:
+        - 기존 NVMe: 내부 PCIe 기반, 로컬 고속 접근
+        - NVMe-oF: 네트워크를 통한 외부 장치 연결, 데이터센터 스토리지 확장에 유리
 
-쓰기 요청 데이터를 버퍼 메모리에 임시 저장 후, 실제 디스크에 나중에 기록하는 방식
-목적: 쓰기 성능 향상 및 동시 요청 처리 능력 증가
-차이점:
+- DAS, NAS, SAN의 차이점
+    - DAS (Direct Attached Storage)
+        - 서버에 직접 연결된 스토리지 (USB, SATA, SAS)
+        - 장점: 빠름, 단순
+        - 단점: 확장성 부족, 공유 어려움
 
-Caching Disk는 읽기 중심, Write Buffering은 쓰기 중심 최적화
-Write Buffering은 정전 시 데이터 손실 위험이 있어 배터리 백업 캐시가 필요할 수 있음
-2. NVMe over Fabrics(NVMe-oF)의 개념과 기존 NVMe와의 차이점
-NVMe (Non-Volatile Memory Express)
+    - NAS (Network Attached Storage)
+        - 파일 레벨 저장소, TCP/IP 기반으로 여러 클라이언트가 파일 공유
+        - 장점: 사용 편리, 파일 시스템 포함
+        - 단점: 일반 네트워크 대역폭에 의존
+        
+    - SAN (Storage Area Network)
+        - 블록 레벨 저장소, 파이버 채널 등으로 고속 네트워크 기반 스토리지 풀 구성
+        - 장점: 대규모, 고성능 스토리지 구성
+        - 단점: 구축 복잡, 비용 높음
 
-고속 SSD를 위해 개발된 PCIe 기반의 저장 장치 인터페이스
-NVMe-oF (over Fabrics)
-
-NVMe 프로토콜을 PCIe 대신 이더넷, 파이버 채널, 인피니밴드 등 네트워크 기반으로 확장한 것
-원격 SSD 장치에 접근하면서도 로컬 NVMe에 준하는 속도 제공
-차이점:
-
-기존 NVMe: 내부 PCIe 기반, 로컬 고속 접근
-NVMe-oF: 네트워크를 통한 외부 장치 연결, 데이터센터 스토리지 확장에 유리
-3. DAS, NAS, SAN의 차이점
-DAS (Direct Attached Storage)
-
-서버에 직접 연결된 스토리지 (USB, SATA, SAS)
-장점: 빠름, 단순
-단점: 확장성 부족, 공유 어려움
-NAS (Network Attached Storage)
-
-파일 레벨 저장소, TCP/IP 기반으로 여러 클라이언트가 파일 공유
-장점: 사용 편리, 파일 시스템 포함
-단점: 일반 네트워크 대역폭에 의존
-SAN (Storage Area Network)
-
-블록 레벨 저장소, 파이버 채널 등으로 고속 네트워크 기반 스토리지 풀 구성
-장점: 대규모, 고성능 스토리지 구성
-단점: 구축 복잡, 비용 높음
-4. 데이터 무결성을 보장하는 ECC(Error Correcting Code) 방식
+- 데이터 무결성을 보장하는 ECC(Error Correcting Code) 방식
 ECC의 목적:
 
 전송 중 또는 저장 중 비트 오류 감지 및 자동 정정
