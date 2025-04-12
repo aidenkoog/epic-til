@@ -3739,18 +3739,17 @@ Organize concepts, features, types and Pros and Cons
         - Fetch 단계: 분기 예측, 인스트럭션 캐시, Prefetch Buffer 사용.
         - Decode 단계: 디코딩 병렬화, 명령어 인코딩 단순화(RISC 구조).
         - Execute 단계: 파이프라이닝, ALU 병렬 처리, 레지스터 리네이밍.
+
+- Control Flow Graph(CFG) 기반 최적화 기법
+    - 기본 개념:
+        - 프로그램 흐름을 노드(기본 블록)와 에지(분기)로 표현한 그래프.
+    - 주요 최적화 기법:
+        - 데드 코드 제거 (Dead Code Elimination).
+        - 공통 표현식 제거 (Common Subexpression Elimination).
+        - 루프 불변 코드 이동 (Loop Invariant Code Motion).
+        - 분기 병합/최소화 (Branch Folding, If Conversion).
+        - 도달 가능성 분석을 통한 코드 제거.
         
-5. Control Flow Graph(CFG) 기반 최적화 기법
-기본 개념:
-
-프로그램 흐름을 노드(기본 블록)와 에지(분기)로 표현한 그래프.
-주요 최적화 기법:
-
-데드 코드 제거 (Dead Code Elimination).
-공통 표현식 제거 (Common Subexpression Elimination).
-루프 불변 코드 이동 (Loop Invariant Code Motion).
-분기 병합/최소화 (Branch Folding, If Conversion).
-도달 가능성 분석을 통한 코드 제거.
 6. Hardware Prefetching vs Software Prefetching
 Hardware Prefetching:
 
