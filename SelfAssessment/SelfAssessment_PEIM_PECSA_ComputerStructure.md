@@ -3463,128 +3463,111 @@ Organize concepts, features, types and Pros and Cons
         - 운영체제 수준의 압축(ZRAM, ZSwap), 하드웨어 메모리 컨트롤러 압축 등.
 
 - Software-Managed Cache와 Hardware-Managed Cache의 차이점
-Software-Managed Cache:
+    - Software-Managed Cache:
+        - 캐시 데이터의 관리(할당/교체 등)를 소프트웨어(컴파일러, OS)가 직접 수행.
+        - 임베디드 시스템, GPU에서 사용.
+        - 개발자 제어 가능하지만 복잡함.
 
-캐시 데이터의 관리(할당/교체 등)를 소프트웨어(컴파일러, OS)가 직접 수행.
-임베디드 시스템, GPU에서 사용.
-개발자 제어 가능하지만 복잡함.
-Hardware-Managed Cache:
+    - Hardware-Managed Cache:
+        - 하드웨어가 자동으로 캐시를 제어.
+        - 대부분의 CPU에서 사용됨.
+        - 간편하지만, 제어 유연성은 떨어짐.
 
-하드웨어가 자동으로 캐시를 제어.
-대부분의 CPU에서 사용됨.
-간편하지만, 제어 유연성은 떨어짐.
-2. Address Alias(주소 중복) 문제와 해결 방법
-개념:
+- Address Alias(주소 중복) 문제와 해결 방법
+    - 개념:
+        - 서로 다른 가상 주소가 동일한 물리 주소를 참조할 때 발생하는 문제.
+        - 특히 캐시에서 중복 데이터로 인해 캐시 일관성 문제, 불필요한 무효화 등이 발생.
+    - 해결 방법:
+        - 페이지 색상(Page Coloring) 기법으로 물리 주소를 제어.
+        - 메모리 접근 시 명시적 flush 또는 invalidate 사용.
+        - 캐시 인덱싱 방식 개선 (물리 주소 기반 인덱싱 등).
 
-서로 다른 가상 주소가 동일한 물리 주소를 참조할 때 발생하는 문제.
-특히 캐시에서 중복 데이터로 인해 캐시 일관성 문제, 불필요한 무효화 등이 발생.
-해결 방법:
+- Memory Consistency Model(메모리 일관성 모델)
+    - 개념:
+        - 멀티프로세서 시스템에서 메모리 읽기/쓰기 순서에 대한 규칙을 정의.
+        - 프로세서 간 메모리 접근 순서를 어떻게 보장할지 결정.
+    - 대표적인 모델:
+        - Sequential Consistency: 모든 프로세스가 같은 순서로 메모리 접근을 관찰.
+        - Total Store Order (TSO): 대부분의 x86 CPU에서 사용, Load-Store 순서만 유지.
+        - Relaxed Consistency: ARM, POWER 아키텍처에서 사용, 성능 최적화를 위해 순서 유연성 보장.
+        - Release Consistency, Acquire Consistency 등도 존재.
 
-페이지 색상(Page Coloring) 기법으로 물리 주소를 제어.
-메모리 접근 시 명시적 flush 또는 invalidate 사용.
-캐시 인덱싱 방식 개선 (물리 주소 기반 인덱싱 등).
-3. Memory Consistency Model(메모리 일관성 모델)
-개념:
+- Spinlock과 Mutex의 차이점과 활용 사례
+    - Spinlock:
+        - Lock이 해제될 때까지 계속 반복 루프(바쁘게 대기).
+        - 짧은 임계 구역, 컨텍스트 스위칭이 비용이 클 때 적합.
+        - 커널 또는 실시간 시스템에서 자주 사용.
+    - Mutex:
+        - Lock이 해제될 때까지 스레드를 대기열에 넣고 차단(Blocking).
+        - 긴 임계 구역에 적합, CPU 낭비 줄임.
+        - 사용자 공간 프로그램이나 POSIX 스레드 등에서 일반적으로 사용.
 
-멀티프로세서 시스템에서 메모리 읽기/쓰기 순서에 대한 규칙을 정의.
-프로세서 간 메모리 접근 순서를 어떻게 보장할지 결정.
-대표적인 모델:
+- Read-Copy-Update(RCU) 기법
+    - 개념:
+        - 읽기 성능을 극대화하기 위해 읽기-쓰기 충돌 없이 동시 접근을 가능하게 하는 동기화 기법.
+    - 동작 방식:
+        - 쓰기 시 기존 데이터를 복사하여 수정 → 완료 후 포인터 전환.
+        - 읽기 스레드는 락 없이 읽기 가능.
+        - 쓰기 후 지연 해제(GP: Grace Period)를 통해 안전하게 메모리 해제.
+    - 활용 사례:
+        - 리눅스 커널, 트리 구조 탐색, 읽기 많은 공유 자원 관리.
 
-Sequential Consistency: 모든 프로세스가 같은 순서로 메모리 접근을 관찰.
-Total Store Order (TSO): 대부분의 x86 CPU에서 사용, Load-Store 순서만 유지.
-Relaxed Consistency: ARM, POWER 아키텍처에서 사용, 성능 최적화를 위해 순서 유연성 보장.
-Release Consistency, Acquire Consistency 등도 존재.
-4. Spinlock과 Mutex의 차이점과 활용 사례
-Spinlock:
-
-Lock이 해제될 때까지 계속 반복 루프(바쁘게 대기).
-짧은 임계 구역, 컨텍스트 스위칭이 비용이 클 때 적합.
-커널 또는 실시간 시스템에서 자주 사용.
-Mutex:
-
-Lock이 해제될 때까지 스레드를 대기열에 넣고 차단(Blocking).
-긴 임계 구역에 적합, CPU 낭비 줄임.
-사용자 공간 프로그램이나 POSIX 스레드 등에서 일반적으로 사용.
-5. Read-Copy-Update(RCU) 기법
-개념:
-
-읽기 성능을 극대화하기 위해 읽기-쓰기 충돌 없이 동시 접근을 가능하게 하는 동기화 기법.
-동작 방식:
-
-쓰기 시 기존 데이터를 복사하여 수정 → 완료 후 포인터 전환.
-읽기 스레드는 락 없이 읽기 가능.
-쓰기 후 지연 해제(GP: Grace Period)를 통해 안전하게 메모리 해제.
-활용 사례:
-
-리눅스 커널, 트리 구조 탐색, 읽기 많은 공유 자원 관리.
-6. Cache Coherence Protocol에서 MOESI와 MESI의 차이점
-MESI (Modified, Exclusive, Shared, Invalid):
-
-각 캐시 라인의 상태를 4단계로 구분하여 일관성 유지.
-CPU 간 읽기/쓰기 충돌 시 캐시 상태 전환으로 조정.
-MOESI (Modified, Owned, Exclusive, Shared, Invalid):
-
-MESI에 Owned 상태 추가.
-공유 중인 데이터를 한 CPU가 소유(Owned)하고, 다른 CPU는 읽기만 가능.
-불필요한 메모리 쓰기 감소 → 버스 사용량 감소, 성능 향상.
+- Cache Coherence Protocol에서 MOESI와 MESI의 차이점
+    - MESI (Modified, Exclusive, Shared, Invalid):
+        - 각 캐시 라인의 상태를 4단계로 구분하여 일관성 유지.
+        - CPU 간 읽기/쓰기 충돌 시 캐시 상태 전환으로 조정.
+    - MOESI (Modified, Owned, Exclusive, Shared, Invalid):
+        - MESI에 Owned 상태 추가.
+        - 공유 중인 데이터를 한 CPU가 소유(Owned)하고, 다른 CPU는 읽기만 가능.
+        - 불필요한 메모리 쓰기 감소 → 버스 사용량 감소, 성능 향상.
 
 - Directory-Based Cache Coherence의 개념과 장점
-개념:
+    - 개념:
+        - 각 메모리 블록마다 디렉토리(Directory)를 유지하며, 그 블록을 캐시에 보유 중인 프로세서 목록을 관리.
+        - 요청이 있을 때 디렉토리에서 다른 캐시에 알려 일관성을 유지.
+    - 장점:
+        - 스케일 아웃 가능: 프로세서 수가 많아도 브로드캐스트 필요 없음.
+        - 네트워크 기반 멀티프로세서 시스템에서 유리.
+        - 트래픽 절감: 버스가 아닌 포인트-투-포인트 통신 구조를 활용.
 
-각 메모리 블록마다 디렉토리(Directory)를 유지하며, 그 블록을 캐시에 보유 중인 프로세서 목록을 관리.
-요청이 있을 때 디렉토리에서 다른 캐시에 알려 일관성을 유지.
-장점:
+- Thread-Level Speculation (TLS)
+    - 개념:
+        - 병렬 처리 불가능해 보이는 코드(예: 루프 등)를 스레드 단위로 추측 실행한 후, 의존성 충돌이 없으면 결과 채택, 충돌 시 롤백.
+    - 활용 예:
+        - 컴파일러 또는 런타임 시스템이 제어 흐름이나 데이터 의존성 예측을 통해 speculative thread 생성.
+        - 예측 성공 시 병렬성 극대화 → 성능 향상.
+    - 장점:
+        - 프로그래머가 병렬성 명시하지 않아도 자동 병렬화 가능.
+        - 기존 코드의 성능 향상 가능성.
 
-스케일 아웃 가능: 프로세서 수가 많아도 브로드캐스트 필요 없음.
-네트워크 기반 멀티프로세서 시스템에서 유리.
-트래픽 절감: 버스가 아닌 포인트-투-포인트 통신 구조를 활용.
-2. Thread-Level Speculation (TLS)
-개념:
+- Data Prefetching vs Instruction Prefetching
+    - Data Prefetching:
+        - 다음에 사용할 데이터를 메모리에서 캐시로 미리 불러오기.
+        - 메모리 접근 지연을 줄여 데이터 병목 완화.
+    - Instruction Prefetching:
+        - 다음에 실행될 명령어를 캐시에 미리 적재.
+        - 분기 예측과 함께 사용되며 파이프라인 효율 향상.
+    - 성능 효과:
+        - 둘 다 캐시 미스 감소, 메모리 지연 최소화, CPI 개선에 기여.
 
-병렬 처리 불가능해 보이는 코드(예: 루프 등)를 스레드 단위로 추측 실행한 후, 의존성 충돌이 없으면 결과 채택, 충돌 시 롤백.
-활용 예:
+- NUMA-aware Memory Allocation
+    - 개념:
+        - NUMA(Non-Uniform Memory Access) 구조에서 프로세서가 자신에 가까운 메모리 뱅크에 데이터 할당하도록 최적화하는 전략.
+    - 방법:
+        - OS나 프로그래머가 메모리 바인딩(affinity) 또는 numactl 등 정책 활용.
+        - 스레드-메모리 바인딩으로 메모리 접근 레이턴시 최소화.
+    - 장점:
+        - 메모리 병목 해소, 캐시 지역성 향상, 성능 예측성 증가.
 
-컴파일러 또는 런타임 시스템이 제어 흐름이나 데이터 의존성 예측을 통해 speculative thread 생성.
-예측 성공 시 병렬성 극대화 → 성능 향상.
-장점:
-
-프로그래머가 병렬성 명시하지 않아도 자동 병렬화 가능.
-기존 코드의 성능 향상 가능성.
-3. Data Prefetching vs Instruction Prefetching
-Data Prefetching:
-
-다음에 사용할 데이터를 메모리에서 캐시로 미리 불러오기.
-메모리 접근 지연을 줄여 데이터 병목 완화.
-Instruction Prefetching:
-
-다음에 실행될 명령어를 캐시에 미리 적재.
-분기 예측과 함께 사용되며 파이프라인 효율 향상.
-성능 효과:
-
-둘 다 캐시 미스 감소, 메모리 지연 최소화, CPI 개선에 기여.
-4. NUMA-aware Memory Allocation
-개념:
-
-NUMA(Non-Uniform Memory Access) 구조에서 프로세서가 자신에 가까운 메모리 뱅크에 데이터 할당하도록 최적화하는 전략.
-방법:
-
-OS나 프로그래머가 메모리 바인딩(affinity) 또는 numactl 등 정책 활용.
-스레드-메모리 바인딩으로 메모리 접근 레이턴시 최소화.
-장점:
-
-메모리 병목 해소, 캐시 지역성 향상, 성능 예측성 증가.
-5. Weak Consistency vs Sequential Consistency
-Sequential Consistency:
-
-모든 연산이 프로그램 순서대로 실행되고, 모든 프로세스가 동일한 순서로 관찰.
-Weak Consistency:
-
-명시적 동기화 시점만 일관성 보장.
-성능 향상을 위해 일부 순서 무시 가능.
-비교:
-
-Sequential은 간단하지만 느림.
-Weak은 복잡하지만 성능 좋음, 예: ARM, POWER 아키텍처.
+- Weak Consistency vs Sequential Consistency
+    - Sequential Consistency:
+        - 모든 연산이 프로그램 순서대로 실행되고, 모든 프로세스가 동일한 순서로 관찰.
+    - Weak Consistency:
+        - 명시적 동기화 시점만 일관성 보장.
+        - 성능 향상을 위해 일부 순서 무시 가능.
+    - 비교:
+        - Sequential은 간단하지만 느림.
+        - Weak은 복잡하지만 성능 좋음, 예: ARM, POWER 아키텍처.
 6. Write Combining 기술
 개념:
 
