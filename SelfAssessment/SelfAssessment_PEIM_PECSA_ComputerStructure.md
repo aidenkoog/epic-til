@@ -2834,257 +2834,225 @@ Organize concepts, features, types and Pros and Cons
         - 대역폭 병목 완화.
         - 에너지 효율 향상.
         - AI/빅데이터 처리에 적합.
-        
-3. Load/Store Queue
-개념:
-Out-of-Order 프로세서에서 메모리 명령어의 순서 및 의존성 관리를 위한 대기 구조.
 
-역할:
+- Load/Store Queue
+    - 개념:
+        - Out-of-Order 프로세서에서 메모리 명령어의 순서 및 의존성 관리를 위한 대기 구조.
+    - 역할:
+        - Load Queue: 이전 store가 있는 경우 데이터 Forwarding.
+        - Store Queue: Store 명령어 지연 시 결과 보관 및 순서 보장.
+        - 메모리 접근 순서, 의존성 검사, 예외 처리 등에 관여.
 
-Load Queue: 이전 store가 있는 경우 데이터 Forwarding.
-Store Queue: Store 명령어 지연 시 결과 보관 및 순서 보장.
-메모리 접근 순서, 의존성 검사, 예외 처리 등에 관여.
-4. Direct Mapped Cache vs. Set-Associative Cache
-Direct Mapped Cache:
+- Direct Mapped Cache vs. Set-Associative Cache
+    - Direct Mapped Cache:
+        - 각 블록이 고정된 하나의 캐시 라인에만 저장 가능.
+        - 단순하고 빠르지만 충돌(Collision) 빈번.
+    - Set-Associative Cache:
+        - 각 블록이 n개의 라인 중 한 곳에 저장 가능 (예: 4-way).
+        - 유연성은 높지만, 복잡도와 접근 시간 약간 증가.
 
-각 블록이 고정된 하나의 캐시 라인에만 저장 가능.
-단순하고 빠르지만 충돌(Collision) 빈번.
-Set-Associative Cache:
+- 메모리 컨트롤러
+    - 역할:
+        - CPU와 메모리 간 명령 스케줄링, 타이밍 조율, 버퍼 관리 등을 수행.
+        - 주소 변환, ECC 처리 등도 포함.
+    - 성능 최적화 방법:
+        - Bank Interleaving, 명령 재정렬.
+        - QoS 기반 스케줄링.
+        - DRAM 타이밍 파라미터 최적화.
 
-각 블록이 n개의 라인 중 한 곳에 저장 가능 (예: 4-way).
-유연성은 높지만, 복잡도와 접근 시간 약간 증가.
-5. 메모리 컨트롤러
-역할:
+- Prefetch Buffer (프리페치 버퍼)
+    - 개념:
+        - CPU가 곧 필요할 것으로 예측되는 데이터를 미리 로드하여 대기 상태로 두는 버퍼.
+    - 성능 향상 효과:
+        - 메모리 접근 지연 최소화.
+        - 캐시 미스를 줄이고 캐시 히트율 향상.
+        - 순차 접근이 많은 워크로드에 효과적.
 
-CPU와 메모리 간 명령 스케줄링, 타이밍 조율, 버퍼 관리 등을 수행.
-주소 변환, ECC 처리 등도 포함.
-성능 최적화 방법:
+- CPU vs. FPGA
+    - CPU (Central Processing Unit):
+        - 범용 계산 장치, 소프트웨어 기반 명령어 실행.
+        - 적은 병렬성, 높은 유연성.
+    - FPGA (Field Programmable Gate Array):
+        - 하드웨어 회로를 프로그래머블하게 구성.
+        - 병렬 처리 성능 우수, 고속 처리 가능.
+        - 지연 시간 최소화, 저전력 AI 가속기/통신 처리에 적합.
+    - FPGA 장점:
+        - 병렬성 극대화.
+        - 실시간 처리 성능.
+        - 하드웨어 수준의 보안/속도.
 
-Bank Interleaving, 명령 재정렬.
-QoS 기반 스케줄링.
-DRAM 타이밍 파라미터 최적화.
-6. Prefetch Buffer (프리페치 버퍼)
-개념:
-CPU가 곧 필요할 것으로 예측되는 데이터를 미리 로드하여 대기 상태로 두는 버퍼.
+- SIMD vs. SIMT
+    - SIMD (Single Instruction Multiple Data):
+        - 하나의 명령어가 여러 데이터에 동일하게 적용됨.
+        - CPU의 벡터 연산, GPU의 연산 유닛 등에서 활용됨.
+        - 예: Intel AVX, ARM NEON
+    - SIMT (Single Instruction Multiple Threads):
+        - GPU에서 사용되는 모델로, 여러 스레드가 하나의 명령어 스트림을 공유하되, 각 스레드는 고유한 제어 흐름을 가짐.
+        - 실행 유닛은 SIMD지만, 추상화 계층은 멀티스레딩 형태.
+        - NVIDIA CUDA 아키텍처가 대표적.
 
-성능 향상 효과:
+- TPU vs. GPU
+    - TPU (Tensor Processing Unit):
+        - AI 특화 하드웨어. 텐서 연산을 고속 처리하는 매트릭스 곱셈 가속기 포함.
+        - 연산 효율성과 전력 효율에 초점.
+        - 주로 행렬 연산 중심의 딥러닝 추론 및 학습에 최적화.
+    - GPU (Graphics Processing Unit):
+        - 범용 병렬 처리 유닛. SIMT 구조 기반.
+        - 연산 유연성 높고, AI 외에도 그래픽, 시뮬레이션 등에 사용.
+    - 차이점 요약:
+        - TPU는 AI 전용, 고정 연산 패턴에 효율적.
+        - GPU는 범용, 다양한 병렬 연산에 강점.
 
-메모리 접근 지연 최소화.
-캐시 미스를 줄이고 캐시 히트율 향상.
-순차 접근이 많은 워크로드에 효과적.
-7. CPU vs. FPGA
-CPU (Central Processing Unit):
+- Pipelined vs. Non-Pipelined ALU
+    - Pipelined ALU:
+        - ALU 내부 연산 단계를 파이프라인화하여 동시에 여러 연산 처리 가능.
+        - 각 사이클마다 새로운 연산 입력 가능.
+        - 높은 처리량, 낮은 지연 시간.
+    - Non-Pipelined ALU:
+        - 하나의 연산이 끝나야 다음 연산이 가능.
+        - 단순 구조, 낮은 설계 복잡성.
+    - 비교:
+        - Pipelined ALU는 고속 처리, 고성능 CPU에서 주로 사용.
+        - Non-Pipelined은 단순 제어기, 소형 임베디드 장치에 적합.
 
-범용 계산 장치, 소프트웨어 기반 명령어 실행.
-적은 병렬성, 높은 유연성.
-FPGA (Field Programmable Gate Array):
+- Coarse-Grained vs. Fine-Grained Multithreading
+    - Fine-Grained Multithreading:
+        - 매 사이클마다 스레드를 교체하여 지연 시간 은폐.
+        - 컨텍스트 스위칭 오버헤드가 낮음, 파이프라인 스톨 방지.
+        - 예: 일부 GPU, 고성능 네트워크 장비
+    - Coarse-Grained Multithreading:
+        - 캐시 미스 등 주요 이벤트 발생 시에만 스레드를 전환.
+        - 컨텍스트 스위칭 오버헤드는 크지만, 스레드당 처리 집중도 높음.
+    - 활용:
+        - Fine-Grained: 지연 은폐 중심 설계에 효과적.
+        - Coarse-Grained: 각 스레드 성능 중시 환경에 적합.
 
-하드웨어 회로를 프로그래머블하게 구성.
-병렬 처리 성능 우수, 고속 처리 가능.
-지연 시간 최소화, 저전력 AI 가속기/통신 처리에 적합.
-FPGA 장점:
+- Shared Memory vs. Distributed Memory
+    - Shared Memory 모델:
+        - 모든 프로세스/스레드가 동일한 메모리 공간을 공유.
+        - 동기화 필요 (Mutex, Lock 등).
+        - 예: 멀티코어 CPU 시스템, OpenMP
+    - Distributed Memory 모델:
+        - 각 노드가 자신의 메모리를 가지고 통신(MPI 등)으로 데이터 교환.
+        - 동기화보다 데이터 전달 방식 설계 중요.
+        - 예: 클러스터, 슈퍼컴퓨터 환경
+    - 비교:
+        - Shared: 빠른 접근, 설계 단순하나 동기화 문제 있음.
+        - Distributed: 확장성 우수, 통신 지연 고려 필요.
 
-병렬성 극대화.
-실시간 처리 성능.
-하드웨어 수준의 보안/속도.
+- GPU에서 Thread Divergence
+    - Thread Divergence:
+        - GPU의 SIMT 구조에서는 한 워프(warp, 32 threads 등)가 동일한 명령어를 실행해야 최적 성능.
+        - if/else 조건 분기로 워프 내 스레드가 다른 경로로 분기되면 실행이 순차화되어 성능 저하 발생.
+    - 방지 방법:
+        - 조건문 최소화 및 스레드 간 경로 통일화.
+        - Warp Specialization을 통해 역할 구분.
+        - 분기 발생 시 조건별 워프 분리도 고려.
 
-- 1. SIMD vs. SIMT
-SIMD (Single Instruction Multiple Data):
+- Heterogeneous Computing(이기종 컴퓨팅)
+    - 정의:
+        - CPU, GPU, TPU, FPGA 등 서로 다른 연산 자원을 통합하여 특정 작업을 최적화하는 구조.
+        - 각 처리 장치의 장점을 살려 분산 작업 수행.
+    - 사용 환경:
+        - AI 연산: GPU + TPU
+        - 고속 영상 처리: CPU + FPGA
+        - 임베디드 디바이스: CPU + NPU
+        - 고성능 서버: CPU + GPU 클러스터
 
-하나의 명령어가 여러 데이터에 동일하게 적용됨.
-CPU의 벡터 연산, GPU의 연산 유닛 등에서 활용됨.
-예: Intel AVX, ARM NEON
-SIMT (Single Instruction Multiple Threads):
+- Asynchronous vs. Synchronous Execution
+    - 동기 실행 (Synchronous):
+        - 명령어가 순차적으로 실행되며, 앞선 작업 완료 후 다음 단계 진행.
+        - 코드 이해는 쉬우나, I/O 블로킹 및 병렬성 낮음.
+    - 비동기 실행 (Asynchronous):
+        - 명령어 실행 후 완료를 기다리지 않고 다음 작업 진행.
+        - 병렬성 향상, I/O 작업 최적화에 유리.
+        - 예: GPU 커널 실행, 비동기 네트워크 전송
 
-GPU에서 사용되는 모델로, 여러 스레드가 하나의 명령어 스트림을 공유하되, 각 스레드는 고유한 제어 흐름을 가짐.
-실행 유닛은 SIMD지만, 추상화 계층은 멀티스레딩 형태.
-NVIDIA CUDA 아키텍처가 대표적.
-2. TPU vs. GPU
-TPU (Tensor Processing Unit):
+- Persistent Memory(지속성 메모리)
+    - 정의:
+        - 전원이 꺼져도 데이터가 유지되는 비휘발성 메모리(예: Intel Optane DC PM).
+        - DRAM처럼 빠르면서 SSD처럼 영구 저장 가능.
+    - 활용 사례:
+        - 대용량 인메모리 데이터베이스
+        - 저지연 로그 저장
+        - 재시작 복원 성능 향상 (비휘발성 체크포인트)
 
-AI 특화 하드웨어. 텐서 연산을 고속 처리하는 매트릭스 곱셈 가속기 포함.
-연산 효율성과 전력 효율에 초점.
-주로 행렬 연산 중심의 딥러닝 추론 및 학습에 최적화.
-GPU (Graphics Processing Unit):
+- PCIe Lane과 Bandwidth의 관계
+    - Lane:
+        - 데이터 전송을 위한 직렬 통신 채널의 쌍(송신/수신).
+        - PCIe x1, x4, x8, x16 등으로 구성되며, Lane 수가 많을수록 대역폭 증가.
+    - Bandwidth 관계:
+        - PCIe Gen별로 Lane 당 속도는 정해져 있으며, 예: PCIe Gen 4 기준 Lane당 약 2GB/s.
+        - x16 사용 시 2GB/s × 16 = 32GB/s 대역폭 확보 가능.
 
-범용 병렬 처리 유닛. SIMT 구조 기반.
-연산 유연성 높고, AI 외에도 그래픽, 시뮬레이션 등에 사용.
-차이점 요약:
+- Direct I/O vs. Memory-Mapped I/O
+    - Direct I/O:
+        - 장치 드라이버를 통해 명령어 기반 데이터 입출력.
+        - CPU가 명령어로 I/O 요청 → OS가 제어.
+        - I/O 제어는 명확하지만 성능 한계 존재.
+    - Memory-Mapped I/O:
+        - I/O 장치를 메모리 주소 공간에 매핑.
+        - 장치 레지스터나 버퍼를 메모리처럼 접근 가능.
+        - 캐시 제어 유의해야 하지만 성능 우수.
 
-TPU는 AI 전용, 고정 연산 패턴에 효율적.
-GPU는 범용, 다양한 병렬 연산에 강점.
-3. Pipelined vs. Non-Pipelined ALU
-Pipelined ALU:
-
-ALU 내부 연산 단계를 파이프라인화하여 동시에 여러 연산 처리 가능.
-각 사이클마다 새로운 연산 입력 가능.
-높은 처리량, 낮은 지연 시간.
-Non-Pipelined ALU:
-
-하나의 연산이 끝나야 다음 연산이 가능.
-단순 구조, 낮은 설계 복잡성.
-비교:
-
-Pipelined ALU는 고속 처리, 고성능 CPU에서 주로 사용.
-Non-Pipelined은 단순 제어기, 소형 임베디드 장치에 적합.
-4. Coarse-Grained vs. Fine-Grained Multithreading
-Fine-Grained Multithreading:
-
-매 사이클마다 스레드를 교체하여 지연 시간 은폐.
-컨텍스트 스위칭 오버헤드가 낮음, 파이프라인 스톨 방지.
-예: 일부 GPU, 고성능 네트워크 장비
-Coarse-Grained Multithreading:
-
-캐시 미스 등 주요 이벤트 발생 시에만 스레드를 전환.
-컨텍스트 스위칭 오버헤드는 크지만, 스레드당 처리 집중도 높음.
-활용:
-
-Fine-Grained: 지연 은폐 중심 설계에 효과적.
-Coarse-Grained: 각 스레드 성능 중시 환경에 적합.
-5. Shared Memory vs. Distributed Memory
-Shared Memory 모델:
-
-모든 프로세스/스레드가 동일한 메모리 공간을 공유.
-동기화 필요 (Mutex, Lock 등).
-예: 멀티코어 CPU 시스템, OpenMP
-Distributed Memory 모델:
-
-각 노드가 자신의 메모리를 가지고 통신(MPI 등)으로 데이터 교환.
-동기화보다 데이터 전달 방식 설계 중요.
-예: 클러스터, 슈퍼컴퓨터 환경
-비교:
-
-Shared: 빠른 접근, 설계 단순하나 동기화 문제 있음.
-Distributed: 확장성 우수, 통신 지연 고려 필요.
-
-- GPU에서 Thread Divergence란?
-Thread Divergence:
-
-GPU의 SIMT 구조에서는 한 워프(warp, 32 threads 등)가 동일한 명령어를 실행해야 최적 성능.
-if/else 조건 분기로 워프 내 스레드가 다른 경로로 분기되면 실행이 순차화되어 성능 저하 발생.
-방지 방법:
-
-조건문 최소화 및 스레드 간 경로 통일화.
-Warp Specialization을 통해 역할 구분.
-분기 발생 시 조건별 워프 분리도 고려.
-2. Heterogeneous Computing(이기종 컴퓨팅)
-정의:
-
-CPU, GPU, TPU, FPGA 등 서로 다른 연산 자원을 통합하여 특정 작업을 최적화하는 구조.
-각 처리 장치의 장점을 살려 분산 작업 수행.
-사용 환경:
-
-AI 연산: GPU + TPU
-고속 영상 처리: CPU + FPGA
-임베디드 디바이스: CPU + NPU
-고성능 서버: CPU + GPU 클러스터
-3. Asynchronous vs. Synchronous Execution
-동기 실행 (Synchronous):
-
-명령어가 순차적으로 실행되며, 앞선 작업 완료 후 다음 단계 진행.
-코드 이해는 쉬우나, I/O 블로킹 및 병렬성 낮음.
-비동기 실행 (Asynchronous):
-
-명령어 실행 후 완료를 기다리지 않고 다음 작업 진행.
-병렬성 향상, I/O 작업 최적화에 유리.
-예: GPU 커널 실행, 비동기 네트워크 전송
-4. Persistent Memory(지속성 메모리)
-정의:
-
-전원이 꺼져도 데이터가 유지되는 비휘발성 메모리(예: Intel Optane DC PM).
-DRAM처럼 빠르면서 SSD처럼 영구 저장 가능.
-활용 사례:
-
-대용량 인메모리 데이터베이스
-저지연 로그 저장
-재시작 복원 성능 향상 (비휘발성 체크포인트)
-5. PCIe Lane과 Bandwidth의 관계
-Lane:
-
-데이터 전송을 위한 직렬 통신 채널의 쌍(송신/수신).
-PCIe x1, x4, x8, x16 등으로 구성되며, Lane 수가 많을수록 대역폭 증가.
-Bandwidth 관계:
-
-PCIe Gen별로 Lane 당 속도는 정해져 있으며, 예: PCIe Gen 4 기준 Lane당 약 2GB/s.
-x16 사용 시 2GB/s × 16 = 32GB/s 대역폭 확보 가능.
-6. Direct I/O vs. Memory-Mapped I/O
-Direct I/O:
-
-장치 드라이버를 통해 명령어 기반 데이터 입출력.
-CPU가 명령어로 I/O 요청 → OS가 제어.
-I/O 제어는 명확하지만 성능 한계 존재.
-Memory-Mapped I/O:
-
-I/O 장치를 메모리 주소 공간에 매핑.
-장치 레지스터나 버퍼를 메모리처럼 접근 가능.
-캐시 제어 유의해야 하지만 성능 우수.
-7. RDMA(Remote Direct Memory Access)
-정의:
-
-네트워크를 통해 상대방 메모리에 직접 읽기/쓰기할 수 있는 기술.
-CPU 개입 없이 데이터 전송 → 낮은 지연, 높은 처리량.
-TCP/IP와의 차이:
-
-일반 TCP는 커널 스택, 복사 과정을 거치므로 지연 큼.
-RDMA는 Zero Copy, Kernel Bypass가 가능.
-데이터 센터 고성능 컴퓨팅, 스토리지 전송, AI 클러스터에서 필수 기술.
+- RDMA(Remote Direct Memory Access)
+    - 정의:
+        - 네트워크를 통해 상대방 메모리에 직접 읽기/쓰기할 수 있는 기술.
+        - CPU 개입 없이 데이터 전송 → 낮은 지연, 높은 처리량.
+    - TCP/IP와의 차이:
+        - 일반 TCP는 커널 스택, 복사 과정을 거치므로 지연 큼.
+        - RDMA는 Zero Copy, Kernel Bypass가 가능.
+        - 데이터 센터 고성능 컴퓨팅, 스토리지 전송, AI 클러스터에서 필수 기술.
 
 - Zero-Copy I/O 기술의 개념과 성능 향상 효과
-개념:
+    - 개념:
+        - 전통적인 I/O는 사용자 공간 ↔ 커널 공간 간에 데이터 복사가 반복됨.
+        - Zero-Copy는 복사 없이 직접 송수신 버퍼에 접근함으로써 데이터 이동을 최소화하는 기술.
+        - DMA(Direct Memory Access), mmap(), sendfile() 등이 활용됨.
+    - 성능 효과:
+        - CPU 오버헤드 감소: 복사 과정 생략으로 불필요한 연산 감소.
+        - 메모리 대역폭 절약: 메모리 간 복사 최소화.
+        - 지연 시간 감소: 대용량 파일 처리나 네트워크 I/O에서 성능 향상.
 
-전통적인 I/O는 사용자 공간 ↔ 커널 공간 간에 데이터 복사가 반복됨.
-Zero-Copy는 복사 없이 직접 송수신 버퍼에 접근함으로써 데이터 이동을 최소화하는 기술.
-DMA(Direct Memory Access), mmap(), sendfile() 등이 활용됨.
-성능 효과:
+- 인터럽트의 벡터 처리 방식 (Vector Interrupt Processing)
+    - 개념:
+        - 인터럽트 요청이 발생했을 때 벡터 번호(Vector Number)를 기반으로 특정 인터럽트 처리 루틴의 주소로 직접 점프하는 방식.
+        - 인터럽트 우선순위와 식별이 정적으로 매핑되어 있음 (예: x86의 IDT 구조).
+    - 특징:
+        - 빠른 응답성 확보.
+        - 다중 장치 환경에서 정확한 인터럽트 소스 식별 가능.
+        - 대부분의 현대 CPU 아키텍처가 채택.
 
-CPU 오버헤드 감소: 복사 과정 생략으로 불필요한 연산 감소.
-메모리 대역폭 절약: 메모리 간 복사 최소화.
-지연 시간 감소: 대용량 파일 처리나 네트워크 I/O에서 성능 향상.
-2. 인터럽트의 벡터 처리 방식 (Vector Interrupt Processing)
-개념:
+- NVMe Direct Storage의 개념과 기존 스토리지 방식과의 차이점
+    - NVMe Direct Storage:
+        - GPU, CPU가 OS 커널이나 파일 시스템을 거치지 않고 NVMe SSD에 직접 접근하는 방식.
+        - Microsoft의 DirectStorage API나 GPU DSA(Direct Storage Access) 같은 기술에서 구현됨.
+    - 기존 방식과 차이:
+        - 기존: CPU → OS I/O 스택 → SSD
+        - Direct: GPU/CPU → NVMe SSD (직접 I/O)
+    - 장점:
+        - 레이턴시 감소.
+        - 게임, AI, 대용량 데이터 로딩 속도 향상.
 
-인터럽트 요청이 발생했을 때 벡터 번호(Vector Number)를 기반으로 특정 인터럽트 처리 루틴의 주소로 직접 점프하는 방식.
-인터럽트 우선순위와 식별이 정적으로 매핑되어 있음 (예: x86의 IDT 구조).
-특징:
+- Adaptive Interrupt Moderation (AIM, 적응형 인터럽트 조절)
+    - 개념:
+        - 네트워크 인터페이스 카드(NIC)에서 인터럽트를 패킷 수나 부하에 따라 동적으로 조절하는 기법.
+        - 수신 속도가 높을 경우 인터럽트를 모아서 처리하고, 낮을 땐 실시간에 가깝게 처리.
+    - 활용 사례:
+        - 고속 이더넷 환경에서 인터럽트 폭주 방지.
+        - 클라우드 서버, 고성능 라우터, 가상화 환경에서 네트워크 처리 최적화.
 
-빠른 응답성 확보.
-다중 장치 환경에서 정확한 인터럽트 소스 식별 가능.
-대부분의 현대 CPU 아키텍처가 채택.
-3. NVMe Direct Storage의 개념과 기존 스토리지 방식과의 차이점
-NVMe Direct Storage:
+- Infiniband 네트워크의 개념과 고성능 컴퓨팅에서의 활용 사례
+    - 개념:
+        - 초고속, 저지연 네트워크 아키텍처. 주로 RDMA를 지원하고, 100Gbps 이상의 대역폭 제공.
+        - CPU와 메모리 간 통신처럼 서버 간 메모리 직접 접근이 가능.
+    - 활용 사례:
+        - HPC(High-Performance Computing) 클러스터
+        - AI 모델 학습용 데이터센터
+        - 대용량 병렬 연산을 수행하는 슈퍼컴퓨터
 
-GPU, CPU가 OS 커널이나 파일 시스템을 거치지 않고 NVMe SSD에 직접 접근하는 방식.
-Microsoft의 DirectStorage API나 GPU DSA(Direct Storage Access) 같은 기술에서 구현됨.
-기존 방식과 차이:
-
-기존: CPU → OS I/O 스택 → SSD
-Direct: GPU/CPU → NVMe SSD (직접 I/O)
-장점:
-
-레이턴시 감소.
-게임, AI, 대용량 데이터 로딩 속도 향상.
-4. Adaptive Interrupt Moderation (AIM, 적응형 인터럽트 조절)
-개념:
-
-네트워크 인터페이스 카드(NIC)에서 인터럽트를 패킷 수나 부하에 따라 동적으로 조절하는 기법.
-수신 속도가 높을 경우 인터럽트를 모아서 처리하고, 낮을 땐 실시간에 가깝게 처리.
-활용 사례:
-
-고속 이더넷 환경에서 인터럽트 폭주 방지.
-클라우드 서버, 고성능 라우터, 가상화 환경에서 네트워크 처리 최적화.
-5. Infiniband 네트워크의 개념과 고성능 컴퓨팅에서의 활용 사례
-개념:
-
-초고속, 저지연 네트워크 아키텍처. 주로 RDMA를 지원하고, 100Gbps 이상의 대역폭 제공.
-CPU와 메모리 간 통신처럼 서버 간 메모리 직접 접근이 가능.
-활용 사례:
-
-HPC(High-Performance Computing) 클러스터
-AI 모델 학습용 데이터센터
-대용량 병렬 연산을 수행하는 슈퍼컴퓨터
-6. Host Channel Adapter (HCA)의 개념과 역할
-개념:
-
+- Host Channel Adapter (HCA)의 개념과 역할
+    - 개념:
 Infiniband 네트워크에서 서버와 네트워크 스위치를 연결하는 인터페이스 장치.
 NIC와 유사하나, Infiniband 전용 기능 포함 (RDMA, Zero-Copy, Kernel Bypass 등).
 역할:
