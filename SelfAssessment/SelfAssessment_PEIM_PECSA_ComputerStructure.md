@@ -2531,39 +2531,33 @@ Organize concepts, features, types and Pros and Cons
         - 민감 정보나 키 관리를 Secure World에서 수행.
     - 역할:
         - 키 관리, 디지털 서명, 암호 연산, 개인정보 처리 등 민감 연산을 격리하여 보호.
-        
-5. 메모리 암호화(Memory Encryption) 기술
-개념:
 
-시스템 메모리에 저장되는 데이터를 하드웨어 수준에서 암호화하여,
-메모리 덤프 공격, 냉각 공격(Cold Boot Attack) 등의 물리적 접근 위협에 대응.
-기술 예시:
+- 메모리 암호화(Memory Encryption) 기술
+    - 개념:
+        - 시스템 메모리에 저장되는 데이터를 하드웨어 수준에서 암호화하여,
+        - 메모리 덤프 공격, 냉각 공격(Cold Boot Attack) 등의 물리적 접근 위협에 대응.
+    - 기술 예시:
+        - AMD SEV (Secure Encrypted Virtualization)
+        - Intel TME (Total Memory Encryption)
+    - 특징:
+        - 암복호화는 메모리 컨트롤러에서 실시간 수행, 성능 영향 최소화.
 
-AMD SEV (Secure Encrypted Virtualization)
-Intel TME (Total Memory Encryption)
-특징:
-
-암복호화는 메모리 컨트롤러에서 실시간 수행, 성능 영향 최소화.
-6. 해시 기반 무결성 검증(Hash-Based Integrity Checking)
-원리:
-
-파일, 데이터 블록, 시스템 바이너리 등에 대해 SHA-256, SHA-3 등의 해시를 계산하고 저장.
-이후 동일한 방식으로 해시값을 재계산해 비교함으로써 무결성 여부 판단.
-활용 사례:
-
-운영체제 부팅 시 커널 검증 (Secure Boot, Measured Boot).
-파일 시스템 무결성 검사 (AIDE, Tripwire).
-패키지 설치 시 해시 체크 (apt, yum 등 패키지 관리자).
+- 해시 기반 무결성 검증(Hash-Based Integrity Checking)
+    - 원리:
+        - 파일, 데이터 블록, 시스템 바이너리 등에 대해 SHA-256, SHA-3 등의 해시를 계산하고 저장.
+        - 이후 동일한 방식으로 해시값을 재계산해 비교함으로써 무결성 여부 판단.
+    - 활용 사례:
+        - 운영체제 부팅 시 커널 검증 (Secure Boot, Measured Boot).
+        - 파일 시스템 무결성 검사 (AIDE, Tripwire).
+        - 패키지 설치 시 해시 체크 (apt, yum 등 패키지 관리자).
 
 - 서버 CPU에서 Secure Boot의 원리와 필요성
-개념:
-
-Secure Boot은 부팅 시점에 실행되는 모든 코드(펌웨어, 부트로더, OS 등)가 서명된 정품 코드인지 확인하는 보안 기능이다.
-원리:
-
-CPU는 UEFI 펌웨어에 내장된 신뢰할 수 있는 공개 키(Root of Trust)를 기반으로,
-부팅에 필요한 모든 구성 요소의 디지털 서명 검증을 단계적으로 수행하며,
-검증 실패 시 부팅 중단 또는 사용자 경고.
+    - 개념:
+        - Secure Boot은 부팅 시점에 실행되는 모든 코드(펌웨어, 부트로더, OS 등)가 서명된 정품 코드인지 확인하는 보안 기능이다.
+    - 원리:
+        - CPU는 UEFI 펌웨어에 내장된 신뢰할 수 있는 공개 키(Root of Trust)를 기반으로,
+        - 부팅에 필요한 모든 구성 요소의 디지털 서명 검증을 단계적으로 수행하며,
+        - 검증 실패 시 부팅 중단 또는 사용자 경고.
 필요성:
 
 루트킷, 부트킷 등의 시스템 레벨 악성코드 차단.
