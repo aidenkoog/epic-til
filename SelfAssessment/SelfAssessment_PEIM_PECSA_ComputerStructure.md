@@ -3709,40 +3709,37 @@ Organize concepts, features, types and Pros and Cons
         - 레지스터 리네이밍(Register Renaming).
         - 데이터 포워딩(Forwarding, Bypassing).
         - 컴파일러 최적화 (Instruction Scheduling).
+
+- Loop-Carried Dependency(루프 의존성)의 개념과 해결 기법
+    - 개념:
+        - 반복문 내에서 현재 반복의 결과가 다음 반복의 입력에 영향을 주는 의존성.
+        - 예: A[i] = A[i-1] + 1은 병렬 실행 불가.
+    - 해결 기법:
+        - 루프 변환 (Loop Transformation):
+            - Loop Unrolling, Loop Fission, Loop Interchange 등.
+        - 프라이빗 변수 활용 (Privatization).
+        - 스칼라 확장 (Scalar Expansion)으로 종속 제거.
+        - 데이터 흐름 분석 기반 병렬화 (자동화 툴이나 OpenMP 사용).
+
+- Register Windowing(레지스터 윈도잉) 기법과 RISC에서의 활용
+    - 개념:
+        - 함수 호출 시, 새로운 레지스터 집합(Window)을 할당하여 스택 접근 최소화.
+        - 대표 사례: SPARC 아키텍처의 윈도우 기반 레지스터 파일.
+    - RISC 활용 방식:
+        - 각 함수 호출마다 입력/출력/지역 레지스터 집합 분리.
+        - 컨텍스트 스위칭 비용 절감.
+        - 레지스터 이름 충돌 방지 및 컴파일러 설계 최적화.
+
+- Fetch-Decode-Execute 사이클과 병목 줄이기 위한 최적화
+    - 단계별 역할:
+        - Fetch: 명령어를 메모리에서 가져옴.
+        - Decode: 명령어를 해석하고 오퍼랜드 추출.
+        - Execute: 연산 수행 또는 메모리/분기 처리.
+    - 병목 최적화 방법:
+        - Fetch 단계: 분기 예측, 인스트럭션 캐시, Prefetch Buffer 사용.
+        - Decode 단계: 디코딩 병렬화, 명령어 인코딩 단순화(RISC 구조).
+        - Execute 단계: 파이프라이닝, ALU 병렬 처리, 레지스터 리네이밍.
         
-2. Loop-Carried Dependency(루프 의존성)의 개념과 해결 기법
-개념:
-
-반복문 내에서 현재 반복의 결과가 다음 반복의 입력에 영향을 주는 의존성.
-예: A[i] = A[i-1] + 1은 병렬 실행 불가.
-해결 기법:
-
-루프 변환 (Loop Transformation):
-Loop Unrolling, Loop Fission, Loop Interchange 등.
-프라이빗 변수 활용 (Privatization).
-스칼라 확장 (Scalar Expansion)으로 종속 제거.
-데이터 흐름 분석 기반 병렬화 (자동화 툴이나 OpenMP 사용).
-3. Register Windowing(레지스터 윈도잉) 기법과 RISC에서의 활용
-개념:
-
-함수 호출 시, 새로운 레지스터 집합(Window)을 할당하여 스택 접근 최소화.
-대표 사례: SPARC 아키텍처의 윈도우 기반 레지스터 파일.
-RISC 활용 방식:
-
-각 함수 호출마다 입력/출력/지역 레지스터 집합 분리.
-컨텍스트 스위칭 비용 절감.
-레지스터 이름 충돌 방지 및 컴파일러 설계 최적화.
-4. Fetch-Decode-Execute 사이클과 병목 줄이기 위한 최적화
-단계별 역할:
-
-Fetch: 명령어를 메모리에서 가져옴.
-Decode: 명령어를 해석하고 오퍼랜드 추출.
-Execute: 연산 수행 또는 메모리/분기 처리.
-병목 최적화 방법:
-
-Fetch 단계: 분기 예측, 인스트럭션 캐시, Prefetch Buffer 사용.
-Decode 단계: 디코딩 병렬화, 명령어 인코딩 단순화(RISC 구조).
-Execute 단계: 파이프라이닝, ALU 병렬 처리, 레지스터 리네이밍.
 5. Control Flow Graph(CFG) 기반 최적화 기법
 기본 개념:
 
