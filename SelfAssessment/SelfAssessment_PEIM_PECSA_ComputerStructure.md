@@ -3568,42 +3568,36 @@ Organize concepts, features, types and Pros and Cons
     - 비교:
         - Sequential은 간단하지만 느림.
         - Weak은 복잡하지만 성능 좋음, 예: ARM, POWER 아키텍처.
-6. Write Combining 기술
-개념:
 
-여러 개의 작은 쓰기 연산을 하나의 큰 블록으로 결합하여 메모리에 쓰는 방식.
-동작 원리:
-
-CPU가 쓰기 버퍼에 데이터를 모았다가, 일정 기준 충족 시 한 번에 쓰기.
-효과:
-
-버스 트래픽 감소, 쓰기 병렬성 증가, 메모리 쓰기 성능 향상.
-GPU 또는 I/O 연산에서 특히 효과적.
+- Write Combining 기술
+    - 개념:
+        - 여러 개의 작은 쓰기 연산을 하나의 큰 블록으로 결합하여 메모리에 쓰는 방식.
+    - 동작 원리:
+        - CPU가 쓰기 버퍼에 데이터를 모았다가, 일정 기준 충족 시 한 번에 쓰기.
+    - 효과:
+        - 버스 트래픽 감소, 쓰기 병렬성 증가, 메모리 쓰기 성능 향상.
+        - GPU 또는 I/O 연산에서 특히 효과적.
 
 - Hardware Transactional Memory (HTM)
-개념:
-HTM은 CPU가 지원하는 하드웨어 수준의 트랜잭션 기반 병렬 처리 기법으로, 임계 구역(Critical Section)을 명시적 락 없이 실행하며 충돌 시 자동 롤백함.
+    - 개념:
+        - HTM은 CPU가 지원하는 하드웨어 수준의 트랜잭션 기반 병렬 처리 기법으로, 임계 구역(Critical Section)을 명시적 락 없이 실행하며 충돌 시 자동 롤백함.
+    - 역할:
+        - 락을 사용하지 않고 동기화를 처리하므로 데드락 회피, 락 경합 최소화, 성능 향상에 유리.
+        - 병렬 알고리즘 구현의 복잡성을 줄이고, 다중 스레드 환경에서의 동시성 제어 간소화.
+    - 적용 예시:
+        - Intel의 TSX(Transactional Synchronization Extensions), IBM POWER의 HTM 기능 등.
 
-역할:
-
-락을 사용하지 않고 동기화를 처리하므로 데드락 회피, 락 경합 최소화, 성능 향상에 유리.
-병렬 알고리즘 구현의 복잡성을 줄이고, 다중 스레드 환경에서의 동시성 제어 간소화.
-적용 예시:
-Intel의 TSX(Transactional Synchronization Extensions), IBM POWER의 HTM 기능 등.
-
-2. DMA vs RDMA
-DMA (Direct Memory Access):
-
-CPU의 개입 없이 디바이스가 메모리와 직접 데이터 송수신을 수행.
-단일 시스템 내에서 I/O 처리 속도 향상.
-RDMA (Remote Direct Memory Access):
-
-네트워크 상에서 원격 시스템의 메모리에 직접 접근하는 방식.
-CPU 개입 없이 원격 메모리에 읽기/쓰기가 가능하며, 초저지연 고속 네트워킹 (예: InfiniBand)에서 주로 사용됨.
-차이점:
-
-DMA는 로컬, RDMA는 원격 메모리 접근.
-RDMA는 네트워크 오버헤드 감소와 고속 데이터 이동에 효과적.
+- DMA vs RDMA
+    - DMA (Direct Memory Access):
+        - CPU의 개입 없이 디바이스가 메모리와 직접 데이터 송수신을 수행.
+        - 단일 시스템 내에서 I/O 처리 속도 향상.
+    - RDMA (Remote Direct Memory Access):
+        - 네트워크 상에서 원격 시스템의 메모리에 직접 접근하는 방식.
+        - CPU 개입 없이 원격 메모리에 읽기/쓰기가 가능하며, 초저지연 고속 네트워킹 (예: InfiniBand)에서 주로 사용됨.
+    - 차이점:
+        - DMA는 로컬, RDMA는 원격 메모리 접근.
+        - RDMA는 네트워크 오버헤드 감소와 고속 데이터 이동에 효과적.
+        
 3. PCIe Link Width(x1, x4, x8, x16)의 성능 영향
 개념:
 PCIe는 레인(Lane) 단위로 데이터 전송이 이루어지며, x1은 1레인, x16은 16레인 사용을 의미.
