@@ -3950,120 +3950,102 @@ Organize concepts, features, types and Pros and Cons
     - 차이점:
         - HT는 모듈형 설계에 강점, QPI는 캐시 일관성 중심 설계.
         - QPI는 멀티프로세서 환경에서 NUMA 최적화에 유리.
-        
-2. Synchronization Barrier의 개념과 멀티스레딩 환경에서의 역할
-개념:
 
-모든 스레드가 특정 지점(Barrier)에 도달할 때까지 대기하고, 이후 동시에 다음 단계로 진행하도록 보장.
-병렬 알고리즘에서 동기적 단계 수행을 보장하는 데 사용.
-역할:
+- Synchronization Barrier의 개념과 멀티스레딩 환경에서의 역할
+    - 개념:
+        - 모든 스레드가 특정 지점(Barrier)에 도달할 때까지 대기하고, 이후 동시에 다음 단계로 진행하도록 보장.
+        - 병렬 알고리즘에서 동기적 단계 수행을 보장하는 데 사용.
+    - 역할:
+        - 분산 계산, 병렬 시뮬레이션에서 각 단계마다 정합성을 유지.
+        - 예: 병렬 행렬 곱셈에서 각 타임스텝이 끝나기 전 다음 단계로 못 가도록 동기화.
+    - 구현 방식:
+        - 소프트웨어 기반(Pthread Barrier), 하드웨어 명령어 기반(전용 명령어) 존재.
 
-분산 계산, 병렬 시뮬레이션에서 각 단계마다 정합성을 유지.
-예: 병렬 행렬 곱셈에서 각 타임스텝이 끝나기 전 다음 단계로 못 가도록 동기화.
-구현 방식:
+- Multi-Core 환경에서 Memory Contention(메모리 충돌)을 줄이는 방법
+    - 메모리 분산:
+        - NUMA 노드 최적화, 메모리 접근이 로컬이 되도록 스레드 바인딩(Thread Affinity) 적용.
+    - False Sharing 방지:
+        - 변수 간 캐시 라인 간섭 제거로 성능 저하 예방.
+    - 데이터 분할(Data Partitioning):
+        - 코어마다 별도의 데이터 블록 할당하여 충돌 최소화.
+    - 락 경쟁 완화:
+        - 락-프리(lock-free) 자료구조, 분산 큐 등 적용.
 
-소프트웨어 기반(Pthread Barrier), 하드웨어 명령어 기반(전용 명령어) 존재.
-3. Multi-Core 환경에서 Memory Contention(메모리 충돌)을 줄이는 방법
-메모리 분산:
+- CC-NUMA(Cache-Coherent Non-Uniform Memory Access) 성능 최적화 기법
+    - 메모리 접근 로컬화(Locality-Aware Placement):
+        - 스레드가 사용하는 데이터는 같은 NUMA 노드 메모리에 할당.
+    - Thread Affinity 설정:
+        - 스레드가 자주 이동하지 않도록 코어에 고정(핀ning).
+    - 메모리 할당 정책 조정:
+        - First-touch, Interleaved 등 운영체제 정책에 따라 메모리 할당 제어.
+    - NUMA-aware 프로그래밍:
+        - 메모리/스레드 배치를 고려한 프로그래밍 모델 적용 (예: OpenMP + NUMA).
 
-NUMA 노드 최적화, 메모리 접근이 로컬이 되도록 스레드 바인딩(Thread Affinity) 적용.
-False Sharing 방지:
+- PCIe Lane Width와 대역폭 관계
+    - Lane의 의미:
+        - PCIe는 직렬 링크 기반으로, 한 쌍의 송수신 라인이 x1, x4, x8, x16 등으로 확장 가능.
+    - 대역폭 관계:
+        - 대역폭은 Lane 수에 비례하여 증가.
+        - 예: PCIe 4.0 기준, x1은 약 2GB/s, x16은 약 32GB/s.
+    - 활용 사례:
+        - GPU는 보통 x16, SSD는 x4, 사운드카드는 x1 슬롯을 활용함.
 
-변수 간 캐시 라인 간섭 제거로 성능 저하 예방.
-데이터 분할(Data Partitioning):
-
-코어마다 별도의 데이터 블록 할당하여 충돌 최소화.
-락 경쟁 완화:
-
-락-프리(lock-free) 자료구조, 분산 큐 등 적용.
-4. CC-NUMA(Cache-Coherent Non-Uniform Memory Access) 성능 최적화 기법
-메모리 접근 로컬화(Locality-Aware Placement):
-
-스레드가 사용하는 데이터는 같은 NUMA 노드 메모리에 할당.
-Thread Affinity 설정:
-
-스레드가 자주 이동하지 않도록 코어에 고정(핀ning).
-메모리 할당 정책 조정:
-
-First-touch, Interleaved 등 운영체제 정책에 따라 메모리 할당 제어.
-NUMA-aware 프로그래밍:
-
-메모리/스레드 배치를 고려한 프로그래밍 모델 적용 (예: OpenMP + NUMA).
-5. PCIe Lane Width와 대역폭 관계
-Lane의 의미:
-
-PCIe는 직렬 링크 기반으로, 한 쌍의 송수신 라인이 x1, x4, x8, x16 등으로 확장 가능.
-대역폭 관계:
-
-대역폭은 Lane 수에 비례하여 증가.
-예: PCIe 4.0 기준, x1은 약 2GB/s, x16은 약 32GB/s.
-활용 사례:
-
-GPU는 보통 x16, SSD는 x4, 사운드카드는 x1 슬롯을 활용함.
-6. Direct I/O vs Memory-Mapped I/O
-Direct I/O:
-
-CPU가 명령어로 I/O 포트에 직접 접근 (x86의 IN/OUT 명령어).
-보통 Port-mapped I/O라고도 하며, 특정 I/O 주소 공간 사용.
-장점: I/O와 메모리 주소 분리.
-단점: 접근 속도 낮고, 범용성 떨어짐.
-Memory-Mapped I/O:
-
-I/O 장치가 일반 메모리 주소 공간 내에 매핑되어, 메모리 접근처럼 처리.
-장점: 통일된 접근 방식, 고속 처리 가능.
-단점: 주소 공간 낭비 가능성.
-성능 비교:
-
-Memory-Mapped 방식이 고성능 시스템에서 일반적으로 우세.
+- Direct I/O vs Memory-Mapped I/O
+    - Direct I/O:
+        - CPU가 명령어로 I/O 포트에 직접 접근 (x86의 IN/OUT 명령어).
+        - 보통 Port-mapped I/O라고도 하며, 특정 I/O 주소 공간 사용.
+        - 장점: I/O와 메모리 주소 분리.
+        - 단점: 접근 속도 낮고, 범용성 떨어짐.
+    - Memory-Mapped I/O:
+        - I/O 장치가 일반 메모리 주소 공간 내에 매핑되어, 메모리 접근처럼 처리.
+        - 장점: 통일된 접근 방식, 고속 처리 가능.
+        - 단점: 주소 공간 낭비 가능성.
+    - 성능 비교:
+        - Memory-Mapped 방식이 고성능 시스템에서 일반적으로 우세.
 
 - Latency-Hiding Techniques(지연시간 은폐 기법)의 개념과 예시
-개념:
-시스템 내에서 발생하는 지연(latency)을 완전히 줄이기 어렵기 때문에, 작업을 병렬적으로 수행하거나 기다리는 동안 다른 연산을 실행하여 지연을 숨기는 기법이다.
-대표적인 기법들:
-멀티스레딩: 한 스레드가 메모리 대기 중일 때 다른 스레드 실행.
-비동기 처리(Async I/O): 입출력을 요청만 하고 CPU는 다른 작업 수행.
-프리페칭(Prefetching): 미리 데이터를 가져와 캐시에 적재.
-파이프라이닝: 각 단계가 독립적으로 수행되어 연속 처리 가능.
-2. USB 3.0과 USB 4.0의 차이점과 성능 비교
-USB 3.0:
+    - 개념:
+        - 시스템 내에서 발생하는 지연(latency)을 완전히 줄이기 어렵기 때문에, 작업을 병렬적으로 수행하거나 기다리는 동안 다른 연산을 실행하여 지연을 숨기는 기법이다.
+    - 대표적인 기법들:
+        - 멀티스레딩: 한 스레드가 메모리 대기 중일 때 다른 스레드 실행.
+        - 비동기 처리(Async I/O): 입출력을 요청만 하고 CPU는 다른 작업 수행.
+        - 프리페칭(Prefetching): 미리 데이터를 가져와 캐시에 적재.
+        - 파이프라이닝: 각 단계가 독립적으로 수행되어 연속 처리 가능.
 
-이론적 속도: 5Gbps (SuperSpeed).
-단방향 통신(Host-Device).
-표준 Type-A 커넥터 중심.
-USB 4.0:
+- USB 3.0과 USB 4.0의 차이점과 성능 비교
+    - USB 3.0:
+        - 이론적 속도: 5Gbps (SuperSpeed).
+        - 단방향 통신(Host-Device).
+        - 표준 Type-A 커넥터 중심.
+    - USB 4.0:
+        - 최대 속도: 40Gbps (Thunderbolt 3 기반).
+        - 양방향 동시 통신, 디스플레이 및 데이터 동시 지원.
+        - USB-C 커넥터 기반, 다중 프로토콜 통합(TB3, DisplayPort 등).
+    - 차이점 요약:
+        - 속도, 커넥터 종류, 프로토콜 지원 범위에서 USB 4.0이 압도적이다.
 
-최대 속도: 40Gbps (Thunderbolt 3 기반).
-양방향 동시 통신, 디스플레이 및 데이터 동시 지원.
-USB-C 커넥터 기반, 다중 프로토콜 통합(TB3, DisplayPort 등).
-차이점 요약:
+- Storage Class Memory(SCM)의 개념과 DRAM/NAND와의 차이점
+    - 개념:
+        - 비휘발성 메모리와 DRAM의 특성을 혼합한 고속 스토리지 계층.
+        - 예: Intel Optane (3D XPoint)
+    - 기존 메모리와 차이점:
+        - DRAM: 매우 빠르지만 휘발성.
+        - NAND Flash: 비휘발성이나 느리고 수명이 제한됨.
+        - SCM: DRAM보다 느리지만 비휘발성이며 NAND보다 훨씬 빠름.
+    - 활용:
+        - 메모리 계층 사이에 캐시 또는 확장 메모리로 사용.
 
-속도, 커넥터 종류, 프로토콜 지원 범위에서 USB 4.0이 압도적이다.
-3. Storage Class Memory(SCM)의 개념과 DRAM/NAND와의 차이점
-개념:
-
-비휘발성 메모리와 DRAM의 특성을 혼합한 고속 스토리지 계층.
-예: Intel Optane (3D XPoint)
-기존 메모리와 차이점:
-
-DRAM: 매우 빠르지만 휘발성.
-NAND Flash: 비휘발성이나 느리고 수명이 제한됨.
-SCM: DRAM보다 느리지만 비휘발성이며 NAND보다 훨씬 빠름.
-활용:
-
-메모리 계층 사이에 캐시 또는 확장 메모리로 사용.
-4. I/O Bandwidth vs I/O Throughput
-I/O Bandwidth:
-
-단위 시간당 전송 가능한 최대 데이터 양.
-하드웨어의 이론적 용량에 가까움.
-I/O Throughput:
-
-실제로 전송된 데이터 양.
-소프트웨어, 병목, 지연 등에 영향을 받음.
-차이:
-
-Bandwidth는 용량, Throughput은 성능 지표.
-Throughput이 항상 Bandwidth보다 작거나 같음.
+- I/O Bandwidth vs I/O Throughput
+    - I/O Bandwidth:
+        - 단위 시간당 전송 가능한 최대 데이터 양.
+        - 하드웨어의 이론적 용량에 가까움.
+    - I/O Throughput:
+        - 실제로 전송된 데이터 양.
+        - 소프트웨어, 병목, 지연 등에 영향을 받음.
+    - 차이:
+        - Bandwidth는 용량, Throughput은 성능 지표.
+        - Throughput이 항상 Bandwidth보다 작거나 같음.
+        
 5. Hot Plugging(핫 플러깅)에서 발생할 수 있는 기술적 문제와 해결 방법
 문제:
 
