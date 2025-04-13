@@ -4217,40 +4217,39 @@ Organize concepts, features, types and Pros and Cons
     - 활용 사례:
         - CDC 6600, IBM 360/91 등의 고전적인 슈퍼스칼라 설계
         - 일부 임베디드/저전력 아키텍처에서도 변형 사용
-        
-5. Hardware Loop Buffer(하드웨어 루프 버퍼)
-개념: 반복되는 루프 명령어들을 전용 버퍼에 저장해 재인출 없이 반복 실행할 수 있도록 지원하는 기능.
-성능 향상 효과:
-명령어 캐시 접근 및 디코딩 생략 → 전력 및 시간 절약
-루프 카운터만으로 제어 가능 → 루프 실행 속도 향상
-활용 예: DSP, RISC-V, ARM Cortex-M 시리즈 등에서 에너지 효율 향상을 위해 채택
-6. SIMD Execution Unit vs 일반 ALU
-SIMD Execution Unit:
-하나의 명령어로 여러 데이터를 동시에 처리 (벡터 연산)
-데이터 병렬성에 최적화 (멀티미디어, 이미지 처리, 행렬 연산 등)
-예: SSE, AVX, NEON
-일반 ALU:
-정수 단일 연산 수행 (일반 산술/논리 연산)
-컨트롤 흐름 기반 프로그램에 적합
-장점 비교:
-SIMD: 연산 처리량 높고 병렬 처리에 강함
-ALU: 단순 구조로 빠른 반응, 제어 흐름에 유리
+
+- Hardware Loop Buffer(하드웨어 루프 버퍼)
+    - 개념: 반복되는 루프 명령어들을 전용 버퍼에 저장해 재인출 없이 반복 실행할 수 있도록 지원하는 기능.
+    - 성능 향상 효과:
+        - 명령어 캐시 접근 및 디코딩 생략 → 전력 및 시간 절약
+        - 루프 카운터만으로 제어 가능 → 루프 실행 속도 향상
+        - 활용 예: DSP, RISC-V, ARM Cortex-M 시리즈 등에서 에너지 효율 향상을 위해 채택
+
+- SIMD Execution Unit vs 일반 ALU
+    - SIMD Execution Unit:
+        - 하나의 명령어로 여러 데이터를 동시에 처리 (벡터 연산)
+        - 데이터 병렬성에 최적화 (멀티미디어, 이미지 처리, 행렬 연산 등)
+        - 예: SSE, AVX, NEON
+    - 일반 ALU:
+        - 정수 단일 연산 수행 (일반 산술/논리 연산)
+        - 컨트롤 흐름 기반 프로그램에 적합
+    - 장점 비교:
+        - SIMD: 연산 처리량 높고 병렬 처리에 강함
+        - ALU: 단순 구조로 빠른 반응, 제어 흐름에 유리
 
 - Power Gating과 Clock Gating의 개념과 전력 절감 효과
-Power Gating:
-
-사용하지 않는 회로 블록의 전원 공급 자체를 차단하여 누설 전류(Leakage Power)를 줄이는 기법
-주로 슬립 트랜지스터(sleep transistor)를 사용
-효과: 대기 상태 전력 절감에 탁월
-Clock Gating:
-
-회로 블록의 클럭 신호를 차단하여 불필요한 스위칭 활동(dynamic power)을 줄이는 기법
-RTL 및 컴파일러 수준에서 많이 사용
-효과: 동작 중인 회로의 전력 절감에 효과적
-차이점:
-
-Power Gating은 완전한 꺼짐(off), Clock Gating은 일시 정지(pause)와 유사
-Power Gating은 wake-up 시간이 오래 걸리지만 절감 효과는 큼
+    - Power Gating:
+        - 사용하지 않는 회로 블록의 전원 공급 자체를 차단하여 누설 전류(Leakage Power)를 줄이는 기법
+        - 주로 슬립 트랜지스터(sleep transistor)를 사용
+        - 효과: 대기 상태 전력 절감에 탁월
+    - Clock Gating:
+        - 회로 블록의 클럭 신호를 차단하여 불필요한 스위칭 활동(dynamic power)을 줄이는 기법
+        - RTL 및 컴파일러 수준에서 많이 사용
+        - 효과: 동작 중인 회로의 전력 절감에 효과적
+    - 차이점:
+        - Power Gating은 완전한 꺼짐(off), Clock Gating은 일시 정지(pause)와 유사
+        - Power Gating은 wake-up 시간이 오래 걸리지만 절감 효과는 큼
+        
 2. Register Scoreboarding의 개념과 Out-of-Order Execution에서의 역할
 Register Scoreboarding:
 레지스터의 사용 상태를 추적하여 데이터 종속성 여부를 확인하고, 명령어 발행 타이밍을 제어하는 기법
