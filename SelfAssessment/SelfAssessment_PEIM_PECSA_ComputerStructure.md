@@ -4425,109 +4425,93 @@ Organize concepts, features, types and Pros and Cons
     - 차이점 요약:
         - TLP는 병렬 작업, DLP는 병렬 데이터
         - DLP는 같은 명령 반복, TLP는 서로 다른 명령
-        
-6. Multi-Chip Module(MCM)과 단일 다이 프로세서의 성능 및 설계 차이점
-MCM(Multi-Chip Module):
 
-여러 개의 칩(Chiplet)을 하나의 패키지로 집적한 구조
-AMD Ryzen 시리즈가 대표적 사례
-단일 다이 구조:
-
-하나의 실리콘에 모든 코어, 캐시, I/O가 집적됨
-인텔의 전통적 설계 방식
-차이점:
-
-MCM 장점: 수율 개선, 유연한 설계, 비용 절감
-MCM 단점: 칩 간 통신 지연 증가 가능성 (Infinity Fabric 등 보완)
-단일 다이 장점: 칩 내부 통신 빠름, 통합성 높음
-단일 다이 단점: 다이 크기 증가로 수율 저하, 발열 문제
+- Multi-Chip Module(MCM)과 단일 다이 프로세서의 성능 및 설계 차이점
+    - MCM(Multi-Chip Module):
+        - 여러 개의 칩(Chiplet)을 하나의 패키지로 집적한 구조
+        - AMD Ryzen 시리즈가 대표적 사례
+    - 단일 다이 구조:
+        - 하나의 실리콘에 모든 코어, 캐시, I/O가 집적됨
+        - 인텔의 전통적 설계 방식
+    - 차이점:
+        - MCM 장점: 수율 개선, 유연한 설계, 비용 절감
+        - MCM 단점: 칩 간 통신 지연 증가 가능성 (Infinity Fabric 등 보완)
+        - 단일 다이 장점: 칩 내부 통신 빠름, 통합성 높음
+        - 단일 다이 단점: 다이 크기 증가로 수율 저하, 발열 문제
 
 - Parallel Programming에서 Load Imbalance(부하 불균형)의 원인과 해결 방법
-개념:
-병렬 프로그래밍에서 일부 스레드나 프로세스가 다른 것보다 더 많은 작업을 수행하면서 전체 실행 시간이 늘어나는 문제를 의미함.
+    - 개념:
+        - 병렬 프로그래밍에서 일부 스레드나 프로세스가 다른 것보다 더 많은 작업을 수행하면서 전체 실행 시간이 늘어나는 문제를 의미함.
+    - 주요 원인:
+        - 작업 분할의 불균형
+        - 스레드 간 자원 경쟁
+        - 동적 입력 데이터의 분포 차이
+        - 데이터 접근 지연 또는 캐시 미스
+    - 해결 방법:
+        - 동적 작업 할당(Dynamic Scheduling)
+        - 작업 단위(Task Granularity) 조정
+        - 데이터 로컬리티 최적화
+        - Work Stealing 사용
 
-주요 원인:
+- Work Stealing Algorithm(작업 도둑 알고리즘)의 개념과 성능 최적화 효과
+    - 개념:
+        - 스레드가 자신에게 할당된 작업을 모두 마치면 다른 스레드의 작업 큐에서 작업을 훔쳐와 실행하는 방식
+    - 특징:
+        - 각 스레드는 로컬 작업 큐를 가지고 있으며, 유휴 상태가 되면 다른 큐에서 작업을 훔친다.
+        - 예: Cilk, Java Fork/Join Framework, Go 런타임 등에서 사용됨
+    - 장점:
+        - 부하 균형을 자동으로 맞춤
+        - 유휴 리소스 활용률 극대화
+        - 병렬 처리 효율성 증가
 
-작업 분할의 불균형
-스레드 간 자원 경쟁
-동적 입력 데이터의 분포 차이
-데이터 접근 지연 또는 캐시 미스
-해결 방법:
+- Compute-Bound Task와 Memory-Bound Task의 차이점
+    - Compute-Bound Task:
+        - CPU 연산이 중심인 작업 (예: 행렬 곱, 암호화, AI 추론)
+        - 성능은 CPU 속도 및 병렬 처리 능력에 의존
+    - Memory-Bound Task:
+        - 데이터 이동과 접근이 병목인 작업 (예: 대용량 배열 순회, 파일 I/O)
+        - 성능은 메모리 대역폭과 캐시 구조에 좌우
+    - 차이점 요약:
+        - Compute-Bound는 CPU 중심, Memory-Bound는 데이터 접근 중심
+        - 병목 위치가 다르므로 최적화 방향도 달라짐
 
-동적 작업 할당(Dynamic Scheduling)
-작업 단위(Task Granularity) 조정
-데이터 로컬리티 최적화
-Work Stealing 사용
-2. Work Stealing Algorithm(작업 도둑 알고리즘)의 개념과 성능 최적화 효과
-개념:
-스레드가 자신에게 할당된 작업을 모두 마치면 다른 스레드의 작업 큐에서 작업을 훔쳐와 실행하는 방식
+- CC-NUMA와 SC-NUMA의 차이점과 성능 최적화 방법
+    - CC-NUMA (Cache-Coherent NUMA):
+        - 노드 간 캐시 일관성 유지
+        - 프로그래머는 공유 메모리처럼 접근 가능
+        - 대표 예: AMD EPYC, Intel Xeon
+    - SC-NUMA (Simple/Non Coherent NUMA):
+        - 캐시 일관성 유지하지 않음
+        - 명시적 메시지 패싱 또는 페이지 복제 필요
+    - 성능 최적화 방법:
+        - NUMA-Aware Memory Allocation (numactl 등)
+        - Thread Affinity 설정
+        - 메모리 접근 로컬리티 유지
+        - 캐시 일관성 유지 정책 고려한 데이터 배치
 
-특징:
+- Parallel Reduction과 Scan Operation(스캔 연산)의 차이점
+    - Parallel Reduction:
+        - 전체 데이터를 하나의 값으로 축소 (예: 합계, 최댓값)
+        - 연산은 연관적이어야 함 (Associative)
+    - Scan Operation (Prefix Sum):
+        - 입력 배열에 대해 누적 연산을 수행하여 부분 합의 배열을 출력
+        - 예: [1,2,3,4] → [1,3,6,10]
+    - 차이점 요약:
+        - Reduction은 단일 결과, Scan은 중간 결과 보존
+        - Scan은 후속 연산 최적화(예: 히스토그램, 정렬)에 유리
 
-각 스레드는 로컬 작업 큐를 가지고 있으며, 유휴 상태가 되면 다른 큐에서 작업을 훔친다.
-예: Cilk, Java Fork/Join Framework, Go 런타임 등에서 사용됨
-장점:
-
-부하 균형을 자동으로 맞춤
-유휴 리소스 활용률 극대화
-병렬 처리 효율성 증가
-3. Compute-Bound Task와 Memory-Bound Task의 차이점
-Compute-Bound Task:
-
-CPU 연산이 중심인 작업 (예: 행렬 곱, 암호화, AI 추론)
-성능은 CPU 속도 및 병렬 처리 능력에 의존
-Memory-Bound Task:
-
-데이터 이동과 접근이 병목인 작업 (예: 대용량 배열 순회, 파일 I/O)
-성능은 메모리 대역폭과 캐시 구조에 좌우
-차이점 요약:
-
-Compute-Bound는 CPU 중심, Memory-Bound는 데이터 접근 중심
-병목 위치가 다르므로 최적화 방향도 달라짐
-4. CC-NUMA와 SC-NUMA의 차이점과 성능 최적화 방법
-CC-NUMA (Cache-Coherent NUMA):
-
-노드 간 캐시 일관성 유지
-프로그래머는 공유 메모리처럼 접근 가능
-대표 예: AMD EPYC, Intel Xeon
-SC-NUMA (Simple/Non Coherent NUMA):
-
-캐시 일관성 유지하지 않음
-명시적 메시지 패싱 또는 페이지 복제 필요
-성능 최적화 방법:
-
-NUMA-Aware Memory Allocation (numactl 등)
-Thread Affinity 설정
-메모리 접근 로컬리티 유지
-캐시 일관성 유지 정책 고려한 데이터 배치
-5. Parallel Reduction과 Scan Operation(스캔 연산)의 차이점
-Parallel Reduction:
-
-전체 데이터를 하나의 값으로 축소 (예: 합계, 최댓값)
-연산은 연관적이어야 함 (Associative)
-Scan Operation (Prefix Sum):
-
-입력 배열에 대해 누적 연산을 수행하여 부분 합의 배열을 출력
-예: [1,2,3,4] → [1,3,6,10]
-차이점 요약:
-
-Reduction은 단일 결과, Scan은 중간 결과 보존
-Scan은 후속 연산 최적화(예: 히스토그램, 정렬)에 유리
-6. NVMe Over Fabrics(NVMe-oF)의 개념과 기존 스토리지 인터페이스와의 차이점
-NVMe-oF 개념:
-
-고속 NVMe 명령어 세트를 RDMA, TCP, Fibre Channel 등 네트워크 상에서 확장한 프로토콜
-스토리지를 물리적으로 분리된 환경에서도 직접 접근하듯 사용 가능
-기존 인터페이스와의 차이점:
-
-SATA/SAS: 레거시 프로토콜, 지연 시간 큼
-NVMe: PCIe에 최적화된 고속 인터페이스
-NVMe-oF: 네트워크 기반이지만 PCIe 수준 성능 유지
-장점:
-
-고성능 분산 스토리지 구성 가능
-CPU 오버헤드 감소 (특히 RDMA 기반)
-클라우드, 데이터센터에서 스토리지 자원 유연하게 확장
+- NVMe Over Fabrics(NVMe-oF)의 개념과 기존 스토리지 인터페이스와의 차이점
+    - NVMe-oF 개념:
+        - 고속 NVMe 명령어 세트를 RDMA, TCP, Fibre Channel 등 네트워크 상에서 확장한 프로토콜
+        스토리지를 물리적으로 분리된 환경에서도 직접 접근하듯 사용 가능
+    - 기존 인터페이스와의 차이점:
+        - SATA/SAS: 레거시 프로토콜, 지연 시간 큼
+        - NVMe: PCIe에 최적화된 고속 인터페이스
+        - NVMe-oF: 네트워크 기반이지만 PCIe 수준 성능 유지
+    - 장점:
+        - 고성능 분산 스토리지 구성 가능
+        - CPU 오버헤드 감소 (특히 RDMA 기반)
+        - 클라우드, 데이터센터에서 스토리지 자원 유연하게 확장
 
 - Persistent Memory에서 Read Disturbance 현상이란 무엇이며, 이를 해결하는 방법은?
 개념:
