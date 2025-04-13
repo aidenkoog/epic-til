@@ -4104,121 +4104,120 @@ Organize concepts, features, types and Pros and Cons
         - 속도: 광신호는 전기 신호보다 빠르며 병렬 연산 가능성이 높음.
         - 발열 적음: 전자보다 발열이 낮아 고집적도 가능.
         - 상용화 제약: 광소자 제어 및 메모리 통합에서 기술적 난제 존재.
-        
-4. Zero Trust Architecture(제로 트러스트 아키텍처)와 하드웨어 보안
-개념:
 
-내부/외부를 구분하지 않고 모든 접근을 검증하고 최소 권한만 부여하는 보안 모델.
-“Never Trust, Always Verify” 원칙에 기반.
-하드웨어 보안에서의 중요성:
+- Zero Trust Architecture(제로 트러스트 아키텍처)와 하드웨어 보안
+    - 개념:
+        - 내부/외부를 구분하지 않고 모든 접근을 검증하고 최소 권한만 부여하는 보안 모델.
+        - “Never Trust, Always Verify” 원칙에 기반.
+    - 하드웨어 보안에서의 중요성:
+        - 펌웨어, 칩셋, 부트로더 등 하드웨어 루트도 항상 검증 필요.
+        - 하드웨어 수준의 보안 부팅(Secure Boot), TPM, 암호화 가속기와 연계 필요.
+        - 내부 공격자나 하드웨어 백도어도 고려하는 구조.
 
-펌웨어, 칩셋, 부트로더 등 하드웨어 루트도 항상 검증 필요.
-하드웨어 수준의 보안 부팅(Secure Boot), TPM, 암호화 가속기와 연계 필요.
-내부 공격자나 하드웨어 백도어도 고려하는 구조.
-5. Edge AI 프로세서와 클라우드 AI의 차이점
-Edge AI 프로세서:
+- Edge AI 프로세서와 클라우드 AI의 차이점
+    - Edge AI 프로세서:
+        - 데이터 센터가 아닌 단말 또는 게이트웨이에서 AI 연산 수행.
+        - 전력 효율, 실시간성, 네트워크 종속성 최소화를 지향.
+    - 차이점 요약:
+        - 위치: Edge는 현장, Cloud는 중앙 서버.
+        - 지연 시간: Edge가 짧음.
+        - 모델 사이즈: Edge는 경량 모델 최적화 필요.
+        - 보안: Edge는 네트워크 노출이 적지만, 단말 보안은 강화 필요.
 
-데이터 센터가 아닌 단말 또는 게이트웨이에서 AI 연산 수행.
-전력 효율, 실시간성, 네트워크 종속성 최소화를 지향.
-차이점 요약:
+- Near-Memory Computing(NMC)의 개념과 기존 메모리 계층 구조와의 차이점
+    - 개념:
+        - 메모리 칩 또는 그 근처에 연산 회로를 포함시켜, 데이터 이동 없이 연산을 수행.
+        - 주로 DRAM, HBM 근처에 연산 유닛을 배치.
+    - 기존 계층 구조와의 차이:
+        - 기존: CPU ↔ Cache ↔ DRAM 구조, 데이터 이동 비용 큼.
+        - NMC: 데이터가 있는 위치에서 바로 연산, 메모리 병목 해결.
+        - AI, 그래프 연산, DB 등 대용량 데이터 반복 접근 분야에 유리.
 
-위치: Edge는 현장, Cloud는 중앙 서버.
-지연 시간: Edge가 짧음.
-모델 사이즈: Edge는 경량 모델 최적화 필요.
-보안: Edge는 네트워크 노출이 적지만, 단말 보안은 강화 필요.
-6. Near-Memory Computing(NMC)의 개념과 기존 메모리 계층 구조와의 차이점
-개념:
+- Neuromorphic Computing(뉴로모픽 컴퓨팅)의 개념과 AI 활용
+    - 개념: 인간의 뇌 신경망을 하드웨어적으로 모사한 방식으로, 뉴런과 시냅스를 회로로 구현.
+    - 특징:
+        - 사건 기반(Event-driven) 연산
+        - 초저전력, 비동기적 신호 처리
+        - 병렬 구조 최적화
+    - AI 활용:
+        - 센서 연동 실시간 인식 (예: 스마트 센서, 음성/이미지 분류)
+        - 학습보다 추론에 특화된 경량 AI 시스템
+        - 대표 사례: IBM TrueNorth, Intel Loihi
 
-메모리 칩 또는 그 근처에 연산 회로를 포함시켜, 데이터 이동 없이 연산을 수행.
-주로 DRAM, HBM 근처에 연산 유닛을 배치.
-기존 계층 구조와의 차이:
+- Quantum Error Correction(양자 오류 정정)의 개념과 필요성
+    - 개념: 양자 비트(큐비트)는 외부 간섭에 매우 민감하므로, 오류를 탐지하고 복구하기 위한 알고리즘/코딩 기법.
+    - 필요성:
+        - 큐비트는 decoherence, noise에 쉽게 노출
+        - 측정 불가능한 상태를 보호하기 위해 중첩 상태 유지가 필수
+    - 기술 예:
+        - Shor 코드, Surface 코드, Bacon-Shor 등
+        - 논리 큐비트(Logical Qubit)와 물리 큐비트의 다대일 대응이 일반적
 
-기존: CPU ↔ Cache ↔ DRAM 구조, 데이터 이동 비용 큼.
-NMC: 데이터가 있는 위치에서 바로 연산, 메모리 병목 해결.
-AI, 그래프 연산, DB 등 대용량 데이터 반복 접근 분야에 유리.
+- Nanosheet Transistor(나노시트 트랜지스터)와 FinFET의 차이점
+    - Nanosheet Transistor:
+        - GAA(Gate-All-Around) 구조의 일종, 게이트가 채널을 전방위로 감싸 제어.
+        - 3~5nm 이하 공정에서 적용되는 차세대 트랜지스터 구조.
+    - FinFET과의 차이점:
+        - FinFET: Fin 구조 위쪽과 양 옆에서 게이트 제어 (3면)
+        - Nanosheet: Gate가 4면 모두에서 채널 제어, 누설전류 줄이고 성능 향상
+        - 설계 유연성 증가 (채널 폭 조정 가능)
 
+- 3D Heterogeneous Integration(3D 이기종 집적)의 개념과 활용
+    - 개념: 다양한 기능(로직, 메모리, 센서 등)을 가진 칩들을 수직 적층 방식으로 집적하는 기술.
+    - 활용 가능성:
+        - AI, 5G, HPC에서 고속 데이터 처리와 소형화 실현
+        - HBM(High Bandwidth Memory), SoIC(System on Integrated Chip) 적용 사례
+        - 다양한 공정 기술을 융합 가능 (e.g., CMOS + RF + Photonic)
 
-- Neuromorphic Computing(뉴로모픽 컴퓨팅)이란 무엇이며, AI 연산에서 어떻게 활용되는가?
-- Quantum Error Correction(양자 오류 정정) 기술이란 무엇이며, 왜 필요한가?
-- Nanosheet Transistor(나노시트 트랜지스터)란 무엇이며, 기존 FinFET과의 차이점은?
-- 3D Heterogeneous Integration(3D 이기종 집적)의 개념과 활용 가능성은?
-- Human Brain-Inspired Computing(인간 뇌 모방 컴퓨팅)이란 무엇이며, 기존 AI 아키텍처와의 차이점은?
-- Instruction Window(명령어 윈도우) 크기가 성능에 미치는 영향은?
-    - 1. Neuromorphic Computing(뉴로모픽 컴퓨팅)의 개념과 AI 활용
-개념: 인간의 뇌 신경망을 하드웨어적으로 모사한 방식으로, 뉴런과 시냅스를 회로로 구현.
-특징:
-사건 기반(Event-driven) 연산
-초저전력, 비동기적 신호 처리
-병렬 구조 최적화
-AI 활용:
-센서 연동 실시간 인식 (예: 스마트 센서, 음성/이미지 분류)
-학습보다 추론에 특화된 경량 AI 시스템
-대표 사례: IBM TrueNorth, Intel Loihi
-2. Quantum Error Correction(양자 오류 정정)의 개념과 필요성
-개념: 양자 비트(큐비트)는 외부 간섭에 매우 민감하므로, 오류를 탐지하고 복구하기 위한 알고리즘/코딩 기법.
-필요성:
-큐비트는 decoherence, noise에 쉽게 노출
-측정 불가능한 상태를 보호하기 위해 중첩 상태 유지가 필수
-기술 예:
-Shor 코드, Surface 코드, Bacon-Shor 등
-논리 큐비트(Logical Qubit)와 물리 큐비트의 다대일 대응이 일반적
-3. Nanosheet Transistor(나노시트 트랜지스터)와 FinFET의 차이점
-Nanosheet Transistor:
-GAA(Gate-All-Around) 구조의 일종, 게이트가 채널을 전방위로 감싸 제어.
-3~5nm 이하 공정에서 적용되는 차세대 트랜지스터 구조.
-FinFET과의 차이점:
-FinFET: Fin 구조 위쪽과 양 옆에서 게이트 제어 (3면)
-Nanosheet: Gate가 4면 모두에서 채널 제어, 누설전류 줄이고 성능 향상
-설계 유연성 증가 (채널 폭 조정 가능)
-4. 3D Heterogeneous Integration(3D 이기종 집적)의 개념과 활용
-개념: 다양한 기능(로직, 메모리, 센서 등)을 가진 칩들을 수직 적층 방식으로 집적하는 기술.
-활용 가능성:
-AI, 5G, HPC에서 고속 데이터 처리와 소형화 실현
-HBM(High Bandwidth Memory), SoIC(System on Integrated Chip) 적용 사례
-다양한 공정 기술을 융합 가능 (e.g., CMOS + RF + Photonic)
-5. Human Brain-Inspired Computing(뇌 모방 컴퓨팅)과 기존 AI 아키텍처의 차이점
-개념: 생물학적 뇌의 신경 네트워크를 모방한 비전통적 컴퓨팅 모델 (단순한 인공신경망 이상의 접근).
-차이점:
-기존 AI: 순차적, 수학적 모델 기반(딥러닝, CNN 등)
-뇌 모방 컴퓨팅: 비선형, 사건 기반, 비동기적, 더 적은 연산으로 복잡한 학습/추론
-메모리와 연산의 통합 (인메모리 연산, 시냅틱 연산)
-6. Instruction Window(명령어 윈도우) 크기와 성능의 관계
-개념: 파이프라인에서 동시에 디코딩/실행 대기 중인 명령어 집합의 크기.
-성능 영향:
-크기가 클수록 명령어 간 독립성 탐지와 재정렬 기회 증가 → ILP 향상
-단, 너무 크면 하드웨어 복잡도, 소비 전력, 레이턴시 증가
-최적화 포인트:
-워크로드 특성에 따라 동적 조정 또는 리오더링 기법과 연계 사용
-OOO(Out-of-Order Execution) 프로세서에서 성능 향상의 핵심 요소
+- Human Brain-Inspired Computing(뇌 모방 컴퓨팅)과 기존 AI 아키텍처의 차이점
+    - 개념: 생물학적 뇌의 신경 네트워크를 모방한 비전통적 컴퓨팅 모델 (단순한 인공신경망 이상의 접근).
+    - 차이점:
+        - 기존 AI: 순차적, 수학적 모델 기반(딥러닝, CNN 등)
+        - 뇌 모방 컴퓨팅: 비선형, 사건 기반, 비동기적, 더 적은 연산으로 복잡한 학습/추론
+        - 메모리와 연산의 통합 (인메모리 연산, 시냅틱 연산)
+
+- Instruction Window(명령어 윈도우) 크기와 성능의 관계
+    - 개념: 파이프라인에서 동시에 디코딩/실행 대기 중인 명령어 집합의 크기.
+    - 성능 영향:
+        - 크기가 클수록 명령어 간 독립성 탐지와 재정렬 기회 증가 → ILP 향상
+        - 단, 너무 크면 하드웨어 복잡도, 소비 전력, 레이턴시 증가
+    - 최적화 포인트:
+        - 워크로드 특성에 따라 동적 조정 또는 리오더링 기법과 연계 사용
+        - OOO(Out-of-Order Execution) 프로세서에서 성능 향상의 핵심 요소
 
 - Indirect Branch Prediction(간접 분기 예측)
-개념: 간접 분기는 jump eax나 call [table + index]처럼 실행 시점에 타겟 주소가 레지스터나 메모리에 의해 결정되는 분기를 말합니다. 일반 분기보다 예측이 어렵습니다.
-최적화 방법:
-BTB(Branch Target Buffer) 확장 또는 다중 엔트리 방식
-Target Address Cache(TAC) 또는 Virtual Call Target Cache 사용
-다중 히스토리 기반 예측기(Multi-History Predictors)를 도입해 컨텍스트별 예측 성능 향상
-2. Register File 크기와 CPU 성능의 관계
-Register File: 명령어 실행 시 참조되는 레지스터들의 집합으로, 연산 중간 결과나 데이터 저장에 사용됩니다.
-성능과의 관계:
-레지스터 수가 많을수록 더 많은 ILP(Instruction Level Parallelism)를 활용 가능 (특히 OOO에서)
-리네이밍(Register Renaming) 성능 향상에도 긍정적
-반면 레지스터 수가 많아지면 액세스 레이턴시 및 전력 소비 증가 → 타협 필요
-3. ALU Pipeline vs. FPU Pipeline
-ALU Pipeline (산술 논리 유닛 파이프라인):
-정수 기반 연산 중심 (덧셈, AND, OR 등)
-파이프라인 깊이가 짧고, 연산이 간단하며 고속 처리에 최적화
-FPU Pipeline (부동소수점 유닛 파이프라인):
-부동소수점 연산 처리 (부동소수 덧셈, 곱셈 등)
-파이프라인 단계가 깊고 레이턴시가 크지만 정밀한 과학/그래픽 계산에 필수
-활용: HPC, 그래픽, 과학 시뮬레이션 등에서 FPU 사용률이 높음
-4. Decoupled Access/Execute Architecture(분리형 접근/실행 아키텍처)
-개념: 메모리 접근(Load/Store)과 연산(Execute) 단계를 독립적인 파이프라인으로 분리하여 병목을 완화하는 구조.
-장점:
-메모리 지연에 덜 민감
-로드와 실행 사이에 큐를 두어 명령어 흐름을 비동기적으로 처리
-활용 사례:
-CDC 6600, IBM 360/91 등의 고전적인 슈퍼스칼라 설계
-일부 임베디드/저전력 아키텍처에서도 변형 사용
+    - 개념: 
+        - 간접 분기는 jump eax나 call [table + index]처럼 실행 시점에 타겟 주소가 레지스터나 메모리에 의해 결정되는 분기를 말합니다. 일반 분기보다 예측이 어렵습니다.
+    - 최적화 방법:
+        - BTB(Branch Target Buffer) 확장 또는 다중 엔트리 방식
+        - Target Address Cache(TAC) 또는 Virtual Call Target Cache 사용
+        - 다중 히스토리 기반 예측기(Multi-History Predictors)를 도입해 컨텍스트별 예측 성능 향상
+
+- Register File 크기와 CPU 성능의 관계
+    - Register File: 명령어 실행 시 참조되는 레지스터들의 집합으로, 연산 중간 결과나 데이터 저장에 사용됩니다.
+    - 성능과의 관계:
+        - 레지스터 수가 많을수록 더 많은 ILP(Instruction Level Parallelism)를 활용 가능 (특히 OOO에서)
+        - 리네이밍(Register Renaming) 성능 향상에도 긍정적
+        - 반면 레지스터 수가 많아지면 액세스 레이턴시 및 전력 소비 증가 → 타협 필요
+
+- ALU Pipeline vs. FPU Pipeline
+    - ALU Pipeline (산술 논리 유닛 파이프라인):
+        - 정수 기반 연산 중심 (덧셈, AND, OR 등)
+        - 파이프라인 깊이가 짧고, 연산이 간단하며 고속 처리에 최적화
+    - FPU Pipeline (부동소수점 유닛 파이프라인):
+        - 부동소수점 연산 처리 (부동소수 덧셈, 곱셈 등)
+        - 파이프라인 단계가 깊고 레이턴시가 크지만 정밀한 과학/그래픽 계산에 필수
+        - 활용: HPC, 그래픽, 과학 시뮬레이션 등에서 FPU 사용률이 높음
+
+- Decoupled Access/Execute Architecture(분리형 접근/실행 아키텍처)
+    - 개념: 메모리 접근(Load/Store)과 연산(Execute) 단계를 독립적인 파이프라인으로 분리하여 병목을 완화하는 구조.
+    - 장점:
+        - 메모리 지연에 덜 민감
+        - 로드와 실행 사이에 큐를 두어 명령어 흐름을 비동기적으로 처리
+    - 활용 사례:
+        - CDC 6600, IBM 360/91 등의 고전적인 슈퍼스칼라 설계
+        - 일부 임베디드/저전력 아키텍처에서도 변형 사용
+        
 5. Hardware Loop Buffer(하드웨어 루프 버퍼)
 개념: 반복되는 루프 명령어들을 전용 버퍼에 저장해 재인출 없이 반복 실행할 수 있도록 지원하는 기능.
 성능 향상 효과:
