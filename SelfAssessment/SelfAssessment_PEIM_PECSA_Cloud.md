@@ -893,9 +893,9 @@ Organize concepts, features, types and Pros and Cons
     - BigQuery (GCP)
         - 페타바이트 단위의 데이터를 분석하는 서버리스 분석 데이터베이스
         - SQL 기반 질의 가능, 대용량 데이터 처리에 최적화
-        
-5. 클라우드 비용 최적화를 위한 주요 전략
-Reserved Instance (RI)
+
+- 클라우드 비용 최적화를 위한 주요 전략
+    - Reserved Instance (RI)
 
 일정 기간(1~3년) 인스턴스를 예약 구매하여 최대 75% 할인
 예측 가능한 워크로드에 적합
