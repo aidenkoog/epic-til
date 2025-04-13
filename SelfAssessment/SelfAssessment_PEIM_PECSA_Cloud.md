@@ -896,41 +896,30 @@ Organize concepts, features, types and Pros and Cons
 
 - 클라우드 비용 최적화를 위한 주요 전략
     - Reserved Instance (RI)
+        - 일정 기간(1~3년) 인스턴스를 예약 구매하여 최대 75% 할인
+        - 예측 가능한 워크로드에 적합
+    - Spot Instance
+        - 남는 자원을 경매 기반으로 저렴하게 제공
+        - 비실시간, 중단 허용 작업(예: 데이터 분석, 테스트)에 적합
+    - Auto-Scaling
+        - 부하에 따라 인스턴스 수를 자동으로 조절
+        - 리소스 낭비 방지, 성능/비용 균형 유지
+    - 리소스 태깅과 모니터링
+        - 리소스 태그로 사용자/팀별 비용 분석 가능
+        - CloudWatch, Cost Explorer, Budget 등 활용해 모니터링 및 알람 설정
 
-일정 기간(1~3년) 인스턴스를 예약 구매하여 최대 75% 할인
-예측 가능한 워크로드에 적합
-Spot Instance
-
-남는 자원을 경매 기반으로 저렴하게 제공
-비실시간, 중단 허용 작업(예: 데이터 분석, 테스트)에 적합
-Auto-Scaling
-
-부하에 따라 인스턴스 수를 자동으로 조절
-리소스 낭비 방지, 성능/비용 균형 유지
-리소스 태깅과 모니터링
-
-리소스 태그로 사용자/팀별 비용 분석 가능
-CloudWatch, Cost Explorer, Budget 등 활용해 모니터링 및 알람 설정
-
-
-- 클라우드 서비스에서 Pay-As-You-Go(종량제)와 Subscription(구독제)의 차이점은?
-- 클라우드 환경에서 FinOps(Financial Operations)의 개념과 중요성은?
-- 클라우드 컴퓨팅에서 마이크로서비스 아키텍처(MSA)의 개념과 장점은?
-- 클라우드 기반 이벤트 드리븐 아키텍처(Event-Driven Architecture)란 무엇인가?
-- 클라우드에서의 메시지 큐(Message Queue)와 스트리밍 처리(Kafka, AWS Kinesis)의 차이점은?
-    - 1. 클라우드 서비스에서 Pay-As-You-Go(종량제)와 Subscription(구독제)의 차이점
-Pay-As-You-Go (종량제)
-
-사용한 만큼만 비용을 지불하는 후불 요금제
-초기 투자 없이 유연하게 리소스를 사용할 수 있음
-단기 실험, 급변하는 워크로드에 적합
-실시간 확장/축소 가능하나, 장기 사용 시 비용 증가 위험
-Subscription (구독제, 예: Reserved, Prepaid)
-
-월/연 단위로 특정 리소스를 예약하거나 선불 결제
-장기적인 예측 가능한 사용량에 대해 비용 절감 가능
-RI(Reserved Instance), Savings Plan, Enterprise Agreement 등이 해당
-유연성은 낮지만 비용 효율성은 뛰어남
+- 클라우드 서비스에서 Pay-As-You-Go(종량제)와 Subscription(구독제)의 차이점
+    - Pay-As-You-Go (종량제)
+        - 사용한 만큼만 비용을 지불하는 후불 요금제
+        - 초기 투자 없이 유연하게 리소스를 사용할 수 있음
+        - 단기 실험, 급변하는 워크로드에 적합
+        - 실시간 확장/축소 가능하나, 장기 사용 시 비용 증가 위험
+    - Subscription (구독제, 예: Reserved, Prepaid)
+        - 월/연 단위로 특정 리소스를 예약하거나 선불 결제
+        - 장기적인 예측 가능한 사용량에 대해 비용 절감 가능
+        - RI(Reserved Instance), Savings Plan, Enterprise Agreement 등이 해당
+        - 유연성은 낮지만 비용 효율성은 뛰어남
+        
 2. 클라우드 환경에서 FinOps(Financial Operations)의 개념과 중요성
 개념
 
