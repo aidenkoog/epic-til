@@ -883,19 +883,17 @@ Organize concepts, features, types and Pros and Cons
         - 데이터 형식과 처리 방식, 목적, 사용 도구의 차이가 존재
 
 - 클라우드 환경에서의 데이터베이스 관리(RDS, NoSQL, BigQuery 등)의 특징
-RDS (Relational Database Service)
-
-MySQL, PostgreSQL, Oracle, SQL Server 등 관계형 DB 관리형 서비스
-자동 백업, 장애 복구, 스케일링 기능 제공
-NoSQL (DynamoDB, MongoDB 등)
-
-비정형 데이터, 빠른 쓰기/읽기 성능에 최적화
-스키마 유연성, 수평 확장성 뛰어남
-채팅, 로그, IoT에 적합
-BigQuery (GCP)
-
-페타바이트 단위의 데이터를 분석하는 서버리스 분석 데이터베이스
-SQL 기반 질의 가능, 대용량 데이터 처리에 최적화
+    - RDS (Relational Database Service)
+        - MySQL, PostgreSQL, Oracle, SQL Server 등 관계형 DB 관리형 서비스
+        - 자동 백업, 장애 복구, 스케일링 기능 제공
+    - NoSQL (DynamoDB, MongoDB 등)
+        - 비정형 데이터, 빠른 쓰기/읽기 성능에 최적화
+        - 스키마 유연성, 수평 확장성 뛰어남
+        - 채팅, 로그, IoT에 적합
+    - BigQuery (GCP)
+        - 페타바이트 단위의 데이터를 분석하는 서버리스 분석 데이터베이스
+        - SQL 기반 질의 가능, 대용량 데이터 처리에 최적화
+        
 5. 클라우드 비용 최적화를 위한 주요 전략
 Reserved Instance (RI)
 
