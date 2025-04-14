@@ -1719,7 +1719,33 @@ Organize concepts, features, types and Pros and Cons
 - CoroutineExceptionHandler의 역할은?
 - Job과 SupervisorJob의 차이점은?
 - Flow와 Channel의 차이점은?
-- StateFlow와 SharedFlow의 차이점은?
+- StateFlow와 SharedFlow의 차이점
+    - 개요
+        - Kotlin Flow의 일종, UI 상태 처리나 이벤트 처리에 자주 사용
+        - 플로우의 확장 버전
+        - 둘 다 Hot Flow(앱 실행 중 계속 살아 있음)
+        - 둘 다 구조 동일 (emit() > collect() 구조)
+        - UI와 뷰모델간 단방향 데이터 흐름(Uni-directional flow) 구현할 때 자주 사용됨
+    - StateFlow
+        - 항상 현재 상태를 가지고 있는 상태값 전용 플로우
+        - 주요 특징
+            - State(상태) 개념을 가짐 → 항상 마지막 값 1개를 유지
+            - 초기값이 필요함 (MutableStateFlow("초기값"))
+            - 새로운 수집자(collector)가 생기면 가장 최근 값 1개를 즉시 받음
+            - UI 상태 처리에 최적 (예: 현재 화면 상태, 데이터 상태 등)
+    - SharedFlow
+        - 이벤트를 여러 구독자에게 브로드캐스팅하는 목적의 Flow
+        - 주요 특징
+            - 상태 없이 이벤트자체를 발행 (값 유지하지 않음)
+            - 초기값 불필요
+            - 최근 값을 기억할 수도 있음 (replay 설정)
+            - 새로운 수집자는 이전 값 없이 현재부터 수신
+                - 단, replay > 0이면 버퍼된 값도 받음
+            - UI 단 단발성 이벤트 처리에 적합 (예: 토스트, 네비게이션, 알림 등)
+    - 정리
+        - StateFlow: 화면 상태를 지속적으로 표현할 때 (예: 로딩/성공/실패 상태)
+        - SharedFlow: 클릭 이벤트, 메시지, 네비게이션 등 1회성 이벤트 처리에 적합
+
 - Flow에서 buffer()와 conflate()의 차이점은?
 - flowOn()을 사용할 때 발생할 수 있는 문제는?
 - Cold Flow와 Hot Flow의 차이점은?
