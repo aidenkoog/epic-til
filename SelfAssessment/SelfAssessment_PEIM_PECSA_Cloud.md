@@ -2404,20 +2404,21 @@ Organize concepts, features, types and Pros and Cons
             - 저렴한 비용으로 다양한 환경 실험 및 테스트
 
 - AI 기반 클라우드 비용 예측 및 최적화 방법
-🔹 개념
-머신러닝 기반으로 클라우드 사용량 및 비용 패턴을 분석하여 미래 비용 예측 및 최적화를 지원
-🔹 비용 예측 방법
-머신러닝 모델을 통한 분석
-과거 비용 데이터를 학습하여 향후 비용을 정확하게 예측
-AWS Cost Anomaly Detection, Google Cloud AI 기반 예측 기능 제공
-이상 탐지(Anomaly Detection)
-예상하지 못한 비용 급증을 미리 탐지하여 신속한 대응 가능
-🔹 비용 최적화 방법
-AI 기반 리소스 추천(Recommendation)
-Reserved Instance 및 Savings Plans 추천
-최적 인스턴스 유형 자동 제안
-자동화된 조정 및 경고(Automated Alerts)
-예상 초과 비용 시 미리 알림 제공 및 자동 조치
+    - 개념
+        - 머신러닝 기반으로 클라우드 사용량 및 비용 패턴을 분석하여 미래 비용 예측 및 최적화를 지원
+    - 비용 예측 방법
+        - 머신러닝 모델을 통한 분석
+            - 과거 비용 데이터를 학습하여 향후 비용을 정확하게 예측
+            - AWS Cost Anomaly Detection, Google Cloud AI 기반 예측 기능 제공
+        - 이상 탐지(Anomaly Detection)
+            - 예상하지 못한 비용 급증을 미리 탐지하여 신속한 대응 가능
+    - 비용 최적화 방법
+        - AI 기반 리소스 추천(Recommendation)
+        - Reserved Instance 및 Savings Plans 추천
+        - 최적 인스턴스 유형 자동 제안
+        - 자동화된 조정 및 경고(Automated Alerts)
+        - 예상 초과 비용 시 미리 알림 제공 및 자동 조치
+        
 📌 5. API Rate Limiting이 비용 절감에 미치는 영향
 🔹 개념
 API 요청의 빈도를 제한하여 과도한 자원 사용을 방지하는 방법
