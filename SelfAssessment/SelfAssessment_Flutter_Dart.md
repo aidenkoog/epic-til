@@ -641,6 +641,63 @@ Organize concepts, features, types and Pros and Cons
 - Flutter에서 Firebase Authentication을 연동하는 방법은?
 - Flutter에서 JWT 토큰을 활용한 인증 구현 방법은?
 - Flutter에서 WebSockets을 활용한 실시간 통신 방법은?
+- 실시간 영상 처리 방법
+  - RTSP 스트리밍
+    - rtsp://xxx 형태로 영상을 스트리밍
+    - 앱에서 이 RTSP 영상을 받아서 재생
+    - 구현 방법
+      - 플러그인 사용: flutter_vls_player (가장 대중적)
+        - 내부적으로 VLC 라이브러리 사용
+        - RTSP, HTTP, HLS 등 대부분의 스트리밍 포맷 지원
+      - 주의 사항
+        - 안드로이드에서는 비교적 잘 동작
+        - iOS는 앱스토어 심사에서 VLC 기반 코덱 이슈로 거절될 수 있음 > 필요 시 WebRTC 방식 고려 필요
+    - 장점
+      - 실시간 영상에 가장 가까움, 딜레이 낮음
+      - 표준 스트리밍 방식
+      - 네트워크 환경에 따라 적응적 처리 가능
+    - 단점
+      - 일부 플러터 플랫폼(iOS)의 제약
+      - RTSP가 방화벽 또는 모바일망에서 차단되는 경우 존재
+      - 애플은 자체 코덱 외에는 민감함 > RTSP + VLC는 위험요소
+
+  - 이미지 프레임을 주기적으로 전송 (MJPEG or Snapshot Polling)
+    - 서버에서 정지 이미지를 일정 주기로 앱에 전송
+    - 예: 1초에 5장씩 JPEG 이미지 > 애니매이션 처럼 보여주기
+    - 구현 방법
+      - Image.network()를 주기적으로 변경하여 표시
+      - 또는 flutter_mjpeg 플러그인 사용 (이미지 Polling 기반)
+      - 서버에서 MJPEG 형식으로 계속 스트림 전송 가능
+    - 장점
+      - 구현 단순
+      - 보안 이슈, 앱 심사 이슈 거의 없음
+      - 스트리밍 서버가 없다면 임시 대안으로 적합
+    - 단점
+      - 실시간성 낮음 (딜레이 큼)
+      - 고해상도 이미지 전송 시 네트워크 부하 발생
+      - 움직임 많은 영상에는 부적합
+  
+  - WebRTC 기반 스트리밍 (플러터 웹 + 모바일 모두 호환)
+    - 영상 지연 최소화 목적일 때 가장 실시간성 좋은 방식
+    - 구현 방법
+      - 서버: WebRTC SFU(예: mediasoup, Janus, Kurento 등)
+      - flutter_webrtc 플러그인 사용
+    - 장점
+      - 초저지연(100 ~ 300ms)
+      - 브라우저/앱/IoT 등 다양한 환경과 호환
+    - 단점
+      - 초기 구축 복잡
+      - 서버, 인증, 연결 관리가 어려움
+      - 사내 네트워크/로컬 IP 환경에선 구성 난이도 높음
+
+  - 실제 진행 시 실무적인 팁
+    - 서버 측에서 어떤 포맷 지원하는 정보 입수 필요
+      - (RTSP, MJPEG, 이미지 API, WebRTC 등)
+    - 네트워크 환경 (내부망, 외부망), 프레인 수요(초당 몇장), 보안 요구사항 등도 같이 고려 필요
+    - flutter_webrtc는 WebSocket + signaling 서버가 필요하므로 백엔드와 협업 필요
+    - MJPEG 방식은 UI가 투박하긴 하나 심사, 배포, 유지보수 측면에서 가장 안전함
+    - 고성능 요구가 없다면 MJPEG 방식 출시, 추후 WebRTC 업그레이드 방향의 단계적 전략 고려 필요
+
 - Flutter에서 데이터 암호화를 위해 SecureStorage를 활용하는 방법은?
 - Flutter에서 OAuth 2.0 인증을 구현하는 방법은?
 - Flutter에서 API 호출을 위한 Rate Limiting을 적용하는 방법은?
