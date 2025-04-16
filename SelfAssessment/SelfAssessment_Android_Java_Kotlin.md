@@ -1366,6 +1366,49 @@ Organize concepts, features, types and Pros and Cons
         - remember, mutableStateOf, State 이용한 상태 업데이트
         - animateAsState, updateTransition 등으로 애니매이션 처리 간결
 
+- StateIn()
+    - 개요
+        - Flow를 StateFlow로 변환해서 항상 최신 값을 보관하고, 구독자가 없어도 유지되게 만드는 연산자
+        - 즉, Flow가 기본적으로 가지고 있지 않은 현재 상태값을 항상 보관하는 능력을 추가해주는 것
+
+    - 사용 시점
+        - UI 상태를 Flow로 관리하고 싶은데, StateFlow처럼 현재 값을 바로 가져오고 싶을 때
+        - 예: 컴포즈에서 collectAsState() 사용하려면 StateFlow여야 함
+
+    - 컴포즈 예시
+        ```java
+        @Composable
+        fun UserScreen(viewModel: UserViewModel) {
+            val users by viewModel.userList.collectAsState() // StateFlow여야 함
+            LazyColumn {
+                items(users) { user -> Text(user.name) }
+            }
+        }
+        ```
+
+    - 기본 문법
+        - scope: 값을 유지할 코루틴 범위 (viewModelScope, lifecycleScope 등)
+        - started: Flow 공유 조건 (WhileSubscribed, Eagerly, Lazily)
+        - initialValue: 초기 상태값 (StateFlow의 value)
+        ```java
+        val stateFlow = myFlow
+            .stateIn(
+                scope = viewModelScope, // CoroutineScope
+                started = SharingStarted.WhileSubscribed(5000), // 공유 시작 조건
+                initialValue = emptyList() // 초기 값
+            )
+        ```
+    - SharingStarted 종류
+        - WhileSubscibed(timeout): 구독자가 있으면 시작 / 없으면 timeout 후 정지
+        - Eagerly: scope 진입과 동시에 실행
+        - Lazily: 첫 구독자가 있을 때 실행
+
+    - 정리
+        - Flow + 상태 보존 = StateFlow
+        - UI와 상태 동기화 시 필수
+        - collectAsState() 사용 시 핵심 연산자
+        - 구독 여부에 따라 실행 제어 가능 (SharingStarted)
+
 - Android에서 ViewModel과 SavedStateHandle의 차이점
 - Android에서 LiveData와 Flow의 차이점
 - Android에서 Kotlin Coroutines을 활용하는 방법
