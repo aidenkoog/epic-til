@@ -1298,7 +1298,74 @@ Organize concepts, features, types and Pros and Cons
         - RecyclerView에서 데이터를 페이징하여 로드해야 하는 경우, Jetpack Paging이 가장 효과적인 솔루션
 
 - Android에서 App Bundle과 APK의 차이점
+    - APK(Android Package)
+        - 특징
+            - 완전한 하나의 앱 설치 파일
+            - 하나에 모든 리소스, 언어, ABI(프로세서 아키텍처)가 다 들어있음
+            - 크기가 큼 (예: 영어, 한글, 중국어, arm64, x86 등 전부 포함)
+        - 사용 예시
+            - 사내 배포 / 테스트
+            - 외부 테스트 (QA, 베타 테스트)
+            - adb 설치 가능
+    - App Bundle(AAB)
+        - 특징
+            - 개발자가 만드는 것은 .aab, 이걸 Google Play가 분석해서 기기에 맞는 APK를 자동 생성
+            - 기기에 맞는 언어, 해상도, ABI만 포함된 Split APK 를 제공
+            - 최대 20~50% 용량 감소 가능
+        - 구조
+            - Play Store는 여기서 사용자 기기에 필요한 부분만 조합해서 APK 생성
+            ```bash
+            base/
+                - AndroidManifest.xml
+                - classes.dex
+                - res/
+                - lib/arm64-v8a/
+                - lib/x86/
+                - values-ko/
+                - values-en/
+            ```
+    - 설치 흐름
+        - APK: 개발자 빌드 > .apk 생성 > 그대로 배포 및 설치
+        - AAB: 개발자 빌드 > .aab 생성 > Play Store 업로드 > 사용자 기기에 맞는 APK 조합 > 설치
+
+    - AAB 사용 이유
+        - 앱 사이즈 축소 가능
+        - 빠른 설치 가능
+        - 다국어, 다양한 ABI 지원 앱에 대해 Split APK 최적화
+        - Play Feature Delivery / Dynamic Module 같은 기능 지원
+
+    - AAB > APK 변환 방법
+        - 구글 플레이 없이 테스트 희망 시 bundletool 사용
+            ```bash
+            bundletool build-apks \
+                --bundle=app.aab \
+                --output=output.apks \
+                --ks=my-release-key.jks \
+                --ks-key-alias=keyAlias \
+                --ks-pass=pass:password \
+                --key-pass=pass:password
+
+            bundletool install-apks --apks=output.apks
+            ```
+
 - Android에서 Jetpack Compose와 기존 XML 기반 UI의 차이점
+    - 개요
+        - 기존 명령형 > 선언형 스타일로 변경
+        - 상태 선언의 개념 > UI 자동 업데이트
+        - 대표 개념의 전환: findViewById, ViewGroup > @Composable, State
+    - 컴포즈 장점
+        - 코틀린 코드로 UI 작성 (생산성 향상)
+        - 상태 변화만 주면 UI 자동 업데이트
+        - 함수처럼 @Composable 재사용 가능
+            - 함수 기반이라 모듈화 편리함
+        - 특히 리스트 구성에 있어서 간편해짐
+            - XML + Adapter + ViewHolder -> 하나의 함수로 대체
+        - 컴파일러 최적화 + 재구성 효율적 (Recomposition)
+        - Material3 지원, 코드 내에서 테마 적용 가능
+        - 실시간 미리보기 지원
+        - remember, mutableStateOf, State 이용한 상태 업데이트
+        - animateAsState, updateTransition 등으로 애니매이션 처리 간결
+
 - Android에서 ViewModel과 SavedStateHandle의 차이점
 - Android에서 LiveData와 Flow의 차이점
 - Android에서 Kotlin Coroutines을 활용하는 방법
@@ -1670,7 +1737,32 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 delegation을 활용하는 방법은?
 - Kotlin에서 typealias를 사용하는 이유는?
 - Kotlin에서 Any, Unit, Nothing 타입의 차이점은?
-- Kotlin에서 when 표현식과 switch 문법의 차이점은?
+- Kotlin에서 when 표현식과 Java의 switch 문법의 차이점
+    - 표현 형태
+        - 코틀린: 표현식 (값 반환 가능)
+        - 자바: 문장 (값 반환하지 않음)
+    - 리턴 사용 가능
+        - 코틀린: 리턴값 사용 가능
+        - 자바: 기본적으로 리턴 불가능
+    - 타입 유연성
+        - 코틀린: 숫자, 문자열, 객체 등 자유롭게 가능
+        - 자바: 자바7까지는 정수, 자바 14부터는 향상
+    - 범위 비교 가능
+        - 코틀린: in/!in 가능 (in 1..10)
+        - 자바: 범위 비교 불가
+    - 조건식 사용 가능
+        - 코틀린: 부울 표현식 가능 (x > 5)
+        - 자바: 불가능
+    - break 필요 여부
+        - 코틀린: 불필요 (자동 break)
+        - 자바: 명시적 break 필요
+    - default 처리
+        - 코틀린: else
+        - 자바: default
+    - 타입 체크 가능 여부
+        - 코틀린: is 로 타입 체크 가능
+        - 자바: 타입 체크 안됨 (instanceof로 따로 비교 필요)
+
 - Kotlin에서 vararg를 활용한 가변 인자 함수
     - 개요
         - 가변 인자(Variable number of arguments)를 받기 위해 사용하는 키워드
@@ -1851,9 +1943,117 @@ Organize concepts, features, types and Pros and Cons
         - StateFlow: 화면 상태를 지속적으로 표현할 때 (예: 로딩/성공/실패 상태)
         - SharedFlow: 클릭 이벤트, 메시지, 네비게이션 등 1회성 이벤트 처리에 적합
 
-- Flow에서 buffer()와 conflate()의 차이점은?
-- flowOn()을 사용할 때 발생할 수 있는 문제는?
-- Cold Flow와 Hot Flow의 차이점은?
+- Flow에서 buffer()와 conflate()의 차이점
+    - 개요
+        - 백프레셔 처리를 위한 대표적인 방식들
+        - 어디에서 데이터를 얼마나 저장하고, 어느 시점의 값을 전달할 것인가에서 차이가 있음
+    - 백프레셔(Backpressure)
+        - 데이터를 생성하는 속도가 데이터를 소비하는 속도보다 빠를 때 생기는 과부하 현상.
+    - buffer(): 버펴 큐에 값을 순차적으로 저장
+        - 동작 방식
+            - 생산자가 데이터를 빠르게 방출해도 소비자가 처리할 때까지 내부 큐에 보관
+            - 모든 값이 순서대로 소비
+            - 버퍼 크기를 지정하지 않으면 기본은 64
+        - 특징
+            - 데이터 손실 없음
+            - collect가 느려도 데이터는 전부 수집됨
+            - 메모리 증가 가능성 존재
+    - conflate(): 최신값만 유지, 이전 값은 덮어쓰기
+        - 동작 방식
+            - 소비자가 처리 중일 때 새 값이 오면 기존 값은 버리고 최신값으로 덮어씀
+            - 즉, 가장 최신 상태만 유지
+        - 특징
+            - 중간값 손실 가능성 있음
+            - UI 상태 업데이트 처럼 과거 상태가 중요하지 않은 경우 유리
+            - 메모리 사용이 낮고 효율적
+    - 실제 사용 예
+        - UI 상태 업데이트: conflate()
+            - StateFlow, LiveData, collectLatest와 같이 동작
+        - 모든 이벤트 로깅은 buffer()
+            - 서버 전송, 로그 저장 등에서는 중간값도 중요
+    - 추가 정보
+        - collectLatest와 conflate 동작 차이
+            - conflate() 중간 값 스킵 (이전 작업은 끝냄)
+            - collectLatest {}는 새 값이 오면 이전 작업 취소하고 새로 시작
+            - 결론은 conflate()는 이전 작업을 끝내고 중간은 스킵, collectLatest{}는 이전 작업 취소하고 신규 값 올 시 새로 시작하는 원리임
+
+- flowOn()을 사용할 때 발생할 수 있는 문제
+    - 개요
+        - flowOn(dispatcher)은 Flow의 upstream 즉 데이터 생성 쪽의 실행 context(Dispatcher)를 바꿔주는 연산자
+        - 코드 예제
+            ```java
+            flow {
+                emit(loadFromDisk()) // 이 부분만 Dispatchers.IO에서 실행됨
+            }.flowOn(Dispatchers.IO)
+            ```
+    - 안전하게 사용하는 방법
+        - 데이터 emit + 처리 가공까지 모두 IO > flow{...}.map{...}.flowOn(Dispatchers.IO)
+        - collect 쪽에서 무거운 작업 시 > withContext(Dispatchers.IO) { collect (...) }
+        - 예외를 처리하고 싶을 때 > catch{}는 flowOn()보다 위에 위치
+            - 추가 설명
+                - flowOn()은 코루틴 컨텐스트를 변경하는 것이기 때문에 이전까지의 코루틴 스코프와 Context가 달라져서 취소, 예외 핸들링 문제가 발생할 수 있음
+                - flowOn() 위에서 발생한 예외가 catch까지 전파되지 않는 경우가 있음
+        - context 전환 과다 회피 > flowOn은 최소 사용 지향
+
+- Cold Stream과 Hot Stream
+    - Cold Stream
+        - 개념
+            - 데이터를 소비자가 구독할 때까지만 기다리고 있다가, 구독이 시작되면 그때부터 데이터를 생산(emit)하는 흐름
+            - 시작 시점: collect() 호출 시 시작
+            - 데이터 소비: 구독자마다 독립된 스트림
+            - 재사용: 구독할 때마다 새롭게 실행됨
+        - 대표적인 Cold Stream
+            - flow{}, asFlow{}, sequence{}
+        - 장점
+            - 필요할 때만 실행 > 불필요한 리소스 사용 없음
+            - 매번 다른 조건, 다른 환경으로 다이나믹하게 실행 가능
+            - 구독자마다 독립된 결과가 필요한 로직에 적합
+        - 비유: 주문하면 그때 만들어주는 커피
+        - 예시
+            ```java
+            // collect 하기 전까지는 "Flow 시작됨" 도 실행되지 않음
+            val myFlow = flow {
+                println("Flow 시작됨")
+                emit(1)
+                emit(2)
+                emit(3)
+            }
+            myFlow.collect { println("값: $it") }
+            ```
+    - Hot Stream
+        - 개념
+            - 시작 시점: 생성되자마자 동작 시작 (항상 뜨거움)
+            - 데이터 소비: 구독자는 중간부터 수신 가능
+            - 재사용: 같은 데이터를 여러 구독자가 공유
+        - 추가 설명
+            - 이미 돌고 있음
+            - 구독자들은 그 흐름에 끼어드는 구조
+            - 대표적 예: SharedFlow, StateFlow, RxJava의 Subject, LiveData
+        - 비유: 커피포트에 계속 끓고 있는 커피
+
+- Cold Flow와 Hot Flow의 차이점
+    - 핵심 차이 요약
+        - 데이터 생성 시점
+            - Cold Flow: collect 호출 시마다 새로 시작
+            - Hot Flow: 이미 시작됨, 구독자 없이도 계속 동작 가능
+        - 구독자 처리 방식
+            - Cold Flow: 각 구독자마다 독립적인 데이터 흐름
+            - Hot Flow: 모든 구독자가 같은 데이터 흐름 공유
+        - 예시
+            - Cold Flow: flow{}. asFlow{}, sequence{}
+            - Hot Flow: StateFlow, SharedFlow, LiveData
+        - 기본 동작
+            - Cold Flow: 늦게 collect 해도 처음부터 다시 emit
+            - Hot Flow: 늦게 collect 하면 최근 상태나 최신 emit만 받음
+        - 메모리/리소스 흐름
+            - Cold Flow: 필요할 때만 동작 > 효율적
+            - Hot Flow: 항상 동작 중이므로 제어 필요
+    - 사용 시점에 따른 선택
+        - 매 요청마다 새로운 작업 필요(API 호출 등): Cold Flow (flow{})
+        - UI 상태 유지, 최신값만 필요할 때: Hot Flow (StateFlow)
+        - 다수 구독자에게 이벤트 전파할 때: Hot Flow (SharedFlow)
+        - 테스트, 순차 작업용 임시 흐름: Cold Flow
+
 - MutableSharedFlow에서 replay 옵션을 설정하는 이유는?
 - StateFlow에서 초기 값을 설정해야 하는 이유는?
 - yield() 함수의 역할은?
@@ -1965,14 +2165,98 @@ Organize concepts, features, types and Pros and Cons
 - runBlocking을 사용할 때의 문제점은?
 - withContext()와 launch의 차이점은?
 - CoroutineContext의 주요 요소(Job, Dispatcher, ExceptionHandler 등)를 설명하시오.
-- Flow와 LiveData의 차이점은?
-- SharedFlow와 StateFlow의 차이점은?
+- Flow와 LiveData의 차이점
+    - 차이 요약
+        - 플랫폼
+            - LiveData: 안드로이드 전용(LifecycleOwner 필요)
+            - Flow: Kotlin Core Library
+        - 생명주기 연동
+            - LiveData: 생명주기 자동 감지 (onStart, onStop)
+            - Flow: 기본은 생명주기 미연동 (직접 처리 필요)
+        - 비동기 처리
+            - LiveData: 내장 안됨(별도로 MediatorLiveData, CoroutineScope 등 필요)
+            - Flow: 코루틴 기반 비동기 처리 내장
+        - 데이터 흐름 방식
+            - LiveData: Hot Stream (항상 활성 상태)
+            - Flow: Cold Stream (collect()로 시작)
+        - 멀티 구독자
+            - LiveData: 가능 (UI 컴포넌트에 적합)
+            - Flow: 가능 (SharedFlow, StateFlow 활용 시)
+        - 에러 처리
+            - LiveData: 기본 에러 처리 없음 (try-catch 필요)
+            - Flow: .catch{} 등 내장 에러 처리 지원
+        - 반환/조합 유연성
+            - LiveData: 제한적 (Transformations.map, switchMap)
+            - Flow: 매우 유연 (map, flatMapConcat 등)
+        - 취소 제어
+            - LiveData: 수동 해제 필요
+            - Flow: collect() 범위에서 자동 취소됨
+    - 시점에 따른 선택
+        - UI 상태를 뷰모델 > 프래그먼트 연결: LiveData / StateFlow
+        - 복잡한 데이터 처리 / 조합 / 변환: Flow
+        - Android 외 플랫폼 (멀티플랫폼): Flow
+        - 실시간 이벤트 스트림 처리(토스트, 네비게이션 등): SharedFlow
+        - 생명주기 안전한 단순 데이터 UI 표시: LiveData
+    - LiveData > Flow 전환 시 고려사항
+        - viewModelScope.launch 사용 필요
+            - collect()는 suspend이기 때문에 코루틴 안에서 사용 필수
+        - 생명주기 연동
+            - repeatOnLifecycle, lifecycleScope.launchWhenX 같이 사용해야 안전
+        - 상태 저장 필요 시
+            - StateFlow 또는 LiveData 유지
+        - 이벤트 전파
+            - SharedFlow가 SingleLiveEvent 대체 가능
+
+- SharedFlow와 StateFlow의 차이점
+    - StateFlow
+        - 초기값 필요: 반드시 초기값 필수
+        - 최신값 저장: 항상 최신값 유지(value) 접근 가능
+        - 기본 용도: UI 상태 유지용
+    - SharedFlow
+        - 초기값 필요: 없음 가능
+        - 최신값 저장: 필요 시 replay 설정해야 함
+        - 기본 용도: 일회성 이벤트 전달용 (예: 토스트)
+
 - suspend function 내부에서 try-catch를 올바르게 사용하는 방법은?
 - Coroutine의 Dispatchers.Default, IO, Main의 차이점은?
 - supervisorScope와 coroutineScope의 차이점은?
 - Kotlin Coroutine에서 cancel()을 호출했을 때 실행 흐름은?
 - Job과 SupervisorJob의 차이점은?
-- Flow에서 buffer()와 conflate()의 차이점은?
+
+- Flow에서 buffer()와 conflate()의 차이점
+    - 개요
+        - 백프레셔 처리를 위한 대표적인 방식들
+        - 어디에서 데이터를 얼마나 저장하고, 어느 시점의 값을 전달할 것인가에서 차이가 있음
+    - 백프레셔(Backpressure)
+        - 데이터를 생성하는 속도가 데이터를 소비하는 속도보다 빠를 때 생기는 과부하 현상.
+    - buffer(): 버펴 큐에 값을 순차적으로 저장
+        - 동작 방식
+            - 생산자가 데이터를 빠르게 방출해도 소비자가 처리할 때까지 내부 큐에 보관
+            - 모든 값이 순서대로 소비
+            - 버퍼 크기를 지정하지 않으면 기본은 64
+        - 특징
+            - 데이터 손실 없음
+            - collect가 느려도 데이터는 전부 수집됨
+            - 메모리 증가 가능성 존재
+    - conflate(): 최신값만 유지, 이전 값은 덮어쓰기
+        - 동작 방식
+            - 소비자가 처리 중일 때 새 값이 오면 기존 값은 버리고 최신값으로 덮어씀
+            - 즉, 가장 최신 상태만 유지
+        - 특징
+            - 중간값 손실 가능성 있음
+            - UI 상태 업데이트 처럼 과거 상태가 중요하지 않은 경우 유리
+            - 메모리 사용이 낮고 효율적
+    - 실제 사용 예
+        - UI 상태 업데이트: conflate()
+            - StateFlow, LiveData, collectLatest와 같이 동작
+        - 모든 이벤트 로깅은 buffer()
+            - 서버 전송, 로그 저장 등에서는 중간값도 중요
+    - 추가 정보
+        - collectLatest와 conflate 동작 차이
+            - conflate() 중간 값 스킵 (이전 작업은 끝냄)
+            - collectLatest {}는 새 값이 오면 이전 작업 취소하고 새로 시작
+            - 결론은 conflate()는 이전 작업을 끝내고 중간은 스킵, collectLatest{}는 이전 작업 취소하고 신규 값 올 시 새로 시작하는 원리임
+
 - Coroutine에서 Mutex와 Semaphore의 차이점은?
 - CoroutineExceptionHandler가 실행되는 경우는?
 - Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법은?
