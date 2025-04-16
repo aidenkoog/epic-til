@@ -1671,8 +1671,113 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 typealias를 사용하는 이유는?
 - Kotlin에서 Any, Unit, Nothing 타입의 차이점은?
 - Kotlin에서 when 표현식과 switch 문법의 차이점은?
-- Kotlin에서 vararg를 활용한 가변 인자 함수는 어떻게 동작하는가?
-- Kotlin에서 generic을 사용할 때 out과 in 키워드의 차이점은?
+- Kotlin에서 vararg를 활용한 가변 인자 함수
+    - 개요
+        - 가변 인자(Variable number of arguments)를 받기 위해 사용하는 키워드
+        - 자바의 String... args와 같은 개념
+        - 예제
+            ```java
+            fun printAll(vararg messages: String) {
+                for (msg in messages) {
+                    println(msg)
+                }
+            }
+            ```
+    - 핵심 동작 방식
+        - vararg는 여러 개의 인자를 배열로 포장해서 함수에 넘겨줌
+        - 함수 안에서는 예를 들어 messages: Array<out String>형태로 다뤄짐
+    - 다른 파라미터와 함께 혼용 사용도 가능
+        - 예: log(priority: int, vararg messages: String) {...}
+    - 배열을 넘길 때 * 스프레드 연산자 필요
+        ```java
+        val logs = arrayOf("하나", "둘", "셋")
+        log(2, *logs) // <- * 연산자를 붙여야 vararg로 인식됨
+        ```
+    - 주의 사항
+        - vararg는 단 하나의 파라미터에만 사용 가능
+        - 위치는 마지막 파라미터 쪽에 두는 것이 일반적 (중간에 두는 것도 가능하긴 하나 사용이 제한됨)
+    - 고급 사용법
+        - Int형인 경우 sum() 함수 호출 가능
+        - 제네릭 타입 사용 가능
+            ```java
+            fun <T> printList(vararg items: T) {
+                items.forEach { println(it) }
+            }
+            ```
+    - 실제 활용 케이스
+        - 로깅 시스템
+        - 다수의 뷰 업데이트/삭제 처리
+        - DSL 작성 시 동적 컴포넌트 리스트 처리
+        - Test Helper 함수에서 다수 인자 처리
+
+- Kotlin에서 generic을 사용할 때 out과 in 키워드의 차이점
+    - 개요
+        - 제네릭(Generic) 선언 방식은 코틀린에서 재사용 가능한 타입 유연성을 부여할 때 사용
+    - out T: 공변성(variance) 의미
+        - T는 반환(출력) 전용 타입이라는 의미
+        - 하위 타입을 상위 타입으로 안전하게 치환 가능 (예: String > Any)
+        - 반환만 하고, 받아서 set하지는 않을 때 out 사용
+        - 예제
+            ```java
+            fun getResult(): Result<String> = Result.Success("OK")
+            val result: Result<Any> = getResult() // 허용됨, 공변성(out T)
+            ```
+    - in P, R
+        - in P: 입력 전용 타입, 즉 P는 이 클래스 안에서 매개변수로만 사용
+        - R: 제약없이 입력/출력 가능
+        - in은 반공변성, 입력 타입만 허용하므로.
+        - 예를 들어 SafeUseCase<in P, R> 일 때 SafeUseCase<Any, R>에 SafeUseCase<String, R>를 대입 가능 
+        - 예제
+            ```java
+            val useCase: SafeUseCase<Any, String> = MyStringUseCase()
+            // 내부에서는 P를 읽기만 가능 (set X, consume only)
+            ```
+    - 정리
+        - out T: 출력 전용(공변성), 반환 타입으로만 사용
+        - in T: 입력 전용(반공변성), 파라미터 타입으로만 사용
+        - T (생략): 입력 + 출력 가능 (무공변), 유연성은 낮지만 자유롭게 사용 가능
+        - 사용 이유: 재사용성, 타입 안정성 보장, 코틀린에서 PECS 원칙(Producer -> out, Consumer -> in)을 기반으로 타입을 안전하게 설계하기 위해 사용
+
+- DSL
+    - 개요
+        - DSL (Domain Specific Language): 특정 목적/도메인에 특화된 작고 간결한 언어를 의미
+        - 코틀린에서는 내장 언어처럼 보이게 만드는 문법적 트릭와 람다 with receiver, 확장 함수 등을 활용해서 만들 수 있다.
+    - 예제
+        - 설명을 위한 예제
+            ```java
+            // 일반 스타일
+            val person = Person()
+                person.name = "Aiden"
+                person.age = 32
+
+            // DSL 스타일 -> DSL -> person {... }
+            val person = person {
+                name = "Aiden"
+                age = 32
+            }
+            ```
+    - 코틀린의 대표적인 DSL 예시
+        - build.gradle.kts
+        - dependencies { ... } 내부는 람다 with receiver 구조로 되어 있음
+
+    - DSL 핵심 기술 요소
+        - Lambda with receiver: this 생략 가능한 람다(apply, with, run 등 내부 구조)
+        - 확장함수: 기존 클래스에 새로운 함수 추가 가능
+        - invoke 연산자: object() 형태로 유스케이스 처럼 함수처럼 호출 가능
+
+    - DSL이 유용한 이유
+        - 코드 가독성 증가
+        - 선언형 스타일 UI 구성(Jetpack Compose, Anko)
+        - 설정 파일, 테스트 시나리오 구성에 탁월
+        - 빌더 패턴 개선 가능 
+
+    - DSL 잘쓰는 프레임워크들
+        - Gradle Kotlin DSL
+        - Jetpack Compose (UI DSL)
+        - Ktor(서버 DSL)
+        - kotlinx.html
+        - MockK, Kotest(테스트 DSL)
+
 - Kotlin에서 copy() 메서드를 사용하는 이유는?
 - Kotlin에서 apply, let, run, also, with의 차이점은?
 - Kotlin에서 object expression과 object declaration의 차이점은?
