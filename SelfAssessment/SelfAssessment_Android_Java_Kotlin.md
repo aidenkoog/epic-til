@@ -1410,7 +1410,53 @@ Organize concepts, features, types and Pros and Cons
         - 구독 여부에 따라 실행 제어 가능 (SharingStarted)
 
 - Android에서 ViewModel과 SavedStateHandle의 차이점
-- Android에서 LiveData와 Flow의 차이점
+    - 개요
+        - 둘 다 안드로이드에서 UI 상태를 유지하기 위해 사용되는 도구지만, 목적과 역할, 생명주기, 저장 범위에 차이가 존재
+    - 정의
+        - 뷰모델
+            - 화면 상태(리스트, 로딩여부 등)을 메모리 내에서 오래 유지하도록 설계된 클래스
+            - 화면 회전해도 살아 있고, 비즈니스 로직/비동기 처리에 최적
+        - SavedStateHandle
+            - Bundle 처럼 값을 저장했다가 프로세스가 죽고 재생성될 때 자동 복원되는 상태 저장소
+            - 뷰모델 생성자에 주입되어 사용
+            - 예제
+                ```java
+                // 앱이 강제 종료돼도 값 유지됨 (onSaveInstanceState 와 유사)
+                class MyViewModel(
+                    private val state: SavedStateHandle
+                ) : ViewModel() {
+
+                    companion object {
+                        private const val KEY_COUNTER = "counter"
+                    }
+
+                    var counter: Int
+                        get() = state.get<Int>(KEY_COUNTER) ?: 0
+                        set(value) {
+                            state.set(KEY_COUNTER, value)
+                        }
+
+                    fun increase() {
+                        counter += 1
+                    }
+                }
+                ```
+    - 뷰모델 + SavedStateHandle 함께 쓰는 패턴
+        - Navigation Component에서 전달된 파라미터를 자동으로 SavedStateHandle로 받아서 복구 가능하게 함
+        - 보통 둘을 같이 사용하는 경우가 많음
+        ```java
+        class DetailViewModel(
+            savedStateHandle: SavedStateHandle
+        ) : ViewModel() {
+            val userId = savedStateHandle.get<String>("userId")
+        }
+        ```
+    - 사용 시점에 따른 선택 기준
+        - 일반적인 UI 상태 유지(회전, 탭 전환 등): 뷰모델
+        - 시스템이 앱을 죽였다가 복원할 수 있는 상황: SavedStateHandle
+        - 인텐트로 전달된 값 기억해야 할 때: SavedStateHandle
+        - API 호출, 비즈니스 로직 상태 관리: 뷰모델
+
 - Android에서 Kotlin Coroutines을 활용하는 방법
 - Android에서 Room Database와 SQLite의 차이점
 - Android에서 Data Binding을 사용하는 이유
@@ -2392,7 +2438,6 @@ Organize concepts, features, types and Pros and Cons
 - Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
 - Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
 - Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
-- Kotlin의 Flow와 LiveData의 차이점은?
 - Kotlin에서 Channel과 SharedFlow의 차이점은?
 - Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
 - Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
