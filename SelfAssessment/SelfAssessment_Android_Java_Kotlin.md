@@ -2606,7 +2606,26 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 data class와 일반 클래스의 차이는?
 - suspend 함수와 Coroutine의 작동 방식은?
 - Kotlin에서 lateinit과 lazy의 차이는?
-- Kotlin의 sealed class는 어떤 경우에 사용하는가?
+- Kotlin의 sealed class 사용 시점
+    - 개요
+        - 계층적으로 제한적인 타입 분기를 명확하게 하고 싶을 때 사용하는 강력한 기능
+        - 특히, when 과 같이 사용하면 컴파일 타임에서 안전한 조건 분기를 만들 수 있음 (when 분기 시 모든 하위 타입을 처리하지 않으면 컴파일 오류 발생 > 안전성 보장)
+    - 요약
+        - sealed class 는 상속 가능한 클래스 계층을 제한하고, 모든 하위 클래스가 정해진 경우에만 사용되는 클래스
+    - 사용 목적
+        - 결과 타입을 명확히 나누고 싶을 때 (성공 / 실패 / 로딩 상태)
+        - 분기 처리를 안전하게 하고 싶을 때 (when에서 모든 케이스를 컴파일 시 검사)
+        - 계층 구조가 닫힌 상태에서만 유효할 때 (다른 파일/모듈에서 확장 못하게 막음)
+        - UI 상태 표현 (Compose나 MVVM에서 UI State 분기에 적합)
+        - 이벤트/명령 정의 (EventBus, Command 패턴처럼 사용 가능)
+    - sealed
+        - 봉인된 클래스 > 하위 타입을 이 파일 내에서만 허용
+        - 파일 외부에서 상속 금지 > 타입 안정성 확보
+        - 컴파일러가 모든 가능성을 알 수 있음
+    - sealed interface
+        - Kotlin 1.5+부터 지원
+        - 클래스보다 더 유연한 타입 계층 구성 가능
+
 - Kotlin의 companion object의 역할은?
 - inline 함수와 일반 함수의 차이는?
 - Kotlin의 extension function을 설명하라.
