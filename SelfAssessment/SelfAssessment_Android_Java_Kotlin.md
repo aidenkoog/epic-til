@@ -2037,8 +2037,31 @@ Organize concepts, features, types and Pros and Cons
         - JVM 수준에서 CAS (Compare And Set) 연산을 사용
         - 경쟁이 있을 경우 재시도(스핀 락) 방식으로 처리
         - 락은 없지만 경쟁이 심할 경우 성능 저하 발생 가능성도 존재
-        
-- Java에서 ThreadLocal이란 무엇이며, 언제 사용하는가?
+
+- Java에서 ThreadLocal
+    - 개요
+        - 각 스레드가 자기만의 값을 가지도록 해주는 변수 저장소
+        - 스레드 간에 데이터 충돌 없이 독립적인 값 유지가 필요할 때 사용
+
+    - 예제
+        - set, get, remove() 메소드 존재
+        ```java
+        ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
+        threadLocal.set(100); // 현재 스레드만 이 값을 가짐
+        Integer value = threadLocal.get(); // 다른 스레드와는 무관한 값
+        ```
+
+    - 사용 시점
+        - 각 스레드가 자신만의 데이터 / 컨텍스트를 가져야 할 때 (스레드 간 충돌없이 처리)
+        - 스레드 풀에서 같은 객체를 재사용해야 할 때 (객체 공유 없이 안전하게 처리)
+        - 웹 요청 처리 시 사용자 정보 등 컨텐스트 보관 (스레드로컬로 로그인 정보 등 유지)
+        - 로그 트레이싱 정보 저장 (스레드로컬로 트레이스 아이디 유지)
+
+    - 주의 사항
+        - 메모리 누수 (스레드 풀에서는 스레드 로컬을 명시적으로 remove 필요)
+        - 스레드 로컬 값은 절대 공유되지 않음
+        - InheritableThreadLocal (자식 스레드에도 값 전달 희망 시 사용)
+
 - Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Java의 ArrayList와 LinkedList의 차이점은?
 - Java의 HashMap과 TreeMap의 차이점은?
