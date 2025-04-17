@@ -1916,6 +1916,7 @@ Organize concepts, features, types and Pros and Cons
 - Java에서 switch 문을 개선한 switch expressions의 특징
     - 개요
         - switch expressions는 값 반환 가능하며 안전하고 간결한 문법으로 개선된 switch (when과 유사)
+        - Java 14 이후부터 도입
     - 특징
         - yield 키워드 지원: 여러줄 블록에서 값 반환 시 사용
         - 컴파일러가 누락된 case 감지 가능: enum 타입 사용 시 모든 케이스 미 처리시 경고 발생 가능
@@ -2012,7 +2013,31 @@ Organize concepts, features, types and Pros and Cons
         - 플래그처럼 단일 필드 감시는 volatile 사용
         - 데이터 동기화 필요하거나 연산 포함 시에는 synchronized / Lock
 
-- Java에서 AtomicInteger와 synchronized의 차이점은?
+- Java에서 AtomicInteger와 synchronized의 차이점
+    - 개요
+        - AtomicInteger는 단일 변수의 원자적 연산을 빠르게 처리하는 클래스
+        - synchronized는 임계 영역 전체의 동시 접근을 제어하는 키워드
+
+    - 차이 비교
+        - Atomic은 원자성만 보장, 락 없으며 Lock-Free 방식
+        - 성능은 빠르며, CAS 기반, 경합 적을수록 효율은 높아짐
+        - 가시성 보장: JMM 기반 volatile 보장
+
+    - Atomic 예제
+        - incrementAndGet(), getAndAdd(), compareAndSet() 등 원자 연산 제공
+        - 내부적으로 CAS(Compare-And-Swap) 알고리즘 사용
+        ```java
+        AtomicInteger counter = new AtomicInteger();
+        public void increase() {
+            counter.incrementAndGet(); // 원자적 증가
+        }
+        ```
+
+    - Atomic 변수 내부적 동작 원리
+        - JVM 수준에서 CAS (Compare And Set) 연산을 사용
+        - 경쟁이 있을 경우 재시도(스핀 락) 방식으로 처리
+        - 락은 없지만 경쟁이 심할 경우 성능 저하 발생 가능성도 존재
+        
 - Java에서 ThreadLocal이란 무엇이며, 언제 사용하는가?
 - Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Java의 ArrayList와 LinkedList의 차이점은?
