@@ -4570,30 +4570,24 @@ Organize concepts, features, types and Pros and Cons
 	- 기타:
 		- Materialized View, Stream Processing, Partitioning을 통해 성능 최적화
 
-2. AI 기반 예측 분석(Predictive Analytics)의 개념과 활용 사례
+- AI 기반 예측 분석(Predictive Analytics)의 개념과 활용 사례
+	- 개념:
+		- 과거 데이터로부터 패턴을 학습하여 미래를 예측하는 분석 방식
+		- 회귀, 시계열 예측, 분류 모델 등 사용
 
-개념:
-	- 과거 데이터로부터 패턴을 학습하여 미래를 예측하는 분석 방식
-	- 회귀, 시계열 예측, 분류 모델 등 사용
+	- 활용 사례:
+		- 수요 예측, 고장 예지, 사용자 이탈 예측, 금융 사기 탐지
+		- DB는 대용량 학습 데이터를 안정적으로 저장하고 서빙하는 역할 수행
 
-활용 사례:
-	- 수요 예측, 고장 예지, 사용자 이탈 예측, 금융 사기 탐지
-	- DB는 대용량 학습 데이터를 안정적으로 저장하고 서빙하는 역할 수행
+- Edge AI와 데이터베이스의 관계 및 실시간 데이터 처리 방안
+	- Edge AI와 DB 관계:
+		- 엣지 디바이스에서 로컬 데이터 수집 → 경량 DB 저장 (예: SQLite, InfluxDB)
+		- 필요 시 클라우드 DB로 동기화
 
-⸻
-
-3. Edge AI와 데이터베이스의 관계 및 실시간 데이터 처리 방안
-
-Edge AI와 DB 관계:
-	- 엣지 디바이스에서 로컬 데이터 수집 → 경량 DB 저장 (예: SQLite, InfluxDB)
-	- 필요 시 클라우드 DB로 동기화
-
-실시간 처리 방안:
-	- In-Memory DB, Stream DB, Time-Series DB 도입
-	- Kafka/Flink 등을 통해 실시간 이벤트 분석
-	- DB 내에서도 Trigger, Stored Procedure로 반응형 처리 구성
-
-⸻
+	- 실시간 처리 방안:
+		- In-Memory DB, Stream DB, Time-Series DB 도입
+		- Kafka/Flink 등을 통해 실시간 이벤트 분석
+		- DB 내에서도 Trigger, Stored Procedure로 반응형 처리 구성
 
 4. 양자 컴퓨팅이 데이터베이스 기술에 미치는 영향
 
