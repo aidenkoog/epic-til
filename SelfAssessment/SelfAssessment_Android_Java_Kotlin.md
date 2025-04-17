@@ -1544,8 +1544,85 @@ Organize concepts, features, types and Pros and Cons
             ```
 
 - Android에서 Room Database와 SQLite의 차이점
+    - 개요
+        - SQLite는 로우레벨 API, Room은 SQLite를 추상화한 고급 Wrapper이자 ORM(Object-Relational Mapping)
+        - 모두 안드로이드에서 로컬 데이터 저장을 위한 도구이지만, 개발 생산성, 안정성, 유지보수성 측면에서 큰 차이 존재
+    
+    - 핵심 차이 비교
+        - 사용방식: rawQuery, execSQL / @Dao, @Entity, @Query 등 애노테이션 기반
+        - 타입 안정성: 없음 (런타임 에러 가능) / 컴파일 시 쿼리 검증
+        - ORM 기능: 수동으로 Cursor -> Object 매핑 필요 / 자동으로 객체 매핑 지원
+        - LiveData / Flow: Room은 지원
+
+    - Room 장점
+        - 컴파일 타임에 SQL 검증 (쿼리 오류를 빌드 시 감지 가능)
+        - 객체 매핑 자동화 (Cursor 핸들링 불필요)
+        - 코루틴, LiveData, Flow 지원 (비동기 작업 구조화 가능)
+        - 마이그레이션 유틸 제공 (DB 스키마 변경 처리 가능)
+        - Jetpack과 연계 용이 (ViewModel, Repository 패턴에 최적화)
+
+    - 결론 요약
+        - SQLite는 강력하나 로우레벨, 귀찮고 오류 발생 가능성 높음
+        - Room은 SQLite 위에 만든 Jetpack ORM으로, 생산성/안정성/테스트/확장성 모두 좋음
+        - 현 시점은 대부분 Room 사용
+
 - Android에서 Data Binding을 사용하는 이유
+    - 개요
+        - UI와 데이터(또는 뷰모델)를 더 깔끔하고 효율적으로 연결하기 위해서임
+        - XML 레이아웃에서 직접 뷰모델 및 데이터에 접근해 UI를 자동으로 갱신하게 해주는 기능
+
+    - 사용의 이유
+        - UI와 데이터 간 연결 코드 감소
+            - findViewById 없이도 XML에서 직접 데이터를 바인딩
+            - 클릭 리스너도 XML에서 바로 연결 가능
+        - 자동 UI 업데이트 (양방향 바인딩도 가능)
+            - 뷰모델의 라이브데이터 값이 바뀌면 UI도 자동 반영
+            - 데이터가 바뀌면 UI가 자동 업데이트되므로 notifyDataSetChanged() 불필요
+        - XML 에서 로직 표현 가능 (삼항 연산자 / 조건문 / 포맷팅 등)
+        - MVVM 구조와 어울림
+            - 뷰는 XML에서 관찰만 하면 됨
+            - 액티비티 / 프래그먼트가 로직에서 자유로워짐 (UI만 담당)
+        - Click 리스너, 아답터 설정도 XML 에서 처리 가능
+
+    - 뷰 바인딩과의 차이
+        - 뷰 바인딩
+            - 단순 findViewById() 대체
+            - XML 직접 바인딩 불가
+            - 성능 가벼움
+            - MVVM 연계 제한적
+        - 데이터 바인딩
+            - 데이터 바인딩 + 표현식 지원
+            - XML 직접 바인딩 가능
+            - MVVM 연계 매우 적합
+            - 성능 약간 무거움 (컴파일 시 코드 생성됨)
+
+    - 결론
+        - 데이터 바인딩은 UI와 데이터를 선언적으로 연결시켜주는 도구
+        - 코드량 줄이고, MVVM 구조에서 UI-로직 분리에 최적
+        - 라이브데이터, 뷰모델과 결합 시 자동 UI 업데이트 가능
+        - 실무 시 중/대형 앱, MVVM 구조, 재사용성 고려 시 매우 유용
+
 - Android에서 Shared Preferences보다 Encrypted Shared Preferences가 필요한 이유
+    - 개요
+        - EncryptedSharedPreferences는 내부 데이터를 자동으로 암호화하여 저장하는 보안 강화된 버전
+        - 로그인 정보, 토큰, 설정 등 민감 데이터 저장 시에는 반드시 사용 필수
+
+    - 주요 차이점
+        - AES 암호화된 상태로 저장
+        - 보안 수준 높음 (키 스토어 기반 키 암호화)
+        - 데이터 유출 위험 낮음
+        - 비밀번호, 토큰, 사용자 정보 등 민감 데이터에 사용
+        - API 23+ (마시멜로 이상) 부터 사용 가능
+
+    - 필요 이유
+        - SharedPreferences의 경우 /data/data/../shared_prefs/*.xml 파일에 평문 그대로 저장되어 있음
+        - 루팅 기기 등 도구로 쉽게 열람 가능
+        - 자동 암호화 + 복호화 시스템
+        - 내부적으로 AES + GCM 방식으로 암호화 (안드로이드 키스토어 기반 키 관리)
+        - 키는 키스토어에서 관리되어 앱 외부에서 접근 불가
+        - 저장 파일 자체도 암호화되어 있어 디바이스 외부에서 노출돼도 안전
+        - MasterKey + Keystore로 키 관리까지 안전
+
 - Android에서 Jetpack Paging 라이브러리를 사용하는 이유
 - Android에서 Dependency Injection을 구현하는 방법
 - Android에서 Hilt와 Dagger의 차이점
@@ -1836,11 +1913,107 @@ Organize concepts, features, types and Pros and Cons
 - Java의 Functional Interface와 Lambda Expression의 관계는?
 - Java의 Stream API를 활용하는 방법은?
 - Java의 Comparator와 Comparable 인터페이스의 차이점은?
-- Java에서 switch 문을 개선한 switch expressions의 특징은?
-- Java에서 synchronized 키워드를 사용할 때 주의할 점은?
-- Java에서 ThreadLocal이란 무엇이며, 언제 사용하는가?
-- Java에서 volatile 키워드를 사용하는 이유는?
+- Java에서 switch 문을 개선한 switch expressions의 특징
+    - 개요
+        - switch expressions는 값 반환 가능하며 안전하고 간결한 문법으로 개선된 switch (when과 유사)
+    - 특징
+        - yield 키워드 지원: 여러줄 블록에서 값 반환 시 사용
+        - 컴파일러가 누락된 case 감지 가능: enum 타입 사용 시 모든 케이스 미 처리시 경고 발생 가능
+        - 화살표 문법
+        - 반환 가능 (값 반환)
+    - 예제
+        ```java
+        String result = switch (day) {
+            case MONDAY, FRIDAY, SUNDAY -> "Weekend";
+            case TUESDAY -> "Work hard!";
+            default -> "Midweek";
+        };
+
+        int result = switch (value) {
+            case 1 -> 100;
+            case 2 -> {
+                int calc = 10 * 2;
+                yield calc;
+            }
+            default -> 0;
+        };
+        ```
+    - 전체 요약
+        - 코드 간결 (break 줄이기 가능)
+        - 값 반환 가능
+        - 타입 안정성 증가 (모든 케이스 커버 > 컴파일러가 체크)
+        - 가독성 향상 (블록 없이 화살표 문법)
+
+- Java에서 synchronized 키워드 사용 시 주의점
+    - 개요
+        - 멀티스레드 환경에서 공유 자원의 동시 접근을 제어하기 위해 사용하는 가장 기본적인 동기화 수단
+        - 잘못 사용 시 성능저하, 데드락, 기대하지 않은 동작 등 문제 발생 가능성 있음
+    - 주의 사항
+        - (1) 락의 범위
+            - 객체 또는 클래스 단위로 락 설정
+            - 같은 락을 여러 스레드가 요청하면 순차적으로 실행됨
+            - 매번 new Object()로 락을 만들면 의미 없음
+        - (2) 과도한 락은 성능 저하 (synchronized 블록이 너무 크면)
+            - 블록이 너무 크면 해당 영역에 접근하려는 다른 스레드들이 장시간 대기함
+            - 최소한의 범위로 락을 걸어야 성능 유지
+        - (3) 데드락 (Deadlock) 주의
+            - 여러 스레드가 서로의 락을 기다리며 영원히 멈추는 상태
+                ```java
+                Thread 1: synchronized(objA) → synchronized(objB)
+                Thread 2: synchronized(objB) → synchronized(objA)
+                ```
+            - 락 순서를 일관되게 유지하거나 tryLock() (ReentrantLock 사용 시)을 고려해야 예방 가능
+        - (4) synchronized는 가시성 보장도 함
+            - 락을 획득하고 해제하는 과정에서 메모리 가시성 보장
+            - 즉, 하나의 스레드가 업데이트한 값이 다른 스레드에서도 보이는 상태로 유지
+            - volatile과 다르게, 원자성 + 가시성을 모두 제공
+        - (5) 메서드 전체 락 가능
+            - 인스턴스 메서드: this를 락 객체로 사용
+            - static 메서드: Class.class를 락 객체로 사용
+                ```java
+                public synchronized void doSomething() {
+                    // this에 대해 락이 걸림
+                }
+                public static synchronized void doGlobalThing() {
+                    // MyClass.class에 대해 락
+                }
+                ```
+        - (6) 성능에 민감하면 ReentrantLock 고려
+            - synchronized는 간단하지만 정밀 제어가 불가능
+            - java.util.concurrent.locks.ReentrantLock을 사용하면:
+                - 타임아웃 설정 (tryLock)
+                - 공정성 설정
+                - 명시적인 락 해제 (unlock) 가능
+        `   - 단, unlock()을 반드시 finally 블록에서 호출해야 안전
+
+- Java에서 volatile 과 synchronized 차이
+    - 개요
+        - 둘다 멀티스레드 환경에서 변수의 안전한 접근을 위해 사용되는 키워드
+        - 역할과 보장하는 범위가 다르다.
+    - 요약
+        - volatile: 가시성만 보장
+        - synchronized: 가시성 + 원자성 모두 보장
+    - volatile 기준 차이 비교
+        - 변수 수중에서 메모리 동기화
+        - 락 사용하지 않음
+        - 성능 빠름 (락이 없으므로)
+        - 복잡한 연산 처리 불가 (count++)
+        - 데드락 위험 없음 (락 없으므로)
+        - 단일 변수의 상태 플래그 사용 용도
+    - volatile 이 보장하는 가시성
+        - 한 스레드에서 변경한 값을 다른 스레드에서 즉시 볼 수 있도록 보장
+        - volatile 없으면 플래그 값이 CPU 캐시에 남아 변경을 감지하지 못할 가능성 존재
+    - volatile 이 보장하지 않는 원자성
+        - count++ 류의 연산은 내부적으로 복잡한 3단계 연산 (read, add, write)
+        - volatile은 가시성만 보장하므로 동시 접근 시 경쟁 조건 발생
+    - 결론
+        - volatile은 값을 즉시 반영하도록 보장, 연산은 보호하지 않음
+        - synchronized는 원자성 + 가시성 모두 보장, 락 기반으로 더 안전하나 느릴 수 있음
+        - 플래그처럼 단일 필드 감시는 volatile 사용
+        - 데이터 동기화 필요하거나 연산 포함 시에는 synchronized / Lock
+
 - Java에서 AtomicInteger와 synchronized의 차이점은?
+- Java에서 ThreadLocal이란 무엇이며, 언제 사용하는가?
 - Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Java의 ArrayList와 LinkedList의 차이점은?
 - Java의 HashMap과 TreeMap의 차이점은?
