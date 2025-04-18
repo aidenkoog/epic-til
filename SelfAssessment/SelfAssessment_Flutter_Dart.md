@@ -699,6 +699,34 @@ Organize concepts, features, types and Pros and Cons
     - 고성능 요구가 없다면 MJPEG 방식 출시, 추후 WebRTC 업그레이드 방향의 단계적 전략 고려 필요
 
 - Flutter에서 데이터 암호화를 위해 SecureStorage를 활용하는 방법은?
+  - 개요
+    - Flutter에서 암호화된 안전한 저장소를 제공하는 공식 추천 패키지로, Android Keystore / iOS Keychain을 이용하여 민감 정보를 저장
+
+  - 기본 예제
+    ```dart
+    import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+    // 초기화
+    final storage = FlutterSecureStorage();
+
+    // 저장
+    await storage.write(key: 'token', value: 'abc123');
+
+    // 읽기
+    String? token = await storage.read(key: 'token');
+
+    // 삭제
+    await storage.delete(key: 'token');
+
+    // 전체 삭제
+    await storage.deleteAll();
+    ```
+
+  - 정리
+    - 내부적으로 안드로이드 키스토어, iOS 키체인 사용
+    - 민감 정보 저장시 사용, 저장 속도는 기본 shared_preferences 보다는 느림
+    - 저장용량 제한적 (키체인, 키스토어 용량 제약)
+
 - Flutter에서 OAuth 2.0 인증을 구현하는 방법은?
 - Flutter에서 API 호출을 위한 Rate Limiting을 적용하는 방법은?
 - Flutter에서 SSL Pinning을 적용하는 방법은?
