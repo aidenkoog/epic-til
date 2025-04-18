@@ -2126,13 +2126,65 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 companion object와 object의 차이점은?
 - Kotlin에서 open 키워드를 사용하는 이유는?
 - Kotlin에서 inline 함수의 장점과 단점은?
-- Kotlin에서 reified 키워드를 사용하는 이유는?
+- Kotlin에서 reified 키워드를 사용하는 이유
+    - 개요
+        - 코틀린의 인라인 함수와 제네릭을 함께 사용할 때, 타입 정보를 런타임까지 유지하기 위해 사용하는 키워드
+        - 제네릭 타입의 정보를 런타임에도 사용할 수 있도록 해주는 키워드, inline함수와 함께 사용될 때에만 가능
+
+    - 필요 이유
+        - 코틀린이나 자바에서는 제네릭 타입은 컴파일 시점에만 존재하고, 런타임에는 사라짐 (타입 소거(Type Erasure))
+        - 아래 코드에서 T::class 접근시도 시 컴파일 오류 발생
+        - inline + reified 사용하면 제네릭 타입 T의 정보를 런타임까지 유지 가능
+        - T::class, is T, T::class.java 등 사용 가능
+        ```java
+        fun <T> printType(value: T) {
+            println(T::class) // 컴파일 오류!
+        }
+        ```
+    - 예제 자료
+        ```java
+        inline fun <reified T> isOfType(value: Any): Boolean {
+            return value is T
+        }
+        val result = isOfType<String>("hello")  // true
+
+        inline fun <reified T> Gson.fromJson(json: String): T {
+            return this.fromJson(json, T::class.java)
+        }
+
+        //reified 없는 경우 대안책
+        // Class<T>를 직접 넘겨줘야 함
+        fun <T> fromJson(json: String, clazz: Class<T>): T {
+            return Gson().fromJson(json, clazz)
+        }
+        ```
+
 - Kotlin에서 extension function을 활용하는 방법은?
 - Kotlin에서 operator overloading을 구현하는 방법은?
 - Kotlin에서 delegation을 활용하는 방법은?
 - Kotlin에서 typealias를 사용하는 이유는?
-- Kotlin에서 Any, Unit, Nothing 타입의 차이점은?
-- Kotlin에서 when 표현식과 Java의 switch 문법의 차이점
+- Kotlin에서 Any, Unit, Nothing 타입
+    - Any
+        - 모든 타입의 부모, 모든 클래스의 슈퍼 타입
+        - equals(), hashCode(), toString() 존재
+        - 여러 타입을 다루는 공통 파라미터 필요시 사용
+    - Unit
+        - 함수가 의미있는 값을 반환하지 않을 때 사용
+        - Java void와 비슷하나 Kotlin에서는 Unit도 하나의 객체
+        - 생략 가능
+        - 명시적으로 콜백, 고차함수 등에서 반환 타입을 지정하고 싶을 때 사용
+    - Nothing
+        - 절대 반환되지 않는 함수의 반환 타입
+        - 주로 예외 전파, 무한 루프, 비정상 종료 등의 상황에서 사용
+        - 하위 타입이므로 모든 타입에 대입 가능 (예: val x: String = Nothing)
+    - 3가지 타입 비교 예제
+        ```java
+        fun anything(): Any = "Hello"        // 어떤 값이든 가능
+        fun doSomething(): Unit = println("Done") // 반환은 없지만 실제 객체로 존재
+        fun neverReturns(): Nothing = throw Exception("죽었음")
+        ```
+
+- Kotlin에서 when 표현식과 Java의 switch 문법
     - 표현 형태
         - 코틀린: 표현식 (값 반환 가능)
         - 자바: 문장 (값 반환하지 않음)
@@ -2283,7 +2335,50 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 context receivers가 도입된 이유는?
 - Kotlin에서 JvmInline을 사용하는 이유는?
 - Kotlin에서 contract API가 무엇이며, 어떻게 활용하는가?
-- Kotlin에서 SAM(Single Abstract Method) Conversion이란 무엇인가?
+- Kotlin에서 SAM(Single Abstract Method) Conversion
+    - SAM Conversion (Single Abstract Method Conversion)
+        - 단 하나의 추상 메서드만 갖는 인터페이스(SAM)를 람다로 자동 변환해주는 코틀린 기능
+        - 자바와의 상호운용성(interoperability)을 돕기 위해 자바의 함수형 인터페이스를 더 코틀린스럽게 쓰게 해주는 것
+
+    - SAM 예
+        - Runnable, Comparator<T>, ActionListener 등
+
+    - SAM Conversion 예시 (코틀린)
+        - 자바 스타일
+            ```java
+            val thread = Thread(object : Runnable {
+                override fun run() { // 단 하나의 추상 메서드 존재
+                    println("작동 중!")
+                }
+            })
+            ```
+        - 코틀린 SAM Conversion 사용
+            ```java
+            val thread = Thread {
+                println("작동 중!")
+            }
+            ```
+
+    - 동작 시점
+        - 코틀린은 자바 인터페이스에 대해서만! SAM 변환을 기본 지원
+        - 코틀린에서 만든 인터페이스는 기본적으로 SAM 변환 지원 X
+            - Kotlin 1.4 이후부터는 fun interface 사용 시 가능
+            - fun interface로 정의 시 코틀린 자체에서도 SAM Conversion 가능
+            - 반환 타입과 파라미터 타입이 명확해야 가능
+        ```java
+        fun interface ClickListener {
+            fun onClick()
+        }
+
+        fun handleClick(listener: ClickListener) {
+            listener.onClick()
+        }
+
+        handleClick {
+            println("클릭됨!")
+        }
+        ```
+
 - Kotlin에서 builder pattern을 DSL로 구현하는 방법은?
 - Kotlin에서 type inference의 원리와 활용 방법은?
 - Kotlin에서 spread operator(*)의 활용 방법은?
@@ -2296,7 +2391,29 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 LazyThreadSafetyMode의 옵션들과 차이점은?
 - Kotlin에서 CoroutineContext와 Job의 관계는?
 - Kotlin에서 JvmStatic과 JvmOverloads를 활용하는 방법은?
-- Kotlin에서 try-catch와 runCatching의 차이점은?
+- Kotlin에서 try-catch와 runCatching
+    - 개요
+        - 예외 처리 방식
+        - try-catch: 전통적인 명령형 방식
+        - runCatching: 함수형 스타일로 예외를 다루기 위한 코틀린의 표준 함수
+    - runCatching (함수형 스타일)
+        - 결과가 Result<T> 객체로 래핑됨
+        - 예외가 발생하든 말든, 결과를 함수형 체이닝 방식으로 처리
+        - map, recover, getOrElse, getOrNull 등의 함수 사용 가능
+        - 코드 흐름 깔끔, 선언적 스타일
+        ```java
+        val result = runCatching {
+            riskyFunction()
+        }
+
+        result
+            .onSuccess { println("성공: $it") }
+            .onFailure { println("실패: ${it.message}") }
+        ```
+    - 추가 가공 시 예제
+        - result.map {}.onSuccess {}.onFailure {} 이런식의 체이닝 처리 가능
+
+
 - Kotlin에서 @OptIn 어노테이션을 사용하는 이유는?
 - Kotlin Coroutines의 핵심 개념은?
 - suspend 함수란 무엇이며, 일반 함수와의 차이점은?
@@ -2309,8 +2426,48 @@ Organize concepts, features, types and Pros and Cons
 - runBlocking을 사용하는 것이 위험한 이유는?
 - Kotlin Coroutines에서 Structured Concurrency란?
 - CoroutineExceptionHandler의 역할은?
-- Job과 SupervisorJob의 차이점은?
-- Flow와 Channel의 차이점은?
+- Job과 SupervisorJob
+    - 개요
+        - 둘다 부모-자식 관계를 가진 코루틴에서 중요하고 오류 전파 방식에 차이 존재
+    - 중간 요약
+        - Job: 부모-자식 간 오류가 전파 가능
+        - SupervisorJob: 자식 코루틴의 오류가 부모나 다른 자식에게 전파되지 않음
+    - Job의 특징
+        - 자식 코루틴이 예외를 던지면 부모와 다른 자식들도 모두 취소
+    - SupervisorJob의 특징
+        - 자식 중 하나가 실패해도 다른 자식 코루틴에는 영향을 주지 않음
+        - 독립적 실행 보장, 독립적 작업에 적합
+    - 사용 사례
+        - 네트워크 호출, 파일 쓰기 등 모두 실패 시 중단: Job
+        - UI 컴포넌트 여러개 동작 중 하나 실패해도 유지: SupervisorJob
+        - ViewModel 내 동시 작업, 한 작업 오류: SupervisorJob (많이 사용)
+
+- Flow와 Channel의 차이점
+    - 개요
+        - 둘 다 비동기 스트림을 처리하기 위한 도구이나 설계 목적, 동작 방식 그리고 사용 패턴이 다름
+    - Flow: 선언형, 콜드 스트림
+        - collect()를 호출해야 실행되는 구조
+        - collect()를 호출하는 시점부터 emit()이 시작됨
+        - 1:N 구조에서 N명 모두 동일한 데이터 스트림을 별도로 실행
+        - 리액티브 스타일 map, filter, debounce 등 체이닝 가능
+    - Channel: 명령형, 핫 스트림
+        - 누가 소비하든 말든 보내면 실행됨
+        - 1:1 구조에 적합 (생산자 <-> 소비자)
+        - send(), receive()를 명시적으로 호출해야 함
+        - send()가 먼저 실행되어도 receive()가 기다리고 있어야 소비됨
+    - Channel 예제
+        ```java
+        val channel = Channel<Int>()
+        launch {
+            channel.send(1)
+            channel.send(2)
+        }
+        launch {
+            println("받음: ${channel.receive()}")
+            println("받음: ${channel.receive()}")
+        }
+        ```
+
 - StateFlow와 SharedFlow의 차이점
     - 개요
         - Kotlin Flow의 일종, UI 상태 처리나 이벤트 처리에 자주 사용
@@ -2457,10 +2614,78 @@ Organize concepts, features, types and Pros and Cons
 - select {} 블록을 활용하여 여러 채널을 동시에 처리하는 방법은?
 - produce {}와 consumeEach {}의 차이점은?
 - Mutex와 Atomic을 활용한 동시성 문제 해결 방법은?
-- sequence {}와 Flow {}의 차이점은?
+- sequence {}와 Flow {}
+    - 개요
+        - 둘 다 지연 계산(lazy evaluation)을 제공하는 스트림형 컬렉션
+        - 동작 환경, 비동기 처리, 쓰임새에 있어서 차이 존재
+        - sequence{}는 동기 지연 계산, flow{}는 비동기 지연 계산을 위한 스트림
+    - sequence {}: 동기식 Lazy 스트림
+        - 단일 스레드, 동기 방식
+        - yield() 통해 값을 순차적으로 반환
+        - 컬렉션처럼 사용 가능 (for, map, filter 등 사용 가능)
+        - iterator()로 내부 동작
+        - yield는 일시 중단하면서 다음 값 반환 > 다음 호출 때 이어서 진행
+        ```java
+        val seq = sequence {
+            yield(1)
+            yield(2)
+            yield(3)
+        }
+        // for 문 사용 가능 (내부 iterator 동작)
+        for (value in seq) {
+            println(value)
+        }
+        ```
+    - flow {}: 비동기식 스트림 (Cold Stream)
+        - 비동기방식으로 값 emit
+        - emit() 사용 > suspend 함수
+        - 코루틴 기반이므로 delay(), 네트워크, DB 등 비동기 작업과 궁합 좋음
+        - collect() 호출해야 실행(emit)됨 (Cold Stream)
+
+    - 차이점
+        - sequence 에서는 서스펜드 함수 사용 불가능
+        - sequence 는 현재 스레드, flow는 코루틴 디스패처에서 실행
+        - sequence 는 호출 후 바로 사용 가능, flow는 collect 호출 시 동작
+        - sequence 는 계산, 반복, 간단한 지연처리에 적합, flow는 비동기 데이터 스트림, UI, 네트워크 등 처리에 적합
+
 - combine() 연산자를 활용한 데이터 스트림 결합 방법은?
 - retry()와 catch() 연산자의 차이점은?
-- debounce()와 throttleFirst()의 차이점은?
+- debounce()와 throttleFirst()의 차이점
+    - 개요
+        - 둘 다 이벤트 발생 빈도를 제어하기 위한 연산자이나 동작 방식이 정반대
+    - debounce: 마지막 이벤트만 처리
+        - 짧은 시간 간격으로 들어온 이벤트들을 무시하고, 마지막 이벤트만 처리
+        - 입력 완료 후 일정 시간 지났을 때만 발동됨
+        - 사용 예: 검색창 자동완성, 입력 필터, 네트워크 요청 최소화 등
+        ```java
+        flowOf("H", "He", "Hel", "Hell", "Hello")
+            .debounce(500)
+            .collect { println(it) }  // 마지막 "Hello"만 출력
+        ```
+    - throttleFirst: 첫 번째 이벤트만 처리
+        - 특정 시간 동안의 이벤트 중 첫 번째만 처리하고 나머지는 무시
+        - 이후 다시 시간 창이 열리면, 다시 첫번째 이벤트만 처리
+        - 사용 예: 버튼 연타 방지, 과도한 네트워크 요청 방지, 게임 조작 등 빠른 반응 1회만 필요 시
+        ```java
+        button.clicks()
+            .throttleFirst(1, TimeUnit.SECONDS)
+            .subscribe { println("클릭 처리됨!") }
+        ```
+    - Kotlin Flow 에서 throttleFirst() 사용 시
+        - 직접 구현 및 확장함수 구현 필요
+        ```java
+        fun <T> Flow<T>.throttleFirst(windowDuration: Long): Flow<T> = channelFlow {
+            var lastEmissionTime = 0L
+            collect { value ->
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - lastEmissionTime >= windowDuration) {
+                    lastEmissionTime = currentTime
+                    send(value)
+                }
+            }
+        }
+        ```
+
 - Kotlin Coroutines에서 테스트를 수행하는 방법은?
 - ViewModelScope를 활용하여 네트워크 요청을 수행하는 방법은?
 - Retrofit과 Coroutines을 함께 사용할 때의 장점은?
@@ -2482,7 +2707,54 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin Coroutines을 활용한 Custom Thread Pool 구성 방법은?
 - 코루틴에서 예외 처리를 효과적으로 수행하는 방법은?
 - Kotlin Coroutines과 Kotlin Multiplatform(KMP)에서의 활용 방법은?
-- Kotlin의 바이트코드 최적화 과정을 설명하시오.
+- Kotlin의 바이트코드 최적화 과정
+    - 개요
+        - 코틀린이 컴파일되어 자바 바이트코드로 변환된 뒤 어떻게 최적화되는가에 대한 내용
+        - 코틀린의 바이트코드 최적화 과정은 코틀린 > 자바 바이트코드 변환 시의 컴파일러 최적화와 JVM 런타임(JIT) 최적화, 그리고 인라인, 람다, null 처리 최적화로 구성
+
+    - 최적화 흐름
+        - (1) 코틀린 컴파일러가 kt > class(자바 바이트코드) 변환
+        - (2) 이 과정에서 코틀린 컴파일러가 자체적으로 스마트 캐스트, 인라인 함수, 람다 최적화를 수행
+        - (3) 생성된 class는 JVM이 JIT 컴파일을 통해 실행 시점에서 추가로 최적화
+        - (4) 경우에 따라 ProGuard / R8 같은 도구로 dead code 제거, 인라이닝, obfuscation(난독화) 수행
+
+    - 코틀린 컴파일러의 바이트코드 최적화 기능
+        - (1) 스마트 캐스트 최적화
+        ```java
+        val x: Any = "Hello"
+        if (x is String) {  // 타입 체크 후 중복 캐스팅 생략 최적화
+            println(x.length) // 자동 캐스트 → 바이트코드에서 중복 검사 제거
+        }
+        ```
+
+        - (2) 인라인 함수 최적화
+            - inline 키워드를 사용하면 함수 호출 자체를 바이트코드에서 제거하고
+            - 함수 본문을 호출 위치에 그대로 삽입해서 성능 최적화
+            - 호출 오버헤드 감소 효과, 람다 캡쳐 비용 축소 (남용 시 코드 부풀림 이슈 존재)
+            ```java
+            inline fun runWithLog(block: () -> Unit) {
+                ...
+                block()
+                println("끝")
+            }
+            ```
+
+        - (3) 람다 최적화 (Lambda Lifting & SAM conversion)
+            - 코틀린은 람다를 클래스 인스턴스로 캡슐화 하지만
+            - 가능할 경우 정적 메서드로 변환하거나 캡쳐 없이 최적화된 객체로 생성함
+
+        - (4) Null 안전 코드 최적화
+            - 코틀린은 바이트코드에서 IFNULL, IFNONNULL, ATHROW 등을 효율적으로 사용하여 자바보다 더 안전한 널 체크 로직 생성
+
+    - JVM 런타임(JIT)의 바이트코드 최적화
+        - 코틀린 컴파일러는 JVM과의 최적화를 위해 표준 자바 바이트코드 구조를 따름
+        - JVM의 JIT(Just-In-Time) 컴파일러는 실행 중 아래 런타임 최적화 수행
+            - (1) 인라이닝: 자주 호출되는 메서드 > 호출 없이 직접 삽입
+            - (2) 루프 언롤링: 반복문 구조 최적화
+            - (3) escape analysis: 객체를 힙이 아닌 스택에 할당할 수 있는지 분석
+            - (4) dead code elimination: 실행되지 않는 코드 제거
+            - (5) GC 최적화: 객체 생명주기 분석을 통한 메모리 정리 효율화
+
 - Kotlin의 escape analysis가 어떻게 동작하는지 설명하시오.
 - Kotlin의 inline function이 내부적으로 어떻게 동작하는가?
 - Kotlin에서 tail recursion이 동작하는 방식을 설명하시오.
@@ -2495,7 +2767,62 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 메모리 관리 방식과 Java의 GC(Garbage Collector) 차이점은?
 - Kotlin에서 가변 객체(mutable object)의 성능 최적화 방법은?
 - Kotlin에서 immutable 객체를 구현하는 방법과 효과적인 활용 사례는?
-- Kotlin에서 객체 풀(Object Pool)을 활용하여 성능을 개선하는 방법은?
+- Kotlin에서 객체 풀(Object Pool)을 활용하여 성능을 개선하는 방법
+    - 개요
+        - 빈번하게 생성, 소멸되는 객체의 재사용을 통해 성능과 메모리 효율을 높이는 전략
+        - 자주 생성되는 객체를 미리 만들어두고 재사용함으로써 GC 비용을 줄이고 메모리 할당을 최적화
+
+    - 필요성
+        - 객체가 반복적으로 빠르게 생성되고 버려질 때 (GC 횟수 증가하고 메모리 부하도 커짐)
+        - 게임, 애니매이션, 실시간 네트워크, UI 렌더링 (같은 타입의 객체가 반복적으로 사용됨)
+        - Object Pool을 사용하면 필요한 만큼만 만들어서 재사용 가능
+
+    - 기본 구조 구현
+        - ArrayDeque, Stack, Queue 등 활용해 직접 구현 가능
+        - 반환 처리 필수 (메모리 누수 가능성)
+        - 쓰레드 동기화 필요 (멀티스레드 환경에서는 synchronized or ConcurrentLinkedQueue 등 사용)
+        - 이전 상태 제거를 위해 reset 초기화 필수
+        ```java
+        class ObjectPool<T>(private val factory: () -> T, private val reset: (T) -> Unit) {
+            private val pool = ArrayDeque<T>()
+
+            fun get(): T {
+                return if (pool.isEmpty()) factory() else pool.removeLast()
+            }
+
+            fun release(obj: T) {
+                reset(obj)
+                pool.addLast(obj)
+            }
+        }
+
+        // 사용 예제
+        data class Bullet(var x: Int = 0, var y: Int = 0)
+
+        val bulletPool = ObjectPool(
+            factory = { Bullet() },
+            reset = { it.x = 0; it.y = 0 }
+        )
+
+        val bullet = bulletPool.get()
+        bullet.x = 100
+        bullet.y = 200
+
+        // 사용 후 반환
+        bulletPool.release(bullet)
+        ```
+    - Android SDK 자체도 객체 풀 전략 적용하고 있음
+        - 예: 리싸이클러뷰, RecyclerView.RecycledViewPool, BitmapPool
+        - 스크롤 시 뷰 홀더가 사라질 때 GC하지 않고 재활용함
+        - 뷰홀더 객체를 계속 재사용하여 성능 극대화
+
+    - Coroutine 관련 객체 재사용 예시
+        - Kotlin Coroutines에서는 내부적으로 Continuation이나 DispatchQueue도 풀링되는 구조
+        - 사용자가 직접 풀링을 할 경우에도 유사한 방식으로 관리할 수 있음
+
+    - Apache Commons Pool 등 외부 라이브러리 활용도 방법
+        - GenericObjectPool<T> 등을 사용하여 연결, 버퍼, 파서 등 풀링 가능
+
 - Kotlin에서 람다(Lambda)의 capture 비용을 줄이는 방법은?
 - Kotlin에서 JVM의 Code Cache를 활용한 최적화 기법은?
 - Kotlin에서 value class(구 inline class)를 활용할 때 성능적인 장점은?
@@ -2506,7 +2833,6 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 Coroutines에서 Structured Concurrency 개념이 중요한 이유는?
 - Kotlin의 Coroutines에서 GlobalScope 사용이 위험한 이유는?
 - Kotlin Coroutines에서 Dispatchers.IO와 Dispatchers.Default의 내부 구현 차이는?
-- Kotlin에서 Job과 SupervisorJob의 차이점과 예제 코드를 설명하시오.
 - Kotlin에서 Flow의 Backpressure(역압) 문제를 해결하는 방법은?
 - Kotlin의 StateFlow와 SharedFlow의 차이점과 실전 활용법은?
 - Kotlin에서 채널(Channel)과 Flow의 차이점은?
@@ -2728,7 +3054,6 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
 - Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
 - Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
-- Coroutine의 SupervisorJob과 일반 Job의 차이점은 무엇인가요?
 - Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
 - Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
 - Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
@@ -2871,7 +3196,6 @@ Organize concepts, features, types and Pros and Cons
 - Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할은?
 - Kotlin의 inline, noinline, crossinline 키워드는 언제 사용하는가?
 - Coroutine의 Structured Concurrency 개념을 설명하라.
-- Coroutine에서 SupervisorJob과 일반 Job의 차이는?
 - Kotlin의 Flow에서 SharedFlow와 StateFlow의 차이는?
 - Kotlin의 Delegation 패턴은 어떤 경우에 유용한가?
 - Jetpack Compose의 Slot API 개념과 활용 사례는?
