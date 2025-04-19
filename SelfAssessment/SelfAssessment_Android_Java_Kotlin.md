@@ -1908,7 +1908,26 @@ Organize concepts, features, types and Pros and Cons
 - Java의 Optional 클래스를 활용하는 방법은?
 - Java에서 varargs(가변 인자)를 사용할 때 주의할 점은?
 - Java에서 enum을 활용하는 방법과 장점은?
-- Java에서 default 메서드를 인터페이스에서 지원하는 이유는?
+- Java에서 default 메서드를 인터페이스에서 지원하는 이유
+    - 배경 및 필요성:
+	    - Java 8 이전까지 인터페이스는 추상 메서드만 가질 수 있었고, 이를 구현하는 클래스는 모든 메서드를 구현해야 했음
+	    - 하지만 인터페이스에 새로운 기능(메서드)을 추가하면, 그 인터페이스를 구현한 모든 클래스에 컴파일 에러가 발생했음
+        - → 이는 기존 코드를 깨뜨리는 문제를 발생시킴.
+
+    - 지원 이유 요약:
+	    - 기존 인터페이스에 기능 추가 시, 하위 호환성을 유지하기 위해.
+        - 다이아몬드 상속 문제를 피하면서도 다형성과 유연성을 제공하기 위해.
+    
+    - 예제
+        - 기존 구현 클래스가 아무 변경 없이도 sayHello()를 사용할 수 있게 됨
+        ```java
+        interface MyInterface {
+            default void sayHello() {
+                System.out.println("Hello from interface!");
+            }
+        }
+        ```
+
 - Java에서 record 키워드를 사용하면 얻을 수 있는 장점은?
 - Java의 Functional Interface와 Lambda Expression의 관계는?
 - Java의 Stream API를 활용하는 방법은?
