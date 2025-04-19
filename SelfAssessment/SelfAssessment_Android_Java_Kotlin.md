@@ -1868,7 +1868,46 @@ Organize concepts, features, types and Pros and Cons
 - HIDL에 대해 설명
 - AOSP의 HAL(Hardware Abstraction Layer)에 대해 설명해주세요.
 - AOSP의 시스템 서비스(SystemService) 추가 경험이 있다면 설명해주세요.
-- Android의 RenderThread와 UI Thread의 상호작용을 설명해주세요.
+- Android의 RenderThread와 UI Thread의 상호작용
+    - RenderThread와 UI Thread는 Android의 화면 렌더링 파이프라인에서 중요한 역할을 담당하는 두 축이야. 이 둘의 상호작용을 이해하면 앱의 퍼포먼스 최적화, 특히 **jank(버벅임)**이나 프레임 드랍 문제를 분석하는 데 큰 도움이 돼.
+
+⸻
+
+1. UI Thread란?
+	•	Android 앱의 메인 스레드(Main Thread).
+	•	모든 **UI 작업(뷰 그리기, 터치 이벤트 처리, 레이아웃 측정, 애니메이션 제어 등)**이 여기서 이루어져.
+	•	예: Activity, View, Handler, setText(), invalidate() 등.
+
+⸻
+
+2. RenderThread란?
+	•	Android 5.0 (API 21) Lollipop부터 도입됨.
+	•	UI Thread의 작업과 별개로, 실제 OpenGL ES 기반의 렌더링 작업을 수행하는 백그라운드 스레드.
+	•	Choreographer와 연결되어 VSync 타이밍에 맞춰 동작.
+
+⸻
+
+3. 상호작용 흐름 요약 (프레임 단위로)
+	1.	UI Thread
+	•	View hierarchy의 측정(measure), 배치(layout), 그리기(draw) 를 실행함.
+	•	그 결과 DisplayList라는 렌더링 명령 리스트를 생성함.
+	•	이 DisplayList를 RenderThread로 넘김.
+	2.	RenderThread
+	•	UI Thread가 만든 DisplayList를 기반으로 실제 GPU에 렌더링 명령을 전송(OpenGL ES).
+	•	이때 SurfaceFlinger와 협업하여 디스플레이에 출력.
+	3.	VSync 신호 발생
+	•	약 16.6ms마다 발생 (60fps 기준).
+	•	Choreographer가 이 신호를 받아서 UI Thread와 RenderThread에 프레임 준비를 지시함.
+
+⸻
+
+4. 상호작용 시 주의사항
+	•	UI Thread가 오래 걸리면 → RenderThread가 DisplayList를 제때 못 받아 → 프레임 드랍 발생 (jank).
+	•	RenderThread는 비동기로 작동하므로 → UI Thread에서 블로킹 작업하면 → 다음 프레임이 늦어짐.
+	•	UI Thread에서 너무 많은 작업을 하면 → 애니메이션 끊김 발생.
+
+
+
 - Android의 WindowManager와 SurfaceFlinger의 역할은 무엇인가
 - Android의 ART(Android Runtime)와 Dalvik의 차이점은 무엇인가
 - AOSP의 init 프로세스와 서비스 관리 방법을 설명해주세요.
