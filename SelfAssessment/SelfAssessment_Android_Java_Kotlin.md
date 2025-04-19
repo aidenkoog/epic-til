@@ -1928,7 +1928,34 @@ Organize concepts, features, types and Pros and Cons
         }
         ```
 
-- Java에서 record 키워드를 사용하면 얻을 수 있는 장점은?
+- Java에서 record 키워드를 사용하면 얻을 수 있는 장점
+    - 배경:
+	    - Java 14부터 도입되었고, Java 16부터 정식 기능으로 포함됨.
+	    - record는 불변(immutable) 데이터 객체를 간단하게 선언할 수 있게 해주는 문법.
+        - 구조 상 코틀린의 데이터 클래스와 유사
+
+    - 장점 요약:
+        - 불변 데이터 객체 생성 간소화
+	        - getter, equals(), hashCode(), toString() 자동 생성.
+	        - 생성자도 자동 생성됨.
+        - 코드 간결화
+	        - 수동으로 작성해야 할 보일러플레이트 코드 제거.
+        - 가독성과 유지보수성 향상
+	        - 데이터 중심 클래스를 명확하게 표현.
+
+    - 예시 비교:
+        ```java
+        public record User(String name, int age) {}
+
+        public class User {
+            private final String name;
+            private final int age;
+        
+            // 생성자, getter, equals, hashCode, toString 등 다 작성해야 함
+        }
+        ```
+
+
 - Java의 Functional Interface와 Lambda Expression의 관계는?
 - Java의 Stream API를 활용하는 방법은?
 - Java의 Comparator와 Comparable 인터페이스의 차이점은?
