@@ -1654,9 +1654,123 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 ViewBinding과 DataBinding의 차이점
 - Android에서 Parcelable과 Serializable의 차이점
 - Compound Component 패턴고ㅏ Slot API 설명
-- Media Player 자체 내부 로직 설명
-- ExoPlayer 내부 구조 설명
-- FFMpegPlayer 내부 구조 설명
+- Media Player 자체 내부
+    - 구조 개요
+        - MediaPlayer는 안드로이드 OS에서 제공하는 Native 기반의 기본 미디어 플레이어
+        - 내부적으로는 C/C++로 구현된 Stagefright 또는 NuPlayer (MediaCodec 기반) 를 사용해 미디어 디코딩과 렌더링을 처리
+
+    - 내부 처리 흐름
+        - (1) Java Layer (android.media.MediaPlayer)
+            - 앱 개발자가 사용하는 API (e.g., setDataSource(), prepare(), start() 등)
+            - JNI를 통해 Native Layer와 통신
+
+        - (2) JNI Layer (android_media_MediaPlayer.cpp)
+            - Java ↔ C++ 통신을 위한 인터페이스
+            - MediaPlayerService에 명령을 전달
+
+        - (3) Native Layer (MediaPlayerService, AudioFlinger, SurfaceFlinger)
+            - MediaPlayerService: 전체 플레이어 로직을 담당
+            - NuPlayer 또는 Stagefright로 미디어 디코딩 수행
+            - AudioFlinger: 오디오 출력 처리
+            - SurfaceFlinger: 비디오 렌더링 처리
+
+        - (4) Codec Layer (MediaCodec / HW codec)
+            - 하드웨어 디코더를 사용하거나, 필요 시 소프트웨어 디코더를 사용
+            - MP4, H.264, AAC 등의 기본 포맷 지원
+
+    - 특징
+        - 단순한 로직과 사용법
+        - 버퍼링, DASH, DRM 등 확장성 부족
+        - 스트리밍 최적화는 부족
+
+- ExoPlayer 내부 구조
+    - 구조 개요
+        - ExoPlayer는 구글이 직접 개발한 모듈형 플레이어
+        - MediaPlayer보다 유연하고 확장 가능
+        - 앱 프로세스 내에서 실행되며, 모든 구성 요소가 Java/Kotlin으로 구성되어 있음.
+
+    - 주요 컴포넌트
+        - (1) ExoPlayer
+            - 플레이어 컨트롤러 역할 (prepare, play, seek 등)
+            - 각 MediaComponent들을 제어
+
+        - (2) Renderers
+            - VideoRenderer, AudioRenderer, TextRenderer
+            - MediaCodec 또는 FFmpeg 등을 사용해 디코딩한 데이터를 실제 출력
+
+        - (3) SampleStream / SampleQueue
+            - 디코딩 전 압축 스트림을 제공 (MediaSource → Renderer로 전달)
+
+        - (4) MediaSource
+            - MP4, HLS, DASH, SmoothStreaming 등 다양한 형식 지원
+            - Timeline, TrackGroup 등 관리
+
+        - (5) Extractor
+            - MP4, TS, WebM 등의 컨테이너를 파싱하여 Raw Sample 추출
+
+        - (6) Loaders & LoadControl
+            - 버퍼링, 데이터 로딩, 네트워크 제어
+
+    - 특징
+        - 스트리밍(DASH, HLS, SS 등) 완벽 지원
+        - DRM, 오디오 트랙 선택, 자막 등 유연한 지원
+        - 라이브 스트리밍이나 광고 삽입에 최적화
+
+- FFMpegPlayer 내부 구조
+    - 구조 개요
+        - FFmpegPlayer는 FFmpeg 라이브러리를 기반으로 직접 미디어 디코딩과 처리를 수행하는 플레이어
+        - FFmpeg는 강력한 디코딩/인코딩/포맷 변환 엔진이며, 거의 모든 미디어 포맷을 지원함.
+        - 주의: FFmpeg는 공식적으로 안드로이드에서 지원되지 않기 때문에 JNI로 직접 빌드하고 바인딩해야 함.
+
+    - 처리 흐름
+        - (1) Java Layer
+            - 플레이어 API 정의 (e.g., play, pause, seek, release)
+            - JNI를 통해 C/C++의 FFmpeg 함수 호출
+
+        - (2) JNI Layer
+            - FFmpeg 초기화 및 함수 호출 브릿지 역할
+            - Java ↔ Native 데이터 변환 처리
+
+        - (3) FFmpeg Core
+            - avformat_open_input(): 포맷 열기
+            - avformat_find_stream_info(): 스트림 정보 파싱
+            - avcodec_find_decoder(): 코덱 찾기
+            - av_read_frame(): 패킷 읽기
+            - avcodec_send_packet() / avcodec_receive_frame(): 디코딩
+            - sws_scale() / swr_convert(): 영상/음성 변환
+
+        - (4) Renderer
+            - 디코딩된 프레임을 OpenGL 또는 Android Surface로 렌더링
+            - 오디오는 OpenSL ES 또는 AudioTrack API를 통해 출력
+
+    - 특징
+        - 거의 모든 포맷, 코덱 지원 (MKV, FLAC, RMVB, HEVC 등)
+        - 자체 디코딩으로 MediaCodec 의존 없음
+        - 스트리밍, 변환, 필터 등 고급 기능 지원 가능
+        - 단점: 무겁고 복잡, HW 가속 부재, 배터리 소모 높음
+
+    - 안드로이드 플레이어 항목별 요약
+        - 디코딩 방식	
+            - MediaPlayer: HW 중심 (MediaCodec)
+            - ExoPlayer: HW + SW 지원	
+            - FFmpegPlayer: 완전 SW 디코딩 (FFmpeg 기반)
+        - 스트리밍 지원			
+            - MediaPlayer: 제한적 (HLS만 간단 지원)
+            - ExoPlayer: HLS, DASH, SmoothStreaming 완벽
+            - FFmpegPlayer: 가능하지만 구현 난이도 높음
+        - 포맷 지원 범위			
+            - MediaPlayer: 제한적 (기본 포맷만)
+            - ExoPlayer: 다양한 컨테이너 + 코덱 지원
+            - FFmpegPlayer: 거의 모든 포맷/코덱 지원
+        - 커스터마이징			
+            - MediaPlayer: 불가능에 가까움
+            - ExoPlayer: 매우 유연함 (모듈화 구조)
+            - FFmpegPlayer: 자유롭지만 직접 구현 필요
+        - 성능/배터리			
+            - MediaPlayer: 우수 (HW 가속)
+            - ExoPlayer: 우수 (선택적 HW 가속)
+            - FFmpegPlayer: 낮음 (CPU 사용량 높음)
+
 - Android에서 Splash Screen을 구현하는 올바른 방법
 - Android에서 ViewModel을 사용하여 데이터 저장을 최적화하는 방법
 - Android에서 Jetpack Paging을 활용하여 대용량 데이터 처리하는 방법
