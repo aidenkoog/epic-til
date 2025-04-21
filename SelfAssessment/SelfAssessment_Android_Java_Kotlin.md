@@ -1623,9 +1623,75 @@ Organize concepts, features, types and Pros and Cons
         - 저장 파일 자체도 암호화되어 있어 디바이스 외부에서 노출돼도 안전
         - MasterKey + Keystore로 키 관리까지 안전
 
-- Android에서 Jetpack Paging 라이브러리를 사용하는 이유
+- Android에서 Jetpack Paging 라이브러리
+    - 개념
+        - Jetpack Paging은 대량의 데이터를 페이징 처리하면서 메모리와 네트워크 자원을 효율적으로 관리해주는 라이브러리
+        - RecyclerView 등과 결합해 스크롤할 때 필요한 만큼만 데이터를 로드하도록 도와줌
+        - PagingDataAdapter, PagingSource, RemoteMediator 등의 컴포넌트로 구성
+
+    - 사용하는 이유
+        - 메모리 최적화: 수천 건의 데이터를 한 번에 메모리에 올리지 않고 필요한 만큼만 로드
+        - UI 성능 유지:	RecyclerView 스크롤 중 성능 저하 방지
+        - 자동 리프레시 지원: 데이터 소스 변경 시 자동 갱신
+        - Room, Retrofit 연동: 로컬 + 네트워크 데이터 흐름을 통합해서 관리 가능
+        - 생명주기 대응: LiveData/Flow와 연동해 안전하게 동작함
+
+    - 예제
+        ```java
+        // 페이저 생성
+        val pager = Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = { MyPagingSource() }
+        ).flow
+        
+        // PagingDataAdapter와 연결하여 RecyclerView에 연결
+        lifecycleScope.launch {
+            viewModel.pagingFlow.collectLatest {
+                adapter.submitData(it)
+            }
+        }
+        ```
+
 - Android에서 Dependency Injection을 구현하는 방법
+    - 개념
+        - 객체가 의존하는 개첵를 외부에서 주입하는 설계 패턴
+        - 클래스 간 결합도를 줄이고 테스트/유지보수를 쉽게 하는 효과
+
+    - 구현 방식
+        - 수동 주입: 생성자 또는 Setter 통해 직접 주입
+        - Service Locator: 컨테이너에서 의존 객체를 찾아 사용
+        - Dagger / Hilt: 컴파일 타임 의존성 주입 (정적 DI)
+        - Koin / Kodein: 런타임 의존성 주입 (동적 DI)
+
+    - DI를 사용하는 이유
+        - 유연성 향상: 클래스 내부에서 객체를 생성하지 않음
+        - 테스트 용이: Mock 객체 주입이 쉬움
+        - 유지보수 쉬움: 컴포넌트 간 결합도 낮아짐
+        - 구조적 설계 유도: 계층화된 아키텍쳐 구현에 필수
+
 - Android에서 Hilt와 Dagger의 차이점
+    - 개요
+        - Hilt는 Dagger를 쉽게 쓰게 도와주는 안드로이드 특화 자동화 DI 프레임워크
+
+    - 설치 복잡도
+        - Hilt: 간단(애노테이션 기반)
+        - Dagger2: 복잡 (Component, Module 수동 생성 필요)
+    - 기본 DI 구조
+        - Hilt: 자동 구성 (기본 AppComponent 제공)
+        - Dagger2: 수동 구성 (Component 직접 정의)
+    - Android 지원 (생명주기)
+        - Hilt: Android 의존성 생명주기 자동 대응
+        - Dagger2: 수동으로 @Component.Builder 등 관리
+    - ViewModel DI
+        - Hilt: @HiltViewModel로 자동 지원
+        - Dagger2: 별도 ViewModelFactory 작성 필요
+    - 테스트 지원
+        - Hilt: 테스트 환경 자동 분리 가능
+        - Dagger2: 직접 testComponent 만들어야 함
+    - 커스터마이징
+        - Hilt: 제약 (자동 구성 제한 있음)
+        - Dagger2: 자유도 높음 (고급 사용자 용)
+
 - Android에서 WorkManager와 JobScheduler의 차이점
 - Android에서 CameraX와 기존 Camera API의 차이점
 - Android에서 Jetpack Security 라이브러리를 사용하는 이유
@@ -1653,7 +1719,7 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
 - Android에서 ViewBinding과 DataBinding의 차이점
 - Android에서 Parcelable과 Serializable의 차이점
-- Compound Component 패턴고ㅏ Slot API 설명
+- Compound Component 패턴과 Slot API 설명
 - Media Player 자체 내부
     - 구조 개요
         - MediaPlayer는 안드로이드 OS에서 제공하는 Native 기반의 기본 미디어 플레이어
@@ -1974,52 +2040,425 @@ Organize concepts, features, types and Pros and Cons
 - ListView와 RecylerView에 대해서 설명해보세요
 - ListView는 재활용이 불가능할까요?
 - Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
-- Android의 ProGuard와 R8의 차이점은 무엇인가
-- Android의 ANR(Application Not Responding) 원인과 해결 방법은 무엇인가
-- Android의 Jetpack Navigation Component 사용 경험을 설명해주세요.
+- Android의 ProGuard와 R8의 차이점
+    - 개요
+        - ProGuard는 코드 축소/난독화 도구
+        - R8은 이를 대체하는 차세대 통합 컴파일러 + 최적화 도구
+
+    - 공통 기능
+        - 코드 난독화: 클래스/메서드/변수명을 의미 없는 이름으로 치환
+        - 코드 제거: 사용되지 않는 코드, 리소스를 빌드 시 제거 (Dead Code Elimination)
+        - APK 최적화: 최종 빌드 크기 감소
+
+    - ProGuard, R8(Android Studio 3.4+ 기본)
+        - 개발주체
+            - ProGuard: 외부(Guardsquare)
+            - R8: Google (Android Gradle Plugin 내장)
+        - 작동 시점
+            - ProGuard: 컴파일 이후 별도 최적화 단계
+            - R8: 컴파일과 동시에 최적화 (D8과 통합)
+        - 성능
+            - ProGuard: 상대적으로 느림
+            - R8: 더 빠르고 강력한 최적화 수행
+        - 리소스 제거
+            - ProGuard: 별도 도구 필요
+            - R8: 내장 (이미지, 문자열 등 사용 안하는 리소스 제거)
+        - 규칙 파일
+            - ProGuard: proguard-rules.pro
+            - R8: 동일 파일 사용 (호환성 유지)
+        - 난독화 수준
+            - ProGuard: 기본 수준
+            - R8: 더 정교하고 aggressive
+
+    - 결론 및 정리
+        - ProGuard는 예전 방식, 지금은 R8이 기본
+        - R8은 D8(Dex Compiler)과 통합되어 성능 + 빌드 속도 + 최적화 모두 개선
+        - proguard-rules.pro는 R8에서도 그대로 사용 가능
+
+- Android의 ANR(Application Not Responding) 원인과 해결 방법
+    - 정의
+        - 앱이 UI 스레드(MainThread)에서 일정 시간 이상 응답하지 않으면 시스템이 강제로 표시하는 경고 다이얼로그
+
+    - ANR 발생 기준 (조건 / 시간제한)
+        - Input 이벤트 처리 지연: 5초 이상
+        - BroadcastReceiver 실행 지연: 10초 이상
+        - Service 실행 지연: 20초 이상(포그라운드) / 200초 이상(백그라운드, 3분 20초)
+
+    - 발생 원인
+        - MainThread에서 과도한 연산 수행
+            - 예: 파일 다운로드, JSON 파싱, DB 쿼리 등
+        - 무한 루프 또는 블로킹 함수 호출
+            - while(true) {} or Thread.sleep()
+        - 리소스 대기 중 블로킹	
+            - synchronized 락 대기, deadlock
+        - 느린 네트워크 요청
+            - Retrofit, HttpURLConnection 등 동기 방식 호출
+        - 브로드캐스트 처리 지연
+            - BroadcastReceiver에서 무거운 작업 수행
+
+    - 해결 방법
+        - 메인 스레드에서 무거운 작업 제거	
+            - Dispatchers.IO, AsyncTask(구), Coroutine, Executor 등 사용
+        - 네트워크, DB, I/O 작업은 백그라운드로 변경
+            - 비동기 처리 구조로 전환
+        - StrictMode 활용
+            - UI 스레드에서 잘못된 동기 호출 감지
+        - Coroutine, LiveData, Flow, RxJava로 구조화
+            - 반응형/비동기 구조 권장
+        - 로그 분석	
+            - logcat, traces.txt, bugreport 등으로 정확한 원인 파악
+
+- Android의 Jetpack Navigation Component 사용 경험
+    - 개요
+        - Android Jetpack의 하나로, Fragment 간 이동, BackStack 관리, DeepLink 처리를 간단하고 안정적으로 구현할 수 있는 라이브러리
+
+    - 사용 목적 및 장점
+        - Navigation Graph 사용
+            - 화면 흐름을 XML로 시각화 (디자인툴 + 코드 일관화)
+        - Safe Args 지원
+            - Fragment 간 인자 전달을 타입 안정성 있게 처리
+        - BackStack 자동 관리
+            - popBackStack() 등을 직접 쓰지 않아도 자동 처리
+        - DeepLink 쉽게 처리
+            - navArgs, <deepLink>로 URI 매핑
+        - BottomNavigation, Drawer 통합
+            - 탭 기반 화면 전환도 쉽게 구성 가능
+
+    - 실무 활용
+        - 다중 그래프 분리
+            - 로그인, 메인, 설정 등 분리하면 유지보수에 유리
+        - navigation() vs navigateUp()
+            - 백버튼 커스터마이징 시 구분 필요
+        - SafeArgs plugin 필수	
+            - 타입 안정성 높은 인자 전달
+        - 복잡한 인자 전달 → ViewModel 공유로 대체
+            - 너무 큰 데이터는 navArgs 대신 ViewModel/DI 사용
+
 - AOSP의 SELinux 정책과 보안 메커니즘에 대해 설명해주세요.
-- AIDL에 대해 말씀해주세요
-- HIDL에 대해 설명
-- AOSP의 HAL(Hardware Abstraction Layer)에 대해 설명해주세요.
-- AOSP의 시스템 서비스(SystemService) 추가 경험이 있다면 설명해주세요.
+- AIDL 개념
+    - 개요
+        - Android Interface Definition Language, AIDL
+        - Android에서 다른 앱(또는 다른 프로세스)의 서비스와 통신하기 위한 인터페이스를 정의하는 언어
+
+    - AIDL 필요성
+        - 안드로이드는 앱마다 별도의 샌드박스안에서 동작함 > 서로 프로세스가 다름
+        - 이 상황에서 메서드 호출 또는 데이터 교환을 하려면 IPC(Inter-Process Communication)가 필요
+
+    - AIDL 구조
+        - .aidl 파일 - 인터페이스 정의(func1, func2() 등)
+        - AIDL 컴파일러가 자동 생성한 Stub 클래스
+            ```java
+            class MyService : Service() {
+                // 서버 서비스에서 Stub을 구현하고
+                private val binder = object : IMyService.Stub() {
+                    override fun add(x: Int, y: Int): Int = x + y
+                }
+
+                override fun onBind(intent: Intent?): IBinder = binder
+            }
+            ```
+        - Service에서 Stub을 구현하여 onBind()에서 반환
+        - Client 앱에서 bindService() > 서비스 연결
+            ```java
+            bindService(
+                Intent("com.example.aidl.MY_SERVICE").setPackage("com.example.server"),
+                connection,
+                Context.BIND_AUTO_CREATE
+            )
+
+            private var myService: IMyService? = null
+
+            val connection = object : ServiceConnection {
+                override fun onServiceConnected(name: ComponentName, service: IBinder) {
+                    // 클라이언트에서 asInterface()로 바인딩
+                    myService = IMyService.Stub.asInterface(service)
+                    val result = myService?.add(3, 4)
+                    Log.d("AIDL", "결과: $result")
+                }
+
+                override fun onServiceDisconnected(name: ComponentName) {
+                    myService = null
+                }
+            }
+            ```
+    - 데이터 전달을 위한 규칙
+        - 기본타입 가능
+        - String, CharSequence 가능
+        - 커스텀 객체 (MyObject): Parcelable로 정의, .aidl 생성 필요
+        - List/Map 가능
+
+    - AIDL 사용 시 정보
+        - AIDL은 비동기식 아님: 메서드 호출 블로킹 가능성 > 별도 스레드에서 호출 권장
+        - 앱 간 통신은 보안 중요: 권한 확인 필수 (checkPermission 등)
+        - 버전 관리 어려움: AIDL 인터페이스 변경 시 호환성 관리 필요
+            - 따라서 API 개발 완료 시점에 범용 API를 하나 더 두는 것도 방법
+            - 추가 요구사항 발생 시 Bundle 타입으로 서버, 클라이언트 간 약속된 Key, Value만 설정해주면 통신 가능
+        - Parcelable 구현 필수: 커스텀 객체는 반드시 Parcelable로 처리 필수
+
+    - 사용 시점
+        - 다른 앱 또는 다른 프로세스와의 통신
+        - 하드웨어 제어, 시스템 API 구현 등
+
+- HIDL 개념
+    - 개요
+        - Hardware Interface Definition Language, HIDL
+        - Android에서 HAL(Hardware Abstraction Layer)과 Android 프레임워크 사이의 통신을 정의하는 AIDL의 하드웨어 버전
+        - HW <> HAL <> HIDL <> Framework
+
+    - 필요성
+        - 안드로이드는 하드웨어와 OS 사이에 HAL이라는 추상 계층을 둠
+        - 카메라, 오디오, 센서등 디바이스 의존적인 기능은 HAL을 통해 접근
+        - 과거, C/C++로 HAL을 구현하면서 프레임워크와 직접 연결했지만, 버전관리, 안정성, 모듈화 문제 증가
+            - 안드로이드 8.0(Oreo)부터 도입된 것이 HIDL
+
+    - HIDL 역할
+        - 안정적인 인터페이스 정의
+            - HAL과 Android 시스템 간 통신을 정해진 방식으로 제한
+        - HAL 모듈의 독립성 확보
+            - HAL과 시스템 프레임워크가 별도 프로세스로 나뉘어 통신
+        - VINTF(버전 독립 프레임워크) 지원
+            - 버전 간 호환성 보장, 제조사가 시스템 업데이트와 독립적으로 HAL 제공 가능
+        - AIDL 기반 고수준 프레임워크와 분리
+            - 시스템 안정성 증가
+
+    - HIDL 구조와 구성 요소
+        - HIDL 인터페이스는 .hal 파일로 정의됨
+            ```java
+            package android.hardware.camera.provider@2.4;
+
+            interface ICameraProvider {
+                getCameraIdList() generates (vec<string> cameraDeviceNames);
+            }
+            ```
+        
+    - HIDL 기반 HAL 통신 흐름
+        - Stub는 HAL 구현체와 통신
+        - System은 HIDL 인터페이스만 바라보고 호출
+        ```scss
+        [ App Framework ]
+            ↓
+        [ Camera Service (Java/C++) ]
+            ↓ (Binder IPC)
+        [ HIDL Stub (C++) ]
+            ↓
+        [ HAL 구현체 (Vendor) ]
+            ↓
+        [ 하드웨어 드라이버 ]
+        ```
+        
+    - HIDL 도입 효과 (Treble 기반)
+        - 안드로이드 8 이후부터 시스템(OS)과 벤더(HAL) 영역을 분리
+        - 하드웨어 추상화의 표준으로 도입 (Treble 아키텍쳐)
+            - 시스템 업데이트는 구글이 책임
+            - 벤더는 HAL만 업데이트 (HAL 구현은 C++로)
+            - 제조사는 더 빠르게 업데이트 대응 가능 (프로젝트 트레블 목적)
+
+    - 안드로이드 11+ 이후: HIDL > AIDL 전환 중
+        - 안드로이드 11부터는 AIDL도 native 지원을 강화하면서,
+        - 일부 HIDL 인터페이스를 AIDL로 대체하는 방향으로 전환되고 있음
+        - 예: android.hardware.health
+
+- Android Treble
+    - 개요
+        - 안드로이드의 프로젝트 Treble은 안드로이드 플랫폼 아키텍쳐를 완전히 바꿔버린 대형 프로젝트
+        - OS 업데이트를 빠르게 만들기 위해, 구글이 안드로이드 8.0(Oreo)부터 도입한 핵심 기술
+        - 안드로이드 시스템(OS)과 하드웨어 제조사(Vendor) 구현(HAL 등)을 명확히 분리해서, OS 업데이트 속도를 빠르게 만들기 위한 아키텍쳐 재설계 프로젝트
+
+    - 도입 배경
+        - 기존 안드로이드는 하드웨어와 OS가 강하게 결합
+        - 시스템 업데이트 시 HAL도 같이 수정해야 하는 문제 발생
+            - 이로 인해 제조사가 업데이트에 느리게 대응 또는 아예 안하는 경우 발생
+            ```scss
+            [ Android Framework ]
+                ↕ tightly coupled
+            [ HAL + Vendor Driver ]
+            ```
+
+    - Treble 구조
+        - 안드로이드 프레임워크와 Vendor 구현사이에 명확한 인터페이스(VINTF) 삽입
+        - 시스템 파티션과 벤더 파티션 완전 분리
+        - 구글이 시스템을 업데이트해도 Vendor 구현은 그대로 유지 가능
+            ```scss
+            [ Android Framework (System partition) ]
+                    ↓   ↑
+                VINTF Interface (AIDL/HIDL)
+                    ↓   ↑
+            [ HAL / Vendor Implementation (Vendor partition) ]
+            ```
+
+    - 핵심 개념 재정리
+        - VINTF (Vendor Interface)
+            - Framework과 Vendor 간 호환을 위한 계약(Interface)
+        - HIDL / AIDL
+            - Framework ↔ HAL 간 IPC를 위한 인터페이스 정의 언어
+        - System Partition
+            - 구글/OS 업데이트 대상
+        - Vendor Partition
+            - 제조사 드라이버 및 HAL 구현 담당
+
+    - Treble 도입의 효과
+        - 시스템 업데이트 시 HAL도 수정 필요
+            - -> 시스템 업데이트만 해도 HAL 그대로 사용 가능
+        - 제조사별 맞춤 커널/드라이버로 인해 업데이트 지연
+            - -> 커널과 드라이버는 고정, 시스템은 빠르게 교체 가능
+        - AOSP 업데이트 후 실제 단말 적용까지 수개월~년 소요
+            - -> 이론상 수주 내에 업데이트 가능
+
+    - Treble 이후 변화
+        - OS 모듈화
+            - 시스템이 여러 개의 모듈로 나뉘어 OTA로 개별 업데이트 가능
+        - 시스템 이미지 재사용
+            - 하나의 시스템 이미지로 다양한 하드웨어에 이식 가능
+        - 벤더 테스트 요구사항 도입 (VTS)
+            - HAL이 시스템과 호환되는지 검증 자동화
+        - GSI (Generic System Image)
+            - 어떤 디바이스에도 올라가는 표준 시스템 이미지 제공
+        - (GSI, VINTF, VTS 등 관련 도구/표준과 함께 동작)
+
+    - 실제 시스템 업데이트 플로우 (Treble 적용)
+        - (1) 구글이 AOSP 최신 버전 릴리즈
+        - (2) 디바이스 제조사는 Vendor HAL은 그대로 유지
+        - (3) 새 AOSP를 디바이스에 적용 > VINTF 체크 > 호환되면 바로 업데이트
+
+- AOSP의 HAL(Hardware Abstraction Layer)
+    - 개요
+        - 안드로이드 프레임워크와 하드웨어 드라이버 사이를 연결해주는 중간 계층
+        - 안드로이드 시스템이 하드웨어와 직접 맞닿지 않고도, 하드웨어 기능을 사용할 수 있게 해주는 중간 계층
+        - 안드로이드 시스템이 하드웨어를 추상화하여 일관되게 접근할 수 있도록 해줌
+
+    - HAL의 위치
+        - 안드로이드 아키텍쳐 계층에서 HAL 구조
+            - App → Framework → HAL → Driver 순으로 하드웨어 접근
+            - HAL은 프레임워크가 하드웨어를 직접 몰라도 동작할 수 있게 함
+            ```css
+            [ Android App (Java/Kotlin) ]
+                    ↓
+            [ Android Framework (Java) ]
+                    ↓
+            [ JNI / Native C++ ]
+                    ↓
+            [ HAL (C/C++) ]
+                    ↓
+            [ 하드웨어 드라이버 / 커널 ]
+            ```
+    
+    - HAL 사용 예시
+        - 예: 카메라 기능
+            - 앱에서 CameraManager 호출
+            - 프레임워크에서 CameraService 동작
+            - HAL 레이어의 camera_device 인터페이스 호출
+            - 드라이버가 실제 카메라 하드웨어 제어
+
+    - HAL 구성 방식 (Pre-Treble vs Treble+)
+        - Android 7 이하 (Pre-Treble)
+            - HAL은 .so 형태의 Shared Library
+            - 프레임워크와 동일 프로세스에서 호출 → 강결합
+
+        - Android 8 (Treble 도입 이후)
+            - HAL은 Binder 기반 IPC 구조
+            - 프레임워크와 다른 프로세스에서 동작
+            - HIDL (→ Android 11 이후 AIDL로 점진 전환 중)
+
+    - HAL 구현 프로세스 요약
+        - .hal 또는 .aidl 인터페이스 정의
+        - hidl-gen 또는 aidl-cpp로 Stub 코드 생성
+        - 제조사가 실제 하드웨어 동작을 구현 (C/C++)
+        - Android Framework는 이 인터페이스만 호출
+
+- AOSP의 시스템 서비스(SystemService)
+    - 개요
+        - System Service는 AndroidOS의 중추 역할을 하는 핵심 시스템 컴포넌트
+        - 안드로이드의 자바 프레임워크 레이어에서 OS기능을 제공하는 핵심 서비스로, 앱과 시스템이 하드웨어/리소스를 안전하고 일관되게 사용할 수 있도록 도와주는 역할
+
+    - 안드로이드 아키텍쳐에서 SystemService 위치
+        - 앱은 Context.getSystemService() 또는 Manager API를 통해 시스템 서비스를 호출
+        - SystemService는 Java 기반의 OS 기능을 제공하며, 필요시 JNI로 Native 또는 HAL에 접근
+            ```scss
+            [ 앱 (Java/Kotlin) ]
+                ↓ Binder
+            [ SystemService (Java) ] ← Android Framework
+                ↓ JNI
+            [ Native Services (C++) ]
+                ↓ HAL → 커널
+            [ 하드웨어 ]
+            ```
+
+    - 서비스 생성 시점
+        - SystemService들은 Android 부팅 시 Zygote → SystemServer 프로세스가 실행되면서 생성
+        - 경로
+            - frameworks/base/services/java/com/android/server/SystemServer.java
+        - 주요 서비스 등록 부분
+            - 즉, SystemServer에서 SystemServiceManager.startService()로 시작
+            ```java
+            private void startOtherServices() {
+                traceBeginAndSlog("StartActivityManager");
+                ActivityManagerService am = mSystemServiceManager.startService(
+                    ActivityManagerService.Lifecycle.class).getService();
+                
+                traceBeginAndSlog("StartPowerManager");
+                mSystemServiceManager.startService(PowerManagerService.class);
+                
+                // ...
+            }
+            ```
+
+    - 앱에서 접근하는 방식
+        - 앱은 보통 Context.getSystemService()나 Manager 클래스를 통해 접근
+        - 아래에서 실제로는 WifiManager → IWIFIService(AIDL) → WifiServiceImpl 로 IPC 호출
+            ```java
+            val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val enabled = wifiManager.isWifiEnabled
+            ```
+
+    - Binder 기반 IPC 구조
+        - SystemService는 대부분 Binder 기반 IPC 서버로 동작
+            - (1) 앱에서 Manager 클래스를 통해 Binder 호출
+            - (2) Binder Stub > Service Impl로 연결
+            - (3) Native 또는 HAL 레벨로 작업 요청
+            ```java
+            // 구조 흐름 예시
+            LocationManager.kt
+                ↓
+            ILocationManager.aidl
+                ↓
+            LocationManagerService.java
+                ↓
+            GnssHal.cpp or native lib
+            ```
+
 - Android의 RenderThread와 UI Thread의 상호작용
-    - RenderThread와 UI Thread는 Android의 화면 렌더링 파이프라인에서 중요한 역할을 담당하는 두 축이야. 이 둘의 상호작용을 이해하면 앱의 퍼포먼스 최적화, 특히 **jank(버벅임)**이나 프레임 드랍 문제를 분석하는 데 큰 도움이 돼.
+    - 개요
+        - RenderThread와 UI Thread는 Android의 화면 렌더링 파이프라인에서 중요한 역할을 담당하는 두 축
+        - 이 둘의 상호작용을 이해하면 앱의 퍼포먼스 최적화, 특히 jank(버벅임)이나 프레임 드랍 문제를 분석하는 데 도움이 될 것으로 생각
 
-⸻
+    - UI Thread
+        - Android 앱의 메인 스레드(Main Thread).
+        - 모든 UI 작업(뷰 그리기, 터치 이벤트 처리, 레이아웃 측정, 애니메이션 제어 등)이 UI 스레드에서 이루어짐
+        - 예: Activity, View, Handler, setText(), invalidate() 등.
 
-1. UI Thread란?
-	•	Android 앱의 메인 스레드(Main Thread).
-	•	모든 **UI 작업(뷰 그리기, 터치 이벤트 처리, 레이아웃 측정, 애니메이션 제어 등)**이 여기서 이루어져.
-	•	예: Activity, View, Handler, setText(), invalidate() 등.
+    - RenderThread
+        - Android 5.0 (API 21) Lollipop부터 도입됨.
+        - UI Thread의 작업과 별개로, 실제 OpenGL ES 기반의 렌더링 작업을 수행하는 백그라운드 스레드.
+        - Choreographer와 연결되어 VSync 타이밍에 맞춰 동작.
 
-⸻
+    - 상호작용 흐름 요약 (프레임 단위로)
+        - (1) UI Thread
+            - View hierarchy의 측정(measure), 배치(layout), 그리기(draw) 를 실행함.
+            - 그 결과 DisplayList라는 렌더링 명령 리스트를 생성함.
+            - 이 DisplayList를 RenderThread로 넘김.
 
-2. RenderThread란?
-	•	Android 5.0 (API 21) Lollipop부터 도입됨.
-	•	UI Thread의 작업과 별개로, 실제 OpenGL ES 기반의 렌더링 작업을 수행하는 백그라운드 스레드.
-	•	Choreographer와 연결되어 VSync 타이밍에 맞춰 동작.
+        - (2) RenderThread
+            - UI Thread가 만든 DisplayList를 기반으로 실제 GPU에 렌더링 명령을 전송(OpenGL ES).
+            - 이때 SurfaceFlinger와 협업하여 디스플레이에 출력.
 
-⸻
+        - (3) VSync 신호 발생
+            - 약 16.6ms마다 발생 (60fps 기준).
+            - Choreographer가 이 신호를 받아서 UI Thread와 RenderThread에 프레임 준비를 지시함.
 
-3. 상호작용 흐름 요약 (프레임 단위로)
-	1.	UI Thread
-	•	View hierarchy의 측정(measure), 배치(layout), 그리기(draw) 를 실행함.
-	•	그 결과 DisplayList라는 렌더링 명령 리스트를 생성함.
-	•	이 DisplayList를 RenderThread로 넘김.
-	2.	RenderThread
-	•	UI Thread가 만든 DisplayList를 기반으로 실제 GPU에 렌더링 명령을 전송(OpenGL ES).
-	•	이때 SurfaceFlinger와 협업하여 디스플레이에 출력.
-	3.	VSync 신호 발생
-	•	약 16.6ms마다 발생 (60fps 기준).
-	•	Choreographer가 이 신호를 받아서 UI Thread와 RenderThread에 프레임 준비를 지시함.
-
-⸻
-
-4. 상호작용 시 주의사항
-	•	UI Thread가 오래 걸리면 → RenderThread가 DisplayList를 제때 못 받아 → 프레임 드랍 발생 (jank).
-	•	RenderThread는 비동기로 작동하므로 → UI Thread에서 블로킹 작업하면 → 다음 프레임이 늦어짐.
-	•	UI Thread에서 너무 많은 작업을 하면 → 애니메이션 끊김 발생.
-
+    - 상호작용 시 주의사항
+        - UI Thread가 오래 걸리면 → RenderThread가 DisplayList를 제때 못 받아 → 프레임 드랍 발생 (jank).
+        - RenderThread는 비동기로 작동하므로 → UI Thread에서 블로킹 작업하면 → 다음 프레임이 늦어짐.
+        - UI Thread에서 너무 많은 작업을 하면 → 애니메이션 끊김 발생.
 
 
 - Android의 WindowManager와 SurfaceFlinger의 역할은 무엇인가
@@ -2324,7 +2763,84 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 sealed class와 enum class의 차이점은?
 - Kotlin에서 companion object와 object의 차이점은?
 - Kotlin에서 open 키워드를 사용하는 이유는?
-- Kotlin에서 inline 함수의 장점과 단점은?
+- Kotlin에서 inline 함수의 장점과 단점
+    - 개요
+        - 코틀린의 인라인 함수는 성능 최적화와 람다 사용의 유연성을 위해 자주 사용하는 기능
+        - 인라인 함수는 함수 호출을 줄이고, 람다 인자를 컴파일 타임에 코드로 치환하여 성능을 높이는 기능
+
+    - 인라인 함수(inline function)
+        - 일반적으로 람다를 인자로 넘기면 익명 클래스가 생성되고 호출됨
+        - inline 키워드 사용 시, 함수와 람다 본문이 호출 지점에 직접 삽입됨
+        ```java
+        // 인라인 함수 정의 
+        inline fun runTwice(action: () -> Unit) {
+            action()
+            action()
+        }
+        // 인라인 함수 호출 (람다를 인자로 넘김)
+        runTwice { println("Hello") }
+
+        // 컴파일 시 실제 코드
+        println("Hello")
+        println("Hello")
+        ```
+
+    - 인라인 함수 장점
+        - 성능 향상(콜 제거)
+            - 함수 호출 자체가 사라져 호출 비용이 줄어듦 (특히 람다 함수에서 효과 큼)
+        - 익명 클래스 생성 안함
+            - 람다 인자를 넘겨도 object: FunctionN {}가 생성되지 않음 -> GC 부담 감소
+        - non local return 가능
+            - 람다 안에서 return을 쓰면 바깥 함수에서 바로 반환 가능
+            - 일반 람다에선 불가능한 동작이 인라인 함수 안에서는 허용
+            ```java
+            inline fun doSomething(action: () -> Unit) {
+                action()
+            }
+
+            fun test() {
+                doSomething {
+                    return // 가능: test()에서 바로 빠져나감
+                }
+            }
+            ```
+        - reified 타입 사용 가능
+            - 제네릭 타입을 런타임에도 사용할 수 있음 -> T::class.java 등 사용 가능
+            ```java
+            inline fun <reified T> isType(value: Any): Boolean {
+                return value is T
+            }
+
+            isType<String>("hello") // true
+            ```
+
+    - 인라인 함수의 단점
+        - 코드 크기 증가 (Code Bloat)
+            - 호출 위치마다 본문이 복붙됨 → 큰 함수일수록 빌드 크기 커짐
+        - 디버깅 어려움	
+            - 중간에 함수가 사라져서 브레이크포인트 설정이 어렵거나 혼란스러움
+        - reified는 inline에서만 가능
+            - 반대로 말하면, reified 제네릭은 inline 함수에서만 사용 가능 (제약)
+        - 재귀 호출 불가
+            - inline fun factorial(...) 같이 자기 자신을 호출하는 함수는 inline 불가
+        - 람다 캡처 시 주의 필요
+            - 람다 안에서 캡처한 외부 변수의 처리 방식이 달라질 수 있음
+    
+    - 인라인 사용 시점 정리
+        - 람다를 자주 사용하는 함수 (map, filter, withContext 등)
+            - inline 권장
+        - 고차 함수가 빈번하게 호출되는 Utility 함수
+            - inline 고려
+        - 큰 본문, 재귀 구조, 중복 호출이 많은 함수
+            - inline 지양
+        - 제네릭 타입의 reified가 필요한 경우
+            - 반드시 inline 필요
+        - 디버깅 중인 복잡한 로직
+            - 디버깅 불편 → 일반 함수 추천
+
+    - 참고
+        - 고차 함수(Higher order function): 함수를 인자로 전달받거나 함수를 결과로 반환하는 함수
+
 - Kotlin에서 reified 키워드를 사용하는 이유
     - 개요
         - 코틀린의 인라인 함수와 제네릭을 함께 사용할 때, 타입 정보를 런타임까지 유지하기 위해 사용하는 키워드
@@ -2351,17 +2867,172 @@ Organize concepts, features, types and Pros and Cons
             return this.fromJson(json, T::class.java)
         }
 
-        //reified 없는 경우 대안책
+        // reified 없는 경우 대안책
         // Class<T>를 직접 넘겨줘야 함
         fun <T> fromJson(json: String, clazz: Class<T>): T {
             return Gson().fromJson(json, clazz)
         }
         ```
 
-- Kotlin에서 extension function을 활용하는 방법은?
-- Kotlin에서 operator overloading을 구현하는 방법은?
-- Kotlin에서 delegation을 활용하는 방법은?
-- Kotlin에서 typealias를 사용하는 이유는?
+- Kotlin에서 extension function을 활용하는 방법
+    - 개요
+        - 확장 함수는 기존 클래스의 소스를 수정하지 않고, 외부에서 마치 클래스의 멤버 함수처럼 새 기능을 추가하는 방법
+
+    - 기본 문법 예제
+        - String 클래스에 capitalizeFirst()를 마치 내장된 함수처럼 호출 가능
+        - 실제로는 정적 메서드로 컴파일되지만 문법적으로는 확장처럼 보임
+        ```java
+        fun String.capitalizeFirst(): String {
+            if (this.isEmpty()) return this
+            return this[0].uppercaseChar() + this.substring(1)
+        }
+
+        val name = "aiden"
+        val capitalized = name.capitalizeFirst()  // "Aiden"
+        ```
+
+    - 활용 예시
+        - 컬렉션 확장
+            ```java
+            fun List<Int>.sumOfSquares(): Int = this.sumOf { it * it }
+
+            val result = listOf(1, 2, 3).sumOfSquares() // 14
+            ```
+        - Context 관련 확장
+            ```java
+            fun Context.toast(msg: String) {
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
+
+            // 사용
+            context.toast("Hello!")
+            ```
+        - View 관련 확장
+            ```java
+            fun View.visible() { this.visibility = View.VISIBLE }
+            fun View.gone() { this.visibility = View.GONE }
+
+            // 사용
+            button.visible()
+            ```
+    - 확장 함수, 멤버 함수 충돌 발생의 경우
+        - 멤버 함수 우선순위 높음
+        - 확장 함수는 정적 바인딩, 멤버 함수는 동적 디스패치
+
+- Kotlin에서 operator overloading을 구현하는 방법
+    - 개요
+        - Kotlin은 특정 키워드 operator 사용하여 연산자(+,-,[],+=,==등)를 사용자 정의 타입에서 오버로딩할 수 있게 해줌
+
+    - 기본 문법
+        ```java
+        data class Point(val x: Int, val y: Int) {
+            // + 연산자는 내부적으로 plus() 메서드를 호출
+            operator fun plus(other: Point): Point {
+                return Point(this.x + other.x, this.y + other.y)
+            }
+        }
+
+        val p1 = Point(1, 2)
+        val p2 = Point(3, 4)
+        val p3 = p1 + p2  // Point(4, 6)
+        ```
+
+    - 주요 operators
+        - plus, minus, times, div, rem(%), get, set(a[i] = x), plusAssign (+=), equals (==), rangeTo (1..5), contains(x in list), invoke(foo())
+
+    - 안드로이드 실무 예시
+        - Dp + Dp 또는 Offset + Offset 연산 등 UI 컴포넌트 연산 지원
+        - Compose에서 Modifier.then() / += 스타일로 사용
+        - DSL 구조 만들 때 invoke 오버로드
+
+- Kotlin에서 delegation을 활용하는 방법
+    - 정의
+        - 클래스의 일부 기능을 다른 객체에 맡기는 설계 패턴
+        - 코틀린에서는 언어 차원에서 지원 (by 키워드)
+
+    - 대표적 두가지 위임 방식
+        - Interface Delegation(구현 위임)
+            - 다른 클래스에 인터페이스 구현을 위임 (by)
+        - Property Delegation(속성 위임)
+            - get() / set() 동작을 커스텀 위임자로 맡김 (by lazy, by Delegates.observable 등)
+
+    - Interface Delegation
+        ```java
+        // 인터페이스 정의 코드
+        interface Printer {
+            fun print()
+        }
+
+        class RealPrinter : Printer {
+            override fun print() = println("진짜 프린터 출력")
+        }
+
+        // Delegation
+        // PrinterProxy는 Printer 인터페이스를 직접 구현하지 않고도 위임으로 기능 제공
+        class PrinterProxy(private val delegate: Printer) : Printer by delegate
+
+        // 사용하는 부분 코드
+        val proxy = PrinterProxy(RealPrinter())
+        proxy.print()  // RealPrinter의 print() 호출
+        ```
+
+    - Property Delegation
+        - by lazy
+            - 처음 접근 시에만 계산 중... 출력 (지연 초기화)
+            - 이후부터는 캐싱됨
+            ```java
+            val heavyValue: String by lazy {
+                println("계산 중...")
+                "무거운 값"
+            }
+            ```
+
+        - Delegates.observable
+            - 값이 변경될 때마다 자동 콜백 발생 (LiveData 와 유사)
+            ```java
+            import kotlin.properties.Delegates
+
+            var name: String by Delegates.observable("초기값") { prop, old, newv ->
+                println("[$prop.name] $old → $newv")
+            }
+            ```
+
+        - Custom Delegate 직접 구현
+            ```java
+            class MyDelegate {
+                private var value: String = ""
+                
+                operator fun getValue(thisRef: Any?, property: KProperty<*>) = value
+                operator fun setValue(thisRef: Any?, property: KProperty<*>, newValue: String) {
+                    println("setValue 호출됨: ${property.name} = $newValue")
+                    value = newValue
+                }
+            }
+
+            var customProp: String by MyDelegate()
+            ```
+
+- Kotlin에서 typealias를 사용하는 이유
+    - 정의
+        - 기존 타입(클래스, 함수, 제네릭 등)에 새로운 이름(별칭)을 부여하는 기능
+        ```java
+        typealias ClickHandler = (View) -> Unit
+        ```
+
+    - 사용 이유
+        - 가독성 향상: 복잡한 타입 선언을 읽기 쉽게 만듦
+        - 재사용성 향상: 동일한 함수 타입을 여러 곳에서 반복 사용 가능
+        - 간접 참조로 유연성: 나중에 내부 타입을 바꾸더라도 외부 코드 수정 필요 없음
+        - 플랫폼 타입 추상화: Android, iOS에서 공통 타입처럼 사용 가능 (멀티플랫폼 대응)
+
+    - 실무 사용 예
+        - Retrofit API Response	
+            - typealias ApiResult<T> = Result<Response<T>>
+        - RecyclerView Click	
+            - typealias OnItemClickListener = (Int) -> Unit
+        - ViewModel StateFlow	
+            - typealias UiState = StateFlow<SomeUiModel>
+
 - Kotlin에서 Any, Unit, Nothing 타입
     - Any
         - 모든 타입의 부모, 모든 클래스의 슈퍼 타입
