@@ -1693,7 +1693,60 @@ Organize concepts, features, types and Pros and Cons
         - Dagger2: 자유도 높음 (고급 사용자 용)
 
 - Android에서 WorkManager와 JobScheduler의 차이점
+    - 개요
+        - 둘 다 백그라운드에서 일정 조건이 충족될 때 작업을 수행하기 위한 프레임워크
+        - 사용 목적, 지원 범위, 신뢰성 영역에서의 차이점
+
+    - WorkManager
+        - API 14이상 지원 (내부적으로 fallback)
+        - Jetpack 라이브러리, AndroidX 라이브러리, 최신 앱 적합
+        - Doze Mode, App Standby, 백그라운드 제한에서도 동작 보장
+        - 자동 fallback: API 23이상은 JobScheduler, 이하에서는 AlarmManager + BroadcastReceiver 자동 사용
+        - 반복 작업 지원은 PeriodicWorkRequest
+        - 체이닝 기능 존재: 작업을 순서대로 연결 가능 (WorkManager.beginWith(...))
+        - Data 객체로 입출력 데이터 교환 / 전달
+        - 앱 재부팅후에도 유지: setPersisted(true) 가능 (단, 기본은 false)
+        - 테스트 쉬움 (Worker 클래스 단위 테스트 가능)
+        - 재부팅 이후에도 가능 (작업 보존)
+
+    - JobScheduler
+        - 안드로이드 기본 내장 스케쥴러 (Android 5.0 (API 21) 이상에서 사용 가능)
+        - 네트워크, 충전 중, 유휴 시간 등 조건 설정 (조건 기반 실행)
+        - 시스템 제어 기반 (시스템 리소스 최적화를 위한 작업 스케쥴링)
+        - 반복 작업: setPeriodic()
+        - API 21 이상만 지원, 체이닝 안됨, 기능 제한적
+            - 체이닝 / 병렬처리는 지원하지 않고 직접 구현 필요
+        - 백그라운드 제약 회피는 불가능
+        - 시스템 통합돼 있어 안정성 높음
+        - 작업 보존 가능
+        - Legacy Code 유지 시에나 커널 레벨 제어가 필요한 경우에만 고려
+
 - Android에서 CameraX와 기존 Camera API의 차이점
+    - 개요
+        - 모두 안드로이드 기기의 카메라 기능 활용하는 API
+    
+    - 코드 예시
+        - CameraX
+            ```java
+            val cameraProvider = context.getCameraProvider()
+            val preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(previewView.surfaceProvider)
+            }
+            val imageCapture = ImageCapture.Builder().build()
+
+            cameraProvider.bindToLifecycle(this, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageCapture)
+            ```
+        - Camera2
+            ```java
+            val cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+            cameraManager.openCamera(cameraId, cameraCallback, handler)
+            // 이후 세션 구성, request 설정, surface 연결 등 복잡한 처리 필요
+            ```
+
+    - 전체 요약
+        - 라이프사이클 자동 관리, UseCase 방식, 최신 프로젝트 > CameraX
+        - 고급 설정이나 특정 기능 필요할 때 > Camera2 API
+
 - Android에서 Jetpack Security 라이브러리를 사용하는 이유
 - Android에서 MVVM 패턴을 적용하는 방법
 - Android에서 Jetpack Navigation Component를 사용하는 이유
@@ -1718,7 +1771,68 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 ConstraintLayout과 RelativeLayout의 차이점
 - Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
 - Android에서 ViewBinding과 DataBinding의 차이점
+    - 개요
+        - 두 바인딩 타입 모두 XML 레이아웃과 코틀린/자바 코드 간의 연결 즉, 바인딩을 쉽게 해주는 기능
+        - Null safe한 뷰 참조 (findViewById()없이 타입 안전하게 뷰 접근)
+        - 뷰 아이디 자동 생성 (XML의 아이디가 자동으로 클래스에 생성됨)
+        - XML > 코드 연결 (레이아웃과 액티비티/프래그먼트 연결 가능)
+
+    - 뷰바인딩 (ViewBinding)
+        - 뷰 참조 특화 (데이터 표현 목적 아님)
+        - 타입 안전, 널 세이프
+        - 양방향 바인딩 불가 (@={}문법 불가능), 즉 XML에서 데이터 참조 불가능
+        - Observable/LiveData 연동 안됨, 직접 observe() 필요
+        - 데이터바인딩보다 가볍고 빠름 (빌드 속도 빠름)
+        - 코드 생성 위해서는 binding = ActivityMainBinding.inflate(layoutInflater) 등 방식으로 명시적 호출 필요 
+            ```java
+            val binding = ActivityMainBinding.inflate(layoutInflater)
+            binding.textView.text = "Hello ViewBinding"
+            ```
+
+    - 데이터바인딩 (DataBinding)
+        - LiveData, Observable 등과 자동 바인딩 가능 즉, XML 에서 데이터 참조 가능
+        - 양방향 바인딩 지원, @={user.name} 표현 가능 즉, XML 에서 데이터 참조 가능
+        - 뷰모델 연계 (MVVM)
+        - annotation 프로세싱으로 무거움, 빌드 속도 상대적으로 느림
+        - 잘못된 바인딩 식은 빌드 시 체크 어려움 (실수 발생 시 런타임 에러 가능성 존재)
+            ```java
+            <data>
+                <variable name="viewModel" type="com.example.MyViewModel" />
+            </data>
+            <TextView android:text="@{viewModel.userName}" />
+
+            binding.viewModel = myViewModel
+            binding.lifecycleOwner = this
+            ```
+
+    - 단순 정리
+        - 코드에서 단순 UI 구성 및 참조 > 뷰바인딩
+            - Code <- XML
+        - MVVM + LiveData + 양방향 바인딩 필요 > 데이터바인딩
+            - Code <-> XML
+
 - Android에서 Parcelable과 Serializable의 차이점
+    - 개요
+        - 둘 다 객체를 직렬화해서 다른 컴포넌트(액티비티, 서비스 등) 간 전달할 수 있게 함
+
+    - Serializable (Java 표준)
+        - 자바 표준 인터페이스
+        - 구현 쉬움, 코드 작성 거의 없음
+        - 성능 낮음, 내부 적으로 리플렉션 기반으로 느림, 객체 크기도 큼
+        - 안드로이드 최적화 X (GC 부하 크며, 안드로이드에서는 비추천)
+        - 버전간 충돌 가능성 존재
+
+    - Parcelable (Android 특화)
+        - 안드로이드 전용 인터페이스 (안드로이드에 최적화)
+        - Parcel 객체를 통해 바이너리로 직접 기록하므로 빠름 (직접 바이트 변환)
+        - 구현 코드 많음 (writeToParcel, CREATOR 구현 필요)
+        - 코틀린에서는 @Parcelize로 간단하게 처리 가능
+            ```java
+            @Parcelize
+            data class User(val name: String) : Parcelable
+            ```
+        - 안정성 높음 (명시적 구조)
+
 - Compound Component 패턴과 Slot API 설명
 - Media Player 자체 내부
     - 구조 개요
@@ -1962,7 +2076,6 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 TraceView와 Perfetto를 활용한 성능 분석 방법
 - Android에서 RecyclerView의 DiffUtil을 활용하는 방법
 - Android에서 Jetpack Compose의 UI 테스트를 수행하는 방법
-- Android에서 Data Binding과 View Binding을 비교하시오.
 - Android에서 Prefetching과 Lazy Loading의 차이점
 - Android의 ART(Android Runtime) 최적화 방법
 - Android에서 Firebase Performance Monitoring을 활용하는 방법
@@ -2489,8 +2602,250 @@ Organize concepts, features, types and Pros and Cons
 - Java의 다형성(Polymorphism)이란 무엇이며, 어떻게 구현되는가?
 - Java에서 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
 - Java에서 인터페이스(Interface)와 추상 클래스(Abstract Class)의 차이점은?
-- Java에서 super 키워드와 this 키워드의 차이점은?
-- Java에서 메모리 관리(Memory Management)와 가비지 컬렉션(Garbage Collection)은 어떻게 이루어지는가?
+- Java에서 super 키워드와 this 키워드의 차이점
+    - 개요
+        - this: 현재 클래스의 인스턴스를 가리킴
+        - super: 부모 클래스의 인스턴스를 가리킴
+
+    - this 키워드
+        - 필드와 파라미터 이름이 충돌할 때 (this.name = name)
+        - 현재 객체를 다른 메서드에 전달할 때
+        - 생성자 간 호출 (this(...), 오버로딩된 생성자 재사용)
+
+    - super 키워드
+        - 부모 클래스 생성자 호출
+        - 부모 클래스 메서드 호출
+        - 부모 클래스 필드 참조 (super.field)
+            ```java
+            class Animal {
+                String type = "동물";
+                void speak() {
+                    System.out.println("소리 낸다");
+                }
+            }
+
+            class Dog extends Animal {
+                void printType() {
+                    System.out.println(super.type);  // Animal의 필드
+                }
+                void speak() {
+                    super.speak(); // Animal의 메서드 호출
+                    System.out.println("멍멍!");
+                }
+            }
+            ```
+
+- Java에서 메모리 관리(Memory Management)와 가비지 컬렉션(Garbage Collection)
+    - 개요
+        - 자바는 자동 메모리 관리 언어
+        - 개발자가 직접 free()를 호출하지 않아도 JVM이 자동으로 객체를 할당하고 제거(가비지 컬렉션)
+
+    - 자바 메모리 구조(JVM 기준)
+        - Heap
+            - 객체(instance), 배열 등이 저장되는 영역 → GC 대상
+        - Stack	
+            - 메서드 호출 시의 지역변수, 매개변수 저장 → 스코프 종료 시 자동 제거
+        - Method Area
+            - 클래스 정보, static 변수, 메서드 등 → PermGen → MetaSpace
+        - PC Register
+            - 각 스레드가 어떤 명령어를 실행 중인지 기록
+        - Native Method Stack
+            - JNI 등 네이티브 호출용
+
+    - 객체 생성과 소멸
+        - new 키워드로 객체 생성 → Heap에 메모리 할당
+        - 객체를 참조하는 변수가 사라지면 → 더 이상 사용되지 않는 객체
+        - JVM이 GC(Garbage Collector) 를 통해 해당 객체를 제거
+
+    - Garbage Collection의 특징
+        - 자동 메모리 회수: 더 이상 참조되지 않는 객체는 자동으로 제거
+        - 참조 카운트 방식 사용 안함:  Java는 참조 카운트보다 reachability 탐색 기반
+        - GC Root 기준: static 변수, 스레드 stack, 메서드 호출 체인에서 도달할 수 없으면 GC 대상
+
+    - GC 동작 방식
+        - Mark: GC Root에서 참조 가능한 객체들 "표시"
+        - Sweep: 참조되지 않은 객체 제거
+        - Compact: 메모리 단편화 해소를 위해 객체를 한 곳으로 정렬
+            - → 이 과정은 Full GC 또는 Young GC, Old GC에 따라 달라짐
+
+    - GC 유형(JVM 구현 기준)
+        - Serial GC: 단일 스레드, 작은 애플리케이션에 적합
+        - Parallel GC: 멀티 스레드, Throughput 중시
+        - CMS GC: 응답 속도 중시 (Low latency)
+        - G1 GC: 최신 GC, Heap을 Region으로 나눠 관리
+        - ZGC / Shenandoah: 매우 낮은 지연을 위한 최신 GC
+
+    - 메모리 누수 방지를 위한 방법
+        - 리스너, 콜백, 컨텍스트 참조 해제 필요
+        - WeakReference, SoftReference로 GC 대상 객체 구분 가능
+        - System.gc() > 직접 GC 요청 가능하지만 보장은 안됨
+
+- 메모리 누수 발생 예시
+    - 개요
+        - 메모리 누수(Memory Leak)는 Android에서 흔히 발생하는 문제 중 하나고, 특히 Context, Adapter, Static 변수를 잘못 사용하면 앱이 점점 느려지거나 OOM(Out of Memory)을 일으키는 원인이 됨
+
+    - 발생 예시
+        - (1) Static 변수에 Context를 저장한 경우
+            - 잘못된 코드 예시
+                - object / static 필드는 애플리케이션 생명주기보다 오래 살아있음
+                - Activity Context는 화면 종료 후에도 메모리에 남게 됨 > GC 되지 않는 이슈 발생
+                ```java
+                object AppConfig {
+                    var context: Context? = null
+                }
+
+                class MyActivity : AppCompatActivity() {
+                    override fun onCreate(savedInstanceState: Bundle?) {
+                        super.onCreate(savedInstanceState)
+                        AppConfig.context = this  // 메모리 누수 발생 포인트
+                    }
+                }
+                ```
+            - 해결 방법
+                - ApplicationContext만 Static으로 저장 (가능한 경우)
+                - WeakReference 사용 (GC에 의해 강제로 수집될 수 있는 참조를 나타내는 객체)
+                    - 일반적으로 자바에서는 객체에 대한 참조가 있는 경우 해당 객체는 메모리에서 수집안됨
+                    - WeakReference는 약한 참조를 제공하여 객체가 메모리에서 수집되도록 허용
+                    - WeakReference 사용 시 객체가 더 이상 사용되지 않는 경우 자동으로 메모리에서 제거됨 > 객체의 수명 주기를 추적하고 메모리 누수 방지에 유용
+                    - 예: 캐시나 캐시 라인에 저장된 객체 등은 더 이상 필요하지 않을 때 메모리 상에서 제거되어야 함
+                    ```java
+                    object AppConfig {
+                        var contextRef: WeakReference<Context>? = null
+                    }
+                    ```
+
+        - (2) Adapter 에서 Context 또는 View 참조 유지
+            - 잘못된 코드 예시
+                - 액티비티가 종료되어도 Adapter가 ViewPager, RecyclerView 등에 의해 계속 참조될 수 있음
+                - 내부 클랙스 또는 context 고정 참조가 액티비티를 계속 메모리에 유지
+                ```java
+                class MyAdapter(context: Context) : RecyclerView.Adapter<...>() {
+                    val context = context  // 액티비티 context를 내부에 고정 참조
+                }
+
+                inner class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view)  // context를 계속 들고 있음
+                ```
+            - 해결 방법
+                - ApplicationContext 사용 (가능한 경우)
+                    ```java
+                    val context = context.applicationContext
+                    ```
+                - ViewHolder를 static(inner class X)으로 구현
+                - Context 참조 자체를 없애고 필요 시 itemView.context 활용
+
+        - (3) Handler가 액티비티를 참조하는 경우
+            - 잘못된 코드 예시
+                - 핸들러는 내부적으로 액티비티를 참조 > 메시지큐에 오래 남으면 GC되지 않음
+            - 해결 방법
+                - 핸들러를 static / object 클래스로 분리 + WeakReference 사용
+                ```java
+                class MyHandler(activity: Activity) : Handler(Looper.getMainLooper()) {
+                    private val activityRef = WeakReference(activity)
+
+                    override fun handleMessage(msg: Message) {
+                        activityRef.get()?.let {
+                            Toast.makeText(it, "Hello", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                ```
+
+        - (4) Listener, Callback 등록 후 해제하지 않은 경우
+            - 잘못된 코드 예시
+                - 리스너를 등록하고 remove를 호출하지 않으면 시스템이 액티비티를 계속 참조 > GC 불가
+            - 해결 방법
+                - onDestroy / onPause에서 반드시 해제 (remove/Listener, callback)
+
+        - (5) WebView 사용 시 누수
+            - 잘못된 코드 예시
+                - 웹뷰는 액티비티보다 오래 살아남는 경우가 많음
+                ```java
+                val webView = WebView(this)  // 직접 생성 후 addView, 그리고 해제 안 하면 누수
+                ```
+            - 해결 방법
+                ```java
+                override fun onDestroy() {
+                    webView.apply {
+                        clearHistory()
+                        clearCache(true)
+                        loadUrl("about:blank")
+                        removeAllViews()
+                        destroy()
+                    }
+                    super.onDestroy()
+                }
+                ```
+    - LeakCanary 의존성 사용한 누수 탐지
+        - debugImplementation "com.squareup.leakcanary:leakcanary-android:2.12"
+        - 설치 후 앱 실행 > 누수 발생 시 알림 > 어떤 객체가 해제되지 않았는지 추적 가능
+
+- Listener, Callback 의 개념적 차이
+    - 개요
+        - 비슷한 개념이고 사용법 유사하나 관점 또는 사용 방식에서 차이 존재
+        - 콜백은 함수의 참조(콜백 함수)를 넘겨서 나중에 호출하는 방식
+        - 리스너는 인터페이스 기반의 이벤트 수신자를 등록하는 구조
+
+    - 공통점
+        - 둘 다 비동기 처리를 위한 메커니즘
+        - 어떤 이벤트가 발생했을 때 특정 작업을 수행하게 함
+        - 호출 시점은 개발자가 아닌, 시스템 또는 다른 클래스가 제어
+
+    - 개념적 차이
+        - 콜백
+            - 함수(람다 / 참조)
+            - 본질은 함수(코드 블록) 참조 전달
+            - 주로 단일 이벤트 처리, 단일 응답/일회성 작업
+            - 함수를 인자로 전달하는 구조
+            - 람다로 표현 가능하고 짧고 간결한 코드
+            - 대표 예: Retrofit의 onResponse, runOnUiThread {}
+        - 리스너
+            - 인터페이스 구현체
+            - 본질은 인터페이스 구현체 전달
+            - 주로 복수 이벤트 처리 및 대응
+            - 인터페이스 구현 후 등록하는 구조
+            - 클래스 구조 많고 장황할 가능성 있음
+            - 대표 예: Button의 OnClickListener, RecyclerView의 OnScrollListener
+
+    - 예시
+        - 콜백
+            - 람다 또는 함수 참조를 인자로 전달
+            - 함수 하나만 넘기면 되는 단순한 이벤트에 적합
+            ```java
+            fun loadData(onFinished: (String) -> Unit) {
+                // ...데이터 로드 중
+                onFinished("성공!")
+            }
+
+            loadData { result ->
+                println("결과: $result") // 콜백 함수가 나중에 호출됨
+            }
+            ```
+
+        - 리스너
+            - 인터페이스 구현 > 등록 구조
+            - 여러 메서드가 필요한 복잡한 상호작용 이벤트 처리에 적합
+            ```java
+            interface OnItemClickListener {
+                fun onItemClick(position: Int)
+            }
+
+            class MyAdapter {
+                var listener: OnItemClickListener? = null
+            }
+
+            adapter.listener = object : OnItemClickListener {
+                override fun onItemClick(position: Int) {
+                    println("클릭됨: $position")
+                }
+            }
+            ```
+    - Android SDK 예시
+        - Button: Listener
+        - Retrofit / Volley: Callback
+        - Dialog: Listener
+        - Coroutines: Callback
+        - RecyclerView: Listener
+
 - Java에서 final 키워드를 사용할 수 있는 곳과 그 의미는?
 - Java에서 static 키워드가 가지는 의미는?
 - Java에서 객체를 clone()할 때 발생할 수 있는 문제는?
