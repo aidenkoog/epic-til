@@ -2076,6 +2076,146 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 ContentProvider의 역할과 사용 사례
 - RecyclerView의 ViewHolder 패턴을 사용하는 이유와 성능 최적화 방법
 - Android에서 Handler, Looper, MessageQueue의 동작 원리
+    - 등장 배경
+        - Android는 기본적으로 UI 작업을 Main Thread (UI Thread)에서만 처리해야 함
+        - 하지만 앱이 여러 스레드를 사용하면서도 안정적으로 메시지를 전달하거나 딜레이 실행할 수 있어야 하므로 이때 등장하는 구조가 Handler, Looper 그리고 MessageQueue
+            - MessageQueue: 메시지를 저장하는 큐
+            - Looper: 큐를 순회하며 메시지를 꺼내 처리하는 반복문
+            - Handler: 메시지를 생성하거나 보내는 인터페이스
+
+    - 구성 요소별 동작 원리
+        - Looper
+            - Thread마다 단 1개만 존재 가능 (prepare()로 생성)
+            - 내부에 MessageQueue를 포함하고 있음
+            - loop() 메서드를 통해 무한 루프를 돌며 메시지를 계속 꺼냄
+            - (참고) 메인 스레드에서는 Android가 자동으로 Looper.prepareMainLooper()를 호출해줌.
+                ```java
+                val looper = Looper.myLooper() // 현재 스레드의 Looper
+                Looper.prepare()  // 스레드에서 Looper 준비 (보통 MainThread는 자동 준비됨)
+                Looper.loop()     // 무한 루프 돌면서 메시지 처리
+                ```
+
+        - MessageQueue
+            - 메시지를 시간 순으로 저장하는 큐 구조
+            - enqueueMessage()로 삽입되고, next()로 하나씩 꺼냄
+            - 메시지가 없을 땐 Looper가 블로킹 상태로 대기함
+            - 메시지에는 Handler, Runnable, what, arg1, arg2, obj 등이 포함됨
+
+        - Handler
+            - 특정 Looper를 기반으로 작동
+            - sendMessage(), post() 등을 통해 메시지를 MessageQueue에 넣음
+            - Looper가 메시지를 꺼내면 Handler.dispatchMessage()가 호출되고, → 직접 오버라이드하거나 handleMessage()를 구현해서 메시지 처리
+            - (참고) post(Runnable)은 내부적으로 Runnable을 메시지로 감싸서 큐에 넣는 것과 같음.
+                ```java
+                val handler = object : Handler(Looper.getMainLooper()) {
+                    override fun handleMessage(msg: Message) {
+                        // 메시지 처리
+                    }
+                }
+
+                // 메시지 보내기
+                handler.sendMessage(Message.obtain().apply { what = 0 })
+                ```
+
+    - 전체 동작 흐름 요약
+        ```scss
+        - sendMessage/post > MessageQueue에 삽입 > Looper가 하나씩 추출 >  Handler.dispatchMessage() 호출 > handleMessage 호출됨
+        Thread (MainThread or BackgroundThread)
+            │
+            ├─ Looper.prepare() → 현재 스레드에 MessageQueue 생성
+            ├─ Looper.loop() → 메시지 대기 및 처리 시작
+            │
+            └─ Handler 생성 → 해당 Looper에 메시지 전송 (sendMessage/post)
+                            ↓
+                        MessageQueue에 메시지 저장
+                            ↓
+                    Looper가 하나씩 꺼내서 Handler로 전달
+                            ↓
+                    Handler.handleMessage()에서 처리됨
+        ```
+
+    - 실제 예: 딜레이 처리
+        - 내부적으로는 MessageQueue에 미래시간(timestamp)을 가진 메시지를 넣고 Looper가 도달할 때까지 대기했다가 실행
+    
+    - 주의사항 & 메모리 누수 방지
+        - Handler가 Activity의 내부 클래스일 경우, Activity의 참조를 암시적으로 잡고 있어 메모리 누수 가능성 있음 → WeakReference 또는 static + WeakReference 구조 추천
+
+        - Looper.loop()는 무한 루프이므로 반드시 종료 조건이 있는 백그라운드 스레드에서는 사용 후 Looper.quit() 호출 필요
+
+    - 요약 정리 문장
+        - Handler, Looper, MessageQueue는 안드로이드에서 스레드 간 메시지 전달과 비동기 처리를 위한 핵심 구조입니다.
+        - Handler는 메시지를 생성하고 큐에 넣는 역할
+        - Looper는 큐를 돌며 메시지를 처리하는 루프
+        - MessageQueue는 시간 순으로 메시지를 보관하며, 이 세 가지는 함께 동작하여 안정적인 UI/비동기 처리를 지원합니다.
+
+- HandlerThread 개념 설명
+    - HandlerThread 개념
+        - HandlerThread는 Thread를 상속한 클래스로 내부에 Looper를 자동으로 생성해줘서, 해당 스레드에서 메시지 기반 비동기 작업을 처리할 수 있도록 해줘.
+        - 즉, Thread + Looper + Handler의 복잡한 설정을 한 번에 해주는 스레드 전용 도우미 역할
+
+    - 기본 개념
+        - Thread: 별도의 백그라운드 스레드 생성
+        - Looper: 메시지 루프를 돌면서 작업 대기
+        - Handler: 메시지를 전달하여 해당 스레드에서 실행되도록 함
+
+    - 사용 구조
+        ```java
+        // 1. HandlerThread 생성 및 시작
+        val handlerThread = HandlerThread("MyBackgroundThread")
+        handlerThread.start()
+
+        // 2. Handler 생성 (Looper는 handlerThread의 것 사용)
+        val backgroundHandler = Handler(handlerThread.looper)
+
+        // 3. 작업 전송
+        backgroundHandler.post {
+            // 이 블록은 handlerThread 스레드에서 실행됨
+            Log.d("MyApp", "Background task running on: ${Thread.currentThread().name}")
+        }
+
+        // 4. 종료 시
+        handlerThread.quitSafely()
+        ```
+
+    - 내부 동작 흐름
+        ```scss
+        1. HandlerThread.start()
+            └ Thread 실행 → Looper.prepare()
+                                ↓
+                            Looper.loop() 시작
+
+            2. Handler(handlerThread.looper) 생성
+            └ 해당 스레드의 MessageQueue에 작업 등록 가능
+
+            3. handler.post { ... }
+            └ 메시지가 MessageQueue에 들어감
+                ↓
+            Looper가 메시지를 꺼내서 해당 Runnable 실행
+        ```
+
+    - 실전 예제
+        - 이미지 디코딩, 파일 I/O, 네트워크 요청 등
+        ```java
+        val decodeThread = HandlerThread("ImageDecodeThread")
+        decodeThread.start()
+        val decodeHandler = Handler(decodeThread.looper)
+
+        decodeHandler.post {
+            val image = decodeHeavyBitmap("image_path.jpg")
+            mainHandler.post {
+                imageView.setImageBitmap(image)
+            }
+        }
+        ```
+
+    - 종료 함수
+        - 무한 루프(Looper.loop())를 돌기 때문에 반드시 종료 필요
+        - handlerThread.quitSafely() → 큐에 남은 메시지 처리 후 종료
+        - handlerThread.quit() → 즉시 종료 (남은 메시지는 처리 안 함)
+
+    - 정리
+        - HandlerThread는 별도 스레드에서 Handler를 통한 메시지 기반 비동기 처리를 가능하게 하는 Android의 구조화된 백그라운드 스레드 클래스입니다.
+
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
 - Android에서 권한 시스템(Permission Request)이 동작하는 방식
 - Android의 Jetpack WorkManager와 JobScheduler의 차이점
