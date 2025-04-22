@@ -4316,7 +4316,62 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 inline function이 내부적으로 어떻게 동작하는가?
 - Kotlin에서 tail recursion이 동작하는 방식을 설명하시오.
 - Kotlin의 delegate 패턴을 사용하는 이유와 성능적 이점은?
-- Kotlin의 스마트 캐스팅(Smart Casting)이 내부적으로 어떻게 처리되는가?
+- Kotlin의 스마트 캐스팅(Smart Casting)의 내부적 처리 방법
+    - 스마트 캐스팅 (Smart Casting)
+        - 코틀린이 변수 타입 검사 결과를 기억하고, 이후 코드에서 자동으로 해당 타입으로 캐스팅 해주는 컴파일러 기능
+            ```kotlin
+            fun printLength(obj: Any) {
+                if (obj is String) {
+                    // 여기서 obj는 스마트 캐스트되어 String으로 간주됨
+                    println(obj.length)
+                }
+            }
+            ```
+    - 스마트 캐스팅의 내부 처리 방식
+        - 컴파일 타임 캐스팅 최적화
+            - 런타임 캐스팅이 아니라 컴파일러가 분석한 결과로 결정됨
+            - 컴파일러는 다음을 통해 스마트 캐스트 판단
+                - 변수의 불변성(immutability)(val)
+                - 분기문(is/!is/null check) 조건
+                - 분기 이후 절대로 타입이 바뀌지 않음을 보장할 수 있는 경우
+        - 실제 컴파일 결과
+            ```kotlin
+            if (obj is String) {
+                println(obj.length)
+            }
+            ```
+            - 컴파일 시 내부적으로는 아래와 같이 처리됨 (Java 바이트코드 수준)
+            - 개발자에게는 암묵적으로 표현되나, 컴파일러는 명시적인 타입 체크 + 캐스팅 코드로 변환하여 처리
+            ```java
+            if (obj instanceof String) {
+                String str = (String) obj;
+                System.out.println(str.length());
+            }
+            ```
+
+    - 스마트 캐스팅이 불가능한 상황
+        - 항상 가능한 것은 아니며, 컴파일러가 타입 안정성을 보장할 수 없다면 거부 처리
+            - 예시 1: var로 선언된 변수
+                - 다른 스레드나 블록에서 값이 바뀔 가능성이 있으므로 불가능
+                - 해결은 var -> val로 변경
+
+            - 예시 2: 커스텀 getter 사용
+                - val 이긴 하지만 get() 호출할 때마다 값이 바뀔 수 있기 때문에 불가능
+                ```kotlin
+                val obj: Any
+                    get() = ...
+
+                if (obj is String) {
+                    println(obj.length) // 스마트 캐스트 불가
+                }
+                ```
+
+    - 스마트 캐스트 활용 정리
+        - is / !is 검사 후 분기: 스마트캐스트 발생 (val인 경우, 커스텀 get 없는 경우)
+        - null체크 후 안전 사용: null 제외 후 스마트캐스트 가능
+        - when 조건식 내부: 각 분기에서 자동 캐스트
+        - 커스텀 클래스의 필드 검사: val 이면 캐스트 가능, var은 변동성으로 인해 불가능
+
 - Kotlin의 reified 키워드가 동작하는 원리를 설명하시오.
 - Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 차이는?
 - Kotlin의 default parameter와 Java의 method overloading 차이점은?
