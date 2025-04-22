@@ -2099,7 +2099,49 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 AI 기반 추천 시스템을 구현하는 방법
 - Android에서 Jetpack Compose로 Instant Apps를 만드는 방법
 - Android에서 AI 기반 음성 인식을 활용하는 방법
-- Jetpack Compose의 UI 트리 렌더링 방식은 기존 View 시스템과 어떻게 다른
+- Jetpack Compose의 UI, 기존 View 시스템의 렌더링 방식 차이
+    - 기존 View 시스템
+        - 구조 및 렌더링 방식
+            - UI는 XML 레이아웃 파일 또는 코드로 구성된 View 트리(View hierarchy) 기반
+            - 트리 구조: ViewGroup > View들로 구성
+                - 즉, UI 트리는 ViewGroup 기반 View 트리
+            - 렌더링 과정
+                - (1) inflate()로 XML을 파싱해 뷰 객체 생성
+                - (2) measure() > layout() > draw() 3단계 렌더링 수행
+                - (3) UI 갱신 시, 해당 뷰나 부모 뷰에서 invalidate() > requestLayout() 트리거
+            - 상태 변경 시
+                - 뷰 자체 또는 자식 뷰까지 갱신 (부분적으로 비효율적일 수 있음)
+                - 구조가 복잡해질수록 리플로우 비용 증가
+            - 요약
+                - 명령형 방식 (Imperative UI)
+                - 트리 구조가 무겁고 중첩될수록 성능 저하 가능
+                - 렌더링 최적화는 개발자가 직접 관리해야 함
+
+    - Jetpack Compose
+        - 구조 및 렌더링 방식
+            - UI는 @Composable 함수로 선언되는 컴포지션 트리(Composition Tree) 기반
+                - UI 트리는 Composition Tree
+            - 트리 구조는 RecompositionScope 단위로 관리
+            - 렌더링 과정
+                - (1) @Composable 함수 호출로 구성요소 트리(Composition Tree) 생성
+                - (2) Compose Runtime이 상태를 관찰(State, MutableState), Compose Runtime이 성능 최적화 자동 관리
+                - (3) 상태 변경 시 해당 범위만 Recomposition 발생
+                - (4) 변경된 UI 요소만 Layout, Draw 재수행
+            - 특징
+                - 선언형 방식 (Declarative UI)
+                - 상태 기반으로 UI 트리 자동 재구성
+                - Diffing 및 Skipping 최적화 > 실제 변경된 UI만 업데이트
+                - View 트리 없이 Android Canvas를 직접 활용하여 그려짐
+            - 렌더링 최적화 요소
+                - remember, derivedStateOf, key, LaunchedEffect 등으로 스코프 조절
+                - Recomposer와 Snapshot 시스템이 UI 변경 추적 및 최소 렌더링을 보장
+
+    - 결론
+        - Jetpack Compose
+            - 명령형 View 트리가 아닌 선언형 Composition Tree 기반으로 작동하며, 상태 변화에 따른 최소 범위의 Recomposition을 통해 성능을 자동 최적화
+        - 기존 View System
+            - iewGroup 기반 트리 구조와 명령형 접근 방식으로 인해 복잡한 구조에서는 비효율적인 리렌더링이 발생할 수 있음, 종종 부모까지 리렌더링 영향 존재
+
 - Jetpack Compose에서 Recomposition이 발생하는 원인
 - Compose에서 remember와 rememberSaveable의 차이점
 - Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
