@@ -2232,7 +2232,7 @@ Organize concepts, features, types and Pros and Cons
         - 새로운 프로젝트 or Kotlin 중심 앱이라면 → Coroutine 우선 사용
         - 레거시 시스템과 연동되거나 Android 프레임워크 API가 필요할 때 → HandlerThread
         - UI 바깥의 복잡한 순차/병렬 처리를 선언적으로 관리하고 싶다면 → Coroutine + withContext, async
-        
+
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
 - Android에서 권한 시스템(Permission Request)이 동작하는 방식
 - Android의 Jetpack WorkManager와 JobScheduler의 차이점
@@ -2349,9 +2349,11 @@ Organize concepts, features, types and Pros and Cons
         - Jetpack Compose
             - 명령형 View 트리가 아닌 선언형 Composition Tree 기반으로 작동하며, 상태 변화에 따른 최소 범위의 Recomposition을 통해 성능을 자동 최적화
         - 기존 View System
-            - iewGroup 기반 트리 구조와 명령형 접근 방식으로 인해 복잡한 구조에서는 비효율적인 리렌더링이 발생할 수 있음, 종종 부모까지 리렌더링 영향 존재
+            - ViewGroup 기반 트리 구조와 명령형 접근 방식으로 인해 복잡한 구조에서는 비효율적인 리렌더링이 발생할 수 있음, 종종 부모까지 리렌더링 영향 존재
 
 - Jetpack Compose에서 Recomposition이 발생하는 원인
+
+
 - Compose에서 remember와 rememberSaveable의 차이점
 - Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
 - Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
