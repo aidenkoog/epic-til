@@ -2200,6 +2200,7 @@ Organize concepts, features, types and Pros and Cons
         decodeThread.start()
         val decodeHandler = Handler(decodeThread.looper)
 
+        // Coroutine withContext(Dispatchers.IO/Main)과 유사
         decodeHandler.post {
             val image = decodeHeavyBitmap("image_path.jpg")
             mainHandler.post {
@@ -2216,6 +2217,22 @@ Organize concepts, features, types and Pros and Cons
     - 정리
         - HandlerThread는 별도 스레드에서 Handler를 통한 메시지 기반 비동기 처리를 가능하게 하는 Android의 구조화된 백그라운드 스레드 클래스입니다.
 
+- HandlerThread, Coroutine 비교
+    - 개요
+        - 핸들러 스레드, 코루틴 둘 다 모두 백그라운드에서 작업을 처리하는 도구
+
+    - 사용 시점에 따른 성택
+        - UI/프레임워크 레거시 연동 필요: HandlerThread
+        - 간단한 백그라운드 작업: Coroutine
+        - 복잡한 동기/비동기 혼합 흐름: Coroutine + suspend, 제어 흐름이 깔끔
+        - 오래 지속되는 백그라운드 서비스 (예: 알람, 블루투스 처리)
+            - 둘다 가능하나 Coroutine 선호, CoroutineScope + Lifecycle 연동이 유리
+    
+    - 실무 전략 정리
+        - 새로운 프로젝트 or Kotlin 중심 앱이라면 → Coroutine 우선 사용
+        - 레거시 시스템과 연동되거나 Android 프레임워크 API가 필요할 때 → HandlerThread
+        - UI 바깥의 복잡한 순차/병렬 처리를 선언적으로 관리하고 싶다면 → Coroutine + withContext, async
+        
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
 - Android에서 권한 시스템(Permission Request)이 동작하는 방식
 - Android의 Jetpack WorkManager와 JobScheduler의 차이점
