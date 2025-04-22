@@ -2016,9 +2016,61 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 Kotlin을 기본 언어로 채택한 이유
 - Android의 Application Class는 무엇이며, 어떻게 활용하는
 - Android에서 Context의 역할과 종류 (ApplicationContext, ActivityContext 등)의 차이점
+    - Context 정의와 역할
+        - 안드로이드에서 애플리케이션의 전반적인 정보와 리소스, 시스템 서비스에 접근하기 위한 인터페이스이자 핵심 객체
+        - 컴포넌트 간 연결고리 역할
+        - 앱의 환경/상태/자원에 접근하는 핵심 도구
+
+    - 주요 기능
+        - 리소스 접근
+        - 시스템 서비스 접근
+        - 앱 컴포넌트 제어
+        - 파일 / DB 접근
+        - View 생성
+
+    - Context 주요 종류 및 차이점
+        - (1) ApplicationContext
+            - Application 클래스에서 반환되는 전역 컨텍스트
+            - 앱의 전체 생명주기와 함께 존재 (앱 실행 ~ 종료까지 살아있음)
+            - 메모리 누수 위험 ↓ (Activity 종료와 무관)
+            - 주로 오래 살아야 하는 객체, 싱글톤, 서비스 등에서 사용
+            - 장기적인 리소스 접근에 적합하며 메모리 누수 위험 적음
+            - 예: context.getApplicationContext()
+            - 사용 예시:
+                ```java
+                val prefs = context.applicationContext.getSharedPreferences("settings", MODE_PRIVATE)
+                ```
+        - (2) ActivityContext
+            - Activity 인스턴스 그 자체 (this 또는 MainActivity.this)
+            - 해당 Activity의 생명주기와 동일 (Activity가 종료되면 함께 소멸)
+            - UI 관련 작업에 최적화되어 있음, 생명주기 관리에 주의 필요
+            - View를 inflate하거나 Dialog, Toast를 띄울 때 등 UI와 밀접한 작업에 적합
+            - 메모리 누수 유의 (장기 보관 금지)
+            - 사용 예시:
+                ```java
+                val inflater = LayoutInflater.from(this) // Activity context
+                val view = inflater.inflate(R.layout.dialog_layout, null)
+                ```
+
+        - (3) ServiceContext
+            - Service 내부에서 사용되는 Context
+            - ApplicationContext와 유사하게 오래 지속됨
+            - UI 관련 작업은 불가
+
+        - (4) BroadcastReceiverContext (일회성)
+            - BroadcastReceiver 내에서 사용되는 Context는 일시적
+            - onReceive() 메서드 내에서만 유효 (함수 종료 시 사라짐)
+            - 장기 실행 작업에는 Context 보관 금지
+
+    - Context 사용 시 주의할 점 (메모리 누수 방지)
+        - View 또는 Activity Context를 싱글톤에 보관
+            - Singleton.context = activity.applicationContext
+        - Handler 또는 콜백에서 Activity 참조 보관
+            - WeakReference(activity)
+        - Glide, Picasso 등의 이미지 라이브러리
+            - Glide.with(activity).load()
+
 - Android에서 onSaveInstanceState()와 ViewModel의 차이점
-- Android의 Parcelable과 Serializable의 차이점과 성능 비교
-- Kotlin에서 View Binding과 Data Binding의 차이점
 - Android의 Activity와 Fragment의 생명주기에서 주요 차이점
 - Jetpack Lifecycle Observer의 역할과 활용 방법
 - Android에서 ContentProvider의 역할과 사용 사례
