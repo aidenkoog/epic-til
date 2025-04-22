@@ -2352,6 +2352,85 @@ Organize concepts, features, types and Pros and Cons
             - ViewGroup 기반 트리 구조와 명령형 접근 방식으로 인해 복잡한 구조에서는 비효율적인 리렌더링이 발생할 수 있음, 종종 부모까지 리렌더링 영향 존재
 
 - Jetpack Compose에서 Recomposition이 발생하는 원인
+    - 개요
+        - Compose는 선언형 UI 시스템이기 때문에, 상태(state)가 바뀌면 UI 트리를 다시 그리는 Recomposition이 자동으로 발생
+
+    - Recomposition 개념
+        - Recomposition은 @Composable 함수의 UI 트리를 다시 실행하여 변경된 상태를 반영하는 과정
+            - Compose는 UI를 "상태에 따라 정의되는 함수"로 보고,
+            - 상태가 바뀌면 해당 상태를 참조하고 있는 @Composable 함수만 부분적으로 다시 실행
+
+    - Recomposition 발생 주요 원인
+        - (1) State, MutableState, remember 등의 상태 값 변경
+            - count++ > mutableState 변경됨
+            - 이를 참조하는 Text()는 Recomposition 대상이 됨
+            ```kotlin
+            var count by remember { mutableStateOf(0) }
+
+            Button(onClick = { count++ }) {
+                Text("Clicked $count times")
+            }
+            ```
+        
+        - (2) remember 되지 않은 값이 계속 새로 생성되는 경우
+            - remember 되지 않은 값 자체는 Recomposition을 유발하지는 않음
+                - 그 자체가 UI를 바꾸는 데 사용되지 않으면 괜찮음
+            - 그 값이 Composable 함수 호출 시 파라미터로 전달되거나 상태 추적의 대상이 될 때 발생
+            - 아래 예에서 list는 매번 새로운 객체가 되기 때문에 Compose는 이전 list와 새 list가 다르다고 판단하고, LazyColumn 내부를 다시 리컴포지션하게 됨
+            ```kotlin
+            // (1) 리컴포지션이 계속 발생하는 예
+            val list = List(100) { it } // 매 recomposition 시 새로 생성됨
+
+            LazyColumn {
+                items(list) { item -> Text("Item $item") }
+            }
+
+            // (2) remember로 캐싱 처리하여 해결한 예
+            // remember 또는 rememberUpdatedState 사용으로 극복 가능
+            @Composable
+            fun Sample() {
+                val list = remember { List(1000) { it } } // 한 번만 생성됨
+                LazyColumn {
+                    items(list) { item ->
+                        Text("Item $item")
+                    }
+                }
+            }
+            ```
+
+        - (3) 파라미터 값이 변경된 경우
+            - 만약 아래 예에서 name이 변경되면, Greeting(name) 전체가 다시 리컴포지션 발생
+            ```kotlin
+            @Composable
+            fun Greeting(name: String) {
+                Text("Hello, $name")
+            }
+            ```
+
+        - (4) derivedStateOf로 감싸지 않은 계산식의 불필요한 참조
+            ```kotlin
+            // 리컴포지션 발생 예
+            val filtered = items.filter { it.isActive } // 매번 계산되면 무조건 recomposition
+
+            // 해결 코드
+            val filtered by remember(items) {
+                derivedStateOf { items.filter { it.isActive } }
+            }
+            ```
+
+        - (5) LaunchedEffect, SideEffect 등에서 key 값 변경
+            ```kotlin
+            LaunchedEffect(userId) {
+                // userId가 바뀌면 내부 블록 다시 실행됨 (recomposition과는 다르지만 관련)
+            }
+            ```
+
+    - Recomposition 최적화 방법 정리
+        - remember: 불필요 객체 재생성 방지
+        - derivedStateOf: 계산 비용 높은 상태값 캐싱
+        - key(): 리스트 내 Composable의 고유성 유지
+        - stable 객체 사용: 데이터 클래스나 람다 등은 가능하다면 > @Stable, @Immutable 애노테이션 작성 고려
+        - Slot API: 필요에 따라 Composable 영역을 나누고 최소 범위만 갱신하도록 리팩토링 전개
 
 
 - Compose에서 remember와 rememberSaveable의 차이점
