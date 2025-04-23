@@ -5294,9 +5294,38 @@ Organize concepts, features, types and Pros and Cons
 - 아이템 100개 와 ViewHolder 1개를 가진 RecyclerView의 동작원리를 설명 해주세요.
 - RecyclerView or ListView 의 Pagination 구현 방법을 설명 해주세요.
 - 네트워크 통신을 통해 이미지를 가져오는 뷰가 포함된 ListView 또는 RecyclerView에서 빠르게 스크롤 시 생길 수 있는 이슈가 무엇이고 어떻게 수정 및 최적화를 할 수 있을까요?
-- with, run 의 차이점은 무엇일까요?
-- run, let 의 차이점은 무엇일까요?
-- let, also 의 차이점은 무엇일까요?
+- with, run 의 차이점
+    - 공통
+        - 수신 객체(this)를 기준으로 블록 실행
+        - 블록의 마지막 표현식이 반환값
+    - 차이점
+        - with
+            - 수신객체를 파라미터로 받음
+            - 확장 함수 아님
+            - 수신 객체를 명시적으로 지정하고 블록을 실행할 때 사용
+            ```kotlin
+            val result = with(user) {
+                println(name)
+                age + 1 // 반환값
+            }
+            ```
+        - run
+            - 확장 함수
+            - 수신 객체에서 바로 .run{} 형태로 호출
+            - 블록 내부에서 this는 수신 객체
+            ```kotlin
+            val result = user.run {
+                println(name)
+                age + 1 // 반환값
+            }
+            ```
+
+- run, let 의 차이점
+
+
+- let, also 의 차이점
+
+
 - Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
 - 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
 - Parcel 과 Serializable의 차이는 무엇일까요?
