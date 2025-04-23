@@ -3081,7 +3081,7 @@ Organize concepts, features, types and Pros and Cons
             - Collections.synchronizedMap을 쓰면 맵 전체에 synchronized 적용
         - ConcurrentHashMap
             - JDK 7: Segment 단위로 락 (16개 Segment 기본)
-            - JDK 8+: Bin Level Locking (각 버킷의 노드 단위 잠금) 또는 CAS 연산 활용
+            - JDK 8+: Bin Level Locking (각 버킷의 노드 단위 잠금) 또는 CAS(Compare And Swap) 연산 활용
             - 동시 수정이 가능한 고성능 구조
 
     - 결론
@@ -3089,7 +3089,71 @@ Organize concepts, features, types and Pros and Cons
         - ConcurrentHashMap: 멀티스레드 환경에서 안전하고 성능 좋은 맵, 실시간 시스템이나 캐시 구현에 적합
 
 - Java에서 Stream API를 활용하는 방법은?
-- Java에서 Reflection을 사용할 때 주의해야 할 점은?
+- Java에서 Reflection을 사용할 때 주의해야 할 점 및 개념
+    - 개요
+        - 자바 리플렉션은 매우 강력한 기능, 잘못 사용 시 보안/성능/안정성에 문제 유발
+    - 리플렉션 개념
+        - 정의 
+            - 런타임에 클래스, 필드, 메서드, 생성자 등의 정보를 조사하고 조작할 수 있는 자바 메커니
+            - java.lang.reflect 패키지에 포함됨
+        - 주요 클래스
+            - Class<?>: 클래스 자체 의미
+            - Field: 멤버 변수
+            - Method: 메서드
+            - Constructor: 생성자
+        - 예시
+            ```java
+            Class<?> clazz = Class.forName("com.example.MyClass");
+            Method method = clazz.getMethod("doSomething");
+            method.invoke(clazz.newInstance());
+            ```
+
+    - 주요 기능
+        - 클래스 정보 탐색: Class.forName(), getDeclaredFields(), getMethods() 등
+        - 메서드 실행: Method.invoke()
+        - 필드 접근: Field.set(), Field.get()
+        - 생성자 호출: Constructor.newInstance()
+        - Private 접근: setAccessible(true) 통해 private / protected 접근 가능
+
+    - 리플렉션 사용시 주의사항
+        - (1) 성능 저하
+            - 리플렉션은 런타임에 동적으로 검사하고 실행되기 때문에, 일반적인 메서드 호출보다 훨씬 느림
+            - 반복 호출 시 성능 저하가 심각할 수 있음 (캐싱 or 제한된 영역에서만 사용 권장)
+
+        - (2) 캡슐화 위반
+            - private, protected 접근 제한자를 우회할 수 있음 (setAccessible(true))
+            - 이는 객체지향 원칙(정보 은닉) 을 위배하며, 코드 유지보수성을 떨어뜨릴 수 있음
+
+        - (3) 보안 위험
+            - 악의적인 코드가 리플렉션을 통해 시스템 내부 구조를 들여다보거나 조작 가능
+            - Java에서는 SecurityManager 를 통해 리플렉션 사용을 제한할 수 있었지만, 이는 이후 버전에서 폐지 예정임
+
+        - (4) 런타임 오류 가능성
+            - 리플렉션은 컴파일 타임 타입 검사(type checking)가 불가능
+            - 잘못된 메서드 이름, 매개변수 타입, 필드명 등을 사용해도 컴파일 시 오류가 발생하지 않음
+                - → 런타임 오류가 발생하기 쉬움
+
+        - (5) 코드 난독화 및 유지보수 어려움
+            - 코드가 정적 분석 도구나 IDE 자동완성에 잡히지 않음
+            - 리팩토링 시에도 영향이 누락될 수 있음 (예: 메서드 이름 바뀌면 invoke는 깨짐)
+
+    - 리플렉션 사용이 유용한 경우
+        - 프레임워크 개발: 스프링, 하이버네이트 등에서 의존성 주입, AOP, ORM 등에 활용
+        - 라이브러리 코드의 유연성: 외부 라이브러리나 모듈을 동적으로 호출해야 할 때
+        - 테스트 도구: Mockito, JUnit 등에서 private 필드나 메서드에 접근할 때
+        - 역직렬화: JSON/XML -> 객체 변환 시 클래스 구조 파악 필요
+
+    - 리플렉션 실무 권장 사항
+        - 가능하면 리플렉션 대신 정적 코드 구조 사용
+        - 필요 시
+            - 캐싱해서 재사용 (Method, Field 등)
+            - 잘 문서화하고 명확한 fallback 전략을 둬야 함
+            - 라이브러리 / 프레임워크 내부에서만 국한시키고, 앱 전역에 남용하지 않도록 설계
+
+    - 결론 정리
+        - 리플렉션은 강력한 도구이나 느리고, 위험하고(보안, 캡슐화 침해) 그리고 불안정함(런타임 오류)
+
+
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
 - Java에서 메모리 누수를 방지하는 방법은?
