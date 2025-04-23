@@ -3166,7 +3166,45 @@ Organize concepts, features, types and Pros and Cons
 - Java의 JVM, JRE, JDK의 차이점은?
 - Java에서 equals()와 ==의 차이점은?
 - Java에서 hashCode()와 equals()의 관계는?
-- Java에서 String과 StringBuilder, StringBuffer의 차이점은?
+- Java에서 String과 StringBuilder, StringBuffer의 차이점
+    - String
+        - 불변(immutable) 클래스, 문자열 수정 시 항상 새로운 객체가 생성됨
+        - 문자열 값이 절대 변경되지 않음
+        - 문자열 연산이 생기면 항상 새로운 객체를 생성
+        - 가장 많이 사용되며, 문자열 리터럴("abc")로도 선언 가능
+
+    - StringBuilder
+        - 가변(mutable) 클래스, 내부 배열을 직접 수정
+        - 문자열 조작(append, insert, delete 등)이 자주 발생하는 경우에 적합
+        - 싱글 스레드 환경에서 성능이 가장 좋음
+
+    - StringBuffer
+        - StringBuilder와 거의 동일하나, 모든 메서드가 synchronized 처리
+        - 즉, 스레드 안전(thread-safe) 하지만 성능은 느림
+        - 멀티 스레드 환경에서 문자열 조작이 필요할 때 사용
+        - 가변이지만 동기화 처리됨
+
+    - 속도
+        - StringBuilder > StringBuffer > String
+
+    - StringBuilder, StringBuffer 메소드
+        - append
+        - insert
+        - delete
+        - reverse
+        - toString
+
+    - 사용 사례별 추천
+        - 문자열이 자주 변경되지 않음, String 추천, 코드 간결함, 불변으로 안전
+        - 반복적으로 빠른 문자열 조작 필요, StringBuilder. 빠르고 효율적
+        - 멀티스레드 환경에서 문자열 조작, StringBuffer, 동기화로 스레드 안전 보장
+
+    - 기타 참고 사항
+        - StringBuilder와 StringBuffer는 내부적으로 char[] 배열을 사용
+        - 버퍼 크기가 부족하면 자동으로 배열 크기를 2배 이상으로 확장
+        - StringBuilder는 JDK 1.5부터 도입 → 기존 StringBuffer보다 빠른 대안으로 자리잡음
+
+
 - Java의 클래스 로딩 과정(Class Loading Process)
     - 개요
         - Java 프로그램이 실행될 때, .class 파일(바이트 코드)을 JVM이 읽고 메모리에 적재하고
