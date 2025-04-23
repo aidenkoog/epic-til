@@ -4200,7 +4200,6 @@ Organize concepts, features, types and Pros and Cons
         - MockK, Kotest(테스트 DSL)
 
 - Kotlin에서 copy() 메서드를 사용하는 이유는?
-- Kotlin에서 apply, let, run, also, with의 차이점은?
 - Kotlin에서 object expression과 object declaration의 차이점은?
 - Kotlin에서 sealed interface를 활용하는 방법은?
 - Kotlin에서 break, continue, return의 차이점은?
@@ -5376,6 +5375,20 @@ Organize concepts, features, types and Pros and Cons
         - also → "디버깅, 로그, 부수효과" 삽입 (원본 유지)
         - run → "값을 계산해서 리턴하고 싶을 때" (스트링 연결, 값 계산)
         - with → "여러 속성/메서드를 한 객체에 집중적으로 적용"
+        ```kotlin
+        val userName = intent.getStringExtra("userName")?.let {
+            it.uppercase()
+        } ?: "Guest"
+
+        val user = User().apply {
+            name = userName
+            age = 30
+        }
+
+        user.also {
+            Log.d("UserDebug", "생성된 사용자: $it")
+        }
+        ```
 
 - Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
 - 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
