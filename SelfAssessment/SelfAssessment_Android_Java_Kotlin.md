@@ -5370,6 +5370,13 @@ Organize concepts, features, types and Pros and Cons
         - let: it으로 객체 접근. 결과를 다른 값으로 변환하거나 null-safe 처리할 때.
         - also: it으로 접근하지만 객체 그대로 반환. 로깅이나 디버깅, 체이닝에 유용.
 
+    - 상황에 따른 사용
+        - apply → "객체 초기화" (Intent, RecyclerView.Adapter, Paint 등)
+        - let → "null-safe 처리" 또는 "변환이 필요한 경우"
+        - also → "디버깅, 로그, 부수효과" 삽입 (원본 유지)
+        - run → "값을 계산해서 리턴하고 싶을 때" (스트링 연결, 값 계산)
+        - with → "여러 속성/메서드를 한 객체에 집중적으로 적용"
+
 - Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
 - 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
 - Parcel 과 Serializable의 차이는 무엇일까요?
