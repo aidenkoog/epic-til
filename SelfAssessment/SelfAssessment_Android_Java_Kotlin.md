@@ -5301,8 +5301,9 @@ Organize concepts, features, types and Pros and Cons
     - 차이점
         - with
             - 수신객체를 파라미터로 받음
+            - 객체를 인자로 넘겨 블록 실행
             - 확장 함수 아님
-            - 수신 객체를 명시적으로 지정하고 블록을 실행할 때 사용
+            - 수신 객체를 명시적으로 지정하고 블록을 실행할 때 사용 (사용 이유)
             ```kotlin
             val result = with(user) {
                 println(name)
@@ -5311,6 +5312,7 @@ Organize concepts, features, types and Pros and Cons
             ```
         - run
             - 확장 함수
+            - 객체에서 직접 run 실행
             - 수신 객체에서 바로 .run{} 형태로 호출
             - 블록 내부에서 this는 수신 객체
             ```kotlin
@@ -5319,9 +5321,30 @@ Organize concepts, features, types and Pros and Cons
                 age + 1 // 반환값
             }
             ```
+        
+        - 요약
+            - 둘 다 this 기반, 리턴값을 받고 싶을 때 유용
 
 - run, let 의 차이점
-
+    - 공통
+        - 확장함수
+        - 블록 실행하고 마지막 표현식을 반환
+    - 차이점
+        - run
+            - 블록 안에서 this로 수신 객체에 접근
+            - 객체 초기화나 리턴값 계산 등에서 자주 사용
+        - let
+            - 블록 안에서 it으로 수신 객체에 접근
+            - 주로 null-safe 호출, 체이닝, 일시적 컨텍스트에서 많이 사용
+            ```kotlin
+            val result = user?.let {
+                println(it.name)
+                it.age + 1
+            }
+            ```
+        - 요약
+            - run -> this 기반, 초기화나 계산
+            - let -> it 기반, null-safe 처리에 특화
 
 - let, also 의 차이점
 
