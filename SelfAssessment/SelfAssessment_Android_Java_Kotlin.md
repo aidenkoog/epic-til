@@ -5603,7 +5603,39 @@ Organize concepts, features, types and Pros and Cons
             ```
 
     - 함수형 프로그래밍 지원
-        - 
+        - 고차 함수, 람다, map/filter/reduce 등 함수형 프로그래밍 스타일을 자연스럽게 지원
+        - 일급 함수, 비동기 처리를 간결하게 작성 가능
+            ```kotlin
+            val sum = listOf(1, 2, 3).fold(0) { acc, i -> acc + i }
+            ```
+
+    - 코루틴(Coroutines) 기반 비동기 프로그래밍
+        - 쓰레드가 아닌 경량 스레드 방식으로 비동기 작업을 효율적으로 처리
+        - suspend, launch, async, flow 등을 통해 복잡한 비동기 로직도 간단하게 구현 가능
+            ```kotlin
+            suspend fun fetchData() {
+                withContext(Dispatchers.IO) {
+                    // 백그라운드 작업
+                }
+            }
+            ```
+
+    - 데이터 클래스 (data class)
+        - equals, hashCode, toString, copy() 등 기본 메서드 자동 생성
+        - DTO/모델 클래스 정의 시 매우 유용
+            ```kotlin
+            data class User(val name: String, val age: Int)
+            ```
+
+    - Sealed Class / Enum Class
+        - ADT(Algebraic Data Type) 표현 가능 -> 타입에 따라 안전하게 분기 처리 가능
+        - when과 함께 사용할 때 컴파일러가 분기 누락을 체크
+         ```kotlin
+         sealed class UiState
+         object Loading : UiState()
+         data class Success(val data: String) : UiState()
+         object Error : UiState()
+         ```
 
 - fold, reduce 차이
     - 개요
@@ -5626,6 +5658,6 @@ Organize concepts, features, types and Pros and Cons
             val sumFromTen = numbers.fold(10) { total, num -> total + num }
             println("folded: $sumFromTen") // folded: 39
             ```
-            
+
 - 코루틴 설명
 - 엘비스 연산자
