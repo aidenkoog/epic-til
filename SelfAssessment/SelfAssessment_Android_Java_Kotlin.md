@@ -4301,7 +4301,49 @@ Organize concepts, features, types and Pros and Cons
 - suspend 함수란 무엇이며, 일반 함수와의 차이점은?
 - launch와 async의 차이점은?
 - GlobalScope를 사용하면 안 되는 이유는?
-- coroutineScope와 supervisorScope의 차이점은?
+- coroutineScope와 supervisorScope의 차이점
+    - 목적과 기본 개념
+        - coroutineScope
+            - 자식 코루틴들이 모두 정상적으로 완료될 때까지 기다리는 구조
+            - 코루틴 블록 안에서 구조화된 동시성(Structured Concurrency)을 구현할 때 기본적으로 사용하는 스코프
+        - supervisorScope
+            - 자식 코루틴 간의 실패 전파를 분리하고 싶을 때 사용
+            - 즉 하나의 자식이 실패해도 다른 자식들에게 영향을 주지 않도록 격리된 실행을 허용하는 스코프
+
+    - 예외 처리 방식의 차이
+        - coroutineScope의 경우
+            - 자식 코루틴 중 하나라도 예외가 발생하면, 다른 자식 코루틴도 모두 취소되고 스코프 전체가 실패로 간주 > 즉, 실패가 전파되는 구조
+            ```kotlin
+            coroutineScope {
+                launch { /* 성공 */ }
+                launch { throw Exception() } // → 모든 자식이 취소됨
+            }
+            ```
+        - supervisorScope의 경우
+            - 자식 코루틴 중 하나가 예외로 실패해도, 해당 자식만 취소되고 나머지는 계속 실행됨
+            - 스코프 자체는 실패로 간주되지 않으며, 실패를 전파하지 않음
+            ```kotlin
+            supervisorScope {
+                launch { /* 성공 */ }
+                launch { throw Exception() } // → 다른 자식은 영향을 받지 않음
+            }
+            ```
+
+    - 사용 시점
+        - coroutineScope
+            - 자식 작업들이 서로 강하게 연결되어 있을 때
+            - 하나라도 실패하면 전체를 중단해야 하는 경우
+                - 예: 여러 API를 병렬로 호출하는데, 하나라도 실패하면 전체화면 로딩을 실패시켜야 하는 경우
+
+        - supervisorScope
+            - 자식 작업들이 독립적인 성격인 경우
+            - 하나의 실패가 다른 작업을 멈추게 해선 안되는 경우
+                - 예: 여러 파일을 업로드할 때 하나는 실패해도 다른 파일은 계속 업로드해야 하는 경우
+
+    - 정리
+        - 둘 다 코루틴 빌더가 아닌 스코프 생성 함수 > 구조화된 동시성을 구성
+        - 큰 차이점은 예외 전파 방식
+
 - CoroutineContext의 구성 요소는?
 - withContext()와 async-await의 차이점은?
 - Dispatchers.IO, Dispatchers.Main, Dispatchers.Default의 차이점은?
@@ -4879,8 +4921,6 @@ Organize concepts, features, types and Pros and Cons
 - Coroutine의 Dispatchers.Default, IO, Main의 차이점은?
 - supervisorScope와 coroutineScope의 차이점은?
 - Kotlin Coroutine에서 cancel()을 호출했을 때 실행 흐름은?
-- Job과 SupervisorJob의 차이점은?
-
 - Flow에서 buffer()와 conflate()의 차이점
     - 개요
         - 백프레셔 처리를 위한 대표적인 방식들
@@ -5029,7 +5069,6 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
 - Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
 - Kotlin에서 Flow와 LiveData의 차이점은?
-- Kotlin에서 coroutineScope와 supervisorScope의 차이점은?
 - Kotlin에서 backing field와 backing property란?
 - Kotlin에서 deep copy와 shallow copy의 차이점은?
 - Kotlin에서 sealed class와 enum class의 차이점은?
