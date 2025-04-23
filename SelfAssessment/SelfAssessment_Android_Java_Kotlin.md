@@ -5496,14 +5496,73 @@ Organize concepts, features, types and Pros and Cons
 - 바이트 코드를 안드로이드에서 바로 실행할 수 있나요?
 - 채팅 기능 구현 경험이 있는가?
 - Annotation이란?
+- Custom Annotation 정의 및 커스텀 기능 구현 방법
 - AsyncTask Deprecated된 이유는 무엇인가?
 - JAR, AAR, DEX, APK에 대해 설명해보아라?
 - 프래그먼트는 기본 생성자를 왜 사용해야 할까?
 - Gradle / Ant / Maven이 무엇인가?
 - String vs StringBuffer vs StringBuilder 에 대해 설명해보아라?
 - 직렬화 vs 역직렬화 개념에 대해 설명해보아라?
-- Parcelable, Serializable 차이점은 무엇입니까?
 - var, val차이
+    - val (value)
+        - 읽기 전용(Read-only) 변수
+        - 한 번 초기화하면 값을 변경할 수 없음
+        - 내부적으로는 final 변수처럼 동작함
+
+    - var (variable)
+        - 가변(mutable)변수
+        - 값을 언제든지 재할당 가능
+
+    - 사용목적
+        - val 사용 경우
+            - 변하지 않는 값 (상수, 참조만 고정)
+            - 불변성을 유지
+            - 더 안전한 코드와 의도를 명확히 하기 위해 사용
+            - 참조는 고정되나 객체가 불변이냐 가변이냐는 따로 판단
+                - 리스트 참조는 고정이나 리스트 아이템들은 변경 가능
+
+        - var 사용 경우
+            - 이후에 값을 바꿔야 하는 경우
+            - 상태가 바뀌는 모델(뷰모델, UI상태 등)에 사용
+
+    - 성능/안정성 측면
+        - val을 우선 사용하는 것이 불변성 유지 + 코드 안정성에 더 유리
+        - Kotlin 공식 스타일 가이드도 기본적으로 val 을 선호함
+        - 필요할 때는 var 사용 -> 예상치 못한 변경을 방지 가능
+
+- val, const val, var, lateinit var
+    - val, const val
+        - val
+            - 런타임에 값을 할당함 (실행 중에 결정될 수 있음)
+                ```kotlin
+                val versionName = BuildConfig.VERSION_NAME
+                ```
+            - 클래스 내부나 함수 내부 어디서나 사용 가능
+            - 객체 생성 시 초기화 가능 (동적 값도 가능)
+        - const val
+            - 컴파일 타임 상수 (값이 컴파일 시점에 고정되어야 함)
+            - 오직 top-level, object 또는 companion object 내에서만 선언 가능
+            - String, Int, Boolean 등 기본 타입만 사용 가능
+            - Android에서는 주로 상수 정의할 때 사용 (Intent키, 설정값 등)
+                ```kotlin
+                const val EXTRA_USER_ID = "extra_user_id"
+                ```
+    - var, lateinit var
+        - var
+            - 가변 변수
+            - 선언 즉시 초기화 필요
+        - lateinit var
+            - var 처럼 가변 변수이나 선언만 하고 나중에 초기화 가능
+            - 반드시 Non-null 타입이어야 하며, primitive 타입(Int, Boolean)에는 사용 불가
+            - 보통 DI, ViewModel, 의존성 주입, 초기화 지연이 필요한 변수에 사용
+            - 초기화 전에 접근하면 UninitializedPropertyAccessException 발생
+
+    - 요약
+        - val → 변하지 않는 일반 값
+        - const val → 컴파일 시점 고정 상수 (기본 타입 상수 정의에 사용)
+        - var → 즉시 초기화 가능한 가변 값
+        - lateinit var → 나중에 초기화될 참조 타입 값 (nullable 아님)
+
 - 코틀린에서 두드러지는 특징
 - 코루틴 설명
 - 엘비스 연산자
