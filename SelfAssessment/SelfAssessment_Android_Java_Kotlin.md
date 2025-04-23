@@ -5482,8 +5482,6 @@ Organize concepts, features, types and Pros and Cons
 - Jetpack Compose의 Slot API 개념과 활용 사례는?
 - invoke operator를 활용한 고급 함수형 프로그래밍 예제를 설명하라.
 - Kotlin Multiplatform에서 JVM, Native, JS 타겟을 함께 사용할 때의 문제점과 해결 방법은?
-- Zygote 에 대해서 말해보세요.
-- JVM과 Dalvik 가상 머신에 대해서 설명해보세요
 - SharedPreferences 에서 commit() 과 apply() 의 다른점에 대해 말해주세요.
 - 안드로이드에서 메모리 누수를 줄일 수 있는 방법에 대해 말해주세요.
 - 안드로이드 APK 파일의 크기를 줄일 수 있는 방법들을 말해주세요.
@@ -5492,20 +5490,24 @@ Organize concepts, features, types and Pros and Cons
 - aaptOptions.cruncherEnabled=false 설명
 - Ext.alwaysUpdateBuildId = false 설명
 - Gradle은 맨 뒤에 ‘+’를 추가하면 자동으로 최신 버전으로 업데이트, 자동 업데이트하게 하는 방법
-- 바이트 코드를 안드로이드에서 바로 실행할 수 있나요?
-- 채팅 기능 구현 경험이 있는가?
-- Annotation이란?
-- Custom Annotation 정의 및 커스텀 기능 구현 방법
-- AsyncTask Deprecated된 이유는 무엇인가?
-- JAR, AAR, DEX, APK에 대해 설명해보아라?
+- 채팅 기능 구현
 - 프래그먼트는 기본 생성자를 왜 사용해야 할까?
 - Gradle / Ant / Maven이 무엇인가?
+
+- JAR, AAR, DEX, APK 개념
+- Annotation 개념
+- Custom Annotation 정의 및 커스텀 기능 구현 방법
+- AsyncTask Deprecated된 이유
+- Zygote 개념
+- JVM과 Dalvik 가상 머신
+- 바이트 코드를 안드로이드에서 바로 실행 가능한지에 대한 설명
+
 - 직렬화 vs 역직렬화 개념
     - 개요
         - 데이터를 저장하거나 네트워크로 전송할 때 자주 등장하는 개념
         - JSON, Parcelable, Bundle, Room 등 다양한 곳에서 활용
 
-    - 직렬화 (Serialization)
+    - 직렬화 (Serialization): 변환
         - 개념
             - 객체의 상태를 바이트나 문자열 형태로 변환하여 파일로 저장하거나 네트워크로 전송 가능한 형태로 만드는 과정
         - 필요 이유
@@ -5519,7 +5521,7 @@ Organize concepts, features, types and Pros and Cons
             val json = gson.toJson(user) // 직렬화: 객체 → JSON 문자열
             ```
 
-    - 역직렬화 (Deserialization)
+    - 역직렬화 (Deserialization): 복원
         - 개념
             - 직렬화된 데이터를 다시 원래의 객체 형태로 복원하는 과정
         - 필요 이유
@@ -5529,6 +5531,18 @@ Organize concepts, features, types and Pros and Cons
             val json = """{ "name": "Aiden", "age": 30 }"""
             val user = gson.fromJson(json, User::class.java) // 역직렬화: JSON 문자열 → 객체
             ```
+
+    - 자주 사용되는 직렬화 방식
+        - JSON (일반적)
+            - Gson, Moshi, Kotlinx,serialization 등 사용
+            - 예: REST API 응답을 JSOB -> 객체로 역직렬화
+        - Parcelable (안드로이드 전용)
+            - Intent, Bundle 간 객체 전달 시 사용
+            - 속도 빠르고 경량화
+            - 예: Intent.putExtra() -> 객체를 Parcelable로 직렬화
+        - Serializable (Java 표준)
+            - Java의 Serializable 인터페이스 구현 시 사용
+            - 속도 느리고 무겁지만 간단한 구현
 - var, val차이
     - val (value)
         - 읽기 전용(Read-only) 변수
