@@ -5424,7 +5424,6 @@ Organize concepts, features, types and Pros and Cons
 - Retrofit과 Volley의 차이점은?
 - Firebase Crashlytics를 사용한 경험이 있는가? 어떻게 활용했는가?
 - Java의 가비지 컬렉션(GC)은 어떻게 동작하는가?
-- String, StringBuilder, StringBuffer의 차이는?
 - Java에서 volatile, synchronized, Atomic의 차이를 설명하라.
 - Java 8에서 추가된 주요 기능(람다, 스트림, Optional 등)에 대해 설명하라.
 - Checked Exception과 Unchecked Exception의 차이는?
@@ -5501,8 +5500,35 @@ Organize concepts, features, types and Pros and Cons
 - JAR, AAR, DEX, APK에 대해 설명해보아라?
 - 프래그먼트는 기본 생성자를 왜 사용해야 할까?
 - Gradle / Ant / Maven이 무엇인가?
-- String vs StringBuffer vs StringBuilder 에 대해 설명해보아라?
-- 직렬화 vs 역직렬화 개념에 대해 설명해보아라?
+- 직렬화 vs 역직렬화 개념
+    - 개요
+        - 데이터를 저장하거나 네트워크로 전송할 때 자주 등장하는 개념
+        - JSON, Parcelable, Bundle, Room 등 다양한 곳에서 활용
+
+    - 직렬화 (Serialization)
+        - 개념
+            - 객체의 상태를 바이트나 문자열 형태로 변환하여 파일로 저장하거나 네트워크로 전송 가능한 형태로 만드는 과정
+        - 필요 이유
+            - 객체는 메모리에서만 유효
+            - 데이터를 디스크 저장 또는 다른 장치 전송, DB 저장하려면 문자열 또는 바이트 배열처럼 변환 가능한 형태가 필요
+        - 예시
+            ```kotlin
+            data class User(val name: String, val age: Int)
+
+            val user = User("Aiden", 30)
+            val json = gson.toJson(user) // 직렬화: 객체 → JSON 문자열
+            ```
+
+    - 역직렬화 (Deserialization)
+        - 개념
+            - 직렬화된 데이터를 다시 원래의 객체 형태로 복원하는 과정
+        - 필요 이유
+            - 저장된 데이터나 수신한 데이터는 사람이 이해할 수 있어도 코드에서 객체처럼 다루려면 다시 객체로 되돌려야 함
+        - 예시
+            ```Kotlin
+            val json = """{ "name": "Aiden", "age": 30 }"""
+            val user = gson.fromJson(json, User::class.java) // 역직렬화: JSON 문자열 → 객체
+            ```
 - var, val차이
     - val (value)
         - 읽기 전용(Read-only) 변수
