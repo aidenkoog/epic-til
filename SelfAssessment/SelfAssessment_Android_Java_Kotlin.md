@@ -3207,7 +3207,54 @@ Organize concepts, features, types and Pros and Cons
 
 - Java의 클래스 로딩 과정(Class Loading Process)
     - 개요
-        - Java 프로그램이 실행될 때, .class 파일(바이트 코드)을 JVM이 읽고 메모리에 적재하고
+        - Java 프로그램이 실행될 때, .class 파일(바이트 코드)을 JVM이 읽고 메모리에 적재하고 실행하는 과정을 클래스 로딩 과정이라고 함
+        - 이 과정은 크게 5단계로 구성됨
+            - Loading -> Linking -> Initialization -> Using -> Unloading
+            - 클래스 로딩 -> 링킹 -> 초기화 -> 사용 -> 언로드
+
+    - (1) Loading (클래스 로딩) -> .class 파일을 JVM 메모리에 로딩
+        - 역할: .class 파일을 JVM 메모리로 읽어들이는 작업
+        - 작동 방식
+            - 클래스 이름을 기반으로 해당 .class 파일을 찾음
+            - 파일 내용을 읽어 메서드 영역에 클래스의 구조를 저장
+        - 클래스 로더 종류
+            - Bootstrap ClassLoader: java.* 클래스 로딩
+            - Extension ClassLoader: ext 디렉토리 클래스 로딩
+            - Application ClassLoader: 클래스패스에 있는 사용자 정의 클래스 로딩
+        - 클래스 로딩은 Lazy Loading 방식: 실제로 필요한 시점에 로딩됨
+
+    - (2) Linking (링킹) -> 바이트코드 검증, static 필드 메모리 할당, 심볼 참조 해석
+        - 로딩된 클래스 파일을 JVM이 실행 가능한 형태로 연결하는 작업, 3단계로 구성
+        - (A) Verification (검증)
+            - 바이트코드가 JVM 규칙에 맞는지 검사
+            - 악의적인 코드로부터 JVM을 보호
+            - 스택 사용 규칙, 접근 제어, 포맷 검증 등 수행
+        - (B) Preparation (준비)
+            - 클래스의 static 변수들을 메모리에 할당
+            - 단, 초기값(디폴트 값)만 설정됨 (예: int는 0, boolean은 false)
+            - 아직 실제 값으로 초기화되지 않음
+        - (C) Resolution (해결)
+            - 클래스 내부에서 참조하는 다른 클래스/인터페이스/메서드/필드 등을 연결
+            - 심볼릭 참조 -> 직접 참조로 변환 (Symbolic Reference -> Direct Reference)
+
+    - (3) Initialization (초기화) -> static 블록 및 필드 초기화
+        - static 초기화 블록 또는 Static 필드의 명시적 초기값을 실행함
+        - Preparation 단계에서 할당된 static 필드들이 실제 값으로 초기화되는 단계
+        - 이 단계는 클래스가 실제로 사용될 때 한 번만 수행됨
+        - 순서는 상속 계층에 따라 상위 클래스부터 하위 클래스 순으로 실행됨
+
+    - (4) Using (사용) -> 클래스 사용 (인스턴스 생성, 메서드 호출 등)
+        - 이제 클래스는 정상적으로 메서드를 호출하거나 인스턴스를 생성하는 데 사용할 수 있음
+        - JVM은 메서드 호출, 필드 접근 등을 처리하면서 바이트코드를 실행함
+
+    - (5) Unloading (언로드) -> 사용이 끝난 클래스 메모리 해제(GC에 의해)
+        - 클래스가 더 이상 사용되지 않으면 GC(가비지 컬렉터)가 해당 클래스를 메모리에서 제거
+        - 단, 대부분의 클래스는 앱 종료 전까지 유지됨
+        - 동적 클래스 로딩 시 (ClassLoader를 직접 정의할 때) 메모리 해제를 명확히 관리해야 함
+
+    - 참고: 클래스 로더 체인 (Delegation Model)
+        - 자바는 위임 모델을 사용해 클래스 로더가 상위 클래스 로더에 먼저 위임하고, 상위에서 찾지 못할 때만 자신이 로딩함
+        - 이 구조는 보안과 일관성을 보장하며, 중복 로딩을 방지함.
 
 - Java의 다형성(Polymorphism)이란 무엇이며, 어떻게 구현되는가?
 - Java에서 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
