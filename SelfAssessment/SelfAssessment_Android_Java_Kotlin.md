@@ -4300,7 +4300,150 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin Coroutines의 핵심 개념은?
 - suspend 함수란 무엇이며, 일반 함수와의 차이점은?
 - launch와 async의 차이점은?
-- GlobalScope를 사용하면 안 되는 이유는?
+- GlobalScope를 사용하면 안 되는 이유
+    - 생명주기와 구조화된 동시성 위반
+        - 애플리케이션이 종료되기 전까지 살아 있는 전역 스코프에서 실행됨
+        - Lifecycle이나 ViewModel 등 UI 컴포넌트의 생명주기와 연결되지 않음
+            - 액티비티가 종료되어도 코루틴이 계속 실행
+            - 메모리 누수 또는 예기치 않은 동작의 원인
+        - 구조화된 동시성 원칙을 위반하게 되며, 이로 인해 코루틴 취소, 예외 처리, 자원 정리가 어려워짐
+
+    - 예외 처리의 어려움
+        - GlobalScope에서 실행된 코루틴은 상위 스코프가 없기 때문에 예외 처리를 포착하기 어려움
+        - 예외는 앱 전역에서 처리되지 않으면 앱이 비정상 종료될 수 있음
+        - 일반적인 coroutinScope 또는 viewModelScope에서는 예외가 상위 스코프로 전달되어 안전하게 처리 가능
+
+    - 취소(cancel)의 어려움
+        - GlobalScope에서 시작한 코루틴은 참조를 별도로 저장하지 않으면 취소 불가능
+        - 구조화된 스코프를 사용 시 scope.cancel() 또는 viewModel이 destroy 될 때 자동으로 취소
+        - GlobalScope는 명시적인 자원 정리를 하지 않으면 무한정 백그라운드 작업이 남아 있을 수 있음
+
+    - 테스트 어려움
+        - GlobalScope는 앱 전체에 영향을 주는 전역 컨텐스트이므로
+            - 단위테스트나 UI테스트에서 스코프 조절 불가능
+            - 코루틴이 백그라운드에서 살아있기 때문에 테스트가 예측 불가능
+        - CoroutineScope를 주입하거나 TestCoroutineScope를 사용하면 의도적으로 컨트롤 가능한 테스트 환경을 만들 수 있음
+
+    - 스코프 선택
+        - 액티비티, 프래그먼트, 뷰모델 등 -> lifecycleScope, viewModelScope
+        - 명확한 범위 지닌 비동기 작업 -> CoroutineScope + Job() 조합
+        - UI와 무관한 앱 전역 백그라운드 작업 -> ApplicationScope 등으로 의도적으로 별도 정의
+
+    - GlobalScope 정리
+        - 앱 전역에서 실행
+        - 생명주기와 무관하게 계속 실행
+        - 예외처리 및 취소의 어려움
+        - 구조화된 동시성 유지에 문제 발생, 관리 어려움
+        - 명확한 범위를 가진 CoroutineScope 사용 권장
+        - 사용 피해야 하는 상황
+            - UI와 관련된 모든 작업
+            - ViewModel, Activity, Fragment에서 실행되는 로직
+            - 예외 처리와 취소가 중요한 작업
+            - 앱 상태에 따라 취소되어야 하는 작업
+
+    - 예외
+        - 의도적으로 전역 작업이 필요할 때 사용 가능
+        - 사용 케이스
+            - (1) 앱 생명주기와 무관한 전역 백그라운드 작업이 필요한 경우
+                - 앱 전체에서 한 번만 실행되는 초기화 작업
+                    - 앱 시작 시 네트워크 구성 초기화, 암호화 키 생성, 라이브러리 초기화 등
+                    - Application 클래스에서 실행, 앱 전체 스코프에 속함
+                    - CoroutineScope(ApplicationScope) 따로 생성 후 사용하는 것이 더 안전
+                    ```kotlin
+                    class MyApplication : Application() {
+                        override fun onCreate() {
+                            super.onCreate()
+                            GlobalScope.launch {
+                                initCryptoKeys()
+                            }
+                        }
+                    }
+                    ```
+
+            - (2) 데모, 테스트 코드, 예제 코드에서 빠르게 결과만 보고 싶을 때
+            - (3) 독립적으로 살아야 할 백그라운드 서비스 작업
+                - 백그라운드에서 실행되는 JobService, AlarmManager 등에서 앱 종료 후에도 살아야 하는 독립성 있는 백그라운드 작업
+                - OS에서 서비스가 종료되거나 GC 될 경우 작업 중단 가능성 존재 -> WorkManager 권장
+                ```kotlin
+                class MyJobService : JobService() {
+                    override fun onStartJob(params: JobParameters?): Boolean {
+                        GlobalScope.launch {
+                            doLongRunningWork()
+                            jobFinished(params, false)
+                        }
+                        return true
+                    }
+                }
+                ```
+            - (4) 실험적 코드, 단발성 Fire and Forget 작업
+                - 로그 전송, 임시 캐시 정리처럼 결과가 UI나 사용자와 관계없는 일회성 작업
+                - CoroutineScope(loggingDispatcher).launch{} 처럼 명시적 범위 사용이 더 권장
+                ```kotlin
+                fun logEvent(message: String) {
+                    GlobalScope.launch {
+                        sendLogToServer(message)
+                    }
+                }
+                ```
+
+- GlobalScope 없이 전역 Scope 만드는 방법
+    - ApplicationScope 정의 (Application 클래스)
+        - SupervisorJob을 사용하면 하나의 작업이 실패해도 다른 작업이 취소되지 않음
+        - Dispatchers.Default는 CPU 바운드 작업에 적합 (계산, 로직 등)
+        ```kotlin
+        @HiltAndroidApp // ← Hilt 사용하는 경우, 아니면 그냥 Application 상속
+        class MyApplication : Application() {
+
+            // 전역 CoroutineScope: SupervisorJob + Dispatchers.Default
+            val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+            override fun onCreate() {
+                super.onCreate()
+
+                // 예: 앱 전역 초기화 비동기 작업
+                applicationScope.launch {
+                    initAnalytics()
+                    preloadCache()
+                }
+            }
+        }
+        ```
+    
+    - 의도적으로 주입해서 사용 (의존성 주입 없이도 가능)
+        - 액티비티, Repository 등에서 필요할 때 applicationScope 주입해서 사용 가능
+            ```kotlin
+            // Application에서 가져오기
+            val appScope = (applicationContext as MyApplication).applicationScope
+
+            appScope.launch {
+                // 앱 생명주기와 무관한 백그라운드 작업
+                syncWithServer()
+            }
+            ```
+
+    - SupervisorJob 사용 이유
+        - Job()은 부모-자식 관계에서 자식이 실패하면 전체 취소
+        - SupervisorJob()은 자식이 하나 실패해도 다른 자식에게 영향 없음
+            ```kotlin
+            val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+            scope.launch {
+                throw RuntimeException("실패!") // 여기서 실패해도
+            }
+
+            scope.launch {
+                doSomethingElse() // 여기는 그대로 실행됨
+            }
+            ```
+
+    - 필요 디스패쳐 정의
+        - 상황에 따라 스코프를 나눠서 사용
+        ```kotlin
+        val ioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+        val cpuScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        val mainScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+        ```
+
 - coroutineScope와 supervisorScope의 차이점
     - 목적과 기본 개념
         - coroutineScope
