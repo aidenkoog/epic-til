@@ -5564,5 +5564,68 @@ Organize concepts, features, types and Pros and Cons
         - lateinit var → 나중에 초기화될 참조 타입 값 (nullable 아님)
 
 - 코틀린에서 두드러지는 특징
+    - 개요
+        - 간결성 + 안정성 + 실용성 핵심 철학
+        - 안드로이드 + 백엔드 + 웹 + 데스크탑 등에서도 널리 사용
+        - 자바보다 더 표현력 높고 오류 감소되는 구조 제공
+
+    - 널 안정성 (Null Safety)
+        - NullPointerException (NPE)을 언어 차원에서 원천 차단
+        - Nullable(String?)과 Non-nullable 타입을 명확히 구분
+        - 컴파일 타임에 null 관련 오류를 미리 감지 가능
+            ```kotlin
+            val name: String = "Aiden"
+            val nullableName: String? = null
+            println(nullableName?.length) // Safe Call
+            ```
+
+    - 간결한 문법 (Concise Syntax)
+        - getter/setter, new, 세미콜론, 명시적 타입 선언 등이 불필요
+        - 람다 표현식, 확장함수, 스마트 캐스팅 등을 활용해 간결한 코드 작성 가능
+            ```kotlin
+            val list = listOf(1, 2, 3).filter { it > 1 }.map { it * 2 }
+            ```
+
+    - 스마트 캐스팅 (Smart Casting)
+        - is 체크 이후, 별도의 형 변환없이 자동으로 해당 타입으로 캐스팅
+            ```kotlin
+            fun printLength(obj: Any) {
+                if (obj is String) {
+                    println(obj.length) // obj는 String으로 자동 캐스팅됨
+                }
+            }
+            ```
+
+    - 확장 함수와 확장 프로퍼티
+        - 기존 클래스에 기능 추가 가능 (라이브러리나 안드로이드 API 확장에 유용)
+            ```kotlin
+            fun String.addPrefix(prefix: String): String = "$prefix$this"
+            ```
+
+    - 함수형 프로그래밍 지원
+        - 
+
+- fold, reduce 차이
+    - 개요
+        - Kotlin 컬렉션에는 컬렉션 내의 데이터를 모두 모으는(Accumulate) 함수인 reduce()와 fold()가 있음
+
+    - reduce()
+        - 초기값 없이 첫번째 요소로 시작
+            ```kotlin
+            val numbers = listOf(7, 4, 8, 1, 9)
+
+            val sum = numbers.reduce { total, num -> total + num }
+            println("reduced: $sum") // reduced: 29
+            ```
+    - fold(): Java Stream 에서는 둘 다 reduce()
+        - 지정해준 초기값으로 시작
+            ```kotlin
+            val numbers = listOf(7, 4, 8, 1, 9)
+            
+            // 초기 시작값 10
+            val sumFromTen = numbers.fold(10) { total, num -> total + num }
+            println("folded: $sumFromTen") // folded: 39
+            ```
+            
 - 코루틴 설명
 - 엘비스 연산자
