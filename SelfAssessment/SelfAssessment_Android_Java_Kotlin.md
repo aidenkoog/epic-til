@@ -3041,7 +3041,53 @@ Organize concepts, features, types and Pros and Cons
 - Java의 JVM, JRE, JDK의 차이점은?
 - Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
 - Java에서 Multi-threading을 구현하는 방법은?
-- Java에서 HashMap과 ConcurrentHashMap의 차이점은?
+- Java에서 HashMap과 ConcurrentHashMap의 차이점
+    - 개요
+        - Java 에서 키-값 쌍을 저장하는 Map 구조
+        - 스레드 환경에서의 사용과 성능 최적화 방식에서 큰 차이 존재
+
+    - 스레드 안정성 (Thread-Safety)
+        - HashMap
+            - 스레드에 안전하지 않음
+            - 여러 스레드에서 동시에 접근하면 데이터가 손상되거나 무한 루프 발생 가능
+            - 멀티스레드 환경에서는 외부에서 동기화 처리 필요
+                ```java
+                Map<K, V> syncMap = Collections.synchronizedMap(new HashMap<>());
+                ```
+        - ConcurrentHashMap
+            - 스레드에 안전함
+            - 내부적으로 동시 접근을 허용하면서도 안정적으로 동작하도록 설계됨
+            - JDK 8 이후에는 Bucket 기반 분할 잠금(Striped Locking) 대신 Segment-Free 구조와 CAS 기반의 동시성 처리로 향상됨
+
+    - 성능 (Performance)
+        - HashMap
+            - 단일 스레드 환경에서는 빠르고 효율적
+            - 그러나 멀티스레드 환경에서는 synchronized를 사용하면 성능 저하
+        - ConcurrentHashMap
+            - 멀티스레드 환경에서도 높은 성능 제공
+            - 전체 맵을 동기화하지 않고, 키에 따라 부분적으로만 잠금(Lock)하므로 경쟁이 줄어듬
+            - 읽기(Read) 작업은 대부분 잠금 없이 (non-blocking) 동작
+    - null 허용 여부
+        - HashMap
+            - null 키 1개 허용
+            - null 값은 여러 개 허용
+        - ConcurrentHashMap
+            - null 키나 null 값 모두 허용하지 않음
+            - 이유: null 값을 반환하면 key 부재인지 value가 null 인지 판단이 어려워 동기화 오류 유발 가능
+
+    - 락 처리 방식 (Locking Mechanism)
+        - HashMap
+            - 동기화 없으므로 락 자체가 없음
+            - Collections.synchronizedMap을 쓰면 맵 전체에 synchronized 적용
+        - ConcurrentHashMap
+            - JDK 7: Segment 단위로 락 (16개 Segment 기본)
+            - JDK 8+: Bin Level Locking (각 버킷의 노드 단위 잠금) 또는 CAS 연산 활용
+            - 동시 수정이 가능한 고성능 구조
+
+    - 결론
+        - HashMap: 단일 스레드용, 가볍고 빠르나 멀티스레드에서는 반드시 외부 동기화 필요
+        - ConcurrentHashMap: 멀티스레드 환경에서 안전하고 성능 좋은 맵, 실시간 시스템이나 캐시 구현에 적합
+
 - Java에서 Stream API를 활용하는 방법은?
 - Java에서 Reflection을 사용할 때 주의해야 할 점은?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
