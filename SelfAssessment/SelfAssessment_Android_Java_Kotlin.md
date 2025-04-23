@@ -5637,6 +5637,10 @@ Organize concepts, features, types and Pros and Cons
          object Error : UiState()
          ```
 
+    - 안드로이드 친화성
+        - Jetpack Compose, Coroutine, KTX 등과 궁합이 좋음
+        - 구글 공식 안드로이드 언어로 채택
+
 - fold, reduce 차이
     - 개요
         - Kotlin 컬렉션에는 컬렉션 내의 데이터를 모두 모으는(Accumulate) 함수인 reduce()와 fold()가 있음
@@ -5658,6 +5662,19 @@ Organize concepts, features, types and Pros and Cons
             val sumFromTen = numbers.fold(10) { total, num -> total + num }
             println("folded: $sumFromTen") // folded: 39
             ```
+- 엘비스 연산자 (Elvis Operator)
+    - 개념
+        - 피연산자가 null일 경우 대체 값을 반환하는 연산자
+    - 예제 추가 설명
+        ```kotlin
+        val result = a ?: b
 
-- 코루틴 설명
-- 엘비스 연산자
+        // 위 아래 두 코드는 동일한 코드
+        val result = if (a != null) a else b
+
+        // 아래는 다른 예제들
+        val length = user?.name?.length ?: 0
+
+        // null check + 예외처리를 한 줄로 표현 가능
+        val user = findUserById(id) ?: throw IllegalArgumentException("User not found")
+        ```
