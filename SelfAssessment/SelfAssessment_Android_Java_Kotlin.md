@@ -5347,7 +5347,28 @@ Organize concepts, features, types and Pros and Cons
             - let -> it 기반, null-safe 처리에 특화
 
 - let, also 의 차이점
+    - 공통
+        - 둘 다 it 기반 확장 함수
+        - 수신 객체를 블록에 넘기고 사용함
+    - 차이점
+        - let
+            - 블록의 마지막 결과를 반환
+            - 객체의 속성을 변형하거나 가공한 값을 리턴하고 싶을 때 사용
+        - also
+            - 블록 실행 후 원래 객체 자체(this)를 반환
+            - 객체는 그대로 유지하면서 로깅, 디버깅, 부수효과(side-effect)등 수행 시 사용
+            ```kotlin
+            val user = User("Lee").also {
+                println("User created: $it")
+            }
+            // user는 그대로 반환됨
+            ```
 
+    - 전체 키워드 요약
+        - with: 객체를 파라미터로 넘겨 블록 실행. this로 접근. 일반 함수.
+        - run: 객체에서 바로 호출. this로 접근. 계산 결과 반환.
+        - let: it으로 객체 접근. 결과를 다른 값으로 변환하거나 null-safe 처리할 때.
+        - also: it으로 접근하지만 객체 그대로 반환. 로깅이나 디버깅, 체이닝에 유용.
 
 - Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
 - 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
