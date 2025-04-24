@@ -5769,6 +5769,36 @@ Organize concepts, features, types and Pros and Cons
 - Annotation 개념
 - Custom Annotation 정의 및 커스텀 기능 구현 방법
 - AsyncTask Deprecated된 이유
+    - 개요
+        - 백그라운드 작업을 쉽게 처리하기 위한 기본 API 였으나, 현재는 Deprecated
+    - Deprecated된 시점
+        - 안드로이드 API 30(Android 11)부터 AsyncTask는 Deprecated 처리됨
+        - Jetpack 라이브러리 / Kotlin Coroutine, WorkManager 등 권장
+    - Deprecated 된 핵심 이유
+        - 생명주기와의 불안정한 연동
+            - AsyncTask는 액티비티 / 프래그먼트의 생명주기를 인식하지 못함
+            - 액티비티가 종료되어도 doInBackground() 는 계속 실행되므로
+                - -> 메모리 누수, 크래시, UI 갱신 오류 발생 가능
+        - 스레드 처리 방식의 제한성
+            - AsyncTask는 내부적으로 ThreadPoolExecutor를 공유하며, 기본적으로 직렬(serial) 실행
+                - → 다중 작업 병렬 처리 시 의도치 않은 대기 현상, 동기화 오류 발생 가능
+
+        - 예외 처리 및 취소 처리의 어려움
+            - 예외 발생 시 try-catch 외엔 대응이 어렵고
+            - cancel() 호출 이후에도 doInBackground() 내부에서 명시적으로 체크하지 않으면 취소가 제대로 되지 않음
+
+        - 기능 확장과 관리 어려움
+            - 작업 취소, 리트라이, 실패 시 대체 로직 등 구조적으로 확장하기 어려움
+            - 테스트도 어렵고 구조화된 비동기 처리(구조적 동시성) 개념 부재
+
+    - 권장 대체 방법
+        - Kotlin Coroutine
+        - WorkManager
+        - RxJava
+
+    - 결론
+        - AsyncTask는 생명주기 관리 부재, 스레드 처리의 제한, 예외/취소 처리의 불편함, 구조 확장의 어려움 등으로 인해 Android 11(API 30)부터 공식적으로 deprecated 되었으며, Kotlin Coroutine, WorkManager 등 보다 현대적이고 안전한 대체 수단으로 전환하는 것이 권장
+
 - Zygote 개념
     - 개요
         - Zygote(자이곳)는 앱 프로세스의 성능과 메모리 효율에 큰 영향을 주는 중요한 시스템 컴포넌트
