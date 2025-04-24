@@ -5453,8 +5453,91 @@ Organize concepts, features, types and Pros and Cons
         - Kotlin 1.5+부터 지원
         - 클래스보다 더 유연한 타입 계층 구성 가능
 
-- Kotlin의 companion object의 역할은?
-- inline 함수와 일반 함수의 차이는?
+- Kotlin의 companion object
+    - 개요
+        - 자바에서의 static 키워드 개념을 더 안전하고 유연하게 대체하기 위한 기능
+        - 클래스 수준에서 공유되는 정적 멤버를 정의할 때 사용
+
+    - 정의
+        - 클래스에 소속된 정적 멤버(필드, 함수 등)를 선언하기 위한 구조
+        - static 키워드 대신 companion object를 통해 클래스 레벨에서 공유되는 개체를 만들 수 있음
+        
+
+    - 주요 역할
+        - 클래스의 정적(static) 멤버를 정의
+            - 인스턴스를 생성하지 않아도 접근 가능
+            ```kotlin
+            class Utils {
+                companion object {
+                    const val DEFAULT_TIMEOUT = 3000
+                    fun log(msg: String) = println("LOG: $msg")
+                }
+            }
+
+            // 사용
+            Utils.log("Hello")
+            println(Utils.DEFAULT_TIMEOUT)
+            ```
+        - 팩토리 메서드 (Factory Method) 제공
+            - 객체 생성을 내부적으로 관리하고자 할 때 자주 사용
+            ```kotlin
+            class User private constructor(val name: String) {
+                companion object {
+                    // 팩토리 메서드
+                    fun create(name: String): User {
+                        return User(name.uppercase())
+                    }
+                }
+            }
+
+            // 사용
+            val user = User.create("aiden")
+            ```
+
+        - 인터페이스 구현도 가능 (객체이므로)
+            ```kotlin
+            interface Clickable {
+                fun click()
+            }
+
+            class Button {
+                companion object : Clickable {
+                    override fun click() {
+                        println("Clicked")
+                    }
+                }
+            }
+            ```
+    - 특징
+        - 클래스당 companion object는 하나만 존재 가능
+        - 실제로는 클래스 내부의 singleton object로 존재
+            - 런타임에는 singleton 객체로 동작
+        - 클래스 이름을 통해 정적 접근 가능 (ClassName.member)
+        - 정적 필드처럼 보이나 사실은 런타임 객체에 속한 멤버
+
+    - 실제 사용 예시
+        - Intent 생성 도우미
+        - Fragment.newInstance() 팩토리 패턴
+        - 공통 상수 정의
+        - @JvmStatic과 함께 사용하여 Java에서 static처럼 호출 가능
+        ```kotlin
+        class MyFragment : Fragment() {
+            companion object {
+                fun newInstance(id: Int): MyFragment {
+                    return MyFragment().apply {
+                        arguments = bundleOf("id" to id)
+                    }
+                }
+            }
+        }
+        ```
+
+    - 추가 설명
+        - @JvmStatic
+            - Kotlin에서는 companion object 멤버를 Java에서 호출하려면 ClassName.Companion.method() 형태여야 하지만, @JvmStatic을 해당 멤버에 붙이면 자바에서도 ClassName.log("...")처럼 static처럼 호출 가능
+
+- inline 함수와 일반 함수의 차이
+
 - Kotlin의 extension function을 설명하라.
 - Kotlin의 flow와 channel의 차이점은?
 - Jetpack Compose에서 Composition이란 무엇인가? Recomposition은 언제 발생하는가?
