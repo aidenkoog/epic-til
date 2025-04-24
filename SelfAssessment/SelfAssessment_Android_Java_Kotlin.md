@@ -2115,6 +2115,8 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 onSaveInstanceState()와 ViewModel의 차이점
 - Android의 Activity와 Fragment의 생명주기에서 주요 차이점
 - Jetpack Lifecycle Observer의 역할과 활용 방법
+
+
 - Android에서 ContentProvider의 역할과 사용 사례
     - 개요
         - 안드로이드의 4대 컴포넌트 중 하나이자 앱 간 데이터 공유를 담당하는 중요한 구조
@@ -2160,6 +2162,75 @@ Organize concepts, features, types and Pros and Cons
         - ContentProvider는 안드로이드에서 앱 간 데이터 공유를 표준화하고,URI + ContentResolver를 통해 데이터 접근을 안전하고 구조적으로 관리할 수 있게 도와주는 컴포넌트
 
 - RecyclerView의 ViewHolder 패턴을 사용하는 이유와 성능 최적화 방법
+    - ViewHolder 패턴
+        - RecyclerView 에서 각 아이템 뷰의 참조를 저장해두는 객체
+        - 뷰를 매번 findViewById()로 찾지 않고, 재활용 가능한 구조로 캐싱
+        - 아답터 내에서 onCreateViewHolder()로 뷰 홀더를 생성하고, onBindViewHolder()로 데이터를 바인딩
+            ```kotlin
+            class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                val titleText: TextView = itemView.findViewById(R.id.titleText)
+            }
+            ```
+
+    - 뷰 홀더 패턴을 사용하는 이유
+        - 뷰 재활용
+            - RecyclerView는 스크롤 시 기존 뷰를 재사용하므로 메모리 절약 및 렌더링 효율 ↑
+        - findViewById 반복 방지
+            - ViewHolder에 뷰 참조를 캐싱해 매번 탐색하는 오버헤드를 제거
+        - 성능 향상
+            - 스크롤 성능, FPS 향상, GC 부담 감소 등 앱 전반의 UI 반응 속도 개선
+        - 명확한 구조
+            - 아이템 뷰 구성과 바인딩 로직을 분리해 코드 유지보수성 ↑
+
+    - 성능 최적화 방법
+        - (1) 뷰홀더 패턴 철저히 적용
+            - findViewById()는 무조건 ViewHolder 내에서 한 번만 호출
+            - ViewBinding 또는 DataBinding 사용 시 더 깔끔하게 처리 가능
+            ```kotlin
+            class MyViewHolder(private val binding: ItemMyBinding) :
+                RecyclerView.ViewHolder(binding.root) {
+                fun bind(item: MyItem) {
+                    binding.title.text = item.title
+                }
+            }
+            ```
+
+        - (2) DiffUtil 사용
+            - notifyDataSetChanged() 대신 DiffUtil로 변경된 항목만 업데이트
+            - 성능과 배터리 효율 모두 크게 개선됨
+            ```kotlin
+            val diffCallback = object : DiffUtil.ItemCallback<MyItem>() {
+                override fun areItemsTheSame(old: MyItem, new: MyItem): Boolean = old.id == new.id
+                override fun areContentsTheSame(old: MyItem, new: MyItem): Boolean = old == new
+            }
+            ```
+
+        - (3) Payload 활용 (부분 바인딩)
+            - onBindViewHolder(holder, position, payloads) 활용 시 전체 바인딩이 아니라 변경된 부분만 바인딩 가능
+            ```kotlin
+            override fun onBindViewHolder(holder: MyViewHolder, position: Int, payloads: MutableList<Any>) {
+                if (payloads.isEmpty()) {
+                    super.onBindViewHolder(holder, position, payloads)
+                } else {
+                    // 부분 업데이트
+                }
+            }
+            ```
+
+        - (4) ViewType 분리
+            - 여러 종류의 아이템 뷰가 있는 경우 getItemViewType()을 적절히 활용해서 재활용 혼선 방지
+
+        - (5) Stable ID 사용
+            - setHasStableIds(true) 및 getItemId() 재정의 -> View 상태(스크롤, 선택 등) 안정성 ↑
+
+    - 부가적인 성능 팁
+        - RecyclerView.setItemViewCacheSize() 조절로 캐시 최적화
+        - View 안에 중첩된 복잡한 레이아웃은 ConstraintLayout 등으로 단순화
+        - NestedScrolling 필요 시 NestedScrollView → RecyclerView 구조는 신중히 고려
+
+    - 핵심 사항
+        - ViewHolder 패턴은 RecyclerView의 핵심 성능 최적화 기법으로, 뷰 재활용 + 참조 캐싱 + 부분 업데이트를 통해 스크롤 성능과 메모리 효율을 극대화한다.
+
 - Android에서 Handler, Looper, MessageQueue의 동작 원리
     - 등장 배경
         - Android는 기본적으로 UI 작업을 Main Thread (UI Thread)에서만 처리해야 함
