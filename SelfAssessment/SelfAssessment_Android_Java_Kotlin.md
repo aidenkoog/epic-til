@@ -5653,7 +5653,80 @@ Organize concepts, features, types and Pros and Cons
         - 타입 안전성은 유지하면서 런타임 객체 생성을 제거하여 성능을 향상시키는 코틀린 기능
         - ID, Email, Token 등 의미있는 값 표현에 자주 사용되며, 안드로이드에서도 Parcelable 등과 함께 활용 가능
 
-- Kotlin의 extension function을 설명하라.
+- Kotlin의 extension function
+    - 개요
+        - 기존 클래스의 소스코드를 수정하지 않고도 새로운 함수(기능)를 추가할 수 있는 기능
+
+    - 개념
+        - 코틀린에서 기존 클래스에 대해 상속없이 새로운 함수를 확장 형태로 추가할 수 있도록 해주는 기능
+        - 마치 그 클래스의 멤버 함수처럼 호출 가능
+
+    - 문법과 기본 사용법
+        ```kotlin
+        fun String.addPrefix(prefix: String): String {
+            return "$prefix$this"
+        }
+
+        val name = "Aiden"
+        val newName = name.addPrefix("Mr. ")  // 출력: "Mr. Aiden"
+        ```
+        - String 클래스에 addPrefix라는 새로운 함수가 생긴 것처럼 사용
+
+    - 사용 이유
+        - 기존 클래스의 기능을 확장하고 싶을 때
+            - 외부 라이브러리 클래스, 자바 클래스 등 수정할 수 없는 클래스에 새로운 기능을 붙이고 싶을 때 유용
+        - 유틸 함수 또는 DSL 스타일의 가독성 향상
+            - apply, with, run, also 등의 스코프 함수들도 내부적으로는 확장 함수
+        - 코드 간결성 + 재사용성 향상
+            - 중복되는 코드를 확장 함수로 빼면 프로젝트 전체에 깔끔하게 적용 가능
+
+    - 실제 예시
+        - 뷰에 간단한 확장 함수 추가
+        - 예시
+            ```kotlin
+            // 뷰 가시성 설정
+            fun View.visible() {
+                this.visibility = View.VISIBLE
+            }
+
+            fun View.gone() {
+                this.visibility = View.GONE
+            }
+
+            // 사용하는 부분
+            button.visible()
+            textView.gone()
+
+            // 프래그먼트에 확장함수로 Toast
+            fun Fragment.toast(message: String) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+
+            // 사용하는 부분
+            toast("토스트!")
+            ```
+
+    - 확장 함수의 제약 사항
+        - 멤버 함수처럼 보이지만 진짜 멤버 함수는 아님
+            - 컴파일 시에는 정적(static) 함수로 처리됨
+            - 같은 이름의 멤버 함수가 있다면 멤버 함수가 우선 (원래 것이 우선)
+        - private/protected 멤버에는 접근할 수 없음
+            - 내부 구현에 접근하는 멤버 함수와 달리,
+            - 확장 함수는 클래스 내부 구조에 접근 불가 (공개된 API만 사용 가능)
+
+    - 다른 확장 기능과의 관계
+        - 확장 프로퍼티(Extension Property)도 유사하게 존재
+        ```kotlin
+        val String.lastChar: Char
+        get() = this[length - 1]
+        ```
+            - Operator overloading, DSL, Coroutine builder 등에서 매우 자주 활용됨
+
+    - 결론
+        - 기존 클래스에 대해 새로운 기능을 외부에서 추가 가능한 기능
+        - 코드 재사용, 유틸리티 함수 작성, 가독성 향상에 유용
+        - 안드로이드 실무에서도 뷰, 프래그먼트, 컨텍스트 등의 기능 확장에 자주 사용됨
+
 - Kotlin의 flow와 channel의 차이점은?
 - Jetpack Compose에서 Composition이란 무엇인가? Recomposition은 언제 발생하는가?
 - WorkManager와 AlarmManager의 차이점과 사용 사례는?
@@ -5697,6 +5770,61 @@ Organize concepts, features, types and Pros and Cons
 - Custom Annotation 정의 및 커스텀 기능 구현 방법
 - AsyncTask Deprecated된 이유
 - Zygote 개념
+    - 개요
+        - Zygote(자이곳)는 앱 프로세스의 성능과 메모리 효율에 큰 영향을 주는 중요한 시스템 컴포넌트
+
+    - 정의
+        - 안드로이드 시스템에서 애플리케이션 프로세스를 생성하기 위한 기본 프로세스(부모 프로세스)
+        - 수정란(Zygote)처럼 다른 앱 프로세서들이 여기서부터 fork(분기)되어 생성
+
+    - 역할
+        - 시스템 초기화된 공통 리소스를 미리 로딩
+            - Android Framework API, 리소스, 라이브러리, 클래스 로딩 등을 미리 메모리에 올려둠
+        - 앱 프로세스 생성의 부모 역할
+            - 새로운 앱이 실행될 때, Zygote가 자신을 복제(fork)해서 새로운 앱 프로세스를 생성
+        - 빠른 앱 실행 및 메모리 절약
+            - 공통 리소스들이 이미 로딩된 상태로 프로세스가 복제되기 때문에
+                - -> 앱 실행 속도 향상
+                - -> 메모리 절약 (공유 메모리로 처리됨)
+
+    - 동작 흐름 요약
+        - (1) 부팅 시 init 프로세스가 Zygote를 실행
+        - (2) Zygote는 app_process를 통해 Java VM(Dalvik / ART)환경을 초기화함
+        - (3) 시스템 클래스, 리소스, Framework 등이 선로드(preload) 됨
+        - (4) 이후 앱을 실행할 때마다 Zygote가 fork() 호출하여 자식 프로세스(앱 프로세스)를 생성
+            - 이 구조는 유닉스 계열의 프로세스 생성 모델과 유사하게 설계되어 있음
+
+    - Zygote 사용 이유 (이점)
+        - 빠른 프로세스 생성
+            - fork()는 기존 메모리를 그대로 복제하므로, cold start 시에도 앱 실행 속도가 매우 빠름
+
+        - 메모리 공유로 절약
+            - 프레임워크 및 공통 클래스들이 Copy-On-Write 방식으로 공유됨
+                - → 여러 앱에서 동일한 메모리 사용 가능
+
+        - 안정성과 보안성 향상
+            - 시스템 리소스는 Zygote에서 미리 안전하게 초기화되어
+                - → 앱마다 반복할 필요 없음
+                - → 자원 충돌 방지
+
+    - Android 앱 생명주기에서의 위치
+        - 앱 실행 시 ActivityManagerService가 앱 실행 요청
+        - Zygote에 socket을 통해 실행 명령 전송
+        - Zygote가 fork() → 새 앱 프로세스 생성
+        - 새로 생성된 앱 프로세스는 자신의 ActivityThread를 시작함
+        - 그 후 Application, Activity, Service 등이 실행됨
+
+    - 실무 시 알아야 할 포인트
+        - Zygote는 앱 프로세스가 느리게 시작되는 이유가 아님 → 오히려 속도를 빠르게 해주는 주체
+        - Zygote fork 이후 초기화가 느린 앱은 대부분 자체 초기화 코드(Application.onCreate 등) 때문
+        - Android 8.0 이후에는 Zygote64, Zygote32 등으로 분리되어 64비트/32비트 앱을 각각 지원함
+
+    - 전체 요약
+        - Zygote는 안드로이드 핵심 프로세스
+        - 모든 앱 프로세스의 부모 역할
+        - 앱 실행에 필요한 공통 리소스를 미리 로딩한 뒤, 새로운 앱 실행 요청 시 fork()를 통해 빠르고 효율적으로 프로세스를 생성
+        - 앱 실행 속도와 메모리 사용 효율을 극대화하는 안드로이드 아키텍쳐의 핵심 구성 요소
+
 - .class, .dex 파일 내부 구조
     - .class 파일 (Java Bytecode)
         - 개요
