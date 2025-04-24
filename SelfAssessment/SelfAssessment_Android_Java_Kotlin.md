@@ -2014,7 +2014,40 @@ Organize concepts, features, types and Pros and Cons
 - Android TV에서 Leanback Extensions의 활용 방법
 - Android TV에서 Push Notification을 적용하는 방법
 - Android에서 Kotlin을 기본 언어로 채택한 이유
-- Android의 Application Class는 무엇이며, 어떻게 활용하는
+- Android의 Application Class 정의와 활용 방법
+    - 정의
+        - 안드로이드 앱의 전체 라이프사이클에서 가장 먼저 실행되고 가장 오래 살아있는 객체
+        - 앱 프로세스가 시작될 때 단 한번 생성되며, 앱이 종료될 때까지 유지
+        - 기본적으로 android.app.Application 클래스를 상속하여 커스터마이징 가능
+
+    - 사용 목적 및 활용 방법
+        - (1) 글로벌 컨텍스트 제공
+            - Context가 필요한 객체 (Repository, DB 등)에 안전하게 전달할 수 있는 앱 전역 Context
+            ```kotlin
+            val appContext = applicationContext // 어디서든 접근 가능
+            ```
+        - (2) 전역 변수 저장
+            - 앱 전체에서 공유해야 하는 값(예: 로그인 유저 정보, 설정값 등)을 저장
+        - (3) 초기화 작업 수행
+            - 앱이 시작될 때 한번만 수행해야 하는 초기화 작업 (Firebase, DI 설정, Logger 등)
+        - (4) DI(Container) or Singleton 관리
+            - Hilt, Dagger, Koin 같은 DI 프레임워크 설정 시 활용됨
+        - (5) Custom Crash Handling
+            - 전역 에러 핸들링용 UncaughtExceptionHandler 설정 가능
+            ```kotlin
+            Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+                // 로그 저장 및 재시작 로직 등
+            }
+            ```
+    - 적용 방법
+        - Application 클래스를 상속한 클래스를 정의
+        - AndroidManifest.xml에 등록
+    
+    - 코드 주의
+        - 메모리 누수 주의: Context를 정적 Static 변수로 저장하면 메모리 누수 위험 존재
+        - 많은 초기화 작업은 App Start를 느리게 만들 수 있으니 비동기 처리 또는 최소화 필요
+        - Application에 너무 많은 책임을 주면 유지보수가 어려워짐. 역할 분리 중요
+
 - Android에서 Context의 역할과 종류 (ApplicationContext, ActivityContext 등)의 차이점
     - Context 정의와 역할
         - 안드로이드에서 애플리케이션의 전반적인 정보와 리소스, 시스템 서비스에 접근하기 위한 인터페이스이자 핵심 객체
