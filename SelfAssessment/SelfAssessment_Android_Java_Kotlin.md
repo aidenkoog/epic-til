@@ -5855,6 +5855,56 @@ Organize concepts, features, types and Pros and Cons
         - 앱 실행에 필요한 공통 리소스를 미리 로딩한 뒤, 새로운 앱 실행 요청 시 fork()를 통해 빠르고 효율적으로 프로세스를 생성
         - 앱 실행 속도와 메모리 사용 효율을 극대화하는 안드로이드 아키텍쳐의 핵심 구성 요소
 
+- Zygote 다른 설명
+    - 개요
+        - 안드로이드 앱이 빠르게 실행될 수 있도록 지원하는 핵심 프로세스
+
+    - 정의
+        - 안드로이드에서 모든 앱 프로세스의 부모 역할을 하는 초기 런타임 프로세스
+            - 리눅스의 fork() 시스템 호출을 이용하여 새로운 앱 프로세스를 생성
+            - 안드로이드 부팅 시 시스템이 가장 먼저 실행하는 앱 런타임 환경의 템플릿
+            - app_process 바이너리를 통해 Zygote 프로세스가 런타임 환경을 미리 초기화
+
+    - Zygote 동작 방식
+        - 부팅 시 초기화
+            - 안드로이드 기기가 부팅되면, Init 프로세스가 Zygote를 실행
+            - 아래 작업을 미리 로딩
+                - ART 런타임
+                - 필수 클래스 (java.lang, android.app 등)
+                - 공통 리소스 (Drawable, Layout 등)
+        - 앱 실행 시 fork
+            - 앱 실행하면 Zygote가 fork()를 호출해 새 프로세스를 복사
+            - 이로 인해 새 앱 프로세스는 초기화 시간을 절약
+            - 이 방식은 리눅스의 Copy-on-Write(COW) 특성 덕분에 메모리 효율성도 높음
+
+    - 사용 이유
+        - 앱 실행 속도 향상: 미리 로드, 앱 프로세스 생성 시 바로 사용
+        - 메모리 절약: COW 기법, 부모(Zygote)와 자식(앱)이 공통 메모리 공유
+        - 안정성: 초기환경 표준화, 앱 간 실행 일관성 유지
+
+    - 중요 특징
+        - ART 초기화 포함: Zygote는 ART를 미리 초기화하여 앱 프로세스는 바로 코드 실행 가능
+        - app_process 실행: Zygote는 /system/bin/app_process 실행을 통해 Java런타임 환경을 실행
+        - zygote64, zygote32: 64, 32비트 기기 아키텍쳐에 따라 두 종류가 존재, 앱도 ro.zygote 설정에 따라 적절한 버전으로 fork
+
+    - 안드로이드 앱 실행 흐름 내 Zygote 위치
+        - SystemServer: 시스템 서비스들을 실행하는 프로세스 (AMS, WMS 등)
+        - 앱 프로세스: Zygote로부터 fork 된 독립 실행 환경
+        ```scss
+        [init] → [Zygote] → fork() → [SystemServer]
+                               → fork() → [앱 프로세스]
+        ```
+
+    - 총 정리
+        - Zygote는 안드로이드에서 모든 앱의 런타임 기반이 되는 템플릿 프로세스
+        - 앱 실행 시 Zygote가 fork()로 새 프로세스를 빠르게 복사
+        - 앱 실행 속도 향상 + 메모리 효율성 증가
+        - 안드로이드 시스템의 핵심 부팅 시퀀스와 런타임 구조의 출발점
+
+    - 참고
+        - ZygoteInit.java
+        - ActivityManagerService
+
 - .class, .dex 파일 내부 구조
     - .class 파일 (Java Bytecode)
         - 개요
