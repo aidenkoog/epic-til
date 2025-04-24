@@ -5537,6 +5537,121 @@ Organize concepts, features, types and Pros and Cons
             - Kotlin에서는 companion object 멤버를 Java에서 호출하려면 ClassName.Companion.method() 형태여야 하지만, @JvmStatic을 해당 멤버에 붙이면 자바에서도 ClassName.log("...")처럼 static처럼 호출 가능
 
 - inline 함수와 일반 함수의 차이
+    - 기본 개념
+        - 일반 함수
+            - 일반적인 함수 호출 방식으로, 함수를 호출하면 스택에 올라가고, 반환되며 종료됨
+            - 람다를 인자로 넘기면 실행 시점에 Function 객체로 생성됨
+            ```kotlin
+            fun greet(name: String, block: () -> Unit) {
+                println("Hello, $name")
+                block() // Function 객체 실행
+            }
+            ```
+
+        - inline 함수
+            - 함수 호출 시 컴파일 타임에 해당 함수의 코드 자체를 호출 지점에 복붙(inline) 해주는 방식
+            - 고차 함수(함수를 인자로 받는 함수)에서 불필요한 객체 생성을 줄이고 성능을 최적화할 수 있음
+            - 람다가 인라인되면 Function 객체를 생성하지 않음 -> 성능 향상
+            ```kotlin
+            inline fun greet(name: String, block: () -> Unit) {
+                println("Hello, $name")
+                block()
+            }
+            ```
+
+    - 차이점
+        - 함수 호출 방식
+            - 일반 함수: 실행 시점에 호출 스택에 올라감
+            - inline 함수: 컴파일 타임에 호출 지점에 코드가 삽입됨 (함수 호출 자체가 사라짐)
+    
+        - 람다 처리
+            - 일반 함수: 람다 = Function 객체 생성 -> 힙 메모리 사용
+            - inline 함수: 람다 = 객체 생성 없이 코드가 직접 삽입됨 -> GC 부담 없음
+
+        - 성능
+            - 일반 함수: 함수 호출 오버헤드 + 람다 객체 할당
+            - inline 함수: 오버헤드 없음 + 람다 객체 생성 생략 -> 더 빠름
+
+        - 디버깅 및 코드 크기
+            - 일반 함수: 호출 추적이 쉬움 (스택 프레임 존재)
+            - inline 함수: 디버깅 시 코드가 여러 위치에 삽입되므로 추적이 어려울 수 있음, 또한 남용시 바이트코드 크기가 증가할 수 있음
+
+    - inline 사용 시점
+        - 사용 권장 상황
+            - 람다를 자주 넘기는 고차함수
+            - 성능 민감한 반복 호출 함수
+            - crossinline, noinline 제어가 필요한 컨텍스트
+            - 안드로이드에서 with, let, run, apply, use 등 스코프 함수처럼 많이 쓰는 유틸 함수들
+        - 사용 주의 상황
+            - 함수 내용이 너무 길면 -> 코드 복제 증가 -> 바이트코드 커짐
+            - 람다를 저장하거나 나중에 실행해야 하는 경우 -> inline 사용 X
+            - 일반적인 단순 함수 -> inline 필요 없음
+
+    - 추가 설명
+        - noinline: inline 함수 내에서 특정 람다는 인라인 되지 않게 함
+        - crossinline: 람다 내에서 return 이 불가능하도록 막음
+
+- inline class (value class)
+    - 개요
+        - 런타임에 불필요한 객체 생성을 줄이고 성능을 높이기 위해 도입된 경량 래퍼 클래스
+    - inline class (value class) 정의
+        - 하나의 프로퍼티만을 가지는 클래스
+        - 컴파일 시점에는 일반 클래스처럼 보이지만, 런타임에는 해당 프로퍼티로 인라인(대체) 처리되는 구조
+        - 즉, 추가적인 객체 생성 없이 클래스처럼 다루되, 성능은 기본 타입처럼 경량화된 것
+
+    - 기본 사용법
+        ```kotlin
+        @JvmInline
+        value class UserId(val value: String)
+        ```
+        - 이제 UserId는 String을 감싸는 클래스로 사용되지만, 런타임에는 실제 UserId 객체없이 String 값으로 처리
+
+        ```kotlin
+        val id = UserId("aiden123")
+        println(id.value)
+        ```
+        - 컴파일 후 JVM 바이트코드에서는 UserId 객체 없이 "aiden123"만 남게 됨 -> 성능 향상
+
+    - 사용 이유
+        - (1) 타입 안정성 확보
+            - 단순 String, Int를 직접 넘기는 대신 의미 있는 타입으로 감쌀 수 있음 (UserId)
+            ```kotlin
+            fun getUser(id: UserId) { ... } // String과 구분되는 안전한 타입
+            ```
+                - 실수로 productId: String을 넘기는 버그를 방지
+
+        - (2) 성능 최적화
+            - 일반 래퍼 클래스는 객체를 생성해야 하지만,
+            - value class는 JVM에서 객체를 생성하지 않고 값만 사용함 -> 메모리 효율 + 속도 향상
+
+    - 특징 요약
+        - 단 하나의 프로퍼티만 가질 수 있음
+        - 기본 타입처럼 처리되지만, 타입의 구분은 유지됨
+        - @JvmInline 애노테이션이 필요 (JVM에서 inline 최적화가 적용되도록)
+
+    - 제한 사항 (주의점)
+        - 프로퍼티는 val만 가능 (불변)
+        - init 블록 사용 불가
+        - 상속 불가, abstract/open/interface 구현 불가
+        - null 허용 시 타입은 Boxed됨 -> 인라인 최적화가 사라짐
+        - 여러 프로퍼티를 가질 수 없음
+
+    - 실제 예시
+        - ID, Email, Token 같은 도메인 값의 타입 안정성 확보
+            ```kotlin
+            @JvmInline
+            value class Email(val value: String)
+
+            fun send(email: Email) { ... }
+
+            send(Email("test@a.com")) // 안전
+            send("test@a.com")        // 컴파일 에러
+            ```
+
+    - 전체 요약
+        - inline class 즉, value class는 하나의 값을 감싸는 경량 래퍼 클래스
+        - 타입 안전성은 유지하면서 런타임 객체 생성을 제거하여 성능을 향상시키는 코틀린 기능
+        - ID, Email, Token 등 의미있는 값 표현에 자주 사용되며, 안드로이드에서도 Parcelable 등과 함께 활용 가능
 
 - Kotlin의 extension function을 설명하라.
 - Kotlin의 flow와 channel의 차이점은?
