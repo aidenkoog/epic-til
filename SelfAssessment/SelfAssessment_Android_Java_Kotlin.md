@@ -3166,6 +3166,59 @@ Organize concepts, features, types and Pros and Cons
 - Java의 JVM, JRE, JDK의 차이점은?
 - Java에서 equals()와 ==의 차이점은?
 - Java에서 hashCode()와 equals()의 관계는?
+- Java StringPool
+    - 개요
+        - 문자열의 메모리 사용을 최적화하기 위한 JVM의 내부 메커니즘
+    
+    - String Pool 정의
+        - JVM이 관리하는 문자열 상수 전용 메모리 영역
+        - 이 영역에 저장된 문자열은 중복 없이 공유되며, 같은 문자열 리터럴을 여러 번 사용할 경우 하나의 인스턴스만 사용
+    
+    - 필요 이유
+        - 문자열은 불변하고 코드 곳곳에서 자주 사용되기 때문
+        - 매번 객체를 생성하면 메모리 낭비가 크고 성능 저하 발생
+        - JVM은 동일한 문자열 리터럴을 String Pool에 저장하고 재사용
+
+    - 동작 내용
+        - 리터럴 사용 시 (컴파일 타임)
+            ```java
+            String s1 = "Hello";
+            String s2 = "Hello";
+            System.out.println(s1 == s2); // true
+            ```
+            - "Hello"는 String Pool에 한번만 생성되고, s1, s2는 같은 메모리 주소를 참조
+
+        - new 연산자 사용 시 (런타임)
+            ```java
+            String s3 = new String("Hello");
+            System.out.println(s1 == s3); // false
+            ```
+            - new String("Hello")는 Heap 영역에 별도의 객체를 만듦
+            - Pool에 있는 "Hello"와는 다른 주소 참조
+
+        - intern() 메서드 사용
+            ```java
+            String s4 = new String("Hello").intern();
+            System.out.println(s1 == s4); // true
+            ```
+            - 해당 문자열이 String Pool에 있으면 그 객체를 반환하고, 없으면 Pool에 추가하고 반환함
+    
+    - 특징
+        - String Pool은 JVM의 Metaspace (구 JVM PermGen) 영역에 존재
+        - JVM이 자동 관리하지만, intern()으로 수동 제어도 가능
+        - 문자열 리터럴은 기본적으로 Pool에 들어감
+        - 불변성이 기반이라 가능한 기능 (String이 mutable이면 불가능)
+
+    - 추가 설명
+        - 문자열 비교 시 == 대신 .equals() 사용이 안전
+        - intern()을 무분별하게 사용하면 Metaspace 메모리 부족 가능성
+        - JSON이나 대용량 텍스트 처리 시 문자열 객체가 쌓이지 않도록 주의
+
+    - 재 정리
+        - Java의 String Pool은 동일한 문자열 리터럴이 메모리상에서 하나의 객체로 공유되도록 하는 JVM 메커니즘
+        - 메모리 절약과 성능 향상을 위해 설계된 기능
+        - "Hello"와 같이 직접 작성한 문자열 리터럴은 자동으로 Pool에 저장되며, intern() 메서드를 통해 수동으로도 Pool에 등록 가능
+
 - Java에서 String과 StringBuilder, StringBuffer의 차이점
     - String
         - 불변(immutable) 클래스, 문자열 수정 시 항상 새로운 객체가 생성됨
