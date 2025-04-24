@@ -3164,7 +3164,27 @@ Organize concepts, features, types and Pros and Cons
 - Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
 - Java에서 Functional Interface를 활용하는 방법은?
 - Java의 JVM, JRE, JDK의 차이점은?
-- Java에서 equals()와 ==의 차이점은?
+- Java에서 equals()와 ==의 차이점
+    - 개요
+        - 두 값을 비교할 때 사용하는 연산자/메서드
+        - 비교하는 대상과 의미가 완전히 다름
+    - == 연산자
+        - ==는 참조 타입일 경우 메모리 주소(참조값)을 비교
+        - 기본 타입일 경우 값 자체를 비교하는 연산자(Operator)
+    - equals()
+        - 객체가 논리적으로 같은지를 판단하는 메서드
+        - 기본적으로 Object.equals()는 ==와 동일하게 참조값을 비교하지만,
+        - 필요에 따라 오버라이드하여 값 기반 비교가 가능
+        ```java
+        String a = new String("hello");
+        String b = new String("hello");
+        System.out.println(a.equals(b)); // true → 내용이 같음
+        ```
+    - 결론
+        - ==는 참조(주소) 또는 기본값 자체를 비교하는 연산자
+        - equals()는 객체의 논리적 동등성을 비교하는 메서드
+        - 객체 비교 시에는 반드시 equals()를 사용해야 하며, ==는 동일 인스턴스 여부 확인에만 사용해야 한다.
+
 - Java에서 hashCode()와 equals()의 관계
     - 개요
         - 객체의 동등성 비교와 해시 기반 컬렉션(Set, Map 등)의 동작을 결정하는 핵심 메서드
