@@ -2014,6 +2014,15 @@ Organize concepts, features, types and Pros and Cons
 - Android TV에서 Leanback Extensions의 활용 방법
 - Android TV에서 Push Notification을 적용하는 방법
 - Android에서 Kotlin을 기본 언어로 채택한 이유
+    - 간결한 문법과 높은 생산성
+    - Null 안정성 내장
+    - 완벽한 자바 호환성
+    - 구글의 공식 지원과 안드로이드 스튜디오 통합
+    - 코루틴을 통한 비동기 처리의 간결화
+    - 모던 언어 (함수형, DSL)
+    - Jetpack Compose 중심의 개발 패러다임 변화
+        - Declarative UI 구조와 Kotlin DSL 문법의 조화
+
 - Android의 Application Class 정의와 활용 방법
     - 정의
         - 안드로이드 앱의 전체 라이프사이클에서 가장 먼저 실행되고 가장 오래 살아있는 객체
@@ -2107,6 +2116,49 @@ Organize concepts, features, types and Pros and Cons
 - Android의 Activity와 Fragment의 생명주기에서 주요 차이점
 - Jetpack Lifecycle Observer의 역할과 활용 방법
 - Android에서 ContentProvider의 역할과 사용 사례
+    - 개요
+        - 안드로이드의 4대 컴포넌트 중 하나이자 앱 간 데이터 공유를 담당하는 중요한 구조
+    - 정의
+        - 앱 간에 데이터를 안전하게 공유할 수 있도록 도와주는 컴포넌트
+        - 데이터베이스, 파일, 네트워크 등 다양한 저장소를 추상화해 URI 기반으로 접근할 수 있게 해줌
+        - 앱 외부에서도 데이터를 읽거나 쓸 수 있도록 표준화된 API 인터페이스 제공
+            - query(), insert(), update(), delete() 등
+
+    - ContentProvider의 주요 역할
+        - 앱 간 데이터 공유: 앱 A의 데이터를 앱 B에서 안전하게 접근할 수 있도록 해줌
+        - URI 기반 접근: content://authority/path/id 형태의 URI로 데이터를 식별하고 접근 가능
+        - 권한 제어: android:exported, permission 속성 등으로 외부 접근 제어 가능
+        - ContentResolver 연동: 클라이언트 측에서는 ContentResolver를 통해 데이터에 접근
+
+    - 대표적인 시스템 ContentProvider
+        - ContactsContract → 연락처
+        - MediaStore → 사진, 동영상, 음악
+        - CalendarContract → 일정
+        - Settings.System → 시스템 설정 값
+        ```kotlin
+        val cursor = contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null, null, null, null
+        )
+        ```
+    - 커스텀 ContentProvider 사용 예
+        - 회사 내 여러 앱이 공용 DB를 쓰는 경우
+        - 한 앱에서 다른 앱의 데이터를 읽거나 업데이트해야 하는 경우
+        - 플러그인 구조 앱에서 각 모듈 간 데이터를 표준 인터페이스로 주고받는 경우
+
+    - 구현방법
+        - (1) ContentProvider 상속 클래스 구현
+        - (2) AndroidManifest.xml 에 등록
+        - (3) 클라이언트 앱에서 ContentResolver 사용
+
+    - 주의점
+        - 보안 이슈: 민감한 데이터는 permission 설정 및 android:exported="false" 고려
+        - 성능 이슈: 너무 큰 데이터는 파일이나 DB를 직접 공유하는 방식이 나을 수 있음
+        - 앱 간 계약(Contract): URI path, 컬럼 명 등 명확한 설계 문서 필요
+
+    - 결론
+        - ContentProvider는 안드로이드에서 앱 간 데이터 공유를 표준화하고,URI + ContentResolver를 통해 데이터 접근을 안전하고 구조적으로 관리할 수 있게 도와주는 컴포넌트
+
 - RecyclerView의 ViewHolder 패턴을 사용하는 이유와 성능 최적화 방법
 - Android에서 Handler, Looper, MessageQueue의 동작 원리
     - 등장 배경
