@@ -3165,7 +3165,76 @@ Organize concepts, features, types and Pros and Cons
 - Java에서 Functional Interface를 활용하는 방법은?
 - Java의 JVM, JRE, JDK의 차이점은?
 - Java에서 equals()와 ==의 차이점은?
-- Java에서 hashCode()와 equals()의 관계는?
+- Java에서 hashCode()와 equals()의 관계
+    - 개요
+        - 객체의 동등성 비교와 해시 기반 컬렉션(Set, Map 등)의 동작을 결정하는 핵심 메서드
+        - 서로 긴밀하게 연결된 규약(contract)이 있기 때문에, 올바르게 이해하고 함께 오버라이드 해야 문제없이 작동
+
+    - equals()
+        - 두 객체가 논리적으로 같은지 비교하는 메서드
+        - 기본적으로 Object.equals()는 참조(주소) 비교를 하지만,
+        - 직접 오버라이드하여 값 기반 비교가 가능
+        ```java
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Person other = (Person) obj;
+            return name.equals(other.name) && age == other.age;
+        }
+        ```
+
+    - hashCode()
+        - 객체를 해시 기반 컬렉션(Map, Set 등)의 키로 사용할 때 필요한 정수값을 반환하는 메서드
+        - 기본적으로 객체의 메모리 주소 기반으로 계산되지만,
+        - equals()를 오버라이드하면 hashCode()도 반드시 같이 오버라이드해야 함
+        ```java
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, age);
+        }
+        ```
+
+    - equals()와 hashCode()의 필수 규약 (Contract)
+        - 핵심 규칙
+            - 같다고 판단되는 객체는 항상 같은 hashCode 값을 가져야 함
+        - 상세 내용
+            - a.equals(b) == true 이면 -> a.hashCode() == b.hashCode() 여야 함
+            - a.hashCode() == b.hashCode() 라고 해서 반드시 a.equals(b) == true 일 필요는 없음 (충돌 가능)
+        - 규약 미 준수 시
+            - HashMap, HashSet, HashTable 등의 컬렉션에서 검색/중복 제거/저장 등의 동작이 비정상적으로 작동
+
+    - HashSet에서 문제되는 경우
+        ```java
+        Set<Person> people = new HashSet<>();
+        people.add(new Person("Aiden", 30));
+        people.contains(new Person("Aiden", 30)); // hashCode와 equals 둘 다 오버라이드 안 하면 false!
+        ```
+        - equals()만 오버라이드하고 hashCode()는 그대로 두면
+            - -> 논리적으로 같지만 서로 다른 해시 버킷에 들어가서 탐색 실패
+
+    - 올바른 오버라이드 방법 (Java 7+)
+        ```java
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Person other = (Person) obj;
+            return name.equals(other.name) && age == other.age;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, age); // java.util.Objects
+        }
+        ```
+
+    - 총 정리
+        - Java에서 equals()는 객체의 논리적 동등성,
+        - hashCode()는 해시 기반 자료구조에서 객체 위치 지정을 위해 사용되며,
+        - 같다고 판단되는 객체는 반드시 같은 hashCode를 가져야 한다는 규약을 지켜야 한다.
+        - 그렇지 않으면 HashMap, HashSet 등에서 검색 오류, 중복 허용 등의 버그가 발생할 수 있다.
+
 - Java StringPool
     - 개요
         - 문자열의 메모리 사용을 최적화하기 위한 JVM의 내부 메커니즘
