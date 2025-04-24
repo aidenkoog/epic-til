@@ -5582,8 +5582,155 @@ Organize concepts, features, types and Pros and Cons
 - Custom Annotation 정의 및 커스텀 기능 구현 방법
 - AsyncTask Deprecated된 이유
 - Zygote 개념
+- .class, .dex 파일 내부 구조
+    - .class 파일 (Java Bytecode)
+        - 개요
+            - JVM에서 실행하기 위한 Java 바이트코드
+            - 각 .class 파일은 하나의 클래스 또는 인터페이스를 나타냄
+            - 표준 JVM 포맷이고, 바이너리 형식
+
+        - 주요 구성 요소
+            - Magic Number
+                - 항상 0xCAFEBABE로 시작 → JVM 파일임을 식별
+            - 버전 정보
+                - Java 버전 명시 (예: major version 52 = Java 8)
+            - Constant Pool
+                - 문자열, 클래스, 메서드 참조 등 리터럴 상수 저장
+                - 바이트코드가 이 인덱스를 참조함
+            - Access Flags
+                - public, abstract, final 등의 클래스 접근 정보
+            - This Class / Super Class
+                - 현재 클래스와 부모 클래스 정보
+            - Interfaces
+                - 구현한 인터페이스 목록
+            - Fields / Methods
+                - 변수 및 메서드 정의 (이름, 시그니처, 접근자 포함)
+            - Attributes
+                - Code, LineNumberTable, SourceFile 등의 메타정보
+
+    - .dex 파일 (Dalvik Executable)
+        - 개요
+            - Android의 Dalvik 또는 ART에서 실행 가능한 특수 포맷
+            - 모든 클래스가 하나의 .dex 파일 안에 포함됨
+            - 공간 효율성을 고려한 설계 (모바일 환경에 최적화)
+
+        - 주요 구성 요소
+            - Header
+                - dex\n035\0 → dex 파일 식별자 (magic number)
+                - 파일 크기, 체크섬, 버전 정보 포함
+            - String IDs
+                - 모든 문자열의 목록 (중복 제거)
+            - Type IDs
+                - 클래스, 인터페이스, 배열 등 타입 목록
+            - Proto IDs
+                - 메서드 시그니처 정보 (return type, parameters)
+            - Field IDs / Method IDs
+                - 필드와 메서드의 이름, 소속 클래스, 시그니처 인덱스
+            - Class Defs
+                - 각 클래스의 정의 (상속 정보, 인터페이스, 메서드 오프셋 등)
+            - Code Items
+                - 실제 바이트코드 (register 기반 명령어 집합)
+            - Data Section
+                - 상수, 어노테이션, 디버깅 정보 등 추가 데이터
+
+    - 내부 구조
+        - .class
+            ```pgsql
+            | Magic | Version | Constant Pool | Access Flags |
+            | This Class | Super Class | Interfaces |
+            | Fields | Methods | Attributes |
+            ```
+        - .dex
+            ```pgsql
+            | Header | String IDs | Type IDs | Proto IDs |
+            | Field IDs | Method IDs | Class Defs |
+            | Code Items | Data Section |
+            ```
+
 - JVM과 Dalvik 가상 머신
+    - 기본 개념
+        - JVM (Java Virtual Machine): Java 프로그램을 실행하는 표준 가상 머신
+            - 자바로 작성된 프로그램을 바이트코드(.class) 로 컴파일 후 JVM에서 실행
+            - 모든 자바 플랫폼의 기반
+            - OS와 하드웨어 독립적인 실행 환경 제공
+            - 명령어 기반: 스택 기반
+            - 실행 방식: .class를 직접 실행
+
+        - DVM (Dalvik Virtual Machine): 안드로이드 전용으로 설계된 가상 머신 (안드로이드 4.4 이하)
+            - 자바 코드를 안드로이드에서 실행할 수 있게 하기 위한 맞춤형 가상 머신
+            - .class -> .dex(Dalvik Executable)로 변환 후 실행
+            - 모바일 기기 특화 설계: 메모리 적게 사용, 다중 인스턴스 지원
+            - 명령어 기반: 레지스터 기반
+            - 실행 방식: .dex를 실행 (.class -> .dex 변환 필요 (dx, D8 사용))
+
+    - 구조적 차이
+        - JVM
+            - 스택 기반 아키텍쳐
+            - 명령어 실행 시 스택을 활용 (push, pop 중심)
+            - 예: 두 값을 더하려면 스택에 값을 넣고 iadd 수행
+        - DVM
+            - 레지스터 기반 아키텍쳐
+            - 명령어가 가상의 레지스터에 직접 접근
+            - 더 빠르고 효율적인 연산 가능 (스택 사용 줄임)
+            - 모바일 기기의 메모리 최적화와 속도 향상에 유리
+
+    - 멀티스레드 및 멀티앱 처리
+        - JVM: 일반적으로 하나의 인스턴스에서 여러 스레드가 실행
+        - DVM: 각 안드로이드 앱마다 하나의 DVM 인스턴스를 가짐
+            - 앱 간 충돌방지
+            - 앱마다 독립적인 실행 환경 보장
+
+    - Dalvik -> ART (Android Runtime)
+        - Android 5.0 롤리팝부터는 ART가 기본 런타임
+            - 인터프리터 실행 방식에서 AOT (설치 시 네이티브 코드 변환)
+            - 속도는 빨라짐 (기계어로 실행)
+            - 메모리 사용은 증가 (기계어 저장 필요)
+
+    - 참고
+        - 코드 설계: 안드로이드 앱 개발 시 JVM 특화된 기능 (예: SecurityManager, ClassLoader 구조 등)을 사용할 수 없음
+
 - 바이트 코드를 안드로이드에서 바로 실행 가능한지에 대한 설명
+    - 개요
+        - 안드로이드는 JVM 바이트코드(.class)를 직접 실행하지 않음
+
+    - 안드로이드는 JVM 사용하지 않음
+        - 자바는 기본적으로 JVM위에서 실행되는 언어
+            - .java -> .class -> JVM이 실행 (바이트코드 실행)
+        - 반면, 안드로이드는 JVM이 아닌 Dalvik/ART(Android Runtime)을 사용
+            - JVM 바이트코드를 그대로 실행 불가능
+
+    - 안드로이드 앱 빌드 흐름
+        - .java -> .class -> .dex
+            ```markdown
+            1. Java 소스코드 (.java)
+                    ↓
+            2. Java 바이트코드 (.class) ← 이건 JVM 용
+                    ↓
+            3. D8 or DX 툴로 변환
+                    ↓
+            4. Dalvik/ART 실행용 바이트코드 (.dex = Dalvik Executable)
+            ```
+            - D8 or R8: .class -> .dex 변환기 (안드로이드용 실행 포맷 생성)
+            - .dex 파일은 Android Runtime에서 실행 가능한 포맷
+            - 바이트 코드는 중간 산물이며, 직접 실행되지 않음, 반드시 .dex로 변환된 뒤 실행돼야 함 
+                - 안드로이드는 .class 바이트코드를 직접 실행할 수 없으며, 반드시 .dex 포맷으로 변환된 후 ART에서 실행됨
+                - 바이트코드는 안드로이드에서 직접 실행하는 최종 산물이 아니며, 앱 실행을 위한 중간 단계
+
+    - 실행 환경 비교
+        - 실행 대상
+            - Java (JVM): .class (바이트코드)
+            - Android (ART/Dalvik): .dex
+        - 런타임
+            - Java (JVM): JVM (Java Virtual Machine)
+            - Android (ART/Dalvik): ART(Android Runtime), 이전에는 Dalvik
+        - 변환 도구
+            - Java (JVM): 없음
+            - Android (ART/Dalvik): D8, R8, dx 등을 통해 변환 필요
+
+    - 예외 / 테스트 상황
+        - 안드로이드 기기에서 자바 프로그램 직접 실행 시
+            - JVM 설치 필요 (Termux 등)
+            - .class 또는 .jar 파일을 JVM으로 실행하는 방식
 
 - 직렬화 vs 역직렬화 개념
     - 개요
@@ -5801,3 +5948,158 @@ Organize concepts, features, types and Pros and Cons
         // null check + 예외처리를 한 줄로 표현 가능
         val user = findUserById(id) ?: throw IllegalArgumentException("User not found")
         ```
+
+- 용어 정리
+    - 일급 함수 (First Class Function)
+        - 개념
+            - 함수를 값처럼 취급할 수 있다 라는 의미
+            - 함수가 변수에 저장, 파라미터로 전달, 리턴값으로 반환될 수 있으면 그 언어는 일급 함수를 지원한다라고 할 수 있음
+                - 변수저장, 파라미터 전달, 리턴값 반환
+        - 특징
+            - 함수를 변수에 저장할 수 있음
+            - 함수를 다른 함수에 전달할 수 있음
+            - 함수에서 다른 함수를 반환할 수 있음
+            - 함수 자체를 생성할 수 있음 (람다, 클로저 등)
+        - 예시
+            ```Kotlin
+            val add: (Int, Int) -> Int = { a, b -> a + b }  // 변수에 함수 저장
+            println(add(3, 5)) // 8
+            ```
+
+    - 고차 함수 (Higher Order Function)
+        - 개념
+            - 함수를 매개변수로 받거나 또는 함수를 리턴하는 함수
+            - 즉, 함수를 인자로 받거나, 함수를 반환하는 함수
+            - 고차 함수는 일급 함수가 지원되는 언어에서만 가능
+        - 특징
+            - 콜백 함수 전달 가능
+            - 람다나 익명 함수로 간결한 표현 가능
+            - 코드 재사용 및 추상화 수준 증가
+        - 예시
+            ```Kotlin
+            fun operate(a: Int, b: Int, op: (Int, Int) -> Int): Int {
+                return op(a, b)
+            }
+
+            val result = operate(10, 20) { x, y -> x + y }  // 고차 함수 사용
+            println(result) // 30
+            ```
+
+    - 활용 예시
+        - Java/Kotlin에서 콜백 전달: 버튼 클릭, 네트워크 응답 처리
+        - JavaScript에서 map, filter, reduce: 배열 함수 대부분이 고차 함수
+        - Swift의 closure, Python의 lambda:	람다 전달로 코드 간결화
+        - RxJava / Flow / Coroutine: 대부분 고차 함수 기반의 연산 (map, flatMap, collect)
+
+    - 결론 요약
+        - 일급 함수는 "함수를 값처럼 다룰 수 있다"는 능력
+        - 고차 함수는 "함수를 인자로 받거나, 반환하는 함수"라는 사용 형태
+        - 고차 함수는 일급 함수가 가능한 언어에서만 구현 가능
+        - 이 개념은 람다, 콜백, 클로저, 함수형 API 설계에 핵심
+
+- 익명 함수, 람다, 클로저
+    - 익명함수 (Anonymous Function)
+        - 개념
+            - 이름이 없는 함수
+            - 함수 정의와 동시에 사용되며, 주로 일회성 목적으로 사용
+        - 특징
+            - 일반적인 함수와 동일한 구문을 갖지만 이름이 없음
+            - 파라미터와 반환 타입 명시 가능
+            - Java 8, Kotlin, Swift 등에서 지원
+        - 예시
+            ```kotlin
+            val sum = fun(a: Int, b: Int): Int {
+                return a + b
+            }
+            println(sum(3, 4)) // 7
+            ```
+    - 람다 표현식 (Lambda Expression)
+        - 개념
+            - 익명함수의 간단한 표현 방법
+            - 함수를 간결하게 전달하고자 할 때 주로 사용
+        - 특징
+            - fun 키워드 생략 가능
+            - 파라미터 타입 생략 가능 (타입 추론됨)
+            - return 키워드도 생략 가능 (단일 표현식의 경우)
+        - 예시
+            - 람다는 본질적으로 익명함수이지만, 더 간결하고 함수형 스타일에 적합
+            ```kotlin
+            val sum = { a: Int, b: Int -> a + b }
+            println(sum(5, 6)) // 11
+            ```
+    - 클로저 (Closure)
+        - 개념
+            - 자신이 생성된 환경(스코프)의 변수들을 함께 기억하는 함수 (외부 변수 참조를 기억하는 함수)
+            - 즉, 외부 변수에 대한 참조(캡쳐)를 유지하는 함수 객체
+            - Java 8+ 에서는 제한적 클로저 지원 (final or effectively final만, ()->{})
+        - 특징
+            - 지역변수를 캡쳐해서 함수 외부에서도 사용 가능
+            - 함수 실행 후에도 그 지역변수가 GC되지 않고 살아 있음
+            - 상태를 기억할 수 있어 상태 기반 콜백이나 은닉된 상태 관리에 유리
+        - 예시
+            - count는 makeCounter() 스코프 안의 지역변수지만, counter() 함수가 외부에서도 기억하고 접근 가능 -> 클로저 개념
+
+    - 최종 정리 요약
+        - 익명 함수: 이름 없는 함수, 함수도 값이다가 컨셉, 기본 표현
+        - 람다: 익명 함수의 간결 버전, 고차 함수에서 자주 사용
+        - 클로저: 외부 변수 캡처(상태 기억)를 통해 진정한 함수형 프로그래밍 가능
+
+- 함수형 프로그래밍 (Function Programming)
+    - 개요
+        - 함수를 수학적 개념으로 다루고, 부작용 없이 상태를 예측 가능하게 만드는 프로그래밍 패러다임
+
+    - 정의
+        - 함수를 일급 시민(First Class Citizen)으로 다루며, 상태 변화나 부작용(Side Effect)을 피하고 순수 함수(Pure Function)를 조합하여 프로그램을 구성하는 방식
+        - 즉, 코드가 예측 가능하고 디버깅이 쉽고 테스트가 용이하도록 만드는 방식
+
+    - 주요 특징
+        - (1) 순수 함수 (Pure Function)
+            - 입력 -> 출력이 항상 같음
+            - 외부 상태를 변경하지 않음 (부작용 없음)
+                ```kotlin
+                fun add(a: Int, b: Int): Int = a + b // 같은 입력이면 항상 같은 결과
+                ```
+        - (2) 부작용 없음 (Side Effect Free)
+            - 함수 내부에서 파일 쓰기, 로그 출력, DB 저장 등 외부 상태 변경 금지
+            - -> 코드를 테스트하기 쉽고 예측 가능
+        - (3) 불변성 (Immutable State)
+            - 변수는 가능한 val 선언
+            - 상태 변경 대신 새 객체를 만들어 반환
+                ```kotlin
+                val list = listOf(1, 2, 3)
+                val newList = list + 4 // 원본은 변하지 않음
+                ```
+        - (4) 고차 함수 (Higher Order Function)
+            - 함수를 인자로 전달 또는 반환
+        - (5) 일급 함수 (First Class Function)
+            - 함수를 값처럼 저장, 전달, 반환 가능
+        - (6) 함수 조합 (Composition)
+            - 작은 순수 함수들을 조합해서 복잡한 로직을 구성
+            - compose(), andThen() 같은 조합 메서드 사용
+
+    - 함수형 프로그래밍 예시
+        ```kotlin
+        // 불변 컬렉션
+        val numbers = listOf(1, 2, 3, 4, 5)
+
+        // 함수형 스타일 (순수 함수, 고차 함수)
+        val evenSquares = numbers
+            .filter { it % 2 == 0 }      // 짝수 필터링
+            .map { it * it }             // 제곱 계산
+            .toList()
+
+        println(evenSquares) // [4, 16]
+        ```
+
+    - 장점
+        - 코드 예측 가능 (동일 입력 -> 동일 출력)
+        - 테스트 용이 (상태가 없으므로 모킹 쉬움)
+        - 병렬 처리에 강함 (공유 상태 없음)
+        - 디버깅 및 추론 쉬움 (로직이 명확)
+        - 코드 재사용성 높음
+
+    - 단점
+        - 진입 장벽
+        - 과도한 불변성 관리 -> 새로운 객체 생성 등의 성능 오버헤드 가능성
+        - 중간 상태 추적 어려움
+        - 함수형이 과도하면 추상화 심화 가능성
