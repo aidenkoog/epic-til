@@ -1747,29 +1747,6 @@ Organize concepts, features, types and Pros and Cons
         - 라이프사이클 자동 관리, UseCase 방식, 최신 프로젝트 > CameraX
         - 고급 설정이나 특정 기능 필요할 때 > Camera2 API
 
-- Android에서 Jetpack Security 라이브러리를 사용하는 이유
-- Android에서 MVVM 패턴을 적용하는 방법
-- Android에서 Jetpack Navigation Component를 사용하는 이유
-- Android에서 Coroutine을 사용한 비동기 처리 방법
-- Android에서 MutableLiveData와 StateFlow의 차이점
-- Android에서 Jetpack ViewModel을 활용하는 방법
-- Android에서 Jetpack Lifecycle Observer의 역할
-- Android에서 ViewModelScope와 GlobalScope의 차이점
-- Android에서 Coroutines의 Structured Concurrency 개념
-- Android에서 BroadcastReceiver의 역할
-- Android에서 IntentService와 Foreground Service의 차이점
-- Android에서 Jetpack Compose의 State Hoisting 개념
-- Android에서 Activity의 생명주기와 Fragment의 생명주기를 비교하시오.
-- Android에서 RecyclerView의 ViewHolder 패턴을 사용하는 이유
-- Android에서 Retrofit과 Volley의 차이점
-- Android에서 FusedLocationProvider API를 사용하는 이유
-- Android에서 앱 내 결제를 구현하는 방법
-- Android에서 Fingerprint 및 Face ID 인증을 구현하는 방법
-- Android에서 Firebase Crashlytics를 활용하는 방법
-- Android에서 Jetpack WorkManager를 활용한 백그라운드 작업 수행 방법
-- Android에서 AndroidX 라이브러리를 사용하는 이유
-- Android에서 ConstraintLayout과 RelativeLayout의 차이점
-- Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
 - Android에서 ViewBinding과 DataBinding의 차이점
     - 개요
         - 두 바인딩 타입 모두 XML 레이아웃과 코틀린/자바 코드 간의 연결 즉, 바인딩을 쉽게 해주는 기능
@@ -1833,7 +1810,6 @@ Organize concepts, features, types and Pros and Cons
             ```
         - 안정성 높음 (명시적 구조)
 
-- Compound Component 패턴과 Slot API 설명
 - Media Player 자체 내부
     - 구조 개요
         - MediaPlayer는 안드로이드 OS에서 제공하는 Native 기반의 기본 미디어 플레이어
@@ -1951,68 +1927,6 @@ Organize concepts, features, types and Pros and Cons
             - ExoPlayer: 우수 (선택적 HW 가속)
             - FFmpegPlayer: 낮음 (CPU 사용량 높음)
 
-- Android에서 Splash Screen을 구현하는 올바른 방법
-- Android에서 ViewModel을 사용하여 데이터 저장을 최적화하는 방법
-- Android에서 Jetpack Paging을 활용하여 대용량 데이터 처리하는 방법
-- Android에서 App Bundle과 APK의 차이점
-- Android에서 Livedata와 StateFlow 중 어떤 경우에 StateFlow를 선택하는 것이 좋은
-- Android에서 Foreground Service를 활용하여 지속적인 작업을 수행하는 방법
-- Android에서 Bluetooth LE를 사용하는 방법
-- Android에서 Jetpack WorkManager와 Foreground Service의 차이점
-- Android에서 Jetpack Paging을 사용하는 이유
-- Android에서 UI Thread와 Worker Thread의 차이점
-- Android에서 OpenGL ES를 활용하여 2D 및 3D 그래픽을 구현하는 방법
-- Android에서 ProGuard를 활용한 코드 난독화 방법
-- Android TV 앱 개발 시 Leanback 라이브러리의 역할
-- Android TV 앱에서 DPAD 네비게이션을 구현하는 방법
-- Android TV에서 VideoView와 ExoPlayer 중 어떤 것을 선택하는 것이 좋은
-- Android TV에서 Focusable 요소를 적절하게 배치하는 방법
-- Android TV에서 OTT 서비스를 구축할 때 고려해야 할 사항
-- Android TV에서 Adaptive Streaming을 활용하는 방법
-- Android TV에서 DRM(Digital Rights Management)이 중요한 이유
-- Android TV에서 Google Cast API를 활용하는 방법
-- Android TV에서 Leanback Showcase를 활용하는 방법
-- Android TV에서 KeyEvent를 활용하여 사용자 입력을 처리하는 방법
-- Android TV에서 Fire TV와 Android TV의 차이점
-- Android TV에서 UI 최적화를 위해 Leanback Components를 활용하는 방법
-- Android TV에서 홈 화면을 커스터마이징하는 방법
-- Android TV에서 A/B 테스트를 수행하는 방법
-- Android TV에서 Voice Input을 적용하는 방법
-- Android TV에서 ExoPlayer를 활용한 재생 목록 구현 방법
-- Android TV에서 OTT 앱을 개발할 때 UX 디자인 원칙
-- Android TV에서 Fire TV Stick에서 동작하는 앱을 개발하는 방법
-- Android TV에서 Android TV Input Framework(TIF)의 역할
-- Android TV에서 Low Latency Mode를 구현하는 방법
-- Android TV에서 In-App Purchase를 구현하는 방법
-- Android TV에서 Fragment를 활용하여 Leanback UI를 구성하는 방법
-- Android TV에서 Live TV 앱을 개발하는 방법
-- Android TV에서 TV Remote Control API를 활용하는 방법
-- Android TV에서 Google TV와 기존 Android TV의 차이점
-- Android TV에서 HDR 콘텐츠를 재생하는 방법
-- Android TV에서 ExoPlayer의 Cache 기능을 활용하는 방법
-- Android TV에서 HLS와 DASH 스트리밍의 차이점
-- Android TV에서 Real-time Analytics를 적용하는 방법
-- Android TV에서 OTT 서비스의 광고 삽입(Ad Insertion) 방법
-- Android TV에서 Data Saver Mode를 적용하는 방법
-- Android TV에서 UX 성능 최적화를 위한 권장 사항
-- Android TV에서 4K와 8K 콘텐츠를 지원하는 방법
-- Android TV에서 Google Assistant를 통합하는 방법
-- Android TV에서 Low Latency Streaming을 구현하는 방법
-- Android TV에서 동적 콘텐츠 추천을 구현하는 방법
-- Android TV에서 앱 크기를 최적화하는 방법
-- Android TV에서 Firebase Analytics를 활용하는 방법
-- Android TV에서 Voice Search 기능을 구현하는 방법
-- Android TV에서 ExoPlayer의 Offline Download 기능을 활용하는 방법
-- Android TV에서 TV 앱에서의 사용자 경험(UX)을 향상시키는 방법
-- Android TV에서 ML 모델을 활용한 추천 시스템을 구축하는 방법
-- Android TV에서 Custom Leanback Fragment를 구현하는 방법
-- Android TV에서 VOD와 Live Streaming의 차이점
-- Android TV에서 Play Billing Library를 활용하여 결제 기능을 구현하는 방법
-- Android TV에서 OTT 서비스의 콘텐츠 보안 정책
-- Android TV에서 프레임 속도 최적화를 수행하는 방법
-- Android TV에서 Dynamic UI Elements를 활용하는 방법
-- Android TV에서 Leanback Extensions의 활용 방법
-- Android TV에서 Push Notification을 적용하는 방법
 - Android에서 Kotlin을 기본 언어로 채택한 이유
     - 간결한 문법과 높은 생산성
     - Null 안정성 내장
@@ -2111,11 +2025,6 @@ Organize concepts, features, types and Pros and Cons
             - WeakReference(activity)
         - Glide, Picasso 등의 이미지 라이브러리
             - Glide.with(activity).load()
-
-- Android에서 onSaveInstanceState()와 ViewModel의 차이점
-- Android의 Activity와 Fragment의 생명주기에서 주요 차이점
-- Jetpack Lifecycle Observer의 역할과 활용 방법
-
 
 - Android에서 ContentProvider의 역할과 사용 사례
     - 개요
@@ -2389,81 +2298,6 @@ Organize concepts, features, types and Pros and Cons
         - 레거시 시스템과 연동되거나 Android 프레임워크 API가 필요할 때 → HandlerThread
         - UI 바깥의 복잡한 순차/병렬 처리를 선언적으로 관리하고 싶다면 → Coroutine + withContext, async
 
-- Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
-- Android에서 권한 시스템(Permission Request)이 동작하는 방식
-- Android의 Jetpack WorkManager와 JobScheduler의 차이점
-- Android에서 Jetpack Navigation Component를 사용할 때의 장점
-- Android에서 Jetpack DataStore와 SharedPreferences의 차이점
-- Android에서 ViewModel과 Repository 패턴을 함께 사용하는 이유
-- Android에서 ViewModelStoreOwner의 역할
-- Android에서 Room Database와 SQLite의 차이점
-- Jetpack Compose와 기존 View 기반 UI의 차이점
-- Compose에서 State Hoisting 개념을 설명하고, 언제 사용해야 하는
-- Jetpack Compose에서 remember와 rememberSaveable의 차이점
-- Jetpack Compose에서 recomposition을 방지하는 방법
-- Jetpack Compose의 SnapshotStateList와 일반 List의 차이점
-- Jetpack Compose의 Side Effect API (LaunchedEffect, rememberCoroutineScope, SideEffect 등)의 차이점
-- Compose에서 LazyColumn과 RecyclerView의 성능 차이
-- Compose에서 Modifier의 역할과 주요 Modifier 예제를 설명하시오.
-- Jetpack Compose에서 rememberScopedState가 필요한 이유
-- Compose에서 Slot API를 활용하는 방법
-- Compose에서 UI 성능을 최적화하는 방법
-- Compose에서 정적인 상태와 동적인 상태를 관리하는 모범 사례
-- Jetpack Compose의 Preview 기능을 활용하는 방법
-- Compose에서 BottomSheet와 Dialog를 구현하는 방법
-- Jetpack Compose에서 Navigation을 적용하는 방법
-- Compose의 LazyColumn에서 성능을 최적화하는 방법
-- Compose에서 GestureDetector를 활용한 제스처 처리 방법
-- Jetpack Compose에서 Recomposition을 피하는 방법
-- Compose에서 ConstraintLayout과 Box를 활용하는 방법
-- Compose의 SnapshotFlow는 무엇이며, 언제 사용해야 하는
-- Jetpack Compose에서 Skia 렌더링 엔진을 활용한 성능 최적화 기법
-- Android Thermal API를 활용하여 배터리 및 성능 최적화를 수행하는 방법
-- ExoPlayer에서 DRM(Digital Rights Management) 처리의 고급 기법
-- Android 14에서 추가된 보안 기능과 권한 관리 변화
-- Android에서 ART(Android Runtime) 최적화를 위한 AOT, JIT, PGO의 차이점
-- Android에서 WorkManager의 내부 스케줄링 메커니즘
-- Android에서 Jetpack CameraX API를 활용한 맞춤형 카메라 솔루션 구축 방법
-- Android의 Foreground Service와 Background Service의 차이점 및 최적화 기법
-- Android에서 TensorFlow Lite를 활용하여 ML 모델을 최적화하는 방법
-- Android에서 Baseline Profiles을 활용한 앱 성능 개선 방법
-- Android에서 Kotlin Coroutines를 사용하는 이유
-- Android에서 Paging 3 라이브러리를 사용하는 이유
-- Android에서 App Startup Library를 활용하는 방법
-- Android에서 UI 렌더링 속도를 최적화하는 방법
-- Android에서 OutOfMemory(OOM) 오류를 방지하는 방법
-- Android에서 백그라운드 작업을 최적화하는 방법
-- Android에서 Jetpack Compose의 Recompositions를 최적화하는 방법
-- Android에서 Bitmap 메모리 관리를 최적화하는 방법
-- Android에서 Custom View를 만들 때 고려해야 할 사항
-- Android에서 CPU 및 메모리 사용량을 최적화하는 방법
-- Android에서 StrictMode를 활용한 성능 분석 방법
-- Android에서 TraceView와 Perfetto를 활용한 성능 분석 방법
-- Android에서 RecyclerView의 DiffUtil을 활용하는 방법
-- Android에서 Jetpack Compose의 UI 테스트를 수행하는 방법
-- Android에서 Prefetching과 Lazy Loading의 차이점
-- Android의 ART(Android Runtime) 최적화 방법
-- Android에서 Firebase Performance Monitoring을 활용하는 방법
-- Android 14에서 추가된 주요 기능과 변경 사항
-- Android에서 Jetpack Macrobenchmark를 활용한 성능 측정 방법
-- Android에서 Jetpack Compose로 SEO 대응 웹뷰를 구현하는 방법
-- Android에서 TensorFlow Lite를 활용한 AI/ML 모델 적용 방법
-- Android의 Low Latency Rendering을 구현하는 방법
-- Android에서 Jetpack CameraX를 활용하는 방법
-- Google Play 정책 변경이 앱 개발에 미치는 영향
-- Android에서 WebRTC를 활용한 실시간 영상 통화 구현 방법
-- Android에서 Multi-Window를 지원하는 방법
-- Android에서 Foldable(접이식) 디바이스 대응 방법
-- Android에서 OpenGL ES를 활용한 그래픽 렌더링 최적화 방법
-- Android에서 Material 3 디자인 시스템을 적용하는 방법
-- Jetpack Compose로 Widget을 만드는 방법
-- Android에서 Jetpack Glance를 활용한 위젯 개발 방법
-- Android에서 Dynamic Feature Module을 활용하는 방법
-- Android에서 Baseline Profiles을 활용한 성능 최적화 방법
-- Android 앱에서 Zero Trust Security를 구현하는 방법
-- Android에서 AI 기반 추천 시스템을 구현하는 방법
-- Android에서 Jetpack Compose로 Instant Apps를 만드는 방법
-- Android에서 AI 기반 음성 인식을 활용하는 방법
 - Jetpack Compose의 UI, 기존 View 시스템의 렌더링 방식 차이
     - 기존 View 시스템
         - 구조 및 렌더링 방식
@@ -2588,59 +2422,6 @@ Organize concepts, features, types and Pros and Cons
         - stable 객체 사용: 데이터 클래스나 람다 등은 가능하다면 > @Stable, @Immutable 애노테이션 작성 고려
         - Slot API: 필요에 따라 Composable 영역을 나누고 최소 범위만 갱신하도록 리팩토링 전개
 
-
-- Compose에서 remember와 rememberSaveable의 차이점
-- Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
-- Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
-- Jetpack Compose의 상태 관리에서 State Hoisting 패턴을 활용하는 방법
-- Compose에서 derivedStateOf와 remember를 활용한 성능 최적화 방법
-- Jetpack Compose에서 State와 Event를 분리하는 이유
-- Jetpack Compose에서 key()를 사용하여 Recomposition을 최적화하는 방법
-- Compose에서 UI 요소가 계속해서 Recomposition되는 문제를 해결하는 방법
-- Jetpack Compose의 CompositionLocal이란 무엇이며, 언제 사용하는
-- Jetpack Compose에서 custom Modifier를 활용한 성능 최적화 방법
-- Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
-- Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
-- Compose에서 LazyColumn의 성능을 최적화하는 방법
-- Compose에서 MutableState와 ImmutableState의 차이점
-- Jetpack Compose의 Layout 코드를 최적화하는 방법
-- Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
-- Jetpack Compose에서 SnapshotStateList와 일반 List의 차이점
-- Jetpack Compose에서 ConstraintLayout을 활용하는 이유
-- Compose의 Recomposer 내부 구조와 실행 방식
-- Jetpack Compose의 produceState는 어떤 경우에 유용한
-- Compose에서 Slot API를 활용하여 UI를 구성하는 방법
-- Jetpack Compose에서 UI Test를 수행하는 방법과 Best Practice
-- Jetpack Compose에서 Theme와 Material 3를 활용하는 방법
-- Compose에서 Preview 기능을 활용할 때 발생할 수 있는 문제
-- Jetpack Compose에서 SideEffect, DisposableEffect, LaunchedEffect의 차이점
-- Jetpack Compose에서 LocalContext와 LocalLifecycleOwner의 활용 방법
-- Compose에서 Layout Inspector를 활용하여 UI Debugging을 수행하는 방법
-- Jetpack Compose에서 Accessibility를 개선하는 방법
-- Jetpack Compose로 마이그레이션할 때 고려해야 할 사항
-- Compose에서 XML 기반 View와 혼합하여 사용할 때 성능 문제를 해결하는 방법
-- Jetpack Compose에서 ViewModel과 StateFlow를 결합하여 상태를 관리하는 방법
-- Compose에서 Flow를 collect하여 UI를 업데이트하는 최적의 방법
-- Android 14에서 Jetpack Compose와 관련된 주요 변경 사항
-- Jetpack Compose의 새로운 Material 3 디자인 적용 시 고려해야 할 사항
-- Jetpack Compose에서 터치 이벤트를 처리하는 방법
-- Jetpack Compose에서 다크 모드를 지원하는 방법
-- Compose에서 WebView를 사용할 때 발생하는 문제와 해결책
-- Jetpack Compose에서 Edge-to-Edge UI를 구현하는 방법
-- Compose에서 폴더블(Foldable) 디바이스를 대응하는 방법
-- Jetpack Compose에서 Navigation Component를 활용하는 방법
-- Compose에서 비동기 데이터 로딩 중 UI를 최적화하는 방법
-- Jetpack Compose에서 ConstraintLayout을 사용할 때 주의할 점
-- Compose에서 WorkManager와 Coroutines을 함께 활용하는 방법
-- Jetpack Compose에서 ML Kit을 활용한 AI 기능을 추가하는 방법
-- Compose의 Glance를 활용하여 Widget을 구현하는 방법
-- Jetpack Compose에서 Jetpack CameraX를 활용하는 방법
-- Jetpack Compose에서 Biometric API를 활용하는 방법
-- Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법
-- Android의 Binder IPC 메커니즘에 대해 설명해주세요.
-- ListView와 RecylerView에 대해서 설명해보세요
-- ListView는 재활용이 불가능할까요?
-- Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
 - Android의 ProGuard와 R8의 차이점
     - 개요
         - ProGuard는 코드 축소/난독화 도구
@@ -2735,7 +2516,6 @@ Organize concepts, features, types and Pros and Cons
         - 복잡한 인자 전달 → ViewModel 공유로 대체
             - 너무 큰 데이터는 navArgs 대신 ViewModel/DI 사용
 
-- AOSP의 SELinux 정책과 보안 메커니즘에 대해 설명해주세요.
 - AIDL 개념
     - 개요
         - Android Interface Definition Language, AIDL
@@ -3191,12 +2971,6 @@ Organize concepts, features, types and Pros and Cons
             - 이 세 가지를 하이브리드로 결합해 최적의 성능을 끌어냄.
             - 개발자는 이러한 아키텍처를 이해함으로써 배포 전략, 성능 테스트, 릴리즈 플래닝에 있어 보다 효과적인 판단을 할 수 있음
 
-- AOSP의 init 프로세스와 서비스 관리 방법을 설명해주세요.
-- AOSP의 Binder 드라이버와 IPC 메커니즘에 대해 설명해주세요.
-- Android MVI orbit 설명
-- Java의 JVM, JRE, JDK의 차이점은?
-- Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
-- Java에서 Multi-threading을 구현하는 방법은?
 - Java에서 HashMap과 ConcurrentHashMap의 차이점
     - 개요
         - Java 에서 키-값 쌍을 저장하는 Map 구조
@@ -3244,7 +3018,6 @@ Organize concepts, features, types and Pros and Cons
         - HashMap: 단일 스레드용, 가볍고 빠르나 멀티스레드에서는 반드시 외부 동기화 필요
         - ConcurrentHashMap: 멀티스레드 환경에서 안전하고 성능 좋은 맵, 실시간 시스템이나 캐시 구현에 적합
 
-- Java에서 Stream API를 활용하는 방법은?
 - Java에서 Reflection을 사용할 때 주의해야 할 점 및 개념
     - 개요
         - 자바 리플렉션은 매우 강력한 기능, 잘못 사용 시 보안/성능/안정성에 문제 유발
@@ -3309,17 +3082,6 @@ Organize concepts, features, types and Pros and Cons
     - 결론 정리
         - 리플렉션은 강력한 도구이나 느리고, 위험하고(보안, 캡슐화 침해) 그리고 불안정함(런타임 오류)
 
-
-- Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
-- Java에서 CompletableFuture를 활용하는 방법은?
-- Java에서 메모리 누수를 방지하는 방법은?
-- Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
-- Java의 Optional 클래스를 사용하는 이유는?
-- Java에서 Thread와 Executor의 차이점은?
-- Java에서 WebSockets을 구현하는 방법은?
-- Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
-- Java에서 Functional Interface를 활용하는 방법은?
-- Java의 JVM, JRE, JDK의 차이점은?
 - Java에서 equals()와 ==의 차이점
     - 개요
         - 두 값을 비교할 때 사용하는 연산자/메서드
@@ -3554,9 +3316,6 @@ Organize concepts, features, types and Pros and Cons
         - 자바는 위임 모델을 사용해 클래스 로더가 상위 클래스 로더에 먼저 위임하고, 상위에서 찾지 못할 때만 자신이 로딩함
         - 이 구조는 보안과 일관성을 보장하며, 중복 로딩을 방지함.
 
-- Java의 다형성(Polymorphism)이란 무엇이며, 어떻게 구현되는가?
-- Java에서 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
-- Java에서 인터페이스(Interface)와 추상 클래스(Abstract Class)의 차이점은?
 - Java에서 super 키워드와 this 키워드의 차이점
     - 개요
         - this: 현재 클래스의 인스턴스를 가리킴
@@ -3801,15 +3560,6 @@ Organize concepts, features, types and Pros and Cons
         - Coroutines: Callback
         - RecyclerView: Listener
 
-- Java에서 final 키워드를 사용할 수 있는 곳과 그 의미는?
-- Java에서 static 키워드가 가지는 의미는?
-- Java에서 객체를 clone()할 때 발생할 수 있는 문제는?
-- Java에서 Serializable 인터페이스의 역할은?
-- Java에서 transient 키워드를 사용하는 이유는?
-- Java에서 try-with-resources를 사용하는 이유는?
-- Java의 Optional 클래스를 활용하는 방법은?
-- Java에서 varargs(가변 인자)를 사용할 때 주의할 점은?
-- Java에서 enum을 활용하는 방법과 장점은?
 - Java에서 default 메서드를 인터페이스에서 지원하는 이유
     - 배경 및 필요성:
 	    - Java 8 이전까지 인터페이스는 추상 메서드만 가질 수 있었고, 이를 구현하는 클래스는 모든 메서드를 구현해야 했음
@@ -3857,10 +3607,6 @@ Organize concepts, features, types and Pros and Cons
         }
         ```
 
-
-- Java의 Functional Interface와 Lambda Expression의 관계는?
-- Java의 Stream API를 활용하는 방법은?
-- Java의 Comparator와 Comparable 인터페이스의 차이점은?
 - Java에서 switch 문을 개선한 switch expressions의 특징
     - 개요
         - switch expressions는 값 반환 가능하며 안전하고 간결한 문법으로 개선된 switch (when과 유사)
@@ -4010,69 +3756,6 @@ Organize concepts, features, types and Pros and Cons
         - 스레드 로컬 값은 절대 공유되지 않음
         - InheritableThreadLocal (자식 스레드에도 값 전달 희망 시 사용)
 
-- Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
-- Java의 ArrayList와 LinkedList의 차이점은?
-- Java의 HashMap과 TreeMap의 차이점은?
-- Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점은?
-- Java에서 WeakHashMap을 사용하는 이유는?
-- Java에서 LinkedHashMap을 활용하여 캐시(Cache)를 구현하는 방법은?
-- Java에서 PriorityQueue의 동작 방식은?
-- Java에서 Deque와 Queue의 차이점은?
-- Java에서 ArrayDeque와 LinkedList의 차이점은?
-- Java의 HashSet과 TreeSet의 차이점은?
-- Java에서 Iterator와 ListIterator의 차이점은?
-- Java에서 CopyOnWriteArrayList의 사용 사례는?
-- Java에서 EnumMap을 사용하는 이유는?
-- Java에서 BlockingQueue의 역할과 사용 예제는?
-- Java에서 Stream API와 for-each 루프의 차이점은?
-- Java에서 Collectors.toMap()을 사용할 때 발생할 수 있는 문제는?
-- Java에서 Spliterator의 역할과 활용 방법은?
-- Java에서 Unmodifiable Collection을 생성하는 방법은?
-- Java에서 Arrays.asList()를 사용할 때 주의할 점은?
-- Java에서 Immutable Collections을 생성하는 방법은?
-- Java에서 Map.computeIfAbsent()의 활용 사례는?
-- Java에서 ConcurrentLinkedQueue와 LinkedBlockingQueue의 차이점은?
-- Java의 ForkJoinPool을 활용한 병렬 처리는 어떻게 구현하는가?
-- Java에서 NavigableMap과 NavigableSet의 차이점은?
-- Java에서 TreeMap을 활용하여 정렬된 데이터를 관리하는 방법은?
-- Java에서 PriorityBlockingQueue의 동작 원리는?
-- Java에서 Thread-Safe Collection의 대표적인 구현체는 무엇인가?
-- Java에서 Stream API의 parallelStream()을 사용할 때 주의해야 할 점은?
-- Java에서 FlatMap()을 활용하는 방법은?
-- Java에서 Collectors.groupingBy()를 활용한 데이터 분류 방법은?
-- Java의 Stream.reduce()를 활용한 데이터 집계 방법은?
-- Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법은?
-- Java에서 Future와 CompletableFuture의 차이점은?
-- Java에서 ScheduledExecutorService의 역할은?
-- Java에서 ReentrantLock과 synchronized의 차이점은?
-- Java에서 ForkJoinTask와 RecursiveTask를 활용한 병렬 처리는 어떻게 구현하는가?
-- Java에서 Phaser와 CyclicBarrier의 차이점은?
-- Java에서 Callable과 Runnable의 차이점은?
-- Java에서 AsynchronousFileChannel의 역할은?
-- Java에서 Non-blocking I/O(NIO)와 Blocking I/O(BIO)의 차이점은?
-- Java에서 Netty를 활용한 네트워크 프로그래밍의 장점은?
-- Java에서 Zero-Copy 기법을 활용하여 성능을 최적화하는 방법은?
-- Java에서 WebSockets을 활용한 실시간 통신 구현 방법은?
-- Java에서 gRPC와 REST API의 차이점은?
-- Java에서 HttpClient와 URLConnection의 차이점은?
-- Java에서 Thread Dump를 분석하는 방법은?
-- Java에서 Deadlock이 발생하는 원인과 해결 방법은?
-- Java에서 Thread.sleep()과 Object.wait()의 차이점은?
-- Java에서 ScheduledThreadPoolExecutor의 활용 방법은?
-- Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법은?
-- Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
-- Java의 Virtual Threads(프로젝트 Loom) 개념과 기존 Thread와의 차이점은?
-- Java에서 GraalVM을 활용한 AOT(Ahead-of-Time) 컴파일 성능 최적화 방법은?
-- Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
-- Java의 Structured Concurrency 개념과 기존 Thread 관리 방식과의 차이점은?
-- Java에서 CDS(Class Data Sharing)를 활용하여 JVM 성능을 최적화하는 방법은?
-- Kotlin과 Java의 주요 차이점은?
-- Kotlin에서 var와 val의 차이점은?
-- Kotlin에서 lateinit과 lazy의 차이점은?
-- Kotlin에서 data class를 사용하는 이유는?
-- Kotlin의 sealed class와 enum class의 차이점은?
-- Kotlin에서 companion object와 object의 차이점은?
-- Kotlin에서 open 키워드를 사용하는 이유는?
 - Kotlin에서 inline 함수의 장점과 단점
     - 개요
         - 코틀린의 인라인 함수는 성능 최적화와 람다 사용의 유연성을 위해 자주 사용하는 기능
@@ -4497,23 +4180,6 @@ Organize concepts, features, types and Pros and Cons
         - kotlinx.html
         - MockK, Kotest(테스트 DSL)
 
-- Kotlin에서 copy() 메서드를 사용하는 이유는?
-- Kotlin에서 object expression과 object declaration의 차이점은?
-- Kotlin에서 sealed interface를 활용하는 방법은?
-- Kotlin에서 break, continue, return의 차이점은?
-- Kotlin의 context receivers 기능을 설명하시오.
-- Kotlin에서 nullable 타입과 !! 연산자를 사용할 때 주의할 점은?
-- Kotlin에서 @JvmStatic, @JvmOverloads, @JvmField 어노테이션의 역할은?
-- Kotlin에서 is 키워드와 as 키워드의 차이점은?
-- Kotlin에서 Collection과 Sequence의 차이점은?
-- Kotlin에서 vararg를 사용한 함수 호출 시 배열을 전달하는 방법은?
-- Kotlin에서 Enum class를 활용한 안전한 상태 관리는 어떻게 하는가?
-- Kotlin에서 builder pattern을 활용하여 객체를 생성하는 방법은?
-- Kotlin에서 inline class의 개념과 사용 예제는?
-- Kotlin에서 suspend 함수와 일반 함수의 차이점은?
-- Kotlin에서 context receivers가 도입된 이유는?
-- Kotlin에서 JvmInline을 사용하는 이유는?
-- Kotlin에서 contract API가 무엇이며, 어떻게 활용하는가?
 - Kotlin에서 SAM(Single Abstract Method) Conversion
     - SAM Conversion (Single Abstract Method Conversion)
         - 단 하나의 추상 메서드만 갖는 인터페이스(SAM)를 람다로 자동 변환해주는 코틀린 기능
@@ -4558,18 +4224,6 @@ Organize concepts, features, types and Pros and Cons
         }
         ```
 
-- Kotlin에서 builder pattern을 DSL로 구현하는 방법은?
-- Kotlin에서 type inference의 원리와 활용 방법은?
-- Kotlin에서 spread operator(*)의 활용 방법은?
-- Kotlin에서 tail recursion 최적화 기법을 설명하시오.
-- Kotlin에서 Map을 destructuring하여 사용하는 방법은?
-- Kotlin에서 bitwise operations을 수행하는 방법은?
-- Kotlin에서 dynamic 키워드를 사용할 수 없는 이유는?
-- Kotlin에서 KProperty와 Reflection API를 활용하는 방법은?
-- Kotlin에서 @DslMarker 어노테이션을 사용하는 이유는?
-- Kotlin에서 LazyThreadSafetyMode의 옵션들과 차이점은?
-- Kotlin에서 CoroutineContext와 Job의 관계는?
-- Kotlin에서 JvmStatic과 JvmOverloads를 활용하는 방법은?
 - Kotlin에서 try-catch와 runCatching
     - 개요
         - 예외 처리 방식
@@ -4592,11 +4246,6 @@ Organize concepts, features, types and Pros and Cons
     - 추가 가공 시 예제
         - result.map {}.onSuccess {}.onFailure {} 이런식의 체이닝 처리 가능
 
-
-- Kotlin에서 @OptIn 어노테이션을 사용하는 이유는?
-- Kotlin Coroutines의 핵심 개념은?
-- suspend 함수란 무엇이며, 일반 함수와의 차이점은?
-- launch와 async의 차이점은?
 - GlobalScope를 사용하면 안 되는 이유
     - 생명주기와 구조화된 동시성 위반
         - 애플리케이션이 종료되기 전까지 살아 있는 전역 스코프에서 실행됨
@@ -4784,12 +4433,6 @@ Organize concepts, features, types and Pros and Cons
         - 둘 다 코루틴 빌더가 아닌 스코프 생성 함수 > 구조화된 동시성을 구성
         - 큰 차이점은 예외 전파 방식
 
-- CoroutineContext의 구성 요소는?
-- withContext()와 async-await의 차이점은?
-- Dispatchers.IO, Dispatchers.Main, Dispatchers.Default의 차이점은?
-- runBlocking을 사용하는 것이 위험한 이유는?
-- Kotlin Coroutines에서 Structured Concurrency란?
-- CoroutineExceptionHandler의 역할은?
 - Job과 SupervisorJob
     - 개요
         - 둘다 부모-자식 관계를 가진 코루틴에서 중요하고 오류 전파 방식에 차이 존재
@@ -4970,14 +4613,6 @@ Organize concepts, features, types and Pros and Cons
         - 다수 구독자에게 이벤트 전파할 때: Hot Flow (SharedFlow)
         - 테스트, 순차 작업용 임시 흐름: Cold Flow
 
-- MutableSharedFlow에서 replay 옵션을 설정하는 이유는?
-- StateFlow에서 초기 값을 설정해야 하는 이유는?
-- yield() 함수의 역할은?
-- cancel()을 호출한 후에도 코루틴이 종료되지 않는 이유는?
-- ensureActive() 함수의 역할은?
-- select {} 블록을 활용하여 여러 채널을 동시에 처리하는 방법은?
-- produce {}와 consumeEach {}의 차이점은?
-- Mutex와 Atomic을 활용한 동시성 문제 해결 방법은?
 - sequence {}와 Flow {}
     - 개요
         - 둘 다 지연 계산(lazy evaluation)을 제공하는 스트림형 컬렉션
@@ -5012,8 +4647,6 @@ Organize concepts, features, types and Pros and Cons
         - sequence 는 호출 후 바로 사용 가능, flow는 collect 호출 시 동작
         - sequence 는 계산, 반복, 간단한 지연처리에 적합, flow는 비동기 데이터 스트림, UI, 네트워크 등 처리에 적합
 
-- combine() 연산자를 활용한 데이터 스트림 결합 방법은?
-- retry()와 catch() 연산자의 차이점은?
 - debounce()와 throttleFirst()의 차이점
     - 개요
         - 둘 다 이벤트 발생 빈도를 제어하기 위한 연산자이나 동작 방식이 정반대
@@ -5050,27 +4683,6 @@ Organize concepts, features, types and Pros and Cons
         }
         ```
 
-- Kotlin Coroutines에서 테스트를 수행하는 방법은?
-- ViewModelScope를 활용하여 네트워크 요청을 수행하는 방법은?
-- Retrofit과 Coroutines을 함께 사용할 때의 장점은?
-- Room Database에서 Coroutines을 사용하는 이유는?
-- Android에서 LiveData와 StateFlow를 함께 사용할 때의 고려사항은?
-- WorkManager와 Coroutines을 함께 사용할 때의 주의점은?
-- Android에서 코루틴을 활용한 백그라운드 작업 최적화 방법은?
-- Paging 3 라이브러리에서 Flow를 활용하는 방법은?
-- Android에서 네트워크 요청 중간에 코루틴을 취소하는 방법은?
-- 코루틴이 과도하게 생성되었을 때 발생할 수 있는 문제는?
-- Kotlin에서 Coroutines을 활용한 효율적인 병렬 처리 방법은?
-- Kotlin에서 Job과 Deferred를 활용한 작업 스케줄링 방법은?
-- Android에서 Flow를 활용한 실시간 데이터 처리 방법은?
-- 코루틴을 활용한 이벤트 기반 아키텍처 설계 방법은?
-- Coroutines에서 CoroutineScope를 올바르게 관리하는 방법은?
-- Coroutines에서 Flow.collectLatest()를 활용한 최신 데이터 유지 방법은?
-- Kotlin에서 StateFlow와 LiveData를 변환하는 방법은?
-- Android에서 Jetpack Compose와 Coroutines을 함께 사용하는 방법은?
-- Kotlin Coroutines을 활용한 Custom Thread Pool 구성 방법은?
-- 코루틴에서 예외 처리를 효과적으로 수행하는 방법은?
-- Kotlin Coroutines과 Kotlin Multiplatform(KMP)에서의 활용 방법은?
 - Kotlin의 바이트코드 최적화 과정
     - 개요
         - 코틀린이 컴파일되어 자바 바이트코드로 변환된 뒤 어떻게 최적화되는가에 대한 내용
@@ -5119,9 +4731,6 @@ Organize concepts, features, types and Pros and Cons
             - (4) dead code elimination: 실행되지 않는 코드 제거
             - (5) GC 최적화: 객체 생명주기 분석을 통한 메모리 정리 효율화
 
-- Kotlin의 escape analysis가 어떻게 동작하는지 설명하시오.
-- Kotlin의 inline function이 내부적으로 어떻게 동작하는가?
-- Kotlin에서 tail recursion이 동작하는 방식을 설명하시오.
 - Kotlin의 delegate 패턴을 사용하는 이유와 성능적 이점
     - 개요
         - delegate 패턴은 코드의 재사용성, 가독성, 캡슐화, 동작 위임을 향상시키기 위한 강력한 기능
@@ -5249,13 +4858,6 @@ Organize concepts, features, types and Pros and Cons
         - when 조건식 내부: 각 분기에서 자동 캐스트
         - 커스텀 클래스의 필드 검사: val 이면 캐스트 가능, var은 변동성으로 인해 불가능
 
-- Kotlin의 reified 키워드가 동작하는 원리를 설명하시오.
-- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 차이는?
-- Kotlin의 default parameter와 Java의 method overloading 차이점은?
-- Kotlin에서 String interpolation이 내부적으로 어떻게 최적화되는가?
-- Kotlin의 메모리 관리 방식과 Java의 GC(Garbage Collector) 차이점은?
-- Kotlin에서 가변 객체(mutable object)의 성능 최적화 방법은?
-- Kotlin에서 immutable 객체를 구현하는 방법과 효과적인 활용 사례는?
 - Kotlin에서 객체 풀(Object Pool)을 활용하여 성능을 개선하는 방법
     - 개요
         - 빈번하게 생성, 소멸되는 객체의 재사용을 통해 성능과 메모리 효율을 높이는 전략
@@ -5312,69 +4914,198 @@ Organize concepts, features, types and Pros and Cons
     - Apache Commons Pool 등 외부 라이브러리 활용도 방법
         - GenericObjectPool<T> 등을 사용하여 연결, 버퍼, 파서 등 풀링 가능
 
-- Kotlin에서 람다(Lambda)의 capture 비용을 줄이는 방법은?
-- Kotlin에서 JVM의 Code Cache를 활용한 최적화 기법은?
-- Kotlin에서 value class(구 inline class)를 활용할 때 성능적인 장점은?
-- Kotlin의 동적 바인딩과 정적 바인딩의 차이점 및 실행 성능 비교는?
-- Kotlin에서 reflection을 사용할 때 발생하는 오버헤드는 어떻게 줄일 수 있는가?
-- Kotlin에서 Lazy initialization을 성능적으로 최적화하는 방법은?
-- Kotlin에서 Coroutines과 Java의 Thread Pool의 차이점은?
-- Kotlin의 Coroutines에서 Structured Concurrency 개념이 중요한 이유는?
-- Kotlin의 Coroutines에서 GlobalScope 사용이 위험한 이유는?
-- Kotlin Coroutines에서 Dispatchers.IO와 Dispatchers.Default의 내부 구현 차이는?
-- Kotlin에서 Flow의 Backpressure(역압) 문제를 해결하는 방법은?
-- Kotlin의 StateFlow와 SharedFlow의 차이점과 실전 활용법은?
-- Kotlin에서 채널(Channel)과 Flow의 차이점은?
-- Kotlin에서 Coroutines의 동시성 제어를 위해 Mutex와 Semaphore를 어떻게 활용하는가?
-- Kotlin에서 Thread Safety를 보장하는 방법은?
-- Kotlin의 Atomic 변수를 활용한 동시성 제어 방법은?
-- Kotlin에서 코루틴을 활용하여 Concurrent Processing을 구현하는 방법은?
-- Kotlin에서 runBlocking이 주는 성능적 부담과 이를 피하는 방법은?
-- Kotlin Coroutines에서 launch와 async의 차이점과 내부 동작 원리는?
-- Kotlin의 yield() 함수가 비동기 작업에서 어떤 역할을 하는가?
-- Kotlin에서 CoroutineScope의 메모리 누수를 방지하는 방법은?
-- Kotlin의 select {} 문법을 활용한 비동기 작업 최적화 방법은?
-- Kotlin에서 CoroutineExceptionHandler가 실행되는 조건은?
-- Kotlin에서 ensureActive()의 역할과 사용 예제는?
-- Kotlin에서 coroutineScope와 supervisorScope의 내부적인 동작 차이는?
-- Kotlin에서 다중 모듈 프로젝트를 효율적으로 구성하는 방법은?
-- Kotlin에서 Dependency Injection(DI)을 적용할 때 Koin과 Hilt의 차이점은?
-- Kotlin에서 JUnit5와 MockK를 활용한 단위 테스트 전략은?
-- Kotlin에서 비동기 네트워크 요청을 최적화하는 방법은?
-- Kotlin의 Coroutines과 RxJava의 차이점 및 선택 기준은?
-- Kotlin에서 Dagger-Hilt와 Koin을 함께 사용할 때의 장점과 단점은?
-- Kotlin의 Multiplatform 프로젝트에서 Coroutines을 활용하는 방법은?
-- Kotlin에서 Jetpack Compose와 Coroutines을 함께 사용할 때 고려해야 할 점은?
-- Kotlin에서 GraphQL API를 활용할 때 최적화하는 방법은?
-- Kotlin에서 Room Database와 Coroutines을 함께 사용할 때의 주의점은?
-- Kotlin에서 Paging 3 라이브러리를 활용한 비동기 데이터 로딩 방식은?
-- Kotlin의 KMM(Kotlin Multiplatform Mobile)에서 네트워크 요청을 처리하는 방법은?
-- Kotlin에서 DI 프레임워크 없이 Factory 패턴을 활용한 객체 관리는 어떻게 하는가?
-- Kotlin에서 Retrofit과 Coroutines을 함께 사용할 때의 베스트 프랙티스는?
-- Kotlin에서 JSON Parsing을 최적화하는 방법은?
-- Kotlin에서 Domain Layer와 Data Layer를 분리할 때의 원칙은?
-- Kotlin의 Anvil을 활용한 DI 성능 최적화 방법은?
-- Kotlin에서 ViewModelScope를 사용할 때 발생할 수 있는 문제는?
-- Kotlin에서 Singleton 객체를 Thread-Safe하게 생성하는 방법은?
-- Kotlin의 Anvil을 사용한 Dependency Injection의 성능 최적화 방법은?
-- Kotlin 1.9에서 새롭게 추가된 기능과 성능 최적화 요소는?
-- Kotlin의 Compiler Plugin을 활용하여 코드 최적화를 수행하는 방법은?
-- Kotlin에서 JIT과 AOT의 차이점과 각각의 활용 사례는?
-- Kotlin에서 JetBrains의 Ktor를 활용한 비동기 웹 서버 구축 방법은?
-- Kotlin에서 새로운 Concurrent Garbage Collector의 장점과 활용 방안은?
-- Kotlin의 최신 정적 분석 도구(Detekt, Ktlint)를 활용하는 방법은?
-- Kotlin에서 Memory Leak을 방지하는 패턴은?
-- Kotlin의 Context Receivers 기능이 필요한 이유는?
-- Kotlin에서 Native Image를 활용한 성능 최적화 방법은?
-- Kotlin에서 Compiler Intrinsics을 활용한 성능 최적화 기법은?
-- Kotlin과 Java의 주요 차이점은 무엇인가?
-- CoroutineScope를 올바르게 관리하는 방법은?
-- Coroutine의 Structured Concurrency란 무엇이며, 왜 중요한가?
-- GlobalScope를 사용하면 안 되는 이유는?
-- launch와 async의 차이점은?
-- runBlocking을 사용할 때의 문제점은?
-- withContext()와 launch의 차이점은?
-- CoroutineContext의 주요 요소(Job, Dispatcher, ExceptionHandler 등)를 설명하시오.
+- launch와 async, withContext의 차이점
+    - 개요
+        - 모두 코루틴을 전환하거나 실행하는데 사용됨
+    - 개념
+        - launch
+            - 새로운 코루틴을 시작하고, 병렬적으로 비동기 작업을 수행
+                - 결과 반환하지 않음
+                - 작업을 실행만 하면 되는 경우에 사용
+                - 비동기 실행 (fire and forget)스타일
+                ```kotlin
+                launch(Dispatchers.IO) {
+                    doSomeWork()
+                }
+                ```
+        - withContext
+            - 지정된 컨텍스트(예: Dispatchers.IO)에서 코드 블록을 실행하고 결과를 반환함.
+                - 일시적으로 context를 전환
+                - 결과를 반환하는 함수
+                - 일반적으로 함수 내에서 특정 작업을 일시적으로 IO 쓰레드 등에서 처리할 때 사용
+
+    - 주요 차이
+        - launch
+            - 새 코루틴 시작
+            - 반환값 없음, Job객체 반환
+            - 사용 목적은 병렬 실행
+            - 예외 전파됨
+            - suspend 아님
+        - withContext
+            - 현재 코루틴 안에서 context만 전환
+            - 결과 반환
+            - 사용 목적은 컨텍스트 전환 후 결과 사용
+            - 예외 전파됨
+            - suspend 함수임
+
+    - 예시 비교
+        - launch (백그라운드에서 로그만 남기는 경우)
+            ```kotlin
+            fun logUserEvent(event: String) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    logToServer(event)
+                }
+            }
+            ```
+        - withContext (백그라운드에서 데이터 불러오고 UI에 반영)
+            ```kotlin
+            suspend fun fetchUser(): User {
+                return withContext(Dispatchers.IO) {
+                    api.getUserInfo()
+                }
+            }
+            ```
+
+    - launch, async+await 차이
+        - launch: 결과없이 코루틴 실행
+        - async: 결과를 반환하는 코루틴 실행
+        - withContext: 컨텍스트를 바꾸며 결과 반환
+        ```kotlin
+        val deferred = async { computeValue() }
+        val result = deferred.await()   // async는 await와 함께 사용
+        ```
+
+- runBlocking을 사용할 때의 문제점
+    - 개요
+        - 강력한 기능이나 남용, 오용시 심각한 성능 문제를 유발
+    - 개념
+        - 코루틴을 블로킹 방식으로 실행하는 특수한 함수
+        - 코루틴을 실행하고 해당 블록이 끝날 때까지 현재 스레드를 차단
+        ```kotlin
+        fun main() {
+            runBlocking {
+                val result = fetchData()
+                println("결과: $result")
+            }
+        }
+        ```
+        - 주로 사용 위치
+            - 테스트 코드
+            - main()함수 (entry point)
+            - UI 및 뷰모델에서는 비권장
+    - 동작 방식
+        - 내부적으로는 스레드를 "정지(block)" 시켜서 동작을 기다림
+        - 일반 launch, async는 비동기적이지만, runBlocking은 동기적 기다림
+
+    - 사용 시 문제점 리스트
+        - UI 쓰레드 블로킹
+            - Android에서 runBlocking을 UI 스레드에서 사용하면 앱이 멈추고, ANR 발생 가능
+        - 비동기 성능 저하	
+            - 코루틴의 장점인 비동기 처리/경량 스레드 특성을 상쇄
+        - 데드락 가능성	
+            - 내부에서 다른 suspend 함수나 withContext 등이 동작 못하고 데드락 발생할 수 있음
+        - 구조적 동시성 위반
+            - runBlocking은 스코프 컨트롤 없이 독립적으로 실행되므로 부모 코루틴과 관계 없음
+        - 실무 코드에 부적절
+            - 테스트나 CLI 앱이 아닌 Android UI 환경에서는 사용 비추천
+
+    - 사용 시기
+        - 단위 테스트: 사용 OK (JUnit 등에서 runBlockingTest 권장)
+            - runTest { ... } 또는 runBlockingTest (코루틴 테스트 라이브러리 사용)
+        - main() 진입점: main 함수에서 suspend 함수 실행할 때
+
+- CoroutineContext의 주요 요소(Job, Dispatcher, ExceptionHandler 등)
+    - 개요
+        - CoroutineContext는 코루틴의 실행 환경을 구성하는 키-값 형태의 컨테이너
+        - 각각의 키는 코루틴의 생명주기, 실행 스레드, 에러 처리 등에 직접적으로 관여
+
+    - CoroutineContext 개념
+        - 코루틴의 실행 정보(스레드, 상태, 예외처리자 등)를 담고 있는 컨텍스트 객체
+        - 각 코루틴은 자신만의 CoroutineContext를 갖고, 필요 시 상속하거나 조합 가능
+        ```kotlin
+        CoroutineScope(Dispatchers.IO + Job() + CoroutineName("MyCoroutine"))
+        ```
+
+    - CoroutineContext의 주요 요소
+        - Job: 코루틴의 생명주기 관리, 취소 처리, kotlinx.coroutines.Job
+        - Dispatcher: 코루틴이 실행될 스레드 지정, CoroutineDispatcher
+        - CoroutineName: 디버깅용 이름 태그 지정, CoroutineName
+        - CoroutineExceptionHandler: 예외 처리 담당자, CoroutineExceptionHandler
+        - ThreadContextElement: 스레드 로컬 데이터 연결, ThreadContextElement<T>
+
+    - 각 요소별 상세 설명
+        - (1) Job
+            - 코루틴의 생명주기, 취소 제어, 구조적 동시성의 핵심
+                - launch {} 나 async {} 사용 시 내부적으로 Job 생성
+                - cancel(), join(), isActive 등을 통해 상태 관리 가능
+                - 부모-자식 관계 자동 구성됨
+                ```kotlin
+                val job = Job()
+                CoroutineScope(Dispatchers.IO + job).launch {
+                    // 코루틴 실행
+                }
+                job.cancel()
+                ```
+        - (2) Dispatcher
+            - 코루틴이 어느 스레드에서 실행될지를 지정
+            - 대표적인 Dispatcher:
+                - Dispatchers.Main → UI 스레드
+                - Dispatchers.IO → I/O 작업 최적화
+                - Dispatchers.Default → CPU 연산 최적화
+                - Dispatchers.Unconfined → 상위 컨텍스트를 그대로 사용
+
+        - (3) CoroutineExceptionHandler
+            - 코루틴 예외를 처리하는 전용 핸들러 (특히 launch 계열)
+                - launch 내에서 발생한 예외는 기본적으로 CoroutineExceptionHandler에 위임됨
+                - async는 await() 시점에 예외 발생
+                ```kotlin
+                val handler = CoroutineExceptionHandler { _, throwable ->
+                    println("예외 발생: ${throwable.message}")
+                }
+
+                CoroutineScope(Dispatchers.Default + handler).launch {
+                    throw RuntimeException("예외!")
+                }
+                ```
+        - (4) CoroutineName
+            - 디버깅 시 유용한 이름 설정 (Logcat, debugger에서 표시됨)
+            ```kotlin
+            launch(CoroutineName("MyWorker")) {
+                println("현재 코루틴 이름: ${coroutineContext[CoroutineName]}")
+            }
+            ```
+        - (5) ThreadContextElement
+            - 스레드 로컬(ThreadLocal) 값 전파에 사용됨
+            - 예: MDC(Logback의 로그 태그), 사용자 ID 같은 정보 공유
+            ```kotlin
+            val threadLocal = ThreadLocal<String?>()
+            threadLocal.set("main")
+
+            val context = threadLocal.asContextElement()
+
+            launch(context) {
+                println("스레드 로컬 값: ${threadLocal.get()}")
+            }
+            ```
+    - CoroutineContext는 어떻게 동작할까?
+        - 각 코루틴은 CoroutineContext를 상속 + 덮어쓰기 가능
+        - 내부적으로는 Map-like 구조로 작동 (get(), plus() 연산 지원)
+        - coroutineContext 라는 키워드로 현재 컨텍스트 접근 가능 (suspend 함수 내에서만 사용 가능)
+
+    - 전체 예제
+        ```kotlin
+        val handler = CoroutineExceptionHandler { _, e ->
+            println("에러: ${e.message}")
+        }
+
+        val context = Dispatchers.IO + Job() + CoroutineName("MyJob") + handler
+
+        CoroutineScope(context).launch {
+            println("CoroutineContext 예시 실행")
+            throw Exception("테스트 예외")
+        }
+        ```
+
 - Flow와 LiveData의 차이점
     - 차이 요약
         - 플랫폼
@@ -5427,10 +5158,193 @@ Organize concepts, features, types and Pros and Cons
         - 최신값 저장: 필요 시 replay 설정해야 함
         - 기본 용도: 일회성 이벤트 전달용 (예: 토스트)
 
-- suspend function 내부에서 try-catch를 올바르게 사용하는 방법은?
-- Coroutine의 Dispatchers.Default, IO, Main의 차이점은?
-- supervisorScope와 coroutineScope의 차이점은?
-- Kotlin Coroutine에서 cancel()을 호출했을 때 실행 흐름은?
+- suspend function 내부에서 try-catch를 올바르게 사용하는 방법
+    - 개요
+        - 코루틴은 예외가 throw될 수 있는 구조이기 때문에 try-catch의 사용 위치와 타이밍이 중요
+    - suspend 함수와 예외처리 기본 개념
+        - suspend 함수는 일반 함수처럼 예외를 throw할 수 있음
+            - 코루틴 내에서 실행되더라도 try-catch로 잡을 수 있음
+            - 외부에서 호출할 때 try-catch로 감싸야 에러를 다룰 수 있음
+    - 기본 사용 예
+        ```kotlin
+        suspend fun fetchData(): String {
+            try {
+                val result = networkCall()  // 이 suspend 함수에서 예외 발생 가능
+                return result
+            } catch (e: IOException) {
+                // 네트워크 오류 처리
+                return "Error"
+            }
+        }
+        ```
+        - 핵심 포인트
+            - suspend 함수 내의 try-catch는 해당 블록 내에서 발생한 예외만 처리
+            - 반드시 catch 블록에서 적절히 처리하거나 throw 다시 해야 함
+    - 실전 실수
+        - launch 내 예외 무시됨
+        ```kotlin
+        viewModelScope.launch {
+            val result = fetchData() // 예외 발생 시 앱이 크래시될 수 있음
+        }
+        ```
+            - launch 블록 내부의 예외는 전파되지 않고, 크래시 발생
+            - → 별도의 try-catch로 감싸야 함
+
+    - 올바른 예외 처리 위치
+        - (1) suspend 함수 내부에서 처리
+        - (2) 호출부에서 처리 (코루틴 블록 내)
+
+    - withContext 내에서의 try-catch
+        - withContext 내부도 suspend 블록이기 때문에 try-catch 사용 가능
+        - 컨텍스트 전환 후에도 예외 안전하게 처리 가능
+
+    - 코루틴 빌더별 예외 처리 차이
+        - launch: 내부에서 크래시 발생,	전파안됨, 크래시 발생, 반드시 try-catch 또는 CoroutineExceptionHandler 사용
+        - async: Deferred.await() 호출 시 예외 전파, await() 를 try-catch로 감싸야 함
+        - withContext: 예외 발생 시 바로 전파됨, 일반 함수처럼 try-catch 가능
+
+    - 실전 통상적인 팁
+        - API 호출: suspend 함수 안에서 try-catch로 감싸고, 실패 시 null 또는 Result 반환
+        - ViewModel → UI: suspend 호출부에서 try-catch로 UI 에러 상태 갱신
+        - 로깅 필요: catch 블록에 Log.e(...) 또는 서버에 에러 전송
+        - 복수 API 병렬 호출: async + await 시 각각의 await()를 try-catch로 감싸기
+
+- Coroutine의 Dispatchers.Default, IO, Main의 차이점
+    - 개요
+        - 코루틴이 어떤 스레드에서 실행될지를 결정하는 디스패처
+    - 디스패처 개념
+        - 코루틴이 실행될 스레드(또는 스레드 풀)을 결정하는 컴포넌트
+        - launch {}안의 코드가 어디서 실행될 지를 정하는 역할
+    - 디스패처 종류
+        - Main: UI 작업, TextView 업데이트, LiveData 관찰 등
+        - IO: 입출력 작업, DB, 네트워크, 파일 읽기/쓰기 등
+        - Default: CPU 연산 작업, JSON 파싱, 정렬, 필터링 등 무거운 계산
+    - 각 디스패처의 상세 설명
+        - Dispatchers.Main
+            - 안드로이드의 UI 스레드(MainThread) 에서 실행됨
+                - UI 컴포넌트에 접근 가능 (예: textView.text = "Hello")
+                - 너무 무거운 연산을 실행하면 ANR(앱 멈춤) 발생 가능성 있음
+                - 내부적으로 Looper/Handler 기반으로 작동
+                - 스레드 수: 1 메인 스레드
+        
+        - Dispatchers.IO: Default 보다 많은 스레드 생성 허용/사용
+            - 네트워크, 디스크, DB I/O 등 빠르게 블록될 수 있는 작업을 위한 스레드 풀
+                - 내부적으로 최대 64개까지 동시 실행 가능한 스레드 풀 사용
+                - Default보다 많은 스레드 생성 허용 → 대기 시간이 짧은 I/O에 적합
+                - Room, Retrofit, File.readBytes() 등에 적합
+                - 스레드 수: 많음 (최대 64)
+
+        - Dispatchers.Default
+            - CPU 집중형 작업을 위한 스레드 풀
+                - 코어 수에 맞는 적정 수준의 스레드를 유지 (기본: CPU 수)
+                - 무거운 계산, 정렬, 압축, JSON 파싱 등 CPU 부하 작업에 적합
+                - I/O 작업보다 스레드 수 제한이 크므로 대기 작업에는 부적절
+                - 스레드 수: CPU코어수
+
+    - 디스패처 선택 가이드
+        - UI 업데이트, 버튼 클릭 후 처리: Dispatchers.Main
+        - Retrofit, Room, 파일 작업: Dispatchers.IO
+        - JSON 파싱, 대량 데이터 연산: Dispatchers.Default
+        - 테스트용 블로킹 처리: runBlocking, Unconfined (주의해서 사용)
+
+    - 주의 사항
+        - Dispatchers.IO에서 CPU 작업을 하면 스레드 낭비
+        - Dispatchers.Default에서 네트워크 호출하면 스레드 부족 위험
+        - Dispatchers.Main에서 무거운 작업하면 앱 멈춤(ANR) 발생
+
+- Kotlin Coroutine에서 cancel()을 호출했을 때 실행 흐름
+    - 개요
+        - cancel() 호출 시 코루틴이 즉시 종료되지 않는 이유나 취소가 어떻게 전파되고 중단되는 지에 대해 숙지 필요
+    - cancel() 호출 시 개념
+        - cancel()은 코루틴의 Job에 취소 요청을 보내는 것이지, 즉시 강제 종료되는 것이 아님
+            - 코루틴 내부 코드가 취소 상태를 점검하거나 협조적 중단을 수행해야 종료됨
+            - 즉, 취소는 "요청"일 뿐, "즉시 중단"이 아님
+
+    - 실행 흐름 단계별 정리
+        - 1단계: cancel() 호출
+        - 2단계: Job의 상태 -> isActive == false, isCancelled == true
+        - 3단계: suspend 함수 or cancellation point에 도달하면 중단됨
+            - 예: delay(), withContext, yield() 등에서 취소를 감지하고 CancellationException 발생
+
+    - 코드 예시
+        - cancel() 호출 흐름
+        ```kotlin
+        val job = CoroutineScope(Dispatchers.Default).launch {
+            repeat(5) { i ->
+                println("작업 $i 실행 중")
+                delay(500) // <---- 취소 포인트
+            }
+            println("이건 출력되지 않음")
+        }
+
+        delay(1000)
+        println("cancel 호출")
+        job.cancel()
+        job.join()
+        println("코루틴 취소 완료")
+
+        // 출력 결과
+        // 작업 0 실행 중
+        // 작업 1 실행 중
+        // cancel 호출
+        // 코루틴 취소 완료
+        ```
+    - 취소가 즉시 되지 않는 이유
+        - 코루틴은 협조적으로 중단되는 구조
+        - 내부 코드가 취소를 감지하려면 다음 중 하나를 해야 함:
+            - 취소 가능한 suspend 함수 사용 (delay, withContext, etc.)
+            - isActive 직접 확인
+            - ensureActive() 호출
+        - 취소가 안되는 코드
+            - 취소되지 않고 끝까지 다 실행됨
+            ```kotlin
+            val job = launch {
+                repeat(5) {
+                    println("계산 중... $it") // delay가 없기 때문에 취소 포인트 없음
+                }
+            }
+            delay(100)
+            job.cancel()
+            ```
+
+    - 취소 감지 방법들
+        - delay(): 내부적으로 취소 체크 포함
+        - yield(): 현재 중단 + 취소 여부 확인
+        - withContext: 내부에서 컨텍스트 전환 시 자동 확인
+        - isActive: 현재 Job이 활성 상태인지 확인
+        - ensureActive(): 비활성 상태면 CancellationException 즉시 throw
+
+    - 취소 시 예외처리
+        - cancel() 호출 후 내부에서 CancellationException 발생
+        - 이 예외는 일반적으로 자동 처리되지만, try-catch로 명시적으로 다룰 수도 있음
+        ```kotlin
+        try {
+            withContext(Dispatchers.IO) {
+                delay(5000) // 여기에 취소 발생 시 중단
+            }
+        } catch (e: CancellationException) {
+            println("코루틴이 취소되었습니다: ${e.message}")
+        }
+        ```
+
+    - 부모 자식 관계와 취소 전파
+        - 부모 코루틴이 취소되면 자식 코루틴도 자동으로 모두 취소됨
+        - 구조적 동시성(structured concurrency)의 핵심
+        ```kotlin
+        val parentJob = CoroutineScope(Dispatchers.Default).launch {
+            launch { delay(1000); println("자식1") }
+            launch { delay(2000); println("자식2") }
+        }
+        delay(500)
+        parentJob.cancel() // 자식들도 모두 취소됨
+        ```
+
+    - 전체 요약
+        - cancel() 역할: 코루틴을 중단하라고 요청하는 것 (강제 종료 아님)
+        - 실행 중단 시점: suspend 함수, isActive, ensureActive() 등에서 협조적으로 중단됨
+        - 예외 처리: CancellationException 발생 (기본적으로 무시되지만 처리 가능)
+        - 부모-자식 관계: 부모가 취소되면 자식도 모두 취소됨
+
 - Flow에서 buffer()와 conflate()의 차이점
     - 개요
         - 백프레셔 처리를 위한 대표적인 방식들
@@ -5465,132 +5379,6 @@ Organize concepts, features, types and Pros and Cons
             - collectLatest {}는 새 값이 오면 이전 작업 취소하고 새로 시작
             - 결론은 conflate()는 이전 작업을 끝내고 중간은 스킵, collectLatest{}는 이전 작업 취소하고 신규 값 올 시 새로 시작하는 원리임
 
-- Coroutine에서 Mutex와 Semaphore의 차이점은?
-- CoroutineExceptionHandler가 실행되는 경우는?
-- Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법은?
-- Jetpack WorkManager와 Coroutines을 함께 사용할 때의 주의점은?
-- MVVM과 MVI의 차이점은?
-- Clean Architecture를 Android 프로젝트에 적용하는 방법은?
-- DI(Dependency Injection)에서 Hilt와 Koin의 차이점은?
-- Kotlin에서 컴파일 시 생성되는 바이트코드는 어떻게 최적화되는가?
-- Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향은?
-- Kotlin에서 smart casting이 내부적으로 어떻게 동작하는가?
-- Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교는?
-- Kotlin의 companion object는 언제 메모리에 로드되는가?
-- Kotlin에서 data class의 copy() 메서드는 어떻게 동작하며, deep copy를 구현하는 방법은?
-- Kotlin에서 typealias의 내부적인 동작 방식과 활용 사례는?
-- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 방식은?
-- Kotlin의 contract API는 무엇이며, 최적화에 어떻게 기여하는가?
-- Kotlin에서 reflection이 성능에 미치는 영향과 이를 줄이는 방법은?
-- Kotlin에서 inline function이 성능을 개선하는 이유는?
-- Kotlin에서 reified 키워드가 컴파일러 최적화에 미치는 영향은?
-- Kotlin의 null-safety가 JVM에서 어떻게 구현되는가?
-- Kotlin의 default arguments는 Java와 어떻게 다르게 처리되는가?
-- Kotlin에서 lazy initialization의 내부 동작 방식과 성능 고려 사항은?
-- Kotlin에서 tail recursion 최적화(TCO)가 적용되지 않는 경우는?
-- Kotlin에서 synchronized 블록과 volatile 키워드의 차이점은?
-- Kotlin에서 companion object가 싱글톤처럼 동작하는 이유는?
-- Kotlin에서 함수형 프로그래밍 패러다임을 적용할 때 고려해야 할 사항은?
-- Kotlin에서 inline class를 활용한 메모리 최적화 기법은?
-- Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점은?
-- Kotlin에서 Serialization을 최적화하는 방법은?
-- Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조는?
-- Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법은?
-- Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할은?
-- Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법은?
-- Kotlin에서 collectLatest()와 collect()의 차이점은?
-- Kotlin의 StateFlow와 SharedFlow의 차이점 및 활용 방법은?
-- Kotlin에서 Immutable Data Structure를 활용한 성능 최적화 방법은?
-- Kotlin의 Compiler Intrinsics을 활용한 성능 최적화 기법은?
-- 다이나믹 아일랜드 구현 방법 및 실시간 업데이트 처리 방법
-- Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
-- Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
-- OOP의 4대 원칙과 SOLID 원칙에 대해 설명해주세요.
-- 멀티스레딩과 동시성 처리에 대해 설명해주세요. (Thread, ExecutorService, Synchronized, Volatile 등)
-- Java의 컬렉션 프레임워크에 대해 설명해주세요. (List, Set, Map 등)
-- 예외 처리의 종류와 차이점을 설명해주세요. (Checked Exception vs Unchecked Exception)
-- Kotlin의 주요 특징과 Java와의 차이점은 무엇인가요?
-- Null Safety를 어떻게 구현했는지 설명해주세요.
-- Kotlin의 Coroutine과 Java의 Thread의 차이점은 무엇인가요?
-- Kotlin에서의 확장 함수(Extension Function)에 대해 설명해주세요.
-- Data Class의 장점과 사용 사례를 설명해주세요.
-- Coroutine이란 무엇이고, 어떤 상황에서 사용하나요?
-- Coroutine의 Dispatcher 종류와 각각의 사용 사례를 설명해주세요.
-- Coroutine의 Cancellation과 Exception Handling에 대해 설명해주세요.
-- Coroutine과 RxJava의 차이점은 무엇인가요?
-- Coroutine을 사용해본 프로젝트에서의 경험을 공유해주세요.
-- Android의 생명주기(Lifecycle)에 대해 설명해주세요.
-- Activity와 Fragment의 차이점은 무엇인가요?
-- ViewModel과 LiveData의 역할과 장점은 무엇인가요?
-- Android에서의 메모리 관리와 LeakCanary 사용 경험에 대해 설명해주세요.
-- Jetpack Compose를 사용해본 경험이 있다면 설명해주세요.
-- Android에서의 DI(Dependency Injection) 사용 경험을 공유해주세요. (Dagger, Hilt 등)
-- Android의 백그라운드 작업 처리 방법을 설명해주세요. (WorkManager, JobScheduler 등)
-- AOSP 빌드 과정에 대해 설명해주세요.
-- Android 시스템의 주요 컴포넌트에 대해 설명해주세요. (Binder, Zygote, SystemServer 등)
-- 커스텀 ROM을 제작한 경험이 있다면 설명해주세요.
-- Java의 Garbage Collection 알고리즘에 대해 설명해주세요. (CMS, G1, ZGC 등)
-- Java의 ClassLoader와 동적 로딩에 대해 설명해주세요.
-- Java의 Reflection API 사용 사례와 주의점은 무엇인가요?
-- Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)에 대해 설명해주세요.
-- Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리를 설명해주세요.
-- 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
-- Kotlin의 Inline 함수와 Reified 타입에 대해 설명해주세요.
-- Kotlin의 Sealed Class와 Enum Class의 차이점은 무엇인가요?
-- Kotlin의 Delegated Properties 사용 사례를 설명해주세요.
-- Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
-- Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
-- Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
-- Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
-- Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
-- Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
-- Java의 VarHandle과 Atomic 클래스의 사용 사례를 설명해주세요.
-- Java의 Module System(JPMS)에 대해 설명해주세요.
-- Java의 Bytecode 조작 라이브러리(ASM, ByteBuddy 등) 사용 경험이 있다면 설명해주세요.
-- Kotlin의 Type Alias와 Inline Class의 차이점은 무엇인가요?
-- Kotlin의 Contracts API 사용 사례를 설명해주세요.
-- Kotlin의 Multiplatform 프로젝트 경험이 있다면 설명해주세요.
-- Coroutine의 Flow에서의 Backpressure 처리 방법을 설명해주세요.
-- Coroutine의 StateFlow와 SharedFlow의 차이점은 무엇인가요?
-- Coroutine의 Channel과 Actor의 차이점은 무엇인가요?
-- Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
-- Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
-- Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
-- Kotlin에서 Channel과 SharedFlow의 차이점은?
-- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
-- Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
-- Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
-- Jetpack Compose에서 Modifier의 역할과 best practice는?
-- Android에서 WorkManager와 AlarmManager의 차이점은?
-- Android에서 DataStore와 SharedPreferences의 차이점은?
-- Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
-- Android에서 ViewBinding과 DataBinding의 차이점은?
-- Android에서 CameraX를 사용할 때의 장점은?
-- Android에서 Activity Result API를 활용하는 방법은?
-- Android에서 LifecycleOwner와 ViewModel의 관계를 설명하시오.
-- Android에서 Hilt와 Koin의 차이점은?
-- Android에서 Firebase Cloud Messaging(FCM)과 OneSignal의 차이점은?
-- Android에서 ExoPlayer와 MediaPlayer의 차이점은?
-- Android에서 Jetpack Paging 3 라이브러리의 개념과 사용법은?
-- Android에서 Service와 JobIntentService의 차이점은?
-- Jetpack Compose에서 recomposition이 발생하는 조건은?
-- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
-- Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
-- Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
-- Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
-- Kotlin에서 Flow와 LiveData의 차이점은?
-- Kotlin에서 backing field와 backing property란?
-- Kotlin에서 deep copy와 shallow copy의 차이점은?
-- Kotlin에서 sealed class와 enum class의 차이점은?
-- Jetpack Compose에서 Slot API란?
-- Jetpack Compose에서 derivedStateOf를 사용하는 이유는?
-- Jetpack Compose에서 LazyColumn의 성능을 최적화하는 방법은?
-- Kotlin Multiplatform을 사용해본 경험이 있는가?
-- Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
-- Android에서 Inline Class의 장점은?
-- 아이템 100개 와 ViewHolder 1개를 가진 RecyclerView의 동작원리를 설명 해주세요.
-- RecyclerView or ListView 의 Pagination 구현 방법을 설명 해주세요.
-- 네트워크 통신을 통해 이미지를 가져오는 뷰가 포함된 ListView 또는 RecyclerView에서 빠르게 스크롤 시 생길 수 있는 이슈가 무엇이고 어떻게 수정 및 최적화를 할 수 있을까요?
 - with, run 의 차이점
     - 공통
         - 수신 객체(this)를 기준으로 블록 실행
@@ -5688,49 +5476,6 @@ Organize concepts, features, types and Pros and Cons
         }
         ```
 
-- Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
-- 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
-- Parcel 과 Serializable의 차이는 무엇일까요?
-- 안드로이드에서 Unit Test가 필요 한 이유는 무엇일까요?
-- 기존 프로젝트에서 “개발 서버를 바라보는 어플” 과 “프로덕션 서버를 바라보는 어플”을 나눠서 관리해야 한다고 했을 때 본인의 계획을 말씀 해주세요.
-- 인플레이션(inflation)이란 무엇인가요?
-- Intent를 통해 데이터 전달하는 과정에서 클래스 객체를 바로 전달하지 못하는 이유는 무엇이고 전달하기 위해서는 어떤 처리가 필요한가요? 그리고 Activity 간 데이터 전달을 위해 Intent 방법을 사용하는 이유가 무엇인가요?
-- 복수의 Fragment 간 데이터 전달 방법을 설명 해주세요.
-- Width가 1000px Height가 20000px인 이미지가 있고 해당 이미지를 보여주려고 했을 때 아래와 같은 에러가 떴다. 이를 이미지 라이브러리를 사용하지 않고 해결하는 방법에 대해 설명 해주세요.
-- W/OpenGLRenderer: Bitmap too large to be uploaded into a texture (max=2048x2048)
-- Jetpack Compose를 사용해본 경험이 있는가? 기존 XML 방식과 비교했을 때 어떤 장점과 단점이 있는가?
-- Android Lifecycle에 대해 설명하고, ViewModel이 어떻게 메모리 관리를 도와주는지 설명해보라.
-- Coroutine과 LiveData의 차이를 설명해보라.
-- Flow와 StateFlow, SharedFlow의 차이점은?
-- Android 앱의 성능 최적화를 위해 어떤 기법을 사용했는가?
-- ProGuard와 R8의 차이를 설명해보라.
-- WorkManager, AlarmManager, Foreground Service의 차이점은?
-- Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
-- 앱의 메모리 릭을 찾고 해결하는 방법은?
-- 앱이 갑자기 크래시가 발생했을 때 어떻게 디버깅할 것인가?
-- Android 앱의 생명주기(Lifecycle)에 대해 설명하라.
-- Service와 Foreground Service의 차이점은?
-- ViewBinding과 DataBinding의 차이는?
-- Jetpack Compose와 기존 View 시스템의 차이점은?
-- RecyclerView에서 ViewHolder 패턴이 중요한 이유는?
-- 안드로이드의 권한 요청(Permission) 방식이 Android 6.0 이후 어떻게 변경되었는가?
-- 멀티 모듈(Multi Module) 프로젝트를 구성할 때 장점과 단점은?
-- Dagger, Hilt, Koin 같은 DI(Dependency Injection) 라이브러리를 사용해본 경험이 있는가?
-- Android 앱의 ANR(Application Not Responding) 이슈를 해결하는 방법은?
-- Java의 OOP(객체지향 프로그래밍) 특징을 설명하라.
-- JVM, JRE, JDK의 차이점은?
-- Retrofit과 Volley의 차이점은?
-- Firebase Crashlytics를 사용한 경험이 있는가? 어떻게 활용했는가?
-- Java의 가비지 컬렉션(GC)은 어떻게 동작하는가?
-- Java에서 volatile, synchronized, Atomic의 차이를 설명하라.
-- Java 8에서 추가된 주요 기능(람다, 스트림, Optional 등)에 대해 설명하라.
-- Checked Exception과 Unchecked Exception의 차이는?
-- HashMap과 ConcurrentHashMap의 차이점은?
-- Java에서 Reflection을 사용할 때 주의할 점은?
-- Kotlin과 Java의 주요 차이점은?
-- Kotlin의 data class와 일반 클래스의 차이는?
-- suspend 함수와 Coroutine의 작동 방식은?
-- Kotlin에서 lateinit과 lazy의 차이는?
 - Kotlin의 sealed class 사용 시점
     - 개요
         - 계층적으로 제한적인 타입 분기를 명확하게 하고 싶을 때 사용하는 강력한 기능
@@ -6025,47 +5770,596 @@ Organize concepts, features, types and Pros and Cons
         - 코드 재사용, 유틸리티 함수 작성, 가독성 향상에 유용
         - 안드로이드 실무에서도 뷰, 프래그먼트, 컨텍스트 등의 기능 확장에 자주 사용됨
 
-- Kotlin의 flow와 channel의 차이점은?
-- Jetpack Compose에서 Composition이란 무엇인가? Recomposition은 언제 발생하는가?
-- WorkManager와 AlarmManager의 차이점과 사용 사례는?
-- Android의 StrictMode를 활용한 성능 개선 방법을 설명하라.
-- ViewModel을 Scope별로 관리하는 최적의 방법은?
-- 프로세스가 종료된 후에도 데이터가 유지되도록 하는 방법은? (DataStore, Room, SharedPreferences 비교)
-- Android에서 Parcelable과 Serializable의 차이를 설명하고, Parcelable을 사용하는 이유는?
-- MotionLayout을 활용한 애니메이션 구현 방법을 설명하라.
-- Jetpack Navigation Component의 Deep Link 동작 방식과 활용 사례는?
-- Android 앱에서 보안 강화를 위한 ProGuard, R8, App Integrity 적용 방법은?
-- Java에서 ClassLoader는 어떻게 동작하는가? (Bootstrap, System, Custom ClassLoader)
-- ThreadLocal은 어떤 상황에서 유용하게 사용할 수 있는가?
-- Java의 CompletableFuture와 ExecutorService의 차이점은?
-- JVM의 Garbage Collection(GC) 알고리즘(G1, CMS, ZGC 등)의 차이점과 최적화 방법은?
-- synchronized, Lock, ReentrantLock의 차이점과 각각의 장단점은?
-- Java의 ForkJoinPool은 어떤 경우에 사용하는가?
-- Java에서 Immutable 객체를 설계하는 방법과 장점은?
-- Java 17의 최신 기능과 주요 변경 사항을 설명하라.
-- Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할은?
-- Kotlin의 inline, noinline, crossinline 키워드는 언제 사용하는가?
-- Coroutine의 Structured Concurrency 개념을 설명하라.
-- Kotlin의 Flow에서 SharedFlow와 StateFlow의 차이는?
-- Kotlin의 Delegation 패턴은 어떤 경우에 유용한가?
-- Jetpack Compose의 Slot API 개념과 활용 사례는?
-- invoke operator를 활용한 고급 함수형 프로그래밍 예제를 설명하라.
-- Kotlin Multiplatform에서 JVM, Native, JS 타겟을 함께 사용할 때의 문제점과 해결 방법은?
-- SharedPreferences 에서 commit() 과 apply() 의 다른점에 대해 말해주세요.
-- 안드로이드에서 메모리 누수를 줄일 수 있는 방법에 대해 말해주세요.
-- 안드로이드 APK 파일의 크기를 줄일 수 있는 방법들을 말해주세요.
-- 비트맵보다 용량이 작으면서 XML로 작성 가능한 방법
-- 안드로이드 어플리케이션의 빌드 시간을 줄일 수 있는 방법들을 말해주세요.
-- aaptOptions.cruncherEnabled=false 설명
-- Ext.alwaysUpdateBuildId = false 설명
+- Coroutine의 Structured Concurrency(구조적 동시성) 개념
+    - 개요
+        - 코루틴을 예측가능하게 관리하고, 메모리 누수와 비정상 종료를 방지하는 원칙
+    - Structured Concurrency 개념
+        - 정의
+            - 코루틴은 그 코루틴을 시작한 범위(Scope) 내에서만 존재하며, 부모가 사라지면 자식 코루틴도 함께 취소되는 구조적인 실행 흐름을 보장하는 개념
+            - 코루틴을 만든 스코프가 사라지면
+            - 그 안에서 실행된 모든 코루틴도 같이 종료
+            - 즉, 부모-자식 관계를 통해 동시성 작업을 구조적으로 관리
+
+    - 필요성
+        - 기존 문제점 (전통적인 비동기 처리 문제, 예: GlobalScope)
+            - 전역에서 실행되는 코루틴은 수명이 관리되지 않음
+            - 액티비티나 프래그먼트가 사라져도 코루틴은 계속 실행 > 메모리 누수, 충돌, 데이터 처리 오류 발생
+        - 구조적 동시성 장점
+            - 코루틴의 생명주기를 안전하게 관리
+            - 에러 전파, 취소, 자원 해제가 구조적으로 이루어짐
+            - 작업 범위가 명확해지고 예측 가능함
+
+    - 구조적 동시성의 핵심 원칙
+        - 부모 - 자식 관계: 코루틴은 자신을 실행한 부모 CoroutineScope에 속함
+        - 부모 취소 -> 자식 취소: 부모가 취소되면 자식 루틴도 자동 취소
+        - 예외 전파: 자식 코루틴에서 예외가 발생하면 부모로 전달됨
+        - coroutineScope {} 사용: 구조적 컨텍스트에서 안전한 자식 코루틴 실행 보장
+
+    - 예제
+        - GlobalScope는 액티비티, 프래그먼트가 사라져도 계속 실행됨
+            - 구조적 동시성 위반
+        - viewModelScope, lifecycleScope는 구조적 동시성을 기본 제공
+            - → ViewModel이나 Fragment가 종료되면 내부 코루틴도 자동 취소됨
+
+    - coroutineScope & supervisorScope
+        - coroutineScope {}: 자식 중 하나라도 실패하면 모든 자식이 취소됨
+        - supervisorScope {}: 자식 중 하나가 실패해도 다른 자식에는 영향 없음
+        ```kotlin
+        coroutineScope {
+            launch { taskA() }     // A 실패 → B도 취소
+            launch { taskB() }
+        }
+
+        supervisorScope {
+            launch { taskA() }     // A 실패 → B는 계속
+            launch { taskB() }
+        }
+        ```
+
+    - 최종 결론
+        - Structured Concurrency 는 Kotlin Coroutine의 가장 중요한 설계 철학 중 하나로, 비동기 작업을 명확하고 안전하게 관리하며, 코드 유지보수성과 안정성을 크게 향상
+
+- 안드로이드 APK 파일의 크기를 줄일 수 있는 방법들
+    - 개요
+        - 다운로드 속도, 설치율, 저장공간 부담과 직결되기 때문에 중요한 사항
+    - 크기 축소 방법
+        - (1) 리소스 최적화
+            - 사용하지 않는 리소스 제거
+                - res/ 폴더에 있는 사용되지 않는 drawable, layout, values 등 리소스 삭제
+                - Android Studio → Lint 또는 Build → Analyze APK 도구 활용 가능
+                - shrinkResources true 옵션 사용
+                ```gradle
+                buildTypes {
+                    release {
+                        shrinkResources true
+                        minifyEnabled true
+                        proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                    }
+                }
+                ```
+
+            - 리소스 압축 및 포맷 변경
+                - PNG -> WebP로 변환 (용량 최소 20~30% 감소 가능)
+                - 벡터(VectorDrawable) 사용 (아이콘, 단색 이미지에 효과적)
+                - 이미지 압축 도구 사용 (TinyPNG, ImageOptim 등)
+
+            - 다국어 리소스 제거
+                - 사용하지 않는 values-xx/strings.xml 제거
+                - resConfigs를 통해 필요한 언어만 포함
+                ```gradle
+                defaultConfig {
+                    resConfigs "en", "ko" // 한국어, 영어만 포함
+                }
+                ```
+        - (2) 코드 최적화
+            - ProGuard / R8 사용 (난독화 + 코드 축소)
+                - 사용하지 않는 클래스, 메서드, 필드 제거 (Dead Code Removal)
+                - R8은 ProGuard를 대체하며 최신 빌드 시스템에 통합됨
+                ```gradle
+                minifyEnabled true
+                ```
+                    - 주의: ProGuard 설정 시 꼭 필요한 클래스가 제거되지 않도록 Keep 옵션 명시 필요
+
+            - Kotlin Reflection 최소화
+                - kotlin-reflect 라이브러리는 매우 무거움 -> 가능하면 사용하지 않도록 리팩토링
+                - 대신 KClass.simpleName, sealed class 등을 활용
+
+            - 불필요 써드파티 라이브러리 제거
+                - 전체 기능을 사용하지 않는데도 무거운 라이브러리를 참조하는 경우 제거
+                - 예: 전체 Glide 대신 Glide-no-op, Picasso-lite 등 경량 버전 사용 고려
+
+        - (3) ABI 및 아키텍쳐 분할
+            - 여러 CPU 아키텍쳐에 대해 분할 빌드
+                - arm64-v8a, armeabi-v7a, x86 등 모두 포함하면 용량 증가
+                - → 각 ABI별 APK 분리 (Split APKs) 또는 App Bundle 사용
+                ```gradle
+                splits {
+                    abi {
+                        enable true
+                        reset()
+                        include "armeabi-v7a", "arm64-v8a" // 필요한 것만 포함
+                        universalApk false
+                    }
+                }
+                ```
+
+        - (4) App Bundle 사용 (AAB)
+            - .aab (Android App Bundle) 형식으로 배포하면, Google Play가 사용자 디바이스에 맞는 APK만 생성하여 전달
+                - 필요 없는 리소스, 코드, ABI 자동 제외
+                - APK 크기 평균 20~50% 감소
+                - Google Play에서 공식 권장 방식
+
+        - (5) 기타 전략
+            - Native 코드 최적화
+                - .so 라이브러리 → 사용하지 않는 ABI 제거
+                - JNI 호출 줄이기 / NDK 옵션 최적화
+            - Dynamic Feature Module
+                - 일부 기능을 동적으로 다운로드 하도록 분리 가능 (예: 로그인, 고해상도 이미지 편집 등)
+                - 앱 설치 초기 용량 줄이기에 매우 효과적
+
+    - 전략 요약
+        - 리소스 최적화
+        - 코드 최적화
+        - 아키텍처 분리
+        - 번들 사용
+        - 고급 전략 (Dynamic Feature, Native Code 최적화, Resource Shrinker)
+
 - Gradle은 맨 뒤에 ‘+’를 추가하면 자동으로 최신 버전으로 업데이트, 자동 업데이트하게 하는 방법
+    - 사용 방법: 버전 끝에 + 삽입
+        ```groovy
+        dependencies {
+            implementation 'com.squareup.retrofit2:retrofit:2.+'   // 2.x 버전 중 가장 최신
+            implementation 'com.google.code.gson:gson:+'            // 전체 중 가장 최신
+        }
+        ```
+        - 의미
+            - 1.2.+: 1.2.0, 1.2.1, 1.2.99 등 1.2 버전 내에서 최신
+            - 2.+: 2.0.0 ~ 2.99.99 등 2.x 버전 중 최신
+            - +: 가장 최신 버전 전체 중 하나 선택
+
+    - 장점
+        - 항상 최신 버전으로 자동 반영
+        - 보안 패치, 기능 개선 등을 자동 반영
+        - 개발 초기에는 빠른 테스트 가능
+
+    - 주의 사항
+        - 빌드 결과가 매번 달라짐: 동일 프로젝트라도 날짜/위치에 따라 버전이 바뀜 → 재현 불가 문제
+        - 예기치 않은 호환성 이슈: 종속 라이브러리 업데이트로 앱이 갑자기 깨질 수 있음
+        - 빌드 속도 저하: 매번 리모트 저장소에서 버전 확인 요청 발생
+        - 보안 리스크: 검증되지 않은 버전이 자동 반영될 수 있음
+            - 그래서 실무에선 "정확한 버전 명시"가 강력히 권장됨
+
+    - 대안: 최신 버전 자동 확인 후 수동 적용
+        - Gradle Version Plugin 사용 (./gradlew dependencyUpdates)
+        - GitHub Dependabot 또는 Renovate
+        - com.github.ben-manes.versions 플러그인으로 확인 후 수동 업데이트
+
 - 채팅 기능 구현
-- 프래그먼트는 기본 생성자를 왜 사용해야 할까?
-- Gradle / Ant / Maven이 무엇인가?
+    - 개요
+        - 전체 시스템 구조 개요
+            ```text
+            [Client: Android App] ←→ [Backend Server] ←→ [Database]
+                                        ↑
+                                    (WebSocket or Firebase)
+            ```
+            - Android 클라이언트: UI + 메시지 송수신 처리
+            - 서버: 실시간 처리 (WebSocket 등), 메시지 저장
+            - 데이터베이스: 메시지, 유저, 채팅방 기록 저장
+    - 핵심 기능 목록
+        - 메시지 송/수신: 서버와 연결하여 텍스트 / 이미지 / 파일 주고받기
+        - 실시간 업데이트: 메시지를 수신 즉시 UI 반영
+        - 메시지 저장: DB에 대화 로그 저장 및 불러오기
+        - 읽음 처리: 읽음 여부 동기화
+        - 사용자 인증: 유저별 메시지 분리 및 식별 필요
+    - 기술 선택
+        - 실시간 통신
+            - 선택 옵션: Firebase Realtime DB / Firestore, WebSocket (Socket.IO, Stomp, OkHttp), MQTT
+            - 설명: 서버가 없으면 Firebase가 쉬움 / 서버 있으면 WebSocket 권장
+        - 백엔드: Node.js, Spring, FastAPI, Firebase Functions 등 (메시지 중계 및 저장)
+        - 데이터 저장: Firebase, MongoDB, MySQL, PostgreSQL	(스케일링 고려)
+        - Push 알림: FCM (Firebase Cloud Messaging)	(앱이 꺼져 있을 때 알림)
+        - 보안: JWT 인증, Firebase Auth, OAuth (사용자 구분 필수)
+    - Android 클라이언트 개발 구조
+        - UI 구성
+            - RecyclerView + Adapter 사용
+            - 메세지 방향에 따라 ViewHolder 분리 (보낸 메세지 / 받은 메시지)
+                - 보낸 메세지: 오른쪽 정렬
+                - 받은 메세지: 왼쪽 정렬
+        - 실시간 메시지 수신 처리
+            - Firebase 사용 시 (초보자/빠른 구현용)
+                ```kotlin
+                val db = FirebaseDatabase.getInstance()
+                val messagesRef = db.getReference("chat_rooms/room_id/messages")
+
+                messagesRef.addChildEventListener(object : ChildEventListener {
+                    override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                        val msg = snapshot.getValue(ChatMessage::class.java)
+                        adapter.addMessage(msg)
+                    }
+                    // ...
+                })
+                ```
+            - WebSocket 사용 시 (고급/사용 서비스)
+                ```kotlin
+                val client = OkHttpClient()
+                val request = Request.Builder().url("wss://yourserver.com/chat").build()
+                val listener = object : WebSocketListener() {
+                    override fun onMessage(webSocket: WebSocket, text: String) {
+                        val msg = gson.fromJson(text, ChatMessage::class.java)
+                        adapter.addMessage(msg)
+                    }
+                }
+                client.newWebSocket(request, listener)
+                ```
+        - 메시지 전송 처리
+            ```kotlin
+            val message = ChatMessage(senderId, messageText, System.currentTimeMillis())
+            messagesRef.push().setValue(message) // Firebase 예시
+            ```
+    - 서버 구성 예 (웹소켓 기반)
+        - /join
+        - /send
+        - /receive
+        - 구현 예제 (Node.js + Socket.IO)
+            ```js
+            io.on('connection', socket => {
+                socket.on('join', roomId => socket.join(roomId));
+                socket.on('send', (roomId, msg) => {
+                    io.to(roomId).emit('receive', msg);
+                });
+            });
+            ```
+    - 고급 기능 확장 예시
+        - 채팅방 목록: 사용자별 참여중인 채팅방 목록 표시
+        - 이미지/파일 전송: Firebase Storage or Multipart Upload
+        - 메시지 읽음 여부: 메시지에 readBy 리스트 저장
+        - 메시지 삭제: soft delete or 필드 플래그
+        - 타이yping 표시: WebSocket으로 typing 이벤트 전달
+    - 실제 적용 기술 스택 예
+        - 클라이언트: Android (Kotlin, Jetpack Compose, RecyclerView, ViewModel)
+        - 실시간: Firebase RTDB / Firestore or WebSocket (OkHttp, Stomp)
+        - 백엔드: Spring Boot, Node.js, FastAPI + Redis pub/sub
+        - 데이터 저장: Firebase / MongoDB / MySQL
+        - 인증: Firebase Auth or JWT
+        - 알림: Firebase Cloud Messaging (FCM)
+
+    - 결론
+        - 안드로이드 채팅 기능 구현의 핵심은 실시간 메시지 송수신, 안정적인 데이터 저장, 그리고 반응성 있는 UI 구성
+        - Firebase는 서버 없이 빠르게 시작할 수 있고, WebSocket은 고급 커스터마이징에 적합
+
+- 프래그먼트 기본 생성자 사용 이유
+    - 개요
+        - 반드시 기본 생성자(인자가 없는 생성자) 제공해야 하는 이유는 시스템이 프래그먼트를 복원하고 재생성하는 방식과 관련있음
+    - 핵심 이유: 시스템이 프래그먼트를 자동으로 재생성하기 때문
+        - 안드로이드 시스템은 다음 상황에서 프래그먼트를 자동 복원
+            - 화면 회전(configuration change)
+            - 프로세스가 강제 종료된 후 백 스택 복원
+            - 앱이 메모리 부족으로 KILL됐다가 다시 시작될 때
+            ```java
+            Fragment fragment = fragmentClass.newInstance(); // 리플렉션 기반 생성
+            ```
+            - 리플렉션 통해 기본 생성자로 프래그먼트를 생성하기 때문에 기본 생성자가 반드시 존재해야 오류없이 복원 가능
+    - 잘못된 예: 인자 있는 생성자 사용
+        ```kotlin
+        class MyFragment(private val userId: String) : Fragment() {
+            // 위험한 패턴: 복원 시 userId가 전달되지 않음 → crash 가능성 있음
+        }
+        ```
+        - 문제점
+            - 시스템이 이 프래그먼트를 복원할 때 userId 값을 전달할 수 없음
+            - 결과적으로 IllegalStateException, NullPointerException,  Fragment$InstantiationException 발생 가능
+
+    - 올바른 패턴: 기본 생성자 + Bundle 사용
+        ```kotlin
+        class MyFragment : Fragment() {
+            companion object {
+                fun newInstance(userId: String): MyFragment {
+                    val fragment = MyFragment()
+                    val args = Bundle().apply {
+                        putString("userId", userId)
+                    }
+                    // fragment.arguments 방식으로 데이터 전달하는 것이 가장 안전
+                    fragment.arguments = args
+                    return fragment
+                }
+            }
+
+            override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState)
+                val userId = arguments?.getString("userId")
+                // 이 값을 사용
+            }
+        }
+        ```
+        - 장점
+            - 기본 생성자 유지
+            - 시스템이 프래그먼트를 자동 복원해도 Bundle이 함께 복원됨
+            - 생명주기/복원 안전
+
+    - 안드로이드 공식 권장 방식
+        - 공식문서 상 프래그먼트는 항상 public 기본 생성자를 제공해야 하며, 파라미터 전달은 arguments를 사용할 것 이라고 명시하고 있음
+
+    - 결론
+        - Fragment는 반드시 기본 생성자가 있어야 한다.
+        - 이유는 시스템이 리플렉션으로 프래그먼트를 자동 재생성하기 때문에, 인자 있는 생성자를 사용할 경우 복원이 불가능하거나 앱이 크래시될 수 있다.
+        - 데이터 전달은 반드시 Bundle(arguments)을 통해 수행해야 한다.
+
+- Gradle / Ant / Maven
+    - 개요
+        - 빌드 도구(Build Tool)
+    - 개념 요약
+        - Ant: 가장 오래된 Java 빌드 도구. 절차지향적
+        - Maven: Ant 이후 등장. 규약 중심(Convention over Configuration)
+        - Gradle: 최신 빌드 도구. 스크립트 기반 + 유연한 설정, Android 공식 빌드 도구
+    - 각 도구별 개념 및 특징
+        - (1) Ant (Apache Ant)
+            - 자바 생태계에서 가장 먼저 널리 쓰인 빌드 도구
+                - XML로 작성된 build.xml 파일 사용
+                - 작업(task) 중심 → 순서대로 실행
+                - 사용자가 모든 작업을 직접 정의 (컴파일, 패키징, 복사 등)
+                - 유연하지만 유지보수 어려움
+                ```xml
+                <project name="HelloApp" default="compile">
+                    <target name="compile">
+                        <javac srcdir="src" destdir="build/classes"/>
+                    </target>
+                </project>
+                ```
+        - (2) Maven (Apache Maven)
+            - Ant의 단점을 보완해 나온 규약 기반 빌드 도구
+                - XML 기반의 pom.xml로 설정
+                - 표준적인 프로젝트 구조와 라이프사이클 존재
+                    - 예: src/main/java, src/test/java
+                - 의존성 관리 시스템 내장 (중앙 저장소 mvnrepository)
+                - 설정은 많지 않지만, 구조 변경은 어렵고 유연성이 떨어짐
+                ```xml
+                <dependencies>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                    <version>5.2.0.RELEASE</version>
+                </dependency>
+                </dependencies>
+                ```
+        - (3) Gradle
+            - Maven의 규약 + Ant의 유연성 → 현대적인 빌드 도구, 현재 Android 공식 빌드 도구
+                - build.gradle 파일에 Groovy/Kotlin DSL로 작성
+                - 의존성, 빌드, 릴리즈, 코드 생성 등 매우 유연하게 처리 가능
+                - 강력한 캐싱, 병렬 빌드, Incremental Build 등 성능 최적화 우수
+                - Plugin 기반으로 확장성 매우 뛰어남
+                - Android Studio 기본 통합
+                ```groovy
+                dependencies {
+                    implementation 'androidx.core:core-ktx:1.10.1'
+                    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+                }
+                ```
+    - Android에서 Gradle 사용 이유
+        - Google이 공식적으로 Android 빌드 도구로 채택
+        - 플러그인 시스템 (e.g. com.android.application)
+        - 다양한 빌드 타입, productFlavor, variant 지원
+        - 코드 생성, 리소스 관리, AAR/JAR 처리 등 Android 생태계에 최적화
+        - Kotlin DSL로도 작성 가능 (build.gradle.kts)
 
 - JAR, AAR, DEX, APK 개념
+    - 개요
+        - 빌드 결과물 또는 라이브러리 구성 형식
+    - JAR (Java ARchive)
+        - 개념
+            - Java 클래스(.class)파일과 메타데이터(MANIFEST.MF)등을 압축한 Java용 배포 패키지
+        - 용도
+            - 일반 자바 라이브러리 배포에 사용
+            - 안드로이드에서도 사용 가능하지만 자바 코드만 포함 가능
+        - 특징
+            - 내부에 .class 파일만 있음
+            - 리소스(res, AndroidManifest.xml, native 라이브러리 등) 없음
+            - 안드로이드에서 사용하려면 .dex 변환이 필요
+        - 포함요소
+            - .class, META-INF
+
+    - AAR (Android ARchive)
+        - 개념
+            - 안드로이드 전용 라이브러리 패키지로, JAR보다 확장된 구조를 가지고 있음
+        - 용도
+            - Android 모듈 또는 라이브러리를 다른 프로젝트에서 재사용할 때 사용
+            - resources, Manifest, ProGuard, assets 등 포함 가능
+        - 특징
+            - 내부 구성
+            ```bash
+            /classes.jar            ← Java 클래스
+            /AndroidManifest.xml    ← 라이브러리용 매니페스트
+            /res/                   ← 리소스
+            /assets/                ← 에셋
+            /proguard.txt           ← 난독화 설정
+            /jni/                   ← .so 파일 (native lib)
+            ```
+            - 일반적으로 maven, jitpack, local repo 등으로 공유
+        - 포함요소
+            - classes.jar, res, manifest, .so
+
+    - DEX (Dalvik Executable)
+        - 개념
+            - 안드로이드 런타임(달빅/ART)에서 실행 가능한 바이트코드 파일
+        - 용도
+            - .class 파일들을 안드로이드에서 실행 가능하게 변환한 결과물
+            - 안드로이드에서 실행되는 모든 코드는 .dex 형태여야 함
+        - 특징
+            - .class -> .dex 변환은 D8 또는 R8 컴파일러가 수행
+            - 내부 명령어는 JVM이 아닌 달빅/ART 명령어셋 (레지스터 기반) 사용
+            - .apk 안에 포함됨
+        - 포함요소
+            - 컴파일된 .class 변환 결과
+
+    - APK (Android Package)
+        - 개념
+            - 안드로이드 앱의 최종 패키지 파일(=실행 가능 배포 파일)
+        - 용도
+            - GooglePlay에 업로드하거나, 사용자에게 앱 설치 파일로 제공
+            - 내부적으로 .dex, .xml, .so, .png 등 다양한 자원을 압축하여 포함
+        - 특징
+            - .apk는 사실상 zip 압축 파일
+            - 내부 구성 예:
+            ```bash
+            /classes.dex         ← 앱 실행 코드 (DEX)
+            /AndroidManifest.xml
+            /res/                ← 리소스 (버튼, 배경 등)
+            /assets/             ← 에셋 (읽기 전용 리소스)
+            /lib/                ← .so 파일 (native library)
+            /META-INF/           ← 서명 정보
+            ```
+            - .apk는 안드로이드 OS에서 설치/실행 가능한 단일 앱 파일
+        - 포함요소
+            - .dex, 리소스, manifest, lib
+
+    - 간단 결론 요약
+        - JAR → 순수 Java 코드 라이브러리
+        - AAR → Android 앱에 필요한 리소스 + 코드 포함된 라이브러리
+        - DEX → Android에서 실행 가능한 바이트코드
+        - APK → Android 앱 최종 설치 패키지
+
 - Annotation 개념
+    - 정의
+        - Annotation은 코드에 메타데이터(데이터에 대한 데이터)를 추가하는 Java 문법의 한 종류
+        - 컴파일러나 툴, 프레임워크에 추가 정보를 제공하는 방식
+        - 코드에 부가적인 의미를 부여하지만, 실제 프로그램의 실행 로직에는 직접 영향을 주지 않음
+    - 목적
+        - 컴파일러 지시: @Override, @SuppressWarnings 등 컴파일러에게 검사 또는 무시 요청
+        - 런타임 정보 제공:	@Retention(RUNTIME) 설정 시, 리플렉션으로 런타임에 조회 가능
+        - 코드 자동 생성: @Parcelize, @GlideModule, @HiltViewModel 등에서 코드 생성 처리
+        - 의존성 주입 처리: @Inject, @Provides, @Module, @Singleton 등에서 DI 구현
+    - 애노테이션의 주요 메타 애노테이션
+        - 애노테이션 자체도 애노테이션으로 정의 가능
+        - 대표적 예
+            - @Target: 애노테이션이 적용될 수 있는 위치 (class, field, method 등)
+            - @Retention: 유지 범위 (컴파일 시, 클래스 파일에, 런타임까지 등)
+            - @Inherited: 상속 가능 여부
+            - @Documented: Javadoc에 포함 여부
+            ```Kotlin
+            @Target(AnnotationTarget.CLASS)
+            @Retention(AnnotationRetention.RUNTIME)
+            annotation class MyAnnotation
+            ```
+    - 자주 사용되는 애노테이션
+        - @Override: 부모 클래스의 메서드를 오버라이드함을 명시
+        - @NonNull, @Nullable: null 허용 여부를 명시, Lint 및 코드 툴이 활용
+        - @Inject: Dagger/Hilt 등 의존성 주입 대상 지정
+        - @HiltViewModel: ViewModel에 Hilt 자동 주입 설정
+        - @Parcelize: Parcelable 인터페이스를 컴파일 타임에 자동 구현
+        - @BindingAdapter: DataBinding에서 커스텀 속성 연결 처리
+    - 애노테이션 처리기
+        - 애노테이션은 해석되고 처리되어야 기능을 발휘
+            - Java: Annotation Processing Tool (APT)를 통해 컴파일 타임 처리
+            - Kotlin: kapt (Kotlin Annotation Processing)
+            - 대표적인 예: Dagger, Hilt, Room, Glide → 모두 APT 기반 코드 자동 생성 사용
+            ```kotlin
+            // Room 예시
+            @Entity
+            data class User(
+                @PrimaryKey val id: Int,
+                val name: String
+            )
+            ```
+                - → @Entity와 @PrimaryKey는 Room이 처리해서 DAO 및 DB 구조 자동 생성
+    - 애노테이션 중요한 이유
+        - 코드 간결화: 보일러 플레이트 코드 감소
+        - 컴파일 시점 오류 감지: @NotNull 등은 앱 실행 전에 오류 가능성 사전 확인 가능
+        - 프레임워크 간 통합 포인트: 프레임워크 내부 훅 연결 수단
+        - 성능 향상: 컴파일 타임에 코드를 생성하여 리플렉션 비용 감소(Room, Hilt 등)
+    - 결론
+        - Annotation은 코드에 메타데이터를 부여하여, 컴파일러, 프레임워크, 툴에게 의미 있는 정보를 전달하는 수단이다.
+        - Android 개발에서는 DI, 데이터바인딩, 코드 생성 등 광범위하게 사용됨
+
 - Custom Annotation 정의 및 커스텀 기능 구현 방법
+    - 개요
+        - 안드로이드 또는 코틀린/자바 개발에서 프레임워크처럼 동작하는 기능을 직접 만들고 싶을 때 핵심 개념
+    - 전체 구현 흐름
+        - Annotation 정의
+        - Annotation을 붙인 대상 작성
+        - Annotation Processor 작성 (컴파일 타임 or 런타임)
+        - (선택) 코드 생성 or 특정 로직 실행
+    
+    - (1) Custom Annotation 정의
+        ```kotlin
+        @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+        @Retention(AnnotationRetention.RUNTIME)
+        annotation class MyLogger(
+            val tag: String = "MyLogger"
+        )
+        ```
+        - 주요 요소 설명
+            - @Target: 어디에 붙일 수 있는지 지정 (CLASS, FIELD, FUNCTION 등)
+            - @Retention: 언제까지 유지할지 지정 (SOURCE, BINARY, RUNTIME)
+            - @Repeatable, @MustBeDocumented, @Inherited 등도 있음	
+            - RUNTIME 으로 설정하면 리플렉션으로 사용할 수 있음
+    - (2) Annotation 사용
+        ```kotlin
+        @MyLogger(tag = "CustomLogger")
+        fun doSomething() {
+            println("Doing something...")
+        }
+        ```
+    - (3) 리플렉션을 사용한 런타임 처리
+        - 간단한 실행 예시(함수에 @MyLogger 붙은 경우 로그 출력)
+        ```kotlin
+        fun invokeWithLogging(target: Any) {
+            val kClass = target::class
+
+            for (func in kClass.members) {
+                val annotation = func.annotations.find { it is MyLogger } as? MyLogger
+                if (annotation != null) {
+                    println("${annotation.tag} → ${func.name} 실행 전 로그 출력")
+                    func.call(target) // 파라미터 없는 함수만 호출 가능
+                    println("${func.name} 실행 완료")
+                }
+            }
+        }
+        ```
+        - 호출
+        ```kotlin
+        class TestClass {
+            @MyLogger(tag = "TEST")
+            fun hello() {
+                println("Hello, world!")
+            }
+        }
+
+        fun main() {
+            val obj = TestClass()
+            invokeWithLogging(obj)
+        }
+        ```
+    - (4) Annotation Processor (컴파일 타임 처리)
+        - 런타일이 아닌 컴파일 타임에 코드 생성 및 유효성 검사를 하려면 아래 도구 사용
+            - Java:	APT (Annotation Processing Tool)
+            - Kotlin: kapt (kotlin-kapt 플러그인)
+            - 대표 라이브러리: AutoService, KotlinPoet, JavaPoet
+        - Processor 예제
+            ```java
+            @AutoService(Processor.class)
+            public class MyLoggerProcessor extends AbstractProcessor {
+                @Override
+                public Set<String> getSupportedAnnotationTypes() {
+                    return Collections.singleton(MyLogger.class.getCanonicalName());
+                }
+
+                @Override
+                public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+                    for (Element element : roundEnv.getElementsAnnotatedWith(MyLogger.class)) {
+                        // 대상 클래스나 메서드 정보 추출
+                        System.out.println("Found @MyLogger on: " + element.getSimpleName());
+                        // 코드 생성 또는 로깅 등 수행
+                    }
+                    return true;
+                }
+            }
+            ```
+    - 결론
+        - 정의: @interface 또는 annotation class로 Annotation 정의
+        - 사용: 클래스/함수/필드에 애노테이션 부착
+        - 처리 방식: 리플렉션 기반(RUNTIME) 또는 APT/kapt 기반(COMPILE TIME)
+        - 도구: kapt, AutoService, KotlinPoet, JavaPoet 등 사용 가능
+
+
 - AsyncTask Deprecated된 이유
     - 개요
         - 백그라운드 작업을 쉽게 처리하기 위한 기본 API 였으나, 현재는 Deprecated
