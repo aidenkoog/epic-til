@@ -7290,6 +7290,79 @@ Organize concepts, features, types and Pros and Cons
         - 무한 Observable 관리: takeUntil, dispose() 등으로 수명 제어
 
 - AOSP의 SELinux 정책과 보안 메커니즘
+    - 개요
+        - AOSP(Android Open Source Project) 의 SELinux(시큐리티 인핸스드 리눅스) 정책과 보안 메커니즘은 Android 플랫폼의 핵심 보안 방어선
+
+    - SELinux 정의
+        - SELinux(Security-Enhanced Linux) 는 리눅스 커널에 내장된 강제적 접근 제어(MAC: Mandatory Access Control) 시스템
+            - 기존 리눅스의 권한 기반 모델(UID/GID)만으로는 부족한 보안을 강화
+            - 권한을 갖고 있어도, 추가적으로 정책에 명시된 작업만 허용
+            - Android 4.3(Jelly Bean)에서 처음 적용 → Android 5.0(Lollipop)부터 Enforcing Mode로 기본 활성화됨
+
+    - Android AOSP 에서 SELinux의 역할
+        - 프로세스 간 격리: 앱, 서비스, 시스템 프로세스를 강력하게 분리
+        - 최소 권한 원칙 적용: 필요한 작업만 허용 (권한을 갖더라도 정책이 허용하지 않으면 차단)
+        - 시스템 무결성 보호: 루트킹/커널 해킹/버그 악용 방지
+        - 공격 표면 감소: 시스템 콤포넌트별 최소한의 접근 허용
+
+    - SELinux의 기본 동작 방식
+        - 기본 구조
+            - 모든 객체(파일, 소켓, 프로세스 등) 에 Security Label(보안 컨텍스트) 부여
+            - 모든 주체(프로세스) 도 Security Label을 가짐
+            - 정책 파일(policy) 에 따라 "A가 B에 대해 X를 수행할 수 있는가?" 를 검사
+        - 예시
+            - System Server	u:r:system_server:s0
+            - Wifi Service	u:r:wifi:s0
+            - Data 파일	u:object_r:app_data_file:s0:c512,c768
+        - 접근 제어 예시
+            - 정책에서 명시적으로 허용되어야만 동작 허용됨
+            ```less
+            system_server (u:r:system_server:s0) 
+                 → /data/misc/wifi (u:object_r:wifi_data_file:s0)
+                 : read 권한 요청
+            ```
+
+    - Android SELinux 주요 정책 영역
+        - file_contexts: 파일/디렉토리별 기본 Security Label 지정
+        - sepolicy: 프로세스, 리소스 별 권한 허용/거부 규칙
+        - property_contexts: system property에 대한 label 관리
+        - service_contexts: 서비스(component) 별 보안 레이블 지정
+        - mac_permissions.xml: 앱 설치 시 MAC(SELinux) 권한 매핑 처리
+
+    - SELinux 상태 모드
+        - Permissive: 위반을 허용하고 로그만 기록 (audit)
+        - Enforcing: 위반 시 해당 액션 차단 (denied)
+            - Android는 Enforcing 모드가 기본값
+            - 개발/디버깅 중에는 Permissive로 임시 전환 가능 (adb shell 명령)
+            - 명령
+                - adb shell setenforce 0   # Permissive 모드
+                - adb shell setenforce 1   # Enforcing 모드
+
+    - SELinux 보안 메커니즘 요약
+        - Context-Based Access: Label 기반 접근 제어
+        - Type Enforcement: 주체-객체 간의 "type" 매칭 제어
+        - Role-Based Access Control (RBAC): 사용자의 역할 기반 제어
+        - Multi-Category Security (MCS): 프로세스나 파일에 대해 세밀한 분리
+        - Least Privilege Principle: "꼭 필요한 권한만 부여" 전략
+
+    - 실무에서 SELinux 정책 적용 예시
+        - System 앱이 /data 디렉터리 접근 요청 → 정책에서 명시적으로 허용 필요
+        - Vendor-specific Service(ex: Qualcomm, Samsung Service) 추가 시
+            - → 새로 추가한 서비스에 대한 Label 설정 및 접근 권한 검토 필수
+        - OEM Customization 시 → device-specific sepolicy 분리 필요
+
+    - SELinux 정책 디버깅 툴
+        - audit2allow
+        - SELinux 보안 위반 로그 분석 흐름(dmesg, logcat 분석)
+
+    - 결론 요약
+        - Android AOSP의 SELinux는 시스템 전체에 강제적 접근 통제를 부여해,
+        - 앱 간, 시스템 컴포넌트 간, 커널 자원 간의 보안을 강화하는 핵심 방어선
+            - 핵심 개념: MAC 기반 강제 접근 제어
+            - 동작 방식: Label + Policy 검사
+            - 적용 목적: 앱 격리, 시스템 무결성 보장
+            - 실무 시 주의: 서비스 추가, Vendor 커스텀 시 sepolicy 검토 필수
+
 - Parcel 과 Serializable의 차이는 무엇일까요?
 - 안드로이드에서 Unit Test가 필요 한 이유는 무엇일까요?
 - 기존 프로젝트에서 “개발 서버를 바라보는 어플” 과 “프로덕션 서버를 바라보는 어플”을 나눠서 관리해야 한다고 했을 때 본인의 계획을 말씀 해주세요.
