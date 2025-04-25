@@ -7514,7 +7514,43 @@ Organize concepts, features, types and Pros and Cons
     - 결론
         - 구현체에 직접 의존하지 말고, 추상적인 인터페이스에 의존해야 한다.
         - DI Framework 인 Hilt, Dagger, Koin 등도 DIP를 기반으로 만들어짐
-        
+
+- ConstraintLayout의 장점
+    - 복잡한 레이아웃을 한 번에 표현 가능
+        - 기존에는 LinearLayout, RelativeLayout, FrameLayout 등을 여러 번 중첩해서 복잡한 화면 제작
+        - ConstraintLayout은 한 번에 복잡한 레이아웃을 만들 수 있어서 View 계층(View hierarchy) 을 얕게 만들 수 있음
+        - 결과적으로 성능(특히 렌더링 속도)이 개선
+
+    - 성능 최적화 (Hierarchy Depth 감소)
+        - View 트리의 깊이가 얕아지면 안드로이드 시스템이 레이아웃을 계산하고 그리는 시간 감소
+        - ConstraintLayout은 내부적으로 측정(Measure)과 배치(Layout) 과정을 최적화해서 성능을 높임
+
+    - 유연하고 강력한 제약 조건 설정
+        - 각각의 View를 부모나 다른 View에 상대적으로 제약(Constraint) 을 걸 수 있음
+        - 예를 들면:
+            - 좌우 중앙 정렬
+            - 다른 View의 바로 아래에 위치
+            - 특정 비율(Aspect Ratio) 유지
+            - 양쪽에 딱 맞게 늘어나기
+        - 기존 레이아웃보다 훨씬 세밀한 위치 조정이 가능해.
+
+    - 레이아웃 에디터(Design Editor)와 호환성
+        - Android Studio에서 드래그 앤 드롭으로 제약을 설정 가능
+        - 뷰 간 제약선을 시각적으로 확인하고 수정할 수 있어서, 특히 초보자나 복잡한 레이아웃 수정에 용이
+
+    - 가로/세로 화면 대응, 다양한 해상도 대응 용이
+        - Constraint를 상대적으로 잡기 때문에, 화면 크기가 달라져도 레이아웃이 자연스럽게 적응
+        - 따로 dp를 일일이 계산하거나 별도로 land 레이아웃 파일을 만들 필요가 없는 경우도 있음
+
+    - Chain, Group, Barrier, Guideline 같은 고급 기능 제공
+        - Chain: 여러 View를 연결해서 자동 정렬이나 균등 분배 가능
+        - Group: 여러 View를 하나로 묶어서 한 번에 제어 가능
+        - Barrier: 여러 View의 가장자리 기준으로 제약 걸 수 있음
+        - Guideline: 화면 안에 보이지 않는 선을 추가해서 위치 기준 설정 가능
+
+    - 전체 요약
+        - ConstraintLayout은 복잡한 화면을 중첩 없이 하나의 레이아웃으로 만들 수 있게 해주고, 성능까지 최적화해주는 강력한 레이아웃
+
 - 인플레이션(inflation)이란 무엇인가요?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
