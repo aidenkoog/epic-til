@@ -7203,8 +7203,93 @@ Organize concepts, features, types and Pros and Cons
         - UI 상태 관리, 애니메이션 등: Mutable
         - 멀티스레드 환경에서 안전하게 동작해야 함: Immutable 권장
 
-- 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
-- AOSP의 SELinux 정책과 보안 메커니즘에 대해 설명해주세요.
+- 안드로이드에서 RxJava2 메모리 관리 하는 법
+    - 개요
+        - RxJava는 비동기 이벤트를 다루기 쉬운 구조를 제공하지만, 구독(Subscription)을 적절히 해제하지 않으면 리소스가 계속 유지되어 Activity나 Fragment가 GC되지 않고 누수가 발생
+
+    - 메모리 누수 주요 원인
+        - 구독(Subscribe) 해제하지 않음	
+            - Observable, Flowable, Single 등을 구독한 후 dispose()를 호출하지 않으면 리스너가 살아있음
+        - Activity/Fragment를 내부에서 참조	
+            - 람다, 클로저, 리스너에서 this, context를 직접 참조하면 해당 객체가 해제되지 않음
+        - 무한 스트림 or Timer/Interval	
+            - 자동 종료되지 않는 스트림을 무한히 유지
+
+    - 메모리 누수 방지를 위한 핵심 방법
+        - (1) CompositeDisposable 사용 (가장 일반적)
+            ```kotlin
+            class MyViewModel : ViewModel() {
+                private val disposables = CompositeDisposable()
+
+                fun loadData() {
+                    val disposable = api.getData()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ result ->
+                            // handle success
+                        }, { error ->
+                            // handle error
+                        })
+
+                    disposables.add(disposable)
+                }
+
+                override fun onCleared() {
+                    super.onCleared()
+                    disposables.clear() // 모든 구독 해제
+                }
+            }
+            ```
+            - Activity나 Fragment
+                - onDestroy() 또는 onStop() 등 생명주기에 따라 dispose() 또는 clear() 호출 필요
+        
+        - (2) 자동 해제를 위한 라이프사이클 연동 (RxLifecycle, AutoDispose 등 활용)
+            - RxLifecycle 예시
+                ```kotlin
+                observable
+                    .compose(bindUntilEvent(ActivityEvent.DESTROY))
+                    .subscribe()
+                ```
+            - AutoDispose 예시 (Google 권장)
+                ```kotlin
+                observable
+                    .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
+                    .subscribe()
+                ```
+                - 라이프사이클 연동으로 자동 dispose 처리, 누수 방지
+
+        - (3) 구독에서 context, this 직접 참조 금지
+            ```kotlin
+            // 위험한 코드
+            someObservable.subscribe {
+                textView.text = "Hello"  // 내부에서 Activity를 참조함
+            }
+            ```
+            - 해결 방법
+                - WeakReference 사용
+                - Activity나 View를 ViewModel에서 직접 참조하지 않도록 설계
+
+        - (4) 무한 Observable 처리 시 주의
+            ```kotlin
+            Observable.interval(1, TimeUnit.SECONDS)
+                .subscribe { println("Tick") } // 무한 실행
+            ```
+            - takeUntil, takeWhile, dispose() 등으로 수명 관리
+
+    - 추가 정보
+        - CompositeDisposable.clear(): 모든 구독을 해제 (다시 추가 가능)
+        - CompositeDisposable.dispose(): 모든 구독을 해제하고 객체도 종료
+        - Flowable 사용 시: Backpressure 문제 주의, 구독자 없으면 데이터 누수 가능
+        - Schedulers.trampoline(): 테스트 환경에서 블로킹 없이 순차 처리 가능
+
+    - RxJava2 메모리 관리 체크리스트
+        - CompositeDisposable 사용: 다수 구독을 묶어서 한 번에 관리
+        - 생명주기에 따라 clear/dispose: onDestroy, onCleared, onStop 등에서 처리
+        - RxLifecycle / AutoDispose 사용: 생명주기 연동으로 자동 관리
+        - context 직접 참조 금지: 람다에서 Activity나 View 참조하지 말 것
+        - 무한 Observable 관리: takeUntil, dispose() 등으로 수명 제어
+
+- AOSP의 SELinux 정책과 보안 메커니즘
 - Parcel 과 Serializable의 차이는 무엇일까요?
 - 안드로이드에서 Unit Test가 필요 한 이유는 무엇일까요?
 - 기존 프로젝트에서 “개발 서버를 바라보는 어플” 과 “프로덕션 서버를 바라보는 어플”을 나눠서 관리해야 한다고 했을 때 본인의 계획을 말씀 해주세요.
