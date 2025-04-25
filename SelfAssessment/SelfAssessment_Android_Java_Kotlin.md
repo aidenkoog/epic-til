@@ -7018,3 +7018,654 @@ Organize concepts, features, types and Pros and Cons
         - 과도한 불변성 관리 -> 새로운 객체 생성 등의 성능 오버헤드 가능성
         - 중간 상태 추적 어려움
         - 함수형이 과도하면 추상화 심화 가능성
+
+- Java의 다형성(Polymorphism)이란 무엇이며, 어떻게 구현되는가?
+- Java에서 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
+- Java에서 인터페이스(Interface)와 추상 클래스(Abstract Class)의 차이점은?
+- Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
+- 안드로이드에서 RxJava2 메모리 관리 하는 법은 무엇일까요?
+- AOSP의 SELinux 정책과 보안 메커니즘에 대해 설명해주세요.
+- Parcel 과 Serializable의 차이는 무엇일까요?
+- 안드로이드에서 Unit Test가 필요 한 이유는 무엇일까요?
+- 기존 프로젝트에서 “개발 서버를 바라보는 어플” 과 “프로덕션 서버를 바라보는 어플”을 나눠서 관리해야 한다고 했을 때 본인의 계획을 말씀 해주세요.
+- 인플레이션(inflation)이란 무엇인가요?
+- Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
+- Java에서 CompletableFuture를 활용하는 방법은?
+- Java에서 메모리 누수를 방지하는 방법은?
+- Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
+- Java의 Optional 클래스를 사용하는 이유는?
+- Java에서 Thread와 Executor의 차이점은?
+- Java에서 WebSockets을 구현하는 방법은?
+- Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
+- Java에서 Functional Interface를 활용하는 방법은?
+- Java의 JVM, JRE, JDK의 차이점은?
+- Compose에서 remember와 rememberSaveable의 차이점
+- Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
+- Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
+- Jetpack Compose의 상태 관리에서 State Hoisting 패턴을 활용하는 방법
+- Compose에서 derivedStateOf와 remember를 활용한 성능 최적화 방법
+- Jetpack Compose에서 State와 Event를 분리하는 이유
+- Jetpack Compose에서 key()를 사용하여 Recomposition을 최적화하는 방법
+- Compose에서 UI 요소가 계속해서 Recomposition되는 문제를 해결하는 방법
+- Jetpack Compose의 CompositionLocal이란 무엇이며, 언제 사용하는
+- Jetpack Compose에서 custom Modifier를 활용한 성능 최적화 방법
+- Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
+- Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
+- Compose에서 LazyColumn의 성능을 최적화하는 방법
+- Compose에서 MutableState와 ImmutableState의 차이점
+- Jetpack Compose의 Layout 코드를 최적화하는 방법
+- Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
+- Jetpack Compose에서 SnapshotStateList와 일반 List의 차이점
+- Jetpack Compose에서 ConstraintLayout을 활용하는 이유
+- Compose의 Recomposer 내부 구조와 실행 방식
+- Jetpack Compose의 produceState는 어떤 경우에 유용한
+- Compose에서 Slot API를 활용하여 UI를 구성하는 방법
+- Jetpack Compose에서 UI Test를 수행하는 방법과 Best Practice
+- Jetpack Compose에서 Theme와 Material 3를 활용하는 방법
+- Compose에서 Preview 기능을 활용할 때 발생할 수 있는 문제
+- Jetpack Compose에서 SideEffect, DisposableEffect, LaunchedEffect의 차이점
+- Jetpack Compose에서 LocalContext와 LocalLifecycleOwner의 활용 방법
+- Compose에서 Layout Inspector를 활용하여 UI Debugging을 수행하는 방법
+- Jetpack Compose에서 Accessibility를 개선하는 방법
+- Jetpack Compose로 마이그레이션할 때 고려해야 할 사항
+- Compose에서 XML 기반 View와 혼합하여 사용할 때 성능 문제를 해결하는 방법
+- Jetpack Compose에서 ViewModel과 StateFlow를 결합하여 상태를 관리하는 방법
+- Compose에서 Flow를 collect하여 UI를 업데이트하는 최적의 방법
+- Android 14에서 Jetpack Compose와 관련된 주요 변경 사항
+- Jetpack Compose의 새로운 Material 3 디자인 적용 시 고려해야 할 사항
+- Jetpack Compose에서 터치 이벤트를 처리하는 방법
+- Jetpack Compose에서 다크 모드를 지원하는 방법
+- Compose에서 WebView를 사용할 때 발생하는 문제와 해결책
+- Jetpack Compose에서 Edge-to-Edge UI를 구현하는 방법
+- Compose에서 폴더블(Foldable) 디바이스를 대응하는 방법
+- Jetpack Compose에서 Navigation Component를 활용하는 방법
+- Compose에서 비동기 데이터 로딩 중 UI를 최적화하는 방법
+- Jetpack Compose에서 ConstraintLayout을 사용할 때 주의할 점
+- Compose에서 WorkManager와 Coroutines을 함께 활용하는 방법
+- Jetpack Compose에서 ML Kit을 활용한 AI 기능을 추가하는 방법
+- Compose의 Glance를 활용하여 Widget을 구현하는 방법
+- Jetpack Compose에서 Jetpack CameraX를 활용하는 방법
+- Jetpack Compose에서 Biometric API를 활용하는 방법
+- Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법
+- Android의 Binder IPC 메커니즘에 대해 설명해주세요.
+- ListView와 RecylerView에 대해서 설명해보세요
+- ListView는 재활용이 불가능할까요?
+- Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
+- Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
+- Android에서 권한 시스템(Permission Request)이 동작하는 방식
+- Android의 Jetpack WorkManager와 JobScheduler의 차이점
+- Android에서 Jetpack Navigation Component를 사용할 때의 장점
+- Android에서 Jetpack DataStore와 SharedPreferences의 차이점
+- Android에서 ViewModel과 Repository 패턴을 함께 사용하는 이유
+- Android에서 ViewModelStoreOwner의 역할
+- Android에서 Room Database와 SQLite의 차이점
+- Jetpack Compose와 기존 View 기반 UI의 차이점
+- Compose에서 State Hoisting 개념을 설명하고, 언제 사용해야 하는
+- Jetpack Compose에서 remember와 rememberSaveable의 차이점
+- Jetpack Compose에서 recomposition을 방지하는 방법
+- Jetpack Compose의 SnapshotStateList와 일반 List의 차이점
+- Jetpack Compose의 Side Effect API (LaunchedEffect, rememberCoroutineScope, SideEffect 등)의 차이점
+- Compose에서 LazyColumn과 RecyclerView의 성능 차이
+- Compose에서 Modifier의 역할과 주요 Modifier 예제를 설명하시오.
+- Jetpack Compose에서 rememberScopedState가 필요한 이유
+- Compose에서 Slot API를 활용하는 방법
+- Compose에서 UI 성능을 최적화하는 방법
+- Compose에서 정적인 상태와 동적인 상태를 관리하는 모범 사례
+- Jetpack Compose의 Preview 기능을 활용하는 방법
+- Compose에서 BottomSheet와 Dialog를 구현하는 방법
+- Jetpack Compose에서 Navigation을 적용하는 방법
+- Compose의 LazyColumn에서 성능을 최적화하는 방법
+- Compose에서 GestureDetector를 활용한 제스처 처리 방법
+- Jetpack Compose에서 Recomposition을 피하는 방법
+- Compose에서 ConstraintLayout과 Box를 활용하는 방법
+- Compose의 SnapshotFlow는 무엇이며, 언제 사용해야 하는
+- Jetpack Compose에서 Skia 렌더링 엔진을 활용한 성능 최적화 기법
+- Android Thermal API를 활용하여 배터리 및 성능 최적화를 수행하는 방법
+- ExoPlayer에서 DRM(Digital Rights Management) 처리의 고급 기법
+- Android 14에서 추가된 보안 기능과 권한 관리 변화
+- Android에서 ART(Android Runtime) 최적화를 위한 AOT, JIT, PGO의 차이점
+- Android에서 WorkManager의 내부 스케줄링 메커니즘
+- Android에서 Jetpack CameraX API를 활용한 맞춤형 카메라 솔루션 구축 방법
+- Android의 Foreground Service와 Background Service의 차이점 및 최적화 기법
+- Android에서 TensorFlow Lite를 활용하여 ML 모델을 최적화하는 방법
+- Android에서 Baseline Profiles을 활용한 앱 성능 개선 방법
+- Android에서 Kotlin Coroutines를 사용하는 이유
+- Android에서 Paging 3 라이브러리를 사용하는 이유
+- Android에서 App Startup Library를 활용하는 방법
+- Android에서 UI 렌더링 속도를 최적화하는 방법
+- Android에서 OutOfMemory(OOM) 오류를 방지하는 방법
+- Android에서 백그라운드 작업을 최적화하는 방법
+- Android에서 Jetpack Compose의 Recompositions를 최적화하는 방법
+- Android에서 Bitmap 메모리 관리를 최적화하는 방법
+- Android에서 Custom View를 만들 때 고려해야 할 사항
+- Android에서 CPU 및 메모리 사용량을 최적화하는 방법
+- Android에서 StrictMode를 활용한 성능 분석 방법
+- Android에서 TraceView와 Perfetto를 활용한 성능 분석 방법
+- Android에서 RecyclerView의 DiffUtil을 활용하는 방법
+- Android에서 Jetpack Compose의 UI 테스트를 수행하는 방법
+- Android에서 Prefetching과 Lazy Loading의 차이점
+- Android의 ART(Android Runtime) 최적화 방법
+- Android에서 Firebase Performance Monitoring을 활용하는 방법
+- Android 14에서 추가된 주요 기능과 변경 사항
+- Android에서 Jetpack Macrobenchmark를 활용한 성능 측정 방법
+- Android에서 Jetpack Compose로 SEO 대응 웹뷰를 구현하는 방법
+- Android에서 TensorFlow Lite를 활용한 AI/ML 모델 적용 방법
+- Android의 Low Latency Rendering을 구현하는 방법
+- Android에서 Jetpack CameraX를 활용하는 방법
+- Google Play 정책 변경이 앱 개발에 미치는 영향
+- Android에서 WebRTC를 활용한 실시간 영상 통화 구현 방법
+- Android에서 onSaveInstanceState()와 ViewModel의 차이점
+- Android의 Activity와 Fragment의 생명주기에서 주요 차이점
+- Jetpack Lifecycle Observer의 역할과 활용 방법
+- Android에서 Multi-Window를 지원하는 방법
+- Android에서 Foldable(접이식) 디바이스 대응 방법
+- Android에서 OpenGL ES를 활용한 그래픽 렌더링 최적화 방법
+- Android에서 Material 3 디자인 시스템을 적용하는 방법
+- Jetpack Compose로 Widget을 만드는 방법
+- Android에서 Jetpack Glance를 활용한 위젯 개발 방법
+- Android에서 Dynamic Feature Module을 활용하는 방법
+- Android에서 Baseline Profiles을 활용한 성능 최적화 방법
+- Android 앱에서 Zero Trust Security를 구현하는 방법
+- Android에서 AI 기반 추천 시스템을 구현하는 방법
+- Android에서 Jetpack Compose로 Instant Apps를 만드는 방법
+- Android에서 AI 기반 음성 인식을 활용하는 방법
+- Intent를 통해 데이터 전달하는 과정에서 클래스 객체를 바로 전달하지 못하는 이유는 무엇이고 전달하기 위해서는 어떤 처리가 필요한가요? 그리고 Activity 간 데이터 전달을 위해 Intent 방법을 사용하는 이유가 무엇인가요?
+- 복수의 Fragment 간 데이터 전달 방법을 설명 해주세요.
+- Width가 1000px Height가 20000px인 이미지가 있고 해당 이미지를 보여주려고 했을 때 아래와 같은 에러가 떴다. 이를 이미지 라이브러리를 사용하지 않고 해결하는 방법에 대해 설명 해주세요.
+- W/OpenGLRenderer: Bitmap too large to be uploaded into a texture (max=2048x2048)
+- Jetpack Compose를 사용해본 경험이 있는가? 기존 XML 방식과 비교했을 때 어떤 장점과 단점이 있는가?
+- Android Lifecycle에 대해 설명하고, ViewModel이 어떻게 메모리 관리를 도와주는지 설명해보라.
+- Coroutine과 LiveData의 차이를 설명해보라.
+- Flow와 StateFlow, SharedFlow의 차이점은?
+- Android 앱의 성능 최적화를 위해 어떤 기법을 사용했는가?
+- ProGuard와 R8의 차이를 설명해보라.
+- Java에서 Stream API를 활용하는 방법은?
+- WorkManager, AlarmManager, Foreground Service의 차이점은?
+- Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
+- Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
+- Java의 ArrayList와 LinkedList의 차이점은?
+- Java의 HashMap과 TreeMap의 차이점은?
+- Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점은?
+- Java에서 WeakHashMap을 사용하는 이유는?
+- Java에서 LinkedHashMap을 활용하여 캐시(Cache)를 구현하는 방법은?
+- Java에서 PriorityQueue의 동작 방식은?
+- Java에서 Deque와 Queue의 차이점은?
+- Java에서 ArrayDeque와 LinkedList의 차이점은?
+- Java의 HashSet과 TreeSet의 차이점은?
+- Java에서 Iterator와 ListIterator의 차이점은?
+- Java에서 CopyOnWriteArrayList의 사용 사례는?
+- Java에서 EnumMap을 사용하는 이유는?
+- Java에서 BlockingQueue의 역할과 사용 예제는?
+- Java에서 Stream API와 for-each 루프의 차이점은?
+- Java에서 Collectors.toMap()을 사용할 때 발생할 수 있는 문제는?
+- Java에서 Spliterator의 역할과 활용 방법은?
+- Java에서 Unmodifiable Collection을 생성하는 방법은?
+- Java에서 Arrays.asList()를 사용할 때 주의할 점은?
+- Java에서 Immutable Collections을 생성하는 방법은?
+- Java에서 Map.computeIfAbsent()의 활용 사례는?
+- Java에서 ConcurrentLinkedQueue와 LinkedBlockingQueue의 차이점은?
+- Java의 ForkJoinPool을 활용한 병렬 처리는 어떻게 구현하는가?
+- Java에서 NavigableMap과 NavigableSet의 차이점은?
+- Java에서 TreeMap을 활용하여 정렬된 데이터를 관리하는 방법은?
+- Java에서 PriorityBlockingQueue의 동작 원리는?
+- Java에서 Thread-Safe Collection의 대표적인 구현체는 무엇인가?
+- Java에서 Stream API의 parallelStream()을 사용할 때 주의해야 할 점은?
+- Java에서 FlatMap()을 활용하는 방법은?
+- Java에서 Collectors.groupingBy()를 활용한 데이터 분류 방법은?
+- Java의 Stream.reduce()를 활용한 데이터 집계 방법은?
+- Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법은?
+- Java에서 Future와 CompletableFuture의 차이점은?
+- Java에서 ScheduledExecutorService의 역할은?
+- Java에서 ReentrantLock과 synchronized의 차이점은?
+- Java에서 ForkJoinTask와 RecursiveTask를 활용한 병렬 처리는 어떻게 구현하는가?
+- Java에서 Phaser와 CyclicBarrier의 차이점은?
+- Java에서 Callable과 Runnable의 차이점은?
+- Java에서 AsynchronousFileChannel의 역할은?
+- Java에서 Non-blocking I/O(NIO)와 Blocking I/O(BIO)의 차이점은?
+- Java에서 Netty를 활용한 네트워크 프로그래밍의 장점은?
+- Java에서 Zero-Copy 기법을 활용하여 성능을 최적화하는 방법은?
+- Java에서 WebSockets을 활용한 실시간 통신 구현 방법은?
+- Java에서 gRPC와 REST API의 차이점은?
+- Java에서 HttpClient와 URLConnection의 차이점은?
+- Java에서 Thread Dump를 분석하는 방법은?
+- Java에서 Deadlock이 발생하는 원인과 해결 방법은?
+- Java에서 Thread.sleep()과 Object.wait()의 차이점은?
+- Java에서 ScheduledThreadPoolExecutor의 활용 방법은?
+- Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법은?
+- Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
+- Java의 Virtual Threads(프로젝트 Loom) 개념과 기존 Thread와의 차이점은?
+- Java에서 GraalVM을 활용한 AOT(Ahead-of-Time) 컴파일 성능 최적화 방법은?
+- Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
+- Java의 Structured Concurrency 개념과 기존 Thread 관리 방식과의 차이점은?
+- Java에서 CDS(Class Data Sharing)를 활용하여 JVM 성능을 최적화하는 방법은?
+- Kotlin과 Java의 주요 차이점은?
+- Kotlin에서 var와 val의 차이점은?
+- Kotlin에서 lateinit과 lazy의 차이점은?
+- Kotlin에서 data class를 사용하는 이유는?
+- Kotlin의 sealed class와 enum class의 차이점은?
+- Kotlin에서 companion object와 object의 차이점은?
+- Kotlin에서 open 키워드를 사용하는 이유는?
+- Java의 Functional Interface와 Lambda Expression의 관계는?
+- Java의 Stream API를 활용하는 방법은?
+- Java의 Comparator와 Comparable 인터페이스의 차이점은?
+- 앱의 메모리 릭을 찾고 해결하는 방법은?
+- 앱이 갑자기 크래시가 발생했을 때 어떻게 디버깅할 것인가?
+- Android 앱의 생명주기(Lifecycle)에 대해 설명하라.
+- Service와 Foreground Service의 차이점은?
+- ViewBinding과 DataBinding의 차이는?
+- Jetpack Compose와 기존 View 시스템의 차이점은?
+- RecyclerView에서 ViewHolder 패턴이 중요한 이유는?
+- 안드로이드의 권한 요청(Permission) 방식이 Android 6.0 이후 어떻게 변경되었는가?
+- 멀티 모듈(Multi Module) 프로젝트를 구성할 때 장점과 단점은?
+- Dagger, Hilt, Koin 같은 DI(Dependency Injection) 라이브러리를 사용해본 경험이 있는가?
+- Android 앱의 ANR(Application Not Responding) 이슈를 해결하는 방법은?
+- Java의 OOP(객체지향 프로그래밍) 특징을 설명하라.
+- JVM, JRE, JDK의 차이점은?
+- Retrofit과 Volley의 차이점은?
+- Firebase Crashlytics를 사용한 경험이 있는가? 어떻게 활용했는가?
+- Java의 가비지 컬렉션(GC)은 어떻게 동작하는가?
+- Java에서 volatile, synchronized, Atomic의 차이를 설명하라.
+- Java 8에서 추가된 주요 기능(람다, 스트림, Optional 등)에 대해 설명하라.
+- Checked Exception과 Unchecked Exception의 차이는?
+- HashMap과 ConcurrentHashMap의 차이점은?
+- Java에서 Reflection을 사용할 때 주의할 점은?
+- Kotlin과 Java의 주요 차이점은?
+- Kotlin의 data class와 일반 클래스의 차이는?
+- suspend 함수와 Coroutine의 작동 방식은?
+- Kotlin에서 lateinit과 lazy의 차이는?
+- Kotlin의 Flow에서 SharedFlow와 StateFlow의 차이는?
+- Kotlin의 Delegation 패턴은 어떤 경우에 유용한가?
+- Jetpack Compose의 Slot API 개념과 활용 사례는?
+- invoke operator를 활용한 고급 함수형 프로그래밍 예제를 설명하라.
+- Kotlin Multiplatform에서 JVM, Native, JS 타겟을 함께 사용할 때의 문제점과 해결 방법은?
+- SharedPreferences 에서 commit() 과 apply() 의 다른점에 대해 말해주세요.
+- 안드로이드에서 메모리 누수를 줄일 수 있는 방법에 대해 말해주세요.
+- 비트맵보다 용량이 작으면서 XML로 작성 가능한 방법
+- 안드로이드 어플리케이션의 빌드 시간을 줄일 수 있는 방법들을 말해주세요.
+- aaptOptions.cruncherEnabled=false 설명
+- Ext.alwaysUpdateBuildId = false 설명
+- Kotlin의 flow와 channel의 차이점은?
+- Jetpack Compose에서 Composition이란 무엇인가? Recomposition은 언제 발생하는가?
+- WorkManager와 AlarmManager의 차이점과 사용 사례는?
+- Android의 StrictMode를 활용한 성능 개선 방법을 설명하라.
+- ViewModel을 Scope별로 관리하는 최적의 방법은?
+- 프로세스가 종료된 후에도 데이터가 유지되도록 하는 방법은? (DataStore, Room, SharedPreferences 비교)
+- Android에서 Parcelable과 Serializable의 차이를 설명하고, Parcelable을 사용하는 이유는?
+- MotionLayout을 활용한 애니메이션 구현 방법을 설명하라.
+- Jetpack Navigation Component의 Deep Link 동작 방식과 활용 사례는?
+- Android 앱에서 보안 강화를 위한 ProGuard, R8, App Integrity 적용 방법은?
+- Java에서 ClassLoader는 어떻게 동작하는가? (Bootstrap, System, Custom ClassLoader)
+- ThreadLocal은 어떤 상황에서 유용하게 사용할 수 있는가?
+- Java에서 final 키워드를 사용할 수 있는 곳과 그 의미는?
+- Java에서 static 키워드가 가지는 의미는?
+- Java에서 객체를 clone()할 때 발생할 수 있는 문제는?
+- Java에서 Serializable 인터페이스의 역할은?
+- Java에서 transient 키워드를 사용하는 이유는?
+- Java에서 try-with-resources를 사용하는 이유는?
+- Java의 Optional 클래스를 활용하는 방법은?
+- Java에서 varargs(가변 인자)를 사용할 때 주의할 점은?
+- Java에서 enum을 활용하는 방법과 장점은?
+- Java의 CompletableFuture와 ExecutorService의 차이점은?
+- JVM의 Garbage Collection(GC) 알고리즘(G1, CMS, ZGC 등)의 차이점과 최적화 방법은?
+- synchronized, Lock, ReentrantLock의 차이점과 각각의 장단점은?
+- Java의 ForkJoinPool은 어떤 경우에 사용하는가?
+- AOSP의 init 프로세스와 서비스 관리 방법을 설명해주세요.
+- AOSP의 Binder 드라이버와 IPC 메커니즘에 대해 설명해주세요.
+- Android MVI orbit 설명
+- Java의 JVM, JRE, JDK의 차이점은?
+- Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
+- Java에서 Multi-threading을 구현하는 방법은?
+- Java에서 Immutable 객체를 설계하는 방법과 장점은?
+- Java 17의 최신 기능과 주요 변경 사항을 설명하라.
+- Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할은?
+- Kotlin의 inline, noinline, crossinline 키워드는 언제 사용하는가?
+- Coroutine에서 Mutex와 Semaphore의 차이점은?
+- CoroutineExceptionHandler가 실행되는 경우는?
+- Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법은?
+- Jetpack WorkManager와 Coroutines을 함께 사용할 때의 주의점은?
+- MVVM과 MVI의 차이점은?
+- Clean Architecture를 Android 프로젝트에 적용하는 방법은?
+- DI(Dependency Injection)에서 Hilt와 Koin의 차이점은?
+- Kotlin에서 컴파일 시 생성되는 바이트코드는 어떻게 최적화되는가?
+- Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향은?
+- Kotlin에서 smart casting이 내부적으로 어떻게 동작하는가?
+- Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교는?
+- Kotlin의 companion object는 언제 메모리에 로드되는가?
+- Kotlin에서 data class의 copy() 메서드는 어떻게 동작하며, deep copy를 구현하는 방법은?
+- Kotlin에서 typealias의 내부적인 동작 방식과 활용 사례는?
+- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 방식은?
+- Kotlin의 contract API는 무엇이며, 최적화에 어떻게 기여하는가?
+- Kotlin에서 reflection이 성능에 미치는 영향과 이를 줄이는 방법은?
+- Kotlin에서 inline function이 성능을 개선하는 이유는?
+- Kotlin에서 reified 키워드가 컴파일러 최적화에 미치는 영향은?
+- Kotlin의 null-safety가 JVM에서 어떻게 구현되는가?
+- Kotlin의 default arguments는 Java와 어떻게 다르게 처리되는가?
+- Kotlin에서 lazy initialization의 내부 동작 방식과 성능 고려 사항은?
+- Kotlin에서 tail recursion 최적화(TCO)가 적용되지 않는 경우는?
+- Kotlin에서 synchronized 블록과 volatile 키워드의 차이점은?
+- Kotlin에서 companion object가 싱글톤처럼 동작하는 이유는?
+- Kotlin에서 함수형 프로그래밍 패러다임을 적용할 때 고려해야 할 사항은?
+- Kotlin에서 inline class를 활용한 메모리 최적화 기법은?
+- Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점은?
+- Kotlin에서 Serialization을 최적화하는 방법은?
+- Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조는?
+- Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법은?
+- Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할은?
+- Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법은?
+- Kotlin에서 collectLatest()와 collect()의 차이점은?
+- Kotlin의 StateFlow와 SharedFlow의 차이점 및 활용 방법은?
+- Kotlin에서 Immutable Data Structure를 활용한 성능 최적화 방법은?
+- Kotlin의 Compiler Intrinsics을 활용한 성능 최적화 기법은?
+- 다이나믹 아일랜드 구현 방법 및 실시간 업데이트 처리 방법
+- Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
+- Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
+- OOP의 4대 원칙과 SOLID 원칙에 대해 설명해주세요.
+- 멀티스레딩과 동시성 처리에 대해 설명해주세요. (Thread, ExecutorService, Synchronized, Volatile 등)
+- Java의 컬렉션 프레임워크에 대해 설명해주세요. (List, Set, Map 등)
+- 예외 처리의 종류와 차이점을 설명해주세요. (Checked Exception vs Unchecked Exception)
+- Kotlin의 주요 특징과 Java와의 차이점은 무엇인가요?
+- Null Safety를 어떻게 구현했는지 설명해주세요.
+- Kotlin의 Coroutine과 Java의 Thread의 차이점은 무엇인가요?
+- Kotlin에서의 확장 함수(Extension Function)에 대해 설명해주세요.
+- Data Class의 장점과 사용 사례를 설명해주세요.
+- Coroutine이란 무엇이고, 어떤 상황에서 사용하나요?
+- Coroutine의 Dispatcher 종류와 각각의 사용 사례를 설명해주세요.
+- Coroutine의 Cancellation과 Exception Handling에 대해 설명해주세요.
+- Coroutine과 RxJava의 차이점은 무엇인가요?
+- Coroutine을 사용해본 프로젝트에서의 경험을 공유해주세요.
+- Android의 생명주기(Lifecycle)에 대해 설명해주세요.
+- Activity와 Fragment의 차이점은 무엇인가요?
+- ViewModel과 LiveData의 역할과 장점은 무엇인가요?
+- Android에서의 메모리 관리와 LeakCanary 사용 경험에 대해 설명해주세요.
+- Jetpack Compose를 사용해본 경험이 있다면 설명해주세요.
+- Android에서의 DI(Dependency Injection) 사용 경험을 공유해주세요. (Dagger, Hilt 등)
+- Android의 백그라운드 작업 처리 방법을 설명해주세요. (WorkManager, JobScheduler 등)
+- AOSP 빌드 과정에 대해 설명해주세요.
+- Android 시스템의 주요 컴포넌트에 대해 설명해주세요. (Binder, Zygote, SystemServer 등)
+- 커스텀 ROM을 제작한 경험이 있다면 설명해주세요.
+- Java의 Garbage Collection 알고리즘에 대해 설명해주세요. (CMS, G1, ZGC 등)
+- Java의 ClassLoader와 동적 로딩에 대해 설명해주세요.
+- Java의 Reflection API 사용 사례와 주의점은 무엇인가요?
+- Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)에 대해 설명해주세요.
+- Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리를 설명해주세요.
+- 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
+- Kotlin의 Inline 함수와 Reified 타입에 대해 설명해주세요.
+- Kotlin의 Sealed Class와 Enum Class의 차이점은 무엇인가요?
+- Kotlin의 Delegated Properties 사용 사례를 설명해주세요.
+- Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
+- Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
+- Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
+- Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
+- Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
+- Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
+- Java의 VarHandle과 Atomic 클래스의 사용 사례를 설명해주세요.
+- Java의 Module System(JPMS)에 대해 설명해주세요.
+- Java의 Bytecode 조작 라이브러리(ASM, ByteBuddy 등) 사용 경험이 있다면 설명해주세요.
+- Kotlin의 Type Alias와 Inline Class의 차이점은 무엇인가요?
+- Kotlin의 Contracts API 사용 사례를 설명해주세요.
+- Kotlin의 Multiplatform 프로젝트 경험이 있다면 설명해주세요.
+- Coroutine의 Flow에서의 Backpressure 처리 방법을 설명해주세요.
+- Coroutine의 StateFlow와 SharedFlow의 차이점은 무엇인가요?
+- Coroutine의 Channel과 Actor의 차이점은 무엇인가요?
+- Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
+- Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
+- Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
+- Kotlin에서 Channel과 SharedFlow의 차이점은?
+- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
+- Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
+- Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
+- Jetpack Compose에서 Modifier의 역할과 best practice는?
+- Android에서 WorkManager와 AlarmManager의 차이점은?
+- Android에서 DataStore와 SharedPreferences의 차이점은?
+- Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
+- Android에서 ViewBinding과 DataBinding의 차이점은?
+- Android에서 CameraX를 사용할 때의 장점은?
+- Android에서 Activity Result API를 활용하는 방법은?
+- Android에서 LifecycleOwner와 ViewModel의 관계를 설명하시오.
+- Android에서 Hilt와 Koin의 차이점은?
+- Android에서 Firebase Cloud Messaging(FCM)과 OneSignal의 차이점은?
+- Android에서 ExoPlayer와 MediaPlayer의 차이점은?
+- Android에서 Jetpack Paging 3 라이브러리의 개념과 사용법은?
+- Android에서 Jetpack Security 라이브러리를 사용하는 이유
+- Android에서 MVVM 패턴을 적용하는 방법
+- Android에서 Jetpack Navigation Component를 사용하는 이유
+- Android에서 Coroutine을 사용한 비동기 처리 방법
+- Android에서 MutableLiveData와 StateFlow의 차이점
+- Android에서 Jetpack ViewModel을 활용하는 방법
+- Android에서 Jetpack Lifecycle Observer의 역할
+- Android에서 ViewModelScope와 GlobalScope의 차이점
+- Android에서 Coroutines의 Structured Concurrency 개념
+- Android에서 BroadcastReceiver의 역할
+- Android에서 IntentService와 Foreground Service의 차이점
+- Android에서 Jetpack Compose의 State Hoisting 개념
+- Android에서 Activity의 생명주기와 Fragment의 생명주기를 비교하시오.
+- Android에서 RecyclerView의 ViewHolder 패턴을 사용하는 이유
+- Android에서 Retrofit과 Volley의 차이점
+- Android에서 FusedLocationProvider API를 사용하는 이유
+- Android에서 앱 내 결제를 구현하는 방법
+- Android에서 Fingerprint 및 Face ID 인증을 구현하는 방법
+- Android에서 Firebase Crashlytics를 활용하는 방법
+- Android에서 Jetpack WorkManager를 활용한 백그라운드 작업 수행 방법
+- Android에서 AndroidX 라이브러리를 사용하는 이유
+- Android에서 ConstraintLayout과 RelativeLayout의 차이점
+- Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
+- Android에서 Service와 JobIntentService의 차이점은?
+- Jetpack Compose에서 recomposition이 발생하는 조건은?
+- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
+- Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
+- Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
+- Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
+- Kotlin에서 Flow와 LiveData의 차이점은?
+- Compound Component 패턴과 Slot API 설명
+- Kotlin에서 backing field와 backing property란?
+- Kotlin에서 deep copy와 shallow copy의 차이점은?
+- Kotlin에서 sealed class와 enum class의 차이점은?
+- Jetpack Compose에서 Slot API란?
+- Jetpack Compose에서 derivedStateOf를 사용하는 이유는?
+- Jetpack Compose에서 LazyColumn의 성능을 최적화하는 방법은?
+- Kotlin Multiplatform을 사용해본 경험이 있는가?
+- Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
+- Android에서 Inline Class의 장점은?
+- 아이템 100개 와 ViewHolder 1개를 가진 RecyclerView의 동작원리를 설명 해주세요.
+- RecyclerView or ListView 의 Pagination 구현 방법을 설명 해주세요.
+- 네트워크 통신을 통해 이미지를 가져오는 뷰가 포함된 ListView 또는 RecyclerView에서 빠르게 스크롤 시 생길 수 있는 이슈가 무엇이고 어떻게 수정 및 최적화를 할 수 있을까요?
+- Kotlin에서 람다(Lambda)의 capture 비용을 줄이는 방법은?
+- Kotlin에서 JVM의 Code Cache를 활용한 최적화 기법은?
+- Kotlin에서 value class(구 inline class)를 활용할 때 성능적인 장점은?
+- Kotlin의 동적 바인딩과 정적 바인딩의 차이점 및 실행 성능 비교는?
+- Kotlin에서 reflection을 사용할 때 발생하는 오버헤드는 어떻게 줄일 수 있는가?
+- Kotlin에서 Lazy initialization을 성능적으로 최적화하는 방법은?
+- Kotlin에서 Coroutines과 Java의 Thread Pool의 차이점은?
+- Kotlin의 Coroutines에서 Structured Concurrency 개념이 중요한 이유는?
+- Kotlin의 Coroutines에서 GlobalScope 사용이 위험한 이유는?
+- Kotlin Coroutines에서 Dispatchers.IO와 Dispatchers.Default의 내부 구현 차이는?
+- Kotlin에서 Flow의 Backpressure(역압) 문제를 해결하는 방법은?
+- Kotlin의 StateFlow와 SharedFlow의 차이점과 실전 활용법은?
+- Kotlin에서 채널(Channel)과 Flow의 차이점은?
+- Kotlin에서 Coroutines의 동시성 제어를 위해 Mutex와 Semaphore를 어떻게 활용하는가?
+- Kotlin에서 Thread Safety를 보장하는 방법은?
+- Kotlin의 Atomic 변수를 활용한 동시성 제어 방법은?
+- Kotlin에서 코루틴을 활용하여 Concurrent Processing을 구현하는 방법은?
+- Kotlin에서 runBlocking이 주는 성능적 부담과 이를 피하는 방법은?
+- Kotlin Coroutines에서 launch와 async의 차이점과 내부 동작 원리는?
+- Kotlin의 yield() 함수가 비동기 작업에서 어떤 역할을 하는가?
+- Kotlin에서 CoroutineScope의 메모리 누수를 방지하는 방법은?
+- Kotlin의 select {} 문법을 활용한 비동기 작업 최적화 방법은?
+- Kotlin에서 CoroutineExceptionHandler가 실행되는 조건은?
+- Kotlin에서 ensureActive()의 역할과 사용 예제는?
+- Kotlin에서 coroutineScope와 supervisorScope의 내부적인 동작 차이는?
+- Kotlin에서 다중 모듈 프로젝트를 효율적으로 구성하는 방법은?
+- Kotlin에서 Dependency Injection(DI)을 적용할 때 Koin과 Hilt의 차이점은?
+- Kotlin에서 JUnit5와 MockK를 활용한 단위 테스트 전략은?
+- Kotlin에서 비동기 네트워크 요청을 최적화하는 방법은?
+- Kotlin의 Coroutines과 RxJava의 차이점 및 선택 기준은?
+- Kotlin에서 Dagger-Hilt와 Koin을 함께 사용할 때의 장점과 단점은?
+- Kotlin의 Multiplatform 프로젝트에서 Coroutines을 활용하는 방법은?
+- Kotlin에서 Jetpack Compose와 Coroutines을 함께 사용할 때 고려해야 할 점은?
+- Kotlin에서 GraphQL API를 활용할 때 최적화하는 방법은?
+- Kotlin에서 Room Database와 Coroutines을 함께 사용할 때의 주의점은?
+- Kotlin에서 Paging 3 라이브러리를 활용한 비동기 데이터 로딩 방식은?
+- Kotlin의 KMM(Kotlin Multiplatform Mobile)에서 네트워크 요청을 처리하는 방법은?
+- Kotlin에서 DI 프레임워크 없이 Factory 패턴을 활용한 객체 관리는 어떻게 하는가?
+- Kotlin에서 Retrofit과 Coroutines을 함께 사용할 때의 베스트 프랙티스는?
+- Kotlin에서 JSON Parsing을 최적화하는 방법은?
+- Kotlin에서 Domain Layer와 Data Layer를 분리할 때의 원칙은?
+- Kotlin의 Anvil을 활용한 DI 성능 최적화 방법은?
+- Kotlin에서 ViewModelScope를 사용할 때 발생할 수 있는 문제는?
+- Kotlin에서 Singleton 객체를 Thread-Safe하게 생성하는 방법은?
+- Kotlin의 Anvil을 사용한 Dependency Injection의 성능 최적화 방법은?
+- Kotlin 1.9에서 새롭게 추가된 기능과 성능 최적화 요소는?
+- Kotlin의 Compiler Plugin을 활용하여 코드 최적화를 수행하는 방법은?
+- Kotlin에서 JIT과 AOT의 차이점과 각각의 활용 사례는?
+- Kotlin에서 JetBrains의 Ktor를 활용한 비동기 웹 서버 구축 방법은?
+- Kotlin에서 새로운 Concurrent Garbage Collector의 장점과 활용 방안은?
+- Kotlin의 최신 정적 분석 도구(Detekt, Ktlint)를 활용하는 방법은?
+- Kotlin에서 Memory Leak을 방지하는 패턴은?
+- Kotlin의 Context Receivers 기능이 필요한 이유는?
+- Kotlin에서 Native Image를 활용한 성능 최적화 방법은?
+- Kotlin에서 Compiler Intrinsics을 활용한 성능 최적화 기법은?
+- Kotlin과 Java의 주요 차이점은 무엇인가?
+- CoroutineScope를 올바르게 관리하는 방법은?
+- Coroutine의 Structured Concurrency란 무엇이며, 왜 중요한가?
+- GlobalScope를 사용하면 안 되는 이유는?
+- Kotlin에서 copy() 메서드를 사용하는 이유는?
+- Kotlin에서 object expression과 object declaration의 차이점은?
+- Kotlin에서 sealed interface를 활용하는 방법은?
+- Kotlin에서 break, continue, return의 차이점은?
+- Kotlin의 context receivers 기능을 설명하시오.
+- Kotlin에서 nullable 타입과 !! 연산자를 사용할 때 주의할 점은?
+- Kotlin에서 @JvmStatic, @JvmOverloads, @JvmField 어노테이션의 역할은?
+- Kotlin에서 is 키워드와 as 키워드의 차이점은?
+- Kotlin에서 Collection과 Sequence의 차이점은?
+- Kotlin에서 vararg를 사용한 함수 호출 시 배열을 전달하는 방법은?
+- Kotlin에서 Enum class를 활용한 안전한 상태 관리는 어떻게 하는가?
+- Kotlin에서 builder pattern을 활용하여 객체를 생성하는 방법은?
+- Kotlin에서 inline class의 개념과 사용 예제는?
+- Kotlin에서 suspend 함수와 일반 함수의 차이점은?
+- Kotlin에서 context receivers가 도입된 이유는?
+- Kotlin에서 JvmInline을 사용하는 이유는?
+- Kotlin에서 contract API가 무엇이며, 어떻게 활용하는가?
+- Kotlin의 reified 키워드가 동작하는 원리를 설명하시오.
+- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 차이는?
+- Kotlin의 default parameter와 Java의 method overloading 차이점은?
+- Kotlin에서 String interpolation이 내부적으로 어떻게 최적화되는가?
+- Kotlin의 메모리 관리 방식과 Java의 GC(Garbage Collector) 차이점은?
+- Kotlin에서 가변 객체(mutable object)의 성능 최적화 방법은?
+- Kotlin에서 immutable 객체를 구현하는 방법과 효과적인 활용 사례는?
+- Kotlin의 escape analysis가 어떻게 동작하는지 설명하시오.
+- Kotlin의 inline function이 내부적으로 어떻게 동작하는가?
+- Kotlin에서 tail recursion이 동작하는 방식을 설명하시오.
+- Kotlin에서 builder pattern을 DSL로 구현하는 방법은?
+- Kotlin에서 type inference의 원리와 활용 방법은?
+- Kotlin에서 spread operator(*)의 활용 방법은?
+- Kotlin에서 tail recursion 최적화 기법을 설명하시오.
+- Kotlin에서 Map을 destructuring하여 사용하는 방법은?
+- Kotlin에서 bitwise operations을 수행하는 방법은?
+- Kotlin에서 dynamic 키워드를 사용할 수 없는 이유는?
+- Kotlin에서 KProperty와 Reflection API를 활용하는 방법은?
+- Kotlin에서 @DslMarker 어노테이션을 사용하는 이유는?
+- Kotlin에서 LazyThreadSafetyMode의 옵션들과 차이점은?
+- Kotlin에서 CoroutineContext와 Job의 관계는?
+- Kotlin에서 JvmStatic과 JvmOverloads를 활용하는 방법은?
+- Kotlin에서 @OptIn 어노테이션을 사용하는 이유는?
+- Kotlin Coroutines의 핵심 개념은?
+- suspend 함수란 무엇이며, 일반 함수와의 차이점은?
+- Kotlin Coroutines에서 테스트를 수행하는 방법은?
+- ViewModelScope를 활용하여 네트워크 요청을 수행하는 방법은?
+- Retrofit과 Coroutines을 함께 사용할 때의 장점은?
+- Room Database에서 Coroutines을 사용하는 이유는?
+- Android에서 LiveData와 StateFlow를 함께 사용할 때의 고려사항은?
+- WorkManager와 Coroutines을 함께 사용할 때의 주의점은?
+- MutableSharedFlow에서 replay 옵션을 설정하는 이유는?
+- StateFlow에서 초기 값을 설정해야 하는 이유는?
+- yield() 함수의 역할은?
+- cancel()을 호출한 후에도 코루틴이 종료되지 않는 이유는?
+- ensureActive() 함수의 역할은?
+- select {} 블록을 활용하여 여러 채널을 동시에 처리하는 방법은?
+- produce {}와 consumeEach {}의 차이점은?
+- Mutex와 Atomic을 활용한 동시성 문제 해결 방법은?
+- Android에서 코루틴을 활용한 백그라운드 작업 최적화 방법은?
+- CoroutineContext의 구성 요소는?
+- withContext()와 async-await의 차이점은?
+- Dispatchers.IO, Dispatchers.Main, Dispatchers.Default의 차이점은?
+- runBlocking을 사용하는 것이 위험한 이유는?
+- Kotlin Coroutines에서 Structured Concurrency란?
+- CoroutineExceptionHandler의 역할은?
+- Paging 3 라이브러리에서 Flow를 활용하는 방법은?
+- Android에서 네트워크 요청 중간에 코루틴을 취소하는 방법은?
+- 코루틴이 과도하게 생성되었을 때 발생할 수 있는 문제는?
+- Kotlin에서 Coroutines을 활용한 효율적인 병렬 처리 방법은?
+- Kotlin에서 Job과 Deferred를 활용한 작업 스케줄링 방법은?
+- Android에서 Flow를 활용한 실시간 데이터 처리 방법은?
+- 코루틴을 활용한 이벤트 기반 아키텍처 설계 방법은?
+- Coroutines에서 CoroutineScope를 올바르게 관리하는 방법은?
+- Coroutines에서 Flow.collectLatest()를 활용한 최신 데이터 유지 방법은?
+- Kotlin에서 StateFlow와 LiveData를 변환하는 방법은?
+- Android에서 Jetpack Compose와 Coroutines을 함께 사용하는 방법은?
+- Kotlin Coroutines을 활용한 Custom Thread Pool 구성 방법은?
+- 코루틴에서 예외 처리를 효과적으로 수행하는 방법은?
+- Kotlin Coroutines과 Kotlin Multiplatform(KMP)에서의 활용 방법은?
+- combine() 연산자를 활용한 데이터 스트림 결합 방법은?
+- retry()와 catch() 연산자의 차이점은?
+- Android에서 Splash Screen을 구현하는 올바른 방법
+- Android에서 ViewModel을 사용하여 데이터 저장을 최적화하는 방법
+- Android에서 Jetpack Paging을 활용하여 대용량 데이터 처리하는 방법
+- Android에서 App Bundle과 APK의 차이점
+- Android에서 Livedata와 StateFlow 중 어떤 경우에 StateFlow를 선택하는 것이 좋은
+- Android에서 Foreground Service를 활용하여 지속적인 작업을 수행하는 방법
+- Android에서 Bluetooth LE를 사용하는 방법
+- Android에서 Jetpack WorkManager와 Foreground Service의 차이점
+- Android에서 Jetpack Paging을 사용하는 이유
+- Android에서 UI Thread와 Worker Thread의 차이점
+- Android에서 OpenGL ES를 활용하여 2D 및 3D 그래픽을 구현하는 방법
+- Android에서 ProGuard를 활용한 코드 난독화 방법
+- Android TV 앱 개발 시 Leanback 라이브러리의 역할
+- Android TV 앱에서 DPAD 네비게이션을 구현하는 방법
+- Android TV에서 VideoView와 ExoPlayer 중 어떤 것을 선택하는 것이 좋은
+- Android TV에서 Focusable 요소를 적절하게 배치하는 방법
+- Android TV에서 OTT 서비스를 구축할 때 고려해야 할 사항
+- Android TV에서 Adaptive Streaming을 활용하는 방법
+- Android TV에서 DRM(Digital Rights Management)이 중요한 이유
+- Android TV에서 Google Cast API를 활용하는 방법
+- Android TV에서 Leanback Showcase를 활용하는 방법
+- Android TV에서 KeyEvent를 활용하여 사용자 입력을 처리하는 방법
+- Android TV에서 Fire TV와 Android TV의 차이점
+- Android TV에서 UI 최적화를 위해 Leanback Components를 활용하는 방법
+- Android TV에서 홈 화면을 커스터마이징하는 방법
+- Android TV에서 A/B 테스트를 수행하는 방법
+- Android TV에서 Voice Input을 적용하는 방법
+- Android TV에서 ExoPlayer를 활용한 재생 목록 구현 방법
+- Android TV에서 OTT 앱을 개발할 때 UX 디자인 원칙
+- Android TV에서 Fire TV Stick에서 동작하는 앱을 개발하는 방법
+- Android TV에서 Android TV Input Framework(TIF)의 역할
+- Android TV에서 Low Latency Mode를 구현하는 방법
+- Android TV에서 In-App Purchase를 구현하는 방법
+- Android TV에서 Fragment를 활용하여 Leanback UI를 구성하는 방법
+- Android TV에서 Live TV 앱을 개발하는 방법
+- Android TV에서 TV Remote Control API를 활용하는 방법
+- Android TV에서 Google TV와 기존 Android TV의 차이점
+- Android TV에서 HDR 콘텐츠를 재생하는 방법
+- Android TV에서 ExoPlayer의 Cache 기능을 활용하는 방법
+- Android TV에서 HLS와 DASH 스트리밍의 차이점
+- Android TV에서 Real-time Analytics를 적용하는 방법
+- Android TV에서 OTT 서비스의 광고 삽입(Ad Insertion) 방법
+- Android TV에서 Data Saver Mode를 적용하는 방법
+- Android TV에서 UX 성능 최적화를 위한 권장 사항
+- Android TV에서 4K와 8K 콘텐츠를 지원하는 방법
+- Android TV에서 Google Assistant를 통합하는 방법
+- Android TV에서 Low Latency Streaming을 구현하는 방법
+- Android TV에서 동적 콘텐츠 추천을 구현하는 방법
+- Android TV에서 앱 크기를 최적화하는 방법
+- Android TV에서 Firebase Analytics를 활용하는 방법
+- Android TV에서 Voice Search 기능을 구현하는 방법
+- Android TV에서 ExoPlayer의 Offline Download 기능을 활용하는 방법
+- Android TV에서 TV 앱에서의 사용자 경험(UX)을 향상시키는 방법
+- Android TV에서 ML 모델을 활용한 추천 시스템을 구축하는 방법
+- Android TV에서 Custom Leanback Fragment를 구현하는 방법
+- Android TV에서 VOD와 Live Streaming의 차이점
+- Android TV에서 Play Billing Library를 활용하여 결제 기능을 구현하는 방법
+- Android TV에서 OTT 서비스의 콘텐츠 보안 정책
+- Android TV에서 프레임 속도 최적화를 수행하는 방법
+- Android TV에서 Dynamic UI Elements를 활용하는 방법
+- Android TV에서 Leanback Extensions의 활용 방법
+- Android TV에서 Push Notification을 적용하는 방법
