@@ -7019,7 +7019,100 @@ Organize concepts, features, types and Pros and Cons
         - 중간 상태 추적 어려움
         - 함수형이 과도하면 추상화 심화 가능성
 
-- Java의 다형성(Polymorphism)이란 무엇이며, 어떻게 구현되는가?
+- Java의 다형성(Polymorphism)이란 무엇이며, 구현 방법
+    - 개요
+        - 객체지향 프로그래밍(OOP)의 핵심 개념 중 하나로, Java에서도 매우 중요하게 사용되는 원리
+    - 다형성 개념
+        - 하나의 객체가 여러 가지 형태를 가질 수 있는 성질
+            - 즉, 부모 타입의 참조 변수로 여러 자식 객체를 가리킬 수 있는 것
+            - 동일한 메서드 호출이 객체에 따라 다르게 동작하게 됨
+    - 다형성 종류
+        - 컴파일타임 다형성: 메서드 오버로딩 (Overloading), 같은 이름의 메서드를 파라미터로 구분
+        - 런타임 다형성: 메서드 오버라이딩 (Overriding), 자식 클래스에서 부모 메서드를 재정의
+    - 다형성의 핵심 구성요소
+        - 상속:	부모 클래스에서 자식 클래스가 상속받아야 함
+        - 업캐스팅: 자식 객체를 부모 타입 변수로 참조
+        - 메서드 오버라이딩: 부모 메서드를 자식이 재정의
+        - 동적 바인딩: 실행 시점에 실제 객체의 메서드를 호출함
+    - 구현 예제
+        ```kotlin
+        class Animal {
+            void sound() {
+                System.out.println("Some sound");
+            }
+        }
+
+        class Dog extends Animal {
+            void sound() {
+                System.out.println("Bark");
+            }
+        }
+
+        class Cat extends Animal {
+            void sound() {
+                System.out.println("Meow");
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Animal myAnimal = new Dog();  // 업캐스팅
+                myAnimal.sound();  // → "Bark"
+
+                myAnimal = new Cat();
+                myAnimal.sound();  // → "Meow"
+            }
+        }
+        ```
+        - 핵심 설명
+            - myAnimal은 Animal 타입이지만 실제 객체는 Dog 또는 Cat
+            - sound() 메서드는 실행 시점에 실제 객체 타입에 따라 동작
+            - 이것이 바로 런타임 다형성 + 동적 바인딩
+
+    - 업캐스팅과 다운캐스팅
+        - 업캐스팅:	자식 → 부모 타입으로 자동 변환	Animal a = new Dog();
+        - 다운캐스팅: 부모 → 자식 타입으로 수동 캐스팅	Dog d = (Dog) a; (명시적 필요)
+            - 다운캐스팅은 잘못하면 ClassCastException 발생 주의
+
+    - 다형성의 장점
+        - 코드 재사용성 ↑: 동일한 메서드명으로 다양한 동작 처리
+        - 유지보수성 ↑: 새로운 클래스를 추가해도 기존 코드 수정 최소화
+        - 유연성 ↑: 부모 타입을 기준으로 동작을 추상화 가능
+        - 설계 확장성 ↑: 인터페이스/추상 클래스 기반 설계에 적합
+
+    - 다형성과 인터페이스
+        - interface도 다형성의 한 형태로 사용됨 → 다양한 구현체 처리 가능
+        ```java
+        interface Drawable {
+            void draw();
+        }
+
+        class Circle implements Drawable {
+            public void draw() {
+                System.out.println("Drawing Circle");
+            }
+        }
+
+        class Square implements Drawable {
+            public void draw() {
+                System.out.println("Drawing Square");
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Drawable shape = new Circle();
+                shape.draw(); // "Drawing Circle"
+            }
+        }
+        ```
+
+    - 결론
+        - 개념: 하나의 객체가 여러 형태를 가질 수 있는 특성
+        - 필수 조건: 상속, 오버라이딩, 업캐스팅
+        - 구현 방식: 컴파일타임: 오버로딩, 런타임: 오버라이딩
+        - 핵심 효과: 동적 바인딩, 유연한 코드 설계, 유지보수성 향상
+
 - Java에서 오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?
 - Java에서 인터페이스(Interface)와 추상 클래스(Abstract Class)의 차이점은?
 - Immutable 변수와 Mutable 변수를 쓰면 좋은점은 무엇일까요?
