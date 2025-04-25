@@ -7401,8 +7401,78 @@ Organize concepts, features, types and Pros and Cons
         - 유닛 테스트는 단순한 자동화 도구가 아니라, 안정적인 코드 작성, 빠른 개발, 리팩토링의 자신감, 협업 효율, 제품 품질 보장이라는 다양한 이점을 가진 개발의 필수 요소다.
         - Android에서도 ViewModel, UseCase, Repository 단위로 유닛 테스트를 설계하는 것은 대규모 프로젝트일수록 필수적인 습관이다.
 
-        
-- 기존 프로젝트에서 “개발 서버를 바라보는 어플” 과 “프로덕션 서버를 바라보는 어플”을 나눠서 관리해야 한다고 했을 때 본인의 계획을 말씀 해주세요.
+
+- “개발 서버를 바라보는 어플” 과 “프로덕션 서버를 바라보는 어플”을 나눠서 관리해야 할 때 계획에 대한 설명
+    - 목적: 나누는 이유
+        - 개발 중에는 미완성 기능, 테스트 API, 디버깅 코드 등이 포함되며 불안정할 수 있다.
+        - 프로덕션은 사용자에게 실제 제공되는 서비스이므로 안정성, 보안, 성능 보장이 필수다.
+        - 하나의 빌드에서 실수로 개발용 설정으로 배포하면 심각한 장애 또는 보안 사고로 이어질 수 있다.
+        - 따라서 개발용(Dev) 빌드와 운영용(Prod) 빌드를 명확히 분리하여 관리해야 한다.
+
+    - 환경 분리
+        -  Build Variant 활용 (Android 기준)
+            - build.gradle에 productFlavors 또는 buildTypes 설정
+            - 예: debug → 개발 서버, release → 프로덕션 서버
+            ```gradle
+            buildTypes {
+                debug {
+                    buildConfigField "String", "BASE_URL", "\"https://dev.api.example.com\""
+                }
+                release {
+                    buildConfigField "String", "BASE_URL", "\"https://api.example.com\""
+                }
+            }
+            ```
+            - 코드에서는 BuildConfig.BASE_URL로 접근
+
+    - 실제 관리 계획
+        - 개발용 앱
+            - 서버: 개발 서버 (Dev API, QA DB 등)
+            - 앱 특징:
+                - 디버그 로그 활성화
+                - 비정상 상태 허용 (강제 에러 테스트 등)
+                - 테스트 계정 하드코딩 가능
+                - 기능 플래그 테스트 가능
+
+        - 프로덕션 앱
+            - 서버: 실제 운영 서버 (Live API, Production DB)
+            - 앱 특징:
+                - 로그 최소화 or 제거
+                - 보안 적용 (난독화, 무결성 체크 등)
+                - 사용 가능한 기능만 노출
+                - 철저한 QA 및 서명된 APK
+
+    - 네이밍/패키지 전략
+        - 앱 이름: [앱명]-Dev, [앱명]-Live 구분
+        - 패키지명: com.example.myapp.dev, com.example.myapp.prod 구분
+        - 아이콘 색상, 라벨: 개발용은 구분되는 색상, 아이콘을 지정해 헷갈리지 않도록
+        ```gradle
+        productFlavors {
+            dev {
+                applicationIdSuffix ".dev"
+                versionNameSuffix "-dev"
+                resValue "string", "app_name", "MyApp (Dev)"
+            }
+            prod {
+                resValue "string", "app_name", "MyApp"
+            }
+        }
+        ```
+
+    - 배포 및 QA 전략
+        - CI/CD 파이프라인에서 자동으로 구분된 빌드 배포 (예: Firebase App Distribution)
+        - 개발용은 QA팀, 테스터, 개발자용 내부 배포
+        - 운영용은 정식 서명과 함께 Google Play 스토어 배포
+        - Firebase, Sentry 등 로그 툴도 구분된 프로젝트 사용 권장
+
+    - 실무 적용 팁
+        - Flavor + BuildType 조합으로 devDebug, devRelease, prodRelease 등 세분화 가능
+        - API 키, URL, Firebase 옵션 등을 gradle.properties 또는 local.properties로 외부 관리
+        - Git 분기 전략도 develop vs main으로 구분하여 빌드 분리와 연동
+
+    - 결론
+        - 개발 서버용 앱과 운영 서버용 앱은 반드시 빌드 단계, 설정, 배포 방식, 보안 수준에서 분리되어야 하며, 이를 통해 테스트 안정성 확보, 실수 방지, 프로덕션 신뢰성 강화가 가능하다.
+
 - 인플레이션(inflation)이란 무엇인가요?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
