@@ -7473,6 +7473,48 @@ Organize concepts, features, types and Pros and Cons
     - 결론
         - 개발 서버용 앱과 운영 서버용 앱은 반드시 빌드 단계, 설정, 배포 방식, 보안 수준에서 분리되어야 하며, 이를 통해 테스트 안정성 확보, 실수 방지, 프로덕션 신뢰성 강화가 가능하다.
 
+- DIP (Dependency Inversion Principle)
+    - 개념
+        - 상위 모듈은 하위 모듈에 의존하면 안 되고, 둘 다 추상화(인터페이스)에 의존해야 한다
+        - 추상화는 구체화에 의존하면 안 되고, 구체화가 추상화에 의존해야 한다
+        - 즉, 구체적인 구현(implementation) 에 의존하지 말고, 추상적인 인터페이스 에 의존해야 한다
+
+    - 필요성
+        - 코드가 유연하고 확장성 있게 만들어짐
+        - 하위 모듈이 바뀌어도 상위 모듈은 영향 없이 동작 가능하게 하기 위함
+        - 테스트 코드 작성 쉬워지며, 의존성 주입(DI)도 가능
+
+    - 적용 방법
+        - 뷰모델이 직접 레파지토리 구현체에 의존하는 것이 아닌 인터페이스에 의존해야 함
+        - 실제 레파지토리 구현체는 나중에 주입해서 사용
+        ```kotlin
+        // 1. 추상화된 인터페이스
+        interface UserRepository {
+            fun getUser(id: String): User
+        }
+
+        // 2. 실제 구현체
+        class UserRepositoryImpl(private val remoteDataSource: RemoteDataSource) : UserRepository {
+            override fun getUser(id: String): User {
+                return remoteDataSource.fetchUser(id)
+            }
+        }
+
+        // 3. ViewModel은 인터페이스(UserRepository)만 의존
+        class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
+            fun loadUser(id: String) {
+                val user = userRepository.getUser(id)
+                // ...
+            }
+        }
+        ```
+        - UserRepositoryImpl 을 변경해도 UserViewModel은 수정할 필요 없는 장점
+        - 테스트 시에도 FakeUserRepository를 만들어서 UserViewModel에 삽입 가능
+
+    - 결론
+        - 구현체에 직접 의존하지 말고, 추상적인 인터페이스에 의존해야 한다.
+        - DI Framework 인 Hilt, Dagger, Koin 등도 DIP를 기반으로 만들어짐
+        
 - 인플레이션(inflation)이란 무엇인가요?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
