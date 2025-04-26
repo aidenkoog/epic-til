@@ -7865,7 +7865,61 @@ Organize concepts, features, types and Pros and Cons
     - 요약
         - Lombok은 코드 간결성과 생산성을 크게 높여주지만, 디버깅 어려움과 IDE 의존성, 명시성 감소라는 리스크를 함께 수반한다.
 
-- Java에서 CompletableFuture를 활용하는 방법은?
+- Java에서 CompletableFuture를 활용하는 방법
+    - CompletableFuture 개념
+        - 비동기(Asynchronous) 프로그래밍을 쉽게 할 수 있도록 제공하는 Java의 표준 API.
+        - Java 8에서 java.util.concurrent 패키지에 추가되었다.
+        - 기존 Future의 한계(완료 확인을 블로킹해야 함)를 극복하여, 논블로킹(Non-Blocking) 방식으로 비동기 작업을 조합할 수 있다.
+        - 여러 비동기 작업을 직렬(then...) 또는 병렬(combine...) 로 쉽게 연결할 수 있다.
+        - CompletableFuture는 비동기 작업을 논블로킹 방식으로 연결하고 조합할 수 있게 해주는 Java의 강력한 Future API
+
+    - 기본 사용 방법
+        - (1) 비동기 작업 실행
+            - supplyAsync()는 리턴값이 있는 비동기 작업을 실행한다.
+            ```java
+            CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+                // 비동기로 수행할 작업
+                return "Hello";
+            });
+            ```
+        - (2) 결과 처리 (thenApply)
+            - 앞선 결과를 받아 변환하는 동작을 비동기로 연결
+            ```java
+            CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "Hello")
+                .thenApply(result -> result + " World");
+            System.out.println(future.join());  // 출력: Hello World
+            ```
+        - (3) 결과 소비 (thenAccept)
+            - 결과를 받아 소비만 하고, 리턴값은 없다
+            ```java
+            CompletableFuture.supplyAsync(() -> "Hello")
+                .thenAccept(result -> System.out.println(result));
+            ```
+        - (4) 두 작업 조합 (thenCombine)
+            - 두 개의 CompletableFuture 결과를 받아 조합한다.
+            ```java
+            CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> "Hello");
+            CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "World");
+
+            CompletableFuture<String> combined = future1.thenCombine(future2, (f1, f2) -> f1 + " " + f2);
+
+            System.out.println(combined.join());  // 출력: Hello World
+            ```
+        - (5) 작업 완료 후 추가 행동 (whenComplete)
+            - 작업 성공/실패 여부에 관계없이 후처리 가능
+            ```java
+            CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+                if (true) throw new RuntimeException("Error");
+                return "Hello";
+            }).whenComplete((result, exception) -> {
+                if (exception != null) {
+                    System.out.println("Exception: " + exception.getMessage());
+                } else {
+                    System.out.println("Result: " + result);
+                }
+            });
+            ```
+
 - Java에서 메모리 누수를 방지하는 방법은?
 - Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
 - Java의 Optional 클래스를 사용하는 이유는?
