@@ -7818,7 +7818,53 @@ Organize concepts, features, types and Pros and Cons
             - return ItemViewHolder(view)
             - 리싸이클러뷰에서는 리스트 아이템의 뷰를 재사용하기 때문에 onCreateViewHolder 단계에서 아이템 레이아웃을 인플레이트한다
 
-- Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
+- Java에서 Lombok 라이브러리를 사용할 때 장점과 단점
+    - Lombok 개념
+        - Lombok은 Java 코드에서 반복적인 보일러플레이트 코드(예: getter, setter, constructor 등)를 자동으로 생성해주는 라이브러리
+            - Getter/Setter, 생성자 등 자동 생성 라이브러리
+        - 컴파일 시점에 애노테이션 프로세서(annotation processor)를 통해 소스 코드에 필요한 메서드를 삽입한다.
+
+    - 장점
+        - ① 코드 간결화
+            - @Getter, @Setter, @ToString, @EqualsAndHashCode, @NoArgsConstructor, @AllArgsConstructor 등 애노테이션만 붙이면
+            - 반복적이고 지루한 코드 작성 없이 필요한 메서드를 자동 생성할 수 있다.
+            - 클래스가 짧고 명확해지고, 핵심 비즈니스 로직에 집중할 수 있다.
+
+        - ② 생산성 향상
+            - 보일러플레이트 코드를 직접 작성하거나 수정할 필요가 없으므로, 개발 속도가 빨라진다.
+            - 특히, DTO, VO, Entity 클래스 작성 시 매우 큰 효율을 볼 수 있다.
+
+        - ③ 유지보수성 개선
+            - 코드 변경 시, 불필요한 getter/setter 수정으로 인한 오류 가능성을 줄인다.
+            - 메서드 수정이 필요하면 필드 선언만 수정해도 자동 반영되므로 관리가 쉽다.
+
+        - ④ 가독성 향상
+            - 클래스가 본질적인 필드와 주요 로직 중심으로 간결하게 유지되기 때문에
+            - 전체 구조 파악이 더 쉽다.
+
+    - 단점
+        - ① 디버깅 어려움
+            - 실제 코드에는 존재하지 않지만, 컴파일 후 생성된 메서드가 동작하기 때문에
+            - IDE 디버깅 시 소스 코드와 실제 실행되는 메서드가 불일치할 수 있다.
+            - 디버깅 과정이 불편해질 수 있다.
+
+        - ② IDE 의존성
+            - Lombok을 제대로 사용하려면 IDE 플러그인 설치가 필요하다.
+            - (예: IntelliJ IDEA, Eclipse 등에서 Lombok 지원 설정)
+            - IDE가 Lombok을 지원하지 않거나 플러그인 버전이 맞지 않으면, 컴파일은 되는데 IDE에서는 에러처럼 보이는 문제가 생길 수 있다.
+
+        - ③ 코드 명시성 감소
+            - 생성된 메서드가 소스 코드에 명시적으로 드러나지 않기 때문에,
+            - 다른 개발자가 코드를 처음 볼 때 동작을 바로 이해하기 어려울 수 있다.
+
+        - ④ 빌드 도구/환경 호환 이슈
+            - Lombok은 annotation processor를 사용하는 특성상,
+            - 특정 빌드 툴(Gradle, Maven) 설정이나 특정 버전에서 호환성 문제가 발생할 수 있다.
+            - 빌드 자동화/CI 환경에서도 추가 설정이 필요한 경우가 있다.
+
+    - 요약
+        - Lombok은 코드 간결성과 생산성을 크게 높여주지만, 디버깅 어려움과 IDE 의존성, 명시성 감소라는 리스크를 함께 수반한다.
+
 - Java에서 CompletableFuture를 활용하는 방법은?
 - Java에서 메모리 누수를 방지하는 방법은?
 - Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
