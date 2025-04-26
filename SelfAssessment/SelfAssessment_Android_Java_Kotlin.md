@@ -7798,7 +7798,26 @@ Organize concepts, features, types and Pros and Cons
         - Intent, Bundle 등에 객체를 담아서 Activity/Service 간 주고받을 때 기본처럼 사용된다.
         - Serializable은 속도가 느리고 GC 부하가 커서, 안드로이드에서는 성능 이유로 Parcelable을 주로 사용한다.
 
-- 인플레이션(inflation)이란 무엇인가요?
+- 인플레이션(inflation)
+    - 정의
+        - XML로 정의된 레이아웃 리소스 파일을 실제 뷰(View) 객체로 메모리에 생성하는 과정
+        - XML 파일(정적인 설계도)을 메모리 상에 동적으로 View 객체 트리로 변환하는 과정
+        - XML 레이아웃을 실제 뷰 객체로 메모리에 로드하는 과정
+    - 필요 이유
+        - 안드로이드에서는 레이아웃을 res/layout 폴더에 XML 파일로 미리 작성한다.
+        - 하지만 앱이 실행될 때는 XML 파일을 직접 사용할 수 없고, 반드시 Java/Kotlin 코드에서 동작하는 View 객체로 변환되어야 한다.
+        - 이 변환 과정을 수행하는 것이 바로 LayoutInflater이고, 이 과정을 Inflation이라고 부른다
+    - 주요 사용 예시
+        - 액티비티
+            - setContentView(R.layout.activity_main)
+        - 프래그먼트
+            - onCreateView -> return inflater.inflate(R.layout.fragment_example, container, false)
+            - 프래그먼트에서는 LayoutInflater 객체를 직접 받아서 필요한 XML 레이아웃을 뷰 객체로 인플레이트해서 반환
+        - 리싸이클러뷰 뷰홀더
+            - val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
+            - return ItemViewHolder(view)
+            - 리싸이클러뷰에서는 리스트 아이템의 뷰를 재사용하기 때문에 onCreateViewHolder 단계에서 아이템 레이아웃을 인플레이트한다
+
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
 - Java에서 메모리 누수를 방지하는 방법은?
