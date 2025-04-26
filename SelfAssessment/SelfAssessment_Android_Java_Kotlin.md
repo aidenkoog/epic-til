@@ -7736,6 +7736,68 @@ Organize concepts, features, types and Pros and Cons
         - SoftReference는 캐시용. (메모리 여유가 있으면 남겨두고, 없으면 버림)
         - PhantomReference는 리소스 직접 정리용. (특수한 경우에만 사용)
 
+- Parcelable 개념
+    - 개념 정의
+        - Parcelable은 안드로이드에서 객체를 직렬화(Serialize)하여 다른 컴포넌트(Activity, Service 등) 간에 빠르게 전달할 수 있도록 하는 인터페이스이다.
+        - 즉, 메모리 상의 객체를 바이트 단위로 변환해서, Intent, Bundle, IPC(프로세스 간 통신) 등에 효율적으로 담아서 전송할 수 있게 해준다.
+
+    - 필요 이유
+        - 안드로이드는 기본적으로 컴포넌트 간 데이터를 주고받을 때 Bundle이나 Intent에 객체를 담아 전달해야 한다.
+        - 그런데 일반 객체는 직접 담을 수 없기 때문에, 직렬화(Serialization) 과정이 필요하다.
+            - Java의 Serializable 인터페이스도 사용할 수 있지만,
+            - Parcelable은 성능(속도, 메모리 효율성) 면에서 훨씬 최적화되어 있어 안드로이드에서는 Parcelable 사용이 권장된다.
+    - 기본 사용 방법
+        - 클래스에 Parcelable 인터페이스를 구현한다.
+        - 객체의 필드를 Parcel에 쓰고 읽는 코드를 직접 작성해야 한다.
+        - CREATOR라는 static 필드를 반드시 정의해야 한다.
+        ```kotlin
+        import android.os.Parcel
+        import android.os.Parcelable
+
+        data class User(val name: String, val age: Int) : Parcelable {
+            constructor(parcel: Parcel) : this(
+                parcel.readString() ?: "",
+                parcel.readInt()
+            )
+
+            override fun writeToParcel(parcel: Parcel, flags: Int) {
+                parcel.writeString(name)
+                parcel.writeInt(age)
+            }
+
+            override fun describeContents(): Int = 0
+
+            companion object CREATOR : Parcelable.Creator<User> {
+                override fun createFromParcel(parcel: Parcel): User {
+                    return User(parcel)
+                }
+
+                override fun newArray(size: Int): Array<User?> {
+                    return arrayOfNulls(size)
+                }
+            }
+        }
+        ```
+    - 특징과 주의사항
+        - 직접 데이터 읽기/쓰기 구현이 필요하다. (Serializable은 자동)
+        - 빠르지만 코드가 많아질 수 있다.
+        - 데이터 손상 방지를 위해 읽고 쓰는 순서를 정확히 맞춰야 한다.
+        - Kotlin에서는 @Parcelize 어노테이션을 활용해 자동으로 Parcelable 구현을 쉽게 만들 수 있다.
+        ```kotlin
+        @Parcelize
+        data class User(val name: String, val age: Int) : Parcelable
+        ```
+        - @Parcelize를 사용하면 읽고 쓰는 코드를 직접 작성하지 않아도 된다.
+        - 단, kotlin-parcelize 플러그인 적용이 필요하다.
+
+    - 요약
+        - Parcelable은 안드로이드에서 객체를 빠르고 효율적으로 직렬화하여 컴포넌트 간 데이터 전달을 가능하게 하는 인터페이스
+
+    - 추가 설명
+        - Parcelable은 프로세스 간 통신(IPC) 에서도 많이 사용된다. (ex: AIDL)
+        - Intent, Bundle 등에 객체를 담아서 Activity/Service 간 주고받을 때 기본처럼 사용된다.
+        - Serializable은 속도가 느리고 GC 부하가 커서, 안드로이드에서는 성능 이유로 Parcelable을 주로 사용한다.
+
 - 인플레이션(inflation)이란 무엇인가요?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
