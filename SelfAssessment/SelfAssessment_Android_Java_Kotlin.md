@@ -7551,6 +7551,96 @@ Organize concepts, features, types and Pros and Cons
     - 전체 요약
         - ConstraintLayout은 복잡한 화면을 중첩 없이 하나의 레이아웃으로 만들 수 있게 해주고, 성능까지 최적화해주는 강력한 레이아웃
 
+- Activity Lifecycle (액티비티 라이프사이클) 재정리
+    - (1) 생성 및 시작 단계
+        - onCreate()
+            - 액티비티가 처음 생성될 때 호출
+            - UI 초기화, 데이터 바인딩, 뷰모델 연결, 리소스 로딩 수행
+            - setContentView()로 레이아웃 설정하는 것도 수행
+        - onStart()
+            - 액티비티가 사용자에게 보이기 시작할 때 호출
+            - 아직 포커스 갖지 못함, 화면에는 표시
+            - 주로 UI 갱신 또는 화면에 필요한 리소스 준비하는 작업 수행
+        - onResume()
+            - 액티비티가 사용자와 상호작용 가능한 상태가 될 때 호출
+            - 포커스 획득, 완전히 활성화
+            - 애니매이션 시작, 센서 리스너 등록, 카메라 접근 등 실제 동작 시작하는 부분
+
+    - (2) 일시 중지 및 정지 단계
+        - onPause()
+            - 다른 액티비티가 포커스를 가져올 때 호출
+            - 화면은 여전히 보일 수 있지만, 포커스를 잃음
+            - 센서 해제, 애니매이션 중단, 일시적 데이터 저장 등 수행
+            - 시스템이 메모리가 부족하면 이 시점 이후에 액티비티를 종료시킬 수도 있음
+        - onStop()
+            - 액티비티가 완전히 화면에서 사라질 때 호출
+            - UI가 더이상 사용자에게 보이지 않음
+            - 무거운 리소스 해제 (네트워크 연결 해제, 브로드캐스트 리시버 해제)
+    - (3) 다시 시작과 종료 단계
+        - onRestart()
+            - 액티비티가 onStop() 이후에 다시 사용자 앞에 나타날 때 호출
+            - 일시정지된 액티비티를 재시작할 때 호출되고 이어서 onStart()로 넘어감
+            - 화면을 갱신하거나 리소스를 다시 연결하는 작업을 여기서 준비
+        - onDestroy()
+            - 액티비티가 완전히 종료되기 직전에 호출
+            - 시스템이 직접 종료하거나, finish() 호출했을 때 실행
+            - 모든 리소스 해제, 쓰레드 종료, 메모리 정리 등 반드시 여기에서 수행
+    - 생명주기 전체 흐름 요약
+        - 생성: onCreate() → onStart() → onResume()
+        - 일시 정지: onPause()
+        - 정지: onStop()
+        - 재시작: onRestart() → onStart() → onResume()
+        - 종료: onPause() → onStop() → onDestroy()
+    - 추가 설명
+        - onPause()와 onStop() 차이
+            - onPause()는 아직 화면에 보이지만 포커스를 잃은 상태
+            - onStop()은 화면에서도 완전히 사라진 상태
+        - onSaveInstanceState() 호출 시점
+            - onSaveInstanceState() → onPause() → onStop()
+            - 주로 onPause() 또는 onStop() 직전에 호출돼서, 임시 데이터를 저장할 기회를 준다.
+            - (화면 회전 같은 구성 변경에 대비)
+        - finish() 호출 시 흐름
+            - onPause() → onStop() → onDestroy() 순서로 호출
+    - 화면 회전 시
+        - (1) 기본 동작
+            - 화면 회전 시 액티비티는 완전히 재생성
+            - 기존 화면 회전 전 액티비티: onPause() → onStop() → onDestroy() 종료
+            - 새로운 액티비티 인스턴스: onCreate() → onStart() → onResume()
+        - (2) 화면 회전 시 주의할 점
+            - 화면 회전 시 액티비티가 다시 만들어지므로, 초기화한 데이터가 모두 사라질 가능성 존재
+            - 회전에도 유지해야 할 데이터는 저장하거나 복구하는 처리가 필요
+        - (3) 데이터 유지 방법
+            - onSaveInstanceState(Bundle outState)
+                - 화면이 회전되기 전에 시스템이 호출해서,
+                - 현재 상태를 Bundle 객체에 저장할 수 있게 해준다.
+                    ```kotlin
+                    override fun onSaveInstanceState(outState: Bundle) {
+                        super.onSaveInstanceState(outState)
+                        outState.putString("KEY_NAME", name)
+                    }
+                    ```
+            - onRestoreInstanceState(Bundle savedInstanceState)
+                - onStart() 이후 호출돼서,
+                - onSaveInstanceState()에 저장했던 데이터를 복구할 수 있다.
+                - 또는 onCreate(savedInstanceState: Bundle?)안에서도 복구할 수 있음
+                    ```kotlin
+                    override fun onCreate(savedInstanceState: Bundle?) {
+                        super.onCreate(savedInstanceState)
+                        setContentView(R.layout.activity_main)
+                        val name = savedInstanceState?.getString("KEY_NAME")
+                    }
+                    ```
+        - (4) 화면 회전 시 생명주기 재생성 방지 방법
+            - AndroidManifest.xml에 설정 추가
+                - android:configChanges="orientation|screenSize"
+                - → 이렇게 하면, 회전 시 직접 처리하고, 액티비티를 재생성하지 않는다.
+                - 이렇게 설정하면, 회전 시 onConfigurationChanged() 메서드가 호출된다.
+                - (주의: 이 방법은 일부 경우에만 추천, 복잡한 화면에서는 리스크가 커질 수 있다.)
+        - 최종 정리
+            - 화면 회전이 발생하면 액티비티는 기본적으로 완전히 재생성되며, 
+            - 데이터를 유지하려면 onSaveInstanceState를 활용하거나, 
+            - 특별히 필요한 경우 configChanges로 직접 제어할 수 있다.
+
 - 인플레이션(inflation)이란 무엇인가요?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
