@@ -7920,7 +7920,35 @@ Organize concepts, features, types and Pros and Cons
             });
             ```
 
-- Java에서 메모리 누수를 방지하는 방법은?
+- Java에서 메모리 누수를 방지하는 방법
+    - 메모리 누수
+        - 프로그램이 더 이상 필요로 하지 않는 객체를 참조하고 있어 GC가 메모리를 회수하지 못하는 상황
+        - Java는 GC가 자동으로 메모리를 관리하지만 참조를 잘못 관리하면 여전히 메모리 누수가 발생할 수 있음
+
+    - 메모리 누수 방지하는 주요 방법
+        - (1) 객체 참조 해제
+            - 사용이 끝난 객체에 대해 null을 명시적으로 할당하여 참조 끊는다.
+            - list = null;
+        - (2) WeakReference 사용
+            - 객체가 더 이상 필요 없을 때 GC가 회수할 수 있다.
+            - 주로 캐시 또는 리스너 관리 시 사용
+        - (3) 리스너(Listener) 및 콜백 (Callback) 해제
+            - 등록한 리스너나 콜백을 제때 제거하지 않으면, 참조가 남아 메모리 누수를 유발
+            - 특히 안드로이드에서 액티비티/프래그먼트가 끝났을 때 리스너 해제가 중요
+            - button.setOnClickListener(null);
+        - (4) 내부 클래스(inner class) static 변경
+            - 비정적(Non-static) 내부 클래스는 외부 클래스(예: 액티비티, 프래그먼트)를 암묵적으로 참조한다.
+            - 필요 없는 참조 방지를 위해 내부 클래스를 static으로 선언 또는 WeakReference 사용
+        - (5) 대용량 컬렉션 관리
+            - List, Map, Set 등 컬렉션 사용 시 불필요 시 clear() 호출 > 내부 객체 참조 제거 > 메모리 확보한다.
+            - list.clear();, list = null;
+        - (6) 스레드 관리
+            - 작업 완료 후 중지시키고 참조를 끊는다.
+            - thread.interrupt();, thread = null;
+        - (7) 적절한 툴 사용 (메모리 분석)
+            - Android Studio Profiler, VisualVM, Eclipse MAT(Memory Analyzer Tool) 등을 사용해 메모리 사용량과 누수 지점을 주기적으로 분석한다.
+            - 누수 가능성이 있는 패턴(Object Retain, Heap Dump 등)을 조기에 발견할 수 있다.
+
 - Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
 - Java의 Optional 클래스를 사용하는 이유는?
 - Java에서 Thread와 Executor의 차이점은?
