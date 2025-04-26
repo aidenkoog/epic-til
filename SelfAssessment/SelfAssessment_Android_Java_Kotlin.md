@@ -7641,6 +7641,101 @@ Organize concepts, features, types and Pros and Cons
             - 데이터를 유지하려면 onSaveInstanceState를 활용하거나, 
             - 특별히 필요한 경우 configChanges로 직접 제어할 수 있다.
 
+- WeakReference 재정리
+    - 개념 정의
+        - WeakReference는 객체를 참조하지만, 
+        - 해당 객체를 가비지 컬렉터(GC)가 수거할 수 있도록 허용하는 참조(Reference)를 의미
+            - 일반적으로 객체를 Strong Reference(강한 참조)로 연결하면, GC는 그 객체를 절대 수거하지 못한다.
+            - 하지만 WeakReference로 객체를 참조하면, GC가 객체를 "더 이상 강한 참조가 없을 경우" 수거할 수 있다.
+        - 요약:
+            - "필요하면 쓰고, 필요 없으면 GC가 알아서 치워줄 수 있게 하는 느슨한 참조"
+
+    - 사용 이유/목적
+        - 메모리 누수(Memory Leak)를 방지하려고 사용한다.
+        - 특히 안드로이드에서는 Context(Activity, Fragment) 를 강한 참조로 오래 잡으면 메모리 릭이 발생할 수 있는데, 이를 예방할 때 쓴다.
+        - 캐시(Cache) 를 만들 때도 쓴다.
+            - → 메모리에 여유가 있을 땐 데이터를 유지하고, 메모리가 부족하면 알아서 버린다.
+
+    - 주요 특징
+        - WeakReference 객체가 참조하는 실제 객체는 GC가 수거해도 WeakReference 자체는 남아있을 수 있다.
+        - get() 메서드를 호출하면, 아직 살아있는 객체를 가져올 수 있다. 만약 객체가 수거됐다면 get()은 null을 반환한다.
+            ```kotlin
+            val weakRef = WeakReference(Activity())
+            val activity = weakRef.get()  // 아직 살아있으면 객체 반환, 아니면 null
+            ```
+
+    - 안드로이드에서 자주 쓰이는 사례
+        - Handler + Activity 조합
+            - 오래 실행되는 Handler가 Activity를 직접 참조하면 Activity가 GC되지 못하는 문제가 생긴다.
+            - 이때 WeakReference로 Activity를 감싸서 참조해 해결한다.
+            ```kotlin
+            class MyHandler(activity: Activity) : Handler(Looper.getMainLooper()) {
+                private val activityRef = WeakReference(activity)
+
+                override fun handleMessage(msg: Message) {
+                    val activity = activityRef.get() ?: return
+                    // activity가 살아있을 때만 처리
+                }
+            }
+            ```
+            - Custom Cache 시스템 구현
+                - LruCache처럼 사용자가 직접 캐시를 만들 때, 메모리 부족 시 자동 삭제를 허용하기 위해 WeakReference로 객체를 저장하기도 한다.
+
+    - 주의할 점
+        - WeakReference라고 무조건 메모리 릭을 막아주는 것은 아니다.
+            - 강한 참조가 남아있으면 의미가 없다.
+        - WeakReference로 감싸더라도, 무분별하게 사용하면 코드 가독성과 안정성을 해칠 수 있다.
+        - 자주 접근하는 객체를 WeakReference로 감싸면 null 체크를 매번 해야 해서 코드가 복잡해질 수 있다.
+
+    - 요약
+        - WeakReference는 객체를 부드럽게 참조하여, 필요하면 쓰고 메모리 부족 시 자동으로 GC가 수거할 수 있도록 돕는 참조 방식이다. 
+        - 메모리 릭을 방지하거나 캐시를 구현할 때 유용하다.
+
+- WeakReference, SoftReference, PhantomReference 차이
+    - WeakReference
+        - 개념
+            - 객체를 참조하지만, GC가 강한 참조(Strong Reference)가 없으면 바로 수거할 수 있도록 허용하는 참조.
+        - 특징
+            - 메모리가 충분하든 부족하든, Strong Reference가 없으면 바로 수거된다.
+            - get() 메서드를 호출하면 살아 있는 객체를 가져올 수 있다. (GC 후에는 null)
+        - 주요 사용처
+            - 메모리 누수 방지
+            - 오래 잡고 있을 필요 없는 객체 참조
+            - Handler나 Context 참조 시 메모리 릭 방지
+
+    - SoftReference
+        - 개념
+            - 객체를 참조하지만, 메모리가 부족할 때에만 수거하는 참조.
+        - 특징
+            - 강한 참조는 아니지만, WeakReference보다 오래 살아남는다.
+            - 메모리가 충분하면 계속 유지된다.
+            - 메모리가 부족해지면 GC가 SoftReference 객체를 수거하여 메모리를 확보한다.
+        - 주요 사용처
+            - 이미지 캐시, 대용량 데이터 캐시
+            - 메모리가 허용하는 한 유지하고, 부족할 때만 제거하고 싶은 데이터
+
+    - PhantomReference
+        - 개념
+            - 객체가 GC에 의해 수거된 이후를 감지할 수 있도록 하는 참조.
+            - get() 메서드로 객체를 가져올 수 없다. (항상 null)
+        - 특징
+            - 수거된 시점을 세밀하게 감시할 수 있다.
+            - ReferenceQueue와 함께 사용하여 객체가 사라진 직후 별도 처리를 할 수 있다.
+            - 직접 메모리를 해제해야 하는 경우 등에 유용하다 (ex: Direct ByteBuffer 정리)
+        - 주요 사용처
+            - 리소스 정리(메모리 직접 해제 필요 시)
+            - 객체가 죽은 뒤 정밀한 후처리 작업
+
+    - 요약
+        - WeakReference는 "강한 참조가 없으면 바로 수거"
+        - SoftReference는 "메모리가 부족할 때만 수거"
+        - PhantomReference는 "객체가 수거된 이후를 감지해서 후처리"
+
+    - 추가 설명
+        - WeakReference는 가벼운 메모리 누수 방지용. (Activity, Context 참조 등에 사용)
+        - SoftReference는 캐시용. (메모리 여유가 있으면 남겨두고, 없으면 버림)
+        - PhantomReference는 리소스 직접 정리용. (특수한 경우에만 사용)
+
 - 인플레이션(inflation)이란 무엇인가요?
 - Java에서 Lombok 라이브러리를 사용할 때 장점과 단점은?
 - Java에서 CompletableFuture를 활용하는 방법은?
