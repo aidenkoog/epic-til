@@ -8683,6 +8683,94 @@ Organize concepts, features, types and Pros and Cons
         - 항상 같은 자리에 같은 내용을 보장할 수 없을 때는 key()로 식별자를 명확히 제공해야 함
 
 - Compose에서 UI 요소가 계속해서 Recomposition되는 문제를 해결하는 방법
+    - 문제의 원인
+        - 상태 값이 변경되거나 컴포저블 함수가 입력 파라미터(인자)를 통해 변경되었을 때
+        - 불필요한 상태 변경
+        - 불안정한 파라미터를 컴포저블 함수에 전달 (매번 새로운 객체 전달)
+        - remember 등을 사용하지 않고 매번 연산
+        - 외부 객체가 무분별하게 변할 때
+        - 핵심: 컴포즈는 입력값이 변했다고 인식하면 무조건 다시 그린다.
+
+    - 대표적 해결 방법
+        - remember 사용한 메모이제이션
+            - 컴포저블 내부에서 고정된 계산 결과나 객체를 매번 새로 만들지 않고, remember를 이용해 값을 저장하고 필요할 때만 재생성
+            ```kotlin
+            @Composable
+            fun Example() {
+                val user = remember { User("Aiden") }
+                // 매 리컴포지션 때마다 새로운 User 객체를 만들지 않는다
+                // remember로 고정 가능한 값이나 객체는 항상 캐싱해서 리컴포지션 방지
+            }
+            ```
+        - rememberSaveable로 상태 저장하고 복구
+            - 사용자가 화면을 회전하거나 프로세스가 죽었다 살아나도,
+            - State를 잃지 않고 복구할 수 있게 rememberSaveable 사용
+            ```kotlin
+            @Composable
+            fun Example() {
+                // 사용자의 입력 등을 화면 변화에도 안정적으로 유지
+                var name by rememberSaveable { mutableStateOf("") }
+            }
+            ```
+        - 상태 객체를 세밀하게 분리하고 필요한 부분만 관찰
+            - 하나의 큰 State 객체를 여러 컴포저블이 참조하면, 작은 변경에도 전체가 다시 그려진다.
+            - 필요한 부분만 따로 분리하거나 derivedStateOf를 이용해 최소한만 감시한다.
+            ```kotlin
+            // 관찰 범위를 좁혀서 불필요한 리컴포지션 방지
+            val isButtonEnabled by remember {
+                derivedStateOf { name.isNotEmpty() }
+            }
+            ```
+        - Stable한 객체 전달
+            - 컴포저블에 매번 새로운 객체나 람다를 넘기면 컴포즈는 변경됐다고 인식
+            - 항상 안정적인 값을 넘겨야 함
+            - 리스트나 데이터 클래스는 변경되지 않는 한 그대로 전달해야 함
+            - @Immutable / @Stable을 활용해 컴파일러에게 이 객체는 바뀌지 않음을 명시
+            ```kotlin
+            @Immutable
+            data class User(val name: String)
+
+            @Composable
+            fun UserProfile(user: User) { ... }
+            ```
+        - key()를 적절히 사용해 리컴포지션 범위 제어
+            - 리스트나 반복문 내에서는 key()를 설정하여 개별 항목을 정확히 식별하게 한다.
+            - 데이터 변경에도 필요한 항목만 다시 그리도록 최적화
+            ```kotlin
+            LazyColumn {
+                items(userList, key = { it.id }) { user ->
+                    UserItem(user)
+                }
+            }
+            ```
+        - Modifier 순서, 중복 호출 주의
+            - Modifier를 매번 새로 생성하거나, Modifier 체이닝 순서가 엉키면 Recomposition이 많아질 수 있음
+            - Modifier는 불변성을 유지하고, 불필요한 호출을 최소화
+
+        - SideEffect, LaunchedEffect 활용
+            - Compose는 LaunchedEffect, SideEffect, DisposableEffect 등을 제공해서 컴포즈 생명주기에 따라 부수효과(side-effect)를 관리하게 한다.
+            - 이걸 사용하지 않고 그냥 Composable 안에 로직을 적어버리면 Recomposition 때마다 다시 실행된다.
+            ```kotlin
+            // 필요할 때 한번만 동작하도록 제어
+            LaunchedEffect(key1 = userId) {
+                viewModel.loadUser(userId)
+            }
+            ```
+
+    - 문제 해결 재정리
+        - 불필요한 State 변경 제거
+        - remember / rememberSaveable을 적극 활용
+        - derivedStateOf로 필요한 부분만 감시
+        - 항상 Stable 객체를 전달
+        - key()로 리스트 항목 식별을 정확히 설정
+        - Modifier 호출과 체이닝을 순서
+        - SideEffect 계열 API로 부수효과를 관리
+
+    - 의견
+        - Compose에서 UI 요소가 불필요하게 Recomposition된다면, 원인은 거의 항상 State 관리 문제 또는 입력 안정성 문제
+        - 이를 구조적으로 해결 필요
+
+
 - Jetpack Compose의 CompositionLocal이란 무엇이며, 언제 사용하는
 - Jetpack Compose에서 custom Modifier를 활용한 성능 최적화 방법
 - Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
