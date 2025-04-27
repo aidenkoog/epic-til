@@ -7949,7 +7949,45 @@ Organize concepts, features, types and Pros and Cons
             - Android Studio Profiler, VisualVM, Eclipse MAT(Memory Analyzer Tool) 등을 사용해 메모리 사용량과 누수 지점을 주기적으로 분석한다.
             - 누수 가능성이 있는 패턴(Object Retain, Heap Dump 등)을 조기에 발견할 수 있다.
 
-- Java에서 Java Flight Recorder(JFR)를 사용하는 이유는?
+- Java에서 Java Flight Recorder(JFR)를 사용 이유가
+    - Java Flight Recorder(JFR) 개념
+        - JVM 내부 동작을 매우 낮은 오버헤드로 기록하는 프로파일링 및 모니터링 도구다.
+        - Oracle JDK 7u40 이상, OpenJDK 11 이상부터 기본 내장되어 있다.
+        - CPU 사용량, 메모리 할당, GC 활동, 스레드 상태 등 다양한 실행 데이터를 런타임 중 실시간으로 수집하고 분석할 수 있다.
+
+    - Java Flight Recorder를 사용하는 주요 이유
+        - ① 매우 낮은 오버헤드로 실시간 데이터 수집
+            - 기존 프로파일러는 성능에 큰 부하를 주는 경우가 많지만,
+            - JFR은 JVM 자체에 최적화되어 있어 오버헤드가 매우 낮다.
+            - 실서비스(Production) 환경에서도 성능에 큰 영향을 주지 않고 데이터를 수집할 수 있다.
+
+        - ② 성능 문제 분석(Performance Tuning)
+            - GC 지연, 메모리 할당 문제, 스레드 병목, 클래스 로딩 지연 등
+            - 실제 애플리케이션 성능 저하 원인을 정밀하게 분석할 수 있다.
+            - 프로파일링 없이 막연히 추측하지 않고, 구체적인 수치를 기반으로 튜닝이 가능하다.
+
+        - ③ 오류 및 장애 분석
+            - 서비스 장애나 성능 이슈가 발생했을 때,
+            - JFR 데이터만으로 당시 JVM 내부 상태를 정확히 재현하고 분석할 수 있다.
+            - 힙 메모리, 스레드 상태, 잠금(Lock) 충돌, 메서드 호출 트레이스 등을 확인하여
+            - 근본 원인(Root Cause Analysis) 을 빠르게 찾을 수 있다.
+
+        - ④ 이벤트 기반 데이터 기록
+            - JFR은 JVM 및 애플리케이션 레벨의 다양한 이벤트(Event) 들을 수집한다.
+            - 예를 들어, GC 이벤트, 스레드 스케줄링, 메소드 호출, 예외 발생, 파일 I/O 활동 등.
+            - 개발자가 직접 커스텀 이벤트(Custom Event) 를 만들어 필요한 데이터를 추가 기록할 수도 있다.
+
+        - ⑤ 장기 모니터링 및 운영 데이터 축적
+            - 장기간에 걸친 JVM 상태 변화를 기록하여, 성능 트렌드 분석이나 장기적인 리스크 탐지에도 활용할 수 있다.
+            - 예를 들어, 점진적 메모리 증가(메모리 누수) 패턴 탐지에도 유용하다.
+
+        - ⑥ 다양한 분석 툴과 연동
+            - 수집한 .jfr 파일은 Java Mission Control(JMC) 또는 다른 시각화 도구를 통해 그래픽 기반으로 쉽게 분석할 수 있다.
+            - VisualVM, JMC, 혹은 일부 APM 솔루션들과 연계할 수도 있다.
+
+    - 정리
+        - Java Flight Recorder는 실시간으로 JVM 내부 동작을 낮은 오버헤드로 기록하여, 성능 분석, 장애 분석, 운영 모니터링에 필수적인 도구다.
+
 - Java의 Optional 클래스를 사용하는 이유는?
 - Java에서 Thread와 Executor의 차이점은?
 - Java에서 WebSockets을 구현하는 방법은?
