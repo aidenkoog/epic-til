@@ -8481,6 +8481,149 @@ Organize concepts, features, types and Pros and Cons
 
 
 - Jetpack Compose에서 State와 Event를 분리하는 이유
+    - State와 Event의 개념 명확화
+        - State(상태):
+            - UI를 그리는 데 필요한 데이터.
+            - 화면이 어떤 모습이어야 하는지를 결정한다.
+            - (예) 텍스트 필드의 입력 값, 버튼의 활성화 여부 등
+
+        - Event(이벤트):
+            - 사용자의 액션이나 시스템에 의해 발생하는 동작.
+            - 화면을 변경하거나 특정 처리를 트리거(trigger)한다.
+            - (예) 버튼 클릭, 스크롤 이벤트, 입력 완료 이벤트 등
+        - 정리
+            - → State는 "현재 상태를 나타내는 값",
+            - → Event는 "변화를 유발하는 행동" 으로 역할이 다르다.
+
+    - 책임 분리 (Separation of Concerns)
+        - 각각의 책임을 명확히 구분하면, 코드가 더 이해하기 쉬워진다.
+        - State는 "어떤 데이터가 있는지"만 신경 쓰고,
+        - Event는 "어떤 일이 일어나는지"에만 집중한다.
+        - 서로 다른 변화의 주체(State 업데이트 vs Event 처리)를 혼동하지 않게 된다.
+        - 이를 통해 코드의 가독성(Readability) 과 유지보수성(Maintainability) 이 크게 향상된다.
+
+    - 단방향 데이터 흐름 (Unidirectional Data Flow, UDF) 보장
+        - Compose는 단방향 데이터 흐름을 핵심으로 한다.
+        - State → UI → Event → State 업데이트 로 흐름이 돌아가야 한다.
+        - State와 Event를 명확히 나누지 않으면, 흐름이 꼬이고, 사이드 이펙트(side-effect)가 발생할 위험이 높아진다.
+        - State를 변경하는 건 항상 Event를 통해 이루어져야 하며, UI는 오직 State만 보고 그려져야 한다.
+        - → 이 흐름이 깨지면 버그를 추적하기 어렵고, 동시성 문제(concurrency issues)도 생길 수 있다.
+
+    - 테스트 용이성(Testability) 향상
+        - Event 핸들링을 별도로 분리하면, UI를 직접 띄우지 않고도 이벤트 처리를 단위 테스트할 수 있다.
+        - State 변화도 독립적으로 검증할 수 있다.
+        - ViewModel 레벨에서는 "이벤트를 받으면 어떤 상태 변화를 일으키는가?"를 명확히 테스트할 수 있게 된다.
+        - 테스트 가능한 구조는 장기적으로 프로젝트 품질에 매우 중요한 영향을 준다.
+
+    - UI 재사용성과 유연성 향상
+        - 동일한 State를 가진 다양한 화면을 만들 수 있다.
+        - 동일한 Event를 다른 방식으로 처리할 수 있다 (예: 다른 화면에서는 같은 버튼 클릭을 다르게 처리).
+        - State와 Event를 분리하지 않으면, UI가 로직과 강하게 결합되어 재사용이 어려워진다.
+        - ViewModel과 Composable이 느슨하게 연결(loose coupling)되어, 하나를 변경해도 다른 부분에 영향을 최소화할 수 있다.
+
+    - 코드 복잡도 관리
+        - 기능이 커질수록 State와 Event를 섞어놓으면 코드가 복잡해지고 유지보수가 어려워진다.
+        - 특히 비즈니스 로직이 많은 앱에서는 이벤트별 처리 로직(Event Handler)이 늘어나는데, 이를 깔끔히 관리하려면 분리가 필수적이다.
+        - 각각을 모듈화하거나 다른 클래스로 옮기는 것도 쉬워진다.
+
+    - 예제
+        - State와 Event 미 분리 케이스
+            ```kotlin
+            @Composable
+            fun CounterScreen() {
+                var count by remember { mutableStateOf(0) }
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Count: $count", fontSize = 24.sp)
+
+                    Button(
+                        onClick = {
+                            // Event 로직과 State 업데이트가 뷰 안에 다 섞여있음
+                            count++
+                        }
+                    ) {
+                        Text("Increment")
+                    }
+
+                    Button(
+                        onClick = {
+                            count = 0 // Reset 이벤트도 뷰 안에 섞여있음
+                        }
+                    ) {
+                        Text("Reset")
+                    }
+                }
+            }
+            ```
+            - 문제점
+                - 상태와 이벤트 처리 모두 하나의 Composable 안에 존재
+                - 화면 복잡할 시 관리 어려움
+                - 테스트 어려우며 다른 화면에서 동일 로직 재사용 어려움
+                - UI에 로직이 섞여 있어서 가독성과 유지보수성이 나빠짐
+        - 분리 케이스
+            ```kotlin
+            // 뷰모델
+            class CounterViewModel : ViewModel() {
+                private val _count = mutableStateOf(0)
+                val count: State<Int> = _count
+
+                fun onIncrement() {
+                    _count.value++
+                }
+
+                fun onReset() {
+                    _count.value = 0
+                }
+            }
+            // 컴포저블 함수
+            @Composable
+            fun CounterScreen(viewModel: CounterViewModel = viewModel()) {
+                val count by viewModel.count
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Count: $count", fontSize = 24.sp)
+
+                    Button(
+                        onClick = {
+                            viewModel.onIncrement() // Event 발생만 위임
+                        }
+                    ) {
+                        Text("Increment")
+                    }
+
+                    Button(
+                        onClick = {
+                            viewModel.onReset() // Event 발생만 위임
+                        }
+                    ) {
+                        Text("Reset")
+                    }
+                }
+            }
+            ```
+            - 장점
+                - CounterScreen은 State(count) 구독하고 표시만 함
+                - 이벤트 처리는 뷰모델이 담당
+                - State 변경은 항상 이벤트를 통해서만 이루어짐
+                - 테스트 용이 (뷰모델만 단위테스트 실시하면 됨)
+                - 유지보수성이 높고, 확장하기 쉽다
+    - 요약
+        - Jetpack Compose에서 State와 Event를 분리하는 이유는
+            - 책임 분리로 코드 가독성과 유지보수성을 높이고,
+            - 단방향 데이터 흐름을 확실히 지키며,
+            - 테스트 용이성을 확보하고,
+            - UI 재사용성과 유연성을 높이고,
+            - 코드 복잡도를 체계적으로 관리하기 위함이다.
+        - State는 '어떻게 보일까'를 담당하고, Event는 '무슨 일이 일어날까'를 담당한다.
+        - 이 둘을 명확히 나누는 것이 Compose 아키텍처의 핵심 원칙이다.
+
+
 - Jetpack Compose에서 key()를 사용하여 Recomposition을 최적화하는 방법
 - Compose에서 UI 요소가 계속해서 Recomposition되는 문제를 해결하는 방법
 - Jetpack Compose의 CompositionLocal이란 무엇이며, 언제 사용하는
