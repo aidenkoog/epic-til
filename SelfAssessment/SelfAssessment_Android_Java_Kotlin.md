@@ -7988,8 +7988,63 @@ Organize concepts, features, types and Pros and Cons
     - 정리
         - Java Flight Recorder는 실시간으로 JVM 내부 동작을 낮은 오버헤드로 기록하여, 성능 분석, 장애 분석, 운영 모니터링에 필수적인 도구다.
 
-- Java의 Optional 클래스를 사용하는 이유는?
+- Java의 Optional 클래스를 사용하는 이유
+    - Optional 개념
+        - Optional<T>는 널이 될 수 있는 값을 명시적으로 표현하디 위한 컨테이너 클래스
+        - 자바 8부터 도입, 객체가 존재할 수도 있고(널이 아닐 수도 있고), 널일 수도 있는 상황을 명확하게 표현 가능
+
+    - Optional 사용 주요 이유
+        - (1) 널 포인터 예외 방지
+            - NPE 예방이 가장 큰 목적
+            - 메서드 리턴 타입을 Optional로 명시하면, 호출하는 쪽에서 null여부를 의식적으로 체크하도록 강제 가능
+            ```java
+            Optional<String> findName() {
+                return Optional.ofNullable(null);
+            }
+            ```
+            - 무심코 널 반환 또는 널 값 다루는 실수 감소 효과
+
+        - (2) 코드 가독성 향상
+            - if (x != null) 같은 널 체크 코드 중복 문제 감소 효과
+            - Optional의 메서드 체이닝 > 가독성 증대
+            ```java
+            Optional.ofNullable(user)
+                .map(User::getName)
+                .ifPresent(System.out::println)
+            ```
+
+        - (3) 반환값의 의미를 명확하게 표현
+            - 메서드의 반환 타입을 Optional로 선언하면,
+            - 이 메서드는 값이 없을 수도 있다를 명시적 표현 가능
+            - 메서드 문서 따로 읽지 않아도 API 자체가 명확한 계약(Contract)를 보여줌
+            ```java
+            Optional<User> findUserById(String id);
+            ```
+
+        - (4) 함수형 프로그래밍 스타일 지원
+            - map, flatMap, filter, orElse, orElseGet, ifPresent 같은 메서드를 통해
+            - 함수형 스타일로 null safe한 데이터 흐름을 만들 수 있음
+            - 복잡한 if-else 블록 대신 선언적(declarative) 코드 작성이 가능
+            ```java
+            String name = Optional.ofNullable(user)
+                .map(User::getName)
+                .orElse("Unknown");
+            ```
+    - Optional 사용 시 주의점
+        - 필드에 Optional 사용 지양
+            - 객체 필드에는 사용 안하는것이 권장, 메서드 리턴 타입에 주로 사용
+        - Optional.get() 직접 호출 지양
+            - 무조건 값을 꺼내는 get()은 NPE 유발 가능성
+            - orElse, orElseGet, ifPresent 등 사용 권장
+        - 성능 민감 영역에서 남용 주의
+            - Optional은 기본 타입까지 감싸므로 성능에 민감한 부분에서는 지양 또는 주의
+
+    - 최종 정리
+        - Optional은 널 안정성을 높이고, 코드 가독성과 API 명확성을 개선하기 위해 사용하는 자바의 널 대체 솔루션
+
+        
 - Java에서 Thread와 Executor의 차이점은?
+- Handler, Thread 차이점
 - Java에서 WebSockets을 구현하는 방법은?
 - Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
 - Java에서 Functional Interface를 활용하는 방법은?
