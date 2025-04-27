@@ -8093,6 +8093,41 @@ Organize concepts, features, types and Pros and Cons
         - Executor는 스레드 실행과 관리를 효율적으로 추상화한 구조
 
 - Handler, Thread 차이점
+    - Thread
+        - 스레드는 독립적인 실행 흐름(Flow)을 생성하는 가장 기본 단위
+        - 무거운 작업(네트워크, 파일 I/O, 계산 등)을 메인 스레드와 분리해서 처리할 때 사용
+        - 스레드는 자체적으로 실행 로직을 가지고 비동기 작업을 수행됨
+
+    - Handler
+        - Handler는 특정 쓰레드 즉, 루퍼가 있는 스레드의 메세지 큐에 작업(Runnable)이나 메시지를 보내는 도구
+        - 주로 UI스레드(메인 스레드)와 통신하거나, 다른 쓰레드에서 작업 결과를 메인 쓰레드로 전달할 때 사용
+        - 핸들러 자체는 별도로 작업 수행하지 않음, 작업을 특정 스레드에 전달(post)하는 역할 수행
+        - 새로운 스레드 생성하지 않음 (기존 스레드에 작업 전달)
+        - 핸들러는 내부적으로 루퍼와 메세지 큐를 사용
+        ```java
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(() -> {
+            // 메인 스레드에서 실행할 코드
+        })
+        ```
+    - Handler와 Thread 함께 사용하는 대표 패턴
+        - 보통은 스레드로 백그라운드 작업 처리하고 완료 시 핸들러로 메인쓰레드에 결과 전달하는 패턴
+        - 스레드 -> 핸들러 -> UI 업데이트 패턴
+            ```java
+            new Thread(() -> {
+                String result = downloadData();
+
+                // Main Thread로 결과 전달
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    updateUI(result);
+                });
+            }).start();
+            ```
+
+    - 정리
+        - 스레드는 별도 작업을 실행하는 실행 흐름을 만듬
+        - 핸들러는 특정 스레드에 작업을 예약하고 전달하는 역할
+
 - Java에서 WebSockets을 구현하는 방법은?
 - Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
 - Java에서 Functional Interface를 활용하는 방법은?
