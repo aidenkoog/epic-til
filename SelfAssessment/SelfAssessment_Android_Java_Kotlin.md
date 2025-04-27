@@ -8413,12 +8413,73 @@ Organize concepts, features, types and Pros and Cons
             }
             ```
     - 상태 호이스팅 구조가
-        - State Owner(상위)
-        - Stateless Composable(하위)
-        - Event Callback
+        - State Owner(상위): 상태를 소유하고 관리 (remember, rememberSaveable)
+        - Stateless Composable(하위): 상태를 전달받아 화면에 그리기만 함
+        - Event Callback: 하위 컴포저블에서 사용자 액션 발생 시 상위에 통지
 
+    - 정리
+        - 항상 상위에서 상태를 가지고, 하위로 전달
+        - 하위 컴포저블은 입력만 받고 출력만 발생
+        - 이 패턴 규칙 유지 시 컴포즈의 선언형 UI 구조와 완벽하게 일치하게 됨
+        - 상태 호이스팅은 상태를 컴포저블 외부로 끌어올려 단방향 데이터 흐름을 만들고, 재사용성과 테스트성을 높이는 컴포즈 상태 관리 패턴
 
 - Compose에서 derivedStateOf와 remember를 활용한 성능 최적화 방법
+    - 개념
+        - remember
+            - 컴포저블이 재구성될 때마다 값을 다시 계산하지 않고, 이전 값을 기억(캐시)해주는 역할
+            - 주로 무거운 계산이나 객체 생성 비용이 큰 경우, 불필요한 연산을 방지하지 위해 사용
+
+        - derivedStateOf
+            - 다른 상태에 의존해 계산된 값을 관리할 때 사용
+            - 의존하는 상태가 변경될 때만 다시 계산하고 그렇지 않으면 이전 결과를 재사용
+            - 비용이 큰 계산을 의존성 변화가 있을 때만 수행하도록 최적화 가능
+            ```kotlin
+            val isButtonEnabled = derivedStateOf { text.isNotBlank() }
+            ```
+            - text가 변할 때만 isButtonEnabled를 다시 계산
+
+    - 성능 최적화 중요 이유
+        - 무조건 재계산 문제 (상태 변경될 때마다 복잡한 계산이 다시 수행되면 성능 저하 발생)
+        - 불필요한 리컴포지션 (의존 상태 변하지 않아도 컴포저블이 재구성 시 매번 다시 계산되는 문제)
+        - derivedStateOf + remember (필요할 때만 계산하고, 캐싱을 통해 비용을 절약)
+
+    - 최적화 방법
+        - 기본 패턴
+            ```kotlin
+            val expensiveValue by remember(input) {
+                derivedStateOf {
+                    // input에 따라 비싼 계산
+                    heavyComputation(input)
+                }
+            }
+            ```
+            - input이 변경될 때만 heavyComputation이 실행
+            - 컴포저블 재구성만으로는 다시 계산되지 않음
+
+        - 검색 필터 최적화
+            ```kotlin
+            @Composable
+            fun SearchScreen(query: String, allItems: List<String>) {
+                val filteredItems by remember(query, allItems) {
+                    derivedStateOf {
+                        allItems.filter { it.contains(query, ignoreCase = true) }
+                    }
+                }
+
+                LazyColumn {
+                    items(filteredItems) { item ->
+                        Text(item)
+                    }
+                }
+            }
+            ```
+            - query나 allItems가 변경될 때만 필터링 작업을 수행
+            - 스크롤이나 화면 리컴포지션과 무관하게, 필터 연산은 최소한만 수행됨
+
+    - 결론
+        - remember 는 값 자체를 캐시하고, derivedStateOf는 의존 상태 변화가 있을 때만 계산을 다시 해서 컴포즈 성능을 최적화함
+
+
 - Jetpack Compose에서 State와 Event를 분리하는 이유
 - Jetpack Compose에서 key()를 사용하여 Recomposition을 최적화하는 방법
 - Compose에서 UI 요소가 계속해서 Recomposition되는 문제를 해결하는 방법
@@ -8687,7 +8748,6 @@ Organize concepts, features, types and Pros and Cons
 - AOSP의 init 프로세스와 서비스 관리 방법을 설명해주세요.
 - AOSP의 Binder 드라이버와 IPC 메커니즘에 대해 설명해주세요.
 - Android MVI orbit 설명
-- Java의 JVM, JRE, JDK의 차이점은?
 - Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
 - Java에서 Multi-threading을 구현하는 방법은?
 - Java에서 Immutable 객체를 설계하는 방법과 장점은?
