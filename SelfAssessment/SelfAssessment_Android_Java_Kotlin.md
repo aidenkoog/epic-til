@@ -8042,8 +8042,56 @@ Organize concepts, features, types and Pros and Cons
     - 최종 정리
         - Optional은 널 안정성을 높이고, 코드 가독성과 API 명확성을 개선하기 위해 사용하는 자바의 널 대체 솔루션
 
-        
-- Java에서 Thread와 Executor의 차이점은?
+
+- Java에서 Thread와 Executor의 차이점
+    - 기본 개념
+        - 스레드
+            - 스레드는 하나의 독립된 실행 흐름을 생성하는 가장 기본적인 단위
+            - 자바에서는 스레드 클래스를 직접 생성하여 스레드 시작 가능
+            - 개발자가 직접 start(), join() 관리
+            - 스레드풀은 개발자가 직접 구현 필요
+            - 자원 최적화 어려움
+            - 실패 처리 등의 예외처리는 try-catch로 개발자가 직접 관리 필요
+            ```java
+            Thread thread = new Thread(() -> {
+                System.out.println("Hello");
+            });
+            thread.start();
+            ```
+            - 각각의 스레드를 생성하고 직접 관리 필수, 쓰레드 생명주기, 동기화, 예외 처리 등을 개발자가 직접 신경써야 함
+            - 1~2개의 스레드 작업에 사용
+            - 다수의 동시 작업, 서버 애플리케이션, 백그라운드 작업 시에는 적합하지 않음
+            - 대규모 비동기 처리, 스케쥴링, 안정성 필요한 경우에도 적합하지 않음
+
+        - Executor
+            - 스레드의 실행을 관리(Submit)하는 고수준의 추상화 API
+            - 개발자가 직접 스레드 생성/관리하지 않고, Executor가 쓰레드 풀을 사용해 쓰레드 생성/스케쥴링/종료를 자동으로 관리
+            - 스레드 실행 관리 및 스케쥴링 추상화
+            - ExecutorService가 내부적으로 스레드 관리, 기본적으로 스레드 풀 지원
+            - 스레드 풀로 자원 최적화 가능
+            - 얘외 처리 구조 지원
+            ```java
+            ExecutorService executor = Executors.newFixedThreadPool(2);
+            executor.submit(() -> {
+                System.out.println("Hello");
+            });
+            executor.shutdown();
+            ```
+            - 스레드를 효율적으로 재사용하고 시스템 리소스를 최적화할 수 있다.
+            - 효율적으로 확장 가능 (풀 크기 조절 가능)
+            - 다수의 동시 작업, 서버 애플리케이션, 백그라운드 작업 시 적합 -> Executor (특히 ExecutorService) 사용
+            - 대규모 비동기 처리, 스케쥴링, 안정성 필요한 경우에도 적합하지 않음 -> Executor 사용
+
+    - 추가 내용 키워드
+        - ExecutorService 종류 (FixedThreadPool, CachedThreadPool, SingleThreadExecutor, ScheduledThreadPool)
+        - Future, Callable과 ExecutorService의 관계
+        - Executors 대신 ThreadPoolExecutor 직접 사용하는 방법
+        - Java 8 이후 CompletableFuture + Executor 연계 사용
+
+    - 전체 요약
+        - 스레드는 스레드를 직접 만들고 관리하는 방법
+        - Executor는 스레드 실행과 관리를 효율적으로 추상화한 구조
+
 - Handler, Thread 차이점
 - Java에서 WebSockets을 구현하는 방법은?
 - Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
