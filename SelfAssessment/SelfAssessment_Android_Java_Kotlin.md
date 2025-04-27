@@ -8170,7 +8170,61 @@ Organize concepts, features, types and Pros and Cons
             - VisualVM, Java Flight Recorder(JFR), JConsole, Eclipse MAT 등을 통해
             - Heap Dump 분석, GC 로그 분석, 메모리 사용량 모니터링을 주기적으로 수행한다.
 
-- Java에서 Functional Interface를 활용하는 방법은?
+- Java에서 Functional Interface를 활용하는 방법
+    - Functional Interface 개념
+        - Functional Interface(함수형 인터페이스) 는
+        - 오직 하나의 추상 메서드(abstract method) 만을 가지는 인터페이스를 말한다.
+        - Java 8부터 도입된 람다 표현식(lambda expression) 을 사용할 수 있게 해주는 핵심 기반이다.
+        - @FunctionalInterface 애노테이션을 붙이면 컴파일러가 이를 강제하고 체크해준다.
+        ```java
+        @FunctionalInterface
+        public interface MyFunction {
+            int apply(int x, int y);
+        }
+        ```
+    - Functional Interface를 활용하는 방법
+        - ① 람다 표현식과 함께 사용하기
+            - 함수형 인터페이스를 구현할 때 익명 클래스 대신 간결한 람다 표현식으로 대체할 수 있다.
+            ```java
+            MyFunction add = (x, y) -> x + y;
+            System.out.println(add.apply(2, 3));  // 출력: 5
+            ```
+
+        - ② 메서드 참조(Method Reference)로 사용하기
+            - 람다 표현식 대신 메서드 참조(::) 를 활용할 수 있다.
+            - 메서드 참조는 람다를 더 짧고 직관적으로 표현 가능하게 해줌
+            ```java
+            Function<String, Integer> parseInt = Integer::parseInt;
+            System.out.println(parseInt.apply("123"));  // 출력: 123
+            ```
+
+        - ③ 표준 함수형 인터페이스 사용하기 (java.util.function 패키지)
+            - Java는 다양한 표준 함수형 인터페이스를 제공한다
+                - Function<T, R>: 입력을 받아 출력을 반환, 값 변환
+                - Consumer<T>: 입력을 소비하고 반환 없음, 값 소비
+                - Supplier<T>: 입력 없이 출력을 제공, 값 공급
+                - Predicate<T>: 입력을 받아 true/false 반환, 조건 판단
+                - BiFunction<T, U, R>: 두 입력을 받아 하나의 출력 반환, 두 값 변환
+                ```java
+                Function<String, Integer> lengthFunction = s -> s.length();
+                Consumer<String> printConsumer = s -> System.out.println(s);
+                Supplier<String> helloSupplier = () -> "Hello";
+                Predicate<Integer> isPositive = x -> x > 0;
+                ```
+        
+        ④ 스트림 API와 함께 사용하기
+            - Java 8의 Stream API에서는 함수형 인터페이스가 필수적으로 활용된다.
+            - 스트림 내에서 Predicate, Function, Consumer 등을 자연스럽게 연결해 데이터를 변환하고 처리
+            ```java
+            List<String> names = Arrays.asList("Tom", "Jerry", "Spike");
+            names.stream()
+                .filter(name -> name.startsWith("T"))   // Predicate
+                .map(String::toUpperCase)               // Function
+                .forEach(System.out::println);          // Consumer
+            ```
+    - 정리
+        - Functional Interface는 자바에서 람다 표현식을 활용하고 코드 간결성, 가독성, 함수형 프로그래밍 스타일을 지원하는 핵심 도구
+
 - Java의 JVM, JRE, JDK의 차이점은?
 - Compose에서 remember와 rememberSaveable의 차이점
 - Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
