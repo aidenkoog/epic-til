@@ -8265,6 +8265,30 @@ Organize concepts, features, types and Pros and Cons
         - JDK는 개발과 실행을 모두 가능하게 하는 종합 개발 Kit
 
 - Compose에서 remember와 rememberSaveable의 차이점
+    - 개념
+        - remember
+            - 컴포저블 함수가 Recomposition될 때 데이터를 유지하도록 해주는 함수
+            - 즉, 화면이 다시 그려져도 이전에 저장된 값을 그대로 유지 가능
+            - 예: val count = remember { mutableStateOf(0) }
+            - 액티비티가 종료되거나 프로세스가 죽거나 하면 기억한 값은 사라짐
+            - 이전 값은 메모리에 저장
+        - rememberSaveable
+            - remember의 기능 + 추가로 프로세스 종료/액티비티 재생성 시에도 데이터 유지를 지원하는 함수
+            - 내부적으로 SavedInstanceState를 이용해 데이터를 저장하고 복원
+            - val count = rememberSaveable { mutableStateOf(0) }
+            - 화면 전환이 발생해도 값 유지됨
+            - 이전 값은 SavedInstanceState에 저장
+
+    - 추가 주의사항
+        - rememberSaveable은 Serializable 하거나, 번들에 저장 가능한 타입(Int, String, Boolean 등)만 기본으로 저장 가능
+        - 복잡한 객체를 저장하려면 Saver를 커스터마이징 필수
+        ```kotlin
+        // MyCustomSaver -> Saver의 커스터마이징
+        val customObject = rememberSaveable(stateSaver = MyCustomSaver) { mutableStateOf(MyData()) }
+        ```
+    - 결론
+        - remember는 재구성 시 값을 유지하고, rememberSaveable은 재구성 + 화면 회전이나 프로세스 복구 시까지 값을 유지
+
 - Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
 - Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
 - Jetpack Compose의 상태 관리에서 State Hoisting 패턴을 활용하는 방법
