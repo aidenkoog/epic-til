@@ -8128,8 +8128,48 @@ Organize concepts, features, types and Pros and Cons
         - 스레드는 별도 작업을 실행하는 실행 흐름을 만듬
         - 핸들러는 특정 스레드에 작업을 예약하고 전달하는 역할
 
-- Java에서 WebSockets을 구현하는 방법은?
-- Java에서 메모리 정리(Garbage Collection) 최적화 방법은?
+- Java에서 메모리 정리(Garbage Collection) 최적화 방법
+    - Garbage Collection(GC) 개념
+        - 프로그램이 더 이상 사용하지 않는 객체를 자동으로 찾아서 메모리에서 해제하는 메커니즘
+        - 명시적으로 메모리를 해제하지 않고, JVM이 알아서 필요 없는 객체를 감지하고 회수
+        - GC가 비효율적이거나 과도하게 발생 시 앱 성능 저하, 지연(latency), OutOfMemoryError 등이 발생할 수 있음
+    - 메모리 정리(GC) 최적화 주요 방법
+        - ① 객체 생명주기 관리 철저히 하기
+            - 객체를 오래 참조하지 말고, 필요 없으면 참조를 끊어라 (null 할당).
+            - 특히 대용량 객체(List, Map, Set)는 작업 완료 후 clear() 해주는 습관.
+                - clear() -> null 초기화까지 진행
+        - ② 불필요한 객체 생성 줄이기
+            - 필요할 때만 객체를 생성하고, 가능한 재사용한다.
+            - 예: String은 new String("...") 대신 리터럴 "..." 사용.
+        - ③ 가비지 컬렉션 친화적인 자료구조 사용
+            - 큰 사이즈의 HashMap, ArrayList 등은 사용 후 반드시 clear.
+            - 필요한 경우 WeakReference, SoftReference 등 사용하여 GC가 회수할 수 있도록 설계.
+        - ④ 메모리 누수 패턴 제거
+            - 리스너(Listener), 콜백(Callback)을 등록했으면 반드시 해제(remove).
+            - 내부 클래스는 static으로 선언하여 외부 클래스 암시적 참조 방지.
+            - 쓰레드(Thread)나 타이머 작업 완료 후 참조 해제.
+        - ⑤ String, Collection 최적화
+            - 문자열 연결 시 + 대신 StringBuilder 또는 StringBuffer 사용.
+            ```java
+            StringBuilder sb = new StringBuilder();
+            sb.append("a").append("b").append("c");
+            ```
+            - 큰 컬렉션 초기 용량(capacity)을 예측 가능하면 미리 지정해서 리사이징 비용 절감
+                - List<String> list = new ArrayList<>(1000);
+        - ⑥ 객체 풀링(Object Pooling) (주의해서)
+            - 자주 생성되고 폐기되는 객체(Thread, Connection)를 풀(pool) 로 관리.
+            - 단, 오히려 관리 비용이 커질 수도 있으므로 정말 필요한 경우에만 적용 (ex: DB Connection Pool).
+        - ⑦ GC 튜닝 및 JVM 옵션 설정
+            - JVM GC 정책을 상황에 맞게 조정할 수 있다.
+            - 주요 GC 종류:
+                - Serial GC (단일 쓰레드, 작은 메모리용)
+                - Parallel GC (다중 쓰레드, Throughput 중시)
+                - G1 GC (Balanced, 대규모 메모리용)
+                - ZGC, Shenandoah (Low-latency, 초대형 시스템)
+        - ⑧ 메모리/GC 모니터링 도구 활용
+            - VisualVM, Java Flight Recorder(JFR), JConsole, Eclipse MAT 등을 통해
+            - Heap Dump 분석, GC 로그 분석, 메모리 사용량 모니터링을 주기적으로 수행한다.
+
 - Java에서 Functional Interface를 활용하는 방법은?
 - Java의 JVM, JRE, JDK의 차이점은?
 - Compose에서 remember와 rememberSaveable의 차이점
