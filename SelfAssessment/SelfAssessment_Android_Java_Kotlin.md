@@ -8225,7 +8225,45 @@ Organize concepts, features, types and Pros and Cons
     - 정리
         - Functional Interface는 자바에서 람다 표현식을 활용하고 코드 간결성, 가독성, 함수형 프로그래밍 스타일을 지원하는 핵심 도구
 
-- Java의 JVM, JRE, JDK의 차이점은?
+- Java의 JVM, JRE, JDK의 차이점
+    - 개념
+        - JVM(Java Virtual Machine)
+            - Java 바이트코드(.class 파일)를 실행하는 가상 머신
+            - Java 프로그램이 어떤 OS에서도 동작할 수 있게 해주는 핵심 역할을 담당한다.
+            - 주요 기능:
+                - 바이트코드 해석 및 실행
+                - 메모리 관리 (Heap, Stack, Method Area 등)
+                - 가비지 컬렉션 (Garbage Collection)
+                - 런타임 오류 감지
+                - 보안 및 플랫폼 독립성 제공
+            - 요약: Java 프로그램을 실행하는 "엔진"
+
+        - JRE(Java Runtime Environment)
+            - JVM + Java 라이브러리(API) + 실행 환경 파일 세트
+            - 즉, Java 애플리케이션을 실행할 수 있는 "준비된 환경"이다.
+            - JRE에는 Java 개발에 필요한 도구(컴파일러)는 포함되지 않고, 오직 실행에 필요한 것만 포함된다.
+            - 요약: Java 프로그램을 "실행만" 할 수 있게 해주는 환경
+
+        - JDK(Java Development Kit)
+            - JRE + 개발 도구(Compiler, Debugger, Javadoc, Keytool 등) 를 포함한 패키지
+            - Java 프로그램을 작성(개발)하고, 컴파일하고, 디버깅할 수 있는 전체 도구 세트다.
+            - 개발자는 JDK를 설치해서 소스코드를 작성하고 .class 파일을 만든다.
+            - 요약: Java 프로그램을 "개발하고 실행할 수 있게" 해주는 도구 모음
+
+    - 구조
+        - JDK > JRE > JVM 포함 관계
+        - 즉, JDK 설치 시 JRE와 JVM도 같이 포함되어 있음
+        ```markdown
+        JDK
+        └── JRE
+            └── JVM
+        ```
+
+    - 결론
+        - JVM은 실행 엔진
+        - JRE는 실행 환경
+        - JDK는 개발과 실행을 모두 가능하게 하는 종합 개발 Kit
+
 - Compose에서 remember와 rememberSaveable의 차이점
 - Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
 - Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
