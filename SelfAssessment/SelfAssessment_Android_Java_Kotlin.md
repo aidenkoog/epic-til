@@ -8770,8 +8770,83 @@ Organize concepts, features, types and Pros and Cons
         - Compose에서 UI 요소가 불필요하게 Recomposition된다면, 원인은 거의 항상 State 관리 문제 또는 입력 안정성 문제
         - 이를 구조적으로 해결 필요
 
+- Jetpack Compose의 CompositionLocal 개념과 사용 시점
+    - CompositionLocal 개념
+        - CompositionLocal은 컴포지션 트리(Composable 계층 구조) 안에서 데이터를 암묵적으로 공유할 수 있게 하는 메커니즘
+        - 일반적인 파라미터 전달(Composable 함수 → Composable 함수) 방식 대신, 중간 계층을 거치지 않고 필요한 곳에서 직접 값을 가져올 수 있다.
+        - 대표적으로 테마(Theme), 폰트 크기, 언어, 다크 모드 설정 등 "전역적이지만 상황에 따라 바뀔 수 있는 값" 을 공유할 때 사용한다.
+            - → 즉, "전역(Global)처럼 보이지만, 컴포지션 트리(Local)에 따라 변할 수 있는 데이터" 를 다룬다.
 
-- Jetpack Compose의 CompositionLocal이란 무엇이며, 언제 사용하는
+    - CompositionLocal 동작 방식
+        - CompositionLocalProvider를 통해 특정 Local 값을 컴포지션 트리의 하위로 주입(Inject)한다.
+        - 하위 Composable은 CompositionLocal.current를 통해 주입된 값을 참조한다.
+        - 트리 상위에 다른 Provider가 있으면 그 값을 따르고, 없으면 기본(Default) 값을 사용한다.
+        - 흐름:
+            - Provider에 값 설정 → 하위 컴포저블이 current로 읽기
+
+    - CompositionLocal 사용 방법
+        - (1) CompositionLocal 정의
+            ```kotlin
+            val LocalUserName = compositionLocalOf<String> { error("No username provided") }
+            ```
+            - 기본값 설정 (혹은 예외 던지기)
+
+        - (2) 값 제공하기 (Provider)
+            ```kotlin
+            CompositionLocalProvider(LocalUserName provides "Aiden") {
+                MyScreen()
+            }
+            ```
+            - MyScreen()과 그 하위는 LocalUserName을 사용할 수 있다.
+
+        - (3) 값 읽기
+            ```kotlin
+            @Composable
+            fun MyScreen() {
+                val userName = LocalUserName.current
+                Text(text = "Hello, $userName")
+            }
+            ```
+            - LocalUserName.current를 통해 현재 컨텍스트(Context)의 값을 읽는다.
+
+    - CompositionLocal의 특징
+        - 상위 Provider가 바뀌면 하위 모든 관련 Composable이 Recomposition된다.
+        - Scope(Local)이기 때문에, 다른 트리에서는 다른 값을 가질 수 있다.
+        - Nullable 값 관리를 조심해야 한다 (초기값을 적절히 설정하거나 null 처리 필요).
+
+    - CompositionLocal 사용 시점
+        - (1) 테마(Theme) 관리
+            - 색상, 폰트 스타일, 크기 등 테마 관련 데이터를 전역으로 주입할 때.
+            - 예: MaterialTheme은 내부적으로 CompositionLocal을 이용해 색상 팔레트, 타입 세트 등을 제공한다.
+            ```kotlin
+            val colors = lightColors()
+            MaterialTheme(colors = colors) {
+                // 여기서 colors를 암묵적으로 사용할 수 있다.
+            }
+            ```
+
+        - (2) 앱 설정(App Settings) 공유
+            - 다크 모드 여부, 언어(Locale) 설정, 접근성 설정 등을 전역으로 공유할 때.
+
+        - (3) 컨텍스트성 데이터(Context-like Data) 전달
+            - 로그인한 사용자 정보
+            - 지역화된 리소스
+            - 공통적으로 필요한 네트워크 상태, 기기 정보 등
+                - → 공통적으로 필요한 값이지만, 모든 Composable에 직접 파라미터로 넘기기 싫을 때
+
+        - (4) 뷰모델 또는 스코프 객체 전달
+            - 화면 단위로 Scope를 분리할 때
+            - 특정 컴포저블 하위 트리에서만 사용해야 하는 컨텍스트 데이터를 넘길 때
+
+        - (5) 커스텀 디자인 시스템 구축
+            - 프로젝트에서 자체 Theme 시스템이나 UI 컴포넌트 스타일링을 관리할 때
+            - 버튼, 카드, 다이얼로그 등의 스타일을 글로벌하게 주입하고 싶을 때
+
+    - 결론 요약
+        - CompositionLocal은 Compose 트리 내부에서 값을 전역처럼 암묵적으로 공유하는 방법
+        - 주로 테마, 앱 설정, 공통 데이터 관리에 사용되며, 컴포저블 간 데이터 전달을 단순화하고 유지보수를 쉽게 만듬
+        - 명시적 전달이 번거롭고, 글로벌하되 트리별로 다를 수 있는 값은 CompositionLocal로 관리 권장
+
 - Jetpack Compose에서 custom Modifier를 활용한 성능 최적화 방법
 - Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
 - Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
