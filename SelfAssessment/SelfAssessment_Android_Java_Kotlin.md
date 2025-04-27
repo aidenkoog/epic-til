@@ -8289,7 +8289,46 @@ Organize concepts, features, types and Pros and Cons
     - 결론
         - remember는 재구성 시 값을 유지하고, rememberSaveable은 재구성 + 화면 회전이나 프로세스 복구 시까지 값을 유지
 
-- Jetpack Compose의 Snapshot 시스템이 어떻게 상태를 관리하는
+- Jetpack Compose의 Snapshot 시스템과 상태 관리 방식
+    - Snapshot 시스템
+        - SnapShot은 컴포즈가 상태를 안전하고 효율적으로 관리하기 위해 사용하는 내부 메커니즘
+        - 일종의 메모리상의 상태 복사본이며, 여러 상태 변경을 일관성있게 적용하고,
+        - 동시에 여러 스레드가 상태를 안전하게 읽고 쓸 수 있게 만듬
+
+    - Snapshot 필요 이유
+        - Compose는 선언형 UI 패턴을 따르기 때문에, UI = 상태(State)의 함수로 간주
+        - 상태가 변하면 자동으로 UI가 다시 그려져야 (리컴포지션) 한다
+        - 이때,
+            - 여러 상태 변경이 동시에 일어나더라도,
+            - 비정합이나 충돌없이 정확하고 예측 가능한 방식으로 화면을 업데이트 해야 한다.
+        - 이를 위해 Compose는 Snapshot 시스템을 도입
+
+    - Snapshot 상태 관리 흐름
+        - ① 상태 읽기 (State Read)
+            - Compose 컴포저블이 remember { mutableStateOf(...) } 같은 상태를 읽으면,
+            - 현재 Snapshot의 상태를 읽는다.
+            - 읽은 상태에 의존하는 컴포저블은 자동으로 구독(Subscribe) 된다.
+
+        - ② 상태 변경 (State Write)
+            - 상태를 변경하면, 변경은 즉시 적용되는 게 아니라, 새로운 Snapshot에 기록(pending write) 된다.
+            - 변경은 "스냅샷 버전" 이 따로 관리되어, 나중에 일괄적으로 반영된다.
+            ```kotlin
+            var text by remember { mutableStateOf("Hello") }
+            text = "World"  // 실제로는 Snapshot이 pending write로 기록
+            ```
+
+        - ③ Snapshot Commit & Recomposition
+            - 한 번의 상태 변경이 끝나면, Compose는 Snapshot을 Commit(확정) 하고,
+            - 변경된 상태를 참조하는 컴포저블만 선택적으로 Recompose 한다.
+                - (참고) Commit: 변경사항 확정
+            - 필요한 부분만 다시 그리기(Fine-grained Recomposition)가 가능해진다.
+            - 전체 화면을 다시 그리지 않고, 변경된 UI만 똑똑하게 갱신하는 것이다.
+
+    - 추가 특성
+        - Atomicity (원자성): 여러 상태 변경이 한 번에 일괄 Commit 되어 일관성 유지.
+        - Isolation (격리성): 서로 다른 Snapshot끼리 독립적으로 상태를 읽고 변경 가능.
+        - Concurrency Support (동시성 지원): 멀티스레드 환경에서도 Snapshot Isolation 덕분에 안전하게 상태 관리 가능.
+
 - Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
 - Jetpack Compose의 상태 관리에서 State Hoisting 패턴을 활용하는 방법
 - Compose에서 derivedStateOf와 remember를 활용한 성능 최적화 방법
