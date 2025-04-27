@@ -8625,6 +8625,63 @@ Organize concepts, features, types and Pros and Cons
 
 
 - Jetpack Compose에서 key()를 사용하여 Recomposition을 최적화하는 방법
+    - key() 함수 개념
+        - Compose에서 특정 Composable 블록에 고유 식별자(Identity)를 부여하는 함수
+        - 이 식별자를 기반으로, Compose가 Recomposition(재구성) 시 "어떤 Composable을 유지할지, 다시 만들어야 할지" 를 판단하는 기준을 제공한다.
+        - 기본적으로 Compose는 컴포저블의 위치(Position)를 기준으로 구분하지만, 복잡한 리스트나 조건부 UI에서는 위치만으로는 정확히 판단할 수 없다.
+        - key()를 사용하면 개발자가 "이 블록은 이 ID를 가진다" 고 명시해주기 때문에, Compose가 더 똑똑하게 재구성을 최적화할 수 있다.
+            - 즉 원래 기본은 위치로 구분하나 복잡한 UI의 경우 정확한 판단 어려우므로 개발자가 명시적으로 ID 즉, key를 지정해줘야 성능에 좋다
+    
+    - key()를 사용해야 하는 상황
+        - 리스트(List)나 반복문 안에서 항목별로 고유한 구분이 필요할 때
+        - 조건부 분기(If/Else) 로 뷰가 동적으로 바뀌는 경우
+        - 항목 추가/삭제/순서 변경이 있을 때
+        - 복잡한 Composable에서 위치 기반 추론만으로 식별이 모호해질 때
+            - → 즉, "항상 같은 자리에 같은 내용이 있다는 보장이 없을 때" key()를 써야 한다.
+
+    - key() 사용법
+        - 기본 사용 예
+            ```kotlin
+            LazyColumn {
+                // items 함수 내 key 필드 셋팅
+                items(userList, key = { it.id }) { user ->
+                    UserItem(user)
+                }
+            }
+            ```
+            - key = {it.id}를 명시하면, 각 UserItem은 id를 기준으로 식별
+            - 사용자가 스크롤하거나, 리스트가 추가/삭제될 때 불필요한 Recomposition을 방지하고, 필요한 부분만 깔끔하게 업데이트
+        
+        - 명시적으로 key() 감싸기
+            ```kotlin
+            Column {
+                userList.forEach { user ->
+                    key(user.id) { // 직접 감싸기
+                        UserItem(user)
+                    }
+                }
+            }
+            ```
+            - forEach 같은 단순 반복문에서는 key()로 직접 감싸야 함
+            - 감싼 이후 user.id가 같은 항목은 컴포즈 노드를 재활용하고, id가 바뀐 항목만 다시 그린다.
+
+    - key()를 사용하지 않으면 생기는 문제
+        - 항목의 위치가 바뀌거나 추가/삭제될 때, Compose가 잘못된 항목을 재활용할 수 있다.
+        - 의도치 않은 UI 깜빡임, 리셋, 잘못된 State 매칭 문제가 발생할 수 있다.
+        - 리스트의 한 항목만 수정했는데도 전체가 불필요하게 Recomposition될 수 있다.
+        - 퍼포먼스 저하 및 사용자 경험 악화로 이어진다.
+
+    - key()를 제대로 사용했을 때 얻는 효과
+        - Recomposition 범위 최소화: 변경된 항목만 다시 그린다.
+        - State 보존: 항목 간 이동이 발생해도 내부 상태(예: 입력값)가 유지된다.
+        - 퍼포먼스 최적화: 리스트나 복잡한 UI 구조에서도 빠르고 부드러운 동작을 보장한다.
+        - 코드 안정성 향상: 예측 가능한 동작과 디버깅 용이성 증가.
+
+    - 결론
+        - key()는 Compose가 Composable을 정확하게 추적하고 최소한으로 Recomposition할 수 있도록 명확한 식별자를 제공하는 도구
+        - 리스트나 동적 UI에서 key()를 적절히 사용하면 성능과 안정성이 크게 향상
+        - 항상 같은 자리에 같은 내용을 보장할 수 없을 때는 key()로 식별자를 명확히 제공해야 함
+
 - Compose에서 UI 요소가 계속해서 Recomposition되는 문제를 해결하는 방법
 - Jetpack Compose의 CompositionLocal이란 무엇이며, 언제 사용하는
 - Jetpack Compose에서 custom Modifier를 활용한 성능 최적화 방법
