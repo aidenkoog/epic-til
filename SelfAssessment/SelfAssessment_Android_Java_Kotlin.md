@@ -8359,8 +8359,65 @@ Organize concepts, features, types and Pros and Cons
             - 뷰 풀을 유지하고 뷰 객체를 계속 재사용 -> RecyclerView
             - 메모리에 불필요한 컴포저블을 남기지 않고 필요할 때만 다시 컴포즈 -> LazyColumnn
 
-            
+
 - Jetpack Compose의 상태 관리에서 State Hoisting 패턴을 활용하는 방법
+    - State Hoisting 개념
+        - Composable 내부에서 직접 상태를 가지지 않고, 상태를 외부로 끌어올려 관리하는 패턴
+        - 상태를 컴포저블이 직접 들고 있지 않고, 상위 컴포저블이 소유하고,
+        - 하위 컴포저블은 상태를 받아서(display) + 수정 요청(callback)만 함
+
+    - 사용 이유
+        - 단방향 데이터 흐름: 데이터가 한 방향으로만 흐르게 해서 코드가 명확해짐 (상위 -> 하위)
+        - 재사용성 증가: 컴포저블을 다양한 상태에 대해 재사용할 수 있음
+        - 테스트 용이성: 하위 컴포저블이 순수하게 입력만 받아 렌더링하므로 테스트하기 쉬움
+        - 코드 구조 명확화: 상태 소유와 UI 역할을 분리
+
+    - 상태 호이스팅 기본 패턴
+        - 직접 상태를 가지는 나쁜 예
+            ```kotlin
+            @Composable
+            fun Counter() {
+                var count by remember { mutableStateOf(0) }
+
+                Button(onClick = { count++ }) {
+                    Text(text = "Clicked $count times")
+                }
+            }
+            ```
+            - Counter() 컴포저블이 상태를 직접 들고 있음 -> 재사용성, 확장성 감소
+
+        - 상태 호이스팅 적용한 예
+            - 외부(CounterScreen)에서 상태를 전달받고 수정 요청만 한다.
+            - 상위가 상태를 소유하고, 하위는 UI와 액션만 담당
+            ```kotlin
+            // 하위 컴포저블
+            @Composable
+            fun Counter(
+                count: Int,
+                onIncrement: () -> Unit
+            ) {
+                Button(onClick = onIncrement) {
+                    Text(text = "Clicked $count times")
+                }
+            }
+
+            // 상위 컴포저블
+            @Composable
+            fun CounterScreen() {
+                var count by rememberSaveable { mutableStateOf(0) }
+
+                Counter(
+                    count = count,
+                    onIncrement = { count++ }
+                )
+            }
+            ```
+    - 상태 호이스팅 구조가
+        - State Owner(상위)
+        - Stateless Composable(하위)
+        - Event Callback
+
+
 - Compose에서 derivedStateOf와 remember를 활용한 성능 최적화 방법
 - Jetpack Compose에서 State와 Event를 분리하는 이유
 - Jetpack Compose에서 key()를 사용하여 Recomposition을 최적화하는 방법
