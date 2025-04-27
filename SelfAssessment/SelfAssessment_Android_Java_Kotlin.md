@@ -8330,6 +8330,36 @@ Organize concepts, features, types and Pros and Cons
         - Concurrency Support (동시성 지원): 멀티스레드 환경에서도 Snapshot Isolation 덕분에 안전하게 상태 관리 가능.
 
 - Compose에서 LazyColumn과 RecyclerView의 내부 동작 차이점
+    - 기본 개념
+        - RecyclerView (Android View System)
+            - 기존 뷰 시스템에서 리스트를 효율적으로 표시하는 컨포넌트
+            - 뷰 객체를 재사용하여, 수천 개의 아이템을 메모리 낭비 없이 렌더링할 수 있음
+            - 직접 Adapter, ViewHolder, LayoutManager 등을 구현해서 리스트 구성
+            ```kotlin
+            recyclerView.adapter = MyAdapter()
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            ```
+
+        - LazyColumn (Jetpack Compose)
+            - Jetpack Compose의 선언형 UI 방식에서 리스트를 효율적으로 렌더링하는 컴포저블
+            - 이름처럼 필요할 때만 아이템을 컴포즈
+            - 별도의 아답터, 뷰홀더 구현 없이 컴포저블 함수를 통해 직접 UI 구성
+            ```kotlin
+            LazyColumn {
+                items(list) { item ->
+                    Text(text = item.name)
+                }
+            }
+            ```
+    - 내부 구조
+        - 렌더링 방식
+            - 미리 뷰객체를 생성하고 재사용 (뷰홀더 패턴) -> RecyclerView
+            - 필요한 순간에만 컴포저블을 호출하여 렌더링 -> LazyColumn
+        - 메모리 관리
+            - 뷰 풀을 유지하고 뷰 객체를 계속 재사용 -> RecyclerView
+            - 메모리에 불필요한 컴포저블을 남기지 않고 필요할 때만 다시 컴포즈 -> LazyColumnn
+
+            
 - Jetpack Compose의 상태 관리에서 State Hoisting 패턴을 활용하는 방법
 - Compose에서 derivedStateOf와 remember를 활용한 성능 최적화 방법
 - Jetpack Compose에서 State와 Event를 분리하는 이유
