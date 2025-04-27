@@ -8848,6 +8848,74 @@ Organize concepts, features, types and Pros and Cons
         - 명시적 전달이 번거롭고, 글로벌하되 트리별로 다를 수 있는 값은 CompositionLocal로 관리 권장
 
 - Jetpack Compose에서 custom Modifier를 활용한 성능 최적화 방법
+    - Custom Modifier 개념
+        - Modifier는 Compose에서 UI 요소(Composable)에 레이아웃, 그리기, 동작(Interaction) 을 추가하는 일종의 "데코레이터" 역할
+        - 기본 제공 Modifier(예: padding, background, clickable) 외에도, 필요에 따라 Custom Modifier를 직접 만들어서 복잡한 기능을 하나의 Modifier로 캡슐화할 수 있다.
+        - 특히, 자주 사용되는 조합이나 반복되는 패턴을 커스텀 Modifier로 묶으면, 코드 재사용성 뿐만 아니라 성능 최적화도 가능
+
+    - Custom Modifier를 통한 성능 최적화 핵심 전략
+        - (1) Modifier 조합 최소화
+            - 여러 Modifier를 체이닝(.으로 연결)하면 각각 별도의 노드를 추가하고 연산한다.
+            - Custom Modifier로 여러 기능을 하나로 묶으면, Compose 트리의 노드(Node) 수를 줄여 렌더링과 측정(Measure) 단계를 최적화할 수 있다.
+            - 별도 체이닝 없이 modifer.shadowAndBackground() 한 번에 적용
+            ```kotlin
+            fun Modifier.shadowAndBackground(): Modifier = 
+                this
+                    .shadow(8.dp, RoundedCornerShape(4.dp))
+                    .background(Color.White, RoundedCornerShape(4.dp))
+            ```
+
+        - (2) layout Modifier 직접 구현
+            - 단순히 padding, offset 같은 조작만 필요한 경우, Compose가 제공하는 기본 layout modifier를 조합하지 않고 직접 layout 함수를 구현하면, Measure, Layout, Draw 과정을 줄여 성능을 최적화 가능
+            - 직접 필요한 연산만 수행해서 오버헤드를 줄임
+            ```kotlin
+            fun Modifier.customOffset(x: Dp, y: Dp): Modifier = layout { measurable, constraints ->
+                val placeable = measurable.measure(constraints)
+                layout(placeable.width, placeable.height) {
+                    placeable.placeRelative(x.roundToPx(), y.roundToPx())
+                }
+            }
+            ```
+
+        - (3) drawBehind / drawWithContent 최적 활용
+            - 배경을 그리기 위해 불필요한 Box 래핑을 만들지 않고, Modifier에서 바로 drawBehind, drawWithContent를 사용하면 Compose 트리 깊이를 줄이고 성능을 높일 수 있다.
+            - 추가 레이아웃을 만들지 않고 바로 그리기(렌더링)
+            ```kotlin
+            fun Modifier.customUnderline(color: Color, thickness: Dp): Modifier =
+            this.drawBehind {
+                val y = size.height - thickness.toPx() / 2
+                drawLine(
+                    color = color,
+                    start = Offset(0f, y),
+                    end = Offset(size.width, y),
+                    strokeWidth = thickness.toPx()
+                )
+            }
+            ```
+
+        - (4) Modifier에 Stable 타입 사용
+            - Custom Modifier 내부에서 인자로 받는 값들은 @Stable, @Immutable 등을 붙여 불필요한 Recomposition을 막는다.
+            - Modifier 파라미터가 변경되지 않는 한 다시 그리지 않도록 한다
+
+        - (5) Modifier 순서 신경쓰기
+            - Modifier의 적용 순서에 따라 Layout → Draw → Interaction이 결정된다.
+            - 성능 최적화를 위해서는 layout 관련 Modifier를 먼저, draw 관련 Modifier를 나중에 붙여야 한다.
+            - 잘못된 순서로 Modifier를 적용하면 불필요한 layout pass나 draw pass가 추가될 수 있다.
+            - layout -> draw -> interaction 순서 권장
+            ```kotlin
+            modifier
+                .padding(8.dp)          // Layout
+                .background(Color.Red)  // Draw
+                .clickable { }          // Interaction
+            ```
+
+    - Custom Modifier 사용 시 주의사항
+        - 너무 많은 기능을 하나의 Custom Modifier에 넣지 않는다.
+            - → 관리가 어려워지고 디버깅이 힘들어진다.
+        - 진짜 성능 병목이 있는 부분에만 직접 layout이나 drawBehind를 구현한다.
+            - → 과도한 최적화는 오히려 복잡성만 높인다.
+        - Modifier를 만들어 쓸 때는 Stable, Immutable 데이터를 우선적으로 고려한다.
+
 - Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
 - Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
 - Compose에서 LazyColumn의 성능을 최적화하는 방법
