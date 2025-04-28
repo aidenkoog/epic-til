@@ -10265,9 +10265,42 @@ Organize concepts, features, types and Pros and Cons
         - Android Keystore는 "키를 안전하게 보호하고, 앱 외부나 메모리에 노출 없이 암호화/복호화 기능을 제공"하는 것을 주 목적으로 사용한다. 
         - 특히 금융, 인증, 민감 정보 처리가 필요한 앱에서 필수적으로 활용된다.
 
-- Proguard / R8 설정에서 -keepclassmembers 옵션은 무엇을 의미하는가?
-- Dynamic Feature Module을 사용하면 앱 배포 및 설치 시 어떤 이점이 생기는가?
-- LazyColumn을 최적화할 때 주의해야 할 점은 무엇인가?
+- Proguard / R8 설정에서 -keepclassmembers 옵션
+    - 기본 개념
+        - -keepclassmembers는 클래스 전체를 유지하는 것이 아니라, 특정 멤버(필드나 메서드)만 난독화/제거하지 않고 보존하는 옵션이다.
+        - 클래스 자체는 최적화나 난독화 대상이 될 수 있지만, 지정된 멤버는 반드시 유지된다.
+
+    - 주요 사용 목적
+        - 리플렉션(Reflection) 사용하는 경우 필드나 메서드 이름이 필요할 때 보존.
+        - 직렬화/역직렬화(Serialization/Deserialization) 프레임워크 (예: Gson, Moshi)에서 필드 이름이 런타임에 참조될 때 필수.
+        - 라이브러리 API에서 명시적으로 노출해야 하는 필드나 메서드만 선택적으로 유지할 때 유용
+
+    - 기본 사용 예시
+        ```proguard
+        -keepclassmembers class com.example.model.** {
+            <fields>;
+        }
+        ```
+        - com.example.model 패키지 하위의 모든 클래스에서 필드만 보존하고 나머지는 최적화 가능.
+
+        ```proguard
+        -keepclassmembers class * {
+            @com.google.gson.annotations.SerializedName <fields>;
+        }
+        ```
+        - @SerializedName 애노테이션이 붙은 필드만 유지.
+
+    - 주의사항
+        - -keepclassmembers는 클래스를 유지하지 않는다는 점 주의해야 함.
+        - 만약 클래스가 삭제될 위험이 있다면 -keep이나 -keepclasseswithmembers와 조합 사용해야 함.
+
+    - 요약
+        - -keepclassmembers는 클래스는 최적화 대상이 되더라도 특정 필드/메서드만 안전하게 보존하고 싶을 때 사용
+        - 리플렉션 기반 라이브러리나 직렬화 처리 시 필수 설정이 된다.
+
+- Dynamic Feature Module을 사용할 시 앱 배포 및 설치 시 장점
+
+- LazyColumn을 최적화할 때 주의해야 할 점
 - recomposition을 방지하기 위해 derivedStateOf는 어떤 원리로 동작하는가?
 - LaunchedEffect와 rememberUpdatedState를 조합해야 하는 상황은 어떤 경우인가?
 - Modifier.recomposeHighlighter()를 사용하면 어떤 이점을 얻을 수 있는가?
