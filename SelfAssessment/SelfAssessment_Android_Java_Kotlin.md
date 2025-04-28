@@ -10335,7 +10335,73 @@ Organize concepts, features, types and Pros and Cons
 
 
 - LazyColumn을 최적화할 때 주의해야 할 점
-- recomposition을 방지하기 위해 derivedStateOf는 어떤 원리로 동작하는가?
+    - 아이템 키(key) 지정
+        - key를 명시하지 않으면, Compose는 position 기준으로 아이템을 구분함.
+        - 데이터 변경 시 스크롤 위치나 상태가 깨질 수 있음.
+        - 해결: items나 item에서 key를 명시해서 데이터 아이덴티티를 기준으로 관리.
+            ```kotlin
+            LazyColumn {
+                items(items = list, key = { it.id }) { item ->
+                    Text(item.name)
+                }
+            }
+            ```
+    - 불필요한 recomposition 방지
+        - 리스트 내 아이템이 자주 업데이트되면 전체 리스트가 재구성될 수 있음.
+        - 개별 아이템이 변경되지 않는다면 Stable 데이터를 사용하거나, remember 등을 활용해 변화 감지 최소화.
+        - 데이터 클래스에는 @Immutable 어노테이션을 붙여 immutability를 보장하는 것도 방법.
+
+    - Layout 측정 최적화
+        - Modifier.fillMaxWidth() 같은 명시적 크기 설정을 사용하여, Compose가 측정 비용을 줄일 수 있게 돕는다.
+        - 크기를 명확히 주지 않으면 매번 측정이 재수행될 가능성이 높아짐.
+
+    - 간결한 Item UI 구성
+        - LazyColumn 아이템 안에서는 복잡한 로직이나, 무거운 연산(예: bitmap decode, heavy composable)을 직접 넣지 않는다.
+        - 가능한 별도의 Composable 함수로 분리하고, 최적화된 상태로 호출한다.
+
+    - Nested Scrolling 문제 주의
+        - LazyColumn 안에 또 다른 Scrollable 컴포넌트가 있으면 성능 저하나 충돌이 발생할 수 있음.
+        - 이 경우 nestedScroll 처리나 스크롤 상호작용 조정이 필요하다.
+
+    - 요약
+        - LazyColumn 최적화 핵심은 "key를 명시하고, 데이터 변경 범위를 최소화하며, 측정/계산을 가볍게 유지하는 것"
+
+- recomposition을 방지하기 위해 derivedStateOf의 동작 원리
+    - 기본 개념
+        - derivedStateOf는 State를 기반으로 계산된 새로운 State를 만들되, 실제로 값이 변할 때만 recomposition을 발생시키는 고급 기능이다.
+        - 관찰하고 있는 입력 State 값이 변할 때만 재평가된다.
+
+    - 동작 흐름
+        - (1) 초기 계산
+            - derivedStateOf { } 블록 안에서 값을 한 번 계산함.
+        - (2) 입력 State 추적
+            - 블록 안에서 참조하는 State를 자동으로 추적한다.
+        - (3) 입력 State 변화 감지
+            - 참조 중인 State 값이 변하지 않으면, derivedStateOf는 다시 계산하거나 recomposition을 트리거하지 않음.
+            - 참조된 State가 변하면, 블록을 다시 실행하여 새로운 값을 계산함.
+        - (4) Recomposition 최소화
+            - derivedStateOf로 래핑된 값만 바뀌어야 recomposition이 발생한다.
+            - 값이 같으면 Compose는 UI를 다시 그리지 않음.
+    - 사용 예시
+        ```kotlin
+        val searchText by remember { mutableStateOf("") }
+        val filteredList by remember(searchText) {
+            derivedStateOf {
+                fullList.filter { it.contains(searchText, ignoreCase = true) }
+            }
+        }
+        ```
+        - searchText가 바뀔 때만 filteredList가 재계산된다.
+        - fullList는 고정되어 있다면 recomposition을 유발하지 않는다.
+
+    - 주의사항
+        - derivedStateOf는 메모리상 캐시처럼 작동하지만, 너무 복잡한 계산을 넣으면 오히려 관리 부담이 생길 수 있다.
+        - 불필요하게 많이 중첩해서 사용하지 말고, 진짜 "비용이 크거나, 변화 감지를 최적화할 필요가 있는" 계산에만 사용하는 것이 좋다.
+
+    - 요약
+        - derivedStateOf는 "State 기반 연산을 최적화해서, 필요할 때만 recomposition을 발생시키는 스마트한 캐시" 개념이다.
+        - 주로 필터링, 정렬, 값 계산 최적화 같은 곳에 사용된다.
+
 - LaunchedEffect와 rememberUpdatedState를 조합해야 하는 상황은 어떤 경우인가?
 - Modifier.recomposeHighlighter()를 사용하면 어떤 이점을 얻을 수 있는가?
 - Compose Navigation에서 ViewModel을 안전하게 공유하려면 어떻게 해야 하는가?
