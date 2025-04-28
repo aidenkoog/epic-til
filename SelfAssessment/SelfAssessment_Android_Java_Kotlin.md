@@ -10023,8 +10023,90 @@ Organize concepts, features, types and Pros and Cons
         - derivedStateOf: 다른 State에 의존하는 계산된 값을 캐싱할 때 사용한다.
         - 변화가 있을 때만 recomposition을 유발하여 성능 최적화에 효과적이다.
 
-- LaunchedEffect와 rememberCoroutineScope의 차이를 설명하라.
-- onTrimMemory()는 어떤 상황에서 호출되는가? 주요 레벨 중 하나를 예로 들어 설명하라.
+- LaunchedEffect와 rememberCoroutineScope의 차이
+    - LaunchedEffect
+        - 컴포저블의 생명주기(Lifecycle)에 종속된 Coroutine을 실행한다.
+        - 키(key)가 바뀌면, 기존 Coroutine을 취소하고 새로운 Coroutine을 재실행한다.
+            ```kotlin
+            LaunchedEffect(key1) {
+                // key1이 바뀔 때마다 이 블록이 재실행됨
+                doSomething()
+            }
+            ```
+        - 특징
+            - 컴포저블이 Composition에 들어갈 때 실행된다.
+            - 컴포저블이 Composition에서 제거될 때 Coroutine도 자동 취소된다.
+            - 키가 변경되면 기존 Coroutine을 취소하고 새로운 작업을 시작한다.
+            - 주로 Side Effect (예: 네트워크 요청, 애니메이션 트리거 등)에 사용한다.
+
+    - rememberCoroutineScope
+        - 컴포저블에 수명(Lifecycle)을 묶은 CoroutineScope를 생성해준다.
+        - 코드를 직접 명령형으로 실행하고 싶을 때 사용한다.
+        - Scope는 컴포저블이 Composition에서 사라질 때 자동으로 cancel된다.
+            ```kotlin
+            val coroutineScope = rememberCoroutineScope()
+            Button(onClick = {
+                coroutineScope.launch {
+                    doSomething()
+                }
+            }) {
+                Text("Click Me")
+            }
+            ```
+        - 특징
+            - Coroutine이 명시적으로 launch될 때만 실행된다.
+            - 컴포저블이 살아있는 한 Scope는 유지된다.
+            - 주로 버튼 클릭, 사용자 인터랙션 등 명령형 이벤트 처리에 사용한다.
+
+
+- onTrimMemory()는 어떤 상황에서 호출되고 주요 레벨 중 몇가지를 예로 들어 설명
+    - onTrimMemory()
+        - 시스템 메모리가 부족할 때 앱에 메모리를 줄이라고 신호를 보내는 콜백 메서드다.
+        - Activity, Service, ContentProvider 등이 이 메서드를 구현할 수 있다.
+        ```kotlin
+        override fun onTrimMemory(level: Int) {
+            when (level) {
+                ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW -> {
+                    // 메모리가 부족하니 캐시 줄이기
+                }
+                ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN -> {
+                    // 앱 UI가 완전히 숨겨졌으니 리소스 정리
+                }
+            }
+        }
+        ```
+
+    - 주요 호출 상황
+        - 백그라운드 앱이 많거나,
+        - 포그라운드 앱이 메모리를 많이 사용할 때,
+        - OS가 프로세스를 정리해야 할 때 호출된다.
+
+    - 주요 레벨 예시
+        - (1) TRIM_MEMORY_RUNNING_MODERATE
+            - 시스템이 메모리 부족을 감지했지만, 심각한 수준은 아님.
+            - 앱은 필요 없는 리소스를 조금 줄이면 된다.
+
+        - (2) TRIM_MEMORY_RUNNING_LOW
+            - 시스템 메모리가 심각하게 부족한 상태.
+            - 앱은 가능한 많은 리소스를 해제해야 한다.
+
+        - (3) TRIM_MEMORY_UI_HIDDEN
+            - 앱의 UI가 완전히 사용자 눈에 보이지 않는 상태가 됨. (ex: 앱이 백그라운드로 전환)
+            - 이때는 UI 관련 리소스(이미지, 뷰 캐시 등)를 해제해 메모리를 절약할 수 있다.
+
+        - (4) TRIM_MEMORY_COMPLETE
+            - 시스템이 메모리 확보를 위해 앱 프로세스를 강제 종료할 수도 있는 심각한 수준.
+            - 앱은 최대한 빨리 메모리를 해제해야 한다.
+
+    - 정리
+        - LaunchedEffect: 
+            - 자동 실행, 키 변화에 따라 재시작 → Side Effect 작업에 적합.
+        - rememberCoroutineScope: 
+            - 수동 실행, 명령형 이벤트 대응 → 클릭/입력 등 트리거 작업에 적합.
+        - onTrimMemory():
+            - 시스템 메모리 부족 시 호출,
+            - 레벨에 따라 리소스 정리 정도를 조절해야 한다. (예: UI 숨김, 메모리 심각 부족 등)
+
 - Foreground Service를 정상적으로 실행하기 위해 Android 8.0 이상에서 추가로 필요한 작업은 무엇인가?
 - JobScheduler와 WorkManager를 비교할 때, API 23 이상에서 WorkManager를 선호하는 이유는 무엇인가?
 - Memory Leak을 방지하기 위해 Fragment에서 ViewBinding을 사용할 때 주의해야 할 점은 무엇인가?
