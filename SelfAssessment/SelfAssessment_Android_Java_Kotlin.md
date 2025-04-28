@@ -8916,45 +8916,1113 @@ Organize concepts, features, types and Pros and Cons
             - → 과도한 최적화는 오히려 복잡성만 높인다.
         - Modifier를 만들어 쓸 때는 Stable, Immutable 데이터를 우선적으로 고려한다.
 
-- 액티비티가 다른 액티비티에 의해 가려질 때 호출되는 메서드는 무엇인가?
-- 앱이 완전히 종료될 때 호출되는 생명주기 메서드는 무엇인가?
-- onSaveInstanceState()와 onRestoreInstanceState()의 차이를 설명하라.
-- 프래그먼트에서 onAttach()와 onCreateView()는 각각 언제 호출되는가?
-- RecyclerView와 ListView의 핵심 차이를 설명하라.
-- Jetpack Compose에서 rememberSaveable과 remember의 차이는 무엇인가?
-- ConstraintLayout을 사용하는 주요 이점은 무엇인가?
-- ViewBinding과 DataBinding의 차이점을 설명하라.
-- 안드로이드에서 긴 작업을 수행할 때 UI 스레드가 차단되지 않게 하려면 어떤 방법을 사용해야 하는가?
-- WorkManager와 AlarmManager의 차이점은 무엇인가?
-- 코루틴에서 Dispatchers.Main, Dispatchers.IO의 차이는 무엇인가?
-- Explicit Intent와 Implicit Intent의 차이를 설명하라.
-- Activity 간 데이터를 전달하는 가장 일반적인 방법은 무엇인가?
-- BroadcastReceiver는 어떤 상황에서 사용해야 하는가?
-- SharedPreferences는 어떤 용도로 사용하는가?
-- Room 데이터베이스에서 DAO는 어떤 역할을 하는가?
-- SQLiteOpenHelper를 사용할 때 onUpgrade()는 언제 호출되는가?
-- Android 6.0 (Marshmallow) 이후 퍼미션을 처리하는 방법은?
-- ContentProvider의 주요 목적은 무엇인가?
-- 앱의 민감한 데이터를 저장할 때 권장되는 방법은 무엇인가?
-- Android에서 메모리 누수(Memory Leak)가 발생하는 가장 흔한 예를 하나 들고, 이를 방지하는 방법을 설명하라.
-- ViewHolder 패턴을 사용하는 이유는 무엇인가?
-- Bitmap을 효율적으로 로드할 때 주의해야 할 점은?
-- AndroidManifest.xml에서 필수적으로 정의해야 하는 두 가지는 무엇인가?
-- Jetpack Navigation Component를 사용하는 주요 이점은 무엇인가?
-- 프로가드(ProGuard) 설정은 주로 어떤 목적으로 사용하는가?
-- 액티비티가 onStop() 상태에 있다가 다시 사용자에게 표시되면 호출되는 메서드는 무엇인가?
-- 프래그먼트가 재사용될 때 onCreateView()는 항상 호출되는가? 그 이유는 무엇인가?
-- ViewModel은 어떤 생명주기를 기준으로 메모리에서 제거되는가?
-- SavedStateHandle은 어떤 상황에서 유용하게 사용되는가?
-- CoroutineScope를 액티비티에서 사용할 때 취소(Cancel)를 반드시 해줘야 하는 이유는 무엇인가?
-- viewModelScope와 lifecycleScope의 주요 차이는 무엇인가?
-- suspend 키워드를 함수에 붙였을 때 해당 함수는 어떻게 동작하는가?
-- SupervisorJob을 사용하는 주요 이유는 무엇인가?
-- Retrofit에서 suspend 함수를 사용하는 것과 콜백 기반 함수를 사용하는 것의 차이는 무엇인가?
-- OkHttp Interceptor를 사용하는 주요 목적은 무엇인가?
-- 서버 통신 중 발생할 수 있는 TimeoutException을 안전하게 처리하는 코루틴 패턴은 무엇인가?
-- Jetpack Compose에서 recomposition을 피하기 위해 어떤 최적화 기법을 사용할 수 있는가?
-- derivedStateOf는 어떤 상황에서 사용하는 것이 적합한가?
+- 액티비티가 다른 액티비티에 의해 가려질 때 호출되는 메서드
+    - 호출되는 메서드
+        - onPause()
+            - 현재 액티비티는 화면에 보이지 않거나 일부만 보이는 상태로 전환된다.
+            - "다른 액티비티가 앞으로 나타날 때" 가장 먼저 호출된다.
+            - CPU 리소스를 덜 소모하도록 처리하거나, 애니메이션/센서 업데이트를 멈추는 등의 작업을 수행하는 곳이다.
+
+        - 주의할 점
+            - 이때는 아직 완전히 소멸(onStop())한 것이 아니다.
+            - 반투명 액티비티(예: 다이얼로그 테마 Activity)가 뜨는 경우에도 onPause()만 호출되고 onStop()은 호출되지 않을 수 있다.
+
+- 앱이 완전히 종료될 때 호출되는 생명주기 메서드
+    - 호출되는 생명주기 메서드
+        - onDestroy()
+            - 액티비티가 완전히 종료될 때 호출된다.
+            - 사용자가 "뒤로 가기"를 눌러 종료하거나, 시스템이 메모리 회수 등을 위해 액티비티를 제거할 때 호출된다.
+    - 앱 전체 종료 관점에서는
+        - 안드로이드 시스템에는 "앱 종료"라는 개념이 명확하지 않다. 
+        - 모든 액티비티가 소멸되어야 사실상 앱이 종료된 것으로 간주한다.
+        - 각각의 액티비티들은 소멸될 때 개별적으로 onDestroy()가 호출된다.
+    - 주의할 점
+        - 강제 종료(killProcess 등)나 비정상 종료(OOM 등) 상황에서는 onDestroy()가 호출되지 않을 수 있다.
+        - 따라서 onDestroy에 중요한 저장작업만 의존하는 것은 위험하다. 필요한 경우 onPause()나 onStop() 단계에서도 데이터를 저장하는 것이 안전하다.
+
+- onSaveInstanceState()와 onRestoreInstanceState()의 차이
+    - onSaveInstanceState()
+        - 호출 시점
+            - 액티비티나 프래그먼트가 일시적으로 소멸될 가능성이 있을 때 (ex: 화면 회전, 백그라운드 이동 후 시스템에 의해 종료될 때) 호출된다.
+            - onSaveInstanceState() -> onPause() -> onStop()
+        - 작업 내용
+            - 현재 UI 상태나 임시 데이터를 Bundle 객체에 저장한다.
+            - 사용자가 보고 있던 상태를 보존하기 위한 목적.
+        - 특징
+            - 반드시 호출되지는 않는다. 시스템이 결정한다.
+            - 매우 빠르게 실행되어야 한다. 무거운 작업 금지.
+
+    - onRestoreInstanceState()
+        - 호출 시점
+            - 액티비티가 onStart() 직후,
+            - 프래그먼트가 onViewStateRestored()나 onActivityCreated() 직후에 호출된다.
+            - onCreate()에서도 Bundle이 전달되지만, onRestoreInstanceState()는 onStart 이후 UI가 모두 준비된 상태에서 추가로 복원할 수 있게 도와준다.
+        - 작업 내용
+            - onSaveInstanceState()에 저장했던 데이터로 UI 상태를 복원한다.
+            - 주로 View나 입력값 등 사용자 인터랙션 관련 데이터를 복원.
+        - 특징
+            - onCreate() 때 복원할 수도 있지만, UI가 다 만들어진 이후 복원할 작업이 있다면 여기서 처리하는 게 좋다.
+
+- 프래그먼트에서 onAttach()와 onCreateView() 호출 시점
+    - onAttach()
+        - 호출 시점
+            - 프래그먼트가 호스트 액티비티에 처음 연결될 때 호출된다.
+            - Fragment 객체가 Context (Activity) 와 연결되는 최초 시점.
+        - 작업 내용
+            - Context를 활용해야 하는 초기 설정을 수행할 수 있다.
+            - 예를 들어, 액티비티에 대한 참조를 저장하거나 콜백 인터페이스를 연결할 수 있다.
+        - 특징
+            - 아직 View는 존재하지 않는다. (UI 생성 전 단계)
+
+    - onCreateView()
+        - 호출 시점
+            - 프래그먼트의 UI를 처음 생성할 때 호출된다.
+            - onAttach()와 onCreate()가 끝난 후 호출된다.
+        - 작업 내용
+            - XML 레이아웃을 inflate 해서 화면에 보여질 View를 반환한다.
+            - 프래그먼트의 실질적인 UI 구성을 담당하는 메서드.
+        - 특징
+            - 이 메서드에서 직접 findViewById() 등을 통해 View를 다룰 수 있다.
+
+    - 간단 요약 흐름
+        - onAttach() — "호스트 액티비티에 연결됨 (Context 연결)"
+        - onCreate() — "초기 데이터 준비"
+        - onCreateView() — "UI(View) 생성"
+
+- RecyclerView와 ListView의 핵심 차이
+    - RecyclerView
+        - 유연성과 확장성이 뛰어남.
+        - ViewHolder 패턴을 강제하여 스크롤 성능을 최적화.
+        - 다양한 레이아웃 지원 (LinearLayoutManager, GridLayoutManager,StaggeredGridLayoutManager 등).
+        - 아이템 추가/삭제/갱신을 효율적으로 처리 (notifyItemInserted, notifyItemRemoved 등 세밀한 제어 가능).
+        - ItemAnimator, ItemDecoration 등 커스터마이징이 용이.
+        - RecyclerView.Adapter를 반드시 직접 구현해야 함.
+
+    - ListView
+        - 사용이 간단하지만 확장성과 유연성이 떨어짐.
+        - ViewHolder 패턴을 권장사항으로만 제공 (강제 아님 → 퍼포먼스 저하 가능성).
+        - 기본적으로 수직 스크롤만 지원.
+        - 아이템 변경 시 전체 갱신 (notifyDataSetChanged만 있음 → 성능 저하 우려).
+        - 꾸미기나 애니메이션 추가가 번거롭고 제한적.
+
+    - 결론
+        - 새로운 앱 개발에서는 RecyclerView가 사실상 표준이다.
+        - ListView는 과거의 단순 리스트 표시 용도로 사용되었으나, 현재는 권장되지 않는다.
+
+- Jetpack Compose에서 rememberSaveable과 remember의 차이
+    - remember
+        - 컴포저블이 재구성(recomposition)될 때만 유지되는 상태를 저장한다.
+        - 앱이 프로세스 종료(예: 백그라운드 이동 중 강제 종료)되거나, 화면 회전(구성 변경, Configuration Change)이 발생하면 값이 사라진다.
+        - 매우 빠르지만, 수명(lifecycle)이 짧다.
+
+    - rememberSaveable
+        - remember + 저장(Bundle 기반) 기능을 함께 가진다.
+        - 프로세스 종료나 화면 회전(구성 변경) 시에도 값을 자동으로 복구한다.
+        - 내부적으로 SavedStateHandle처럼 동작하며, 저장 가능한 타입(Primitive, Serializable, Parcelable 등)만 가능하다.
+        - 추가로 custom Saver를 구현하면 복잡한 객체도 저장할 수 있다.
+
+    - 간단 요약
+        - remember: 단순 재구성 유지용, 일시적 상태 저장.
+        - rememberSaveable: 구성 변경(회전 등)과 프로세스 종료에도 복구 가능한 영구적 상태 저장.
+
+- ConstraintLayout을 사용하는 주요 이점
+    - 유연한 UI 구성
+        - 복잡한 레이아웃을 한 번에 하나의 레이아웃 트리로 작성할 수 있다.
+        - 중첩된 LinearLayout, RelativeLayout 없이도 다양한 위치 배치가 가능하다.
+
+    - 퍼포먼스 최적화
+        - 레이아웃 트리가 얕아져서 계층 구조가 단순화된다.
+        - 중첩 레이아웃을 줄이면 Measure → Layout → Draw 과정이 빨라진다.
+
+    - 직관적이고 강력한 제약 시스템
+        - View들 간에 관계(Constraint) 로 배치하므로 복잡한 정렬과 비율 조정이 쉬워진다.
+        - Guideline, Barrier, Group 등을 활용하여 유동적인 레이아웃 구성이 가능하다.
+
+    - 디자이너 친화적
+        - Android Studio의 ConstraintLayout Editor(시각적 에디터)를 통해 드래그 앤 드랍으로 직관적으로 UI를 설계할 수 있다.
+
+    - 기타 장점
+        - 체인(Chain), 가중치(Weight), 비율 설정 등을 이용해 복잡한 반응형 디자인도 쉽게 구현 가능하다.
+
+- ViewBinding과 DataBinding의 차이점
+    - ViewBinding
+        - 자동으로 View에 대한 타입 안전한 참조를 생성해준다.
+        - findViewById() 호출 없이 XML에 선언된 모든 View에 접근할 수 있다.
+        - UI와 데이터의 연결은 직접 수동으로 해야 한다.
+        - 단순하고 빠르며, 성능 오버헤드가 거의 없다.
+        - 런타임 시 오류를 줄이고 컴파일 타임에서 오류를 잡을 수 있다.
+
+    - DataBinding
+        - UI와 데이터를 직접 연결(bind) 할 수 있다.
+        - XML 파일 안에서 변수, 식(Expression), LiveData 관찰 등을 선언할 수 있다.
+        - @BindingAdapter 등을 통해 커스텀 바인딩 로직도 정의 가능하다.
+        - 복잡한 양방향 바인딩(@={}) 지원으로 MVVM 아키텍처에 적합하다.
+        - 다만 컴파일 시간이 길어지고, 초기 설정이 ViewBinding보다 복잡할 수 있다.
+
+    - 간단 요약
+        - ViewBinding: View 참조만 쉽게 하자. (빠르고 가벼움)
+        - DataBinding: UI와 데이터까지 직접 연결하자. (MVVM에 적합, 더 무겁고 복잡)
+
+- 안드로이드에서 긴 작업을 수행할 때 UI 스레드가 차단되지 않게 하기 위한 방법
+    - 원칙
+        - UI 스레드(Main Thread) 는 반드시 가볍고 빠르게 유지해야 한다.
+        - 긴 작업(네트워크 통신, 파일 I/O, 디코딩 등)은 반드시 백그라운드 스레드에서 처리해야 한다.
+
+    - 주요 방법
+        - (1) Kotlin Coroutines
+            - Dispatchers.IO, Dispatchers.Default 등을 사용하여 비동기 작업 수행.
+            - 가볍고 코드를 직관적으로 작성할 수 있어 현대 안드로이드 개발의 표준.
+        - (2) Thread + Handler
+            - 전통적인 방법.
+            - 별도의 Thread를 생성하고, 결과를 Handler로 메인스레드에 전달.
+            - 직접 스레드를 관리해야 하므로 비교적 번거롭다.
+        - (3) AsyncTask (Deprecated)
+            - 과거에 UI-Thread와 백그라운드 스레드 작업을 쉽게 연결하려고 만든 클래스.
+            - 현재는 권장되지 않고 Coroutine이나 WorkManager를 사용하는 것이 좋다.
+        - (4) WorkManager
+            - 장시간 실행이 필요한 작업(특히 앱이 종료돼도 보장되어야 하는 작업)을 백그라운드로 예약.
+            - 주로 서버 동기화, 파일 업로드 같은 작업에 적합.
+
+- WorkManager와 AlarmManager의 차이점
+    - WorkManager
+        - 장시간 작업을 안정적으로 예약하고 실행한다.
+        - 앱이 꺼져도, 기기가 재부팅돼도 작업이 유지된다.
+        - 네트워크 연결 여부, 충전 상태 같은 조건부 실행 제어가 가능하다.
+        - 내부적으로 상황에 따라 JobScheduler, FirebaseJobDispatcher, AlarmManager 등을 적절히 조합해서 사용한다.
+        - 주로 신뢰성이 중요한 백그라운드 작업(예: 서버 업로드, 데이터 동기화)에 사용.
+
+    - AlarmManager
+        - 특정 시간에 알람을 발생시킨다.
+        - 시간이 되면 앱이 실행 중이든 아니든 PendingIntent를 통해 알람을 발생시킨다.
+        - 단순히 알람만 울릴 뿐, 작업 완료 보장이나 상태 체크는 스스로 관리해야 한다.
+        - 주로 시간 기반 트리거(예: 특정 시간에 알림 표시, 예약 동작 실행 등)에 사용.
+
+    - 간단 요약
+        - WorkManager: 조건 기반, 작업 성공 보장, 백그라운드 장시간 신뢰성 작업.
+        - AlarmManager: 시간 트리거 기반 알람 발생, 이후 작업은 개발자가 알아서 관리.
+
+- 코루틴에서 Dispatchers.Main, Dispatchers.IO, Dispatchers.Default의 차이
+    - Dispatchers.Main
+        - UI 스레드(Main Thread) 에서 코루틴을 실행한다.
+        - UI 갱신, 사용자 입력 처리와 같은 작업을 수행할 때 사용.
+        - 무거운 연산이나 블로킹 작업을 하면 절대 안 된다.
+
+    - Dispatchers.IO
+        - I/O 작업(네트워크 요청, 파일 읽기/쓰기, 데이터베이스 쿼리 등)을 위한 최적화된 스레드 풀을 사용한다.
+        - 다수의 I/O 요청을 효율적으로 처리할 수 있게 설계되어 있다.
+        - I/O 작업은 CPU를 많이 소모하지 않기 때문에 스레드를 많이 만들어도 부담이 적다.
+
+    - Dispatchers.Default
+        - CPU 집약적 작업(복잡한 계산, 데이터 처리, 대규모 리스트 정렬 등)을 위한 스레드 풀을 사용한다.
+        - 내부적으로 기기 CPU 코어 수에 맞춰 스레드 수를 최적화한다.
+        - 무거운 연산을 병렬로 처리할 때 적합하다.
+
+    - Dispatchers.Unconfined
+        - 개념
+            - 특정 스레드에 묶이지 않고 코루틴을 실행하는 디스패처다.
+            - 처음 실행할 때는 현재 호출한 스레드에서 실행하고, suspension(일시 중단) 이후에는 재개되는 스레드가 달라질 수 있다.
+        - 동작 방식
+            - 코루틴이 처음 시작될 때:
+                - 현재 코루틴을 호출한 스레드(보통 Main, IO 등) 에서 즉시 실행된다.
+            - suspend 지점 이후 재개될 때: (예: delay(1000) 이후)
+                - 어떤 스레드에서든 재개될 수 있다. (보장되지 않음)
+
+        - 특징
+            - 스레드를 고정하지 않는다. (비고정 디스패처)
+            - 매우 가볍고 빠르지만, UI 작업처럼 특정 스레드에서 안전하게 실행해야 하는 작업에는 위험하다.
+            - 주로 테스트 용도나 간단한 작업에서 사용한다.
+            - 무거운 작업이나 멀티스레드 충돌이 발생할 수 있는 작업에는 적합하지 않다.
+
+        - 사용 시기
+            - 특정 스레드에 구애받지 않고 작업 순서만 중요할 때.
+            - 테스트 코드 작성 시 디스패처를 가볍게 처리할 때.
+            - UI 업데이트가 필요 없는, 단순 로직을 빠르게 처리하고 싶을 때.
+
+        - 주의사항
+            - 스레드 안정성(Thread Safety)이 필요한 작업에는 절대 사용하면 안 된다.
+            - 특히 UI 컴포넌트 접근은 반드시 Dispatchers.Main을 사용해야 한다.
+            - 예상치 못한 스레드에서 재개되면, 디버깅이 매우 까다로워질 수 있다.
+
+        - 간단 요약
+            - Unconfined = "처음은 호출 스레드, suspend 후는 어디서든 재개"
+            - 빠르고 가볍지만, 안정성 보장 X
+            - 테스트나 간단한 작업에서만 신중하게 사용
+
+- Explicit Intent와 Implicit Intent의 차이
+    - Explicit Intent (명시적 인텐트)
+        - 명확하게 대상 컴포넌트(Activity, Service 등)를 지정해서 호출하는 인텐트.
+        - 앱 내부의 특정 화면이나 기능을 직접 실행할 때 사용.
+        ```kotlin
+        val intent = Intent(this, DetailActivity::class.java)
+        startActivity(intent)
+        ```
+        - 사용 예시
+            - 다른 액티비티 열기
+            - 서비스 시작하기
+            - BroadcastReceiver 직접 호출
+
+    - Implicit Intent (암시적 인텐트)
+        - 수행하고 싶은 액션(Action)만 지정하고, 시스템이 적합한 컴포넌트를 찾아 실행하는 인텐트.
+        - 주로 다른 앱의 기능을 호출할 때 사용.
+        ```kotlin
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://example.com"))
+        startActivity(intent)
+        ```
+        - 사용 예시
+            - 웹 브라우저 열기
+            - 카메라 앱 실행
+            - 연락처에서 전화번호 선택
+
+    - 간단 요약
+        - Explicit Intent: "어디로 갈지 정해져 있다" → 내부 컴포넌트 호출
+        - Implicit Intent: "무엇을 할지만 정해져 있다" → 시스템이 적합한 앱이나 기능을 찾아 실행
+
+- Activity 간 데이터를 전달하는 가장 일반적인 방법
+    - Intent를 사용한 데이터 전달
+        - 가장 표준적이고 많이 쓰이는 방법.
+        - Intent의 extras(Bundle) 를 이용해서 데이터를 넘긴다.
+
+    - 방법
+        - 보내는 쪽 (Activity A → Activity B)
+            ```kotlin
+            val intent = Intent(this, BActivity::class.java)
+            intent.putExtra("key_name", "value_data")
+            startActivity(intent)
+            ```
+        - 받는 쪽 (Activity B)
+            ```kotlin
+            val data = intent.getStringExtra("key_name")
+            ```
+    - 특징
+        - 간단한 타입(Primitive, String, Serializable, Parcelable 등)을 쉽게 전달할 수 있다.
+        - 복잡한 객체를 전달할 때는 Parcelable 구현을 권장한다. (Serializable은 느리다)
+        - startActivityForResult → registerForActivityResult로 대체되면서 ActivityResult API를 함께 쓰는 경우도 많아졌다.
+
+- BroadcastReceiver를 사용하는 상황
+    - 개념
+        - 앱 내부 또는 외부에서 발생한 시스템/앱 이벤트를 감지하고 대응하는 컴포넌트.
+        - 브로드캐스트(전파)되는 이벤트를 수신하여 처리한다.
+
+    - 사용하는 대표 상황
+        - (1) 시스템 이벤트 감지
+            - 예시:
+                - 기기 부팅 완료 (BOOT_COMPLETED)
+                - 네트워크 연결 상태 변경 (CONNECTIVITY_CHANGE)
+                - 배터리 부족 경고 (BATTERY_LOW)
+        - (2) 앱 내부 이벤트 전달
+            - 앱 컴포넌트 간 느슨하게 통신할 때 사용.
+            - 예시: 특정 작업 완료 시 다른 컴포넌트에 알리기.
+
+    - 주의할 점
+        - Android 8.0(API 26)부터 정적 등록(Manifest 등록) BroadcastReceiver 제한이 생겼다.
+            - (일부 시스템 브로드캐스트만 수신 가능 → 나머지는 동적 등록해야 함)
+        - 꼭 필요한 경우에만 사용해야 한다. 과도한 브로드캐스트 수신은 배터리 소모를 초래할 수 있다.
+
+- Android 8.0(API 26)부터 정적 등록(Manifest 등록) BroadcastReceiver 제한
+    - 기본 개념
+        - 이전까지는 Manifest에 등록만 하면 앱이 꺼져 있어도 대부분의 브로드캐스트를 수신할 수 있었다.
+        - 하지만 Android 8.0부터는 앱이 실행 중이 아닐 때 Manifest에 등록된 BroadcastReceiver가 일부 시스템 이벤트에 대해서만 호출된다.
+
+    - 제한된 이유
+        - 백그라운드 앱들의 무분별한 브로드캐스트 수신으로 인해 배터리 소모 증가
+        - 시스템 리소스 낭비 
+        - 백그라운드 앱 활동을 최소화하여 배터리 수명 향상과 성능 최적화를 목적으로 도입됨.
+
+    - 제한 되는 경우
+        - 앱이 완전히 종료되어 있고 (Background 상태)
+        - Manifest에 등록된 BroadcastReceiver만 의존하는 경우.
+        - 허용된 특정 시스템 이벤트만 수신 가능.
+        - 대부분의 일반 브로드캐스트(CONNECTIVITY_CHANGE, NEW_PICTURE 등)는 수신 불가.
+
+    - 수신 가능한 대표적 예외 (허용된 이벤트)
+        - BOOT_COMPLETED (기기 부팅 완료)
+        - SMS_RECEIVED (SMS 수신)
+        - PACKAGE_ADDED, PACKAGE_REMOVED (앱 설치/삭제)
+        - ACTION_MY_PACKAGE_REPLACED (자기 앱이 업데이트됨)
+        - 일부 알람 관련 이벤트(TIMEZONE_CHANGED, TIME_SET 등)
+        - ※ 허용 리스트는 한정적이며, 대부분의 일반 이벤트는 수신 불가.
+
+    - 대응 방법
+        - (1) 동적 등록 사용
+            - 앱이 실행 중일 때 코드에서 registerReceiver()로 수신 등록해야 한다.
+            - 앱이 꺼지면 수신되지 않지만, 필요할 때만 정확하게 리스닝 가능.
+                - 자바/코틀린 코드 상에서 작성 (onStart / onStop)
+        - (2) Foreground Service 이용
+            - 지속적으로 브로드캐스트를 수신해야 할 경우
+                - → 앱을 Foreground Service로 전환하여 백그라운드 제한을 우회할 수 있다.
+                - 단, 사용자에게 알림(Notification) 을 항상 표시해야 한다.
+
+        - (3) WorkManager 사용
+            - 예약된 작업이나 조건부 작업이 필요할 경우
+                - → WorkManager를 활용해서 시스템 이벤트 감지 후 필요한 작업을 수행.
+
+    - 간단 요약
+        - Android 8.0부터는 Manifest 등록만으로 대부분의 브로드캐스트 수신 불가
+        - 반드시 필요한 경우만 일부 시스템 이벤트 허용
+        - 일반적인 경우는 동적 등록 또는 Foreground Service, WorkManager를 사용해서 대응 필수
+
+- Room 데이터베이스에서 DAO 역할
+    - DAO (Data Access Object): 데이터 접근 객체
+        - Room 데이터베이스와 앱의 비즈니스 로직 간의 연결 통로 역할을 한다.
+        - SQL 쿼리를 추상화하여 메서드로 표현하는 인터페이스 또는 추상 클래스다.
+
+    - 주요 기능
+        - 데이터베이스 접근 메서드 정의
+            - (조회, 삽입, 수정, 삭제 작업 → SQL 없이 메서드로 표현)
+            ```kotlin
+            @Dao
+            interface UserDao {
+                @Query("SELECT * FROM user")
+                fun getAll(): List<User>
+
+                @Insert
+                fun insert(user: User)
+
+                @Delete
+                fun delete(user: User)
+            }
+            ```
+            - 컴파일 타임에 SQL 문법 검사가 가능하다.
+            - Room이 DAO 코드를 기반으로 자동으로 구현체를 생성한다.
+
+    - 특징
+        - 코드의 가독성과 유지보수성이 높아진다.
+        - Room은 DAO 없이 직접 접근하는 것을 허용하지 않는다. → 강제적으로 안전한 구조 유지
+
+- SQLiteOpenHelper를 사용할 때 onUpgrade() 호출 시점
+    - onUpgrade() 개념
+        - 데이터베이스 버전이 변경될 때 호출되는 메서드.
+        - 기존 데이터베이스 구조를 새 버전에 맞게 마이그레이션하는 역할을 한다.
+
+    - 호출되는 정확한 조건
+        - SQLiteOpenHelper를 생성할 때 지정한 버전 번호가 기존 데이터베이스의 버전보다 클 때 호출된다.
+        ```kotlin
+        SQLiteOpenHelper(context, "database_name", null, NEW_VERSION)
+        ```
+        - 예를 들어:
+            - 기존 DB 버전이 1
+            - 새로 코드에 설정한 버전이 2
+            - 앱 실행 시 → onUpgrade() 호출됨
+
+    - onUpgrade()에서 주로 하는 일
+        - 테이블 추가/삭제
+        - 컬럼 추가
+        - 데이터 이전(Migration)
+        - 구조 변경에 필요한 모든 작업
+        ```kotlin
+        override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+            if (oldVersion < 2) {
+                db.execSQL("ALTER TABLE user ADD COLUMN last_login INTEGER")
+            }
+        }
+        ```
+
+    - 주의할 점
+        - onUpgrade()를 잘못 설계하면 데이터 손실이 발생할 수 있다.
+        - 반드시 데이터 백업 → 구조 변경 → 데이터 복구를 고려한 설계를 해야 한다.
+
+    - 간단 요약
+        - Room의 DAO:
+            - DB 접근 메서드를 정의하는 추상화된 인터페이스/클래스.
+            - Room이 자동 구현, SQL 안전성 보장.
+        
+        - SQLiteOpenHelper의 onUpgrade():
+            - DB 버전이 상승할 때 호출된다.
+            - 테이블 구조 변경 및 데이터 마이그레이션 수행.
+
+- Android 6.0 (Marshmallow) 이후 퍼미션을 처리하는 방법
+    - 배경
+        - Android 6.0(API 23)부터 "런타임 퍼미션" 제도가 도입되었다.
+        - 설치할 때가 아니라, 앱이 실제로 기능을 사용할 시점에 사용자에게 퍼미션을 요청해야 한다.
+
+    - 퍼미션 처리 흐름
+        - (1) AndroidManifest.xml에 퍼미션 선언
+            - 선언만 하면 끝이 아니라, 실제 앱 실행 중 요청을 별도로 해야 한다.
+
+        - (2) 퍼미션 상태 체크
+            - 앱이 퍼미션을 이미 갖고 있는지 먼저 확인한다.
+            ```kotlin
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                // 이미 권한 있음
+            } else {
+                // 권한 요청 필요
+            }
+            ```
+
+        - (3) 퍼미션 요청
+            - 권한이 없으면 사유자에게 요청
+            ```kotlin
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_CODE)
+            ```
+
+        - (4) 결과 처리
+            - 사용자가 수락/거절했는지 콜백을 통해 처리한다.
+            ```kotlin
+            override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+                if (requestCode == REQUEST_CODE) {
+                    if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                        // 권한 허용됨
+                    } else {
+                        // 권한 거부됨
+                    }
+                }
+            }
+            ```
+
+    - 추가 포인트
+        - "다시 묻지 않기"를 선택하면, 앱 설정 화면으로 유도해야 한다.
+        - 여러 퍼미션을 묶어서 동시에 요청할 수도 있다.
+        - 최신 API에서는 ActivityResultLauncher 기반의 권한 요청 방식 (registerForActivityResult)을 권장한다.
+
+- ContentProvider의 주요 목적
+    - 개념 (표준화된 인터페이스, 앱 간 / 앱 내부 데이터 공유)
+        - 앱 간 또는 앱 내부에서 데이터를 안전하게 공유할 수 있도록 하는 컴포넌트.
+        - 데이터베이스, 파일, 네트워크 등 다양한 소스의 데이터를 표준화된 인터페이스로 제공한다.
+
+    - 주요 목적
+        - (1) 앱 간 데이터 공유
+            - 다른 앱에서 ContentProvider를 통해 데이터에 접근할 수 있다.
+            - 예시: 연락처 앱이 자신의 데이터를 다른 앱에 제공.
+            ```kotlin
+            val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
+            ```
+
+        - (2) 보안 제어
+            - 권한을 이용해 데이터 접근 권한을 정밀하게 관리 가능
+            - 읽기/쓰기 권한을 별도로 설정 가능
+
+        - (3) 통합된 데이터 접근 방식 제공
+            - ContentResolver를 통해 앱 내외부의 다양한 데이터 소스에 일관된 방식으로 접근할 수 있다.
+            - 데이터베이스를 직접 노출하지 않고, 추상화된 API로 제어할 수 있다.
+
+    - 사용 시점
+        - 앱 간 데이터 공유가 필요한 경우
+        - (ex: 연락처, 사진 갤러리, 메시지 앱 등)
+        - 앱 내부에서도 여러 컴포넌트(Activity, Service 등)가 데이터를 통합적으로 사용할 때.
+
+    - 간단 요약
+        - Android 6.0 이후 퍼미션 처리:
+            - 설치 시점 아님 → 기능 사용 시점에 런타임 요청 필요
+
+        - ContentProvider 주요 목적:
+            - 앱 간 안전한 데이터 공유
+            - 데이터 접근 보안 관리
+            - 표준화된 데이터 인터페이스 제공
+
+- 앱의 민감한 데이터를 저장할 때 권장되는 방법
+    - 기본 원칙
+        - 민감한 데이터(토큰, 로그인 정보, 개인 식별 정보 등)는 암호화하여 저장해야 한다.
+        - 저장 위치는 반드시 보안이 강화된 영역이어야 한다.
+
+    - 권장 저장 방법
+        - (1) EncryptedSharedPreferences
+            - SharedPreferences를 AES-256 암호화하여 저장하는 공식 방법.
+            - Android Jetpack Security 라이브러리 지원.
+            ```kotlin
+            val sharedPreferences = EncryptedSharedPreferences.create(
+                "secure_prefs",
+                MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
+                context,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+            ```
+            - 안전하게 키-값 쌍으로 저장 가능
+
+    - (2) EncryptedFile
+        - 파일 형태로 저장해야 할 경우, 파일 자체를 암호화해서 저장.
+        - 대용량 데이터(예: 문서, 로그) 저장 시 사용.
+
+    - (3) Android Keystore System
+        - 암호화 키를 안전하게 저장하는 시스템.
+        - 민감한 키(예: RSA 키, AES 키)를 직접 노출하지 않고, Keystore 내부에 보관.
+        - 키를 직접 다루지 않고 사용만 할 수 있게 되어 있어 매우 안전함.
+
+    - 기타 주의사항
+        - 민감 데이터는 외부 저장소(SD 카드 등)에 저장하면 안 된다.
+        - 네트워크 통신 시에도 HTTPS를 반드시 사용해야 한다.
+
+- Android에서 메모리 누수(Memory Leak)가 발생하는 가장 흔한 예를 하나 들고, 이를 방지하는 방법
+    - 가장 흔한 예: Context 참조로 인한 메모리 누수
+    - 예시 상황
+        - Activity나 Fragment의 Context를 오래 참조하는 경우
+        - 예를 들어, Activity가 이미 종료되었는데도
+        - 백그라운드에서 실행 중인 객체(예: Handler, Thread, Singleton 등)가 Activity를 참조하고 있으면 GC(가비지 컬렉터)가 Activity를 수거하지 못해 메모리 누수가 발생
+        ```kotlin
+        object MyManager {
+            var context: Context? = null
+        }
+        ```
+        - 이 경우, MyManager가 Application Context가 아니라 Activity Context를 참조하면, 액티비티 메모리가 해제되지 않음
+    
+    - 방지 방법
+        - (1) Application Context 사용
+            - Activity나 View의 Context 대신 applicationContext를 사용하면 메모리 누수를 막을 수 있다.
+
+        - (2) WeakReference 사용
+            - 메모리 해제가 가능하도록 WeakReference로 감싸서 참조한다.
+            - Callback, Listener 등에서 자주 활용됨
+            - 예: val weakContext = WeakReference(context)
+
+        - (3) 생명주기와 함께 관리
+            - Handler, Runnable, Observer 같은 비동기 객체들은 onDestroy()나 onCleared() 시점에 반드시 해제해야 한다.
+            ```kotlin
+            override fun onDestroy() {
+                handler.removeCallbacksAndMessages(null)
+                super.onDestroy()
+            }
+            ```
+    - 간단 요약
+        - 민감 데이터 저장:
+            - EncryptedSharedPreferences, EncryptedFile, Keystore 사용.
+
+        - 메모리 누수 흔한 예:
+            - Context를 잘못 참조 → GC가 수거 못함.
+            - Application Context 사용, WeakReference 사용, 수명 주기와 함께 해제로 예방.
+
+- ViewHolder 패턴을 사용하는 이유
+    - 배경
+        - ListView, RecyclerView 같은 스크롤 가능한 뷰들은
+        - 스크롤할 때마다 계속해서 View를 생성하고 findViewById() 호출을 반복한다.
+        - 이 작업은 매우 비용이 크고 느리다.
+
+    - ViewHolder 패턴의 핵심
+        - 뷰를 재활용하고, findViewById 호출을 최소화하여 성능을 최적화하는 패턴이다.
+
+    - 방법
+        - 각 아이템 View에 대해 뷰 참조를 저장하는 객체(ViewHolder)를 만든다.
+        - 뷰를 재활용할 때 기존 ViewHolder를 재사용하고, 다시 findViewById()를 호출하지 않는다
+        ```kotlin
+        class ViewHolder(view: View) {
+            val titleTextView: TextView = view.findViewById(R.id.title)
+        }
+
+        // Adapter의 getView나 onBindViewHolder에서 사용
+        ```
+
+    - 주요 이점 (스크롤, 메모리, 반응성)
+        - 스크롤 성능 향상 (findViewById()는 호출할 때마다 View 트리를 탐색하므로, 제거하면 훨씬 빨라진다.)
+        - 메모리 사용량 감소 (불필요한 View 객체 생성 방지)
+        - UI 반응성 개선 (스크롤이 부드러워진다)
+
+- Bitmap을 효율적으로 로드할 때 주의해야 할 점
+    - 문제
+        - 고해상도 이미지를 한 번에 메모리에 로드하면 OutOfMemoryError(OOM) 가 쉽게 발생할 수 있다.
+        - 특히 안드로이드에서는 메모리 관리가 제한적이기 때문에 주의해야 한다.
+
+    - 주의사항 및 해결 방법
+        - (1) 이미지 크기 조절 (샘플링)
+            - 화면에 표시할 크기에 맞게 Bitmap을 축소해서 로드해야 한다.
+            - 원본 사이즈를 그대로 메모리에 로드하지 않는다.
+            ```kotlin
+            val options = BitmapFactory.Options().apply {
+                inSampleSize = 4 // 1/4 크기로 로드
+            }
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.large_image, options)
+            ```
+        - (2) 캐싱 전략 사용
+            - 이미 로드한 Bitmap은 메모리 캐시나 디스크 캐시에 저장하여 다시 로딩할 때 빠르게 가져온다.
+            - 대표적인 라이브러리: Glide, Picasso, Coil
+
+        - (3) Bitmap Config 최적화
+            - 필요 없는 경우에는 ARGB_8888 대신 RGB_565 같은 저용량 포맷을 사용해 메모리 절약 가능.
+            - options.inPreferredConfig = Bitmap.Config.RGB_565
+
+        - (4) 리소스 해제 (recycle)
+            - 사용이 끝난 Bitmap은 필요에 따라 recycle() 호출해서 명시적으로 메모리 해제할 수 있다.
+            - 단, Glide 같은 라이브러리를 사용하면 직접 recycle할 필요는 없다.
+
+    - 총 정리
+        - ViewHolder 패턴:
+            - findViewById 최소화, 뷰 재활용, 스크롤 성능 향상.
+        - Bitmap 효율적 로드:
+            - 샘플링(축소), 캐시 사용, Bitmap Config 조정, 리소스 해제로 OOM 방지.
+
+- AndroidManifest.xml에서 필수적으로 정의해야 하는 두 가지 (컴포넌트 + 권한)
+    - (1) 앱의 컴포넌트(Component)
+        - 앱을 구성하는 주요 컴포넌트는 반드시 Manifest에 등록해야 한다.
+        - 컴포넌트 종류
+            - Activity
+            - Service
+            - BroadcastReceiver
+            - ContentProvider
+        - 등록하지 않으면 시스템이 해당 컴포넌트를 인식하지 못해 동작할 수 없다.
+
+    - (2) 앱의 권한(Permissions)
+        - 앱이 민감한 기능(네트워크, 카메라, 파일 읽기 등)을 사용할 경우
+        - 사용 권한을 명시적으로 선언해야 한다.
+        - 선언하지 않으면 해당 기능을 사용할 수 없고, 요청해도 자동으로 거부된다.
+
+    - 추가적으로 자주 정의하는 항목
+        - 최소/타겟 SDK 버전 (minSdkVersion, targetSdkVersion)
+        - 앱 이름, 아이콘 (application 태그 내부 설정)
+        - 인텐트 필터 (intent-filter) 등록 (예: 런처 설정, 딥링크 설정)
+
+- Jetpack Navigation Component를 사용하는 주요 이점
+    - (1) 복잡한 네비게이션을 단순화
+        - 여러 Fragment나 Activity 간의 이동을 선언적(Declarative) 으로 설계할 수 있다.
+        - XML 파일(nav_graph.xml)로 전체 화면 흐름을 한눈에 볼 수 있다.
+
+    - (2) 안전한 인자 전달(Safe Args)
+        - 화면 전환 시 데이터 전달을 타입 안전(type-safe) 하게 할 수 있다.
+        - 컴파일 타임에 오류를 잡아주기 때문에, Intent나 Bundle 실수(키 오타 등)를 막을 수 있다.
+
+    - (3) 백 스택 자동 관리
+        - 화면 이동 시 Back Stack을 자동으로 관리해준다.
+        - 개발자가 직접 FragmentTransaction을 일일이 다루지 않아도 된다.
+
+    - (4) 딥링크(Deep Link) 지원
+        - 외부에서 앱의 특정 화면으로 바로 진입할 수 있도록 딥링크를 쉽게 설정할 수 있다.
+        - 인텐트 필터 설정 없이도 XML에서 쉽게 매핑 가능.
+
+    - (5) UI 상태와 네비게이션 상태 통합 가능
+        - NavigationUI를 활용하면 BottomNavigationView, NavigationDrawer 등과 NavController를 자동으로 연결할 수 있다.
+        ```kotlin
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        ```
+
+    - (6) 싱글 액티비티 체제 아키텍쳐와의 궁합
+
+- 프로가드(ProGuard) 설정은 주로 어떤 목적으로 사용
+    - 주요 목적
+        - (1) 코드 난독화(Obfuscation)
+            - 클래스, 메서드, 변수 이름을 의미 없는 이름(a, b, c 등)으로 변경하여 코드를 리버스 엔지니어링하기 어렵게 만든다.
+            - APK를 디컴파일해도 원래 의미를 파악하기 힘들어진다.
+
+        - (2) 코드 최적화(Optimization)
+            - 사용되지 않는 코드(dead code)를 제거하고, 중복 코드를 통합하여 APK 파일 크기를 줄이고 성능을 개선한다.
+
+        - (3) 코드 축소(Shrinking)
+            - 사용되지 않는 클래스, 메서드, 리소스를 자동으로 제거하여 앱의 최종 크기를 최소화한다.
+
+        - (4) 보안 강화(Security)
+            - 핵심 로직이나 알고리즘을 쉽게 파악하지 못하게 하여 어느 정도 보안성을 높일 수 있다.
+
+    - 간단 요약
+        - ProGuard = 코드 난독화 + 최적화 + 축소 + 보안 강화
+        - 디컴파일/해킹을 100% 막지는 못하지만, 리버스 엔지니어링 난이도를 높인다.
+
+- 액티비티가 onStop() 상태에 있다가 다시 사용자에게 표시되면 호출되는 메서드
+    - 호출되는 메서드
+        - onRestart() → onStart()
+
+    - 동작 순서
+        - 액티비티가 onStop() 상태에 있음 (사용자에게 화면이 안 보이는 상태)
+        - 사용자가 다시 액티비티로 돌아오면:
+            - onRestart() 먼저 호출
+                - "멈췄던 액티비티를 다시 시작하려고 준비하는 단계"
+            - 이어서 onStart() 호출
+                - 화면이 사용자에게 다시 보이기 시작하는 단계
+            - 그리고 onResume() 호출되어 완전 활성화됨.
+
+    - 간단 흐름 요약
+        - onStop() → onRestart() → onStart() → onResume()
+
+    - 간단 요약
+        - ProGuard 설정:
+            - 난독화 + 최적화 + 축소 + 보안 강화 목적으로 사용.
+        - onStop() 후 다시 표시될 때 호출되는 메서드:
+            - onRestart() 호출 후 onStart() → onResume() 순서로 이어진다.
+
+- 프래그먼트가 재사용될 때 onCreateView()는 항상 호출되는지와 호출된다면 그 이유
+    - 항상 호출 여부
+        - 프래그먼트가 재사용될 때 onCreateView()는 항상 호출됨
+
+    - 호출 이유
+        - onCreateView()는 프래그먼트듸 UI(View)를 새로 생성하는 메서드
+        - 프래그먼트가 화면에서 사라질 때(onDestroyView() 호출)
+            - -> 뷰 객체는 메모리에서 해제
+        - 프래그먼트 객체 자체는 살아있어도, 뷰는 재사용되지 않음
+        - 다시 화면에 표시될 때는 반드시 새로운 뷰를 생성하기 위해 onCreateView()가 호출
+
+    - 정리
+        - 프래그먼트 인스턴스는 살아있을 수 있지만,
+        - View는 항상 새로 만들어야 하므로 onCreateView()는 호출된다.
+
+- ViewModel은 어떤 생명주기를 기준으로 메모리에서 제거되는 지 설명
+    - 어떤 생명주기를 기준으로 메모리에서 제거되는지에 대한 내용
+        - ViewModel은 연결된 LifecycleOwner(Activity나 Fragment)가 종료될 때 메모리에서 제거된다
+
+    - 상세 설명
+        - 액티비티에 연결된 뷰델
+            - 액티비티가 Finish()되거나 시스템에 의해 파괴될 때 onCleared() 호출됨
+        - 프래그먼트에 연결된 뷰모델
+            - 프래그먼트가 소멸될 때, 그리고 관련된 ViewModelStoreOwner도 더 이상 존재하지 않을 때 onCleared() 호출됨
+        - 뷰모델은 화면 회전 같은 구성 변경 (Configuration Change)시에는 자동으로 재사용됨
+        - 액티비티나 프래그먼트가 재생성되어도 뷰모델은 살아남음
+
+    - 주의사항
+        - ViewModel은 View의 수명과 다르다.
+        - 프래그먼트의 View가 onDestroyView()로 파괴되어도,
+        - 프래그먼트가 살아 있다면 ViewModel도 그대로 살아있다.
+
+    - 총정리
+        - 프래그먼트 재사용 시 onCreateView() 호출 여부:
+            - 항상 호출된다. (View는 새로 생성되어야 하기 때문)
+        - ViewModel 메모리 제거 기준:
+            - 연결된 Activity나 Fragment의 Lifecycle이 완전히 종료될 때 (onCleared() 호출)
+
+- SavedStateHandle은 어떤 상황에서 유용하게 사용되는지 설명
+    - 개념
+        - SavedStateHandle은 ViewModel에 데이터를 안전하게 저장하고 복구할 수 있도록 도와주는 도구다.
+        - 화면 회전, 프로세스 종료(시스템 강제 종료) 같은 구성 변경(Configuration Change) 상황에서도 상태(state)를 유지하고 복구할 수 있게 해준다.
+
+    - 유용한 상황
+        - (1) 화면 회전 등 구성 변경 시 데이터 복구
+            - 예시: 사용자가 입력 중이던 데이터를 화면 회전 후에도 유지하고 싶을 때.
+            ```kotlin
+            class MyViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+                fun saveUserInput(input: String) {
+                    savedStateHandle["user_input"] = input
+                }
+
+                fun getUserInput(): String? {
+                    return savedStateHandle["user_input"]
+                }
+            }
+            ```
+
+        - (2) 프로세스가 강제 종료되었다가 복원될 때 데이터 유지
+            - 예시: 백그라운드에서 메모리 부족으로 앱 프로세스가 죽었다가 다시 살아날 때, 사용자가 보고 있던 상태를 복구해야 할 때 유용하다.
+
+        - (3) Navigation Component와 함께 인자 관리    
+            - SafeArgs 없이도 SavedStateHandle을 이용해 프래그먼트 간 전달된 인자를 저장하고 복구할 수 있다.
+            ```kotlin
+            val userId = savedStateHandle.get<String>("userId")
+            ```
+
+    - 간단 요약
+        - SavedStateHandle은
+            - 구성 변경, 프로세스 종료 시에도 ViewModel에 안전하게 데이터 저장/복구를 도와준다.
+        - 주로 입력값 저장, 상태 유지, 네비게이션 인자 관리 등에 유용하다.
+
+- CoroutineScope를 액티비티에서 사용할 때 취소(Cancel)를 반드시 해줘야 하는 이유
+    - 이유
+        - 액티비티가 종료되었는데도 Coroutine이 계속 살아있으면 메모리 누수(Memory Leak)가 발생할 수 있다.
+        - 살아있는 Coroutine이 Activity나 Fragment의 Context, View 등을 참조하면 GC(가비지 컬렉터)가 메모리를 해제하지 못해 누수가 생긴다.
+
+    - 주요 문제점
+        - 메모리 낭비 (필요 없는 리소스가 계속 살아있음)
+        - 비정상적인 작업 수행 (이미 닫힌 화면에 데이터를 업데이트하려고 하거나, 충돌 발생)
+        - 배터리 소모 증가 (불필요한 작업이 계속 백그라운드에서 돌 수 있음)
+
+    - 올바른 사용법
+        - lifecycleScope나 viewModelScope를 사용하면 Lifecycle에 따라 자동으로 Coroutine이 취소된다.
+        - 만약 별도로 CoroutineScope를 만들었다면, 반드시 onDestroy()나 적절한 시점에 직접 cancel() 호출해줘야 한다.
+        ```kotlin
+        private val myScope = CoroutineScope(Dispatchers.Main)
+
+        override fun onDestroy() {
+            super.onDestroy()
+            myScope.cancel()
+        }
+        ```
+
+- viewModelScope와 lifecycleScope의 주요 차이
+    - viewModelScope
+        - 개념
+            - ViewModel 전용 CoroutineScope다.        
+            - ViewModel이 onCleared() 될 때 자동으로 Coroutine이 취소(canceled) 된다.
+            - ViewModel 안에서 비동기 작업(네트워크, DB 등)을 수행할 때 사용.
+        - 특징
+            - ViewModel과 수명(lifecycle) 을 같이 함.
+            - 화면 회전(Configuration Change)이 일어나도 ViewModel은 살아남기 때문에, 비동기 작업도 계속 유지된다.
+            - 주로 UI 상태 관리, 데이터 로드, 비즈니스 로직을 처리할 때 사용.
+
+    - lifecycleScope
+        - 개념
+            - LifecycleOwner(Activity, Fragment) 전용 CoroutineScope다.
+            - 해당 컴포넌트가 DESTROYED 상태가 되면 Coroutine이 자동으로 취소된다.
+        - 특징
+            - Activity나 Fragment의 Lifecycle에 직접 연결된다.
+            - 화면이 종료되면 즉시 Coroutine이 취소된다.
+            - 주로 UI와 밀접한 작업, 짧은 생명주기 작업(애니메이션, 간단한 비동기 요청 등)에 사용한다.
+
+    - 총정리
+        - viewModelScope: ViewModel 수명에 맞춰 살아있음.
+            - → UI 데이터 관리, 비즈니스 로직 처리에 적합.
+        - lifecycleScope: Activity/Fragment 수명에 맞춰 살아있음.
+            - → UI 처리, 화면 기반 짧은 작업에 적합.
+
+- suspend 키워드를 함수에 붙였을 때 함수 동작 원리
+    - suspend 개념
+        - suspend 키워드를 붙이면, 이 함수는 코루틴 안에서만 호출할 수 있는 일시 중단(suspendable) 함수가 된다.
+        - 일시 중단이란: 함수를 실행하는 도중에도 다른 작업을 할 수 있도록 "잠시 멈췄다가 다시 이어서 실행" 할 수 있게 만든다는 의미.
+
+    - 동작 원리
+        - suspend 함수는 내부적으로 Continuation이라는 콜백 객체를 사용한다.
+        - 함수 실행 중 suspend 지점에 도달하면, 현재 상태를 저장하고 Coroutine Dispatcher에게 제어권을 넘긴다.
+        - 나중에 작업이 완료되면 저장된 상태에서 다시 이어서 실행된다.
+        - 이 과정은 개발자가 신경 쓰지 않아도, Kotlin 컴파일러가 자동으로 변환(Continuation-passing style)해준다.
+
+    - 예시
+        - 첫번째 예제
+            ```kotlin
+            suspend fun fetchData(): String {
+                delay(1000) // 1초 동안 일시 중단
+                return "Result"
+            }
+            ```
+            - delay()는 중단 지점(suspension point)이다.
+            - 코루틴은 1초 동안 멈추고, 그 사이에 다른 코드를 실행할 수 있다.
+            - 1초 후 다시 이어서 return "Result"를 실행한다.
+
+        - 두번째 예제
+            - suspending 되었을 때 다른 코드를 실행하는 예제
+            ```kotlin
+            import kotlinx.coroutines.*
+            fun main() = runBlocking {
+                launch {
+                    println("Fetch start at ${System.currentTimeMillis()}")
+                    val result = fetchData()
+                    println("Fetch result: $result at ${System.currentTimeMillis()}")
+                }
+
+                launch {
+                    repeat(5) { i ->
+                        delay(200)
+                        println("Other work $i at ${System.currentTimeMillis()}")
+                    }
+                }
+            }
+
+            suspend fun fetchData(): String {
+                delay(1000) // 1초 동안 멈춤
+                return "Result"
+            }
+            ```
+            - 실행 흐름 설명
+                - 첫 번째 launch 블록이 fetchData() 를 호출한다.
+                - fetchData() 안에서 delay(1000) 을 만나면서
+                    - 이 코루틴은 일시 중단(suspend) 되고,
+                    - 다른 코루틴(여기선 두 번째 launch)이 CPU를 사용하게 된다.
+                - 두 번째 launch는 0.2초마다 반복하면서 "Other work 0", "Other work 1", ..., "Other work 4" 를 출력한다.
+                - 1초가 지나고 나면 중단된 fetchData()가 다시 이어져서 "Result" 반환 후 결과를 출력한다
+
+            - 예상 출력 예시
+            ```pgsql
+            Fetch start at 1714567890000
+            Other work 0 at 1714567890200
+            Other work 1 at 1714567890400
+            Other work 2 at 1714567890600
+            Other work 3 at 1714567890800
+            Other work 4 at 1714567891000
+            Fetch result: Result at 1714567891000
+            ```
+
+    - 주의할 점
+        - suspend 함수는 직접 호출할 수 없다.
+        - 반드시 launch, async, 또는 다른 suspend 함수 안에서 호출해야 한다.
+
+    - 총 정리
+        - 스레드를 차단(block)하지 않으면서, 동시에 여러 작업을 자연스럽게 병렬로 처리할 수 있다는 점이 코루틴의 장점
+        - delay 중단 동안 다른 코루틴이 CPU를 사용해서 작업 수행 가능
+        - suspend는 스레드를 블로킹하지 않음
+        - 작업을 미뤄놓고 그 사이 다른 코루틴이 자연스럽게 실행되는 구조
+
+- SupervisorJob을 사용하는 주요 이유
+    - 개념
+        - SupervisorJob은 자식 코루틴 중 하나가 실패해도 다른 자식 코루틴에 영향을 주지 않게 하는 특별한 Job이다.
+        - 일반 Job과는 달리, 한 자식의 실패가 부모나 다른 자식에게 전파되지 않는다.
+        
+    - 주요 사용 이유
+        - (1) 독립적인 작업 관리
+            - 여러 코루틴을 병렬로 실행할 때, 하나의 작업이 실패하더라도 다른 작업이 계속 수행되길 원할 때 사용한다.
+            ```kotlin
+            val supervisor = SupervisorJob()
+            val scope = CoroutineScope(Dispatchers.Main + supervisor)
+
+            scope.launch {
+                // 실패해도 다른 작업 영향 없음
+            }
+            scope.launch {
+                // 독립적으로 실행
+            }
+            ```
+        - (2) 병렬 작업 중 하나만 실패해도 전체 취소를 막고 싶을 때
+            - 일반 Job은 하나의 실패로 전체가 취소된다.
+            - 하지만 SupervisorJob은 실패를 "개별적으로" 다룬다.
+
+        - (3) 안정성 강화
+            - 사용자 경험상, 하나의 작은 실패(예: 네트워크 요청 하나 실패) 때문에
+            - 앱 전체가 비정상적으로 멈추는 것을 막을 수 있다.
+
+    - 결론
+        - SupervisorJob:
+            - → 자식 코루틴 실패를 독립적으로 처리하여
+            - → 다른 작업에 영향 없이 안정적인 병렬 처리를 가능하게 만든다.
+
+- Retrofit에서 suspend 함수를 사용하는 것과 콜백 기반 함수를 사용하는 것의 차이
+    - suspend 기반 사용 (코루틴)
+        - Retrofit 서비스 인터페이스를 suspend 함수로 정의하면, 코루틴 안에서 네트워크 요청을 자연스럽게 일시 중단하고 재개할 수 있다.
+        ```kotlin
+        interface ApiService {
+            @GET("users")
+            suspend fun getUsers(): List<User>
+        }
+
+        viewModelScope.launch {
+            val users = apiService.getUsers()
+        }
+        ```
+        - 특징
+            - 코드가 동기식처럼 깔끔하게 작성된다.
+            - 예외 처리도 일반 try-catch로 간단하게 처리 가능.
+            - 콜백 지옥(callback hell) 없음 → 가독성 및 유지보수성 향상.
+
+    - 콜백 기반 사용
+        - 과거 방식: Retrofit의 enqueue()를 이용해 콜백(callback) 으로 결과를 받는다.
+            ```kotlin
+            apiService.getUsers().enqueue(object : Callback<List<User>> {
+                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                    // 성공 처리
+                }
+
+                override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                    // 실패 처리
+                }
+            })
+            ```
+            - 특징
+                - 네트워크 요청 결과를 비동기 콜백으로 처리.
+                - 콜백 중첩 문제(callback hell)가 발생하기 쉽다.
+                - 코드가 복잡해지고 에러 핸들링이 번거롭다.
+
+- OkHttp Interceptor를 사용하는 주요 목적
+    - 개념
+        - Interceptor는 HTTP 요청/응답을 가로채서 수정하거나 기록하거나 추가 작업을 할 수 있는 OkHttp의 강력한 기능
+        - 일종의 중간 단계 필터 역할
+
+    - 주요 사용 목적
+        - (1) 공통 요청 헤더 추가
+            - 모든 요청에 공통적으로 Authorization 토큰, User-Agent 등을 자동으로 추가할 수 있다.
+            ```kotlin
+            class AuthInterceptor : Interceptor {
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    val request = chain.request().newBuilder()
+                        .addHeader("Authorization", "Bearer token")
+                        .build()
+                    return chain.proceed(request)
+                }
+            }
+            ```
+        - (2) 요청/응답 로깅
+            - API 통신 내용을 로깅하여 디버깅할 수 있다.
+            - 개발 중에는 HttpLoggingInterceptor를 많이 사용한다.
+
+        - (3) 요청/응답 가로채서 수정
+            - 요청에 파라미터 추가하거나,
+            - 응답을 가로채서 필요한 데이터만 추출하거나 변형할 수 있다.
+
+        - (4) 통합 에러 처리
+            - 서버에서 공통 에러 응답이 올 때, Interceptor에서 일괄적으로 처리 가능하다.
+            - (예: 401 Unauthorized 응답 시, 토큰 재발급 로직 처리)
+    - 정리
+        - OkHttp Interceptor는 요청/응답을 가로채고 수정/기록/추가 작업할 수 있는 강력한 중간 처리 장치
+
+- 서버 통신 중 발생할 수 있는 TimeoutException을 안전하게 처리하는 코루틴 패턴
+    - 문제
+        - 서버가 느리거나 네트워크가 불안정할 때 TimeoutException (ex: SocketTimeoutException)이 발생할 수 있다.
+        - 이를 제대로 처리하지 않으면 앱이 강제 종료되거나 불안정한 상태에 빠질 수 있다.
+
+    - 안전하게 처리하는 코루틴 패턴
+        - (1) withTimeout() 사용
+            - 일정 시간 내에 작업이 끝나지 않으면 TimeoutCancellationException을 발생시키고, 코루틴을 자동 취소한다.
+            - 5초 넘으면 코루틴이 취소되고 예외가 발생한다
+            ```kotlin
+            suspend fun fetchDataSafely(): String {
+                return withTimeout(5000L) { // 5초 이내 완료
+                    apiService.getData()
+                }
+            }
+            ```
+
+        - (2) try-catch로 안전하게 예외 처리
+            - TimeoutCancellationException은 CancellationException의 하위 타입이라 일반 Exception으로 잡아도 되고, 명시적으로 TimeoutCancellationException만 잡을 수도 있다.
+            ```kotlin
+            viewModelScope.launch {
+                try {
+                    val result = fetchDataSafely()
+                    // 성공 처리
+                } catch (e: TimeoutCancellationException) {
+                    // 타임아웃 처리
+                    showToast("서버 응답이 지연되고 있습니다.")
+                } catch (e: Exception) {
+                    // 기타 에러 처리
+                    showToast("알 수 없는 에러 발생")
+                }
+            }
+            ```
+        - 추가
+            - withTimeoutOrNull() 을 사용하면 예외 대신 null을 반환시킬 수도 있다.
+            ```kotlin
+            val result = withTimeoutOrNull(5000L) {
+                apiService.getData()
+            }
+            if (result == null) {
+                showToast("서버 응답 시간 초과")
+            }
+            ```
+
+- Jetpack Compose에서 recomposition을 피하기 위한 최적화 기법
+    - Recomposition 개념
+        - 컴포저블이 입력값이나 상태가 변경되었을 때 다시 그리는 과정.
+        - 필요한 경우에만 다시 그리는 것은 좋지만, 불필요한 Recomposition이 과도하면 성능 저하를 일으킬 수 있다.
+
+    - 주요 최적화 기법
+        - (1) remember 사용
+            - 계산 결과나 객체를 메모리에 저장해서, 재구성(Recomposition)될 때 다시 계산하지 않고 재사용한다.
+        - (2) key 사용
+            - 리스트 같은 동적 컴포저블에서 각 아이템을 명확하게 구분해 불필요한 리빌드를 막는다.
+            ```kotlin
+            LazyColumn {
+                items(items, key = { it.id }) { item ->
+                    ItemRow(item)
+                }
+            }
+            ```
+        - (3) derivedStateOf 사용
+            - 상태가 복잡한 계산 결과를 기반으로 변할 때, 의미 있는 변경이 일어날 때만 recomposition 하도록 한다.
+            - derivedStateOf는 변경이 필요할 때만 값을 다시 계산한다.
+            ```kotlin
+            val isButtonEnabled by remember {
+                derivedStateOf { text.isNotEmpty() }
+            }
+            ```
+        - (4) 부하가 큰 컴포저블 분리
+            - 무거운 UI나 상태 변화가 많은 부분은 별도의 컴포저블로 분리한다.
+            - 변화가 없는 부모 컴포저블까지 재구성되는 걸 막을 수 있다.
+        - (5) stable한 데이터 구조 사용
+            - Compose는 Stable 데이터(변경 추적이 가능한 데이터) 를 다루는 데 최적화되어 있다.
+            - 데이터 클래스를 불필요하게 새로 생성하거나 변형하지 않고, 필요한 경우만 갱신한다.
+
+- derivedStateOf의 사용 시점
+    - 개념
+        - derivedStateOf는 다른 State를 기반으로 계산된 값을 가질 때 사용하는 API다.
+        - 내부적으로 값이 실제로 변경될 때만 recomposition을 유발한다.
+
+    - 사용 시점
+        - (1) 복잡한 계산 결과를 캐시하고 싶을 때
+            - 예를 들어, 입력된 텍스트가 비어 있는지 여부를 매번 직접 계산하는 대신, 필요한 경우에만 다시 계산하게 한다.
+            ```kotlin
+            val isFormValid by remember {
+                derivedStateOf { name.isNotEmpty() && email.contains("@") }
+            }
+            ```
+        - (2) 관찰하는 State의 변화가 자주 일어나지만, 결과는 자주 변하지 않을 때
+            - 상태가 자주 바뀌더라도 계산 결과가 자주 변하지 않으면 불필요한 recomposition을 줄일 수 있다.
+
+        - (3) Lazy 컴포넌트 최적화 (ex: LazyColumn)
+            - 리스트 필터링, 정렬처럼 리스트 원본이 자주 변경되지만, 실제로 보여줄 리스트가 크게 변하지 않는 경우에 derivedStateOf로 계산해서 효율적으로 갱신할 수 있다
+            ```kotlin
+            val visibleItems by remember {
+                derivedStateOf { allItems.filter { it.isVisible } }
+            }
+            ```
+    - 개념 재정리
+        - derivedStateOf: 다른 State에 의존하는 계산된 값을 캐싱할 때 사용한다.
+        - 변화가 있을 때만 recomposition을 유발하여 성능 최적화에 효과적이다.
+
 - LaunchedEffect와 rememberCoroutineScope의 차이를 설명하라.
 - onTrimMemory()는 어떤 상황에서 호출되는가? 주요 레벨 중 하나를 예로 들어 설명하라.
 - Foreground Service를 정상적으로 실행하기 위해 Android 8.0 이상에서 추가로 필요한 작업은 무엇인가?
