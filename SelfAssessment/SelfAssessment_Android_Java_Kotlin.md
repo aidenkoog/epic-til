@@ -8916,6 +8916,70 @@ Organize concepts, features, types and Pros and Cons
             - → 과도한 최적화는 오히려 복잡성만 높인다.
         - Modifier를 만들어 쓸 때는 Stable, Immutable 데이터를 우선적으로 고려한다.
 
+- 액티비티가 다른 액티비티에 의해 가려질 때 호출되는 메서드는 무엇인가?
+- 앱이 완전히 종료될 때 호출되는 생명주기 메서드는 무엇인가?
+- onSaveInstanceState()와 onRestoreInstanceState()의 차이를 설명하라.
+- 프래그먼트에서 onAttach()와 onCreateView()는 각각 언제 호출되는가?
+- RecyclerView와 ListView의 핵심 차이를 설명하라.
+- Jetpack Compose에서 rememberSaveable과 remember의 차이는 무엇인가?
+- ConstraintLayout을 사용하는 주요 이점은 무엇인가?
+- ViewBinding과 DataBinding의 차이점을 설명하라.
+- 안드로이드에서 긴 작업을 수행할 때 UI 스레드가 차단되지 않게 하려면 어떤 방법을 사용해야 하는가?
+- WorkManager와 AlarmManager의 차이점은 무엇인가?
+- 코루틴에서 Dispatchers.Main, Dispatchers.IO의 차이는 무엇인가?
+- Explicit Intent와 Implicit Intent의 차이를 설명하라.
+- Activity 간 데이터를 전달하는 가장 일반적인 방법은 무엇인가?
+- BroadcastReceiver는 어떤 상황에서 사용해야 하는가?
+- SharedPreferences는 어떤 용도로 사용하는가?
+- Room 데이터베이스에서 DAO는 어떤 역할을 하는가?
+- SQLiteOpenHelper를 사용할 때 onUpgrade()는 언제 호출되는가?
+- Android 6.0 (Marshmallow) 이후 퍼미션을 처리하는 방법은?
+- ContentProvider의 주요 목적은 무엇인가?
+- 앱의 민감한 데이터를 저장할 때 권장되는 방법은 무엇인가?
+- Android에서 메모리 누수(Memory Leak)가 발생하는 가장 흔한 예를 하나 들고, 이를 방지하는 방법을 설명하라.
+- ViewHolder 패턴을 사용하는 이유는 무엇인가?
+- Bitmap을 효율적으로 로드할 때 주의해야 할 점은?
+- AndroidManifest.xml에서 필수적으로 정의해야 하는 두 가지는 무엇인가?
+- Jetpack Navigation Component를 사용하는 주요 이점은 무엇인가?
+- 프로가드(ProGuard) 설정은 주로 어떤 목적으로 사용하는가?
+- 액티비티가 onStop() 상태에 있다가 다시 사용자에게 표시되면 호출되는 메서드는 무엇인가?
+- 프래그먼트가 재사용될 때 onCreateView()는 항상 호출되는가? 그 이유는 무엇인가?
+- ViewModel은 어떤 생명주기를 기준으로 메모리에서 제거되는가?
+- SavedStateHandle은 어떤 상황에서 유용하게 사용되는가?
+- CoroutineScope를 액티비티에서 사용할 때 취소(Cancel)를 반드시 해줘야 하는 이유는 무엇인가?
+- viewModelScope와 lifecycleScope의 주요 차이는 무엇인가?
+- suspend 키워드를 함수에 붙였을 때 해당 함수는 어떻게 동작하는가?
+- SupervisorJob을 사용하는 주요 이유는 무엇인가?
+- Retrofit에서 suspend 함수를 사용하는 것과 콜백 기반 함수를 사용하는 것의 차이는 무엇인가?
+- OkHttp Interceptor를 사용하는 주요 목적은 무엇인가?
+- 서버 통신 중 발생할 수 있는 TimeoutException을 안전하게 처리하는 코루틴 패턴은 무엇인가?
+- Jetpack Compose에서 recomposition을 피하기 위해 어떤 최적화 기법을 사용할 수 있는가?
+- derivedStateOf는 어떤 상황에서 사용하는 것이 적합한가?
+- LaunchedEffect와 rememberCoroutineScope의 차이를 설명하라.
+- onTrimMemory()는 어떤 상황에서 호출되는가? 주요 레벨 중 하나를 예로 들어 설명하라.
+- Foreground Service를 정상적으로 실행하기 위해 Android 8.0 이상에서 추가로 필요한 작업은 무엇인가?
+- JobScheduler와 WorkManager를 비교할 때, API 23 이상에서 WorkManager를 선호하는 이유는 무엇인가?
+- Memory Leak을 방지하기 위해 Fragment에서 ViewBinding을 사용할 때 주의해야 할 점은 무엇인가?
+- Android Profiler를 사용할 때 앱의 스레드 덤프(Thread Dump)는 어떤 상황에서 분석하는가?
+- Bitmap 이미지를 메모리 효율적으로 로드하기 위해 사용하는 Android API 또는 라이브러리는 무엇인가?
+- Android Keystore를 사용하는 주요 목적은 무엇인가?
+- Proguard / R8 설정에서 -keepclassmembers 옵션은 무엇을 의미하는가?
+- Dynamic Feature Module을 사용하면 앱 배포 및 설치 시 어떤 이점이 생기는가?
+- LazyColumn을 최적화할 때 주의해야 할 점은 무엇인가?
+- recomposition을 방지하기 위해 derivedStateOf는 어떤 원리로 동작하는가?
+- LaunchedEffect와 rememberUpdatedState를 조합해야 하는 상황은 어떤 경우인가?
+- Modifier.recomposeHighlighter()를 사용하면 어떤 이점을 얻을 수 있는가?
+- Compose Navigation에서 ViewModel을 안전하게 공유하려면 어떻게 해야 하는가?
+- remember 대신 rememberSaveable을 써야 하는 대표적인 상황은?
+- LaunchedEffect(Unit) 은 언제 취소되는가?
+- derivedStateOf의 핵심 역할은?
+- key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제는?
+- rememberCoroutineScope()로 launch한 코루틴은 언제 자동 취소되는가?
+- Compose에서 recomposition 발생을 디버깅하기 위한 방법은?
+- rememberUpdatedState()는 어떤 상황에서 사용해야 하나?
+- Modifier.graphicsLayer를 사용할 때 주의할 점은?
+- CompositionLocalProvider를 남발할 경우 문제가 되는 이유는?
+- Composable 함수에 key1, key2를 걸고 LaunchedEffect(key1, key2)를 걸었을 때, 둘 중 하나라도 바뀌면 어떤 일이 발생하는가?
 - Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
 - Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
 - Compose에서 LazyColumn의 성능을 최적화하는 방법
