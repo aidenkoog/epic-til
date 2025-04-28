@@ -10243,8 +10243,27 @@ Organize concepts, features, types and Pros and Cons
     - 요약
         - Android API로는 BitmapFactory.Options + ImageDecoder를 활용
         - 라이브러리로는 Glide가 가장 널리 쓰이며, Coil은 최신 프로젝트에서 경량화를 목표로 많이 채택되고 있다.
-        
+
 - Android Keystore를 사용하는 주요 목적
+    - 키(Key) 보안 저장
+        - 암호화 키(대칭/비대칭)를 단말 내부의 별도 보호된 영역(Keystore)에 저장.
+        - 앱이 직접 키를 가져오지 않고, Keystore를 통해 키를 간접적으로 사용 (키가 메모리에 노출되지 않음).
+
+    - 암호화 및 복호화
+        - Keystore에 저장된 키를 사용하여 안전하게 데이터 암호화/복호화 가능.
+        - 키를 외부로 노출시키지 않고, 내부적으로만 연산 처리.
+
+    - 인증(Authentication) 연계
+        - 지문, 얼굴 인식 등 생체 인증을 통해 키 접근을 제한할 수 있음 (StrongBox 지원 기기에서는 더욱 강화됨).
+        - 예를 들어 "사용자가 지문 인증을 해야만 복호화 가능" 같은 보안 시나리오 구현 가능.
+
+    - 키 관리 자동화
+        - 키 생성, 저장, 삭제 등을 Android Keystore System이 관리해 줌.
+        - 개발자가 직접 파일 시스템이나 SharedPreferences에 민감한 키를 저장하지 않아도 됨.
+
+    - 요약
+        - Android Keystore는 "키를 안전하게 보호하고, 앱 외부나 메모리에 노출 없이 암호화/복호화 기능을 제공"하는 것을 주 목적으로 사용한다. 
+        - 특히 금융, 인증, 민감 정보 처리가 필요한 앱에서 필수적으로 활용된다.
 
 - Proguard / R8 설정에서 -keepclassmembers 옵션은 무엇을 의미하는가?
 - Dynamic Feature Module을 사용하면 앱 배포 및 설치 시 어떤 이점이 생기는가?
