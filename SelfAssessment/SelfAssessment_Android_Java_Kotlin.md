@@ -10107,12 +10107,111 @@ Organize concepts, features, types and Pros and Cons
             - 시스템 메모리 부족 시 호출,
             - 레벨에 따라 리소스 정리 정도를 조절해야 한다. (예: UI 숨김, 메모리 심각 부족 등)
 
-- Foreground Service를 정상적으로 실행하기 위해 Android 8.0 이상에서 추가로 필요한 작업은 무엇인가?
-- JobScheduler와 WorkManager를 비교할 때, API 23 이상에서 WorkManager를 선호하는 이유는 무엇인가?
-- Memory Leak을 방지하기 위해 Fragment에서 ViewBinding을 사용할 때 주의해야 할 점은 무엇인가?
-- Android Profiler를 사용할 때 앱의 스레드 덤프(Thread Dump)는 어떤 상황에서 분석하는가?
-- Bitmap 이미지를 메모리 효율적으로 로드하기 위해 사용하는 Android API 또는 라이브러리는 무엇인가?
-- Android Keystore를 사용하는 주요 목적은 무엇인가?
+- Foreground Service를 정상적으로 실행하기 위해 Android 8.0 이상에서 추가로 필요한 작업
+    - 배경
+        - Android 8.0 (API 26)부터 Background Execution Limits가 도입되면서,
+        - 백그라운드 상태에서 바로 일반 Service를 시작하는 것이 금지되었다.
+        - 대신, 백그라운드에서 Service를 시작하려면 Foreground Service를 사용해야 하고, 즉시 Notification을 띄워야 한다.
+
+    - 추가로 필요한 작업
+        - (1) startForegroundService() 사용
+            - 일반 startService() 대신, 반드시 Context.startForegroundService(Intent) 로 Service를 시작해야 한다.
+            ```kotlin
+            val intent = Intent(this, MyForegroundService::class.java)
+            ContextCompat.startForegroundService(this, intent)
+            ```
+
+        - (2) Service 내에서 빠르게 startForeground() 호출
+            - Service가 시작된 후 5초 이내에 반드시 startForeground() 호출로 Notification을 띄워야 한다.
+            - 지연되면 시스템이 ANR (App Not Responding)로 서비스를 강제 종료시킬 수 있음
+            ```kotlin
+            override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+                val notification = createNotification()
+                startForeground(NOTIFICATION_ID, notification)
+                return START_STICKY
+            }
+            ```
+
+- JobScheduler와 WorkManager를 비교할 때, API 23 이상에서 WorkManager를 선호하는 이유
+    - JobScheduler
+        - Android 5.0 (API 21)부터 도입.
+        - OS가 관리하는 백그라운드 작업 예약 시스템.
+        - 네트워크 연결 여부, 충전 중 여부 등 조건을 붙여 작업을 예약할 수 있다.
+
+    - WorkManager
+        - Android Jetpack 라이브러리 중 하나.
+        - 내부적으로 JobScheduler, AlarmManager, Firebase JobDispatcher 등을 상황에 따라 적절히 사용한다.
+        - API 14 이상 지원.
+        - 앱이 꺼지거나 디바이스가 재부팅되어도 작업을 보장한다.
+
+    - 왜 API 23 이상에서도 WorkManager를 선호하는가? JobScheduler보다 훨씬 신뢰성과 편의성이 높다
+        - (1) 더 높은 신뢰성과 일관성
+            - WorkManager는 JobScheduler에 비해 백그라운드 작업의 성공 보장이 강력하다.
+            - 앱 프로세스가 죽어도, 디바이스가 재부팅돼도 작업이 살아남는다.
+
+        - (2) 다양한 상황 대응
+            - WorkManager는 내부적으로 상황에 따라 JobScheduler, AlarmManager, 직접적인 Alarm + Broadcast 등을 적절히 조합해 사용한다.
+            - 즉, JobScheduler 단독 사용보다 훨씬 유연하고 견고하다.
+
+        - (3) Chaining, Constraints 지원
+            - 여러 작업을 순차적으로 연결(Chaining) 하거나,
+            - 네트워크 연결, 충전 여부 등 다양한 제약 조건(Constraints) 을 세밀하게 지정할 수 있다.
+            - 복잡한 작업 플로우를 쉽게 관리할 수 있다.
+
+        - (4) API 통합
+            - 여러 기기, 다양한 안드로이드 버전에서도 한 가지 API(WorkManager)만 사용하면 되기 때문에 개발과 유지보수가 훨씬 쉬워진다.
+
+
+- Memory Leak을 방지하기 위해 Fragment에서 ViewBinding을 사용할 때 주의해야 할 점
+    - 문제
+        - Fragment는 onCreateView() 에서 View를 생성하고, onDestroyView() 에서 View를 파괴한다.
+        - 그런데 ViewBinding 객체를 Fragment의 멤버 변수로 계속 참조하고 있으면, View가 파괴된 후에도 메모리에 남아 Memory Leak이 발생할 수 있다.
+
+    - 올바른 ViewBinding 패턴
+        - (1) _binding 변수를 nullable로 선언
+            - 외부에서는 항상 binding을 통해 접근
+            - 내부에서는 _binding을 관리
+            ```kotlin
+            private var _binding: FragmentHomeBinding? = null
+            private val binding get() = _binding!!
+            ```
+
+        - (2) onDestroyView()에서 _binding을 null로 해제
+            - View가 파괴될 때 반드시 _binding = null 해줘야 뷰에 대한 참조가 끊어지고 GC가 메모리를 회수 가능
+            ```kotlin
+            override fun onDestroyView() {
+                super.onDestroyView()
+                _binding = null
+            }
+            ```
+
+- Android Profiler를 사용할 때 앱의 스레드 덤프(Thread Dump)를 분석하는 상황
+    - 스레드 덤프 개념
+        - 앱의 모든 스레드 상태(Sleeping, Running, Waiting 등)를 한 번에 스냅샷처럼 저장한 것
+        - 각각의 스레드가 어떤 코드에서 무엇을 하고 있는지 기록된다.
+
+    - Thread Dump를 분석해야 하는 상황
+        - (1) 앱이 응답하지 않거나 멈췄을 때 (ANR, Hang)
+            - UI가 멈췄다면 메인 스레드(Main Thread) 가 무엇을 하고 있는지 확인해야 한다.
+            - 긴 작업이 메인 스레드에서 돌고 있으면 ANR(앱 응답 없음)이 발생할 수 있다.
+
+        - (2) Deadlock이나 무한 대기가 의심될 때
+            - 여러 스레드가 서로 자원을 기다리면서 멈춰 있는 상태(Deadlock)를 파악할 수 있다.
+            - 특정 스레드가 Lock을 잡고 계속 대기하거나 Release하지 않는지 확인한다.
+
+        - (3) 비정상적으로 많은 스레드 생성이 의심될 때
+            - 스레드가 비정상적으로 많이 생성되어 메모리를 잡아먹고 있다면,
+            - 어떤 스레드가 과도하게 생성되었는지 Thread Dump로 추적할 수 있다.
+
+    - 분석하는 방법
+        - Android Studio → Profiler → Threads 탭으로 이동
+        - 특정 순간(Freeze, ANR 등) 포착해서 Thread Dump 생성
+        - 각 스레드 이름과 스택 트레이스를 분석해서 문제 원인을 찾는다.
+
+
+- Bitmap 이미지를 메모리 효율적으로 로드하기 위해 사용하는 Android API 또는 라이브러리
+- Android Keystore를 사용하는 주요 목적
+
 - Proguard / R8 설정에서 -keepclassmembers 옵션은 무엇을 의미하는가?
 - Dynamic Feature Module을 사용하면 앱 배포 및 설치 시 어떤 이점이 생기는가?
 - LazyColumn을 최적화할 때 주의해야 할 점은 무엇인가?
