@@ -10210,6 +10210,40 @@ Organize concepts, features, types and Pros and Cons
 
 
 - Bitmap 이미지를 메모리 효율적으로 로드하기 위해 사용하는 Android API 또는 라이브러리
+    - Android 기본 API
+        - BitmapFactory.Options
+            - inSampleSize 설정을 통해 원본 이미지 크기를 축소하여 로드.
+            - inJustDecodeBounds = true를 먼저 사용해 메모리 할당 없이 이미지 크기만 파악하고, 적절한 축소 비율을 계산 후 로드.
+            - inPreferredConfig = Bitmap.Config.RGB_565를 사용하면 기본 ARGB_8888보다 메모리 사용량을 줄일 수 있음 (16bit vs 32bit).
+
+        - ImageDecoder (Android 9, API 28 이상)
+            - 고해상도 이미지를 다양한 크기로 효율적으로 디코딩할 수 있음.
+            - setTargetSampleSize, setTargetSize 등을 통해 다운샘플링하여 로드 가능.
+
+        - Bitmap.recycle()
+            - 사용이 끝난 Bitmap 객체는 명시적으로 recycle() 호출하여 메모리 해제 (단, 주의해서 사용해야 함).
+
+    - 대표 라이브러리
+        - Glide
+            - 강력한 이미지 로딩 및 캐싱 라이브러리.
+            - 디스크 캐시, 메모리 캐시 자동 지원.
+            - placeholder, thumbnail, override 등을 통해 리사이즈 및 지연 로딩 최적화 가능.
+            - 대용량 이미지도 스크롤 시 부드럽게 처리 가능.
+
+        - Picasso
+            - 간단한 코드로 이미지 로딩 가능.
+            - 메모리 및 디스크 캐시 기본 제공.
+            - 자동으로 이미지 크기를 조정하여 View에 맞춰서 로드.
+
+        - Coil
+            - Kotlin 코루틴 기반 경량 이미지 로딩 라이브러리.
+            - AndroidX 라이프사이클과 친화적.
+            - Glide/Picasso 대비 더욱 가벼운 메모리 사용량을 지향.
+
+    - 요약
+        - Android API로는 BitmapFactory.Options + ImageDecoder를 활용
+        - 라이브러리로는 Glide가 가장 널리 쓰이며, Coil은 최신 프로젝트에서 경량화를 목표로 많이 채택되고 있다.
+        
 - Android Keystore를 사용하는 주요 목적
 
 - Proguard / R8 설정에서 -keepclassmembers 옵션은 무엇을 의미하는가?
