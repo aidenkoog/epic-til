@@ -20,6 +20,49 @@ Organize concepts, features, types and Pros and Cons
 	  - UI의 유연성이 필요한 경우 → Flexbox, 전체적인 페이지 레이아웃을 설계할 경우 → Grid를 선택하는 것이 적절
 	  - 복합적인 UI에서는 Flexbox와 Grid를 함께 사용하여 최적화 가능
 
+- Electron 개념
+  - 개념
+    - 웹 기술(HTML, CSS, JavaScript)를 사용해서 데스크탑 앱을 만들 수 있도록 해주는 프레임워크
+
+  - 추가 설명
+    - Chromium(크롬 브라우저 엔진)으로 화면 그리고
+    - Node.js기능을 통해 OS를 제어할 수 있도록 함
+    - 웹 개발자가 네이티브 지식 없이도 윈도우(.exe), 맥(.dmg), 리눅스(.deb, .AppImage) 설치 파일을 쉽게 만들 수 있음
+  
+  - Electron 중요한 이유
+    - 여러 OS에 대해 하나의 코드 베이스로 윈도우/맥/리눅스 모두 지원 가능
+    - electron_builder로 쉽게 패키징 가능
+    - 웹 기술만 알면 네이티브 앱 빌드 / 개발 가능
+
+  - Electron 내부 구조
+    - Main Process: 
+      - 앱의 생명주기, 창 관리, 시스템 제어(Node.js 기능 가능)
+      - Node.js API를 자유롭게 사용 가능
+    - Renderer Process:
+      - 실제 화면 그리는 부분, HTML/CSS/JS(React, Vue등) 실행
+      - 웹 브라우저처럼 동작, 필요하면 Main과 통신해서 시스템 기능 요청 가능
+
+  - Electron으로 가능한 것들
+    - 데스크탑 앱 제작
+    - 파일 시스템 읽고 쓰기
+    - 시스템 명령어 실행
+    - 윈도우, 맥, 리눅스 배포
+    - 블루투스, USB 연결 제어
+    - 화면 밝기/볼륨/하드웨어 접근
+    - 알림(Notification), 트레이 아이콘 만들기
+    - 자동 업데이트(업그레이드) 구현
+
+  - Electron으로 제작한 앱
+    - 슬랙, Visual Studio Code, Discord, Figma
+
+  - 단점
+    - Chromium + Node.js를 묶어야 해서 앱 크기가 큼 (보통 100MB 이상)
+    - 브라우저 하나 띄운 것과 비슷, 메모리 사용량 많음
+    - 최적화 필요, 성능 튜닝 필수, 느려질 수 있음
+  
+  - 최적화 기법
+    - Electron Forge, 코드 스플리팅, Lazy Loading 등
+
 - CSS의 position: absolute와 position: fixed의 차이는?
 - CSS의 z-index는 어떻게 동작하는가?
 - CSS의 rem과 em 단위의 차이는?
