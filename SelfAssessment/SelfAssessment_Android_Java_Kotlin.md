@@ -10402,8 +10402,65 @@ Organize concepts, features, types and Pros and Cons
         - derivedStateOf는 "State 기반 연산을 최적화해서, 필요할 때만 recomposition을 발생시키는 스마트한 캐시" 개념이다.
         - 주로 필터링, 정렬, 값 계산 최적화 같은 곳에 사용된다.
 
-- LaunchedEffect와 rememberUpdatedState를 조합해야 하는 상황은 어떤 경우인가?
-- Modifier.recomposeHighlighter()를 사용하면 어떤 이점을 얻을 수 있는가?
+- LaunchedEffect와 rememberUpdatedState를 조합해야 하는 상황
+    - 핵심 개념
+        - LaunchedEffect는 컴포지션 시점에 Coroutine을 시작하는 데 사용
+        - LaunchedEffect 안에서 참조하는 값이 변경될 경우,
+            - → LaunchedEffect는 재시작돼야 하지만
+            - → 기존 코루틴은 취소되고 새로 시작됨
+        - 이를 막고 싶을 때 rememberUpdatedState를 사용해 "최신 값을 참조만" 하게 만들 수 있음
+
+    - 조합해야 되는 시기
+        - LaunchedEffect는 키 변경 없이 그대로 유지하고 싶고, 내부에서 참조하는 값만 항상 최신으로 유지하고 싶을 때.
+        - 대표적인 상황:
+            - 콜백 함수나 외부 상태가 바뀌더라도
+            - LaunchedEffect 자체는 재시작하지 않고,
+            - 최신 상태를 반영만 하고 싶을 때.
+
+    - 예시
+        ```kotlin
+        @Composable
+        fun MyComposable(onEvent: () -> Unit) {
+            val latestOnEvent = rememberUpdatedState(newValue = onEvent)
+
+            LaunchedEffect(Unit) { // 키를 Unit으로 고정 = 재시작 방지
+                while (true) {
+                    delay(1000)
+                    latestOnEvent.value() // 항상 최신 onEvent 호출
+                }
+            }
+        }
+        ```
+        - 포인트:
+            - LaunchedEffect(Unit) → 재시작 안 함
+            - rememberUpdatedState(onEvent) → onEvent가 변경돼도 항상 최신 값을 사용
+
+    - 정리
+        - LaunchedEffect: 컴포지션 시점에 코루틴 시작, 키 변경 시 재시작
+        - rememberUpdatedState: 키는 고정하고, 참조하는 값만 최신으로 유지
+
+- Modifier.recomposeHighlighter()를 사용할 시 장점
+    - 핵심 개념
+        - Modifier.recomposeHighlighter()는 컴포저블이 Recomposition(다시 그리기)될 때 화면에 깜빡이는 하이라이트 효과를 보여준다
+        - 즉, 어떤 컴포저블이 자주 다시 그려지는지 시각적으로 확인할 수 있는 디버깅 툴
+
+    - 장점
+        - 불필요한 Recomposition을 바로 눈으로 파악할 수 있다.
+        - 최적화 포인트를 빠르게 찾을 수 있다.
+        - 코드만 봐서는 알기 힘든 부분을 시각적으로 분석할 수 있다.
+
+    - 예시
+        ```kotlin
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color.Blue)
+                .recomposeHighlighter() // Recomposition 발생 시 깜빡임
+        )
+        ```
+        - 이 Box가 리컴포즈될 때마다 화면이 잠깐 깜빡인다.
+        - 깜빡임이 자주 발생한다면 → 불필요한 상태 변화나 recomposition 의심 가능.
+
 - Compose Navigation에서 ViewModel을 안전하게 공유하려면 어떻게 해야 하는가?
 - remember 대신 rememberSaveable을 써야 하는 대표적인 상황은?
 - LaunchedEffect(Unit) 은 언제 취소되는가?
