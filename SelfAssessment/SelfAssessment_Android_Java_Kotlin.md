@@ -10551,7 +10551,27 @@ Organize concepts, features, types and Pros and Cons
         - derivedStateOf는 값이 실제로 변경될 때만 recomposition을 유발
 
 - key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제
-    -
+    - [문제 원인]
+        - LazyColumn은 내부적으로 item content를 재사용(reuse) 하기 때문에 고유한 key 없이 index로만 item을 추적하면 순서가 바뀌거나 삭제/추가 시 잘못된 recomposition이 발생할 수 있음
+
+    - [대표적인 문제들]
+        - 스크롤 위치가 튐
+        - 아이템 애니메이션이 잘못됨 (예: 삭제인데 다른 아이템이 사라짐)
+        - 상태가 섞임 (예: 체크박스 상태가 엉뚱한 곳에 적용)
+
+    - [해결 방법]
+        - 반드시 stable하고 unique한 key를 제공해야 함
+        ```kotlin
+        items(list, key = { it.id }) { item ->
+            Text(item.name)
+        }
+        ```
+    
+    - 전체 정리
+        - LaunchedEffect(Unit)은 해당 Composable이 Composition에서 제거될 때 취소된다.
+        - derivedStateOf는 파생 상태 계산을 메모이징해 불필요한 recomposition을 줄이는 최적화 도구다.
+        - LazyColumn에서 key 없이 사용하면 스크롤 위치 튐, 상태 섞임, 잘못된 애니메이션 등의 문제가 생긴다.
+
 - rememberCoroutineScope()로 launch한 코루틴은 언제 자동 취소되는가?
 - Compose에서 recomposition 발생을 디버깅하기 위한 방법은?
 - rememberUpdatedState()는 어떤 상황에서 사용해야 하나?
