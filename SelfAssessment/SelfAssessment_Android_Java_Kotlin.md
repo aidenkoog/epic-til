@@ -10513,7 +10513,22 @@ Organize concepts, features, types and Pros and Cons
 
         - 사용자가 화면을 회전하거나 백그라운드에서 앱이 재생성되더라도 상태를 복원하고 싶다면 반드시 rememberSaveable 사용
 
-- LaunchedEffect(Unit) 은 언제 취소되는가?
+- LaunchedEffect(Unit) 취소 시점
+    - [핵심 개념]
+        - LaunchedEffect(Unit)은 Composable이 Composition에 진입할 때 실행되고 Composable이 Composition에서 벗어날 때(cancel) 자동으로 취소된다.
+
+    - [취소되는 시점]
+        - 해당 Composable이 사라지거나 recomposition에서 제외될 때
+        - Unit을 key로 썼기 때문에, 다시 실행되는 일은 없고, 해당 Composable이 제거될 때 한 번만 취소됨
+
+    - [예시 상황]
+        - if (isVisible) 조건 안에서 Composable을 보여주고 있는데
+        - isVisible이 false로 바뀌면 해당 LaunchedEffect(Unit)도 종료됨
+
+    - [주의]
+        - LaunchedEffect(someKey)로 key를 바꾸면, key가 변경될 때마다 기존 코루틴이 취소되고 재시작된다.
+        - (이건 재시작, 위의 Unit은 종료)
+
 - derivedStateOf의 핵심 역할은?
 - key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제는?
 
