@@ -10529,9 +10529,29 @@ Organize concepts, features, types and Pros and Cons
         - LaunchedEffect(someKey)로 key를 바꾸면, key가 변경될 때마다 기존 코루틴이 취소되고 재시작된다.
         - (이건 재시작, 위의 Unit은 종료)
 
-- derivedStateOf의 핵심 역할은?
-- key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제는?
+- derivedStateOf의 핵심 역할
+    - [핵심 기능]
+        - Compose에서 계산된 상태(derived state)를 메모이징해서 불필요한 recomposition을 방지하는 데 사용된다.
 
+    - [사용 시점]
+        - 어떤 State를 기반으로 파생된 값을 계산할 때, 그 파생 값이 의미 있는 변경이 있을 때만 recomposition되게 하고 싶을 때
+
+    - [예시]
+        ```kotlin
+        val list by remember { mutableStateOf(listOf(1, 2, 3)) }
+        val evenCount by remember {
+            derivedStateOf { list.count { it % 2 == 0 } }
+        }
+        ```
+        - list가 변경되지 않으면 evenCount는 다시 계산되지 않는다
+        - 즉, 불필요한 recomposition 방지 + 성능 최적화
+
+    - [비교]
+        - 그냥 val derived = list.count { ... }면 recomposition마다 재계산됨
+        - derivedStateOf는 값이 실제로 변경될 때만 recomposition을 유발
+
+- key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제
+    -
 - rememberCoroutineScope()로 launch한 코루틴은 언제 자동 취소되는가?
 - Compose에서 recomposition 발생을 디버깅하기 위한 방법은?
 - rememberUpdatedState()는 어떤 상황에서 사용해야 하나?
