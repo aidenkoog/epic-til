@@ -10488,11 +10488,35 @@ Organize concepts, features, types and Pros and Cons
 
 
 - remember 대신 rememberSaveable을 써야 하는 대표적인 상황
+    - [차이점 요약]
+        - remember: 상태를 메모리에만 저장 → 프로세스가 유지될 때만 복원됨
+        - rememberSaveable: 상태를 Bundle에 저장 → Activity 재생성(예: 회전, 백그라운드 후 복귀) 시에도 복원됨
 
+    - [rememberSaveable이 필요한 대표적 상황]
+        - (1) 화면 회전 시 상태 유지
+            - 예: TextField 입력값, 선택된 탭 인덱스 등
+            - 화면 회전하면 remember는 초기화되지만, rememberSaveable은 값 유지됨
+
+        - (2) 시스템에 의한 프로세스 kill 후 재생성
+            - 예: 사용자가 앱을 백그라운드로 뒀다가 오래 지나 다시 열었을 때
+            - remember는 데이터가 사라지고, rememberSaveable은 복원됨
+
+        - (3) Form 입력 단계
+            - 여러 화면을 이동하며 입력할 때, 임시 상태를 유지해야 하는 상황 (예: 회원가입, 주문 정보 작성)
+
+    - [주의사항]
+        - 저장 가능한 타입이어야 함 (Bundle에 저장 가능한 기본 타입 or Saver 제공)
+        - 커스텀 객체는 Saver를 별도로 정의해야 함
+
+    - 요약
+        - ViewModel 공유는 NavBackStackEntry 기준으로 hiltViewModel(backStackEntry) 사용이 가장 안전
+
+        - 사용자가 화면을 회전하거나 백그라운드에서 앱이 재생성되더라도 상태를 복원하고 싶다면 반드시 rememberSaveable 사용
 
 - LaunchedEffect(Unit) 은 언제 취소되는가?
 - derivedStateOf의 핵심 역할은?
 - key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제는?
+
 - rememberCoroutineScope()로 launch한 코루틴은 언제 자동 취소되는가?
 - Compose에서 recomposition 발생을 디버깅하기 위한 방법은?
 - rememberUpdatedState()는 어떤 상황에서 사용해야 하나?
