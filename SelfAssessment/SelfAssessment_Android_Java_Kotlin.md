@@ -10461,8 +10461,35 @@ Organize concepts, features, types and Pros and Cons
         - 이 Box가 리컴포즈될 때마다 화면이 잠깐 깜빡인다.
         - 깜빡임이 자주 발생한다면 → 불필요한 상태 변화나 recomposition 의심 가능.
 
-- Compose Navigation에서 ViewModel을 안전하게 공유하려면 어떻게 해야 하는가?
-- remember 대신 rememberSaveable을 써야 하는 대표적인 상황은?
+- Compose Navigation에서 ViewModel을 안전하게 공유하기 위한 방법
+    - [공유 ViewModel의 목적]
+        - 여러 Composable(Screen) 간에 상태를 유지하고 공유하고 싶을 때 필요
+        - 예: A → B → C 로 이동하면서 하나의 ViewModel로 데이터 공유
+
+    - [문제점]
+        - viewModel()을 각 Composable에서 개별 호출하면 ViewModel이 재생성되거나 스코프가 달라져 공유되지 않음
+        - 특히 NavGraphBuilder.composable() 내부에서 viewModel() 호출 시 기본은 그 Composable에 종속된 ViewModelStoreOwner를 따름
+
+    - [해결 방법]
+        - (1) hiltViewModel() + Navigation Graph ViewModel 사용
+            ```kotlin
+            val sharedViewModel: SharedViewModel = hiltViewModel(navController.getBackStackEntry("routeA"))
+            ```
+            - getBackStackEntry("routeA")를 통해 "routeA를 기준으로 생성된 ViewModel"을 하위 화면에서 안전하게 재사용 가능
+            - routeA는 해당 ViewModel을 처음 생성한 screen의 route명
+
+        - (2) activityViewModel() 혹은 sharedViewModel() (비권장 또는 제한적)
+            - 전체 액티비티 스코프에서 공유하는 방식이지만,
+            - 복잡한 구조에서는 데이터 오염 위험이 있어, 보통은 BackStackEntry 기반 접근이 더 권장됨
+
+    - [주의사항]
+        - 반드시 NavController의 route가 back stack에 존재해야 함
+        - Dialog, BottomSheet처럼 backstack에 올라가지 않는 경우에는 공유 불가
+
+
+- remember 대신 rememberSaveable을 써야 하는 대표적인 상황
+
+
 - LaunchedEffect(Unit) 은 언제 취소되는가?
 - derivedStateOf의 핵심 역할은?
 - key를 설정하지 않고 LazyColumn을 사용할 경우 발생할 수 있는 문제는?
