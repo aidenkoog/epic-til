@@ -10572,9 +10572,33 @@ Organize concepts, features, types and Pros and Cons
         - derivedStateOf는 파생 상태 계산을 메모이징해 불필요한 recomposition을 줄이는 최적화 도구다.
         - LazyColumn에서 key 없이 사용하면 스크롤 위치 튐, 상태 섞임, 잘못된 애니메이션 등의 문제가 생긴다.
 
-- rememberCoroutineScope()로 launch한 코루틴은 언제 자동 취소되는가?
-- Compose에서 recomposition 발생을 디버깅하기 위한 방법은?
-- rememberUpdatedState()는 어떤 상황에서 사용해야 하나?
+- rememberCoroutineScope()로 launch한 코루틴 자동 취소 시점
+    - [핵심 개념]
+        - rememberCoroutineScope()는 Composable의 Composition 범위에 종속되지 않음
+        - 즉, LaunchedEffect와 달리 Composable이 제거돼도 자동 취소되지 않음
+
+    - [취소 시점]
+        - 자동으로는 취소되지 않는다
+        - 직접 관리해야 한다 (Job.cancel() 등)
+
+    - [사용 시점]
+        - 버튼 클릭 같은 UI 이벤트에서 코루틴을 일시적으로 실행하고 싶을 때
+        ```kotlin
+        val scope = rememberCoroutineScope()
+        Button(onClick = {
+            scope.launch {
+                doSomething()
+            }
+        }) { ... }
+        ```
+
+    - [주의사항]
+        - 오래 지속되거나 ViewModel 단위로 관리해야 할 경우에는 ViewModelScope 사용이 적절함
+        - rememberCoroutineScope()는 메모리 누수 주의가 필요함
+
+- Compose에서 recomposition 발생을 디버깅하기 위한 방법
+- rememberUpdatedState()는 사용 시점
+
 - Modifier.graphicsLayer를 사용할 때 주의할 점은?
 - CompositionLocalProvider를 남발할 경우 문제가 되는 이유는?
 - Composable 함수에 key1, key2를 걸고 LaunchedEffect(key1, key2)를 걸었을 때, 둘 중 하나라도 바뀌면 어떤 일이 발생하는가?
