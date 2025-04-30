@@ -10616,8 +10616,27 @@ Organize concepts, features, types and Pros and Cons
             - 안정을 위한 주석과 data 구조 리팩토링 고려
 
 - rememberUpdatedState()는 사용 시점
+    - [기본 개념]
+        - LaunchedEffect, DisposableEffect 등과 같이 Compose scope 내에서 오래 지속되는 작업에서 "최신 값을 참조" 해야 할 때 사용
 
+    - [필요 이유]
+        - Compose에서는 Effect 블록이 초기 Composition 시점의 값을 캡처하기 때문에 이후 변경된 값을 알 수 없음
 
+    - [사용 시점 예시]
+        ```kotlin
+        @Composable
+        fun MyScreen(onEvent: () -> Unit) {
+            val currentOnEvent = rememberUpdatedState(onEvent)
+
+            LaunchedEffect(Unit) {
+                delay(2000)
+                currentOnEvent.value() // 항상 최신 콜백을 참조
+            }
+        }
+        ```
+
+    - [정리]
+        - 외부 값이 바뀌더라도 Effect 블록 자체는 재시작되지 않고, 내부에서 참조하는 값만 항상 최신으로 유지하고 싶을 때 사용
 
 - Modifier.graphicsLayer를 사용할 때 주의할 점은?
 - CompositionLocalProvider를 남발할 경우 문제가 되는 이유는?
