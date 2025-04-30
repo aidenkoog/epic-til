@@ -10597,7 +10597,27 @@ Organize concepts, features, types and Pros and Cons
         - rememberCoroutineScope()는 메모리 누수 주의가 필요함
 
 - Compose에서 recomposition 발생을 디버깅하기 위한 방법
+    - [디버깅 방법]
+        - (1) Modifier.recomposeHighlighter()
+            - 리컴포지션 시 깜빡이며 시각적으로 확인 가능 (디버깅 전용)
+            ```kotlin
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .recomposeHighlighter()
+            )
+            ```
+
+        - (2) Log.d() 사용
+            - Composable 내부에 Log.d()로 컴포지션 확인
+
+        - (3) @Stable, @Immutable 확인
+            - 리컴포지션 과다 발생 시 data class나 parameter에 불필요한 변화가 있는지 확인
+            - 안정을 위한 주석과 data 구조 리팩토링 고려
+
 - rememberUpdatedState()는 사용 시점
+
+
 
 - Modifier.graphicsLayer를 사용할 때 주의할 점은?
 - CompositionLocalProvider를 남발할 경우 문제가 되는 이유는?
