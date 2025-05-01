@@ -10638,9 +10638,97 @@ Organize concepts, features, types and Pros and Cons
     - [정리]
         - 외부 값이 바뀌더라도 Effect 블록 자체는 재시작되지 않고, 내부에서 참조하는 값만 항상 최신으로 유지하고 싶을 때 사용
 
-- Modifier.graphicsLayer를 사용할 때 주의할 점은?
-- CompositionLocalProvider를 남발할 경우 문제가 되는 이유는?
-- Composable 함수에 key1, key2를 걸고 LaunchedEffect(key1, key2)를 걸었을 때, 둘 중 하나라도 바뀌면 어떤 일이 발생하는가?
+- Modifier.graphicsLayer를 사용할 때 주의할 점
+    - [문제 원인]
+        - graphicsLayer는 Modifier.drawLayer의 저수준 API
+        - 성능과 시각 효과 측면에서 강력하지만 하드웨어 레이어를 생성하므로 렌더링 비용이 증가할 수 있음.
+
+    - [대표적인 문제들]
+        - 불필요한 레이어 생성으로 UI 렌더링 성능 저하
+        - 자식 Composable이 과도하게 overdraw되는 현상
+        - alpha, scale, translation 등의 속성 적용 시 의도치 않은 clipping 또는 시각적 오류 발생
+
+    - [해결 방법]
+        - 시각적 효과(예: fade, transform)가 정말 필요한 경우에만 사용
+        - 애니메이션이나 변형 효과를 넣을 때는 Modifier.graphicsLayer 대신 
+        - Modifier.alpha, Modifier.scale, Modifier.offset 등 Compose 기본 Modifier 우선 고려
+
+- CompositionLocalProvider를 남발할 경우 문제가 되는 이유
+    - [문제 원인]
+        - CompositionLocal은 전역 상태를 계층적으로 전달하는 강력한 도구
+        - 남발하면 상태 관리가 불투명해지고 성능 문제도 발생할 수 있음.
+
+    - [대표적인 문제들]
+        - 구조가 복잡해짐: 어떤 값이 어디서 바뀌는지 추적 어려움
+        - 성능 저하: CompositionLocal 값이 변경되면 하위 전체 recomposition 발생
+        - 테스트/유지보수 어려움: 명시적 파라미터가 아닌 암묵적 상태 전달이 많아지면 컴포저블 재사용성 저하
+
+    - [해결 방법]
+        - 꼭 계층적 상태 전달이 필요한 경우에만 사용
+        - 일반적인 데이터 전달은 state hoisting으로 처리
+        - CompositionLocal은 테마, 다크모드, 로케일, 디바이스 정보처럼 컨텍스트성 전역 상태 전달에 국한
+
+- Composable 함수에 key1, key2를 걸고 LaunchedEffect(key1, key2)를 걸었을 때, 둘 중 하나라도 바뀔 시 발생하는 것
+    - [동작 원리]
+        - LaunchedEffect(key1, key2)는 key1 또는 key2 중 하나라도 변경되면 
+        - 기존 코루틴을 취소하고 새 코루틴을 실행함.
+
+    - [대표적인 동작]
+        - 이전 LaunchedEffect 블록 내 코루틴은 CancellationException으로 중단됨
+        - 새로운 LaunchedEffect 블록이 재실행됨
+        - 상태 관찰, 이벤트 수신 등에서 재구독이 일어날 수 있음
+
+    - [주의사항]
+        - key를 잘못 설정하면 불필요한 코루틴 재시작
+        - side effect 동작은 key 변화에 따라 정확하게 한 번만 실행되도록 보장해야 함
+
+    - [해결 방법]
+        - key1, key2는 정말로 side effect 실행 조건에 해당하는 값만 넣을 것
+        - 불필요한 재실행 방지를 위해 derivedStateOf + snapshotFlow 사용 고려
+
+- Compose에서 상태 호이스팅(State Hoisting)
+    - [정의]
+        - 상태(state)를 Composable 내부가 아닌 외부에서 소유하고, 
+        - Composable은 그 상태를 입력값(파라미터)으로 받고, 변경은 콜백을 통해 요청하는 구조를 의미함.
+
+    - [도입 배경]
+        - 재사용성 향상: 내부 상태를 갖지 않기 때문에 다양한 상황에서 재사용 가능
+        - 테스트 용이: 외부에서 상태를 주입받으므로 단위 테스트가 쉬움
+        - 단방향 데이터 흐름(One-way data flow)을 유지해 버그 감소, 예측 가능한 UI 동작 유도
+
+    - [대표적인 문제들] (상태 호이스팅이 없을 경우)
+        - Composable 내부에 remember로 상태를 관리하면,
+            - 외부에서 값을 제어하기 어려움
+            - 동기화 안 된 상태로 인해 UI 버그 발생 가능
+            - 다른 Composable과 상태 공유 어려움
+
+    - [상태 호이스팅 기본 구조 예시]
+        ```kotlin
+        // 상태는 외부에서 주입받고, 변경은 콜백을 통해 요청
+        @Composable
+        fun MySwitch(
+            isChecked: Boolean,
+            onCheckedChange: (Boolean) -> Unit
+        ) {
+            Switch(
+                checked = isChecked,
+                onCheckedChange = onCheckedChange
+            )
+        }
+
+        // 외부에서 아래와 같이 호출하여 사용
+        var checked by remember { mutableStateOf(false) }
+
+        MySwitch(
+            isChecked = checked,
+            onCheckedChange = { checked = it }
+        )
+        ```
+    - [요약]: Compose의 권장 패턴, 복잡한 UI에서의 유지보수성과 테스트성 향상의 핵심
+        - Composable은 상태를 소유하지 말고 받아라
+        - 변경은 콜백으로 위임하라
+        - 단방향 흐름을 지켜라
+
 - Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
 - Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
 - Compose에서 LazyColumn의 성능을 최적화하는 방법
