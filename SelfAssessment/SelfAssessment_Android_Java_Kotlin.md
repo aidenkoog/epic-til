@@ -10775,6 +10775,24 @@ Organize concepts, features, types and Pros and Cons
         - 이미지 등은 AsyncImage, rememberImagePainter + contentScale.Crop 등 최적화 적용
 
 - Compose에서 MutableState와 ImmutableState의 차이점
+    - [개념 차이]
+        - MutableState<T>: 값이 바뀌면 Compose가 자동으로 recomposition
+        - ImmutableState (예: val state = remember { derivedStateOf { ... } }): 읽기 전용 뷰, 외부에서는 값을 변경할 수 없음
+
+    - [용도 차이]
+        - MutableState는 UI 변경을 트리거하는 값
+        - derivedStateOf 기반 State<T>는 계산된 상태로 성능 최적화 목적
+
+    - [주의사항]
+        - MutableState는 지나치게 많이 생성하면 불필요한 recomposition 초래
+        - 직접 노출하지 말고 viewModel -> UI로는 Immutable 형태로 전달하는 구조 권장
+
+    - [패턴]
+        ```kotlin
+        // ViewModel
+        private val _isVisible = mutableStateOf(false)
+        val isVisible: State<Boolean> get() = _isVisible
+        ```
 
 - LaunchedEffect, DisposableEffect 설명 및 LaunchedEffect 대신 DisposableEffect로 다 대체해도 문제없는지에 대한 설명
 
