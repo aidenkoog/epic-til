@@ -10759,6 +10759,21 @@ Organize concepts, features, types and Pros and Cons
         - DisposableEffect 등을 활용해 scope 사용 후 정리 필요 시 정리 로직 명시
 
 - Compose에서 LazyColumn의 성능을 최적화하는 방법
+    - [문제 원인]
+        - LazyColumn은 화면에 보여지는 아이템만 Compose하지만, 
+        - 내부 상태 관리, recomposition, 측정 등에서 성능 병목 발생 가능
+
+    - [대표적인 문제들]
+        - key 없이 사용 시 아이템 변경 시 잘못된 recomposition 또는 스크롤 위치 튐
+        - 무거운 Composable을 리스트 안에서 직접 호출
+        - 애니메이션 중첩, Modifier 조합 과다
+
+    - [해결 방법]
+        - items(items, key = { it.id }) 형태로 stable하고 unique한 key 제공
+        - 아이템 Composable은 @Composable fun ItemRow(...)처럼 분리하고 재사용 가능하게 구성
+        - LazyColumn 내부의 상태나 애니메이션은 반드시 성능을 고려해 최소화
+        - 이미지 등은 AsyncImage, rememberImagePainter + contentScale.Crop 등 최적화 적용
+
 - Compose에서 MutableState와 ImmutableState의 차이점
 
 - LaunchedEffect, DisposableEffect 설명 및 LaunchedEffect 대신 DisposableEffect로 다 대체해도 문제없는지에 대한 설명
