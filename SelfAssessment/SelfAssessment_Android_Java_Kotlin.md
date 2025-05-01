@@ -10730,9 +10730,39 @@ Organize concepts, features, types and Pros and Cons
         - 단방향 흐름을 지켜라
 
 - Compose에서 animation API를 활용할 때 발생할 수 있는 성능 문제와 해결책
+    - [문제 원인]
+        - animate*AsState, updateTransition, AnimatedVisibility 등의 애니메이션 API는
+        - 내부적으로 Frame-by-Frame recomposition이나 Layout Pass 재요청을 발생시킬 수 있음.
+
+    - [대표적인 문제들]
+        - 불필요한 recomposition으로 인한 UI 렌더링 부담
+        - 오브젝트 재생성 비용 증가 (예: 애니메이션 대상 값이 복잡한 객체일 경우)
+        - 중첩된 애니메이션 또는 LazyColumn 내 사용 시 jank 발생 가능성
+
+    - [해결 방법]
+        - animate*AsState 대상은 가급적 Primitive 타입 또는 immutable 객체 사용
+        - AnimatedVisibility는 간단한 UI에만 사용, 복잡한 경우 Transition 기반 커스텀 애니메이션 고려
+        - 애니메이션 대상 Composable은 key 또는 derivedStateOf 등으로 불필요한 recomposition 차단
+
 - Jetpack Compose에서 rememberCoroutineScope를 사용할 때 주의해야 할 점
+    - [문제 원인]
+        - rememberCoroutineScope()는 Composition과 함께 생명주기를 가지며, 
+        - 수동으로 관리하지 않으면 코루틴이 뷰가 사라진 후에도 살아남을 수 있음.
+
+    - [대표적인 문제들]
+        - 메모리 누수(leak): Composable이 사라졌는데 코루틴은 계속 실행 중
+        - 중첩 Composable에서 여러 Scope 생성 시 의도치 않은 동시성 문제
+
+    - [해결 방법]
+        - 실제로 Composable의 수명과 정확히 일치하는 작업은 LaunchedEffect 사용 우선
+        - rememberCoroutineScope는 사용자 상호작용 기반(one-shot 이벤트 처리) 등에만 제한적으로 사용
+        - DisposableEffect 등을 활용해 scope 사용 후 정리 필요 시 정리 로직 명시
+
 - Compose에서 LazyColumn의 성능을 최적화하는 방법
 - Compose에서 MutableState와 ImmutableState의 차이점
+
+- LaunchedEffect, DisposableEffect 설명 및 LaunchedEffect 대신 DisposableEffect로 다 대체해도 문제없는지에 대한 설명
+
 - Jetpack Compose의 Layout 코드를 최적화하는 방법
 - Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
 - Jetpack Compose에서 SnapshotStateList와 일반 List의 차이점
