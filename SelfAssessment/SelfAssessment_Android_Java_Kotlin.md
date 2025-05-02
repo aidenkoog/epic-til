@@ -10795,6 +10795,60 @@ Organize concepts, features, types and Pros and Cons
         ```
 
 - LaunchedEffect, DisposableEffect 설명 및 LaunchedEffect 대신 DisposableEffect로 다 대체해도 문제없는지에 대한 설명
+    - LaunchedEffect
+        - [정의]
+            - Composable이 composition될 때 코루틴을 실행할 수 있도록 하는 API.
+            - 지정된 key가 변경되면 기존 코루틴을 자동으로 취소하고 새로 시작함.
+
+        - [주 사용 사례]
+            - 화면 진입 시 초기 로직 실행
+            - 상태 변경 시 네트워크 요청, 애니메이션 시작 등 비동기 작업 수행
+            - collect, delay, launch 기반의 작업 처리
+
+        - [예시]
+            ```kotlin
+            LaunchedEffect(Unit) {
+                delay(1000)
+                viewModel.fetchData()
+            }
+            ```
+
+    - DisposableEffect
+        - [정의]
+            - Composable이 composition될 때 리소스를 생성하고, 
+            - composition이 종료될 때 해당 리소스를 정리하는 용도의 API
+
+        - [주 사용 사례]
+            - 리스너 등록/해제
+            - 콜백, 브로드캐스트 수신 등록
+            - 리소스나 참조 해제 로직 (onDispose { ... })
+
+        - [예시]
+            ```kotlin
+            DisposableEffect(key1 = context) {
+                val listener = SomeListener()
+                registerListener(listener)
+                onDispose {
+                    unregisterListener(listener)
+                }
+            }
+            ```
+
+    - LaunchedEffect를 DisposableEffect로 전부 대체 가능한지?
+        - [결론]
+            - 불가능하며 적절한 용도 구분이 필요
+        - [이유]
+            - LaunchedEffect는 코루틴 실행을 위한 API, DisposableEffect는 리소스 정리를 위한 API
+            - DisposableEffect에서는 suspend 함수를 호출할 수 없음 → 비동기 로직 실행 불가
+            - LaunchedEffect는 rememberCoroutineScope() 없이도 키 변경에 따라 자동 관리되는 scope를 제공
+
+    - [정리 요약]
+        - LaunchedEffect: 비동기 처리 / 코루틴 실행용
+        - DisposableEffect: 등록/해제 / 정리용 (side-effect 해제)
+        - 서로 용도가 완전히 다르므로 대체 불가이며, 각 목적에 맞게 사용해야 Compose 생명주기에 맞는 안정적인 동작이 보장됨
+
+- LaunchedEffect와 DisposableEffect를 하나의 Composable 함수 내에서 같이 사용할 때의 현상
+- LaunchedEffect와 DisposableEffect 중 먼저 실행되는 것
 
 - Jetpack Compose의 Layout 코드를 최적화하는 방법
 - Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
