@@ -10848,7 +10848,93 @@ Organize concepts, features, types and Pros and Cons
         - 서로 용도가 완전히 다르므로 대체 불가이며, 각 목적에 맞게 사용해야 Compose 생명주기에 맞는 안정적인 동작이 보장됨
 
 - LaunchedEffect와 DisposableEffect를 하나의 Composable 함수 내에서 같이 사용할 때의 현상
+    - [동작 구조]
+        - LaunchedEffect와 DisposableEffect는 각각 별도의 Composition 트리 lifecycle에 따라 작동
+        - 둘 다 같은 Composable 내에 존재하더라도 독립적으로 관리되며, 서로 간섭하지 않음
+        - key가 같다면 각자 해당 key의 변경 여부에 따라 작동함
+
+    - [공존할 때의 실제 현상]
+        - Composable이 처음 composition될 때:
+            - DisposableEffect → effect 실행 후 onDispose 등록됨
+            - LaunchedEffect → 코루틴 시작
+
+        - key가 변경될 때:
+            - 두 effect의 key가 동일하면:
+                - DisposableEffect → onDispose 먼저 실행 → 새로운 effect 재실행
+                - LaunchedEffect → 기존 코루틴 자동 취소 → 새 코루틴 시작
+
+        - Composable이 composition에서 제거될 때:
+            - DisposableEffect.onDispose → 호출됨
+            - LaunchedEffect의 코루틴 → CancellationException으로 종료됨
+
+    - [주의사항]
+        - DisposableEffect는 즉시(onDispose) 실행
+        - LaunchedEffect는 코루틴 내부에서 순차적으로 실행되므로
+        - 둘 다 동일한 자원을 다룰 경우 작업 순서 및 동기화 문제 주의
+        - 예: DisposableEffect에서 리소스 해제 후, 
+        - LaunchedEffect에서 접근하면 NullPointerException 발생 가능
+
+    - [실제 사용 예시]
+        ```kotlin
+        @Composable
+        fun ExampleComposable(id: String) {
+            DisposableEffect(id) {
+                val listener = registerSomeCallback()
+                onDispose {
+                    unregisterSomeCallback(listener)
+                }
+            }
+
+            LaunchedEffect(id) {
+                // suspend 함수 실행 가능
+                delay(500)
+                fetchData(id)
+            }
+        }
+        ```
+    - [요약 정리]
+        - LaunchedEffect와 DisposableEffect는 같은 Composable에서 공존 가능하며, 독립적으로 동작
+        - 동일한 key를 공유하더라도 각자의 역할(코루틴 vs 리소스 해제)은 분리되어 관리됨
+        - 단, 동일 자원 접근 시 순서 주의 필요
+
 - LaunchedEffect와 DisposableEffect 중 먼저 실행되는 것
+    - [정확한 실행 순서]
+        - DisposableEffect가 먼저 실행된다.
+        - Compose의 내부 동작 순서상 DisposableEffect는 composition 단계에서 즉시 실행되며,
+        - LaunchedEffect는 composition이 끝난 후 Frame 시점에 코루틴으로 예약되어 실행됨.
+
+    - [이유 및 배경]
+        - DisposableEffect는 SideEffect 계열 중에서도 composition 시점의 리소스 등록 및 정리 용도
+        - LaunchedEffect는 composition이 완료된 후에 실제로 CoroutineScope.launch로 코루틴을 시작
+
+    - [실제 예시 흐름]
+        ```kotlin
+        @Composable
+        fun Example(id: String) {
+            DisposableEffect(id) {
+                println("DisposableEffect 실행")
+                onDispose {
+                    println("DisposableEffect onDispose 실행")
+                }
+            }
+
+            LaunchedEffect(id) {
+                println("LaunchedEffect 실행")
+            }
+        }
+        // 출력 결과
+        // DisposableEffect 실행
+        // LaunchedEffect 실행
+
+        // 만약 id가 바뀌어서 recomposition이 발생하면:
+        // DisposableEffect onDispose 실행 (기존 리소스 정리)
+        // DisposableEffect 실행 (새 리소스 등록)
+        // LaunchedEffect 실행 (새 코루틴 실행)
+        ```
+    - [요약 정리]
+        - DisposableEffect는 항상 먼저 실행됨
+        - LaunchedEffect는 composition 이후 다음 Frame에 코루틴으로 실행
+        - 리소스 해제 → 재설정 → 코루틴 시작 순서를 의도한 대로 설계해야 안정성 확보
 
 - Jetpack Compose의 Layout 코드를 최적화하는 방법
 - Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
