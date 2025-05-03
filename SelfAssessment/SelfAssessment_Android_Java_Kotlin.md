@@ -11392,11 +11392,184 @@ Organize concepts, features, types and Pros and Cons
         - Lifecycle에 민감한 경우 collectAsStateWithLifecycle() 활용 (crash 방지)
 
 - Android 14에서 Jetpack Compose와 관련된 주요 변경 사항
+    - [핵심 변경 사항]
+        - (1) Runtime Permission 변경
+            - SCHEDULE_EXACT_ALARM, POST_NOTIFICATIONS 등 새로운 퍼미션이 등장 → Compose 앱도 명시적 요청 필요
+        - (2) Predictive Back 지원 강화
+            - Compose Navigation에 Predictive Back Transition API 도입됨
+            - BackHandler 사용 시 predictive back 흐름 방해 주의 필요
+        - (3) IME(키보드) 애니메이션 개선
+            - Compose에서 WindowInsets.ime 사용 시 애니메이션이 더 자연스럽고 동기화된 애니메이션 동작 가능
+        - (4) Compose Compiler 및 Kotlin 1.9.x 대응
+            - 최신 Android Studio에서는 Kotlin 1.9 + Compose Compiler 1.5+ 조합 사용 권장
+            - @Composable target 변경 등 내부 최적화 적용됨
+
+    - [대응 방법]
+        - AndroidManifest에 새로운 퍼미션 반영
+        - androidx.activity:activity-compose 최신 버전 사용
+        - compose.navigation 업데이트 시 Predictive Back 관련 옵션 설정
+        - Jetpack BOM을 최신으로 유지 (compose-bom:2023.10.01 이상)
+
 - Jetpack Compose의 새로운 Material 3 디자인 적용 시 고려해야 할 사항
+    - [변경된 핵심 요소]
+        - (1) ColorScheme 기반 색상 시스템
+            - MaterialTheme.colorScheme.primary 등 → 더 세분화된 색상 체계 제공
+            - Android 12 이상에서는 Dynamic Color까지 자동 적용 가능
+        - (2) 기본 컴포넌트 스타일 변화
+            - Button, TextField, Card, AppBar 등 Material 2 대비 여백, 모서리, 간격, 상태 변화 다름
+            - FilledTonalButton, ElevatedCard, CenterAlignedTopAppBar 등 신규 컴포넌트 추가
+        - (3) Motion 및 Shape 시스템 업데이트
+            - Elevation과 Motion이 시각적으로 더 표현되도록 변경됨
+    - [적용 시 고려사항]
+        - Material3로 테마 마이그레이션할 때 기존 Material2 스타일과 혼용 주의
+        - 기본 MaterialTheme → MaterialTheme3로 변경 후, colorScheme, typography, shapes를 전면 적용
+        - 다크모드 + Dynamic Color 대응은 dynamicLightColorScheme()로 분기
+
 - Jetpack Compose에서 터치 이벤트를 처리하는 방법
+    - [기본 처리 방식]
+        - (1) Modifier.clickable()
+            - 단일 탭 제스처 처리
+            - ripple 효과 및 accessibility 자동 지원
+
+        - (2) Modifier.pointerInput()
+            - 저수준 터치 제어 (탭, 드래그, 멀티터치 등)
+            - detectTapGestures, awaitPointerEventScope 등 활용 가능
+
+        - (3) Modifier.pointerInteropFilter()
+            - Android View 방식의 MotionEvent 직접 처리 가능 (Interop 용)
+
+    - [예시]
+        ```kotlin
+        Modifier.pointerInput(Unit) {
+            detectTapGestures(
+                onTap = { offset -> /* 좌표 기반 동작 */ },
+                onDoubleTap = { /* 더블탭 처리 */ }
+            )
+        }
+
+        // pointerInteropFilter
+        Modifier.pointerInteropFilter {
+            when (it.action) {
+                MotionEvent.ACTION_DOWN -> { /* 뷰 방식 이벤트 */ true }
+                else -> false
+            }
+        }
+        ```
+
+    - [Best Practice]
+        - 간단한 동작: clickable()
+        - 제스처 복합 조합: pointerInput()
+        - 기존 View 연동 필요 시: pointerInteropFilter()
+        - 터치 충돌 방지 시 indication = null, interactionSource = remember { MutableInteractionSource() } 활용 가능
+
 - Jetpack Compose에서 다크 모드를 지원하는 방법
+    - [기본 개념]
+        - Compose는 시스템 다크 모드에 따라 자동으로 테마를 변경할 수 있는 구조를 갖고 있음
+        - isSystemInDarkTheme()을 사용해 현재 테마 상태를 판단 가능
+
+    - [구현 방법]
+        - (1) 테마 설정
+            ```kotlin
+            @Composable
+            fun MyAppTheme(
+                darkTheme: Boolean = isSystemInDarkTheme(),
+                content: @Composable () -> Unit
+            ) {
+                val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+
+                MaterialTheme(
+                    colorScheme = colorScheme,
+                    typography = Typography,
+                    shapes = Shapes,
+                    content = content
+                )
+            }
+
+            // 사용 시
+            MyAppTheme {
+                // Your UI
+            }
+            ```
+    - [Best Practice]
+        - 시스템 설정에 따라 테마 자동 전환 (isSystemInDarkTheme)
+        - 색상은 MaterialTheme.colorScheme.primary 등으로 추상화해 하드코딩 방지
+        - 다크 모드 기준 테스트 필요 (Preview 또는 실제 기기)
+
 - Compose에서 WebView를 사용할 때 발생하는 문제와 해결책
+    - [문제 원인]
+        - Compose는 Viewless 환경이지만 WebView는 기존 View 시스템 기반 → AndroidView를 통해 사용해야 함
+        - WebView 내에서 상태 저장, 포커스, 크래시 등 문제가 발생할 수 있음
+
+    - [대표적인 문제들]
+        - WebView 리로드 시 상태 초기화
+        - BackPress 충돌 (WebView 내부에서 뒤로가기 처리 필요)
+        - Compose recomposition 시 WebView가 의도치 않게 재생성됨
+
+    - [해결 방법]
+        - (1) AndroidView로 WebView 삽입
+            ```kotlin
+            AndroidView(factory = {
+                WebView(it).apply {
+                    loadUrl("https://example.com")
+                }
+            })
+            ```
+        - (2) WebView 재생성 방지
+            - remember { WebView(context) } 사용해 인스턴스 유지
+        - (3) BackPress 지원
+            ```kotlin
+            val webView = remember { WebView(context) }
+
+            BackHandler(enabled = webView.canGoBack()) {
+                webView.goBack()
+            }
+            ```
+    - [추가 설명]
+        - WebView 설정은 반드시 .apply { ... } 블록에서 초기화
+        - 쿠키, 자바스크립트, 클라이언트 설정은 명시적으로 처리
+
 - Jetpack Compose에서 Edge-to-Edge UI를 구현하는 방법
+    - [기본 개념]
+        - Edge-to-Edge UI는 시스템 상태바/내비게이션바 영역까지 UI를 확장하는 방식
+        - Compose는 WindowInsets를 통해 상태바, 내비바, IME 높이 등을 제어함
+
+    - [구현 절차]
+        - (1) System UI Controller 설정 (Accompanist 사용)
+            ```kotlin
+            val systemUiController = rememberSystemUiController()
+            SideEffect {
+                systemUiController.setSystemBarsColor(Color.Transparent, darkIcons = true)
+            }
+            ```
+
+        - (2) 전체화면 설정 (Activity)
+            ```kotlin
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            ```
+
+        - (3) Insets Padding 처리
+            ```kotlin
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(WindowInsets.systemBars.asPaddingValues())
+            ) {
+                // Content
+            }
+            ```
+
+    - [주의사항]
+        - 상태바 영역과 겹치는 UI 요소에는 반드시 padding 처리
+        - WindowInsets.navigationBars 및 ime 도구로 입력창/내비게이션 대응 가능
+        - 시스템 배경색/아이콘 명도 조절 필요 (darkIcons = true/false)
+
+- Android의 Binder IPC 메커니즘에 대해 설명해주세요.
+- ListView와 RecylerView에 대해서 설명해보세요
+- ListView는 재활용이 불가능할까요?
+- Java에서 Stream API를 활용하는 방법은?
+- WorkManager, AlarmManager, Foreground Service의 차이점은?
+- Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
+- Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Compose에서 폴더블(Foldable) 디바이스를 대응하는 방법
 - Jetpack Compose에서 Navigation Component를 활용하는 방법
 - Compose에서 비동기 데이터 로딩 중 UI를 최적화하는 방법
@@ -11407,9 +11580,6 @@ Organize concepts, features, types and Pros and Cons
 - Jetpack Compose에서 Jetpack CameraX를 활용하는 방법
 - Jetpack Compose에서 Biometric API를 활용하는 방법
 - Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법
-- Android의 Binder IPC 메커니즘에 대해 설명해주세요.
-- ListView와 RecylerView에 대해서 설명해보세요
-- ListView는 재활용이 불가능할까요?
 - Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
 - Android에서 권한 시스템(Permission Request)이 동작하는 방식
@@ -11499,10 +11669,6 @@ Organize concepts, features, types and Pros and Cons
 - Flow와 StateFlow, SharedFlow의 차이점은?
 - Android 앱의 성능 최적화를 위해 어떤 기법을 사용했는가?
 - ProGuard와 R8의 차이를 설명해보라.
-- Java에서 Stream API를 활용하는 방법은?
-- WorkManager, AlarmManager, Foreground Service의 차이점은?
-- Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
-- Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Java의 ArrayList와 LinkedList의 차이점은?
 - Java의 HashMap과 TreeMap의 차이점은?
 - Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점은?
