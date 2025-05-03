@@ -11230,9 +11230,88 @@ Organize concepts, features, types and Pros and Cons
         - LifecycleOwner 활용 시에는 Composable이 화면에 보이는 동안만 observer가 살아 있도록 설계해야 메모리 누수 방지 가능
 
 - Compose에서 Layout Inspector를 활용하여 UI Debugging을 수행하는 방법
-- Jetpack Compose에서 Accessibility를 개선하는 방법
-- Jetpack Compose로 마이그레이션할 때 고려해야 할 사항
+    - [기본 개념]
+        - Android Studio의 Layout Inspector는 현재 앱에서 표시 중인 Compose UI를 실시간으로 계층 구조 및 상태까지 시각화할 수 있는 도구
 
+    - [주요 기능]
+        - 재조합 경로 확인: 어떤 Composable이 리컴포지션 되었는지 추적
+        - Modifier 확인: 패딩, 마진, 클릭 등 실제 적용된 Modifier 정보 확인
+        - Composition tree 시각화: 뷰 계층 없이도 Compose만의 트리 확인
+        - State 추적: MutableState 값 및 해당 Composable 위치 직접 확인 가능`
+
+    - [활용 방법]
+        - 앱 실행 → Android Studio → Layout Inspector 실행
+        - Live updates 활성화 → 현재 UI 상태 실시간 반영
+        - 특정 Composable 클릭 시 속성, Modifier, 상태 값 확인 가능
+
+    - [주의사항]
+        - Preview 상태에선 사용 불가, 실제 기기 또는 에뮬레이터에서만 가능
+        - release 빌드나 minify된 경우 정보가 제한될 수 있음
+
+- Jetpack Compose에서 Accessibility를 개선하는 방법
+    - [문제 원인]
+        - Compose는 XML의 contentDescription 같은 속성이 명시적으로 존재하지 않기 때문에, Accessibility 지원을 명시적으로 구현해야 함
+
+    - [개선 방법]
+        - 텍스트 설명 제공
+            ```kotlin
+            Icon(
+                imageVector = Icons.Default.Favorite,
+                contentDescription = "즐겨찾기 아이콘"
+            )
+            ```
+
+        - TalkBack 인식 명확히 하기 위한 Semantics 설정
+            ```kotlin
+            Modifier.semantics {
+                contentDescription = "로그인 버튼"
+            }
+            ```
+
+        - 비시각 요소는 accessibilityMerged: false로 제어
+            ```kotlin
+            Modifier.clearAndSetSemantics { }
+            ```
+
+        - custom component는 role, state, action을 명시적으로 정의
+            ```kotlin
+            Modifier.semantics {
+                role = Role.Button
+                stateDescription = "켜짐"
+            }
+            ```
+
+        - Focusable 처리 및 접근성 포커스 이동 고려
+            - Modifier.focusable(), Modifier.clickable() 사용 시 접근성 포커스 지원됨
+
+    - [Best Practice]
+        - 이미지/아이콘엔 항상 contentDescription 설정
+        - 복잡한 UI는 semantics {}로 명시적 의미 추가
+        - TalkBack, VoiceOver 등으로 직접 테스트 필수
+
+- Jetpack Compose로 마이그레이션할 때 고려해야 할 사항
+    - [1. 점진적 전환 전략 필요]
+        - 기존 View + Compose 혼합 운영: ComposeView, AndroidView 활용
+        - XML을 완전히 버리지 않고 중요 UI부터 Compose 전환
+
+    - [2. 아키텍처 고려]
+        - ViewModel, State 관리 구조 먼저 정비
+        - 단방향 데이터 흐름(One-way data flow), 상태 호이스팅 도입
+
+    - [3. 테마 및 스타일 정리]
+        - MaterialTheme, ColorScheme, Typography 통일
+        - 다크 모드, 접근성 대비 포함
+
+    - [4. 테스트 전략]
+        - UI 테스트 코드 재작성 필요 (Espresso → Compose UI Test)
+        - 화면마다 @Preview 추가하여 시각적 품질 확인
+
+    - [5. 팀원 학습 곡선 고려]
+        - Compose 문법/상태 관리에 익숙하지 않다면 내부 교육 및 코드리뷰 기준 수립
+
+    - [6. 퍼포먼스 주의]
+        - LazyColumn, Recomposition, SideEffect 등 Compose 특성 이해 후 마이그레이션
+        - 잘못된 사용 시 초기 앱 성능 저하 가능
 
 - Compose에서 XML 기반 View와 혼합하여 사용할 때 성능 문제를 해결하는 방법
 - Jetpack Compose에서 ViewModel과 StateFlow를 결합하여 상태를 관리하는 방법
