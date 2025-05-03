@@ -11202,7 +11202,32 @@ Organize concepts, features, types and Pros and Cons
         ```
 
 - Jetpack Compose에서 LocalContext와 LocalLifecycleOwner의 활용 방법
+    - LocalContext
+        - 현재 Composable이 소속된 Context 제공
+        - Activity, Application, Toast, startActivity 등 Android API 접근에 필수
+        ```kotlin
+        val context = LocalContext.current
+        Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
+        ```
 
+    - LocalLifecycleOwner
+        - 현재 Composable이 위치한 LifecycleOwner 제공
+        - LifecycleObserver 등록, Flow.observeWithLifecycle() 등에 활용
+        ```kotlin
+        val lifecycleOwner = LocalLifecycleOwner.current
+        DisposableEffect(Unit) {
+            val observer = LifecycleEventObserver { _, event -> ... }
+            lifecycleOwner.lifecycle.addObserver(observer)
+            onDispose {
+                lifecycleOwner.lifecycle.removeObserver(observer)
+            }
+        }
+        ```
+
+    - [활용 팁]
+        - ViewModel 연동 시 viewModel() 함수는 내부적으로 LocalViewModelStoreOwner.current 사용
+        - LocalContext는 비동기 Context 기반 작업 (WorkManager, CameraX, Permission)에 유용
+        - LifecycleOwner 활용 시에는 Composable이 화면에 보이는 동안만 observer가 살아 있도록 설계해야 메모리 누수 방지 가능
 
 - Compose에서 Layout Inspector를 활용하여 UI Debugging을 수행하는 방법
 - Jetpack Compose에서 Accessibility를 개선하는 방법
