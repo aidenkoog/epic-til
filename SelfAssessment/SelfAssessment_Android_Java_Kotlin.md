@@ -10955,6 +10955,22 @@ Organize concepts, features, types and Pros and Cons
         - 무거운 연산은 LaunchedEffect, produceState 등 비동기 처리로 분리
 
 - Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
+    - [문제 원인]
+        - 리스트 아이템이 자주 바뀌거나 삭제/추가되면 key가 없을 경우 재조합 오류
+        - 무거운 Composable이 리스트 내에 직접 들어가면 불필요한 리소스 소모
+
+    - [비효율 사례]
+        - LazyColumn { items(list) { ... } } 에서 key 없이 사용
+        - 리스트 내부에서 직접 Image(bitmapFromUrl(url)) 등 무거운 작업 수행
+        - 리스트 아이템마다 새로운 remember {} 호출
+
+    - [효율적 렌더링 방법]
+        - items(items = list, key = { it.id }) 형태로 stable key 사용
+        - 복잡한 아이템은 @Composable fun ListItem(...)처럼 재사용 가능한 함수로 분리
+        - LazyColumn 내 상태는 remember 대신 상위에서 전달받아 stateless하게 구성
+        - 비동기 이미지 로딩은 AsyncImage, rememberImagePainter 사용
+        - Paging3 + LazyPagingItems로 페이지 단위 렌더링 적용도 고려
+
 - Jetpack Compose에서 SnapshotStateList와 일반 List의 차이점
 
 
