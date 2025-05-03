@@ -11314,9 +11314,82 @@ Organize concepts, features, types and Pros and Cons
         - 잘못된 사용 시 초기 앱 성능 저하 가능
 
 - Compose에서 XML 기반 View와 혼합하여 사용할 때 성능 문제를 해결하는 방법
-- Jetpack Compose에서 ViewModel과 StateFlow를 결합하여 상태를 관리하는 방법
-- Compose에서 Flow를 collect하여 UI를 업데이트하는 최적의 방법
+    - [문제 원인]
+        - ComposeView 또는 AndroidView로 XML과 Compose를 혼합할 경우, 렌더링 트리 간 경계 비용이 발생
+        - View 계층과 Compose 계층이 서로 이벤트/상태를 오갈 때 중복 측정(measure), 배치(layout), draw 작업이 추가됨
 
+    - [대표적인 문제]
+        - 스크롤/애니메이션 시 끊김
+        - View ↔ Compose 간 데이터/포커스 전달 지연
+        - ComposeView를 RecyclerView 안에 넣는 등 잘못된 중첩 사용 시 성능 급락
+
+    - [해결 방법]
+        - 필요한 구간만 최소한으로 ComposeView/AndroidView 사용
+        - ComposeView.setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)로 메모리 누수 방지
+        - 상태 공유는 ViewModel, LiveData, StateFlow 등 공통 아키텍처 계층에서 처리
+        - Scroll/Touch 이벤트 충돌 시 NestedScrollInteropConnection 또는 pointerInteropFilter 사용
+
+- Jetpack Compose에서 ViewModel과 StateFlow를 결합하여 상태를 관리하는 방법
+    - [기본 구조]
+        - StateFlow는 ViewModel에서 상태를 스트림 형태로 관리할 수 있는 선언적 방식
+        - Compose에서는 이를 collectAsState()로 UI에 바인딩하여 자동 recomposition 유도
+
+    - [ViewModel 예시]
+        ```kotlin
+        class MyViewModel : ViewModel() {
+            private val _uiState = MutableStateFlow("Hello")
+            val uiState: StateFlow<String> = _uiState
+
+            fun update() { _uiState.value = "Updated" }
+        }
+        ```
+
+    - [Composable 예시]
+        ```kotlin
+        @Composable
+        fun MyScreen(viewModel: MyViewModel = viewModel()) {
+            val state by viewModel.uiState.collectAsState()
+            Text(text = state)
+        }
+        ```
+
+    - [Best Practice]
+        - collectAsState()는 Composable 내부에서 호출, UI recomposition 보장
+        - StateFlow는 ViewModel에서 private mutable / public immutable 패턴 유지
+        - 단순 이벤트는 SharedFlow 또는 Channel로 분리
+
+- Compose에서 Flow를 collect하여 UI를 업데이트하는 최적의 방법
+    - [문제점: 일반적인 Flow 사용 시]
+        - Flow는 cold stream이기 때문에 직접 collect하면 
+        - recomposition 타이밍과 lifecycle mismatch 발생 가능
+        - 수동 collect 시 메모리 누수, 중복 실행, 죽은 lifecycle에서의 collect 문제 발생
+
+    - [최적의 방법]
+        - collectAsState() 사용 (StateFlow or Hot Flow)
+            ```kotlin
+            val state by flow.collectAsState(initial = "Loading")
+            ```
+
+        - collectAsStateWithLifecycle() 사용 (lifecycle-aware)
+            - Jetpack Lifecycle Compose 라이브러리 필요
+            ```kotlin
+            val state by viewModel.flow.collectAsStateWithLifecycle()
+            ```
+
+        - LaunchedEffect + collect 사용 (이벤트 흐름 처리)
+            - Flow<T>가 UI 상태가 아닌 이벤트 스트림일 경우
+            ```kotlin
+            LaunchedEffect(Unit) {
+                viewModel.eventFlow.collect { event -> 
+                    handleEvent(event)
+                }
+            }
+            ```
+
+    - [Best Practice]
+        - UI 상태는 StateFlow + collectAsState()
+        - 일회성 이벤트는 SharedFlow + LaunchedEffect
+        - Lifecycle에 민감한 경우 collectAsStateWithLifecycle() 활용 (crash 방지)
 
 - Android 14에서 Jetpack Compose와 관련된 주요 변경 사항
 - Jetpack Compose의 새로운 Material 3 디자인 적용 시 고려해야 할 사항
