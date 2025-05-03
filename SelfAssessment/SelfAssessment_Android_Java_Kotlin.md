@@ -10972,7 +10972,21 @@ Organize concepts, features, types and Pros and Cons
         - Paging3 + LazyPagingItems로 페이지 단위 렌더링 적용도 고려
 
 - Jetpack Compose에서 SnapshotStateList와 일반 List의 차이점
+    - [개념 차이]
+        - List<T>: 불변형 또는 변경 감지되지 않는 일반 리스트, Compose는 이 변경을 감지하지 못함
+        - SnapshotStateList<T>: Compose의 State 시스템과 연결된 리스트, 변경 시 recomposition 자동 유도
 
+    - [주요 동작 차이]
+        - List.add(), List.remove()는 Compose에서 UI 갱신되지 않음
+        - SnapshotStateList.add()는 자동으로 recomposition 트리거
+
+    - [사용 시점]
+        - UI 리스트가 동적으로 변하고, UI가 해당 변화를 즉시 반영해야 할 때 mutableStateListOf() 사용
+        - 외부에서 immutable하게 리스트를 전달할 때는 List<T> suffices
+
+    - [주의사항]
+        - SnapshotStateList는 mutable 상태이므로 직접 노출 금지
+        - → ViewModel 등에서 val list: List<T> get() = _stateList 식으로 읽기 전용 노출 권장
 
 - Jetpack Compose에서 ConstraintLayout을 활용하는 이유
 - Compose의 Recomposer 내부 구조와 실행 방식
