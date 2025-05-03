@@ -11089,7 +11089,35 @@ Organize concepts, features, types and Pros and Cons
         - 여러 Slot이 필요한 경우, 명확하게 이름 구분: topBar, content, actions 등
 
 - Jetpack Compose에서 UI Test를 수행하는 방법과 Best Practice
+    - [기본 도구]
+        - androidx.compose.ui.test.junit4.createComposeRule 사용
+        - composeTestRule.setContent { ... }로 테스트 대상 UI 정의
+        - onNodeWithText(), onNodeWithTag() 등으로 UI 요소 선택 및 검증
+
+    - [기본 예시]
+        ```kotlin
+        @get:Rule
+        val composeTestRule = createComposeRule()
+
+        @Test
+        fun myButton_click_changesText() {
+            composeTestRule.setContent {
+                MyComposable()
+            }
+
+            composeTestRule.onNodeWithText("Click me").performClick()
+            composeTestRule.onNodeWithText("Clicked!").assertIsDisplayed()
+        }
+        ```
+
+    - [Best Practice]
+        - Modifier.testTag("myTag")를 사용해 테스트 대상 명확하게 식별
+        - 사용자 플로우 테스트는 SemanticsMatcher 조합으로 시나리오 구성
+        - 비동기 작업이 포함된 경우 waitUntil, idle, runOnIdle 등 사용해 안정화
+        - 테스트 명은 행동 기반으로 구체적으로 작성 (예: loginButton_showsError_whenFieldsEmpty())
+
 - Jetpack Compose에서 Theme와 Material 3를 활용하는 방법
+
 
 - Compose에서 Preview 기능을 활용할 때 발생할 수 있는 문제
 - Jetpack Compose에서 SideEffect, DisposableEffect, LaunchedEffect의 차이점
