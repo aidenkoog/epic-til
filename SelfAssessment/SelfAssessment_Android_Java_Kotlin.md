@@ -11169,6 +11169,38 @@ Organize concepts, features, types and Pros and Cons
         - PreviewParameterProvider로 리스트/객체 인젝션 가능
 
 - Jetpack Compose에서 SideEffect, DisposableEffect, LaunchedEffect의 차이점
+    - [공통점]
+        - 모두 Composable의 생명주기와 연결된 Side Effect 처리 도구
+
+    - SideEffect
+        - 매 recomposition마다 실행됨
+        - 비 suspend 작업 수행 시 사용 (예: 로그 기록, 외부 객체에 상태 전달)
+        ```kotlin
+        SideEffect {
+            Log.d("TAG", "This runs every recomposition")
+        }
+        ```
+    
+    - LaunchedEffect
+        - key가 변경될 때마다 suspend 함수 실행
+        - 코루틴 기반으로 delay, collect, API 호출 등 수행 가능
+        ```kotlin
+        LaunchedEffect(key1) {
+            delay(1000)
+            viewModel.loadData()
+        }
+        ```
+
+    - DisposableEffect
+        - Composable 진입 시 실행, 사라질 때 onDispose 블록 실행
+        - 리소스 정리 또는 등록/해제 목적
+        ```kotlin
+        DisposableEffect(key1) {
+            registerCallback()
+            onDispose { unregisterCallback() }
+        }
+        ```
+
 - Jetpack Compose에서 LocalContext와 LocalLifecycleOwner의 활용 방법
 
 
