@@ -11686,7 +11686,62 @@ Organize concepts, features, types and Pros and Cons
         - 성능 민감한 경우 .parallelStream()은 주의해서 사용
 
 - WorkManager, AlarmManager, Foreground Service의 차이점
-- Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
+    - [공통점]
+        - 모두 지속적인 백그라운드 작업을 예약하거나 실행하는 컴포넌트
+
+    - WorkManager
+        - 백그라운드에서 신뢰성 있는 작업 예약 가능
+        - 앱 종료/재부팅 후에도 보장
+        - 네트워크 조건, 충전 중 여부 등 제약 조건 지정 가능
+        - 장점: 지연 허용 작업, 조건 기반 실행
+        - 단점: 즉시 실행보단 예약 기반
+        ```kotlin
+        val workRequest = OneTimeWorkRequestBuilder<MyWorker>().build()
+        WorkManager.getInstance(context).enqueue(workRequest)
+        ```
+    
+    - AlarmManager
+        - 지정한 시간에 정확히 실행되는 작업 예약
+        - 앱이 종료되었어도 시스템이 알람을 전달
+        - 장점: 정확한 시점에 동작
+        - 단점: Android 6+ 이상에서 Doze 모드로 인해 지연 가능
+
+    - Foreground Service
+        - 사용자 인식 하에 지속 실행되는 작업
+        - 알림(Notification)과 함께 실행됨 → 시스템에서 우선순위 높음
+        - 장점: 실시간 처리 필요 시 (위치 추적, 음악 재생)
+        - 단점: 배터리 소모 큼, 사용자 알림 필수
+
+- Jetpack Paging3 라이브러리, 동작 방식
+    - [핵심 개념]
+        - Paging 3는 Jetpack에서 제공하는 대용량 리스트의 효율적인 로딩 라이브러리
+        - 데이터를 페이지 단위로 불러오며, RecyclerView와 결합해 사용
+
+    - [동작 방식 요약]
+        - (1) PagingSource
+            - 서버/DB 등 데이터 로딩 로직 정의 (load())
+        - (2) Pager
+            - PagingSource를 기반으로 PagingData 스트림 생성
+        - (3) ViewModel
+            - Flow<PagingData<T>>로 노출 → Compose or RecyclerView로 연결
+        - (4) UI (LazyColumn or Adapter)
+            - collectAsLazyPagingItems() 또는 PagingDataAdapter.submitData()
+        ```kotlin
+        val pager = Pager(PagingConfig(pageSize = 20)) {
+            MyPagingSource()
+        }.flow.cachedIn(viewModelScope)
+        ```
+
+    - [장점]
+        - 스크롤 이벤트 기반 자동 로딩
+        - DiffUtil 내장, loadState로 로딩/에러 상태 추적 가능
+        - Room, Retrofit 등과 쉽게 연동 가능
+
+    - [Best Practice]
+        - RemoteMediator 사용 시 캐싱 + 페이징 동기화 가능
+        - UI에서 LazyPagingItems나 PagingDataAdapter로 처리
+        - 에러 처리 및 빈 목록 대응은 LoadState 기반으로 UI 분기
+
 - Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Compose에서 폴더블(Foldable) 디바이스를 대응하는 방법
 - Jetpack Compose에서 Navigation Component를 활용하는 방법
