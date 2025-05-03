@@ -11867,7 +11867,65 @@ Organize concepts, features, types and Pros and Cons
         - Compose의 remember, LaunchedEffect는 UI 전용으로만 사용
 
 - Jetpack Compose에서 ConstraintLayout을 사용할 때 주의할 점
+    - [문제 원인]
+        - Compose는 선언형 UI 구조인데, ConstraintLayout은 제약 조건 기반 배치 시스템
+        - 과도한 ConstraintLayout 사용은 Compose의 간결성과 성능 저하 가능
+
+    - [주의할 점]
+        - (1) ConstraintSet 사용 시 id는 Modifier.layoutId로 지정
+            ```kotlin
+            ConstraintLayout(
+                constraintSet = constraints,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text("A", Modifier.layoutId("textA"))
+            }
+            ```
+        - (2) 복잡한 제약 조건 → Compose Layout DSL로 대체 가능한지 검토
+            - 단순 정렬/간격/중앙 배치 등은 Box, Row, Column으로 충분
+        - (3) ConstraintLayout 내부 중첩 최소화
+            - 다른 Layout들과 혼용 시 측정/배치 충돌 가능
+        - (4) Compose ConstraintLayout 버전 관리
+            - androidx.constraintlayout:constraintlayout-compose는 일반 ConstraintLayout과 별도 라이브러리이며 최신 버전 사용 필요
+
+    - [Best Practice]
+        - 복잡한 UI에만 사용 (예: 양쪽 고정, 비율 배치, 힌지 대응 UI)
+        - ConstraintSet을 사용해 재구성 가능한 UI 설계
+        - ConstraintLayout은 UI 정렬 도구이지 상태 관리는 맡기지 않음
+
 - Compose에서 WorkManager와 Coroutines을 함께 활용하는 방법
+    - [기본 구조]
+        - WorkManager는 백그라운드 작업을 스케줄링
+        - CoroutineWorker를 사용하면 suspend fun 형태로 코루틴 기반 비동기 작업 수행 가능
+
+    - [구현 방법]
+        - (1) CoroutineWorker 정의
+            ```kotlin
+            class MyWorker(ctx: Context, params: WorkerParameters) :
+                CoroutineWorker(ctx, params) {
+                override suspend fun doWork(): Result {
+                    val result = repository.syncData()
+                    return if (result) Result.success() else Result.retry()
+                }
+            }
+            ```
+        - (2) Work 요청
+            ```kotlin
+            val work = OneTimeWorkRequestBuilder<MyWorker>().build()
+            WorkManager.getInstance(context).enqueue(work)
+            ```
+        - (3) Compose 내 Trigger (예: Button 클릭)
+            ```kotlin
+            Button(onClick = {
+                WorkManager.getInstance(context).enqueue(work)
+            }) {
+                Text("작업 시작")
+            }
+            ```
+    - [Best Practice]
+        - 장시간 작업, 앱 종료 이후에도 유지해야 하는 작업은 반드시 WorkManager 사용
+        - 내부에서는 withContext(Dispatchers.IO) 등 코루틴 최적화 가능
+        - Compose는 WorkManager 진행 상태를 Observe 하되, 작업 로직은 ViewModel 또는 Worker에 위임
 
 - Jetpack Compose에서 ML Kit을 활용한 AI 기능을 추가하는 방법
 - Compose의 Glance를 활용하여 Widget을 구현하는 방법
