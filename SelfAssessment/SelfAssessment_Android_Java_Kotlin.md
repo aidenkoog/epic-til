@@ -10989,8 +10989,28 @@ Organize concepts, features, types and Pros and Cons
         - → ViewModel 등에서 val list: List<T> get() = _stateList 식으로 읽기 전용 노출 권장
 
 - Jetpack Compose에서 ConstraintLayout을 활용하는 이유
+    - [기본 개념]
+        - ConstraintLayout은 Compose에서도 복잡한 상대적 위치 지정이 필요한 경우 사용하는 고급 레이아웃 도구
+
+    - [활용 이유]
+        - Column, Row, Box로는 구현하기 어려운 상대적 제약 관계를 설정할 수 있음
+        - 다중 요소의 정렬, 비율 기반 배치, 바깥 여백 유지 등의 복잡 레이아웃 구현에 적합
+
+    - [대표적인 사용 시점]
+        - 정확한 위치와 정렬 제어가 필요한 UI
+        - 가로/세로 중앙 정렬, 비율 유지, 고정 마진/간격 등이 조합된 복잡한 디자인
+        - 기존 XML ConstraintLayout을 마이그레이션할 때
+
+    - [주의사항]
+        - ConstraintLayout은 성능은 뛰어나지만 오버킬일 수 있으므로 간단한 UI는 기본 레이아웃으로 충분
+        - ConstraintSet을 사용하면 동적 제약 조건 구성 가능
+
 - Compose의 Recomposer 내부 구조와 실행 방식
-- Jetpack Compose의 produceState는 어떤 경우에 유용한
+
+
+- Jetpack Compose의 produceState는 어떤 경우에 유용한가
+
+
 - Compose에서 Slot API를 활용하여 UI를 구성하는 방법
 - Jetpack Compose에서 UI Test를 수행하는 방법과 Best Practice
 - Jetpack Compose에서 Theme와 Material 3를 활용하는 방법
