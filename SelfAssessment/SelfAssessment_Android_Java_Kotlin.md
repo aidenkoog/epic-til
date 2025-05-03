@@ -11742,12 +11742,133 @@ Organize concepts, features, types and Pros and Cons
         - UI에서 LazyPagingItems나 PagingDataAdapter로 처리
         - 에러 처리 및 빈 목록 대응은 LoadState 기반으로 UI 분기
 
-- Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
+- Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점
+    - [공통점]
+        - 모두 java.util.concurrent 패키지에 속한 스레드 동기화 도구
+
+    - Semaphore
+        - 리소스 수 제한을 두고 스레드 접근 제어
+        - 내부적으로 허용 가능한 permit 수만큼 acquire/release
+        - 여러 스레드 중 제한된 수만 동시 실행, 순차 완료나 그룹 동기화 목적에는 부적합
+        ```java
+        Semaphore semaphore = new Semaphore(3); // 최대 3개 동시 접근 허용
+        semaphore.acquire();  // 접근 요청
+        semaphore.release();  // 리소스 반환
+        ```
+
+    - CountDownLatch
+        - N개의 스레드가 완료될 때까지 기다리는 구조
+        - countDown()이 0이 되면 await() 중인 스레드가 모두 진행
+        - 단방향/일회성 구조, 재사용 불가
+        ```java
+        CountDownLatch latch = new CountDownLatch(3);
+        latch.countDown(); // 스레드 3개 완료
+        latch.await();     // 모든 작업 완료까지 대기
+        ```
+
+    - CyclicBarrier
+        - 여러 스레드가 모두 도달할 때까지 기다렸다가 동시에 실행
+        - barrier.await()로 모두 도착 시 동시 진행
+        - 다방향/재사용 가능 (라운드별로 반복 가능), 동기화 실패 시 BrokenBarrierException 주의
+
 - Compose에서 폴더블(Foldable) 디바이스를 대응하는 방법
+    - [기본 개념]
+        - 폴더블 디바이스는 화면이 접히거나 펴지면서 UI 구성 변경이 필요
+        - 화면이 접히는 히지(Hinge) 위치, 상태 등을 반영한 UI 설계 필수
+
+    - [구현 방법]
+        - (1) Window Manager Jetpack 라이브러리 사용
+            ```kotlin
+            implementation("androidx.window:window:1.1.0")
+            ```
+        - (2) foldingFeature 감지
+            ```kotlin
+            val windowLayoutInfo = LocalWindowLayoutInfo.current
+            val foldingFeature = windowLayoutInfo.displayFeatures
+                .filterIsInstance<FoldingFeature>()
+                .firstOrNull()
+            ```
+        - (3) 히지 상태에 따른 UI 대응
+            - FoldingFeature.State.HALF_OPENED, FLAT
+            - orientation == VERTICAL → 좌우 분할
+            - orientation == HORIZONTAL → 위아래 분할
+        - (4) Adaptive Layout 구성
+            - 두 개의 Column/Row로 나누고 힌지 영역만큼 Spacer 처리
+
+    - [Best Practice]
+        - BoxWithConstraints 활용해 폭/높이 기준 레이아웃 분기 처리
+        - 힌지 좌표는 FoldingFeature.bounds로 계산해 View 나누기
+        - 화면 접힘 전/후의 상태 저장 및 복원 처리 필수
+
 - Jetpack Compose에서 Navigation Component를 활용하는 방법
+    - [기본 구성 요소]
+        - NavHost: 화면 전환이 일어나는 루트 컨테이너
+        - NavController: 화면 이동을 제어하는 객체
+        - composable(): 각 화면의 경로(route)를 정의하는 엔트리
+
+    - [예시 코드]
+        ```kotlin
+        @Composable
+        fun MyAppNavHost(navController: NavHostController) {
+            NavHost(navController = navController, startDestination = "home") {
+                composable("home") { HomeScreen(navController) }
+                composable("detail/{id}") { backStackEntry ->
+                    DetailScreen(id = backStackEntry.arguments?.getString("id"))
+                }
+            }
+        }
+
+        val navController = rememberNavController()
+        MyAppNavHost(navController)
+        ```
+
+    - [전달 방식]
+        - 파라미터 전달: "detail/123"
+        - backStackEntry.arguments?.getString("id")`로 받기
+
+    - [Best Practice]
+        - sealed class Screen(val route: String) 으로 route 구조화
+        - hiltViewModel() 등으로 ViewModel injection
+        - deep link, nested navigation, dialog/BottomSheet 지원 가능
+        - AnimatedNavHost 등으로 transition 확장 가능
+
 - Compose에서 비동기 데이터 로딩 중 UI를 최적화하는 방법
+    - [문제 상황]
+        - API 응답 대기 중 무조건 Blank UI 노출
+        - LaunchedEffect 내 suspend 호출 시 UI 상태와 분리되지 않으면 UI 지연 발생
+        - 로딩 중에도 사용자 피드백 부족하면 UX 저하
+
+    - [최적화 방법]
+        - (1) UI 상태 분리 및 상태 기반 분기
+            ```kotlin
+            when (uiState) {
+                is Loading -> CircularProgressIndicator()
+                is Success -> Content(uiState.data)
+                is Error -> ErrorView()
+            }
+            ```
+
+        - (2) produceState 활용한 비동기 초기화
+            ```kotlin
+            val data by produceState<Result>(initialValue = Loading) {
+                value = loadData()
+            }
+            ```
+
+        - (3) Placeholder/샘플 UI 활용
+            - 로딩 중에도 Skeleton UI나 Shimmer 효과로 사용자 관심 유지
+
+        - (4) Recomposition 최소화
+            - 로딩 상태와 데이터 상태를 derivedStateOf로 분리해 불필요한 리컴포지션 차단
+
+    - [Best Practice]
+        - 상태 → UI 흐름을 명확하게 유지 (Unidirectional Data Flow)
+        - 비동기 작업은 ViewModel + StateFlow로 분리
+        - Compose의 remember, LaunchedEffect는 UI 전용으로만 사용
+
 - Jetpack Compose에서 ConstraintLayout을 사용할 때 주의할 점
 - Compose에서 WorkManager와 Coroutines을 함께 활용하는 방법
+
 - Jetpack Compose에서 ML Kit을 활용한 AI 기능을 추가하는 방법
 - Compose의 Glance를 활용하여 Widget을 구현하는 방법
 - Jetpack Compose에서 Jetpack CameraX를 활용하는 방법
