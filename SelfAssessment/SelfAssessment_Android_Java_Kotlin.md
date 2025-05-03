@@ -11006,7 +11006,23 @@ Organize concepts, features, types and Pros and Cons
         - ConstraintSet을 사용하면 동적 제약 조건 구성 가능
 
 - Compose의 Recomposer 내부 구조와 실행 방식
+    - [Recomposer 개념]
+        - Compose의 렌더링 엔진 핵심 컴포넌트
+        - 변경된 상태를 감지하고 해당 Composable을 재구성(Recomposition)하는 역할을 함
 
+    - [내부 구조]
+        - Recomposer는 Snapshot 시스템과 연결되어 있음
+        - State가 변경되면 Snapshot이 이를 감지하고 → Recomposer가 해당 Composable scope에 재구성 요청
+
+    - [실행 방식]
+        - State 변경 → Compose runtime이 Snapshot을 통해 변경 감지
+        - Recomposer는 변경된 Composable scope를 재실행 대상으로 큐에 추가
+        - Main thread에서 순차적으로 recomposition 실행
+        - 필요 시 layout → draw 단계로 UI 업데이트
+
+    - [중요 개념]
+        - 재조합은 필요한 부분만 수행 (Composable 단위로 granularity(세분성) 있음)
+        - 무한 recomposition 방지를 위해 정상 종료 또는 안정된 상태 보장 필요
 
 - Jetpack Compose의 produceState는 어떤 경우에 유용한가
 
