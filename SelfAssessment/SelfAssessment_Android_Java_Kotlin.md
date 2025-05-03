@@ -11117,17 +11117,71 @@ Organize concepts, features, types and Pros and Cons
         - 테스트 명은 행동 기반으로 구체적으로 작성 (예: loginButton_showsError_whenFieldsEmpty())
 
 - Jetpack Compose에서 Theme와 Material 3를 활용하는 방법
+    - [기본 개념]
+        - MaterialTheme은 앱 전반의 색상(ColorScheme), 타이포그래피(Typography), 쉐이프(Shape)를 관리하는 테마 시스템
+        - Material 3는 Dynamic Color, adaptive theming, 새로운 component 스타일 등을 지원
 
+    - [설정 예시]
+        ```kotlin
+        @Composable
+        fun MyAppTheme(content: @Composable () -> Unit) {
+            val colorScheme = dynamicLightColorScheme(LocalContext.current) // or custom
+            MaterialTheme(
+                colorScheme = colorScheme,
+                typography = Typography,
+                shapes = Shapes,
+                content = content
+            )
+        }
+
+        @Composable
+        fun MyScreen() {
+            MyAppTheme {
+                Surface { Text("Hello") }
+            }
+        }
+        ```
+
+    - [활용 포인트]
+        - MaterialTheme.colorScheme.primary 등으로 색상 참조
+        - 다크모드 대응: isSystemInDarkTheme()로 조건 분기
+        - Dynamic Color는 Android 12 이상에서 dynamicLightColorScheme() 등으로 적용
+
+    - [Best Practice]
+        - 앱 전역에 공통 Theme 적용하고, 하위 컴포넌트는 Theme 기반 속성 사용
+        - 직접 색상/스타일을 하드코딩하지 말고 MaterialTheme 참조 사용
+        - Preview에서도 MyAppTheme {}로 감싸 테스트
 
 - Compose에서 Preview 기능을 활용할 때 발생할 수 있는 문제
+    - [문제 원인]
+        - @Preview는 Android Studio 내에서 UI 렌더링을 위한 디자인 시뮬레이션 도구로, 일반적인 Compose 환경과 다소 차이가 있음
+
+    - [대표적인 문제들]
+        - Context, ViewModel, NavController 등 실행 시점 의존성 주입 불가
+        - LocalContext.current 사용 시 NPE 또는 "Preview not supported" 오류 발생 가능
+        - 동적 데이터(Firebase, Room, Network 등) 접근 시 미동작 또는 실패
+        - 커스텀 Theme 적용 누락 시 실제와 다른 UI 미리보기
+
+    - [해결 방법]
+        - Preview 용 mock 데이터 또는 fake ViewModel 생성
+        - @Preview(showBackground = true)로 기본 배경 확인
+        - 의존성이 필요한 컴포넌트는 분리하고, slot-based 구조로 Preview 가능한 형태로 설계
+        - PreviewParameterProvider로 리스트/객체 인젝션 가능
+
 - Jetpack Compose에서 SideEffect, DisposableEffect, LaunchedEffect의 차이점
 - Jetpack Compose에서 LocalContext와 LocalLifecycleOwner의 활용 방법
+
+
 - Compose에서 Layout Inspector를 활용하여 UI Debugging을 수행하는 방법
 - Jetpack Compose에서 Accessibility를 개선하는 방법
 - Jetpack Compose로 마이그레이션할 때 고려해야 할 사항
+
+
 - Compose에서 XML 기반 View와 혼합하여 사용할 때 성능 문제를 해결하는 방법
 - Jetpack Compose에서 ViewModel과 StateFlow를 결합하여 상태를 관리하는 방법
 - Compose에서 Flow를 collect하여 UI를 업데이트하는 최적의 방법
+
+
 - Android 14에서 Jetpack Compose와 관련된 주요 변경 사항
 - Jetpack Compose의 새로운 Material 3 디자인 적용 시 고려해야 할 사항
 - Jetpack Compose에서 터치 이벤트를 처리하는 방법
