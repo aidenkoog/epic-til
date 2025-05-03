@@ -11563,11 +11563,129 @@ Organize concepts, features, types and Pros and Cons
         - WindowInsets.navigationBars 및 ime 도구로 입력창/내비게이션 대응 가능
         - 시스템 배경색/아이콘 명도 조절 필요 (darkIcons = true/false)
 
-- Android의 Binder IPC 메커니즘에 대해 설명해주세요.
-- ListView와 RecylerView에 대해서 설명해보세요
-- ListView는 재활용이 불가능할까요?
-- Java에서 Stream API를 활용하는 방법은?
-- WorkManager, AlarmManager, Foreground Service의 차이점은?
+- Android의 Binder IPC 메커니즘
+    - [정의]
+        - Binder는 안드로이드에서 프로세스 간 통신(IPC, Inter-Process Communication)을
+        - 지원하는 고성능 커널 기반 메커니즘
+        - 클라이언트와 서비스 간 메서드 호출 형태로 데이터 전달 가능
+
+    - [동작 방식]
+        - (1) 클라이언트가 서비스에 AIDL 인터페이스를 통해 요청
+        - (2) 요청은 Binder Driver를 통해 커널 영역을 거쳐 서비스로 전달 (바인더 구조 조사 필요)
+        - (3) 서비스는 요청을 처리하고 응답을 다시 클라이언트에 전달
+
+    - [특징]
+        - 직접 메모리 공유 없이 안전하게 통신 가능
+        - 안드로이드의 Service, ContentProvider, Messenger, AIDL 등이 Binder 위에서 동작
+
+    - [장점]
+        - 빠른 IPC 성능 (shared memory 기반보다 안정적)
+        - 보안성 높음: UID/PID 기반 인증 가능
+        - 시스템 서비스와 앱 간 통신에서도 주요 기반 기술
+
+- Binder 구조
+    - [Binder 개념]
+        - Android의 IPC (Inter-Process Communication) 메커니즘의 핵심
+        - 앱 프로세스와 시스템 서비스 또는 다른 앱 간에 직접 메서드 호출처럼 통신할 수 있도록 해주는 커널 기반 드라이버와 프레임워크의 조합
+
+    - [Binder의 전체 구조]
+        - (1) Application Layer (Java/Kotlin)
+            - Service, Messenger, AIDL 등을 통해 Binder 통신을 추상화하여 사용
+            - 예: MyAidlInterface.Stub.asInterface(binder)
+
+        - (2) Binder Framework (Native Layer, C++)
+            - IBinder, Binder, Parcel 객체를 통해 실제 데이터 직렬화 및 메서드 호출 처리
+            - BpBinder / BnBinder 구조
+                - BpBinder: 클라이언트 측 프록시 (proxy), 서버에 요청 전달
+                - BnBinder: 서버 측 수신자 (native binder), 요청 처리
+
+        - (3) Binder Driver (커널 레벨)
+            - /dev/binder에 위치한 실제 Linux 커널 모듈
+            - 클라이언트와 서버 간의 데이터 및 메시지 전달을 중재
+            - 프로세스 간 메모리를 공유하지 않고 버퍼 복사 방식으로 안전하게 데이터 전달
+
+    - [Binder 통신 흐름 요약]
+        - 클라이언트가 AIDL을 통해 요청을 생성 (BpBinder)
+        - 요청이 Parcel 형태로 직렬화되어 Binder Driver에 전달
+        - 커널의 Binder Driver가 메시지를 서버 프로세스에 전달
+        - 서버의 BnBinder가 요청을 역직렬화하고 처리
+        - 응답이 다시 Binder Driver를 통해 클라이언트로 전달됨
+
+    - [Binder 구조의 장점]
+        - 고속 IPC 성능 (Unix Socket이나 메시지 큐보다 효율적)
+        - 안전성: 각 프로세스는 메모리를 공유하지 않으며 UID/PID 인증이 가능
+        - 프레임워크 통합도 우수: ServiceManager, ActivityManager, MediaService 등 모두 Binder 기반
+
+    - [Binder 관련 주요 구성요소]
+        - IBinder: Binder 인터페이스의 최상위 추상화
+        - Binder: 서버 측 구현체 (Stub)
+        - BpBinder: 클라이언트 측 프록시
+        - Parcel: 데이터 직렬화/역직렬화 클래스
+        - Binder Driver: 커널 공간의 메모리 메시지 전달 드라이버
+        - ServiceManager: 시스템 서비스 레지스트리
+
+    - [실무 관점 활용 예시]
+        - AIDL 기반 서비스 통신
+        - System Service (예: LocationManager, NotificationManager)는 모두 Binder 기반
+        - 앱 ↔ 서비스 프로세스 간 통신 시 Binder가 핵심
+
+- ListView와 RecylerView 설명
+    - [ListView]
+        - 오래된 리스트 컴포넌트 (API 1부터 존재)
+        - 스크롤 시 convertView를 통해 일부 재활용은 가능하지만 재사용 범위와 유연성이 제한적
+        - 레이아웃이 고정적이고 ViewHolder 패턴을 직접 구현해야 함
+        - 레이아웃 관리 -> 고정 (세로 리스트만)
+        - 애니매이션 -> 기본 또는 없음
+
+    - [RecyclerView]
+        - ListView의 단점을 개선한 최신 리스트 컴포넌트
+        - ViewHolder 패턴 내장, 다양한 LayoutManager (Linear, Grid, Staggered) 지원
+        - ItemAnimator, ItemDecoration, DiffUtil 등으로 확장성과 효율성 탁월
+        - 레이아웃 관리 -> 다양한 LayoutManager 지원
+        - 애니매이션 -> ItemAnimator로 쉽게 구현 가능
+
+- ListView 재활용 가능 여부를
+    - [가능 여부]
+        - 불가능하지는 않고 제한적으로 가능함
+
+    - [재활용 방식]
+        - getView() 메서드에서 convertView가 null이 아니면 기존 뷰를 재사용
+        - 하지만 RecyclerView처럼 ViewHolder가 내장되지 않았기 때문에, 개발자가 직접 재활용 로직(ViewHolder 패턴)을 구현해야 함
+
+    - [한계]
+        - 재활용 범위가 제한적 (스크롤 시 일정 수의 뷰만 재사용)
+        - 복잡한 레이아웃이나 다양한 뷰 타입이 필요한 경우 재사용 관리가 까다로움
+
+    - [정리]
+        - 재활용은 가능하지만 비효율적이며 관리가 복잡
+        - 유지보수성과 성능을 고려하면 RecyclerView 사용이 권장됨
+
+- Java에서 Stream API를 활용하는 방법
+    - [기본 개념]
+        - Stream API는 Java 8부터 추가된 컬렉션 처리의 선언형 방식
+        - map, filter, collect 등 체이닝 메서드로 데이터 흐름 중심 처리 가능
+    - [대표적인 사용 예시]
+        ```java
+        List<String> names = Arrays.asList("Tom", "John", "Alice");
+        List<String> filtered = names.stream()
+            .filter(name -> name.startsWith("A"))
+            .map(String::toUpperCase)
+            .collect(Collectors.toList());
+        ```
+    - [핵심 연산 유형]
+        - 중간 연산: filter(), map(), sorted() → lazy evaluation
+        - 종단 연산: collect(), forEach(), count() → 실행 발생
+
+    - [장점]
+        - 코드 간결성: 복잡한 for-loop 없이 선언형 코드 가능
+        - 병렬 처리: .parallelStream()으로 멀티스레드 실행
+        - 불변성 유지: 기존 컬렉션 변경 없이 새로운 결과 생성
+
+    - [주의점]
+        - Stream은 1회성 소비 → 재사용 불가
+        - 성능 민감한 경우 .parallelStream()은 주의해서 사용
+
+- WorkManager, AlarmManager, Foreground Service의 차이점
 - Jetpack Paging3 라이브러리를 사용해 본 경험이 있는가? 어떻게 동작하는가?
 - Java에서 Semaphore, CountDownLatch, CyclicBarrier의 차이점은?
 - Compose에서 폴더블(Foldable) 디바이스를 대응하는 방법
