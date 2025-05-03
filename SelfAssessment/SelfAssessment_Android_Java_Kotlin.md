@@ -11025,6 +11025,35 @@ Organize concepts, features, types and Pros and Cons
         - 무한 recomposition 방지를 위해 정상 종료 또는 안정된 상태 보장 필요
 
 - Jetpack Compose의 produceState는 어떤 경우에 유용한가
+    - [기본 개념]
+        - produceState는 비동기 데이터를 State로 변환할 때 사용하는 Composable Scope API
+        - 내부에서 CoroutineScope를 제공하며, 데이터를 State<T>로 자동 제공함
+
+    - [사용 시점]
+        - 비동기 API 호출 결과를 Compose UI 상태로 바인딩할 때
+        - ViewModel 없이 단일 Composable에서 간단히 사용할 때
+        - 상태 캐싱이 필요 없는 경우
+
+    - [예시]
+        ```kotlin
+        @Composable
+        fun WeatherWidget(city: String) {
+            val weather by produceState(initialValue = "Loading...", city) {
+                value = fetchWeather(city) // suspend fun
+                // 뷰모델 없이 단일 컴포저블에서 간단히 사용 시 유용
+            }
+
+            Text(text = weather)
+        }
+        ```
+    
+    - [장점]
+        - LaunchedEffect보다 직관적으로 상태 + 로직을 통합할 수 있음
+        - remember 없이도 자동 State 제공 + recomposition 유도
+
+    - [주의사항]
+        - 상태 저장이 필요한 경우엔 ViewModel + mutableStateOf() 패턴이 더 적합
+        - produceState는 내부적으로 launch되므로 정리 코드 필요 시 DisposableEffect 병행 고려
 
 
 - Compose에서 Slot API를 활용하여 UI를 구성하는 방법
