@@ -10937,8 +10937,27 @@ Organize concepts, features, types and Pros and Cons
         - 리소스 해제 → 재설정 → 코루틴 시작 순서를 의도한 대로 설계해야 안정성 확보
 
 - Jetpack Compose의 Layout 코드를 최적화하는 방법
+    - [문제 원인]
+        - 중첩된 Layout (Column > Row > Box > ...) 구조가 깊어지면 측정, 배치, 그리기 비용 증가
+        - 불필요한 recomposition이 빈번히 발생하면 프레임 드롭 가능
+
+    - [대표적인 비효율 사례]
+        - 너무 많은 Box, Row, Column 중첩
+        - Modifier.padding().background().padding() 등 중복 Modifier 사용
+        - 재사용 불가능한 Layout 구성
+        - remember 없이 매 recomposition 시 객체 생성
+
+    - [최적화 방법]
+        - Modifier.layoutId, Modifier.zIndex, Modifier.graphicsLayer 등은 꼭 필요할 때만
+        - Layout, SubcomposeLayout을 통한 커스텀 배치로 중첩 최소화
+        - Modifier.combinedClickable 등 결합 가능한 Modifier 사용
+        - remember, derivedStateOf로 계산 최소화
+        - 무거운 연산은 LaunchedEffect, produceState 등 비동기 처리로 분리
+
 - Jetpack Compose에서 동적 리스트 아이템을 효율적으로 렌더링하는 방법
 - Jetpack Compose에서 SnapshotStateList와 일반 List의 차이점
+
+
 - Jetpack Compose에서 ConstraintLayout을 활용하는 이유
 - Compose의 Recomposer 내부 구조와 실행 방식
 - Jetpack Compose의 produceState는 어떤 경우에 유용한
