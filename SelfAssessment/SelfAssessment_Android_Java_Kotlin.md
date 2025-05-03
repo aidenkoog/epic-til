@@ -11057,8 +11057,40 @@ Organize concepts, features, types and Pros and Cons
 
 
 - Compose에서 Slot API를 활용하여 UI를 구성하는 방법
+    - [Slot API]
+        - 부모 Composable이 자식 UI를 파라미터(Composable lambda)로 전달받아 
+        - 원하는 위치에 삽입하는 구성 방식
+        - UI 재사용성과 확장성을 높이는 Compose의 핵심 디자인 패턴
+
+    - [사용 예시]
+        ```kotlin
+        @Composable
+        fun CustomCard(
+            title: String,
+            content: @Composable () -> Unit
+        ) {
+            Column {
+                Text(text = title)
+                content() // Slot 영역
+            }
+        }
+
+        CustomCard(title = "공지") {
+            Text("이곳은 사용자 정의 영역입니다")
+        }
+        ```
+
+    - [활용 이유 및 장점]
+        - UI 컴포넌트 재사용: 고정 레이아웃 + 유동 콘텐츠 혼합 가능
+        - 컴포저블 조합 가능성 증가: Scaffold, AlertDialog, BottomSheetScaffold 등 내부도 Slot API 사용
+
+    - [Best Practice]
+        - Slot은 @Composable () -> Unit 또는 @Composable () -> T 형태로 명시
+        - 여러 Slot이 필요한 경우, 명확하게 이름 구분: topBar, content, actions 등
+
 - Jetpack Compose에서 UI Test를 수행하는 방법과 Best Practice
 - Jetpack Compose에서 Theme와 Material 3를 활용하는 방법
+
 - Compose에서 Preview 기능을 활용할 때 발생할 수 있는 문제
 - Jetpack Compose에서 SideEffect, DisposableEffect, LaunchedEffect의 차이점
 - Jetpack Compose에서 LocalContext와 LocalLifecycleOwner의 활용 방법
