@@ -12629,9 +12629,86 @@ Organize concepts, features, types and Pros and Cons
         - 내부에 또 다른 스크롤 가능한 Composable을 포함할 경우, Modifier.nestedScroll() 등으로 충돌 방지 조치 필요함.
 
 - Compose에서 GestureDetector를 활용한 제스처 처리 방법
+    - [기본 방식]
+        - Jetpack Compose에서는 Modifier.pointerInput과 detectTapGestures, awaitPointerEventScope 등을 통해 다양한 제스처를 처리함. 
+        - GestureDetector라는 명시적 클래스는 없지만, gesture detection은 Modifier 수준에서 처리하는 구조임.
+
+    - [단일 탭 예시]
+        ```kotlin
+        Modifier.pointerInput(Unit) {
+            detectTapGestures(onTap = { offset -> /* 클릭 처리 */ })
+        }
+        ```
+
+    - [복합 제스처 예시]
+        - drag, longPress, doubleTap 등 다양한 제스처를 동시에 감지 가능하며, 필요 시 커스텀 제스처도 구현할 수 있음.
+    
+    - [드래그 제스처 예시]
+        ```kotlin
+        Modifier.pointerInput(Unit) {
+            detectDragGestures { change, dragAmount ->
+                // 드래그 거리 활용
+            }
+        }
+        ```
+
+    - [주의점]
+        - pointerInput 블록은 suspend 함수이기 때문에 Modifier.combinedClickable 등의 고수준 Modifier를 먼저 고려하고, 
+        - 복잡한 제스처가 필요한 경우 pointerInput을 직접 구현하는 것이 좋음.
+
 - Jetpack Compose에서 Recomposition을 피하는 방법
+    - [상태 변경 최소화]
+        - 상태 변경이 불필요한 Composable에 상태가 전달되면 리컴포지션이 발생함. 
+        - 이를 방지하기 위해 상태는 필요한 최소한의 범위로 전달하고, 상태가 자주 변하는 영역과 그렇지 않은 영역을 함수로 분리해야 함.
+
+    - [remember와 derivedStateOf 사용]
+        - remember는 값이 변하지 않도록 캐싱하고, derivedStateOf는 상태에서 파생된 값을 메모이제이션하여 재계산을 줄임.
+
+    - [key로 리컴포지션 범위 제어]
+        - key(key1, key2) { ... } 형태로 내부 컴포저블의 리컴포지션 기준을 명확하게 설정할 수 있음.
+
+    - [Stable 클래스 활용]
+        - 전달하는 파라미터가 불변이면 Compose가 재컴포지션을 생략할 수 있음. 
+        - @Stable 또는 @Immutable 어노테이션을 활용하여 데이터 구조의 불변성을 보장해야 함.
+
+    - [LaunchedEffect, SideEffect 등 제한적 사용]
+        - 리컴포지션 시 LaunchedEffect가 다시 실행되지 않도록, key 값을 정확히 설정하거나 scope를 줄여야 불필요한 side-effect 실행을 피할 수 있음.
+
 - Compose에서 ConstraintLayout과 Box를 활용하는 방법
-- Compose의 SnapshotFlow는 무엇이며, 언제 사용해야 하는
+    - [Box의 활용]
+        - Box는 자식들을 겹쳐서 쌓는 레이아웃임. 
+        - 내부 자식은 기본적으로 좌측 상단에 배치되며, Modifier.align()을 통해 정렬 가능함. 
+        - 간단한 UI 겹치기, 배경+텍스트 구성, 센터 정렬 등에 적합함.
+        ```kotlin
+        Box(modifier = Modifier.fillMaxSize()) {
+            Text("중앙 텍스트", modifier = Modifier.align(Alignment.Center))
+        }
+        ```
+
+    - [ConstraintLayout의 활용]
+        - ConstraintLayout은 Compose에서도 사용할 수 있으며, 복잡한 배치 조건(예: 뷰 간 거리, 비율, 기준점 정렬 등)이 필요한 경우 적합함. 
+        - ConstraintSet, createRefs, constrainAs 등을 통해 유연한 배치 가능.
+        ```kotlin
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+            val (title, button) = createRefs()
+            Text("제목", Modifier.constrainAs(title) {
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+            })
+            Button(onClick = {}, Modifier.constrainAs(button) {
+                top.linkTo(title.bottom)
+                end.linkTo(parent.end)
+            }) {
+                Text("버튼")
+            }
+        }
+        ```
+
+    - [선택 기준]
+        - 간단한 배치(정렬, 겹침)는 Box, Column, Row로 충분하며, 
+        - 복잡한 조건이 필요한 경우에만 ConstraintLayout을 도입하는 것이 성능과 가독성 면에서 유리함.
+
+- Compose의 SnapshotFlow는 무엇이며, 언제 사용해야 하는 가
 - Jetpack Compose에서 Skia 렌더링 엔진을 활용한 성능 최적화 기법
 - Android Thermal API를 활용하여 배터리 및 성능 최적화를 수행하는 방법
 - ExoPlayer에서 DRM(Digital Rights Management) 처리의 고급 기법
