@@ -13095,8 +13095,60 @@ Organize concepts, features, types and Pros and Cons
         - Paging 3, Jetpack Compose의 LazyColumn 등 지연 로딩 방식을 사용하여 메모리에서 한 번에 많은 데이터를 다루지 않도록 설계해야 함.
 
 - Android에서 백그라운드 작업을 최적화하는 방법
+    - [WorkManager 사용 권장]
+        - OS 제약 없이 신뢰성 있게 백그라운드 작업을 실행하려면 WorkManager 사용이 가장 안전함.
+        - 네트워크 조건, 충전 상태, 딜레이 설정 등 다양한 조건을 만족할 때 실행되며 앱 종료 후에도 유지됨.
+
+    - [ForegroundService는 필수 작업에만]
+        - 지속적인 위치 추적, 오디오 스트리밍 등 사용자 인식이 필요한 작업은 ForegroundService로 처리해야 하며, Notification 표시가 필수임.
+        - 단, 과도한 사용은 배터리 소모 및 시스템 제한 가능성 있음.
+
+    - [JobScheduler와 AlarmManager의 제한]
+        - JobScheduler는 API 21+에서 사용 가능하지만 정확한 시점을 보장하지 않음.
+        - AlarmManager는 정확한 시점 지정이 가능하나 Android 6.0 이상에서는 Doze Mode의 영향을 받음.
+
+    - [Doze & App Standby 대응]
+        - Android 6.0 이상에서는 백그라운드 작업이 제한되므로 setAndAllowWhileIdle() 또는 WorkManager의 setExpedited() 옵션을 활용해야 함.
+
+    - [Battery 및 네트워크 고려]
+        - 대량 작업은 충전 중이거나 Wi-Fi 상태일 때 실행되도록 제약을 걸어야 시스템 차단을 피할 수 있음.
+
 - Android에서 Jetpack Compose의 Recompositions를 최적화하는 방법
+    - [remember와 derivedStateOf 사용]
+        - 불필요한 계산이나 상태 변화를 막기 위해 remember { ... }, derivedStateOf { ... }로 메모이제이션을 적용해야 함.
+
+    - [함수 분리 및 Stable 클래스 사용]
+        - 리컴포지션 범위를 줄이기 위해 Composable을 작게 분리하고, 데이터 모델에는 @Stable 또는 @Immutable 어노테이션을 붙여 불필요한 리렌더링 방지가 가능함.
+
+    - [key 사용으로 제어]
+        - key(id) { ... }를 사용하면 특정 항목의 리컴포지션 기준을 명확하게 제어할 수 있음. 
+        - 특히 LazyColumn 등 리스트 항목에서는 필수임.
+
+    - [UI 상태와 데이터 상태 분리]
+        - ViewModel에서 상태를 관리하고, Composable은 전달받은 State를 기반으로 UI만 그리도록 하여 단방향 데이터 흐름(One-Way Data Flow) 유지가 중요함.
+
+    - [무의미한 recomposition 탐지]
+        - Android Studio의 Recomposition Highlighter 또는 println() 로그로 recompose 시점을 추적하며 최적화 포인트를 식별해야 함.
+
 - Android에서 Bitmap 메모리 관리를 최적화하는 방법
+    - [샘플링 및 해상도 제한]
+        - 고해상도 이미지를 그대로 메모리에 로드하면 OOM 발생 위험이 크기 때문에,
+        - BitmapFactory.Options.inSampleSize를 설정하여 필요한 크기만큼만 로드해야 함.
+
+    - [inPreferredConfig 설정]
+        - 기본 ARGB_8888은 고용량이므로, 품질이 중요하지 않은 경우에는 RGB_565로 설정하여 메모리 사용량 절반으로 감소시킬 수 있음.
+
+    - [이미지 캐싱 활용]
+        - Glide, Coil 등 이미지 라이브러리는 LruCache 기반 메모리 캐시를 제공하므로 재로드 방지 및 메모리 최적화에 효과적임.
+            - LRU Cache: 캐시에 공간이 부족할 때 가장 오랫동안 사용하지 않은 항목을 제거하는 방식
+
+    - [불필요한 Bitmap 해제]
+        - 사용이 끝난 Bitmap은 bitmap.recycle() 또는 참조를 null로 해제하여 GC 대상이 되도록 처리해야 함.
+        - 특히 ZoomView, CanvasView 등의 커스텀 뷰에서는 수동 해제가 중요함.
+
+    - [Bitmap pooling 고려]
+        - 반복적으로 이미지가 생성되는 환경에선 BitmapPool을 이용해 Bitmap을 재사용함으로써 GC 및 메모리 할당 비용을 줄일 수 있음.
+
 - Android에서 Custom View를 만들 때 고려해야 할 사항
 - Android에서 CPU 및 메모리 사용량을 최적화하는 방법
 - Android에서 StrictMode를 활용한 성능 분석 방법
