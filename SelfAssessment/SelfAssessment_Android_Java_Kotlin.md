@@ -12786,8 +12786,77 @@ Organize concepts, features, types and Pros and Cons
         - 과도한 개입보다는 온도 수준에 따른 사용자 경험 보호 목적으로 사용하는 것이 좋음.
 
 - ExoPlayer에서 DRM(Digital Rights Management) 처리의 고급 기법
+    - [기본 구조]
+        - ExoPlayer는 MediaDrm, DrmSessionManager, DefaultDrmSessionManagerProvider 등을 통해 Widevine, PlayReady 등의 DRM 기술을 통합 처리함.
+        - 콘텐츠 제공자(CDN)는 보통 .mpd(DASH), .m3u8(HLS) 등의 콘텐츠에 KEY_ID를 포함시키고, 클라이언트는 라이선스 서버로부터 키를 받아 복호화함.
+
+    - [고급 기법 1: Custom DRMSessionManager]
+        - 기본 제공되는 DefaultDrmSessionManager 대신 직접 DRM 세션 매니저를 구현함으로써,
+            - 커스텀 헤더 추가
+            - 사용자 인증 토큰 삽입
+            - 네트워크 재시도 로직
+            - 서드파티 키 서버 연동
+                - 같은 고급 요구 사항을 처리할 수 있음.
+
+    - [고급 기법 2: Key Rotation 대응]
+        - 일부 콘텐츠는 키가 일정 시간마다 교체됨. 
+        - 이를 위해 ExoPlayer에서 OnKeyStatusChangeListener를 등록하고, 재요청 로직을 구현해야 함.
+        - 동적 키 갱신 실패 시 재생 중단이 발생하므로, 이중화 및 리트라이 전략이 중요함.
+
+    - [고급 기법 3: Secure Decoder Path 설정]
+        - DRM 콘텐츠는 하드웨어 보안 영역(TEE)에서만 재생 가능해야 하는 경우가 있음. 
+        - 이때 MediaCodecInfo.isSecure()를 확인하고, setDrmSessionManager()에서 secure decoder를 강제 설정해야 함.
+
+    - [실전 고려사항]
+        - 키 만료 시점 체크
+        - offline license storage
+        - Widevine L1/L3 장치 구분
+        - 개발 중에는 DRM debug license server로 테스트 필요
+
 - Android 14에서 추가된 보안 기능과 권한 관리 변화
+    - [사진 및 미디어 접근 권한 세분화]
+        - 기존의 READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE 권한 대신, Android 14에서는
+        - READ_MEDIA_IMAGES, READ_MEDIA_VIDEO, READ_MEDIA_AUDIO로 분리되어 미디어 유형별로 최소 권한 요청이 가능함.
+
+    - [Partial Media Access 기능 추가]
+        - 전체 갤러리 접근 대신, 사용자가 선택한 이미지/동영상만 접근하는 옵션이 도입됨.
+        - 개발자는 Intent.ACTION_PICK_IMAGES를 활용하여 선택형 권한 흐름을 구현해야 함.
+
+    - [Implicit Intent 보안 강화]
+        - PendingIntent나 Intent를 사용할 때 명시적 대상 지정이 강제되며,
+        - export 속성이 없는 컴포넌트는 외부 접근이 차단됨. 의도치 않은 컴포넌트 노출이 방지됨.
+
+    - [알림 권한의 지속적 강화]
+        - Android 13부터 도입된 POST_NOTIFICATIONS 권한 요구가 Android 14에서도 유지되며,
+        - 백그라운드에서 자동 알림 등록 제한이 강화됨. 유저 인터랙션 없이 알림 권한 유도 시 거부 가능성 증가.
+
+    - [보안 로그 및 API 접근 제약 강화]
+        - 시스템 로그나 제약된 API 접근 시 RuntimeException 발생. 보안 민감 기능(예: Accessibility, 녹음, 위치)은 점진적으로 더 강한 사용자 승인이 요구됨.
+
 - Android에서 ART(Android Runtime) 최적화를 위한 AOT, JIT, PGO의 차이점
+    - [AOT (Ahead-Of-Time)]
+        - 앱 설치 시점에 Dalvik bytecode → native machine code로 컴파일하는 방식.
+        - 앱 실행 시 로딩 속도가 빠르지만, 설치 시간 증가 및 설치 용량이 커지는 단점이 있음. 
+        - Android 5~6 시기까지 기본 사용됨.
+
+    - [JIT (Just-In-Time)]
+        - 런타임 중 자주 실행되는 메서드만 즉시 native code로 컴파일함.
+        - 설치 속도가 빠르고 메모리 효율적이지만, 초기 실행 성능이 다소 느릴 수 있음. 
+        - Android 7 이후부터 기본 적용.
+
+    - [PGO (Profile-Guided Optimization)]
+        - JIT와 AOT의 장점을 결합한 방식
+        - 앱 사용 중 수집된 실제 실행 profile 정보를 기반으로 AOT 컴파일을 최적화함.
+        - 자주 사용되는 경로만 빠르게, 거의 사용되지 않는 코드는 미리 컴파일하지 않음.
+
+    - [최적화 흐름]
+        - (1) 초기 앱 실행 → JIT으로 profile 수집
+        - (2) 일정 시간 후 → background에서 profile 분석
+        - (3) 다음 설치/업데이트 시점에 AOT 최적화 실행 → 부팅/실행 속도 향상
+
+    - [실무 팁]
+        - dexopt, profileinstaller API 등을 통해 개발 중에도 PGO 데이터를 수동으로 관리 가능함.
+        - ART 최적화를 위해 baseline profile을 직접 설정하는 것도 성능 향상에 도움 됨.
 
 - Android에서 WorkManager의 내부 스케줄링 메커니즘
 - Android에서 Jetpack CameraX API를 활용한 맞춤형 카메라 솔루션 구축 방법
