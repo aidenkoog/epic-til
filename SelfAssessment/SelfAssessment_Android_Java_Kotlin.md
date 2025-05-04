@@ -12709,11 +12709,86 @@ Organize concepts, features, types and Pros and Cons
         - 복잡한 조건이 필요한 경우에만 ConstraintLayout을 도입하는 것이 성능과 가독성 면에서 유리함.
 
 - Compose의 SnapshotFlow는 무엇이며, 언제 사용해야 하는 가
+    - [기본 개념]
+        - snapshotFlow는 Compose의 상태 시스템인 Snapshot 내부의 State를 감지하고, 
+        - 이를 Coroutine Flow 형태로 변환해주는 API임.
+        - 즉, Compose의 상태 변경을 감지해 비Compose 환경에서 반응형으로 처리할 수 있게 해줌.
+
+    - [사용 목적]
+        - State가 변경될 때마다 특정 side-effect를 실행하고 싶을 때 사용함. 
+        - 예를 들어 스크롤 위치를 관찰하거나, 애니메이션 상태를 감지해서 외부 API 호출 등을 해야 할 때 유용함.
+
+    - [예시]
+        ```kotlin
+        val scrollState = rememberScrollState()
+        LaunchedEffect(Unit) {
+            snapshotFlow { scrollState.value }
+                .distinctUntilChanged()
+                .collect { position ->
+                    // 스크롤 위치에 따른 동작 처리
+                }
+        }
+        ```
+
+    - [주의할 점]
+        - snapshotFlow는 Compose 내부의 상태를 Coroutine 환경으로 bridge 시켜주는 역할이므로, 
+        - 항상 LaunchedEffect 또는 CoroutineScope 안에서 사용해야 하며, State를 기준으로 해야 작동함.
+
 - Jetpack Compose에서 Skia 렌더링 엔진을 활용한 성능 최적화 기법
+    - [Skia 렌더링 엔진 개념]
+        - Jetpack Compose는 내부적으로 Skia 기반의 그래픽스 엔진(SkiaRenderer) 를 사용함. 
+        - 이는 Android 뿐 아니라 데스크탑, 웹 Compose에도 공통적으로 쓰이며 고성능 벡터 기반 2D 그래픽 처리가 가능함.
+
+    - [최적화 기법 1: drawBehind 사용 최소화]
+        - Skia는 draw 호출마다 새로운 레이어나 캔버스를 생성할 수 있어 성능 저하를 유발함.
+        - Modifier.drawBehind를 남용하면 불필요한 그리기 연산이 반복되므로, 가급적 Box + background 등으로 단순히 처리하는 것이 좋음.
+
+    - [최적화 기법 2: Clip, Shadow, graphicsLayer 남용 주의]
+        - clipToBounds, graphicsLayer, shadow는 모두 하드웨어 가속 연산을 유도하므로 오버드로우가 발생할 수 있음.
+        - 뷰가 많거나 깊은 계층에선 layer를 최소화해야 GPU 렌더링 효율이 좋아짐.
+
+    - [최적화 기법 3: drawIntoCanvas 최적 활용]
+        - Skia의 저수준 API에 접근할 수 있는 drawIntoCanvas를 사용할 경우, 
+        - 직접적으로 캔버스를 제어하여 맞춤형 고성능 UI를 구현할 수 있음. 
+        - 단, 이 방식은 일반적인 UI 구성보단 커스텀 차트/애니메이션 등에 권장됨.
+
+
 - Android Thermal API를 활용하여 배터리 및 성능 최적화를 수행하는 방법
+    - [기본 개념]
+        - Android 10(API 29)부터 제공되는 Thermal API는 디바이스의 열 상태를 감지하고, 
+        - 앱이 이에 따라 성능 조절, 애니메이션 간소화, 통신 제어 등을 수행할 수 있게 해줌.
+
+    - [핵심 클래스]
+        - android.os.ThermalService 또는 ThermalManager를 통해 시스템의 thermal 상태를 구독할 수 있음.
+
+    - [thermal 상태 종류]
+        - ThermalStatus.NORMAL, LIGHT, MODERATE, SEVERE, CRITICAL, EMERGENCY, SHUTDOWN 등 총 7단계가 있으며, 상태가 나빠질수록 CPU throttling이 발생함.
+
+    - [사용 예시]
+        ```kotlin
+        val thermalManager = getSystemService(Context.THERMAL_SERVICE) as ThermalManager
+        thermalManager.registerThermalStatusListener({ status ->
+            if (status >= ThermalStatus.MODERATE) {
+                // 애니메이션 중단, 통신 제한 등 성능 조정
+            }
+        }, handler)
+        ```
+
+    - [실전 대응 전략]
+        - 열 상태가 일정 기준 이상이면 →
+            - 고성능 연산 연기 (ex. 영상 처리, 실시간 렌더링)
+            - 애니메이션/이펙트 간소화
+            - 데이터 전송 빈도 조절
+            - 사용자에게 상태 안내 (배터리 과열 경고 등)
+
+    - [주의할 점]
+        - Thermal API는 모든 디바이스에서 완벽히 대응하지 않음, 제조사별 차이가 있으며, 
+        - 과도한 개입보다는 온도 수준에 따른 사용자 경험 보호 목적으로 사용하는 것이 좋음.
+
 - ExoPlayer에서 DRM(Digital Rights Management) 처리의 고급 기법
 - Android 14에서 추가된 보안 기능과 권한 관리 변화
 - Android에서 ART(Android Runtime) 최적화를 위한 AOT, JIT, PGO의 차이점
+
 - Android에서 WorkManager의 내부 스케줄링 메커니즘
 - Android에서 Jetpack CameraX API를 활용한 맞춤형 카메라 솔루션 구축 방법
 - Android의 Foreground Service와 Background Service의 차이점 및 최적화 기법
