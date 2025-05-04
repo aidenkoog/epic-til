@@ -12859,8 +12859,92 @@ Organize concepts, features, types and Pros and Cons
         - ART 최적화를 위해 baseline profile을 직접 설정하는 것도 성능 향상에 도움 됨.
 
 - Android에서 WorkManager의 내부 스케줄링 메커니즘
+    - [기본 구조]
+        - WorkManager는 백그라운드에서 지속적이고 신뢰성 있는 작업을 처리하는 Jetpack 컴포넌트임.
+        - 내부적으로 OS 버전에 따라 실행 엔진이 다르게 적용됨.
+
+    - [스케줄링 전략]
+        - Android 6.0 미만 → AlarmManager + BroadcastReceiver
+        - Android 6.0 이상 → JobScheduler
+        - Android 12 이상에서도 여전히 JobScheduler 기반이지만, 시스템 정책이 더 엄격해짐 (ex. Doze, 배터리 제한)
+
+    - [데이터 저장 방식]
+        - 작업 정의, 상태, 입력/출력은 Room 기반 internal DB에 저장됨.
+        - 앱이 강제 종료되어도 재부팅 후 작업이 복원 가능함.
+
+    - [재시도 및 백오프 정책]
+        - 네트워크 미연결, 배터리 부족 등으로 실패할 경우 지수 증가 방식의 백오프(BackoffPolicy)를 설정할 수 있음.
+            - 실패할 때마다 재시도 간격을 점점 더 길게 설정하는 방식 적용
+        - 예: BackoffPolicy.LINEAR 또는 EXPONENTIAL + delay 설정
+
+    - [실행 조건 설정]
+        - 네트워크 필요 여부, 충전 상태, 저장 공간 등 다양한 조건을 Constraints로 명시 가능.
+        - 조건이 만족될 때까지 작업이 보류됨.
+
+    - [최적화 포인트]
+        - UniqueWork로 중복 작업 방지
+        - Chain 작업으로 순차 실행 보장
+        - WorkContinuation을 활용한 병렬 작업 제어
+
 - Android에서 Jetpack CameraX API를 활용한 맞춤형 카메라 솔루션 구축 방법
+    - [CameraX 개요]
+        - CameraX는 기존 Camera2 API의 복잡함을 줄이고 Lifecycle-aware하며, 
+        - 대부분의 기기와 호환되는 카메라 API임.
+        - Preview, ImageCapture, ImageAnalysis 등으로 구성되어 있음.
+
+    - [기본 구성 방식]
+        ```kotlin
+        val cameraProvider = ProcessCameraProvider.getInstance(context).get()
+        val preview = Preview.Builder().build().also {
+            it.setSurfaceProvider(previewView.surfaceProvider)
+        }
+        val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+        cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, preview)
+        ```
+
+    - [이미지 캡처 기능 추가]
+        - ImageCapture.Builder()를 사용해 JPEG 화질, 회전 방향, 캡처 모드 등을 설정할 수 있음.
+        - 캡처 후 저장 또는 Bitmap 처리도 가능.
+
+    - [맞춤형 분석 처리]
+        - ImageAnalysis를 활용하면 실시간으로 프레임 데이터를 분석할 수 있음.
+        - 얼굴 인식, QR코드 인식, OCR 등 AI 기능과 결합 가능.
+        ```kotlin
+        val imageAnalysis = ImageAnalysis.Builder().build().also {
+            it.setAnalyzer(executor, { imageProxy -> ... })
+        }
+        ```
+
+    - [최적화 포인트]
+        - cameraExecutor는 백그라운드 전용 스레드 사용
+        - 해상도는 필요한 수준으로 제한 (ex. 720p로 충분하면 FHD는 비효율적)
+        - useCaseGroup으로 Preview, Capture, Analysis 조합 최적화
+
 - Android의 Foreground Service와 Background Service의 차이점 및 최적화 기법
+    - [Foreground Service 개념]
+        - 사용자 인지 가능 상태로 실행되는 서비스로, 알림(Notification)을 항상 표시해야 함.
+        - 백그라운드 제약이 강화된 Android 8 이상에서는 지속적인 작업(예: 위치 추적, 녹음, 파일 업로드) 등에 필수로 사용됨.
+
+    - [Background Service 개념]
+        - 사용자에게 표시되지 않는 일반 서비스. Android 8부터는 앱이 백그라운드 상태일 경우 시스템에 의해 자동 종료됨.
+        - 현재는 JobIntentService, WorkManager, JobScheduler로 대체하는 것이 권장됨.
+
+    - [주요 차이점]
+        - Foreground Service는 즉시 실행되며 종료되지 않음
+        - Background Service는 제한적이며, 오랜 실행이 불가함
+
+    - [Foreground 최적화 전략]
+        - 서비스 시작 직후 startForeground() 호출 필수
+        - 알림 채널을 통해 사용자에게 기능 안내 제공
+        - CPU/GPU 리소스를 과도하게 사용하지 않도록 조절 필요
+
+    - [대체 전략]
+        - 지속 작업이 아닌 경우 Foreground Service 대신 WorkManager 또는 JobScheduler를 사용하면 배터리 최적화 및 시스템 호환성이 높아짐.
+
+    - [실무 예시]
+        - 실시간 위치 추적, 오디오 스트리밍, 운동 기록 앱 등의 기능은 Foreground Service로 구현됨.
+        - 반면, 데이터 동기화, 백업 등은 WorkManager를 통해 주기 실행 처리.
+
 - Android에서 TensorFlow Lite를 활용하여 ML 모델을 최적화하는 방법
 - Android에서 Baseline Profiles을 활용한 앱 성능 개선 방법
 - Android에서 Kotlin Coroutines를 사용하는 이유
