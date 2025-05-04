@@ -12545,8 +12545,89 @@ Organize concepts, features, types and Pros and Cons
         - Preview에서 remember, LaunchedEffect 등 런타임 컨텍스트 의존 코드가 동작하지 않을 수 있으므로, UI 전용 Preview 전용 함수 구조로 분리하는 것이 좋음.
 
 - Compose에서 BottomSheet와 Dialog를 구현하는 방법
+    - [BottomSheet 구현 방법]
+        - ModalBottomSheet 또는 ModalBottomSheetLayout을 사용함. 
+        - 상태 관리는 rememberModalBottomSheetState와 ModalBottomSheetState로 제어함.
+        - 코루틴을 사용하여 show/hide 동작을 수행해야 하며, 외부 클릭/뒤로가기 처리도 자동 지원됨.
+        ```kotlin
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        val scope = rememberCoroutineScope()
+
+        ModalBottomSheet(
+            onDismissRequest = { scope.launch { sheetState.hide() } },
+            sheetState = sheetState,
+            sheetContent = {
+                Text("시트 내용")
+            }
+        ) {
+            Button(onClick = { scope.launch { sheetState.show() } }) {
+                Text("시트 열기")
+            }
+        }
+        ```
+
+    - [Dialog 구현 방법]
+        - AlertDialog 또는 Dialog를 사용하여 간단한 팝업 UI를 구성함.
+        - 보여줄지 여부는 Boolean 상태로 제어하고, 닫기 동작은 onDismissRequest에서 수행함
+        ```kotlin
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = { showDialog = false },
+                title = { Text("제목") },
+                text = { Text("내용입니다.") },
+                confirmButton = { Button(onClick = { showDialog = false }) { Text("확인") } }
+            )
+        }
+        ```
+
+    - [팁]
+        - BottomSheet와 Dialog는 모두 UI 상태와 직접 연결되므로 Composable 내부에서 상태 분리를 명확히 하고,
+        - rememberSaveable로 복원 가능하게 관리하는 것이 중요함.
+
 - Jetpack Compose에서 Navigation을 적용하는 방법
+    - [기본 구조]
+        - androidx.navigation:navigation-compose 라이브러리를 사용함.
+        - NavHost, NavController, composable(route) 등을 활용하여 화면 간 전환을 구성함.
+
+    - [기본 흐름 예시]
+        ```kotlin
+        val navController = rememberNavController()
+        NavHost(navController, startDestination = "home") {
+            composable("home") { HomeScreen(navController) }
+            composable("detail") { DetailScreen(navController) }
+        }
+        ```
+
+    - [인자 전달 방법]
+        - 경로에 파라미터를 포함하여 전달할 수 있으며, navBackStackEntry.arguments?.getString(...)으로 수신함.
+        ```kotlin
+        composable("detail/{itemId}") { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getString("itemId")
+        }
+        ```
+
+    - [복귀 및 스택 제어]
+        - navController.popBackStack()을 통해 뒤로가기 가능하며, 특정 화면으로 되돌아가거나 스택 초기화도 가능함.
+
+    - [다중 그래프/BottomNav 구조]
+        - NavGraphBuilder를 별도로 분리하거나, Nested Navigation 구조를 활용하여 모듈화 가능함.
+
 - Compose의 LazyColumn에서 성능을 최적화하는 방법
+    - [아이템 고유 키 지정]
+        - items(items, key = { it.id }) 형식으로 고유 key를 지정해야 삭제/추가/변경 시 위치 추적 오류 및 리컴포지션 오작동을 방지할 수 있음.
+
+    - [최소 상태 관여]
+        - 리스트 내부 Composable이 상태를 가지지 않도록 하고, 상태는 ViewModel이나 외부에서 관리하여 각 아이템이 리컴포지션되지 않게 해야 함.
+
+    - [화면 외 아이템 제거]
+        - LazyColumn은 스크롤 범위 밖 아이템은 메모리에서 자동 제거되므로, Column 대신 반드시 LazyColumn을 사용해야 함.
+
+    - [고정 높이, Stable class 사용]
+        - 아이템이 자주 바뀌는 경우에는 Modifier.height()로 고정 높이를 지정하고, 데이터 모델에 @Stable 또는 @Immutable 어노테이션을 붙여야 Compose가 최적화 가능함.
+
+    - [nested scrolling 주의]
+        - 내부에 또 다른 스크롤 가능한 Composable을 포함할 경우, Modifier.nestedScroll() 등으로 충돌 방지 조치 필요함.
+
 - Compose에서 GestureDetector를 활용한 제스처 처리 방법
 - Jetpack Compose에서 Recomposition을 피하는 방법
 - Compose에서 ConstraintLayout과 Box를 활용하는 방법
