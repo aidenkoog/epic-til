@@ -12300,10 +12300,62 @@ Organize concepts, features, types and Pros and Cons
         - Navigation, Lifecycle, Animation 등 Compose 전용 API 학습 필요
 
 
-- Compose에서 State Hoisting 개념을 설명하고, 언제 사용해야 하는
-- Jetpack Compose에서 remember와 rememberSaveable의 차이점
-- Jetpack Compose에서 recomposition을 방지하는 방법
+- Compose에서 State Hoisting 개념을 설명과 사용 시점
+    - [개념 설명]
+        - State Hoisting은 Composable 내부의 상태를 외부로 끌어올려 관리하는 패턴
+        - 즉, 상태(State)와 상태 변경 로직(onValueChange 등)을 상위 컴포저블에 위임함
+        ```kotlin
+        @Composable
+        fun MyInput(value: String, onValueChange: (String) -> Unit) {
+            TextField(value = value, onValueChange = onValueChange)
+        }
+        ```
 
+    - [사용 이유]
+        - 재사용성 증가
+            - → 상태 없이 동작하는 순수 UI 구성 가능
+        - 단방향 데이터 흐름(One-way Data Flow)
+            - → 버그가 줄고 디버깅이 쉬움
+        - 상태 공유 및 ViewModel과 연결 용이
+            - → 여러 Composable 간 동일 상태 공유 가능
+
+    - [사용 시점]
+        - UI 상태를 여러 컴포넌트에서 제어하거나 ViewModel과 연동할 때
+        - 리팩토링 가능한 컴포넌트를 만들고 싶을 때
+        - 모든 @Composable은 상태를 가능하면 외부에서 주입받도록 설계
+
+- Jetpack Compose에서 remember와 rememberSaveable의 차이점
+    - [공통점]
+        - 둘 다 Composable 내부에서 값을 기억(캐싱)해서 recomposition 시 값 유지
+        - remember는 메모리에 저장 → 재구성 시 유지, 프로세스 종료 시 손실
+
+    - [remember]
+        - 재구성(Recomposition) 동안 값 유지
+        - 그러나 프로세스 종료 / 화면 회전 시 값 사라짐
+
+    - [rememberSaveable]
+        - 내부적으로 SavedInstanceState를 활용해 → 화면 회전 / 프로세스 재시작 후에도 값 유지
+
+- Jetpack Compose에서 recomposition을 방지하는 방법
+    - [recomposition 개념]
+        - 상태가 변경되면 해당 Composable 또는 하위가 자동 재실행되는 과정
+        - 과도한 recomposition은 성능 저하의 원인
+
+    - [방지 또는 최소화 방법]
+        - (1) remember / derivedStateOf로 값 메모이제이션
+            - val derived = remember { derivedStateOf { expensiveComputation(data) } }
+        - (2) key를 이용한 리컴포지션 범위 분리
+        - (3) LaunchedEffect, SideEffect의 의존성 정확히 설정
+            - 의존 값이 바뀔 때만 재실행 되도록 관리
+        - (4) 함수 분리로 scope 최소화
+            - 큰 Composable 안에서 복잡한 UI를 함수 단위로 분리해 불필요한 재실행 줄임
+        - (5) Stable 클래스 활용
+            - 불변 객체를 넘기면 Compose가 변경 없음을 추적 가능
+
+    - [Best Practice]
+        - 상태의 위치와 범위를 의도적으로 설계
+        - 상태가 불필요한 UI에 영향을 주지 않도록 분리
+        - CompositionLocal 남용 금지 → 전역 리컴포지션 유발 가능
 
 - Jetpack Compose의 SnapshotStateList와 일반 List의 차이점
 - Jetpack Compose의 Side Effect API (LaunchedEffect, rememberCoroutineScope, SideEffect 등)의 차이점
