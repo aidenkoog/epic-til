@@ -13150,9 +13150,107 @@ Organize concepts, features, types and Pros and Cons
         - 반복적으로 이미지가 생성되는 환경에선 BitmapPool을 이용해 Bitmap을 재사용함으로써 GC 및 메모리 할당 비용을 줄일 수 있음.
 
 - Android에서 Custom View를 만들 때 고려해야 할 사항
+    - [onMeasure, onDraw 구현]
+        - onMeasure()에서 정확한 크기 계산, onDraw()에서 최소 연산으로 필요한 UI만 그리도록 구현해야 성능 저하를 막을 수 있음.
+        - 특히 onDraw 내부에서 객체 생성, 텍스트 측정 등은 캐싱 처리가 필요함.
+
+    - [레이아웃 최소화]
+        - 기존 ViewGroup을 확장해서 Custom View를 만드는 경우 중첩된 뷰를 줄이고 하나의 컴포넌트로 통합하는 것이 바람직함.
+
+    - [Touch 이벤트 처리]
+        - onTouchEvent()나 GestureDetector를 통해 사용자 인터랙션을 처리할 경우, 이벤트 전파 흐름(dispatchTouchEvent, onInterceptTouchEvent)을 명확히 이해하고 제어해야 함.
+
+    - [Attribute 설정]
+        - attrs.xml에 속성을 정의하고, 생성자에서 context.obtainStyledAttributes()로 값을 받아 처리하면 XML에서의 유연한 설정이 가능함.
+
+    - [Custom View 성능 최적화]
+        - setWillNotDraw(true)로 draw 생략 가능
+        - invalidate() 호출 최소화
+        - Hardware acceleration 이슈 확인
+
 - Android에서 CPU 및 메모리 사용량을 최적화하는 방법
+    - [불필요한 연산 제거]
+        - 반복 호출되는 UI나 루프 내부에서 연산/할당 발생을 줄이고 캐싱을 활용함.
+        - ex: TextView.setText() 과도한 호출, JSON 파싱 반복 등
+
+    - [메모리 누수 방지]
+        - Context를 static 변수에 보관하지 않기
+        - 콜백, Handler, Coroutine scope 등에서 참조 해제 명확히
+        - LiveData, BroadcastReceiver, Room Observer 구독 해제 처리
+
+    - [이미지 메모리 절감]
+        - Glide, Coil 등 라이브러리에서 .override(), .fitCenter() 적용
+        - Bitmap 불필요할 경우 즉시 recycle() 호출
+
+    - [객체 생성 최소화]
+        - ViewHolder, Adapter, 커스텀 뷰 내 반복 처리에서 객체 재사용 원칙 준수
+        - ex: Paint, Path, RectF 등은 val로 재사용
+
+    - [GC 및 쓰레드 최적화]
+        - GC가 자주 발생하지 않도록 메모리 청크를 효율적으로 관리하고, 불필요한 쓰레드 생성을 방지함.
+        - 필요 시 HandlerThread, Executors, CoroutineDispatcher 활용
+
 - Android에서 StrictMode를 활용한 성능 분석 방법
+    - [StrictMode 개요]
+        - 개발 중에 MainThread에서 발생하는 위험한 작업이나 리소스 누수를 탐지할 수 있는 디버깅 도구임. 
+        - 앱 퍼포먼스 디버깅 시 매우 유용함.
+
+    - [ThreadPolicy 설정 예시]
+        ```kotlin
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build()
+        )
+        ```
+
+    - [VmPolicy 설정 예시]
+        ```kotlin
+        StrictMode.setVmPolicy(
+            StrictMode.VmPolicy.Builder()
+                .detectLeakedSqlLiteObjects()
+                .detectLeakedClosableObjects()
+                .penaltyLog()
+                .build()
+        )
+        ```
+
+    - [탐지 가능한 항목 예시]
+        - MainThread에서의 네트워크/디스크 I/O
+        - Cursor/SQLite 미해제
+        - 미닫힌 File/Stream
+        - 리소스 누수
+
+    - [활용 방법]
+        - 개발 단계에서 Application.onCreate()에 설정해두고, 로그를 통해 문제 코드 탐지 → 리팩터링 유도.
+        - 단, 릴리즈 빌드에서는 제거해야 함.
+
 - Android에서 TraceView와 Perfetto를 활용한 성능 분석 방법
+    - [TraceView 개요]
+        - Android Studio에서 제공하는 UI 트레이싱 도구로, 메서드 단위의 호출 시간, 호출 빈도, 병목 구간을 시각적으로 분석할 수 있음.
+        - Debug.startMethodTracing("trace")로 수동 기록 가능.
+
+    - [TraceView 단점]
+        - 메서드 호출 단위라서 시스템 수준 분석은 불가능
+        - Android Q 이후부터는 Perfetto 사용이 권장됨
+
+    - [Perfetto 개요]
+        - 시스템 전반(CPU, 메모리, I/O, 프레임 렌더링 등)을 고정밀 추적할 수 있는 Google의 공식 trace 도구
+            - Android Studio → Profiler → Record → System Trace 탭
+            - systrace, atrace보다 정밀하고 확장 가능
+
+    - [Perfetto 사용 포인트]
+        - Choreographer 프레임 드롭 분석
+        - Garbage Collection 시간
+        - UI 스레드, RenderThread, Binder call 병목 확인
+        - 앱 시작 지연 원인 추적
+
+    - [결과 해석 방법]
+        - 프레임 당 16ms 이상 걸리면 dropped frame
+        - Idle 시간이 많다면 최적화 가능성 있음
+        - UI thread blocking 시, 비동기 처리 고려
+
 - Android에서 RecyclerView의 DiffUtil을 활용하는 방법
 - Android에서 Jetpack Compose의 UI 테스트를 수행하는 방법
 - Android에서 Prefetching과 Lazy Loading의 차이점
