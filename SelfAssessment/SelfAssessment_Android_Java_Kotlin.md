@@ -12115,13 +12115,142 @@ Organize concepts, features, types and Pros and Cons
         - (5) StrictMode + Profiler 활용
             - 느린 View 측정, UI Thread block 탐지 → Android Studio Profiler로 추적
 
-
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
+    - [기본 개념]
+        - BroadcastReceiver는 앱 간 또는 시스템과 앱 간 메시지 수신을 위한 컴포넌트
+        - 예: 부팅 완료, 배터리 변경, 네트워크 상태 변경 등
+
+    - [주의할 점]
+        - (1) Android 8.0(API 26)+ 이상에서 제한 강화
+            - 대부분의 implicit broadcast는 Manifest 등록 불가
+            - 예: CONNECTIVITY_CHANGE, ACTION_NEW_PICTURE 등은 동적 등록만 가능
+
+        - (2) Context 생명주기 짧음
+            - onReceive()는 UI 작업이나 장기 작업에 부적합 → 별도 서비스 또는 WorkManager 사용 필요
+
+        - (3) 앱 비정상 종료 리스크
+            - 무거운 처리 로직, 네트워크 호출 등은 BroadcastReceiver에서 직접 하지 말 것
+
+        - (4) 보안 고려
+            - sendBroadcast()로 공개된 브로드캐스트는 악의적 앱이 수신 가능
+            - 민감한 데이터는 LocalBroadcastManager 또는 Context.sendBroadcast(Intent, permission) 사용
+
+    - [Best Practice]
+        - Manifest 등록은 시스템 이벤트만 최소한으로
+        - 장시간 작업은 JobIntentService / WorkManager로 위임
+        - 동적 등록은 반드시 unregisterReceiver()로 해제
+
 - Android에서 권한 시스템(Permission Request)이 동작하는 방식
+    - [기본 개념]
+        - Android 6.0(API 23)부터 런타임 권한 모델 도입
+        - targetSdkVersion >= 23이면 위험 권한은 앱 실행 중 사용자에게 명시적으로 요청해야 함
+
+    - [권한 요청 흐름]
+        - (1) AndroidManifest.xml에 선언
+            ```xml
+            <uses-permission android:name="android.permission.CAMERA" />
+            ```
+        - (2) 실행 중 권한 체크 및 요청
+            ```kotlin
+            if (ContextCompat.checkSelfPermission(context, CAMERA) != PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, arrayOf(CAMERA), REQUEST_CODE)
+            }
+            ```
+        - (3) 결과 콜백 처리
+            ```kotlin
+            override fun onRequestPermissionsResult(...) {
+                if (grantResults[0] == PERMISSION_GRANTED) { ... }
+            }
+            ```
+
+    - [권한 분류]
+        - Normal Permission: 자동 승인 (예: INTERNET)
+        - Dangerous Permission: 사용자 승인 필요 (예: CAMERA, LOCATION)
+        - Special Permission: 별도 UI 접근 필요 (예: SYSTEM_ALERT_WINDOW, MANAGE_EXTERNAL_STORAGE)
+
+    - [주의사항]
+        - 거부 + "다시 묻지 않기" 선택 시, 권한 요청 재시도 불가 → 설정 화면 유도 필요
+        - 여러 권한 동시 요청 시 사용자 혼란 주의, 단계적으로 처리 권장
+
 - Android의 Jetpack WorkManager와 JobScheduler의 차이점
+    - [공통점]
+        - 둘 다 백그라운드 작업 예약 실행을 위한 API
+        - 조건 기반 실행, 지연 실행 가능
+
+    - [WorkManager]
+        - Jetpack 공식 백그라운드 작업 처리 API
+        - 앱 종료/재부팅 후에도 작업 보장
+        - CoroutineWorker, ListenableWorker, RxWorker 등 다양한 타입 지원
+        - Firebase JobDispatcher, AlarmManager 등 내부적으로 통합하여 관리
+
+    - [JobScheduler]
+        - Android 시스템 기본 제공 스케줄러 (API 21+)
+        - 시스템 수준의 조건 기반 작업 예약 (네트워크, 충전 중 등)
+        - JobService 기반의 구현 필요
+
 - Android에서 Jetpack Navigation Component를 사용할 때의 장점
+    - [기본 개념]
+        - Jetpack Navigation Component는 Fragment 간 전환, BackStack 관리, SafeArgs 데이터 전달 등을
+        - 명시적이고 구조적으로 처리할 수 있도록 지원하는 라이브러리
+
+    - [주요 장점]
+        - (1) BackStack 자동 관리
+            - Fragment 간 전환 시 뒤로가기 동작을 자동 처리
+        - (2) 시각적 NavGraph 설계 가능
+            - XML 또는 Kotlin DSL로 전체 앱 내 이동 흐름을 한눈에 파악 가능
+        - (3) Safe Args 지원
+            - 화면 간 데이터 전달을 타입 안정성 있게 처리 (컴파일 타임 검증)
+        - (4) DeepLink, Dialog, BottomSheet 등 대응
+            - 네비게이션 목적지로 다양한 유형의 UI 컴포넌트 지원
+        - (5) Jetpack Compose 지원
+            - Navigation-Compose를 통해 선언형 UI에서도 동일하게 구성 가능
+
+    - [Best Practice]
+        - singleActivity 아키텍처와 함께 활용 시 효과 극대화
+        - Fragment 외에도 Composable 화면 전환에 활용 가능
+
 - Android에서 Jetpack DataStore와 SharedPreferences의 차이점
+    - [기본 개념]
+        - 둘 다 키-값 기반의 데이터 저장 방식
+        - DataStore는 SharedPreferences의 모던 대체 기술
+
+    - [SharedPreferences 특징]
+        - 동기식 API (commit()) 사용 → ANR 발생 위험
+        - 내부적으로 XML 파일에 저장
+        - 데이터 일관성, 타입 안정성 부족
+        - Multi-process 환경에 취약
+
+    - [DataStore 특징]
+        - 비동기 처리 기반 (Coroutine/Flow)
+        - 두 가지 유형
+            - Preferences DataStore: 키-값 구조 (SharedPrefs 대체)
+            - Proto DataStore: 구조화된 타입 저장 (Protocol Buffers)
+        - 타입 안전성 보장, 트랜잭션 안정성 우수
+        - DataStore.updateData()를 통해 원자적 갱신 가능
+
 - Android에서 ViewModel과 Repository 패턴을 함께 사용하는 이유
+    - [기본 구조 개념]
+        - ViewModel: UI 상태와 생명주기 관리를 담당 (UI 중심)
+        - Repository: 데이터 소스 (Local, Remote)와의 추상화 계층을 담당 (도메인 중심)
+
+    - [ViewModel만 사용할 경우 문제점]
+        - ViewModel이 API 호출, DB 접근, 비즈니스 로직까지 포함하게 되면 역할이 커지고 테스트/유지보수 어려움
+        - 다양한 데이터 소스를 UI와 직접 연결하면 의존성 증가 + 중복 코드 유발
+
+    - [Repository와 함께 쓰는 이유]
+        - (1) 관심사 분리 (Separation of Concerns)
+            - ViewModel은 UI 상태 관리에 집중, Repository는 데이터 처리 담당
+        - (2) 테스트 용이성
+            - Repository를 mocking하여 ViewModel 테스트 가능
+        - (3) 유지보수성 향상
+            - 데이터 변경(예: API → Room 변경) 시 ViewModel 코드 변경 없이 대응 가능
+        - (4) 다중 소스 통합 처리
+            - 로컬 캐시 + 원격 API 등 여러 소스를 Repository에서 조합 가능
+
+    - [Best Practice]
+        - suspend fun, Flow, LiveData 등 비동기 처리를 ViewModel ↔ Repository 계층에서 분리
+        - Repository는 interface → implementation 구조로 DI와 테스트 유리하게 설계
+
 - Android에서 ViewModelStoreOwner의 역할
 - Android에서 Room Database와 SQLite의 차이점
 - Jetpack Compose와 기존 View 기반 UI의 차이점
