@@ -12067,7 +12067,53 @@ Organize concepts, features, types and Pros and Cons
         - 테스트 환경 따라 생체 인증이 없을 경우 fallback 처리 필요
 
 - Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법
+    - [기본 개념]
+        - Hilt는 Android에서 공식적으로 권장하는 DI 프레임워크
+        - Compose에서도 @HiltViewModel과 hiltViewModel()로 ViewModel을 주입 가능
+
+    - [기본 설정]
+        - (1) 의존성 추가
+            - implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+        - (2) Application 클래스에 Hilt 설정
+        - (3) ViewModel 주입 예시
+        - (4) Composable에서 주입
+            ```kotlin
+            @Composable
+            fun MyScreen(viewModel: MyViewModel = hiltViewModel()) {
+                val state by viewModel.state.collectAsState()
+                ...
+            }
+            ```
+
+    - [Best Practice]
+        - DI는 반드시 ViewModel까지로 한정, UI 계층에 직접 주입은 피함
+        - Navigation graph가 여러 개일 경우 HiltNavGraphBuilder 등으로 scope 분리
+        - 테스트용 Hilt 모듈도 함께 구성 (@TestInstallIn)
+
 - Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
+    - [렌더링 과정 요약]
+        - (1) Measure: 각 View의 크기를 결정 (뷰의 크기)
+        - (2) Layout: 부모 기준으로 View의 위치 배치 (뷰의 위치 배치)
+        - (3) Draw: 실제 픽셀로 화면에 그리기 (그리기)
+            - → 이 과정은 매 프레임마다 UI 쓰레드(Main Thread) 에서 처리됨
+
+    - [성능 저하 원인]
+        - 레이아웃 계층이 깊거나 중첩 (Nested LinearLayout, RelativeLayout)
+        - UI Thread에서 비동기 처리 없이 네트워크, 디코딩 등 수행
+        - onDraw() 커스텀 로직 과도하거나 무한 invalidate 호출
+
+    - [최적화 방법]
+        - (1) 레이아웃 단순화
+            - ConstraintLayout 또는 Compose로 깊이 줄이기
+        - (2) ViewHolder 패턴 / LazyColumn 사용
+            - RecyclerView, Compose의 Lazy 계열로 필요한 UI만 렌더링
+        - (3) 비동기 처리
+            - 이미지 로딩은 Glide, Coil 등의 백그라운드 처리 라이브러리 사용
+            - 코루틴, RxJava 등으로 UI Thread 분리
+        - (4) GPU 오버드로우 최소화
+            - 투명도/배경 중첩 줄이기 → Debug GPU overdraw로 분석 가능
+        - (5) StrictMode + Profiler 활용
+            - 느린 View 측정, UI Thread block 탐지 → Android Studio Profiler로 추적
 
 
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
