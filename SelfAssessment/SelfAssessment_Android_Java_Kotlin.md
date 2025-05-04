@@ -13023,9 +13023,77 @@ Organize concepts, features, types and Pros and Cons
         ```
 
 - Android에서 Paging 3 라이브러리를 사용하는 이유
+    - [대용량 데이터 처리에 최적화됨]
+        - Paging 3는 RecyclerView와 연동되어 스크롤할 때마다 필요한 데이터만 로드함으로써 메모리 효율성과 성능을 모두 향상시킴. 
+        - 전체 데이터를 한 번에 불러오지 않아도 되기 때문에 OOM 리스크도 낮아짐.
+
+    - [Flow 기반 비동기 구조]
+        - Paging 3는 Flow<PagingData<T>>를 기반으로 동작하므로 Coroutines와 자연스럽게 통합되어, 비동기 처리, 에러 처리, 로딩 상태 관리가 간결해짐.
+
+    - [Jetpack 구성 요소와 통합]
+        - ViewModel, Room, Retrofit과 쉽게 연결되며, PagingSource, PagingDataAdapter 등으로 데이터 흐름을 구조화할 수 있음.
+
+    - [Load 상태 관리 지원]
+        - 로딩 중, 로딩 실패, 리트라이 등의 상태를 별도로 관리할 수 있어 사용자 경험을 개선할 수 있음.
+
 - Android에서 App Startup Library를 활용하는 방법
+    - [기본 개념]
+        - App Startup은 Jetpack의 애플리케이션 초기화 라이브러리로, 앱이 시작될 때 각 서브 시스템이 어떤 순서로 초기화되는지 명확히 제어할 수 있음. 
+        - ContentProvider를 활용해 자동 실행됨.
+
+    - [Initializer 정의 방법]
+        - 각 모듈 또는 라이브러리는 Initializer<T> 인터페이스를 구현하여 필요한 리소스를 초기화함. 
+        - 다른 Initializer에 의존성도 명시 가능.
+        ```kotlin
+        class MyInitializer : Initializer<MyDependency> {
+            override fun create(context: Context): MyDependency {
+                return MyDependency.init(context)
+            }
+
+            override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
+        }
+        ```
+
+    - [활용 사례]
+        - Firebase, Timber, WorkManager 등 앱 시작 시 필수 설정을 AppStartup에 등록하면 초기화 순서 충돌 방지, 스타트업 비용 측정 등이 가능함.
+
+    - [장점]
+        - Application 클래스 비대화 방지
+        - 의존성 그래프 기반 순서 관리
+        - 조건부 초기화 구현 용이
+
 - Android에서 UI 렌더링 속도를 최적화하는 방법
+    - [불필요한 뷰 계층 제거]
+        - 중첩된 LinearLayout, Nested ScrollView 등의 복잡한 계층 구조는 Measure/Layout/Draw 단계에서 병목을 유발함.
+        - ConstraintLayout이나 Compose로 단순화하는 것이 렌더링 최적화에 효과적임.
+
+    - [View 재사용 및 ViewHolder 최적화]
+        - RecyclerView에서 ViewHolder 패턴을 철저히 지키고, DiffUtil을 사용해 변경된 항목만 갱신함으로써 전체 재그리기를 방지할 수 있음.
+
+    - [GPU 과부하 방지]
+        - Drop Shadow, Clip, Overdraw 등을 과도하게 사용할 경우 GPU 렌더링이 지연될 수 있음. 
+        - Profile GPU Rendering, Layout Inspector를 통해 프레임 렌더링 병목을 시각적으로 분석해야 함.
+
+    - [이미지 최적화]
+        - Glide, Coil 등의 이미지 라이브러리에서 썸네일 크기 지정, 메모리 캐싱, 리사이징 등을 활용하여 ImageView 렌더링 병목을 줄여야 함.
+
 - Android에서 OutOfMemory(OOM) 오류를 방지하는 방법
+    - [이미지 메모리 관리]
+        - 이미지 로딩 시 inSampleSize, inPreferredConfig, Bitmap.recycle() 등의 설정을 통해 메모리 사용량을 줄여야 하며, Glide/Coil을 사용하면 자동 관리 가능함.
+
+    - [Context 누수 방지]
+        - Activity나 Fragment의 Context를 static 변수에 보관하면 메모리 해제가 불가능해짐
+        - 반드시 applicationContext를 사용하거나, 참조 해제를 명확히 해야 함.
+
+    - [리소스 해제 처리]
+        - RecyclerView, ViewPager 등에서 View 재사용 시 이벤트 리스너, animation, coroutine 등 비정상적 참조가 남지 않도록 onViewRecycled, onDestroyView 등에서 해제를 철저히 해야 함.
+
+    - [메모리 Leak 감지]
+        - LeakCanary 등을 통해 정적 참조, Coroutine 누수, LiveData 구독 미해제 등을 지속적으로 감시해야 함.
+
+    - [대용량 리스트 대응]
+        - Paging 3, Jetpack Compose의 LazyColumn 등 지연 로딩 방식을 사용하여 메모리에서 한 번에 많은 데이터를 다루지 않도록 설계해야 함.
+
 - Android에서 백그라운드 작업을 최적화하는 방법
 - Android에서 Jetpack Compose의 Recompositions를 최적화하는 방법
 - Android에서 Bitmap 메모리 관리를 최적화하는 방법
