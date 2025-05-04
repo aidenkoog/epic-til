@@ -12488,8 +12488,62 @@ Organize concepts, features, types and Pros and Cons
         - 따라서 Slot 구조에 익숙해지면 확장 가능한 UI 컴포넌트 설계가 가능함.
 
 - Compose에서 UI 성능을 최적화하는 방법
+    - [Recomposition 최소화]
+        - 상태가 변경될 때 불필요한 리컴포지션이 발생하지 않도록 remember, derivedStateOf, key 등을 적절히 사용해야 함.
+        - Composable 내부에서 자주 바뀌지 않는 값은 remember로 캐싱하고, 계산이 많은 파생 상태는 derivedStateOf로 분리함.
+
+    - [함수 분리]
+        - 하나의 Composable 함수가 너무 크거나 많은 상태에 의존하면 리컴포지션 범위가 커짐.
+        - 따라서 UI를 작은 단위의 함수로 분리하여 변경된 영역만 다시 그리도록 유도해야 함.
+
+    - [Lazy 계열 사용]
+        - 리스트나 반복 구조는 Column이 아닌 LazyColumn, LazyRow 등을 사용하여 필요한 항목만 렌더링하도록 해야 메모리와 연산 비용을 아낄 수 있음.
+
+    - [Modifier 최적화]
+        - Modifier는 체이닝 순서와 구성에 따라 불필요한 레이아웃 측정이나 그리기가 반복될 수 있으므로, 중복 Modifier 제거와 불필요한 drawBehind, graphicsLayer 회피가 중요함.
+
+    - [SnapshotState 관리]
+        - mutableStateListOf, mutableStateMapOf 등을 사용할 때는 변경 범위를 명확히 하고, 불필요한 전체 리스트 갱신 대신 부분 업데이트를 유도해야 함.
+
 - Compose에서 정적인 상태와 동적인 상태를 관리하는 모범 사례
+    - [정적인 상태 예시]
+        - 앱 내에서 고정된 문자열, 색상, UI 구조 등은 재조합이 필요 없는 정적인 상태로, val, remember 등을 통해 컴포지션 동안 한 번만 선언되도록 해야 함.
+
+    - [동적인 상태 예시]
+        - 사용자 입력값, API 결과, 스크롤 위치, 버튼 클릭 상태 등은 자주 바뀌는 값이므로 remember { mutableStateOf(...) }, collectAsState() 등을 사용해 관리함.
+
+    - [모범 분리 방식]
+        - ViewModel에서 상태를 StateFlow 또는 LiveData로 선언하고, Composable에서는 collectAsState()로 구독함.
+        - 상태는 가능한 외부에서 주입(hoisting)하고, Composable은 순수 UI 함수로 유지하는 것이 이상적임.
+
+    - [불변성과 추적 가능성 유지]
+        - 상태 객체는 최대한 불변 구조로 관리하여 예측 가능하게 만들고, 필요하다면 State → UI → Event → ViewModel → State로 이어지는 단방향 흐름(One-way Data Flow) 구조를 유지해야 함.
+
 - Jetpack Compose의 Preview 기능을 활용하는 방법
+    - [기본 사용 방법]
+        - @Preview 애노테이션을 붙이면 Android Studio에서 XML처럼 Composable UI를 실시간 미리보기 가능함.
+        - showBackground = true, name, uiMode, device 등 다양한 옵션으로 테스트 시나리오를 설정할 수 있음.
+
+    - [상태 분리 중요성]
+        - Preview에서는 ViewModel이나 실제 데이터가 없기 때문에, UI 로직과 상태 로직을 분리해야 제대로 동작함.
+        - 미리보기용 dummy 데이터를 직접 전달하는 방식으로 Preview에 대응해야 함.
+
+    - [예제 구조]
+        ```kotlin
+        @Preview(showBackground = true)
+        @Composable
+        fun MyScreenPreview() {
+            MyScreen(title = "예시 제목", onClick = {})
+        }
+        ```
+
+    - [활용 포인트]
+        - 다크 모드, 폰트 크기, 화면 방향, 기기 종류에 따른 UI 미리보기 테스트를 통해 다양한 기기 대응력을 확인할 수 있음.
+        - 디자이너와 협업 시 빠르게 레이아웃 피드백을 받기에도 매우 유용함.
+
+    - [주의점]
+        - Preview에서 remember, LaunchedEffect 등 런타임 컨텍스트 의존 코드가 동작하지 않을 수 있으므로, UI 전용 Preview 전용 함수 구조로 분리하는 것이 좋음.
+
 - Compose에서 BottomSheet와 Dialog를 구현하는 방법
 - Jetpack Compose에서 Navigation을 적용하는 방법
 - Compose의 LazyColumn에서 성능을 최적화하는 방법
