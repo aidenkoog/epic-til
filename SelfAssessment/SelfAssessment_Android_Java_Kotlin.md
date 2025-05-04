@@ -12946,8 +12946,82 @@ Organize concepts, features, types and Pros and Cons
         - 반면, 데이터 동기화, 백업 등은 WorkManager를 통해 주기 실행 처리.
 
 - Android에서 TensorFlow Lite를 활용하여 ML 모델을 최적화하는 방법
+    - [TensorFlow Lite 개요]
+        - TensorFlow Lite(TFLite)는 모바일 및 엣지 디바이스에서 경량화된 머신러닝 모델을 실행하기 위한 솔루션임.
+        - .tflite 확장자를 가진 모델 파일을 Android에서 로드해 추론(inference)을 수행할 수 있음.
+
+    - [최적화 기법 1: 모델 양자화(Quantization)]
+        - Float32 기반 모델을 int8, float16 등으로 줄여 모델 크기 및 추론 속도 향상 가능.
+        - Post-training quantization 기법으로 적용하며 정확도 손실을 최소화하면서 성능 개선 효과가 큼.
+
+    - [최적화 기법 2: 모델 슬라이싱 및 프루닝]
+        - 사용하지 않는 노드를 제거하거나 구조를 단순화하여 모델 용량 및 연산량 감소
+        - 예: MobileNetV3-small, EfficientNet-lite 모델 사용
+
+    - [최적화 기법 3: NNAPI / GPU Delegate 사용]
+        - CPU 외에 NNAPI, GPU, Hexagon delegate를 활용해 추론 속도 향상 가능.
+        - 기기 성능에 따라 delegate를 자동 선택하거나 fallback 처리 필요.
+
+    - [실무 적용 팁]
+        - Interpreter.Options에 delegate 설정
+        - Model metadata를 포함하면 텐서 이름 없이도 쉽게 입출력 가능
+        - Android Studio ML Model Binding을 활용하면 boilerplate 코드 생략 가능
+
 - Android에서 Baseline Profiles을 활용한 앱 성능 개선 방법
+    - [Baseline Profile 개요]
+        - Baseline Profile은 앱 실행 중 자주 호출되는 경로를 미리 컴파일(AOT) 하기 위한 최적화 방식임.
+        - Google Play 또는 ART 런타임이 이 정보를 기반으로 특정 메서드들을 사전 컴파일하여 
+        - 앱의 cold start, animation lag, JIT delay를 줄일 수 있음.
+
+    - [작성 및 적용 흐름]
+        - (1) profileinstaller 라이브러리 설정
+        - (2) 특정 시나리오에 대한 프로파일 수집 테스트 실행
+        - (3) baseline-prof.txt 생성 후 앱 빌드에 포함
+        - (4) Google Play Upload 시 자동 인식 및 적용됨
+
+    - [개발 도구]
+        - Macrobenchmark 라이브러리를 활용해 generateBaselineProfile() 실행
+            - → cold start, 화면 전환, 리스트 렌더링 등 자주 호출되는 경로 자동 수집
+
+    - [실제 효과]
+        - Cold Start 시간 최대 30% 감소
+        - 첫 화면 진입 속도 개선
+        - RecyclerView / LazyColumn 초기 렌더링 지연 감소
+
+    - [주의 사항]
+        - 프로파일은 release 빌드 기준으로 생성해야 효과가 있음
+        - 앱 업데이트 시 새로운 profile 유지 필요
+        - Gradle Plugin 7.0 이상 필요
+
 - Android에서 Kotlin Coroutines를 사용하는 이유
+    - [비동기 처리의 구조적 개선]
+        - 기존의 Thread, Handler, AsyncTask 등은 콜백 지옥(callback hell)과 메모리 누수 문제를 유발하기 쉬움.
+        - CoroutineScope를 활용하면 lifecycle-aware한 비동기 코드를 간결하고 안전하게 작성 가능함.
+
+    - [가독성 및 유지보수 향상]
+        - suspend 키워드를 사용하여 동기 코드처럼 순차적 흐름의 비동기 코드를 작성할 수 있음.
+        - 예외 처리, 취소, timeout 등도 한눈에 파악 가능해 유지보수가 쉬움.
+
+    - [경량 스레드 기반]
+        - 코루틴은 실제 스레드를 생성하지 않고, 경량 스레드(continuation)로 동작하기 때문에
+        - 수천 개의 병렬 작업도 최소한의 자원으로 실행할 수 있음.
+
+    - [구성 요소와의 통합성]
+        - Jetpack ViewModel, Room, Retrofit, WorkManager 등과 자연스럽게 통합됨.
+        - viewModelScope, lifecycleScope, Dispatchers.IO, Flow와 조합하면 UI, 데이터, 네트워크를 하나의 일관된 흐름으로 처리 가능함.
+
+    - [예시]
+        ```kotlin
+        viewModelScope.launch {
+            try {
+                val data = repository.getData()
+                _uiState.value = UiState.Success(data)
+            } catch (e: Exception) {
+                _uiState.value = UiState.Error(e)
+            }
+        }
+        ```
+
 - Android에서 Paging 3 라이브러리를 사용하는 이유
 - Android에서 App Startup Library를 활용하는 방법
 - Android에서 UI 렌더링 속도를 최적화하는 방법
