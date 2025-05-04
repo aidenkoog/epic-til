@@ -12358,11 +12358,135 @@ Organize concepts, features, types and Pros and Cons
         - CompositionLocal 남용 금지 → 전역 리컴포지션 유발 가능
 
 - Jetpack Compose의 SnapshotStateList와 일반 List의 차이점
+    - [상태 추적 여부]
+        - SnapshotStateList는 Compose의 상태 시스템에 통합되어 있어 아이템 추가, 삭제, 변경 시 자동으로 recomposition이 발생
+        - 반면 일반 List나 MutableList는 상태 추적이 불가능해 값이 바뀌어도 UI가 자동으로 갱신되지 않는다.
+
+    - [recomposition 반응성]
+        - SnapshotStateList는 내부 변경에도 반응하여 Compose UI가 자동으로 업데이트된다.
+        - 일반 리스트는 리스트 자체를 새로운 값으로 할당해야만 Compose가 변화로 인식한다.
+
+    - [사용 목적]
+        - UI 상에서 리스트 항목이 동적으로 변경되는 경우(추가, 삭제, 변경 등)에 SnapshotStateList를 사용한다.
+        - 반대로 정적인 리스트를 단순히 출력할 때는 일반 리스트로 충분하다.
+
+    - [선언 방식 차이]
+        - SnapshotStateList는 mutableStateListOf()로 선언하며, 
+        - 일반 리스트는 listOf() 또는 mutableListOf()로 생성된다.
+
 - Jetpack Compose의 Side Effect API (LaunchedEffect, rememberCoroutineScope, SideEffect 등)의 차이점
+    - [LaunchedEffect]
+        - Composable이 Composition될 때 suspend 함수나 비동기 작업을 수행할 수 있도록 하는 API. 
+        - key가 바뀌면 이전 작업이 취소되고 새로운 코루틴이 실행된다. 
+        - 주로 초기 API 호출, 애니메이션 시작 등에 사용한다.
+
+    - [rememberCoroutineScope]
+        - Composable 외부에서도 코루틴을 실행할 수 있게 해주는 Scope를 기억한다.
+        - recomposition과 무관하게 유지되며, 예를 들어 버튼 클릭 등 사용자의 이벤트 발생 시 비동기 작업을 트리거할 때 사용된다.
+
+    - [SideEffect]
+        - Composition이 완료된 후 동기적으로 실행되는 블록이다. 
+        - UI에는 직접적인 영향을 주지 않지만, 로그 출력, ViewModel 연동, 외부 상태 기록 등 비동기 작업이 아닌 side-effect 로직에 적합하다.
+
+    - [비교 정리]
+        - LaunchedEffect는 suspend 기반 side-effect, 
+        - rememberCoroutineScope는 수동 트리거, 
+        - SideEffect는 composition 이후 동기 처리 용도로 사용하며 각각의 lifecycle 및 실행 시점이 다르므로 목적에 따라 구분해서 사용해야 한다.
+
 - Compose에서 LazyColumn과 RecyclerView의 성능 차이
-- Compose에서 Modifier의 역할과 주요 Modifier 예제를 설명하시오.
+    - [UI 렌더링 방식]
+        - RecyclerView는 ViewHolder 패턴을 통해 뷰를 재활용하면서 View 객체를 직접 다룬다. 
+        - 반면 LazyColumn은 선언형 구조로 필요한 항목만 동적으로 Composable을 구성하고 필요 없으면 자동으로 폐기하여 메모리 사용을 최소화한다.
+
+    - [성능 최적화 방식]
+        - RecyclerView는 내부적으로 Pool을 활용한 뷰 재사용을 통해 성능을 확보하며, 
+        - LazyColumn은 recomposition을 최소화하며 필요한 데이터만 그리도록 설계되어 비슷한 수준의 성능을 보여준다. 
+        - 다만 복잡한 뷰 타입이나 고급 스크롤 기능은 RecyclerView가 유리하다.
+
+    - [코드 복잡도]
+        - RecyclerView는 Adapter, ViewHolder, DiffUtil 등 별도 클래스를 작성해야 하지만, 
+        - LazyColumn은 코드량이 적고 선언형 구조로 UI 설계가 더 직관적이다.
+
+    - [상태 시스템과의 통합성]
+        - LazyColumn은 Compose의 상태 시스템과 자연스럽게 연결되어 있어 
+        - State, Flow, LiveData 등과 손쉽게 연동된다. 
+        - 반면 RecyclerView는 Observe 기반으로 UI 변경을 수동 처리해야 한다.
+
+    - [사용 추천 기준]
+        - 새로운 프로젝트에서는 LazyColumn이 기본 선택이며, 
+        - 복잡한 커스텀 애니메이션이나 기존 View 기반 시스템과의 호환성이 필요한 경우 RecyclerView를 고려
+
+- Compose에서 Modifier의 역할과 주요 Modifier 예제를 설명
+    - [역할]
+        - Modifier는 Composable의 레이아웃, 동작, 스타일, 제스처 등 속성을 연속적으로 설정할 수 있는 구성 블록임. 
+        - 모든 Modifier는 순차적으로 체이닝되며, 각 단계에서 Composable의 속성을 꾸미거나 제어함.
+
+    - [레이아웃 관련 예시]
+        - Modifier.padding(16.dp) → 내부 여백 설정
+        - Modifier.fillMaxWidth() → 부모의 가로 폭 전체 사용
+        - Modifier.size(100.dp) → 고정된 너비와 높이 지정
+
+    - [스타일 관련 예시]
+        - Modifier.background(Color.Red) → 배경 색상 적용
+        - Modifier.border(1.dp, Color.Black) → 테두리 추가
+        - Modifier.alpha(0.5f) → 투명도 설정
+
+    - [동작/제스처 예시]
+        - Modifier.clickable { ... } → 클릭 이벤트
+        - Modifier.pointerInput(Unit) { detectTapGestures { ... } } → 사용자 제스처 감지
+
+    - [조합의 특징]
+        - Modifier는 순서에 따라 동작이 달라질 수 있으므로, 실행 순서를 고려한 조합 설계가 중요함.
+
 - Jetpack Compose에서 rememberScopedState가 필요한 이유
+    - [기본 개념]
+        - rememberScopedState는 Navigation Compose 환경에서 route 단위로 remember된 값을 NavBackStackEntry의 생명주기 범위에 따라 관리하기 위해 사용됨.
+
+    - [필요 이유]
+        - 일반적인 remember나 rememberSaveable은 Composable이 사라지면 값이 소멸됨. 
+        - 하지만 화면 전환으로 인해 Composable이 제거되었다가 다시 돌아오는 경우, 값을 유지해야 하는 경우가 있음.
+        - 이때 rememberScopedState를 사용하면 BackStackEntry 단위로 상태를 저장하고 화면 복귀 시 이전 상태를 복원할 수 있음.
+
+    - [주로 사용되는 경우]
+        - 탭 전환, 다중 네비게이션 그래프, Dialog/BottomSheet 등 BackStack 유지가 필요한 복합 구조에서 사용됨.
+
+    - [Compose 공식 상태 관리 흐름의 보완용]
+        - 아직 Compose Navigation에선 공식 API로 노출된 것은 아니고, rememberSaveable(stateSaver, key = backStackEntry)와 유사한 방식으로 커스텀 구현하는 사례가 많음.
+
 - Compose에서 Slot API를 활용하는 방법
+    - [개념]
+        - Slot API는 Composable 내부에 특정 UI 자리를 열어두고, 외부에서 Composable을 주입받아 내부에 삽입할 수 있도록 하는 방식임.
+        - 즉, "레이아웃 안에 원하는 부분을 외부에서 정의할 수 있게 열어두는 기술"
+
+    - [사용 이유]
+        - 재사용 가능한 컴포넌트를 만들 때 UI 일부를 유연하게 커스터마이징하기 위해 사용함.
+        - 예: 제목/본문/버튼이 정해진 Card 컴포넌트 안에 버튼만 바꿔 쓰고 싶을 때
+
+    - [기본 구조 예시]
+        ```kotlin
+        @Composable
+        fun CustomCard(
+            title: String,
+            content: @Composable () -> Unit
+        ) {
+            Column {
+                Text(title, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(8.dp))
+                content()
+            }
+        }
+
+        // 사용 예
+        CustomCard(title = "안내") {
+            Text("이곳에 Slot으로 들어갈 내용입니다.")
+        }
+        ```
+
+    - [실전 활용]
+        - AlertDialog, Scaffold, TopAppBar 등의 Jetpack Compose 공식 컴포넌트들도 
+        - 모두 Slot API 구조로 되어 있음.
+        - 따라서 Slot 구조에 익숙해지면 확장 가능한 UI 컴포넌트 설계가 가능함.
+
 - Compose에서 UI 성능을 최적화하는 방법
 - Compose에서 정적인 상태와 동적인 상태를 관리하는 모범 사례
 - Jetpack Compose의 Preview 기능을 활용하는 방법
