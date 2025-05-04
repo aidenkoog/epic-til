@@ -12252,11 +12252,59 @@ Organize concepts, features, types and Pros and Cons
         - Repository는 interface → implementation 구조로 DI와 테스트 유리하게 설계
 
 - Android에서 ViewModelStoreOwner의 역할
+    - [기본 개념]
+        - ViewModelStoreOwner는 ViewModel을 보관(ViewModelStore)하고, 
+        - 생명주기 범위에 따라 공유 가능하도록 해주는 인터페이스
+
+    - [주요 역할]
+        - (1) ViewModel 범위 결정
+            - Activity, Fragment, NavBackStackEntry 등이 ViewModelStoreOwner를 구현함
+            - ViewModel은 이 Owner의 생명주기 동안 유지됨
+
+        - (2) ViewModelStore 제공
+            - viewModelStore: ViewModelStore 반환 → 내부적으로 ViewModel을 키 기반으로 저장
+
+        - (3) 공유 가능성
+            - 동일한 ViewModelStoreOwner를 기반으로 하면 여러 Composable 또는 Fragment 간 ViewModel 공유 가능
+
+    - [예시]
+        ```kotlin
+        val viewModel = ViewModelProvider(owner).get(MyViewModel::class.java)
+        ```
+        - owner는 보통 activity, fragment, navBackStackEntry 등
+
+    - [Best Practice]
+        - Navigation Component 사용 시 NavBackStackEntry를 ViewModelStoreOwner로 활용하여 화면 간 상태 유지/공유 최적화
+        - ViewModel 범위를 정확히 설정하지 않으면 불필요한 메모리 유지 또는 상태 초기화 문제 발생
+
 - Android에서 Room Database와 SQLite의 차이점
+    - [Room의 장점]
+        - @Entity, @Dao, @Database 기반으로 명시적 구조화
+        - SQL 쿼리도 @Query로 작성하면서 컴파일 타임 오류 검출 가능
+        - LiveData / Flow와 연계하여 UI와 자동 연결 가능
+        - 테스트 용이, 멀티 스레드 안전성 ↑
+
+    - [실무 팁]
+        - Room은 내부적으로 SQLite를 사용 → 성능은 SQLite와 같음
+        - 단, Room은 타입 안전성 + 아키텍처 통합 + 추상화 제공이 강점
+
 - Jetpack Compose와 기존 View 기반 UI의 차이점
+    - [Compose의 강점]
+        - UI와 상태 간의 단방향 데이터 흐름 (Unidirectional Data Flow)
+        - View 계층 없이 간단하고 유연한 UI 구성 가능
+        - 코드 → UI 직접 연결로 테스트, 유지보수, 리팩토링 용이
+
+    - [주의할 점]
+        - 재컴포지션 원리 이해 필수 (remember, derivedStateOf)
+        - 기존 뷰 시스템과의 혼용 시 AndroidView, ComposeView 사용
+        - Navigation, Lifecycle, Animation 등 Compose 전용 API 학습 필요
+
+
 - Compose에서 State Hoisting 개념을 설명하고, 언제 사용해야 하는
 - Jetpack Compose에서 remember와 rememberSaveable의 차이점
 - Jetpack Compose에서 recomposition을 방지하는 방법
+
+
 - Jetpack Compose의 SnapshotStateList와 일반 List의 차이점
 - Jetpack Compose의 Side Effect API (LaunchedEffect, rememberCoroutineScope, SideEffect 등)의 차이점
 - Compose에서 LazyColumn과 RecyclerView의 성능 차이
