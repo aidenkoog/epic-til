@@ -11928,8 +11928,37 @@ Organize concepts, features, types and Pros and Cons
         - Compose는 WorkManager 진행 상태를 Observe 하되, 작업 로직은 ViewModel 또는 Worker에 위임
 
 - Jetpack Compose에서 ML Kit을 활용한 AI 기능을 추가하는 방법
+    - [기본 개념]
+        - ML Kit은 Google이 제공하는 온디바이스 머신러닝 기능 라이브러리
+        - 얼굴 인식, 텍스트 인식(OCR), 바코드 스캔, 번역 등 다양한 AI 기능 제공
+
+    - [구현 흐름]
+        - (1) ML Kit 의존성 추가
+            ```gradle
+            implementation "com.google.mlkit:text-recognition:16.0.0"
+            ```
+        - (2) CameraX 또는 이미지 입력을 받아 InputImage로 변환
+            ```kotlin
+            val image = InputImage.fromBitmap(bitmap, rotation)
+            ```
+        - (3) ML Kit 모델 적용 (예: OCR, Optical Character Recognition, 광학 문자 인식 기술)
+            ```kotlin
+            val recognizer = TextRecognition.getClient()
+            recognizer.process(image)
+                .addOnSuccessListener { result -> /* 텍스트 사용 */ }
+            ```
+        - (4) 결과를 Compose 상태에 반영
+            ```kotlin
+            val recognizedText = remember { mutableStateOf("") }
+            ```
+    -  [Best Practice]
+        - 온디바이스 모델만 사용 시 네트워크 불필요, 빠름
+        - 결과 처리 후 remember, State로 UI에 바인딩
+        - 권한(Camera 등) 처리와 함께 ViewModel에서 처리 로직 분리 권장
+
 - Compose의 Glance를 활용하여 Widget을 구현하는 방법
 - Jetpack Compose에서 Jetpack CameraX를 활용하는 방법
+
 - Jetpack Compose에서 Biometric API를 활용하는 방법
 - Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법
 - Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
