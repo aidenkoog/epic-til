@@ -11957,11 +11957,119 @@ Organize concepts, features, types and Pros and Cons
         - 권한(Camera 등) 처리와 함께 ViewModel에서 처리 로직 분리 권장
 
 - Compose의 Glance를 활용하여 Widget을 구현하는 방법
+    -  [Glance 개념]
+        - Jetpack Compose 기반의 앱 위젯(Widget) 구현 라이브러리
+        - 기존 RemoteViews 기반 위젯보다 구조적이고 선언형으로 구현 가능
+
+    - [기본 구성 요소]
+        - (1) GlanceAppWidget
+            - 위젯 정의 클래스. Content() 내부에 UI 선언
+
+        - (2) GlanceAppWidgetReceiver
+            - 위젯 업데이트를 OS에 연결해주는 Receiver
+
+    - [예시 구조]
+        ```kotlin
+        class MyWidget : GlanceAppWidget() {
+            @Composable
+            override fun Content() {
+                Text("Hello from Widget!")
+            }
+        }
+
+        class MyWidgetReceiver : GlanceAppWidgetReceiver() {
+            override val glanceAppWidget: GlanceAppWidget = MyWidget()
+        }
+
+        // AndroidManifest.xml
+        <receiver android:name=".MyWidgetReceiver" ... />
+        ```
+    - [주의사항 및 팁]
+        - GlanceStateDefinition으로 상태 저장 가능
+        - Compose와 비슷하지만 완전히 동일한 Modifier/컴포넌트는 아님
+        - 배경 업데이트, 클릭 핸들링은 Glance API를 통해 따로 정의해야 함
+
 - Jetpack Compose에서 Jetpack CameraX를 활용하는 방법
+    - [기본 개념]
+        - CameraX는 Jetpack에서 제공하는 고수준 카메라 API
+        - 다양한 디바이스에서 일관된 사진/영상/분석 기능을 제공
+    - [Compose에서 CameraX 연동 방식]
+        - (1) CameraX 의존성 추가
+            - implementation "androidx.camera:camera-camera2:1.1.0"
+            - implementation "androidx.camera:camera-lifecycle:1.1.0"
+            - implementation "androidx.camera:camera-view:1.1.0"
+        - (2) PreviewView를 AndroidView로 삽입
+            ```kotlin
+            AndroidView(factory = { context ->
+                PreviewView(context).apply {
+                    scaleType = PreviewView.ScaleType.FILL_CENTER
+                }
+            }, modifier = Modifier.fillMaxSize())
+            ```
+        - (3) CameraProvider 사용
+            ```kotlin
+            val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
+            cameraProviderFuture.addListener({
+                val cameraProvider = cameraProviderFuture.get()
+                val preview = Preview.Builder().build().also {
+                    it.setSurfaceProvider(previewView.surfaceProvider)
+                }
+
+                val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, preview)
+            }, ContextCompat.getMainExecutor(context))
+            ```
+
+    - [Best Practice]
+        - CameraX + ML Kit 조합 시 ImageAnalysis로 실시간 프레임 처리 가능
+        - lifecycleOwner와 함께 안전하게 리소스 관리
+        - Compose 전용 Camera 라이브러리는 아직 미완성 → AndroidView 활용이 필수
 
 - Jetpack Compose에서 Biometric API를 활용하는 방법
+    - [기본 개념]
+        - BiometricPrompt API는 지문, 얼굴 인식 등을 활용한 생체 인증 API
+        - Compose에서는 FragmentActivity 기반 Context를 사용해야 하며, Dialog 기반으로 표시
+
+    - [구현 흐름]
+        - (1) 의존성 추가
+            - implementation "androidx.biometric:biometric:1.1.0"
+        - (2) BiometricPrompt 구성
+            ```kotlin
+            val executor = ContextCompat.getMainExecutor(context)
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("지문 인증")
+                .setNegativeButtonText("취소")
+                .build()
+
+            val biometricPrompt = BiometricPrompt(
+                context as FragmentActivity,
+                executor,
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                        onSuccess()
+                    }
+                    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                        onError()
+                    }
+                }
+            )
+
+            biometricPrompt.authenticate(promptInfo)
+            ```
+        - (3) Compose에서 Trigger
+            ```kotlin
+            Button(onClick = { startBiometricAuth() }) {
+                Text("생체 인증")
+            }
+            ```
+    - [주의사항]
+        - context는 반드시 FragmentActivity여야 함 (LocalContext.current as FragmentActivity)
+        - 테스트 환경 따라 생체 인증이 없을 경우 fallback 처리 필요
+
 - Compose에서 Jetpack Hilt와 함께 DI를 활용하는 방법
 - Android의 View 렌더링 과정과 성능 최적화 방법을 설명해주세요.
+
+
 - Android에서 BroadcastReceiver를 사용할 때 주의해야 할 점
 - Android에서 권한 시스템(Permission Request)이 동작하는 방식
 - Android의 Jetpack WorkManager와 JobScheduler의 차이점
