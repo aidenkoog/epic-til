@@ -13337,9 +13337,115 @@ Organize concepts, features, types and Pros and Cons
         - GC 횟수 감소
 
 - Android에서 Firebase Performance Monitoring을 활용하는 방법
+    - [기본 개념]
+        - Firebase Performance Monitoring은 앱의 실행 시간, 네트워크 응답 속도, 앱 시작 지연 등을 자동 수집해주는 성능 분석 도구임.
+        - 앱 릴리즈 이후 실 사용자 환경에서의 성능 데이터를 수집할 수 있음.
+
+    - [적용 방법]
+        - firebase-perf 라이브러리 추가 (build.gradle)
+        - Firebase 콘솔에서 성능 모니터링 활성화
+        - PerformanceMonitoring.getInstance().isPerformanceCollectionEnabled = true (선택)
+
+    - [자동 수집 항목]
+        - 앱 시작 시간
+        - 화면 렌더링 지연 (slow rendering)
+        - HTTP/S 네트워크 요청 시간 (URL, 응답 코드 포함)
+
+    - [커스텀 Trace 측정]
+        ```kotlin
+        val trace = FirebasePerformance.getInstance().newTrace("custom_trace_name")
+        trace.start()
+        // 측정할 로직
+        trace.stop()
+        ```
+
+    - [네트워크 요청 커스터마이징]
+        - Retrofit이나 OkHttp에서 FirebasePerfOkHttpClient로 감싸거나
+        - addApplicationInterceptor를 사용하여 자동 추적 설정 가능
+
 - Android 14에서 추가된 주요 기능과 변경 사항
+    - [사진 접근 권한 세분화]
+        - Android 13에 이어 Android 14에서도 READ_MEDIA_IMAGES, READ_MEDIA_VIDEO, READ_MEDIA_AUDIO를 세분화하여
+        - 앱이 접근 가능한 미디어 범위 제한 및 사용자 선택 권한 강화
+
+    - [선택적 미디어 접근 허용]
+        - 사용자가 이미지 전체가 아닌 선택한 파일만 공유 가능하도록 ACTION_PICK_IMAGES 등 새 API 제공됨
+
+    - [보안 및 권한 강화]
+        - PendingIntent가 명시적 인텐트만 허용되도록 제한 강화
+        - 앱이 백그라운드에서 포그라운드 서비스 실행 시 시스템 승인 필요
+
+    - [앱 호환성 및 백그라운드 제약 강화]
+        - 앱이 백그라운드에서 알림을 생성하려면 POST_NOTIFICATIONS 권한 필요
+        - 정지된 앱(suspended app)은 Broadcast 수신 차단됨
+
+    - [새 시스템 동작]
+        - Non-dismissable 알림 제한
+        - 시스템 UI와 상호작용 시 Full-Screen Intent 제한
+        - 앱 타겟 SDK 34 이상 시 동작 방식 변경 필요
+
 - Android에서 Jetpack Macrobenchmark를 활용한 성능 측정 방법
+    - [기본 개요]
+        - Macrobenchmark는 Cold Start, Warm Start, Scroll, Navigation 등의 성능을 측정하는 Jetpack 도구임.
+        - 실제 APK에서 실행되므로 릴리즈 빌드 기준 성능 측정이 가능함.
+
+    - [설정 방법]
+        - macrobenchmark 모듈 생성
+        - androidx.benchmark.macro.junit4.MacrobenchmarkRule 사용
+        - 측정 대상 액티비티를 Intent로 실행하고, UIAutomator로 조작
+        ```kotlin
+        @get:Rule val benchmarkRule = MacrobenchmarkRule()
+
+        @Test
+        fun startupBenchmark() = benchmarkRule.measureRepeated(
+            packageName = "com.example.app",
+            metrics = listOf(StartupTimingMetric()),
+            iterations = 5,
+            setupBlock = {
+                pressHome()
+            },
+            measureBlock = {
+                startActivityAndWait()
+            }
+        )
+        ```
+
+    - [지원 측정 항목]
+        - StartupTimingMetric
+        - FrameTimingMetric
+        - PowerMetric, CpuUsageMetric, CustomTraceMetric
+
+    - [실무 적용 포인트]
+        - release 빌드 기준으로 측정해야 실 성능 반영
+        - baseline-prof.txt와 연결하여 최적화 효과 확인
+        - 실제 사용 시나리오 기반 측정 루틴 구성
+
 - Android에서 Jetpack Compose로 SEO 대응 웹뷰를 구현하는 방법
+    - [기본 한계점]
+        - Jetpack Compose 앱 자체는 SEO 크롤러가 인식하지 않기 때문에 
+        - SEO는 WebView가 로드하는 웹 콘텐츠에서 대응해야 함.
+        - 즉, SEO 대응은 앱이 아닌 웹 콘텐츠 측면에서 이뤄져야 함.
+
+    - [Compose에서 WebView 구현]
+        ```kotlin
+        AndroidView(factory = {
+            WebView(it).apply {
+                settings.javaScriptEnabled = true
+                loadUrl("https://example.com/seo-page")
+            }
+        })
+        ```
+
+    - [SEO 대응 핵심 전략]
+        - WebView 내 페이지가 SSR(Server-Side Rendering) 또는 Prerender 기반으로 구성되어야 함
+        - React, Vue 같은 SPA는 meta, og, robots.txt, structured data 등을 HTML에 직접 포함시켜야 함
+        - WebView의 User-Agent를 크롤러에 맞게 설정하거나 대응
+
+    - [테크니컬 대응 방법]
+        - WebView.getSettings().userAgentString으로 커스터마이징
+        - shouldOverrideUrlLoading 또는 WebViewClient에서 redirect 흐름 제어
+        - SEO를 위한 noindex, canonical, og:image, description 등 메타 태그 포함된 HTML을 로드해야 함
+
 - Android에서 TensorFlow Lite를 활용한 AI/ML 모델 적용 방법
 - Android의 Low Latency Rendering을 구현하는 방법
 - Android에서 Jetpack CameraX를 활용하는 방법
