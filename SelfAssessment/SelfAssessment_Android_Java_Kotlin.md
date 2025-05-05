@@ -13447,9 +13447,92 @@ Organize concepts, features, types and Pros and Cons
         - SEO를 위한 noindex, canonical, og:image, description 등 메타 태그 포함된 HTML을 로드해야 함
 
 - Android에서 TensorFlow Lite를 활용한 AI/ML 모델 적용 방법
+    - [TFLite 개요]
+        - TensorFlow Lite는 모바일 및 엣지 디바이스용 경량 머신러닝 프레임워크로, .tflite 확장자의 모델 파일을 Android에서 로드하여 추론 가능.
+
+    - [기본 적용 흐름]
+        - 모델을 .tflite 파일로 변환 (TensorFlow → TFLite Converter)
+        - tflite-model 파일을 assets에 추가
+        - Interpreter 또는 ML Model Binding으로 로드 후 추론 수행
+
+    - [코드 예시]
+        ```kotlin
+        val interpreter = Interpreter(loadModelFile("model.tflite"))
+        val input = floatArrayOf(...)
+        val output = Array(1) { FloatArray(RESULT_SIZE) }
+        interpreter.run(input, output)
+        ```
+
+    - [최적화 전략]
+        - Quantization (int8, float16 등)으로 추론 속도 및 메모리 절약
+        - GPU / NNAPI Delegate로 하드웨어 가속
+        - Model metadata 추가 시 입출력 텐서 이름 생략 가능
+
 - Android의 Low Latency Rendering을 구현하는 방법
+    - [Low Latency 목표]
+        - UI → GPU → Display까지의 지연을 최소화하여 빠르고 부드러운 사용자 반응성 확보.
+        - 특히 실시간 카메라, 게임, 미디어 앱에서 중요.
+
+    - [최적화 전략]
+        - Choreographer.postFrameCallback을 활용해 프레임 타이밍을 조절
+        - SurfaceView / TextureView / OpenGL ES 사용 시 하드웨어 직접 렌더링 유도
+        - setWillNotDraw(true)로 불필요한 draw 생략
+
+    - [Jetpack Compose에서 대응]
+        - Modifier.graphicsLayer() 최소 사용
+        - 리컴포지션 범위 제한 (derivedStateOf, key, remember)
+        - SnapshotFlow로 상태 변경 감지 시점 최적화
+
+    - [도구 활용]
+        - Profile GPU Rendering
+        - Perfetto / Systrace
+        - FrameMetricsAggregator (API 24+) 로 렌더링 타임 측정 가능
+
 - Android에서 Jetpack CameraX를 활용하는 방법
+    - [CameraX 개요]
+        - Jetpack CameraX는 기존 Camera2 API의 복잡성을 줄이고 Lifecycle-aware, 간단한 카메라 기능 구현을 도와주는 Jetpack 라이브러리.
+
+    - [기본 구성 요소]
+        - Preview: 미리보기
+        - ImageCapture: 사진 촬영
+        - ImageAnalysis: 실시간 프레임 분석
+        - CameraSelector: 전/후면 카메라 지정
+
+    - [설정 및 코드 예시]
+        ```kotlin
+        val cameraProvider = ProcessCameraProvider.getInstance(context).get()
+        val preview = Preview.Builder().build().also {
+            it.setSurfaceProvider(previewView.surfaceProvider)
+        }
+        val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+        cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, preview)
+        ```
+
+    - [고급 기능]
+        - 실시간 얼굴 인식, QR 분석 시 ImageAnalysis 활용
+        - HDR, 줌, 플래시 등은 Camera2Interop으로 확장
+        - CameraX Extensions API로 Bokeh, Night, HDR 등의 특수 모드 지원
+
 - Google Play 정책 변경이 앱 개발에 미치는 영향
+    - [권한 제한 강화]
+        - Android 11 이후로 백그라운드 위치, 전화/문자 접근, 알림 권한 등 민감 권한은 사용 제한 강화
+            - ACCESS_BACKGROUND_LOCATION 사용 시 심사 필요
+            - Android 13~14: READ_MEDIA_*, POST_NOTIFICATIONS로 세분화됨
+
+    - [타겟 SDK 요구사항 강화]
+        - 매년 타겟 SDK 상향 요구됨 (현재 기준: SDK 34 이상)
+            - → 미대응 앱은 스토어 노출 제한, 업데이트 불가, 신규 앱 등록 제한 발생
+
+    - [정책 위반 시 영향]
+        - 앱 삭제, 계정 정지
+        - 결제 정책 위반 시 IAP 차단
+        - 민감 권한 위반 시 앱 노출 불가
+
+    - [개발자 대응 전략]
+        - 정기적으로 정책 변경 공지 확인
+        - Privacy Policy, 권한 사용 사유, 민감 정보 처리 방식을 명확히 명시
+        - 앱심사 요청 시 스크린샷, 데모영상, 정책 설명 문서를 함께 제출하여 리젝 방지
+
 - Android에서 WebRTC를 활용한 실시간 영상 통화 구현 방법
 - Android에서 onSaveInstanceState()와 ViewModel의 차이점
 - Android의 Activity와 Fragment의 생명주기에서 주요 차이점
