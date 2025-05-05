@@ -13534,9 +13534,136 @@ Organize concepts, features, types and Pros and Cons
         - 앱심사 요청 시 스크린샷, 데모영상, 정책 설명 문서를 함께 제출하여 리젝 방지
 
 - Android에서 WebRTC를 활용한 실시간 영상 통화 구현 방법
+    - [WebRTC 개요]
+        - WebRTC는 Google이 주도한 브라우저 및 네이티브에서의 실시간 P2P 영상/음성 통신 프로토콜임. 
+        - Android에선 Java/Kotlin 기반 SDK로 제공됨.
+
+    - [기본 구성 요소]
+        - PeerConnection: P2P 연결 담당
+        - MediaStream, MediaTrack: 영상/음성 데이터 스트림
+        - SurfaceViewRenderer: 영상 출력 뷰
+        - Signaling Server: SDP/ICE candidate 교환 (직접 구현 필요, WebSocket 등 활용)
+
+    - [구현 순서]
+        - WebRTC 라이브러리 의존성 추가 (Maven 또는 aar 수동 빌드)
+        - 카메라/마이크 권한 요청
+        - PeerConnectionFactory 초기화
+        - MediaStream 생성 및 addTrack()
+        - PeerConnection 구성, signaling 서버를 통해 offer/answer/sdp/candidate 교환
+        - SurfaceViewRenderer로 내/외부 영상 렌더링
+
+    - [실전 팁]
+        - 네트워크 NAT, TURN/STUN 서버 고려 필수
+        - 영상 해상도 및 FPS는 성능 최적화 핵심
+        - signaling 서버는 WebSocket 또는 Firebase 활용 가능
+
+- WebRTC 동작 흐름 요약 (기기 A <-> 기기 B)
+    - [1. Signaling 시작 (초기 연결 수립 준비)]
+        - 역할: 두 클라이언트가 통신을 시작하기 위한 SDP (Session Description Protocol) 와 ICE Candidate 정보를 주고받는 과정
+        - 방법: WebRTC 자체에는 signaling이 없으므로 직접 WebSocket, Firebase, MQTT 등으로 구현해야 함
+        - 초기 흐름:
+            - A가 offer SDP 생성 → signaling 서버를 통해 B에게 전달
+            - B가 answer SDP 생성 → A에게 전달
+
+    - [2. PeerConnection 생성 및 구성]
+        - 양쪽 모두 PeerConnection 객체를 생성
+        - 필요한 ICE 서버 정보(STUN/TURN) 등록
+        - 미디어 스트림(Local Camera/Audio 등)을 연결에 추가
+        ```kotlin
+        val peerConnection = peerConnectionFactory.createPeerConnection(iceServers, observer)
+        ```
+
+    - [3. SDP 교환 (Offer/Answer)]
+        - A: createOffer() 호출 → setLocalDescription()
+        - B: setRemoteDescription() 후 createAnswer() → setLocalDescription() → A에 전송
+
+    - [4. ICE Candidate 교환]
+        - ICE(Interactive Connectivity Establishment): 실제 통신 경로(IP, 포트 등)를 찾는 과정
+        - 양쪽에서 onIceCandidate 콜백이 발생할 때마다 상대방에게 전달
+        - 모든 후보(Candidate)를 교환한 후 가장 효율적인 경로로 연결 수립
+        ```kotlin
+        peerConnection.onIceCandidate = { candidate ->
+            signaling.send(candidate)
+        }
+        ```
+
+    - [5. 연결 완료 및 미디어 스트림 전달]
+        - SDP와 ICE 교환이 완료되면 연결이 수립됨 (→ onAddStream, onTrack 콜백 발생)
+        - SurfaceViewRenderer나 TextureView에 미디어 스트림을 연결해 렌더링함
+
+    - [6. 실시간 통신 시작]
+        - 영상/음성이 P2P 방식으로 전달됨
+        - NAT, 방화벽 회피를 위해 TURN 서버를 통해 릴레이할 수도 있음
+        - 통신 도중 ICE candidate가 추가되면 계속 반영 가능 (ICE trickling)
+
+    - WebRTC 전체 흐름 시각 요약
+        - Signaling 연결 (WebSocket 등)
+        - PeerConnection 생성 + ICE 서버 설정
+        - SDP Offer/Answer 교환
+        - ICE Candidate 교환
+        - Connection 수립 (ICE 연결 완료)
+        - 미디어 스트림 교환 및 렌더링
+
 - Android에서 onSaveInstanceState()와 ViewModel의 차이점
+    - [공통 목적]
+        - 둘 다 Activity/Fragment 상태가 파괴될 때 데이터를 유지하기 위해 사용되지만, 사용 시점과 보존 범위가 다름.
+
+    - [onSaveInstanceState()]
+        - 기기 회전, 프로세스 킬 후 재생성 등에서 일시적인 상태 보존에 사용
+        - Bundle에 저장 가능한 크기 제한 있음 (약 1MB 이하)
+        - UI 관련 데이터(스크롤 위치, 입력값 등) 보존에 적합
+        - 생명주기: onSaveInstanceState() → onCreate(savedInstanceState)로 복원
+
+    - [ViewModel]
+        - UI 상태, 로직 데이터, 비동기 처리 결과 유지에 사용
+        - Configuration 변경(Activity 재생성)에도 소멸되지 않음
+        - 프로세스가 완전히 종료되면 유지되지 않음
+        - LiveData, StateFlow, repository와 함께 구조화 가능
+
+    - [핵심 차이]
+        - ViewModel: 메모리 상 유지, 복잡한 상태와 UI 로직 담당
+        - onSaveInstanceState: 저장소 기반 일시 복원, 간단한 UI 상태 처리에 적합
+
 - Android의 Activity와 Fragment의 생명주기에서 주요 차이점
+    - [Activity 생명주기]
+        - 앱의 한 화면(단독 실행 단위)으로, onCreate → onStart → onResume → onPause → onStop → onDestroy 순서
+        - 생성 -> 시작 -> 재개 -> 중지 -> 정지 -> 파괴
+        - Activity 종료 시 OS에 의해 완전히 파괴됨
+
+    - [Fragment 생명주기]
+        - Activity에 의존적인 화면 구성 단위
+        - onAttach → onCreate → onCreateView → onViewCreated → onStart → onResume 등 View 중심 생명주기가 추가됨
+        - onDestroyView() 이후에도 Fragment 인스턴스는 메모리에 남아 있을 수 있음
+
+    - [핵심 차이점]
+        - Fragment는 UI(View) 생명주기와 자체 생명주기가 분리되어 있음
+        - Fragment는 addToBackStack()을 통해 백스택 관리 가능
+        - Activity는 앱 내에서 독립적인 context이고, Fragment는 조립형 UI 구조의 일부임
+
 - Jetpack Lifecycle Observer의 역할과 활용 방법
+    - [LifecycleObserver 개요]
+        - LifecycleObserver는 Activity/Fragment의 생명주기 변화에 비침투적으로 반응하는 컴포넌트 구조를 제공함.
+        - → 메모리 누수 방지, 명확한 구조화에 도움
+
+    - [사용 예시]
+        ```kotlin
+        class MyObserver : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                // 생명주기 이벤트 대응
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(MyObserver())
+        ```
+
+    - [주요 활용 사례]
+        - Sensor, Location Listener 등록/해제
+        - 카메라, 오디오, 타이머 등 리소스 관리
+        - Compose, Room, Retrofit 등의 비동기 작업 Lifecycle-aware하게 구성
+
+    - [장점]
+        - ViewModel, UseCase, Manager 등 다양한 계층에 안전하게 생명주기 의존 로직 분리 가능
+        - 수동으로 onStart() 등 호출할 필요 없이 자동으로 연결됨
+
 - Android에서 Multi-Window를 지원하는 방법
 - Android에서 Foldable(접이식) 디바이스 대응 방법
 - Android에서 OpenGL ES를 활용한 그래픽 렌더링 최적화 방법
