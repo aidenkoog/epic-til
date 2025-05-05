@@ -14498,10 +14498,99 @@ Organize concepts, features, types and Pros and Cons
         - 쓰기 연산이 자주 발생하는 경우 성능 급락
         - 객체 수가 많거나 크기가 클수록 메모리 부담 커짐
 
-- Java에서 EnumMap을 사용하는 이유는?
-- Java에서 BlockingQueue의 역할과 사용 예제는?
-- Java에서 Stream API와 for-each 루프의 차이점은?
-- Java에서 Collectors.toMap()을 사용할 때 발생할 수 있는 문제는?
+- Java에서 EnumMap을 사용하는 이유
+    - [정의 및 구조]
+        - EnumMap<K extends Enum<K>, V>는 Enum 키 전용 Map 구현체
+        - 내부적으로 배열 기반으로 매우 빠르게 작동함.
+
+    - [장점]
+        - 성능 우수: 해시 연산이 아닌 배열 인덱스를 통해 값에 직접 접근 → 일반 HashMap보다 훨씬 빠름
+        - 메모리 절약: Enum 값 개수만큼의 배열만 유지하므로 공간 효율성도 뛰어남
+        - null 키 허용 안 함: Enum 값이 아닌 키는 compile-time에 걸러짐 → 타입 안정성 확보
+
+    - [사용 예]
+        - 상태머신 구현 (ex. OrderStatus -> Handler)
+        - 요일, 방향, 단계 등 명확한 Enum 매핑 구조 필요 시
+
+- Java에서 BlockingQueue의 역할과 사용 예제
+    - [정의 및 목적]
+        - BlockingQueue는 스레드 간 안전한 데이터 교환을 위한 큐.
+            - 큐가 비어있으면 take()가 블록됨
+            - 큐가 가득 차면 put()이 블록됨
+
+    - [사용 예]
+        - 생산자-소비자 패턴 (Producer-Consumer)
+        - 쓰레드 풀에서 작업 큐로 활용
+        - 백그라운드 작업 처리용 이벤트 큐
+
+    - [대표 구현체]
+        - ArrayBlockingQueue: 고정 크기 버퍼
+        - LinkedBlockingQueue: 동적 크기, 무제한 가능
+        - PriorityBlockingQueue: 우선순위 기반 처리
+        - DelayQueue: 특정 시간 이후 처리용 큐
+
+    - [예제]
+        ```kotlin
+        BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+
+        // Producer
+        new Thread(() -> {
+            queue.put("작업 A");
+        }).start();
+
+        // Consumer
+        new Thread(() -> {
+            String task = queue.take();
+            // 처리
+        }).start();
+        ```
+
+- Java에서 Stream API와 for-each 루프의 차이점
+    - [Stream API 특징]
+        - 선언형(Declarative): 원하는 작업을 명시적으로 기술 (ex. filter, map, collect)
+        - 내부 반복(Internal Iteration): 병렬 처리 및 최적화에 유리
+        - 중간 연산/최종 연산 분리: filter().map().collect()
+        - 병렬 스트림 지원: .parallelStream() 으로 멀티코어 사용
+
+    - [for-each 특징]
+        - 명령형(Imperative): 반복 로직을 직접 구현
+        - 외부 반복(External Iteration): 제어가 개발자에게 있음
+        - 단순 반복에 적합: 성능 예측이 쉽고, 직관적
+
+    - [차이 요약]
+        - Stream은 코드 가독성, 불변성, 병렬성에 유리
+        - for-each는 간단한 반복이나 수정이 필요한 로직에 유리
+
+- Java에서 Collectors.toMap()을 사용할 때 발생할 수 있는 문제
+    - [문제 1: 키 중복 시 예외 발생]
+        ```kotlin
+        list.stream().collect(Collectors.toMap(
+            item -> item.getId(),
+            item -> item.getValue()
+        ));
+        ```
+        - → 같은 키가 두 번 나오면 IllegalStateException 발생
+    - [해결 방법: 병합 함수 제공]
+        ```kotlin
+        .collect(Collectors.toMap(
+            item -> item.getId(),
+            item -> item.getValue(),
+            (v1, v2) -> v1  // 충돌 시 v1 유지
+        ));
+        ```
+    - [문제 2: Null 키 또는 Null 값 허용 안 함]
+        - toMap()은 기본적으로 null 키나 null 값 허용하지 않음 → NullPointerException 발생 가능
+        - 처리 방법: .filter(Objects::nonNull) 등 사전 정제 필요
+
+    - [문제 3: LinkedHashMap 등 커스텀 맵 지정 없이 HashMap 고정]
+        - 기본적으로 HashMap으로 수집되므로 순서 보장 불가
+        - 해결: 4번째 인자로 LinkedHashMap::new 등 전달
+        ```kotlin
+        .collect(Collectors.toMap(
+            k -> ..., v -> ..., (v1, v2) -> v1, LinkedHashMap::new
+        ));
+        ```
+
 - Java에서 Spliterator의 역할과 활용 방법은?
 - Java에서 Unmodifiable Collection을 생성하는 방법은?
 - Java에서 Arrays.asList()를 사용할 때 주의할 점은?
