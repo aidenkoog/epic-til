@@ -14270,10 +14270,32 @@ Organize concepts, features, types and Pros and Cons
         - -keep 규칙 누락 시 앱 크래시 발생
         - Retrofit, Gson, Hilt 등 reflection 기반 라이브러리의 경우 별도 -keepclassmembers 필요
 
-- Java의 ArrayList와 LinkedList의 차이점은?
+- Java의 ArrayList와 LinkedList의 차이점
+    - [구조 차이]
+        - ArrayList: 배열 기반의 동적 리스트
+        - LinkedList: 이중 연결 리스트(Double Linked List) 기반
+
+    - [삽입/삭제 성능]
+        - ArrayList는 중간 삽입/삭제 시 모든 요소를 이동해야 하므로 느림
+        - LinkedList는 포인터만 변경하면 되므로 중간 삽입/삭제가 빠름
+
+    - [조회 성능]
+        - ArrayList는 index 기반 조회가 O(1)
+        - LinkedList는 처음부터 순회 → O(n)
+
+    - [메모리 사용]
+        - ArrayList는 배열 메모리만 사용 (덜 복잡)
+        - LinkedList는 노드마다 추가 포인터가 있어 메모리 오버헤드가 큼
+
+    - [정리]
+        - 빈번한 조회/검색 위주면 ArrayList
+        - 빈번한 삽입/삭제 위주면 LinkedList
+
+
 - Java의 HashMap과 TreeMap의 차이점은?
 - Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점은?
 - Java에서 WeakHashMap을 사용하는 이유는?
+
 - Java에서 LinkedHashMap을 활용하여 캐시(Cache)를 구현하는 방법은?
 - Java에서 PriorityQueue의 동작 방식은?
 - Java에서 Deque와 Queue의 차이점은?
