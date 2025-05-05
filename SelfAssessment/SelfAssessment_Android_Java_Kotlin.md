@@ -13665,9 +13665,93 @@ Organize concepts, features, types and Pros and Cons
         - 수동으로 onStart() 등 호출할 필요 없이 자동으로 연결됨
 
 - Android에서 Multi-Window를 지원하는 방법
+    - [기본 개념]
+        - Multi-Window는 하나의 화면에 두 개 이상의 앱을 동시에 표시하는 기능으로, Android 7.0 (API 24)부터 지원됨.
+        - 사용자 멀티태스킹 및 대화면 UX 대응에 필수적임.
+
+    - [지원 설정 방법]
+        - AndroidManifest.xml에 다음 속성 추가:
+        ```xml
+        <activity
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true" />
+        ```
+
+    - [주의 사항]
+        - onMultiWindowModeChanged() 콜백에서 레이아웃 대응 필요
+        - 화면 크기가 줄어들 수 있어 ConstraintLayout, Compose, WindowMetrics 등으로 동적 UI 대응
+        - 화면 비율, orientation 변경 감안
+
+    - [실전 대응 포인트]
+        - 비디오 플레이어: Picture-in-Picture(PiP) 모드 연동
+        - 채팅/메신저 앱: Multi-instance 구성 고려
+        - Compose에서는 WindowSizeClass 활용해 레이아웃 분기 가능
+
 - Android에서 Foldable(접이식) 디바이스 대응 방법
+    - [기기 특성]
+        - Foldable 디바이스는 하나의 앱이 여러 화면 크기, 비율, 접힘 상태에서 동작해야 하므로 Window 상태 변화 감지 및 반응형 UI 설계가 중요함.
+
+    - [Jetpack WindowManager 활용]
+        - androidx.window:window 라이브러리를 사용하여 fold 상태, hinge 위치, layout bounds를 감지
+
+    - [주의할 점]
+        - WindowSizeClass로 화면 크기 대응 (Compact/Medium/Expanded)
+        - isSeparating, FoldingFeature로 분할 UI 구성
+        - 화면 회전 시 각 레이아웃 크기, 비율 변경 고려
+
+    - [실전 활용 예]
+        - Chat 앱 → 좌: 리스트 / 우: 상세
+        - 이메일 앱 → 분할 레이아웃 대응
+        - 게임 → 접힌 상태 시 미니맵 표시
+
 - Android에서 OpenGL ES를 활용한 그래픽 렌더링 최적화 방법
+    - [OpenGL ES 개요]
+        - OpenGL ES는 Android에서 저수준 하드웨어 가속 2D/3D 렌더링을 위한 그래픽 API로, 게임, AR/VR, 실시간 시각화에 사용됨.
+
+    - [최적화 전략]
+        - Draw Call 최소화: glDrawArrays() 호출 횟수 줄이기, batching 처리
+        - VBO(Vertex Buffer Object) 사용으로 정점 데이터 GPU에 캐싱
+        - 텍스처 압축 사용: ETC2, ASTC 포맷 활용해 메모리 절약
+        - Framebuffer Object (FBO): 오프스크린 렌더링으로 성능 향상
+        - Viewport 최적화: 실제 화면 크기에 맞게 조정해 불필요한 픽셀 렌더링 제거
+
+    - [개발 도구 활용]
+        - Android GPU Inspector (AGI)
+        - Adreno Profiler (퀄컴 디바이스)
+        - Mali GPU Tools (ARM 디바이스)
+
+    - [주의 사항]
+        - glFinish()는 강제 GPU 동기화 → 성능 저하 유발
+        - glGetError() 호출 과다 시 성능 악영향
+        - 메모리 누수 방지 위해 glDeleteBuffers, glDeleteTextures 필요
+
 - Android에서 Material 3 디자인 시스템을 적용하는 방법
+    - [Material 3 개요]
+        - Material 3 (또는 Material You)는 Google의 최신 디자인 시스템으로, 동적 색상, adaptive 컴포넌트, 모던 스타일링을 제공함.
+
+    - [적용 방법 (Compose 기준)]
+        - (1) 의존성 추가
+            - implementation("androidx.compose.material3:material3:1.1.0")
+        - (2) Theme 설정
+            ```kotlin
+            MaterialTheme(
+                colorScheme = dynamicLightColorScheme(context),
+                typography = Typography,
+                shapes = Shapes
+            ) {
+                // UI content
+            }
+            ```
+    - [Material 3 특징]
+        - 동적 색상: 시스템 배경 기반 자동 테마 적용 (Android 12 이상)
+        - 모양, 간격, 애니메이션 개선
+        - Composable 기반 컴포넌트 확장 (e.g. CenterAlignedTopAppBar, NavigationDrawer 등)
+
+    - [실전 대응 팁]
+        - Legacy MaterialTheme 대신 androidx.compose.material3.MaterialTheme 사용
+        - 커스텀 colorScheme 정의 시 lightColorScheme, darkColorScheme 사용
+        - M2 → M3 전환 시는 전용 컴포넌트로 교체 필요 (예: TopAppBar → CenterAlignedTopAppBar)
+
 - Jetpack Compose로 Widget을 만드는 방법
 - Android에서 Jetpack Glance를 활용한 위젯 개발 방법
 - Android에서 Dynamic Feature Module을 활용하는 방법
