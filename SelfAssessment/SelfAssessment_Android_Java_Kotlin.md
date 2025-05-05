@@ -14291,14 +14291,135 @@ Organize concepts, features, types and Pros and Cons
         - 빈번한 조회/검색 위주면 ArrayList
         - 빈번한 삽입/삭제 위주면 LinkedList
 
+- Java의 HashMap과 TreeMap의 차이점
+    - [구조 및 정렬]
+        - HashMap: 해시 테이블 기반, 정렬되지 않음
+        - TreeMap: Red-Black Tree 기반, Key 기준 오름차순 정렬
 
-- Java의 HashMap과 TreeMap의 차이점은?
-- Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점은?
-- Java에서 WeakHashMap을 사용하는 이유는?
+    - [Null 허용 여부]
+        - HashMap: null 키 1개 허용, null 값 다수 허용
+        - TreeMap: null 키 허용 안 함 (NPE 발생), 값은 허용
 
-- Java에서 LinkedHashMap을 활용하여 캐시(Cache)를 구현하는 방법은?
-- Java에서 PriorityQueue의 동작 방식은?
-- Java에서 Deque와 Queue의 차이점은?
+    - [성능]
+        - HashMap: 평균 O(1) (충돌 많으면 O(n))
+        - TreeMap: 항상 O(log n) (정렬 유지를 위해)
+
+    - [사용 목적]
+        - HashMap: 빠른 검색이 중요할 때
+        - TreeMap: 정렬된 순서 유지가 필요할 때
+
+- Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점
+    - [기본 구조]
+        - ConcurrentHashMap: Segmented Lock 기반 동시성 맵
+        - synchronizedMap(): 전체 Map에 대해 동기화 Wrapper 적용
+
+    - [동시성 처리 방식]
+        - ConcurrentHashMap은 버킷 단위로 lock → 동시 쓰기 가능
+        - synchronizedMap은 전체 맵을 lock → 병목 발생 가능
+
+    - [성능]
+        - ConcurrentHashMap이 다중 스레드 환경에서 훨씬 빠름
+        - synchronizedMap은 thread-safe이긴 하지만 효율성 떨어짐
+
+    - [Null 처리]
+        - ConcurrentHashMap: null 키/값 모두 허용 안 함
+        - synchronizedMap: HashMap 기반이므로 null 키/값 허용 가능
+
+    - [정리]
+        - 멀티스레드 환경에서 성능이 중요하다면 → ConcurrentHashMap
+        - 단순한 thread-safe 래핑만 필요하다면 → synchronizedMap
+
+- Java에서 WeakHashMap을 사용하는 이유
+    - [기본 개념]
+        - WeakHashMap은 Key가 WeakReference로 저장됨
+        - Key 객체가 GC 대상이 되면 자동으로 Map에서 제거됨
+
+    - [사용 목적]
+        - 메모리 누수 방지: 더 이상 참조되지 않는 키에 대한 매핑 자동 삭제
+        - 캐시, 리스너 저장소, 이미지 메모리 관리 등에 적합
+
+    - [비교]
+        - 일반 HashMap은 Key가 Strong Reference → GC가 수집 못 함
+        - WeakHashMap은 Key가 GC 대상이 되면 entry 자체가 제거됨
+
+    - [예시 용도]
+        - Activity → Presenter 매핑 시, Activity가 종료되면 자동으로 제거
+        - 컴파일러의 심볼 테이블
+        - 이미지 캐시에서 미사용 리소스 제거
+
+- Java에서 LinkedHashMap을 활용하여 캐시(Cache)를 구현하는 방법
+    - [개요]
+        - LinkedHashMap은 삽입 순서 또는 접근 순서 유지가 가능한 Map이며, 
+        - removeEldestEntry() 메서드를 오버라이드하면 LRU 캐시처럼 동작 가능함.
+
+    - [LRU 캐시 구현 예시]
+        ```kotlin
+        class LRUCache<K, V> extends LinkedHashMap<K, V> {
+            private final int capacity;
+
+            public LRUCache(int capacity) {
+                super(capacity, 0.75f, true); // true → access-order 모드
+                this.capacity = capacity;
+            }
+
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+                return size() > capacity;
+            }
+        }
+        ```
+
+    - [동작 방식]
+        - accessOrder = true 로 설정 시, 가장 최근 접근된 항목이 뒤로 이동됨
+        - put() 또는 get() 시 마다 순서가 갱신됨
+        - size()가 capacity를 초과하면 가장 오래된 항목 자동 제거
+
+    - [활용 예]
+        - 이미지 캐시, 네트워크 응답 캐시, View 객체 캐싱 등에 적합
+
+- Java에서 PriorityQueue의 동작 방식
+    - [기본 구조]
+        - PriorityQueue는 내부적으로 최소 힙(Min-Heap) 구조를 사용함
+        - → 가장 작은 값이 우선순위를 가짐 (peek() 시 가장 낮은 값 반환)
+
+    - [정렬 기준]
+        - 기본: Comparable 구현에 따라
+        - 사용자 정의: PriorityQueue(Comparator<T>) 생성자로 커스터마이징 가능
+
+    - [시간 복잡도]
+        - 삽입 (offer): O(log n)
+        - 삭제 (poll): O(log n)
+        - 조회 (peek): O(1)
+
+    - [특징]
+        - 중간 요소는 정렬되어 있지 않음
+        - 오직 우선순위가 가장 높은 요소만 빠르게 접근 가능
+        - Collections.sort()처럼 전체 정렬이 필요할 땐 부적합
+
+    - [사용 예]
+        - Dijkstra, A* 알고리즘
+        - 작업 스케줄링 (Job Queue)
+        - Top-K 문제
+
+- Java에서 Deque와 Queue의 차이점
+    - [Queue (First-In-First-Out)]
+        - 단방향 선입선출 자료구조
+        - add() / offer() → 요소 추가
+        - poll() / remove() → 앞에서 제거
+        - 예시 구현체: LinkedList, ArrayDeque, PriorityQueue
+
+    - [Deque (Double-Ended Queue)]
+        - 양쪽에서 삽입/삭제 가능한 구조 (스택 + 큐 겸용 구조 가능)
+        - addFirst(), addLast()
+        - pollFirst(), pollLast()
+        - peekFirst(), peekLast()
+        - 예시 구현체: ArrayDeque, LinkedList
+
+    - [Deque 활용 예]
+        - Stack 대체 (push, pop)
+        - 슬라이딩 윈도우 최대값 계산
+        - 양방향 탐색
+
 - Java에서 ArrayDeque와 LinkedList의 차이점은?
 - Java의 HashSet과 TreeSet의 차이점은?
 - Java에서 Iterator와 ListIterator의 차이점은?
