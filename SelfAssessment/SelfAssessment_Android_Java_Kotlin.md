@@ -13252,9 +13252,90 @@ Organize concepts, features, types and Pros and Cons
         - UI thread blocking 시, 비동기 처리 고려
 
 - Android에서 RecyclerView의 DiffUtil을 활용하는 방법
+    - [DiffUtil 개요]
+        - DiffUtil은 RecyclerView의 데이터가 변경될 때 최소한의 업데이트만 수행하도록 도와주는 유틸리티 클래스임.
+        - 전체 리스트가 아닌, 변경된 항목만 갱신되므로 성능 및 UX가 향상됨.
+
+    - [구현 방식]
+        - (1) DiffUtil.ItemCallback<T> 또는 DiffUtil.Callback을 구현
+        - (2) areItemsTheSame() → 같은 항목인지 여부(ID 비교 등)
+        - (3) areContentsTheSame() → 내용이 변경되었는지 여부
+        ```kotlin
+        class MyDiffCallback : DiffUtil.ItemCallback<MyItem>() {
+            override fun areItemsTheSame(oldItem: MyItem, newItem: MyItem) = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: MyItem, newItem: MyItem) = oldItem == newItem
+        }
+        ```
+
+    - [실무 적용]
+        - ListAdapter 또는 AsyncListDiffer에 전달하여 자동으로 diff 계산 적용함.
+        - 대용량 리스트 변경, 애니메이션 적용 시 매우 효과적임.
+
 - Android에서 Jetpack Compose의 UI 테스트를 수행하는 방법
+    - [테스트 환경 설정]
+        - androidx.compose.ui:ui-test-junit4, 
+        - androidx.compose.ui:ui-test-manifest 라이브러리를 추가하고 
+        - createAndroidComposeRule<Activity> 사용
+
+    - [기본 구조 예시]
+        ```kotlin
+        @get:Rule
+        val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+        @Test
+        fun myButton_isVisible_andClickable() {
+            composeTestRule.onNodeWithText("확인").assertIsDisplayed().performClick()
+        }
+        ```
+
+    - [Node 탐색 방법]
+        - onNodeWithText, onNodeWithTag, onAllNodesWithContentDescription 등 다양한 selector 제공
+        - Modifier.testTag("myTag")로 노드 식별 가능
+
+    - [동기화 및 애니메이션 대기]
+        - Compose 테스트는 기본적으로 UI 상태 변화가 안정될 때까지 자동 대기함.
+        - waitUntil, hasAnyDescendant, assertExists 등의 조합으로 복잡한 동작도 검증 가능
+
+    - [실전 팁]
+        - 복잡한 UI는 Custom Matcher로 재사용성 높임
+        - 상태 변경 후 UI 확인까지 고려하여 Test State 관리 필요
+
 - Android에서 Prefetching과 Lazy Loading의 차이점
+    - [Prefetching]
+        - 사용자가 필요로 하기 전에 미리 데이터를 가져오는 방식
+        - 예: RecyclerView의 setItemViewCacheSize() 또는 PagingConfig.prefetchDistance
+        - 장점: 사용자 체감 속도 향상, 스크롤 지연 감소
+        - 단점: 불필요한 네트워크/메모리 사용 가능
+
+    - [Lazy Loading]
+        - 요청이 있을 때 그 시점에 데이터를 로딩하는 방식
+        - 예: Glide의 이미지 로딩, Paging 3의 loadState 기반 로딩 등
+        - 장점: 리소스 절약, 필요한 만큼만 처리
+        - 단점: 로딩 딜레이로 UX 저하 가능
+
+    - [차이 핵심]
+        - Prefetching은 선제적 대비, Lazy Loading은 요청 기반 처리
+        - 둘은 조합해서 사용 가능 (예: Lazy Loading 기반이지만 미리 prefetch도 설정)
+
 - Android의 ART(Android Runtime) 최적화 방법
+    - [ART 개요]
+        - Android 5.0 이상에서 사용되는 런타임으로, AOT 컴파일 + JIT + 인터프리터 조합으로 앱을 실행함.
+        - Android 7 이후에는 JIT, Android 9 이후에는 Profile Guided Optimization (PGO) 포함됨.
+
+    - [최적화 방식]
+        - AOT (Ahead-Of-Time): 앱 설치 시 바이트코드를 native 코드로 컴파일 → 실행 빠름, 설치 느림
+        - JIT (Just-In-Time): 실행 중 자주 호출되는 메서드만 native로 변환 → 설치 빠름, 실행 중 최적화
+        - PGO (Profile-Guided Optimization): 사용 프로파일을 기반으로 중요한 경로만 AOT → 앱 시작 속도 개선
+
+    - [Baseline Profile 활용]
+        - 자주 실행되는 경로를 미리 지정하여 Google Play나 ART가 해당 메서드를 AOT로 최적화하도록 유도할 수 있음.
+        - profileinstaller, baseline-prof.txt 활용
+
+    - [기대 효과]
+        - Cold start 최대 30% 단축
+        - 첫 진입 화면 렌더링 속도 향상
+        - GC 횟수 감소
+
 - Android에서 Firebase Performance Monitoring을 활용하는 방법
 - Android 14에서 추가된 주요 기능과 변경 사항
 - Android에서 Jetpack Macrobenchmark를 활용한 성능 측정 방법
