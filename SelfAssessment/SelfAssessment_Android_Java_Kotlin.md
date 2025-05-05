@@ -14420,10 +14420,84 @@ Organize concepts, features, types and Pros and Cons
         - 슬라이딩 윈도우 최대값 계산
         - 양방향 탐색
 
-- Java에서 ArrayDeque와 LinkedList의 차이점은?
-- Java의 HashSet과 TreeSet의 차이점은?
-- Java에서 Iterator와 ListIterator의 차이점은?
-- Java에서 CopyOnWriteArrayList의 사용 사례는?
+- Java에서 ArrayDeque와 LinkedList의 차이점
+    - [구조 차이]
+        - ArrayDeque: 배열 기반의 원형 버퍼 구조
+        - LinkedList: 이중 연결 리스트 기반 구조
+
+    - [성능]
+        - ArrayDeque는 index 기반 접근이 빠르고 캐시 적중률이 높음
+        - LinkedList는 노드 포인터 이동이 필요하므로 검색이나 반복 시 느림
+
+    - [삽입/삭제]
+        - 양쪽 삽입/삭제는 둘 다 O(1)이지만,
+        - ArrayDeque는 크기 초과 시 배열 복사가 발생할 수 있음
+        - LinkedList는 노드 연결만 바꾸면 되므로 항상 일정 성능
+
+    - [메모리 사용]
+        - ArrayDeque는 배열 오버헤드 + 리사이징 비용
+        - LinkedList는 노드마다 포인터 2개(앞/뒤)로 메모리 사용량 증가
+
+    - [정리]
+        - 빈번한 양방향 삽입/삭제 → LinkedList
+        - 빠른 순차 접근과 낮은 메모리 오버헤드 → ArrayDeque (Stack/Queue 대체로 권장)
+
+- Java의 HashSet과 TreeSet의 차이점
+    - [구조 및 정렬]
+        - HashSet: 해시 테이블 기반, 순서 없음
+        - TreeSet: Red-Black Tree 기반, 정렬된 순서 유지
+
+    - [성능]
+        - HashSet: 삽입/삭제/검색 평균 O(1)
+        - TreeSet: 삽입/삭제/검색 O(log n)
+
+    - [Null 허용 여부]
+        - HashSet: null 허용
+        - TreeSet: null 허용 안 함 (NPE 발생 가능)
+
+    - [사용 예]
+        - HashSet: 빠른 중복 제거가 필요할 때
+        - TreeSet: 정렬된 데이터가 필요하거나 범위 검색 (subSet, headSet 등)
+
+- Java에서 Iterator와 ListIterator의 차이점
+    - [기본 구조]
+        - Iterator: 단방향 탐색만 가능
+        - ListIterator: 양방향 탐색 가능 (단, List 계열에서만 사용 가능)
+
+    - [탐색 기능]
+        - Iterator: hasNext(), next(), remove()
+        - ListIterator: hasNext(), hasPrevious(), next(), previous(), add(), set()
+
+    - [적용 범위]
+        - Iterator: 모든 Collection
+        - ListIterator: List 계열 (ArrayList, LinkedList)만 가능
+
+    - [기능적 차이]
+        - ListIterator는 현재 위치 기반으로 앞/뒤 탐색, 인덱스 기반 삽입, 변경 가능
+        - Iterator는 간단한 순방향 순회 전용
+
+    - [사용 예]
+        - Iterator: 필터링하며 순회, 간단한 제거 작업
+        - ListIterator: 탐색 중 중간 삽입/수정이 필요한 경우
+
+- Java에서 CopyOnWriteArrayList의 사용 사례
+    - [기본 개념]
+        - CopyOnWriteArrayList는 쓰기 연산 시마다 전체 배열을 복사하여 새로운 배열로 대체하는 Immutable 방식의 thread-safe List
+
+    - [특징]
+        - 읽기 작업이 많고 쓰기 작업이 드문 환경에서 매우 효율적
+        - Iterator 도중에 List가 수정되어도 ConcurrentModificationException 발생하지 않음
+        - 동기화 비용 없이 Safe iteration 가능
+
+    - [사용 사례]
+        - 이벤트 리스너 목록: 리스너 등록/해제는 드물고, 이벤트 브로드캐스트는 자주 발생
+        - 캐시 리스트: 빈번한 조회, 간헐적 갱신이 필요한 설정 목록
+        - 멀티스레드 환경의 정적 데이터 리스트: 실시간 동기화 없이 안정된 읽기 필요
+
+    - [주의점]
+        - 쓰기 연산이 자주 발생하는 경우 성능 급락
+        - 객체 수가 많거나 크기가 클수록 메모리 부담 커짐
+
 - Java에서 EnumMap을 사용하는 이유는?
 - Java에서 BlockingQueue의 역할과 사용 예제는?
 - Java에서 Stream API와 for-each 루프의 차이점은?
