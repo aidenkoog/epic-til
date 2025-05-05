@@ -13753,13 +13753,131 @@ Organize concepts, features, types and Pros and Cons
         - M2 → M3 전환 시는 전용 컴포넌트로 교체 필요 (예: TopAppBar → CenterAlignedTopAppBar)
 
 - Jetpack Compose로 Widget을 만드는 방법
+    - [Compose 기반 위젯은 직접적으로 불가능]
+        - Jetpack Compose 자체는 아직 App Widget(View 기반)에서 직접 사용이 불가능함.
+            - → 대신 Jetpack Glance를 통해 Compose 스타일로 위젯을 구성할 수 있음.
+
+    - [기존 Compose에서는 아래 방식 불가]
+        - 일반 @Composable은 위젯 RemoteViews로 변환할 수 없음
+        - 따라서 AppWidgetProvider 방식 + RemoteViews로만 구성됨
+
+    - [대안]
+        - → Jetpack Glance 사용 (Compose-like DSL로 RemoteViews 생성)
+        - → Android 12 이상에서는 일부 OS 위젯 영역에 Compose 적용 예정
+
+
 - Android에서 Jetpack Glance를 활용한 위젯 개발 방법
+    - [Glance 개요]
+        - Jetpack Glance는 Compose-like 문법을 사용해 앱 위젯(AppWidget)을 선언적으로 구성할 수 있게 해주는 라이브러리임.
+        - 내부적으로 RemoteViews를 생성하지만 더 간결하게 UI 정의 가능.
+
+    - [기본 구조 예시]
+        ```kotlin
+        class MyWidget : GlanceAppWidget() {
+            @Composable
+            override fun Content() {
+                Text("안녕하세요!", style = TextStyle(fontSize = 18.sp))
+            }
+        }
+
+        class MyWidgetReceiver : GlanceAppWidgetReceiver() {
+            override val glanceAppWidget = MyWidget()
+        }
+        ```
+
+    - [구성 요소]
+        - GlanceAppWidget: 위젯 UI 정의
+        - GlanceAppWidgetReceiver: Manifest에 등록되는 수신자
+        - update(), actionRunCallback() 등으로 동적 처리 가능
+
+    - [제약사항]
+        - Compose처럼 복잡한 View 트리는 불가능
+        - Image, Text, Button, Column, Row 등 제한된 컴포넌트만 지원
+        - 모든 로직은 RemoteViews 제약을 따름
+
 - Android에서 Dynamic Feature Module을 활용하는 방법
+    - [기본 개요]
+        - Dynamic Feature Module은 앱 설치 시 필수 기능만 설치하고, 선택 기능은 필요 시 다운로드하는 구조를 가능하게 함.
+        - → 앱 초기 설치 용량 감소, 기능 단위 업데이트 가능
+
+    - [기본 구성]
+        - (1) Base Module (앱 기본 기능)
+        - (2) Feature Module (install-time, on-demand, conditional 설치 가능)
+        - (3) Play Core API로 런타임 중 다운로드 및 실행
+
+    - [Manifest 설정 예시]
+        ```xml
+        <dist:module
+            dist:onDemand="true"
+            dist:title="@string/feature_title" />
+        ```
+
+    - [호출 방법 예시]
+        - SplitInstallManager.requestInstall(SplitInstallRequest.newBuilder().addModule("feature_name").build())
+
+    - [활용 사례]
+        - AR 기능, 고급 설정, 관리자 도구 등 비일상적 기능
+        - 국가/디바이스별 기능 분리 배포
+
+    - [주의 사항]
+        - Instant App과 호환 불가
+        - Base 모듈에서 Feature 모듈 코드를 직접 참조 불가 → Reflection 또는 Navigation 사용 권장
+
 - Android에서 Baseline Profiles을 활용한 성능 최적화 방법
+    - [개요]
+        - Baseline Profiles는 앱의 핵심 경로(startup, navigation 등)의 메서드 호출 정보를 미리 컴파일하도록 가이드하여 앱 실행 성능을 향상시킴.
+
+    - [적용 흐름]
+        - (1) baseline-profile 모듈 생성
+        - (2) ProfileInstaller 라이브러리 추가
+        - (3) BaselineProfileRule을 사용하여 프로파일 자동 생성
+        - (4) 생성된 baseline-prof.txt를 앱 모듈에 포함
+
+    - [테스트 코드 예시]
+        ```kotlin
+        @get:Rule val baselineProfileRule = BaselineProfileRule()
+
+        @Test
+        fun generateStartupProfile() = baselineProfileRule.collectBaselineProfile(
+            packageName = "com.example.app"
+        ) {
+            startActivityAndWait()
+            // 주요 네비게이션 동작 수행
+        }
+        ```
+
+    - [실제 효과]
+        - 앱 Cold Start 속도 최대 30~40% 단축
+        - 초기 렌더링 프레임 개선
+        - Profile 기반으로 ART가 AOT 컴파일 수행 가능
+
+    - [적용 시점]
+        - Google Play에 업로드하면 자동으로 활용됨.
+        - 로컬 테스트 시에는 adb shell cmd package compile 명령으로 직접 적용 확인 가능
+
 - Android 앱에서 Zero Trust Security를 구현하는 방법
+    - [Zero Trust 개요]
+        - Zero Trust는 “아무도 신뢰하지 않는다(Trust No One)”는 보안 모델로, 앱 내에서도 사용자, 디바이스, 네트워크 모두 검증 기반으로 접근 제어함.
+
+    - [핵심 구성 요소]
+        - 인증 강화: MFA, 생체인증, OAuth2, FIDO2 등
+        - 디바이스 상태 검증: 루팅 여부, 악성 앱 탐지, OS 버전 체크
+        - 네트워크 검증: VPN 우선 사용, TLS pinning, 비인가 IP 차단
+        - 최소 권한 원칙 적용: 민감 API, 로컬 저장소 접근 제한
+
+    - [실전 적용 예시]
+        - 로그인 후 토큰 기반 API 접근 (Refresh 포함)
+        - SafetyNet, Play Integrity API, Attestation 으로 디바이스 무결성 확인
+        - 인증 토큰 만료 시 자동 로그아웃 및 토큰 재검증
+
+    - [추가 전략]
+        - 앱 내 SecureStorage 사용 (EncryptedSharedPreferences, Keystore)
+        - 사용자별 기능 접근 제한 (RBAC 적용)
+
 - Android에서 AI 기반 추천 시스템을 구현하는 방법
 - Android에서 Jetpack Compose로 Instant Apps를 만드는 방법
 - Android에서 AI 기반 음성 인식을 활용하는 방법
+
 - Intent를 통해 데이터 전달하는 과정에서 클래스 객체를 바로 전달하지 못하는 이유는 무엇이고 전달하기 위해서는 어떤 처리가 필요한가요? 그리고 Activity 간 데이터 전달을 위해 Intent 방법을 사용하는 이유가 무엇인가요?
 - 복수의 Fragment 간 데이터 전달 방법을 설명 해주세요.
 - Width가 1000px Height가 20000px인 이미지가 있고 해당 이미지를 보여주려고 했을 때 아래와 같은 에러가 떴다. 이를 이미지 라이브러리를 사용하지 않고 해결하는 방법에 대해 설명 해주세요.
