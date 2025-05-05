@@ -14128,9 +14128,148 @@ Organize concepts, features, types and Pros and Cons
         - Coroutine은 비동기 로직 처리에 더 적합한 저수준 구조
         - LiveData는 무거운 로직 처리에 불리하고, Coroutine은 직접 Lifecycle 관리가 필요함
 
-- Flow와 StateFlow, SharedFlow의 차이점은?
-- Android 앱의 성능 최적화를 위해 어떤 기법을 사용했는가?
-- ProGuard와 R8의 차이를 설명해보라.
+- Flow와 StateFlow, SharedFlow의 차이점
+    - [공통점]
+        - 모두 Kotlin Coroutines 기반 비동기 데이터 스트림 API
+        - → cold stream vs hot stream, 단일 구독 vs 다중 구독 여부에서 차이 발생
+
+    - Flow
+        - [특징]
+            - Cold Stream (collect되기 전까지 아무 작업 없음)
+            - collect가 시작될 때마다 새롭게 실행됨 (1:1 관계)
+            - 기본적으로 한 번의 수신자만 가능
+
+        - [사용 예]
+            - Repository에서 네트워크/DB 결과를 1회성으로 방출
+            - 비동기 데이터 스트림
+
+    - StateFlow
+        - [특징]
+            - Hot Stream + 상태 보존 (항상 최신 값을 1개 유지)
+            - 기본값이 반드시 있어야 함 (StateFlow("초기값"))
+            - collect하면 항상 가장 최근 값부터 수신
+            - ViewModel의 UI 상태 저장에 적합
+
+        - [사용 예]
+            - val uiState = MutableStateFlow(UiState())
+            - ViewModel에서 UI 상태 전파
+
+    - SharedFlow
+        - [특징]
+            - Hot Stream + 상태 없음 (즉시 소멸)
+            - 기본값 필요 없음
+            - 여러 수신자에게 이벤트 broadcast 가능 (1:N 구조)
+            - 이벤트 보존 버퍼 설정 가능 (replay, extraBufferCapacity)
+
+        - [사용 예]
+            - UI 단발성 이벤트 처리 (ex: Toast, Navigation, Dialog 호출)
+            - val event = MutableSharedFlow<Event>()
+
+- SharedFlow replay, extraBufferCapacity 속성 설정
+    - [replay]
+        - 역할:
+            - 새로운 수집자(collect)가 붙었을 때, 이전에 방출된 이벤트 중 몇 개를 다시 전달할지 설정
+
+        - 예시:
+            ```kotlin
+            val sharedFlow = MutableSharedFlow<Int>(replay = 2)
+            sharedFlow.emit(1)
+            sharedFlow.emit(2)
+            sharedFlow.emit(3)
+
+            sharedFlow.collect { println(it) }
+            ```
+            - -> 출력 결과: 2, 3 (마지막 2개의 이벤트가 replay 된다)
+        - 주의 사항:
+            - replay 캐시는 수집자가 collect 하기 전에 발생한 이벤트를 재전달
+            - replay 버퍼도 메모리를 차지하므로 적절한 크기 관리 필요
+
+    - [extraBufferCapacity]
+        - 역할:
+            - 수집자가 처리하지 못할 경우를 대비해, replay 외에 추가로 버퍼에 쌓을 수 있는 이벤트 수
+
+        - 예시:
+            ```kotlin
+            val sharedFlow = MutableSharedFlow<Int>(
+                replay = 1,
+                extraBufferCapacity = 2
+            )
+            ```
+            - 총 수용 가능 이벤트 수: replay(1) + extraBufferCapacity(2) = 3개
+            - emit()이 호출되었는데 수집자가 없거나 느릴 경우에도 최대 3개까지는 버퍼링됨
+
+        - 추가 이벤트가 emit되면?
+            - 버퍼 초과 시 오래된 이벤트부터 drop (삭제)
+            - 또는 BufferOverflow.DROP_OLDEST / DROP_LATEST / SUSPEND 전략에 따라 동작 조절 가능
+
+    - 예제 코드
+        ```kotlin
+        val sharedFlow = MutableSharedFlow<String>(
+            replay = 1,
+            extraBufferCapacity = 2,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+
+        sharedFlow.emit("A")
+        sharedFlow.emit("B")
+        sharedFlow.emit("C")
+        sharedFlow.emit("D") // "A"는 버퍼에서 사라지고, B, C, D만 남음
+
+        sharedFlow.collect { println(it) }
+        // 출력: C, D (replay 1개: D, 수집 이후 emit된 C)
+        ```
+    - 실전 팁
+        - UI 이벤트 (toast, navigation)에는 replay = 0, extraBufferCapacity = 1~2 정도가 적절
+        - 상태(state) 저장용에는 StateFlow를 사용하고, 이벤트용은 SharedFlow에 replay + buffer 설정을 적극 활용
+
+- Android 앱의 성능 최적화를 위해 사용한 기법
+    - [UI 성능 최적화]
+        - ConstraintLayout, LazyColumn, Modifier.recomposeHighlighter() 등으로 뷰 트리 간소화
+        - Jetpack Compose에서 derivedStateOf, key, remember로 리컴포지션 최적화
+        - Nested Scroll, Overdraw 줄이기, Layout Inspector 활용
+
+    - [메모리 최적화]
+        - Glide/Picasso 등 이미지 캐싱 적용
+        - ViewModel + StateFlow로 Configuration Change 대응
+        - Fragment ViewBinding의 null 해제 처리 (_binding = null)
+
+    - [네트워크 최적화]
+        - Retrofit + OkHttp + Gzip 압축
+        - 통신 실패 시 재시도 로직 (retry, exponential backoff)
+        - Paging3 + RecyclerView로 효율적 목록 처리
+
+    - [스타트업 속도 최적화]
+        - Baseline Profiles 적용 → 앱 cold start 30% 이상 향상
+        - App Startup Library 도입으로 Lazy init 수행
+        - Splash 화면에서 초기화 최소화 (실제 초기화는 MainActivity에서 지연 실행)
+
+    - [툴 활용]
+        - Android Profiler, LeakCanary, StrictMode, Perfetto
+        - Systrace, TraceView로 렌더링 병목 파악
+
+- ProGuard와 R8의 차이
+    - [ProGuard 개요]
+        - Java 기반 앱 최적화 도구
+            - 클래스, 필드, 메서드 이름 난독화
+            - 사용하지 않는 코드 제거 (shrink)
+            - Java 코드 기준으로 동작 (Dex 파일 아님)
+
+    - [R8 개요]
+        - Google이 만든 최신 최적화 컴파일러
+            - ProGuard + D8(Dex Compiler) 통합
+            - ProGuard 설정 파일을 그대로 인식
+            - 더 빠른 컴파일 + 더 강력한 최적화 수행 (inlining, dead code 제거 등)
+
+    - [주요 차이점]
+        - 통합성: R8은 컴파일 시점에 작동 → 빌드 파이프라인 단축
+        - 성능: R8이 코드 크기를 더 효과적으로 줄이고 빠름
+        - 기본 설정: Android Gradle Plugin 3.4 이상에선 R8이 기본 활성화
+        - R8은 ProGuard와 100% 호환되진 않음 → 복잡한 규칙은 테스트 필요
+
+    - [사용 시 주의점]
+        - -keep 규칙 누락 시 앱 크래시 발생
+        - Retrofit, Gson, Hilt 등 reflection 기반 라이브러리의 경우 별도 -keepclassmembers 필요
+
 - Java의 ArrayList와 LinkedList의 차이점은?
 - Java의 HashMap과 TreeMap의 차이점은?
 - Java에서 ConcurrentHashMap과 Collections.synchronizedMap()의 차이점은?
