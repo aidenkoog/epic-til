@@ -13875,8 +13875,82 @@ Organize concepts, features, types and Pros and Cons
         - 사용자별 기능 접근 제한 (RBAC 적용)
 
 - Android에서 AI 기반 추천 시스템을 구현하는 방법
+    - [기본 개념]
+        - AI 추천 시스템은 사용자의 행동, 선호, 맥락을 기반으로 콘텐츠 또는 기능을 추천하는 구조로, 협업 필터링, 콘텐츠 기반 필터링 등이 대표적임.
+
+    - [구현 방식]
+        - 클라이언트 기반 (Lightweight): 사용자 행동 로그 분석 → 모델 적용 (ex: TF Lite)
+        - 서버 기반: Firebase, TensorFlow Serving 등 백엔드에서 추천 결과 제공
+
+    - [Android 구현 흐름 예시]
+        - 유저 행동 수집: 클릭, 검색어, 체류 시간
+        - 로컬 저장 또는 서버 전송
+        - 추천 결과를 서버에서 받고 RecyclerView 등 UI에 반영
+        - or, 사전 학습된 .tflite 모델로 실시간 유사도 계산
+
+    - [라이브러리 및 도구]
+        - Firebase Recommendations
+        - TensorFlow Lite + MLModelBinding
+        - Scikit-learn 기반 서버 추천 API
+
+    - [실전 활용 예]
+        - 쇼핑앱: 비슷한 상품 추천
+        - 미디어 앱: 유사 콘텐츠 자동 추천
+        - 위치/시간 기반 개인화 추천
+
 - Android에서 Jetpack Compose로 Instant Apps를 만드는 방법
+    - [Instant Apps 개요]
+        - 사용자가 앱을 설치하지 않고도 일부 기능을 체험할 수 있는 Android 기능.
+            - → 특정 기능만 노출하여 다운로드 유도 가능
+
+    - [Compose Instant App 구성 방식]
+        - 기본은 View 기반이지만, Compose 앱도 Dynamic Feature + Instant App 규칙을 적용하면 지원 가능
+        - Compose 자체는 제한 없지만 Module 분리와 경량화 구조 필수
+
+    - [구현 흐름]
+        - base 모듈 + feature 모듈로 앱 구성
+        - Instant App 모듈 생성 (.instantapp)
+        - URL routing (App Links) 또는 IntentFilter로 진입점 설정
+        - Compose UI는 feature 모듈 내 구성
+
+    - [제약 조건]
+        - 전체 앱 크기 15MB 이하 권장
+        - 로그인, 결제, 저장소 접근 등에 제한 있음
+        - Play Store Console에서 별도 테스트 필요
+
+    - [활용 사례]
+        - 체험판 게임
+        - 공유 가능한 특정 화면
+        - 쇼핑앱에서 상품 상세만 미리보기
+
 - Android에서 AI 기반 음성 인식을 활용하는 방법
+    - [기본 구현 방식]
+        - Android SpeechRecognizer (내장)
+        - Google Cloud Speech-to-Text API
+        - Custom TFLite 모델 기반 음성 인식
+
+    - [내장 SpeechRecognizer 예시]
+        ```kotlin
+        val recognizer = SpeechRecognizer.createSpeechRecognizer(context)
+        recognizer.setRecognitionListener(...)
+        val intent = RecognizerIntent.getVoiceDetailsIntent(context).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        }
+        recognizer.startListening(intent)
+        ```
+    - [Cloud 기반 고정밀 인식]
+        - Google Cloud Speech API를 사용하면 노이즈 억제, 다중 언어, 실시간 스트리밍 지원
+        - 단, 인터넷 연결 필수 + 비용 발생
+
+    - [실전 응용 예]
+        - 음성 명령 기반 제어 앱 (예: “라이트 꺼줘”)
+        - 키오스크, 자동차, IoT 인터페이스
+        - 자막 생성, 전화 녹취 분석
+
+    - [주의할 점]
+        - 권한: RECORD_AUDIO
+        - UI thread blocking 방지 (비동기 처리 필수)
+        - 배터리/데이터 소모 고려
 
 - Intent를 통해 데이터 전달하는 과정에서 클래스 객체를 바로 전달하지 못하는 이유는 무엇이고 전달하기 위해서는 어떤 처리가 필요한가요? 그리고 Activity 간 데이터 전달을 위해 Intent 방법을 사용하는 이유가 무엇인가요?
 - 복수의 Fragment 간 데이터 전달 방법을 설명 해주세요.
