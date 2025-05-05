@@ -13952,13 +13952,182 @@ Organize concepts, features, types and Pros and Cons
         - UI thread blocking 방지 (비동기 처리 필수)
         - 배터리/데이터 소모 고려
 
-- Intent를 통해 데이터 전달하는 과정에서 클래스 객체를 바로 전달하지 못하는 이유는 무엇이고 전달하기 위해서는 어떤 처리가 필요한가요? 그리고 Activity 간 데이터 전달을 위해 Intent 방법을 사용하는 이유가 무엇인가요?
-- 복수의 Fragment 간 데이터 전달 방법을 설명 해주세요.
-- Width가 1000px Height가 20000px인 이미지가 있고 해당 이미지를 보여주려고 했을 때 아래와 같은 에러가 떴다. 이를 이미지 라이브러리를 사용하지 않고 해결하는 방법에 대해 설명 해주세요.
-- W/OpenGLRenderer: Bitmap too large to be uploaded into a texture (max=2048x2048)
-- Jetpack Compose를 사용해본 경험이 있는가? 기존 XML 방식과 비교했을 때 어떤 장점과 단점이 있는가?
-- Android Lifecycle에 대해 설명하고, ViewModel이 어떻게 메모리 관리를 도와주는지 설명해보라.
-- Coroutine과 LiveData의 차이를 설명해보라.
+- Intent를 통해 데이터 전달하는 과정에서 클래스 객체를 바로 전달하지 못하는 이유와 전달하기 위해 필요한 작업 그리고 액티비티 간 데이터 전달을 위해 Intent를 사용하는 이유
+    - [문제 원인]
+        - Intent는 내부적으로 Parcel이라는 직렬화 포맷을 사용하여 데이터를 주고받음.
+        - → 일반 클래스는 Parcelable 또는 Serializable이 아니면 Parcel로 변환 불가능 → 런타임 예외 발생
+
+    - [해결 방법]
+        - Parcelable 인터페이스 구현
+            - 더 빠르고 Android에 최적화
+            - @Parcelize 애노테이션 사용하면 자동 생성 가능
+            ```kotlin
+            @Parcelize
+            data class User(val name: String, val age: Int) : Parcelable
+            ```
+        - Serializable 구현
+            - 자바 표준 방식이지만 느리고 비효율적
+            - 단순 테스트용/임시 용도 외에는 비추천
+
+    - [Activity 간 데이터 전달 시 Intent 사용하는 이유]
+        - Activity는 Android OS에서 Intent 기반으로 관리되기 때문에 시스템적으로 안전하게 데이터 전달 가능
+        - 명시적/암시적 호출이 모두 가능
+        - Bundle과 함께 다양한 타입의 데이터 전달 가능
+        - 구조적으로 UI 간 느슨한 결합을 유지
+
+- 복수의 Fragment 간 데이터 전달 방법
+    - [1. ViewModel 공유 방식 (권장)]
+        - activityViewModels() 또는 sharedViewModel()을 통해 동일한 ViewModel을 공유
+        - 상태 보존 + Lifecycle-aware
+        ```kotlin
+        class SharedViewModel : ViewModel() {
+            val selectedItem = MutableLiveData<String>()
+        }
+        ```
+
+    - [2. FragmentResult API 사용 (Jetpack 제공)]
+        - Fragment → Fragment 간 안전한 통신 (Navigation 사용 시에도 유용)
+        ```kotlin
+        // 보내는 쪽
+        parentFragmentManager.setFragmentResult("requestKey", bundleOf("key" to value))
+
+        // 받는 쪽
+        setFragmentResultListener("requestKey") { _, bundle ->
+            val result = bundle.getString("key")
+        }
+        ```
+
+    - [3. Navigation Component 이용 시 SafeArgs 활용]
+        - XML에서 argument 정의 → 자동으로 타입 안전 클래스 생성
+        - Navigation Graph 기반 프로젝트에서 권장
+
+    - [4. Interface 콜백 방식 (구식/비추천)]
+        - Fragment → Activity → 다른 Fragment로 직접 전달
+        - 강한 결합 발생 → 유지보수 어려움
+
+- Width가 1000px Height가 20000px인 이미지가 있고 해당 이미지를 보여주려고 했을 때 아래와 같은 에러가 떴다.
+- 이를 이미지 라이브러리를 사용하지 않고 해결하는 방법에 대한 설명
+    - 에러: W/OpenGLRenderer: Bitmap too large to be uploaded into a texture (max=2048x2048)
+
+    - [문제 원인]
+        - Android의 GPU/OpenGL은 텍스처로 업로드할 수 있는 최대 사이즈 제한이 있음 (일반적으로 2048x2048 또는 4096x4096)
+        - → 1000x20000은 세로 길이가 초과되어 OpenGL에서 처리 불가능
+
+    - [해결 방법]
+        - Canvas + ScrollView 사용 (이미지를 분할하여 그리기)
+            - BitmapRegionDecoder를 활용해 세로로 분할한 이미지 조각을 순차적으로 그려주면 전체 이미지 표현 가능
+
+        - WebView 사용
+            - WebView는 내부적으로 GPU 제한을 받지 않고 HTML <img>로 긴 이미지를 처리 가능
+
+        - SurfaceView 또는 TextureView + 수동 렌더링
+            - Canvas.drawBitmap(...)으로 화면에 보이는 부분만 수동으로 그리는 방식
+            - 더 복잡하지만 유연한 제어 가능
+
+        - ImageView + Matrix 사용해 가상 스크롤 구현
+            - 전체 이미지를 보여주지 않고, 현재 보이는 위치만 Bitmap.createBitmap()으로 잘라서 표시
+    
+    - [주의 사항]
+        - 절대 ImageView.setImageBitmap()에 초대형 이미지 그대로 넣지 말 것 → OOM 발생
+        - 가능한 경우 이미지 리사이징 또는 분할이 정석적인 해결책
+
+- BitmapRegionDecoder로 초대형 이미지 표시 예시
+    - 준비물: 1000x20000 크기의 초대형 이미지 파일 (예: assets 폴더에 long_image.jpg)
+    - 이미지 분할 후 ImageView에 표시 (스크롤 기반)
+        - 이 커스텀 뷰는 세로로 1000px 단위로 잘라서 화면에 쌓아 그리는 방식으로 GPU 제한을 피함. 
+        - 성능 개선을 위해 현재 View 높이 내에서만 draw 되도록 최적화도 가능.
+        ```kotlin
+        class LargeImageView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+
+            private lateinit var decoder: BitmapRegionDecoder
+            private val paint = Paint()
+            private val options = BitmapFactory.Options().apply {
+                inPreferredConfig = Bitmap.Config.RGB_565
+            }
+
+            private val regionHeight = 1000
+            private var imageWidth = 0
+            private var imageHeight = 0
+
+            init {
+                val inputStream = context.assets.open("long_image.jpg")
+                decoder = BitmapRegionDecoder.newInstance(inputStream, false)
+                imageWidth = decoder.width
+                imageHeight = decoder.height
+            }
+
+            override fun onDraw(canvas: Canvas) {
+                var yOffset = 0
+                while (yOffset < imageHeight) {
+                    val bottom = (yOffset + regionHeight).coerceAtMost(imageHeight)
+                    val rect = Rect(0, yOffset, imageWidth, bottom)
+                    val bitmap = decoder.decodeRegion(rect, options)
+                    canvas.drawBitmap(bitmap, 0f, yOffset.toFloat(), paint)
+                    yOffset += regionHeight
+                }
+            }
+        }
+        ```
+
+- Jetpack Compose를 기존 XML 방식과 비교했을 때의 장점과 단점
+    - [장점]
+        - 선언형 UI
+            - UI 상태(state)에 따라 자동으로 UI가 갱신됨 → 코드가 간결하고 예측 가능
+        - 코드 통합
+            - XML과 Kotlin이 분리되지 않고 한 파일에서 UI와 로직을 함께 작성 가능
+        - 재사용성과 테스트 용이
+            - Composable 함수 단위로 구조화 가능 → Preview, 단위 테스트, Slot API 활용 용이
+        - Animation, State 관리 간편화
+            - 내장된 animate*AsState, remember, derivedStateOf 등으로 자연스러운 애니메이션과 상태 추적 가능
+        - 호환성
+            - 기존 View 시스템과 혼합 사용 가능 (AndroidView, ViewBinding 등)
+    - [단점]
+        - 러닝 커브
+            - 기존 View 시스템에 익숙한 개발자에겐 새로운 Compose 개념(State Hoisting, recomposition 등)이 낯설 수 있음
+        - 성능 디버깅 어려움
+            - 초기엔 recomposition 관련 디버깅이 복잡하며, 잘못 사용할 경우 성능 저하 유발
+        - Jetpack 라이브러리/서드파티 대응 제한
+            - 모든 Jetpack/서드파티 라이브러리가 Compose를 완전히 지원하는 건 아님 (ex. 지도 SDK 등)
+        - 툴링 제약
+            - Preview나 Layout Inspector 기능이 완전하지 않을 때도 있음 (버전 이슈, IDE 문제 등)
+
+- Android Lifecycle에 대해 설명하고, ViewModel이 어떻게 메모리 관리를 도와주는지 설명
+    - [Android Lifecycle 개요]
+        - Activity/Fragment는 OS 상태에 따라 onCreate → onStart → onResume → onPause → onStop → onDestroy 생명주기를 순차적으로 가짐
+        - → 생명주기마다 UI/리소스 해제 또는 초기화를 적절히 수행해야 메모리 누수 방지
+
+    - [ViewModel의 역할]
+        - ViewModel은 Activity/Fragment의 Lifecycle보다 더 오래 살아남는 상태 저장소
+            - 화면 회전 등 Configuration 변경에도 살아남음
+            - ViewModelStore에 저장되어 onDestroy() 이전까지 유지됨
+            - ViewModel 내부의 코루틴은 viewModelScope 사용 시 자동으로 Lifecycle 종료에 따라 취소됨
+
+    - [메모리 관리 기여]
+        - UI 상태/비즈니스 로직 분리로 Activity/Fragment에 의존성 감소
+        - 비동기 작업이 Lifecycle에 안전하게 연동됨 (LiveData, StateFlow 등)
+        - ViewModel이 메모리를 점유하더라도 View가 종료되면 자동 해제됨 → 누수 위험 감소
+
+- Coroutine과 LiveData의 차이
+    - [공통점]
+        - 둘 다 비동기 처리 및 UI 상태 전달에 활용됨
+
+    - [LiveData]
+        - Lifecycle-aware 데이터 전달 도구
+        - Activity/Fragment가 STARTED 이상 상태일 때만 자동으로 observe
+        - 데이터 변경만 전달하며, 내부적으로 MainThread에서 동작
+        - Configuration 변경에도 Observer는 자동 재연결됨
+
+    - [Coroutine]
+        - 비동기 흐름 제어 자체에 집중한 Kotlin 언어 레벨 기능
+        - launch, async, withContext 등을 활용한 비동기 블록
+        - Lifecycle에 연결하려면 viewModelScope, lifecycleScope 등을 명시적으로 사용해야 함
+        - Flow와 함께 사용할 경우 LiveData처럼 구독/취소가 가능하며 더 유연하고 강력함
+
+    - [핵심 차이]
+        - LiveData는 UI 상태 관리에 적합한 고수준 API
+        - Coroutine은 비동기 로직 처리에 더 적합한 저수준 구조
+        - LiveData는 무거운 로직 처리에 불리하고, Coroutine은 직접 Lifecycle 관리가 필요함
+
 - Flow와 StateFlow, SharedFlow의 차이점은?
 - Android 앱의 성능 최적화를 위해 어떤 기법을 사용했는가?
 - ProGuard와 R8의 차이를 설명해보라.
