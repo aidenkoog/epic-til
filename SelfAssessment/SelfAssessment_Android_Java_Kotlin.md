@@ -14907,7 +14907,59 @@ Organize concepts, features, types and Pros and Cons
         - map()은 계층 유지, flatMap()은 계층 제거
 
 - Java에서 Collectors.groupingBy()를 활용한 데이터 분류 방법
-- Java의 Stream.reduce()를 활용한 데이터 집계 방법은?
+    - [기본 개념]
+        - groupingBy(Function)은 Stream 요소를 특정 기준(key)으로 그룹화하여 Map 형태로 반환
+    - [기본 사용 예]
+        ```java
+        Map<String, List<Person>> byDept = people.stream()
+            .collect(Collectors.groupingBy(Person::getDepartment));
+        ```
+    - [중첩 사용: 분류 + 집계]
+        ```java
+        Map<String, Long> countByDept = people.stream()
+            .collect(Collectors.groupingBy(
+                Person::getDepartment,
+                Collectors.counting()
+            ));
+        ```
+    - [중첩 사용: 분류 + 최대값]
+        ```java
+        Map<String, Optional<Person>> topSalaryByDept = people.stream()
+            .collect(Collectors.groupingBy(
+                Person::getDepartment,
+                Collectors.maxBy(Comparator.comparing(Person::getSalary))
+            ));
+        ```
+    - [요약]
+        - 데이터 분류, 통계, 분할 등을 선언적으로 처리 가능
+        - groupingBy + downstream collector 조합으로 유연한 통계 구현 가능
+
+- Java의 Stream.reduce()를 활용한 데이터 집계 방법
+    - [기본 개념]
+        - reduce는 Stream 요소들을 하나의 결과값으로 축소(Aggregate) 시키는 연산
+        - → 누적값을 만들기 위해 BinaryOperator를 반복 적용
+
+    - [기본 예: 합계 구하기]
+        ```java
+        int sum = list.stream()
+            .reduce(0, Integer::sum);
+        ```
+    - [문자열 연결 예시]
+        ```java
+        String combined = List.of("a", "b", "c")
+            .stream()
+            .reduce("", (a, b) -> a + b);
+        ```
+    - [고급 예: 객체 누적 처리]
+        ```java
+        int totalSalary = employees.stream()
+            .map(Employee::getSalary)
+            .reduce(0, Integer::sum);
+        ```
+    - [요약]
+        - reduce(identity, accumulator) or reduce(accumulator) 형태
+        - 기본형 stream (IntStream)에서는 sum(), average() 등을 활용하는 것이 더 간단함
+        - 복잡한 누적 로직에는 reduce()가 강력함
 
 - Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법은?
 - Java에서 Future와 CompletableFuture의 차이점은?
