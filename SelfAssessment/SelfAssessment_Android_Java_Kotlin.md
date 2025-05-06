@@ -15077,10 +15077,117 @@ Organize concepts, features, types and Pros and Cons
         - fair = true: 대기 순서 보장 (안전하지만 성능 낮음)
         - fair = false: 빠르지만 스레드가 굶을 수 있음 (기아 발생 가능성)
 
-- Java에서 ForkJoinTask와 RecursiveTask를 활용한 병렬 처리는 어떻게 구현하는가?
-- Java에서 Phaser와 CyclicBarrier의 차이점은?
-- Java에서 Callable과 Runnable의 차이점은?
-- Java에서 AsynchronousFileChannel의 역할은?
+- Java에서 ForkJoinTask와 RecursiveTask를 활용한 병렬 처리 구현 방법
+    - [기본 개념]
+        - ForkJoinTask는 Java 7부터 도입된 Fork/Join 프레임워크의 기본 단위로,
+        - 큰 작업을 작게 나누어(fork) 병렬로 처리하고, 최종 결과를 합치는(join) 방식의 병렬 처리에 사용됨.
+
+    - [RecursiveTask vs RecursiveAction]
+        - RecursiveTask<V>: 반환값 있는 작업
+        - RecursiveAction: 반환값 없는 작업
+
+    - [구현 예제: 배열의 합 계산]
+        ```java
+        class SumTask extends RecursiveTask<Long> {
+            private final int[] arr;
+            private final int start, end;
+            private static final int THRESHOLD = 1000;
+
+            SumTask(int[] arr, int start, int end) {
+                this.arr = arr;
+                this.start = start;
+                this.end = end;
+            }
+
+            @Override
+            protected Long compute() {
+                if (end - start <= THRESHOLD) {
+                    long sum = 0;
+                    for (int i = start; i < end; i++) sum += arr[i];
+                    return sum;
+                } else {
+                    int mid = (start + end) / 2;
+                    SumTask left = new SumTask(arr, start, mid);
+                    SumTask right = new SumTask(arr, mid, end);
+                    left.fork(); // 비동기 실행
+                    return right.compute() + left.join(); // 결과 병합
+                }
+            }
+        }
+
+        ForkJoinPool pool = new ForkJoinPool();
+        long total = pool.invoke(new SumTask(array, 0, array.length));
+        ```
+
+- Java에서 Phaser와 CyclicBarrier의 차이점
+    - [공통점]
+        - 둘 다 지정된 수의 스레드가 특정 지점(barrier)에 도달할 때까지 대기시키는 동기화 도구
+
+    - [CyclicBarrier]
+        - 고정된 수의 스레드가 도달할 때까지 대기
+        - 도달 후 모든 스레드가 동시에 재개
+        - 재사용 가능, 이름 그대로 "사이클형 장벽"
+
+    - [Phaser]
+        - 유연한 파티 참가/탈퇴 관리 가능 (동적 등록/도착 지원)
+        - 여러 "단계(phase)"를 가질 수 있어 멀티 스텝 동기화에 적합
+        - 복잡한 병렬 워크플로우를 지원
+
+- Java에서 Callable과 Runnable의 차이점
+    - [Runnable]
+        - Java 1.0부터 존재
+        - run() 메서드만 있고, 반환값 없음, 예외 던지기 불가
+        - Thread 또는 ExecutorService.submit(Runnable)에서 사용 가능
+
+    - [Callable<V>]
+        - Java 5부터 도입 (java.util.concurrent)
+        - call() 메서드로 동작, 결과 반환 가능, 예외 던질 수 있음
+        - ExecutorService.submit(Callable) → Future<V> 반환
+
+    - [예시 비교]
+        ```java
+        Callable<Integer> task = () -> {
+            return 42;
+        };
+
+        Future<Integer> result = executor.submit(task);
+        ```
+
+- Java에서 AsynchronousFileChannel의 역할
+    - [정의]
+        - AsynchronousFileChannel은 Java NIO.2에서 제공하는 비동기 파일 I/O 채널
+        - → 파일을 읽거나 쓸 때 스레드 블로킹 없이 비동기 방식으로 처리 가능
+
+    - [주요 특징]
+        - read() 또는 write() 호출 시 작업이 백그라운드에서 실행
+        - 완료되면 CompletionHandler 콜백이 실행됨
+        - I/O가 완료될 때까지 현재 스레드는 대기하지 않음
+        - 고성능 서버/로깅 시스템에 적합
+
+    - [예시: 비동기 파일 읽기]
+        ```java
+        Path path = Paths.get("sample.txt");
+        AsynchronousFileChannel channel = AsynchronousFileChannel.open(path, StandardOpenOption.READ);
+
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        channel.read(buffer, 0, buffer, new CompletionHandler<Integer, ByteBuffer>() {
+            @Override
+            public void completed(Integer result, ByteBuffer attachment) {
+                attachment.flip();
+                System.out.println("Read: " + new String(attachment.array()));
+            }
+
+            @Override
+            public void failed(Throwable exc, ByteBuffer attachment) {
+                System.err.println("Failed: " + exc.getMessage());
+            }
+        });
+        ```
+
+    - [활용 예]
+        - 고성능 로깅 시스템
+        - 대용량 파일 비동기 업로드/다운로드
+        - GUI 앱에서 파일 처리 중 UI 멈춤 방지
 
 - Java에서 Non-blocking I/O(NIO)와 Blocking I/O(BIO)의 차이점은?
 - Java에서 Netty를 활용한 네트워크 프로그래밍의 장점은?
