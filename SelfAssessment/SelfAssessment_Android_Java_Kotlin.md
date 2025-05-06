@@ -14591,10 +14591,94 @@ Organize concepts, features, types and Pros and Cons
         ));
         ```
 
-- Java에서 Spliterator의 역할과 활용 방법은?
-- Java에서 Unmodifiable Collection을 생성하는 방법은?
-- Java에서 Arrays.asList()를 사용할 때 주의할 점은?
-- Java에서 Immutable Collections을 생성하는 방법은?
+- Java에서 Spliterator의 역할과 활용 방법
+    - [정의]
+        - Spliterator는 Stream의 병렬 처리 또는 대용량 데이터 분할 탐색을 위한 Iterator의 확장형
+        - → Split + Iterator = Spliterator
+
+    - [주요 역할]
+        - 컬렉션을 분할(split) 하여 병렬 처리에 적합하도록 나누는 기능
+        - tryAdvance()로 개별 요소 처리, forEachRemaining()으로 일괄 처리
+        - trySplit() 호출 시 처리 단위를 절반으로 나누어 새로운 Spliterator 반환
+
+    - [활용 예시]
+        ```java
+        List<String> list = List.of("A", "B", "C", "D");
+
+        Spliterator<String> spliterator = list.spliterator();
+
+        spliterator.tryAdvance(System.out::println); // A
+        spliterator.forEachRemaining(System.out::println); // B, C, D
+        ```
+
+    - [Stream 내부에서의 활용]
+        - Stream은 내부적으로 Spliterator를 사용하여 병렬 처리를 분기함 (parallelStream())
+
+- Java에서 Unmodifiable Collection을 생성하는 방법
+    - [정의]
+        - Unmodifiable Collection은 요소 추가/삭제/수정이 불가능한 읽기 전용 컬렉션
+
+    - [생성 방법]
+        - Collections.unmodifiableXXX()
+            ```java
+            List<String> list = new ArrayList<>();
+            List<String> readOnly = Collections.unmodifiableList(list);
+            ```
+        - List.of() / Set.of() / Map.of() (Java 9+)
+            ```java
+            List<String> list = List.of("A", "B", "C"); // 불변 + 수정 불가
+            ```
+
+    - [주의사항]
+        - Collections.unmodifiableXXX()는 원본이 변경되면 같이 변경됨 (view 역할)
+        - 완전한 불변을 원한다면 Java 9 이후의 of() 메서드 사용 추천
+
+- Java에서 Arrays.asList()를 사용할 때 주의할 점
+    - [정의]
+        - Arrays.asList()는 고정 크기(List 형태지만 내부는 배열 기반)의 리스트를 반환함
+
+    - [주의사항]
+        - add(), remove() 등 요소의 크기를 변경하는 작업은 UnsupportedOperationException 발생
+        - set()은 가능하지만 구조 변경은 불가
+
+    - [예시 문제]
+        ```java
+        List<String> list = Arrays.asList("A", "B");
+        list.add("C"); // 예외 발생
+        ```
+
+    - [해결 방법]
+        - 구조 변경이 필요하다면 new ArrayList<>(Arrays.asList(...))로 감싸서 사용해야 함
+
+- Java에서 Immutable Collections을 생성하는 방법
+    - [정의]
+        - Immutable Collection은 요소 추가/삭제/수정 모두 불가능하며, 안전하게 공유할 수 있는 컬렉션
+
+    - [생성 방법]
+        - Java 9+ List.of() / Set.of() / Map.of()
+            ```java
+            List<String> list = List.of("A", "B", "C");
+            Set<Integer> set = Set.of(1, 2, 3);
+            Map<String, String> map = Map.of("k", "v");
+            ```
+        - Google Guava 라이브러리
+            ```java
+            ImmutableList<String> list = ImmutableList.of("A", "B", "C");
+            ```
+        - Java 8 이하
+            ```java
+            List<String> list = Collections.unmodifiableList(new ArrayList<>(...));
+            ```
+
+    - [장점]
+        - Thread-safe
+        - 불변 보장 → side effect 방지
+        - 의도 명확 → 유지보수 용이
+
+    - [차이점 vs Unmodifiable Collection]
+        - Unmodifiable: 내부 데이터는 변경 가능 (view 역할)
+        - Immutable: 내부도 변경 불가 (완전 불변)
+
 - Java에서 Map.computeIfAbsent()의 활용 사례는?
 - Java에서 ConcurrentLinkedQueue와 LinkedBlockingQueue의 차이점은?
 - Java의 ForkJoinPool을 활용한 병렬 처리는 어떻게 구현하는가?
