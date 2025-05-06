@@ -14961,10 +14961,121 @@ Organize concepts, features, types and Pros and Cons
         - 기본형 stream (IntStream)에서는 sum(), average() 등을 활용하는 것이 더 간단함
         - 복잡한 누적 로직에는 reduce()가 강력함
 
-- Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법은?
-- Java에서 Future와 CompletableFuture의 차이점은?
-- Java에서 ScheduledExecutorService의 역할은?
-- Java에서 ReentrantLock과 synchronized의 차이점은?
+- Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법
+    - [정의]
+        - ExecutorService는 Java의 스레드 풀(Thread Pool) 을 구현한 인터페이스
+        - 스레드 생성/관리/작업 제출을 추상화한 API
+
+    - [기본 생성 방법]
+        - ExecutorService executor = Executors.newFixedThreadPool(5);
+    - [주요 구현 종류]
+        - newFixedThreadPool(int n): 고정 개수 스레드
+        - newCachedThreadPool(): 필요할 때 무제한 스레드 생성, 사용 후 재사용
+        - newSingleThreadExecutor(): 단일 스레드, FIFO
+        - newWorkStealingPool(): ForkJoinPool 기반 (Java 8+)
+
+    - [작업 제출]
+        - executor.submit(Runnable) 또는 executor.submit(Callable)
+        - 반환값 필요 시 Future 이용
+
+    - [종료]
+        ```java
+        executor.shutdown();               // graceful shutdown
+        executor.awaitTermination(10, TimeUnit.SECONDS); // 대기
+        executor.shutdownNow();           // 강제 종료
+        ```
+
+- Java에서 Future와 CompletableFuture의 차이점
+    - [Future]
+        - Java 5 도입
+        - 비동기 작업의 결과를 반환받기 위한 객체
+        - future.get()으로 결과 가져오며, 완료될 때까지 블로킹됨
+        - 콜백 처리 불가 → 동기적 접근 방식
+        - 예외 처리 시 try-catch 필요
+        - 병렬 연산 조합 불가
+
+    - [CompletableFuture]
+        - Java 8 도입
+        - Future 확장형으로, 비동기 + 콜백 기반 처리 가능
+        - thenApply(), thenAccept(), thenCombine() 등 체이닝 지원
+        - supplyAsync() 또는 runAsync() 로 스레드 풀 연계 가능
+        - 예외 처리: .exceptionally(), .handle()
+        - 병렬 연산 조합 가능 (.thenCombine(), .allOf())
+
+- Java에서 ScheduledExecutorService의 역할
+    - [정의]
+        - ScheduledExecutorService는 지연 또는 반복 실행 작업을 예약하기 위한 Executor 인터페이스 확장
+
+    - [생성 방법]
+        - ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+    - [사용 예]
+        ```java
+        scheduler.schedule(() -> {
+            System.out.println("3초 후 실행");
+        }, 3, TimeUnit.SECONDS);
+
+        scheduler.scheduleAtFixedRate(task, 0, 5, TimeUnit.SECONDS); // 고정 주기 반복
+        ```
+
+    - [차이점 vs Timer]
+        - 예외 발생 시에도 전체 스케줄러 멈추지 않음
+        - 멀티스레드 기반으로 Timer보다 안정성, 확장성 우수
+
+    - [주요 메서드]
+        - schedule(...): 일정 지연 후 1회 실행
+        - scheduleAtFixedRate(...): 고정 간격 반복
+        - scheduleWithFixedDelay(...): 이전 작업 종료 후 일정 지연 반복
+
+- Java에서 ReentrantLock과 synchronized의 차이점
+    - [공통점]
+        - 둘 다 스레드 동기화를 위한 방법으로, 임계 영역에서 동시 접근 방지 기능 제공
+
+    - [synchronized]
+        - Java 내장 키워드
+        - 블록 단위 혹은 메서드 전체에 적용
+        - 자동 잠금/해제 → try-finally 필요 없음
+        - 공정성(Fairness) 제어 불가
+        - 조건 변수 지원: 불가능
+
+    - [ReentrantLock]
+        - java.util.concurrent.locks 패키지 제공
+        - 명시적 lock() / unlock() 필요 (try-finally 필수)
+        - 공정성 설정 가능 (new ReentrantLock(true))
+        - 추가 기능: tryLock(), lockInterruptibly(), Condition await/signal
+        - 조건 변수 지원: Condition 객체 지원
+
+- 공정성(Fairness) 설정
+    - [개요]
+        - Java에서 ReentrantLock 또는 Semaphore 같은 동기화 도구를 사용할 때, 
+        - 락을 기다리는 스레드들에게 락을 얼마나 '공평하게' 분배할 것인가를 제어하는 설정
+
+    - [공정성(Fairness) 설정 개념]
+        - 락을 얻으려는 여러 스레드가 대기 중일 때, 먼저 기다린 스레드가 먼저 락을 얻도록 보장할지 여부를 설정하는 것을 말함.
+
+    - [공정성 종류]
+        - 공정(Fair) 락 (fair = true)
+            - 대기 큐에서 가장 오래 기다린 스레드에게 우선 락을 부여
+            - 락 요청 순서를 FIFO(선입선출) 방식으로 보장
+            - → 예측 가능, 하지만 약간의 성능 저하 가능
+
+        - 비공정(Non-Fair) 락 (fair = false, 기본값)
+            - 락을 요청한 스레드가 즉시 획득할 수 있다면, 대기열을 무시하고 바로 락을 획득함
+            - → 빠르지만, 일부 스레드가 락을 계속 선점하게 되는 기아(Starvation) 현상이 발생할 수 있음
+
+    - [예시]
+        ```java
+        ReentrantLock fairLock = new ReentrantLock(true);   // 공정 락
+        ReentrantLock unfairLock = new ReentrantLock(false); // 비공정 락
+        ```
+
+    - [공정 락 사용 시점]
+        - 실시간성 보장이 중요한 경우
+        - 기아 현상(Starvation) 을 방지해야 하는 시스템 (예: ATM, 티켓 발매 등 순서 보장 필요)
+
+    - [요약]
+        - 공정성 설정은 락의 순서 보장 여부에 대한 설정
+        - fair = true: 대기 순서 보장 (안전하지만 성능 낮음)
+        - fair = false: 빠르지만 스레드가 굶을 수 있음 (기아 발생 가능성)
 
 - Java에서 ForkJoinTask와 RecursiveTask를 활용한 병렬 처리는 어떻게 구현하는가?
 - Java에서 Phaser와 CyclicBarrier의 차이점은?
