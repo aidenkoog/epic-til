@@ -14679,9 +14679,101 @@ Organize concepts, features, types and Pros and Cons
         - Unmodifiable: 내부 데이터는 변경 가능 (view 역할)
         - Immutable: 내부도 변경 불가 (완전 불변)
 
-- Java에서 Map.computeIfAbsent()의 활용 사례는?
-- Java에서 ConcurrentLinkedQueue와 LinkedBlockingQueue의 차이점은?
-- Java의 ForkJoinPool을 활용한 병렬 처리는 어떻게 구현하는가?
+- Java에서 Map.computeIfAbsent()의 활용 사례
+    - [기능 설명]
+        - computeIfAbsent(key, mappingFunction)은 지정한 key에 값이 없을 경우에만 mappingFunction을 호출하여 값을 계산 후 Map에 저장
+            - → lazy initialization 방식으로, 중복 확인 + 초기화 코드를 줄여줌
+
+    - [활용 사례]
+        - Map 내부에 List/Set 등의 복합 자료구조 초기화
+            ```java
+            Map<String, List<String>> map = new HashMap<>();
+            map.computeIfAbsent("A", k -> new ArrayList<>()).add("hello");
+            ```
+
+        - 캐시 패턴 구현
+            ```java
+            cache.computeIfAbsent(id, this::loadFromDb);
+            ```
+
+        - 데이터 그룹핑 처리
+            ```java
+            list.forEach(item -> 
+                groupedMap.computeIfAbsent(
+                    item.category(), k -> new ArrayList<>()).add(item)
+            );
+            ```
+    - [장점]
+        - 코드 간결화 (if-contains-key + put의 반복 제거)
+        - thread-safe Map과 함께 쓰면 성능 및 안정성 향상 (ConcurrentHashMap 등)
+
+- Java에서 ConcurrentLinkedQueue와 LinkedBlockingQueue의 차이점
+    - [ConcurrentLinkedQueue]
+        - 비동기(non-blocking) 큐
+        - 내부적으로 CAS 기반의 Lock-Free 큐
+        - null 허용 안 함
+        - offer(), poll() 즉시 반환됨 (대기 없음)
+
+    - [LinkedBlockingQueue]
+        - BlockingQueue의 대표 구현체
+        - 내부적으로 take()/put()은 대기 상태 가능 (block)
+        - 생산자-소비자 패턴에 적합
+        - 큐의 크기를 고정 또는 무제한 설정 가능
+
+    - [사용 예]
+        - UI 이벤트 비동기 큐 → ConcurrentLinkedQueue
+        - 스레드 간 데이터 전달 (Blocking 필요) → LinkedBlockingQueue
+
+- Java의 ForkJoinPool을 활용한 병렬 처리 구현 방법
+    - [정의]
+        - ForkJoinPool은 Java 7에서 도입된 작업 분할-정복(Fork/Join) 기반 병렬 처리 프레임워크
+        - → 큰 작업을 재귀적으로 쪼개서 여러 코어에서 병렬 처리 후 합침
+
+    - [기본 구성]
+        - RecursiveTask<T>: 결과 반환
+        - RecursiveAction: 반환 없음
+
+    - [예제: 배열 합계 계산]
+        ```java
+        class SumTask extends RecursiveTask<Long> {
+            private final int[] array;
+            private final int start, end;
+            private static final int THRESHOLD = 1000;
+
+            SumTask(int[] array, int start, int end) {
+                this.array = array; this.start = start; this.end = end;
+            }
+
+            @Override
+            protected Long compute() {
+                if (end - start <= THRESHOLD) {
+                    long sum = 0;
+                    for (int i = start; i < end; i++) sum += array[i];
+                    return sum;
+                } else {
+                    int mid = (start + end) / 2;
+                    SumTask left = new SumTask(array, start, mid);
+                    SumTask right = new SumTask(array, mid, end);
+                    left.fork();
+                    return right.compute() + left.join();
+                }
+            }
+        }
+
+        // 사용
+        ForkJoinPool pool = new ForkJoinPool();
+        long result = pool.invoke(new SumTask(array, 0, array.length));
+        ```
+
+    - [장점]
+        - 작업을 자동 분할하여 CPU 코어를 최대한 활용
+        - fork()는 서브 작업 시작, join()은 해당 작업 완료 대기
+        - 내부적으로 work-stealing 알고리즘을 사용해 idle 스레드가 다른 작업을 가져와 수행
+
+    - [사용 예]
+        - 대용량 계산 (병렬 정렬, 이미지 처리, 행렬 연산 등)
+        - 데이터 분석용 MapReduce-like 연산
+
 - Java에서 NavigableMap과 NavigableSet의 차이점은?
 - Java에서 TreeMap을 활용하여 정렬된 데이터를 관리하는 방법은?
 - Java에서 PriorityBlockingQueue의 동작 원리는?
