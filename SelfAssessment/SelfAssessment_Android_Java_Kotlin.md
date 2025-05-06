@@ -14774,34 +14774,120 @@ Organize concepts, features, types and Pros and Cons
         - 대용량 계산 (병렬 정렬, 이미지 처리, 행렬 연산 등)
         - 데이터 분석용 MapReduce-like 연산
 
-- Java에서 NavigableMap과 NavigableSet의 차이점은?
-- Java에서 TreeMap을 활용하여 정렬된 데이터를 관리하는 방법은?
-- Java에서 PriorityBlockingQueue의 동작 원리는?
-- Java에서 Thread-Safe Collection의 대표적인 구현체는 무엇인가?
+- Java에서 NavigableMap과 NavigableSet의 차이점
+    - [공통점]
+        - 둘 다 Java 1.6부터 추가된 정렬 기반 컬렉션 인터페이스, 하위 구조는 각각 TreeMap, TreeSet
+        - → 범위 조회, 순방향/역방향 탐색, 가장 가까운 값 조회 기능 제공
+
+    - [NavigableMap]
+        - Map<K, V> 인터페이스 확장
+        - Key 기반 정렬 Map
+        - 주요 메서드:
+            - lowerKey(K key): 보다 작은 key 중 최대
+            - ceilingKey(K key): 같거나 큰 key 중 최소
+            - subMap(K from, K to, boolean inclusive...)
+
+    - [NavigableSet]
+        - Set<E> 인터페이스 확장
+        - 정렬된 고유 값 집합
+        - 주요 메서드:
+            - lower(E e), floor(E e), ceiling(E e), higher(E e)
+            - pollFirst(), pollLast()
+
+- Java에서 TreeMap을 활용하여 정렬된 데이터를 관리하는 방법
+    - [기본 개념]
+        - TreeMap은 NavigableMap 인터페이스 구현체로, 내부적으로 Red-Black Tree(이진 균형 트리) 기반
+        - → Key 기준 자동 정렬 Map
+
+    - [기본 정렬 방식]
+        - Comparable 구현 시 자동 정렬
+        - 또는 생성자에서 Comparator 전달 가능
+            ```java
+            TreeMap<String, Integer> map = new TreeMap<>(Comparator.reverseOrder());
+            ```
+
+    - [활용 예]
+        - 시간순 정렬 로그 저장
+        - 범위 검색: subMap, headMap, tailMap 등으로 부분 Map 추출
+        - 최대/최소 키 조회: firstKey(), lastKey(), higherKey(), lowerKey()
+
+    - [주의사항]
+        - Key가 null이면 NullPointerException 발생
+        - 성능은 삽입/검색/삭제 모두 O(log n)
+
+- Java에서 PriorityBlockingQueue의 동작 원리
+    - [정의]
+        - PriorityBlockingQueue는 우선순위 큐 + 동기화 지원(BlockingQueue) 를 결합한 구조
+
+    - [동작 원리]
+        - 내부적으로 Heap(Binary Heap) 기반으로 동작 (기본은 Min-Heap)
+        - Comparator 또는 Comparable을 통해 우선순위 정의
+        - put()/take() 시 내부적으로 ReentrantLock으로 동기화 처리
+        - 비어 있으면 take()는 블록 상태, 요소가 들어올 때까지 대기
+
+    - [특징]
+        - 우선순위 정렬 + 스레드 간 안전한 큐 처리
+        - peek()는 가장 높은 우선순위 요소 반환
+        - Iterator로 순회 시 정렬된 상태는 아님 (heap 구조 유지 때문)
+
+    - [사용 예]
+        - 작업 스케줄러 큐
+        - 우선순위 기반 이벤트 처리
+        - Job Queue 시스템
+
+- Java에서 Thread-Safe Collection의 대표적인 구현체
+    - [Legacy Thread-Safe] (동기화 래핑된 컬렉션: 느림)
+        - Vector, Hashtable
+        - Collections.synchronizedList(...), synchronizedMap(...)
+
+    - [Concurrent 패키지 기반: 현대적 방식]
+        - ConcurrentHashMap
+        - CopyOnWriteArrayList
+        - ConcurrentLinkedQueue
+        - ConcurrentSkipListMap
+        - LinkedBlockingQueue, ArrayBlockingQueue, PriorityBlockingQueue
+
+    - [특징]
+        - ConcurrentHashMap: Segment 기반 Lock으로 성능 향상
+        - CopyOnWriteArrayList: 읽기 위주에 적합, 쓰기 시 전체 복사
+        - ConcurrentLinkedQueue: lock-free 구조, 빠른 비동기 큐
+        - BlockingQueue 계열: 생산자-소비자 구조에서 강력함
+
+    - [선택 기준]
+        - 읽기 중심 + 안전성 보장 → CopyOnWriteArrayList
+        - 다중 스레드 빠른 조회/수정 → ConcurrentHashMap
+        - 대기 및 큐 처리 필요 → LinkedBlockingQueue, PriorityBlockingQueue
+
 - Java에서 Stream API의 parallelStream()을 사용할 때 주의해야 할 점은?
 - Java에서 FlatMap()을 활용하는 방법은?
 - Java에서 Collectors.groupingBy()를 활용한 데이터 분류 방법은?
 - Java의 Stream.reduce()를 활용한 데이터 집계 방법은?
+
 - Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법은?
 - Java에서 Future와 CompletableFuture의 차이점은?
 - Java에서 ScheduledExecutorService의 역할은?
 - Java에서 ReentrantLock과 synchronized의 차이점은?
+
 - Java에서 ForkJoinTask와 RecursiveTask를 활용한 병렬 처리는 어떻게 구현하는가?
 - Java에서 Phaser와 CyclicBarrier의 차이점은?
 - Java에서 Callable과 Runnable의 차이점은?
 - Java에서 AsynchronousFileChannel의 역할은?
+
 - Java에서 Non-blocking I/O(NIO)와 Blocking I/O(BIO)의 차이점은?
 - Java에서 Netty를 활용한 네트워크 프로그래밍의 장점은?
 - Java에서 Zero-Copy 기법을 활용하여 성능을 최적화하는 방법은?
 - Java에서 WebSockets을 활용한 실시간 통신 구현 방법은?
+
 - Java에서 gRPC와 REST API의 차이점은?
 - Java에서 HttpClient와 URLConnection의 차이점은?
 - Java에서 Thread Dump를 분석하는 방법은?
 - Java에서 Deadlock이 발생하는 원인과 해결 방법은?
+
 - Java에서 Thread.sleep()과 Object.wait()의 차이점은?
 - Java에서 ScheduledThreadPoolExecutor의 활용 방법은?
 - Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법은?
 - Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
+
 - Java의 Virtual Threads(프로젝트 Loom) 개념과 기존 Thread와의 차이점은?
 - Java에서 GraalVM을 활용한 AOT(Ahead-of-Time) 컴파일 성능 최적화 방법은?
 - Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
