@@ -14858,9 +14858,55 @@ Organize concepts, features, types and Pros and Cons
         - 다중 스레드 빠른 조회/수정 → ConcurrentHashMap
         - 대기 및 큐 처리 필요 → LinkedBlockingQueue, PriorityBlockingQueue
 
-- Java에서 Stream API의 parallelStream()을 사용할 때 주의해야 할 점은?
-- Java에서 FlatMap()을 활용하는 방법은?
-- Java에서 Collectors.groupingBy()를 활용한 데이터 분류 방법은?
+- Java에서 Stream API의 parallelStream()을 사용할 때 주의해야 할 점
+    - [기본 개념]
+        - parallelStream()은 내부적으로 ForkJoinPool(commonPool) 을 이용하여 데이터를 병렬 처리
+        - → Stream 요소들을 여러 스레드에서 병렬로 분할 처리
+
+    - [주의할 점]
+        - 공유 상태 사용 금지: 병렬 환경이므로 List.add() 등 외부 상태를 사용하는 코드는 race condition 발생
+            - → 반드시 reduce, collect 등 불변 기반 함수형 연산 사용
+        - Stream 연산 순서 불보장: forEach() 사용 시 순서가 뒤섞일 수 있음
+            - → 순서가 중요하면 forEachOrdered() 사용
+        - 작업 비용이 충분히 커야 효율 있음: 간단한 연산은 오히려 병렬 오버헤드가 더 큼
+        - 디폴트 스레드 풀 공유: 다른 라이브러리도 같은 commonPool을 공유하므로 리스크 존재
+            - → 병렬 작업이 많을 경우 custom ForkJoinPool 사용 고려
+
+    - [요약]
+        - CPU 연산 중심 작업에 적합
+        - I/O 중심, 순서 민감, 사이드 이펙트 있는 경우 지양
+
+- Java에서 FlatMap()을 활용하는 방법
+    - [기본 개념]
+        - flatMap(Function<T, Stream<R>>)은 여러 Stream을 하나의 Stream으로 평탄화(flatten) 할 때 사용
+        - → 다차원 구조 → 일차원 스트림으로 변환
+
+    - [활용 예: List<List<String>> → List<String>]
+        ```java
+        List<List<String>> list = List.of(
+            List.of("A", "B"),
+            List.of("C", "D")
+        );
+
+        List<String> flat = list.stream()
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
+        ```
+
+    - [문자열 분해 예시]
+        ```java
+        List<String> words = List.of("hello world", "java stream");
+
+        List<String> tokens = words.stream()
+            .flatMap(s -> Arrays.stream(s.split(" ")))
+            .collect(Collectors.toList());
+        ```
+
+    - [요약]
+        - 중첩 구조 → 단일 Stream 변환
+        - map()은 계층 유지, flatMap()은 계층 제거
+
+- Java에서 Collectors.groupingBy()를 활용한 데이터 분류 방법
 - Java의 Stream.reduce()를 활용한 데이터 집계 방법은?
 
 - Java에서 ExecutorService를 활용한 스레드 풀(Thread Pool) 구현 방법은?
