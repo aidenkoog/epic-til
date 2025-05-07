@@ -403,13 +403,57 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         c(); // 2
         ```
     - 요약: 클로저는 함수가 외부 변수에 계속 접근 가능하게 하여 상태를 보존함
+
+- JavaScript의 event loop와 call stack의 동작 원리
+    - Call Stack:
+        - 현재 실행 중인 함수들의 스택. 
+        - 함수가 호출되면 쌓이고, 종료되면 빠짐
     
-- JavaScript의 event loop와 call stack의 동작 원리는?
-- TypeScript에서 unknown과 any의 차이점은?
-- TypeScript에서 never 타입은 언제 사용하는가?
+    - Event Loop: Call Stack이 비어 있을 때 Task Queue의 콜백을 하나씩 처리함
+    
+    - 비동기 처리 흐름:
+        - setTimeout, Promise, DOM 이벤트 → 큐에 등록됨
+        - Call Stack이 비면, Event Loop가 큐에서 꺼내 실행
+    
+    - 요약: Call Stack은 함수 실행 순서를, Event Loop는 비동기 작업의 실행 시점을 관리함
+
+- TypeScript에서 unknown과 any의 차이점
+    - any: 어떤 타입도 허용하며, 모든 연산 가능 → 타입 안전성 없음
+    - unknown: 모든 타입을 수용하지만, 사용 전에 타입 검사가 필요함
+    - 차이점:
+        - any는 무제한 자유, unknown은 타입 보호 후 사용 가능
+        - unknown은 타입 안정성을 유지할 수 있음
+        ```ts
+        let val: unknown = "test";
+        val.toUpperCase(); // 오류
+        if (typeof val === 'string') val.toUpperCase(); // OK
+        ```
+    - 요약: unknown은 타입 안전한 any로, 더 엄격하고 안전함
+
+- TypeScript에서 never 타입 사용 시점
+    - 정의: 절대 발생하지 않는 값의 타입 (예: 함수가 끝나지 않거나 에러만 발생할 때)
+    - 주요 사용처:
+        - throw만 있는 함수 → 반환값 없음
+        - switch문의 모든 case를 처리한 후의 default
+        - 타입 좁히기 후 도달 불가능한 경우
+    - 예제
+        ```ts
+        function fail(): never {
+            throw new Error("error");
+        }
+
+        function check(x: string | number) {
+            if (typeof x === 'string') return;
+            if (typeof x === 'number') return;
+            x; // never
+        }
+        ```
+    - 요약: never는 도달 불가능한 상태나 반환값이 절대 없는 상황을 명시할 때 사용함
+
 - JavaScript의 debounce와 throttle의 차이는?
 - JavaScript의 Prototype Chain과 Closure를 활용한 메모리 최적화 방법은?
 - JavaScript의 Event Loop와 Microtask Queue의 차이는?
+
 - TypeScript의 Mapped Types와 Conditional Types은 어떻게 동작하는가?
 - JavaScript에서 WeakMap, WeakSet의 사용 사례는?
 - JavaScript에서 Proxy와 Reflect API는 어떤 경우에 유용한가?
