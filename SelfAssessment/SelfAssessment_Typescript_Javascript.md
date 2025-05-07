@@ -324,10 +324,46 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
         - 한줄 요약: 데코레이터는 클래스나 메서드에 기능을 주입해 코드 재사용성과 관심사 분리를 돕는 메타 프로그래밍 도구임
 
-- JavaScript와 TypeScript를 비교했을 때 TypeScript를 사용하면 유지보수성이 개선되는 이유는?
-- JavaScript에서 CSR(Client Side Rendering)과 SSR(Server Side Rendering)의 차이점은?
-- JavaScript의 this 바인딩 원리는?
-- JavaScript의 Promise와 async/await의 차이는?
+- JavaScript와 TypeScript를 비교했을 때 TypeScript를 사용하면 유지보수성이 개선되는 이유
+    - 정적 타입 검사: 컴파일 시점에 타입 오류를 사전에 확인 가능
+    - IDE 자동완성 & 리팩토링 용이: 타입 기반 코드 추적 및 변경이 쉬움
+    - 자체 문서화 효과: 타입 정의만 봐도 함수/객체 구조를 쉽게 이해
+    - 대규모 프로젝트에 적합: 협업 시 계약 기반 개발(타입 계약) 가능
+    - 요약: 코드 안정성 향상, 예측 가능한 동작, 오류 감소로 유지보수 비용 절감
+
+- JavaScript에서 CSR(Client Side Rendering)과 SSR(Server Side Rendering)의 차이점
+    - CSR (클라이언트 측 렌더링):
+        - 브라우저가 JS 받아서 렌더링
+        - 초기 로딩 느림, 이후 빠름
+        - SEO 불리, 동적 UI에 유리
+
+    - SSR (서버 측 렌더링):
+        - 서버에서 HTML 생성 후 전달
+        - 초기 로딩 빠름, SEO에 유리
+        - 서버 부하 증가, JS 상호작용 시 추가 로딩 필요
+
+    - 요약: CSR은 UX 최적화에, SSR은 초기 속도·SEO에 유리
+
+- JavaScript의 this 바인딩 원리
+    - 기본 바인딩: 함수 단독 호출 → 전역(window, undefined in strict)
+    - 암시적 바인딩: obj.method() 형태 → obj가 this
+    - 명시적 바인딩: call, apply, bind로 this 직접 지정
+    - new 바인딩: 생성자 함수 호출 시 새 객체가 this
+    - 화살표 함수: this는 선언 당시 상위 스코프를 따라감 (렉시컬 바인딩)
+    - 요약: 호출 방식에 따라 this가 결정되며, 화살표 함수는 예외적으로 고정됨
+
+- JavaScript의 Promise와 async/await의 차이
+    - Promise:
+        - 비동기 작업을 .then().catch() 체인으로 처리
+        - 가독성 떨어질 수 있음 (콜백 중첩 유사)
+
+    - async/await:
+        - async 함수 내에서 await으로 동기처럼 작성 가능
+        - 에러 핸들링도 try/catch로 일관성
+        - 더 간결하고 가독성 좋음
+
+    - 요약: Promise는 체이닝 방식, async/await은 동기형 코드 스타일로 더 읽기 쉬움
+
 - TypeScript의 interface와 type의 차이는?
 - 렉시컬 스코프에 대한 설명
 - JavaScript에서 클로저(Closure)는 어떻게 동작하는가?
