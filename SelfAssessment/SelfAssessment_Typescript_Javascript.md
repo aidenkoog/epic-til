@@ -364,9 +364,46 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
     - 요약: Promise는 체이닝 방식, async/await은 동기형 코드 스타일로 더 읽기 쉬움
 
-- TypeScript의 interface와 type의 차이는?
+- TypeScript의 interface와 type의 차이
+    - interface: 객체의 구조 정의에 최적화됨, 선언 병합(extend, merge) 가능
+    - type: 모든 타입 정의 가능 (유니언, 튜플, 함수 등), 유연한 조합에 강함
+    - 차이 요약:
+        - interface는 주로 객체 타입 확장에 적합
+        - type은 복잡한 타입 표현에 유리
+    - 실무에서는 interface를 기본으로, 복잡한 조합이 필요할 때 type을 사용함
+
 - 렉시컬 스코프에 대한 설명
-- JavaScript에서 클로저(Closure)는 어떻게 동작하는가?
+    - 정의: 함수가 정의된 위치(코드 작성 시점) 기준으로 변수의 유효 범위가 결정되는 스코프 방식
+    - 특징: 실행 시점이 아닌 선언 시점의 스코프 체인을 따름
+    - 예시:
+        ```javascript
+        function outer() {
+            const x = 10;
+            function inner() {
+                console.log(x); // 10
+            }
+            return inner;
+        }
+        ```
+    - 요약: 렉시컬 스코프는 함수가 선언된 위치 기준으로 상위 변수에 접근함
+
+- JavaScript에서 클로저(Closure)는 동작원리
+    - 정의: 함수가 외부 스코프의 변수에 접근할 수 있는 상태를 유지하는 구조
+    - 동작 원리: 함수가 반환되거나 실행 컨텍스트가 종료되어도, 참조된 외부 변수는 GC되지 않고 살아있음
+    - 용도: 정보 은닉, 상태 유지, 콜백 핸들링 등
+    - 예시:
+        ```js
+        function counter() {
+            let count = 0;
+            return () => ++count;
+        }
+
+        const c = counter();
+        c(); // 1
+        c(); // 2
+        ```
+    - 요약: 클로저는 함수가 외부 변수에 계속 접근 가능하게 하여 상태를 보존함
+    
 - JavaScript의 event loop와 call stack의 동작 원리는?
 - TypeScript에서 unknown과 any의 차이점은?
 - TypeScript에서 never 타입은 언제 사용하는가?
