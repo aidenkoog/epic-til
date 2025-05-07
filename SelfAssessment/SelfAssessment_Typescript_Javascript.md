@@ -505,9 +505,63 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Microtask는 더 빠르게, 우선적으로 실행됨
         - 일반 이벤트보다 먼저 소비되는 고우선 큐
 
-- TypeScript의 Mapped Types와 Conditional Types은 어떻게 동작하는가?
-- JavaScript에서 WeakMap, WeakSet의 사용 사례는?
-- JavaScript에서 Proxy와 Reflect API는 어떤 경우에 유용한가?
+- TypeScript의 Mapped Types와 Conditional Types의 동작원리
+    - Mapped Types: 기존 타입의 모든 프로퍼티에 대해 일괄적으로 수정된 타입을 생성
+        - 예: readonly, optional, nullable 변환
+        ```ts
+        type ReadOnly<T> = {
+            [P in keyof T]: T[P];
+        };
+        ```
+
+    - Conditional Types: 타입 간 조건 분기
+        - A extends B ? X : Y 형태로 사용
+        ```ts
+        type IsString<T> = T extends string ? true : false;
+        ```
+
+    - 요약
+        - Mapped → 속성 반복 변형
+        - Conditional → 타입 조건 분기
+
+- JavaScript에서 WeakMap, WeakSet의 사용 사례
+    - WeakMap: 키가 객체만 가능, 참조가 사라지면 자동 GC
+        - 캐싱, 프라이빗 데이터 저장 등에 사용
+        ```js
+        const wm = new WeakMap();
+        wm.set(obj, "value"); // obj가 null되면 자동 GC
+        ```
+    - WeakSet: 객체만 저장 가능, 중복 허용 안 함
+        - 특정 객체가 등록됐는지 여부 추적할 때 사용
+
+    - 실제 사례:
+        - DOM 노드 관련 임시 데이터 저장
+        - 라이브러리에서 내부 상태 은닉 (메모리 누수 방지)
+    - 요약:
+        - GC 친화적 구조로, 일시적 객체의 상태 추적이나 은닉에 유리
+    
+- JavaScript에서 Proxy와 Reflect API 유용한 시점
+    - Proxy: 객체의 접근/설정/삭제 등 모든 동작을 가로채는 래퍼
+        - 예: 속성 접근 감시, 유효성 검사, 동적 속성 대응
+        ```js
+        const user = new Proxy({}, {
+            get: (target, prop) => prop in target ? target[prop] : 'default',
+        });
+        ```
+
+    - Reflect: Proxy 트랩 내부에서 원래 동작을 안전하게 수행할 때 사용
+        - 내부 작업을 직접 구현하지 않고 일관된 방식으로 수행 가능
+        ```js
+        get(target, prop) {
+            console.log('get', prop);
+            return Reflect.get(target, prop);
+        }
+        ```
+
+    - 요약:
+        - Proxy → 행동을 가로채고 제어
+        - Reflect → 가로챈 동작을 안전하게 위임
+
 - TypeScript에서 Utility Types를 활용하여 코드 재사용성을 높이는 방법은?
 - JavaScript의 var, let, const의 차이점은?
 - ==와 ===의 차이점은?
