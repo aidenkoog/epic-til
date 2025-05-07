@@ -15286,9 +15286,65 @@ Organize concepts, features, types and Pros and Cons
         - 논블로킹 = 스레드가 멈추지 않는다 (즉시 반환)
             - 두 개념은 독립적이므로 조합해서 동작 방식이 다양해질 수 있다.
 
-- Java에서 Non-blocking I/O(NIO)와 Blocking I/O(BIO)의 차이점은?
-- Java에서 Netty를 활용한 네트워크 프로그래밍의 장점은?
-- Java에서 Zero-Copy 기법을 활용하여 성능을 최적화하는 방법은?
+- Java에서 Non-blocking I/O(NIO)와 Blocking I/O(BIO)의 차이점
+    - [Blocking I/O (BIO)]
+        - Thread-per-connection 모델
+        - I/O 작업(예: read(), write())이 완료될 때까지 스레드가 블록됨
+        - 구현이 단순하지만, 동시 연결이 많아지면 스레드 수 급증 → 성능 저하
+        - 복잡도는 낮고 확장성도 낮음 (스레드 많아짐)
+
+    - [Non-blocking I/O (NIO)]
+        - Single-thread + Selector 기반의 이벤트 처리 모델
+        - 채널을 등록하고, Selector를 통해 여러 채널의 I/O 이벤트를 감시
+        - I/O 작업이 준비되지 않아도 스레드가 블로킹되지 않음
+        - 복잡도는 높음(셀렉터/채널 관리), 확장성 높음(셀렉터로 수천 개 처리)
+
+- Java에서 Netty를 활용한 네트워크 프로그래밍의 장점
+    - [Netty]
+        - Netty는 Java 기반의 비동기 이벤트 기반 고성능 네트워크 프레임워크
+        - TCP/UDP/HTTP/WebSocket 등 다양한 프로토콜 지원
+
+    - [주요 장점]
+        - NIO 기반: 블로킹 없이 수천~수만 개 연결 처리 가능
+        - ChannelPipeline: 요청 처리 흐름을 핸들러 체인으로 구성 → 높은 유연성
+        - ThreadPool 관리 최적화: I/O 작업과 비즈니스 로직을 분리
+        - 성능 최적화: Zero-Copy, DirectBuffer, ByteBuf 등 제공
+        - WebSocket, TLS, HTTP2 등 다양한 프로토콜 지원
+
+    - [실전 사용 예]
+        - 실시간 메시징 서버, 게임 서버, IoT 게이트웨이, 고성능 API Gateway 등
+
+- Java에서 Zero-Copy 기법을 활용하여 성능을 최적화하는 방법
+    - [Zero-Copy 개념]
+        - 데이터를 커널 공간 → 유저 공간으로 복사하지 않고, 
+        - 커널 레벨에서 직접 처리하여 불필요한 데이터 복사를 줄이는 기술
+
+    - [전통적 방식]
+        - 디스크 → 커널 버퍼 → 사용자 버퍼 → 소켓 버퍼 → NIC
+    - [Zero-Copy 방식]
+        - 디스크 → 커널 버퍼 → 소켓 버퍼 → NIC (사용자 영역 복사 생략)
+    - [Java에서 적용 방법]
+        - FileChannel.transferTo() / transferFrom()
+
+java
+코드 복사
+FileChannel source = new FileInputStream("file").getChannel();
+WritableByteChannel dest = Channels.newChannel(socket.getOutputStream());
+source.transferTo(0, source.size(), dest);
+Netty 내부의 FileRegion, DirectBuffer 사용
+
+Netty는 내부적으로 Zero-Copy를 추상화하여 자동 적용
+
+[효과]
+
+CPU 사용량 감소
+
+GC 부담 줄어듦
+
+대용량 파일 전송 시 효율 극대화
+
+
+
 - Java에서 WebSockets을 활용한 실시간 통신 구현 방법은?
 
 - Java에서 gRPC와 REST API의 차이점은?
