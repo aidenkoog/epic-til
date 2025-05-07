@@ -226,11 +226,47 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 데이터 은닉과 상태 유지가 가능하여 함수형 프로그래밍과 객체 지향 프로그래밍에서 유용하게 활용됨
         - 외부 함수의 변수를 기억하는 함수 안의 함수
 
-- Immutable 데이터 패턴을 사용하면 어떤 이점이 있는가?
-- 프론트엔드 성능 최적화를 위해 JavaScript에서 할 수 있는 것들은?
+- Javascript/Typescript에서 클로저를 사용한 객체 지향 프로그래밍 예를 보여주세요.
+    - 정의: 클로저는 함수가 외부 스코프의 변수에 접근할 수 있게 하는 구조임
+    - OOP 방식 사용 예:
+        ```ts
+        function Counter() {
+            let count = 0; // private 변수
+
+            return {
+                increment: () => ++count,
+                getCount: () => count
+            };
+        }
+
+        const counter = Counter();
+        counter.increment(); // 1
+        counter.getCount();  // 1
+        ```
+        - 특징: count는 외부에서 접근 불가, 내부 함수에서만 접근 → 은닉성 구현
+
+- Immutable 데이터 패턴 사용 시 이점
+    - 정의: 데이터 변경 없이 복사본을 생성하여 새로운 상태를 만드는 방식
+    - 이점:
+        - 상태 추적과 디버깅이 쉬움
+        - 예측 가능한 상태 관리 (Redux 등에서 유리)
+        - 사이드 이펙트 감소 → 안정성 향상
+        - React의 shouldComponentUpdate 최적화에 유리
+
+- 프론트엔드 성능 최적화를 위해 JavaScript에서 할 수 있는 것들
+    - 주요 방법들:
+        - 이벤트 디바운싱/스로틀링 사용
+        - 불필요한 DOM 조작 최소화
+        - Lazy loading, 코드 스플리팅
+        - Web Worker로 연산 분산
+        - 메모리 누수 방지 및 클로저 주의
+        - requestAnimationFrame 활용 (애니메이션 시)
+
 - TypeScript의 제네릭(Generic)을 사용하면 어떤 장점이 있는가?
 - TypeScript의 strict 옵션을 활성화하면 어떤 이점이 있는가?
 - TypeScript의 Decorator 패턴은 무엇이며, 실제로 어떻게 사용하는가?
+
+
 - JavaScript와 TypeScript를 비교했을 때 TypeScript를 사용하면 유지보수성이 개선되는 이유는?
 - JavaScript에서 CSR(Client Side Rendering)과 SSR(Server Side Rendering)의 차이점은?
 - JavaScript의 this 바인딩 원리는?
