@@ -262,10 +262,67 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 메모리 누수 방지 및 클로저 주의
         - requestAnimationFrame 활용 (애니메이션 시)
 
-- TypeScript의 제네릭(Generic)을 사용하면 어떤 장점이 있는가?
-- TypeScript의 strict 옵션을 활성화하면 어떤 이점이 있는가?
-- TypeScript의 Decorator 패턴은 무엇이며, 실제로 어떻게 사용하는가?
+- TypeScript의 제네릭(Generic)을 사용 시 장점
+    - 정의: 제네릭은 타입을 함수나 클래스에 매개변수처럼 넘길 수 있게 해주는 기능
+    - 장점:
+        - 코드 재사용성 증가: 여러 타입에 대해 하나의 함수/클래스 정의
+        - 타입 안정성 유지: 타입이 고정되지 않으면서도 타입 체크 가능
+        - 자동 타입 추론 가능: 호출 시 인자에 따라 자동으로 타입 추론
+    - 예시
+        ```ts
+        function identity<T>(value: T): T {
+            return value;
+        }
 
+        identity<string>('hello');  // 타입 명시
+        identity(123);              // 타입 추론
+        ```
+        - 한줄 요약: 제네릭은 유연하면서도 타입 안정성을 유지할 수 있게 해줌
+
+- TypeScript의 strict 옵션을 활성화 시 이점
+    - 정의: strict는 타입스크립트의 모든 엄격한 타입 검사 기능을 켜는 플래그임
+    - 이점:
+        - null/undefined에 대한 엄격한 검사 (strictNullChecks)
+        - 암시적 any 방지 (noImplicitAny)
+        - 더 안전한 코드 작성 가능 → 런타임 에러 사전 방지
+        - 의도하지 않은 버그를 컴파일 단계에서 발견 가능
+
+    - 예시:
+        ```ts
+        function greet(name: string | null) {
+            // strictNullChecks 없으면 오류 없이 통과됨
+            console.log(name.toUpperCase()); // runtime error 가능
+        }
+        ```
+        - 한줄 요약: strict는 버그 가능성을 줄이고 타입 안정성을 높여줌
+
+- TypeScript의 Decorator 패턴은 무엇이며, 실제 사용 방법
+    - 정의: 데코레이터는 클래스/속성/메서드/파라미터에 메타 프로그래밍 기능을 부여하는 특수 문법임
+    - 특징:
+        - 코드에 부가 기능 주입: 로깅, 인증, 바인딩 등
+        - AOP(관점 지향 프로그래밍)처럼 동작
+        - experimentalDecorators 설정 필요
+
+    - 예시:
+        ```ts
+        function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            const original = descriptor.value;
+            descriptor.value = function (...args: any[]) {
+                console.log(`Called ${propertyKey} with`, args);
+                return original.apply(this, args);
+            };
+        }
+
+        class Example {
+            @Log
+            greet(msg: string) {
+                console.log(msg);
+            }
+        }
+
+        new Example().greet('hello'); // 로그 출력 후 메서드 실행
+        ```
+        - 한줄 요약: 데코레이터는 클래스나 메서드에 기능을 주입해 코드 재사용성과 관심사 분리를 돕는 메타 프로그래밍 도구임
 
 - JavaScript와 TypeScript를 비교했을 때 TypeScript를 사용하면 유지보수성이 개선되는 이유는?
 - JavaScript에서 CSR(Client Side Rendering)과 SSR(Server Side Rendering)의 차이점은?
