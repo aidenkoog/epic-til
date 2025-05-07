@@ -450,9 +450,60 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: never는 도달 불가능한 상태나 반환값이 절대 없는 상황을 명시할 때 사용함
 
-- JavaScript의 debounce와 throttle의 차이는?
-- JavaScript의 Prototype Chain과 Closure를 활용한 메모리 최적화 방법은?
-- JavaScript의 Event Loop와 Microtask Queue의 차이는?
+- JavaScript의 debounce와 throttle의 차이
+    - debounce: 이벤트 발생 후 일정 시간 동안 추가 이벤트 없을 때 실행
+        - 마지막 이벤트만 실행됨
+        - 예: 검색창 자동완성, resize 끝난 후 작업
+
+    - throttle: 일정 간격마다 이벤트 실행, 중간 이벤트 무시
+        - 주기적으로 실행됨
+        - 예: 스크롤 위치 추적, 드래그 처리
+
+    - 요약:
+        - debounce는 “마지막에 한 번”,
+        - throttle은 “간격마다 한 번”
+
+- JavaScript의 Prototype Chain과 Closure를 활용한 메모리 최적화 방법
+    - Prototype Chain: 
+        - 객체 간 상속 구조. 
+        - 공통 메서드는 prototype에 정의하여 메모리 절약
+        - 추가 설명
+            - 메서드를 인스턴스마다 생성하지 않음
+            - Object.create()나 클래스 prototype에 메서드 저장
+            ```js
+            function Animal() {}
+            Animal.prototype.speak = function () { 
+                console.log('sound'); 
+            };
+            ```
+    
+    - Closure 활용: 필요한 값만 클로저로 캡슐화하여 외부 노출 차단
+        - 반복적으로 생성되는 객체의 내부 상태 은닉 → 불필요한 참조 제거
+        ```js
+        function createCounter() {
+            let count = 0;
+            return () => ++count;
+        }
+        ```
+        - 요약:
+            - Prototype은 공용 메서드 공유로 메모리 절약
+            - Closure는 불필요한 전역 노출 방지와 상태 은닉에 도움
+
+- JavaScript의 Event Loop와 Microtask Queue의 차이
+    - Event Loop: Call Stack이 비면 큐에서 작업을 꺼내 실행
+    - Microtask Queue: Promise .then, MutationObserver 등 고우선 작업이 담김
+        - 이벤트 큐(Task Queue)보다 먼저 처리됨
+        - 하나의 작업(예: 클릭 이벤트) 처리 후, 다음 이벤트 전에 모든 Microtask 처리
+        ```js
+        console.log('start');
+        Promise.resolve().then(() => console.log('microtask'));
+        setTimeout(() => console.log('macrotask'), 0);
+        console.log('end');
+        // 출력: start → end → microtask → macrotask
+        ```
+    - 요약:
+        - Microtask는 더 빠르게, 우선적으로 실행됨
+        - 일반 이벤트보다 먼저 소비되는 고우선 큐
 
 - TypeScript의 Mapped Types와 Conditional Types은 어떻게 동작하는가?
 - JavaScript에서 WeakMap, WeakSet의 사용 사례는?
