@@ -1656,10 +1656,38 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
                 - immer, immutable.js 등으로 복잡한 구조도 불변 처리 가능
                 - 요약: 불변성은 직접 수정 대신 복사 후 변경이 원칙
                     - → 상태 관리 라이브러리(Redux 등)에서 필수 개념
-                    
-- JavaScript에서 setTimeout(fn, 0)은 어떻게 동작하는가?
-- JavaScript에서 Event Delegation(이벤트 위임)이란?
-- JavaScript에서 this가 동적으로 바뀌는 경우는 언제인가?
+
+- JavaScript에서 setTimeout(fn, 0) 동작 원리
+    - 정의: 0ms 후에 콜백 함수를 실행하라는 요청
+    - 오해 주의: 즉시 실행이 아님 → 최소 지연 시간, 이벤트 루프(Task Queue)에 등록
+    - 예제
+        ```js
+        console.log('start');
+        setTimeout(() => console.log('timeout'), 0);
+        console.log('end');
+
+        // 출력 순서: start → end → timeout
+        ```
+    - 이유: setTimeout 콜백은 Call Stack이 비워진 후 실행, 최소 4ms~ 정도 실제 지연 가능
+    - 요약: setTimeout(fn, 0)은 “다음 틱에 실행” 요청하는 방식 → 비동기 처리 예약용
+
+- JavaScript에서 Event Delegation(이벤트 위임)
+    - 정의: 자식 요소 각각에 이벤트를 등록하지 않고, 부모 요소에 이벤트를 위임해서 처리하는 방식
+    - 원리: 이벤트는 버블링(Bubbling)을 통해 상위로 전파됨
+    - 활용 이유:
+        - 동적 요소에도 이벤트 자동 적용
+        - 이벤트 리스너 수 감소 → 성능 향상
+    - 예제
+        ```js
+        document.getElementById('list').addEventListener('click', e => {
+            if (e.target.tagName === 'LI') {
+                console.log('클릭된 항목:', e.target.textContent);
+            }
+        });
+        ```
+    - 요약: 이벤트 위임은 부모 한 곳에서 자식 이벤트를 관리하는 효율적 패턴
+
+- JavaScript에서 this가 동적으로 바뀌는 경우/시점
 
 - JavaScript에서 비동기 프로그래밍을 다루는 방법은?
 - JavaScript의 Generator 함수와 일반 함수의 차이점은?
