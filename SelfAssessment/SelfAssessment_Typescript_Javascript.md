@@ -835,9 +835,30 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 원시 타입은 값 자체를 저장
         - 참조 타입은 메모리 주소를 통해 값 참조
 
-- IIFE(즉시 실행 함수, Immediately Invoked Function Expression)의 역할은?
-- JavaScript에서 truthy와 falsy 값에는 무엇이 있는가?
+- IIFE(즉시 실행 함수, Immediately Invoked Function Expression)의 역할
+    - 정의
+        - 즉시 실행 함수, Immediately Invoked Function Expression
+        - 정의하자마자 즉시 실행되는 함수 표현식
+    - 형태
+        ```js
+        (function() {
+            console.log('실행됨');
+        })();
+        ```
+
+    - 주요 역할:
+        - 변수 스코프를 지역화해서 전역 오염 방지
+        - 모듈화 패턴 구현 (ES6 이전)
+        - 클로저 기반 초기화 코드 실행에 활용
+
+    - 요약: IIFE는 즉시 실행 + 스코프 보호용 함수로 많이 사용됨
+
+- JavaScript에서 truthy와 falsy 값 설명
+    - 
+
+
 - JavaScript에서 deep copy와 shallow copy의 차이는?
+
 - JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점은?
 - JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
 - JavaScript에서 함수 선언과 함수 표현식의 차이는?
