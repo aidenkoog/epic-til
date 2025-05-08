@@ -1868,7 +1868,23 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 임시 객체 상태 저장, 메모리 누수 방지 목적에 사용
 
 - JavaScript에서 Promise.all과 Promise.race의 차이
+    - Promise.all
+        - 모든 Promise가 성공 시 배열로 결과 반환
+        - 하나라도 실패하면 reject
+    - Promise.race
+        - 가장 먼저 완료되는 프로미스(성공/실패 무관) 반환
+        - 가장 빠른 결과에 따라 resolve/reject
+    - 예시
+        ```js
+        const p1 = new Promise(res => setTimeout(() => res(1), 100));
+        const p2 = new Promise(res => setTimeout(() => res(2), 200));
 
+        Promise.all([p1, p2]).then(console.log); // [1, 2] (모두 완료 시)
+        Promise.race([p1, p2]).then(console.log); // 1 (먼저 끝난 p1)
+        ```
+    - 요약:
+        - all → 모두 성공해야 통과, 실패 하나라도 있으면 reject
+        - race → 가장 먼저 끝난 Promise의 결과 반환
 
 
 - JavaScript에서 옵저버 패턴(Observer Pattern)과 이벤트 기반 프로그래밍의 차이는?
