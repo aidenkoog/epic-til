@@ -1540,8 +1540,46 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약: arguments는 함수 인자 전체를 담는 옛 방식 유사 배열 객체
 
 
-- JavaScript에서 use strict의 역할은?
-- JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
+- JavaScript에서 use strict의 역할
+    - 정의: "use strict"는 ES5에서 도입된 엄격 모드 선언
+    - 역할 및 효과:
+        - 암묵적 전역 변수 선언 방지
+        - 중복된 파라미터 금지
+        - 삭제 불가능한 속성 삭제 차단
+        - this가 undefined인 경우 오류 발생 (예: 일반 함수에서의 this)
+        - 보안성과 오류 예방에 도움
+    - 예제
+        ```js
+        "use strict";
+
+        x = 10; // ReferenceError: x is not defined
+        ```
+    - 요약: "use strict"는 코드를 더 엄격하고 안전하게 실행하는 개발자 보호 모드
+
+- JavaScript에서 함수형 프로그래밍을 적용하는 방법
+    - 정의: 순수 함수 + 불변성 유지 + 고차 함수 사용을 중심으로 동작하는 프로그래밍 스타일
+    - 핵심 원칙:
+        - 순수 함수: 같은 입력 → 같은 출력, 부작용 없음
+        - 불변 데이터: 원본 데이터 변경 없이 새로운 값 생성
+        - 고차 함수: 함수를 인자로 받거나 함수를 반환하는 함수
+    - 예제
+        ```js
+        // 순수 함수
+        const add = (a, b) => a + b;
+
+        // 불변 데이터
+        const arr = [1, 2];
+        const newArr = [...arr, 3]; // 원본 수정 안 함
+
+        // 고차 함수
+        const twice = fn => x => fn(fn(x));
+        ```
+    - 실무 적용:
+        - map, filter, reduce 활용
+        - lodash/fp, Ramda 같은 라이브러리 사용
+        - 상태 변경은 복사본으로 처리
+
+    - 요약: 함수형 프로그래밍은 순수성과 예측 가능성을 바탕으로 버그를 줄이고 테스트 용이성을 높임
 
 - JavaScript에서 setTimeout(fn, 0)은 어떻게 동작하는가?
 - JavaScript에서 Event Delegation(이벤트 위임)이란?
