@@ -1366,6 +1366,86 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             - 화살표 함수는 유일하게 this가 정적으로(렉시컬) 바인딩됨
             - 정확한 제어가 필요하면 call, bind, 또는 화살표 함수 사용 고려
 
+- 렉시컬 스코프 vs 다이나믹 스코프, 가비지 컬렉션 시점, 메모리 누수 원인, Event Loop + 클로저 조합 문제
+    - 렉시컬 스코프 vs 다이나믹 스코프
+        - 렉시컬 스코프
+            - 기준: 코드 작성 시점 (함수 정의 위치)
+            - 변수 탐색 위치: 정의된 시점의 외부 스코프 체인
+            - 언어 예시: 자바스크립트, 파이썬 등
+        - 다이나믹 스코프
+            - 기준: 코드 실행 시점 (함수 호출 위치)
+            - 변수 탐색 위치: 호출한 곳의 실행 컨텍스트 체인
+            - 언어 예시: 일부 Lisp 계열, Bash 등
+        - 예제
+            ```js
+            // 렉시컬 스코프 예시
+            const a = 1;
+            function outer() {
+                const a = 2;
+                function inner() {
+                    console.log(a); // 2 ← 정의된 외부 스코프 기준
+                }
+                inner();
+            }
+            outer();
+            ```
+        - 요약: 자바스크립트는 정의 위치 기준(정적)인 렉시컬 스코프만 사용
+
+    - 가비지 컬렉션(GC) 시점
+        - 정의: 더 이상 접근할 수 없는 메모리를 자동으로 해제
+        - GC 시점 조건:
+            - 도달 불가능한 객체 (reachability graph에 포함되지 않음)
+            - 루트 객체(window/globalThis)에서 참조되지 않으면 GC 대상
+        - 예제
+            ```js
+            let obj = { name: 'data' };
+            obj = null; // 이전 객체는 더 이상 참조되지 않음 → GC 대상
+            ```
+            - GC는 명시적 시점이 없음 → JS 엔진(V8 등)이 알고리즘으로 자동 처리
+        - 요약: 참조가 완전히 끊긴 객체는 GC 대상, 직접 해제는 불가능
+
+    - 메모리 누수(Memory Leak) 주요 원인
+        - 전역 변수 남용
+            - 참조가 계속 유지되어 GC가 못 지움
+        - 클로저 내부에서 불필요한 외부 참조 유지
+            - 오래 살아남는 클로저가 불필요한 데이터까지 보관
+        - DOM 참조 유지
+            - 제거된 DOM을 코드에서 계속 참조할 경우
+        - 이벤트 리스너 제거 안 함
+            - addEventListener만 하고 removeEventListener 안 하면 참조 유지됨
+        - 누수 예시
+            ```js
+            function leak() {
+                const large = new Array(1000000).fill('...');
+                return () => console.log(large.length); // 클로저가 large를 계속 참조
+            }
+            const hold = leak(); // large가 GC 안 됨
+            ```
+        - 요약: GC는 똑똑하지만, 개발자가 참조를 무심코 유지하면 메모리 누수 발생
+
+    - Event Loop + 클로저 조합 문제
+        - 상황: 클로저로 묶인 데이터를 Event Queue나 Timer로 넘길 때, 이벤트가 실행되기 전까지 불필요한 메모리 유지
+
+        - 문제 예시:
+            ```js
+            function createHandler() {
+                const hugeData = new Array(1000000).fill('...');
+                setTimeout(() => {
+                    console.log('event'); // hugeData 클로저로 잡힘 → 3초 동안 GC 안 됨
+                }, 3000);
+            }
+            createHandler();
+            ```
+            - 해결 방법:
+                - 클로저에서 불필요한 외부 변수 참조 제거
+                - null 할당 또는 스코프 제한
+
+    - 전체 요약
+        - 렉시컬 vs 다이나믹 스코프: 정의 위치 기준 vs 호출 위치 기준(JS는 렉시컬만 사용)
+        - 가비지 컬렉션 시점: 참조 끊긴 객체가 GC 대상
+        - 메모리 누수 원인: 전역변수, 클로저, DOM 참조, 이벤트 리스너 등
+        - 이벤트 루프 + 클로저 문제: 콜백 실행 전까지 클로저가 데이터 유지 -> 메모리 오래 점유할 가능성 존재
+
 - JavaScript에서 arguments 객체는 어떻게 동작하는가?
 - JavaScript에서 use strict의 역할은?
 - JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
