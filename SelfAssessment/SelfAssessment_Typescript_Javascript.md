@@ -965,9 +965,31 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Rest는 나머지를 모음
         - Default는 값이 없을 때 기본 대입
 
-- JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점은?
+- JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점
+    - Object.freeze(obj)
+        - 불변 객체로 만듦
+        - 속성 추가/삭제/수정 모두 불가능
+        - 깊은 freeze는 아님 (중첩 객체는 여전히 변경 가능)
+
+    - Object.seal(obj)
+        - 속성 추가/삭제 불가, 수정은 가능
+        - 구조는 고정되지만 값은 바뀔 수 있음
+
+    - Object.assign(target, source)
+        - 객체 복사 또는 병합에 사용
+        - 얕은 복사 (shallow copy) 수행
+        - 같은 키가 있으면 덮어씀
+
+    - 예제
+        ```js
+        const a = { x: 1 };
+        const b = { y: 2 };
+        const merged = Object.assign({}, a, b); // { x: 1, y: 2 }
+        ```
+
 - JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
 - JavaScript에서 함수 선언과 함수 표현식의 차이는?
+
 - JavaScript에서 bind, call, apply의 차이점은?
 - JavaScript에서 setTimeout과 setInterval은 어떻게 동작하는가?
 - JavaScript에서 Map과 Object의 차이점은?
