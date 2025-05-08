@@ -730,9 +730,9 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - === (일치 연산자): 타입과 값 모두 동일해야 true
     - 예시:
         ```js
-        0 == '0';   // true (형변환 발생, 암묵적 형변환)
-        0 === '0';  // false
-        null == undefined; // true
+        0 == '0';           // true (형변환 발생, 암묵적 형변환)
+        0 === '0';          // false
+        null == undefined;  // true
         null === undefined; // false
         ```
     - 요약: ===은 예측 가능한 정확한 비교, 실무에서는 === 사용이 기본
@@ -780,9 +780,60 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         Object.prototype.toString.call(new Date())   // '[object Date]'
         ```
 
-- JavaScript에서 null과 undefined의 차이는?
-- JavaScript에서 typeof 연산자는 어떤 값을 반환하는가?
-- JavaScript에서 데이터 타입은 몇 가지가 있는가?
+- JavaScript에서 null과 undefined의 차이
+    - undefined: 변수는 선언되었지만 값이 할당되지 않은 상태
+        - 자바스크립트가 자동으로 부여
+    - null: 의도적으로 “값이 비어 있음”을 나타내기 위해 개발자가 명시적으로 할당
+    - 차이 요약:
+        - undefined → "할당되지 않음"
+        - null → "비어 있도록 명시함"
+    - 예제
+        ```js
+        let a;
+        console.log(a); // undefined
+
+        let b = null;
+        console.log(b); // null
+        ```
+
+
+- JavaScript에서 typeof 연산자가 반환하는 값
+    - 결과값: 항상 문자열 형태로 타입 이름을 반환
+    - 주요 반환값:
+        - 'undefined', 'object', 'boolean', 'number', 'string'
+        - 'function', 'symbol', 'bigint'
+    - 주의할 점:
+        - typeof null → 'object' (버그)
+        - 배열도 'object'
+    - 예제
+        ```js
+        typeof 123           // 'number'
+        typeof 'hi'          // 'string'
+        typeof undefined     // 'undefined'
+        typeof null          // 'object' ← 주의
+        typeof () => {}      // 'function'
+        ```
+
+- JavaScript에서 데이터 타입 종류 및 개수
+    - 총 개수
+        - 총 8가지 (ES6 기준)
+
+    - 원시 타입 (Primitive)
+        - undefined
+        - null
+        - boolean
+        - number
+        - string
+        - symbol (ES6)
+        - bigint (ES2020)
+
+    - 참조 타입 (Reference)
+        - object
+            - 배열, 함수, 객체, 날짜 등 포함
+
+    - 요약:
+        - 원시 타입은 값 자체를 저장
+        - 참조 타입은 메모리 주소를 통해 값 참조
 
 - IIFE(즉시 실행 함수, Immediately Invoked Function Expression)의 역할은?
 - JavaScript에서 truthy와 falsy 값에는 무엇이 있는가?
