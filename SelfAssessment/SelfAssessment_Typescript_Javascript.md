@@ -914,6 +914,57 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - ...은 객체/배열/인자의 요소를 펼치거나 복사할 때 사용
         - Spread는 복사, 병합, 전달에 유용한 문법 도구
 
+- Rest parameter, default parameter, 배열과 객체 구조 분해
+    - Rest Parameter (...args)
+        - 정의: 함수의 가변 인자들을 배열로 수집
+        - 문법: function fn(...args) {}
+        - 예시:
+            ```js
+            function sum(...nums) {
+                return nums.reduce((a, b) => a + b, 0);
+            }
+            sum(1, 2, 3); // 6
+            ```
+        - 요약: Rest는 나머지를 모은다, 항상 마지막 인자에만 위치 가능
+
+    - Default Parameter
+        - 정의: 함수 인자에 기본값 설정
+        - 예시:
+            ```js
+            function greet(name = 'Guest') {
+                console.log(`Hello, ${name}`);
+            }
+            greet(); // Hello, Guest
+            ```
+        - 요약: 전달된 인자가 undefined일 경우 기본값 사용
+
+    - 구조 분해 할당 (Destructuring Assignment)
+        - 배열 구조 분해
+            ```js
+            const arr = [1, 2, 3];
+            const [a, b] = arr; // a=1, b=2
+            ```
+        - 객체 구조 분해
+            ```js
+            const user = { name: 'Tom', age: 30 };
+            const { name, age } = user;
+            ```
+        - 구조 분해 + 기본값 + 나머지 (Rest)
+            ```js
+            const [x, y = 5, ...rest] = [1];
+            console.log(x); // 1
+            console.log(y); // 5
+            console.log(rest); // []
+
+            const { a, ...others } = { a: 1, b: 2, c: 3 };
+            console.log(others); // { b: 2, c: 3 }
+            ```
+
+    - 요약: 
+        - 구조 분해는 값을 변수로 쉽게 분리
+        - Rest는 나머지를 모음
+        - Default는 값이 없을 때 기본 대입
+
 - JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점은?
 - JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
 - JavaScript에서 함수 선언과 함수 표현식의 차이는?
