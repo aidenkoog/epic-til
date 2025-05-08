@@ -1163,6 +1163,62 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: 실행 컨텍스트는 JS 코드가 어디서, 어떻게 실행될지를 정의하는 실행 단위의 기본 구조
 
+- this 바인딩, 클로저, 실행 컨텍스트, 스코프 체인 고찰
+    - this 바인딩
+        - 정의: 함수가 호출되는 방식에 따라 결정되는 실행 컨텍스트 내의 참조 객체
+        - 바인딩 방식:
+            - 호출방식 & this 값 정보
+                - 일반 함수 호출: 전역 객체 (window, strict에서는 undefined)
+                - 메서드 호출: 해당 객체
+                - 생성자 호출(new): 새로 생성된 인스턴스
+                - call, apply, bind: 명시적으로 지정한 객체
+                - 화살표 함수: 외부 스코프의 this를 그대로 사용 (렉시컬 this)
+
+- 렉시컬 스코프(Lexical Scope)와 렉시컬 this
+    - 렉시컬 스코프 (Lexical Scope)
+        - 정의: 함수가 정의된 위치(코드 작성 시점) 기준으로 상위 스코프가 결정되는 방식
+            - 누가 호출했는지와는 무관, 어디서 선언되었는지가 중요함
+            - 쉽게 말해: 함수가 어디서 호출되든, 자기 주변 코드(정의된 위치)만 본다는 것
+        - 예제
+            ```js
+            const x = 1;
+
+            function outer() {
+                const x = 2;
+
+                function inner() {
+                    console.log(x); // → 2 (정의된 위치 기준)
+                }
+
+                return inner;
+            }
+
+            const fn = outer();
+            fn(); // outer 안에 정의됐으므로 x = 2
+            // 즉, fn() 호출은 외부에서 했지만 함수가 정의된 위치,
+            // 코드 작성 시점 기준으로 동작하게 됨
+            // 그러므로 값은 2 즉, 기존에 선언될 때 정의되었던 const x = 2의 2가 반환
+            ```
+
+    - 렉시컬 this (Lexical this)
+        - 정의: this 값이 선언된 위치의 상위 스코프를 따라 결정되는 방식
+        - 화살표 함수에서만 적용
+        - 일반 함수는 this가 호출된 방식에 따라 달라지지만, 화살표 함수는 고정됨
+        - 예제
+            ```js
+            const person = {
+                name: 'Alice',
+                greet: function () {
+                    setTimeout(() => {
+                        console.log(this.name); // → 'Alice'
+                    }, 100);
+                }
+            };
+
+            person.greet();
+            ```
+        - setTimeout 안의 화살표 함수는 this를 자신이 선언된 greet 함수의 this로 고정해서 사용함 → 즉 person
+
 - JavaScript에서 arguments 객체는 어떻게 동작하는가?
 - JavaScript에서 use strict의 역할은?
 - JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
