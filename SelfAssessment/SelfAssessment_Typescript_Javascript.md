@@ -1334,18 +1334,37 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
     - 화살표 함수 vs 일반 함수의 this 차이
         - 일반 함수
-            - this 바인딩 방식
-            - call/apply/bind 작동
-            - 주 용도
+            - this 바인딩 방식: 호출 시점에 결정(동적)
+            - call/apply/bind 작동: 작동함
+            - 주 용도: 동적 객체 메서드, 생성자 함수 등
         - 화살표 함수
-            - this 바인딩 방식
-            - call/apply/bind 작동
-            - 주 용도
+            - this 바인딩 방식: 정의된 위치의 외부 this (렉시컬)
+            - call/apply/bind 작동: 작동 안 함
+            - 주 용도: 콜백 함수, setTimeout 내부, React 등
         - 예제
             ```js
+            const obj = {
+                name: 'Charlie',
+                say: function () {
+                    setTimeout(function () {
+                        console.log(this.name); // undefined (전역)
+                    }, 100);
+                },
+            };
+
+            const obj2 = {
+                name: 'Dana',
+                say: function () {
+                    setTimeout(() => {
+                        console.log(this.name); // 'Dana' (렉시컬 this)
+                    }, 100);
+                },
+            };
             ```
         - 요약
-            - 
+            - this는 어떻게 호출되었는지에 따라 달라지는 동적 개념
+            - 화살표 함수는 유일하게 this가 정적으로(렉시컬) 바인딩됨
+            - 정확한 제어가 필요하면 call, bind, 또는 화살표 함수 사용 고려
 
 - JavaScript에서 arguments 객체는 어떻게 동작하는가?
 - JavaScript에서 use strict의 역할은?
