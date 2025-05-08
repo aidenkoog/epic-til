@@ -1581,9 +1581,86 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
     - 요약: 함수형 프로그래밍은 순수성과 예측 가능성을 바탕으로 버그를 줄이고 테스트 용이성을 높임
 
+- 순수 함수 vs 비순수 함수, 고차 함수의 활용, 불변성 유지 방법
+    - 순수 함수 vs 비순수 함수
+        - 순수 함수 (Pure Function)
+            - 특징:
+                - 동일한 입력 → 항상 동일한 출력
+                - 외부 상태 변경 없음 (부작용 없음)
+                - 내부에서 외부 변수에 영향 주지 않음
+            - 예제:
+                ```js
+                const add = (a, b) => a + b;
+                ```
+        - 비순수 함수 (Impure Function)
+            - 특징:
+                - 실행 시마다 결과가 달라질 수 있음 (ex. Date.now(), Math.random())
+                - 외부 상태를 읽거나 변경함 → 사이드 이펙트 발생
+            - 예제:
+                ```js
+                let count = 0;
+                function increase() {
+                    return ++count;
+                }
+                ```
+        - 요약:
+            - 순수 함수는 예측 가능하고 테스트 용이
+            - 비순수 함수는 상태 의존 → 디버깅 어려움
+
+    - 고차 함수(Higher-Order Function)의 활용
+        - 정의: 함수를 인자로 받거나 함수를 반환하는 함수
+        - 대표 활용 예시
+            - 배열 메서드: map, filter, reduce 등
+                ```js
+                [1, 2, 3].map(x => x * 2); // [2, 4, 6]
+                ```
+            - 함수 생성기
+                ```js
+                const multiplyBy = factor => x => x * factor;
+                const double = multiplyBy(2);
+                double(3); // 6
+                ```
+            - 로직 캡슐화
+                ```js
+                function withLogging(fn) {
+                    return function (...args) {
+                        console.log('call with', args);
+                        return fn(...args);
+                    };
+                }
+                ```
+        - 요약: 고차 함수는 재사용성 높이고 로직을 추상화하는 데 유용함
+
+    - 불변성 유지 방법
+        - 정의: 원본 데이터를 변경하지 않고 복사하여 새로운 값 생성
+        - 이유: 예측 가능한 상태 변경, 디버깅 용이, 버그 감소
+        - 객체/배열 복사 방법
+            - 스프레드 연산자
+                ```js
+                const obj1 = { a: 1 };
+                const obj2 = { ...obj1, b: 2 }; // obj1은 변경되지 않음
+                ```
+
+            - Object.assign
+                ```js
+                const obj2 = Object.assign({}, obj1, { b: 2 });
+                ```
+
+            - 배열 조작
+                ```js
+                const arr = [1, 2];
+                const newArr = [...arr, 3]; // [1, 2, 3]
+                ```
+
+            - 라이브러리 활용
+                - immer, immutable.js 등으로 복잡한 구조도 불변 처리 가능
+                - 요약: 불변성은 직접 수정 대신 복사 후 변경이 원칙
+                    - → 상태 관리 라이브러리(Redux 등)에서 필수 개념
+                    
 - JavaScript에서 setTimeout(fn, 0)은 어떻게 동작하는가?
 - JavaScript에서 Event Delegation(이벤트 위임)이란?
 - JavaScript에서 this가 동적으로 바뀌는 경우는 언제인가?
+
 - JavaScript에서 비동기 프로그래밍을 다루는 방법은?
 - JavaScript의 Generator 함수와 일반 함수의 차이점은?
 - JavaScript에서 Symbol 타입은 왜 필요한가?
