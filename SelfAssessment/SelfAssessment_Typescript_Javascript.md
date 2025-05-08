@@ -1767,7 +1767,33 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Promise → 체이닝, 에러 처리 분리
         - async/await → 가장 가독성 좋고 표준화된 방식
 
-- JavaScript의 Generator 함수와 일반 함수의 차이점은?
+- JavaScript의 Generator 함수와 일반 함수의 차이점
+    - 개요
+        - Generator 함수: function*으로 선언, yield로 실행 중단 가능
+        - 일반 함수: 한 번 호출되면 끝까지 실행됨
+
+    - Generator 특징:
+        - lazy evaluation (지연 실행)
+        - 이터러블/이터레이터 프로토콜을 따름
+        - yield로 중간 값 반환 + 중단
+        - next() 호출로 실행을 제어
+        - 예제
+            ```js
+            function* gen() {
+                yield 1;
+                yield 2;
+                yield 3;
+            }
+            const it = gen();
+            console.log(it.next()); // { value: 1, done: false }
+            ```
+        - 활용 예시:
+            - 반복 제어
+            - 중단 가능한 상태 머신
+            - 비동기 흐름 제어 (과거엔 co 등에서 사용)
+
+        - 요약: Generator는 실행 흐름을 직접 제어하고, 중단/재개 가능한 함수
+
 - JavaScript에서 Symbol 타입은 왜 필요한가?
 
 
