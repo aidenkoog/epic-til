@@ -883,7 +883,36 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - deep: 완전히 독립된 복사본 생성
 
 - ...obj 에서 ...의 의미
-    - 
+    - 정의: 전개 연산자(Spread Operator, 스프레드 오퍼레이션)
+        - 객체나 배열의 요소를 개별적으로 펼쳐서 복사하거나 전달하는 문법
+
+    - 객체에서 사용 예제
+        ```js
+        const obj1 = { a: 1, b: 2 };
+        const obj2 = { ...obj1, c: 3 };  // { a: 1, b: 2, c: 3 }
+        ```
+
+    - 배열에서 사용
+        ```js
+        const arr1 = [1, 2];
+        const arr2 = [...arr1, 3]; // [1, 2, 3]
+        ```
+        - 배열도 마찬가지로 각 요소를 펼쳐서 새로운 배열을 만듦
+
+    - 함수 인자에서 사용 (Rest Parameter 와는 반대)
+        ```js
+        function sum(a, b, c) {
+            return a + b + c;
+        }
+
+        const nums = [1, 2, 3];
+        sum(...nums); // 6
+        ```
+        - 배열 요소를 개별 인자처럼 전달할 때 사용
+
+    - 요약
+        - ...은 객체/배열/인자의 요소를 펼치거나 복사할 때 사용
+        - Spread는 복사, 병합, 전달에 유용한 문법 도구
 
 - JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점은?
 - JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
