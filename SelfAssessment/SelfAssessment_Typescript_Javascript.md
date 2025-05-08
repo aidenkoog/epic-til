@@ -1173,6 +1173,72 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
                 - 생성자 호출(new): 새로 생성된 인스턴스
                 - call, apply, bind: 명시적으로 지정한 객체
                 - 화살표 함수: 외부 스코프의 this를 그대로 사용 (렉시컬 this)
+        - 예제
+            ```js
+            const obj = {
+                value: 1,
+                get: function () { return this.value; }
+            };
+            obj.get(); // 1
+
+            const get = obj.get;
+            get(); // undefined (전역 또는 strict 모드에 따라 다름)
+            ```
+        - 요약: this는 정의된 곳이 아니라 호출된 방식에 따라 결정됨
+
+    - 클로저 vs 실행 컨텍스트
+        - 클로저
+            - 정의: 함수가 외부 스코프의 변수를 기억하는 기능
+            - 생성 시점: 함수가 정의될 때
+            - 수명: 참조가 유지되는 한 지속됨 (GC 예외 대상)
+            - 역할: 상태 유지, 은닉
+        - 실행 컨텍스트
+            - 정의: 코드 실행 환경에 대한 모든 정보 집합
+            - 생성 시점: 코드 실행 시 (전역, 함수 등)
+            - 수명: 실행 종료 시 콜 스택에서 제거됨
+            - 역할: 변수/스코프/this 관리
+        - 예제
+            ```js
+            function outer() {
+                let count = 0;
+                return function () {
+                    return ++count;
+                };
+            }
+
+            const counter = outer(); // 클로저 생성
+            counter(); // 1
+            counter(); // 2
+            ```
+        - 요약:
+            - 실행 컨텍스트는 일시적인 실행 환경
+            - 클로저는 그 환경의 일부를 계속 기억하는 함수 객체
+
+    - 스코프 체인 (Scope Chain)
+        - 정의: 변수를 찾을 때 현재 렉시컬 환경부터 상위 스코프까지 검색하는 구조
+        - 실행 컨텍스트 안의 Lexical Environment가 체인 구조로 연결됨
+        - 예제:
+            ```js
+            function outer() {
+                let x = 10;
+                function inner() {
+                    console.log(x); // outer의 x를 참조
+                }
+                inner();
+            }
+            ```
+        - 동작 원리:
+            - inner → outer → global 순으로 위로 거슬러 올라가며 변수 탐색
+        - 관련 키워드:
+            - 렉시컬 스코프(정의된 위치 기준)
+            - 클로저도 이 스코프 체인을 참조해 외부 변수 기억함
+        - 요약: 스코프 체인은 내부 함수에서 외부 변수에 접근할 수 있게 해주는 구조
+    
+    - 핵심 흐름 요약
+        - 실행 컨텍스트가 만들어지면 → 스코프 체인과 this 바인딩 설정
+        - 함수가 생성될 때 외부 스코프를 기억하며 → 클로저가 생성됨
+        - 클로저는 해당 실행 컨텍스트 일부(렉시컬 환경)를 계속 참조함
+        - 변수 탐색 시 스코프 체인을 따라 위로 올라가며 찾음
 
 - 렉시컬 스코프(Lexical Scope)와 렉시컬 this
     - 렉시컬 스코프 (Lexical Scope)
@@ -1218,6 +1284,68 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             person.greet();
             ```
         - setTimeout 안의 화살표 함수는 this를 자신이 선언된 greet 함수의 this로 고정해서 사용함 → 즉 person
+
+    - 요약
+        - 렉시컬 스코프
+            - 기준: 함수의 정의 위치
+            - 적용대상: 모든 함수
+            - 동작방식: 변수 탐색 시 상위 코드 범위 기준
+        - 렉시컬 this
+            - 기준: 화살표 함수의 정의 위치
+            - 화살표 함수만 해당
+            - this는 상위 스코프의 this를 따름
+
+- this 바인딩 방식 5가지와 함께, 화살표 함수 vs 일반 함수의 this 차이
+    - JavaScript의 this 바인딩 방식 5가지 (기본, 암시, 명시, new, 렉시컬)
+        - 기본 바인딩 (Default Binding)
+            - 일반 함수 호출 시 → this는 전역(window) 또는 undefined (strict mode)
+            ```js
+            function show() {
+                console.log(this); // window or undefined
+            }
+            show();
+            ```
+
+        - 암시적 바인딩 (Implicit Binding)
+            - 객체의 메서드로 호출될 경우 → 해당 객체가 this
+            ```js
+            const obj = { name: 'Tom', say() { console.log(this.name); } };
+            obj.say(); // 'Tom'
+            ```
+
+        - 명시적 바인딩 (Explicit Binding)
+            - call, apply, bind를 통해 this를 직접 지정
+            ```js
+            function say() { console.log(this.name); }
+            const user = { name: 'Alice' };
+            say.call(user); // 'Alice'
+            ```
+
+        - new 바인딩 (Constructor Binding)
+            - new 키워드로 생성자 함수 호출 시 -> 새로 생성된 인스턴스가 this
+            ```js
+            function Person(name) { this.name = name; }
+            const p = new Person('Bob'); // p.name = 'Bob'
+            ```
+
+        - 렉시컬 바인딩 (Arrow Function)
+            - this가 정적으로 결정됨 -> 상위 스코프의 this를 그대로 사용
+            - 바인딩 불가능 (call, apply, bind로도 변경 안됨)
+
+    - 화살표 함수 vs 일반 함수의 this 차이
+        - 일반 함수
+            - this 바인딩 방식
+            - call/apply/bind 작동
+            - 주 용도
+        - 화살표 함수
+            - this 바인딩 방식
+            - call/apply/bind 작동
+            - 주 용도
+        - 예제
+            ```js
+            ```
+        - 요약
+            - 
 
 - JavaScript에서 arguments 객체는 어떻게 동작하는가?
 - JavaScript에서 use strict의 역할은?
