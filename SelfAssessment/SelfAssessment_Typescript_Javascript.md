@@ -1446,6 +1446,79 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 메모리 누수 원인: 전역변수, 클로저, DOM 참조, 이벤트 리스너 등
         - 이벤트 루프 + 클로저 문제: 콜백 실행 전까지 클로저가 데이터 유지 -> 메모리 오래 점유할 가능성 존재
 
+- 클로저 최적화 전략, 메모리 관리 베스트 프랙티스
+    - 클로저 최적화 전략
+        - 불필요한 참조 최소화
+            - 클로저 내부에서 외부 변수 사용을 최소화
+            - 불필요한 대용량 객체는 참조하지 않기
+            ```js
+            function create() {
+                const big = new Array(1000000).fill('...');
+                return () => {
+                    // console.log(big); 필요 없으면 제거
+                    console.log('hello'); ✅
+                };
+            }
+            ```
+
+        - 클로저 수명 제한
+            - 클로저를 전역이나 장기 참조 변수에 저장하지 않기
+            - 필요 시 명시적으로 null 할당
+            ```js
+            let handler = create();
+            handler = null; // 참조 해제 → GC 가능
+            ```
+
+        - 타이머/이벤트에서 클로저 정리
+            - setTimeout, setInterval, addEventListener 안에 클로저가 있을 경우
+                - → 실행 후 null 처리 또는 clearTimeout / removeEventListener
+                ```js
+                const id = setTimeout(() => {
+                    // 클로저 내부 참조 정리
+                }, 3000);
+                clearTimeout(id);
+                ```
+
+    - JavaScript 메모리 관리 베스트 프랙티스
+        - 전역 변수 최소화
+            - 전역에 변수를 선언하면 앱이 종료될 때까지 GC 대상에서 제외
+            - let, const, 모듈 범위로 스코프 제한
+
+        - DOM 요소 참조 시 정리 필수
+            - 제거된 DOM을 여전히 코드에서 참조하면 메모리 누수 발생
+            - 이벤트 핸들러도 함께 해제
+            ```js
+            const el = document.getElementById('btn');
+            function handleClick() { ... }
+
+            el.addEventListener('click', handleClick);
+
+            // 제거 시
+            el.removeEventListener('click', handleClick);
+            ```
+
+        - 클로저 내부 변수와 타이머 정리
+            - setInterval은 특히 주의: 자동 반복되며 클로저 내 변수 계속 참조
+            - 컴포넌트 언마운트 시 반드시 clear
+
+        - 객체 캐시 또는 Map은 WeakMap 사용 고려
+            - 참조 해제 자동화, GC 친화적
+            ```js
+            const wm = new WeakMap();
+            wm.set(obj, 'value'); // obj가 사라지면 자동 GC
+            ```
+
+        - 메모리 릭 감지 툴 사용
+            - DevTools → Performance 탭, Heap Snapshot 활용
+            - console.profile() → GC 후에도 살아 있는 객체 추적 가능
+
+    - 전체 요약 정리
+        - 클로저 참조 최소화: 메모리 점유 줄이기
+        - 타이머/리스너 정리: 참조 유지 방지
+        - WeakMap 사용: 자동 해제 가능한 키-값 저장
+        - 전역 변수 지양: 수명 통제 불가능한 참조 방지
+        - DevTool 활용: 누수 진단 및 객체 생명 주기 분석
+
 - JavaScript에서 arguments 객체는 어떻게 동작하는가?
 - JavaScript에서 use strict의 역할은?
 - JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
