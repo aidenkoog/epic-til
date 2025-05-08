@@ -976,7 +976,7 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 구조는 고정되지만 값은 바뀔 수 있음
 
     - Object.assign(target, source)
-        - 객체 복사 또는 병합에 사용
+        - 객체 복사 또는 병합에 사용, 속성 추가/수정 가능
         - 얕은 복사 (shallow copy) 수행
         - 같은 키가 있으면 덮어씀
 
@@ -987,8 +987,37 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         const merged = Object.assign({}, a, b); // { x: 1, y: 2 }
         ```
 
-- JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
-- JavaScript에서 함수 선언과 함수 표현식의 차이는?
+- JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는지 설명
+    - 일반 객체는 Object.prototype을 상속
+        - 기본 메서드 (toString, hasOwnProperty, 등)가 있음
+    - Object.create(null)은 순수한 딕셔너리 객체 생성
+        - 프로토타입 체인이 없음
+        - 해시 맵처럼 사용 시 충돌 방지
+    - 예제
+        ```js
+        const obj = Object.create(null);
+        obj.toString; // undefined
+        ```
+    - 실전 활용: 키 충돌 없는 순수 데이터 저장용 객체로 적합
+
+- JavaScript에서 함수 선언과 함수 표현식의 차이
+    - 함수 선언 (Function Declaration)
+        ```js
+        function greet() {
+            console.log('hi');
+        }
+        ```
+        - 호이스팅 O: 코드 위에서도 호출 가능, 선언 전 사용 가능
+        - 전역이나 블록 내에 선언됨
+
+    - 함수 표현식 (Function Expression)
+        ```js
+        const greet = function() {
+            console.log('hi');
+        };
+        ```
+        - 호이스팅 X: 변수는 호이스팅되지만, 값 할당 전엔 사용 불가, 선언 이후에만 사용 가능
+        - 함수가 값처럼 변수에 할당됨
 
 - JavaScript에서 bind, call, apply의 차이점은?
 - JavaScript에서 setTimeout과 setInterval은 어떻게 동작하는가?
