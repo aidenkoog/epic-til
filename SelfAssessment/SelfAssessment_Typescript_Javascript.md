@@ -1824,9 +1824,53 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: Symbol은 고유 키, 은닉 속성, 내부 프로토콜 확장에 활용되는 안전한 식별자
 
-- JavaScript에서 garbage collection(가비지 컬렉션)의 동작 방식은?
-- JavaScript에서 WeakMap과 WeakSet은 언제 사용하는가?
-- JavaScript에서 Promise.all과 Promise.race의 차이는?
+- JavaScript에서 garbage collection(가비지 컬렉션)의 동작 방식
+    - 정의: 더 이상 도달할 수 없는 객체를 자동으로 메모리에서 제거하는 기능
+    - JS는 자동 메모리 관리 언어 → 명시적 free/delete 없음
+    - 주요 알고리즘: Mark-and-Sweep
+    - 동작 원리
+        - 루트 객체(globalThis, window)에서 접근 가능한 값 추적
+        - 접근 가능한 객체는 "도달 가능(reachable)"로 표시
+        - 그 외 나머지는 GC 대상 → 메모리 해제
+        ```js
+        let obj = { name: 'A' };
+        obj = null; // 이제 참조 없음 → GC 대상
+        ```
+    - 주의점:
+        - 순환 참조라도 외부에서 접근 불가능하면 GC 가능
+        - 클로저, 전역 변수, 이벤트 핸들러 참조는 GC 방해 가능
+
+    - 요약:
+        - JS의 GC는 도달 불가능한 값만 자동 해제
+        - 참조를 잘 끊어줘야 메모리 누수 방지 가능
+
+- JavaScript에서 WeakMap과 WeakSet 사용 시점
+    - WeakMap
+        - 키 타입: 객체만 가능
+        - GC 영향: 키가 더 이상 참조되지 않으면 GC 대상
+        - 순회: 불가능 (forEach 등 없음)
+    - WeakSet
+        - 키 타입: 객체만 가능
+        - GC 영향: 값이 더 이상 참조되지 않으면 GC 대상
+        - 순회: 불가능
+    - 사용 사례
+        - DOM 요소를 키로 상태 저장 → 제거되면 자동 해제됨
+        - 라이브러리 내부 캐싱, 프라이빗 데이터 저장에 사용
+        ```js
+        const wm = new WeakMap();
+        const el = document.getElementById('btn');
+        wm.set(el, { clicked: true });
+
+        // el이 DOM에서 제거되면 자동으로 GC 대상
+        ```
+    - 요약:
+        - WeakMap/WeakSet은 GC 친화적인 구조
+        - 임시 객체 상태 저장, 메모리 누수 방지 목적에 사용
+
+- JavaScript에서 Promise.all과 Promise.race의 차이
+
+
+
 - JavaScript에서 옵저버 패턴(Observer Pattern)과 이벤트 기반 프로그래밍의 차이는?
 - TypeScript와 JavaScript의 차이점은?
 - TypeScript에서 타입 추론(Type Inference)이란?
