@@ -1519,9 +1519,30 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 전역 변수 지양: 수명 통제 불가능한 참조 방지
         - DevTool 활용: 누수 진단 및 객체 생명 주기 분석
 
-- JavaScript에서 arguments 객체는 어떻게 동작하는가?
+- JavaScript에서 arguments 객체 동작 원리
+    - 정의: 함수 내부에서 사용 가능한 유사 배열 객체로, 모든 인자 목록을 담고 있음
+    - 특징:
+        - 배열처럼 생겼지만 진짜 배열은 아님 (map, filter 등 사용 불가)
+        - ES5 이하에서 주로 사용
+        - 화살표 함수에는 존재하지 않음
+        - ES6 이후엔 ...rest로 대체하는 것이 일반적
+    - 예제
+        ```js
+        function sum() {
+            let total = 0;
+            for (let i = 0; i < arguments.length; i++) {
+                total += arguments[i];
+            }
+            return total;
+        }
+        sum(1, 2, 3); // 6
+        ```
+    - 요약: arguments는 함수 인자 전체를 담는 옛 방식 유사 배열 객체
+
+
 - JavaScript에서 use strict의 역할은?
 - JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
+
 - JavaScript에서 setTimeout(fn, 0)은 어떻게 동작하는가?
 - JavaScript에서 Event Delegation(이벤트 위임)이란?
 - JavaScript에서 this가 동적으로 바뀌는 경우는 언제인가?
