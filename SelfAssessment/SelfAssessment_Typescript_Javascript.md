@@ -1019,9 +1019,39 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 호이스팅 X: 변수는 호이스팅되지만, 값 할당 전엔 사용 불가, 선언 이후에만 사용 가능
         - 함수가 값처럼 변수에 할당됨
 
-- JavaScript에서 bind, call, apply의 차이점은?
+- JavaScript에서 bind, call, apply의 차이점
+    - 공통점: 함수의 this를 명시적으로 설정하는 방법
+    - 차이점:
+        - bind:
+            - 실행 여부 X
+            - 인자 전달 방식: 나중에 실행, bind(this, a, b)
+            - 용도: 함수 복제 (지연 실행용)
+        - call:
+            - 실행 여부 O
+            - 즉시 실행, call(this, a, b)
+            - 용도: 즉시 실행 + this 지정
+        - apply:
+            - 실행 여부 O
+            - 즉시 실행, apply(this, [a, b])
+            - 용도: 인자를 배열로 전달해야 할 때 유용
+    - 예제
+        ```js
+        function greet(msg) {
+            console.log(msg + ', ' + this.name);
+        }
+        const person = { name: 'Tom' };
+
+        greet.call(person, 'Hello');   // Hello, Tom
+        greet.apply(person, ['Hi']);   // Hi, Tom
+        
+        const bound = greet.bind(person);
+        bound('Hey');                  // Hey, Tom
+        ```
+
 - JavaScript에서 setTimeout과 setInterval은 어떻게 동작하는가?
 - JavaScript에서 Map과 Object의 차이점은?
+
+
 - JavaScript에서 forEach, map, filter, reduce의 차이점은?
 - JavaScript에서 동기 코드와 비동기 코드의 차이는?
 - JavaScript의 실행 컨텍스트(Execution Context)는 무엇인가?
