@@ -854,10 +854,36 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약: IIFE는 즉시 실행 + 스코프 보호용 함수로 많이 사용됨
 
 - JavaScript에서 truthy와 falsy 값 설명
+    - falsy 값 (Boolean으로 변환 시 false):
+        - false, 0, '' (빈 문자열), null, undefined, NaN
+
+    - truthy 값 (그 외 전부):
+        - 빈 배열 [], 빈 객체 {}, '0', 'false', Infinity, -1 등
+
+    - 요약: falsy는 JS에서 조건문 등에서 false로 간주되는 값 → 이외는 모두 truthy
+
+- JavaScript에서 deep copy와 shallow copy의 차이
+    - shallow copy (얕은 복사):
+        - 최상위 값만 복사, 내부 객체는 참조 유지
+        - ex: Object.assign({}, obj), spread { ...obj }
+
+    - deep copy (깊은 복사):
+        - 중첩 객체까지 전부 복사, 원본과 완전히 독립
+        - ex: structuredClone(obj), JSON.parse(JSON.stringify(obj)) (단점 있음)
+
+    - 예제 (얕은 복사)
+        ```js
+        const obj = { a: 1, b: { c: 2 } };
+        const shallow = { ...obj };
+        shallow.b.c = 9; // 원본 obj도 영향 받음
+        ```
+
+    - 요약:
+        - shallow: 참조 공유됨
+        - deep: 완전히 독립된 복사본 생성
+
+- ...obj 에서 ...의 의미
     - 
-
-
-- JavaScript에서 deep copy와 shallow copy의 차이는?
 
 - JavaScript에서 Object.freeze(), Object.seal(), Object.assign()의 차이점은?
 - JavaScript에서 Object.create(null)를 사용하면 어떤 차이가 있는가?
