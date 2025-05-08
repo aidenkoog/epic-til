@@ -1688,7 +1688,43 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약: 이벤트 위임은 부모 한 곳에서 자식 이벤트를 관리하는 효율적 패턴
 
 - JavaScript에서 this가 동적으로 바뀌는 경우/시점
+    - 동적 바인딩 개념: 
+        - 함수 호출 방식에 따라 this가 다르게 결정되는 것
 
+    - 주요 동적 바인딩 상황
+        - 일반 함수 호출
+            - → this는 window (strict 모드에선 undefined)
+
+        - 메서드 호출
+            - → 호출한 객체가 this
+
+        - call, apply, bind 사용
+            - → 명시적으로 this 지정
+
+        - 이벤트 핸들러에서
+            - → DOM 요소가 this
+            - (단, 화살표 함수는 예외 → 상위 스코프의 this 유지)
+
+        - setTimeout, setInterval 안에서
+            - → 일반 함수면 this는 전역 (화살표 함수 쓰면 외부 this 유지)
+    - 예제
+        ```js
+        const obj = {
+            val: 1,
+            show: function () {
+                setTimeout(function () {
+                    console.log(this.val); // undefined
+                }, 0);
+
+                setTimeout(() => {
+                    console.log(this.val); // 1 (렉시컬 this)
+                }, 0);
+            }
+        };
+        obj.show();
+        ```
+    - 요약: this는 함수가 어떻게 호출됐는지에 따라 바뀌며, 화살표 함수는 예외적으로 정적 바인딩을 사용
+    
 - JavaScript에서 비동기 프로그래밍을 다루는 방법은?
 - JavaScript의 Generator 함수와 일반 함수의 차이점은?
 - JavaScript에서 Symbol 타입은 왜 필요한가?
