@@ -1794,8 +1794,35 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
         - 요약: Generator는 실행 흐름을 직접 제어하고, 중단/재개 가능한 함수
 
-- JavaScript에서 Symbol 타입은 왜 필요한가?
+- JavaScript에서 Symbol 타입 필요성
+    - 정의: ES6에서 도입된 고유하고 변경 불가능한 원시 값
+    - 용도:
+        - 객체 프로퍼티의 고유 키로 사용
+            - → 충돌 없는 키 생성 가능
+        - 숨겨진 내부 속성 구현
+            - → 외부에서 의도치 않게 접근 못 하게 함
+        - 내장 심볼 활용 (ex: Symbol.iterator)
+    - 예제:
+        ```js
+        const id = Symbol('id');
+        const user = {
+            [id]: 123,
+            name: 'Tom'
+        };
+        console.log(user[id]); // 123
+        ```
 
+        - 내장 Symbol 예시:
+        ```js
+        const obj = {
+            *[Symbol.iterator]() {
+                yield 1;
+                yield 2;
+            }
+        };
+        for (const val of obj) console.log(val); // 1, 2
+        ```
+    - 요약: Symbol은 고유 키, 은닉 속성, 내부 프로토콜 확장에 활용되는 안전한 식별자
 
 - JavaScript에서 garbage collection(가비지 컬렉션)의 동작 방식은?
 - JavaScript에서 WeakMap과 WeakSet은 언제 사용하는가?
