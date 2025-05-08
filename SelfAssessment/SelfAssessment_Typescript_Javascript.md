@@ -1041,16 +1041,49 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         }
         const person = { name: 'Tom' };
 
-        greet.call(person, 'Hello');   // Hello, Tom
-        greet.apply(person, ['Hi']);   // Hi, Tom
-        
-        const bound = greet.bind(person);
-        bound('Hey');                  // Hey, Tom
+        greet.call(person, 'Hello');        // Hello, Tom
+        greet.apply(person, ['Hi']);        // Hi, Tom
+
+        const bound = greet.bind(person);   // 지연 실행용
+        bound('Hey');                       // Hey, Tom
         ```
 
-- JavaScript에서 setTimeout과 setInterval은 어떻게 동작하는가?
-- JavaScript에서 Map과 Object의 차이점은?
+- JavaScript에서 setTimeout과 setInterval의 동작 원리
+    - setTimeout(fn, delay): 일정 시간 후 한 번 실행
+    - setInterval(fn, delay): 일정 시간마다 반복 실행
+    - 공통점:
+        - 둘 다 비동기 타이머 함수, Web API에 의해 동작
+        - 실행 후 콜백은 Task Queue에 등록, Call Stack이 비면 실행됨
+    - 예제
+        ```js
+        setTimeout(() => console.log('once'), 1000);
+        setInterval(() => console.log('repeat'), 1000);
+        ```
+    - 주의: 정확한 시간 보장은 아님 (이벤트 루프 상태에 따라 지연 가능)
 
+- JavaScript에서 Map과 Object의 차이점
+    - Map
+        - 키 타입: 모든 값 (객체 포함)
+        - 순서 보장: 입력 순서 보장
+        - 반복 및 크기 측정: map.size, for...of 가능
+        - 성능: 많은 키 삽입/삭제 시 더 안정적
+    - Object
+        - 키 타입: 문자열, 심볼만
+        - 순서 보장: 일부 엔진만 보장(명시적 아님)
+        - 반복 및 크기 측정: 수동 처리 필요(ex: Object.keys)
+        - 성능: 간단한 구조에만 적합
+    - 예제
+        ```js
+        const map = new Map();
+        map.set('a', 1);
+        map.set({}, 2); // 객체도 키로 가능
+
+        const obj = { a: 1 };
+        obj[{}] = 2; // 키가 문자열로 강제 변환됨: "[object Object]"
+        ```
+    - 요약
+        - Map은 고급 키/값 저장, 순서 보장, 객체 키 가능
+        - Object는 간단한 구조에 적합하며 프로토타입 이슈 있음
 
 - JavaScript에서 forEach, map, filter, reduce의 차이점은?
 - JavaScript에서 동기 코드와 비동기 코드의 차이는?
