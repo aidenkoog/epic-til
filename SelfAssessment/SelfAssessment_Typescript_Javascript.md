@@ -1724,10 +1724,53 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         obj.show();
         ```
     - 요약: this는 함수가 어떻게 호출됐는지에 따라 바뀌며, 화살표 함수는 예외적으로 정적 바인딩을 사용
-    
-- JavaScript에서 비동기 프로그래밍을 다루는 방법은?
+
+- JavaScript에서 비동기 프로그래밍을 다루는 방법
+    - 콜백 (Callback)
+        - 가장 기초적인 방식
+        - 단점: 콜백 지옥(callback hell) → 가독성, 에러 처리 어려움
+        - 예제:
+            ```js
+            fs.readFile('file.txt', (err, data) => {
+                if (err) return console.error(err);
+                console.log(data);
+            });
+            ```
+    - Promise
+        - 비동기 작업을 객체로 표현
+        - .then() / .catch()로 결과 처리
+        - 상태: pending → fulfilled/rejected
+        - 예제:
+            ```js
+            fetch(url)
+                .then(res => res.json())
+                .catch(err => console.error(err));
+            ```
+    - async/await
+        - Promise를 동기 코드처럼 작성 가능
+        - await은 Promise가 해결될 때까지 기다림
+        - 에러는 try/catch로 처리
+        - 예제:
+            ```js
+            async function getData() {
+                try {
+                    const res = await fetch(url);
+                    const json = await res.json();
+                    console.log(json);
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+            ```
+    - 요약:
+        - 콜백 → 오래된 방식
+        - Promise → 체이닝, 에러 처리 분리
+        - async/await → 가장 가독성 좋고 표준화된 방식
+
 - JavaScript의 Generator 함수와 일반 함수의 차이점은?
 - JavaScript에서 Symbol 타입은 왜 필요한가?
+
+
 - JavaScript에서 garbage collection(가비지 컬렉션)의 동작 방식은?
 - JavaScript에서 WeakMap과 WeakSet은 언제 사용하는가?
 - JavaScript에서 Promise.all과 Promise.race의 차이는?
