@@ -562,13 +562,228 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Proxy → 행동을 가로채고 제어
         - Reflect → 가로챈 동작을 안전하게 위임
 
-- TypeScript에서 Utility Types를 활용하여 코드 재사용성을 높이는 방법은?
-- JavaScript의 var, let, const의 차이점은?
-- ==와 ===의 차이점은?
+- TypeScript에서 Utility Types를 활용하여 코드 재사용성을 높이는 방법
+    - 정의: 기존 타입을 변형해 새로운 타입을 만들 수 있는 도구 타입들
+    - 대표 예시:
+        - Partial<T>: 모든 속성을 optional로
+        - Pick<T, K>: 특정 속성만 선택
+        - Omit<T, K>: 특정 속성 제외
+        - Readonly<T>: 모든 속성을 읽기 전용
+        - Record<K, T>: K 키들에 대해 T 값을 매핑
+        ```ts
+        type User = { id: number; name: string; age: number };
+        type UserPreview = Pick<User, 'id' | 'name'>;
+        ```
+    - 요약: 반복 타입 정의 없이 필요한 구조를 간결하게 재구성 가능 → 유지보수성과 재사용성 향상
+
+- JavaScript의 var, let, const의 차이점
+    - var: 함수 스코프, 중복 선언 가능, 호이스팅 시 undefined
+    - let: 블록 스코프, 재할당 가능, 호이스팅되지만 TDZ(Temporal Dead Zone) 존재
+    - const: 블록 스코프, 재할당 불가 (하지만 객체는 내부 변경 가능)
+    ```js
+    {
+        var a = 1; // 바깥에서도 접근됨
+        let b = 2; // 블록 내부에서만
+        const c = 3;
+    }
+    ```
+    - 요약: let과 const는 블록 스코프, const는 불변 참조 → var는 지양, const 우선 사용 권장
+
+- Hoisting(호이스팅) 정의와 동작 원리
+    - 정의: 변수, 함수 선언이 스코프 최상단으로 끌어올려지는 JS의 동작 방식
+    - 동작 원리:
+        - var, function 선언은 실행 전에 메모리에 등록됨
+        - let, const도 호이스팅되지만 TDZ(Temporal Dead Zone) 때문에 초기화 전 접근 시 오류 발생
+        ```js
+        console.log(a); // undefined
+        var a = 5;  // 5로 정의
+
+        console.log(b); // ReferenceError
+        let b = 10; // 10으로 정의
+        ```
+    - 요약:
+        - var/function은 선언만 끌어올려짐 → undefined로 접근 가능
+        - let/const는 호이스팅되지만 초기화 전 접근 금지 → 런타임 에러 발생
+
+- 호이스팅에 대한 고찰
+    - 개요
+        - C++에서 함수 선언을 코드 상단에 명시 > 아래에서 해당 함수 호출 가능한 것처럼
+        - 자바스크립트에서는 호이스팅 덕분에 아래에서 선언된 함수나 변수를 위에서 사용할 수 있게 됨
+        - 그러나 C++의 이 개념과는 차이가 있음
+
+    - C++ 함수 선언 vs JavaScript 호이스팅 차이
+        - C++: 함수의 시그니처만 상단에 명시하는 선언(Declaration).
+            - 실제 구현(Definition)은 아래에 있어도 됨.
+            - 컴파일러가 명시적으로 해석함 (정적 언어)
+            ```cpp
+            void print(); // 선언
+
+            int main() {
+                print(); // 사용 가능
+            }
+
+            void print() {
+                std::cout << "Hello";
+            }
+            ```
+        - JavaScript: 인터프리터가 실행 전에 암묵적으로 선언을 끌어올림
+            - 변수는 undefined로 초기화 (var), let/const는 TDZ 적용
+            - 함수 선언문은 전체 함수 본문까지 호이스팅됨
+            ```js
+            greet(); // 가능
+            
+            function greet() {
+                console.log("Hello");
+            }
+            ```
+
+        - 요약
+            - C++은 명시적 선언,
+            - JavaScript는 암묵적 호이스팅
+            - 비슷하지만, 정적 vs 동적 해석 방식의 차이로 인해 의도적이냐 자동이냐, 언제 초기화되냐가 다름
+
+- undefined에 대한 설명
+    - 정의: 변수는 선언됐지만, 값이 할당되지 않았을 때 자동으로 부여되는 기본값
+    - 자동 부여 상황:
+        - 변수를 let, var로 선언만 했을 때
+        - 함수에서 명시적 return 없이 종료
+        - 객체에서 존재하지 않는 속성 접근
+        - 배열의 비어 있는 인덱스 접근
+        ```js
+        let a;
+        console.log(a); // undefined
+
+        function test() {}
+        console.log(test()); // undefined
+
+        const obj = {};
+        console.log(obj.foo); // undefined
+        ```
+    - typeof 결과: typeof undefined → 'undefined'
+    - 주의: undefined는 null과 다름 (둘 다 falsy지만 의미가 다름)
+    - 요약
+        - undefined는 "값이 없다"가 아니라, "값이 아직 할당되지 않았다"는 상태
+        - 명시적 할당 없이 생기는 JavaScript 고유의 기본값
+        - 개발자가 직접 할당하기보다는 상태 확인용으로 사용하는 것이 좋음
+
+- null, NaN, falsy, == vs === 비교
+    - null
+        - 의도적으로 "없음"을 나타내는 값
+        - 개발자가 직접 할당
+        - typeof null은 'object' (역사적 버그지만 유지됨)
+        - 예: let data = null; → "여기에 일부러 비워둠" 의미
+
+    - NaN (Not-a-Number)
+        - 숫자 타입인데, 숫자가 아님을 의미
+        - 계산이 실패했을 때 발생 (ex: 0 / 0, parseInt('abc'))
+        - typeof NaN은 'number'
+        - NaN은 자기 자신과도 같지 않음 → NaN === NaN → false
+        - 비교할 땐 Number.isNaN(value) 사용
+
+    - falsy
+        - Boolean 변환 시 false로 평가되는 값들
+        - 대표적인 falsy 값:
+            - false, 0, '' (빈 문자열), null, undefined, NaN
+        - truthy는 falsy가 아닌 모든 값
+
+    - == vs ===
+        - == (느슨한 비교): 타입이 다르면 암묵적 형변환 후 비교
+        - === (엄격한 비교): 타입과 값이 모두 같아야 true
+            - 실무에서는 예측 가능한 결과를 위해 항상 === 권장
+
+    - 요약
+        - null: 일부러 비운 값
+        - NaN: 수치 연산 실패 결과
+        - falsy: 조건문에서 false로 처리되는 값들
+        - ==: 형 변환 후 비교 / ===: 타입까지 비교 (권장)
+
+- typeof null === 'object'가 왜 버그인지, 왜 발생했는지, 그리고 왜 아직까지 유지되는지에 대한 설명
+    - typeof null === 'object'는 왜 버그인가?
+        - null은 원시 타입(primitive)인데, typeof 연산자 결과가 'object'로 나옴
+        - 논리적으로 맞지 않음: null은 객체가 아님
+        - JS 입문자들이 가장 많이 혼동하는 부분 중 하나
+
+    - 이 버그는 왜 생겼는가?
+        - 역사적 배경:
+            - JavaScript의 typeof는 초기 구현 당시 값의 내부 표현을 참조
+            - 내부적으로 값들은 태그(tag) 형태로 저장됨
+                - 예: 객체는 000으로 시작하는 태그, null도 같은 태그 사용
+            - 결과적으로 null도 object처럼 취급된 것
+        - ECMAScript 초창기 설계 실수였고, 이미 퍼져버린 생태계로 인해 변경 불가
+
+    - 왜 지금까지 수정되지 않았는가?
+        - 하위 호환성 때문
+            - typeof null === 'object'를 기반으로 만든 수많은 웹사이트가 존재
+            - 수정할 경우 기존 코드에서 오류 발생 위험 → JS는 웹 호환성에 매우 민감
+        - 대신 대안 제공
+            - 정확히 null 여부 확인 시는 value === null
+            - 또는 value == null로 null | undefined 동시에 체크
+
+    - 요약
+        - typeof null === 'object'는 초기 JS 설계 실수
+        - null은 객체가 아님에도 내부 태그값 때문에 'object'로 표시됨
+        - 하위 호환성 때문에 지금도 유지 중
+        - 정확한 null 체크는 value === null로 수행해야 함
+
+- ==와 ===의 차이점
+    - == (동등 연산자): 타입이 다르면 암묵적 형변환 후 비교
+    - === (일치 연산자): 타입과 값 모두 동일해야 true
+    - 예시:
+        ```js
+        0 == '0';   // true (형변환 발생, 암묵적 형변환)
+        0 === '0';  // false
+        null == undefined; // true
+        null === undefined; // false
+        ```
+    - 요약: ===은 예측 가능한 정확한 비교, 실무에서는 === 사용이 기본
+
+- typeof, instanceof, Object.prototype.toString 간의 차이
+    - typeof
+        - 용도: 원시 타입(primitive) 확인
+        - 결과값: 
+            - 문자열 ('string', 'number', 'undefined', 'boolean', 'symbol', 'bigint', 'function', 'object')
+        - 한계:
+            - 배열, 객체, null, 함수 → 대부분 'object'로 나옴
+            - typeof null === 'object' (역사적 버그)
+        ```js
+        typeof 123          // 'number'
+        typeof 'hi'         // 'string'
+        typeof undefined    // 'undefined'
+        typeof null         // 'object' ← 주의, 역사적 버그
+        typeof [1, 2, 3]    // 'object'
+        typeof function(){} // 'function'
+        ```
+
+    - instanceof
+        - 용도: 객체가 어떤 생성자(constructor)의 인스턴스인지 확인
+        - 기준: 프로토타입 체인을 따라 constructor.prototype을 검사
+        - 한계:
+            - 원시 타입엔 사용 불가
+            - 다른 iframe/window에서 생성된 객체는 실패할 수 있음 (다른 realm)
+        - 예제
+            ```js
+            [] instanceof Array      // true
+            {} instanceof Object     // true
+            'hi' instanceof String   // false (원시값은 false)
+            new String('hi') instanceof String // true
+            ```
+
+    - Object.prototype.toString.call(value)
+        - 용도: 정확한 내부 타입 식별
+        - 결과값: "[object Type]" 형태의 문자열
+        - 장점: 배열, null, Date 등도 정확히 구분 가능
+        - 실무에서 가장 정밀한 타입 확인 방법 중 하나
+        ```js
+        Object.prototype.toString.call(null)         // '[object Null]'
+        Object.prototype.toString.call([])           // '[object Array]'
+        Object.prototype.toString.call(() => {})     // '[object Function]'
+        Object.prototype.toString.call(new Date())   // '[object Date]'
+        ```
+
 - JavaScript에서 null과 undefined의 차이는?
 - JavaScript에서 typeof 연산자는 어떤 값을 반환하는가?
 - JavaScript에서 데이터 타입은 몇 가지가 있는가?
-- Hoisting(호이스팅)이란 무엇이며, 어떻게 동작하는가?
+
 - IIFE(즉시 실행 함수, Immediately Invoked Function Expression)의 역할은?
 - JavaScript에서 truthy와 falsy 값에는 무엇이 있는가?
 - JavaScript에서 deep copy와 shallow copy의 차이는?
