@@ -1085,9 +1085,84 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Map은 고급 키/값 저장, 순서 보장, 객체 키 가능
         - Object는 간단한 구조에 적합하며 프로토타입 이슈 있음
 
-- JavaScript에서 forEach, map, filter, reduce의 차이점은?
-- JavaScript에서 동기 코드와 비동기 코드의 차이는?
-- JavaScript의 실행 컨텍스트(Execution Context)는 무엇인가?
+- JavaScript에서 forEach, map, filter, reduce의 차이점
+    - forEach
+        - 목적: 반복 수행(단순 실행)
+        - 반환값: 없음 (undefined)
+        - 사용 예: 로그 출력, 외부 변수 조작 등
+    - map
+        - 목적: 요소 변환
+        - 반환값: 새 배열
+        - 사용 예: 변환된 배열 만들 때
+    - filter
+        - 목적: 조건 필터링
+        - 반환값: 조건 통과한 새 배열
+        - 사용 예: 조건 만족 요소 추출
+    - reduce
+        - 목적: 누적 계산
+        - 반환값: 누적 결과값
+        - 사용 예: 합계, 객체로 변환 등
+    - 예제
+        ```js
+        const arr = [1, 2, 3];
+        arr.forEach(v => console.log(v));           // 단순 실행
+        const doubled = arr.map(v => v * 2);        // [2, 4, 6]
+        const evens = arr.filter(v => v % 2 === 0); // [2]
+        const sum = arr.reduce((a, b) => a + b, 0); // 6
+        ````
+    - 요약
+        - forEach는 실행만
+        - map은 변환
+        - filter는 추출
+        - reduce는 누적
+
+- JavaScript에서 동기 코드와 비동기 코드의 차이
+    - 동기(Synchronous):
+        - 위에서 아래로 차례대로 실행
+        - 다음 작업은 이전 작업이 끝날 때까지 대기
+        - 예: 일반 함수 호출, 수학 계산
+
+    - 비동기(Asynchronous):
+        - 바로 다음 줄로 넘어감, 작업 완료는 나중에
+        - 대기 중인 작업은 콜백, 프로미스 등으로 처리
+        - 예: setTimeout, fetch, 이벤트 리스너
+
+    - 예제
+        ```js
+        console.log(1);
+        setTimeout(() => console.log(2), 0);
+        console.log(3);  // 결과: 1 → 3 → 2
+        ```
+
+    - 요약:
+        - 동기: 순차 실행
+        - 비동기: 나중에 실행 (이벤트 루프에 의해 처리)
+
+- JavaScript의 실행 컨텍스트(Execution Context)
+    - 정의: 코드가 실행되는 환경/정보의 집합
+    - 종류:
+        - 전역 실행 컨텍스트 (스크립트 전체 실행 시 생성)
+        - 함수 실행 컨텍스트 (함수 호출 시마다 생성)
+        - eval 실행 컨텍스트 (사용 지양)
+
+    - 구성요소:
+        - Variable Environment: 변수/함수 선언 정보
+        - Lexical Environment: 현재 스코프 체인
+        - this 바인딩: 현재 컨텍스트의 this 값
+
+    - 실행 흐름:
+        - 실행 컨텍스트는 Call Stack에 쌓이고,
+        - 가장 위의 컨텍스트가 현재 실행 중인 코드 환경을 의미
+
+    - 예제
+        ```js
+        function foo() {
+            let x = 10;
+        }
+        foo(); // foo() 실행 시 새로운 컨텍스트 생성됨
+        ```
+    - 요약: 실행 컨텍스트는 JS 코드가 어디서, 어떻게 실행될지를 정의하는 실행 단위의 기본 구조
+
 - JavaScript에서 arguments 객체는 어떻게 동작하는가?
 - JavaScript에서 use strict의 역할은?
 - JavaScript에서 함수형 프로그래밍을 적용하는 방법은?
