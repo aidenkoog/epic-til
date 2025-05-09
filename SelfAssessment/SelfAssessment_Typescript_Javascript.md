@@ -1934,7 +1934,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약
         - JS는 실행 중심, TS는 타입 안정성과 생산성 향상용 슈퍼셋 언어
 
-- TypeScript에서 타입 추론(Type Inference)이란?
+- TypeScript에서 타입 추론(Type Inference)
+    - 정의
+        - 명시적 타입을 작성하지 않아도 TS 컴파일러가 변수/함수의 타입을 자동으로 추론하는 기능
+        - 예제
+            ```ts
+            let x = 'hello'; // TS는 x를 string으로 추론함
+            x = 123; // 오류
+            ```
+    - 적용되는 곳:
+        - 변수 초기화
+        - 함수 반환값
+        - 매개변수 기본값
+        - 제네릭 컨텍스트 등
+        ```ts
+        function add(a: number, b = 10) {
+            return a + b; // 반환 타입은 number로 추론
+        }
+        ```
+    - 요약: 타입 추론은 명시적 타입 없이도 안전한 코드 작성을 가능하게 해주는 TypeScript의 핵심 기능
 
 - TypeScript에서 enum 타입은 언제 사용하는가?
 - TypeScript에서 interface와 type alias의 차이는?
