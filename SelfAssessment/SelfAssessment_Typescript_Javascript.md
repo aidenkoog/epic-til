@@ -1979,7 +1979,33 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약: enum은 의미 있는 상수 집합을 안전하게 정의할 때 사용
 
 - TypeScript에서 interface와 type alias의 차이점
-    - 
+    - interface
+        - 주 사용 목적: 객체 구조 정의
+        - 확장 방식: extends 사용 가능 (선언 병합 O)
+        - 선언 병합: 가능
+        - 사용 대상: 객체 타입 전용
+    - type alias
+        - 주 사용 목적: 다양한 타입 표현 (유니언, 튜플, 함수 등)
+        - 확장 방식: &로 조합 (선언 병합 X)
+        - 선언 병합: 불가능
+        - 사용 대상: 모든 타입 (문자열 리터럴 등 포함)
+    - 예제
+        ```ts
+        // 객체 타입 전용
+        interface User {
+            id: number;
+            name: string;
+        }
+
+        // 모든 타입, 문자열 리터럴 등 사용 가능
+        type Admin = {
+            id: number;
+            role: 'admin';
+        };
+        ```
+    - 요약:
+        - interface → 객체 구조 위주, 확장성 좋음
+        - type → 객체 외 타입 조합도 가능, 유연한 표현에 강함
 
 - TypeScript에서 readonly 키워드는 어떻게 사용하는가?
 
