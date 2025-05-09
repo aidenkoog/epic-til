@@ -179,7 +179,7 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 함수 안의 함수
         - 외부 함수의 변수를 기억하고 접근할 수 있는 함수
 
-    - 클로저의 핵심 개념
+    - 클로저의 핵심 개념 (함수, 내부함수)
         - 함수 안에 정의된 함수(내부 함수)
         - 외부 함수의 변수에 접근 가능
         - 심지어 외부 함수의 실행이 끝난 후에도 변수를 기억하고 사용 가능
@@ -1887,9 +1887,39 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - race → 가장 먼저 끝난 Promise의 결과 반환
 
 
-- JavaScript에서 옵저버 패턴(Observer Pattern)과 이벤트 기반 프로그래밍의 차이는?
+- JavaScript에서 옵저버 패턴(Observer Pattern)과 이벤트 기반 프로그래밍의 차이
+    - 옵저버 패턴(Observer Pattern)
+        - 정의: 한 객체(Subject)의 상태 변화에 따라 등록된 여러 옵저버가 자동으로 알림을 받는 구조
+        - 구조 방식: 직접 구독/알림
+        - 주요 구성:
+            - Subject: 상태를 가진 객체
+            - Observer: 변화에 반응하는 객체
+            - 예시: RxJS, MutationObserver, Object.observe(폐기됨)
+        - 예제
+            ```js
+            class Subject {
+                constructor() {
+                    this.observers = [];
+                }
+                subscribe(fn) { this.observers.push(fn); }
+                notify(data) { this.observers.forEach(fn => fn(data)); }
+            }
+            ```
+    - 이벤트 기반 프로그래밍
+        - 정의: 특정 이벤트가 발생하면 이벤트 핸들러가 실행되는 구조
+        - 구조 방식: 이벤트 발생 후 등록된 핸들러 실행
+        - 비동기 처리, UI 반응 등에 적합
+        - DOM의 addEventListener, Node.js EventEmitter 등
+        - 예제
+            ```js
+            button.addEventListener('click', () => {
+                console.log('Clicked!');
+            });
+            ```
+
 - TypeScript와 JavaScript의 차이점은?
 - TypeScript에서 타입 추론(Type Inference)이란?
+
 - TypeScript에서 enum 타입은 언제 사용하는가?
 - TypeScript에서 interface와 type alias의 차이는?
 - TypeScript에서 readonly 키워드는 어떻게 사용하는가?
