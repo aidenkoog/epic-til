@@ -2007,7 +2007,23 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - interface → 객체 구조 위주, 확장성 좋음
         - type → 객체 외 타입 조합도 가능, 유연한 표현에 강함
 
-- TypeScript에서 readonly 키워드는 어떻게 사용하는가?
+- TypeScript에서 readonly 키워드 사용 방법
+    - 정의: 속성을 읽기 전용으로 만들어 재할당을 방지
+    - 적용 대상:
+        - 객체 속성
+        - 배열 요소
+        - 튜플
+    - 예제
+        ```ts
+        interface User {
+            readonly id: number;    // 아이디를 readonly로 설정
+            name: string;
+        }
+
+        const user: User = { id: 1, name: 'Tom' };
+        user.id = 2; // 오류, readonly 속성이므로.
+        ```
+    - 요약: readonly는 불변성 보장과 실수 방지를 위해 사용되는 키워드
 
 - TypeScript에서 typeof, keyof, in 연산자는 어떻게 동작하는가?
 - TypeScript에서 Partial<T>와 Required<T>의 차이는?
