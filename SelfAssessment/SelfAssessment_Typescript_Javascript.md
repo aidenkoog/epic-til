@@ -1954,9 +1954,35 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: 타입 추론은 명시적 타입 없이도 안전한 코드 작성을 가능하게 해주는 TypeScript의 핵심 기능
 
-- TypeScript에서 enum 타입은 언제 사용하는가?
-- TypeScript에서 interface와 type alias의 차이는?
+- TypeScript에서 enum 타입 사용 시점
+    - 정의: 의미 있는 이름을 가진 상수 집합을 정의할 수 있는 타입
+    - 용도:
+        - 상태 값, 카테고리, 모드 등 유한한 값들을 명확하게 표현할 때 사용
+        - 가독성과 자동완성 지원에 유리
+    - 예제
+        ```ts
+        enum Direction {
+            Up,
+            Down,
+            Left,
+            Right,
+        }
+
+        function move(dir: Direction) {
+            if (dir === Direction.Left) { ... }
+        }
+        ```
+    - 특징:
+        - 기본값은 0부터 시작 (숫자형 enum)
+        - 문자열 enum도 가능 → enum Status { OK = 'ok', FAIL = 'fail' }
+
+    - 요약: enum은 의미 있는 상수 집합을 안전하게 정의할 때 사용
+
+- TypeScript에서 interface와 type alias의 차이점
+    - 
+
 - TypeScript에서 readonly 키워드는 어떻게 사용하는가?
+
 - TypeScript에서 typeof, keyof, in 연산자는 어떻게 동작하는가?
 - TypeScript에서 Partial<T>와 Required<T>의 차이는?
 - TypeScript에서 함수 오버로딩(Function Overloading)은 어떻게 사용하는가?
