@@ -2025,9 +2025,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: readonly는 불변성 보장과 실수 방지를 위해 사용되는 키워드
 
-- TypeScript에서 typeof, keyof, in 연산자는 어떻게 동작하는가?
+- TypeScript에서 typeof, keyof, in 연산자 동작 방법/원리
+    - typeof
+        - 정의: 값의 타입을 추출하여 타입으로 사용할 수 있게 함
+        - 용도: 기존 변수의 타입을 재사용할 때 유용
+        - 예제
+            ```ts
+            const user = { name: 'Tom', age: 30 };
+            type User = typeof user; // { name: string; age: number }
+            ```
+
+    - keyof
+        - 정의: 객체 타입의 모든 키를 문자열 리터럴 유니언으로 반환
+        - 예제
+            ```ts
+            type User = { name: string; age: number };
+            type UserKeys = keyof User; // 'name' | 'age'
+            ```
+
 - TypeScript에서 Partial<T>와 Required<T>의 차이는?
 - TypeScript에서 함수 오버로딩(Function Overloading)은 어떻게 사용하는가?
+
 - TypeScript에서 never 타입은 어떤 경우에 사용되는가?
 - TypeScript에서 unknown과 any의 차이점은?
 - TypeScript에서 extends 키워드는 어떤 역할을 하는가?
