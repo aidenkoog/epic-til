@@ -1917,7 +1917,23 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             });
             ```
 
-- TypeScript와 JavaScript의 차이점은?
+- TypeScript와 JavaScript의 차이점
+    - 자바스크립트
+        - 타입 시스템: 동적 타입
+        - 실행 환경: 브라우저/Node.js
+        - 에러 발견 시점: 런타임
+        - 특징: 유연하지만 버그 위험
+    - 타입스크립트
+        - 타입 시스템: 정적 타입
+        - 실행 환경: 트랜스파일 후 JS로 실행
+        - 에러 발견 시점: 컴파일 타임
+        - 특징: 타입 기반으로 코드 안정성 향상
+    - 추가 특징
+        - TS는 인터페이스, 제네릭, Enum, 접근 제어자(public/private) 등 OOP 기능 제공
+        - JS는 표준 기반 동작, ES6 이후 기능이 많이 고도화됨
+    - 요약
+        - JS는 실행 중심, TS는 타입 안정성과 생산성 향상용 슈퍼셋 언어
+
 - TypeScript에서 타입 추론(Type Inference)이란?
 
 - TypeScript에서 enum 타입은 언제 사용하는가?
