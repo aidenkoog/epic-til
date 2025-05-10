@@ -2057,7 +2057,23 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - keyof → 객체 키 추출
         - in → Mapped Type 루프에 사용
 
-- TypeScript에서 Partial<T>와 Required<T>의 차이는?
+- TypeScript에서 Partial<T>와 Required<T>의 차이
+    - Partial<T>: 모든 속성을 optional로 변경
+    - Required<T>: 모든 속성을 필수(required)로 변경
+    - 예제
+        ```ts
+        interface User {
+            name: string;
+            age?: number;
+        }
+
+        type A = Partial<User>;  // name?: string, age?: number
+        type B = Required<User>; // name: string, age: number
+        ```
+    - 요약:
+        - Partial → 선택적으로 만들고 싶을 때
+        - Required → 모든 속성 필수화할 때 사용
+
 - TypeScript에서 함수 오버로딩(Function Overloading)은 어떻게 사용하는가?
 
 - TypeScript에서 never 타입은 어떤 경우에 사용되는가?
