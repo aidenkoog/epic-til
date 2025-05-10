@@ -2137,7 +2137,7 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
         // unknown 타입
         let val2: unknown = 'hello';
-        // val2.toFixed(); 컴파일 에러
+        // val2.toFixed(); 컴파일 에러, 타입 검사 안했으므로.
 
         // 타입 좁히기 필수
         if (typeof val2 === 'string') {
@@ -2146,8 +2146,24 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: any는 타입 검사 무시, unknown은 검사 강제 → 더 안전함
 
-- TypeScript에서 extends 키워드는 어떤 역할을 하는가?
-- TypeScript에서 interface를 확장하는 방법은?
+- TypeScript에서 extends 키워드 역할
+    - 용도:
+        - 제네릭 제약 조건 설정
+            - → 특정 타입만 허용
+        - 조건부 타입 정의
+            - → T extends U ? X : Y 형태
+    - 예제
+        ```ts
+        function printLength<T extends { length: number }>(value: T) {
+            console.log(value.length);
+        }
+
+        type IsString<T> = T extends string ? 'Yes' : 'No';
+        type A = IsString<'hi'>; // 'Yes'
+        ```
+    - 요약: extends는 타입 상속/제한 조건을 지정하는 데 사용됨
+
+- TypeScript에서 interface를 확장하는 방법
 
 
 - TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
