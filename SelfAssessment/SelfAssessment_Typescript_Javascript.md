@@ -2043,6 +2043,20 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             type UserKeys = keyof User; // 'name' | 'age'
             ```
 
+    - in
+        - 정의: Mapped Type 생성 시 반복적으로 키를 순회할 때 사용
+        ```ts
+        type User = { name: string; age: number };
+        type ReadonlyUser = {
+            readonly [K in keyof User]: User[K];
+        };
+        ```
+
+    - 요약:
+        - typeof → 값으로부터 타입 추출
+        - keyof → 객체 키 추출
+        - in → Mapped Type 루프에 사용
+
 - TypeScript에서 Partial<T>와 Required<T>의 차이는?
 - TypeScript에서 함수 오버로딩(Function Overloading)은 어떻게 사용하는가?
 
