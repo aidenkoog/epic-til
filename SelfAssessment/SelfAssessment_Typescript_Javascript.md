@@ -2194,8 +2194,32 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             ```
     - 요약: interface는 extends로 구조 확장 가능하며, 선언 병합 지원까지 있음
 
+- TypeScript의 타입 가드 (Type Guard)
+    - 정의: 조건문을 통해 변수의 정확한 타입을 좁히는 기술
+    - 종류:
+        - typeof
+        - instanceof
+        - 사용자 정의 타입 가드 (is 키워드)
+    - 예제
+        ```ts
+        function isString(val: unknown): val is string {
+            return typeof val === 'string';
+        }
+
+        function print(val: string | number) {
+            if (isString(val)) {
+                console.log(val.toUpperCase()); // string으로 좁혀짐
+            } else {
+                console.log(val.toFixed());     // number
+            }
+        }
+        ```
+    - 요약: 타입 가드는 런타임 조건을 이용해 타입을 명확하게 좁히는 기술
+
+- TypeScript의 템플릿 리터럴 타입
 - TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
 - TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
+
 - TypeScript에서 Mapped Types은 무엇이며, 어떻게 사용하는가?
 - TypeScript에서 Conditional Types(조건부 타입)은 어떻게 동작하는가?
 - TypeScript에서 Infer 키워드는 어떤 역할을 하는가?
