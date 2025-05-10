@@ -2120,7 +2120,32 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: never는 절대 발생하지 않는 상황을 타입으로 표현할 때 사용됨
 
-- TypeScript에서 unknown과 any의 차이점은?
+- TypeScript에서 unknown과 any의 차이점
+    - any
+        - 타입 검사 없음, 모든 작업 허용
+        - 타입 안전성 매우 낮음
+        - 빠르게 넘기거나 외부 데이터 처리 시 사용
+    - unknown
+        - 타입 검사 있음 (사용 전 타입 좁히기 필요)
+        - 타입 안전성 높음
+        - 안전하게 알 수 없는 타입 처리 시
+    - 예제
+        ```ts
+        // any 타입
+        let val1: any = 'hello';
+        val1.toFixed(); // 런타임 에러 발생 가능 (컴파일러 허용)
+
+        // unknown 타입
+        let val2: unknown = 'hello';
+        // val2.toFixed(); 컴파일 에러
+
+        // 타입 좁히기 필수
+        if (typeof val2 === 'string') {
+            console.log(val2.toUpperCase());
+        }
+        ```
+    - 요약: any는 타입 검사 무시, unknown은 검사 강제 → 더 안전함
+
 - TypeScript에서 extends 키워드는 어떤 역할을 하는가?
 - TypeScript에서 interface를 확장하는 방법은?
 
