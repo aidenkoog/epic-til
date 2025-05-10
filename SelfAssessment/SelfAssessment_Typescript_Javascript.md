@@ -2164,7 +2164,35 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약: extends는 타입 상속/제한 조건을 지정하는 데 사용됨
 
 - TypeScript에서 interface를 확장하는 방법
+    - 방법: extends 키워드로 다른 interface를 확장
+    - 예제
+        - 여러 개도 가능
+            ```ts
+            interface Animal {
+                name: string;
+            }
 
+            interface Dog extends Animal {
+                breed: string;
+            }
+
+            // Animal, Dog 인터페이스 내 정의된 속성들을 다 사용 가능
+            const myDog: Dog = {
+                name: 'Max',                // Animal interface
+                breed: 'Golden Retriever'   // Dog interface
+            };
+            ```
+        - 선언 병합도 가능: 같은 이름의 interface 여러번 선언 시 자동으로 합쳐짐
+            ```ts
+            interface User {
+                id: number;
+            }
+            interface User {
+                name: string;
+            }
+            // → User = { id: number; name: string }
+            ```
+    - 요약: interface는 extends로 구조 확장 가능하며, 선언 병합 지원까지 있음
 
 - TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
 - TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
