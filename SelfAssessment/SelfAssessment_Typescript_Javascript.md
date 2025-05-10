@@ -2096,10 +2096,35 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 주의: 구현부는 모든 시그니처를 커버해야 함 (중요한 포인트)
     - 요약: 함수 오버로딩은 다형성을 지원하며, 사용자에게 명확한 API 제공에 유용
 
-- TypeScript에서 never 타입은 어떤 경우에 사용되는가?
+- TypeScript에서 never 타입 사용 시점
+    - 정의: 절대 값이 발생할 수 없는 타입
+    - 사용 시점:
+        - 함수가 항상 오류를 던져서 종료될 때
+        - 끝나지 않는 함수 (while(true))
+        - 조건 분기 후 도달 불가능한 경우
+    - 예제
+        ```ts
+        function fail(msg: string): never {
+            throw new Error(msg);
+        }
+
+        function loop(): never {
+            while (true) {}
+        }
+
+        function check(x: string | number) {
+            if (typeof x === 'string') return;
+            if (typeof x === 'number') return;
+            x; // x는 never로 추론됨
+        }
+        ```
+    - 요약: never는 절대 발생하지 않는 상황을 타입으로 표현할 때 사용됨
+
 - TypeScript에서 unknown과 any의 차이점은?
 - TypeScript에서 extends 키워드는 어떤 역할을 하는가?
 - TypeScript에서 interface를 확장하는 방법은?
+
+
 - TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
 - TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
 - TypeScript에서 Mapped Types은 무엇이며, 어떻게 사용하는가?
