@@ -2074,7 +2074,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Partial → 선택적으로 만들고 싶을 때
         - Required → 모든 속성 필수화할 때 사용
 
-- TypeScript에서 함수 오버로딩(Function Overloading)은 어떻게 사용하는가?
+- TypeScript에서 함수 오버로딩(Function Overloading) 사용 방법
+    - 정의: 하나의 함수에 대해 여러 시그니처(호출 방식)를 선언하여 다양한 인자를 처리할 수 있도록 함
+    
+    - 사용 방식:
+        - 함수 시그니처만 선언
+        - 실제 구현부는 하나
+
+    - 예제
+        ```ts
+        function greet(name: string): string;
+        function greet(age: number): string;
+        function greet(value: string | number): string {
+            if (typeof value === 'string') return `Hello, ${value}`;
+            return `You are ${value} years old`;
+        }
+
+        greet('Tom');   // OK
+        greet(30);      // OK
+        ```
+    - 주의: 구현부는 모든 시그니처를 커버해야 함 (중요한 포인트)
+    - 요약: 함수 오버로딩은 다형성을 지원하며, 사용자에게 명확한 API 제공에 유용
 
 - TypeScript에서 never 타입은 어떤 경우에 사용되는가?
 - TypeScript에서 unknown과 any의 차이점은?
