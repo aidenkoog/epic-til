@@ -2334,10 +2334,31 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: Discriminated Union은 공통 속성을 기준으로 안전하게 분기 처리할 수 있는 유니온 타입 설계 패턴
 
-- TypeScript에서 Function Overloading(함수 오버로딩)을 어떻게 정의하는가?
+- TypeScript에서 Function Overloading(함수 오버로딩) 정의 방법
+    - 정의: 함수 하나에 대해 여러 호출 시그니처를 정의하는 방식
+    - 작성법:
+        오버로드 시그니처 선언 (하나 이상)
+        하나의 실제 구현부 (모든 케이스 처리)
+    - 예제
+        ```ts
+        function greet(name: string): string;
+        function greet(age: number): string;
+        function greet(value: string | number): string {
+            return typeof value === 'string'
+                ? `Hello, ${value}`
+                : `You are ${value} years old`;
+        }
+
+        greet('Tom'); // OK
+        greet(30);    // OK
+        ```
+    - 요약: 오버로드는 다양한 인자 조합에 대해 하나의 함수로 대응할 수 있게 해줌
+    
 - TypeScript에서 Indexed Access Types는 어떻게 사용하는가?
 - TypeScript에서 ReadonlyArray<T>와 Array<T>의 차이점은?
 - TypeScript에서 Module Augmentation은 무엇인가?
+
+
 - TypeScript에서 Declaration Merging(선언 병합)이란?
 - JavaScript에서 WeakMap과 Map의 차이점은?
 - JavaScript에서 WeakSet과 Set의 차이점은?
