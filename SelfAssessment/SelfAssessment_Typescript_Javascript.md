@@ -2250,7 +2250,26 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
     - 요약: Record는 키 유니언 타입 기반의 정적 객체 생성에 적합
 
-- TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
+- TypeScript에서 Pick<T, K>과 Omit<T, K> 동작 원리/방법
+    - Pick<T, K>
+    - Omit<T, K>
+    - 예제
+        ```ts
+        interface User {
+            id: number;
+            name: string;
+            password: string;
+        }
+
+        type PublicUser = Omit<User, 'password'>;
+        // { id: number; name: string }
+
+        type BasicInfo = Pick<User, 'id' | 'name'>;
+        // { id: number; name: string }
+        ```
+    - 요약:
+        - Pick → 일부 속성만 골라 쓰기
+        - Omit → 특정 속성 제외하고 재사용
 
 - TypeScript에서 Mapped Types은 무엇이며, 어떻게 사용하는가?
 - TypeScript에서 Conditional Types(조건부 타입)은 어떻게 동작하는가?
