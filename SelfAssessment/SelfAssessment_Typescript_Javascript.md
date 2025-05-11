@@ -2217,6 +2217,21 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약: 타입 가드는 런타임 조건을 이용해 타입을 명확하게 좁히는 기술
 
 - TypeScript의 템플릿 리터럴 타입
+    - 정의: 문자열을 조합해서 새로운 문자열 리터럴 타입을 생성하는 문법
+        ```ts
+        type Color = 'red' | 'blue';
+        type Variant = `bg-${Color}`; // 'bg-red' | 'bg-blue'
+        ```
+
+    - 활용 예: CSS 클래스, 이벤트 이름 등 고정된 문자열 패턴 타입화
+        ```ts
+        type Size = 'sm' | 'lg';
+        type ClassName = `btn-${Color}-${Size}`;
+        // 'btn-red-sm' | 'btn-red-lg' | ...
+        ```
+        
+    - 요약: 템플릿 리터럴 타입은 문자열 패턴을 정적 타입으로 안전하게 표현
+    
 - TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
 - TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
 
