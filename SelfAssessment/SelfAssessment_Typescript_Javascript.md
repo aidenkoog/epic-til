@@ -2271,10 +2271,69 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Pick → 일부 속성만 골라 쓰기
         - Omit → 특정 속성 제외하고 재사용
 
-- TypeScript에서 Mapped Types은 무엇이며, 어떻게 사용하는가?
-- TypeScript에서 Conditional Types(조건부 타입)은 어떻게 동작하는가?
-- TypeScript에서 Infer 키워드는 어떤 역할을 하는가?
-- TypeScript에서 Discriminated Unions(태그된 유니온 타입)은 언제 사용하는가?
+- TypeScript에서 Mapped Types 정의 및 사용 방법
+    - Mapped Types (맵드 타입)
+        - 정의: 기존 타입의 키들을 반복적으로 순회하며 새로운 타입 생성
+    - 예제
+        ```ts
+        type ReadonlyUser<T> = {
+            readonly [K in keyof T]: T[K];
+        };
+
+        type User = { id: number; name: string };
+        type ReadonlyUserType = ReadonlyUser<User>;
+        // { readonly id: number; readonly name: string }
+        ```
+    - 요약: Mapped Type은 기존 타입의 구조를 반복 변형할 때 사용됨
+
+- TypeScript에서 Conditional Types(조건부 타입) 동작 방법
+    - 정의: T extends U ? X : Y 형식으로 타입을 조건에 따라 분기
+    - 예제
+        ```ts
+        type IsString<T> = T extends string ? 'YES' : 'NO';
+
+        type A = IsString<'hello'>; // 'YES'
+        type B = IsString<123>;     // 'NO'
+        ```
+    - 활용 예:
+        - 타입 좁히기, 타입에 따라 다른 구조 지정, 유니언 타입 처리 등
+    - 요약: 조건부 타입은 타입 간 분기를 표현하여 타입 레벨 if문 역할을 함
+
+- TypeScript에서 Infer 키워드 역할
+    - 정의: 조건부 타입 내에서 타입 일부를 추론할 수 있게 해주는 키워드
+    - 예제
+        ```ts
+        type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+
+        type A = ReturnType<() => string>; // string
+        ```
+    - 주요 사용처:
+        - 함수 반환 타입 추출
+        - Promise 결과 타입 추출
+        - 튜플/배열 요소 타입 분리
+
+    - 요약: infer는 조건부 타입 안에서 새로운 타입을 변수처럼 추론할 수 있게 해줌
+
+- TypeScript에서 Discriminated Unions(태그된 유니온 타입) 사용 시점
+    - 정의: 공통된 "tag" 속성을 기준으로 여러 타입을 구분하는 유니온
+    - 장점: 타입 가드 없이도 switch 문이나 if문으로 타입 좁히기 가능
+    - 예제
+        ```ts
+        type Shape =
+            | { kind: 'circle'; radius: number }
+            | { kind: 'square'; side: number };
+
+        function area(shape: Shape) {
+            switch (shape.kind) {
+                case 'circle':
+                    return Math.PI * shape.radius ** 2;
+                case 'square':
+                    return shape.side ** 2;
+            }
+        }
+        ```
+    - 요약: Discriminated Union은 공통 속성을 기준으로 안전하게 분기 처리할 수 있는 유니온 타입 설계 패턴
+
 - TypeScript에서 Function Overloading(함수 오버로딩)을 어떻게 정의하는가?
 - TypeScript에서 Indexed Access Types는 어떻게 사용하는가?
 - TypeScript에서 ReadonlyArray<T>와 Array<T>의 차이점은?
