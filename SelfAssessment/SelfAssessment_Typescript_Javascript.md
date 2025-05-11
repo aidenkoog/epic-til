@@ -2229,10 +2229,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         type ClassName = `btn-${Color}-${Size}`;
         // 'btn-red-sm' | 'btn-red-lg' | ...
         ```
-        
+
     - 요약: 템플릿 리터럴 타입은 문자열 패턴을 정적 타입으로 안전하게 표현
     
-- TypeScript에서 Record<T, K> 유틸리티 타입은 언제 사용되는가?
+- TypeScript에서 Record<T, K> 유틸리티 타입 사용 시점
+    - 정의: 키 T에 대해 값이 K인 객체 타입을 생성
+    - 문법: Record<Keys, ValueType>
+    - 예제
+        ```ts
+        // id 및 name에 해당하는 값을 string 타입으로 지정
+        type User = Record<'id' | 'name', string>;
+        // { id: string; name: string }
+
+        type RoleMap = Record<'admin' | 'user', boolean>;
+        // { admin: boolean; user: boolean }
+        ```
+    - 활용 상황:
+        - 동일한 타입의 키-값 객체 만들 때
+        - Enum 또는 유니언 타입 키 매핑
+
+    - 요약: Record는 키 유니언 타입 기반의 정적 객체 생성에 적합
+
 - TypeScript에서 Pick<T, K>과 Omit<T, K>는 어떻게 동작하는가?
 
 - TypeScript에서 Mapped Types은 무엇이며, 어떻게 사용하는가?
