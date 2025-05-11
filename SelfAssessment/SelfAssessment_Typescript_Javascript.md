@@ -2353,8 +2353,24 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         greet(30);    // OK
         ```
     - 요약: 오버로드는 다양한 인자 조합에 대해 하나의 함수로 대응할 수 있게 해줌
+
+- TypeScript에서 Indexed Access Types 사용 방법
+    - 정의: 객체 타입에서 속성의 타입만 추출하는 문법 (인덱스 접근 타입)
+    - 형식: T[K]
+    - 예제
+        ```ts
+        type User = {
+            id: number;
+            name: string;
+        };
+
+        type IdType = User['id']; // number
+        ```
+    - 활용 예
+        - 동적 키 접근
+        - 유틸리티 타입 구현 시 (예: Pick<T, K>, Record<K, T[K]>)
+    - 요약: Indexed Access는 객체의 속성 타입을 추출하거나 재사용할 때 사용
     
-- TypeScript에서 Indexed Access Types는 어떻게 사용하는가?
 - TypeScript에서 ReadonlyArray<T>와 Array<T>의 차이점은?
 - TypeScript에서 Module Augmentation은 무엇인가?
 
