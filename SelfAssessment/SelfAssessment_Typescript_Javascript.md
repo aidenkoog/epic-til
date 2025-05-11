@@ -2370,9 +2370,37 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 동적 키 접근
         - 유틸리티 타입 구현 시 (예: Pick<T, K>, Record<K, T[K]>)
     - 요약: Indexed Access는 객체의 속성 타입을 추출하거나 재사용할 때 사용
-    
-- TypeScript에서 ReadonlyArray<T>와 Array<T>의 차이점은?
-- TypeScript에서 Module Augmentation은 무엇인가?
+
+- TypeScript에서 ReadonlyArray<T>와 Array<T>의 차이점
+    - ReadonlyArray<T>
+        - 변경 불가 (컴파일 에러)
+        - 불변 배열 보장 (안전성 강화)
+    - Array<T>
+        - push, pop, 변경 가능
+        - 일반적인 배열 처리
+    - 예제
+        ```ts
+        const arr: ReadonlyArray<number> = [1, 2, 3];
+        arr.push(4); // 오류: Property 'push' does not exist
+        ```
+    - 요약
+        - 요약: ReadonlyArray는 배열을 읽기 전용으로 만들고, 수정 불가능하게 해줌
+
+- TypeScript에서 Module Augmentation
+    - 정의: 기존에 정의된 타입/모듈/인터페이스에 새 속성을 추가하거나 재정의하는 방식
+    - 주로 사용 시점:
+        - 라이브러리 타입 확장 (ex: express, react)
+        - 글로벌 타입 보강, 커스텀 메서드 추가
+    - 예제
+        ```ts
+        // express 확장 예시
+        declare module 'express' {
+            interface Request {
+                user?: { id: string };
+            }
+        }
+        ```
+    - 요약: Module Augmentation은 외부 모듈의 타입을 안전하게 확장할 수 있게 해주는 기능
 
 
 - TypeScript에서 Declaration Merging(선언 병합)이란?
