@@ -2402,11 +2402,34 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
     - 요약: Module Augmentation은 외부 모듈의 타입을 안전하게 확장할 수 있게 해주는 기능
 
+- TypeScript에서 Declaration Merging(선언 병합)
+    - 정의
+        - 동일한 이름의 선언이 여러 개 존재할 경우, TypeScript가 이를 하나로 병합하는 기능.
 
-- TypeScript에서 Declaration Merging(선언 병합)이란?
+    - 주요 사용 사례
+        - 인터페이스 병합: 동일한 이름의 인터페이스 속성이 합쳐짐
+            ```ts
+            interface User { name: string; }
+            interface User { age: number; }
+            // 병합 결과: { name: string; age: number }
+            ```
+        
+        - Namespace + Function/Class 병합: 기능 확장용으로 자주 사용
+            ```ts
+            function greet() {}
+            namespace greet {
+                export const version = "1.0";
+            }
+            ```
+
+        - 활용 예시
+            - 라이브러리 확장 시 타입 보완, 전역 객체 확장 등
+
 - JavaScript에서 WeakMap과 Map의 차이점은?
 - JavaScript에서 WeakSet과 Set의 차이점은?
 - JavaScript에서 Reflect API는 어떤 역할을 하는가?
+
+
 - JavaScript에서 Object.defineProperty()는 어떻게 활용되는가?
 - JavaScript에서 JSON.stringify()와 JSON.parse()의 내부 동작 원리는?
 - JavaScript에서 eval() 함수는 왜 사용을 지양해야 하는가?
