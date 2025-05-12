@@ -2441,7 +2441,22 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - WeakMap: 메모리 누수 없이 비공개 데이터 저장 (ex: 클래스 private 필드)
 
 
-- JavaScript에서 WeakSet과 Set의 차이점은?
+- JavaScript에서 WeakSet과 Set의 차이점
+    - Set
+        - 중복 없는 값 저장 가능
+        - 객체와 원시값 모두 저장 가능
+        - 순회 가능 (forEach, for...of)
+        - size 속성 존재
+
+    - WeakSet
+        - 객체만 저장 가능 (원시값은 저장 불가)
+        - 순회 불가, size 없음
+        - 저장된 객체에 대한 약한 참조 → GC 대상이 되면 자동 제거
+
+    - 사용 목적 차이
+        - Set: 일반적인 유일 값 관리
+        - WeakSet: 비공개 객체 추적, 메모리 누수 방지
+
 - JavaScript에서 Reflect API는 어떤 역할을 하는가?
 
 
