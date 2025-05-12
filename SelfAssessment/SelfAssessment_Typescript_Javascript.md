@@ -2425,7 +2425,22 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 활용 예시
             - 라이브러리 확장 시 타입 보완, 전역 객체 확장 등
 
-- JavaScript에서 WeakMap과 Map의 차이점은?
+- JavaScript에서 WeakMap과 Map의 차이점
+    - Map
+        - 키로 객체 또는 원시값 사용 가능
+        - 순회 가능 (forEach, for...of)
+        - 강한 참조로 인해 키 객체가 메모리에서 수동으로 제거되기 전까지 유지됨
+
+    - WeakMap
+        - 키는 객체만 가능 (원시값은 키로 사용 불가)
+        - 순회 불가, size도 없음
+        - 키 객체에 대한 약한 참조 → 키 객체가 더 이상 참조되지 않으면 GC에 의해 자동 삭제
+
+    - 주요 목적
+        - Map: 일반 데이터 저장 및 순회
+        - WeakMap: 메모리 누수 없이 비공개 데이터 저장 (ex: 클래스 private 필드)
+
+
 - JavaScript에서 WeakSet과 Set의 차이점은?
 - JavaScript에서 Reflect API는 어떤 역할을 하는가?
 
