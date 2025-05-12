@@ -2457,8 +2457,23 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Set: 일반적인 유일 값 관리
         - WeakSet: 비공개 객체 추적, 메모리 누수 방지
 
-- JavaScript에서 Reflect API는 어떤 역할을 하는가?
+- JavaScript에서 Reflect API의 역할
+    - 역할
+        - 객체에 대한 내장 동작을 인터셉트하거나 재정의하지 않고 직접 호출할 수 있는 정적 메서드 제공
 
+    - 주요 기능
+        - Reflect.get, Reflect.set: 객체 프로퍼티 접근/설정
+        - Reflect.has: in 연산자와 유사
+        - Reflect.construct: new 연산자 역할
+        - Reflect.defineProperty, Reflect.deleteProperty: 기존 Object API 대체 가능
+
+    - 장점
+        - Proxy 핸들러 트랩에서 내부 동작 위임 시 사용
+        - 더 일관된 오류 처리 (예: 실패 시 false 반환)
+
+    - 활용 예시
+        - Proxy와 함께 복잡한 객체 행위 제어
+        - 기존 객체 조작 메서드를 대체하여 통일성 확보
 
 - JavaScript에서 Object.defineProperty()는 어떻게 활용되는가?
 - JavaScript에서 JSON.stringify()와 JSON.parse()의 내부 동작 원리는?
