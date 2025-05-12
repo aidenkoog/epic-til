@@ -2475,11 +2475,31 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Proxy와 함께 복잡한 객체 행위 제어
         - 기존 객체 조작 메서드를 대체하여 통일성 확보
 
-- JavaScript에서 Object.defineProperty()는 어떻게 활용되는가?
+- JavaScript에서 Object.defineProperty() 활용 방법
+    - 정의
+        - 객체의 속성(property)에 대한 세밀한 설정을 가능하게 하는 메서드.
+
+    - 주요 활용
+        - 속성 제어: writable, enumerable, configurable 등 설정 가능
+        - Getter/Setter 정의:
+            ```js
+            Object.defineProperty(obj, 'fullName', {
+                get() { return this.first + ' ' + this.last; },
+                set(value) { [this.first, this.last] = value.split(' '); }
+            });
+            ```
+        - 불변 속성 설정: writable: false, configurable: false로 읽기 전용 설정 가능
+        - 숨김 속성 생성: enumerable: false를 통해 for...in에서 제외
+    
+    - 실제 사용처
+        - 라이브러리 내부 데이터 은닉, 프레임워크 내부 바인딩, 불변 속성 설정 등
+
 - JavaScript에서 JSON.stringify()와 JSON.parse()의 내부 동작 원리는?
 - JavaScript에서 eval() 함수는 왜 사용을 지양해야 하는가?
 - JavaScript에서 with 문을 사용하면 발생할 수 있는 문제는?
 - JavaScript에서 try...catch의 성능 오버헤드는 어떤 방식으로 최적화할 수 있는가?
+
+
 - JavaScript에서 document.createElement()와 innerHTML의 성능 차이는?
 - JavaScript에서 ArrayBuffer와 TypedArray는 어떤 경우에 사용되는가?
 - JavaScript에서 Intl 객체는 어떤 용도로 사용하는가?
