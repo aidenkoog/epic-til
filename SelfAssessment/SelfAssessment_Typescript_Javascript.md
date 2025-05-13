@@ -2494,7 +2494,21 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 실제 사용처
         - 라이브러리 내부 데이터 은닉, 프레임워크 내부 바인딩, 불변 속성 설정 등
 
-- JavaScript에서 JSON.stringify()와 JSON.parse()의 내부 동작 원리는?
+- JavaScript에서 JSON.stringify()와 JSON.parse()의 내부 동작 원리
+    - 목적
+        - JSON.stringify(): JS 객체 → JSON 문자열 변환
+        - JSON.parse(): JSON 문자열 → JS 객체 복원
+
+    - stringify() 내부 동작
+        - 순환 참조 객체는 TypeError 발생
+        - 함수, undefined, symbol 속성은 제거됨
+        - 배열에서 undefined는 null로 변환됨
+        - 객체에 toJSON() 메서드가 있으면 그 반환값 기준으로 직렬화
+
+    - parse() 내부 동작
+        - 문자열을 기반으로 JSON 문법을 파싱
+        - 잘못된 JSON 형식이면 SyntaxError 발생
+
 - JavaScript에서 eval() 함수는 왜 사용을 지양해야 하는가?
 - JavaScript에서 with 문을 사용하면 발생할 수 있는 문제는?
 - JavaScript에서 try...catch의 성능 오버헤드는 어떤 방식으로 최적화할 수 있는가?
