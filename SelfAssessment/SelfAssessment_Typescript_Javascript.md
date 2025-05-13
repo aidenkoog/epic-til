@@ -2509,8 +2509,21 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 문자열을 기반으로 JSON 문법을 파싱
         - 잘못된 JSON 형식이면 SyntaxError 발생
 
-- JavaScript에서 eval() 함수는 왜 사용을 지양해야 하는가?
-- JavaScript에서 with 문을 사용하면 발생할 수 있는 문제는?
+- JavaScript에서 eval() 함수 사용 지양 이유
+    - 보안 문제
+        - 외부 입력을 그대로 실행 시 XSS 등 치명적인 보안 취약점 유발
+
+    - 성능 문제
+        - JS 엔진의 최적화 대상에서 제외되며 실행 속도 저하
+        - 정적 분석 불가 → 코드 흐름 추적 어려움
+
+    - 디버깅 어려움
+        - 런타임 동적 실행으로 인해 오류 추적, 테스트 어려움
+
+    - 대안
+        - JSON.parse(), Function 생성자, 모듈 시스템 등 더 안전한 대안 존재
+
+- JavaScript에서 with 문을 사용하면 발생할 수 있는 문제
 - JavaScript에서 try...catch의 성능 오버헤드는 어떤 방식으로 최적화할 수 있는가?
 
 
