@@ -2534,9 +2534,16 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 표준화 문제
         - strict mode에서 사용 불가능
         - 최신 코드에서는 거의 사용되지 않으며, 비추천
-        
-- JavaScript에서 try...catch의 성능 오버헤드는 어떤 방식으로 최적화할 수 있는가?
 
+- JavaScript에서 try...catch의 성능 오버헤드 최적화 방식
+    - 오버헤드 발생 지점
+        - 예외가 실제로 발생할 때만 성능 저하가 두드러짐
+        - 정상 실행 루틴과 예외 처리 루틴이 분리되면서 엔진 최적화 대상에서 제외됨
+
+    - 최적화 전략
+        - 오류 발생이 예상되는 최소 범위에만 try...catch 적용
+        - try 블록 내부에는 가능한 한 간단한 로직만 작성
+        - 자주 호출되는 핫패스 코드에서는 예외 대신 조건문 기반 오류 처리 선호
 
 - JavaScript에서 document.createElement()와 innerHTML의 성능 차이는?
 - JavaScript에서 ArrayBuffer와 TypedArray는 어떤 경우에 사용되는가?
