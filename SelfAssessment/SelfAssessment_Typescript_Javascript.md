@@ -2524,6 +2524,17 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - JSON.parse(), Function 생성자, 모듈 시스템 등 더 안전한 대안 존재
 
 - JavaScript에서 with 문을 사용하면 발생할 수 있는 문제
+    - 스코프 모호성
+        - 내부에서 선언된 변수의 스코프가 예측 불가능해짐
+        - 어떤 객체의 속성을 참조하는지 코드만 보고 명확히 판단하기 어려움
+
+    - 최적화 방해
+        - JS 엔진이 최적화 루틴을 적용하지 못함 → 성능 저하
+
+    - 표준화 문제
+        - strict mode에서 사용 불가능
+        - 최신 코드에서는 거의 사용되지 않으며, 비추천
+        
 - JavaScript에서 try...catch의 성능 오버헤드는 어떤 방식으로 최적화할 수 있는가?
 
 
