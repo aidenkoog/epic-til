@@ -2559,9 +2559,41 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - DOM 파싱 → 리플로우 유발 가능
         - 보안 취약점 존재 (XSS 공격 위험)
 
-- JavaScript에서 ArrayBuffer와 TypedArray는 어떤 경우에 사용되는가?
-- JavaScript에서 Intl 객체는 어떤 용도로 사용하는가?
-- JavaScript에서 Function.prototype.toString()을 사용하면 어떤 정보를 얻을 수 있는가?
+- JavaScript에서 ArrayBuffer와 TypedArray 사용 시점
+    - ArrayBuffer
+        - 고정 크기 이진 데이터 저장소
+        - 직접 값 접근 불가 (뷰 필요)
+        - 사용처: 바이너리 파일, WebSocket, WebAssembly
+
+    - TypedArray
+        - ArrayBuffer 기반의 형식화된 뷰 (Int8Array, Float32Array 등)
+        - 숫자 데이터 직접 접근 가능
+        - 사용처: 이미지/오디오/비디오 처리, WebGL, 실시간 스트리밍
+
+- JavaScript에서 Intl 객체 사용 용도
+    - 역할
+        - 국제화(Internationalization) 지원
+        - 브라우저에 내장된 로케일 기반 포맷 처리
+
+    - 기능
+        - 날짜/시간 포맷: Intl.DateTimeFormat
+        - 숫자/통화 포맷: Intl.NumberFormat
+        - 문자열 정렬: Intl.Collator
+        - 언어 리스트: Intl.DisplayNames, Intl.ListFormat
+
+    - 사용처
+        - 다국어 서비스 제공
+        - 국가별 날짜·통화 표현 차이 처리
+
+- JavaScript에서 Function.prototype.toString() 사용 시 얻을 수 있는 정보
+    - 역할: 함수의 소스 코드(문자열)를 반환
+    - 사용 목적
+        - 디버깅 시 함수 내용 확인
+        - 함수 코드 비교 (예: 프록시 감지)
+        - 클로저 내부 파악 가능 (일부 경우)
+    - 주의사항
+        - 네이티브 함수는 [native code] 반환
+        - 악의적 코드 분석에도 사용 가능 → 보안 유의
 
 - JavaScript에서 structuredClone()을 사용할 때의 장점은?
 - JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
