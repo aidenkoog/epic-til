@@ -2545,10 +2545,24 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - try 블록 내부에는 가능한 한 간단한 로직만 작성
         - 자주 호출되는 핫패스 코드에서는 예외 대신 조건문 기반 오류 처리 선호
 
-- JavaScript에서 document.createElement()와 innerHTML의 성능 차이는?
+- JavaScript에서 document.createElement()와 innerHTML의 성능 차이
+    - document.createElement()
+        - DOM 노드를 직접 생성
+        - 구조적으로 명확하고 타입 안전
+        - 이벤트 핸들러 연결 가능
+        - 브라우저 최적화 용이 → 성능 우수
+        - 보안에 강함 (XSS 방지)
+
+    - innerHTML
+        - 문자열 기반 HTML 삽입
+        - 빠른 마크업 작성에 유리 (간단한 UI)
+        - DOM 파싱 → 리플로우 유발 가능
+        - 보안 취약점 존재 (XSS 공격 위험)
+
 - JavaScript에서 ArrayBuffer와 TypedArray는 어떤 경우에 사용되는가?
 - JavaScript에서 Intl 객체는 어떤 용도로 사용하는가?
 - JavaScript에서 Function.prototype.toString()을 사용하면 어떤 정보를 얻을 수 있는가?
+
 - JavaScript에서 structuredClone()을 사용할 때의 장점은?
 - JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
 - JavaScript에서 **Garbage Collector(GC)**의 동작 방식은?
