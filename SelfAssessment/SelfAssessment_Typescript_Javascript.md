@@ -2620,7 +2620,21 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 보안 목적 사용 금지 (코드 유출 위험)
         - 난독화된 코드나 압축된 코드에서는 가독성이 낮음
 
-- JavaScript에서 structuredClone()을 사용할 때의 장점은?
+- JavaScript에서 structuredClone()을 사용할 때의 장점
+    - 목적
+        - 객체를 깊은 복사(Deep Clone) 하기 위한 표준 내장 함수
+
+    - 장점
+        - 깊은 복사 가능: 중첩된 객체, 배열, Map, Set, Date, Blob 등 복사 지원
+        - 순환 참조 지원: 순환 참조가 포함된 구조도 안전하게 복사 가능
+        - 안전성 보장: JSON.parse(JSON.stringify())로는 처리 불가한 구조도 복사 가능
+        - 간결하고 빠름: 별도 라이브러리 없이 브라우저 내장 최적화된 성능
+
+    - 사용 예
+        ```js
+        const clone = structuredClone(originalObject);
+        ```
+        
 - JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
 - JavaScript에서 **Garbage Collector(GC)**의 동작 방식은?
 - JavaScript에서 event listener 누수를 방지하는 방법은?
