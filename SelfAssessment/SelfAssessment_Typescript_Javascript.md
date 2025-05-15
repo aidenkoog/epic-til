@@ -2546,40 +2546,56 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 자주 호출되는 핫패스 코드에서는 예외 대신 조건문 기반 오류 처리 선호
 
 - JavaScript에서 document.createElement()와 innerHTML의 성능 차이
+    - 개요
+        - 둘 다 DOM 요소를 생성하는 방식이지만, 내부 동작 방식이 다름
+
     - document.createElement()
-        - DOM 노드를 직접 생성
-        - 구조적으로 명확하고 타입 안전
-        - 이벤트 핸들러 연결 가능
-        - 브라우저 최적화 용이 → 성능 우수
-        - 보안에 강함 (XSS 방지)
+        - DOM API 기반으로 요소를 직접 생성
+        - 속성, 자식 요소 등을 JS 코드로 명확히 제어 가능
+        - 보안성 높음 (스크립트 주입 위험 없음)
+        - 성능이 우수함 → 특히 복잡한 트리 조작 시 브라우저 최적화 가능
 
     - innerHTML
-        - 문자열 기반 HTML 삽입
-        - 빠른 마크업 작성에 유리 (간단한 UI)
-        - DOM 파싱 → 리플로우 유발 가능
-        - 보안 취약점 존재 (XSS 공격 위험)
+        - HTML 파서 기반 문자열 해석
+        - 전체 innerHTML 갱신 시 기존 노드 파괴 및 재생성 → 성능 저하 유발 가능
+        - XSS 취약점 우려
+        - 빠르게 다수의 요소를 렌더링할 때는 초기 성능이 더 나을 수 있음
+
+    - 결론
+        - 단순하고 빠른 렌더링: innerHTML
+        - 정밀 제어와 반복 DOM 조작: createElement() 추천
 
 - JavaScript에서 ArrayBuffer와 TypedArray 사용 시점
     - ArrayBuffer
-        - 고정 크기 이진 데이터 저장소
-        - 직접 값 접근 불가 (뷰 필요)
-        - 사용처: 바이너리 파일, WebSocket, WebAssembly
+        - 원시 이진 데이터 저장용 고정 길이 버퍼
+        - 메모리 블록 자체를 표현
+        - 아무 타입 정보 없음 → 보기만으로 해석 불가능
 
     - TypedArray
-        - ArrayBuffer 기반의 형식화된 뷰 (Int8Array, Float32Array 등)
-        - 숫자 데이터 직접 접근 가능
-        - 사용처: 이미지/오디오/비디오 처리, WebGL, 실시간 스트리밍
+        - ArrayBuffer를 정수, 부동소수점 등 형식에 맞게 해석하는 뷰
+        - 예: Uint8Array, Float32Array, Int16Array 등
+        - 성능 최적화된 바이너리 데이터 처리에 적합
+
+    - 사용 예시
+        - WebGL, WebAssembly, 파일 I/O, 네트워크 프로토콜, 이미지 처리 등
+        - 대용량 이진 데이터 처리 시 필요
 
 - JavaScript에서 Intl 객체 사용 용도
     - 역할
-        - 국제화(Internationalization) 지원
+        - 국제화(Internationalization) 지원 (국제화 지원 (i18n)을 위한 표준 API 제공)
         - 브라우저에 내장된 로케일 기반 포맷 처리
 
     - 기능
         - 날짜/시간 포맷: Intl.DateTimeFormat
         - 숫자/통화 포맷: Intl.NumberFormat
-        - 문자열 정렬: Intl.Collator
+        - 문자열 정렬 기준 (locale-aware): Intl.Collator
         - 언어 리스트: Intl.DisplayNames, Intl.ListFormat
+        - 플루럴 룰: Intl.PluralRules
+        - 메시지 포맷팅 (ECMA-402 확장): Intl.MessageFormat (라이브러리로 구현)
+
+    - 사용 목적
+        - 사용자 지역(locale)에 맞는 표현 제공
+        - 복잡한 국제화 요구사항도 간단하게 처리 가능
 
     - 사용처
         - 다국어 서비스 제공
@@ -2587,13 +2603,22 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
 - JavaScript에서 Function.prototype.toString() 사용 시 얻을 수 있는 정보
     - 역할: 함수의 소스 코드(문자열)를 반환
+    - 반환 정보
+        - 해당 함수의 소스 코드 문자열을 그대로 반환
+        - 익명 함수, 화살표 함수, 클래스 메서드 등 모두 포함
     - 사용 목적
         - 디버깅 시 함수 내용 확인
         - 함수 코드 비교 (예: 프록시 감지)
         - 클로저 내부 파악 가능 (일부 경우)
+    - 활용 사례
+        - 함수 내부 확인 (디버깅, 테스트, 메타프로그래밍)
+        - 코드 직렬화(예: 서버-클라이언트 간 함수 전달 시)
+        - 함수가 native code인지 감별: function.toString().includes("[native code]")
     - 주의사항
         - 네이티브 함수는 [native code] 반환
         - 악의적 코드 분석에도 사용 가능 → 보안 유의
+        - 보안 목적 사용 금지 (코드 유출 위험)
+        - 난독화된 코드나 압축된 코드에서는 가독성이 낮음
 
 - JavaScript에서 structuredClone()을 사용할 때의 장점은?
 - JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
