@@ -2665,8 +2665,40 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - V8 엔진 기반 최적화
         - 스카벤지, 마크-컴팩트, 인크리멘탈 GC 등 다양한 기법으로 처리 성능 향상.
 
-- JavaScript에서 event listener 누수를 방지하는 방법은?
-- JavaScript에서 모바일 성능 최적화를 위해 고려해야 할 점은?
+- JavaScript에서 event listener 누수를 방지하는 방법
+    - removeEventListener 명확하게 사용
+        - DOM 요소 제거 전에 반드시 리스너를 제거하여 메모리 정리.
+
+    - 한 번만 실행되는 리스너
+        - { once: true } 옵션을 통해 이벤트가 한 번만 실행되도록 설정.
+
+    - 동일한 참조 유지
+        - addEventListener에 등록한 함수와 정확히 동일한 참조로 removeEventListener를 호출해야 정상 작동.
+
+    - SPA에서 라우팅 시 정리
+        - 컴포넌트 언마운트 시점에 이벤트 제거 필수 (ex. React의 useEffect cleanup).
+
+    - MutationObserver 활용
+        - 동적으로 추가된 요소의 이벤트 리스너 제거 자동화 가능.
+
+- JavaScript에서 모바일 성능 최적화를 위해 고려해야 할 점
+    - DOM 조작 최소화
+        - DOM 변경은 비용이 크므로 배치 처리하거나 Virtual DOM으로 관리.
+
+    - 리소스 최적화
+        - WebP 이미지, lazy-loading 적용, 불필요한 리소스 지연 로딩 처리.
+
+    - 코드 압축 및 번들링
+        - Webpack, Rollup, Terser 등을 이용해 파일 사이즈 축소.
+
+    - 비동기 처리 최적화
+        - requestAnimationFrame, requestIdleCallback 사용하여 렌더링 차단 방지.
+
+    - 효율적인 레이아웃 설계
+        - 반응형 레이아웃 적용 시 미디어쿼리 과도 사용 방지, CSS 계산 간소화.
+
+    - 메모리 사용량 관리
+        - 타이머, 이벤트, 캐시 오브젝트 등을 주기적으로 정리해 리소스 절약.
 
 
 - JavaScript에서 requestAnimationFrame()과 setTimeout()의 차이는?
