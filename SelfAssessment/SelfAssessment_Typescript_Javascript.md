@@ -2635,66 +2635,124 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         const clone = structuredClone(originalObject);
         ```
         
-- JavaScript에서 메모리 누수를 방지하는 방법에는 어떤 것들이 있는가?
-- JavaScript에서 **Garbage Collector(GC)**의 동작 방식은?
+- JavaScript에서 메모리 누수를 방지하는 방법
+    - 불필요한 참조 제거
+        - 사용이 끝난 객체나 변수는 null 또는 undefined로 명시적으로 참조를 해제.
+
+    - 클로저 주의
+        - 클로저(함수안의 함수)가 외부 변수(특히 DOM 객체)를 계속 참조하면 메모리 누수 발생 가능.
+        - 함수 내에서만 필요한 변수로 한정하거나, 외부 참조 해제.
+
+    - DOM 요소 정리
+        - DOM 요소 제거 시, 관련된 이벤트 리스너, 타이머, 관찰자(observer)도 함께 제거 필요.
+
+    - 전역 변수 남용 금지
+        - 전역 스코프에 남아있는 변수는 GC의 대상이 되지 않아 누수 위험 증가.
+
+    - WeakMap / WeakSet 사용
+        - 참조된 객체가 사라지면 자동으로 GC 대상이 되도록 도와주는 자료구조 활용.
+
+- JavaScript에서 Garbage Collector(GC)의 동작 방식
+    - 참조 카운트 방식
+        - 객체가 몇 번 참조되고 있는지 추적하여, 참조 수가 0이면 메모리 해제.
+
+    - 마크 앤 스위프 방식
+        - 루트 객체(window 등)에서 시작해 접근 가능한 객체만 남기고, 나머지는 수집.
+
+    - 세대별 GC 전략
+        - 새로 생성된 객체는 빠르게 수집(Young Generation), 오래된 객체는 느리게 수집(Old Generation)하여 효율성 증가.
+
+    - V8 엔진 기반 최적화
+        - 스카벤지, 마크-컴팩트, 인크리멘탈 GC 등 다양한 기법으로 처리 성능 향상.
+
 - JavaScript에서 event listener 누수를 방지하는 방법은?
 - JavaScript에서 모바일 성능 최적화를 위해 고려해야 할 점은?
+
+
 - JavaScript에서 requestAnimationFrame()과 setTimeout()의 차이는?
 - JavaScript에서 MutationObserver와 IntersectionObserver의 차이점은?
 - JavaScript에서 BigInt가 필요한 이유는?
 - JavaScript에서 documentFragment를 활용하는 이유는?
+
+
 - JavaScript에서 Web Workers를 활용한 성능 최적화 방법은?
 - JavaScript에서 debounce()와 throttle()을 내부적으로 구현하는 방법은?
 - JavaScript에서 async function을 Promise 없이 사용할 수 있는가?
 - JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점은?
+
+
 - JavaScript에서 Optional Chaining (?.) 연산자는 어떤 경우에 유용한가?
 - JavaScript에서 Nullish Coalescing (??) 연산자는 어떻게 동작하는가?
 - JavaScript에서 Promise.allSettled()의 사용 사례는?
 - JavaScript에서 Promise.any()의 동작 방식은?
+
+
 - JavaScript에서 WeakRef는 어떤 경우에 사용될 수 있는가?
 - JavaScript에서 Top-Level await이란 무엇인가?
 - JavaScript에서 Intl.NumberFormat()과 Intl.DateTimeFormat()의 차이는?
 - JavaScript에서 setTimeout()의 최소 실행 시간이 4ms 이상이 되는 이유는?
+
+
 - JavaScript에서 import.meta 객체는 어떤 용도로 사용되는가?
 - JavaScript에서 modulepreload를 사용할 때의 장점은?
 - JavaScript에서 Array.prototype.at()의 사용 사례는?
 - JavaScript에서 Object.hasOwn()은 기존의 Object.prototype.hasOwnProperty()와 어떤 차이가 있는가?
+
+
 - TypeScript에서 type alias와 interface를 혼합해서 사용할 수 있는가?
 - TypeScript에서 extends와 implements의 차이점은?
 - TypeScript에서 mapped types을 사용하여 객체의 속성을 선택적으로 변경하는 방법은?
 - TypeScript에서 Key Remapping in Mapped Types이란 무엇인가?
+
+
 - TypeScript에서 Extract<T, U>과 Exclude<T, U>의 차이점은?
 - TypeScript에서 infer 키워드를 활용한 조건부 타입 예제는?
 - TypeScript에서 Template Literal Types을 활용한 동적 타입 생성 방법은?
 - TypeScript에서 readonly 속성이 불변성을 보장하는가?
+
+
 - TypeScript에서 never 타입과 unknown 타입이 사용되는 실제 사례는?
 - TypeScript에서 Record<K, T>의 사용 사례는?
 - TypeScript에서 typeof, keyof, in을 함께 사용할 수 있는가?
 - TypeScript에서 Declaration Merging의 실제 활용 사례는?
+
+
 - TypeScript에서 Module Augmentation을 사용해야 하는 경우는?
 - TypeScript에서 Tuple Types과 Variadic Tuple Types의 차이점은?
 - TypeScript에서 Intersection Types과 Union Types을 조합하여 활용하는 방법은?
 - TypeScript에서 Assertion Functions는 어떤 역할을 하는가?
+
+
 - TypeScript에서 satisfies 연산자는 어떤 경우에 유용한가?
 - TypeScript에서 const 어노테이션을 활용한 리터럴 타입 제한은?
 - TypeScript에서 ReadonlyArray<T>와 readonly T[]의 차이는?
 - TypeScript에서 ModuleSpecifierResolution 설정이 중요한 이유는?
+
+
 - TypeScript에서 Intrinsic String Manipulation Types은 어떤 경우에 유용한가?
 - TypeScript에서 exactOptionalPropertyTypes 옵션을 사용할 때 주의할 점은?
 - TypeScript에서 noUncheckedIndexedAccess 옵션을 활성화하면 얻을 수 있는 장점은?
 - TypeScript에서 ES Modules과 CommonJS를 함께 사용할 때 주의해야 할 점은?
+
+
 - TypeScript를 JavaScript 프로젝트에 도입할 때 고려해야 할 사항은?
 - TypeScript를 사용하면 발생할 수 있는 오버헤드는 무엇인가?
 - JavaScript에서 Event Delegation을 활용한 성능 최적화 방법은?
 - JavaScript에서 Shadow DOM을 사용하면 얻을 수 있는 이점은?
+
+
 - JavaScript에서 Service Worker와 Web Worker의 차이점은?
 - JavaScript에서 Lazy Loading을 구현하는 방법은?
 - TypeScript에서 strictNullChecks를 활성화하면 코드의 안전성이 어떻게 개선되는가?
 - TypeScript에서 Partial<T>와 Pick<T, K>을 활용한 실용적인 예제는?
+
+
 - TypeScript에서 Utility Types을 적극적으로 활용하면 얻을 수 있는 장점은?
 - TypeScript에서 Omit<T, K>과 Exclude<T, U>의 차이는?
 - TypeScript 프로젝트에서 tsconfig.json을 설정할 때 최적의 옵션은?
 - JavaScript에서 Polyfill이 필요한 이유와 사용하는 방법은?
+
+
 - JavaScript에서 Deep Clone을 구현하는 다양한 방법은?
 - TypeScript에서 Decorator를 사용하면 얻을 수 있는 이점은?
 - TypeScript에서 Ambient Declarations(.d.ts 파일)의 역할은?
