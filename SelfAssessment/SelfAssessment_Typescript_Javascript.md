@@ -2862,7 +2862,23 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         // 출력: microtask → macrotask
         ```
 
-- JavaScript에서 Optional Chaining (?.) 연산자는 어떤 경우에 유용한가?
+- JavaScript에서 Optional Chaining (?.) 연산자
+    - 목적
+        - 중첩된 객체/속성 접근 시 에러 없이 안전하게 접근
+
+    - 동작 방식
+        - 왼쪽 값이 null 또는 undefined인 경우, 오류 대신 undefined 반환
+
+    - 유용한 상황
+        - API 응답에서 특정 경로의 데이터가 항상 보장되지 않을 때
+        - 복잡한 객체에서 속성 존재 여부를 사전에 검사하지 않고도 안전하게 접근 가능
+
+    - 예시
+        ```js
+        const user = { profile: null };
+        console.log(user.profile?.name); // undefined, 에러 아님
+        ```
+
 - JavaScript에서 Nullish Coalescing (??) 연산자는 어떻게 동작하는가?
 - JavaScript에서 Promise.allSettled()의 사용 사례는?
 - JavaScript에서 Promise.any()의 동작 방식은?
