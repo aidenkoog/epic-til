@@ -2733,8 +2733,22 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 요약
         - DOM 구조 변경 감지: MutationObserver
         - 화면 노출 여부 감지: IntersectionObserver
-        
-- JavaScript에서 BigInt가 필요한 이유는?
+
+- JavaScript에서 BigInt가 필요한 이유
+    - 기존 문제점
+        - 자바스크립트의 Number는 IEEE-754 64비트 부동소수점
+        - 안전 정수 범위: -(2^53 - 1) ~ (2^53 - 1)
+        - 그 이상 숫자는 정확도 손실 발생
+
+    - BigInt 도입 이유
+        - 정밀한 정수 연산 지원 (무제한 자릿수)
+        - 금융, 블록체인, 암호화, 고정밀 데이터 처리에 적합
+
+    - 예시
+        ```js
+        const big = 1234567890123456789012345678901234567890n;
+        ```
+
 - JavaScript에서 documentFragment를 활용하는 이유는?
 
 
