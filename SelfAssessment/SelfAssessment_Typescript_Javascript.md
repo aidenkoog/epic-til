@@ -2700,9 +2700,45 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 메모리 사용량 관리
         - 타이머, 이벤트, 캐시 오브젝트 등을 주기적으로 정리해 리소스 절약.
 
+- JavaScript에서 requestAnimationFrame()과 setTimeout()의 차이
+    - 공통점
+        - 일정 시간 후 작업을 실행하는 비동기 타이머 함수
 
-- JavaScript에서 requestAnimationFrame()과 setTimeout()의 차이는?
-- JavaScript에서 MutationObserver와 IntersectionObserver의 차이점은?
+    - requestAnimationFrame()
+        - 화면 리프레시 주기(보통 60FPS)에 맞춰 콜백 실행
+        - 브라우저 최적화에 맞게 렌더링 → 애니메이션에 적합
+        - 백그라운드 탭에서 자동 중지되어 CPU 자원 절약
+
+    - setTimeout()
+        - 지정한 시간(ms) 후 콜백 실행 보장 없음 (지연 가능성 있음)
+        - 브라우저와 무관하게 실행 예약
+        - 정밀한 제어 X, 렌더링 프레임과 무관
+
+    - 요약
+        - 애니메이션: requestAnimationFrame()
+        - 일반 비동기 지연: setTimeout()
+
+- JavaScript에서 MutationObserver와 IntersectionObserver의 차이점
+    - MutationObserver
+DOM 구조의 변화 감지
+
+예: 노드 추가/삭제, 속성 변경, 텍스트 수정
+
+DOM 변경을 감시하고 자동 반응하는 데 사용
+
+예시: Virtual DOM 구현, DOM 기반 동기화
+
+IntersectionObserver
+요소가 뷰포트와 교차되는지 감지 (스크롤 기반)
+
+예: Lazy Load 이미지, 무한 스크롤
+
+브라우저 스크롤 이벤트 감시보다 성능 우수
+
+요약
+DOM 구조 변경 감지: MutationObserver
+
+화면 노출 여부 감지: IntersectionObserver
 - JavaScript에서 BigInt가 필요한 이유는?
 - JavaScript에서 documentFragment를 활용하는 이유는?
 
