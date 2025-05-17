@@ -2791,7 +2791,38 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - UI 블로킹 방지
         - 멀티스레딩처럼 동작하나, 공유 메모리는 없음 (메시지 기반)
 
-- JavaScript에서 debounce()와 throttle()을 내부적으로 구현하는 방법은?
+- JavaScript에서 debounce()와 throttle()을 내부적으로 구현하는 방법
+    - debounce (디바운스)
+        - 이벤트가 연속 발생해도 마지막 호출만 실행
+        - 주로 검색창, 자동완성 등에 사용
+        - 예제
+            ```js
+            function debounce(fn, delay) {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => fn(...args), delay);
+                };
+            }
+            ```
+    - throttle (스로틀)
+        - 일정 시간 간격으로만 함수 실행 허용
+        - 스크롤, 리사이즈 등 고빈도 이벤트 최적화에 사용
+        - 예제
+            ```js
+            function throttle(fn, limit) {
+                let lastCall = 0;
+                return (...args) => {
+                    const now = Date.now();
+                    if (now - lastCall >= limit) {
+                        lastCall = now;
+                        fn(...args);
+                    }
+                };
+            }
+            ```
+
+
 - JavaScript에서 async function을 Promise 없이 사용할 수 있는가?
 - JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점은?
 
