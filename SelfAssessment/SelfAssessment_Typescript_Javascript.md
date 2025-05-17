@@ -2823,7 +2823,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             ```
 
 
-- JavaScript에서 async function을 Promise 없이 사용할 수 있는가?
+- JavaScript에서 async function을 Promise 없이 사용할 수 있는지에 대한 설명
+    - 본질
+        - async 함수는 무조건 Promise를 반환함
+        - (내부에서 return한 값은 자동으로 Promise.resolve(value)로 감싸짐)
+
+    - 의미
+        - 사용자는 await 없이 사용 가능하지만, 내부적으로는 항상 Promise
+
+    - 예제
+        ```js
+        async function foo() {
+            return 1;
+        }
+        foo().then(console.log); // 1 출력됨 (Promise 자동 래핑)
+        ```
+
+    - 결론
+        - Promise를 명시적으로 작성하지 않아도, async 함수는 항상 Promise를 기반으로 동작함 → 완전한 대체는 불가능
+
 - JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점은?
 
 
