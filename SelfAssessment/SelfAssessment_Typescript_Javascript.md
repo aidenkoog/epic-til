@@ -2769,7 +2769,28 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         container.appendChild(fragment); // 단 한 번만 DOM 갱신
         ```
 
-- JavaScript에서 Web Workers를 활용한 성능 최적화 방법은?
+- JavaScript에서 Web Workers를 활용한 성능 최적화 방법
+    - 목적
+        - 메인 스레드(UI 쓰레드)와 분리된 별도 스레드에서 작업 수행
+        - CPU 연산이 많은 작업을 비동기적으로 처리하여 UI 렌더링 지연 방지
+
+    - 활용 사례
+        - 대용량 데이터 처리
+        - 이미지 필터 처리
+        - 암호화/복호화, 파싱
+        - WebSocket/데이터 스트림 처리
+
+    - 기본 흐름
+        ```js
+        const worker = new Worker('worker.js');
+        worker.postMessage(data); // 메인 → 워커
+        worker.onmessage = (e) => { console.log(e.data); }; // 워커 → 메인
+        ```
+    
+    - 장점
+        - UI 블로킹 방지
+        - 멀티스레딩처럼 동작하나, 공유 메모리는 없음 (메시지 기반)
+
 - JavaScript에서 debounce()와 throttle()을 내부적으로 구현하는 방법은?
 - JavaScript에서 async function을 Promise 없이 사용할 수 있는가?
 - JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점은?
