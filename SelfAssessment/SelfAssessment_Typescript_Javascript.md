@@ -2842,8 +2842,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 결론
         - Promise를 명시적으로 작성하지 않아도, async 함수는 항상 Promise를 기반으로 동작함 → 완전한 대체는 불가능
 
-- JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점은?
+- JavaScript에서 마이크로태스크(microtask)와 매크로태스크(macrotask)의 차이점
+    - Microtask
+        - 우선순위 높음, 이벤트 루프가 다음 작업으로 넘어가기 전 반드시 처리
+        - 예: Promise.then, queueMicrotask, MutationObserver
 
+    - Macrotask
+        - 일반적인 비동기 작업 처리
+        - 예: setTimeout, setInterval, setImmediate, I/O callbacks
+
+    - 실행 순서
+        - 콜스택이 비면 → 마이크로태스크 우선 실행
+        - 마이크로태스크가 모두 끝나야 → 다음 매크로태스크로 이동
+
+    - 예시
+        ```js
+        setTimeout(() => console.log('macrotask'));
+        Promise.resolve().then(() => console.log('microtask'));
+        // 출력: microtask → macrotask
+        ```
 
 - JavaScript에서 Optional Chaining (?.) 연산자는 어떤 경우에 유용한가?
 - JavaScript에서 Nullish Coalescing (??) 연산자는 어떻게 동작하는가?
