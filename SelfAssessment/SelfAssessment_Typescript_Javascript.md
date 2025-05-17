@@ -2749,8 +2749,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         const big = 1234567890123456789012345678901234567890n;
         ```
 
-- JavaScript에서 documentFragment를 활용하는 이유는?
+- JavaScript에서 documentFragment를 활용하는 이유
+    - 개념
+        - 메모리에 존재하는 가상 DOM 컨테이너
+        - DOM에 삽입되기 전까지는 렌더링되지 않음
 
+    - 장점
+        - DOM 조작 최소화로 성능 향상 (Reflow/Repaint 감소)
+        - 다수의 요소를 한 번에 삽입 가능
+        - 루프 내 DOM 추가 시 효율적
+
+    - 사용 예시
+        ```js
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 1000; i++) {
+            const div = document.createElement("div");
+            fragment.appendChild(div);
+        }
+        container.appendChild(fragment); // 단 한 번만 DOM 갱신
+        ```
 
 - JavaScript에서 Web Workers를 활용한 성능 최적화 방법은?
 - JavaScript에서 debounce()와 throttle()을 내부적으로 구현하는 방법은?
