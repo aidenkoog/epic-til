@@ -2720,25 +2720,20 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
 - JavaScript에서 MutationObserver와 IntersectionObserver의 차이점
     - MutationObserver
-DOM 구조의 변화 감지
+        - DOM 구조의 변화 감지
+            - 예: 노드 추가/삭제, 속성 변경, 텍스트 수정
+        - DOM 변경을 감시하고 자동 반응하는 데 사용
+        - 예시: Virtual DOM 구현, DOM 기반 동기화
 
-예: 노드 추가/삭제, 속성 변경, 텍스트 수정
+    - IntersectionObserver
+        - 요소가 뷰포트와 교차되는지 감지 (스크롤 기반)
+            - 예: Lazy Load 이미지, 무한 스크롤
+        - 브라우저 스크롤 이벤트 감시보다 성능 우수
 
-DOM 변경을 감시하고 자동 반응하는 데 사용
-
-예시: Virtual DOM 구현, DOM 기반 동기화
-
-IntersectionObserver
-요소가 뷰포트와 교차되는지 감지 (스크롤 기반)
-
-예: Lazy Load 이미지, 무한 스크롤
-
-브라우저 스크롤 이벤트 감시보다 성능 우수
-
-요약
-DOM 구조 변경 감지: MutationObserver
-
-화면 노출 여부 감지: IntersectionObserver
+    - 요약
+        - DOM 구조 변경 감지: MutationObserver
+        - 화면 노출 여부 감지: IntersectionObserver
+        
 - JavaScript에서 BigInt가 필요한 이유는?
 - JavaScript에서 documentFragment를 활용하는 이유는?
 
