@@ -3299,7 +3299,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             - any: 아무 제한 없이 사용 가능 (위험)
             - unknown: 먼저 검사 후 사용 가능 → 타입 안정성 확보
 
-- TypeScript에서 Record<K, T>의 사용 사례는?
+- TypeScript에서 Record<K, T>의 사용 사례
+    - 개념
+        - 객체의 key와 value 타입을 제한하는 유틸리티 타입
+
+    - 일반적인 예시
+        ```ts
+        type UserRole = 'admin' | 'user' | 'guest';
+        type RoleDescriptions = Record<UserRole, string>;
+
+        const descriptions: RoleDescriptions = {
+            admin: '관리자',
+            user: '일반 사용자',
+            guest: '게스트'
+        };
+        ```
+
+    - 사용 사례
+        - enum-like 객체 생성
+        - Form 상태 관리, API 응답 매핑
+        - 테이블 헤더 → 필드명 매칭
+
 - TypeScript에서 typeof, keyof, in을 함께 사용할 수 있는가?
 - TypeScript에서 Declaration Merging의 실제 활용 사례는?
 
