@@ -3112,7 +3112,29 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - interface는 확장(extends) 에 유리하고
         - type은 유니온, 교차 타입 등 복잡한 조합에 유리
 
-- TypeScript에서 extends와 implements의 차이점은?
+- TypeScript에서 extends와 implements의 차이점
+    - extends
+        - 클래스 → 클래스 상속, 또는 인터페이스/타입 → 인터페이스/타입 확장
+        - 속성과 구조를 상속받아 새로운 타입 확장 가능
+        ```ts
+        interface Animal { name: string }
+        interface Dog extends Animal { breed: string }
+        ```
+
+    - implements
+        - 클래스가 특정 인터페이스의 구조를 구현
+        - 실제 동작은 클래스 내부에서 정의
+        ```ts
+        interface Walkable { walk(): void }
+        class Person implements Walkable {
+            walk() { console.log("Walking"); }
+        }
+        ```
+
+    - 핵심 차이
+        - extends는 타입 상속
+        - implements는 클래스가 타입을 "구현"
+
 - TypeScript에서 mapped types을 사용하여 객체의 속성을 선택적으로 변경하는 방법은?
 - TypeScript에서 Key Remapping in Mapped Types이란 무엇인가?
 
