@@ -3029,7 +3029,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 모듈 기반 앱에서 동적 import 경로 계산
         - WebAssembly, JSON, 이미지 등 동적 자원 로딩 시 유용
 
-- JavaScript에서 modulepreload를 사용할 때의 장점은?
+- JavaScript에서 modulepreload를 사용할 때의 장점
+    - 개념
+        - <link rel="modulepreload" href="...">
+        - 브라우저가 해당 모듈을 미리 다운로드함
+
+    - 장점
+        - JS 모듈 로딩 지연 최소화
+            - → 초기 렌더링 성능 개선 (특히 SPA, 코드 스플리팅 구조에서 중요)
+        - 병목 없이 병렬 prefetch 가능
+
+    - 사용 예시
+        ```html
+        <link rel="modulepreload" href="/main.js">
+        ```
+
+    - 실무 효과
+        - 중요한 모듈을 미리 로드하여 First Input Delay (FID) 감소
+        - 번들링 구조를 개선하지 않고도 로딩 속도 향상 가능
+
 - JavaScript에서 Array.prototype.at()의 사용 사례는?
 - JavaScript에서 Object.hasOwn()은 기존의 Object.prototype.hasOwnProperty()와 어떤 차이가 있는가?
 
