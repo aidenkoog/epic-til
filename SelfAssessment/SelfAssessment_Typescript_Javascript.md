@@ -2934,7 +2934,28 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         // 가장 빨리 성공한 응답 반환
         ```
 
-- JavaScript에서 WeakRef는 어떤 경우에 사용될 수 있는가?
+- JavaScript에서 WeakRef 사용되는 케이스
+    - 개념
+        - WeakRef는 객체에 대한 약한 참조(Weak Reference) 를 만들어, GC(가비지 컬렉터)가 해당 객체를 자유롭게 수거할 수 있도록 함
+
+    - 특징
+        - 객체가 다른 강한 참조가 없으면 GC에 의해 수거될 수 있음
+        - 참조된 객체가 GC로 사라졌을 수 있으므로 사용 전에 살아있는지 확인 필요
+
+    - 사용 시점
+        - 캐시 구현 (메모리 부족 시 자동 수거)
+        - 큰 객체를 조건부로 유지하고 싶을 때
+        - 단, 신중히 사용해야 하며 일반적인 로직에는 부적합
+
+    - 예시
+        ```js
+        let obj = { data: "hello" };
+        const weakRef = new WeakRef(obj);
+        obj = null; // GC 수거 대상이 됨
+
+        const deref = weakRef.deref(); // undefined일 수 있음
+        ```
+
 - JavaScript에서 Top-Level await이란 무엇인가?
 - JavaScript에서 Intl.NumberFormat()과 Intl.DateTimeFormat()의 차이는?
 - JavaScript에서 setTimeout()의 최소 실행 시간이 4ms 이상이 되는 이유는?
