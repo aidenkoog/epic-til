@@ -3192,7 +3192,24 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Extract: 교집합
         - Exclude: 차집합
 
-- TypeScript에서 infer 키워드를 활용한 조건부 타입 예제는?
+- TypeScript에서 infer 키워드를 활용한 조건부 타입 예제
+    - 개념
+        - infer는 타입 추론(inference) 을 조건부 타입 내부에서 수행할 수 있게 함
+
+    - 예시: 배열 요소 타입 추출
+        ```ts
+        type ElementType<T> = T extends (infer U)[] ? U : T;
+
+        type A = ElementType<number[]>; // number
+        type B = ElementType<string>;   // string
+        ```
+
+    - 실전 응용
+        - 함수 반환 타입 추출, 프로미스 결과 추론 등
+        ```ts
+        type ReturnTypeOf<T> = T extends (...args: any[]) => infer R ? R : never;
+        ```
+
 - TypeScript에서 Template Literal Types을 활용한 동적 타입 생성 방법은?
 - TypeScript에서 readonly 속성이 불변성을 보장하는가?
 
