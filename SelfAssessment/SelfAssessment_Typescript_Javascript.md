@@ -3091,7 +3091,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 특히 Object.create(null) 형태의 객체에 유용
 
 
-- TypeScript에서 type alias와 interface를 혼합해서 사용할 수 있는가?
+- TypeScript에서 type alias와 interface를 혼합 사용 가능성
+    - 가능 여부
+        - Yes, 혼합 사용 가능하며, 실제로 자주 사용됨
+
+    - 사용 방식
+        - type으로 만든 타입을 interface에서 확장 가능
+        - interface로 만든 타입을 type에서 조합 가능 (Intersection 사용)
+
+    - 예시
+        ```ts
+        type Name = { name: string };
+        interface Person extends Name {
+            age: number;
+        }
+        type User = Person & { isAdmin: boolean };
+        ```
+
+    - 실전 팁
+        - interface는 확장(extends) 에 유리하고
+        - type은 유니온, 교차 타입 등 복잡한 조합에 유리
+
 - TypeScript에서 extends와 implements의 차이점은?
 - TypeScript에서 mapped types을 사용하여 객체의 속성을 선택적으로 변경하는 방법은?
 - TypeScript에서 Key Remapping in Mapped Types이란 무엇인가?
