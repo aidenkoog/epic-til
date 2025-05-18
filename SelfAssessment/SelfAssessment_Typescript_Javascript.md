@@ -2898,10 +2898,41 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 기본값 설정 시 값이 "0" 또는 빈 문자열일 수도 있을 때 유용
 
 - JavaScript에서 Promise.allSettled()의 사용 사례
+    - 동작 방식
+        - 모든 Promise가 이행(resolve) 또는 거부(reject) 될 때까지 대기
+        - 각 결과를 { status: "fulfilled" | "rejected", value | reason } 형식으로 반환
 
+    - 유용한 경우
+        - 여러 비동기 작업 중 성공/실패 여부와 관계없이 모든 결과를 수집해야 할 때
+        - 예: 대시보드 API 응답 통합, 파일 업로드 결과 집계
 
-- JavaScript에서 Promise.any()의 동작 방식은?
+    - 예시
+        ```js
+        const results = await Promise.allSettled([
+            fetch('/a'), fetch('/b'), fetch('/c')
+        ]);
+        // 개별 성공/실패 여부 확인 가능
+        ```
 
+- JavaScript에서 Promise.any()의 동작 방식
+    - 목적
+        - 여러 Promise 중 하나라도 성공하면 그 값을 반환
+
+    - 동작 방식
+        - 가장 먼저 resolve된 Promise의 값을 반환
+        - 모든 Promise가 reject될 경우 AggregateError 발생
+
+    - 유용한 상황
+        - 여러 서버 중 응답이 가장 빠른 것을 사용하고자 할 때
+        - 여러 인증 방법 중 하나만 성공하면 통과시키고 싶을 때
+
+    - 예시
+        ```js
+        const result = await Promise.any([
+            fetchFromCache(), fetchFromCDN(), fetchFromOrigin()
+        ]);
+        // 가장 빨리 성공한 응답 반환
+        ```
 
 - JavaScript에서 WeakRef는 어떤 경우에 사용될 수 있는가?
 - JavaScript에서 Top-Level await이란 무엇인가?
