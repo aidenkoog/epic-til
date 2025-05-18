@@ -3068,7 +3068,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 스택/큐 구조에서 끝 요소 접근
         - 마지막 요소 검사, 페이징 처리 등
 
-- JavaScript에서 Object.hasOwn()은 기존의 Object.prototype.hasOwnProperty()와 어떤 차이가 있는가?
+- JavaScript에서 Object.hasOwn()은 기존의 Object.prototype.hasOwnProperty()와 어떤 차이가 있는지 설명
+    - Object.hasOwn() (ES2022 도입)
+        - 순수한 함수 (prototype 오염과 무관)
+        - 객체의 자체 속성만 존재 여부 검사
+
+    - 기존 방식
+        - obj.hasOwnProperty('key'): 프로토타입 체인에 영향 받음
+        - 객체가 hasOwnProperty를 덮어썼거나 prototype이 null인 경우 오류 발생 가능
+
+    - 예시
+        ```js
+        const obj = Object.create(null);
+        obj.foo = 1;
+
+        Object.hasOwn(obj, 'foo'); // true
+        obj.hasOwnProperty('foo'); // TypeError (메서드 없음)
+        ```
+
+    - 결론
+        - Object.hasOwn()은 보다 안전하고 모던한 방식
+        - 특히 Object.create(null) 형태의 객체에 유용
 
 
 - TypeScript에서 type alias와 interface를 혼합해서 사용할 수 있는가?
