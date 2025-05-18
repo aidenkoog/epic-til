@@ -2996,7 +2996,20 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
 
 - JavaScript에서 setTimeout()의 최소 실행 시간이 4ms 이상이 되는 이유
+    - 동작 원리
+        - HTML5 표준에서 정의: 중첩된 타이머(setTimeout 또는 setInterval)가 5회 이상 중첩될 경우, 최소 대기 시간은 4ms 이상으로 강제됨
 
+    - 이유
+        - CPU 자원 남용 방지
+        - 무한 루프 형태의 setTimeout 호출 방지
+        - 브라우저와 OS가 UI 렌더링 및 이벤트 처리에 시간을 할당하도록 보장
+
+    - 예시
+        ```js
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => console.log(i), 0); // 실제 실행은 최소 4ms 간격
+        }
+        ```
 
 - JavaScript에서 import.meta 객체는 어떤 용도로 사용되는가?
 - JavaScript에서 modulepreload를 사용할 때의 장점은?
