@@ -3254,12 +3254,51 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         const config: Config = { settings: { theme: "dark" } };
         config.settings.theme = "light"; // 가능 (내부는 readonly 아님)
         ```
-        
+
     - 진정한 불변성?
         - 중첩까지 불변으로 하려면 Readonly<T> 또는 라이브러리 사용 필요 (예: deepFreeze, immer)
 
 
-- TypeScript에서 never 타입과 unknown 타입이 사용되는 실제 사례는?
+- TypeScript에서 never 타입과 unknown 타입이 사용되는 실제 사례
+    - never 타입
+        - 개념
+            - 절대 도달하지 않는 값의 타입
+            - 함수가 항상 예외를 던지거나 종료되지 않을 때 반환
+        - 사용 사례
+            - 안전한 exhaustive check (switch-case 검사)
+            ```ts
+            function assertNever(value: never): never {
+                throw new Error(`Unhandled value: ${value}`);
+            }
+
+            type Shape = 'circle' | 'square';
+            function getArea(shape: Shape) {
+                switch (shape) {
+                    case 'circle': return 3.14;
+                    case 'square': return 4;
+                    default: return assertNever(shape); // 컴파일러가 체크해줌
+                }
+            }
+            ```
+    - unknown 타입
+        - 개념
+            - 모든 타입의 슈퍼 타입 (any와 비슷하나 더 안전)
+            - 사용할 때는 타입 좁히기 또는 타입 단언 필요
+
+        - 사용 사례
+            - 외부 데이터 또는 사용자 입력 처리 시
+            ```ts
+            function handleInput(data: unknown) {
+                if (typeof data === 'string') {
+                    console.log(data.toUpperCase());
+                }
+            }
+            ```
+
+        - 비교
+            - any: 아무 제한 없이 사용 가능 (위험)
+            - unknown: 먼저 검사 후 사용 가능 → 타입 안정성 확보
+
 - TypeScript에서 Record<K, T>의 사용 사례는?
 - TypeScript에서 typeof, keyof, in을 함께 사용할 수 있는가?
 - TypeScript에서 Declaration Merging의 실제 활용 사례는?
