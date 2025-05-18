@@ -3048,7 +3048,26 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 중요한 모듈을 미리 로드하여 First Input Delay (FID) 감소
         - 번들링 구조를 개선하지 않고도 로딩 속도 향상 가능
 
-- JavaScript에서 Array.prototype.at()의 사용 사례는?
+- JavaScript에서 Array.prototype.at()의 사용 사례
+    - 개념
+        - 배열에서 인덱스로 요소를 가져오는 메서드
+        - 음수 인덱스도 지원하여 뒤에서 접근 가능
+
+    - 장점
+        - array.at(-1)로 마지막 요소 접근 → 가독성 향상
+        - array[array.length - 1] 대신 간결한 표현
+
+    - 예시
+        ```js
+        const arr = [10, 20, 30];
+        arr.at(0);   // 10
+        arr.at(-1);  // 30
+        ```
+
+    - 사용 사례
+        - 스택/큐 구조에서 끝 요소 접근
+        - 마지막 요소 검사, 페이징 처리 등
+
 - JavaScript에서 Object.hasOwn()은 기존의 Object.prototype.hasOwnProperty()와 어떤 차이가 있는가?
 
 
