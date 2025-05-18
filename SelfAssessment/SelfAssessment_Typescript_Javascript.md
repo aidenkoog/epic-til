@@ -2879,8 +2879,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         console.log(user.profile?.name); // undefined, 에러 아님
         ```
 
-- JavaScript에서 Nullish Coalescing (??) 연산자는 어떻게 동작하는가?
-- JavaScript에서 Promise.allSettled()의 사용 사례는?
+- JavaScript에서 Nullish Coalescing (??) 연산자 동작 방법
+    - 목적
+        - null 또는 undefined인 경우에만 우측 값으로 대체
+
+    - 동작 방식
+        - false, 0, "" 같은 Falsy 값은 무시하고 유지
+        - 오직 null/undefined만 대체
+
+    - 비교: || vs ??
+        ```js
+        const val = 0;
+        console.log(val || 100); // 100
+        console.log(val ?? 100); // 0 (false, 0, "" 같은 Falsy 값은 무시하고 유지)
+        ```
+
+    - 사용 사례
+        - 기본값 설정 시 값이 "0" 또는 빈 문자열일 수도 있을 때 유용
+
+- JavaScript에서 Promise.allSettled()의 사용 사례
+
+
 - JavaScript에서 Promise.any()의 동작 방식은?
 
 
