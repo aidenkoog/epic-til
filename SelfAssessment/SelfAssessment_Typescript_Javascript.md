@@ -3230,7 +3230,33 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         // { get_user: () => Promise<any>, get_product: () => Promise<any> }
         ```
 
-- TypeScript에서 readonly 속성이 불변성을 보장하는가?
+- TypeScript에서 readonly 속성
+    - 정의
+        - readonly는 컴파일 타임에만 재할당 금지를 적용
+
+    - 예시
+        ```ts
+        interface User {
+            readonly name: string;
+        }
+
+        const u: User = { name: "John" };
+        u.name = "Doe"; // 오류 (컴파일 시점)
+        ```
+
+    - 제한 사항
+        - 불변성은 얕음(shallow)
+        - 중첩된 객체나 배열 내부는 여전히 변경 가능
+        ```ts
+        interface Config {
+            readonly settings: { theme: string };
+        }
+        const config: Config = { settings: { theme: "dark" } };
+        config.settings.theme = "light"; // 가능 (내부는 readonly 아님)
+        ```
+        
+    - 진정한 불변성?
+        - 중첩까지 불변으로 하려면 Readonly<T> 또는 라이브러리 사용 필요 (예: deepFreeze, immer)
 
 
 - TypeScript에서 never 타입과 unknown 타입이 사용되는 실제 사례는?
