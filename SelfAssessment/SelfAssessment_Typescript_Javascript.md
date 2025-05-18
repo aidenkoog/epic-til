@@ -3210,7 +3210,26 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         type ReturnTypeOf<T> = T extends (...args: any[]) => infer R ? R : never;
         ```
 
-- TypeScript에서 Template Literal Types을 활용한 동적 타입 생성 방법은?
+- TypeScript에서 Template Literal Types을 활용한 동적 타입 생성 방법
+    - 개념
+        - 문자열 조합을 통한 동적 키/값 생성 가능
+    - 예시
+        ```ts
+        type Lang = 'ko' | 'en';
+        type LabelKey = `label_${Lang}`;
+        // 결과: 'label_ko' | 'label_en'
+        ```
+    - 응용 예시: API 응답 키 접두사
+        ```ts
+        type API<T extends string> = {
+            [K in T as `get_${K}`]: () => Promise<any>;
+        };
+
+        type Routes = 'user' | 'product';
+        type APIMap = API<Routes>;
+        // { get_user: () => Promise<any>, get_product: () => Promise<any> }
+        ```
+
 - TypeScript에서 readonly 속성이 불변성을 보장하는가?
 
 
