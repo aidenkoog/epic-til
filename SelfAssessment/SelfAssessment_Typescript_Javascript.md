@@ -2968,10 +2968,34 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 사용 이유
         - 초기 데이터 fetch, 설정 파일 로딩 등 비동기 작업 후 모듈 실행이 필요할 때 유용
 
-예시
+    - 예시
+        ```js
+        const data = await fetchData();
+        initApp(data);
+        ```
 
-- JavaScript에서 Intl.NumberFormat()과 Intl.DateTimeFormat()의 차이는?
-- JavaScript에서 setTimeout()의 최소 실행 시간이 4ms 이상이 되는 이유는?
+- JavaScript에서 Intl.NumberFormat()과 Intl.DateTimeFormat()의 차이
+    - 공통점
+        - Intl 객체를 활용한 국제화(i18n) 포맷팅 도구
+        - 로케일(locale)에 따라 포맷 자동 조정
+
+    - Intl.NumberFormat()
+        - 숫자, 통화, 백분율 등의 포맷 제공
+        - 예: 통화 기호 붙이기, 천 단위 구분자
+        ```js
+        new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(10000);
+        // "₩10,000"
+        ```
+
+    - Intl.DateTimeFormat()
+        - 날짜 및 시간 포맷 제공
+        - 연/월/일/시/분/초 등의 표시 형식 지정
+        ```js
+        new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date());
+        // "May 14, 2025"
+        ```
+
+- JavaScript에서 setTimeout()의 최소 실행 시간이 4ms 이상이 되는 이유
 
 
 - JavaScript에서 import.meta 객체는 어떤 용도로 사용되는가?
