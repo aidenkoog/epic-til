@@ -3320,9 +3320,60 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Form 상태 관리, API 응답 매핑
         - 테이블 헤더 → 필드명 매칭
 
-- TypeScript에서 typeof, keyof, in을 함께 사용할 수 있는가?
-- TypeScript에서 Declaration Merging의 실제 활용 사례는?
+- TypeScript에서 typeof, keyof, in을 함께 사용 가능 여부
+    - 가능 여부
+        - Yes, 세 가지는 조합하여 고급 타입 생성에 자주 사용됨
 
+    - 사용 예시
+        ```ts
+        const person = {
+            name: "Alice",
+            age: 30,
+        };
+
+        type Person = typeof person; // { name: string; age: number }
+        type PersonKeys = keyof Person; // "name" | "age"
+
+        type OptionalPerson = {
+            [K in keyof Person]?: Person[K];
+        };
+        ```
+
+    - 조합 목적
+        - typeof: 값 → 타입 추출
+        - keyof: 타입의 키 추출
+        - in: 매핑 타입 반복 시 사용
+
+- TypeScript에서 Declaration Merging의 실제 활용 사례
+    - 개념
+        - 같은 이름의 interface, namespace, function 등 선언이 자동으로 합쳐짐
+
+    - 사용 예: interface 확장
+        ```ts
+        interface Window {
+            appVersion: string;
+        }
+
+        window.appVersion = '1.0.0';
+        ```
+
+    - 다른 사례: 함수 + namespace
+        ```ts
+        function greet() {
+            console.log("Hello");
+        }
+
+        namespace greet {
+            export const version = "1.2.3";
+        }
+
+        greet(); // "Hello"
+        console.log(greet.version); // "1.2.3"
+        ```
+    - 주요 활용처
+        - 글로벌 객체 확장
+        - 라이브러리 확장 (ex: Express의 Request, Response 인터페이스 확장)
+        - 모듈 보강
 
 - TypeScript에서 Module Augmentation을 사용해야 하는 경우는?
 - TypeScript에서 Tuple Types과 Variadic Tuple Types의 차이점은?
