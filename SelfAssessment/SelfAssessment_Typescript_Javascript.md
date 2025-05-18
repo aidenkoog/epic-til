@@ -3168,7 +3168,30 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - API 응답 필드 이름을 변환하거나, 네이밍 규칙 자동 반영할 때 유용
         - 조건부 키 제거, 추가 접두어/접미어 등 고급 타입 조작 가능
 
-- TypeScript에서 Extract<T, U>과 Exclude<T, U>의 차이점은?
+- TypeScript에서 Extract<T, U>과 Exclude<T, U>의 차이점
+    - 공통점
+        - 둘 다 유니온 타입 필터링을 위한 유틸리티 타입
+
+    - Extract<T, U>
+        - T에서 U와 공통되는 타입만 추출
+        ```ts
+        type T = 'a' | 'b' | 'c';
+        type U = 'a' | 'b';
+        type R = Extract<T, U>; // 'a' | 'b'
+        ```
+
+    - Exclude<T, U>
+        - T에서 U를 제외한 나머지 타입 반환
+        ```ts
+        type T = 'a' | 'b' | 'c';
+        type U = 'a' | 'b';
+        type R = Exclude<T, U>; // 'c'
+        ```
+
+    - 요약
+        - Extract: 교집합
+        - Exclude: 차집합
+
 - TypeScript에서 infer 키워드를 활용한 조건부 타입 예제는?
 - TypeScript에서 Template Literal Types을 활용한 동적 타입 생성 방법은?
 - TypeScript에서 readonly 속성이 불변성을 보장하는가?
