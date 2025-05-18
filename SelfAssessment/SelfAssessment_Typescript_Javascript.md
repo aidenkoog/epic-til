@@ -2956,7 +2956,20 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         const deref = weakRef.deref(); // undefined일 수 있음
         ```
 
-- JavaScript에서 Top-Level await이란 무엇인가?
+- JavaScript에서 Top-Level await
+    - 개념
+        - 모듈 스코프 최상단에서 await 사용 가능
+        - 즉, 함수 내부가 아니어도 await 가능
+
+    - 제한 사항
+        - ESM(ECMAScript Module) 환경에서만 사용 가능 (스크립트 type="module" 필요)
+        - CommonJS나 브라우저 <script>에서는 사용 불가
+
+    - 사용 이유
+        - 초기 데이터 fetch, 설정 파일 로딩 등 비동기 작업 후 모듈 실행이 필요할 때 유용
+
+예시
+
 - JavaScript에서 Intl.NumberFormat()과 Intl.DateTimeFormat()의 차이는?
 - JavaScript에서 setTimeout()의 최소 실행 시간이 4ms 이상이 되는 이유는?
 
