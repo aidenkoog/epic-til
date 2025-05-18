@@ -3135,9 +3135,38 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - extends는 타입 상속
         - implements는 클래스가 타입을 "구현"
 
-- TypeScript에서 mapped types을 사용하여 객체의 속성을 선택적으로 변경하는 방법은?
-- TypeScript에서 Key Remapping in Mapped Types이란 무엇인가?
+- TypeScript에서 mapped types을 사용하여 객체의 속성을 선택적으로 변경하는 방법
+    - 개념
+        - 객체 타입의 각 속성을 일괄적으로 수정할 수 있는 문법
+    - 사용 예시
+        - 모든 속성을 optional 로 바꾸기
+        ```ts
+        type Optional<T> = {
+            [K in keyof T]?: T[K];
+        };
 
+        type User = { id: number; name: string };
+        type OptionalUser = Optional<User>; // { id?: number; name?: string }
+        ```
+    - 변형 예
+        - readonly, nullable, required 등 다양하게 응용 가능
+
+- TypeScript에서 Key Remapping in Mapped Types
+    - 개념
+        - Mapped Type에서 키 이름 자체를 변경할 수 있는 기능 (TS 4.1+)
+    - 문법
+        ```ts
+        type PrefixKeys<T> = {
+            [K in keyof T as `prefix_${string & K}`]: T[K];
+        };
+
+        type Data = { name: string; age: number };
+        type PrefixedData = PrefixKeys<Data>; 
+        // { prefix_name: string; prefix_age: number }
+        ```
+    - 활용 예
+        - API 응답 필드 이름을 변환하거나, 네이밍 규칙 자동 반영할 때 유용
+        - 조건부 키 제거, 추가 접두어/접미어 등 고급 타입 조작 가능
 
 - TypeScript에서 Extract<T, U>과 Exclude<T, U>의 차이점은?
 - TypeScript에서 infer 키워드를 활용한 조건부 타입 예제는?
