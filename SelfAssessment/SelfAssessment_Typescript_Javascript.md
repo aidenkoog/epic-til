@@ -3011,7 +3011,24 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         }
         ```
 
-- JavaScript에서 import.meta 객체는 어떤 용도로 사용되는가?
+- JavaScript에서 import.meta 객체 사용 용도
+    - 개념
+        - ESM(ECMAScript Modules) 환경에서 사용 가능한 모듈 메타 정보 객체
+
+    - 주요 용도
+        - 현재 모듈에 대한 정보를 제공 (위치, 환경 등)
+
+    - 주요 속성 및 예시
+        - import.meta.url: 현재 모듈의 절대 URL
+        ```js
+        console.log(import.meta.url);
+        // 예시: "file:///Users/user/project/module.js"
+        ```
+
+    - 활용 예시
+        - 모듈 기반 앱에서 동적 import 경로 계산
+        - WebAssembly, JSON, 이미지 등 동적 자원 로딩 시 유용
+
 - JavaScript에서 modulepreload를 사용할 때의 장점은?
 - JavaScript에서 Array.prototype.at()의 사용 사례는?
 - JavaScript에서 Object.hasOwn()은 기존의 Object.prototype.hasOwnProperty()와 어떤 차이가 있는가?
