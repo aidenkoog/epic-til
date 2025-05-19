@@ -136,7 +136,27 @@ Organize concepts, features, types and Pros and Cons
     - Diffing 알고리즘을 활용하여 변경된 요소만 찾아서 업데이트하는 것이 핵심 원리
     - Virtual DOM은 웹 애플리케이션의 성능을 향상시키고, 유지보수를 쉽게 만들어 주는 중요한 기술
 
-- React의 State와 Props의 차이점은?
+- React의 State와 Props의 차이점
+  - State (상태)
+    - 컴포넌트 내부에서 관리되는 데이터
+    - 변경 가능 (mutable) – useState, setState 등을 통해 변경
+    - UI 렌더링에 영향을 주는 동적인 값
+
+  - Props (속성)
+    - 부모 컴포넌트가 자식 컴포넌트에 전달하는 읽기 전용 데이터
+    - 변경 불가 (immutable)
+    - 컴포넌트 간 데이터 전달에 사용
+
+  - 핵심 차이
+    - State
+      - 소유자: 자신 (컴포넌트 내부)
+      - 수정 가능성: 가능 (setState)
+      - 역할: 동적 상태 관리
+    - Props
+      - 소유자: 부모 컴포넌트
+      - 수정 가능성: 불가능 (읽기 전용)
+      - 역할: 외부로부터 받은 설정값
+
 - React에서 상태 관리는 어떻게 하는가?
 - Redux와 Context API의 차이점은?
 
