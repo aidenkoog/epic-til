@@ -3952,7 +3952,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Omit: 객체 속성 제거용
         - Exclude: 유니온 타입 필터링용
 
-- TypeScript 프로젝트에서 tsconfig.json을 설정할 때 최적의 옵션은?
+- TypeScript 프로젝트에서 tsconfig.json을 설정할 때 최적의 옵션
+    - 필수 설정
+        - "strict": true
+            - 타입 안전성 극대화 (추론 오류 사전 방지)
+        - "target": "ES2020" 이상
+            - 최신 문법과 성능 향상 활용
+        - "module": "ESNext" or "NodeNext"
+            - ESM 기반 모듈 시스템 사용 시 필수
+        - "moduleResolution": "node"
+            - Node.js 스타일의 모듈 해석
+        - "esModuleInterop": true, "allowSyntheticDefaultImports": true
+             - CommonJS와의 호환성 확보
+        - "skipLibCheck": true
+            - 외부 라이브러리의 타입 검사 생략으로 컴파일 속도 향상
+
+    - 권장 추가 옵션
+        - "noUnusedLocals": true / "noUnusedParameters": true
+            - 불필요한 코드 제거 유도
+        - "baseUrl", "paths"
+            - 절대경로 import 및 모듈 경로 alias 설정 가능
+
 - JavaScript에서 Polyfill이 필요한 이유와 사용하는 방법은?
 
 
