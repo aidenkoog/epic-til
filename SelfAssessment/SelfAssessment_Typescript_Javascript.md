@@ -3973,9 +3973,85 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - "baseUrl", "paths"
             - 절대경로 import 및 모듈 경로 alias 설정 가능
 
-- JavaScript에서 Polyfill이 필요한 이유와 사용하는 방법은?
+- JavaScript에서 Polyfill이 필요한 이유와 사용하는 방법
+    - 필요 이유
+        - 브라우저 간 호환성 확보
+            - 최신 ECMAScript 기능이 오래된 브라우저에서 동작하지 않을 수 있음
+        - 크로스 브라우징 문제 해결
+            - 예: Promise, Array.prototype.includes, Object.entries 등
+        - 표준 기능 미지원 환경에서 동일 동작 보장
+
+    - 사용하는 방법
+        - 수동 import 방식
+            ```js
+            import 'core-js/stable';
+            import 'regenerator-runtime/runtime';
+            ```
+
+        - Babel + Polyfill 자동 삽입
+            ```bash
+            npm install --save core-js regenerator-runtime
+            ```
+            ```json
+            {
+                "presets": [
+                    ["@babel/preset-env", {
+                    "useBuiltIns": "usage",
+                    "corejs": 3
+                    }]
+                ]
+            }
+            ```
+
+        - CDN 방식
+            ```html
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=Promise"></script>
+            ```
+
+- JavaScript에서 Deep Clone을 구현하는 다양한 방법
+    - ① JSON 방식
+        - JSON.stringify() → JSON.parse()로 깊은 복사
+        - 간단하고 빠름
+        - 함수, Date, Map, Set, undefined, symbol, 순환 참조 등은 지원 불가
+        ```js
+        const copy = JSON.parse(JSON.stringify(original));
+        ```
+
+    - ② 재귀 방식 (직접 구현)
+        - 객체와 배열을 재귀적으로 순회하여 복사
+        - 순환 참조 처리 시 WeakMap 사용 필요
+        ```js
+        function deepClone(obj, hash = new WeakMap()) {
+            if (obj === null || typeof obj !== "object") return obj;
+            if (hash.has(obj)) return hash.get(obj);
+
+            const clone = Array.isArray(obj) ? [] : {};
+            hash.set(obj, clone);
+
+            for (const key in obj) {
+                clone[key] = deepClone(obj[key], hash);
+            }
+            return clone;
+        }
+        ```
+
+    - ③ structuredClone() (최신 브라우저)
+        - 내장 API로 깊은 복사 + 순환 참조 지원
+        - 가장 안전하고 빠른 방법 중 하나
+        ```js
+        const copy = structuredClone(original);
+        ```
+
+    - ④ 외부 라이브러리 활용
+        - 예: Lodash의 _.cloneDeep()
+        - 복잡한 객체, 안정성 확보
+        ```js
+        import cloneDeep from 'lodash/cloneDeep';
+        const copy = cloneDeep(original);
+        ```
+
+- TypeScript에서 Decorator를 사용하면 얻을 수 있는 이점
 
 
-- JavaScript에서 Deep Clone을 구현하는 다양한 방법은?
-- TypeScript에서 Decorator를 사용하면 얻을 수 있는 이점은?
-- TypeScript에서 Ambient Declarations(.d.ts 파일)의 역할은?
+
+- TypeScript에서 Ambient Declarations(.d.ts 파일)의 역할
