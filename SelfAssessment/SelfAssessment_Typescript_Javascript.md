@@ -3584,10 +3584,34 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 대부분의 모던 프로젝트에서는 "node" 설정을 사용해야 안정적
         - "paths"와 "baseUrl"과 함께 사용하면 절대경로 import도 쉽게 설정 가능
 
-- TypeScript에서 Intrinsic String Manipulation Types은 어떤 경우에 유용한가?
-- TypeScript에서 exactOptionalPropertyTypes 옵션을 사용할 때 주의할 점은?
-- TypeScript에서 noUncheckedIndexedAccess 옵션을 활성화하면 얻을 수 있는 장점은?
-- TypeScript에서 ES Modules과 CommonJS를 함께 사용할 때 주의해야 할 점은?
+- TypeScript에서 Intrinsic String Manipulation Types 유용한 케이스
+    - 정의
+        - Intrinsic String Manipulation Types는 TypeScript가 기본 제공하는 문자열 조작 타입
+
+    - 주요 종류
+        - Uppercase<T>: 모든 문자를 대문자로
+        - Lowercase<T>: 모든 문자를 소문자로
+        - Capitalize<T>: 첫 글자만 대문자
+        - Uncapitalize<T>: 첫 글자만 소문자
+
+    - 언제 유용한가
+        - 문자열을 기반으로 타입을 동적으로 조합할 때
+        - API 응답 타입, 객체 키 타입 등을 가공하여 리턴 타입을 구성할 때
+        - 템플릿 리터럴 타입과 함께 유연한 타입 조작이 필요할 때
+
+    - 예시
+        ```ts
+        type Greeting = 'hello';
+        type Shout = Uppercase<Greeting>; // 'HELLO'
+
+        type HttpMethod = 'get' | 'post';
+        type HandlerName<T extends string> = `on${Capitalize<T>}`;
+        type GetHandler = HandlerName<'get'>; // 'onGet'
+        ```
+
+- TypeScript에서 exactOptionalPropertyTypes 옵션을 사용할 때 주의할 점
+- TypeScript에서 noUncheckedIndexedAccess 옵션을 활성화하면 얻을 수 있는 장점
+- TypeScript에서 ES Modules과 CommonJS를 함께 사용할 때 주의해야 할 점
 
 
 - TypeScript를 JavaScript 프로젝트에 도입할 때 고려해야 할 사항은?
