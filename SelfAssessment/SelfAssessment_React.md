@@ -304,9 +304,45 @@ Organize concepts, features, types and Pros and Cons
     - componentWillUnmount → Unmount 시
 
 - React에서 불필요한 리렌더링을 방지하는 방법
+  - React.memo()
+    - 컴포넌트를 props 변경 시에만 리렌더링 하도록 최적화
+    ```jsx
+    const MyComponent = React.memo((props) => { /* ... */ });
+    ```
 
+  - useMemo / useCallback
+    - 계산결과(useMemo)나 함수(useCallback)를 메모이제이션하여 참조값 변경 방지
+
+  - shouldComponentUpdate (클래스형)
+    - 조건에 따라 리렌더링 여부 제어
+
+  - key 잘못된 사용 피하기
+    - 반복 요소에서 index 사용 시 오히려 불필요한 리렌더링 유발 가능
+
+  - Context 분리
+    - Context 는 모든 하위 컴포넌트를 리렌더링 시키므로, 역할별로 Context를 나눔
 
 - React에서 상태(state)를 변경할 때 주의할 점
+  - 직접 변경 금지
+    - 불변성 유지 필수
+      - state.value = 1 → setState({ ...state, value: 1 })
+
+  - 비동기적 처리
+    - 상태 업데이트는 즉시 반영되지 않고 비동기적으로 처리됨
+    - 상태에 의존하는 연산은 콜백 또는 useEffect를 사용
+    ```jsx
+    setCount(count + 1); // count는 이전 값일 수 있음
+    setCount(prev => prev + 1); // 안전한 방식
+    ```
+
+  - 병합 주의
+    - 객체/배열 상태 변경 시 spread 연산자 등을 사용해 복사 후 변경
+    ```js
+    setUser(prev => ({ ...prev, name: 'John' }));
+    ```
+
+  - 의존성 배열 누락 주의
+    - useEffect, useCallback, useMemo 등에서 상태를 참조하면, 해당 상태는 반드시 의존성 배열에 포함
 
 - React에서 Suspense와 Error Boundary의 차이점은?
 - React의 Concurrent Mode란 무엇인가?
