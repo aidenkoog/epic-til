@@ -3810,6 +3810,43 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
             - 백그라운드 푸시 알림
 
 - JavaScript에서 Lazy Loading을 구현하는 방법
+    - Lazy Loading 정의
+        - 필요한 시점에 리소스(이미지, 컴포넌트 등)를 지연 로딩하여 초기 로딩 속도와 리소스 사용량을 줄이는 기법
+
+    - 이미지 Lazy Loading
+        ```html
+        <img src="placeholder.jpg" data-src="real-image.jpg" loading="lazy" />
+        ```
+        ```js
+        <!-- JS로 구현 방법 -->
+        const images = document.querySelectorAll('img[data-src]');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    observer.unobserve(img);
+                }
+            });
+        });
+        images.forEach(img => observer.observe(img));
+        ```
+
+    - 모듈/컴포넌트 Lazy Loading
+        - import() 동적 import 사용 (코드 스플리팅)
+            ```js
+            button.addEventListener('click', async () => {
+                const { heavyFunction } = await import('./heavyModule.js');
+                heavyFunction();
+            });
+            ```
+
+    - React Lazy Loading
+        ```tsx
+        const LazyComponent = React.lazy(() => import('./MyComponent'));
+        ```
+
+
 - TypeScript에서 strictNullChecks를 활성화하면 코드의 안전성이 어떻게 개선되는가?
 - TypeScript에서 Partial<T>와 Pick<T, K>을 활용한 실용적인 예제
 
