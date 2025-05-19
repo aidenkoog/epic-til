@@ -3700,7 +3700,26 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 프로젝트 초기부터 하나의 모듈 시스템으로 통일하는 것이 가장 바람직
         - 혼용이 필요하다면 Interop 설정 + 모듈 변환 전략을 명확히 구성할 것
 
-- TypeScript를 JavaScript 프로젝트에 도입할 때 고려해야 할 사항은?
+- TypeScript를 JavaScript 프로젝트에 도입할 때 고려해야 할 사항
+    - 점진적 마이그레이션 가능성
+        - .js → .ts 혹은 .d.ts 기반의 gradual adoption
+        - allowJs, checkJs 옵션을 활용하여 JS 코드에서 타입 체크 가능
+
+    - 기존 코드와의 호환성
+        - 레거시 코드가 많을수록 .d.ts로 타입 정의 보강이 중요
+
+    - 빌드 파이프라인 정비 필요
+        - Babel → TypeScript + tsconfig + bundler(Vite/Webpack 등) 구성 필요
+
+    - 팀의 숙련도와 교육
+        - 팀원들의 타입스크립트 이해 수준이 낮다면 학습 리소스 제공이 선행되어야 함
+
+    - 타입 정의 활용 계획
+        - 외부 라이브러리 타입 제공 여부 확인 (@types 또는 타입 내장 여부)
+
+    - 도입 목적 명확화
+        - 버그 예방? 코드 자동완성 개선? 문서화? → 도입 범위 결정 기준
+
 - TypeScript를 사용하면 발생할 수 있는 오버헤드는 무엇인가?
 - JavaScript에서 Event Delegation을 활용한 성능 최적화 방법은?
 - JavaScript에서 Shadow DOM을 사용하면 얻을 수 있는 이점은?
