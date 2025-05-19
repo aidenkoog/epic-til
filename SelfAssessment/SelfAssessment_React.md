@@ -17,55 +17,65 @@ Organize concepts, features, types and Pros and Cons
     - React Router: SPA에서 페이지 이동을 위한 라우팅
     - 가상 DOM: 성능 최적화를 위한 업데이트 방식
     - SSR (Next.js): 서버 사이드 렌더링으로 SEO 및 성능 개선
+
   - 핵심 개념 상세
     - 컴포넌트 (Component)
-	  - UI를 구성하는 최소 단위
-	  - 재사용 가능하며, 작은 단위로 나누어 개발 가능
-	  - 함수형 컴포넌트와 클래스형 컴포넌트가 있으나, 최근에는 함수형 컴포넌트 + 훅(Hooks)이 주로 사용
+      - UI를 구성하는 최소 단위
+      - 재사용 가능하며, 작은 단위로 나누어 개발 가능
+      - 함수형 컴포넌트와 클래스형 컴포넌트가 있으나, 최근에는 함수형 컴포넌트 + 훅(Hooks)이 주로 사용
+
     - JSX (JavaScript XML)
-	  - JavaScript 내에서 XML-like 문법을 사용하여 UI를 정의하는 방식
-	  - Babel이 JSX를 React.createElement() 형태로 변환하여 실행
+	    - JavaScript 내에서 XML-like 문법을 사용하여 UI를 정의하는 방식
+	    - Babel이 JSX를 React.createElement() 형태로 변환하여 실행
         - const element = <h1>Hello, World!</h1>;
         - const element = React.createElement('h1', null, 'Hello, World!');
+
     - 상태 (State)
       - 컴포넌트 내부에서 변경될 수 있는 데이터
       - useState 훅을 사용하여 상태를 관리
+
     - 속성 (Props)
-	  - 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방법.
-	  - 읽기 전용(immutable)
+	    - 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방법.
+	    - 읽기 전용(immutable)
+
     - 이벤트 핸들링 (Event Handling)
-	  - React에서는 onClick, onChange 등의 이벤트 핸들러를 사용.
+	    - React에서는 onClick, onChange 등의 이벤트 핸들러를 사용.
+
     - 훅 (Hooks)
-	  - 클래스형 컴포넌트에서 제공되던 기능(state, lifecycle)을 함수형 컴포넌트에서도 사용할 수 있도록 도와주는 기능
-	  - 대표적인 훅:
-	    - useState → 상태 관리
+	    - 클래스형 컴포넌트에서 제공되던 기능(state, lifecycle)을 함수형 컴포넌트에서도 사용할 수 있도록 도와주는 기능
+      - 대표적인 훅:
+        - useState → 상태 관리
         - useEffect → 컴포넌트 라이프사이클 관리
-	    - useContext → 전역 상태 관리
-	    - useReducer → 복잡한 상태 로직 관리
-	    - useRef → DOM 요소 접근 및 유지
+        - useContext → 전역 상태 관리
+        - useReducer → 복잡한 상태 로직 관리
+        - useRef → DOM 요소 접근 및 유지
+
     - 컨텍스트 (Context API)
-	  - 전역 상태 관리를 위한 기능
-	  - useContext 훅을 활용하여 컴포넌트 트리에서 깊이 전달해야 하는 데이터를 쉽게 공유 가능
+	    - 전역 상태 관리를 위한 기능
+	    - useContext 훅을 활용하여 컴포넌트 트리에서 깊이 전달해야 하는 데이터를 쉽게 공유 가능
+
     - 리덕스 (Redux)
-	  - React에서 상태 관리를 위한 대표적인 라이브러리
+	    - React에서 상태 관리를 위한 대표적인 라이브러리
       - useReducer와 유사하지만, 전역 상태 관리 기능을 제공
+
     - React Router
-	  - SPA(Single Page Application)에서 페이지 이동을 구현하기 위한 라이브러리
-	  - react-router-dom을 사용하여 라우팅 처리 가능.
+	    - SPA(Single Page Application)에서 페이지 이동을 구현하기 위한 라이브러리
+	    - react-router-dom을 사용하여 라우팅 처리 가능.
+
     - 가상 DOM (Virtual DOM)
-	  - React는 변경 사항을 가상 DOM에서 먼저 비교하고, 실제 DOM에 최소한의 변경만 적용하여 성능을 최적화.
-	  - diffing algorithm을 사용하여 효율적으로 UI 업데이트.
+	    - React는 변경 사항을 가상 DOM에서 먼저 비교하고, 실제 DOM에 최소한의 변경만 적용하여 성능을 최적화.
+	    - diffing algorithm을 사용하여 효율적으로 UI 업데이트.
+
     - 서버 사이드 렌더링 (SSR)
-	  - React는 기본적으로 클라이언트 사이드 렌더링(CSR)을 사용
+	    - React는 기본적으로 클라이언트 사이드 렌더링(CSR)을 사용
       - Next.js 같은 프레임워크를 사용하면 서버에서 HTML을 미리 렌더링 가능.
 
-- Virtual DOM이란 무엇이며, 동작 방법
-  - Virtual DOM 개요
-    - Virtual DOM 개념
-      - Virtual DOM(Virtual Document Object Model, 가상 DOM)
-      - 웹 브라우저의 실제 DOM을 직접 조작하는 대신, 가상의 DOM을 사용하여 성능을 최적화하는 기법
-      - React, Vue 등 프론트엔드 라이브러리에서 효율적인 렌더링을 위해 사용됨
-      - 실제 DOM 조작은 비용이 크므로, Virtual DOM을 활용하여 최소한의 변경만 실제 DOM에 반영
+- Virtual DOM 개념 및 동작 방법
+  - Virtual DOM 개념
+    - Virtual DOM(Virtual Document Object Model, 가상 DOM)
+    - 웹 브라우저의 실제 DOM을 직접 조작하는 대신, 가상의 DOM을 사용하여 성능을 최적화하는 기법
+    - React, Vue 등 프론트엔드 라이브러리에서 효율적인 렌더링을 위해 사용됨
+    - 실제 DOM 조작은 비용이 크므로, Virtual DOM을 활용하여 최소한의 변경만 실제 DOM에 반영
 
   - Virtual DOM의 동작 방식
     - 핵심 개념
@@ -129,69 +139,91 @@ Organize concepts, features, types and Pros and Cons
 - React의 State와 Props의 차이점은?
 - React에서 상태 관리는 어떻게 하는가?
 - Redux와 Context API의 차이점은?
+
 - React에서 useEffect 훅의 역할은?
 - useMemo와 useCallback의 차이점은?
 - React에서 이벤트 핸들링은 어떻게 하는가?
+
 - React의 컴포넌트 라이프사이클을 설명하시오.
 - React에서 불필요한 리렌더링을 방지하는 방법은?
 - React에서 상태(state)를 변경할 때 주의할 점은?
+
 - React에서 Suspense와 Error Boundary의 차이점은?
 - React의 Concurrent Mode란 무엇인가?
 - Server-side Rendering(SSR)과 Client-side Rendering(CSR)의 차이점은?
+
 - Next.js를 사용할 때의 장점은?
 - React에서 HOC(High Order Component)란?
 - React의 Reconciliation 알고리즘이란?
+
 - React에서 상태를 전역으로 관리하는 방법에는 무엇이 있는가?
 - useReducer를 사용하는 경우는 언제인가?
 - React에서 useRef의 용도는?
+
 - React에서 Portals란 무엇인가?
 - React에서 Synthetic Event란?
 - React에서 key props가 필요한 이유는?
+
 - React에서 Suspense를 이용해 데이터를 비동기적으로 로딩하는 방법은?
 - React의 hydrate 기능은 무엇인가?
 - React에서 새로운 상태를 만들지 않고 이전 상태를 직접 변경하면 왜 안 되는가?
+
 - React에서 Lazy Loading을 구현하는 방법은?
 - React.memo()를 사용하는 이유는?
 - React에서 Fragment란 무엇인가?
+
 - React에서 Error Boundary를 구현하는 방법은?
 - React에서 Strict Mode를 사용하는 이유는?
 - React에서 Synthetic Events와 Native Events의 차이점은?
+
 - React의 forwardRef를 사용해야 하는 경우는?
 - React에서 createContext()와 useContext()의 차이점은?
 - React에서 JSX의 역할과 내부적으로 변환되는 방식은?
+
 - React에서 useEffect의 실행 순서는 어떻게 결정되는가?
 - React의 useLayoutEffect와 useEffect의 차이점은?
 - React에서 Fragment와 div를 사용할 때의 차이점은?
+
 - React에서 이벤트 버블링을 방지하는 방법은?
 - React에서 useState의 이전 상태를 기반으로 새 상태를 설정하는 방법은?
 - React에서 React.lazy()를 사용하면 어떤 장점이 있는가?
+
 - React에서 Suspense와 Concurrent Mode의 연관성은?
 - React에서 setState()가 비동기로 동작하는 이유는?
 - React에서 컴포넌트 최적화를 위해 shouldComponentUpdate()를 활용하는 방법은?
+
 - React에서 children props를 활용하는 방식은?
 - React에서 상태(state) 변경이 반영되지 않는 이유는?
 - React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
+
 - React에서 Redux Thunk와 Redux Saga의 차이점은?
 - React에서 Server Components의 개념과 활용 방법은?
 - React에서 hydration이 실패하는 이유는?
+
 - React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제는?
 - React의 Concurrent Rendering이 UI 성능에 미치는 영향은?
 - React에서 useRef와 useState의 차이점은?
+
 - React에서 useReducer를 사용하는 시나리오는?
 - React의 Error Boundaries는 어떤 상황에서 유용한가?
 - React에서 CSS-in-JS 라이브러리를 사용하는 이유는?
+
 - React에서 Refs를 활용해 DOM 요소를 조작하는 방법은?
 - React에서 비동기 상태 업데이트를 수행하는 방법은?
 - React에서 Formik과 React Hook Form의 차이점은?
+
 - React에서 useImperativeHandle()은 어떤 역할을 하는가?
 - React에서 이벤트 핸들러를 바인딩하는 올바른 방법은?
 - React에서 함수를 props로 전달할 때 발생할 수 있는 문제는?
+
 - React에서 useEffect를 활용한 Debounce 구현 방법은?
 - React에서 useState를 배열이나 객체와 함께 사용할 때 주의할 점은?
 - React에서 useReducer를 사용하면 성능이 향상되는 이유는?
+
 - React에서 React.createElement()는 언제 사용되는가?
 - React에서 이벤트 위임(event delegation)의 원리는?
 - React에서 Lazy Loading과 Code Splitting을 적용하는 방법은?
+
 - React에서 클라이언트 상태와 서버 상태의 차이점은?
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
 - React에서 Server Components를 활용하면 어떤 이점이 있는가?
