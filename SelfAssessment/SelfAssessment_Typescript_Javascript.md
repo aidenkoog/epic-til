@@ -3667,7 +3667,38 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 접근 후 반드시 undefined 체크를 해야 하므로 코드가 장황해질 수 있음
 
 - TypeScript에서 ES Modules과 CommonJS를 함께 사용할 때 주의해야 할 점
+    - ESModules (ESM) vs CommonJS (CJS)
+        - ESM: import, export
+        - CJS: require, module.exports
 
+    - 혼용 시 문제점
+        - default import 문제가 자주 발생:
+            ```ts
+            // CommonJS 모듈
+            module.exports = someFunction;
+
+            // ESM import
+            import someFunction from './someModule'; // 오류 or undefined
+            ```
+
+        - 해결 방법: esModuleInterop, allowSyntheticDefaultImports 옵션 설정 필요
+            ```json
+            {
+                "compilerOptions": {
+                    "esModuleInterop": true,
+                    "allowSyntheticDefaultImports": true
+                }
+            }
+            ```
+
+    - 주의사항
+        - Node.js에서는 type: "module"과 .mjs, .cjs 확장자 구분 필요
+        - 번들러(Webpack, Vite 등)에 따라 모듈 시스템 충돌 가능
+        - __dirname, require 등 CJS 전용 API는 ESM에서 직접 사용할 수 없음
+
+    - 권장사항
+        - 프로젝트 초기부터 하나의 모듈 시스템으로 통일하는 것이 가장 바람직
+        - 혼용이 필요하다면 Interop 설정 + 모듈 변환 전략을 명확히 구성할 것
 
 - TypeScript를 JavaScript 프로젝트에 도입할 때 고려해야 할 사항은?
 - TypeScript를 사용하면 발생할 수 있는 오버헤드는 무엇인가?
