@@ -3375,7 +3375,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 라이브러리 확장 (ex: Express의 Request, Response 인터페이스 확장)
         - 모듈 보강
 
-- TypeScript에서 Module Augmentation을 사용해야 하는 경우는?
+- TypeScript에서 Module Augmentation을 사용해야 하는 경우
+    - 정의
+        - Module Augmentation은 기존 모듈(또는 타입)에 새로운 속성이나 타입을 추가하거나 확장할 때 사용하는 기능
+
+    - 사용해야 하는 경우
+        - 외부 라이브러리의 타입에 커스텀 속성을 추가할 때 (예: express.Request에 user 객체 추가)
+        - 선언 병합(declaration merging)이 필요한 상황 (ex. 전역 객체 확장)
+        - 이미 정의된 모듈을 로컬 컨텍스트에 맞게 보완하거나 타입 정의를 덮어써야 할 때
+
+    - 예시
+        ```ts
+        // express 확장 예시
+        declare module 'express' {
+            export interface Request {
+                user?: MyCustomUser;
+            }
+        }
+        ```
+
 - TypeScript에서 Tuple Types과 Variadic Tuple Types의 차이점은?
 - TypeScript에서 Intersection Types과 Union Types을 조합하여 활용하는 방법은?
 - TypeScript에서 Assertion Functions는 어떤 역할을 하는가?
