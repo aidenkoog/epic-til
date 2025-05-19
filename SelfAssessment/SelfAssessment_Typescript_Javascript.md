@@ -3636,6 +3636,36 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 불필요한 undefined 포함을 방지하고자 할 때
 
 - TypeScript에서 noUncheckedIndexedAccess 옵션을 활성화하면 얻을 수 있는 장점
+    - 정의
+        - 이 옵션을 활성화하면 배열이나 객체에 인덱스로 접근할 때, 해당 값이 존재하지 않을 수 있음을 타입 시스템이 인식
+        ```json
+        {
+            "compilerOptions": {
+                "noUncheckedIndexedAccess": true
+            }
+        }
+        ```
+
+    - 기본 동작 (off)
+        ```ts
+        const user: { [key: string]: string } = {};
+        const name = user['name']; // string (위험)
+        ```
+
+    - 옵션 on
+        ```ts
+        const name: string | undefined = user['name']; // 안전
+        ```
+
+    - 장점
+        - 런타임에서 발생할 수 있는 undefined 오류를 컴파일 타임에 방지
+        - 배열/객체 접근 안정성 증가
+        - 더 많은 undefined 체크가 강제되어 안전한 코드 작성 가능
+
+    - 주의할 점
+        - 기존 코드에서 많은 타입 오류 발생 가능
+        - 접근 후 반드시 undefined 체크를 해야 하므로 코드가 장황해질 수 있음
+
 - TypeScript에서 ES Modules과 CommonJS를 함께 사용할 때 주의해야 할 점
 
 
