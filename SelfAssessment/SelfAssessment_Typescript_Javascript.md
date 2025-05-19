@@ -3877,7 +3877,40 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - strictNullChecks는 널 안정성 향상, 버그 감소, 실행 전 검증에 매우 중요
 
 - TypeScript에서 Partial<T>와 Pick<T, K>을 활용한 실용적인 예제
+    - Partial<T>
+        - 타입의 모든 속성을 옵셔널로 변경
+        ```ts
+        type User = { id: number; name: string; email: string };
+        type UserUpdate = Partial<User>; 
+        // { id?: number; name?: string; email?: string }
 
+        function updateUser(id: number, update: UserUpdate) {
+        // 필요한 필드만 전달 가능
+        }
+        ```
+
+    - Pick<T, K>
+        - 타입에서 특정 필드만 선택적으로 추출
+        ```ts
+        type UserPreview = Pick<User, 'id' | 'name'>; 
+        // { id: number; name: string }
+
+        function showUser(user: UserPreview) {
+            console.log(user.name);
+        }
+        ```
+
+    - 실전 예시: API 요청에서 활용
+        ```ts
+        // PATCH 요청에서 수정 가능한 필드만 허용
+        function patchUser(id: number, body: Partial<Pick<User, 'name' | 'email'>>) {
+            // name과 email만 수정 허용
+        }
+        ```
+
+    - 결론
+        - Partial → 유연한 업데이트 처리
+        - Pick → 제한된 데이터 노출 또는 가공에 유용
 
 - TypeScript에서 Utility Types을 적극적으로 활용하면 얻을 수 있는 장점은?
 - TypeScript에서 Omit<T, K>과 Exclude<T, U>의 차이는?
