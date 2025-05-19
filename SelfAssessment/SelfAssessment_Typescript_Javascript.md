@@ -3912,7 +3912,25 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Partial → 유연한 업데이트 처리
         - Pick → 제한된 데이터 노출 또는 가공에 유용
 
-- TypeScript에서 Utility Types을 적극적으로 활용하면 얻을 수 있는 장점은?
+- TypeScript에서 Utility Types을 적극적으로 활용하면 얻을 수 있는 장점
+    - 주요 장점
+        - 코드 재사용성 증가
+            - 반복적인 타입 선언 없이 기존 타입을 변형하여 재활용 가능
+
+        - 타입 정확성 향상
+            - 유도된 타입을 기반으로 하므로 버그 감소 및 자동 완성 개선
+
+        - 의도 표현 명확화
+            - 예: Partial<T>, Readonly<T>를 통해 해당 타입의 사용 의도를 문서화 수준으로 명확하게 표현 가능
+
+        - 유지보수성 향상
+            - 타입이 변경되어도 유틸리티 타입을 통해 파생된 타입도 자동으로 추적됨
+
+    - 자주 쓰는 유틸리티 타입
+        - Partial<T>, Required<T>, Readonly<T>
+        - Pick<T, K>, Omit<T, K>
+        - Record<K, T>, Extract<T, U>, Exclude<T, U>
+
 - TypeScript에서 Omit<T, K>과 Exclude<T, U>의 차이는?
 - TypeScript 프로젝트에서 tsconfig.json을 설정할 때 최적의 옵션은?
 - JavaScript에서 Polyfill이 필요한 이유와 사용하는 방법은?
