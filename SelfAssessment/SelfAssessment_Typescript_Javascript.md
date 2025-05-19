@@ -3506,7 +3506,28 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
 
 - TypeScript에서 const 어노테이션을 활용한 리터럴 타입 제한
-    - 
+    - 정의
+        - as const는 객체, 배열, 문자열 등을 불변 리터럴 타입으로 고정시킴
+
+    - 어디에 사용하나
+        - enum-like 상수 정의
+        - 리터럴 값 그대로 타입으로 추론되길 원할 때
+        - switch문, discriminated union 등에 활용
+
+    - 예시
+        ```ts
+        const colors = ["red", "green", "blue"] as const;
+        // => readonly ["red", "green", "blue"]
+        // => 각 요소는 "red" | "green" | "blue"로 추론됨
+
+        type Color = typeof colors[number]; // "red" | "green" | "blue"
+        ```
+
+    - 일반 const와 차이
+        ```ts
+        const colors = ["red", "green", "blue"]; 
+        // => string[]으로 추론됨 (리터럴 타입 아님)
+        ```
 
 
 - TypeScript에서 ReadonlyArray<T>와 readonly T[]의 차이
