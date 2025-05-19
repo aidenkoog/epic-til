@@ -260,7 +260,30 @@ Organize concepts, features, types and Pros and Cons
     - useMemo: 계산 결과 재사용
     - useCallback: 함수 참조 재사용 → 불필요한 리렌더링 방지
 
-- React에서 이벤트 핸들링은 어떻게 하는가?
+- React에서 이벤트 핸들링
+  - 기본 원리
+    - React는 브라우저의 기본 DOM 이벤트를 추상화한 SyntheticEvent 시스템 사용
+    - 브라우저 간 호환성과 성능 최적화를 위해 자체 이벤트 큐를 관리함
+
+  - 사용 예시
+    ```jsx
+    function MyComponent() {
+      const handleClick = (event) => {
+        console.log(event.target);
+      };
+
+      return <button onClick={handleClick}>Click me</button>;
+    }
+    ```
+
+  - 특징
+    - onClick, onChange, onSubmit 등 이벤트는 camelCase 사용
+    - 이벤트 핸들러는 일반적으로 함수로 정의하고 JSX에서 전달
+
+  - 주의점
+    - 기본 동작 방지 시 event.preventDefault() 호출 필요
+    - 이벤트 객체는 SyntheticEvent → 비동기 핸들링 시 event.persist() 사용하거나 구조분해 할당으로 미리 값 추출 필요
+
 
 - React의 컴포넌트 라이프사이클을 설명하시오.
 - React에서 불필요한 리렌더링을 방지하는 방법은?
