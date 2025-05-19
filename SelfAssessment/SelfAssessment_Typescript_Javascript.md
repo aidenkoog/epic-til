@@ -3394,7 +3394,26 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         }
         ```
 
-- TypeScript에서 Tuple Types과 Variadic Tuple Types의 차이점은?
+- TypeScript에서 Tuple Types과 Variadic Tuple Types의 차이점
+    - Tuple Types
+        - 고정된 순서와 길이를 가지는 배열 타입
+        - 각 인덱스의 타입이 다를 수 있음
+        ```ts
+        type Example = [string, number]; // 길이 2, 첫 번째는 string, 두 번째는 number
+        ```
+
+    - Variadic Tuple Types
+        - 가변 길이의 튜플을 표현할 수 있음
+        - 타입 추론 및 재사용성이 뛰어나고, 주로 제네릭과 함께 사용됨
+        ```ts
+        type Prepend<T, U extends any[]> = [T, ...U];
+        type Example = Prepend<string, [number, boolean]>; // [string, number, boolean]
+        ```
+
+    - 차이점 요약
+        - Tuple Types: 정해진 길이와 타입
+        - Variadic Tuple Types: 일부 요소만 고정하고 나머지는 가변 가능 (Spread 문법 사용)
+
 - TypeScript에서 Intersection Types과 Union Types을 조합하여 활용하는 방법은?
 - TypeScript에서 Assertion Functions는 어떤 역할을 하는가?
 
