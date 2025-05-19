@@ -15341,7 +15341,124 @@ Organize concepts, features, types and Pros and Cons
         - GC 부담 줄어듦
         - 대용량 파일 전송 시 효율 극대화
 
-- Java에서 WebSockets을 활용한 실시간 통신 구현 방법은?
+- Java에서 WebSockets을 활용한 실시간 통신 구현 방법
+    - 개요
+        - 가장 일반적인 방법은 Java EE의 javax.websocket API 또는 Spring Framework의 Spring WebSocket을 사용하는 것
+
+    - Java EE 방식 (javax.websocket API)
+        - 주요 라이브러리
+            - javax.websocket
+            - 서버: Tomcat 8+, Jetty, GlassFish 등
+
+        - 기본 구성
+            - ① 의존성 추가 (예: Maven)
+                ```xml
+                <dependency>
+                    <groupId>javax.websocket</groupId>
+                    <artifactId>javax.websocket-api</artifactId>
+                    <version>1.1</version>
+                </dependency>
+                ```
+
+            - ② 서버 엔드포인트 정의
+                ```java
+                import javax.websocket.*;
+                import javax.websocket.server.ServerEndpoint;
+                import java.io.IOException;
+
+                @ServerEndpoint("/chat")
+                public class ChatEndpoint {
+
+                    @OnOpen
+                    public void onOpen(Session session) {
+                        System.out.println("Connected: " + session.getId());
+                    }
+
+                    @OnMessage
+                    public void onMessage(String message, Session session) throws IOException {
+                        System.out.println("Received: " + message);
+                        session.getBasicRemote().sendText("Echo: " + message);
+                    }
+
+                    @OnClose
+                    public void onClose(Session session) {
+                        System.out.println("Disconnected: " + session.getId());
+                    }
+
+                    @OnError
+                    public void onError(Session session, Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                }
+                ```
+
+            - ③ 클라이언트 연결 (JS 예시)
+                ```js
+                const socket = new WebSocket("ws://localhost:8080/your-app/chat");
+                socket.onmessage = (e) => console.log(e.data);
+                socket.send("Hello");
+                ```
+
+    - Spring Framework 방식 (Spring WebSocket + STOMP)
+        - 주요 의존성 (Spring Boot 기준)
+            ```xml
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+            </dependency>
+            ```
+
+        - 서버 구성 단계
+            - ① WebSocket 설정
+                ```java
+                @Configuration
+                @EnableWebSocketMessageBroker
+                public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+                    @Override
+                    public void configureMessageBroker(MessageBrokerRegistry registry) {
+                        registry.enableSimpleBroker("/topic"); // 구독 주소
+                        registry.setApplicationDestinationPrefixes("/app"); // 송신 주소
+                    }
+
+                    @Override
+                    public void registerStompEndpoints(StompEndpointRegistry registry) {
+                        registry.addEndpoint("/ws").withSockJS(); // 웹소켓 엔드포인트 등록
+                    }
+                }
+                ```
+
+            - ② 메시지 수신/전송 Controller
+                ```java
+                @Controller
+                public class ChatController {
+                    @MessageMapping("/send") // 클라이언트가 보낼 주소 (/app/send)
+                    @SendTo("/topic/messages") // 구독자에게 브로드캐스트
+                    public String handle(String message) {
+                        return "Received: " + message;
+                    }
+                }
+                ```
+
+            - ③ 클라이언트 (JS + SockJS + STOMP)
+                ```html
+                <script src="https://cdn.jsdelivr.net/npm/sockjs-client"></script>
+                <script src="https://cdn.jsdelivr.net/npm/stompjs"></script>
+                <script>
+                const socket = new SockJS("/ws");
+                const stomp = Stomp.over(socket);
+
+                stomp.connect({}, () => {
+                    stomp.subscribe("/topic/messages", (msg) => {
+                    console.log(msg.body);
+                    });
+
+                    stomp.send("/app/send", {}, "Hello from client!");
+                });
+                </script>
+                ```
+    - 상황에 따른 선택
+        - 단순한 서버-클라이언트 웹소켓 통신 -> javax.websocket (Java EE)
+        - 복잡한 메시징 구조, 브로드캐스트, 인증 -> Spring WebSocket + STOMP
 
 - Java에서 gRPC와 REST API의 차이점은?
 - Java에서 HttpClient와 URLConnection의 차이점은?
