@@ -233,7 +233,33 @@ Organize concepts, features, types and Pros and Cons
     - 특정 값 변경 시 재실행 ([value])
     - 리렌더링마다 실행 (생략 시)
 
-- useMemo와 useCallback의 차이점은?
+- useMemo와 useCallback의 차이점
+  - 차이점
+    - useMemo
+      - 목적: 값을 메모이제이션
+      - 반환 값: 계산된 결과값
+      - 사용 예시: 무거운 계산식, 파생 상태
+    - useCallback
+      - 목적: 함수를 메모이제이션
+      - 반환 값: 메모이제이션된 함수 참조
+      - 사용 예시: 자식 컴포넌트에 함수 props 전달 시
+
+  - 예시: useMemo
+    ```js
+    const expensiveValue = useMemo(() => computeHeavy(a, b), [a, b]);
+    ```
+
+  - 예시: useCallback
+    ```js
+    const handleClick = useCallback(() => {
+      console.log('clicked');
+    }, []);
+    ```
+
+  - 요약
+    - useMemo: 계산 결과 재사용
+    - useCallback: 함수 참조 재사용 → 불필요한 리렌더링 방지
+
 - React에서 이벤트 핸들링은 어떻게 하는가?
 
 - React의 컴포넌트 라이프사이클을 설명하시오.
