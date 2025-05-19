@@ -3848,6 +3848,34 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
 
 - TypeScript에서 strictNullChecks를 활성화하면 코드의 안전성이 어떻게 개선되는가?
+    - 기본 동작 (비활성화 시)
+        - null 또는 undefined가 모든 타입에 할당 가능
+            - → string, number, object 등에도 예외 없이 들어갈 수 있어 런타임 오류 발생 위험
+
+    - 활성화 시 효과
+        - null과 undefined는 명시적으로 포함되지 않으면 허용되지 않음
+        - 변수, 함수, 객체의 프로퍼티에서 null 체크 없이 접근 시 컴파일 오류
+        - 실수 방지: 옵셔널 체이닝(?.), Nullish Coalescing(??) 등 활용 권장
+
+    - 예시
+        ```ts
+        function greet(name: string | null) {
+            console.log(name.toUpperCase()); // 컴파일 에러
+        }
+        ```
+
+    - 개선 코드
+        ```ts
+        function greet(name: string | null) {
+            if (name) {
+                console.log(name.toUpperCase());
+            }
+        }
+        ```
+
+    - 결론
+        - strictNullChecks는 널 안정성 향상, 버그 감소, 실행 전 검증에 매우 중요
+
 - TypeScript에서 Partial<T>와 Pick<T, K>을 활용한 실용적인 예제
 
 
