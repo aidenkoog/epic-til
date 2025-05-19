@@ -4051,7 +4051,55 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
 
 - TypeScript에서 Decorator를 사용하면 얻을 수 있는 이점
+    - 개념
+        - 클래스, 메서드, 속성, 매개변수에 메타프로그래밍 방식의 부가 기능 주입
 
+    - 주요 이점
+        - 반복 로직 추상화
+            - 로깅, 캐싱, 인증, 벤치마킹 등의 부가기능 분리 가능
 
+        - 가독성 향상
+            - 핵심 로직과 부가 로직을 명확히 분리
+
+        - DI(의존성 주입) 프레임워크 기반 작업 가능
+            - NestJS, Angular 등의 주요 프레임워크에서 핵심 기능으로 사용됨
+
+    - 예시
+        ```ts
+        function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            const original = descriptor.value;
+            descriptor.value = function (...args: any[]) {
+                console.log(`Call: ${propertyKey} with`, args);
+                return original.apply(this, args);
+            };
+        }
+        class UserService {
+            @Log
+            getUser(id: number) {
+                return { id, name: "Alice" };
+            }
+        }
+        ```
 
 - TypeScript에서 Ambient Declarations(.d.ts 파일)의 역할
+    - 개념
+        - 구현 없이 타입만 정의하는 파일
+        - TypeScript가 외부 자바스크립트 코드 또는 라이브러리의 타입 정보를 이해할 수 있게 해줌
+
+    - 사용 목적
+        - JS 라이브러리 타입 명세 제공
+            - @types/jquery, @types/lodash 등
+
+        - 전역 변수 선언
+            - 예: declare const process: any;
+
+        - 타입만 있는 모듈 선언
+            ```ts
+            // my-lib.d.ts
+            declare module 'my-lib' {
+                export function doSomething(): void;
+            }
+            ```
+            
+    - 사용 시점
+        - 타입만 선언하고 실제 구현은 외부에 존재할 때 (JS 라이브러리, Web API 등)
