@@ -3414,7 +3414,44 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Tuple Types: 정해진 길이와 타입
         - Variadic Tuple Types: 일부 요소만 고정하고 나머지는 가변 가능 (Spread 문법 사용)
 
-- TypeScript에서 Intersection Types과 Union Types을 조합하여 활용하는 방법은?
+- TypeScript에서 Intersection Types과 Union Types을 조합하여 활용하는 방법
+    - Intersection Types (&)
+        - 모든 타입 조건을 동시에 만족해야 함
+        - 객체의 속성 결합에 주로 사용
+        ```ts
+        type A = { name: string };
+        type B = { age: number };
+        type AB = A & B; // { name: string; age: number }
+        ```
+
+    - Union Types (|)
+        - 둘 중 하나 이상의 타입만 만족해도 됨
+        - 조건 분기, 다형성 처리에 유용
+        ```ts
+        type Result = string | number;
+        ```
+
+    - 조합 활용 예시
+        - 조건에 따라 다양한 타입 처리 가능
+        - 타입 가드를 통해 정확한 타입 분기 가능
+        ```ts
+        type Animal = { type: 'cat'; meow: () => void } | { type: 'dog'; bark: () => void };
+        function makeSound(a: Animal) {
+            if ('meow' in a) {
+                a.meow();
+            } else {
+                a.bark();
+            }
+        }
+        ```
+
+    - 복합 구조 조합
+        ```ts
+        type Admin = { role: 'admin'; access: string[] };
+        type User = { name: string };
+        type AdminUser = Admin & User; // 이름과 권한을 모두 가진 사용자
+        ```
+
 - TypeScript에서 Assertion Functions는 어떤 역할을 하는가?
 
 
