@@ -3452,8 +3452,31 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         type AdminUser = Admin & User; // 이름과 권한을 모두 가진 사용자
         ```
 
-- TypeScript에서 Assertion Functions는 어떤 역할을 하는가?
+- TypeScript에서 Assertion Functions 역할
+    - 정의
+        - Assertion Function은 조건을 만족하지 않으면 예외를 발생시키며, 만족할 경우 타입을 좁혀주는 함수
 
+    - 목적
+        - 사용자 정의 타입 가드로 사용됨
+        - 특정 조건을 만족하는지 체크하면서 컴파일러에게 타입 보장을 전달함
+
+    - 사용법
+        ```ts
+        function assertIsString(val: any): asserts val is string {
+            if (typeof val !== 'string') {
+                throw new Error('Not a string');
+            }
+        }
+
+        function printLength(input: any) {
+            assertIsString(input); // 여기서부터 input은 string으로 인식됨
+            console.log(input.length);
+        }
+        ```
+
+    - 장점
+        - 런타임 체크 + 타입 좁히기(Type Narrowing)를 함께 수행
+        - 라이브러리 내부에서 예외 처리 + 타입 안전성 향상
 
 - TypeScript에서 satisfies 연산자는 어떤 경우에 유용한가?
 - TypeScript에서 const 어노테이션을 활용한 리터럴 타입 제한은?
