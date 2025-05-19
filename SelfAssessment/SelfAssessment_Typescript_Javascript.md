@@ -3559,8 +3559,30 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
 
 - TypeScript에서 ModuleSpecifierResolution 설정이 중요한 이유
-    - 
+    - 정의
+        - moduleSpecifierResolution은 TypeScript가 import 경로를 어떻게 해석할지를 지정하는 tsconfig.json 옵션
 
+    - 주요 옵션
+        - "classic": 예전 TypeScript 방식 (직접 지정된 경로만 탐색)
+        - "node": Node.js 방식 (파일 확장자 자동 보완, index.ts 등 탐색)
+
+    - 왜 중요한가
+        - import 시 .ts, .js, /index.ts 등 누락된 경로 처리 방법이 달라짐
+        - Node.js 환경, bundler 환경(Vite, Webpack 등)과의 호환성 확보
+        - 모듈 경로 해석 문제 방지 (ex. "Cannot find module" 오류 방지)
+
+    - 예시
+        ```ts
+        {
+            "compilerOptions": {
+                "moduleResolution": "node"
+            }
+        }
+        ```
+
+    - 실전 적용 팁
+        - 대부분의 모던 프로젝트에서는 "node" 설정을 사용해야 안정적
+        - "paths"와 "baseUrl"과 함께 사용하면 절대경로 import도 쉽게 설정 가능
 
 - TypeScript에서 Intrinsic String Manipulation Types은 어떤 경우에 유용한가?
 - TypeScript에서 exactOptionalPropertyTypes 옵션을 사용할 때 주의할 점은?
