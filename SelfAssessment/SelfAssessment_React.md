@@ -285,9 +285,28 @@ Organize concepts, features, types and Pros and Cons
     - 이벤트 객체는 SyntheticEvent → 비동기 핸들링 시 event.persist() 사용하거나 구조분해 할당으로 미리 값 추출 필요
 
 
-- React의 컴포넌트 라이프사이클을 설명하시오.
-- React에서 불필요한 리렌더링을 방지하는 방법은?
-- React에서 상태(state)를 변경할 때 주의할 점은?
+- React의 컴포넌트 라이프사이클
+  - 개념
+    - 컴포넌트가 화면에 나타나고 유지되며 사라지는 과정을 라이프사이클
+    - 함수형 컴포넌트에서는 useEffect() 훅을 통해 라이프사이클 제어
+
+  - 주요 단계 (함수형 기준)
+    - Mount:
+      - 컴포넌트가 DOM에 처음 렌더링됨 (useEffect(() => {}, []))
+    - Update:
+      - props 또는 state가 변경되어 재렌더링됨 (useEffect(() => {}, [deps]))
+    - Unmount
+      - 컴포넌트가 DOM에서 제거됨 (useEffect의 return 함수로 cleanup 처리)
+
+  - 클래스형 컴포넌트 비교
+    - componentDidMount → Mount 시
+    - componentDidUpdate → Update 시
+    - componentWillUnmount → Unmount 시
+
+- React에서 불필요한 리렌더링을 방지하는 방법
+
+
+- React에서 상태(state)를 변경할 때 주의할 점
 
 - React에서 Suspense와 Error Boundary의 차이점은?
 - React의 Concurrent Mode란 무엇인가?
