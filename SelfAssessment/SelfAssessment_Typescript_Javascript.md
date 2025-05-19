@@ -3610,6 +3610,31 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         ```
 
 - TypeScript에서 exactOptionalPropertyTypes 옵션을 사용할 때 주의할 점
+    - 정의
+        - 이 옵션을 켜면 옵셔널 프로퍼티(?)는 undefined가 자동 포함되지 않음
+        ```ts
+        {
+            "compilerOptions": {
+                "exactOptionalPropertyTypes": true
+            }
+        }
+        ```
+
+    - 기본 동작
+        - 옵션 off: { foo?: string }은 foo가 없거나 string | undefined 가능
+        - 옵션 on: { foo?: string }은 foo가 없을 수 있지만 undefined는 직접 명시해야
+
+    - 주의할 점
+        - 옵셔널 값에 undefined를 명시적으로 넣을 수 없습니다:
+        ```ts
+        const obj: { name?: string } = { name: undefined }; // 오류
+        ```
+        - Partial<T>나 Pick<T>을 사용할 때 타입이 다르게 해석될 수 있어 실행 오류 방지 코드가 더 필요해질 수 있음
+
+    - 언제 사용하나
+        - 보다 정확한 타입 설계가 필요한 라이브러리 개발 시
+        - 불필요한 undefined 포함을 방지하고자 할 때
+
 - TypeScript에서 noUncheckedIndexedAccess 옵션을 활성화하면 얻을 수 있는 장점
 - TypeScript에서 ES Modules과 CommonJS를 함께 사용할 때 주의해야 할 점
 
