@@ -15460,7 +15460,23 @@ Organize concepts, features, types and Pros and Cons
         - 단순한 서버-클라이언트 웹소켓 통신 -> javax.websocket (Java EE)
         - 복잡한 메시징 구조, 브로드캐스트, 인증 -> Spring WebSocket + STOMP
 
-- Java에서 gRPC와 REST API의 차이점은?
+- Java에서 gRPC와 REST API의 차이점
+    - 프로토콜 및 데이터 포맷
+        - REST-API
+            - 전송 프로토콜: HTTP 1.1
+            - 데이터 포맷: JSON (텍스트 기반)
+            - 성능: 상대적으로 느림
+            - 인터페이스 정의: OpenAPI (Swagger 등)
+        - gRPC
+            - 전송 프로토콜: HTTP/2
+            - 데이터 포맷: Protocol Buffers (바이너리)
+            - 성능: 빠름 (바이너리 + HTTP/2 스트리밍)
+            - 인터페이스 정의: .proto 파일 기반 명세
+
+    - 특징 요약
+        - REST: 직관적이고 범용적, 브라우저/프론트엔드 친화적
+        - gRPC: 고성능, 양방향 스트리밍, 엄격한 타입, 내부 마이크로서비스 간 통신에 유리
+
 - Java에서 HttpClient와 URLConnection의 차이점은?
 - Java에서 Thread Dump를 분석하는 방법은?
 - Java에서 Deadlock이 발생하는 원인과 해결 방법은?
