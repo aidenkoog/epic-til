@@ -207,7 +207,32 @@ Organize concepts, features, types and Pros and Cons
       - 상태 구조: 정형화된 구조 (액션 -> 리듀서)
       - 렌더링 성능: 미들웨어와 구조로 성능 최적화 가능
 
-- React에서 useEffect 훅의 역할은?
+- React에서 useEffect 훅의 역할
+  - 개념
+    - 사이드 이펙트(부수 효과)를 처리하기 위한 React 훅
+    - 컴포넌트가 렌더링된 이후 실행되는 로직을 정의할 수 있음
+
+  - 주요 용도
+    - API 요청, 데이터 fetch
+    - DOM 조작, 외부 라이브러리 연동
+    - 타이머(setTimeout, setInterval)
+    - 구독(subscribe)/정리(cleanup)
+
+  - 기본 구조
+    ```jsx
+    useEffect(() => {
+      // 실행할 로직
+      return () => {
+        // 컴포넌트 언마운트 시 정리 작업
+      };
+    }, [deps]); // deps가 변경될 때마다 재실행
+    ```
+
+  - 실행 시점
+    - 마운트 시 1회 실행 ([])
+    - 특정 값 변경 시 재실행 ([value])
+    - 리렌더링마다 실행 (생략 시)
+
 - useMemo와 useCallback의 차이점은?
 - React에서 이벤트 핸들링은 어떻게 하는가?
 
