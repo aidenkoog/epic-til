@@ -3478,10 +3478,43 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - 런타임 체크 + 타입 좁히기(Type Narrowing)를 함께 수행
         - 라이브러리 내부에서 예외 처리 + 타입 안전성 향상
 
-- TypeScript에서 satisfies 연산자는 어떤 경우에 유용한가?
-- TypeScript에서 const 어노테이션을 활용한 리터럴 타입 제한은?
-- TypeScript에서 ReadonlyArray<T>와 readonly T[]의 차이는?
-- TypeScript에서 ModuleSpecifierResolution 설정이 중요한 이유는?
+- TypeScript에서 satisfies 연산자 유용한 케이스
+    - 정의
+        - satisfies 연산자는 값의 구조가 특정 타입을 만족하는지 검증하면서, 타입 추론은 값 자체의 리터럴 형태로 유지하도록 함
+
+    - 언제 유용한가
+        - 객체 리터럴을 정의할 때, 타입은 제한하고 싶지만 추론된 리터럴 타입을 잃고 싶지 않을 때
+        - 타입 체킹은 받고, 자동 완성도 풍부하게 유지하고 싶을 때
+
+    - 예시
+        ```ts
+        type Person = {
+            name: string;
+            age: number;
+        };
+
+        const user = {
+            name: "Alice",
+            age: 30,
+        } satisfies Person;
+        // => user는 Person을 만족하는 구조이지만 name은 "Alice" 리터럴 타입으로 유지됨
+        ```
+
+    - 비교: 일반 타입 단언과 차이
+        ```ts
+        const user1 = { name: "Alice", age: 30 } as Person; // 타입만 Person, 리터럴 타입 정보는 사라짐
+        ```
+
+- TypeScript에서 const 어노테이션을 활용한 리터럴 타입 제한
+    - 
+
+
+- TypeScript에서 ReadonlyArray<T>와 readonly T[]의 차이
+    - 
+
+
+- TypeScript에서 ModuleSpecifierResolution 설정이 중요한 이유
+    - 
 
 
 - TypeScript에서 Intrinsic String Manipulation Types은 어떤 경우에 유용한가?
