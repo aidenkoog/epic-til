@@ -3931,7 +3931,27 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         - Pick<T, K>, Omit<T, K>
         - Record<K, T>, Extract<T, U>, Exclude<T, U>
 
-- TypeScript에서 Omit<T, K>과 Exclude<T, U>의 차이는?
+- TypeScript에서 Omit<T, K>과 Exclude<T, U>의 차이
+    - Omit<T, K>
+        - 객체 타입에서 속성 K를 제거한 타입 반환
+        - 내부적으로는 Pick<T, Exclude<keyof T, K>>와 같음
+        ```ts
+        type Person = { name: string; age: number; gender: string };
+        type WithoutAge = Omit<Person, 'age'>; // { name: string; gender: string }
+        ```
+
+    - Exclude<T, U>
+        - 유니온 타입 T에서 U에 해당하는 타입을 제외
+        - 객체 타입이 아니라 단순 타입 필터링에 사용
+        ```ts
+        type T = 'a' | 'b' | 'c';
+        type R = Exclude<T, 'a' | 'b'>; // 'c'
+        ```
+
+    - 핵심 차이
+        - Omit: 객체 속성 제거용
+        - Exclude: 유니온 타입 필터링용
+
 - TypeScript 프로젝트에서 tsconfig.json을 설정할 때 최적의 옵션은?
 - JavaScript에서 Polyfill이 필요한 이유와 사용하는 방법은?
 
