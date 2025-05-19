@@ -3786,10 +3786,32 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
         shadow.innerHTML = `<style>:host { color: red; }</style><p>Hello!</p>`;
         ```
 
-- JavaScript에서 Service Worker와 Web Worker의 차이점은?
-- JavaScript에서 Lazy Loading을 구현하는 방법은?
+- JavaScript에서 Service Worker와 Web Worker의 차이점
+    - 공통점
+        - 둘 다 브라우저에서 메인 스레드와 분리된 백그라운드 스레드에서 실행됨
+        - postMessage() 방식으로 메인 스레드와 통신
+
+    - Web Worker
+        - 목적: CPU 집약적인 작업(예: 계산, 파싱 등)을 메인 스레드에 영향 없이 수행
+        - 수명: 페이지가 열려 있는 동안만 존재
+        - 접근 가능: DOM 불가, window 객체 접근 불가
+        - 주요 사용 사례:
+            - 대용량 연산
+            - 이미지/비디오 처리
+            - JSON 파싱, 데이터 압축
+
+    - Service Worker
+        - 목적: 네트워크 요청 가로채기, 캐싱, 오프라인 경험 제공
+        - 수명: 브라우저 전체에서 독립적으로 동작 (페이지 없어도 작동 가능)
+        - 접근 가능: Fetch, Cache, Push API, Background Sync 등
+        - 주요 사용 사례:
+            - PWA (Progressive Web App)
+            - 오프라인 페이지 지원
+            - 백그라운드 푸시 알림
+
+- JavaScript에서 Lazy Loading을 구현하는 방법
 - TypeScript에서 strictNullChecks를 활성화하면 코드의 안전성이 어떻게 개선되는가?
-- TypeScript에서 Partial<T>와 Pick<T, K>을 활용한 실용적인 예제는?
+- TypeScript에서 Partial<T>와 Pick<T, K>을 활용한 실용적인 예제
 
 
 - TypeScript에서 Utility Types을 적극적으로 활용하면 얻을 수 있는 장점은?
