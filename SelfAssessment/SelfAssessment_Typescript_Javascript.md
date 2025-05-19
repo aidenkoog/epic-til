@@ -3531,7 +3531,31 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
 
 
 - TypeScript에서 ReadonlyArray<T>와 readonly T[]의 차이
-    - 
+    - 차이점
+        - ReadonlyArray<T>
+            - 선언방식: 제네릭 타입 사용
+            - 사용시점: 인터페이스나 함수 시그니처에 적합
+            - 메서드 차이: 변경 불가능한 메서드만 허용
+            - 타입 확장성: 명시적 타입 선언 시 더 자주 사용
+        - readonly T[]
+            - 선언방식: 배열 앞에 readonly 키워드 사용
+            - 사용시점: 간단한 배열 선언 시 직관적
+            - 메서드 차이: 동일
+            - 타입 확장성: 간단한 상황에 적합
+
+    - 예시
+        ```ts
+        function printList(list: ReadonlyArray<number>) {
+            // list.push(1); 불가능
+        }
+
+        const data: readonly number[] = [1, 2, 3];
+            // data[0] = 5; 수정 불가
+        ```
+
+    - 결론
+        - 기능적으로는 거의 동일하며,
+        - 스타일과 상황에 따라 선택. ReadonlyArray<T>는 명시적이고, readonly T[]는 간단한 선언에 적합.
 
 
 - TypeScript에서 ModuleSpecifierResolution 설정이 중요한 이유
