@@ -7,6 +7,7 @@ Organize concepts, features, types and Pros and Cons
 - React Native와 React의 차이점
   - 공통 사항
     - 둘 다 리액트 라이브러리 기반하나 사용 목적과 실행 환경에서의 차이
+
   - 개념 (React.js / React Native)
     - 설명
       - 웹 애플리케이션 개발을 위한 UI 라이브러리
@@ -23,32 +24,37 @@ Organize concepts, features, types and Pros and Cons
     - 배포 방식
       - 웹사이트 URL로 접근
       - Android/iOS 앱스토어에 배포
+
   - 주요 차이점
     - UI 요소 (HTML vs 네이티브 컴포넌트)
-	  - React는 웹을 위한 HTML 태그(div, span, button, input 등) 을 사용.
-	  - React Native는 네이티브 모바일 UI 요소(View, Text, Button, ScrollView 등)를 사용.
+      - React는 웹을 위한 HTML 태그(div, span, button, input 등) 을 사용.
+      - React Native는 네이티브 모바일 UI 요소(View, Text, Button, ScrollView 등)를 사용.
+
     - 스타일링 방식 (CSS vs React Native Styles)
-	  - React에서는 CSS 또는 CSS-in-JS 사용.
-	  - React Native에서는 StyleSheet API를 사용하여 스타일 적용
+      - React에서는 CSS 또는 CSS-in-JS 사용.
+      - React Native에서는 StyleSheet API를 사용하여 스타일 적용
+
     - 네비게이션 방식 (React Router vs React Navigation)
       - React (웹)에서는 react-router-dom을 사용하여 URL 기반 라우팅을 함
       - React Native (모바일)에서는 react-navigation을 사용하여 화면 간 이동을 처리.
+
   - API 접근 방식
     - React (웹)
-	  - fetch 또는 axios로 API 호출
-	  - 브라우저 기반 API 사용 (예: localStorage, sessionStorage, document 등)
+      - fetch 또는 axios로 API 호출
+      - 브라우저 기반 API 사용 (예: localStorage, sessionStorage, document 등)
+
     - React Native (모바일)
-	  - fetch 또는 axios로 API 호출
-	  - 네이티브 기능 접근 가능 (카메라, GPS, 센서 등)
-	    - react-native-camera → 카메라 사용
-	    - react-native-geolocation → GPS 사용
-	    - AsyncStorage → 로컬 데이터 저장
+	    - fetch 또는 axios로 API 호출
+      - 네이티브 기능 접근 가능 (카메라, GPS, 센서 등)
+        - react-native-camera → 카메라 사용
+        - react-native-geolocation → GPS 사용
+        - AsyncStorage → 로컬 데이터 저장
+
   - 사용 목적에 따른 선택
     - 웹사이트 개발: 리액트
     - 모바일 앱 개발: 리액트 네이티브
     - 데스크톱 앱 개발: 리액트 (Electron 사용 가능)
     - 하이브리드 개발 (웹+앱): 리액트 (PWA 가능) / 리액트 네이티브 (크로스플랫폼 앱 가능)
-
 
 - React Native에서 Navigation을 구현하는 방법
   - React Native에서 Navigation이 필요한 이유
@@ -60,12 +66,14 @@ Organize concepts, features, types and Pros and Cons
     - 가장 많이 사용되는 내비게이션 라이브러리는 react-navigation
 
   - 설치 명령어
-    - npm install @react-navigation/native
-    - npm install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons react-native-dev-menu
-    - npm install @react-navigation/stack
+    ```bash
+    npm install @react-navigation/native
+    npm install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons react-native-dev-menu
+    npm install @react-navigation/stack
+    ```
 
   - 설치 후 babel.config.js 설정 (react-native-reanimated 활성화)
-    ```javascript
+    ```js
     module.exports = {
       presets: ['module:metro-react-native-babel-preset'],
       plugins: ['react-native-reanimated/plugin'], // 추가
@@ -84,7 +92,7 @@ Organize concepts, features, types and Pros and Cons
     - Stack Navigation은 화면을 쌓는 형태(스택)로 구성되어 push, pop 방식으로 동작
     - 뒤로가기 버튼이 자동 생성됨 (iOS는 좌측 스와이프, Android는 BackHandler)
     - 예제: Stack Navigation 구현
-      ```
+      ```jsx
       import React from 'react';
       import { View, Text, Button } from 'react-native';
       import { createStackNavigator } from '@react-navigation/stack';
@@ -140,7 +148,7 @@ Organize concepts, features, types and Pros and Cons
       - npm install react-native-vector-icons
 
     - 예제: Bottom Tab Navigation 구현
-      ```javascript
+      ```jsx
       import React from 'react';
       import { View, Text } from 'react-native';
       import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -194,7 +202,7 @@ Organize concepts, features, types and Pros and Cons
       - npm install @react-navigation/drawer
 
     - 예제: Drawer Navigation 구현
-      ```javascript
+      ```jsx
       import React from 'react';
       import { View, Text } from 'react-native';
       import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -233,7 +241,7 @@ Organize concepts, features, types and Pros and Cons
     - 개요
       - 여러 개의 내비게이션을 조합하여 사용 가능
       - 예제: Stack + Tab Navigation 혼합
-        ```javascript
+        ```jsx
         import React from 'react';
         import { View, Text } from 'react-native';
         import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
