@@ -15321,29 +15321,25 @@ Organize concepts, features, types and Pros and Cons
 
     - [전통적 방식]
         - 디스크 → 커널 버퍼 → 사용자 버퍼 → 소켓 버퍼 → NIC
+
     - [Zero-Copy 방식]
         - 디스크 → 커널 버퍼 → 소켓 버퍼 → NIC (사용자 영역 복사 생략)
+
     - [Java에서 적용 방법]
         - FileChannel.transferTo() / transferFrom()
+            ```java
+            FileChannel source = new FileInputStream("file").getChannel();
+            WritableByteChannel dest = Channels.newChannel(socket.getOutputStream());
+            source.transferTo(0, source.size(), dest);
+            ```
 
-java
-코드 복사
-FileChannel source = new FileInputStream("file").getChannel();
-WritableByteChannel dest = Channels.newChannel(socket.getOutputStream());
-source.transferTo(0, source.size(), dest);
-Netty 내부의 FileRegion, DirectBuffer 사용
+        - Netty 내부의 FileRegion, DirectBuffer 사용
+            - Netty는 내부적으로 Zero-Copy를 추상화하여 자동 적용
 
-Netty는 내부적으로 Zero-Copy를 추상화하여 자동 적용
-
-[효과]
-
-CPU 사용량 감소
-
-GC 부담 줄어듦
-
-대용량 파일 전송 시 효율 극대화
-
-
+    - [효과]
+        - CPU 사용량 감소
+        - GC 부담 줄어듦
+        - 대용량 파일 전송 시 효율 극대화
 
 - Java에서 WebSockets을 활용한 실시간 통신 구현 방법은?
 
