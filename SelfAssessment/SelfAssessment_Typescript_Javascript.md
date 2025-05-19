@@ -3720,10 +3720,71 @@ This page summarizes the main concepts, features, pros and cons of Javascript an
     - 도입 목적 명확화
         - 버그 예방? 코드 자동완성 개선? 문서화? → 도입 범위 결정 기준
 
-- TypeScript를 사용하면 발생할 수 있는 오버헤드는 무엇인가?
-- JavaScript에서 Event Delegation을 활용한 성능 최적화 방법은?
-- JavaScript에서 Shadow DOM을 사용하면 얻을 수 있는 이점은?
+- TypeScript를 사용하면 발생할 수 있는 오버헤드
+    - 컴파일 및 개발 오버헤드
+        - 빌드 시간 증가
+            - 프로젝트가 커질수록 tsc 컴파일 시간이 늘어남
 
+        - 타입 설계의 복잡성 증가
+            - 복잡한 제네릭, 유틸리티 타입 등은 생산성보다 코드 가독성을 해칠 수 있음
+
+        - 정적 타입의 유지보수 비용
+            - API 변경 시 타입 수정도 함께 필요 (코드 리팩토링 시 추가 작업 유발)
+
+        - 테스트 코드 중복 가능성
+            - 런타임 에러가 줄지만 타입 + 테스트를 모두 작성하는 경우 중복되는 검증 발생
+
+    - 운영 오버헤드는 없음
+        - TypeScript는 런타임에 존재하지 않음 → 운영 성능에는 영향 없음
+
+- JavaScript에서 Event Delegation을 활용한 성능 최적화 방법
+    - Event Delegation
+        - 많은 자식 요소에 각각 이벤트 리스너를 붙이는 대신, 공통 부모에 하나의 이벤트 리스너만 등록하고, 이벤트 버블링을 활용해 처리하는 방식
+
+    - 성능 최적화 포인트
+        - 리스너 개수 최소화
+            - DOM 요소마다 리스너 붙이면 메모리와 처리 비용 증가 → 부모 한 곳에 위임하여 효율성 확보
+
+        - 동적 요소 처리에 유리
+            - 나중에 생성되는 요소도 이벤트 핸들링이 가능
+
+    - 예시
+        ```js
+        document.getElementById('list').addEventListener('click', function (e) {
+            if (e.target.matches('li')) {
+                console.log('클릭된 항목:', e.target.textContent);
+            }
+        });
+        ```
+
+    - 주의점
+        - 이벤트 타겟이 예상한 요소가 아닐 수 있으므로 e.target, e.currentTarget 체크 필수
+        - 버블링이 지원되지 않는 이벤트 (예: blur, focus)에는 부적합
+
+- JavaScript에서 Shadow DOM을 사용하면 얻을 수 있는 이점
+    - Shadow DOM
+        - 웹 컴포넌트에서 사용하는 캡슐화된 DOM 영역
+        외부 CSS, JS로부터 격리된 자체 DOM 트리를 가짐
+
+    - 이점
+        - 스타일 캡슐화
+            - 외부 스타일 침범 방지, 내부 스타일 누출 방지 → 예측 가능한 UI 구성
+
+        - 컴포넌트 재사용성 향상
+            - 자체 스타일/구조 포함된 독립형 UI 모듈로 설계 가능
+
+        - 네이티브 DOM API로 구성
+            - React/Vue 없이도 플랫폼 표준으로 모듈화 가능
+
+        - 테스트 용이성
+            - 외부 상태에 의존하지 않기 때문에 독립적인 단위 테스트가 쉬움
+
+    - 예시
+        ```js
+        const shadowHost = document.querySelector('#my-component');
+        const shadow = shadowHost.attachShadow({ mode: 'open' });
+        shadow.innerHTML = `<style>:host { color: red; }</style><p>Hello!</p>`;
+        ```
 
 - JavaScript에서 Service Worker와 Web Worker의 차이점은?
 - JavaScript에서 Lazy Loading을 구현하는 방법은?
