@@ -409,7 +409,53 @@ Organize concepts, features, types and Pros and Cons
     };
     ```
 
-- Server-side Rendering(SSR)과 Client-side Rendering(CSR)의 차이점은?
+- SEO (Search Engine Optimization)
+  - SEO 개요
+    - 웹 사이트가 검색 엔진에서 더 높은 순위에 노출되도록 최적화하는 과정
+    - 특정 키워드를 검색했을 때 사용자들이 원하는 정보를 쉽게 찾을 수 있도록 웹사이트를 최적화하는 것
+
+  - SEO 주요 목표
+    - 검색 엔진에서 웹사이트의 가시성 향상
+      - 특정 키워드를 검색했을 때 웹사이트가 검색 결과 상위에 노출되도록 함
+    - 웹사이트 트래픽 증가
+      - 검색 결과 상위에 노출될수록 웹사이트 방문자가 증가
+    - 고객 참여도 향상
+      - 웹사이트 방문자가 증가하면 자연스럽게 고객 참여도 높아짐
+    - 브랜드 신뢰도 향상
+      - 검색 결과 상위에 노출되면 브랜드 신뢰도가 높아짐
+
+  - SEO 주요 작업
+    - 키워드 연구
+      - 사용자들이 어떤 키워드를 검색하는지 분석, 웹사이트의 콘텐츠와 관련된 키워드를 선정
+    - 온페이지 SEO
+      - 웹사이트 자체를 최적화하는 작업
+      - 웹사이트 구조, 제목, 설명, 콘텐츠 등을 개선
+    - 오프페이지 SEO
+      - 외부 웹사이트에서 웹사이트로 링크를 확보하는 작업
+      - 백링크를 구축하여 웹사이트의 신뢰도 증가
+    - 기술적 SEO
+      - 웹사이트의 기술적인 부분을 최적화하는 작업
+      - 웹사이트의 속도, 모바일 친화성 등을 개선
+    - 콘텐츠 마케팅
+      - 유익하고 매력적인 콘텐츠를 제공하여 사용자들의 웹사이트 방문 유도
+
+  - SEO 중요성
+    - 웹사이트를 운영하는 데 있어서 매우 중요한 요소
+    - SEO를 통해 웹사이트의 가시성을 높이고, 트래픽을 증가시켜 비즈니스를 성장시키는 데 도움이 됨
+
+- Server-side Rendering(SSR)과 Client-side Rendering(CSR)의 차이점
+  - Server-side Rendering (SSR)
+    - 초기 HTML을 서버에서 렌더링 → 클라이언트로 전달
+    - SEO, 초기 로딩 속도에 유리
+      - 참고: SEO -> Search Engine Optimization
+      - 설명: SEO -> 웹사이트가 검색 엔진에서 더 높은 순위에 노출되도록 최적화하는 과정
+      ```js
+      // Next.js 예시 (SSR)
+      export async function getServerSideProps() {
+        const data = await fetchData();
+        return { props: { data } };
+      }
+      ```
 
 - Next.js를 사용할 때의 장점은?
 - React에서 HOC(High Order Component)란?
