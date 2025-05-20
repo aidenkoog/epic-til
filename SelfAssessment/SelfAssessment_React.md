@@ -559,10 +559,32 @@ Organize concepts, features, types and Pros and Cons
     - Recoil/Zustand: 적은 코드로 간편하게 상태 관리하고 싶을 때
 
 - useReducer를 사용하는 경우
+  - 사용 목적
+    - 복잡한 상태 로직을 컴포넌트 내부에서 분리/관리할 때
+    - 다수의 상태 값이 있고, 하나의 이벤트가 여러 상태를 갱신할 때
 
+  - 예시
+    ```js
+    const initialState = { count: 0 };
 
+    function reducer(state, action) {
+      switch (action.type) {
+        case 'increment': return { count: state.count + 1 };
+        case 'decrement': return { count: state.count - 1 };
+        default: return state;
+      }
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+    ```
+
+  - 사용 시점
+    - 상태 전이(state transition)가 명확할 때 (action → result)
+    - useState로 관리하면 로직이 너무 복잡하거나 중복될 때
 
 - React에서 useRef의 용도
+  - ① DOM 접근
+특정 DOM 요소에 직접 접근할 때 사용 (ex. focus 제어, scroll 조작)
 
 - React에서 Portals란 무엇인가?
 - React에서 Synthetic Event란?
