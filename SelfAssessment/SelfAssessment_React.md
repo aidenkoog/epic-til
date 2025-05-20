@@ -667,7 +667,51 @@ Organize concepts, features, types and Pros and Cons
     - index를 key로 사용하면 항목의 순서나 내용이 바뀔 때 잘못된 diffing이 발생할 수 있음
     - 예: 입력 필드, 드래그 앤 드롭 UI에서 의도치 않은 재사용 발생
 
-- React에서 Suspense를 이용해 데이터를 비동기적으로 로딩하는 방법은?
+- React에서 Suspense를 이용해 데이터를 비동기적으로 로딩하는 방법
+  - 기본 개념
+    - React.Suspense는 비동기 로딩 컴포넌트를 기다리는 동안 fallback UI를 보여주는 기능
+    - 원래는 코드 분할(lazy loading)용이었지만, React 18부터는 데이터 페칭도 지원
+
+  - 사용 방법 (React 18 이상 + use or React.lazy 기반)
+    ```tsx
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <MyAsyncComponent />
+    </Suspense>
+    ```
+
+  - 데이터 로딩 예 (React 18 + use() 활용)
+    ```tsx
+    // utils/fetchUser.ts
+    export function fetchUser(userId: string) {
+      const promise = fetch(`/api/user/${userId}`).then(res => res.json());
+      return wrapPromise(promise);
+    }
+
+    // 컴포넌트
+    const user = fetchUser('123').read(); // read()는 throw pending promise
+    ```
+
+  - wrapPromise()는 Suspense가 이해할 수 있는 형태로 Promise를 감쌈
+    ```tsx
+    function wrapPromise(promise) {
+      let status = 'pending';
+      let result;
+      const suspender = promise.then(
+        r => { status = 'success'; result = r; },
+        e => { status = 'error'; result = e; }
+      );
+      return {
+        read() {
+          if (status === 'pending') throw suspender;
+          if (status === 'error') throw result;
+          return result;
+        }
+      };
+    }
+    ```
+    - 실무에서는 Relay, React Query(실험적) 등과 연계해 활용됨.
+
+
 - React의 hydrate 기능은 무엇인가?
 - React에서 새로운 상태를 만들지 않고 이전 상태를 직접 변경하면 왜 안 되는가?
 
