@@ -609,7 +609,25 @@ Organize concepts, features, types and Pros and Cons
     }, [count]);
     ```
 
-- React에서 Portals란 무엇인가?
+- React에서 Portals 개념, 사용목적, 예시
+  - 개념
+    - 부모 컴포넌트의 DOM 계층을 벗어나 다른 DOM 노드에 자식을 렌더링할 수 있는 기능
+    - ReactDOM.createPortal(child, container)를 사용
+
+  - 사용 목적
+    - 모달, 팝오버, 툴팁처럼 레이아웃 제약을 받지 않아야 하는 UI에 적합
+
+  - 예시
+    ```js
+    return ReactDOM.createPortal(
+      <div className="modal">Hello Modal</div>,
+      document.getElementById('modal-root') // HTML의 별도 DOM 노드
+    );
+    ```
+
+  - 장점
+    - 시각적으로 DOM 트리 바깥에 있어도, React 트리 안에서 동작 (이벤트 버블링 유지됨)
+
 - React에서 Synthetic Event란?
 - React에서 key props가 필요한 이유는?
 
