@@ -524,7 +524,23 @@ Organize concepts, features, types and Pros and Cons
   - 주의 사항
     - props 전달 누락, 디버깅 어려움, 컴포넌트 중첩 문제 등이 발생할 수 있음 → React Hooks 도입 이후 일부 대체됨 (useXXX)
 
-- React의 Reconciliation 알고리즘이란?
+- React의 Reconciliation 알고리즘
+  - 개념
+    - React가 상태/props 변화로 인해 Virtual DOM이 변경될 때, 실제 DOM에 반영할 최소 변경 사항을 계산하는 과정
+
+  - 핵심 원리
+    - Virtual DOM을 비교(diffing)하고, 실제 DOM을 효율적으로 업데이트
+    - 기존 DOM을 재사용하며 변경된 부분만 업데이트 → 성능 최적화
+
+  - 주요 규칙
+    - 같은 타입의 요소 → 속성만 업데이트
+    - 다른 타입의 요소 → 해당 노드 전체 재생성
+    - key 값을 기준으로 리스트 요소를 효율적으로 비교
+      - → key는 변하지 않는 고유값을 사용해야 최적화 가능
+
+  - 성능 최적화 팁
+    - key 충돌 방지
+    - 불필요한 재조정 방지 (ex: memo, pure component)
 
 - React에서 상태를 전역으로 관리하는 방법에는 무엇이 있는가?
 - useReducer를 사용하는 경우는 언제인가?
