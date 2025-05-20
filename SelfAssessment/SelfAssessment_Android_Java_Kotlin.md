@@ -15477,8 +15477,30 @@ Organize concepts, features, types and Pros and Cons
         - REST: 직관적이고 범용적, 브라우저/프론트엔드 친화적
         - gRPC: 고성능, 양방향 스트리밍, 엄격한 타입, 내부 마이크로서비스 간 통신에 유리
 
-- Java에서 HttpClient와 URLConnection의 차이점은?
-- Java에서 Thread Dump를 분석하는 방법은?
+- Java에서 HttpClient와 URLConnection의 차이점
+    - URLConnection (구버전 API)
+        - java.net.URLConnection, JDK 1.1부터 존재
+        - 기능 제한적, 비동기 미지원, 설정 불편 (헤더, 타임아웃 등)
+        - 예외 처리, 쿠키, 인증 등 수동 처리 필요
+
+    - HttpClient (JDK 11부터)
+        - java.net.http.HttpClient
+        - 비동기 지원 (CompletableFuture), HTTP/2 지원
+        - 사용 간결, 표준화된 API, 리액티브 스타일 가능
+
+    - 비교 예시
+        ```java
+        // HttpClient (추천)
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://example.com"))
+            .build();
+        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+        ```
+
+- Java에서 Thread Dump를 분석하는 방법
+
+
 - Java에서 Deadlock이 발생하는 원인과 해결 방법은?
 
 - Java에서 Thread.sleep()과 Object.wait()의 차이점은?
