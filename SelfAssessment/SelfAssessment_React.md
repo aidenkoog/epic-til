@@ -344,7 +344,47 @@ Organize concepts, features, types and Pros and Cons
   - 의존성 배열 누락 주의
     - useEffect, useCallback, useMemo 등에서 상태를 참조하면, 해당 상태는 반드시 의존성 배열에 포함
 
-- React에서 Suspense와 Error Boundary의 차이점은?
+- React에서 Suspense와 Error Boundary의 차이점
+  - Suspense
+    - 비동기 로딩 상태 처리를 위한 리액트 기능
+    - lazy()로 불러오는 컴포넌트나 data fetching 중 로딩 UI를 보여주기 위함
+    - 로딩 fallback UI를 지정할 수 있음
+      ```js
+      const LazyComponent = React.lazy(() => import('./MyComponent'));
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyComponent />
+      </Suspense>
+      ```
+
+  - Error Boundary
+    - 렌더링 중 발생한 JavaScript 에러를 잡아내고, 대체 UI를 보여주는 컴포넌트
+    - 앱 전체 크래시 방지, 사용자 친화적 에러 대응 가능
+      ```jsx
+      class MyErrorBoundary extends React.Component {
+        state = { hasError: false };
+        static getDerivedStateFromError(error) {
+          return { hasError: true };
+        }
+        componentDidCatch(error, info) {
+          logErrorToService(error, info);
+        }
+        render() {
+          return this.state.hasError ? <h1>Something went wrong.</h1> : this.props.children;
+        }
+      }
+      ```
+
+    - 차이점 요약
+      - Suspense
+        - 처리 대상: 로딩 지연
+        - 사용 목적: 비동기 UI 처리
+        - 렌더링 영향: fallback UI로 일시 대체
+      - Error Boundary
+        - 처리 대상: Javascript 런타임 에러
+        - 사용 목적: 오류 복구와 대체 UI 제공
+        - 렌더링 영향: componentDidCatch로 복구 처리
+
 - React의 Concurrent Mode란 무엇인가?
 - Server-side Rendering(SSR)과 Client-side Rendering(CSR)의 차이점은?
 
