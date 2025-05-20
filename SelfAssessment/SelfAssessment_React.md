@@ -584,7 +584,30 @@ Organize concepts, features, types and Pros and Cons
 
 - React에서 useRef의 용도
   - ① DOM 접근
-특정 DOM 요소에 직접 접근할 때 사용 (ex. focus 제어, scroll 조작)
+    - 특정 DOM 요소에 직접 접근할 때 사용 (ex. focus 제어, scroll 조작)
+      ```js
+      const inputRef = useRef(null);
+      <input ref={inputRef} />
+      <input onClick={() => inputRef.current.focus()} />
+      ```
+
+  - ② 상태 저장 (렌더링과 무관한 값 보관)
+    - 렌더링을 유발하지 않는 값을 저장할 때
+    - 이전 값 저장, 타이머 ID 저장 등에 유용
+      ```js
+      const countRef = useRef(0);
+      useEffect(() => {
+        countRef.current += 1; // 렌더링 없이 값 누적
+      }, []);
+      ```
+
+  - ③ 이전 값 기억
+    ```js
+    const prevCount = useRef();
+    useEffect(() => {
+      prevCount.current = count;
+    }, [count]);
+    ```
 
 - React에서 Portals란 무엇인가?
 - React에서 Synthetic Event란?
