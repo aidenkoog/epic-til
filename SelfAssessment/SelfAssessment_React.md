@@ -385,7 +385,30 @@ Organize concepts, features, types and Pros and Cons
         - 사용 목적: 오류 복구와 대체 UI 제공
         - 렌더링 영향: componentDidCatch로 복구 처리
 
-- React의 Concurrent Mode란 무엇인가?
+- React의 Concurrent Mode
+  - 개념
+    - React가 렌더링을 인터럽트 가능한 작업 단위로 분할하여 처리하는 비동기 렌더링 모드
+    - 사용자 인터랙션 중에도 앱이 부드럽게 반응하도록 렌더링 우선순위를 제어함
+
+  - 주요 특징
+    - 렌더링 중단/재개 가능 → 장시간 렌더링으로 인한 UI 블로킹 방지
+    - useTransition, startTransition, Suspense, deferredValue 등과 연계됨
+    - React 18부터 기본 렌더링 엔진에 통합 (부분적 사용 가능)
+
+  - 실전 활용 예
+    ```jsx
+    const [input, setInput] = useState('');
+    const [list, setList] = useState([]);
+
+    const handleChange = (e) => {
+      const value = e.target.value;
+      setInput(value);
+      startTransition(() => {
+        setList(expensiveFilter(value));
+      });
+    };
+    ```
+
 - Server-side Rendering(SSR)과 Client-side Rendering(CSR)의 차이점은?
 
 - Next.js를 사용할 때의 장점은?
