@@ -457,6 +457,28 @@ Organize concepts, features, types and Pros and Cons
       }
       ```
 
+  - Client-side Rendering (CSR)
+    - 초기에는 최소 HTML만 제공, 이후 JavaScript로 렌더링
+    - 첫 로딩은 느릴 수 있지만, 이후 페이지 전환은 빠름
+      ```js
+      // CRA 등 SPA 방식
+      useEffect(() => {
+        fetch('/api/data').then(res => res.json()).then(setData);
+      }, []);
+      ```
+
+  - 차이점
+    - SSR
+      - 초기 렌더링 위치: 서버 (Node.js 등)
+      - SEO: 매우 우수
+      - 첫 페이지 로딩: 빠름 (HTML 바로 도착)
+      - 사용자 경험: 빠른 첫 렌더링
+    - CSR
+      - 초기 렌더링 위치: 클라이언트 (브라우저)
+      - SEO: 기본적으로 불리
+      - 첫 페이지 로딩: 느릴 수 있음 (JS 로딩 후 렌더링)
+      - 사용자 경험: 페이지 전환이 빠름
+
 - Next.js를 사용할 때의 장점은?
 - React에서 HOC(High Order Component)란?
 - React의 Reconciliation 알고리즘이란?
