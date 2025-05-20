@@ -499,7 +499,31 @@ Organize concepts, features, types and Pros and Cons
   - Edge Function, Middleware 등 최신 기능 지원
     - Vercel 환경과 통합 시 강력한 클라우드 최적화
 
-- React에서 HOC(High Order Component)란?
+- React에서 HOC(High Order Component)
+  - 개념
+    - 컴포넌트를 인자로 받아 새로운 컴포넌트를 반환하는 함수
+    - 로직 재사용 및 관심사 분리에 유리
+
+  - 참고
+    - 고차함수: 함수를 파라미터로 받거나 연산의 결과로 반환해주는 메서드
+
+  - 사용 예시
+    ```tsx
+    function withLoading(Component) {
+      return function WrappedComponent({ isLoading, ...props }) {
+        return isLoading ? <div>Loading...</div> : <Component {...props} />;
+      };
+    }
+    ```
+
+  - 주요 용도
+    - 인증 처리, 권한 제어
+    - 공통 로딩/에러 처리
+    - 공통 로직 추출
+
+  - 주의 사항
+    - props 전달 누락, 디버깅 어려움, 컴포넌트 중첩 문제 등이 발생할 수 있음 → React Hooks 도입 이후 일부 대체됨 (useXXX)
+
 - React의 Reconciliation 알고리즘이란?
 
 - React에서 상태를 전역으로 관리하는 방법에는 무엇이 있는가?
