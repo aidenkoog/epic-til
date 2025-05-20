@@ -15499,9 +15499,61 @@ Organize concepts, features, types and Pros and Cons
         ```
 
 - Java에서 Thread Dump를 분석하는 방법
+    - Thread Dump 개념
+        - JVM에서 실행 중인 모든 스레드의 상태(stack trace) 를 출력한 내용
+        - Deadlock, 병목, 무한 루프 등 진단에 사용
 
+    - 획득 방법
+        - 콘솔: kill -3 <pid> (Unix)
+        - jcmd: jcmd <pid> Thread.print
+        - jstack: jstack <pid>
+        - VisualVM, JMC 등 툴 사용
 
-- Java에서 Deadlock이 발생하는 원인과 해결 방법은?
+    - 분석 포인트
+        - RUNNABLE: CPU 사용 중
+        - BLOCKED: 다른 스레드가 락을 잡고 있어 대기
+        - WAITING / TIMED_WAITING: wait() 또는 sleep() 상태
+        - java.lang.Thread.State 정보로 스레드 상태 확인
+
+    - Deadlock 확인
+        - 스레드 A가 락 X를 잡고, Y를 기다리며
+        - 스레드 B가 락 Y를 잡고, X를 기다리는 경우
+        ```csharp
+        Found one Java-level deadlock:
+        "Thread-1":
+            waiting to lock monitor 0x000... (object A), held by "Thread-2"
+        "Thread-2":
+            waiting to lock monitor 0x000... (object B), held by "Thread-1"
+        ```
+
+- Java에서 Deadlock이 발생하는 원인과 해결 방법
+    - 발생 원인
+        - 두 개 이상의 스레드가 서로 상대방의 락을 점유한 상태에서 대기
+        - 일반적으로 락 획득 순서 불일치 또는 중첩 락 획득에서 발생
+
+    - 재현 예시
+        ```java
+        synchronized (lockA) {
+            synchronized (lockB) { /* ... */ }
+        }
+
+        synchronized (lockB) {
+            synchronized (lockA) { /* ... */ }
+        }
+        ```
+
+    - 해결 방법
+        - 락 획득 순서 통일
+            - 모든 스레드가 항상 같은 순서로 락을 요청
+
+        - tryLock() 사용 (ReentrantLock)
+            - 일정 시간 내 락 획득 실패 시 포기 → 교착 상태 방지
+
+        - Deadlock 감지 도구 사용
+            - jstack, VisualVM, DeadlockDetector 사용
+
+        - 동시성 제어 구조 리팩토링
+            - 락 사용 최소화, 메시지 큐 기반 구조 도입
 
 - Java에서 Thread.sleep()과 Object.wait()의 차이점은?
 - Java에서 ScheduledThreadPoolExecutor의 활용 방법은?
