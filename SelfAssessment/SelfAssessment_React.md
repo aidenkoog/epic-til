@@ -479,7 +479,26 @@ Organize concepts, features, types and Pros and Cons
       - 첫 페이지 로딩: 느릴 수 있음 (JS 로딩 후 렌더링)
       - 사용자 경험: 페이지 전환이 빠름
 
-- Next.js를 사용할 때의 장점은?
+- Next.js를 사용할 때의 장점
+  - SSR 및 SSG 지원
+    - 페이지 단위로 Server-Side Rendering (SSR) 또는 Static Site Generation (SSG) 선택 가능
+    - 검색엔진 최적화(SEO)와 빠른 초기 로딩 성능 확보
+
+  - 파일 기반 라우팅
+    - pages/ 폴더 구조만으로 자동 라우팅 → 코드 간결화
+
+  - API Routes 내장
+    - pages/api/*.ts에 서버 코드 작성 가능 → 별도 백엔드 없이 간단한 API 제공
+
+  - 이미지 최적화 및 성능 향상
+    - next/image, 자동 코드 분할, lazy loading, prefetch 등 제공
+
+  - 타입스크립트, ESLint, Prettier 기본 통합 지원
+    - 팀 협업 및 품질 관리에 유리
+
+  - Edge Function, Middleware 등 최신 기능 지원
+    - Vercel 환경과 통합 시 강력한 클라우드 최적화
+
 - React에서 HOC(High Order Component)란?
 - React의 Reconciliation 알고리즘이란?
 
