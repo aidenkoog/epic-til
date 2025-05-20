@@ -648,7 +648,24 @@ Organize concepts, features, types and Pros and Cons
   - 사용 주의점
     - 비동기 사용 시 event.persist() 또는 구조분해 할당 필요 (React 16 이하에서는 자동 소멸됨)
 
-- React에서 key props가 필요한 이유는?
+- React에서 key props가 필요한 이유
+  - 목적
+    - 리스트 렌더링 시 항목을 구별하여 최소한의 DOM 변경을 하기 위함
+    - key는 React의 Reconciliation(조정) 알고리즘에서 항목을 추적하는 기준
+
+  - 올바른 key 사용 예
+    ```js
+    {items.map(item => <li key={item.id}>{item.name}</li>)}
+    ```
+
+  - 잘못된 예 (index 사용)
+    ```js
+    {items.map((item, index) => <li key={index}>{item.name}</li>)} // 위험
+    ```
+
+  - 이유
+    - index를 key로 사용하면 항목의 순서나 내용이 바뀔 때 잘못된 diffing이 발생할 수 있음
+    - 예: 입력 필드, 드래그 앤 드롭 UI에서 의도치 않은 재사용 발생
 
 - React에서 Suspense를 이용해 데이터를 비동기적으로 로딩하는 방법은?
 - React의 hydrate 기능은 무엇인가?
