@@ -542,9 +542,27 @@ Organize concepts, features, types and Pros and Cons
     - key 충돌 방지
     - 불필요한 재조정 방지 (ex: memo, pure component)
 
-- React에서 상태를 전역으로 관리하는 방법에는 무엇이 있는가?
-- useReducer를 사용하는 경우는 언제인가?
-- React에서 useRef의 용도는?
+- React에서 상태를 전역으로 관리하는 방법
+  - Context API
+    - React 내장 기능으로 전역 상태 공유
+    - 간단한 앱, 로그인/테마/언어 등
+  - Redux
+    - 액션 > 리듀서 > 스토어 구조
+    - 대규모 앱, 예측 가능한 상태 흐름
+  - Recoil / Zustand / Jotai / MobX
+    - 경량 상태 관리 라이브러리
+    - 선언형, 코드 간결, 학습 곡선 낮음
+
+  - 선택 기준
+    - Context API: 전역 공유만 필요할 때 (ex. 로그인 상태)
+    - Redux: 복잡한 상태 관리, 미들웨어/DevTools 활용 시
+    - Recoil/Zustand: 적은 코드로 간편하게 상태 관리하고 싶을 때
+
+- useReducer를 사용하는 경우
+
+
+
+- React에서 useRef의 용도
 
 - React에서 Portals란 무엇인가?
 - React에서 Synthetic Event란?
