@@ -628,7 +628,26 @@ Organize concepts, features, types and Pros and Cons
   - 장점
     - 시각적으로 DOM 트리 바깥에 있어도, React 트리 안에서 동작 (이벤트 버블링 유지됨)
 
-- React에서 Synthetic Event란?
+- React에서 Synthetic Event
+  - 개념
+    - React가 브라우저의 네이티브 DOM 이벤트를 추상화한 이벤트 객체
+    - 이벤트 간 브라우저 간 호환성을 보장하고, 성능 최적화에 유리
+
+  - 특징
+    - 모든 이벤트는 풀링(pooled) 되어 재사용됨 (React 16 이하)
+    - React의 이벤트 핸들러는 버블링 중심으로 작동
+      - (onClick, onChange, onSubmit 등은 캡처 대신 버블링 처리)
+
+  - 예시
+    ```js
+    function handleClick(event) {
+      console.log(event.type); // "click" (SyntheticEvent)
+    }
+    ```
+
+  - 사용 주의점
+    - 비동기 사용 시 event.persist() 또는 구조분해 할당 필요 (React 16 이하에서는 자동 소멸됨)
+
 - React에서 key props가 필요한 이유는?
 
 - React에서 Suspense를 이용해 데이터를 비동기적으로 로딩하는 방법은?
