@@ -333,15 +333,45 @@ Organize concepts, features, types and Pros and Cons
     await AsyncStorage.setItem('token', 'abc123');
     const token = await AsyncStorage.getItem('token');
     ```
-
-
 - React Native에서 Reanimated
+  - Reanimated 개념
+    - 고성능 애니메이션 라이브러리.
+    - react-native-reanimated는 JavaScript 스레드가 아닌 UI 스레드에서 직접 실행되어 더 부드럽고 끊김 없는 애니메이션을 제공.
+    - Gesture Handler와 함께 자주 사용되며, 복잡한 제스처 및 애니메이션에 적합.
+    - v2부터는 worklet과 shared value를 사용하여 선언형 스타일로 애니메이션을 정의함.
+    - 기존의 Animated API 보다 성능, 자연스러움, 유연성 면에서 훨씬 우수
 
+  - 예시
+    ```ts
+    import { useSharedValue, withSpring, useAnimatedStyle } from 'react-native-reanimated';
 
-- React Native에서 Native Module이란?
+    const offset = useSharedValue(0);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+      transform: [{ translateX: offset.value }],
+    }));
+
+    offset.value = withSpring(100);  // 부드러운 애니메이션 이동
+    ```
+
+- React Native에서 Native Module
+  - 개념
+    - React Native(JavaScript)에서 Android(Java/Kotlin), iOS(Objective-C/Swift) 네이티브 기능을 호출하기 위한 브리지 모듈.
+    - 예: 카메라, Bluetooth, 암호화, 생체인식 등 JS로 직접 제어할 수 없는 네이티브 기능을 사용할 때.
+
+  - 특징
+    - JavaScript ↔ Native 사이 양방향 통신 가능.
+    - Android: @ReactMethod로 메서드 노출
+    - iOS: RCT_EXPORT_METHOD 또는 Swift에서 @objc 사용
+
+  - 예시
+    - Android: MyNativeModule.java
+    - JavaScript: NativeModules.MyNativeModule.doSomething()
+
 - React Native에서 Expo와 Bare Workflow의 차이점은?
 - React Native에서 성능 최적화 방법은?
 - React Native에서 useEffect의 메모리 누수를 방지하는 방법은?
+
 - React Native에서 Gesture Handling을 구현하는 방법은?
 - React Native에서 push notification을 설정하는 방법은?
 - React Native에서 App State를 관리하는 방법은?
