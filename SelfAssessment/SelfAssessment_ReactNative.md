@@ -503,9 +503,21 @@ Organize concepts, features, types and Pros and Cons
     - 앱이 background로 갔을 때 리소스 정리
     - foreground로 복귀할 때 데이터 갱신
     - 세션 유지, 타이머 관리 등
-    
-- React Native에서 Hot Reloading과 Fast Refresh의 차이점
 
+- React Native에서 Hot Reloading과 Fast Refresh의 차이점
+  - Hot Reloading (구버전)
+    - 작동방식: 상태(state)를 유지한 채 JS 변경 적용
+    - 신뢰성: 불안정 (종종 작동 안 함)
+    - 상태 유지: 가능하나 불완전함
+    - 변경 적용 범위: 전체 파일 감지 기준
+    
+  - Fast Refresh (현재 기본)
+    - 작동방식: 자동으로 안전하게 컴포넌트만 다시 로딩
+    - 신뢰성: 매우 안정적
+    - 상태 유지: 대부분의 경우 상태 유지 가능
+    - 변경 적용 범위: 변경된 모듈만 리프레시
+
+  - Fast Refresh는 React Native 0.61 이후 기본 활성화된 기능이며 Hot Reloading은 더 이상 권장되지 않음
 
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
