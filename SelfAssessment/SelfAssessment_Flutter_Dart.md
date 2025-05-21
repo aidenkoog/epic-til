@@ -609,7 +609,29 @@ Organize concepts, features, types and Pros and Cons
     - Navigator 2.0 -> 웹/복잡한 플로우 앱 유리
       - (예: 로그인 -> 대시보드 -> 설정 등 상태 기반 라우팅)
 
-- Flutter에서 Riverpod과 Provider의 차이점은?
+- Flutter에서 Riverpod과 Provider의 차이점
+  - 차이점
+    - Provider
+      - 작성 방식: Flutter 위젯에 의존
+      - 전역 접근: BuildContext 필요
+      - 테스트: 상대적으로 복잡
+      - 상태 추적: context.watch 등 의존
+      - 안전성: runtime 오류 가능
+      - 성능 및 기능: 적절하지만 제한 존재
+
+    - Riverpod
+      - 작성 방식: 완전히 독립적인 선언형 코드 가능
+      - 전역 접근: 어디서든 접근 가능 (context 불필요)
+      - 테스트: 독립적인 테스트 용이
+      - 상태 추적: 자동 상태 추적 (ref.watch)
+      - 안전성: 컴파일 타임 타입 안정성 우수
+      - 성능 및 기능: 캐시, Lazy 초기화 등 고급 기능 내장
+
+  - 요약
+    - Provider: 가볍고 기본적인 상태 관리. 초보자에게 적합.
+    - Riverpod: 더 모듈화, 안전성, 확장성이 뛰어난 최신 상태 관리 솔루션
+
+
 
 - Flutter에서 InheritedWidget의 역할은?
 - Flutter에서 Provider와 Bloc의 차이점은?
