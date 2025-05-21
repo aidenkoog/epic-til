@@ -660,21 +660,53 @@ Organize concepts, features, types and Pros and Cons
 
 - Flutter에서 Provider와 Bloc의 차이점
   - Provider
-    - 아키텍쳐 성격: 
-    - 학습 난이도: 
-    - 상태 변경 방식: 
-    - 의존성 주입: 
-    - 테스트 용이성: 
+    - 아키텍쳐 성격: 단순한 상태 공유 및 리빌드 제어
+    - 학습 난이도: 낮음 (간결하고 직관적)
+    - 상태 변경 방식: notifyListeners()로 직접 통지
+    - 의존성 주입: 지원 (via Provider.of)
+    - 테스트 용이성: 쉬움
   - Bloc
-    - 아키텍쳐 성격: 
-    - 학습 난이도: 
-    - 상태 변경 방식: 
-    - 의존성 주입: 
-    - 테스트 용이성: 
+    - 아키텍쳐 성격: 명확한 계층 구조의 상태 관리 패턴
+    - 학습 난이도: 높음 (스트림과 이벤트 기반)
+    - 상태 변경 방식: 이벤트 -> 비즈니스 로직 처리 -> 상태 전파 (스트림 기반)
+    - 의존성 주입: BlocProvider로 관리
+    - 테스트 용이성: 매우 뛰어남 (로직 분리 가능)
 
+  - 요약
+    - Provider: 간단한 앱에서 UI와 상태를 손쉽게 관리 가능
+    - Bloc: 복잡한 앱 구조, 명확한 Event-Driven 구조가 필요할 때 적합
+      - Bloc은 공식적으로 flutter_bloc 패키지와 함께 사용
+      - 상태 흐름을 명확하게 추적하고 테스트하기 좋음
 
 - Flutter에서 Isolates를 활용하는 이유
+  - 정의
+    - Dart의 병렬 처리 유닛.
+    - Isolate는 각각 별도의 메모리 공간과 이벤트 루프를 가지며, 서로 메시지를 통해 통신
+  
+  - 사용 이유
+    - 플러터는 단일 스레드 UI 모델을 사용하므로, 무거운 연산 작업이 메인쓰레드를 막아 UI가 멈출 수 있음.
+    - 예: JSON 파싱, 이미지 디코딩, 파일 I/O 등 -> Isolate에서 수행
 
+  - 기본 사용 예
+    ```dart
+    import 'dart:isolate';
+
+    void heavyComputation(SendPort sendPort) {
+      int result = 0;
+      for (int i = 0; i < 100000000; i++) result += i;
+      sendPort.send(result);
+    }
+    ```
+
+  - 대체 옵션
+    - compute() 함수: Isolate를 간편하게 사용하는 고수준 API
+      ```dart
+      int sumUpTo(int n) {
+        return List.generate(n, (i) => i).reduce((a, b) => a + b);
+      }
+      final result = await compute(sumUpTo, 100000000);
+      ```
+      - UI 프레임이 끊기지 않도록 비동기 작업을 분리할 때 매우 유용
 
 - Flutter에서 Custom Painter를 활용하는 방법은?
 - Flutter에서 Native Code(Android, iOS)를 호출하는 방법은?
