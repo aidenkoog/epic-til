@@ -482,8 +482,29 @@ Organize concepts, features, types and Pros and Cons
       ```
       -  iOS의 경우 APNs 설정 필요 (개발자 계정, 인증서 필수)
 
-- React Native에서 App State를 관리하는 방법은?
-- React Native에서 Hot Reloading과 Fast Refresh의 차이점은?
+- React Native에서 App State를 관리하는 방법
+  - AppState API
+    - 앱의 현재 상태 감지 가능: active, background, inactive
+  
+  - 예시
+    ```ts
+    import { AppState } from 'react-native';
+
+    useEffect(() => {
+      const subscription = AppState.addEventListener('change', nextState => {
+        console.log('AppState:', nextState);
+      });
+
+      return () => subscription.remove();
+    }, []);
+    ```
+
+  - 주요 활용
+    - 앱이 background로 갔을 때 리소스 정리
+    - foreground로 복귀할 때 데이터 갱신
+    - 세션 유지, 타이머 관리 등
+    
+- React Native에서 Hot Reloading과 Fast Refresh의 차이점
 
 
 - React Native에서 Dynamic Linking이란?
