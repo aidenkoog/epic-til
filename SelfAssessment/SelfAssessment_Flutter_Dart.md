@@ -1234,10 +1234,58 @@ Organize concepts, features, types and Pros and Cons
     - 위젯 배치 UI 구성
       - 기본 기능 외에도 커스텀 드래그 애니메이션, 다중 대상 지원 등 확장이 가능
 
-- Flutter에서 StatelessWidget과 StatefulWidget의 차이점은?
+- Flutter에서 StatelessWidget과 StatefulWidget의 차이점
+  - 차이점
+    - StatelessWidget
+      - 상태 관리: 불가능 (불변)
+      - 리렌더링: 외부 입력이 바뀔 때만 다시 빌드
+      - 사용 용도: UI가 변하지 않는 정적 컴포넌트
+
+    - StatefulWidget
+      - 상태 관리: 가능 (변경 가능)
+      - 리렌더링: setState() 호출 시 다시 빌드
+      - 사용 용도: UI가 사용자 동작 등으로 바뀌는 동적 컴포넌트
+
+  - 예시
+    ```dart
+    // StatelessWidget 예
+    class MyText extends StatelessWidget {
+      final String title;
+      const MyText(this.title);
+
+      @override
+      Widget build(BuildContext context) {
+        return Text(title);
+      }
+    }
+
+    // StatefulWidget 예
+    class MyCounter extends StatefulWidget {
+      @override
+      State<MyCounter> createState() => _MyCounterState();
+    }
+
+    class _MyCounterState extends State<MyCounter> {
+      int count = 0;
+
+      @override
+      Widget build(BuildContext context) {
+        return Column(
+          children: [
+            Text('$count'),
+            ElevatedButton(onPressed: () => setState(() => count++), child: Text("Add"))
+          ],
+        );
+      }
+    }
+    ```
+
+
 - Flutter에서 setState()는 어떤 역할을 하는가?
 - Flutter에서 상태 관리를 위해 Provider를 사용하는 이유는?
 - Flutter에서 Riverpod과 Provider의 차이점은?
+
+
 - Flutter에서 Bloc 패턴을 사용할 때 얻을 수 있는 장점은?
 - Flutter에서 InheritedWidget의 역할은?
 - Flutter에서 GetX 상태 관리 패턴을 사용하는 이유는?
