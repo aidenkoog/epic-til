@@ -402,7 +402,43 @@ Organize concepts, features, types and Pros and Cons
     - 앱 초기화 속도 개선 (Splash Screen 등)
     - 무거운 연산은 Web Worker / Background Thread로 분리
 
-- React Native에서 useEffect의 메모리 누수를 방지하는 방법은?
+- React Native에서 useEffect의 메모리 누수를 방지하는 방법
+  - 문제가 되는 경우
+    - useEffect 내부에서 비동기 작업(fetch, timer, event listener 등)을 시작하고 컴포넌트 언마운트 시 정리(clean-up)를 안 하면 메모리 누수 발생.
+
+  - 해결 방법: return을 사용한 정리
+    ```ts
+    useEffect(() => {
+      const subscription = eventEmitter.addListener('someEvent', handler);
+
+      return () => {
+        // cleanup
+        subscription.remove();
+      };
+    }, []);
+    ```
+    
+  - 비동기 처리 시 주의
+    - 비동기 작업 취소, listener 제거, timer clear 등이 핵심.
+    ```ts
+    useEffect(() => {
+      let isMounted = true;
+
+      const fetchData = async () => {
+        const data = await fetch(...);
+        if (isMounted) {
+          setState(data);
+        }
+      };
+
+      fetchData();
+
+      return () => {
+        isMounted = false;
+      };
+    }, []);
+    ```
+
 
 - React Native에서 Gesture Handling을 구현하는 방법은?
 - React Native에서 push notification을 설정하는 방법은?
