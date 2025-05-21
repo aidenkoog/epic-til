@@ -589,7 +589,26 @@ Organize concepts, features, types and Pros and Cons
     ```
     - 일반적인 ListView보다 더 복잡하고 유연한 스크롤 레이아웃을 구성할 수 있음.
 
-- Flutter에서 Navigator 1.0과 2.0의 차이점은?
+- Flutter에서 Navigator 1.0과 2.0의 차이점
+  - Navigator 1.0
+    - 방식: 명령형 (Imperative)
+    - 사용법: Navigator.push, Navigator.pop
+    - URL 동기화: 불완전
+    - 상태관리 통합: 수동 처리 필요
+    - 복잡한 구조: 구현 어려움
+    
+  - Navigator 2.0
+    - 방식: 선언형 (Declarative)
+    - 사용법: Router, RouteInformaionParser, RouterDelegate
+    - URL 동기화: 브라우저 주소창과 연동 가능
+    - 상태관리 통합: 앱 상태와 네비게이션 통합 용이
+    - 복잡한 구조: 복잡한 UI 상태 반영 쉬움
+
+  - 요약
+    - Navigator 1.0 -> 간단한 앱
+    - Navigator 2.0 -> 웹/복잡한 플로우 앱 유리
+      - (예: 로그인 -> 대시보드 -> 설정 등 상태 기반 라우팅)
+
 - Flutter에서 Riverpod과 Provider의 차이점은?
 
 - Flutter에서 InheritedWidget의 역할은?
