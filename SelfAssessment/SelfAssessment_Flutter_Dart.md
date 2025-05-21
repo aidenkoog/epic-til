@@ -945,9 +945,41 @@ Organize concepts, features, types and Pros and Cons
     - Isolate 고급 활용
       - compute() 외에도 ReceivePort, SendPort, Isolate.spawn을 통해 커스텀 Isolate 제어 가능
 
-- Flutter에서 Custom Painter를 활용하는 방법은?
-- Flutter에서 Native Code(Android, iOS)를 호출하는 방법은?
-- Flutter에서 Firebase Analytics를 활용하는 방법은?
+- Flutter에서 Custom Painter를 활용하는 방법
+  - 정의
+    - 캔버스를 직접 다루어 도형, 그래픽, 차트, 애니메이션 등 저수준 그래픽을 그릴 수 있는 방법.
+    - CustomPaint 위젯과 함께 사용.
+
+  - 사용 예
+    ```dart
+    class MyCirclePainter extends CustomPainter {
+      @override
+      void paint(Canvas canvas, Size size) {
+        final paint = Paint()
+          ..color = Colors.red
+          ..style = PaintingStyle.fill;
+
+        canvas.drawCircle(size.center(Offset.zero), 50, paint);
+      }
+
+      @override
+      bool shouldRepaint(CustomPainter oldDelegate) => false;
+    }
+
+    // 사용
+    CustomPaint(
+      size: Size(200, 200),
+      painter: MyCirclePainter(),
+    )
+    ```
+    - 복잡한 UI, 차트, 곡선 애니메이션 등에 활용 가능
+
+- Flutter에서 Native Code(Android, iOS)를 호출하는 방법
+
+
+- Flutter에서 Firebase Analytics를 활용하는 방법
+
+
 
 
 - Flutter에서 FFI(Foreign Function Interface)를 사용하는 이유는?
