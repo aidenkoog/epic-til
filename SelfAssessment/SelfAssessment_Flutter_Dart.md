@@ -631,14 +631,42 @@ Organize concepts, features, types and Pros and Cons
     - Provider: 가볍고 기본적인 상태 관리. 초보자에게 적합.
     - Riverpod: 더 모듈화, 안전성, 확장성이 뛰어난 최신 상태 관리 솔루션
 
+- Flutter에서 InheritedWidget의 역할
+  - 정의
+    - 트리 구조 상의 하위 위젯들에게 데이터를 효율적으로 전달하기 위한 Flutter의 기본적인 상태 전달 메커니즘.
 
+  - 주요 특징
+    - 위젯 트리 상에서 context를 통해 데이터를 공유할 수 있음
+    - 특정 위젯이 변경되면 이를 구독하는 하위 위젯들만 선택적으로 리빌드됨
+    - Provider, Theme, MediaQuery 등 많은 Flutter 기본 기능이 내부적으로 InheritedWidget을 사용
 
-- Flutter에서 InheritedWidget의 역할은?
+  - 예시
+    ```dart
+    class MyInherited extends InheritedWidget {
+      final int counter;
+
+      const MyInherited({required this.counter, required Widget child})
+          : super(child: child);
+
+      static MyInherited? of(BuildContext context) {
+        return context.dependOnInheritedWidgetOfExactType<MyInherited>();
+      }
+
+      @override
+      bool updateShouldNotify(MyInherited oldWidget) => oldWidget.counter != counter;
+    }
+    ```
+    - 직접 사용은 복잡, 보통은 Provider 같은 라이브러리로 추상화하여 사용
+
 - Flutter에서 Provider와 Bloc의 차이점은?
 - Flutter에서 Isolates를 활용하는 이유는?
+
+
 - Flutter에서 Custom Painter를 활용하는 방법은?
 - Flutter에서 Native Code(Android, iOS)를 호출하는 방법은?
 - Flutter에서 Firebase Analytics를 활용하는 방법은?
+
+
 - Flutter에서 FFI(Foreign Function Interface)를 사용하는 이유는?
 - Flutter에서 Riverpod의 Family Modifier를 사용하는 이유는?
 - Flutter에서 Drag and Drop을 구현하는 방법은?
