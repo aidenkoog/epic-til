@@ -1007,9 +1007,47 @@ Organize concepts, features, types and Pros and Cons
     - 실시간 센서, 시스템 API, BLE 등 네이티브 기능 호출에 활용
 
 - Flutter에서 Firebase Analytics를 활용하는 방법
+  - 설치
+    ```bash
+    flutter pub add firebase_core
+    flutter pub add firebase_analytics
+    ```
 
+  - 초기화
+    ```dart
+    void main() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+      runApp(MyApp());
+    }
+    ```
+    
+  - 기본 사용
+    ```dart
+    import 'package:firebase_analytics/firebase_analytics.dart';
 
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
+    // 사용자 정의 이벤트 전송
+    await analytics.logEvent(
+      name: 'purchase',
+      parameters: {
+        'item_id': '123',
+        'value': 9.99,
+      },
+    );
+
+    // 화면 추적
+    await analytics.setCurrentScreen(
+      screenName: 'HomePage',
+    );
+    ```
+
+  - 주요 기능
+    - 사용자 행동 추적 (버튼 클릭, 구매 등)
+    - 자동 수집 이벤트 (앱 실행, 화면 전환 등)
+    - 유저 속성 지정, 광고 성과 분석 등
+      - 실시간 데이터는 Firebase 콘솔 > Analytics 대시보드에서 확인 가능
 
 - Flutter에서 FFI(Foreign Function Interface)를 사용하는 이유는?
 - Flutter에서 Riverpod의 Family Modifier를 사용하는 이유는?
