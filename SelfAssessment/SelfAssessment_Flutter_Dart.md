@@ -1334,7 +1334,50 @@ Organize concepts, features, types and Pros and Cons
 
   - Riverpod은 Provider의 단점을 개선한 차세대 상태관리 솔루션으로 안정성/성능/유연성 모두 향상됨
 
-- Flutter에서 Bloc 패턴을 사용할 때 얻을 수 있는 장점은?
+- Flutter에서 Bloc 패턴을 사용할 때 얻을 수 있는 장점
+  - 개요
+    - BLoC (Business Logic Component) 패턴
+
+  - UI와 비즈니스 로직의 분리
+    - (1) UI와 비즈니스 로직의 분리
+      - UI(View)와 로직(Bloc)이 명확하게 나뉘어 있어서 코드 구조가 깔끔하고 유지보수하기 쉬움
+      - 디자인/기획 팀과 협업할 때 UI를 독립적으로 다루기 좋음
+
+    - (2) 테스트 용이성 향상
+      - Bloc은 단순히 이벤트를 받고 상태를 반환하는 구조이므로 단위 테스트(Unit Test)가 매우 쉬움
+      - expect(bloc.state, emitsInOrder([...])) 등으로 명확한 상태 검증 가능
+
+    - (3) 예측 가능한 상태 흐름 (Unidirectional Flow)
+      - 모든 상태 변화는 Event → Logic → State 순으로 처리되며, 데이터 흐름이 한 방향으로만 이동함
+      - 디버깅, 로깅, 상태 추적이 쉬움
+
+    - (4) 명확한 상태 기반 UI 리렌더링
+      - BlocBuilder, BlocListener를 통해 상태 변화에 반응하여 UI를 갱신
+      - 상태 단위로 UI를 관리하므로 복잡한 UI에서도 불필요한 리렌더링 방지
+
+    - (5) 대규모 프로젝트에 적합
+      - 기능 모듈 단위로 Bloc을 분리할 수 있어서 팀 개발, 유지보수에 유리
+      - 공통 패턴을 따르므로 프로젝트 규모가 커져도 일관성 유지 가능
+
+    - (6) Flutter 공식 팀 지원
+      - flutter_bloc은 공식 지원 라이브러리이며, 안정적이고 꾸준히 유지보수되고 있음
+
+    - (7) 다양한 유틸 기능 제공
+      - BlocProvider, BlocBuilder, BlocListener, MultiBlocProvider 등을 통해 DI, 상태 구독, UI 연결 등 유틸리티 기능 제공
+
+  - 예시 흐름 요약
+    ```scss
+    [ UI ] 
+      ↓ Bloc.add(Event)
+    [ Bloc ]
+      ↓ emit(New State)
+    [ UI ]
+      → BlocBuilder(State => UI 렌더링)
+    ```
+
+  - 정리
+    - BLoC은 복잡한 앱의 상태를 체계적으로 관리하고, 테스트 가능하고 유지보수 쉬운 아키텍처를 제공하는 Flutter의 대표 패턴
+
 - Flutter에서 InheritedWidget의 역할은?
 - Flutter에서 GetX 상태 관리 패턴을 사용하는 이유는?
 - Flutter에서 ChangeNotifier를 활용한 상태 관리는 어떻게 구현하는가?
