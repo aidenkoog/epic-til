@@ -462,7 +462,26 @@ Organize concepts, features, types and Pros and Cons
     ```
     - Reanimated와 함께 사용하면 애니메이션도 자연스럽게 처리 가능
 
-- React Native에서 push notification을 설정하는 방법은?
+- React Native에서 push notification을 설정하는 방법
+  - 대표 라이브러리: react-native-firebase/messaging
+    - Android와 iOS 모두 FCM(Firebase Cloud Messaging) 기반
+      ```bash
+      npm install @react-native-firebase/app @react-native-firebase/messaging
+      ```
+
+  - 설정 절차 요약
+    - Firebase 콘솔 프로젝트 생성 및 앱 등록
+    - google-services.json (Android), GoogleService-Info.plist (iOS) 추가
+    - 권한 요청: requestPermission()
+    - 디바이스 토큰 등록: getToken()
+    - 백그라운드/포그라운드/종료 상태별 수신 처리
+      ```ts
+      messaging().onMessage(async remoteMessage => {
+        Alert.alert('알림', remoteMessage.notification?.title ?? '');
+      });
+      ```
+      -  iOS의 경우 APNs 설정 필요 (개발자 계정, 인증서 필수)
+
 - React Native에서 App State를 관리하는 방법은?
 - React Native에서 Hot Reloading과 Fast Refresh의 차이점은?
 
