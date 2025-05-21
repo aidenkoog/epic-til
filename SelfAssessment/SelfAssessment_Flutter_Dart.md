@@ -1169,7 +1169,28 @@ Organize concepts, features, types and Pros and Cons
     - FFI는 플랫폼 채널보다 더 빠르고 경량화된 인터페이스를 제공
 
 - Flutter에서 Riverpod의 Family Modifier를 사용하는 이유
+  - 정의
+    - family는 파라미터를 받아 동적으로 Provider를 생성할 수 있게 해주는 Riverpod의 기능.
 
+  - 사용하는 이유
+    - 사용자 ID, 게시글 ID 등 동적 데이터에 따라 Provider를 구성하고 싶을 때
+    - 같은 구조지만 파라미터가 다른 여러 데이터를 독립적으로 관리할 때
+
+  - 사용 예
+    ```dart
+    final userProvider = Provider.family<User, String>((ref, userId) {
+      return fetchUser(userId); // userId에 따라 다른 User 반환
+    });
+    ```
+    ```dart
+    // 사용 시
+    final user = ref.watch(userProvider("user_123"));
+    ```
+
+  - 특징
+    - 캐싱 자동 지원
+    - 고유 파라미터로 상태가 분리됨 → 불필요한 리렌더링 방지
+      - 동일 구조의 상태를 매개변수로 구분된 여러 인스턴스로 관리하고 싶을 때 가장 강력한 기능
 
 - Flutter에서 Drag and Drop을 구현하는 방법
 
