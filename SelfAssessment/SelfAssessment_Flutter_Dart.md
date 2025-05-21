@@ -708,6 +708,131 @@ Organize concepts, features, types and Pros and Cons
       ```
       - UI 프레임이 끊기지 않도록 비동기 작업을 분리할 때 매우 유용
 
+- InheritedWidget 기반 Provider 직접 구현 방법
+  - 목표
+    - Flutter의 Provider 없이 InheritedWidget으로 상태 공유 구조를 직접 만든다.
+
+  - 예제 (Counter 상태 공유)
+    ```dart
+    // Step 1: 상태 클래스 정의
+    class Counter extends ChangeNotifier {
+      int _count = 0;
+      int get count => _count;
+
+      void increment() {
+        _count++;
+        notifyListeners();
+      }
+    }
+
+    // Step 2: InheritedWidget 정의
+    class CounterProvider extends InheritedWidget {
+      final Counter counter;
+
+      const CounterProvider({
+        Key? key,
+        required this.counter,
+        required Widget child,
+      }) : super(key: key, child: child);
+
+      static CounterProvider? of(BuildContext context) {
+        return context.dependOnInheritedWidgetOfExactType<CounterProvider>();
+      }
+
+      @override
+      bool updateShouldNotify(CounterProvider oldWidget) =>
+          counter != oldWidget.counter;
+    }
+    ```
+
+  - 사용 예제
+    - IngeritedWidget + ChangeNotifier + AnimatedBuilder 조합으로 Provider 유사 기능 구현
+    ```dart
+    void main() {
+      final counter = Counter();
+      runApp(CounterProvider(counter: counter, child: MyApp()));
+    }
+
+    class MyApp extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        final counter = CounterProvider.of(context)!.counter;
+
+        return MaterialApp(
+          home: Scaffold(
+            appBar: AppBar(title: Text('Custom Provider')),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedBuilder(
+                    animation: counter,
+                    builder: (_, __) => Text('Count: ${counter.count}'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => counter.increment(),
+                    child: Text('Increment'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    ```
+
+- AnimatedBuilder 개념
+  - 정의
+    - Animation 값이 변할 때마다 위젯을 효율적으로 다시 빌드해주는 플러터 위젯
+    - setState() 없이도 애니매이션에 따라 UI를 업데이트할 수 있음.
+    - 불필요 리렌더링을 방지하고 성능 최적화
+
+  - 기본 사용 예
+    ```dart
+    class MyAnimatedBox extends StatefulWidget {
+      @override
+      _MyAnimatedBoxState createState() => _MyAnimatedBoxState();
+    }
+
+    class _MyAnimatedBoxState extends State<MyAnimatedBox>
+        with SingleTickerProviderStateMixin {
+      late AnimationController _controller;
+      late Animation<double> _sizeAnimation;
+
+      @override
+      void initState() {
+        super.initState();
+        _controller = AnimationController(
+          duration: Duration(seconds: 2),
+          vsync: this,
+        )..repeat(reverse: true);
+
+        _sizeAnimation = Tween<double>(begin: 100, end: 200).animate(_controller);
+      }
+
+      @override
+      Widget build(BuildContext context) {
+        return AnimatedBuilder(
+          animation: _sizeAnimation,
+          builder: (context, child) {
+            return Container(
+              width: _sizeAnimation.value,
+              height: _sizeAnimation.value,
+              color: Colors.blue,
+            );
+          },
+        );
+      }
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+
 - Flutter에서 Custom Painter를 활용하는 방법은?
 - Flutter에서 Native Code(Android, iOS)를 호출하는 방법은?
 - Flutter에서 Firebase Analytics를 활용하는 방법은?
