@@ -658,8 +658,22 @@ Organize concepts, features, types and Pros and Cons
     ```
     - 직접 사용은 복잡, 보통은 Provider 같은 라이브러리로 추상화하여 사용
 
-- Flutter에서 Provider와 Bloc의 차이점은?
-- Flutter에서 Isolates를 활용하는 이유는?
+- Flutter에서 Provider와 Bloc의 차이점
+  - Provider
+    - 아키텍쳐 성격: 
+    - 학습 난이도: 
+    - 상태 변경 방식: 
+    - 의존성 주입: 
+    - 테스트 용이성: 
+  - Bloc
+    - 아키텍쳐 성격: 
+    - 학습 난이도: 
+    - 상태 변경 방식: 
+    - 의존성 주입: 
+    - 테스트 용이성: 
+
+
+- Flutter에서 Isolates를 활용하는 이유
 
 
 - Flutter에서 Custom Painter를 활용하는 방법은?
