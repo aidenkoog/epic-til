@@ -563,9 +563,35 @@ Organize concepts, features, types and Pros and Cons
     - 새로운 Flutter 프로젝트: Riverpod 추천 (최신 기술, 안정적인 구조)
     - 2024년 Flutter 상태 관리는 Riverpod이 가장 유망한 선택이라 생각됨
 
-- Flutter에서 Sliver Widgets을 사용하는 이유는?
+- Flutter에서 Sliver Widgets을 사용하는 이유
+  - Sliver 개념
+    - CustomScrollView 안에서 유연하게 동작하는 스크롤 가능한 영역.
+    - Sliver는 영어로 '얇은 조각'이라는 뜻이며, 스크롤 영역을 조각 단위로 조립하듯 구성함.
+
+  - 사용하는 이유
+    - 고성능 커스터마이징된 스크롤 UI 구현 가능
+    - AppBar가 스크롤되며 사라지거나 나타나는 Flexible AppBar
+    - 리스트, 그리드, 고정 헤더 등 다양한 컴포넌트를 조합 가능
+
+  - 대표 위젯
+    - SliverAppBar: 스크롤에 따라 확장/축소되는 앱바
+    - SliverList, SliverGrid: 커스텀 스크롤 리스트/그리드
+    - SliverPersistentHeader: 고정 헤더 영역 구현
+
+  - 예시 코드
+    ```dart
+    CustomScrollView(
+      slivers: [
+        SliverAppBar(...),
+        SliverList(delegate: ...),
+      ],
+    )
+    ```
+    - 일반적인 ListView보다 더 복잡하고 유연한 스크롤 레이아웃을 구성할 수 있음.
+
 - Flutter에서 Navigator 1.0과 2.0의 차이점은?
 - Flutter에서 Riverpod과 Provider의 차이점은?
+
 - Flutter에서 InheritedWidget의 역할은?
 - Flutter에서 Provider와 Bloc의 차이점은?
 - Flutter에서 Isolates를 활용하는 이유는?
