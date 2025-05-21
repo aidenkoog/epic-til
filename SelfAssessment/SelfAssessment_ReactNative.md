@@ -313,8 +313,29 @@ Organize concepts, features, types and Pros and Cons
 
     - 실무에서는 Context + useReducer 또는 Redux Toolkit, Zustand 조합이 많이 사용됨.
 
-- React Native에서 AsyncStorage의 역할은?
-- React Native에서 Reanimated란?
+- React Native에서 AsyncStorage의 역할
+  - AsyncStorage 역할
+    - 로컬 비동기 키-값 저장소 역할.
+    - 브라우저의 LocalStorage와 비슷하지만 비동기적으로 동작.
+    - 앱을 종료해도 데이터가 유지됨 (영구 저장).
+    - 주로 사용하는 용도:
+      - 로그인 토큰 저장
+      - 간단한 설정값 캐싱
+      - 사용자 정보 저장 등
+
+    - @react-native-async-storage/async-storage 패키지를 사용함.
+
+  - 예시
+    ```ts
+    // 예시
+    import AsyncStorage from '@react-native-async-storage/async-storage';
+
+    await AsyncStorage.setItem('token', 'abc123');
+    const token = await AsyncStorage.getItem('token');
+    ```
+
+
+- React Native에서 Reanimated
 
 
 - React Native에서 Native Module이란?
