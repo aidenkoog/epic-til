@@ -1049,75 +1049,6 @@ Organize concepts, features, types and Pros and Cons
     - 유저 속성 지정, 광고 성과 분석 등
       - 실시간 데이터는 Firebase 콘솔 > Analytics 대시보드에서 확인 가능
 
-- Flutter에서 FFI(Foreign Function Interface)를 사용하는 이유는?
-- Flutter에서 Riverpod의 Family Modifier를 사용하는 이유는?
-- Flutter에서 Drag and Drop을 구현하는 방법은?
-- Flutter에서 StatelessWidget과 StatefulWidget의 차이점은?
-- Flutter에서 setState()는 어떤 역할을 하는가?
-- Flutter에서 상태 관리를 위해 Provider를 사용하는 이유는?
-- Flutter에서 Riverpod과 Provider의 차이점은?
-- Flutter에서 Bloc 패턴을 사용할 때 얻을 수 있는 장점은?
-- Flutter에서 InheritedWidget의 역할은?
-- Flutter에서 GetX 상태 관리 패턴을 사용하는 이유는?
-- Flutter에서 ChangeNotifier를 활용한 상태 관리는 어떻게 구현하는가?
-- Flutter에서 Flutter Hooks의 역할과 활용 방법은?
-- Flutter에서 ValueNotifier는 언제 사용해야 하는가?
-- Flutter에서 Redux와 MobX의 차이점은?
-- Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제는?
-- Flutter에서 Freezed 패키지를 사용하는 이유는?
-- Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법은?
-- Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법은?
-- Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
-- Flutter에서 Cubit과 Bloc의 차이점은?
-- Flutter에서 State Restoration을 구현하는 방법은?
-- Flutter에서 StateNotifier를 활용한 상태 관리는 어떻게 이루어지는가?
-- Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법은?
-- Flutter에서 useEffect와 유사한 기능을 구현하려면 어떻게 해야 하는가?
-- Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법은?
-- Flutter에서 App Lifecycle을 관리하는 방법은?
-- Flutter에서 상태 관리 선택 기준은 무엇인가?
-- Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
-- Flutter에서 OverlayEntry를 활용한 UI 상태 관리는 어떻게 하는가?
-- Flutter에서 StatefulWidget이 필요한 경우는?
-- Flutter에서 ChangeNotifier와 StateNotifier의 차이점은?
-- Flutter에서 FutureProvider와 StreamProvider의 차이점은?
-- Flutter에서 MultiProvider를 활용하는 이유는?
-- Flutter에서 CustomPainter를 활용한 그래픽 구현 방법은?
-- Flutter에서 SliverWidgets를 사용하는 이유는?
-- Flutter에서 RepaintBoundary를 활용하여 성능을 최적화하는 방법은?
-- Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유는?
-- Flutter에서 Image.memory()와 Image.asset()의 차이점은?
-- Flutter에서 Hero 애니메이션을 구현하는 방법은?
-- Flutter에서 ShaderMask를 활용하는 방법은?
-- Flutter에서 AspectRatio 위젯을 활용하는 이유는?
-- Flutter에서 AnimatedList를 사용할 때의 장점은?
-- Flutter에서 ListView와 GridView의 차이점은?
-- Flutter에서 Lottie를 활용한 애니메이션 적용 방법은?
-- Flutter에서 NestedScrollView를 사용할 때 고려해야 할 점은?
-- Flutter에서 Cupertino 디자인 시스템을 적용하는 방법은?
-- Flutter에서 AppBar의 PreferredSizeWidget을 활용하는 이유는?
-- Flutter에서 LayoutBuilder를 활용하여 반응형 UI를 구축하는 방법은?
-- Flutter에서 AutoSizeText를 활용하여 가변 폰트 크기를 적용하는 방법은?
-- Flutter에서 ClipRRect와 ClipPath의 차이점은?
-- Flutter에서 ImageFilter를 활용한 블러 효과 구현 방법은?
-- Flutter에서 RenderObject를 직접 구현하는 이유는?
-- Flutter에서 GestureDetector와 InkWell의 차이점은?
-- Flutter에서 Drawer 위젯을 활용한 내비게이션 방법은?
-- Flutter에서 FloatingActionButton을 커스터마이징하는 방법은?
-- Flutter에서 PageView 위젯을 활용하는 방법은?
-- Flutter에서 커스텀 Shimmer 효과를 구현하는 방법은?
-- Flutter에서 TabBar와 BottomNavigationBar의 차이점은?
-- Flutter에서 기본적인 Theming을 적용하는 방법은?
-- Flutter에서 SafeArea 위젯의 역할은?
-- Flutter에서 BackdropFilter를 활용하여 UI를 디자인하는 방법은?
-- Flutter에서 MaterialStateProperty를 활용하는 방법은?
-- Flutter에서 Wrap과 Row, Column의 차이점은?
-- Flutter에서 Dio와 http 패키지의 차이점은?
-- Flutter에서 GraphQL을 활용하여 데이터를 불러오는 방법은?
-- Flutter에서 REST API 호출 시 예외 처리를 구현하는 방법은?
-- Flutter에서 Firebase Authentication을 연동하는 방법은?
-- Flutter에서 JWT 토큰을 활용한 인증 구현 방법은?
-- Flutter에서 WebSockets을 활용한 실시간 통신 방법은?
 - 실시간 영상 처리 방법
   - RTSP 스트리밍
     - rtsp://xxx 형태로 영상을 스트리밍
@@ -1204,6 +1135,111 @@ Organize concepts, features, types and Pros and Cons
     - 민감 정보 저장시 사용, 저장 속도는 기본 shared_preferences 보다는 느림
     - 저장용량 제한적 (키체인, 키스토어 용량 제약)
 
+- Flutter에서 FFI(Foreign Function Interface)를 사용하는 이유
+  - 정의
+    - FFI는 Dart 코드에서 C, C++ 등의 네이티브 라이브러리를 직접 호출할 수 있게 해주는 기능.
+    - Flutter 앱이 고성능 네이티브 코드와 직접 통신할 수 있도록 함 (플랫폼 채널 없이).
+
+  - 사용하는 이유
+    - 성능이 중요한 연산을 C/C++로 처리하고 싶을 때
+    - 기존의 네이티브 라이브러리(C/C++)를 Flutter에 재사용할 때
+    - 실시간, 고속 처리 (예: 이미지/영상 처리, 암호화, 수치 계산 등)
+
+  - 사용 예
+    ```dart
+    // Dart: 함수 선언
+    import 'dart:ffi';  // FFI import
+    import 'dart:io';
+
+    final DynamicLibrary nativeLib = Platform.isAndroid
+        ? DynamicLibrary.open("libnative.so")
+        : DynamicLibrary.process();
+
+    typedef native_add_func = Int32 Function(Int32 a, Int32 b);
+    typedef DartAddFunc = int Function(int a, int b);
+
+    final add = nativeLib
+        .lookup<NativeFunction<native_add_func>>("add")
+        .asFunction<DartAddFunc>();
+
+    void main() {
+      print("Sum = ${add(3, 5)}");
+    }
+    ```
+    - FFI는 플랫폼 채널보다 더 빠르고 경량화된 인터페이스를 제공
+
+- Flutter에서 Riverpod의 Family Modifier를 사용하는 이유
+
+
+- Flutter에서 Drag and Drop을 구현하는 방법
+
+
+- Flutter에서 StatelessWidget과 StatefulWidget의 차이점은?
+- Flutter에서 setState()는 어떤 역할을 하는가?
+- Flutter에서 상태 관리를 위해 Provider를 사용하는 이유는?
+- Flutter에서 Riverpod과 Provider의 차이점은?
+- Flutter에서 Bloc 패턴을 사용할 때 얻을 수 있는 장점은?
+- Flutter에서 InheritedWidget의 역할은?
+- Flutter에서 GetX 상태 관리 패턴을 사용하는 이유는?
+- Flutter에서 ChangeNotifier를 활용한 상태 관리는 어떻게 구현하는가?
+- Flutter에서 Flutter Hooks의 역할과 활용 방법은?
+- Flutter에서 ValueNotifier는 언제 사용해야 하는가?
+- Flutter에서 Redux와 MobX의 차이점은?
+- Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제는?
+- Flutter에서 Freezed 패키지를 사용하는 이유는?
+- Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법은?
+- Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법은?
+- Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
+- Flutter에서 Cubit과 Bloc의 차이점은?
+- Flutter에서 State Restoration을 구현하는 방법은?
+- Flutter에서 StateNotifier를 활용한 상태 관리는 어떻게 이루어지는가?
+- Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법은?
+- Flutter에서 useEffect와 유사한 기능을 구현하려면 어떻게 해야 하는가?
+- Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법은?
+- Flutter에서 App Lifecycle을 관리하는 방법은?
+- Flutter에서 상태 관리 선택 기준은 무엇인가?
+- Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
+- Flutter에서 OverlayEntry를 활용한 UI 상태 관리는 어떻게 하는가?
+- Flutter에서 StatefulWidget이 필요한 경우는?
+- Flutter에서 ChangeNotifier와 StateNotifier의 차이점은?
+- Flutter에서 FutureProvider와 StreamProvider의 차이점은?
+- Flutter에서 MultiProvider를 활용하는 이유는?
+- Flutter에서 CustomPainter를 활용한 그래픽 구현 방법은?
+- Flutter에서 SliverWidgets를 사용하는 이유는?
+- Flutter에서 RepaintBoundary를 활용하여 성능을 최적화하는 방법은?
+- Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유는?
+- Flutter에서 Image.memory()와 Image.asset()의 차이점은?
+- Flutter에서 Hero 애니메이션을 구현하는 방법은?
+- Flutter에서 ShaderMask를 활용하는 방법은?
+- Flutter에서 AspectRatio 위젯을 활용하는 이유는?
+- Flutter에서 AnimatedList를 사용할 때의 장점은?
+- Flutter에서 ListView와 GridView의 차이점은?
+- Flutter에서 Lottie를 활용한 애니메이션 적용 방법은?
+- Flutter에서 NestedScrollView를 사용할 때 고려해야 할 점은?
+- Flutter에서 Cupertino 디자인 시스템을 적용하는 방법은?
+- Flutter에서 AppBar의 PreferredSizeWidget을 활용하는 이유는?
+- Flutter에서 LayoutBuilder를 활용하여 반응형 UI를 구축하는 방법은?
+- Flutter에서 AutoSizeText를 활용하여 가변 폰트 크기를 적용하는 방법은?
+- Flutter에서 ClipRRect와 ClipPath의 차이점은?
+- Flutter에서 ImageFilter를 활용한 블러 효과 구현 방법은?
+- Flutter에서 RenderObject를 직접 구현하는 이유는?
+- Flutter에서 GestureDetector와 InkWell의 차이점은?
+- Flutter에서 Drawer 위젯을 활용한 내비게이션 방법은?
+- Flutter에서 FloatingActionButton을 커스터마이징하는 방법은?
+- Flutter에서 PageView 위젯을 활용하는 방법은?
+- Flutter에서 커스텀 Shimmer 효과를 구현하는 방법은?
+- Flutter에서 TabBar와 BottomNavigationBar의 차이점은?
+- Flutter에서 기본적인 Theming을 적용하는 방법은?
+- Flutter에서 SafeArea 위젯의 역할은?
+- Flutter에서 BackdropFilter를 활용하여 UI를 디자인하는 방법은?
+- Flutter에서 MaterialStateProperty를 활용하는 방법은?
+- Flutter에서 Wrap과 Row, Column의 차이점은?
+- Flutter에서 Dio와 http 패키지의 차이점은?
+- Flutter에서 GraphQL을 활용하여 데이터를 불러오는 방법은?
+- Flutter에서 REST API 호출 시 예외 처리를 구현하는 방법은?
+- Flutter에서 Firebase Authentication을 연동하는 방법은?
+- Flutter에서 JWT 토큰을 활용한 인증 구현 방법은?
+- Flutter에서 WebSockets을 활용한 실시간 통신 방법은?
 - Flutter에서 OAuth 2.0 인증을 구현하는 방법은?
 - Flutter에서 API 호출을 위한 Rate Limiting을 적용하는 방법은?
 - Flutter에서 SSL Pinning을 적용하는 방법은?
