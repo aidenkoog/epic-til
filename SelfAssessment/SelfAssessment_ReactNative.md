@@ -439,11 +439,34 @@ Organize concepts, features, types and Pros and Cons
     }, []);
     ```
 
+- React Native에서 Gesture Handling을 구현하는 방법
+  - 기본 방법
+    - TouchableOpacity, TouchableHighlight, TouchableWithoutFeedback 등의 기본 제공 컴포넌트 사용
 
-- React Native에서 Gesture Handling을 구현하는 방법은?
+  - 고급 제스처: react-native-gesture-handler
+    - 스와이프, 드래그, 핀치 등 고성능 제스처 구현에 사용
+    - 네이티브에서 제스처를 처리하므로 부드럽고 안정적
+
+  - 예시
+    ```bash
+    npm install react-native-gesture-handler
+    ```
+    ```tsx
+    import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
+
+    <GestureHandlerRootView>
+      <PanGestureHandler onGestureEvent={onPan}>
+        <Animated.View>{/* 움직일 컴포넌트 */}</Animated.View>
+      </PanGestureHandler>
+    </GestureHandlerRootView>
+    ```
+    - Reanimated와 함께 사용하면 애니메이션도 자연스럽게 처리 가능
+
 - React Native에서 push notification을 설정하는 방법은?
 - React Native에서 App State를 관리하는 방법은?
 - React Native에서 Hot Reloading과 Fast Refresh의 차이점은?
+
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
