@@ -712,8 +712,26 @@ Organize concepts, features, types and Pros and Cons
     - 실무에서는 Relay, React Query(실험적) 등과 연계해 활용됨.
 
 
-- React의 hydrate 기능은 무엇인가?
-- React에서 새로운 상태를 만들지 않고 이전 상태를 직접 변경하면 왜 안 되는가?
+- React의 hydrate 기능
+  - 개념
+    - 서버에서 렌더링된 HTML을 클라이언트에서 "살리는" 작업
+    - 클라이언트 JS가 서버에서 받은 정적 HTML과 일치하는지 확인하고, 이벤트 바인딩을 수행
+
+  - 사용 예시 (Next.js, React DOM)
+    ```tsx
+    import { hydrateRoot } from 'react-dom/client';
+    hydrateRoot(document.getElementById('root'), <App />);
+    ```
+
+  - 사용 목적
+    - Server-Side Rendering(SSR) 시 렌더링된 HTML을 다시 그리지 않고, 이벤트만 연결
+    - 최초 로딩 속도 향상과 SEO 확보르 동시에 가능하게 함
+
+  - 주의 사항
+    - 서버에서 렌더링한 결과와 클라이언트 렌더링 결과가 다르면 경고 발생 (Content Mismatch)
+    - 동적 데이터/시간 기반 렌더링 시 반드시 클라이언트-서버 일치에 주의
+
+- React에서 새로운 상태를 만들지 않고 이전 상태를 직접 변경하면 안되는 이유
 
 - React에서 Lazy Loading을 구현하는 방법은?
 - React.memo()를 사용하는 이유는?
