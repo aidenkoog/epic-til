@@ -1193,7 +1193,46 @@ Organize concepts, features, types and Pros and Cons
       - 동일 구조의 상태를 매개변수로 구분된 여러 인스턴스로 관리하고 싶을 때 가장 강력한 기능
 
 - Flutter에서 Drag and Drop을 구현하는 방법
+  - 기본 개념
+    - Flutter는 Draggable, DragTarget, LongPressDraggable 위젯을 통해 드래그 앤 드롭 인터랙션을 구성할 수 있음.
 
+  - 주요 위젯
+    - Draggable<T>
+      - 드래그할 수 있는 컴포넌트 정의
+    - DragTarget<T>
+      - 드롭 가능한 영역 정의
+  
+  - 사용 예
+    ```dart
+    // 드래그 가능한 박스
+    Draggable<String>(
+      data: "Hello",
+      feedback: Material(child: Text("Dragging")),
+      child: Text("Drag me"),
+      childWhenDragging: Text("..."),
+    )
+
+    // 드롭 대상
+    DragTarget<String>(
+      onAccept: (value) {
+        print("Dropped: $value");
+      },
+      builder: (context, candidateData, rejectedData) {
+        return Container(
+          height: 100,
+          width: 100,
+          color: candidateData.isEmpty ? Colors.grey : Colors.green,
+          child: Center(child: Text("Drop here")),
+        );
+      },
+    )
+    ```
+
+  - 활용 예시
+    - 카드 정렬
+    - 아이템 이동
+    - 위젯 배치 UI 구성
+      - 기본 기능 외에도 커스텀 드래그 애니메이션, 다중 대상 지원 등 확장이 가능
 
 - Flutter에서 StatelessWidget과 StatefulWidget의 차이점은?
 - Flutter에서 setState()는 어떤 역할을 하는가?
