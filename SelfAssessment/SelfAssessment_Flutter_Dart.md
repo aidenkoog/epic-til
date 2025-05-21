@@ -789,6 +789,7 @@ Organize concepts, features, types and Pros and Cons
     - 불필요 리렌더링을 방지하고 성능 최적화
 
   - 기본 사용 예
+    - AnimatedBuilder는 효율적으로 애니매이션에 따라 위젯을 변경할 수 있게 해 줌
     ```dart
     class MyAnimatedBox extends StatefulWidget {
       @override
@@ -832,6 +833,117 @@ Organize concepts, features, types and Pros and Cons
       }
     }
     ```
+
+- Bloc 구조도 설명
+  - BLoC 아키텍처 핵심 구성
+    ```scss
+      [ UI Layer ]
+          ↓ ↑ (BlocBuilder / BlocListener)
+        [ Bloc ]
+        ↓       ↑
+    [ Event ] → [ State ]
+        ↓       ↑
+    [ Repository (API, DB 등) ]
+    ```
+
+  - 구성 요소
+    - (1) UI (Widget)
+      - BlocProvider로 Bloc 주입
+      - BlocBuilder로 상태 수신
+      - Bloc.add()로 이벤트 전송
+    - (2) Event
+      - 사용자 상호작용 또는 시스템 이벤트를 표현하는 클래스
+    - (3) State
+      - UI가 반응할 수 있는 단일 상태 값 클래스
+    - (4) Bloc
+      - on<Event> 핸들러로 이벤트 처리
+      - 처리 결과를 emit(State)로 알림
+    - (5) Repository
+      - 외부 API, DB 등과의 데이터 통신 추상화
+
+  - 예시
+    ```dart
+    // Event
+    abstract class CounterEvent {}
+    class IncrementEvent extends CounterEvent {}
+
+    // State
+    class CounterState {
+      final int count;
+      CounterState(this.count);
+    }
+
+    // Bloc
+    class CounterBloc extends Bloc<CounterEvent, CounterState> {
+      CounterBloc() : super(CounterState(0)) {
+        on<IncrementEvent>((event, emit) {
+          emit(CounterState(state.count + 1));
+        });
+      }
+    }
+    ```
+    - UI는 BlocBuilder를 통해 상태를 받고, 사용자는 Bloc에 이벤트만 전달하면 됨. (Unidirectional)
+
+- Isolate 고급 활용 패턴
+  - 문제: compute()는 단일 인자만 가능하고 커스터마이징이 어렵다.
+  - 직접 Isolate 제어 예제
+    - 이 방식은 파라미터를 여러 개 넘기거나, long-running isolate를 관리하는 데 적합
+    ```dart
+    import 'dart:isolate';
+
+    Future<int> runHeavyTask(int value) async {
+      final receivePort = ReceivePort();
+      await Isolate.spawn(_isolateEntry, [receivePort.sendPort, value]);
+
+      return await receivePort.first as int;
+    }
+
+    void _isolateEntry(List<dynamic> args) {
+      final SendPort sendPort = args[0];
+      final int input = args[1];
+
+      // 무거운 연산
+      int result = 0;
+      for (int i = 0; i < input; i++) result += i;
+
+      sendPort.send(result);
+    }
+    ```
+
+  - 별도의 Isolate lifecycle 관리 예
+    ```dart
+    class IsolateManager {
+      Isolate? _isolate;
+      ReceivePort? _receivePort;
+
+      Future<void> start() async {
+        _receivePort = ReceivePort();
+        _isolate = await Isolate.spawn(_entryPoint, _receivePort!.sendPort);
+
+        _receivePort!.listen((message) {
+          print("Main received: $message");
+        });
+      }
+
+      void stop() {
+        _isolate?.kill(priority: Isolate.immediate);
+        _receivePort?.close();
+      }
+
+      static void _entryPoint(SendPort sendPort) {
+        sendPort.send("Isolate started");
+      }
+    }
+    ```
+    - 이 구조는 background 연산 작업을 장시간 수행하거나, 사용자 동작과 무관하게 지속적으로 처리해야 하는 작업에 적합
+
+  - 전체 정리 요약
+    - InheritedWidget Provider
+      - 직접 구현시 context.dependOnInheritedWidgetOfExactType, ChangeNotifier + AnimatedBuilder로 리렌더링 처리
+    - Bloc 구조
+      - UI -> Event -> Bloc -> State -> UI로 흐름이 분리되어 유지보수성 증가
+    - Isolate 고급 활용
+      - compute() 외에도 ReceivePort, SendPort, Isolate.spawn을 통해 커스텀 Isolate 제어 가능
 
 - Flutter에서 Custom Painter를 활용하는 방법은?
 - Flutter에서 Native Code(Android, iOS)를 호출하는 방법은?
