@@ -1315,8 +1315,24 @@ Organize concepts, features, types and Pros and Cons
     ```
     - Provider는 단순하고 가볍게 전역 상태를 관리할 수 있어 Flutter 기본 권장 패턴
 
-- Flutter에서 Riverpod과 Provider의 차이점은?
+- Flutter에서 Riverpod과 Provider의 차이점
+  - Riverpod
+    - Flutter 의존성: 있음 (BuildContext 필요)
+    - 선언 방식: 위젯 기반
+    - 상태 추적: context.watch / read
+    - 안전성: 런타임 오류 가능
+    - 기능성: 기본 기능 위주
+    - 테스트: 어렵거나 보일러플레이트 많음
 
+  - Provider
+    - Flutter 의존성: 없음 (완전한 Dart 기반, 테스트 용이)
+    - 선언 방식: 함수 기반 (전역 선언 가능)
+    - 상태 추적: ref.watch / ref.read
+    - 안전성: Compile 타임 안전 (타입 안정성 증가)
+    - 기능성: family, autoDispose, async 지원 등 고급 기능 다수
+    - 테스트: 테스트 용이 (context 불필요)
+
+  - Riverpod은 Provider의 단점을 개선한 차세대 상태관리 솔루션으로 안정성/성능/유연성 모두 향상됨
 
 - Flutter에서 Bloc 패턴을 사용할 때 얻을 수 있는 장점은?
 - Flutter에서 InheritedWidget의 역할은?
