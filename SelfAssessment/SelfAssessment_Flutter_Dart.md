@@ -975,7 +975,36 @@ Organize concepts, features, types and Pros and Cons
     - 복잡한 UI, 차트, 곡선 애니메이션 등에 활용 가능
 
 - Flutter에서 Native Code(Android, iOS)를 호출하는 방법
+  - 방법: Platform Channels 사용
+    - Flutter <-> Android(Java/Kotlin), iOS(Swift/Obj-C) 간 양방향 통신 가능
+    - 표준 플랫폼 채널: MethodChannel, EventChannel, BasicMessageChannel
 
+  - 예제 (Android)
+    ```dart
+    static const platform = MethodChannel('com.example/my_channel');
+
+    Future<void> getBatteryLevel() async {
+      final int batteryLevel = await platform.invokeMethod('getBatteryLevel');
+    }
+    ```
+    ```kotlin
+    class MainActivity : FlutterActivity() {
+    private val CHANNEL = "com.example/my_channel"
+
+        override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+            super.configureFlutterEngine(flutterEngine)
+
+            MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
+                call, result ->
+                if (call.method == "getBatteryLevel") {
+                    val level = getBatteryLevel()
+                    result.success(level)
+                }
+            }
+        }
+    }
+    ```
+    - 실시간 센서, 시스템 API, BLE 등 네이티브 기능 호출에 활용
 
 - Flutter에서 Firebase Analytics를 활용하는 방법
 
