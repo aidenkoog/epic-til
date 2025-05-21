@@ -385,7 +385,23 @@ Organize concepts, features, types and Pros and Cons
   - 참고
     - Expo도 EAS Build와 Custom Dev Client 도입으로 점점 유연해지고 있음
 
-- React Native에서 성능 최적화 방법은?
+- React Native에서 성능 최적화 방법
+  - JS 측 최적화
+    - FlatList의 keyExtractor, initialNumToRender, windowSize 설정
+    - useMemo, useCallback으로 불필요한 리렌더링 방지
+    - React.memo / PureComponent로 컴포넌트 최적화
+    - VirtualizedList, SectionList 적극 활용
+
+  - 네이티브 성능 최적화
+    - Image 로딩 최적화 (예: FastImage)
+    - UI 애니메이션: Reanimated, Gesture Handler 사용
+    - JS Thread와 UI Thread 분리
+    - WebView, 지도, 영상 등은 가능한 네이티브 모듈로 대체
+
+  - 기타
+    - 앱 초기화 속도 개선 (Splash Screen 등)
+    - 무거운 연산은 Web Worker / Background Thread로 분리
+
 - React Native에서 useEffect의 메모리 누수를 방지하는 방법은?
 
 - React Native에서 Gesture Handling을 구현하는 방법은?
