@@ -368,7 +368,23 @@ Organize concepts, features, types and Pros and Cons
     - Android: MyNativeModule.java
     - JavaScript: NativeModules.MyNativeModule.doSomething()
 
-- React Native에서 Expo와 Bare Workflow의 차이점은?
+- React Native에서 Expo와 Bare Workflow의 차이점
+  - 차이점
+    - Expo
+      - 빠른 개발, 설정 최소화
+      - 네이티브 코드 수정 불가능, Expo CLI 사용
+      - 앱 크기는 상대적으로 증가
+      - MVP, 빠른 프로토타입 필요 시 사용
+    - Bare Workflow
+      - 커스터마이징, 네이티브 기능 통합
+      - 네이티브 코드 수정 가능
+      - Xcode / Android Studio 사용한 빌드 방식
+      - 앱 크기 최적화 가능
+      - 고급 앱, 복잡한 기능 필요한 경우 사용
+  
+  - 참고
+    - Expo도 EAS Build와 Custom Dev Client 도입으로 점점 유연해지고 있음
+
 - React Native에서 성능 최적화 방법은?
 - React Native에서 useEffect의 메모리 누수를 방지하는 방법은?
 
