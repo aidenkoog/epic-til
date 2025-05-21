@@ -1280,9 +1280,41 @@ Organize concepts, features, types and Pros and Cons
     }
     ```
 
+- Flutter에서 setState()의 역할
+  - StatefulWidget에서 UI를 다시 그리도록 요청하는 메소드
+  - 내부 상태값을 변경하고 해당 상태에 의존하는 부분만 build()를 다시 실행
+  - setState()를 호출해야 변경사항이 화면에 반영됨
+  - setState()는 단순하지만 앱 규모가 커지면 전역 상태 관리가 어려워짐
 
-- Flutter에서 setState()는 어떤 역할을 하는가?
-- Flutter에서 상태 관리를 위해 Provider를 사용하는 이유는?
+- Flutter에서 상태 관리를 위해 Provider를 사용하는 이유
+  - setState()의 한계
+    - 여러 위젯에서 공유되는 데이터는 상위 위젯에 있어야 함 → Prop Drilling 발생
+    - 위젯 계층이 깊어질수록 코드 복잡도 증가
+    - 앱 전역에서 쉽게 접근/공유하기 어려움
+
+  - Provider의 장점
+    - 전역 상태 공유 및 의존성 주입 가능
+    - context.watch, context.read를 통해 리액티브 UI 갱신
+    - 구조 분리: 데이터 관리와 UI 로직을 분리할 수 있음
+
+  - 사용 예
+    ```dart
+    final counterProvider = ChangeNotifierProvider((_) => Counter());
+
+    class Counter with ChangeNotifier {
+      int value = 0;
+      void increment() {
+        value++;
+        notifyListeners();
+      }
+    }
+
+    // UI
+    final counter = context.watch<Counter>();
+    Text('${counter.value}');
+    ```
+    - Provider는 단순하고 가볍게 전역 상태를 관리할 수 있어 Flutter 기본 권장 패턴
+
 - Flutter에서 Riverpod과 Provider의 차이점은?
 
 
