@@ -295,9 +295,28 @@ Organize concepts, features, types and Pros and Cons
       - 설명
 	      - HomeStack을 만들어 Stack Navigation(Home, Details) + Tab Navigation(Profile) 조합
 
-- React Native에서 상태 관리는 어떻게 하는가?
+- React Native에서 상태 관리 방법
+  - (1) 기본 방식
+    - useState: 컴포넌트 내부의 간단한 상태를 관리할 때 사용.
+    - useReducer: 상태 업데이트 로직이 복잡하거나 상태 객체가 클 경우 사용.
+
+  - (2) 전역 상태 관리
+    - Context API: 간단한 전역 상태 공유에 적합. 그러나 상태가 커지면 성능 저하 가능.
+
+    - Redux: 가장 보편적인 전역 상태 관리 라이브러리. 액션, 리듀서, 스토어 개념을 기반으로 한다. (액션 > 리듀서 > 스토어)
+
+    - MobX: 관찰 가능한 상태를 기반으로 자동 반응. 코드가 간결하지만 학습 곡선이 존재할 수 있음.
+
+    - Zustand, Recoil, Jotai: 최근 각광받는 간단하고 직관적인 상태 관리 라이브러리.
+
+    - React Query / SWR: 서버 상태(data fetching, caching) 관리를 위한 라이브러리.
+
+    - 실무에서는 Context + useReducer 또는 Redux Toolkit, Zustand 조합이 많이 사용됨.
+
 - React Native에서 AsyncStorage의 역할은?
 - React Native에서 Reanimated란?
+
+
 - React Native에서 Native Module이란?
 - React Native에서 Expo와 Bare Workflow의 차이점은?
 - React Native에서 성능 최적화 방법은?
