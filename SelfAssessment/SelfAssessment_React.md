@@ -813,8 +813,33 @@ Organize concepts, features, types and Pros and Cons
     - 얕은 비교(shallow compare)만 하기 때문에, 객체나 배열을 불변성 없이 전달하면 무용지물
 
 - React에서 Fragment 개념/정의
+  - 개념
+    - 여러 요소를 불필요한 추가 DOM 없이 그룹화할 수 있도록 해주는 React 기능
+    - HTML 구조에 불필요한 <div> 삽입 없이 렌더링 가능
 
+  - 기본 문법
+    ```tsx
+    return (
+      <React.Fragment>
+        <h1>Title</h1>
+        <p>Paragraph</p>
+      </React.Fragment>
+    );
+    ```
 
+  - 축약 문법
+    ```tsx
+    return (
+      <>
+        <h1>Title</h1>
+        <p>Paragraph</p>
+      </>
+    );
+    ```
+
+   - 주요 장점
+    - 렌더링 성능 최적화 (불필요한 DOM 트리 방지)
+    - JSX에서 다중 노드 반환이 필요할 때 유용
 
 - React에서 Error Boundary를 구현하는 방법은?
 - React에서 Strict Mode를 사용하는 이유는?
