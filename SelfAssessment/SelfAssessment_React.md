@@ -865,7 +865,30 @@ Organize concepts, features, types and Pros and Cons
   - 주의점
     - forwardRef는 래핑된 컴포넌트에만 DOM 접근을 허용함 → props와 함께 ref 전달도 의도적으로 처리해야 함
 
-- React에서 createContext()와 useContext()의 차이점은?
+- React에서 createContext()와 useContext()의 차이점
+  - createContext()
+    - 역할: Context 객체 생성
+    - 사용 위치: 루트 또는 외부 정의
+    - 반환값: { Provider, Consumer } 포함 객체
+  - useContext()
+    - 역할: Context 값 읽기
+    - 사용 위치: 컴포넌트 내부에서만 사용 가능
+    - 반환값: 현재 컨텍스트 값
+
+  - createContext() 예시
+    ```tsx
+    const ThemeContext = React.createContext('light');
+    ```
+
+  - useContext() 예시
+    ```tsx
+    const theme = useContext(ThemeContext);
+    ```
+
+  - 결론
+    - createContext()는 Context 생성을 위한 선언
+    - useContext()는 생성된 Context로부터 값 사용
+
 - React에서 JSX의 역할과 내부적으로 변환되는 방식은?
 
 - React에서 Error Boundary를 구현하는 방법은?
