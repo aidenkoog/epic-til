@@ -793,7 +793,24 @@ Organize concepts, features, types and Pros and Cons
     - Suspense는 로딩 중 보여줄 fallback UI를 제공
 
 - React.memo()를 사용하는 이유
+  - 개념
+    - props가 변경되지 않으면 리렌더링을 방지하는 고차 컴포넌트(HOC)
+    - 함수형 컴포넌트의 불필요한 리렌더링을 막아 성능 최적화에 사용
 
+  - 사용 예시
+    ```tsx
+    const MyComponent = React.memo(function MyComponent({ name }) {
+      return <div>Hello, {name}</div>;
+    });
+    ```
+
+  - 사용 시점
+    - 컴포넌트가 props에 의해서만 렌더링될 때
+    - 자식 컴포넌트가 무거운 연산이나 렌더링 비용이 클 때
+    - 부모 컴포넌트가 자주 리렌더링될 때
+
+  - 주의점
+    - 얕은 비교(shallow compare)만 하기 때문에, 객체나 배열을 불변성 없이 전달하면 무용지물
 
 - React에서 Fragment 개념/정의
 
