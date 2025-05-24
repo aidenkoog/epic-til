@@ -841,13 +841,36 @@ Organize concepts, features, types and Pros and Cons
     - 렌더링 성능 최적화 (불필요한 DOM 트리 방지)
     - JSX에서 다중 노드 반환이 필요할 때 유용
 
+- React의 forwardRef를 사용해야 하는 경우
+  - 개념
+    - 부모 컴포넌트가 자식 컴포넌트의 DOM 요소에 접근할 수 있게 해주는 함수형 API
+    - 기본적으로 ref는 DOM 또는 클래스 컴포넌트에만 전달되며, 함수형 컴포넌트에는 전달되지 않기 때문에 필요함
+
+  - 사용 예시
+    ```tsx
+    const CustomInput = React.forwardRef((props, ref) => (
+      <input ref={ref} {...props} />
+    ));
+
+    function Parent() {
+      const inputRef = useRef();
+      return <CustomInput ref={inputRef} />;
+    }
+    ```
+
+  - 사용 시기
+    - 커스텀 컴포넌트 내부에서 input, div 등의 DOM 요소에 외부에서 접근이 필요할 때
+    - 예: focus, scroll, 측정 등
+
+  - 주의점
+    - forwardRef는 래핑된 컴포넌트에만 DOM 접근을 허용함 → props와 함께 ref 전달도 의도적으로 처리해야 함
+
+- React에서 createContext()와 useContext()의 차이점은?
+- React에서 JSX의 역할과 내부적으로 변환되는 방식은?
+
 - React에서 Error Boundary를 구현하는 방법은?
 - React에서 Strict Mode를 사용하는 이유는?
 - React에서 Synthetic Events와 Native Events의 차이점은?
-
-- React의 forwardRef를 사용해야 하는 경우는?
-- React에서 createContext()와 useContext()의 차이점은?
-- React에서 JSX의 역할과 내부적으로 변환되는 방식은?
 
 - React에서 useEffect의 실행 순서는 어떻게 결정되는가?
 - React의 useLayoutEffect와 useEffect의 차이점은?
