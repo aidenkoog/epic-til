@@ -768,9 +768,36 @@ Organize concepts, features, types and Pros and Cons
       - user.age = 21; 이런식으로 값 수정 시 user는 여전히 동일한 객체(동일한 참조) 이므로 리액트는 상태가 바뀌었다고 판단하지 못함
       - 결과적으로 리렌더링도 되지 않으며, 버그 발생
 
-- React에서 Lazy Loading을 구현하는 방법은?
-- React.memo()를 사용하는 이유는?
-- React에서 Fragment란 무엇인가?
+- React에서 Lazy Loading을 구현하는 방법
+  - 개념
+    - 필요한 시점에만 컴포넌트를 로드하여 초기 번들 크기를 줄이고 성능을 향상시키는 기법
+    - React.lazy() + Syspense 조합으로 구현
+
+  - 기본 사용법
+    ```tsx
+    import React, { Suspense } from 'react';
+
+    const MyComponent = React.lazy(() => import('./MyComponent'));
+
+    function App() {
+      return (
+        <Suspense fallback={<div>Loading...</div>}>
+          <MyComponent />
+        </Suspense>
+      );
+    }
+    ```
+
+  - 주요 포인트
+    - React.lazy()는 동적 import() 를 사용함
+    - Suspense는 로딩 중 보여줄 fallback UI를 제공
+
+- React.memo()를 사용하는 이유
+
+
+- React에서 Fragment 개념/정의
+
+
 
 - React에서 Error Boundary를 구현하는 방법은?
 - React에서 Strict Mode를 사용하는 이유는?
