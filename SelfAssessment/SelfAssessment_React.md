@@ -954,6 +954,26 @@ Organize concepts, features, types and Pros and Cons
     - 캐치 불가능: 이벤트 핸들러 내부 오류, 비동기 함수 내부 오류
 
 - React에서 Strict Mode를 사용하는 이유
+  - 개념
+    - React의 개발 모드에서 잠재적 문제를 감지하고 경고를 출력해주는 기능
+    - 실제로는 UI에 영향을 주지 않음 (렌더링 결과는 동일)
+
+  - 주요 기능
+    - 의도치 않은 부작용 감지
+    - 레거시 API 사용 경고 (ex: componentWillMount)
+    - 두 번 렌더링 시뮬레이션으로 불순한 컴포넌트 로직 검출
+
+  - 사용 예시
+    ```tsx
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+    ```
+
+  - 주의 사항
+    - 개발 환경에서만 동작
+    - 렌더링/언마운트/재렌더링을 두 번 실행하여 문제 검출 → 실제 렌더링과 다르게 느껴질 수 있음
+
 - React에서 Synthetic Events와 Native Events의 차이점
 
 - React에서 useEffect의 실행 순서는 어떻게 결정되는가?
