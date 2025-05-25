@@ -1031,8 +1031,28 @@ Organize concepts, features, types and Pros and Cons
       };
     }, [count]);
     ```
-    
+
 - React의 useLayoutEffect와 useEffect의 차이점
+  - useEffect
+    - 실행 시점: 렌더링 후, 브라우저 페인팅 후 실행
+    - 동기/비동기: 비동기
+    - 주 사용 목적: API 요청, 이벤트 핸들러 등록 등
+    - 성능 영향: 렌더링에 영향 없음
+
+  - useLayoutEffect
+    - 실행 시점: 렌더링 후, 브라우저 페인팅 전
+    - 동기/비동기: 동기 (렌더 차단)
+    - 주 사용 목적: DOM 측정, 스크롤 위치, 레이아웃 보정 등
+    - 성능 영향: 렌더링 지연 가능성 존재
+
+  - 예시: DOM 측정 시
+    ```tsx
+    useLayoutEffect(() => {
+      const height = ref.current.offsetHeight; // 정확한 DOM 값 측정 필요
+    });
+    ```
+    - useEffect는 사용자에게 그려진 후 실행되므로, 레이아웃 보정에는 늦음
+
 - React에서 Fragment와 div를 사용할 때의 차이점
 
 - React에서 이벤트 버블링을 방지하는 방법은?
