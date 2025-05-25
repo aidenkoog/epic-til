@@ -1005,9 +1005,35 @@ Organize concepts, features, types and Pros and Cons
     }} />
     ```
 
-- React에서 useEffect의 실행 순서는 어떻게 결정되는가?
-- React의 useLayoutEffect와 useEffect의 차이점은?
-- React에서 Fragment와 div를 사용할 때의 차이점은?
+- React에서 useEffect의 실행 순서 결정 방법
+  - 실행 타이밍
+    - 렌더링 이후 -> DOM 업데이트가 완료된 후 실행 (비동기)
+    - 브라우저가 화면을 그린 다음에 실행
+
+  - 실행 순서
+    - (1) 컴포넌트 렌더링
+    - (2) 화면에 반영 (페인팅 완료)
+    - (3) useEffect() 안의 콜백 실행
+    - (4) 다음 렌더 이전에 cleanup() 함수가 먼저 호출 (의존성 배열 기준)
+
+  - 실행 조건
+    - []: 컴포넌트 마운트 시 1회만 실행
+    - [deps]: 의존성 변경 시에만 실행
+    - 생략 시: 매 렌더링 후 실행
+
+  - 예시
+    ```tsx
+    useEffect(() => {
+      console.log("렌더 후 실행");
+
+      return () => {
+        console.log("다음 렌더링 실행 전 cleanup");
+      };
+    }, [count]);
+    ```
+    
+- React의 useLayoutEffect와 useEffect의 차이점
+- React에서 Fragment와 div를 사용할 때의 차이점
 
 - React에서 이벤트 버블링을 방지하는 방법은?
 - React에서 useState의 이전 상태를 기반으로 새 상태를 설정하는 방법은?
