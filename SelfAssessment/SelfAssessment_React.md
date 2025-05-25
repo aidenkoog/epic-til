@@ -889,8 +889,26 @@ Organize concepts, features, types and Pros and Cons
     - createContext()는 Context 생성을 위한 선언
     - useContext()는 생성된 Context로부터 값 사용
 
-- React에서 JSX의 역할과 내부적으로 변환되는 방식은?
+- React에서 JSX의 역할과 내부적으로 변환되는 방식
+  - JSX 개념
+    - JavaScript 안에 HTML처럼 보이는 문법을 작성할 수 있게 해주는 React의 문법 확장
+    - 문자 그대로 HTML은 아니며, 컴파일러(Babel)가 함수 호출로 변환함
 
+  - 내부 변환 방식
+      ```tsx
+      const element = <h1>Hello</h1>;
+      // 컴파일 후:
+      const element = React.createElement('h1', null, 'Hello');
+      ```
+
+  - 변환 결과의 의미
+    - React.createElement(type, props, ...children) 형식으로 변환
+    - 이 객체는 Virtual DOM의 노드가 됨
+
+  - 장점
+    - 선언형 UI 표현 → 가독성, 유지보수성 향상
+    - JSX → Virtual DOM → 실제 DOM 반영을 위한 효율적인 중간 표현
+    
 - React에서 Error Boundary를 구현하는 방법은?
 - React에서 Strict Mode를 사용하는 이유는?
 - React에서 Synthetic Events와 Native Events의 차이점은?
