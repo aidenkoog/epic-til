@@ -976,8 +976,28 @@ Organize concepts, features, types and Pros and Cons
 
 - React에서 Synthetic Events와 Native Events의 차이점
   - Synthetic Event (합성이벤트)
+    - 리액트가 만든 추상화된 이벤트 객체
+    - 브라우저간 호환성과 최적화 목적
+    - 일관된 API 제공, 자동 풀링(16 이하), 버블링 지원
+    - onClick, onChange, onSubmit등 리액트 이벤트 핸들러
+
   - Native Event (브라우저 고유 이벤트)
+    - 브라우저가 제공하는 DOM 이벤트
+    - 브라우저마다 동작이 다를 수 있음, 직접 접근 가능
+    - element.addEventListener("click", handler)
+
   - 주요 차이
+    - Synthetic Event
+      - 리액트 내부 정의
+      - API 일관성 있음
+      - 이벤트 풀링 있음 (리액트 16이하)
+      - 리액트가 성능 최적화 처리
+    - Native Event
+      - 브라우저 환경에 정의
+      - API는 브라우저마다 다를 수 있음
+      - 이벤트 풀링 없음
+      - 성능 최적화는 직접 제어 필요
+
   - 필요 시 native event 사용 가능
     ```tsx
     <button onClick={(e) => {
