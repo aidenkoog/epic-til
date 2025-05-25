@@ -1054,6 +1054,28 @@ Organize concepts, features, types and Pros and Cons
     - useEffect는 사용자에게 그려진 후 실행되므로, 레이아웃 보정에는 늦음
 
 - React에서 Fragment와 div를 사용할 때의 차이점
+  - Fragment
+    - 생성되는 DOM 없음, 가상의 래퍼
+    - 불필요한 DOM 노드 생략 목적으로 사용
+    - 깔끔한 DOM 트리 유지
+
+  - div
+    - 실제 <div> 태그가 DOM에 추가됨
+    - 스타일링, 레이아웃 목적
+    - 중첩 구조 증가 -> 스타일 충돌 가능성
+
+  - Fragment 사용 예시
+    ```tsx
+    <>
+      <h1>Title</h1>
+      <p>Paragraph</p>
+    </>
+    ```
+
+  - Fragment 사용 시점
+    - 여러 요소를 그룹핑하면서 추가 DOM 노드 없이 렌더링하고 싶을 때
+    - CSS Flex/Grid 등에서 불필요한 부모 노드 삽입을 피하고 싶을 때
+    - 불필요한 DOM 생성없이 구조만 그룹핑
 
 - React에서 이벤트 버블링을 방지하는 방법은?
 - React에서 useState의 이전 상태를 기반으로 새 상태를 설정하는 방법은?
