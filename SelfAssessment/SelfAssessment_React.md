@@ -908,10 +908,53 @@ Organize concepts, features, types and Pros and Cons
   - 장점
     - 선언형 UI 표현 → 가독성, 유지보수성 향상
     - JSX → Virtual DOM → 실제 DOM 반영을 위한 효율적인 중간 표현
-    
-- React에서 Error Boundary를 구현하는 방법은?
-- React에서 Strict Mode를 사용하는 이유는?
-- React에서 Synthetic Events와 Native Events의 차이점은?
+
+- React에서 Error Boundary를 구현하는 방법
+  - 개념
+    - 렌더링 중 JavaScript 에러를 잡아내고, 앱이 크래시되는 것을 막기 위해 대체 UI를 보여주는 컴포넌트
+
+  - 구현 조건
+    - 클래스 컴포넌트로만 구현 가능
+    - 두 가지 메서드를 사용:
+      - static getDerivedStateFromError()
+      - componentDidCatch()
+
+  - 기본 예시
+    ```tsx
+    class ErrorBoundary extends React.Component {
+      state = { hasError: false };
+
+      static getDerivedStateFromError(error) {
+        return { hasError: true };
+      }
+
+      componentDidCatch(error, info) {
+        console.error("Error caught:", error, info);
+      }
+
+      render() {
+        if (this.state.hasError) {
+          return <h1>문제가 발생했습니다.</h1>;
+        }
+        return this.props.children;
+      }
+    }
+    ```
+
+  - 사용 방법
+    ```tsx
+    <ErrorBoundary>
+      <MyComponent />
+    </ErrorBoundary>
+    ```
+
+  - 처리 대상
+    - 렌더링 중 오류, 라이프사이클 메서드 오류, constructor 오류
+    - 캐치 가능: 자식 컴포넌트의 JS 오류
+    - 캐치 불가능: 이벤트 핸들러 내부 오류, 비동기 함수 내부 오류
+
+- React에서 Strict Mode를 사용하는 이유
+- React에서 Synthetic Events와 Native Events의 차이점
 
 - React에서 useEffect의 실행 순서는 어떻게 결정되는가?
 - React의 useLayoutEffect와 useEffect의 차이점은?
