@@ -975,6 +975,15 @@ Organize concepts, features, types and Pros and Cons
     - 렌더링/언마운트/재렌더링을 두 번 실행하여 문제 검출 → 실제 렌더링과 다르게 느껴질 수 있음
 
 - React에서 Synthetic Events와 Native Events의 차이점
+  - Synthetic Event (합성이벤트)
+  - Native Event (브라우저 고유 이벤트)
+  - 주요 차이
+  - 필요 시 native event 사용 가능
+    ```tsx
+    <button onClick={(e) => {
+      e.nativeEvent.stopPropagation(); // native event 접근
+    }} />
+    ```
 
 - React에서 useEffect의 실행 순서는 어떻게 결정되는가?
 - React의 useLayoutEffect와 useEffect의 차이점은?
