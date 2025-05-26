@@ -1122,29 +1122,29 @@ Organize concepts, features, types and Pros and Cons
   - 사용 예
     - 상태 누적, 토글, 배열 push 등에서 이전 값을 기준으로 변경해야 할 때 필수
 
-- React에서 React.lazy()를 사용하면 어떤 장점이 있는가?
-  - ✅ 개념
-React.lazy()는 컴포넌트를 동적으로 import 하여 코드 스플리팅을 가능하게 함
-```jsx
-const MyComponent = React.lazy(() => import('./MyComponent'));
-```
-✅ 장점
-항목	설명
-⚡ 초기 로딩 최적화	
-  - 필요한 시점에만 로드 → 번들 크기 감소
-🚀 성능 개선	
-  - 초기 진입 속도 향상, 모바일에서 유리
-🔧 유지보수 용이	
-  - 페이지/컴포넌트 단위 분할 용이
-🧩 Suspense와 연계 가능	
-  - 로딩 중 fallback UI 표시 가능
+- React에서 React.lazy()를 사용 시 장점
+  - 개념
+    - React.lazy()는 컴포넌트를 동적으로 import 하여 코드 스플리팅을 가능하게 함
+      ```jsx
+      const MyComponent = React.lazy(() => import('./MyComponent'));
+      ```
 
-- 예시
-  ```jsx
-  <Suspense fallback={<div>Loading...</div>}>
-    <MyComponent />
-  </Suspense>
-  ```
+  - 장점
+    - 초기 로딩 최적화	
+      - 필요한 시점에만 로드 → 번들 크기 감소
+    - 성능 개선	
+      - 초기 진입 속도 향상, 모바일에서 유리
+    - 유지보수 용이	
+      - 페이지/컴포넌트 단위 분할 용이
+    - Suspense와 연계 가능	
+      - 로딩 중 fallback UI 표시 가능
+
+  - 예시
+    ```jsx
+    <Suspense fallback={<div>Loading...</div>}>
+      <MyComponent />
+    </Suspense>
+    ```
 
 - React에서 Suspense와 Concurrent Mode의 연관성은?
 - React에서 setState()가 비동기로 동작하는 이유는?
