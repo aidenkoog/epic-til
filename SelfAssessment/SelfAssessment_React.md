@@ -1191,7 +1191,35 @@ Organize concepts, features, types and Pros and Cons
     - React 18에서는 setState()가 DOM 이벤트 핸들러 외부에서는 자동 batch 되지 않음
       - → flushSync(), unstable_batchedUpdates() 등 사용 필요
 
-- React에서 컴포넌트 최적화를 위해 shouldComponentUpdate()를 활용하는 방법은?
+- React에서 컴포넌트 최적화를 위해 shouldComponentUpdate()를 활용하는 방법
+  - 개념
+    - 클래스형 컴포넌트에서 불필요한 리렌더링을 방지하기 위한 생명주기 메서드
+    - 새 props 또는 state가 이전과 다를 때만 리렌더링되도록 제어
+
+  - 기본 예시
+    ```tsx
+    class MyComponent extends React.Component {
+      shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.value !== this.props.value;
+      }
+
+      render() {
+        return <div>{this.props.value}</div>;
+      }
+    }
+    ```
+
+  - 최적화 효과
+    - 변경되지 않은 props/state로 인한 불필요한 DOM 계산 및 리렌더링을 차단
+    - 성능 이슈가 있는 리스트 항목, 고정된 UI, 무거운 렌더링 비용이 있는 컴포넌트에서 유용
+
+  - 함수형 컴포넌트에서 대안
+    - React.memo() + areEqual() 함수로 같은 효과 구현 가능
+    ```tsx
+    const MyMemoComponent = React.memo(Component, (prevProps, nextProps) => {
+      return prevProps.value === nextProps.value;
+    });
+    ```
 
 - React에서 children props를 활용하는 방식은?
 - React에서 상태(state) 변경이 반영되지 않는 이유는?
