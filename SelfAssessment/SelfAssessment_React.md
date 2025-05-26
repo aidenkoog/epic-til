@@ -1077,7 +1077,30 @@ Organize concepts, features, types and Pros and Cons
     - CSS Flex/Grid 등에서 불필요한 부모 노드 삽입을 피하고 싶을 때
     - 불필요한 DOM 생성없이 구조만 그룹핑
 
-- React에서 이벤트 버블링을 방지하는 방법은?
+- React에서 이벤트 버블링을 방지하는 방법
+  - 이벤트 버블링 Concept
+    - 이벤트가 자식 → 부모로 전파되는 동작
+    - 예: <button> 클릭 시 div의 onClick도 실행되는 현상
+
+  - 방지 방법
+    - event.stopPropagation() 사용
+      - 해당 이벤트가 상위로 전파되지 않도록 막음
+      ```jsx
+      function ChildComponent() {
+        return (
+          <div onClick={(e) => e.stopPropagation()}>
+            클릭 시 부모로 전파되지 않음
+          </div>
+        );
+      }
+      ```
+
+    - event.nativeEvent.stopImmediatePropagation()
+      - 이벤트 리스너 중복 실행까지 방지하고 싶을 때 사용 (드물게 사용)
+
+  - 주로 사용되는 시점
+    - 모달 외부 클릭 시 닫기, 드롭다운, 토글 버튼 등에서 자주 사용됨
+
 - React에서 useState의 이전 상태를 기반으로 새 상태를 설정하는 방법은?
 - React에서 React.lazy()를 사용하면 어떤 장점이 있는가?
 
