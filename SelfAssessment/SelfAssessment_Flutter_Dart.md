@@ -1467,6 +1467,22 @@ Organize concepts, features, types and Pros and Cons
     - 카운터, 로딩 상태 표시, 선택된 인덱스 변경 등 매우 단순한 상태에 적합하다.
 
 - Flutter에서 Redux와 MobX의 차이점
+  - Redux의 특징
+    - 불변성(immutability) 기반의 상태 관리 아키텍처
+    - 앱의 상태를 Store에 중앙 집중화
+    - 모든 상태 변경은 반드시 Action → Reducer → Store의 흐름을 따라야 하며, 예측 가능하고 디버깅이 쉬움
+    - 상태 변경 로직이 명확하고 추적 가능하지만, 보일러플레이트 코드가 많음
+
+  - MobX의 특징
+    - 반응형(Reactive) 상태 관리 방식
+    - 관찰 가능한 상태(@observable)와 반응형 표현식(@computed, @action)을 중심으로 상태 변경을 추적
+    - 상태가 바뀌면 자동으로 UI가 갱신되며, 개발자는 선언형 코드에 집중
+    - 설정은 간단하지만 내부 동작이 복잡하여 추적이 어려울 수 있음
+
+  - 비교 요약
+    - Redux는 함수형 사고 기반의 구조적 관리에 적합하고, MobX는 간결하고 직관적인 상태 반응성을 추구
+    - Redux는 복잡한 앱에서 디버깅과 시간여행에 유리하며, MobX는 생산성과 빠른 개발에 강점이 있다.
+
 - Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제
 - Flutter에서 Freezed 패키지를 사용하는 이유
 
