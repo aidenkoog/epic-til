@@ -1378,10 +1378,26 @@ Organize concepts, features, types and Pros and Cons
   - 정리
     - BLoC은 복잡한 앱의 상태를 체계적으로 관리하고, 테스트 가능하고 유지보수 쉬운 아키텍처를 제공하는 Flutter의 대표 패턴
 
-- Flutter에서 InheritedWidget의 역할은?
-- Flutter에서 GetX 상태 관리 패턴을 사용하는 이유는?
-- Flutter에서 ChangeNotifier를 활용한 상태 관리는 어떻게 구현하는가?
-- Flutter에서 Flutter Hooks의 역할과 활용 방법은?
+- Flutter에서 InheritedWidget의 역할
+  - 역할 및 개념
+    - InheritedWidget은 Flutter에서 하위 위젯 트리에 데이터를 효율적으로 전달하기 위한 기본 메커니즘
+    - 보통 위젯 트리 상단에서 공유하고 싶은 데이터를 정의한 뒤, 트리 하위의 여러 위젯들이 그 데이터를 필요할 때 접근할 수 있도록 해준다.
+    - 컴포즈에서 XXXProvider와 유사
+
+  - 특징
+    - 트리 구조의 위에서 아래로만 데이터 전달 가능
+    - of(context) 메서드를 통해 접근
+    - 하위 위젯이 InheritedWidget이 제공하는 데이터에 의존하고 있고, 그 데이터가 변경되면 하위 위젯은 자동으로 재빌드됨
+    - 상태 관리의 핵심 기반이 되며, Provider, Bloc, Riverpod 같은 고급 상태 관리 패키지도 내부적으로 이를 활용함
+
+  - 예시 활용
+    - 사용자 정보, 테마 설정, 로케일 정보 등을 여러 화면에 전달할 때 사용될 수 있다.
+
+- Flutter에서 GetX 상태 관리 패턴을 사용하는 이유
+- Flutter에서 ChangeNotifier를 활용한 상태 관리는 구현 방법
+- Flutter에서 Flutter Hooks의 역할과 활용 방법
+
+
 - Flutter에서 ValueNotifier는 언제 사용해야 하는가?
 - Flutter에서 Redux와 MobX의 차이점은?
 - Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제는?
