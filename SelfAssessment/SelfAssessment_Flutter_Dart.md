@@ -1409,6 +1409,21 @@ Organize concepts, features, types and Pros and Cons
     - 단순한 문법과 적은 코드량으로도 강력한 기능을 제공하기 때문에 작은 프로젝트나 빠르게 프로토타입을 개발할 때 유리하다.
 
 - Flutter에서 ChangeNotifier를 활용한 상태 관리는 구현 방법
+  - 기본적인 구조
+    - ChangeNotifier는 Flutter의 기본 상태 관리 클래스 중 하나
+    - 관찰자 패턴을 구현하고 있음
+    - 이 클래스를 상속받은 모델 클래스에서 notifyListeners()를 호출하면 이를 구독한 위젯들이 자동으로 리빌드된다.
+
+  - 구현 방식
+    - (1) 상태를 가지는 모델 클래스를 ChangeNotifier로 정의
+    - (2) ChangeNotifierProvider를 사용하여 트리 상단에 모델을 주입
+    - (3) Consumer 또는 Provider.of(context)를 통해 하위 위젯에서 상태에 접근
+    - (4) 상태 변경 시 notifyListeners()를 호출하여 UI를 갱신
+
+  - 장점과 단점
+    - 구조가 명확하고 Flutter에 내장되어 있어 추가 의존성이 없다.
+    - 그러나 상태가 많아지고 복잡해질수록 관리가 어려워질 수 있으며, 세분화된 리빌드 제어가 어렵다.
+
 - Flutter에서 Flutter Hooks의 역할과 활용 방법
 
 
