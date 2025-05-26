@@ -1448,10 +1448,28 @@ Organize concepts, features, types and Pros and Cons
   - 주의사항
     - Hook 사용 시 위젯이 HookWidget 또는 HookConsumerWidget을 상속받아야 하며, BuildContext를 훅 외부에서 사용하면 오류가 발생할 수 있다.
 
-- Flutter에서 ValueNotifier는 언제 사용해야 하는가?
-- Flutter에서 Redux와 MobX의 차이점은?
-- Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제는?
-- Flutter에서 Freezed 패키지를 사용하는 이유는?
+- Flutter에서 ValueNotifier 사용 시점
+  - 핵심 개념
+    - ValueNotifier<T>는 특정 값이 변경될 때 이를 감지하여 리스너에게 알리는 가볍고 효율적인 상태 관리 도구
+    - Flutter의 내장 클래스이며, 단일 값의 상태를 관리할 때 가장 적합하다.
+
+  - 사용 시점
+    - 상태가 단순한 단일 변수일 때 (bool, int, double, String, 리스트 등)
+    - 별도의 Provider나 Bloc을 도입할 정도로 구조가 크지 않을 때
+    - StatefulWidget 없이도 UI 갱신이 필요할 때
+
+  - 장점
+    - 코드가 간결하고 경량
+    - 리스너를 직접 등록하거나 ValueListenableBuilder로 UI와 연동 가능
+    - Flutter의 내부 위젯들에서도 활용됨 (예: TextEditingController 내부)
+
+  - 예시
+    - 카운터, 로딩 상태 표시, 선택된 인덱스 변경 등 매우 단순한 상태에 적합하다.
+
+- Flutter에서 Redux와 MobX의 차이점
+- Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제
+- Flutter에서 Freezed 패키지를 사용하는 이유
+
 - Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법은?
 - Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법은?
 - Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
