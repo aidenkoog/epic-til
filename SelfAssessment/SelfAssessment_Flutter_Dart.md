@@ -1497,8 +1497,26 @@ Organize concepts, features, types and Pros and Cons
   - 해결 방안
     - 상태를 분리하여 InheritedWidget, Provider, ValueNotifier, Bloc 등을 사용
     - setState()는 작은 범위의 단순한 상태를 관리할 때만 사용하는 것이 이상적임
-    
+
 - Flutter에서 Freezed 패키지를 사용하는 이유
+  - 핵심 개념
+    - Freezed는 불변 데이터 클래스, 패턴 매칭, copyWith, JSON serialization, 동등성 비교 등을 자동으로 생성해주는 코드 생성 라이브러리
+
+  - 사용 목적
+    - Flutter 앱에서 모델 객체를 안전하게 불변(immutable)하게 관리
+    - 수동으로 작성해야 할 코드(생성자, 복사, 비교 등)를 줄이고 생산성 향상
+    - sealed class 형태로 모델을 구성하고, when 또는 map과 같은 패턴 매칭을 지원하여 복잡한 상태 표현을 구조화할 수 있음
+
+  - 주요 기능
+    - const 생성자 자동 생성
+    - == 및 hashCode 오버라이드
+    - copyWith() 메서드 자동 생성
+    - union/sealed class 구현 지원 (LoginState.loading(), LoginState.success(), ... 처럼)
+
+  - 활용 예시
+    - Bloc/Cubit의 상태 클래스 정의
+    - REST API의 응답 모델
+    - 앱 내 상태 표현을 Enum보다 더 유연하게 표현하고자 할 때
 
 - Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법은?
 - Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법은?
