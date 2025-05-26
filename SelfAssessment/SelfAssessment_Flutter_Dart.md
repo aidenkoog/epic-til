@@ -1425,7 +1425,28 @@ Organize concepts, features, types and Pros and Cons
     - 그러나 상태가 많아지고 복잡해질수록 관리가 어려워질 수 있으며, 세분화된 리빌드 제어가 어렵다.
 
 - Flutter에서 Flutter Hooks의 역할과 활용 방법
+  - 개념과 목적
+    - Flutter Hooks는 함수형 위젯에서 상태 관리 및 라이프사이클 로직을 더욱 간결하게 작성할 수 있도록 도와주는 라이브러리 
+    - React의 Hooks와 유사한 개념을 도입하여 StatefulWidget의 반복적인 보일러플레이트를 줄이는 것을 목표로 한다.
 
+  - 주요 기능
+    - useState, useEffect, useMemoized, useTextEditingController 등 다양한 훅을 제공
+    - 상태값, 컨트롤러, 애니메이션 등 여러 기능을 선언형 방식으로 간단하게 다룰 수 있다
+    - 클래스 기반 StatefulWidget 없이도 상태 유지가 가능해 코드 가독성이 향상된다
+
+  - 사용 방식
+    - flutter_hooks 패키지를 설치한 뒤, HookWidget을 상속받아 훅을 사용할 수 있다
+    ```dart
+    final count = useState(0);
+    ```
+
+  - 장점
+    - 코드량 감소, 가독성 향상
+    - 불필요한 상태관리 클래스 제거
+    - 유지보수성이 좋아짐
+
+  - 주의사항
+    - Hook 사용 시 위젯이 HookWidget 또는 HookConsumerWidget을 상속받아야 하며, BuildContext를 훅 외부에서 사용하면 오류가 발생할 수 있다.
 
 - Flutter에서 ValueNotifier는 언제 사용해야 하는가?
 - Flutter에서 Redux와 MobX의 차이점은?
