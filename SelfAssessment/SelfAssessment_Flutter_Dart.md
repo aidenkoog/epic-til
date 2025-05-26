@@ -1484,6 +1484,20 @@ Organize concepts, features, types and Pros and Cons
     - Redux는 복잡한 앱에서 디버깅과 시간여행에 유리하며, MobX는 생산성과 빠른 개발에 강점이 있다.
 
 - Flutter에서 setState()를 과도하게 사용하면 발생할 수 있는 문제
+  - 과도한 setState()의 문제점
+    - 불필요한 전체 위젯 리빌드가 발생
+    - 특정 값만 바뀌었더라도 위젯 전체가 다시 그려지기 때문에 성능 저하로 이어질 수 있음
+    - 상태 분리가 안된 경우 로직이 커질수록 유지보수 어려움
+    - 여러 상태가 얽혀 있는 경우, UI와 로직이 뒤섞여 가독성과 테스트성이 떨어짐
+
+  - 예시 상황
+    - 하나의 StatefulWidget에서 수십 개의 위젯을 포함하고 있고, 특정 값 하나가 바뀌었을 뿐인데도 전체가 재렌더링되는 경우
+    - 서로 다른 상태가 동일 위젯 내에 존재해 변경 시 예상치 못한 렌더링이 발생하는 경우
+
+  - 해결 방안
+    - 상태를 분리하여 InheritedWidget, Provider, ValueNotifier, Bloc 등을 사용
+    - setState()는 작은 범위의 단순한 상태를 관리할 때만 사용하는 것이 이상적임
+    
 - Flutter에서 Freezed 패키지를 사용하는 이유
 
 - Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법은?
