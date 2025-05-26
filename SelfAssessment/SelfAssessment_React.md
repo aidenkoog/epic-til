@@ -1169,7 +1169,28 @@ Organize concepts, features, types and Pros and Cons
     - 서버 컴포넌트, async data fetching 등에서 지연 렌더링을 자연스럽게 처리 가능
       - → startTransition(), useTransition() 등도 함께 사용됨
 
-- React에서 setState()가 비동기로 동작하는 이유는?
+- React에서 setState()가 비동기로 동작하는 이유
+  - 이유: 성능 최적화 및 일괄 처리(batch update)
+    - setState()는 바로 실행되는 것이 아니라, React의 이벤트 루프 종료 후 일괄 처리(batch) 됨
+    - 이는 렌더링 횟수를 최소화하고 성능을 높이기 위한 설계
+
+  - 예시
+    ```tsx
+    setState(1);
+    setState(2);
+    console.log(state); // 이전 값이 출력될 수 있음
+    ```
+
+  - 해결 방법
+    - 최신 값을 기반으로 상태를 설정하려면 함수형 업데이트를 사용해야 함
+    ```tsx
+    setState(prev => prev + 1);
+    ```
+
+  - 추가 개념
+    - React 18에서는 setState()가 DOM 이벤트 핸들러 외부에서는 자동 batch 되지 않음
+      - → flushSync(), unstable_batchedUpdates() 등 사용 필요
+
 - React에서 컴포넌트 최적화를 위해 shouldComponentUpdate()를 활용하는 방법은?
 
 - React에서 children props를 활용하는 방식은?
