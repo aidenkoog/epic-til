@@ -1146,7 +1146,29 @@ Organize concepts, features, types and Pros and Cons
     </Suspense>
     ```
 
-- React에서 Suspense와 Concurrent Mode의 연관성은?
+- React에서 Suspense와 Concurrent Mode의 연관성
+  - 개념
+    - Suspense
+      - 컴포넌트의 비동기 로딩 상태를 처리하기 위한 리액트 기능
+    - Concurrent Mode
+      - 리액트 18에서 도입된 비동기 렌더링 아키텍쳐, 중단/재개 가능한 렌더링 지원
+
+  - 연관성
+    - Concurrent Mode가 있어야 Suspense가 비동기 데이터에 대해 작동 가능
+    - 기존 React에서는 Suspense가 lazy 컴포넌트에만 적용 가능했지만
+      - → Concurrent Mode에서는 데이터 fetch에도 Suspense 적용 가능
+
+  - 예시 흐름
+    ```tsx
+    <Suspense fallback={<Loading />}>
+      <DataComponent /> {/* 데이터가 준비되지 않으면 fallback UI */}
+    </Suspense>
+    ```
+
+  - 실전 적용: React 18 + use() API
+    - 서버 컴포넌트, async data fetching 등에서 지연 렌더링을 자연스럽게 처리 가능
+      - → startTransition(), useTransition() 등도 함께 사용됨
+
 - React에서 setState()가 비동기로 동작하는 이유는?
 - React에서 컴포넌트 최적화를 위해 shouldComponentUpdate()를 활용하는 방법은?
 
