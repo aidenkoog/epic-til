@@ -1593,9 +1593,28 @@ Organize concepts, features, types and Pros and Cons
     - Android에서만 자동 복원이 기본적으로 작동하며, iOS는 수동 구성 필요
     - 단순 상태 저장 이상으로, 사용자 상호작용 흐름까지 복원하고자 할 때 효과적
 
-- Flutter에서 StateNotifier를 활용한 상태 관리는 어떻게 이루어지는가?
-- Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법은?
-- Flutter에서 useEffect와 유사한 기능을 구현하려면 어떻게 해야 하는가?
+- Flutter에서 StateNotifier를 활용한 상태 관리
+  - 개념 요약
+    - StateNotifier는 Riverpod에서 제공하는 상태 관리 방식 중 하나로, 명시적이고 예측 가능한 상태 변경을 위해 사용됩니다.
+    - ChangeNotifier보다 테스트하기 쉽고 명확한 상태 전이 구현이 가능합니다.
+
+  - 사용 방법
+    - 상태를 표현할 모델 클래스 작성
+    - 이를 관리하는 StateNotifier<T>를 상속받는 클래스 구현
+    - NotifierProvider 또는 StateNotifierProvider로 UI와 연결
+
+  - 특징
+    - 상태 변경은 state = newValue 형태로 단방향으로만 이루어집니다.
+    - 상태 변경 시 전체 상태를 다시 할당해야 하며, 변경 감지를 위해 immutable한 데이터 구조 사용 권장
+    - Provider의 컴포저블한 특성과 함께 사용되면 강력한 상태 분리 구조 구현 가능
+
+  - 장점
+    - 명확한 상태 전이 방식
+    - 구조화된 앱 설계에 유리
+    - 테스트 용이성
+    
+- Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법
+- Flutter에서 useEffect와 유사한 기능을 구현 방법
 
 
 - Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법은?
