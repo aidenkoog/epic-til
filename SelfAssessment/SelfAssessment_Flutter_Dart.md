@@ -1574,14 +1574,36 @@ Organize concepts, features, types and Pros and Cons
     - Bloc은 이벤트 흐름이 명확한 복잡한 앱에 더 적합.
     - 둘 다 flutter_bloc 패키지에 포함되어 있으며, 필요에 따라 선택하면 됩니다.
 
-- Flutter에서 State Restoration을 구현하는 방법은?
+- Flutter에서 State Restoration을 구현하는 방법
+  - 개념 요약
+    - State Restoration은 사용자가 앱을 종료하거나 백그라운드로 전환했다가 다시 돌아왔을 때, 이전 상태를 복원하여 사용자 경험을 유지하는 기능입니다.
+
+  - 구현 방법
+    - Flutter는 RestorationMixin을 사용해 상태 복원 기능을 제공합니다.
+    - StatefulWidget의 State 클래스에서 RestorationMixin을 믹스인으로 추가하고, restoreState() 메서드를 오버라이딩합니다.
+    - RestorationId를 통해 위젯 계층 간 상태 구분이 가능하며, RestorableInt, RestorableTextEditingController 등의 Restorable 객체를 사용해 자동 복원을 구현할 수 있습니다.
+
+  - 예시 흐름
+    - 위젯에서 RestorationMixin 적용
+    - restorationId 설정
+    - registerForRestoration()으로 상태 복원 대상 등록
+    - 앱 재시작 시 자동으로 복원
+
+  - 주의사항
+    - Android에서만 자동 복원이 기본적으로 작동하며, iOS는 수동 구성 필요
+    - 단순 상태 저장 이상으로, 사용자 상호작용 흐름까지 복원하고자 할 때 효과적
+
 - Flutter에서 StateNotifier를 활용한 상태 관리는 어떻게 이루어지는가?
 - Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법은?
 - Flutter에서 useEffect와 유사한 기능을 구현하려면 어떻게 해야 하는가?
+
+
 - Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법은?
 - Flutter에서 App Lifecycle을 관리하는 방법은?
 - Flutter에서 상태 관리 선택 기준은 무엇인가?
 - Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
+
+
 - Flutter에서 OverlayEntry를 활용한 UI 상태 관리는 어떻게 하는가?
 - Flutter에서 StatefulWidget이 필요한 경우는?
 - Flutter에서 ChangeNotifier와 StateNotifier의 차이점은?
