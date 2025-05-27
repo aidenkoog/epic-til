@@ -1544,7 +1544,21 @@ Organize concepts, features, types and Pros and Cons
     - 앱이 커지면 상태가 여러 위치에 흩어지고, 코드 관리가 어려워짐.
     - 복잡한 의존성이나 비동기 처리가 어려워지므로 일정 규모 이상에서는 적절한 상태 관리 도구가 필요
 
-- Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
+- Flutter에서 FutureBuilder와 StreamBuilder의 차이점
+  - FutureBuilder
+    - 한 번만 결과를 반환하는 Future 객체를 기반으로 동작
+    - 일반적으로 단발성 데이터 요청 (예: API 호출, 파일 읽기)에 사용
+    - 상태는 ConnectionState.none, waiting, active, done 중 하나로 관리되며, 완료 시 UI를 갱신
+
+  - StreamBuilder
+    - 지속적으로 변화하는 데이터를 제공하는 Stream 객체를 기반으로 동작합니다.
+    - 예: 실시간 채팅, 센서 데이터, WebSocket 등과 같은 스트림 데이터에 적합합니다.
+    - 데이터가 올 때마다 UI가 자동으로 리빌드됩니다.
+
+  - 비교
+    - FutureBuilder는 1회성 작업, StreamBuilder는 지속적인 구독에 적합합니다.
+    - FutureBuilder는 완료 후 값 변경이 없고, StreamBuilder는 새로운 이벤트마다 상태를 갱신합니다.
+
 - Flutter에서 Cubit과 Bloc의 차이점은?
 
 
