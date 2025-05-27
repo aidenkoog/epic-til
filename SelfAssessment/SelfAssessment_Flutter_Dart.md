@@ -1533,20 +1533,16 @@ Organize concepts, features, types and Pros and Cons
 
 - Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법
   - 핵심 개념
-Flutter는 기본적으로 StatefulWidget을 통해 상태 관리를 제공합니다. 외부 라이브러리를 사용하지 않고도 UI와 상태를 함께 다룰 수 있습니다.
+    - Flutter는 기본적으로 StatefulWidget을 통해 상태 관리를 제공 
+    - 외부 라이브러리를 사용하지 않고도 UI와 상태를 함께 다룰 수 있음
 
-방법
+  - 방법
+    - StatefulWidget과 setState()를 통해 간단한 상태 변경을 반영할 수 있음
+    - 앱의 구조가 작거나 상태 공유 범위가 작을 경우 InheritedWidget 또는 InheritedModel을 사용하여 위젯 트리 상에서 데이터를 하위 위젯으로 전달할 수 있습니다.
 
-StatefulWidget과 setState()를 통해 간단한 상태 변경을 반영할 수 있습니다.
-
-앱의 구조가 작거나 상태 공유 범위가 작을 경우 InheritedWidget 또는 InheritedModel을 사용하여 위젯 트리 상에서 데이터를 하위 위젯으로 전달할 수 있습니다.
-
-한계점
-
-앱이 커지면 상태가 여러 위치에 흩어지고, 코드 관리가 어려워짐.
-
-복잡한 의존성이나 비동기 처리가 어려워지므로 일정 규모 이상에서는 적절한 상태 관리 도구가 필요합니다.
-
+  - 한계점
+    - 앱이 커지면 상태가 여러 위치에 흩어지고, 코드 관리가 어려워짐.
+    - 복잡한 의존성이나 비동기 처리가 어려워지므로 일정 규모 이상에서는 적절한 상태 관리 도구가 필요
 
 - Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
 - Flutter에서 Cubit과 Bloc의 차이점은?
