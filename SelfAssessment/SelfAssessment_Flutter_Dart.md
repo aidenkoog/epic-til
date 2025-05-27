@@ -1612,8 +1612,26 @@ Organize concepts, features, types and Pros and Cons
     - 명확한 상태 전이 방식
     - 구조화된 앱 설계에 유리
     - 테스트 용이성
-    
+
 - Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법
+  - GetIt 개요
+    - GetIt은 Flutter용 DI(Dependency Injection) 컨테이너로, 싱글톤 객체를 등록하고 어디서든 접근할 수 있게 도와줍니다.
+    - UI 레이어에서 비즈니스 로직이나 서비스에 쉽게 접근할 수 있습니다.
+
+  - Injectable 개요
+    - Injectable은 GetIt과 함께 사용되며, DI 등록 코드를 자동 생성해줍니다.
+    - @injectable, @singleton, @module 등의 애노테이션을 사용하여 필요한 객체를 선언하면, build_runner로 DI 설정을 자동화할 수 있습니다.
+
+  - 사용 절차
+    - get_it, injectable, build_runner 패키지 설치
+    - DI 대상 클래스에 @injectable 또는 @singleton 애노테이션 부여
+    - configureInjection(environment) 함수로 의존성 설정
+    - getIt<YourService>()로 인스턴스를 주입 받아 사용
+
+  - 장점
+    - 테스트와 유지보수에 유리한 구조 설계 가능
+    - 코드 중복 없이 DI 자동화 가능
+
 - Flutter에서 useEffect와 유사한 기능을 구현 방법
 
 
