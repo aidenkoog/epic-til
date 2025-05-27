@@ -1559,8 +1559,20 @@ Organize concepts, features, types and Pros and Cons
     - FutureBuilder는 1회성 작업, StreamBuilder는 지속적인 구독에 적합합니다.
     - FutureBuilder는 완료 후 값 변경이 없고, StreamBuilder는 새로운 이벤트마다 상태를 갱신합니다.
 
-- Flutter에서 Cubit과 Bloc의 차이점은?
+- Flutter에서 Cubit과 Bloc의 차이점
+  - Cubit
+    - Bloc보다 더 간단하고 경량화된 상태 관리 방식.
+    - 상태 변화를 직접 메서드 호출을 통해 emit()하는 방식으로 구현됩니다.
+    - 복잡한 이벤트-상태 매핑 없이 간단한 로직에 적합합니다.
 
+  - Bloc
+    - Event와 State를 명확히 분리하여, 이벤트 중심의 상태 전이를 구현합니다.
+    - 이벤트 처리 로직은 mapEventToState() 또는 on<Event>()에서 정의되며, 복잡한 상태 흐름을 다룰 때 적합합니다.
+
+  - 비교 요약
+    - Cubit은 빠르고 간단한 상황에 적합한 방식.
+    - Bloc은 이벤트 흐름이 명확한 복잡한 앱에 더 적합.
+    - 둘 다 flutter_bloc 패키지에 포함되어 있으며, 필요에 따라 선택하면 됩니다.
 
 - Flutter에서 State Restoration을 구현하는 방법은?
 - Flutter에서 StateNotifier를 활용한 상태 관리는 어떻게 이루어지는가?
