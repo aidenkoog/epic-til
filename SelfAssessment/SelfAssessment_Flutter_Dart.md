@@ -1633,7 +1633,30 @@ Organize concepts, features, types and Pros and Cons
     - 코드 중복 없이 DI 자동화 가능
 
 - Flutter에서 useEffect와 유사한 기능을 구현 방법
+  - React의 useEffect 역할
+    - 컴포넌트가 마운트되거나 특정 값이 변경될 때 사이드 이펙트를 실행하는 훅
 
+  - Flutter에서의 대응 방식
+    - initState() → 컴포넌트 최초 생성 시 한 번 실행되는 훅
+    - didUpdateWidget() → 부모 위젯의 변경으로 현재 위젯이 갱신될 때 호출
+    - didChangeDependencies() → InheritedWidget 등 의존성 변경 시 호출됨
+    - addPostFrameCallback() → 프레임이 렌더링된 이후에 특정 로직 실행 (즉, 빌드 완료 이후)
+
+  - 예제 흐름
+    ```dart
+    @override
+    void initState() {
+      super.initState();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // 이곳이 useEffect와 유사하게 동작
+        fetchDataOrDoSideEffect();
+      });
+    }
+    ```
+
+  - 요약
+    - useEffect(() => {}, [])는 initState + addPostFrameCallback 조합과 유사
+    - 값이 변경될 때마다 사이드 이펙트를 실행하려면 ValueNotifier나 StateNotifier 등을 활용한 관찰 구조 사용
 
 - Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법은?
 - Flutter에서 App Lifecycle을 관리하는 방법은?
