@@ -1518,10 +1518,40 @@ Organize concepts, features, types and Pros and Cons
     - REST API의 응답 모델
     - 앱 내 상태 표현을 Enum보다 더 유연하게 표현하고자 할 때
 
-- Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법은?
-- Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법은?
+- Flutter에서 Hydrated Bloc을 활용하여 상태를 유지하는 방법
+  - 핵심 개념
+    - Hydrated Bloc은 Bloc 또는 Cubit의 상태를 디스크에 자동 저장하고 앱 재시작 후 복원해주는 기능을 제공하는 라이브러리
+
+  - 사용 방법
+    - HydratedBloc 또는 HydratedCubit 클래스를 상속받아 상태를 관리
+    - toJson/fromJson 메서드를 오버라이딩하여 상태를 JSON으로 직렬화/역직렬화
+    - 앱 시작 시 HydratedBloc.storage를 초기화해야 하며, 일반적으로 main() 함수에서 HydratedStorage.build()를 사용하여 구현
+
+  - 장점
+    - 별도의 코드 없이도 상태가 자동으로 저장되고 복원되어 앱의 UX 개선에 유리
+    - 로그인 상태, 테마 설정, 캐시 데이터 등에 적합
+
+- Flutter에서 상태 관리 라이브러리 없이 상태를 관리하는 방법
+  - 핵심 개념
+Flutter는 기본적으로 StatefulWidget을 통해 상태 관리를 제공합니다. 외부 라이브러리를 사용하지 않고도 UI와 상태를 함께 다룰 수 있습니다.
+
+방법
+
+StatefulWidget과 setState()를 통해 간단한 상태 변경을 반영할 수 있습니다.
+
+앱의 구조가 작거나 상태 공유 범위가 작을 경우 InheritedWidget 또는 InheritedModel을 사용하여 위젯 트리 상에서 데이터를 하위 위젯으로 전달할 수 있습니다.
+
+한계점
+
+앱이 커지면 상태가 여러 위치에 흩어지고, 코드 관리가 어려워짐.
+
+복잡한 의존성이나 비동기 처리가 어려워지므로 일정 규모 이상에서는 적절한 상태 관리 도구가 필요합니다.
+
+
 - Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
 - Flutter에서 Cubit과 Bloc의 차이점은?
+
+
 - Flutter에서 State Restoration을 구현하는 방법은?
 - Flutter에서 StateNotifier를 활용한 상태 관리는 어떻게 이루어지는가?
 - Flutter에서 GetIt과 Injectable을 활용한 의존성 주입 방법은?
