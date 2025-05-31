@@ -601,8 +601,46 @@ Organize concepts, features, types and Pros and Cons
 
   - 예:
     - .m3u8, .ts 파일, 이미지, JS, CSS 등 정적 콘텐츠가 주로 캐싱됨
+    - 캐시 정책은 TTL(Time-To-Live), 헤더 기반으로 설정 가능
 
-캐시 정책은 TTL(Time-To-Live), 헤더 기반으로 설정 가능
+- MJPEG 스트리밍과 주기적 주소 갱신
+  - MJPEG 방식 개념
+    - http://camera-ip/mjpeg-stream 과 같은 URL로 접속하면,
+    - JPEG 이미지들이 multipart/x-mixed-replace 형태로 연속 전송됨
+    - 영상처럼 보이지만 실제로는 "이미지 슬라이드쇼"임
+
+  - React Native에서 MJPEG 갱신 베스트 프랙티스
+    - WebView 사용
+      - 가장 간단한 방식 (내장 브라우저로 MJPEG URL 스트리밍)
+      - 단점: 늘 그렇듯이 웹뷰는 네이티브 제어 어려움, 렌더링 퍼포먼스 떨어질 수 있음
+      - 예시
+        ```tsx
+        <WebView
+          source={{ uri: 'http://camera-ip/mjpeg-stream' }}
+          allowsInlineMediaPlayback
+          javaScriptEnabled
+          domStorageEnabled
+          style={{ width: '100%', height: 300 }}
+        />
+        ```
+
+    - Image 컴포넌트 + 주기적 리프레시
+      - 장점: 간단, 이미지 캐싱 방지를 위해 timestamp 파라미터로 URL 매번 변경
+      - 단점: 진짜 영상처럼 부드럽진 않음
+      ```tsx
+      const [imageUrl, setImageUrl] = useState('');
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setImageUrl(`http://camera-ip/snapshot.jpg?t=${Date.now()}`);
+        }, 200); // 200ms 마다 새로고침
+        return () => clearInterval(interval);
+      }, []);
+      ```
+
+  - 베스트 프랙티스
+    - WebView: MJPEG 스트림을 브라우저처럼 로드, 구현 간단, 성능 낮음, 제어 어려움
+    - Image + setInterval: snapshot.jpg를 주기적으로 로딩, 제어 쉬우나 부드럽지 않음
+    - native module (추천): Android/iOS MJPEG Decoder 활용, 최적의 성능, 직접 구현/연동작업 필요
 
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
