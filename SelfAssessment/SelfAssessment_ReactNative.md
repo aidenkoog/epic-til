@@ -590,7 +590,20 @@ Organize concepts, features, types and Pros and Cons
     - 엣지 서버에 캐시가 있으면 바로 응답
     - 없으면 오리진(Origin, 원본 서버)에서 받아오고 캐시에 저장 후 응답
 
-    
+- CDN 캐시 개념
+  - 개념
+    - CDN의 엣지 서버(지역 분산 서버)에 임시 저장된 콘텐츠 의미
+
+  - 왜 사용하는가?
+    - 오리진 서버 요청을 줄여 트래픽 비용 절감
+    - 응답 시간 단축 (캐시된 콘텐츠는 즉시 제공)
+    - 글로벌 서비스에서 지연 최소화
+
+  - 예:
+    - .m3u8, .ts 파일, 이미지, JS, CSS 등 정적 콘텐츠가 주로 캐싱됨
+
+캐시 정책은 TTL(Time-To-Live), 헤더 기반으로 설정 가능
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
