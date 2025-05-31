@@ -519,6 +519,61 @@ Organize concepts, features, types and Pros and Cons
 
   - Fast Refresh는 React Native 0.61 이후 기본 활성화된 기능이며 Hot Reloading은 더 이상 권장되지 않음
 
+- 서버에서 실시간 영상 데이터를 앱으로 전송하는 방식 (영상의 특성과 요구사항에 따라 여러가지 방식 존재)
+  - HLS (HTTP Live Streaming)
+    - 원리: 서버에서 영상을 .ts 단위로 잘라서 보내고, .m3u8 인덱스 파일로 클라이언트가 재생.
+    - 장점: CDN 캐시, 유튜브/넷플릭스 등 대규모 서비스에서 많이 사용. 네이티브 지원도 좋음.
+    - 단점: 몇 초 단위의 지연(2~10초). 초저지연 필요 시 부적절.
+    - 리액트 네이티브 사용법:
+      - react-native-video 라이브러리 사용 가능.
+      - iOS는 AVPlayer, Android는 ExoPlayer로 HLS 지원.
+
+  - RTMP (Real-Time Messaging Protocol)
+    - 원리: TCP 기반의 Adobe Flash Video 전송 프로토콜.
+    - 장점: 낮은 지연 시간(1~2초), 설정 쉬움.
+    - 단점: 모바일에서 직접 지원 어려움, React Native에서 직접 재생 불가. 중간 서버 필요 (예: HLS 변환).
+    - 활용법:
+      - 서버에서 RTMP 수신 → 변환 서버(Nginx-RTMP 등) → HLS로 변환 → 앱에서 재생.
+
+  - WebRTC (Web Real-Time Communication)
+    - 원리: P2P 기반 초저지연 스트리밍. 양방향 음성/영상 통신에 최적.
+    - 장점: 초저지연(<0.5초), 양방향 지원, 실시간 회의/영상통화 등에 적합.
+    - 단점: 모바일에서 구현 복잡. React Native에서 직접 구현하려면 네이티브 브리징 필요.
+    - 사용법:
+      - react-native-webrtc 사용 가능 (네이티브 코드 연동 필요).
+      - 서버는 SFU (예: Janus, Mediasoup, Kurento) 필요.
+
+  - MJPEG (Motion JPEG)
+    - 원리: JPEG 이미지를 계속 전송하며 실시간처럼 보여줌.
+    - 장점: 구현 매우 간단. 단순 카메라 모니터링 등에 사용.
+    - 단점: 압축률 낮고 고화질 영상에는 부적합.
+    - 리액트 네이티브에서 처리:
+      - <Image> 태그로 스트림 주소를 주기적으로 갱신하거나 웹뷰로 표시.
+
+  - WebSocket + Binary Streaming
+    - 원리: WebSocket으로 영상을 바이너리로 직접 전송 (예: mp4 fragment, H264 frame).
+    - 장점: 커스터마이징 유연, 비표준 상황에 사용 가능.
+    - 단점: 앱 단에서 디코딩 직접 구현 필요, 복잡.
+    - 적용 예:
+      - 서버에서 H264 raw frame 전송 → 앱에서 ffmpeg wasm 또는 native decoder 연동하여 디코딩.
+
+  - 실무에서는 어떤 방식을 쓰나?
+    - HLS: 라이브 방송처럼 수천명이 시청하는 상황, 또는 녹화/재생 겸용.
+
+    - WebRTC: 실시간 모니터링, 원격 제어, 통신, 회의 등 초저지연이 필수일 때.
+
+    - RTMP → HLS: 방송 서버에서 영상 받아 앱에 보여줄 때 (중간에 변환 필요).
+
+    - MJPEG: 저비용 저성능 IoT 카메라 모니터링 등에 사용.
+
+  - 정리
+    - 실시간성 가장 중요 (<1초): WebRTC
+    - 일정 지연 허용 가능, 쉬운 구현: HLS
+    - 서버에서 RTMS로 송출 중: RTMS -> HLS
+      - RealTime Messaging Protocol, HTTP Live Streaming
+    - 간단한 IP 카메라 뷰어: MJPEG
+    - 완전 커스텀 스트리밍 필요 -> WebSocket + Binary
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
