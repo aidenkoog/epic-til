@@ -574,6 +574,23 @@ Organize concepts, features, types and Pros and Cons
     - 간단한 IP 카메라 뷰어: MJPEG
     - 완전 커스텀 스트리밍 필요 -> WebSocket + Binary
 
+- CDN (Content Delivery Network)
+  - 개념
+    - 전 세계 여러 위치에 분산된 서버 네트워크를 통해 사용자에게 콘텐츠 (예: 영상, 이미지, JS, HTML 등)를 가까운 서버에서 빠르게 제공하는 기술 (가까운 서버에서 빠르게 제공이 핵심)
+
+  - 목적:
+    - 사용자에게 빠른 응답 속도 제공 (가까우니까)
+    - 서버 부하 분산
+    - 전송 지연(latency) 최소화
+    - 대용량 트래픽 대응
+
+  - 동작 구조:
+    - 사용자가 https://example.com/video.m3u8 요청
+    - CDN 네트워크는 사용자의 지역에 가장 가까운 엣지 서버(Edge Server)로 요청을 라우팅
+    - 엣지 서버에 캐시가 있으면 바로 응답
+    - 없으면 오리진(Origin, 원본 서버)에서 받아오고 캐시에 저장 후 응답
+
+    
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
