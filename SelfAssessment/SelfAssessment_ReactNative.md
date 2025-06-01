@@ -667,6 +667,54 @@ Organize concepts, features, types and Pros and Cons
     - multipart/mixed: 독립적인 데이터 묶음
     - multipart/x-mixed-replace: 특수한 타입. 데이터를 지속적으로 교체하며 전송 (스트리밍에 사용됨)
 
+- multipart/x-mixed-replace 개념
+  - 정의
+    - 연속된 데이터를 서버가 실시간으로 전송하며, 클라이언트는 그것을 순차적으로 교체해가며 표시하는 방식
+    - 이 형식은 주로 실시간 MJPEG 스트리밍에서 주로 사용
+    - 즉, 하나의 HTTP 연결 안에서 여러 장의 JPEG 이미지를 계속 보내고, 클라이언트는 그것을 교체하면서 영상처럼 보여주는 것
+
+  - 헤더 예시
+    ```http
+    HTTP/1.0 200 OK
+    Content-Type: multipart/x-mixed-replace; boundary=--frame
+    ```
+    - 이 응답은 여러 파트로 구성됨
+    - 각 파트는 --frame이라는 boundary(경계)로 구분됨
+
+  - 실제 데이터 구조 예시
+    - 이렇게 하나의 HTTP 응답에서 JPEG 이미지들이 끊기지 않고 계속 전송됨
+    - 클라이언트는 각 이미지를 실시간으로 교체하며 영상처럼 렌더링
+    ```http
+    --frame
+    Content-Type: image/jpeg
+    Content-Length: 12345
+
+    <바이트 이미지 데이터 1>
+
+    --frame
+    Content-Type: image/jpeg
+    Content-Length: 12300
+
+    <바이트 이미지 데이터 2>
+
+    --frame
+    Content-Type: image/jpeg
+    Content-Length: 12000
+
+    <바이트 이미지 데이터 3>
+    ...
+    ```
+
+  - 왜 유용한가?
+    - 하나의 연결로 실시간 스트리밍 가능 (WebSocket 없이도!)
+    - 매우 단순한 카메라(예: IP 카메라)나 서버 구현에서 쉽게 사용
+    - HTTP/1.1로도 충분히 처리 가능
+
+  - 브라우저/앱에서의 처리 방식
+    - 브라우저: <img src="mjpeg-stream-url" /> 사용 시 자동 처리
+    - React Native: WebView로 열면 자동 재생됨 (하지만 커스터마이징은 어려움)
+    - 고급 앱	MJPEG 파서를 직접 구현하거나 native decoder 연동 필요
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
