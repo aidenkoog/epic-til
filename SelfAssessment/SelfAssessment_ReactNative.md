@@ -642,6 +642,31 @@ Organize concepts, features, types and Pros and Cons
     - Image + setInterval: snapshot.jpg를 주기적으로 로딩, 제어 쉬우나 부드럽지 않음
     - native module (추천): Android/iOS MJPEG Decoder 활용, 최적의 성능, 직접 구현/연동작업 필요
 
+- 이미지 캐싱 방지를 위한 timestamp 파라미터 추가 건 설명
+  - 개요
+    - 브라우저(또는 네이티브 이미지 로더)의 캐시 메커니즘을 우회하기 위한 트릭
+
+  - TimeStamp 붙이는 이유
+    - 브라우저나 네이티브 이미지 로더는 같은 URL의 이미지는 캐시에 저장하고, 다시 로딩하지 않으려는 성질 존재
+    - 즉, http://camera-ip/snapshot.jpg를 반복해서 불러도 한 번 로딩한 이미지를 계속 보여줄 수 있음
+
+  - 해결 방법
+    - 매번 URL이 달라지기 때문에
+    - 새로운 리소스로 인식되어 항상 서버에서 최신 이미지를 가져오게 됨
+    ```tsx
+    `http://camera-ip/snapshot.jpg?t=${Date.now()}`
+    ```
+
+- 멀티파트 (Muitipart)
+  - 개념
+    - multipart는 HTTP 요청/응답에서 여러 개의 데이터를 하나의 메시지에 포함시켜 전송할 수 있도록 하는 콘텐츠 타입(Content-Type)
+
+  - 주요 Content-Type 종류
+    - multipart/form-data: HTML <form> 전송 시 사용. 파일 업로드에 사용됨
+    - multipart/related: 데이터 간 관계가 있을 때 (예: HTML + 이미지)
+    - multipart/mixed: 독립적인 데이터 묶음
+    - multipart/x-mixed-replace: 특수한 타입. 데이터를 지속적으로 교체하며 전송 (스트리밍에 사용됨)
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
