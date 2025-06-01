@@ -715,6 +715,66 @@ Organize concepts, features, types and Pros and Cons
     - React Native: WebView로 열면 자동 재생됨 (하지만 커스터마이징은 어려움)
     - 고급 앱	MJPEG 파서를 직접 구현하거나 native decoder 연동 필요
 
+- Native Module 사용 이유
+  - Image + setInterval 방식은 다음과 같은 단점 존재
+    - setInterval로 계속 리렌더링 → CPU 사용량 증가
+    - 이미지 간 부드러운 전환이 어려움 → 프레임 드랍
+    - JPEG 이미지 간 연결 불연속 → 화면 깜빡임
+
+  - 실시간 MJPEG 스트리밍을 끊김 없이(부드럽게) 처리하려면 Android/iOS의 MJPEG 디코더를 직접 사용하는 네이티브 모듈 방식이 베스트
+
+  - 아키텍쳐 개요
+    - React Native는 MJPEG을 직접 해석 못 하므로, 네이티브 영역에서 MJPEG 프레임을 읽고 화면에 그리는 방식을 사용
+    ```plaintext
+    [ MJPEG 서버 (IP 카메라 등) ]
+            ↓ MJPEG (multipart/x-mixed-replace)
+    [ React Native 앱 ]
+            ↓
+    [ Custom Native Module ]
+            ↓
+    [ SurfaceView (Android) / UIImageView (iOS) ]
+    ```
+
+  - Android에서 구현 방식
+    - MJPEG Decoder + SurfaceView
+      - 네이티브(Java/Kotlin)에서 HttpURLConnection 또는 OkHttp로 MJPEG 스트림을 연다
+      - multipart boundary 기준으로 JPEG 이미지를 분리
+      - BitmapFactory.decodeStream()으로 JPEG 디코딩
+      - SurfaceView 또는 TextureView에 이미지 반복 렌더링
+
+    - 주요 코드 흐름 (Kotlin 예시)
+      ```kotlin
+      val url = URL("http://camera-ip/mjpeg")
+      val conn = url.openConnection() as HttpURLConnection
+      conn.doInput = true
+      conn.connect()
+
+      val inputStream = conn.inputStream
+      while (true) {
+          val frame = readNextJpegFrame(inputStream) // boundary 기준으로 읽음
+          val bitmap = BitmapFactory.decodeByteArray(frame, 0, frame.size)
+          surfaceHolder.lockCanvas()?.let { canvas ->
+              canvas.drawBitmap(bitmap, 0f, 0f, null)
+              surfaceHolder.unlockCanvasAndPost(canvas)
+          }
+      }
+      ```
+
+  - iOS에서 구현 방식
+    - MJPEG Parser + UIImageView
+      - URLSession으로 MJPEG 스트림을 수신
+      - boundary 기준으로 JPEG 파싱
+      - UIImage(data:)로 디코딩
+      - UIImageView에 실시간 적용
+
+    - 주요 코드 흐름 (Swift 예시)
+      ```swift
+      let url = URL(string: "http://camera-ip/mjpeg")!
+      let task = URLSession.shared.dataTask(with: url) { data, response, error in
+          // boundary로 이미지 분리 → UIImage로 변환 → DispatchQueue.main에서 렌더링
+      }
+      ```
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
