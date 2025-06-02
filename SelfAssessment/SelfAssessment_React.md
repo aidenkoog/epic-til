@@ -1248,7 +1248,7 @@ Organize concepts, features, types and Pros and Cons
 
 - React에서 상태(state) 변경이 반영되지 않는 이유
   - 가능한 원인과 설명:
-    - 상태가 불변성을 유지하지 않고 직접 수정된 경우
+    - (1) 상태가 불변성을 유지하지 않고 직접 수정된 경우
       ```tsx
         const [list, setList] = useState([1, 2, 3]);
 
@@ -1264,7 +1264,7 @@ Organize concepts, features, types and Pros and Cons
         setList([...list, 4])
         ```
 
-    - 비동기 상태 변경을 연달아 했을 때
+    - (2) 비동기 상태 변경을 연달아 했을 때
       ```tsx
       setCount(count + 1);
       setCount(count + 1);
@@ -1277,7 +1277,65 @@ Organize concepts, features, types and Pros and Cons
         setCount(prev => prev + 1); // 총 2 증가
         ```
 
-- React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
+    - (3) 상태 변경 후 바로 그 값을 사용하려고 할 때
+      ```tsx
+      setValue('new');
+      console.log(value); // 여전히 이전 값
+      ```
+      - setState는 비동기이므로, 변경 직후엔 이전 값을 참조
+      - useEffect나 setState의 콜백에서 접근해야 함
+
+    - (4) 그외 컴포넌트가 리렌더링되지 않는 구조일 때
+      - 메모이제이션, React.memo, useCallback 등으로 인해
+      - 의존성 누락 시 리렌더 안됨
+
+- React에서 서버와 클라이언트 상태를 함께 관리하는 방법
+  - 개요
+    - 클라이언트 상태
+      - UI 상태 (모달 열림 여부, 토글 값 등)
+      - 사용자 입력값, 현재 페이지 등
+
+    - 서버 상태
+      - 외부 API에서 받아온 데이터
+      - 비동기 응답 (예: 목록, 상세 정보, 인증 상태 등)
+
+  - 통합 관리 전략
+    - ① React Query, TanStack Query
+      - 서버 상태 전용 관리 라이브러리
+      - 자동 캐싱, 리패칭, 상태 구분 (isLoading, isError, data 등)
+      - 예시
+        ```tsx
+        const { data, isLoading } = useQuery(['user', userId], () => fetchUser(userId));
+        ```
+      - 클라이언트 상태와 useState/useReducer로 분리해 함께 사용
+
+    - ② 상태 관리 라이브러리 + API 연동
+      - Recoil, Zustand, Redux, Jotai 등 클라이언트 상태를 저장하면서, 서버 데이터도 함께 관리 가능
+      - 예: Zustand에서 비동기 데이터 fetch와 로컬 상태를 한곳에서 다룸
+        ```tsx
+        const useStore = create((set) => ({
+          user: null,
+          fetchUser: async () => {
+            const data = await fetch('/api/user').then(res => res.json());
+            set({ user: data });
+          }
+        }));
+        ```
+
+    - ③ useEffect + fetch 직접 사용
+      - 간단한 경우엔 useEffect에서 fetch하여 useState로 상태 저장
+        ```tsx
+        useEffect(() => {
+          fetch('/api/data')
+            .then(res => res.json())
+            .then(data => setData(data));
+        }, []);
+        ```
+
+  - 실무에서의 베스트 프랙티스
+    - 클라이언트 UI 상태: useState, useReducer, Zustand
+    - 서버 비동기 데이터: React Query, SWR
+    - 둘 다 필요할 때: 서버 상태는 React Query로, 클라이언트 상태는 local state로 역할 분리
 
 - React에서 Redux Thunk와 Redux Saga의 차이점은?
 - React에서 Server Components의 개념과 활용 방법은?
