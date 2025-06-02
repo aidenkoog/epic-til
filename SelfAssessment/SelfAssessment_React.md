@@ -1221,7 +1221,31 @@ Organize concepts, features, types and Pros and Cons
     });
     ```
 
-- React에서 children props를 활용하는 방식은?
+- React에서 children props를 활용하는 방식
+  - 개념:
+    - children은 컴포넌트 내부에 포함된 자식 요소를 나타내는 내장 prop
+    - 부모 컴포넌트가 자식 컴포넌트를 사용할 때 <Component>내용</Component> 구조로 자식 요소를 넘기면, 이 내용은 props.children으로 접근 가능
+
+  - 사용 예시:
+    ```tsx
+    const Card = ({ children }) => (
+      <div className="card">
+        {children}
+      </div>
+    );
+
+    <Card>
+      <h1>Hello</h1>
+      <p>This is content inside the card.</p>
+    </Card>
+    ```
+    - 위 예제에서 <h1>과 <p>는 Card 컴포넌트의 props.children으로 들어간다.
+    - 결과적으로 Card 컴포넌트 내부에서 유연하게 UI를 구성 가능
+
+  - 실무 활용 포인트:
+    - 레이아웃 컴포넌트, Modal, Button 등 재사용 가능한 컴포넌트 만들 때 자주 사용.
+    - children은 단순 텍스트부터 컴포넌트 트리까지 모든 JSX를 받을 수 있음.
+
 - React에서 상태(state) 변경이 반영되지 않는 이유는?
 - React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
 
