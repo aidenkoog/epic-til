@@ -1246,7 +1246,37 @@ Organize concepts, features, types and Pros and Cons
     - 레이아웃 컴포넌트, Modal, Button 등 재사용 가능한 컴포넌트 만들 때 자주 사용.
     - children은 단순 텍스트부터 컴포넌트 트리까지 모든 JSX를 받을 수 있음.
 
-- React에서 상태(state) 변경이 반영되지 않는 이유는?
+- React에서 상태(state) 변경이 반영되지 않는 이유
+  - 가능한 원인과 설명:
+    - 상태가 불변성을 유지하지 않고 직접 수정된 경우
+      ```tsx
+        const [list, setList] = useState([1, 2, 3]);
+
+      // 잘못된 방식 (직접 변경)
+      list.push(4);
+      setList(list); // 변경 감지 안 됨
+      ```
+      - React는 참조 변경으로 상태 변경을 감지
+      - 배열/객체는 불변성 유지를 위해 spread 등을 활용해야 함
+
+      - 올바른 예시
+        ```tsx
+        setList([...list, 4])
+        ```
+
+    - 비동기 상태 변경을 연달아 했을 때
+      ```tsx
+      setCount(count + 1);
+      setCount(count + 1);
+      ```
+      - 위 코드에서는 count 값이 동일하게 참조되므로 결국 한 번만 증가
+
+      - 올바른 예시
+        ```tsx
+        setCount(prev => prev + 1);
+        setCount(prev => prev + 1); // 총 2 증가
+        ```
+
 - React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
 
 - React에서 Redux Thunk와 Redux Saga의 차이점은?
