@@ -1370,7 +1370,7 @@ Organize concepts, features, types and Pros and Cons
       - 액션 흐름을 감시(watch)하고, 복잡한 시나리오 제어에 강함 (예: retry, cancel, debounce)
       - watch, takeLatest 등 사용 가능
       - 학습 난이도 있음
-      - 테스트 가능성과 유지보수성이 우수
+      - 테스트 가능성과 유지보수성이 우수, 코드 가독성은 복잡할수록 명확해지는 경향이 있음
 
     - 예시:
       ```tsx
@@ -1386,7 +1386,49 @@ Organize concepts, features, types and Pros and Cons
       }
       ```
 
-- React에서 Server Components의 개념과 활용 방법은?
+- React에서 Server Components의 개념과 활용 방법
+  - 개념
+    - React Server Components (RSC)는 React 18부터 지원되며, 서버에서 렌더링한 컴포넌트를 클라이언트 JS 없이 HTML로 보내는 기능.
+      - 컴포넌트 자체가 서버에서 실행됨
+      - 클라이언트에서 JS 번들로 내려가지 않음
+      - 초기 렌더 속도 향상, 데이터 보안 강화
+
+  - 특징
+    - 서버에서 렌더: React 컴포넌트가 서버에서 실행되어 HTML 생성
+    - JS 번들 없음: 클라이언트로 JS가 전달되지 않아 더 가볍고 빠름
+    - 상태 없음: useState, useEffect 사용 불가
+    - props로 클라이언트 컴포넌트 포함 가능: 필요 시 클라이언트 컴포넌트를 props를 내려줌
+
+  - 예시 (Next.js 13 + App Router 기준)
+    ```tsx
+    // app/page.tsx (Server Component)
+    import ProductList from './ProductList';
+
+    export default async function Page() {
+      const products = await fetchProducts(); // 서버에서 직접 fetch
+      return <ProductList products={products} />;
+    }
+    ```
+    ```tsx
+    // ProductList.tsx (Client Component)
+    'use client';
+    import { useState } from 'react';
+
+    export default function ProductList({ products }) {
+      const [filter, setFilter] = useState('');
+      return (
+        <>
+          <input value={filter} onChange={e => setFilter(e.target.value)} />
+          <ul>
+            {products.filter(p => p.name.includes(filter)).map(p => (
+              <li key={p.id}>{p.name}</li>
+            ))}
+          </ul>
+        </>
+      );
+    }
+    ```
+
 - React에서 hydration이 실패하는 이유는?
 
 - React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제는?
