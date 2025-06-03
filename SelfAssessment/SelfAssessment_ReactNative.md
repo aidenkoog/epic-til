@@ -885,6 +885,129 @@ Organize concepts, features, types and Pros and Cons
     - 로딩 지연, 끊김 등 대비를 위해 onBuffer, onError, onLoadStart 핸들러 처리 반드시 필요
     - VPN, 방화벽 등 네트워크 환경도 중요한 고려 요소
 
+- React Native에서 RTSP 만 지원하는 영상을 네이티브 단에서 처리하는 방법
+  - 전체 구조
+    ```scss
+    [CCTV RTSP 스트림]
+            ↓ (RTSP 전용 네이티브 라이브러리)
+    [Native Layer: Android/iOS]
+            ↓ (비디오 렌더링, 디코딩)
+    [React Native: Native UI Component]
+            ↓
+    앱 화면에 실시간 영상 출력
+    ```
+
+  - Android RTSP 처리
+    - 사용 가능한 라이브러리
+      - VLC Android SDK
+        - RTSP/HLS/MP4 등 거의 모든 프로토콜 지원
+        - 안정적, 고성능, 오픈소스
+        - GitHub: https://code.videolan.org/videolan/libvlc-android
+      - FFmpeg 기반 플레이어 (ExoPlayer + FFmpeg 확장)
+        - 복잡하며,유지보수 어려움
+        - 커스터마이징 필요
+      - VLC 추천 (구현 간단, 안정적)
+
+    - 안드로이드 구현 흐름
+      - 안드로이드 모듈에서 VLC 기반 커스텀 SurfaceView 또는 TextureView 생성
+      - ReactPackage로 해당 ViewManager 등록
+      - React Native 에서 <RTSPPlayer /> 컴포넌트처럼 사용
+
+    - 핵심 코드 예시
+      ```kotlin
+      class RTSPPlayerView(context: Context): SurfaceView(context), IVLCVout.Callback {
+          private var mediaPlayer: MediaPlayer? = null
+
+          fun play(rtspUrl: String) {
+              val libVLC = LibVLC(context, listOf("--no-drop-late-frames", "--no-skip-frames"))
+              mediaPlayer = MediaPlayer(libVLC)
+              mediaPlayer?.vlcVout?.setVideoView(this)
+              mediaPlayer?.vlcVout?.attachViews()
+              mediaPlayer?.media = Media(libVLC, Uri.parse(rtspUrl))
+              mediaPlayer?.play()
+          }
+
+          override fun onSurfacesCreated(vout: IVLCVout?) {}
+          override fun onSurfacesDestroyed(vout: IVLCVout?) {}
+      }
+      ```
+
+  - iOS에서 RTSP 처리
+    - 사용할 수 있는 라이브러리
+      - MobileVLCKit (VLC iOS SDK)
+        - CocoaPods 설치 가능
+        - RTSP 스트리밍을 UIView에 출력 가능
+      - FFmpeg iOS Framework
+        - 빌드 복잡, 유지보수 어려움
+        - 커스텀 디코딩 필요
+      - VLC 기반 MobileVLCKit 추천
+
+    - iOS 구현 흐름
+      - Swift/Objective-C로 UIView 기반 플레이어 구현
+      - RCTViewManager로 React Native 브릿지 생성
+      - React Native에서 <RTSPPlayer />로 사용
+
+    - 핵심 코드 예시
+      ```swift
+      import MobileVLCKit
+
+      class RTSPPlayerView: UIView {
+          private var mediaPlayer: VLCMediaPlayer?
+
+          func play(url: String) {
+              mediaPlayer = VLCMediaPlayer()
+              mediaPlayer?.drawable = self
+              mediaPlayer?.media = VLCMedia(url: URL(string: url)!)
+              mediaPlayer?.play()
+          }
+      }
+      ```
+
+  - React Native 연동
+    - Android/iOS 공통: Native UI 컴포넌트로 등록
+      - Android: RTSPPlayerPackage.kt
+        ```kotlin
+        class RTSPPlayerPackage : ReactPackage {
+            override fun createViewManagers(...) = listOf(RTSPPlayerViewManager())
+        }
+        ```
+      - iOS: RTSPPlayerViewManager.swift
+        ```swift
+        @objc(RTSPPlayerViewManager)
+        class RTSPPlayerViewManager: RCTViewManager {
+            override func view() -> UIView {
+                return RTSPPlayerView()
+            }
+        }
+        ```
+      - React Native 측 사용 예:
+        ```tsx
+        import { requireNativeComponent } from 'react-native';
+
+        const RTSPPlayerView = requireNativeComponent('RTSPPlayerView');
+
+        export default function CCTVViewer() {
+          return (
+            <RTSPPlayerView
+              style={{ width: '100%', height: 300 }}
+              streamUrl="rtsp://camera-ip/live"
+            />
+          );
+        }
+        ```
+        - 필요하면 prop 전달 (streamUrl)이나 상태 이벤트 (onError, onReady)도 브리지로 넘길 수 있음.
+
+  - 장점 및 주의사항
+    - 장점
+      - 지연 최소화: HLS 대비 RTSP는 수 초 빠름
+      - 고성능 디코딩: VLC/FFmpeg는 하드웨어 디코딩 지원
+      - CCTV 하드웨어 호환성 높음
+
+    - 주의사항
+      - VLC 라이브러리는 앱 용량 증가 (수 MB 이상)
+      - iOS는 App Store 정책상 RTSP 보안 문제 검토 필요
+      - 네트워크 상태에 따라 reconnect 로직 필요
+
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
 - React Native에서 Flipper를 사용하는 이유는?
