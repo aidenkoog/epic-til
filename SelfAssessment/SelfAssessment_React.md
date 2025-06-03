@@ -1464,7 +1464,13 @@ Organize concepts, features, types and Pros and Cons
     ```
     - → HTML은 "Hello"인데, JS 렌더는 "Hi"이기 때문에 hydration mismatch.
 
-- React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제는?
+- React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제
+  - 개요
+    - <Suspense>는 원래 코드 스플리팅(ex: React.lazy)용이었지만, React 18부터 서버/클라이언트에서의 데이터 fetch까지 감싸는 용도로 확장되었음
+      - 예: React Query, Relay, Next.js App Router(RSC)에서 활용
+
+  - 주요 문제점
+
 - React의 Concurrent Rendering이 UI 성능에 미치는 영향은?
 - React에서 useRef와 useState의 차이점은?
 
