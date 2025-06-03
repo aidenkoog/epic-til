@@ -1429,7 +1429,40 @@ Organize concepts, features, types and Pros and Cons
     }
     ```
 
-- React에서 hydration이 실패하는 이유는?
+- React에서 hydration이 실패하는 이유
+  - Hydration 개념
+    - 서버에서 렌더링된 HTML을 클라이언트에서 React가 다시 연결(bind) 하여 인터랙티브하게 만드는 과정
+
+  - 실패 원인 3대 요인
+    - (1) 클라이언트와 서버의 렌더링 결과 불일치
+      - 예: Math.random(), Date.now() 같은 비결정적 값 사용
+        ```tsx
+        // 서버와 클라이언트에서 결과가 다름 → hydration mismatch
+        <span>{Math.random()}</span>
+        ```
+
+    - (2) 조건부 렌더링 차이
+      - 예: window 객체 사용 또는 media query 처리 등 클라이언트 환경 전용 코드
+        ```tsx
+        if (typeof window !== 'undefined') {
+          return <div>Only in browser</div>;
+        }
+        ```
+
+    - (3) 상태 초기값 불일치
+      - 클라이언트 상태 초기화 값이 서버와 다를 때
+
+  - 해결 방법
+    - 랜덤 값 사용: useEffect 내에서 처리하거나 SSR 제외
+    - 윈도우 객체 접근: useEffect 안에서만 접근
+    - 날짜/시간 표시: 서버/클라이언트에 동일한 값 주입 또는 클라이언트에서 처리
+    - 동적 로딩 요소: suppressHydrationWarning 또는 use client 분리
+
+  - 에러 예시
+    ```bash
+    Warning: Text content did not match. Server: "Hello" Client: "Hi"
+    ```
+    - → HTML은 "Hello"인데, JS 렌더는 "Hi"이기 때문에 hydration mismatch.
 
 - React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제는?
 - React의 Concurrent Rendering이 UI 성능에 미치는 영향은?
