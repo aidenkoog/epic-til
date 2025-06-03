@@ -1337,7 +1337,55 @@ Organize concepts, features, types and Pros and Cons
     - 서버 비동기 데이터: React Query, SWR
     - 둘 다 필요할 때: 서버 상태는 React Query로, 클라이언트 상태는 local state로 역할 분리
 
-- React에서 Redux Thunk와 Redux Saga의 차이점은?
+- React에서 Redux Thunk와 Redux Saga의 차이점
+  - 공통점
+    - 둘 다 Redux의 middleware로 사용되어, 비동기 로직 (API 호출 등) 을 Redux에서 처리할 수 있게 도와줌.
+
+  - Redux Thunk
+    - 개념
+      - Thunk는 action creator가 함수를 반환하도록 허용함.
+      - 반환된 함수 안에서 dispatch, getState 등을 통해 비동기 로직 실행 가능.
+
+    - 특징
+      - 간단한 로직에 적합
+      - 배우기 쉽고 코드가 직관적
+      - 네이티브 JavaScript로 작성 가능
+
+    - 예시:
+      ```tsx
+      export const fetchUser = (id) => async (dispatch) => {
+        dispatch({ type: 'FETCH_USER_START' });
+        const res = await fetch(`/api/user/${id}`);
+        const data = await res.json();
+        dispatch({ type: 'FETCH_USER_SUCCESS', payload: data });
+      };
+      ```
+
+  - Redux Saga
+    - 개념
+      - Saga는 Generator 함수 기반의 미들웨어
+      - 비동기 흐름을 제어하고, 복잡한 사이드이펙트를 쉽게 테스트하고 추적 가능
+
+    - 특징
+      - 액션 흐름을 감시(watch)하고, 복잡한 시나리오 제어에 강함 (예: retry, cancel, debounce)
+      - watch, takeLatest 등 사용 가능
+      - 학습 난이도 있음
+      - 테스트 가능성과 유지보수성이 우수
+
+    - 예시:
+      ```tsx
+      function* fetchUserSaga(action) {
+        try {
+          yield put({ type: 'FETCH_USER_START' });
+          const data = yield call(fetch, `/api/user/${action.payload}`);
+          const result = yield data.json();
+          yield put({ type: 'FETCH_USER_SUCCESS', payload: result });
+        } catch (e) {
+          yield put({ type: 'FETCH_USER_ERROR', error: e });
+        }
+      }
+      ```
+
 - React에서 Server Components의 개념과 활용 방법은?
 - React에서 hydration이 실패하는 이유는?
 
