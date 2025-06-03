@@ -774,6 +774,116 @@ Organize concepts, features, types and Pros and Cons
           // boundary로 이미지 분리 → UIImage로 변환 → DispatchQueue.main에서 렌더링
       }
       ```
+- React Native 에서 실시간 영상 스트리밍을 출력하는 방법과 상세 내용
+  - 실시간 영상 출력 방식 개요
+    - HLS (HTTP Live Streaming)
+      - 가장 널리 쓰이는 방식, .m3u8 + .ts 조합, 수 초 지연 있음
+    - RTSP (Real Time Streaming Protocol)
+      - 많이 사용하나 모바일 브라우저/RN에서 직접적인 재생 불가
+    - MJPEG (Motion JPEG)
+      - 이미지 연속 출력 방식, 구현 쉬우나 저화질용
+    - WebRTC
+      - 초저지연 P2P 방식, 복잡하지만 고성능
+
+  - 실용적인 선택 조합: HLS + react-native-video
+    - 왜 HLS 선택하는가?
+      - 대부분의 CCTV NVR이나 서버는 RTSP → HLS 변환 게이트웨이를 제공함 (예: FFmpeg, Nginx, Media Server)
+      - React Native 앱에서는 HLS만으로 영상 재생이 가능하며 유지보수도 쉬움
+
+  - HLS 방식 실시간 영상 출력 - 예시
+    - (1) 설치
+      ```bash
+      npm install react-native-video
+      ```
+
+    - (2) 예제 코드
+      ```tsx
+      import React from 'react';
+      import { View, StyleSheet, Dimensions } from 'react-native';
+      import Video from 'react-native-video';
+
+      const RealTimePlayer = () => {
+        return (
+          <View style={styles.container}>
+            <Video
+              source={{ uri: 'https://example.com/stream.m3u8' }} // HLS URL
+              style={styles.video}
+              controls={true}
+              resizeMode="cover"
+              bufferConfig={{
+                minBufferMs: 5000,
+                maxBufferMs: 10000,
+                bufferForPlaybackMs: 1000,
+                bufferForPlaybackAfterRebufferMs: 2000,
+              }}
+            />
+          </View>
+        );
+      };
+
+      const styles = StyleSheet.create({
+        container: {
+          flex: 1,
+          backgroundColor: '#000',
+        },
+        video: {
+          width: Dimensions.get('window').width,
+          height: Dimensions.get('window').width * 9 / 16,
+        },
+      });
+
+      export default RealTimePlayer;
+      ```
+
+  - RTSP밖에 지원하지 않을 때
+    - RTSP는 RN에서 직접 재생 불가하여 중간 서버 필요
+      - 방법: RTSP -> HLS 변환
+        - 서버 예시(FFmpeg)
+          ```bash
+          ffmpeg -rtsp_transport tcp -i rtsp://camera-ip/stream \
+          -c:v libx264 -hls_time 2 -hls_list_size 3 -f hls stream.m3u8
+          ```
+          - 변환된 HLS 파일(.m3u8)을 웹 서버로 호스팅
+          - React Native에서는 이 URL로 재생
+
+  - MJPEG 방식 (간단한 카메라용)
+    - WebView 활용
+      ```tsx
+      import React from 'react';
+      import { View, StyleSheet } from 'react-native';
+      import { WebView } from 'react-native-webview';
+
+      const MJPEGStream = () => {
+        return (
+          <View style={styles.container}>
+            <WebView
+              source={{ uri: 'http://camera-ip/mjpeg-stream' }}
+              style={styles.webview}
+            />
+          </View>
+        );
+      };
+
+      const styles = StyleSheet.create({
+        container: { flex: 1 },
+        webview: { flex: 1 },
+      });
+
+      export default MJPEGStream;
+      ```
+
+  - 고급 방식: WebRTC 기반 CCTV 연동
+    - 실시간성이 매우 중요한 상황 (딜레이 < 500ms)이라면 WebRTC가 필요하지만, React Native에서 WebRTC를 구현하려면 native 연동이 필요
+
+    - WebRTC 연동
+      - 패키지: react-native-webrtc
+      - 서버: Janus, Kurento, Mediasoup 등의 SFU 필요
+      - 복잡도 높지만 음성/화상/양방향 제어에 적합
+        - 실시간 통화, 원격 제어, 로봇 스트리밍 등에서 사용
+
+  - 개발 시 유의 사항
+    - 로딩 지연, 끊김 등 대비를 위해 onBuffer, onError, onLoadStart 핸들러 처리 반드시 필요
+    - VPN, 방화벽 등 네트워크 환경도 중요한 고려 요소
 
 - React Native에서 Dynamic Linking이란?
 - React Native에서 Code Splitting이 필요한 이유는?
