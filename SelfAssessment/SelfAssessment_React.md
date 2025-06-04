@@ -1485,8 +1485,23 @@ Organize concepts, features, types and Pros and Cons
 
     - Suspense boundary nesting
       - 여러 컴포넌트에 중첩된 Suspense boundary가 있을 경우 예기치 않은 리렌더링 지연이나 데이터 race condition이 생길 수 있음.
-      
-- React의 Concurrent Rendering이 UI 성능에 미치는 영향은?
+
+- React의 Concurrent Rendering이 UI 성능에 미치는 영향
+  - 개념 요약
+    - Concurrent Rendering은 React가 렌더링 작업을 중단하고 다시 시작할 수 있도록 만들어, 사용자의 인터랙션을 우선시하면서 앱을 더 부드럽고 반응성 있게 만드는 기능
+    - React 18부터 기본 적용되지 않고, createRoot()를 사용해 opt-in 방식으로 활성화
+
+  - 성능에 미치는 영향
+    - 긍정적 영향
+      - 렌더링 중단 및 재시작을 통해 우선순위 높은 작업(예: 사용자 입력)을 먼저 처리함.
+      - Transition 기반의 UI 업데이트에서 지연 로딩이 가능하여 UX가 향상됨.
+      - 앱이 큰 컴포넌트 트리를 가진 경우, 블로킹 없이 부드러운 렌더링이 가능함.
+
+    - 부정적 영향
+      - 상태 동기화가 까다로워져서, 올바르지 않은 렌더 순서로 인해 의도치 않은 UI가 보일 수 있음.
+      - 효율적인 캐싱/메모이제이션 없이 사용할 경우 오히려 리렌더링이 많아져 성능 저하가 발생할 수 있음.
+      - 디버깅이 어려움: 중단된 작업과 재시작된 작업 사이의 상태 추적이 어려워짐.
+
 - React에서 useRef와 useState의 차이점은?
 
 - React에서 useReducer를 사용하는 시나리오는?
