@@ -1933,7 +1933,21 @@ Organize concepts, features, types and Pros and Cons
     - 클라이언트 상태는 앱 내에서 직접 통제 가능
     - 서버 상태는 외부 요인(지연, 실패, 불일치 등) 고려해야 하므로 비동기 처리 및 캐싱 전략 중요
 
-- React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
+- React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점
+  - 개념 차이
+    - useEffect는 브라우저 페인팅 이후에 실행 (비동기적으로 호출됨)
+    - useLayoutEffect는 DOM 변경 직후, 페인팅 이전에 동기적으로 실행
+
+  - 주의할 점
+    - 렌더링 차단 위험: useLayoutEffect는 동기적이기 때문에 무거운 작업을 하면 UI 렌더링 지연이 발생할 수 있음.
+    - 순서 주의: 두 훅을 함께 쓰면 useLayoutEffect가 먼저 실행됨 → 레이아웃 측정/스크롤 제어에 적합, 반면 useEffect는 네트워크, 비동기 타이머 등에 적합.
+    - SSR 환경 주의: useLayoutEffect는 서버 렌더링 중 경고가 발생할 수 있으므로 조건부로 실행 (typeof window !== "undefined" 등).
+
+  - 정리
+    - DOM 측정/스타일 계산/스크롤 이동 → useLayoutEffect
+    - API 호출/이벤트 리스너 등록/비동기 로직 → useEffect
+    - 같이 사용할 땐 기능 목적을 명확히 분리해야 하며, useLayoutEffect는 최소한으로 사용해야 렌더링 병목을 방지할 수 있음.
+
 - React에서 Server Components를 활용하면 어떤 이점이 있는가?
 - React의 Fiber Reconciliation 알고리즘을 설명하시오.
 - React에서 메모리 누수를 방지하는 방법은?
