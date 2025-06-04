@@ -1875,8 +1875,47 @@ Organize concepts, features, types and Pros and Cons
 
   - 결론
     - React의 이벤트 시스템은 자동으로 이벤트 위임 방식으로 동작하며, 개발자는 신경 쓰지 않아도 되지만 퍼포먼스나 디버깅 시 이해하고 있으면 유리합니다.
-    
+
 - React에서 Lazy Loading과 Code Splitting을 적용하는 방법
+  - 개념 요약
+    - Lazy Loading은 필요한 시점에 리소스를 로드하는 기술이며,
+    - Code Splitting은 앱을 작은 번들로 나눠서 초기 로딩 속도를 개선하는 기법
+
+  - 적용 방법
+    - (1) React.lazy() + Suspense 사용
+      ```tsx
+      const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+      function App() {
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <LazyComponent />
+          </Suspense>
+        );
+      }
+      ```
+
+    - (2) 동적 import() + Webpack Chunk
+      ```tsx
+      import(/* webpackChunkName: "admin" */ './AdminPage')
+      ```
+
+    - (3) 라우팅 기반 Code Splitting (React Router 예시)
+      ```tsx
+      const AdminPage = React.lazy(() => import('./AdminPage'));
+
+      <Route path="/admin" element={
+        <Suspense fallback={<Loading />}>
+          <AdminPage />
+        </Suspense>
+      } />
+      ```
+
+  - 장점
+    - 초기 로딩 속도 개선
+    - 사용자 경험 향상
+    - 모바일 환경에서 데이터 비용 절감
+
 - React에서 클라이언트 상태와 서버 상태의 차이점
 
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
