@@ -1917,6 +1917,21 @@ Organize concepts, features, types and Pros and Cons
     - 모바일 환경에서 데이터 비용 절감
 
 - React에서 클라이언트 상태와 서버 상태의 차이점
+  - 클라이언트 상태
+    - 로컬에서만 관리되는 상태 (UI 상태, 입력값 등)
+    - 도달 열림 여부, 폼 입력값, 다크모드 설정 등
+    - useState, useReducer, Context 등
+    - 앱 안에서만 존재하고 즉시 반응 가능
+    - 동기화는 앱 내부 논리만 고려
+  - 서버 상태
+    - 서버에서 가져와야 하며 외부와 동기화 필요
+    - 유저 정보, API 응답 데이터, 게시글 목록
+    - React Query, SWR, Redux-Toolkit-Query 등
+    - 네트워크 요청/응답, 캐싱, 에러 처리 필요
+    - 동기화는 서버와의 일관성 유지 필수
+  - 요약
+    - 클라이언트 상태는 앱 내에서 직접 통제 가능
+    - 서버 상태는 외부 요인(지연, 실패, 불일치 등) 고려해야 하므로 비동기 처리 및 캐싱 전략 중요
 
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
 - React에서 Server Components를 활용하면 어떤 이점이 있는가?
