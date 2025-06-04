@@ -1558,8 +1558,73 @@ Organize concepts, features, types and Pros and Cons
     - 전체 UI가 멈추는 것을 방지하고, fallback UI 제공
     - 에러 발생 시 사용자에게 친절한 메시지나 복구 옵션을 보여주고 싶을 때
 
-- React에서 CSS-in-JS 라이브러리를 사용하는 이유는?
-- React에서 Refs를 활용해 DOM 요소를 조작하는 방법은?
+  - 예시
+    ```tsx
+    class ErrorBoundary extends React.Component {
+      state = { hasError: false };
+      static getDerivedStateFromError() {
+        return { hasError: true };
+      }
+      render() {
+        if (this.state.hasError) return <h1>문제가 발생했습니다.</h1>;
+        return this.props.children;
+      }
+    }
+    ```
+
+- React에서 CSS-in-JS 라이브러리를 사용하는 이유
+  - 개념 요약
+    - CSS-in-JS는 JavaScript 파일 내에서 직접 CSS를 정의하고 사용할 수 있게 해주는 방식
+    - 대표 라이브러리는 styled-components, emotion, JSS 등
+
+  - 사용 이유 및 장점
+    - 컴포넌트 단위 스타일링: 스타일이 컴포넌트와 함께 묶여 관리됨 → 유지보수 용이
+    - 동적 스타일링: props나 상태에 따라 스타일을 동적으로 변경 가능
+    - 클래스 이름 충돌 방지: 자동으로 고유한 className을 생성
+    - 테마 지원: ThemeProvider를 통한 전역 테마 관리 가능
+    - JavaScript의 힘 활용: 조건문, 계산식 등 논리적 제어 가능
+
+  - 예시 (styled-components):
+    ```tsx
+    const Button = styled.button`
+      background: ${(props) => (props.primary ? 'blue' : 'gray')};
+      color: white;
+    `;
+    ```
+
+- React에서 Refs를 활용해 DOM 요소를 조작하는 방법
+  - 개념 요약
+    - ref는 특정 DOM 요소에 직접 접근할 수 있도록 하는 React의 기능
+    - 보통 input, canvas, 비디오 등 브라우저 DOM API에 접근할 필요가 있을 때 사용
+
+  - 사용 방법
+    - useRef()로 ref 객체 생성
+    - JSX 요소에 ref 속성으로 연결
+    - ref.current를 통해 DOM 요소에 접근 및 조작
+
+  - 사용 예시
+    ```tsx
+    function MyComponent() {
+      const inputRef = useRef<HTMLInputElement>(null);
+
+      const focusInput = () => {
+        inputRef.current?.focus(); // input DOM 요소에 직접 접근
+      };
+
+      return (
+        <>
+          <input ref={inputRef} type="text" />
+          <button onClick={focusInput}>Focus</button>
+        </>
+      );
+    }
+    ```
+
+  - 활용 사례
+    - 포커스 이동 / 스크롤 제어
+    - 비디오 재생/일시정지
+    - 외부 라이브러리(D3, Chart.js 등)에서 DOM 요구 시
+    - 이전 값 추적 (렌더링에는 영향 없음)
 
 - React에서 비동기 상태 업데이트를 수행하는 방법은?
 - React에서 Formik과 React Hook Form의 차이점은?
