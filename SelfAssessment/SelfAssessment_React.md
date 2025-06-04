@@ -1655,6 +1655,24 @@ Organize concepts, features, types and Pros and Cons
     - 연속적인 setState 호출은 batching 처리되어 마지막 값만 반영될 수 있음
 
 - React에서 Formik과 React Hook Form의 차이점
+  - Formik
+    - 상태 기반 방식 (state-driven)
+    - 상태 업데이트가 많아질수록 성능 저하 발생
+    - Yup과 통합 쉬움 (유효성 검사)
+    - Controlled components 컨트롤 방식
+    - 선언적, 직관적 구조 (Form 구성)
+
+  - React Hook Form
+    - 레퍼런스 기반 (ref-driven)
+    - 리렌더 최소화로 성능 우수
+    - 자체 방식 또는 Zod/Yup 통합 (유효성 검사)
+    - Uncontrolled 기반 (controlled도 가능, 컨트롤 방식)
+    - 훅 기반으로 유연 (Form 구성)
+
+  - 요약
+    - Formik: 직관적으로 사용 쉬운 편, 작은 프로젝트 적합
+    - React Hook Form: 상대적으로 나은 성능, 큰 규모 프로젝트 적합, 리엔더링 최소화가 강점
+    
 - React에서 useImperativeHandle() 역할
 - React에서 이벤트 핸들러를 바인딩하는 올바른 방법
 
