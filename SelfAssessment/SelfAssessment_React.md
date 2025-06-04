@@ -1796,6 +1796,26 @@ Organize concepts, features, types and Pros and Cons
     - 실시간 입력 처리 제한
 
 - React에서 useState를 배열이나 객체와 함께 사용할 때 주의할 점
+  - 문제점
+    - 불변성 유지 필수
+      - 배열/객체는 참조 타입이기 때문에 직접 수정하면 상태 변경이 감지되지 않음
+        - → UI가 업데이트되지 않을 수 있음
+
+  - 주의사항
+    - 반드시 새로운 배열/객체를 만들어 setState에 전달해야 함
+
+  - 예시 비교
+    ```tsx
+    // 잘못된 예
+    state.items.push(newItem);
+    setState(state); // 변경 감지 X
+
+    // 올바른 예
+    setState(prev => ({ ...prev, items: [...prev.items, newItem] }));
+    ```
+    - 이전 상태에 의존할 경우 setState(prev => ...) 패턴을 사용할 것
+    - useEffect 등에서 객체/배열을 dependency로 사용할 때 useMemo나 useCallback으로 관리해야 불필요한 호출 방지 가능
+
 - React에서 useReducer를 사용하면 성능이 향상되는 이유
 
 - React에서 React.createElement()는 언제 사용되는가?
