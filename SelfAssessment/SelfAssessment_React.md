@@ -1817,6 +1817,24 @@ Organize concepts, features, types and Pros and Cons
     - useEffect 등에서 객체/배열을 dependency로 사용할 때 useMemo나 useCallback으로 관리해야 불필요한 호출 방지 가능
 
 - React에서 useReducer를 사용하면 성능이 향상되는 이유
+  - 핵심 개념
+    - useReducer는 상태 업데이트 로직을 외부로 분리함으로써 복잡한 상태 변경을 관리하기 쉬우며, 성능상의 이점도 제공합니다.
+
+  - 성능 향상 이유
+    - 상태 로직 분리로 인해 컴포넌트 함수 재생성 최소화
+    - 상태 변경 함수(reducer)가 stable하기 때문에 useCallback/React.memo와의 궁합이 좋음
+    - 복잡한 상태에서 다수의 useState를 분리 관리하는 것보다 리렌더 최소화 및 상태 관리 효율성 증가
+    - dispatch 함수 자체는 불변이므로 props로 내려줘도 리렌더 유발 없음
+
+  - 예시
+    ```tsx
+    const [state, dispatch] = useReducer(reducer, initialState);
+    // 상태 업데이트 로직이 reducer 함수에 집중되므로 가독성과 재사용성 ↑
+    ```
+  
+  - 언제 사용하면 좋은가?
+    - 상태 필드가 3개 이상이거나, 복잡한 조건에 따라 변경되는 경우
+    - 상태 변경 타입이 명확히 나뉘는 경우 (ex. form 상태, 페이지 상태)
 
 - React에서 React.createElement()는 언제 사용되는가?
 - React에서 이벤트 위임(event delegation)의 원리는?
