@@ -1702,7 +1702,46 @@ Organize concepts, features, types and Pros and Cons
     - 외부에서 자식의 포커스, 초기화, 스크롤 제어 등의 동작을 직접 호출해야 할 때
 
 - React에서 이벤트 핸들러를 바인딩하는 올바른 방법
+  - 핵심 개념
+    - React는 JSX 문법 내에서 핸들러를 전달할 때 this 바인딩이나 불필요한 리렌더를 피하는 방식으로 작성하는 것이 중요
 
+  - Class 컴포넌트
+    - 생성자(constructor)에서 this.handler = this.handler.bind(this) 사용
+    - 또는 클래스 필드 문법을 사용 (handleClick = () => {})
+    - 예시
+      ```tsx
+      class MyComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.handleClick = this.handleClick.bind(this); // 바인딩
+        }
+
+        handleClick() {
+          console.log("Clicked");
+        }
+
+        render() {
+          return <button onClick={this.handleClick}>Click me</button>;
+        }
+      }
+      ```
+
+  - 함수형 컴포넌트
+    - useCallback() 훅을 사용해 불필요한 재생성을 막는 것이 권장
+    - 예시
+      ```tsx
+      const MyComponent = () => {
+        const handleClick = useCallback(() => {
+          console.log("Clicked");
+        }, []);
+
+        return <button onClick={handleClick}>Click me</button>;
+      };
+      ```
+
+  - 주의할 점
+    - JSX 내에서 onClick={() => doSomething()}처럼 매번 새 함수 생성 시 성능 저하 가능
+    - 핸들러에 파라미터 전달이 필요한 경우는 래핑 함수 사용하되, 캐싱도 고려 필요
 
 - React에서 함수를 props로 전달할 때 발생할 수 있는 문제는?
 - React에서 useEffect를 활용한 Debounce 구현 방법은?
