@@ -1948,9 +1948,62 @@ Organize concepts, features, types and Pros and Cons
     - API 호출/이벤트 리스너 등록/비동기 로직 → useEffect
     - 같이 사용할 땐 기능 목적을 명확히 분리해야 하며, useLayoutEffect는 최소한으로 사용해야 렌더링 병목을 방지할 수 있음.
 
-- React에서 Server Components를 활용하면 어떤 이점이 있는가?
-- React의 Fiber Reconciliation 알고리즘을 설명하시오.
-- React에서 메모리 누수를 방지하는 방법은?
+- React에서 Server Components를 활용 시 이점
+  - 개념 요약
+    - Server Components는 React 18에서 도입된 기능으로, JS 번들에 포함되지 않고 서버에서만 실행되는 컴포넌트
+
+  - 주요 이점
+    - JS 번들 크기 감소: 클라이언트에 전송되지 않으므로 초기 JS 로드 속도 향상
+    - 보안: 민감한 로직(API 키, DB 쿼리 등)이 클라이언트로 노출되지 않음
+    - 직접 데이터 fetch 가능: 서버에서 직접 DB/API 접근 → 클라이언트까지 데이터 전달 필요 없음
+    - SEO 친화적 SSR: 서버에서 완성된 HTML 제공 가능
+    - 병렬 처리 및 성능 최적화: 서버에서 병렬적으로 여러 컴포넌트를 렌더링 가능
+
+  - 활용 예시
+    ```tsx
+    // Server Component
+    export default async function UserProfile() {
+      const data = await getUserFromDB();
+      return <div>{data.name}</div>;
+    }
+    ```
+
+  - 주의사항
+    - 클라이언트 기능 (상태 관리, 이벤트 핸들링 등)은 불가능 → 필요 시 use client를 통해 클라이언트 컴포넌트로 분리해야 함
+
+- React의 Fiber Reconciliation 알고리즘
+  - 개념 요약
+Fiber는 React의 새로운 렌더링 엔진 구조로, 기존 재귀적 스택 기반 렌더링의 한계를 극복하고 작업을 쪼개어 처리하는 방식을 제공합니다.
+
+기능 및 구조
+
+작업 단위 분할: 각 컴포넌트를 "Fiber Node"로 만들어 렌더링을 작은 단위로 나눔
+
+중단 가능(render interruption): 긴 렌더링을 일시 중단하고 우선순위가 높은 작업을 먼저 처리 가능
+
+우선순위 기반 스케줄링: 중요한 작업(ex. 입력 응답)은 먼저, 덜 중요한 작업(ex. 이미지 로딩)은 나중에 처리
+
+비동기 렌더링 지원: Concurrent Mode와 Suspense 구현의 기반
+
+예시 흐름
+
+작업이 시작되면 Fiber Tree를 만들며 각 작업을 분할 처리
+
+중단 가능하도록 stack이 아닌 단일 linked list 구조로 구성
+
+완료된 작업은 commit phase에서 한번에 적용
+
+결과적 이점
+
+부드러운 UI 인터랙션
+
+낮은 프레임 드랍
+
+효과적인 에러 처리 및 recovery
+
+
+
+- React에서 메모리 누수를 방지하는 방법
 
 - React에서 hydrate() 함수의 역할은?
 - React에서 Recoil과 Redux의 차이점은?
