@@ -1521,11 +1521,37 @@ Organize concepts, features, types and Pros and Cons
     - useEffect는 리렌더링을 통해 UI를 업데이트해야 할 때 사용
 
 
-- React에서 useReducer를 사용하는 시나리오는?
+- React에서 useReducer를 사용하는 시나리오
+  - 개념 요약
+    - useReducer는 상태를 업데이트하는 방식이 복잡하거나, 여러 액션 타입으로 나누어 처리해야 하는 상황에서 유용한 훅
+    - useState보다 더 구조적인 상태 관리를 가능하게 만듬
+
+  - 적용 시나리오
+    - 복잡한 상태 로직: 상태가 단순하지 않고 여러 조건/액션에 따라 다른 방식으로 업데이트되는 경우 (if/switch가 많은 경우).
+    - 상태가 객체 형태이고 부분적으로 갱신되어야 하는 경우.
+    - 이전 상태를 기반으로 새로운 상태를 계산해야 할 때 (prevState를 참조할 필요가 있을 때).
+    - Redux 스타일의 액션 중심 상태 관리가 필요한 경우.
+    - 컴포넌트 트리에 깊이 있는 자식에게 상태와 디스패치 함수를 전달하려는 경우 (Context와 함께 사용).
+
+  - 예시
+    ```tsx
+    const initialState = { count: 0 };
+
+    function reducer(state, action) {
+      switch (action.type) {
+        case 'increment': return { count: state.count + 1 };
+        case 'decrement': return { count: state.count - 1 };
+        default: return state;
+      }
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+    ```
+
 - React의 Error Boundaries는 어떤 상황에서 유용한가?
 - React에서 CSS-in-JS 라이브러리를 사용하는 이유는?
-
 - React에서 Refs를 활용해 DOM 요소를 조작하는 방법은?
+
 - React에서 비동기 상태 업데이트를 수행하는 방법은?
 - React에서 Formik과 React Hook Form의 차이점은?
 
