@@ -1672,8 +1672,35 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - Formik: 직관적으로 사용 쉬운 편, 작은 프로젝트 적합
     - React Hook Form: 상대적으로 나은 성능, 큰 규모 프로젝트 적합, 리엔더링 최소화가 강점
-    
+
 - React에서 useImperativeHandle() 역할
+  - 개념 요약
+    - useImperativeHandle은 부모 컴포넌트가 자식 컴포넌트의 특정 메서드나 속성에 직접 접근하도록 허용할 때 사용
+    - 일반적인 ref 사용과 달리, 커스텀 ref 노출 방식을 정의할 수 있음
+
+  - 사용 예시
+    ```tsx
+    const CustomInput = forwardRef((props, ref) => {
+      const inputRef = useRef();
+
+      useImperativeHandle(ref, () => ({
+        focus: () => inputRef.current.focus(),
+        clear: () => (inputRef.current.value = "")
+      }));
+
+      return <input ref={inputRef} />;
+    });
+
+    // 부모에서 사용
+    const parentRef = useRef();
+    <CustomInput ref={parentRef} />;
+    parentRef.current.focus(); // 자식이 노출한 메서드 호출
+    ```
+
+  - 사용하는 시점
+    - 자식 컴포넌트 내부 구현을 감추면서 특정 동작만 외부에 노출하고 싶을 때
+    - 외부에서 자식의 포커스, 초기화, 스크롤 제어 등의 동작을 직접 호출해야 할 때
+
 - React에서 이벤트 핸들러를 바인딩하는 올바른 방법
 
 
