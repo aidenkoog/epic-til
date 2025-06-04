@@ -1836,7 +1836,30 @@ Organize concepts, features, types and Pros and Cons
     - 상태 필드가 3개 이상이거나, 복잡한 조건에 따라 변경되는 경우
     - 상태 변경 타입이 명확히 나뉘는 경우 (ex. form 상태, 페이지 상태)
 
-- React에서 React.createElement()는 언제 사용되는가?
+- React에서 React.createElement() 사용 시점
+  - 개념 요약
+    - React.createElement()는 JSX가 트랜스파일된 후 호출되는 함수로, 리액트 엘리먼트를 생성하는 가장 기본적인 방식
+    - 즉, JSX는 React.createElement의 문법적 설탕(Syntax Sugar)
+    - 예시
+      ```jsx
+      const element = <h1>Hello</h1>;
+      // 트랜스파일 결과
+      const element = React.createElement('h1', null, 'Hello');
+      ```
+
+  - 언제 직접 사용하는가?
+    - JSX를 사용할 수 없는 환경 (예: 서버 렌더링, 테스트 도구, Babel 미적용 환경)
+    - 동적으로 태그명 또는 컴포넌트 타입을 지정할 때
+    - 예시
+      ```tsx
+      function createTag(tagName, content) {
+        return React.createElement(tagName, null, content);
+      }
+      ```
+
+  - 정리
+    - 직접 사용은 드물고 대부분 JSX를 통해 간접적으로 사용되며, 리액트의 동작 원리를 이해할 때 중요한 함수
+
 - React에서 이벤트 위임(event delegation)의 원리는?
 - React에서 Lazy Loading과 Code Splitting을 적용하는 방법은?
 - React에서 클라이언트 상태와 서버 상태의 차이점은?
