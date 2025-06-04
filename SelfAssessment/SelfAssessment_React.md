@@ -1860,9 +1860,24 @@ Organize concepts, features, types and Pros and Cons
   - 정리
     - 직접 사용은 드물고 대부분 JSX를 통해 간접적으로 사용되며, 리액트의 동작 원리를 이해할 때 중요한 함수
 
-- React에서 이벤트 위임(event delegation)의 원리는?
-- React에서 Lazy Loading과 Code Splitting을 적용하는 방법은?
-- React에서 클라이언트 상태와 서버 상태의 차이점은?
+- React에서 이벤트 위임(event delegation)의 원리
+  - 개념 요약
+    - 이벤트 위임은 하위 DOM 요소마다 이벤트 리스너를 개별로 붙이는 대신, 상위 요소에 단 하나의 이벤트 리스너를 붙여서 이벤트를 처리하는 기법
+
+  - React의 적용 방식
+    - React는 모든 이벤트 리스너를 document 혹은 root 컨테이너에 한 번만 등록합니다.
+    - 이후 발생한 이벤트는 버블링을 통해 루트로 올라오며, React는 해당 이벤트를 감지해 SyntheticEvent로 처리합니다.
+
+  - 장점
+    - DOM 요소 수가 많아도 메모리 효율적
+    - 코드 유지보수가 쉬움 (리스너를 컴포넌트 내에서 통제)
+    - 이벤트 제거/추가 관리가 단순화됨
+
+  - 결론
+    - React의 이벤트 시스템은 자동으로 이벤트 위임 방식으로 동작하며, 개발자는 신경 쓰지 않아도 되지만 퍼포먼스나 디버깅 시 이해하고 있으면 유리합니다.
+    
+- React에서 Lazy Loading과 Code Splitting을 적용하는 방법
+- React에서 클라이언트 상태와 서버 상태의 차이점
 
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
 - React에서 Server Components를 활용하면 어떤 이점이 있는가?
