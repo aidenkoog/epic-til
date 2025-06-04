@@ -1743,7 +1743,30 @@ Organize concepts, features, types and Pros and Cons
     - JSX 내에서 onClick={() => doSomething()}처럼 매번 새 함수 생성 시 성능 저하 가능
     - 핸들러에 파라미터 전달이 필요한 경우는 래핑 함수 사용하되, 캐싱도 고려 필요
 
-- React에서 함수를 props로 전달할 때 발생할 수 있는 문제는?
+- React에서 함수를 props로 전달할 때 발생할 수 있는 문제
+  - 문제 개요
+    - 부모 컴포넌트에서 자식 컴포넌트로 함수를 props로 전달할 때, 매 렌더링마다 새로운 함수가 생성되면 불필요한 리렌더링이 발생할 수 있습니다.
+
+  - 대표적인 문제들
+    - 불필요한 자식 컴포넌트 리렌더링
+      - React는 props가 변경되면 자식 컴포넌트를 리렌더링
+      - 함수가 매번 새롭게 생성되면 shallow 비교에서 항상 false가 되어 리렌더가 발생합니다.
+
+    - React.memo 무력화
+      - 자식 컴포넌트를 React.memo로 감싸도, 함수 props가 변경되면 효과가 없어집니다.
+
+    - 성능 저하
+      - 렌더 트리 깊이가 클수록 매 렌더마다 많은 컴포넌트가 리렌더링되어 성능에 악영향을 줄 수 있습니다.
+
+  - 해결 방법
+    - useCallback 훅을 사용하여 함수 재생성을 방지
+    - 예시
+      ```tsx
+      const handleClick = useCallback(() => {
+        console.log("clicked");
+      }, []);
+      ```
+
 - React에서 useEffect를 활용한 Debounce 구현 방법은?
 - React에서 useState를 배열이나 객체와 함께 사용할 때 주의할 점은?
 - React에서 useReducer를 사용하면 성능이 향상되는 이유는?
