@@ -1548,7 +1548,16 @@ Organize concepts, features, types and Pros and Cons
     const [state, dispatch] = useReducer(reducer, initialState);
     ```
 
-- React의 Error Boundaries는 어떤 상황에서 유용한가?
+- React의 Error Boundaries 유용한 상황
+  - 개념 요약
+    - Error Boundary는 렌더링 과정, 라이프사이클 메서드, 하위 트리에서 발생한 런타임 에러를 포착하여 전체 앱이 죽지 않도록 보호하는 컴포넌트
+
+  - 유용한 상황
+    - 서버에서 전달된 데이터 오류로 인한 UI 크래시 방지
+    - 타사 라이브러리 또는 비정상적 사용자 입력으로 인한 컴포넌트 렌더 실패
+    - 전체 UI가 멈추는 것을 방지하고, fallback UI 제공
+    - 에러 발생 시 사용자에게 친절한 메시지나 복구 옵션을 보여주고 싶을 때
+
 - React에서 CSS-in-JS 라이브러리를 사용하는 이유는?
 - React에서 Refs를 활용해 DOM 요소를 조작하는 방법은?
 
