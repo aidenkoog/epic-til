@@ -1626,13 +1626,40 @@ Organize concepts, features, types and Pros and Cons
     - 외부 라이브러리(D3, Chart.js 등)에서 DOM 요구 시
     - 이전 값 추적 (렌더링에는 영향 없음)
 
-- React에서 비동기 상태 업데이트를 수행하는 방법은?
-- React에서 Formik과 React Hook Form의 차이점은?
+- React에서 비동기 상태 업데이트를 수행하는 방법
+  - 개념 요약
+    - React의 상태(useState) 업데이트는 본질적으로 비동기적이지만, 비동기 함수는 아님.
+    - 즉, 상태가 즉시 반영되지 않고 다음 렌더 사이클에 반영되며, await setState()처럼 사용할 수는 없음.
 
-- React에서 useImperativeHandle()은 어떤 역할을 하는가?
-- React에서 이벤트 핸들러를 바인딩하는 올바른 방법은?
+  - 비동기 상태 처리 방식
+    - 상태 업데이트 후 직접 값을 사용하지 말고 useEffect 등에서 후속 처리 필요
+    - useEffect, useCallback, async/await 조합으로 로직 구성
+    - 비동기 데이터 fetch 시에는 useEffect와 함께 setState 사용
+
+  - 예시
+    ```tsx
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const res = await fetch("/api/data");
+        const json = await res.json();
+        setData(json); // 비동기적으로 반영됨
+      };
+      fetchData();
+    }, []);
+    ```
+
+  - 주의점
+    - setState 다음 줄에서 즉시 변경된 값을 사용하면 이전 값일 수 있음
+    - 연속적인 setState 호출은 batching 처리되어 마지막 값만 반영될 수 있음
+
+- React에서 Formik과 React Hook Form의 차이점
+- React에서 useImperativeHandle() 역할
+- React에서 이벤트 핸들러를 바인딩하는 올바른 방법
+
+
 - React에서 함수를 props로 전달할 때 발생할 수 있는 문제는?
-
 - React에서 useEffect를 활용한 Debounce 구현 방법은?
 - React에서 useState를 배열이나 객체와 함께 사용할 때 주의할 점은?
 - React에서 useReducer를 사용하면 성능이 향상되는 이유는?
@@ -1640,201 +1667,248 @@ Organize concepts, features, types and Pros and Cons
 - React에서 React.createElement()는 언제 사용되는가?
 - React에서 이벤트 위임(event delegation)의 원리는?
 - React에서 Lazy Loading과 Code Splitting을 적용하는 방법은?
-
 - React에서 클라이언트 상태와 서버 상태의 차이점은?
+
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
 - React에서 Server Components를 활용하면 어떤 이점이 있는가?
 - React의 Fiber Reconciliation 알고리즘을 설명하시오.
 - React에서 메모리 누수를 방지하는 방법은?
+
 - React에서 hydrate() 함수의 역할은?
 - React에서 Recoil과 Redux의 차이점은?
 - React에서 Zustand 상태 관리 라이브러리를 사용하는 이유는?
 - React에서 Suspense의 대체 기능은?
+
 - React에서 useImperativeHandle을 사용할 때의 장점은?
 - React에서 useId() 훅은 언제 유용한가?
 - React에서 Error Boundaries의 적용 사례는?
 - React에서 Strict Mode가 useEffect에 미치는 영향은?
+
 - React에서 Refs의 활용 사례는?
 - React에서 클라이언트 측에서 API 호출을 최적화하는 방법은?
 - React에서 Custom Hooks를 만드는 원칙은?
 - React에서 Props Drilling이 문제를 일으키는 이유는?
+
 - React에서 React.memo()와 useMemo()의 차이점은?
 - React에서 웹 성능을 최적화하는 기법은?
 - React에서 useEffect의 Dependency Array의 역할은?
 - React에서 useState와 useReducer 중 어떤 경우에 useReducer를 선택하는 것이 좋은가?
+
 - React에서 Strict Mode가 useEffect 내부의 cleanup 함수에 미치는 영향은?
 - React에서 Suspense를 활용하여 비동기 데이터를 처리하는 방법은?
 - React에서 fetch API와 Axios의 차이점은?
 - React에서 렌더링 최적화를 위해 할 수 있는 방법은?
+
 - React에서 React.lazy()와 Loadable Components의 차이점은?
 - React에서 useEffect의 cleanup 함수는 언제 호출되는가?
 - React에서 useCallback을 사용해야 하는 경우는?
 - React에서 Forward Ref를 사용하는 시나리오는?
+
 - React에서 useRef를 활용하여 DOM 요소에 직접 접근하는 방법은?
 - React에서 useEffect와 useMemo를 함께 사용할 때 주의할 점은?
 - React에서 CSR과 SSR의 성능 차이는 어떤 요소에서 발생하는가?
 - React에서 서버 사이드 렌더링 시 데이터 페칭을 어떻게 처리하는가?
+
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
 - React에서 getInitialProps와 getServerSideProps의 차이는?
 - React에서 Styled Components를 사용할 때의 장점과 단점은?
 - React에서 Redux를 사용하면 불필요한 렌더링이 발생할 수 있는 이유는?
+
 - React에서 Redux Persist를 사용하는 이유는?
 - React에서 Context API를 사용하면 발생할 수 있는 성능 이슈는?
 - React에서 React Query를 사용할 때 얻을 수 있는 이점은?
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
+
 - React에서 상태 관리 라이브러리를 사용하지 않고 상태를 관리하는 방법은?
 - React에서 Apollo Client를 사용할 때의 장점은?
 - React에서 SWR과 React Query의 차이점은?
 - React에서 Suspense를 활용한 데이터 캐싱 기법은?
+
 - React에서 리렌더링을 줄이기 위한 best practice는?
 - React에서 Formik과 React Hook Form의 차이점은?
 - React에서 Jest와 React Testing Library를 활용한 테스트 방법은?
 - React에서 Cypress와 Jest의 차이점은?
+
 - React에서 테스트 코드 작성 시 고려해야 할 사항은?
 - React에서 상태 기반 렌더링을 수행할 때 성능을 최적화하는 방법은?
 - React에서 ESM과 CommonJS의 차이점은?
 - React에서 Webpack과 Vite의 차이점은?
+
 - React에서 Tree Shaking이란 무엇인가?
 - React에서 Dynamic Import를 활용한 코드 스플리팅 기법은?
 - React에서 Suspense의 기본 개념과 활용 방법은?
 - React에서 useDeferredValue()의 활용 사례는?
+
 - React에서 useTransition()을 사용할 때 얻을 수 있는 이점은?
 - React에서 useSyncExternalStore()의 역할은?
 - React에서 Double Rendering이 발생하는 이유는?
 - React에서 Concurrent Mode가 UI 성능에 미치는 영향은?
+
 - React에서 Profiler API를 활용하여 성능 분석을 수행하는 방법은?
 - React에서 Strict Mode가 상태 업데이트에 미치는 영향은?
 - React에서 Strict Mode를 적용할 때 발생할 수 있는 문제는?
 - React에서 Next.js의 Edge Functions을 사용할 때 고려해야 할 사항은?
+
 - React에서 Redux Thunk를 사용하면 얻을 수 있는 장점은?
 - React에서 Server Actions를 활용하는 방법은?
 - React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법은?
 - React에서 React Native와 React의 차이점을 비교하시오.
 - React에서 Global State를 관리하는 다양한 방법을 설명하시오.
+
 - React에서 Preact를 사용할 때 성능 향상을 기대할 수 있는 이유는?
 - React에서 React.memo()를 사용하면 성능이 향상되는 원리는?
 - React에서 Suspense를 활용하여 데이터 로딩 경험을 개선하는 방법은?
 - React에서 useInsertionEffect()의 역할과 활용 사례는?
 - React에서 CSR을 사용할 때의 보안 이슈는?
+
 - React에서 Server Actions와 useMutation()의 차이점은?
 - React에서 Error Boundaries를 사용하면 얻을 수 있는 장점은?
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
 - React에서 서버 렌더링된 페이지를 클라이언트에서 보강하는 과정은?
+
 - React에서 Refs를 활용한 동적 포커스 처리 방법은?
 - React에서 Refs를 활용한 DOM 조작의 장점과 단점은?
 - React에서 Custom Hooks를 만들 때 고려해야 할 사항은?
 - React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
 - React에서 Suspense를 활용한 Skeleton UI 구현 방법은?
+
 - React에서 상태 관리의 대표적인 방식 3가지를 설명하시오.
 - React에서 useDeferredValue()와 useTransition()의 차이점은?
 - React에서 Server Components의 장점과 단점은?
 - React에서 GraphQL을 사용할 때 고려해야 할 보안 이슈는?
+
 - React에서 useSyncExternalStore()를 사용해야 하는 경우는?
 - React에서 Server Actions의 기본 개념을 설명하시오.
 - React에서 useOptimistic()을 사용한 UI 업데이트 최적화 방법은?
 - React에서 React.memo()를 올바르게 사용하는 방법은?
+
 - React Server Components(RSC)의 개념과 기존 CSR, SSR과의 차이점은?
 - React 19에서 추가된 주요 기능과 성능 최적화 개선 사항은?
 - React에서 WASM(WebAssembly)을 활용하는 방법은?
 - React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법은?
+
 - React에서 Context API의 성능 이슈를 해결하는 방법은?
 - React에서 SWR과 React Query의 내부 작동 방식 차이는?
 - React의 Virtual DOM에 대해 설명해주세요.
 - React의 상태 관리 방법에 대해 설명해주세요. (Redux, Context API 등)
+
 - React의 Hooks 내부 동작 원리에 대해 설명해주세요.
 - React의 Concurrent Mode와 Suspense에 대해 설명해주세요.
 - React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 미치는가?
 - React에서 Server Components란 무엇인가?
+
 - React에서 Suspense와 Error Boundary를 활용하는 방법은?
 - React에서 React.memo()와 PureComponent의 차이점은?
 - React에서 Recoil과 Zustand의 차이점은?
 - React에서 PWA(Progressive Web App)를 구현하는 방법은?
 - React의 Virtual DOM은 어떻게 동작하는가?
+
 - React에서 useEffect와 useLayoutEffect의 차이는?
 - React의 상태 관리 라이브러리(Redux, Recoil, Zustand)를 사용해본 경험이 있는가?
 - React에서 context API는 언제 사용하는가?
 - React에서 useMemo와 useCallback의 차이는?
+
 - React에서 forwardRef는 언제 사용하는가?
 - React의 Server Components와 Client Components의 차이는?
 - React에서 Suspense와 Error Boundary는 어떻게 활용하는가?
 - React의 Reconciliation 알고리즘은 어떻게 동작하는가?
+
 - React에서 useReducer를 사용하는 이유와 useState와의 차이점은?
 - React에서 memoization을 활용하여 성능 최적화하는 방법은?
 - Server Components의 동작 방식과 기존 CSR/SSR 방식과의 차이는?
 - React에서 Hydration이란 무엇인가?
+
 - React 18의 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이는?
 - React에서 Suspense를 활용한 데이터 패칭 전략을 설명하라.
 - React의 JSX는 내부적으로 어떻게 변환되는가?
 - React에서 class component와 function component의 차이점은?
+
 - React에서 prop drilling이란 무엇이며, 이를 해결하는 방법은?
 - React에서 one-way data binding이란 무엇인가?
 - React에서 two-way data binding이 필요할 때는 언제인가?
 - React의 reconciliation 알고리즘이 성능 최적화에 어떤 영향을 미치는가?
+
 - React에서 isomorphic rendering이란 무엇이며, 이를 어떻게 구현할 수 있는가?
 - React에서 useEffect의 cleanup 함수는 언제 실행되는가?
 - React에서 useEffect가 의존성 배열이 비었을 때 어떻게 동작하는가?
 - React의 useMemo와 React.memo()의 차이점은?
+
 - React에서 useState와 useRef의 차이점은?
 - React에서 useReducer를 사용하면 성능이 향상되는 이유는?
 - React에서 useContext를 사용하면 발생할 수 있는 성능 이슈는?
 - React에서 useCallback을 사용할 때 주의해야 할 점은?
+
 - React에서 useTransition을 사용할 때의 장점은?
 - React의 useDeferredValue와 useTransition의 차이는?
 - React의 useSyncExternalStore는 어떤 상황에서 사용하는가?
 - React에서 useInsertionEffect()를 사용해야 하는 경우는?
+
 - React에서 React.memo()를 올바르게 사용하는 방법은?
 - React에서 React.lazy()를 활용하여 성능을 개선하는 방법은?
 - React에서 event delegation을 활용하면 성능이 어떻게 개선되는가?
 - React에서 tree shaking이란 무엇이며, 어떻게 적용하는가?
+
 - React에서 code splitting을 적용하는 방법은?
 - React에서 React Profiler를 사용하여 성능을 분석하는 방법은?
 - React에서 Double Rendering이 발생하는 원인은?
 - React에서 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이는?
+
 - React에서 hydration이 실패하는 이유는?
 - React에서 Virtual DOM의 렌더링 성능을 최적화하는 방법은?
 - React에서 useReducer와 Redux를 비교했을 때 언제 useReducer를 사용하는 것이 좋은가?
 - React에서 Redux Thunk와 Redux Saga의 차이점은?
+
 - React에서 Recoil과 Zustand의 차이점은?
 - React에서 zustand를 사용하면 얻을 수 있는 장점은?
 - React에서 server state와 client state의 차이는?
 - React에서 React Query를 사용하면 어떤 장점이 있는가?
+
 - React에서 SWR과 React Query의 차이점은?
 - React에서 Apollo Client를 사용하면 어떤 이점이 있는가?
 - React에서 Global State를 관리하는 다양한 방법을 비교하시오.
 - React에서 Context API를 사용할 때 발생할 수 있는 성능 이슈는?
 - React에서 CSR(Client-Side Rendering)과 SSR(Server-Side Rendering)의 차이점은?
+
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
 - React에서 getInitialProps와 getServerSideProps의 차이는?
 - React에서 Server Components의 개념과 기존 CSR, SSR과의 차이점은?
 - React에서 Streaming SSR이란 무엇이며, 어떻게 활용하는가?
+
 - React에서 Incremental Static Regeneration(ISR)이란 무엇인가?
 - React에서 Edge Functions를 사용하면 어떤 장점이 있는가?
 - React에서 Server Actions를 활용하는 방법은?
 - React에서 fetch API와 Axios의 차이점은?
+
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
 - React에서 Apollo Client를 사용할 때의 장점은?
 - React에서 SWR과 React Query의 차이점은?
 - React에서 Suspense를 활용한 데이터 캐싱 기법은?
+
 - React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
 - React에서 낙관적 업데이트(Optimistic UI)를 구현하는 방법은?
 - React에서 useOptimistic()을 활용하여 UI 업데이트를 최적화하는 방법은?
 - React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
+
 - React에서 XSS(Cross-Site Scripting)을 방지하는 방법은?
 - React에서 CSRF(Cross-Site Request Forgery)를 방지하는 방법은?
 - React에서 JWT(JSON Web Token)을 활용한 인증 방식은?
 - React에서 OAuth 인증을 구현하는 방법은?
+
 - React에서 CORS 정책을 해결하는 방법은?
 - React에서 React Testing Library와 Enzyme의 차이점은?
 - React에서 Jest와 Cypress의 차이점은?
 - React에서 e2e(end-to-end) 테스트를 수행하는 방법은?
+
 - React 19에서 추가된 주요 기능과 성능 최적화 개선 사항은?
 - React에서 WASM(WebAssembly)을 활용하는 방법은?
 - React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법은?
 - React에서 Context API의 성능 이슈를 해결하는 방법은?
+
 - React에서 Concurrent Rendering이 UI 성능에 미치는 영향은?
 - React에서 React Server Components(RSC)의 개념과 기존 CSR, SSR과의 차이점은?
 - React에서 Edge Functions를 사용하면 어떤 장점이 있는가?
 - React에서 PWA(Progressive Web App)를 구현하는 방법은?
+
 - React에서 Server Actions와 useMutation()의 차이점은?
 - React에서 Streaming SSR과 Static Rendering의 차이는?
 - React에서 Preact를 사용하면 성능 향상을 기대할 수 있는 이유는?
