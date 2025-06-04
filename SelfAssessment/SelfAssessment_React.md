@@ -1502,7 +1502,24 @@ Organize concepts, features, types and Pros and Cons
       - 효율적인 캐싱/메모이제이션 없이 사용할 경우 오히려 리렌더링이 많아져 성능 저하가 발생할 수 있음.
       - 디버깅이 어려움: 중단된 작업과 재시작된 작업 사이의 상태 추적이 어려워짐.
 
-- React에서 useRef와 useState의 차이점은?
+- React에서 useRef와 useState의 차이점
+  - useRef
+    - DOM 참조, 변경 가능한 변수 저장
+    - 값 변경 시 리렌더링 없음
+    - input 포커스 제어, 이전 값 기억, 타이머 ID 저장
+    - 컴포넌트 생명주기 내에서 유지 (보존 여부)
+    - ref.current를 통해 접근
+  - useState
+    - UI 상태 값 저장 및 리렌더 트리거
+    - 값 변경 시 리렌더링 발생
+    - 입력값 상태 관리, UI 갱신에 필요한 상태
+    - 유지되나 변경 시 다시 렌더링됨
+    - useState()의 setter로 상태 변경
+  - 정리
+    - 핵심 차이는 렌더링을 유발하는가 여부임
+    - useRef는 렌더링에 영향을 주지 않으므로 값 보존이나 DOM 제어에 적합
+    - useEffect는 리렌더링을 통해 UI를 업데이트해야 할 때 사용
+
 
 - React에서 useReducer를 사용하는 시나리오는?
 - React의 Error Boundaries는 어떤 상황에서 유용한가?
