@@ -1767,9 +1767,36 @@ Organize concepts, features, types and Pros and Cons
       }, []);
       ```
 
-- React에서 useEffect를 활용한 Debounce 구현 방법은?
-- React에서 useState를 배열이나 객체와 함께 사용할 때 주의할 점은?
-- React에서 useReducer를 사용하면 성능이 향상되는 이유는?
+- React에서 useEffect를 활용한 Debounce 구현 방법
+  - 개념 요약
+    - Debounce는 특정 입력 후 일정 시간 동안 사용자 입력이 없을 때만 작업을 실행하는 방식
+    - 검색, 자동 저장 등에 사용됨
+
+  - 예시 코드
+    ```tsx
+    const [query, setQuery] = useState("");
+    const [debouncedQuery, setDebouncedQuery] = useState(query);
+
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedQuery(query);
+      }, 500); // 500ms 딜레이
+
+      return () => clearTimeout(handler); // cleanup
+    }, [query]);
+    ```
+
+  - 설명
+    - query가 변경될 때마다 타이머를 새로 설정
+    - 일정 시간 내에 다시 입력되면 이전 타이머는 취소
+    - 일정 시간 유지되면 debouncedQuery 업데이트됨
+
+  - 활용 예
+    - API 호출 최적화
+    - 실시간 입력 처리 제한
+
+- React에서 useState를 배열이나 객체와 함께 사용할 때 주의할 점
+- React에서 useReducer를 사용하면 성능이 향상되는 이유
 
 - React에서 React.createElement()는 언제 사용되는가?
 - React에서 이벤트 위임(event delegation)의 원리는?
