@@ -1465,12 +1465,27 @@ Organize concepts, features, types and Pros and Cons
     - → HTML은 "Hello"인데, JS 렌더는 "Hi"이기 때문에 hydration mismatch.
 
 - React에서 Suspense로 데이터를 fetch할 때 발생할 수 있는 문제
-  - 개요
-    - <Suspense>는 원래 코드 스플리팅(ex: React.lazy)용이었지만, React 18부터 서버/클라이언트에서의 데이터 fetch까지 감싸는 용도로 확장되었음
-      - 예: React Query, Relay, Next.js App Router(RSC)에서 활용
+  - 개념 요약
+    - Suspense는 비동기 로딩 상태를 선언적으로 처리하기 위해 사용
+    - React.lazy와 React 18에서의 Suspense for Data Fetching은 다르게 동작
+    - 서버 컴포넌트(SSR) 또는 useTransition, useDeferredValue, use 훅과 함께 사용하면 매우 강력
 
   - 주요 문제점
+    - 브라우저 지원 문제
+      - 일부 실험적 기능은 브라우저에서 완전히 지원되지 않거나 React 버전 의존성이 강함.
 
+    - 호환성 부족
+      - Suspense는 React Query나 SWR 등의 라이브러리와 통합하지 않으면 단독 사용 시 데이터 fetching 흐름 제어가 어려움.
+
+    - 에러 핸들링 미흡
+      - Suspense는 로딩 상태는 잘 처리하지만, 오류 처리는 ErrorBoundary를 함께 사용해야 제대로 처리 가능.
+
+    - Fallback 깜빡임
+      - 서버 사이드 렌더링 시 fallback이 깜빡이거나 hydration mismatch가 발생할 수 있음.
+
+    - Suspense boundary nesting
+      - 여러 컴포넌트에 중첩된 Suspense boundary가 있을 경우 예기치 않은 리렌더링 지연이나 데이터 race condition이 생길 수 있음.
+      
 - React의 Concurrent Rendering이 UI 성능에 미치는 영향은?
 - React에서 useRef와 useState의 차이점은?
 
