@@ -2091,6 +2091,36 @@ Organize concepts, features, types and Pros and Cons
     - Zustand는 간결함과 퍼포먼스를 동시에 제공하며, Redux의 복잡성이 부담일 때 강력한 대안
 
 - React에서 Suspense의 대체 기능
+  - Suspense의 역할
+    - 비동기 컴포넌트 로딩 중 fallback UI 렌더링
+    - Code splitting 또는 Server Components와 함께 사용
+
+  - 대체 또는 보완 기능들
+    - (1) React Query / SWR
+      - isLoading, isFetching 상태를 통해 로딩 UI 제어
+      - Suspense 없이도 비동기 상태 관리 및 캐싱 수행
+      - 필요 시 suspense: true 옵션으로 Suspense 연동도 가능
+
+    - (2) Conditional Rendering
+      - 단순한 로딩 처리에는 삼항 연산자나 조건부 렌더링 사용
+        ```tsx
+        {loading ? <Spinner /> : <DataComponent />}
+        ```
+
+    - (3) Custom Fallback Wrapper
+      - 로딩 및 에러 처리를 포함하는 고차 컴포넌트
+        ```tsx
+        function withFallback(Component) {
+          return function Wrapper({ isLoading, ...props }) {
+            if (isLoading) return <Loading />;
+            return <Component {...props} />;
+          };
+        }
+        ```
+
+    - 요약
+      - Suspense는 React 내장 기능이지만, React Query, Zustand 등 외부 상태 관리 도구의 로딩 제어 기능이 실무에서는 더 많이 사용
+      - Suspense는 반드시 필요한 기능이라기보다, 사용 목적과 복잡도에 따라 대체 가능한 역할을 함
 
 - React에서 useImperativeHandle을 사용할 때의 장점은?
 - React에서 useId() 훅은 언제 유용한가?
