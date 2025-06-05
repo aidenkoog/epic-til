@@ -2054,7 +2054,7 @@ Organize concepts, features, types and Pros and Cons
     - 비동기 처리 Selector에서 직접 가능 (async)
     - React 전용 설계 (훅 기반)
     - 세분화된 상태 단위 리렌더링
-    
+
   - Redux
     - 전역 스토어, 단일 상태 트리
     - 보일러 플레이트가 많고 외부 미들웨어 필요
@@ -2067,6 +2067,29 @@ Organize concepts, features, types and Pros and Cons
     - Redux는 예측 가능성, 커뮤니티, 툴링에서 강력하나 복잡도 있음
 
 - React에서 Zustand 상태 관리 라이브러리를 사용하는 이유
+  - Zustand 특징 요약
+    - 매우 가볍고 빠른 상태 관리 라이브러리
+    - 전역 상태를 Hook 기반으로 선언하고, 불변성 관리 없이도 직관적인 사용 가능
+    - Redux보다 훨씬 간결한 코드, React 외부에서도 사용 가능
+
+  - 사용 이유 및 장점
+    - 보일러플레이트 없음: 액션/리듀서 분리 불필요
+    - 초간단 문법: create() 함수 하나로 store 생성
+    - 자동 상태 최적화: 필요한 selector만 추출해 리렌더 최소화
+    - Redux DevTools 통합 가능
+    - SSR, Persist, Immer, Middleware 확장도 손쉬움
+
+  - 예시
+    ```tsx
+    const useStore = create((set) => ({
+      count: 0,
+      increase: () => set((state) => ({ count: state.count + 1 })),
+    }));
+    ```
+
+  - 요약
+    - Zustand는 간결함과 퍼포먼스를 동시에 제공하며, Redux의 복잡성이 부담일 때 강력한 대안
+
 - React에서 Suspense의 대체 기능
 
 - React에서 useImperativeHandle을 사용할 때의 장점은?
