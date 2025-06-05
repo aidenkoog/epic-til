@@ -2033,7 +2033,20 @@ Organize concepts, features, types and Pros and Cons
   - 정리
     - React에서의 메모리 누수는 대부분 컴포넌트 언마운트 이후에도 지속되는 비동기 작업이나 리스너에서 발생하므로, useEffect의 클린업 함수와 상태 체크가 핵심 예방 전략
 
-- React에서 hydrate() 함수의 역할은?
+- React에서 hydrate() 함수의 역할
+  - 개념 요약
+    - hydrate()는 서버에서 렌더링된 HTML과 클라이언트의 React 앱을 연결(attach)해주는 함수
+    - React 18부터는 ReactDOM.hydrateRoot()가 도입되었음
+
+  - 역할
+    - 서버에서 전달된 정적인 HTML을 클라이언트에서 대체하지 않고 유지한 채 이벤트 핸들러만 연결
+    - 초기 렌더링 속도 개선 및 SEO 대응
+    - 클라이언트와 서버의 렌더 결과가 다를 경우 "hydration mismatch" 경고 발생
+
+  - 주의점
+    - 서버와 클라이언트의 결과가 완전히 동일해야 함
+    - 상태나 시간 기반 데이터는 서버에서 미리 설정하거나 클라이언트에서 따로 처리 필요
+    
 - React에서 Recoil과 Redux의 차이점은?
 - React에서 Zustand 상태 관리 라이브러리를 사용하는 이유는?
 - React에서 Suspense의 대체 기능은?
