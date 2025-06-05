@@ -2252,8 +2252,35 @@ Organize concepts, features, types and Pros and Cons
 
   - 요약
     - API 최적화는 “불필요한 호출을 피하고, 필요한 데이터만 가져오며, 중복되지 않게 잘 저장하고 관리”하는 것이 핵심입니다.
-    
+
 - React에서 Custom Hooks를 만드는 원칙
+  - 개념 요약
+    - Custom Hook은 로직을 재사용하기 위해 use로 시작하는 함수
+    - 일반적으로 useState, useEffect, useRef 등 내부에서 훅을 사용할 수 있습니다.
+
+  - 제작 원칙
+    - "use"로 시작: 훅이라는 신호를 React에게 전달 (컴포넌트 렌더링 추적 목적)
+    - 다른 훅을 내부에서 호출 가능
+    - 조건문 안에서 훅을 사용하면 안 됨
+    - 단일 책임 원칙: 한 가지 목적에 집중한 훅
+    - 재사용 가능한 인터페이스 설계: 컴포넌트 간 공유 가능한 API 제공
+
+  - 예시
+    ```tsx
+    function useWindowWidth() {
+      const [width, setWidth] = useState(window.innerWidth);
+      useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+      return width;
+    }
+    ```
+
+  - 요약
+    - Custom Hook은 공통된 상태나 비즈니스 로직을 재사용하고 구조화하는 강력한 수단이며, 유지보수성과 테스트성 향상에 기여
+
 - React에서 Props Drilling이 문제를 일으키는 이유
 
 - React에서 React.memo()와 useMemo()의 차이점은?
