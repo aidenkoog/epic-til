@@ -2122,10 +2122,35 @@ Organize concepts, features, types and Pros and Cons
       - Suspense는 React 내장 기능이지만, React Query, Zustand 등 외부 상태 관리 도구의 로딩 제어 기능이 실무에서는 더 많이 사용
       - Suspense는 반드시 필요한 기능이라기보다, 사용 목적과 복잡도에 따라 대체 가능한 역할을 함
 
-- React에서 useImperativeHandle을 사용할 때의 장점은?
-- React에서 useId() 훅은 언제 유용한가?
-- React에서 Error Boundaries의 적용 사례는?
-- React에서 Strict Mode가 useEffect에 미치는 영향은?
+- React에서 useImperativeHandle을 사용할 때의 장점
+  - 개념 요약
+    - useImperativeHandle은 부모가 자식 컴포넌트에 ref를 통해 직접적으로 특정 메서드나 속성만 사용할 수 있도록 제어하는 훅
+    - forwardRef와 함께 사용됨
+
+  - 장점
+    - 캡슐화 유지: 내부 구현 세부사항은 숨기고 필요한 기능만 노출
+    - 명확한 API 제공: ref를 통한 접근 범위를 제한하여 의도치 않은 접근 방지
+    - 제어 가능한 DOM 접근: input 포커스, 재생 컨트롤 등 imperative 동작을 안전하게 제공
+
+  - 예시
+    ```tsx
+    const CustomInput = forwardRef((props, ref) => {
+      const inputRef = useRef();
+
+      useImperativeHandle(ref, () => ({
+        focus: () => inputRef.current.focus()
+      }));
+
+      return <input ref={inputRef} />;
+    });
+    ```
+
+  - 요약
+    - 직접 DOM 조작이 필요한 상황에서 자식 컴포넌트를 외부에 안전하고 명확하게 제어할 수 있는 API를 만들어줍니다.
+
+- React에서 useId() 훅
+- React에서 Error Boundaries의 적용 사례
+- React에서 Strict Mode가 useEffect에 미치는 영향
 
 - React에서 Refs의 활용 사례는?
 - React에서 클라이언트 측에서 API 호출을 최적화하는 방법은?
