@@ -2299,9 +2299,28 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - Props Drilling은 UI 트리 구조가 깊어질수록 유지보수와 상태 흐름의 추적이 어려워지고, 이를 해결하려면 상태를 더 효율적인 방식으로 공유하거나 저장하는 방법이 필요합니다.
 
-- React에서 React.memo()와 useMemo()의 차이점은?
-- React에서 웹 성능을 최적화하는 기법은?
-- React에서 useEffect의 Dependency Array의 역할은?
+- React에서 React.memo()와 useMemo()의 차이점
+  - React.memo()
+    - 컴포넌트의 리렌더링 방지
+    - 함수형 컴포넌트 전체 적용
+    - props가 변경되지 않으면 컴포넌트 리렌더 생략
+    - 내부적으로 props shallow 비교
+    - <React.memo(MyComponent) />
+
+  - useMemo()
+    - 값 계산을 메모이제이션
+    - 일반 변수나 계산식의 결과
+    - 동일한 의존성이 유지되면 캐시된 값 반환
+    - useMemo(fn, [deps])로 명시적 전달
+    - const result = useMemo(() => expensiveCalc(), [input])
+    
+  - 요약
+    - React.memo는 컴포넌트 리렌더 방지용
+    - useMemo는 계산된 값 재사용용
+      - 둘은 유사한 목적이나 적용 대상과 맥락이 다름
+
+- React에서 웹 성능을 최적화하는 기법
+- React에서 useEffect의 Dependency Array의 역할
 - React에서 useState와 useReducer 중 어떤 경우에 useReducer를 선택하는 것이 좋은가?
 
 - React에서 Strict Mode가 useEffect 내부의 cleanup 함수에 미치는 영향은?
