@@ -2192,6 +2192,27 @@ Organize concepts, features, types and Pros and Cons
     - 복잡한 컴포넌트 또는 외부 의존성이 많은 영역에서 예외 발생을 방지하고, 사용자에게 의미 있는 에러 UI를 제공하는 데 필수적
 
 - React에서 Strict Mode가 useEffect에 미치는 영향
+  - 개념 요약
+    - React의 StrictMode는 개발 중 잠재적인 문제를 조기에 감지하기 위한 도구로, 프로덕션에는 영향을 미치지 않습니다.
+
+  - useEffect에 미치는 영향
+    - 마운트-언마운트-리마운트 시퀀스가 한 번 더 발생함
+    - React는 이 과정을 통해 effect 클린업이 잘 작성되었는지 검증
+      ```tsx
+      useEffect(() => {
+        console.log("mounted");
+        return () => console.log("unmounted");
+      }, []);
+      ```
+    - 위 코드는 StrictMode 하에서:
+      - mounted -> unmounted -> mounted 순으로 실행
+
+  - 주의할 점
+    - 초기화 비용이 큰 작업은 반드시 cleanup을 명확히 해줘야 함
+    - 외부 API 구독, 타이머, socket 연결 등은 중복 연결 방지 필요
+
+  - 요약
+    - StrictMode는 useEffect 클린업 함수의 정확성과 안전성을 테스트하기 위해 마운트/언마운트를 반복 호출하므로, 효과적인 정리(cleanup) 코드가 필요합니다.
 
 - React에서 Refs의 활용 사례는?
 - React에서 클라이언트 측에서 API 호출을 최적화하는 방법은?
