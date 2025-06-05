@@ -2240,9 +2240,21 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - Refs는 렌더링 사이클을 거치지 않고도 상태를 보존하거나 DOM/외부 객체를 제어할 수 있어, UI 제어와 비동기 안정성 확보에 유리합니다.
 
-- React에서 클라이언트 측에서 API 호출을 최적화하는 방법은?
-- React에서 Custom Hooks를 만드는 원칙은?
-- React에서 Props Drilling이 문제를 일으키는 이유는?
+- React에서 클라이언트 측에서 API 호출을 최적화하는 방법
+  - 주요 전략
+    - 의존성에 따른 조건부 호출: useEffect의 의존 배열에 정확한 deps 지정
+    - Debounce / Throttle: 검색어 입력 등 빠른 변화에 대한 과도한 호출 방지
+    - 캐싱: React Query, SWR 등 라이브러리 활용
+    - 중복 호출 방지: 상태/플래그로 동일 API 다중 호출 방지
+    - Pre-fetching: 사용자가 도달할 가능성이 높은 페이지 데이터를 미리 요청
+    - Pagination / Infinite Scroll: 필요한 데이터만 단계적으로 호출
+    - 서버 상태 관리 도구 사용: react-query, swr은 자동 리패치, 캐싱, 오류 재시도 등을 내장
+
+  - 요약
+    - API 최적화는 “불필요한 호출을 피하고, 필요한 데이터만 가져오며, 중복되지 않게 잘 저장하고 관리”하는 것이 핵심입니다.
+    
+- React에서 Custom Hooks를 만드는 원칙
+- React에서 Props Drilling이 문제를 일으키는 이유
 
 - React에서 React.memo()와 useMemo()의 차이점은?
 - React에서 웹 성능을 최적화하는 기법은?
