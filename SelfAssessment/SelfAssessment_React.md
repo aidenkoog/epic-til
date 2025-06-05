@@ -1992,6 +1992,46 @@ Organize concepts, features, types and Pros and Cons
     - 효과적인 에러 처리 및 recovery
 
 - React에서 메모리 누수를 방지하는 방법
+  - 메모리 누수 주요 원인
+    - 비동기 작업 후 컴포넌트가 언마운트되었는데도 setState 호출
+    - setInterval, setTimeout 등 클린업 누락
+    - 이벤트 리스너나 외부 라이브러리 구독 해제 안 됨
+    - DOM 참조(ref) 또는 전역 객체에 지속적으로 참조된 상태
+
+  - 예방 방법
+    - useEffect에서 클린업 함수 반환하기
+      ```tsx
+      useEffect(() => {
+        const id = setInterval(() => console.log("tick"), 1000);
+        return () => clearInterval(id); // 클린업
+      }, []);
+      ```
+
+    - 비동기 작업 취소 패턴
+      ```tsx
+      useEffect(() => {
+        let cancelled = false;
+        async function loadData() {
+          const data = await fetchData();
+          if (!cancelled) setState(data);
+        }
+        loadData();
+        return () => {
+          cancelled = true;
+        };
+      }, []);
+      ```
+
+    - 외부 리소스 사용 시 해제 처리 (WebSocket, Observer 등)
+      ```tsx
+      useEffect(() => {
+        const socket = new WebSocket("...");
+        return () => socket.close();
+      }, []);
+      ```
+
+  - 정리
+    - React에서의 메모리 누수는 대부분 컴포넌트 언마운트 이후에도 지속되는 비동기 작업이나 리스너에서 발생하므로, useEffect의 클린업 함수와 상태 체크가 핵심 예방 전략
 
 - React에서 hydrate() 함수의 역할은?
 - React에서 Recoil과 Redux의 차이점은?
