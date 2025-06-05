@@ -2384,7 +2384,18 @@ Organize concepts, features, types and Pros and Cons
     - useState: 간단하고 직관적인 상태에 적합
     - useReducer: 복잡한 상태 로직이나 상태 간 의존성이 있는 경우에 더 적합
 
-- React에서 Strict Mode가 useEffect 내부의 cleanup 함수에 미치는 영향은?
+- React에서 Strict Mode가 useEffect 내부의 cleanup 함수에 미치는 영향
+  - 개념 요약
+    - React의 StrictMode는 개발 환경에서만 동작하며, 잠재적인 사이드 이펙트나 메모리 누수를 조기에 감지하기 위해 일부 라이프사이클을 의도적으로 두 번 실행
+
+  - useEffect에 대한 영향
+    - StrictMode 하에서는 useEffect → cleanup → useEffect 순으로 한 번 더 실행됨
+    - 이는 실제 동작과 다르지만, effect의 클린업이 제대로 작성되어 있는지 검증하는 용도
+
+  - 주의점
+    - 외부 API, WebSocket, Timer 등을 다룰 때 중복 연결/요청 주의
+    - 클린업 함수가 안정적이고 idempotent 하도록 구현해야 함
+
 - React에서 Suspense를 활용하여 비동기 데이터를 처리하는 방법은?
 - React에서 fetch API와 Axios의 차이점은?
 - React에서 렌더링 최적화를 위해 할 수 있는 방법은?
