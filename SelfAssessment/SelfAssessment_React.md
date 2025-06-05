@@ -2148,7 +2148,30 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - 직접 DOM 조작이 필요한 상황에서 자식 컴포넌트를 외부에 안전하고 명확하게 제어할 수 있는 API를 만들어줍니다.
 
-- React에서 useId() 훅
+- React에서 useId() Hook
+  - 개념 요약
+    - useId()는 React 18에서 도입된 훅으로, 고유하고 일관된 ID를 생성할 수 있습니다. 
+    - SSR(Server Side Rendering)과 CSR(Client Side Rendering) 간의 ID mismatch 문제를 방지하는 데 유용합니다.
+
+  - 사용 사례
+    - <label htmlFor="id" /> + <input id="id" /> 조합
+    - 여러 인스턴스에서 고유한 ID가 필요할 때
+    - Form 컴포넌트나 컴포넌트 라이브러리에서 내부적으로 고유 키가 필요한 경우
+
+  - 예시
+    ```tsx
+    const id = useId();
+    return (
+      <>
+        <label htmlFor={id}>이름</label>
+        <input id={id} type="text" />
+      </>
+    );
+    ```
+
+  - 요약
+    - useId()는 HTML 요소의 id가 서버/클라이언트 사이에서 일치하도록 보장하며, 여러 컴포넌트 인스턴스에서도 충돌 없는 고유 ID를 만들어줍니다.
+
 - React에서 Error Boundaries의 적용 사례
 - React에서 Strict Mode가 useEffect에 미치는 영향
 
