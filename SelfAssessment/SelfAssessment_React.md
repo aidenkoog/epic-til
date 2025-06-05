@@ -2391,6 +2391,8 @@ Organize concepts, features, types and Pros and Cons
   - useEffect에 대한 영향
     - StrictMode 하에서는 useEffect → cleanup → useEffect 순으로 한 번 더 실행됨
     - 이는 실제 동작과 다르지만, effect의 클린업이 제대로 작성되어 있는지 검증하는 용도
+    - mount -> unmount -> mount 로 호출
+      - OFF 일 때는 mount 만 호출되며 실제 컴포넌트가 사라질 때만 unmount 실행됨
 
   - 주의점
     - 외부 API, WebSocket, Timer 등을 다룰 때 중복 연결/요청 주의
