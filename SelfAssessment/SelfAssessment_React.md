@@ -2046,10 +2046,28 @@ Organize concepts, features, types and Pros and Cons
   - 주의점
     - 서버와 클라이언트의 결과가 완전히 동일해야 함
     - 상태나 시간 기반 데이터는 서버에서 미리 설정하거나 클라이언트에서 따로 처리 필요
+
+- React에서 Recoil과 Redux의 차이점
+  - Recoil
+    - 상태가 그래프처럼 구성 (Atoms & Selectors)
+    - 비교적 간단하고 React 친화적
+    - 비동기 처리 Selector에서 직접 가능 (async)
+    - React 전용 설계 (훅 기반)
+    - 세분화된 상태 단위 리렌더링
     
-- React에서 Recoil과 Redux의 차이점은?
-- React에서 Zustand 상태 관리 라이브러리를 사용하는 이유는?
-- React에서 Suspense의 대체 기능은?
+  - Redux
+    - 전역 스토어, 단일 상태 트리
+    - 보일러 플레이트가 많고 외부 미들웨어 필요
+    - redux-thunk, redux-saga 등 외부 도구 필요
+    - React 외 앱에도 사용 가능
+    - 전체 스토어 기준 리렌더 발생 가능성
+
+  - 요약 정리
+    - Recoil은 간단한 구조, 훅 기반의 사용, 세분화된 리렌더링에 강점
+    - Redux는 예측 가능성, 커뮤니티, 툴링에서 강력하나 복잡도 있음
+
+- React에서 Zustand 상태 관리 라이브러리를 사용하는 이유
+- React에서 Suspense의 대체 기능
 
 - React에서 useImperativeHandle을 사용할 때의 장점은?
 - React에서 useId() 훅은 언제 유용한가?
