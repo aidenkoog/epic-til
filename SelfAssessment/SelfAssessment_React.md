@@ -2214,7 +2214,32 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - StrictMode는 useEffect 클린업 함수의 정확성과 안전성을 테스트하기 위해 마운트/언마운트를 반복 호출하므로, 효과적인 정리(cleanup) 코드가 필요합니다.
 
-- React에서 Refs의 활용 사례는?
+- React에서 Refs의 활용 사례
+  - 개념 요약
+    - ref는 React에서 DOM 요소나 컴포넌트 인스턴스에 직접 접근할 수 있게 해주는 도구
+    - useRef() 훅으로 생성하며 렌더 사이클과 무관한 데이터를 저장하거나 imperative한 조작에 사용
+
+  - 주요 활용 사례
+    - DOM 제어: 포커스 이동, 스크롤 위치 조정 등
+      ```tsx
+      const inputRef = useRef();
+      useEffect(() => inputRef.current.focus(), []);
+      ```
+
+    - 비동기 작업 중 상태 추적: 최신 상태 값을 기억하여 race condition 방지
+      ```tsx
+      const latestData = useRef(data);
+      useEffect(() => { latestData.current = data }, [data]);
+      ```
+
+    - 애니메이션 제어: canvas, SVG, GSAP 등과 연동
+    - 타이머 및 interval ID 저장: 클린업용 ID 저장소
+    - 외부 라이브러리 통합: Chart.js, D3, video/audio 등 DOM 접근 요구 시
+    - Imperative Handle과 연계하여 부모가 자식 메서드를 호출하도록 허용
+
+  - 요약
+    - Refs는 렌더링 사이클을 거치지 않고도 상태를 보존하거나 DOM/외부 객체를 제어할 수 있어, UI 제어와 비동기 안정성 확보에 유리합니다.
+
 - React에서 클라이언트 측에서 API 호출을 최적화하는 방법은?
 - React에서 Custom Hooks를 만드는 원칙은?
 - React에서 Props Drilling이 문제를 일으키는 이유는?
