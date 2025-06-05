@@ -2173,6 +2173,24 @@ Organize concepts, features, types and Pros and Cons
     - useId()는 HTML 요소의 id가 서버/클라이언트 사이에서 일치하도록 보장하며, 여러 컴포넌트 인스턴스에서도 충돌 없는 고유 ID를 만들어줍니다.
 
 - React에서 Error Boundaries의 적용 사례
+  - 개념 요약
+    - Error Boundary는 컴포넌트 트리에서 예외가 발생했을 때 앱 전체가 크래시되는 것을 방지하고, fallback UI로 graceful degradation을 제공하는 기능
+
+  - 적용 사례
+    - 외부 라이브러리 오류 감지: 불안정한 써드파티 위젯을 안전하게 감쌀 때
+    - 전체 앱 보호: 페이지 루트 컴포넌트에 적용하여 전체 앱이 멈추는 것을 방지
+    - 특정 섹션 보호: 예를 들어 Chart, VideoPlayer, CustomEditor 같은 개별 기능 단위
+
+  - 예시
+    ```tsx
+    <ErrorBoundary fallback={<ErrorFallback />}>
+      <ComponentThatMayThrow />
+    </ErrorBoundary>
+    ```
+
+  - 요약
+    - 복잡한 컴포넌트 또는 외부 의존성이 많은 영역에서 예외 발생을 방지하고, 사용자에게 의미 있는 에러 UI를 제공하는 데 필수적
+
 - React에서 Strict Mode가 useEffect에 미치는 영향
 
 - React에서 Refs의 활용 사례는?
