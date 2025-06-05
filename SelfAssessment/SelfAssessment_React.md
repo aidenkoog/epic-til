@@ -2313,15 +2313,76 @@ Organize concepts, features, types and Pros and Cons
     - 동일한 의존성이 유지되면 캐시된 값 반환
     - useMemo(fn, [deps])로 명시적 전달
     - const result = useMemo(() => expensiveCalc(), [input])
-    
+
   - 요약
     - React.memo는 컴포넌트 리렌더 방지용
     - useMemo는 계산된 값 재사용용
       - 둘은 유사한 목적이나 적용 대상과 맥락이 다름
 
 - React에서 웹 성능을 최적화하는 기법
+  - 주요 최적화 전략
+    - 코드 스플리팅 & Lazy Loading
+      - React.lazy, Suspense, dynamic import 사용하여 초기 JS 로딩 최소화
+    - 리렌더링 최소화
+      - React.memo, useMemo, useCallback, key 설정 등 활용
+    - 이미지 최적화
+      - 적절한 이미지 포맷(WebP 등), lazy loading, responsive size
+    - Virtualization
+      - 많은 리스트를 효율적으로 렌더링 (react-window, react-virtualized)
+    - 서버 상태 캐싱
+      - React Query, SWR 등 사용하여 API 요청 중복 방지
+    - 브라우저 캐싱 & CDN 사용
+      - 정적 자산과 리소스를 효율적으로 배포
+    - Critical CSS & 폰트 최적화
+      - 렌더 블로킹 리소스를 최소화
+
+  - 요약
+    - 성능 최적화는 "필요할 때만 렌더, 필요한 만큼만 로드, 가능한 빨리 보여주기"가 핵심
+
 - React에서 useEffect의 Dependency Array의 역할
+  - 개념 요약
+    - Dependency Array ([dep1, dep2])는 useEffect()가 언제 실행될지를 명시적으로 제어하는 역할
+
+  - 동작 방식
+    - []: 컴포넌트 마운트 시 1회만 실행
+    - [a, b]: a 또는 b가 변경될 때마다 effect 실행
+    - 생략 시: 매 렌더링마다 실행 → 성능 저하 위험
+
+  - 의미
+    - 의존성 배열은 React에게 “이 값들이 바뀌면 effect를 다시 실행해야 한다”는 신호
+    - 배열이 불완전하거나 참조가 매번 바뀌는 값이 있다면, 의도치 않은 재실행 발생
+
+  - 예시
+    ```tsx
+    useEffect(() => {
+      fetchData();
+    }, [id]); // id가 바뀔 때마다 호출됨
+    ```
+
+  - 정리
+    - 정확한 의존성 배열은 불필요한 리렌더링 방지와 의도한 동작 보장에 중요
+
 - React에서 useState와 useReducer 중 어떤 경우에 useReducer를 선택하는 것이 좋은가?
+  - useState는 간단한 상태일 때 적합
+    - 단일 값 (예: toggle, input)
+    - 복잡한 로직 없이 바로 업데이트되는 상태
+
+  - useReducer가 더 나은 경우
+    - 상태 값이 객체 또는 배열로 구성된 복합 상태
+    - 상태 업데이트가 다양한 액션에 따라 조건부로 분기
+    - 여러 상태 업데이트가 서로 관련되거나 동시에 변경되어야 할 때
+    - 상태 관리 로직을 외부로 추출하고 싶을 때 (가독성과 테스트성 ↑)
+    - 복잡한 폼 상태, 다중 입력 처리, 상태 기반 UI 로직
+
+  - 예시
+    ```tsx
+    const [state, dispatch] = useReducer(reducer, initialState);
+    dispatch({ type: 'increment' });
+    ```
+
+  - 요약
+    - useState: 간단하고 직관적인 상태에 적합
+    - useReducer: 복잡한 상태 로직이나 상태 간 의존성이 있는 경우에 더 적합
 
 - React에서 Strict Mode가 useEffect 내부의 cleanup 함수에 미치는 영향은?
 - React에서 Suspense를 활용하여 비동기 데이터를 처리하는 방법은?
