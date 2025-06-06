@@ -2486,7 +2486,25 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - React의 렌더링 최적화는 렌더 트리 최소화, 계산 중복 방지, 비동기 처리 효율화를 통해 성능과 사용자 경험을 개선하는 것
 
-- React에서 React.lazy()와 Loadable Components의 차이점은?
+- React에서 React.lazy()와 Loadable Components의 차이점
+  - React.lazy()
+    - 리액트 내장 (리액트 16.6+)
+    - SSR 지원하지 않음
+    - Preloading 지원은 직접 구현 필요
+    - 로딩 상태는 Suspense와 함께 사용
+    - 코드 분할 지원
+
+  - Loadable Components
+    - 외부 라이브러리 설치 필요
+    - SSR 지원
+    - .preload()등 제공
+    - 자체 fallback 지원 (Suspense 선택 가능)
+    - 코드 분할 지원, 더 유연한 지원 (React.lazy() 보다 유연)
+
+  - 요약
+    - React.lazy()는 간단한 클라이언트 전용 코드 스플리팅에 적합
+    - Loadable Components는 SSR이 필요한 경우, 서버 + 클라이언트 모두 지원해야 할 때 사용
+
 - React에서 useEffect의 cleanup 함수는 언제 호출되는가?
 - React에서 useCallback을 사용해야 하는 경우는?
 - React에서 Forward Ref를 사용하는 시나리오는?
