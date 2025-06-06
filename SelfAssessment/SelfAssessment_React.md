@@ -2454,12 +2454,37 @@ Organize concepts, features, types and Pros and Cons
     - 요청 취소를 위해 CancelToken or AbortController 지원
     - 인터셉터 요청/응답 가로채기 가능
     - 기본 헤더 설정, 타임아웃, 전역 설정 등 풍부
-    
+
   - 요약
     - fetch: 기본적인 요청에 적합, 가볍고 설치 필요 없음
     - axios: 더 나은 DX (개발 경험)과 에러/인터셉터 지원 등으로 실무에서 자주 사용
 
 - React에서 렌더링 최적화를 위해 할 수 있는 방법
+  - 컴포넌트 최적화
+    - React.memo()로 불필요한 리렌더링 방지
+    - useMemo()로 계산 결과 캐싱
+    - useCallback()으로 함수 재생성 방지
+
+  - 상태 최적화
+    - 상태를 필요한 컴포넌트에만 유지 (불필요한 상위 상태 지양)
+    - Context 사용 시 useContextSelector, memo와 병행
+
+  - 가상 리스트
+    - 긴 리스트는 react-window, react-virtualized로 가상화 처리
+
+  - 코드 분할 & Lazy Loading
+    - React.lazy() + Suspense 사용
+    - 라우팅 기반 코드 스플리팅 (React Router Lazy Routes)
+
+  - 서버 상태 캐싱
+    - React Query, SWR 등으로 API 데이터 캐싱 및 중복 요청 방지
+
+  - 이미지 및 자산 최적화
+    - WebP 등 경량 이미지 포맷 사용
+    - <img loading="lazy" /> 또는 Lazy 컴포넌트
+
+  - 요약
+    - React의 렌더링 최적화는 렌더 트리 최소화, 계산 중복 방지, 비동기 처리 효율화를 통해 성능과 사용자 경험을 개선하는 것
 
 - React에서 React.lazy()와 Loadable Components의 차이점은?
 - React에서 useEffect의 cleanup 함수는 언제 호출되는가?
