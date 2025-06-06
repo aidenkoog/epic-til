@@ -2439,6 +2439,26 @@ Organize concepts, features, types and Pros and Cons
     - 실무에서는 React Query, SWR처럼 라이브러리와 함께 사용하는 것이 일반적
 
 - React에서 fetch API와 Axios의 차이점
+  - fetch
+    - 브라우저 내장
+    - 수동 .json() 호출 필요
+    - 에러 처리: 4xx/5xx도 성공으로 처리됨
+    - AbortController 직접 구현으로 요청 취소
+    - 인터셉터 없음
+    - 최소한의 기능
+
+  - Axios
+    - 외부 라이브러리 설치 필요
+    - 자동 파싱 (data에 바로 접근)
+    - HTTP 에러 자동 catch 처리
+    - 요청 취소를 위해 CancelToken or AbortController 지원
+    - 인터셉터 요청/응답 가로채기 가능
+    - 기본 헤더 설정, 타임아웃, 전역 설정 등 풍부
+    
+  - 요약
+    - fetch: 기본적인 요청에 적합, 가볍고 설치 필요 없음
+    - axios: 더 나은 DX (개발 경험)과 에러/인터셉터 지원 등으로 실무에서 자주 사용
+
 - React에서 렌더링 최적화를 위해 할 수 있는 방법
 
 - React에서 React.lazy()와 Loadable Components의 차이점은?
