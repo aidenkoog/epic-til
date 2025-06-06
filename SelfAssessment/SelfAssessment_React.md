@@ -2398,9 +2398,48 @@ Organize concepts, features, types and Pros and Cons
     - 외부 API, WebSocket, Timer 등을 다룰 때 중복 연결/요청 주의
     - 클린업 함수가 안정적이고 idempotent 하도록 구현해야 함
 
-- React에서 Suspense를 활용하여 비동기 데이터를 처리하는 방법은?
-- React에서 fetch API와 Axios의 차이점은?
-- React에서 렌더링 최적화를 위해 할 수 있는 방법은?
+- React에서 Suspense를 활용하여 비동기 데이터를 처리하는 방법
+  - 개념 요약
+    - Suspense는 React에서 비동기 컴포넌트가 데이터를 로드하는 동안 대기 상태(fallback UI)를 표시할 수 있게 해주는 기능
+
+  - 기본 사용 방식 (리액트 18 이상)
+    ```tsx
+    const userPromise = fetchUser(); // Promise 객체
+
+    function UserInfo() {
+      const user = use(userPromise); // React 18의 실험적 use()
+      return <div>{user.name}</div>;
+    }
+
+    function App() {
+      return (
+        <Suspense fallback={<div>로딩 중...</div>}>
+          <UserInfo />
+        </Suspense>
+      );
+    }
+    ```
+
+  - React Query와 결합하여 Suspense 사용
+    ```tsx
+    const { data } = useQuery(['user'], fetchUser, { suspense: true });
+
+    <Suspense fallback={<div>불러오는 중...</div>}>
+      <UserComponent />
+    </Suspense>
+    ```
+
+  - 장점
+    - 로딩 상태를 컴포넌트 수준에서 선언적으로 처리 가능
+    - 코드 분할과 데이터 로딩 UI를 통합 관리
+    - 서버 컴포넌트(React Server Components)와도 잘 통합됨
+
+  - 주의사항
+    - use()와 Server Components는 아직 실험적 단계
+    - 실무에서는 React Query, SWR처럼 라이브러리와 함께 사용하는 것이 일반적
+
+- React에서 fetch API와 Axios의 차이점
+- React에서 렌더링 최적화를 위해 할 수 있는 방법
 
 - React에서 React.lazy()와 Loadable Components의 차이점은?
 - React에서 useEffect의 cleanup 함수는 언제 호출되는가?
