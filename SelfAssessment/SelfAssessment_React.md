@@ -2669,13 +2669,48 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - SSR 시에는 렌더링 전에 데이터를 준비해 props로 전달하거나, Next.js 같은 프레임워크의 전용 API를 사용하는 것이 일반적입니다.
 
+- React에서 Styled Components를 사용할 때의 장점과 단점
+  - 장점
+    - 컴포넌트 단위의 스타일 캡슐화
+    - props 기반 동적 스타일링 가능
+    - 자동 클래스명 해시 처리 > 충돌 방지
+    - SSR 및 테마 지원
+    - JavaScript 내에서 조건/반복 가능
 
-- React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
+  - 단점
+    - 런타임 비용 발생 (스타일 생성 시점)
+    - 빌드 사이즈 증가
+    - TypeScript와 함께 사용 시 타입 추론 제한
+    - CSS in JS 자체의 성능 이슈: Large DOM 트리일수록 성능 저하 가능
+
+  - 요약
+    - Styled Components 는 개발 경험과 유지보수시 강점
+    - 퍼포먼스 민감 앱/웹에서는 선택할지에 대한 고려 필요
+
+- React에서 Redux를 사용하면 불필요한 렌더링이 발생할 수 있는 이유
+  - 발생 이유 (참조형 비교, Shallow Comparison)
+    - useSelector()는 상태의 참조형 비교(shallowEqual)를 기반으로 리렌더링 결정
+    - 상태 객체(예: 배열, 객체)가 새로 생성되면 이전 값과 같더라도 리렌더링 발생
+    - 모든 컴포넌트가 같은 전역 상태를 참조할 경우, 일부 변경에도 전역 리렌더링 발생 가능
+
+  - 해결 방법
+    - React.memo + shallowEqual 사용
+    - reselect로 메모이제이션된 selector 사용
+    - Slice를 나누어 최소 범위에서 구독
+
+- React에서 Redux Persist를 사용하는 이유
+  - 기능 요약
+    - 리덕스 상태를 로컬 스토리지에 저장
+    - 앱 새로고침 후에도 상태 유지 가능
+    - 로그인 상태, 장바구니, UI 설정 등 사용자 세션 유지에 유용
+
+  - Redux Persist 이점
+    - 사용자 경험 향상
+    - 복잡한 앱에서 초기화 방지
+    - 스토어 재 Hydration 자동 처리
+
+- React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점
 - React에서 getInitialProps와 getServerSideProps의 차이는?
-- React에서 Styled Components를 사용할 때의 장점과 단점은?
-- React에서 Redux를 사용하면 불필요한 렌더링이 발생할 수 있는 이유는?
-
-- React에서 Redux Persist를 사용하는 이유는?
 - React에서 Context API를 사용하면 발생할 수 있는 성능 이슈는?
 - React에서 React Query를 사용할 때 얻을 수 있는 이점은?
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
