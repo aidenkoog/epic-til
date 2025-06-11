@@ -2564,7 +2564,32 @@ Organize concepts, features, types and Pros and Cons
     - forwardRef는 컴포넌트 추상화와 외부 제어 사이의 균형을 잡기 위한 도구
     - DOM 조작, imperative 제어가 필요한 컴포넌트에 적합
 
-- React에서 useRef를 활용하여 DOM 요소에 직접 접근하는 방법은?
+- React에서 useRef를 활용하여 DOM 요소에 직접 접근하는 방법
+  - 개요
+    - useRef는 DOM 요소에 직접 접근하거나 값 저장소처럼 사용할 수 있는 훅
+
+  - DOM 접근 예시
+    ```tsx
+    function MyComponent() {
+      const inputRef = useRef<HTMLInputElement>(null);
+
+      useEffect(() => {
+        inputRef.current?.focus(); // 마운트 시 포커스
+      }, []);
+
+      return <input ref={inputRef} />;
+    }
+    ```
+
+  - 활용 사례
+    - 포커스 제어 (.focus())
+    - 스크롤 이동 (scrollIntoView, scrollTop)
+    - 비디오 제어 (play(), pause())
+    - 외부 라이브러리(D3, Chart.js 등) DOM 연동
+
+  - 요약
+    - useRef는 렌더링에 영향을 주지 않고 DOM에 imperative하게 접근할 수 있는 가장 안전한 방법입니다.
+
 - React에서 useEffect와 useMemo를 함께 사용할 때 주의할 점은?
 - React에서 CSR과 SSR의 성능 차이는 어떤 요소에서 발생하는가?
 - React에서 서버 사이드 렌더링 시 데이터 페칭을 어떻게 처리하는가?
