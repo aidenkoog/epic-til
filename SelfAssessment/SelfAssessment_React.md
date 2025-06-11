@@ -2598,7 +2598,7 @@ Organize concepts, features, types and Pros and Cons
   - 주의할 점
     - useMemo 내부에서 부수효과를 실행하지 말 것 → 이건 useEffect의 책임
       ```tsx
-      // ❌ 부적절
+      // 부적절
       const data = useMemo(() => {
         fetch(...); // 부수효과 실행 X
         return value;
@@ -2618,7 +2618,27 @@ Organize concepts, features, types and Pros and Cons
     - useEffect: 사이드 이펙트 전담
     - 함께 사용할 땐 역할 분리를 명확히 하고 의존성 배열 정확히 명시해야 함
 
-- React에서 CSR과 SSR의 성능 차이는 어떤 요소에서 발생하는가?
+- React에서 CSR과 SSR의 성능 차이는 어떤 요소에서 발생
+  - CSR (Client-Side-Rendering)
+    - 첫 페이지 표시 속도 느림 (JS 로딩 후 렌더)
+    - SEO 대응력 약함 (크롤러가 JS 해석 핋요)
+    - 초기 로딩 JS 크기 큼 (모든 UI 로직 포함)
+    - TTV (Time to View): 느릴 수 있음
+    - 인터렉션 가능 시점은 렌더링 완료 후 가능
+    - 복잡도는 상대적으로 단순
+
+  - SSR (Server-Side-Rendering)
+    - 첫 페이지 표시 속도는 빠름 (HTML 바로 렌더) 
+    - SEO 대응력 강함 (HTML 제공)
+    - 초기 로딩 JS 크기 (상대적 감소)
+    - TTV (Time to View): 빠르게 컨텐츠 표시 가능
+    - 인터랙션 가능 시점은 hydration 까지 필요
+    - 복잡도는 SSR 설정, 데이터 prefetch 복잡함
+
+  - 요약
+    - CSR: 빠른 개발, 초기 로딩 느릴 수 있음
+    - SSR: SEO와 초기 UX에 유리, 하지만 서버 부하 높고 복잡성 높음
+
 - React에서 서버 사이드 렌더링 시 데이터 페칭을 어떻게 처리하는가?
 
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
