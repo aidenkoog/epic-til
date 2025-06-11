@@ -2505,7 +2505,14 @@ Organize concepts, features, types and Pros and Cons
     - React.lazy()는 간단한 클라이언트 전용 코드 스플리팅에 적합
     - Loadable Components는 SSR이 필요한 경우, 서버 + 클라이언트 모두 지원해야 할 때 사용
 
-- React에서 useEffect의 cleanup 함수는 언제 호출되는가?
+- React에서 useEffect의 cleanup 함수는 언제 호출되는가
+  - 컴포넌트가 언마운트될 때
+    - 예: 화면 전환, 조건부 렌더링 등으로 해당 컴포넌트가 제거되면
+  - 의존성 배열이 변경될 때 ( [deps] )
+    - 이전 effect를 정리하고, 새로운 값에 따라 다시 effect 실행
+  - (개발 모드 한정) React.StrictMode로 인해 한 번 더 호출되는 경우
+    - useEffect → cleanup → useEffect 순서로 호출되어 메모리 누수 여부 검증
+
 - React에서 useCallback을 사용해야 하는 경우는?
 - React에서 Forward Ref를 사용하는 시나리오는?
 
