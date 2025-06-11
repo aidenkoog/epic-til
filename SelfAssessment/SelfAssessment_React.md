@@ -2639,7 +2639,36 @@ Organize concepts, features, types and Pros and Cons
     - CSR: 빠른 개발, 초기 로딩 느릴 수 있음
     - SSR: SEO와 초기 UX에 유리, 하지만 서버 부하 높고 복잡성 높음
 
-- React에서 서버 사이드 렌더링 시 데이터 페칭을 어떻게 처리하는가?
+- React에서 서버 사이드 렌더링 시 데이터 페칭 처리 방법
+  - 개요
+    - SSE 환경에서 데이터 페칭을 처리하는 방식은 프레임워크에 따라 상이
+
+  - Next.js 기준 (대표 SSR 프레임워크)
+    - getServerSideProps(): SSR 시점에 실행되는 데이터 페칭 함수
+      ```tsx
+      export async function getServerSideProps(context) {
+        const res = await fetch("https://api.example.com/data");
+        const data = await res.json();
+
+        return {
+          props: { data },
+        };
+      }
+      ```
+    - getStaticProps() + revalidate: SSG + ISR(Incremental Static Regeneration)
+
+  - Custom SSR 환경 (Express + React 등)
+    - 서버에서 React 앱 렌더링 전 fetch() 등으로 데이터를 준비
+    - ReactDOMServer.renderToString() 전에 props로 데이터 전달
+    - 클라이언트에서 hydrate() 사용해 HTML에 이벤트 바인딩
+
+  - 주의점
+    - 서버에서는 브라우저 API(window, localStorage 등) 사용 불가
+    - API 호출은 반드시 node-fetch 같은 서버용 클라이언트 사용
+
+  - 요약
+    - SSR 시에는 렌더링 전에 데이터를 준비해 props로 전달하거나, Next.js 같은 프레임워크의 전용 API를 사용하는 것이 일반적입니다.
+
 
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
 - React에서 getInitialProps와 getServerSideProps의 차이는?
