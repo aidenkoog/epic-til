@@ -2709,9 +2709,23 @@ Organize concepts, features, types and Pros and Cons
     - 복잡한 앱에서 초기화 방지
     - 스토어 재 Hydration 자동 처리
 
+- React에서 Context API를 사용하면 발생할 수 있는 성능 이슈
+  - 문제
+    - Context.Provider의 value가 변경되면 해당 context를 구독 중인 모든 컴포넌트가 리렌더링됨
+
+  - 예시
+    ```tsx
+    <MyContext.Provider value={{ count }}>
+      <CompA />  // count와 관련 없음 → 그래도 리렌더
+    </MyContext.Provider>
+    ```
+
+  - 해결 방법
+    - value를 useMemo로 감싸거나
+    - context-selector, zustand, Recoil 등 분리 가능한 상태 관리 라이브러리 사용
+
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점
 - React에서 getInitialProps와 getServerSideProps의 차이는?
-- React에서 Context API를 사용하면 발생할 수 있는 성능 이슈는?
 - React에서 React Query를 사용할 때 얻을 수 있는 이점은?
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
 
