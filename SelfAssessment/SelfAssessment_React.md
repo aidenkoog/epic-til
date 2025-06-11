@@ -2590,7 +2590,34 @@ Organize concepts, features, types and Pros and Cons
   - 요약
     - useRef는 렌더링에 영향을 주지 않고 DOM에 imperative하게 접근할 수 있는 가장 안전한 방법입니다.
 
-- React에서 useEffect와 useMemo를 함께 사용할 때 주의할 점은?
+- React에서 useEffect와 useMemo를 함께 사용할 때 주의할 점
+  - 핵심 차이
+    - useMemo: 계산된 값을 메모이제이션
+    - useEffect: 사이드 이펙트 실행 (예: API 호출, 이벤트 등록)
+
+  - 주의할 점
+    - useMemo 내부에서 부수효과를 실행하지 말 것 → 이건 useEffect의 책임
+      ```tsx
+      // ❌ 부적절
+      const data = useMemo(() => {
+        fetch(...); // 부수효과 실행 X
+        return value;
+      }, [deps]);
+      ```
+    - useEffect에서 useMemo 결과에 의존할 경우 의존성 배열 정확히 설정
+      ```tsx
+      const memoizedValue = useMemo(() => computeValue(input), [input]);
+
+      useEffect(() => {
+        doSomethingWith(memoizedValue);
+      }, [memoizedValue]);
+      ```
+
+  - 요약
+    - useMemo: 순수 함수의 결과 캐싱
+    - useEffect: 사이드 이펙트 전담
+    - 함께 사용할 땐 역할 분리를 명확히 하고 의존성 배열 정확히 명시해야 함
+
 - React에서 CSR과 SSR의 성능 차이는 어떤 요소에서 발생하는가?
 - React에서 서버 사이드 렌더링 시 데이터 페칭을 어떻게 처리하는가?
 
