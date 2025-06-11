@@ -2513,7 +2513,30 @@ Organize concepts, features, types and Pros and Cons
   - (개발 모드 한정) React.StrictMode로 인해 한 번 더 호출되는 경우
     - useEffect → cleanup → useEffect 순서로 호출되어 메모리 누수 여부 검증
 
-- React에서 useCallback을 사용해야 하는 경우는?
+- React에서 useCallback을 사용해야 하는 경우
+  - 개요
+    - useCallback(fn, deps)은 함수 참조가 매번 새로 생성되는 것을 막기 위한 훅입니다.
+
+  - 사용해야 하는 대표 시나리오:
+    - 함수를 자식 컴포넌트에 props로 전달할 때
+      - → 자식이 React.memo로 감싸져 있는 경우, 함수 참조가 바뀌면 리렌더 발생
+
+    - 함수가 의존성 배열에 포함되어야 할 때
+      - → useEffect, useMemo 등에서 함수가 의존성일 경우 참조 안정성 확보
+
+    - 빈번한 리렌더링이 있는 성능 민감한 컴포넌트에서
+      - → 렌더링마다 함수가 재생성되면 불필요한 연산/효과 발생
+
+  - 예시
+    ```tsx
+    const handleClick = useCallback(() => {
+      doSomething();
+    }, [dependency]);
+    ```
+
+  - 주의점
+    - 불필요하게 모든 함수를 useCallback으로 감싸면 오히려 메모리 낭비나 복잡도 증가 가능. 리렌더링 영향이 있는 경우에만 사용 필요
+
 - React에서 Forward Ref를 사용하는 시나리오는?
 
 - React에서 useRef를 활용하여 DOM 요소에 직접 접근하는 방법은?
