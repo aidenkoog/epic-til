@@ -2537,7 +2537,32 @@ Organize concepts, features, types and Pros and Cons
   - 주의점
     - 불필요하게 모든 함수를 useCallback으로 감싸면 오히려 메모리 낭비나 복잡도 증가 가능. 리렌더링 영향이 있는 경우에만 사용 필요
 
-- React에서 Forward Ref를 사용하는 시나리오는?
+- React에서 Forward Ref를 사용하는 시나리오
+  - 개요
+    - forwardRef는 부모가 자식 컴포넌트 내부의 DOM 또는 Imperative 메서드에 접근할 수 있게 해주는 기능
+
+  - 사용 시나리오
+    - 재사용 가능한 input 컴포넌트를 만들고 부모에서 포커스를 제어하고 싶을 때
+      ```tsx
+      const MyInput = forwardRef((props, ref) => <input ref={ref} {...props} />);
+      ```
+
+    - 모달/툴팁/비디오 등에서 외부에서 직접 조작이 필요한 경우
+      - 예: scrollToTop(), play(), close() 등 외부에서 호출해야 할 함수
+
+    - useImperativeHandle과 함께 제어된 기능만 외부로 노출할 때
+      ```tsx
+      useImperativeHandle(ref, () => ({
+        focus: () => inputRef.current.focus(),
+      }));
+      ```
+
+    - 폼 라이브러리에서 ref 기반 등록이 필요한 경우
+      - 예: react-hook-form의 register()와 함께 사용하는 커스텀 컴포넌트
+
+  - 요약
+    - forwardRef는 컴포넌트 추상화와 외부 제어 사이의 균형을 잡기 위한 도구
+    - DOM 조작, imperative 제어가 필요한 컴포넌트에 적합
 
 - React에서 useRef를 활용하여 DOM 요소에 직접 접근하는 방법은?
 - React에서 useEffect와 useMemo를 함께 사용할 때 주의할 점은?
