@@ -2724,6 +2724,72 @@ Organize concepts, features, types and Pros and Cons
     - value를 useMemo로 감싸거나
     - context-selector, zustand, Recoil 등 분리 가능한 상태 관리 라이브러리 사용
 
+- React에서 리렌더링을 줄이기 위한 best practice
+  - 컴포넌트 메모이제이션
+    - React.memo(Component)
+      - props가 변경되지 않으면 리렌더링 방지
+        ```tsx
+        const MyComponent = React.memo(({ title }) => {
+          return <div>{title}</div>;
+        });
+        ```
+        - 단, props가 객체/함수일 경우 참조가 바뀌면 무조건 리렌더됨 → useCallback, useMemo와 함께 써야 함
+  - 불필요한 State 분리
+  - 함수/객체는 useCallback/useMemo 로 캐싱
+    ```tsx
+    const handleClick = useCallback(() => {
+      // 함수 내용
+    }, [deps]);
+
+    const memoizedValue = useMemo(() => {
+      return computeHeavyValue(data);
+    }, [data]);
+    ```
+    - props로 넘기는 함수/객체가 매번 새로 생성되면 하위 컴포넌트가 리렌더됨
+    - React.memo와 함께 사용할 때 필수
+  - Context 최소화 또는 분리
+    - Context 업데이트는 context를 구독하는 모든 하위 컴포넌트를 리렌더링시킴
+    - 해결 방법
+      - Context를 작게 나누기 (예: ThemeContext, UserContext, ModalContext 등)
+      - 정말 자주 바뀌는 데이터는 Zustand, Redux, Recoil 같은 외부 상태관리 도구로
+  - 리스트 렌더링 최적화
+    - key 속성을 항상 고유하게 설정
+      ```tsx
+      {items.map(item => (
+        <Item key={item.id} data={item} />
+      ))}
+      ```
+      - index를 key로 쓰면, 정렬/삭제 시 문제 발생 → 가상화된 리스트에서만 예외적으로 허용
+  - 컴포넌트 분할
+    - 큰 컴포넌트는 자주 바뀌는 부분과 안 바뀌는 부분을 분리
+      ```tsx
+      const Parent = () => {
+        const [count, setCount] = useState(0);
+        return (
+          <>
+            <StaticHeader /> {/* 리렌더 없음 */}
+            <ChangingContent count={count} />
+          </>
+        );
+      };
+      ```
+  - useDeferredValue로 저우선 렌더링 처리 (React 18+)
+    - 입력값 변경은 즉시 반영하지만, 렌더링은 천천히 수행
+  - 이벤트 핸들러에서 setState 최소화
+    - 여러 상태를 동시에 변경하면, 하나로 묶어 처리
+      ```tsx
+      // 비효율적
+      setA(1); setB(2);
+
+      // 더 나은 방식
+      setState({ a: 1, b: 2 });
+      ```
+  - 성능 측정 도구도 함께 활용
+    - React DevTools -> Profiler 탭
+      - 어떤 컴포넌트가 왜 리렌더되는지 확인
+    - why-did-you-render 라이브러리
+      - 불필요한 리렌더링 원인을 자동 추적
+
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점
 - React에서 getInitialProps와 getServerSideProps의 차이는?
 - React에서 React Query를 사용할 때 얻을 수 있는 이점은?
@@ -2734,7 +2800,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 SWR과 React Query의 차이점은?
 - React에서 Suspense를 활용한 데이터 캐싱 기법은?
 
-- React에서 리렌더링을 줄이기 위한 best practice는?
 - React에서 Formik과 React Hook Form의 차이점은?
 - React에서 Jest와 React Testing Library를 활용한 테스트 방법은?
 - React에서 Cypress와 Jest의 차이점은?
