@@ -1731,7 +1731,13 @@ Organize concepts, features, types and Pros and Cons
     - paused: 앱이 백그라운드로 이동
     - detached: 앱이 분리됨 (플랫폼 View에서 분리됨)
 
-- Flutter에서 상태 관리 선택 기준은 무엇인가?
+- Flutter에서 상태 관리 선택 기준
+  - 소규모, 간단한 상태: setState, InheritedWidget
+  - 중간 규모, 구조화된 상태 분리: Provider, Riverpod, Bloc, GetX
+  - 대규모 앱, 테스트/DI 필요: Riverpod, Bloc (Clean Architecture)
+  - 단순한 비동기 처리: FutureBuilder, StreamBuilder
+  - 복잡한 애니매이션 연동: ValueNotifier, ChangeNotifier
+
 - Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
 
 
