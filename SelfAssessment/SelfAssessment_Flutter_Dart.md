@@ -1738,8 +1738,50 @@ Organize concepts, features, types and Pros and Cons
   - 단순한 비동기 처리: FutureBuilder, StreamBuilder
   - 복잡한 애니매이션 연동: ValueNotifier, ChangeNotifier
 
-- Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
+- Flutter에서 AnimatedBuilder를 활용한 상태 관리의 장점
+  - 개요
+    - AnimatedBuilder는 애니매이션을 효율적으로 재렌더링 할 수 있게 해주는 위젯 리렌더링 최적화 도구
+    - 전체 위젯 리빌드가 아닌, 애니매이션 대상만 다시 빌드
 
+  - 예시
+    ```dart
+    class Spinner extends StatefulWidget {
+      @override
+      _SpinnerState createState() => _SpinnerState();
+    }
+
+    class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
+      late AnimationController _controller;
+
+      @override
+      void initState() {
+        _controller = AnimationController(
+          duration: const Duration(seconds: 2),
+          vsync: this,
+        )..repeat();
+        super.initState();
+      }
+
+      @override
+      Widget build(BuildContext context) {
+        return AnimatedBuilder(
+          animation: _controller,
+          builder: (_, child) {
+            return Transform.rotate(
+              angle: _controller.value * 2 * 3.1415,
+              child: child,
+            );
+          },
+          child: Icon(Icons.refresh),
+        );
+      }
+    }
+    ```
+
+  - 장점:
+    - 위젯 리빌드 최적화: animation 대상만 rebuild
+    - 구조 분리: animation 외부 위젯과의 decoupling 가능
+    - setState보다 성능 우수
 
 - Flutter에서 OverlayEntry를 활용한 UI 상태 관리는 어떻게 하는가?
 - Flutter에서 StatefulWidget이 필요한 경우는?
