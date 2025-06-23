@@ -1690,7 +1690,47 @@ Organize concepts, features, types and Pros and Cons
     - 테스트가 어려움
     - 복잡한 앱에서 의존성 주입 없이 남용 시 유지보수 어려움
 
-- Flutter에서 App Lifecycle을 관리하는 방법은?
+- Flutter에서 App Lifecycle을 관리하는 방법
+  - 앱 라이프사이클 관리 방법
+    - WidgetsBindingObserver 활용하여 앱 라이프사이클 상태 감지 가능
+
+  - 예시
+    ```dart
+    class MyAppState extends State<MyApp> with WidgetsBindingObserver {
+      @override
+      void initState() {
+        super.initState();
+        WidgetsBinding.instance.addObserver(this);
+      }
+
+      @override
+      void dispose() {
+        WidgetsBinding.instance.removeObserver(this);
+        super.dispose();
+      }
+
+      @override
+      void didChangeAppLifecycleState(AppLifecycleState state) {
+        switch (state) {
+          case AppLifecycleState.resumed:
+            print('앱 다시 활성화');
+            break;
+          case AppLifecycleState.paused:
+            print('앱 백그라운드로');
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    ```
+
+  - 주요 상태:
+    - resumed: 앱이 포그라운드 상태로 복귀
+    - inactive: 앱이 비활성 (전화 수신 등)
+    - paused: 앱이 백그라운드로 이동
+    - detached: 앱이 분리됨 (플랫폼 View에서 분리됨)
+
 - Flutter에서 상태 관리 선택 기준은 무엇인가?
 - Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
 
