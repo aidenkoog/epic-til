@@ -1658,7 +1658,38 @@ Organize concepts, features, types and Pros and Cons
     - useEffect(() => {}, [])는 initState + addPostFrameCallback 조합과 유사
     - 값이 변경될 때마다 사이드 이펙트를 실행하려면 ValueNotifier나 StateNotifier 등을 활용한 관찰 구조 사용
 
-- Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법은?
+- Flutter에서 Singleton 패턴을 활용하여 상태를 관리하는 방법
+  - 개요
+    - 싱글톤 패턴은 앱 전체에서 하나의 인스턴스를 공유하는 방식
+    - 플러터에서 주로 Service, Manager, Controller 클래스 등에 사용됨
+    - 상태를 글로벌하게 유지 가능
+
+  - 예시
+    ```dart
+    class UserManager {
+  static final UserManager _instance = UserManager._internal();
+      String? userName;
+
+      factory UserManager() {
+        return _instance;
+      }
+
+      UserManager._internal();
+    }
+
+    // 사용 예
+    UserManager().userName = "Aiden";
+    print(UserManager().userName); // "Aiden"
+    ```
+
+  - 장점:
+    - 전역 접근성
+    - 메모리 절약 (인스턴스 1개만 유지)
+
+  - 단점:
+    - 테스트가 어려움
+    - 복잡한 앱에서 의존성 주입 없이 남용 시 유지보수 어려움
+
 - Flutter에서 App Lifecycle을 관리하는 방법은?
 - Flutter에서 상태 관리 선택 기준은 무엇인가?
 - Flutter에서 AnimatedBuilder를 활용한 상태 관리는 어떤 장점을 가지는가?
