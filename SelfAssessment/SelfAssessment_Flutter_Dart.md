@@ -1783,7 +1783,42 @@ Organize concepts, features, types and Pros and Cons
     - 구조 분리: animation 외부 위젯과의 decoupling 가능
     - setState보다 성능 우수
 
-- Flutter에서 OverlayEntry를 활용한 UI 상태 관리는 어떻게 하는가?
+- Flutter에서 OverlayEntry를 활용한 UI 상태 관리 방법
+  - 개요
+    - OverlayEntry는 현재의 위젯 트리와는 별개로, 화면 위에 UI 요소를 동적으로 띄울 수 있는 기능
+    - 예: 커스텀 툴팁, 드롭다운, 로딩 인디케이터 등.
+
+  - 사용 절차:
+    - OverlayState를 가져온다: Overlay.of(context)
+    - OverlayEntry를 생성한다.
+    - overlay.insert(entry)로 삽입한다.
+    - UI 상태 변화에 따라 entry.markNeedsBuild()로 갱신하거나, entry.remove()로 제거
+
+  - 예시
+    ```dart
+    late OverlayEntry _entry;
+
+    void _showOverlay(BuildContext context) {
+      final overlay = Overlay.of(context);
+      _entry = OverlayEntry(
+        builder: (context) => Positioned(
+          top: 100,
+          left: 100,
+          child: Material(
+            child: Text('Hello Overlay'),
+          ),
+        ),
+      );
+      overlay.insert(_entry);
+    }
+
+    void _hideOverlay() {
+      _entry.remove();
+    }
+    ```
+    - 상태를 StatefulWidget, StateNotifier, Riverpod, Provider, Bloc 등으로 관리하고
+    - setState 혹은 notifyListeners()로 상태 변경 시 OverlayEntry를 갱신할 수 있음.
+
 - Flutter에서 StatefulWidget이 필요한 경우는?
 - Flutter에서 ChangeNotifier와 StateNotifier의 차이점은?
 - Flutter에서 FutureProvider와 StreamProvider의 차이점은?
