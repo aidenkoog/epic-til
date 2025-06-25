@@ -1831,8 +1831,46 @@ Organize concepts, features, types and Pros and Cons
     - ScrollController, TabController 등 컨트롤러 유지가 필요할 때
 
   - 예외 상황
-    - 반대로, 상태가 없거나 고정된 UI만을 그릴 때는 StatelessWidget을 사용.
-- Flutter에서 ChangeNotifier와 StateNotifier의 차이점은?
+    - 반대로, 상태가 없거나 고정된 UI만을 그릴 때는 StatelessWidget을 사용
+
+- Flutter에서 ChangeNotifier와 StateNotifier의 차이점
+  - 차이점
+    - ChangeNotifier
+      - 플러터 기본 제공
+      - 내부 필드를 직접 mutate
+      - 클래스 내부에서 notifyListeners() 호출
+      - 상대적으로 테스트 용이성은 떨어짐
+      - 복잡한 구조
+    - StateNotifier
+      - Riverpod 라이브러리
+      - 단일 state를 불변 객체로 관리
+      - state = newValue 방식
+      - ChangeNotifier보다 명확하며 testable
+      - 명확한 단방향 흐름 설계 가능
+
+  - 예시:
+    - ChangeNotifier
+      ```dart
+      class Counter with ChangeNotifier {
+        int count = 0;
+
+        void increment() {
+          count++;
+          notifyListeners();
+        }
+      }
+      ```
+
+    - StateNotifier
+      ```dart
+      class CounterNotifier extends StateNotifier<int> {
+        CounterNotifier() : super(0);
+
+        void increment() => state++;
+      }
+      ```
+      - 복잡한 상태나 불변 상태 관리를 하려면 StateNotifier가 적합 (단방향, 관리 용이성)
+
 - Flutter에서 FutureProvider와 StreamProvider의 차이점은?
 - Flutter에서 MultiProvider를 활용하는 이유는?
 
