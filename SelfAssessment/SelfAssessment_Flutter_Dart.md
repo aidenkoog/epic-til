@@ -1871,8 +1871,31 @@ Organize concepts, features, types and Pros and Cons
       ```
       - 복잡한 상태나 불변 상태 관리를 하려면 StateNotifier가 적합 (단방향, 관리 용이성)
 
-- Flutter에서 FutureProvider와 StreamProvider의 차이점은?
-- Flutter에서 MultiProvider를 활용하는 이유는?
+- Flutter에서 FutureProvider와 StreamProvider의 차이점
+  - 차이점
+    - FutureProvider
+      - 한 번만 비동기 처리 (예: API 요청)
+      - 반환값 Future<T>
+      - 자동 갱신 안됨 (명시적 다시 호출 필요)
+    - StreamProvider
+      - 여러 값의 비동기 흐름 (예: 실시간 데이터)
+      - Stream<T>
+      - 자동 갱신 가능 (스트림에 새 이벤트가 Emit되면 갱신)
+  - 예시
+    - FutureProvider
+      ```dart
+      final userProvider = FutureProvider((ref) async {
+        return await fetchUser();
+      });
+      ```
+    - StreamProvider
+      ```dart
+      final messagesProvider = StreamProvider((ref) {
+        return FirebaseFirestore.instance.collection('chats').snapshots();
+      });
+      ```
+
+- Flutter에서 MultiProvider를 활용하는 이유
 
 
 - Flutter에서 CustomPainter를 활용한 그래픽 구현 방법은?
