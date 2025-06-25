@@ -1819,7 +1819,19 @@ Organize concepts, features, types and Pros and Cons
     - 상태를 StatefulWidget, StateNotifier, Riverpod, Provider, Bloc 등으로 관리하고
     - setState 혹은 notifyListeners()로 상태 변경 시 OverlayEntry를 갱신할 수 있음.
 
-- Flutter에서 StatefulWidget이 필요한 경우는?
+- Flutter에서 StatefulWidget이 필요한 경우
+  - 필요 케이스
+    - StatefulWidget은 내부에 상태(state)가 변경되며 UI가 다시 빌드되어야 하는 경우에 사용
+
+  - 예시 상황:
+    - 텍스트 필드의 입력값을 추적할 때
+    - 버튼 클릭 여부
+    - 애니메이션 컨트롤
+    - 타이머/카운트다운 등 반복적으로 값이 변할 때
+    - ScrollController, TabController 등 컨트롤러 유지가 필요할 때
+
+  - 예외 상황
+    - 반대로, 상태가 없거나 고정된 UI만을 그릴 때는 StatelessWidget을 사용.
 - Flutter에서 ChangeNotifier와 StateNotifier의 차이점은?
 - Flutter에서 FutureProvider와 StreamProvider의 차이점은?
 - Flutter에서 MultiProvider를 활용하는 이유는?
