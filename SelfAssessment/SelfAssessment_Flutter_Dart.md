@@ -1896,7 +1896,35 @@ Organize concepts, features, types and Pros and Cons
       ```
 
 - Flutter에서 MultiProvider를 활용하는 이유
+  - 사용 이유
+    - MultiProvider는 여러 개의 Provider를 계층적으로 선언할 때 코드 가독성을 높이기 위해 사용
 
+  - 일반적 방식 (비효율적)
+    ```dart
+    return ProviderA(
+      create: (_) => A(),
+      child: ProviderB(
+        create: (_) => B(),
+        child: ProviderC(
+          create: (_) => C(),
+          child: MyApp(),
+        ),
+      ),
+    );
+    ```
+
+  - MultiProvider 방식 (추천)
+    ```dart
+    return MultiProvider(
+      providers: [
+        Provider<A>(create: (_) => A()),
+        Provider<B>(create: (_) => B()),
+        Provider<C>(create: (_) => C()),
+      ],
+      child: MyApp(),
+    );
+    ```
+    - 특히 앱 전체에서 사용하는 여러 의존성 객체를 깔끔하게 주입할 때 유리
 
 - Flutter에서 CustomPainter를 활용한 그래픽 구현 방법은?
 - Flutter에서 SliverWidgets를 사용하는 이유는?
