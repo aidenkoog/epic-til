@@ -1926,7 +1926,103 @@ Organize concepts, features, types and Pros and Cons
     ```
     - 특히 앱 전체에서 사용하는 여러 의존성 객체를 깔끔하게 주입할 때 유리
 
-- Flutter에서 CustomPainter를 활용한 그래픽 구현 방법은?
+- Flutter에서 CustomPainter를 활용한 그래픽 구현 방법
+  - 개요
+    - CustomPainter는 Flutter에서 캔버스 위에 직접 그림을 그리는 저수준 API
+    - 이걸 활용하면 기본 위젯으로는 어려운 커스텀 그래픽, 애니메이션, 차트, 경로 등 복잡한 UI를 그릴 수 있음
+
+  - 기본 구조
+    ```dart
+    class MyPainter extends CustomPainter {
+      @override
+      void paint(Canvas canvas, Size size) {
+        final paint = Paint()
+          ..color = Colors.blue
+          ..strokeWidth = 4
+          ..style = PaintingStyle.stroke;
+
+        canvas.drawRect(
+          Rect.fromLTWH(0, 0, size.width, size.height),
+          paint,
+        );
+      }
+
+      @override
+      bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+    }
+    ```
+    ```dart
+    CustomPaint(
+      size: Size(200, 200),
+      painter: MyPainter(),
+    )
+    ```
+
+  - 주요 메서드 및 속성 설명
+    - paint(Canvas, Size): 그림을 그리는 핵심 메서드
+    - shouldRepaint: 상태가 바뀔 때 다시 그려야 하는지 결정
+    - Paint(): 색상, 두께, 스타일 지정
+    - canvas.drawXXX: 도형, 텍스트, 이미지 그리기 (drawRect, drawCircle, drawLine, drawPath 등)
+
+  - 간단한 예: 원 그리기
+    ```dart
+    class CirclePainter extends CustomPainter {
+      @override
+      void paint(Canvas canvas, Size size) {
+        final paint = Paint()
+          ..color = Colors.orange
+          ..style = PaintingStyle.fill;
+
+        final center = Offset(size.width / 2, size.height / 2);
+        final radius = size.width / 3;
+
+        canvas.drawCircle(center, radius, paint);
+      }
+
+      @override
+      bool shouldRepaint(CustomPainter oldDelegate) => false;
+    }
+    ```
+
+  - 애니메이션과 함께 사용 (예: CustomPainter + AnimationController)
+    ```dart
+    class AnimatedCirclePainter extends CustomPainter {
+      final double progress;
+      AnimatedCirclePainter(this.progress);
+
+      @override
+      void paint(Canvas canvas, Size size) {
+        final paint = Paint()
+          ..color = Colors.blue
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 4;
+
+        final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+        canvas.drawArc(rect, -pi / 2, 2 * pi * progress, false, paint);
+      }
+
+      @override
+      bool shouldRepaint(covariant AnimatedCirclePainter old) =>
+          old.progress != progress;
+    }
+    ```
+    ```dart
+    CustomPaint(
+      painter: AnimatedCirclePainter(animation.value),
+    )
+    ```
+
+  - 주의할 점
+    - CustomPainter는 성능이 좋은 대신 직접 그려야 하므로 좌표계, 레이아웃 계산, 반응 처리(UI 입력) 등을 수동으로 관리해야 함
+    - 복잡한 UI일수록 shouldRepaint 조건을 정확하게 지정해야 리렌더링 성능 유지됨
+
+  - 활용 예시
+    - 게이지/차트/그래프
+    - 다각형/도형 UI
+    - 비동기 애니메이션 효과
+    - 경로 기반의 그래픽 인터랙션
+    - 이미지와 텍스트의 캔버스 합성
+
 - Flutter에서 SliverWidgets를 사용하는 이유는?
 - Flutter에서 RepaintBoundary를 활용하여 성능을 최적화하는 방법은?
 - Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유는?
