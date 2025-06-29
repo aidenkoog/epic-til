@@ -15555,7 +15555,44 @@ Organize concepts, features, types and Pros and Cons
         - 동시성 제어 구조 리팩토링
             - 락 사용 최소화, 메시지 큐 기반 구조 도입
 
-- Java에서 Thread.sleep()과 Object.wait()의 차이점은?
+- Java에서 Thread.sleep()과 Object.wait()의 차이점
+    - 개요
+        - Thread.sleep()과 Object.wait()는 Java에서 스레드를 일시 중단(suspend)시키는 데 사용되지만, 동작 방식과 목적이 다름
+
+    - Thread.sleep(ms)
+        - 목적
+            - 스레드를 지정된 시간(ms) 동안 일시적으로 멈추게 함.
+
+        - 특징
+            - 현재 스레드를 멈춤 (CPU 점유 안 함)
+            - 잠금(lock)을 해제하지 않음
+            - 아무 객체와도 관련이 없음
+
+        - 참고
+            - sleep() 중인 스레드는 interrupt()로 깨울 수 있음
+            - 예외: InterruptedException 발생 가능
+
+    - Object.wait()
+        - 목적
+            - 스레드를 지정된 시간 또는 notify() 호출 전까지 대기시킴
+            - 스레드 간 동기화(synchronization)를 위해 사용됨
+
+        - 특징
+            - wait()은 반드시 synchronized 블록/메서드 안에서 호출해야 함
+            - 호출 시, 해당 객체의 모니터 락(lock)을 반납함
+            - notify()나 notifyAll()이 호출되면 대기 중인 스레드가 깨어남
+
+        - 예시
+            ```java
+            synchronized (sharedObject) {
+                sharedObject.wait(); // wait 중에는 lock을 반납함
+            }
+            ```
+
+    - 결론
+        - sleep()은 단순한 시간 지연.
+        - wait()은 동기화된 환경에서 다른 스레드의 작업을 기다릴 때 사용합니다
+
 - Java에서 ScheduledThreadPoolExecutor의 활용 방법은?
 - Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법은?
 - Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
