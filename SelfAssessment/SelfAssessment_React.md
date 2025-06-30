@@ -2854,7 +2854,19 @@ Organize concepts, features, types and Pros and Cons
     - 쿼리 조작, 너무 복잡한 요청 등에 대비한 쿼리 깊이 제한 필요
     - 인증/인가 전략도 REST와 다르게 설계해야 할 수 있음
 
-- React에서 상태 관리 라이브러리를 사용하지 않고 상태를 관리하는 방법은?
+- React에서 상태 관리 라이브러리를 사용하지 않고 상태를 관리하는 방법
+  - 기본 방식
+    - useState, useReducer: 컴포넌트 내부 상태 관리
+    - useContext: 전역 상태처럼 공유할 수 있음
+
+  - 구조적 예시
+    - 상위 컴포넌트에서 상태를 만들고 props로 하위에 전달 (Prop drilling)
+    - 필요 시 Context API와 useReducer를 조합해 간단한 전역 상태 관리도 가능
+
+  - 한계
+    - 중첩 구조에서 prop drilling 문제
+    - 복잡한 비동기 흐름 및 캐싱은 별도 구현 필요
+
 - React에서 Apollo Client를 사용할 때의 장점은?
 - React에서 SWR과 React Query의 차이점은?
 - React에서 Suspense를 활용한 데이터 캐싱 기법은?
