@@ -2867,10 +2867,23 @@ Organize concepts, features, types and Pros and Cons
     - 중첩 구조에서 prop drilling 문제
     - 복잡한 비동기 흐름 및 캐싱은 별도 구현 필요
 
-- React에서 Apollo Client를 사용할 때의 장점은?
+- React에서 Apollo Client를 사용할 때의 장점
+  - GraphQL 전용 클라이언트
+    - 요청, 응답, 상태 관리를 GraphQL에 최적화된 구조로 처리
+
+  - 캐싱
+    - 자동으로 결과를 캐싱하고, 동일 쿼리 시 빠른 재사용 가능
+    - InMemoryCache를 통한 고성능 캐싱 제공
+
+  - DevTools 및 쿼리 추적
+    - Apollo DevTools로 쿼리 요청/응답, 캐시 상태 확인 가능
+
+  - 다양한 기능 지원
+    - 쿼리, 뮤테이션, 서브스크립션 모두 지원
+    - SSR, 오류 처리, 리페치, 로딩 상태 관리 등 내장
+
 - React에서 SWR과 React Query의 차이점은?
 - React에서 Suspense를 활용한 데이터 캐싱 기법은?
-
 - React에서 Formik과 React Hook Form의 차이점은?
 - React에서 Jest와 React Testing Library를 활용한 테스트 방법은?
 - React에서 Cypress와 Jest의 차이점은?
