@@ -2882,7 +2882,22 @@ Organize concepts, features, types and Pros and Cons
     - 쿼리, 뮤테이션, 서브스크립션 모두 지원
     - SSR, 오류 처리, 리페치, 로딩 상태 관리 등 내장
 
-- React에서 SWR과 React Query의 차이점은?
+- React에서 SWR과 React Query의 차이점
+  - 공통점
+    - 데이터 패칭 라이브러리
+    - 캐싱, 자동 리페치, 에러/로딩 상태 관리 가능
+
+  - SWR (by Vercel)
+    - 더 단순하고 가벼움
+    - 기본 철학: "Stale While Revalidate"
+    - 주로 Next.js와 함께 사용됨
+    - 커스터마이징 자유도가 적은 편
+
+  - React Query (by TanStack)
+    - 더 풍부한 기능: 쿼리 무효화, 무한스크롤, mutation, 비동기 전역상태 관리
+    - 서버 상태 관리 도구로 쓰임
+    - 커스터마이징 및 확장성 뛰어남
+
 - React에서 Suspense를 활용한 데이터 캐싱 기법은?
 - React에서 Formik과 React Hook Form의 차이점은?
 - React에서 Jest와 React Testing Library를 활용한 테스트 방법은?
