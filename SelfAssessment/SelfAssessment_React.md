@@ -2898,7 +2898,21 @@ Organize concepts, features, types and Pros and Cons
     - 서버 상태 관리 도구로 쓰임
     - 커스터마이징 및 확장성 뛰어남
 
-- React에서 Suspense를 활용한 데이터 캐싱 기법은?
+- React에서 Suspense를 활용한 데이터 캐싱 기법
+  - Suspense 개념
+    - 비동기 컴포넌트 렌더링 중 fallback UI를 보여줄 수 있는 리액트 기능
+
+  - 사용 예시
+    ```tsx
+    <Suspense fallback={<Loading />}>
+      <MyComponent />
+    </Suspense>
+    ```
+
+  - 데이터 캐싱 활용
+    - React 18 이후 use() API로 서버 사이드 렌더링(Suspense 지원 라이브러리)에서 활용 가능
+    - react-fetch, Relay, React Query, SWR에서 experimental Suspense 연동 기능 지원
+
 - React에서 Formik과 React Hook Form의 차이점은?
 - React에서 Jest와 React Testing Library를 활용한 테스트 방법은?
 - React에서 Cypress와 Jest의 차이점은?
