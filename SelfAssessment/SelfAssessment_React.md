@@ -2806,8 +2806,21 @@ Organize concepts, features, types and Pros and Cons
       - 항상 최신 데이터를 보장
       - 서버 부하 증가 가능
       - 캐시가 어려움
-      
-- React에서 getInitialProps와 getServerSideProps의 차이는?
+
+- React에서 getInitialProps와 getServerSideProps의 차이
+  - getInitialProps
+    - 사용 가능 위치: _app, _document, 커스텀 페이지 컴포넌트
+    - 렌더링 방식: 서버와 클라이언트 모두에서 실행 가능 (context에 따라 다름)
+    - 단점:
+      - 자동 Static Optimization 비활성화됨
+      - 데이터 fetch가 느려질 수 있음
+      - Next.js 최신 권장 방식 아님
+
+  - getServerSideProps
+    - Next.js 공식 권장 방식 (SSR 용도)
+    - 서버에서만 실행 → 클라이언트에는 노출되지 않음
+    - 최신 방식이며, 더 명확한 실행 시점과 분리된 역할 제공
+
 - React에서 React Query를 사용할 때 얻을 수 있는 이점은?
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
 
