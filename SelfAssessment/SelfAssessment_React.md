@@ -2791,6 +2791,22 @@ Organize concepts, features, types and Pros and Cons
       - 불필요한 리렌더링 원인을 자동 추적
 
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점
+  - getStaticProps
+    - 실행 시점: 빌드 타임(앱이 배포되기 전에 한 번 실행됨)
+    - 용도: 정적인 콘텐츠 생성 (ex. 블로그, 제품 소개 페이지)
+    - 특징:
+      - CDN 캐시 가능 → 빠른 성능 제공
+      - 데이터가 자주 변하지 않는 경우 적합
+      - revalidate 옵션으로 ISR(Incremental Static Regeneration)도 가능
+
+  - getServerSideProps
+    - 실행 시점: 매 요청 시마다 서버에서 실행됨
+    - 용도: 요청마다 최신 데이터가 필요한 페이지 (ex. 사용자 대시보드, 실시간 통계)
+    - 특징:
+      - 항상 최신 데이터를 보장
+      - 서버 부하 증가 가능
+      - 캐시가 어려움
+      
 - React에서 getInitialProps와 getServerSideProps의 차이는?
 - React에서 React Query를 사용할 때 얻을 수 있는 이점은?
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
