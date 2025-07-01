@@ -2913,14 +2913,31 @@ Organize concepts, features, types and Pros and Cons
     - React 18 이후 use() API로 서버 사이드 렌더링(Suspense 지원 라이브러리)에서 활용 가능
     - react-fetch, Relay, React Query, SWR에서 experimental Suspense 연동 기능 지원
 
-- React에서 Formik과 React Hook Form의 차이점은?
-- React에서 Jest와 React Testing Library를 활용한 테스트 방법은?
-- React에서 Cypress와 Jest의 차이점은?
+- React에서 Formik과 React Hook Form의 차이점
+  - Formik
+    - 클래스/함수 컴포넌트 모두 지원.
+    - 상태를 내부적으로 useState로 관리 → 렌더링 횟수 많음.
+    - validation: 자체 방식 + Yup 등 외부 라이브러리와 통합.
+    - 초기 학습 난이도는 낮지만, 성능은 상대적으로 떨어짐.
+    - 제어 컴포넌트 중심 (controlled input).
 
-- React에서 테스트 코드 작성 시 고려해야 할 사항은?
-- React에서 상태 기반 렌더링을 수행할 때 성능을 최적화하는 방법은?
-- React에서 ESM과 CommonJS의 차이점은?
-- React에서 Webpack과 Vite의 차이점은?
+  - React Hook Form
+    - ref 기반으로 DOM을 추적 → 렌더링 최소화.
+    - 비제어 컴포넌트(uncontrolled input)를 기본으로 사용.
+    - 폼이 클수록 성능 이점 큼.
+    - Yup, Zod 등 스키마와 유연하게 통합 가능.
+    - 초기 설정이 약간 까다로울 수 있으나 훨씬 경량.
+
+  - 정리:
+    - React Hook Form은 성능과 확장성 측면에서 최근 트렌드에 더 적합.
+    - Formik은 간단한 폼에 빠르게 도입하기 좋음.
+
+- React에서 Jest와 React Testing Library를 활용한 테스트 방법
+- React에서 Cypress와 Jest의 차이점
+- React에서 테스트 코드 작성 시 고려해야 할 사항
+- React에서 상태 기반 렌더링을 수행할 때 성능을 최적화하는 방법
+- React에서 ESM과 CommonJS의 차이점
+- React에서 Webpack과 Vite의 차이점
 
 - React에서 Tree Shaking이란 무엇인가?
 - React에서 Dynamic Import를 활용한 코드 스플리팅 기법은?
