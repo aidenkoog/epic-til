@@ -2971,8 +2971,14 @@ Organize concepts, features, types and Pros and Cons
   - 단순 구현 테스트 X → 비즈니스 로직 중심 테스트.
   - 유지보수 가능성 고려 → 내부 로직보다 UI 변화에 유연해야 함.
   - 테스트 명세는 행동 중심으로 (ex. “사용자가 A를 하면 B가 보여야 한다”).
-  
+
 - React에서 상태 기반 렌더링을 수행할 때 성능을 최적화하는 방법
+  - React.memo로 불필요한 재렌더링 방지.
+  - useMemo, useCallback으로 연산/함수 재생성 최소화.
+  - 컴포넌트 분리: 상태 변화 범위를 좁히기 위해 로컬화.
+  - 상태 업데이트 배치(batch) 처리 → 여러 상태를 한 번에 변경.
+  - 가상화(lazy rendering): 긴 리스트는 react-window 등 사용.
+  
 - React에서 ESM과 CommonJS의 차이점
 - React에서 Webpack과 Vite의 차이점
 
