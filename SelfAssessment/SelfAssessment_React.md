@@ -2933,6 +2933,22 @@ Organize concepts, features, types and Pros and Cons
     - Formik은 간단한 폼에 빠르게 도입하기 좋음.
 
 - React에서 Jest와 React Testing Library를 활용한 테스트 방법
+  - Jest
+    - 테스트 러너 및 어서션 도구.
+    - 단위 테스트, 모킹, 스냅샷 등 전반적 테스트 도구 제공.
+    - React에 국한되지 않고 범용적으로 사용 가능.
+    - jest.mock() 등을 통해 종속성 주입을 쉽게 제어 가능.
+
+  - React Testing Library (RTL)
+    - 사용자 관점 중심의 DOM 상호작용 테스트.
+    - getByText, getByRole 등 접근성 기반 쿼리 사용.
+    - 내부 구현이 아닌, 외부 행동을 테스트하게 유도.
+    - Jest와 함께 사용하는 것이 일반적 (RTL 단독 사용은 드뭄).
+
+  - 정리:
+    - RTL은 UI를 사용자처럼 테스트할 수 있게 해주고, Jest는 그 테스트를 구동하고 모킹할 수 있는 도구
+
+
 - React에서 Cypress와 Jest의 차이점
 - React에서 테스트 코드 작성 시 고려해야 할 사항
 - React에서 상태 기반 렌더링을 수행할 때 성능을 최적화하는 방법
