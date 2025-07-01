@@ -2978,9 +2978,39 @@ Organize concepts, features, types and Pros and Cons
   - 컴포넌트 분리: 상태 변화 범위를 좁히기 위해 로컬화.
   - 상태 업데이트 배치(batch) 처리 → 여러 상태를 한 번에 변경.
   - 가상화(lazy rendering): 긴 리스트는 react-window 등 사용.
-  
+
 - React에서 ESM과 CommonJS의 차이점
+  - CommonJS
+    - require() 및 module.exports 방식.
+    - 동기적 로딩: 서버 환경(Node.js) 최적화.
+    - 기존 Node 프로젝트에서 여전히 사용됨.
+
+  - ESM (ECMAScript Modules)
+    - import / export 문법.
+    - 비동기적 로딩 지원 → 브라우저 환경에 적합.
+    - Tree Shaking 가능 → 번들 크기 감소.
+    - 현대적인 JS 프로젝트의 표준.
+
+  - 정리:
+    - ESM은 브라우저와 모던 빌드 도구에 최적화된 방식, 앞으로의 표준
+    - CommonJS는 Node.js 레거시 환경에서 주로 사용.
+
 - React에서 Webpack과 Vite의 차이점
+  - Webpack
+    - 복잡한 설정 가능, 플러그인 생태계 풍부.
+    - 번들링 중심 → 초기 빌드 속도 느림.
+    - HMR(핫 모듈 리플레이스먼트)은 느릴 수 있음.
+    - 대규모 엔터프라이즈에서 여전히 많이 사용됨.
+
+  - Vite
+    - ESM 기반 → 즉시 모듈 로딩.
+    - 번들 없이 dev 서버 구동 가능 → 매우 빠름.
+    - Rollup 기반의 프로덕션 빌드 → 경량 번들 생성.
+    - React, Vue 등과의 통합 우수.
+
+  - 정리:
+    - Vite는 개발자 경험 중심의 차세대 번들러
+    - Webpack은 고도화된 설정이 필요한 프로젝트에 적합
 
 - React에서 Tree Shaking이란 무엇인가?
 - React에서 Dynamic Import를 활용한 코드 스플리팅 기법은?
