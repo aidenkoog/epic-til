@@ -3012,12 +3012,20 @@ Organize concepts, features, types and Pros and Cons
     - Vite는 개발자 경험 중심의 차세대 번들러
     - Webpack은 고도화된 설정이 필요한 프로젝트에 적합
 
-- React에서 Tree Shaking이란 무엇인가?
+- React에서 Tree Shaking 개념
+  - Tree Shaking 개념
+    - 사용되지 않는 (dead code) Javascript 모듈을 최종 번들에서 제거하는 최적화 기법
+    - 리액트 자체 기능 아니며, 웹팩, 롤업 등 모듈 번들러가 ESM(ES6 Module)을 분석하여 실행
+  - React에서의 적용 예시
+    - import { Button } from 'library' 처럼 필요한 모듈만 불러오면, 사용하지 않은 부분은 제거됨
+    - default export 보다 named export를 사용하는 것이 tree-shake-friendly 함.
+
 - React에서 Dynamic Import를 활용한 코드 스플리팅 기법은?
 - React에서 Suspense의 기본 개념과 활용 방법은?
 - React에서 useDeferredValue()의 활용 사례는?
-
 - React에서 useTransition()을 사용할 때 얻을 수 있는 이점은?
+
+
 - React에서 useSyncExternalStore()의 역할은?
 - React에서 Double Rendering이 발생하는 이유는?
 - React에서 Concurrent Mode가 UI 성능에 미치는 영향은?
