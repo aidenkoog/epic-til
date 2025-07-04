@@ -3090,8 +3090,12 @@ Organize concepts, features, types and Pros and Cons
   - 사용자의 입력에 대해 즉시 UI를 반영하되, 서버 응답 후 실제 데이터로 교체.
   - useOptimistic(prevState, updater) 패턴으로 구현.
   - 예: 댓글 작성 시 입력값을 먼저 리스트에 보여주고, 실패 시 롤백.
-  
-- React에서 React Native와 React의 차이점을 비교
+
+- React에서 React Native와 React의 차이점
+  - 렌더링 대상이 다름: React는 DOM, React Native는 iOS/Android Native 컴포넌트. (DOM vs Native Component)
+  - React는 HTML/CSS 사용, RN은 View/Text/StyleSheet 등 자체 UI 시스템 사용.
+  - React Native는 브리지(Bridge)를 통해 네이티브 모듈과 통신함.
+
 - React에서 Global State를 관리하는 다양한 방법
 
 - React에서 Preact를 사용할 때 성능 향상을 기대할 수 있는 이유는?
