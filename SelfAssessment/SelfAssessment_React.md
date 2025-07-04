@@ -3065,9 +3065,12 @@ Organize concepts, features, types and Pros and Cons
   - useEffect 내부 로직이 mount → unmount → mount 순으로 실행됨.
   - 안정성 확보를 위한 개발 도우미이며, 실제 앱 동작에는 영향 없음.
 
-- React에서 Strict Mode를 적용할 때 발생할 수 있는 문제는?
+- React에서 Strict Mode를 적용할 때 발생할 수 있는 문제
+  - 개발 중 useEffect, useState, constructor 등의 코드가 2회 실행되어 부작용이 중복 발생할 수 있음.
+  - 외부 API 호출, 타이머 설정 등 비순수한 로직에서 오류 유발 가능.
+  - 실제 프로덕션에서는 1회 실행되므로, 개발 중 순수 함수 검증 목적으로만 발생.
+  
 - React에서 Next.js의 Edge Functions을 사용할 때 고려해야 할 사항은?
-
 - React에서 Redux Thunk를 사용하면 얻을 수 있는 장점은?
 - React에서 Server Actions를 활용하는 방법은?
 - React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법은?
