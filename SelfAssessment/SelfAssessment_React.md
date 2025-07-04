@@ -3036,7 +3036,9 @@ Organize concepts, features, types and Pros and Cons
   - 입력창 반응성은 유지하면서, 값 반영은 비동기로 처리.
 
 - React에서 useTransition()을 사용할 때 얻을 수 있는 이점
-
+  - 상태 업데이트를 두 가지 우선순위로 나눔: urgent(즉시), transition(지연 가능).
+  - 사용자는 입력을 즉시 반영하고, 무거운 작업(리스트 필터 등)은 부드럽게 처리.
+  - UI 블로킹 없이 자연스러운 사용자 경험 제공.
 
 - React에서 useSyncExternalStore()의 역할은?
 - React에서 Double Rendering이 발생하는 이유는?
