@@ -3061,6 +3061,9 @@ Organize concepts, features, types and Pros and Cons
   - React DevTools에서 시각적으로 분석도 가능.
 
 - React에서 Strict Mode가 상태 업데이트에 미치는 영향
+  - 상태 업데이트 함수나 이펙트가 의도치 않은 부작용을 발생시키는지 감지함.
+  - useEffect 내부 로직이 mount → unmount → mount 순으로 실행됨.
+  - 안정성 확보를 위한 개발 도우미이며, 실제 앱 동작에는 영향 없음.
 
 - React에서 Strict Mode를 적용할 때 발생할 수 있는 문제는?
 - React에서 Next.js의 Edge Functions을 사용할 때 고려해야 할 사항은?
