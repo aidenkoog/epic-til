@@ -3748,14 +3748,77 @@ Organize concepts, features, types and Pros and Cons
   - Next.js의 app/ 디렉토리(App Router)에서 기본 지원
   - 대규모 콘텐츠 앱, 느린 API 처리에서 유용
 
-- React에서 Incremental Static Regeneration(ISR)이란 무엇인가?
-- React에서 Edge Functions를 사용하면 어떤 장점이 있는가?
-- React에서 Server Actions를 활용하는 방법은?
-- React에서 fetch API와 Axios의 차이점은?
-- React에서 GraphQL을 사용할 때 고려해야 할 점은?
-- React에서 Apollo Client를 사용할 때의 장점은?
-- React에서 SWR과 React Query의 차이점은?
-- React에서 Suspense를 활용한 데이터 캐싱 기법은?
+- React에서 Incremental Static Regeneration(ISR)
+  - Next.js 기능으로, 정적 페이지를 빌드 이후에도 갱신 가능
+  - 페이지를 요청받을 때마다 백그라운드에서 재생성
+  - getStaticProps에서 revalidate 값을 설정
+  - 장점: 정적 페이지의 성능 + 최신성 동시 확보
+
+- React에서 Edge Functions를 사용 시 장점
+  - CDN 근처 엣지 서버에서 실행되는 서버 코드
+  - Latency가 낮고 응답 속도가 빠름
+  - 지역 기반 콘텐츠, 사용자 맞춤화 처리에 유리
+  - Next.js, Vercel, Cloudflare 등에서 지원
+  - 제약: 파일 시스템 접근 제한, CPU 시간 제한 등
+
+- React에서 Server Actions를 활용하는 방법
+  - React Server Components에서 서버와 직접 상호작용하는 함수
+  - 클라이언트에서 별도 API 라우트 없이 form action 또는 함수 호출로 서버 함수 실행
+  - 예: DB 저장, 인증 처리 등
+  - Next.js App Router (app/)에서 공식 지원
+  - 사용 예:
+    ```tsx
+    export async function action(formData) {
+      'use server';
+      await saveToDb(formData);
+    }
+    ```
+
+- React에서 fetch API와 Axios의 차이점
+  - fetch API
+    - 브라우저 내장
+    - 수동으로 .json() 등 변환 필요
+    - HTTP 4~5xx도 catch 안됨
+    - 인터셉터 없음
+    - 기능 확장 정도는 기본 기능 정도
+  - Axios
+    - 외부 라이브러리
+    - 자동으로 JSON 파싱 가능
+    - 상태 코드 기반 에러 처리 포함
+    - 요청/응답 인터셉터 지원
+    - 타임아웃, 취소 토큰 등 고급 기능 제공
+
+- React에서 GraphQL을 사용할 때 고려해야 할 점
+  - 쿼리 과다/중첩 제한 필요 (DoS 공격 방지)
+  - 필드 단위 권한 검증 필수
+  - introspection은 운영 환경에서 비활성화 권장
+  - 캐싱 전략 복잡 → Apollo, Relay 등 클라이언트 필요
+  - Input Validation과 Rate Limiting도 함께 고려
+
+- React에서 Apollo Client를 사용할 때의 장점
+  - GraphQL 상태 및 캐시 관리 통합
+  - useQuery, useMutation 등 선언적 API
+  - 자동 캐싱, 재요청, 에러 처리 내장
+  - 오프라인 지원, DevTools, Fragment 기반 캐시
+  - 로컬 상태까지 GraphQL로 통합 가능
+
+- React에서 SWR과 React Query의 차이점
+  - SWR:
+    - Vercel 제공, useSWR() 단일 훅으로 간단
+    - stale-while-revalidate 전략 기본
+    - 구조 단순, 빠르게 사용 가능
+
+  - React Query:
+    - TanStack 제공, 더 많은 기능 포함
+    - 쿼리 키 기반 캐시, 자동 재시도, 쿼리 취소, 뮤테이션 관리
+    - DevTools, 비동기 상태 관리까지 포괄
+
+- React에서 Suspense를 활용한 데이터 캐싱 기법
+  - use() 또는 React.lazy와 Suspense를 함께 사용
+  - 데이터 로딩 중 fallback UI 표시
+  - React 18+에서 서버 컴포넌트와 함께 사용 시 캐시 내장
+  - React Query, Relay 등도 Suspense 통합 지원
+  - Streaming + Suspense 조합으로 UX 최적화 가능
 
 - React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
 - React에서 낙관적 업데이트(Optimistic UI)를 구현하는 방법은?
