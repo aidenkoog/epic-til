@@ -3190,10 +3190,19 @@ Organize concepts, features, types and Pros and Cons
         .finally(() => setLoading(false));
     }, []);
     ```
-    
+
 - React에서 Suspense를 활용한 Skeleton UI 구현 방법
+  - React.Suspense와 lazy()로 컴포넌트 로딩 시 대기 화면 제공
+  - Skeleton 컴포넌트를 fallback으로 지정
+  - 예시:
+    ```jsx
+    const LazyComponent = React.lazy(() => import('./MyComponent'));
 
-
+    <Suspense fallback={<SkeletonUI />}>
+      <LazyComponent />
+    </Suspense>
+    ```
+    - ※ 데이터 로딩에는 아직 Suspense for Data Fetching이 실험적이므로 라이브러리 사용 (예: React Query + Suspense) 고려
 
 - React에서 상태 관리의 대표적인 방식 3가지를 설명하시오.
 - React에서 useDeferredValue()와 useTransition()의 차이점은?
