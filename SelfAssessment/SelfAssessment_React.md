@@ -3174,9 +3174,26 @@ Organize concepts, features, types and Pros and Cons
   - Hook 규칙 준수: Top-level에서만 호출, 조건문 내 호출 금지
   - 캡슐화: 내부 상태와 로직은 숨기고 필요한 인터페이스만 외부로 노출
 
+- React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법
+  - useState 또는 useReducer로 상태 분리
+  - isLoading, data, error 상태로 관리
+  - 예시:
+    ```jsx
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
 
-- React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
-- React에서 Suspense를 활용한 Skeleton UI 구현 방법은?
+    useEffect(() => {
+      fetchData()
+        .then(setData)
+        .catch(setError)
+        .finally(() => setLoading(false));
+    }, []);
+    ```
+    
+- React에서 Suspense를 활용한 Skeleton UI 구현 방법
+
+
 
 - React에서 상태 관리의 대표적인 방식 3가지를 설명하시오.
 - React에서 useDeferredValue()와 useTransition()의 차이점은?
