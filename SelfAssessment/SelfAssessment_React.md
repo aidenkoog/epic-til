@@ -3040,12 +3040,16 @@ Organize concepts, features, types and Pros and Cons
   - 사용자는 입력을 즉시 반영하고, 무거운 작업(리스트 필터 등)은 부드럽게 처리.
   - UI 블로킹 없이 자연스러운 사용자 경험 제공.
 
-- React에서 useSyncExternalStore()의 역할은?
-- React에서 Double Rendering이 발생하는 이유는?
-- React에서 Concurrent Mode가 UI 성능에 미치는 영향은?
+- React에서 useSyncExternalStore()의 역할
+  - 외부 상태 저장소(예: Redux, Zustand)와 React를 안정적으로 동기화하는 Hook.
+  - React 18에서 도입되어 Concurrent Mode에서도 일관된 스냅샷 제공.
+  - 외부 스토어 구독 및 스냅샷 값을 안전하게 읽도록 보장.
+  
+- React에서 Double Rendering이 발생하는 이유
+- React에서 Concurrent Mode가 UI 성능에 미치는 영향
+- React에서 Profiler API를 활용하여 성능 분석을 수행하는 방법
+- React에서 Strict Mode가 상태 업데이트에 미치는 영향
 
-- React에서 Profiler API를 활용하여 성능 분석을 수행하는 방법은?
-- React에서 Strict Mode가 상태 업데이트에 미치는 영향은?
 - React에서 Strict Mode를 적용할 때 발생할 수 있는 문제는?
 - React에서 Next.js의 Edge Functions을 사용할 때 고려해야 할 사항은?
 
