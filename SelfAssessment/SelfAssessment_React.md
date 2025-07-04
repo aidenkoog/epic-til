@@ -3168,7 +3168,13 @@ Organize concepts, features, types and Pros and Cons
     - React의 선언형 방식과 어긋남 → 코드 예측성 저하
     - 과도한 사용 시 유지보수 어려움
 
-- React에서 Custom Hooks를 만들 때 고려해야 할 사항은?
+- React에서 Custom Hooks를 만들 때 고려해야 할 사항
+  - 관심사의 분리: 로직을 재사용 가능한 단위로 추출
+  - 명확한 네이밍: use 접두사로 시작 (useFetch, useForm 등)
+  - Hook 규칙 준수: Top-level에서만 호출, 조건문 내 호출 금지
+  - 캡슐화: 내부 상태와 로직은 숨기고 필요한 인터페이스만 외부로 노출
+
+
 - React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
 - React에서 Suspense를 활용한 Skeleton UI 구현 방법은?
 
