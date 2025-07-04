@@ -3080,8 +3080,12 @@ Organize concepts, features, types and Pros and Cons
   - dispatch() 안에서 비동기 로직 처리 가능 (예: API 호출 후 상태 업데이트).
   - 비즈니스 로직을 Action creator에 위치시켜 컴포넌트는 순수하게 유지 가능.
   - 복잡한 흐름 제어(조건부 요청, 흐름 제어 등)에 유연하게 대응.
-  
+
 - React에서 Server Actions를 활용하는 방법
+  - use server 디렉티브를 통해 컴포넌트 내부에서 서버 측 로직 실행 가능.
+  - 클라이언트에서 서버로 함수 호출처럼 동작하며 API route 필요 없음.
+  - 자동 직렬화 / 역직렬화 처리, 폼과 함께 사용 시 유용 (<form action={myServerAction}>).
+  
 - React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법
 - React에서 React Native와 React의 차이점을 비교
 - React에서 Global State를 관리하는 다양한 방법
