@@ -3069,8 +3069,13 @@ Organize concepts, features, types and Pros and Cons
   - 개발 중 useEffect, useState, constructor 등의 코드가 2회 실행되어 부작용이 중복 발생할 수 있음.
   - 외부 API 호출, 타이머 설정 등 비순수한 로직에서 오류 유발 가능.
   - 실제 프로덕션에서는 1회 실행되므로, 개발 중 순수 함수 검증 목적으로만 발생.
-  
-- React에서 Next.js의 Edge Functions을 사용할 때 고려해야 할 사항은?
+
+- React에서 Next.js의 Edge Functions을 사용할 때 고려해야 할 사항
+  - V8 기반 런타임에서 실행되므로 일부 Node.js API 사용 불가 (예: fs, net).
+  - 빠른 응답 시간을 위해 cold start 최소화 설계 필요.
+  - 지역(location) 기반 배포 고려 → 가까운 region 선택 중요.
+  - 응답 크기와 실행 시간에 제한이 있으므로 경량화 필요.
+
 - React에서 Redux Thunk를 사용하면 얻을 수 있는 장점은?
 - React에서 Server Actions를 활용하는 방법은?
 - React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법은?
