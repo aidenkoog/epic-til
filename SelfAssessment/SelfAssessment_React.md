@@ -3097,6 +3097,11 @@ Organize concepts, features, types and Pros and Cons
   - React Native는 브리지(Bridge)를 통해 네이티브 모듈과 통신함.
 
 - React에서 Global State를 관리하는 다양한 방법
+  - Context API: 간단한 전역 데이터 공유에 적합 (예: 테마, 사용자 정보).
+  - Redux: 복잡한 상태, 중간 미들웨어 필요 시 유리.
+  - Zustand, Jotai, Recoil: 보일러플레이트 적고 경량 전역 상태 관리 가능.
+  - React Query / SWR: 서버 상태(캐싱, 동기화 등)에 특화된 글로벌 관리.
+  - useContext + useReducer 조합도 간단한 대안 가능.
 
 - React에서 Preact를 사용할 때 성능 향상을 기대할 수 있는 이유는?
 - React에서 React.memo()를 사용하면 성능이 향상되는 원리는?
