@@ -3343,14 +3343,48 @@ Organize concepts, features, types and Pros and Cons
   - Concurrent Mode는 React가 렌더링을 중단하고 더 중요한 작업(예: 사용자 입력)을 먼저 처리하도록 만드는 비동기적 렌더링 모델
   - Suspense는 데이터를 기다리는 동안 UI의 일부를 fallback으로 대체해 로딩 경험을 향상시키는 기능 (유저 경험 증대)
   - 둘을 결합하면 사용자 경험을 유지하며 점진적 UI 로딩이 가능
-  
-- React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 미치는가?
-- React에서 Server Components란 무엇인가?
-- React에서 Suspense와 Error Boundary를 활용하는 방법은?
-- React에서 React.memo()와 PureComponent의 차이점은?
-- React에서 Recoil과 Zustand의 차이점은?
-- React에서 PWA(Progressive Web App)를 구현하는 방법은?
-- React의 Virtual DOM은 어떻게 동작하는가?
+
+- React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 주는가?
+  - 기존에는 렌더링이 동기적으로 처리되어 긴 작업 중에는 UI가 멈췄다.
+  - Concurrent Rendering은 작업을 나눠서 실행하거나 중단/재시작할 수 있어, 사용자의 응답성(responsiveness)을 향상시킨다.
+  - 이로써 스크롤, 입력, 애니메이션이 끊기지 않고 자연스럽게 작동한다.
+
+- React에서 Server Components
+  - Server Components는 React 컴포넌트를 클라이언트가 아닌 서버에서 렌더링하는 방식
+  - JS 번들을 줄이고 민감한 로직을 서버에 숨길 수 있음
+  - 클라이언트 컴포넌트와 함께 조합 가능하며, Next.js App Router에서 기본 지원
+
+- React에서 Suspense와 Error Boundary를 활용하는 방법
+  - Suspense는 비동기 로딩 상태를 graceful하게 처리하는데 사용하며, fallback UI를 지정해 부분 렌더링을 구현한다.
+  - Error Boundary는 컴포넌트 트리 내 렌더링 중 발생하는 오류를 잡아내 fallback UI로 대체한다.
+  - 두 기능을 함께 사용하면 로딩/에러에 강건한 UI 구성이 가능하다.
+
+- React에서 React.memo()와 PureComponent의 차이점
+  - React.memo()는 함수 컴포넌트의 props 변경 여부를 비교하여 불필요한 리렌더를 방지
+  - PureComponent는 클래스 컴포넌트에서 shouldComponentUpdate를 자동으로 구현해 shallow compare로 최적화
+  - 둘 다 불변성을 기반으로 성능 최적화를 유도하지만 적용 대상이 다르다.
+
+- React에서 Recoil과 Zustand의 차이점
+  - Recoil
+    - Atom, Selector 기반의 선언형 상태 관리
+    - React와 깊이 통합, 의존성 그래프 기반
+    - 비동기 상태 관리에 강점
+
+  - Zustand
+    - 훅 기반의 간단한 API
+    - 전역 상태 공유에 적합하며 React 외부에서도 사용 가능
+    - 최소한의 보일러플레이트로 성능 중심 설계
+
+- React에서 PWA(Progressive Web App)를 구현하는 방법
+  - create-react-app 사용 시 serviceWorkerRegistration.js 등록
+  - 핵심 요소는 manifest.json, HTTPS 제공, Service Worker 설정
+  - 오프라인 캐시, 홈 화면 설치, 푸시 알림 등을 통해 앱처럼 동작
+  - Lighthouse로 PWA 적합성 검사 가능
+
+- React의 Virtual DOM 동작원리
+  - React는 실제 DOM 대신 가상의 DOM 트리를 메모리에 유지한다.
+  - 상태 변경 시 새로운 Virtual DOM을 생성하고 이전 상태와 비교(diffing)하여 최소한의 변경 사항만 실제 DOM에 반영한다.
+  - 이 과정을 통해 성능을 최적화하고 불필요한 DOM 연산을 줄인다.
 
 - React에서 useEffect와 useLayoutEffect의 차이는?
 - React의 상태 관리 라이브러리(Redux, Recoil, Zustand)를 사용해본 경험이 있는가?
