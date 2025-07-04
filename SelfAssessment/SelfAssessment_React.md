@@ -3103,16 +3103,19 @@ Organize concepts, features, types and Pros and Cons
   - React Query / SWR: 서버 상태(캐싱, 동기화 등)에 특화된 글로벌 관리.
   - useContext + useReducer 조합도 간단한 대안 가능.
 
-- React에서 Preact를 사용할 때 성능 향상을 기대할 수 있는 이유는?
-- React에서 React.memo()를 사용하면 성능이 향상되는 원리는?
-- React에서 Suspense를 활용하여 데이터 로딩 경험을 개선하는 방법은?
-- React에서 useInsertionEffect()의 역할과 활용 사례는?
-- React에서 CSR을 사용할 때의 보안 이슈는?
-
-- React에서 Server Actions와 useMutation()의 차이점은?
-- React에서 Error Boundaries를 사용하면 얻을 수 있는 장점은?
-- React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점은?
-- React에서 서버 렌더링된 페이지를 클라이언트에서 보강하는 과정은?
+- React에서 Preact를 사용할 때 성능 향상을 기대할 수 있는 이유
+  - React보다 훨씬 작은 번들 크기(3KB) 로 로딩 속도 향상.
+  - DOM 조작이 더 가볍고 빠르게 구현되어 렌더링 성능 최적화.
+  - React와 API가 유사해 마이그레이션이 쉬움.
+  
+- React에서 React.memo()를 사용하면 성능이 향상되는 원리
+- React에서 Suspense를 활용하여 데이터 로딩 경험을 개선하는 방법
+- React에서 useInsertionEffect()의 역할과 활용 사례
+- React에서 CSR을 사용할 때의 보안 이슈
+- React에서 Server Actions와 useMutation()의 차이점
+- React에서 Error Boundaries를 사용하면 얻을 수 있는 장점
+- React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점
+- React에서 서버 렌더링된 페이지를 클라이언트에서 보강하는 과정
 
 - React에서 Refs를 활용한 동적 포커스 처리 방법은?
 - React에서 Refs를 활용한 DOM 조작의 장점과 단점은?
