@@ -3020,7 +3020,11 @@ Organize concepts, features, types and Pros and Cons
     - import { Button } from 'library' 처럼 필요한 모듈만 불러오면, 사용하지 않은 부분은 제거됨
     - default export 보다 named export를 사용하는 것이 tree-shake-friendly 함.
 
-- React에서 Dynamic Import를 활용한 코드 스플리팅 기법은?
+- React에서 Dynamic Import를 활용한 코드 스플리팅 기법
+  - React.lazy()와 import()를 사용해 컴포넌트를 지연 로딩할 수 있음.
+  - 페이지 단위 또는 특정 컴포넌트 단위로 번들을 분리해 초기 로딩 속도 개선.
+  - Webpack이 자동으로 코드 청크를 분리하여 필요 시 로드
+  
 - React에서 Suspense의 기본 개념과 활용 방법은?
 - React에서 useDeferredValue()의 활용 사례는?
 - React에서 useTransition()을 사용할 때 얻을 수 있는 이점은?
