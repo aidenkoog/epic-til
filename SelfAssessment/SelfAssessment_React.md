@@ -3049,8 +3049,12 @@ Organize concepts, features, types and Pros and Cons
   - React Strict Mode에서 개발 중 의도적으로 컴포넌트를 두 번 렌더링함.
   - 부작용(clean-up 등)의 정확성과 순수성 검증을 위해 실행됨.
   - 실제 배포에서는 단 한 번만 렌더링되므로 걱정할 필요 없음.
-  
+
 - React에서 Concurrent Mode가 UI 성능에 미치는 영향
+  - 렌더링을 중단하고 재시작할 수 있어 응답성이 크게 향상됨.
+  - 긴 작업을 나눠 처리하고, 우선순위가 높은 업데이트(입력 등)를 먼저 반영 가능.
+  - 예: useTransition, Suspense 등이 이 모드에 최적화됨.
+
 - React에서 Profiler API를 활용하여 성능 분석을 수행하는 방법
 - React에서 Strict Mode가 상태 업데이트에 미치는 영향
 
