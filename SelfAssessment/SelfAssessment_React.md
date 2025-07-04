@@ -3076,11 +3076,15 @@ Organize concepts, features, types and Pros and Cons
   - 지역(location) 기반 배포 고려 → 가까운 region 선택 중요.
   - 응답 크기와 실행 시간에 제한이 있으므로 경량화 필요.
 
-- React에서 Redux Thunk를 사용하면 얻을 수 있는 장점은?
-- React에서 Server Actions를 활용하는 방법은?
-- React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법은?
-- React에서 React Native와 React의 차이점을 비교하시오.
-- React에서 Global State를 관리하는 다양한 방법을 설명하시오.
+- React에서 Redux Thunk를 사용하면 얻을 수 있는 장점
+  - dispatch() 안에서 비동기 로직 처리 가능 (예: API 호출 후 상태 업데이트).
+  - 비즈니스 로직을 Action creator에 위치시켜 컴포넌트는 순수하게 유지 가능.
+  - 복잡한 흐름 제어(조건부 요청, 흐름 제어 등)에 유연하게 대응.
+  
+- React에서 Server Actions를 활용하는 방법
+- React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법
+- React에서 React Native와 React의 차이점을 비교
+- React에서 Global State를 관리하는 다양한 방법
 
 - React에서 Preact를 사용할 때 성능 향상을 기대할 수 있는 이유는?
 - React에서 React.memo()를 사용하면 성능이 향상되는 원리는?
