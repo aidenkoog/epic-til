@@ -3056,6 +3056,10 @@ Organize concepts, features, types and Pros and Cons
   - 예: useTransition, Suspense 등이 이 모드에 최적화됨.
 
 - React에서 Profiler API를 활용하여 성능 분석을 수행하는 방법
+  - <Profiler> 컴포넌트로 특정 렌더링 시점의 성능 데이터 수집.
+  - onRender 콜백을 통해 렌더링 시간, 횟수, 원인 등을 파악 가능.
+  - React DevTools에서 시각적으로 분석도 가능.
+
 - React에서 Strict Mode가 상태 업데이트에 미치는 영향
 
 - React에서 Strict Mode를 적용할 때 발생할 수 있는 문제는?
