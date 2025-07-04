@@ -3044,8 +3044,12 @@ Organize concepts, features, types and Pros and Cons
   - 외부 상태 저장소(예: Redux, Zustand)와 React를 안정적으로 동기화하는 Hook.
   - React 18에서 도입되어 Concurrent Mode에서도 일관된 스냅샷 제공.
   - 외부 스토어 구독 및 스냅샷 값을 안전하게 읽도록 보장.
-  
+
 - React에서 Double Rendering이 발생하는 이유
+  - React Strict Mode에서 개발 중 의도적으로 컴포넌트를 두 번 렌더링함.
+  - 부작용(clean-up 등)의 정확성과 순수성 검증을 위해 실행됨.
+  - 실제 배포에서는 단 한 번만 렌더링되므로 걱정할 필요 없음.
+  
 - React에서 Concurrent Mode가 UI 성능에 미치는 영향
 - React에서 Profiler API를 활용하여 성능 분석을 수행하는 방법
 - React에서 Strict Mode가 상태 업데이트에 미치는 영향
