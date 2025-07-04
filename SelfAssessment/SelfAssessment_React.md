@@ -3204,31 +3204,148 @@ Organize concepts, features, types and Pros and Cons
     ```
     - ※ 데이터 로딩에는 아직 Suspense for Data Fetching이 실험적이므로 라이브러리 사용 (예: React Query + Suspense) 고려
 
-- React에서 상태 관리의 대표적인 방식 3가지를 설명하시오.
-- React에서 useDeferredValue()와 useTransition()의 차이점은?
-- React에서 Server Components의 장점과 단점은?
-- React에서 GraphQL을 사용할 때 고려해야 할 보안 이슈는?
+- React에서 상태 관리의 대표적인 방식 3가지
+  - Local State (useState, useReducer)
+    - 컴포넌트 내부의 UI 상태 관리
+    - 작고 단순한 상태에 적합
 
-- React에서 useSyncExternalStore()를 사용해야 하는 경우는?
-- React에서 Server Actions의 기본 개념을 설명하시오.
-- React에서 useOptimistic()을 사용한 UI 업데이트 최적화 방법은?
-- React에서 React.memo()를 올바르게 사용하는 방법은?
+  - Context API
+    - 전역 상태 공유
+    - 규모가 커지면 성능 저하 우려
 
-- React Server Components(RSC)의 개념과 기존 CSR, SSR과의 차이점은?
-- React 19에서 추가된 주요 기능과 성능 최적화 개선 사항은?
-- React에서 WASM(WebAssembly)을 활용하는 방법은?
-- React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법은?
+  - 외부 상태 관리 라이브러리 (Redux, Recoil, Zustand 등)
+    - 복잡한 상태 로직 분리 및 유지보수 용이
+    - 미들웨어, DevTools 등 생태계 지원 강점
 
-- React에서 Context API의 성능 이슈를 해결하는 방법은?
-- React에서 SWR과 React Query의 내부 작동 방식 차이는?
-- React의 Virtual DOM에 대해 설명해주세요.
-- React의 상태 관리 방법에 대해 설명해주세요. (Redux, Context API 등)
+- React에서 useDeferredValue()와 useTransition()의 차이점
+  - useDeferredValue(value)
+    - 특정 값의 변화를 낮은 우선순위로 처리
+    - 예: 입력창 타이핑 중 필터링 결과 느리게 갱신
 
-- React의 Hooks 내부 동작 원리에 대해 설명해주세요.
-- React의 Concurrent Mode와 Suspense에 대해 설명해주세요.
+  - useTransition()
+    - 상태 업데이트 자체를 낮은 우선순위로 분리
+    - 예: 대량 렌더링 시 UI 멈춤 방지
+
+  - 요약:
+    - useDeferredValue: 값을 defer
+    - useTransition: 업데이트 함수를 defer
+
+- React에서 Server Components의 장점과 단점
+  - 장점
+    - 초기 렌더링 속도 개선 (서버에서 HTML 생성)
+    - 클라이언트 JS 번들 크기 감소
+    - 보안상 민감한 로직 서버에 유지 가능
+
+  - 단점
+    - 클라이언트 상호작용 제한
+    - 개발 복잡도 증가 (Client vs Server 분리 필요)
+    - React 18 이후 도입, 아직 생태계 미성숙
+
+- React에서 GraphQL을 사용할 때 고려해야 할 보안 이슈
+  - 과도한 쿼리 (Query Depth/Complexity) → DoS 공격 가능
+  - Injection 공격 → 파라미터 검증 필요
+  - Authorization 미비 → 필드 단위 권한 검증 필수
+  - Introspection 비활성화 필요 (배포 시) → 스키마 노출 방지
+
+- React에서 useSyncExternalStore()를 사용해야 하는 경우
+  - 외부 스토어 상태를 React 렌더링 흐름과 정합성 있게 연결할 때 사용
+  - 예: Redux, Zustand 등의 외부 상태 관리 도구에서 상태를 정확하게 구독할 때
+  - React 18+에서 SSR 및 concurrent rendering을 고려한 안정적 구독 방식 제공
+
+- React에서 Server Actions의 기본 개념
+  - React 서버에서 직접 실행되는 함수
+  - 클라이언트에서 form or 버튼으로 호출 → 서버에서 처리 후 응답
+  - 예: 데이터베이스 쓰기, 인증 처리 등
+  - Next.js App Router에서 지원
+  - 클라이언트 → 서버 요청 간 API 경로 없이 함수 기반 호출
+
+- React에서 useOptimistic()을 사용한 UI 업데이트 최적화 방법
+  - 서버 응답을 기다리지 않고 낙관적으로 UI 선반영
+  - 예: 댓글 작성 시 입력 즉시 반영하고 서버 응답으로 정합성 조정
+  - 상태값과 업데이트 함수 제공:
+    ```js
+    const [optimisticComments, addOptimisticComment] = useOptimistic(comments);
+    ```
+
+- React에서 React.memo()를 올바르게 사용하는 방법
+  - Pure Component처럼 props가 바뀌지 않으면 재렌더 방지
+  - 예시
+    ```js
+    const MyComponent = React.memo(({ title }) => { ... });
+    ```
+  - 조건:
+    - props가 자주 변경되지 않아야 함
+    - props 비교 비용보다 재렌더 비용이 높아야 함
+    - 필요 시 areEqual(prevProps, nextProps) 커스터마이징
+
+- React Server Components(RSC)의 개념과 기존 CSR, SSR과의 차이점
+  - RSC는 서버에서 React 컴포넌트를 렌더링하고, 클라이언트에는 HTML과 최소한의 상태만 전송하는 방식
+  - CSR은 모든 렌더링을 클라이언트에서 처리하고, SSR은 서버에서 HTML을 먼저 렌더링한 후 클라이언트에서 하이드레이션한다.
+  - RSC는 서버 컴포넌트와 클라이언트 컴포넌트를 혼합 사용하며, JS 번들 크기를 줄이고 보안을 강화할 수 있다.
+
+- React 19에서 추가된 주요 기능과 성능 최적화 개선 사항
+  - use() 훅 공식 지원: Promise를 직접 처리 가능
+  - useOptimistic() 정식 도입: 낙관적 UI 업데이트 지원
+  - Server Actions 정식 채택: API 없이 서버 함수 실행 가능
+  - Form Actions 향상: <form> 직접 처리 가능
+  - Transition 성능 향상: 병렬 처리 최적화
+  - Suspense 개선: streaming 방식 강화로 초기 렌더링 속도 개선
+
+- React에서 WASM(WebAssembly)을 활용하는 방법
+  - WASM으로 작성된 성능 중심 모듈(C/C++/Rust 등)을 빌드하여 React에서 JS interop으로 호출
+  - 예: wasm_exec.js 또는 WebAssembly.instantiate() API 사용
+  - 이미지 처리, 수학 계산, 암호화 등 고성능 작업에 활용
+  - React와 연동 시에는 useEffect 또는 Worker와 함께 사용하면 효율적
+
+- React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법
+  - Suspense는 컴포넌트 단위로 로딩 제어
+  - Streaming은 서버에서 HTML을 점진적으로 전송
+  - 둘을 결합하면 사용자에게 빠른 초기 화면을 보여주고, 이후 데이터를 점진적으로 로드
+  - Next.js App Router에서 기본 적용 (RSC + Suspense 활용)
+
+- React에서 Context API의 성능 이슈를 해결하는 방법
+  - 컴포넌트가 불필요하게 전역 컨텍스트 변화로 리렌더링되는 문제
+  - 해결책:
+    - Context 분할 (단일 Context에 너무 많은 값 넣지 않기)
+    - React.memo로 하위 컴포넌트 최적화
+    - useContextSelector 또는 zustand 등 대안 고려
+
+- React에서 SWR과 React Query의 내부 작동 방식 차이
+  - 공통점: 캐싱, 재검증, 폴링, 뮤테이션 지원
+  - SWR
+    - Stale-While-Revalidate 전략 중심
+    - 선언적, 단순한 API
+    - lightweight, 내부 캐시는 key → response 중심
+  - React Query
+    - 상태 관리 포함
+    - Query/Mutation 분리, DevTools 제공
+    - 더 많은 옵션과 제어 가능 (예: retry, staleTime, GC)
+
+- React의 Virtual DOM
+  - Virtual DOM은 실제 DOM의 가벼운 자바스크립트 객체 표현
+  - 변경 전후의 Virtual DOM을 비교(diffing)하여 최소 변경사항만 실제 DOM에 반영함으로써 렌더링 성능을 최적화
+
+- React의 상태 관리 방법 (Redux, Context API 등)
+  - Context API: 전역 상태 공유. 단순하지만 리렌더링 최적화가 어렵다.
+  - Redux: 중앙 스토어 기반. 미들웨어, DevTools 등 생태계 강력. 불변성 유지 필수.
+  - Zustand/Recoil/Jotai 등: 사용 편의성과 성능 중심의 대안. 필요에 따라 선택
+  - 상황에 맞춰 로컬(local) vs 글로벌(global) 상태를 구분해서 선택하는 것이 핵심
+
+- React의 Hooks 내부 동작 원리
+  - Hooks는 함수 컴포넌트 호출 시 내부적으로 순서를 기반으로 작동하는 상태 머신 구조
+    - 순서 기반 상태 머신 구조
+  - useState, useEffect 등은 React 내부의 Hook dispatcher가 인덱스를 기준으로 각 호출을 추적하며, 컴포넌트 재실행 시 동일한 순서로 실행되어 상태를 유지
+    - 훅 디스패쳐가 인덱스 기준으로 흐름 추적 > 재실행 > 동일한 순서로 실행 > 상태 유지
+  - 조건문이나 반복문 안에서 Hook을 호출하면 이 순서가 깨져 렌더링 오류가 발생할 수 있다.
+    - 조건문, 반복문 안에서 훅 호출은 금지 (순서 깨짐, 렌더링 오류)
+
+- React의 Concurrent Mode와 Suspense
+  - Concurrent Mode는 React가 렌더링을 중단하고 더 중요한 작업(예: 사용자 입력)을 먼저 처리하도록 만드는 비동기적 렌더링 모델
+  - Suspense는 데이터를 기다리는 동안 UI의 일부를 fallback으로 대체해 로딩 경험을 향상시키는 기능 (유저 경험 증대)
+  - 둘을 결합하면 사용자 경험을 유지하며 점진적 UI 로딩이 가능
+  
 - React에서 Concurrent Rendering이 성능 최적화에 어떤 영향을 미치는가?
 - React에서 Server Components란 무엇인가?
-
 - React에서 Suspense와 Error Boundary를 활용하는 방법은?
 - React에서 React.memo()와 PureComponent의 차이점은?
 - React에서 Recoil과 Zustand의 차이점은?
@@ -3239,7 +3356,6 @@ Organize concepts, features, types and Pros and Cons
 - React의 상태 관리 라이브러리(Redux, Recoil, Zustand)를 사용해본 경험이 있는가?
 - React에서 context API는 언제 사용하는가?
 - React에서 useMemo와 useCallback의 차이는?
-
 - React에서 forwardRef는 언제 사용하는가?
 - React의 Server Components와 Client Components의 차이는?
 - React에서 Suspense와 Error Boundary는 어떻게 활용하는가?
@@ -3249,7 +3365,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 memoization을 활용하여 성능 최적화하는 방법은?
 - Server Components의 동작 방식과 기존 CSR/SSR 방식과의 차이는?
 - React에서 Hydration이란 무엇인가?
-
 - React 18의 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이는?
 - React에서 Suspense를 활용한 데이터 패칭 전략을 설명하라.
 - React의 JSX는 내부적으로 어떻게 변환되는가?
@@ -3259,7 +3374,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 one-way data binding이란 무엇인가?
 - React에서 two-way data binding이 필요할 때는 언제인가?
 - React의 reconciliation 알고리즘이 성능 최적화에 어떤 영향을 미치는가?
-
 - React에서 isomorphic rendering이란 무엇이며, 이를 어떻게 구현할 수 있는가?
 - React에서 useEffect의 cleanup 함수는 언제 실행되는가?
 - React에서 useEffect가 의존성 배열이 비었을 때 어떻게 동작하는가?
@@ -3269,7 +3383,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 useReducer를 사용하면 성능이 향상되는 이유는?
 - React에서 useContext를 사용하면 발생할 수 있는 성능 이슈는?
 - React에서 useCallback을 사용할 때 주의해야 할 점은?
-
 - React에서 useTransition을 사용할 때의 장점은?
 - React의 useDeferredValue와 useTransition의 차이는?
 - React의 useSyncExternalStore는 어떤 상황에서 사용하는가?
@@ -3279,7 +3392,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 React.lazy()를 활용하여 성능을 개선하는 방법은?
 - React에서 event delegation을 활용하면 성능이 어떻게 개선되는가?
 - React에서 tree shaking이란 무엇이며, 어떻게 적용하는가?
-
 - React에서 code splitting을 적용하는 방법은?
 - React에서 React Profiler를 사용하여 성능을 분석하는 방법은?
 - React에서 Double Rendering이 발생하는 원인은?
@@ -3289,7 +3401,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 Virtual DOM의 렌더링 성능을 최적화하는 방법은?
 - React에서 useReducer와 Redux를 비교했을 때 언제 useReducer를 사용하는 것이 좋은가?
 - React에서 Redux Thunk와 Redux Saga의 차이점은?
-
 - React에서 Recoil과 Zustand의 차이점은?
 - React에서 zustand를 사용하면 얻을 수 있는 장점은?
 - React에서 server state와 client state의 차이는?
@@ -3300,7 +3411,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 Global State를 관리하는 다양한 방법을 비교하시오.
 - React에서 Context API를 사용할 때 발생할 수 있는 성능 이슈는?
 - React에서 CSR(Client-Side Rendering)과 SSR(Server-Side Rendering)의 차이점은?
-
 - React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
 - React에서 getInitialProps와 getServerSideProps의 차이는?
 - React에서 Server Components의 개념과 기존 CSR, SSR과의 차이점은?
@@ -3310,7 +3420,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 Edge Functions를 사용하면 어떤 장점이 있는가?
 - React에서 Server Actions를 활용하는 방법은?
 - React에서 fetch API와 Axios의 차이점은?
-
 - React에서 GraphQL을 사용할 때 고려해야 할 점은?
 - React에서 Apollo Client를 사용할 때의 장점은?
 - React에서 SWR과 React Query의 차이점은?
@@ -3320,7 +3429,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 낙관적 업데이트(Optimistic UI)를 구현하는 방법은?
 - React에서 useOptimistic()을 활용하여 UI 업데이트를 최적화하는 방법은?
 - React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
-
 - React에서 XSS(Cross-Site Scripting)을 방지하는 방법은?
 - React에서 CSRF(Cross-Site Request Forgery)를 방지하는 방법은?
 - React에서 JWT(JSON Web Token)을 활용한 인증 방식은?
@@ -3330,7 +3438,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 React Testing Library와 Enzyme의 차이점은?
 - React에서 Jest와 Cypress의 차이점은?
 - React에서 e2e(end-to-end) 테스트를 수행하는 방법은?
-
 - React 19에서 추가된 주요 기능과 성능 최적화 개선 사항은?
 - React에서 WASM(WebAssembly)을 활용하는 방법은?
 - React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법은?
@@ -3340,7 +3447,6 @@ Organize concepts, features, types and Pros and Cons
 - React에서 React Server Components(RSC)의 개념과 기존 CSR, SSR과의 차이점은?
 - React에서 Edge Functions를 사용하면 어떤 장점이 있는가?
 - React에서 PWA(Progressive Web App)를 구현하는 방법은?
-
 - React에서 Server Actions와 useMutation()의 차이점은?
 - React에서 Streaming SSR과 Static Rendering의 차이는?
 - React에서 Preact를 사용하면 성능 향상을 기대할 수 있는 이유는?
