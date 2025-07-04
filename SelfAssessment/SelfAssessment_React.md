@@ -3386,14 +3386,44 @@ Organize concepts, features, types and Pros and Cons
   - 상태 변경 시 새로운 Virtual DOM을 생성하고 이전 상태와 비교(diffing)하여 최소한의 변경 사항만 실제 DOM에 반영한다.
   - 이 과정을 통해 성능을 최적화하고 불필요한 DOM 연산을 줄인다.
 
-- React에서 useEffect와 useLayoutEffect의 차이는?
-- React의 상태 관리 라이브러리(Redux, Recoil, Zustand)를 사용해본 경험이 있는가?
-- React에서 context API는 언제 사용하는가?
-- React에서 useMemo와 useCallback의 차이는?
-- React에서 forwardRef는 언제 사용하는가?
-- React의 Server Components와 Client Components의 차이는?
-- React에서 Suspense와 Error Boundary는 어떻게 활용하는가?
-- React의 Reconciliation 알고리즘은 어떻게 동작하는가?
+- React에서 useEffect와 useLayoutEffect의 차이
+  - useEffect는 브라우저 페인팅 이후 비동기적으로 실행
+    - 페인팅 > 비동기적으로 실행
+  - useLayoutEffect는 DOM 변경 직후, 페인팅 이전 동기적으로 실행
+    - DOM 변경 직후 > 동작 > 페인팅 이전 동기적 실행
+  - 레이아웃 측정이나 스타일 조정이 필요한 경우 useLayoutEffect 사용
+    - 동기적으로 실행되므로.
+
+- React에서 context API 사용 시점
+  - Theme, 다국어, 인증정보 등 전역적으로 공유되는 상태에 적합
+  - 깊은 컴포넌트 트리를 통해 props drilling을 피하고 싶을 때
+  - 단, 상태 변화가 잦거나 규모가 커지면 성능 저하 우려 → 외부 상태 관리 도구 고려
+
+- React에서 useMemo와 useCallback의 차이
+  - useMemo: 값을 메모이제이션하여 연산 최적화
+  - useCallback: 함수를 메모이제이션하여 불필요한 렌더링 방지
+  - 예: useMemo는 복잡한 계산 결과 캐싱, useCallback은 자식에게 넘길 핸들러 함수 캐싱
+
+- React에서 forwardRef 사용 시점
+  - 부모 컴포넌트가 자식의 DOM 요소에 직접 접근해야 할 때 사용
+  - 예: 커스텀 input 컴포넌트에서 외부로 .focus() 기능을 노출할 때
+  - React의 함수형 컴포넌트가 기본적으로 ref를 받지 않기 때문에 필요
+
+- React의 Server Components와 Client Components의 차이
+  - Server Components: 서버에서 렌더링되며 JS 번들에 포함되지 않음. 무거운 연산, DB 호출 등에 적합
+  - Client Components: 상호작용이 필요한 컴포넌트. 브라우저에서 실행됨
+  - Server Components는 클라이언트 상태나 이벤트 핸들링 불가
+
+- React에서 Suspense와 Error Boundary 활용 방법
+  - Suspense: 데이터를 불러오는 동안 로딩 UI를 fallback으로 렌더링
+  - Error Boundary: 렌더링 중 오류 발생 시 UI를 fallback으로 대체
+  - 함께 사용 시 UX를 안정적으로 유지하며, 장애 복구 가능한 구조 구현 가능
+
+- React의 Reconciliation 알고리즘 동작 방법
+  - Virtual DOM을 기반으로 이전 렌더와 현재 렌더를 비교(diff)
+  - key 값을 기준으로 리스트 요소의 변경을 판단
+  - 최소한의 변경만 실제 DOM에 적용하여 렌더링 성능 최적화
+  - 동일한 타입이면 재사용, 타입이 다르면 완전 교체
 
 - React에서 useReducer를 사용하는 이유와 useState와의 차이점은?
 - React에서 memoization을 활용하여 성능 최적화하는 방법은?
