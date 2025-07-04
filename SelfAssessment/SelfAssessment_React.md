@@ -3107,15 +3107,47 @@ Organize concepts, features, types and Pros and Cons
   - React보다 훨씬 작은 번들 크기(3KB) 로 로딩 속도 향상.
   - DOM 조작이 더 가볍고 빠르게 구현되어 렌더링 성능 최적화.
   - React와 API가 유사해 마이그레이션이 쉬움.
-  
+
 - React에서 React.memo()를 사용하면 성능이 향상되는 원리
+  - props가 변경되지 않으면 컴포넌트를 재렌더링하지 않음.
+  - 불필요한 렌더링을 방지하여 CPU 사용 최소화.
+  - 얕은 비교(Shallow compare)를 기반으로 작동.
+
 - React에서 Suspense를 활용하여 데이터 로딩 경험을 개선하는 방법
+  - 비동기 컴포넌트 로딩 중 fallback UI를 자연스럽게 보여줌.
+  - React 18 이상에서는 서버 컴포넌트, streaming 렌더링과 함께 사용.
+  - 사용자에게 즉각적인 피드백 제공으로 체감 성능 향상.
+
 - React에서 useInsertionEffect()의 역할과 활용 사례
+  - 스타일이 DOM에 삽입되기 전에 실행되는 이펙트.
+  - CSS-in-JS 라이브러리(예: Emotion, Styled-Components)에서 스타일 우선순위 보장에 사용.
+  - useLayoutEffect보다 더 이른 시점에 실행됨.
+    - useInsertionEffect -> useLayoutEffect -> useEffect
+
 - React에서 CSR을 사용할 때의 보안 이슈
+  - 클라이언트에서만 렌더링되므로 초기 로딩 전 데이터가 보이지 않음 → SEO 취약.
+  - 중요 정보나 권한 로직이 노출되면 위변조 위험.
+  - 모든 데이터 요청이 API를 통해 이뤄지므로 API 인증 및 권한 검증이 필수.
+
 - React에서 Server Actions와 useMutation()의 차이점
+  - Server Actions: 서버 함수 직접 호출 (Next.js 기반), 별도 API 라우트 없이 처리 가능.
+  - useMutation(): 클라이언트에서 API 호출 + 낙관적 업데이트 등 지원 (React Query 등 활용).
+  - Server Actions는 서버 우선, useMutation은 클라이언트 주도 방식.
+
 - React에서 Error Boundaries를 사용하면 얻을 수 있는 장점
+  - 자식 컴포넌트의 JavaScript 오류를 감지해 앱 전체 크래시 방지.
+  - fallback UI로 대체 렌더링 가능.
+  - componentDidCatch와 getDerivedStateFromError를 통해 오류를 로깅하거나 복구 가능.
+
 - React에서 useEffect와 useLayoutEffect를 함께 사용할 때 주의할 점
+  - useLayoutEffect는 DOM 변경 직후 동기 실행 → 레이아웃 측정 등 정확한 타이밍 보장.
+  - useEffect는 비동기로 실행되어 렌더링 완료 후 실행됨.
+  - 함께 사용할 경우 레이아웃 점검은 layoutEffect로, 부수효과는 일반 effect로 분리.
+
 - React에서 서버 렌더링된 페이지를 클라이언트에서 보강하는 과정
+  - 서버에서 HTML을 미리 렌더링한 후, 클라이언트가 해당 DOM에 이벤트 핸들러 및 상태를 주입.
+  - 이 과정을 Hydration(하이드레이션) 이라고 부름.
+  - 하이드레이션 중 mismatch가 발생하면 경고 또는 깜빡임 현상 발생 가능.
 
 - React에서 Refs를 활용한 동적 포커스 처리 방법은?
 - React에서 Refs를 활용한 DOM 조작의 장점과 단점은?
