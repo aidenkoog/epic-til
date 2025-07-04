@@ -3085,8 +3085,12 @@ Organize concepts, features, types and Pros and Cons
   - use server 디렉티브를 통해 컴포넌트 내부에서 서버 측 로직 실행 가능.
   - 클라이언트에서 서버로 함수 호출처럼 동작하며 API route 필요 없음.
   - 자동 직렬화 / 역직렬화 처리, 폼과 함께 사용 시 유용 (<form action={myServerAction}>).
-  
+
 - React에서 useOptimistic()을 활용한 낙관적 업데이트 구현 방법
+  - 사용자의 입력에 대해 즉시 UI를 반영하되, 서버 응답 후 실제 데이터로 교체.
+  - useOptimistic(prevState, updater) 패턴으로 구현.
+  - 예: 댓글 작성 시 입력값을 먼저 리스트에 보여주고, 실패 시 롤백.
+  
 - React에서 React Native와 React의 차이점을 비교
 - React에서 Global State를 관리하는 다양한 방법
 
