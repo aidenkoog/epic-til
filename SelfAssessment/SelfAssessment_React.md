@@ -3149,7 +3149,16 @@ Organize concepts, features, types and Pros and Cons
   - 이 과정을 Hydration(하이드레이션) 이라고 부름.
   - 하이드레이션 중 mismatch가 발생하면 경고 또는 깜빡임 현상 발생 가능.
 
-- React에서 Refs를 활용한 동적 포커스 처리 방법은?
+- React에서 Refs를 활용한 동적 포커스 처리 방법
+  - useRef()로 DOM 요소를 참조한 뒤, 원하는 시점에 .focus() 호출
+  - 예시
+    ```jsx
+    const inputRef = useRef(null);
+    useEffect(() => {
+      inputRef.current?.focus();
+    }, []);
+    ```
+
 - React에서 Refs를 활용한 DOM 조작의 장점과 단점은?
 - React에서 Custom Hooks를 만들 때 고려해야 할 사항은?
 - React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
