@@ -3024,8 +3024,12 @@ Organize concepts, features, types and Pros and Cons
   - React.lazy()와 import()를 사용해 컴포넌트를 지연 로딩할 수 있음.
   - 페이지 단위 또는 특정 컴포넌트 단위로 번들을 분리해 초기 로딩 속도 개선.
   - Webpack이 자동으로 코드 청크를 분리하여 필요 시 로드
-  
-- React에서 Suspense의 기본 개념과 활용 방법은?
+
+- React에서 Suspense의 기본 개념과 활용 방법
+  - 비동기 컴포넌트 로딩 중 fallback UI를 표시할 수 있는 컴포넌트.
+  - React.lazy()와 함께 사용하여 로딩 중 상태를 제어.
+  - 향후 데이터 페칭 (e.g., React 18의 use API)에도 확장 가능.
+
 - React에서 useDeferredValue()의 활용 사례는?
 - React에서 useTransition()을 사용할 때 얻을 수 있는 이점은?
 
