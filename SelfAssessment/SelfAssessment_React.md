@@ -3425,60 +3425,328 @@ Organize concepts, features, types and Pros and Cons
   - 최소한의 변경만 실제 DOM에 적용하여 렌더링 성능 최적화
   - 동일한 타입이면 재사용, 타입이 다르면 완전 교체
 
-- React에서 useReducer를 사용하는 이유와 useState와의 차이점은?
-- React에서 memoization을 활용하여 성능 최적화하는 방법은?
-- Server Components의 동작 방식과 기존 CSR/SSR 방식과의 차이는?
-- React에서 Hydration이란 무엇인가?
-- React 18의 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이는?
-- React에서 Suspense를 활용한 데이터 패칭 전략을 설명하라.
-- React의 JSX는 내부적으로 어떻게 변환되는가?
-- React에서 class component와 function component의 차이점은?
+- React에서 useReducer를 사용하는 이유와 useState와의 차이점
+  - useReducer는 상태 전이 로직이 복잡하거나 다단계 액션 처리가 필요한 경우 사용
+  - useState는 단순한 상태 저장에 적합
+  - useReducer는 상태 업데이트 로직을 reducer 함수로 외부 분리함으로써 테스트와 유지보수에 유리함
+  - 예: form 상태, 토글/리스트 복합 상태 등
 
-- React에서 prop drilling이란 무엇이며, 이를 해결하는 방법은?
-- React에서 one-way data binding이란 무엇인가?
-- React에서 two-way data binding이 필요할 때는 언제인가?
-- React의 reconciliation 알고리즘이 성능 최적화에 어떤 영향을 미치는가?
-- React에서 isomorphic rendering이란 무엇이며, 이를 어떻게 구현할 수 있는가?
-- React에서 useEffect의 cleanup 함수는 언제 실행되는가?
-- React에서 useEffect가 의존성 배열이 비었을 때 어떻게 동작하는가?
-- React의 useMemo와 React.memo()의 차이점은?
+- React에서 memoization을 활용하여 성능 최적화하는 방법
+  - useMemo : 값 연산을 캐시
+  - useCallback : 함수 객체를 캐시
+  - React.memo : 컴포넌트 전체를 캐시
+  - 목적은 모두 불필요한 렌더링 방지이며, 특히 props가 자주 변하지 않는 자식 컴포넌트에서 효과적임
 
-- React에서 useState와 useRef의 차이점은?
-- React에서 useReducer를 사용하면 성능이 향상되는 이유는?
-- React에서 useContext를 사용하면 발생할 수 있는 성능 이슈는?
-- React에서 useCallback을 사용할 때 주의해야 할 점은?
-- React에서 useTransition을 사용할 때의 장점은?
-- React의 useDeferredValue와 useTransition의 차이는?
-- React의 useSyncExternalStore는 어떤 상황에서 사용하는가?
-- React에서 useInsertionEffect()를 사용해야 하는 경우는?
+- Server Components의 동작 방식과 기존 CSR/SSR 방식과의 차이
+  - Server Components는 서버에서 React 컴포넌트를 렌더링하고 클라이언트로 JS 없는 HTML 스트림만 전달
+  - CSR은 전체 렌더링을 클라이언트에서 수행
+  - SSR은 서버에서 HTML을 생성하지만 JS hydration 필요
+  - Server Components는 번들 크기 감소, 보안성 향상, 초기 렌더 성능 개선이 가능함
 
-- React에서 React.memo()를 올바르게 사용하는 방법은?
-- React에서 React.lazy()를 활용하여 성능을 개선하는 방법은?
-- React에서 event delegation을 활용하면 성능이 어떻게 개선되는가?
-- React에서 tree shaking이란 무엇이며, 어떻게 적용하는가?
-- React에서 code splitting을 적용하는 방법은?
-- React에서 React Profiler를 사용하여 성능을 분석하는 방법은?
-- React에서 Double Rendering이 발생하는 원인은?
-- React에서 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이는?
+- React에서 Hydration
+  - SSR에서 미리 렌더된 정적인 HTML에 클라이언트 JS 이벤트 연결을 복원하는 과정
+  - React는 서버로부터 전달된 HTML 구조와 클라이언트 Virtual DOM을 비교해 차이를 보완하며 interactivity를 활성화함
 
-- React에서 hydration이 실패하는 이유는?
-- React에서 Virtual DOM의 렌더링 성능을 최적화하는 방법은?
+- React 18의 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이
+  - 여러 상태 업데이트가 발생해도 한 번의 렌더링으로 병합 처리
+  - 기존에는 setTimeout, fetch, Promise 내의 상태 변경은 각각 렌더링 됐음
+  - React 18부터는 비동기 context에서도 자동으로 묶어서 처리, 성능 최적화에 기여
+
+- React에서 Suspense를 활용한 데이터 패칭 전략
+  - Suspense는 로딩 상태를 컴포넌트 단위로 제어하는 도구
+  - React 18부터 use() API 또는 React.lazy와 함께 Streaming + Suspense를 결합해 비동기 UI 점진적 로딩 가능
+  - 데이터 패칭은 fetch() Promise와 함께 Suspense fallback으로 대체 UI 제공
+  - 예: React Query + Suspense 모드, Relay, RSC 등과 통합 가능
+
+- React의 JSX는 내부적으로 변환 방식
+  - JSX는 브라우저가 해석할 수 없기 때문에 Babel 등의 트랜스파일러가 이를 형식으로 변환함. 최종적으로는 객체 형태의 Virtual DOM 노드로 처리됨
+  - 예시
+    ```jsx
+    <div>Hello</div>
+    ```
+    ```js
+    React.createElement('div', null, 'Hello')
+    ```
+
+- React에서 class component와 function component의 차이점
+  - Class Component: 상태와 생명주기 메서드(this.state, componentDidMount)를 갖는 전통적인 방식
+  - Function Component: Hooks 기반의 선언적 구성. 더 짧고 간결하며 가독성 높음
+  - React 16.8 이후로는 대부분 함수형 컴포넌트 사용이 표준
+
+- React에서 prop drilling이란 무엇이며, 이를 해결하는 방법
+  - 상위 컴포넌트의 props를 여러 단계 하위 컴포넌트까지 직접 전달해야 하는 현상
+    - 예: App → Parent → Child → Target
+  - 해결 방법:
+    - Context API
+    - 상태 관리 라이브러리 (Redux, Recoil, Zustand 등)
+    - 컴포넌트 구조 리팩토링
+
+- React에서 one-way data binding 개념
+  - 데이터가 단방향으로 흐름
+    - 부모 → 자식으로만 전달 (props)
+  - React의 기본 철학이며, 디버깅과 상태 추적이 쉬움
+  - 자식이 상태를 바꾸고 싶을 때는 callback 함수를 통해 역으로 트리거함
+
+- React에서 two-way data binding이 필요 시기
+  - 입력값을 상태와 동기화해야 하는 폼 처리 상황
+  - 예: <input value={state} onChange={e => setState(e.target.value)} />
+  - 상태와 UI가 동시에 영향을 주고받는 구조에서 사용
+  - 단방향 바인딩 위에 동작하지만 구현은 가능
+
+- React의 reconciliation 알고리즘이 성능 최적화에 미치는 영향
+  - React는 Virtual DOM 간의 차이를 계산(diffing)하여 최소한의 실제 DOM 조작만 수행
+  - key 값 기반 비교로 리스트 렌더링 최적화
+  - 동일한 컴포넌트는 재사용하고, 타입이 달라지면 제거 후 새로 렌더링 → 렌더링 비용 절감
+
+- React에서 isomorphic rendering이란 무엇이며, 구현 방법
+  - 동일한 React 코드가 서버와 클라이언트 양쪽에서 실행되는 구조
+  - SSR(Server-Side Rendering) + CSR(Client-Side Hydration)을 결합한 방식
+  - Next.js가 대표적 구현체이며, 초기 로딩 속도 + SEO를 개선할 수 있음
+
+- React에서 useEffect의 cleanup 함수 실행 시점
+  - 컴포넌트가 언마운트될 때
+  - 또는 의존성 배열에 변화가 생겨 useEffect가 다시 실행되기 직전
+  - 예: 구독 해제, 타이머 제거, 이벤트 리스너 제거 등 리소스 정리에 사용
+
+- React에서 useEffect가 의존성 배열이 비었을 때 동작 방식
+  - 컴포넌트가 마운트될 때 단 한 번만 실행
+  - 컴포넌트 생애 주기에서 componentDidMount 역할
+  - 리렌더링이나 state 변경에는 반응하지 않음
+
+- React의 useMemo와 React.memo()의 차이점
+  - useMemo: 값 연산 결과를 메모이제이션
+    - 컴포넌트 내에서 사용
+    - 예: 계산이 무거운 함수 결과 캐싱
+
+  - React.memo(): 컴포넌트 자체를 메모이제이션
+    - props가 변하지 않으면 렌더링 방지
+    - 함수형 컴포넌트에 적용 (HOC 방식)
+
+- React에서 useState와 useRef의 차이점
+  - useState: 상태가 변경되면 컴포넌트가 리렌더링됨
+  - useRef: 값은 유지되지만 리렌더링을 발생시키지 않음
+  - 예: DOM 참조, 이전 값 저장, 렌더링과 무관한 내부 데이터 보관 등에 useRef 사용
+
+- React에서 useReducer를 사용하면 성능이 향상되는 이유
+  - 상태 업데이트 로직이 복잡하거나 상태가 객체/배열일 때 useState보다 로직 분리와 구조화가 유리함
+  - 상태 업데이트 함수가 외부로 분리되므로 불필요한 리렌더나 재선언 방지
+  - 특히, 자식 컴포넌트에 dispatch만 넘기면 되므로 props 변경도 줄어듦
+
+- React에서 useContext를 사용하면 발생할 수 있는 성능 이슈
+  - 컨텍스트의 값이 변경되면 이를 구독하는 모든 컴포넌트가 리렌더링됨
+  - 값이 객체이거나 함수인 경우 참조가 자주 바뀌면 불필요한 리렌더 발생
+  - 해결 방법:
+    - React.memo, useMemo, context 분할, useContextSelector 활용
+
+- React에서 useCallback을 사용할 때 주의해야 할 점
+  - 의존성 배열 관리가 중요: 누락 시 stale 상태 참조 가능성
+  - 불필요하게 남용하면 메모리 낭비 + 복잡도 증가
+  - 자식 컴포넌트가 React.memo일 경우에만 실질적 이득 발생
+
+- React에서 useTransition을 사용할 때의 장점
+  - 상태 업데이트를 낮은 우선순위로 처리하여 UI 응답성을 유지
+  - 예: 입력창 필터링 중 빠른 타이핑은 즉시 반영, 결과 목록은 늦게 렌더링
+  - 긴 렌더링 작업을 유휴 시간에 처리 가능
+
+- React의 useDeferredValue와 useTransition의 차이
+  - useDeferredValue: 특정 값의 갱신 우선순위를 낮춤
+    - ex: 입력값은 즉시 반영, 결과 필터링은 나중에
+
+  - useTransition: 상태 업데이트 자체를 트랜지션 처리로 defer
+    - ex: UI 자체가 무거운 경우 병목 분산 가능
+
+  - 요약: useDeferredValue는 값 지연, useTransition은 상태 업데이트 지연
+
+- React의 useSyncExternalStore는 사용하는 상황
+  - 외부 상태 관리 시스템(Redux, Zustand 등)과 React를 동기적으로 연결
+  - React 18부터 SSR/CSR 모두에서 정확한 상태 구독을 보장
+  - subscribe, getSnapshot 함수를 통해 일관된 렌더링 제공
+
+- React에서 useInsertionEffect()를 사용해야 하는 경우
+  - CSS-in-JS 라이브러리(예: styled-components, emotion)에서 스타일을 DOM에 삽입하는 타이밍 제어
+  - DOM 페인팅 전에 동기적으로 실행되므로 레이아웃 쉬프팅 방지 가능
+  - useLayoutEffect보다 더 이른 시점에 작동 (단, 일반적인 로직에서는 사용 빈도 낮음)
+
+- React에서 React.memo()를 올바르게 사용하는 방법
+  - React.memo(Component)는 props가 변경되지 않으면 컴포넌트의 리렌더링을 방지
+  - 불변성 유지가 전제되어야 하며, props가 자주 바뀌는 경우 효과 없음
+  - 필요 시 React.memo(Component, areEqual)로 커스텀 비교 함수 제공 가능
+  - 주로 Pure Component 성격의 UI에 사용
+
+- React에서 React.lazy()를 활용하여 성능을 개선하는 방법
+  - React.lazy()는 동적 import()를 통해 코드 스플리팅을 구현
+  - 초기에 모든 컴포넌트를 불러오지 않고, 필요할 때만 로드하여 초기 번들 크기를 줄임
+  - Suspense와 함께 사용하여 로딩 UI 처리
+  - 예시
+    ```js
+    const LazyComp = React.lazy(() => import('./MyComponent'));
+    ```
+
+- React에서 event delegation을 활용한 성능 개선
+  - 이벤트를 각 자식 요소가 아니라 상위 요소에서 한 번만 등록
+  - DOM 이벤트 버블링을 활용하여 메모리 사용 감소, 이벤트 리스너 수 감소
+  - 대규모 리스트나 동적 요소 생성 시 성능 향상
+
+- React에서 tree shaking이란 무엇이며, 적용방법
+  - 사용하지 않는 모듈을 번들링 과정에서 자동으로 제거하는 최적화 기법
+  - ES6 import/export 문법 기반
+  - 적용 조건:
+    - 모듈이 사이드 이펙트가 없어야 함
+    - 빌드 도구(Webpack, Rollup 등)에서 mode: 'production' 또는 sideEffects: false 설정 필요
+
+- React에서 code splitting을 적용하는 방법
+  - React.lazy() + Suspense를 통한 동적 import
+  - import()를 조건부 로직에 사용하여 라우팅 단위 분할
+  - React Router에서 lazy load 적용 가능
+  - Webpack의 SplitChunksPlugin으로 자동 분할도 가능
+
+- React에서 React Profiler를 사용하여 성능을 분석하는 방법
+  - React DevTools에서 Profiler 탭 사용
+  - 각 컴포넌트의 렌더링 시간, 빈도, 리렌더 원인을 시각화
+  - 렌더링 병목 현상 파악 → memo, useMemo, useCallback 등의 최적화 포인트 도출 가능
+
+- React에서 Double Rendering이 발생하는 원인
+  - React 18의 Strict Mode에서 개발 환경에서만 의도적으로 발생
+  - useEffect, useState 등의 초기 실행을 두 번 호출하여 부작용 검증
+  - 실제 배포(production)에서는 한 번만 실행되므로 문제 없음
+  - 원인 파악 없이 부작용 로직을 작성하면 데이터 중복 요청 등의 문제가 생길 수 있음
+
+- React에서 Automatic Batching이란 무엇이며, 기존 동작 방식과의 차이
+  - 여러 setState() 호출을 하나의 렌더링으로 묶어 처리하는 기능
+  - 기존에는 setTimeout, Promise, 이벤트 핸들러 밖에서는 각각 렌더링 발생
+  - React 18부터는 비동기 컨텍스트에서도 자동으로 배치 처리되어 성능 향상
+
+- React에서 hydration이 실패하는 이유
+  - 서버에서 렌더링한 HTML과 클라이언트에서 렌더링한 Virtual DOM이 불일치할 경우 발생
+  - 주요 원인:
+    - 렌더링 결과가 시간, 랜덤 값 등으로 달라질 때
+    - 조건부 렌더링이 클라이언트와 서버 간 다를 때
+    - useEffect 내 비동기 처리로 인한 지연된 상태 반영
+
+- React에서 Virtual DOM의 렌더링 성능을 최적화하는 방법
+  - key 속성 적절히 사용하여 리스트 비교 효율화
+  - React.memo, useMemo, useCallback으로 불필요한 재렌더 방지
+  - 상태 분리 및 컨텍스트 최적화
+  - 컴포넌트 구조 평탄화(flattening) → 렌더 깊이 최소화
+
 - React에서 useReducer와 Redux를 비교했을 때 언제 useReducer를 사용하는 것이 좋은가?
-- React에서 Redux Thunk와 Redux Saga의 차이점은?
-- React에서 Recoil과 Zustand의 차이점은?
-- React에서 zustand를 사용하면 얻을 수 있는 장점은?
-- React에서 server state와 client state의 차이는?
-- React에서 React Query를 사용하면 어떤 장점이 있는가?
+  - useReducer는 컴포넌트 내부 또는 국지적인 상태 관리에 적합
+  - 상태 변화 로직이 복잡하거나 다단계 상태가 필요할 때 유용
+  - 반면 Redux는 전역 상태를 여러 컴포넌트에서 공유해야 할 때 사용
+  - 예: 폼, 드래그 앤 드롭 등 상태 전이가 중요한 로컬 UI에 useReducer 추천
 
-- React에서 SWR과 React Query의 차이점은?
-- React에서 Apollo Client를 사용하면 어떤 이점이 있는가?
-- React에서 Global State를 관리하는 다양한 방법을 비교하시오.
-- React에서 Context API를 사용할 때 발생할 수 있는 성능 이슈는?
-- React에서 CSR(Client-Side Rendering)과 SSR(Server-Side Rendering)의 차이점은?
-- React에서 Next.js의 getStaticProps와 getServerSideProps의 차이점은?
-- React에서 getInitialProps와 getServerSideProps의 차이는?
-- React에서 Server Components의 개념과 기존 CSR, SSR과의 차이점은?
-- React에서 Streaming SSR이란 무엇이며, 어떻게 활용하는가?
+- React에서 Redux Thunk와 Redux Saga의 차이점
+  - Redux Thunk
+    - 함수(Action Creator)로 비동기 처리
+    - 간단하고 직관적
+    - 로직이 분산되고 복잡해지면 관리 어려움
+
+  - Redux Saga
+    - Generator 기반 미들웨어
+    - 비동기 흐름을 선언적으로 관리 가능 (take, call, put 등)
+    - 복잡한 사이드 이펙트 처리, 테스트에 유리
+
+- React에서 Recoil과 Zustand의 차이점
+  - Recoil
+    - Atom, Selector 구조
+    - 자동 추적 및 캐싱
+    - React 전용, 다소 복잡
+    - 의존성 기반 최적화 (퍼포먼스)
+  - Zustand
+    - Store 기반 (훅 API)
+    - 수동 구독, 매우 단순한 구조
+    - 매우 간단하고 직관적
+    - 상태 단위 구독으로 빠름
+
+- React에서 zustand를 사용하면 얻을 수 있는 장점
+  - 보일러플레이트 없음: set/get 기반 간단한 API
+  - 컴포넌트 간 상태 공유가 쉬움
+  - React 외부에서도 접근 가능 (클린 아키텍처와 잘 맞음)
+  - Redux보다 가볍고 빠름, 미들웨어도 유연하게 사용 가능
+  - 자동 불변성 처리 (immer 내장 지원)
+
+- React에서 server state와 client state의 차이
+  - Server State:
+    - 서버에 존재하는 데이터 (예: API 응답, DB 쿼리)
+    - 캐싱, 동기화, 갱신 타이밍 관리 필요
+    - 예: React Query, SWR 사용
+
+  - Client State:
+    - UI 내부 상태 (예: 모달 open 여부, 폼 입력값)
+    - 컴포넌트 내부에서 직접 관리
+    - useState, useReducer, Context 사용
+
+- React에서 React Query 사용 시 장점
+  - 서버 상태 관리 자동화: 캐싱, 리패칭, 에러 처리, 상태 관리 내장
+  - 자동 갱신: 포커스 시 재요청, stale 데이터 관리
+  - 로딩/성공/에러 상태 자동 처리 → 상태 코드를 따로 작성할 필요 없음
+  - DevTools 제공, SSR, Suspense 통합도 용이
+  - 클라이언트와 서버 간 데이터 일관성 유지에 탁월
+
+- React에서 SWR과 React Query의 차이점
+  - SWR (Stale-While-Revalidate)
+    - Vercel 개발사
+    - Stale While Revalidate 기본 전략
+    - 단순, 직관적 사용
+    - 캐시, 리패칭, 폴링 기능
+    - DevTools 없음 (비공식)
+    - 뮤테이션: 불편(수동 관리)
+
+  - React Query
+    - TanStack (React Query 팀) 개발사
+    - 다양한 캐싱/동기화 옵션 제공 기본 전략
+    - 기능 풍부, 설정 복잡도 존재
+    - 캐시, 자동갱신, 쿼리 키 기반 상태관리 포함
+    - 공식 DevTools 제공
+    - useMutation으로 선언적으로 처리 가능
+
+- React에서 Apollo Client를 사용 시 이점
+  - GraphQL 전용 캐싱 및 상태 관리 내장
+  - 쿼리 병합, 캐시 최적화 기능 제공 (InMemoryCache)
+  - useQuery, useMutation 등으로 선언적 데이터 요청
+  - 자동 UI 갱신, 오프라인 지원, 프래그먼트 기반 캐싱
+  - 서버 응답에 따라 클라이언트 캐시를 자동으로 동기화
+
+- React에서 Global State를 관리하는 다양한 방법을 비교
+  - Context API: 단순 전역 상태 공유에 적합, 리렌더링 이슈 주의
+  - Redux: 액션-리듀서 구조, 미들웨어/DevTools 강력함
+  - Recoil: 의존성 기반 상태 추적, 비동기 상태 관리 우수
+  - Zustand: Hook 기반 단순 API, 성능 및 구조 분리에 강점
+  - Jotai: 간결한 원자(Atom) 기반 상태 관리
+
+- React에서 Context API를 사용할 때 발생할 수 있는 성능 이슈
+  - 컨텍스트 값이 변경되면 모든 소비자 컴포넌트가 리렌더링됨
+  - 값이 객체일 경우, 참조 변경으로 인해 불필요한 리렌더 발생 가능
+  - 해결법:
+    - context 분할
+    - useMemo, React.memo 활용
+    - 외부 상태 관리 도입 고려
+
+- React에서 getInitialProps와 getServerSideProps의 차이
+  - getInitialProps:
+    - 페이지 단위 데이터 패칭 함수
+    - 클라이언트/서버 모두에서 실행 가능
+    - 자동 static optimization 비활성화됨
+    - 이제는 Next.js 공식 권장 X (레거시)
+
+  - getServerSideProps:
+    - 오직 서버 측에서만 실행
+    - 페이지 요청마다 새 HTML 생성
+    - React 18 이후에는 Server Components와 함께 사용 권장
+
+- React에서 Server Components의 개념과 기존 CSR, SSR과의 차이점
+  - 서버에서만 실행되는 컴포넌트로 클라이언트에 JS 없이 HTML만 전송
+  - JS 번들 크기 감소, 민감 로직 서버 유지, SEO 우수
+  - CSR: 클라이언트 렌더
+  - SSR: 서버에서 HTML 생성 후 hydration
+  - RSC: 클라이언트 코드 없이 서버에서 구성된 UI + 클라이언트 컴포넌트 혼용 가능
+
+- React에서 Streaming SSR이란 무엇이며 활용 방법
+  - HTML 전체를 기다리지 않고 부분적으로 스트리밍 전송
+  - 사용자에게 빠른 초기 렌더링 경험 제공
+  - React 18 + Suspense + Server Components 조합으로 활용
+  - Next.js의 app/ 디렉토리(App Router)에서 기본 지원
+  - 대규모 콘텐츠 앱, 느린 API 처리에서 유용
 
 - React에서 Incremental Static Regeneration(ISR)이란 무엇인가?
 - React에서 Edge Functions를 사용하면 어떤 장점이 있는가?
