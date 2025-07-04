@@ -3030,8 +3030,12 @@ Organize concepts, features, types and Pros and Cons
   - React.lazy()와 함께 사용하여 로딩 중 상태를 제어.
   - 향후 데이터 페칭 (e.g., React 18의 use API)에도 확장 가능.
 
-- React에서 useDeferredValue()의 활용 사례는?
-- React에서 useTransition()을 사용할 때 얻을 수 있는 이점은?
+- React에서 useDeferredValue()의 활용 사례
+  - 값 업데이트를 지연시켜 UI의 렌더링 우선순위를 조절할 수 있음.
+  - 고비용 연산을 포함한 하위 컴포넌트를 부드럽게 업데이트할 때 사용.
+  - 입력창 반응성은 유지하면서, 값 반영은 비동기로 처리.
+
+- React에서 useTransition()을 사용할 때 얻을 수 있는 이점
 
 
 - React에서 useSyncExternalStore()의 역할은?
