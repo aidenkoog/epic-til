@@ -3159,7 +3159,15 @@ Organize concepts, features, types and Pros and Cons
     }, []);
     ```
 
-- React에서 Refs를 활용한 DOM 조작의 장점과 단점은?
+- React에서 Refs를 활용한 DOM 조작의 장점과 단점
+  - 장점
+    - 직접 DOM 접근이 가능 (포커스, 스크롤, 텍스트 선택 등)
+    - 외부 라이브러리와 통합 시 유용
+
+  - 단점
+    - React의 선언형 방식과 어긋남 → 코드 예측성 저하
+    - 과도한 사용 시 유지보수 어려움
+
 - React에서 Custom Hooks를 만들 때 고려해야 할 사항은?
 - React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
 - React에서 Suspense를 활용한 Skeleton UI 구현 방법은?
