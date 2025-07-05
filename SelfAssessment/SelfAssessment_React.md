@@ -3820,14 +3820,129 @@ Organize concepts, features, types and Pros and Cons
   - React Query, Relay 등도 Suspense 통합 지원
   - Streaming + Suspense 조합으로 UX 최적화 가능
 
-- React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법은?
-- React에서 낙관적 업데이트(Optimistic UI)를 구현하는 방법은?
-- React에서 useOptimistic()을 활용하여 UI 업데이트를 최적화하는 방법은?
-- React에서 서버와 클라이언트 상태를 함께 관리하는 방법은?
-- React에서 XSS(Cross-Site Scripting)을 방지하는 방법은?
-- React에서 CSRF(Cross-Site Request Forgery)를 방지하는 방법은?
-- React에서 JWT(JSON Web Token)을 활용한 인증 방식은?
-- React에서 OAuth 인증을 구현하는 방법은?
+- React에서 API 호출 시 Loading, Success, Error 상태를 관리하는 방법
+  - 방법:
+    - useState로 loading, data, error 상태를 직접 관리하거나
+    - React Query, SWR과 같은 상태 관리 라이브러리를 활용해 자동 상태 추적
+
+  - 핵심 포인트:
+    - 직접 관리 시엔 try/catch + async/await 구조
+    - 라이브러리 사용 시 캐싱, 자동 리페치, stale 처리 등도 함께 제공
+
+  - 예시 (직접 관리):
+    ```jsx
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          const res = await axios.get('/api/data');
+          setData(res.data);
+        } catch (e) {
+          setError(e);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, []);
+    ```
+
+- React에서 낙관적 업데이트(Optimistic UI)를 구현하는 방법
+  - 의미:
+    - 요청이 성공했다고 가정하고 UI를 선반영한 후, 실제 응답 결과에 따라 수정 or 롤백
+  - 활용 시점:
+    - 좋아요 버튼
+    - 댓글 작성
+    - 수량 변경 등 빠른 피드백이 중요한 UX
+  - 핵심 포인트:
+    - 서버 응답 전에 local state 또는 캐시에 먼저 반영
+    - 실패 시 rollback 전략 필요
+
+- React에서 useOptimistic()을 활용하여 UI 업데이트를 최적화하는 방법
+  - 설명:
+    - React 18+에서 제공하는 실험적 훅 (useOptimistic)
+    - 사용자 액션에 대한 응답 없이 즉시 optimistic UI를 보여주되, 실제 반영은 서버 응답 후 진행
+
+  - 예시:
+    ```jsx
+    const [messages, setMessages] = useState([]);
+    const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+      messages,
+      (state, newMessage) => [...state, newMessage]
+    );
+
+    const handleSend = async (text) => {
+      addOptimisticMessage({ text, pending: true });
+      const res = await sendMessage(text);
+      setMessages((prev) => [...prev, res]);
+    };
+    ```
+  - 핵심 장점:
+    - 비동기 처리 흐름과 UI 분리를 통해 UX 향상
+    - 상태의 일관성 유지
+
+- React에서 서버와 클라이언트 상태를 함께 관리하는 방법
+  - 전략:
+    - 클라이언트 상태: useState, Redux, Zustand, Recoil 등으로 관리
+    - 서버 상태: React Query, SWR, Apollo 등으로 가져오고 캐싱/동기화 처리
+
+  - 핵심:
+    - 서버 상태는 변경 가능성이 낮고 공유 가능
+    - 클라이언트 상태는 UI에 종속적인 값 중심
+    - 두 상태를 섞지 않고 분리해서 관리해야 유지보수 용이
+
+- React에서 XSS(Cross-Site Scripting)을 방지하는 방법
+  - 위협:
+    - 사용자 입력에 <script> 삽입 → 실행될 수 있음  
+
+  - 방지 방법:
+    - React는 기본적으로 JSX에선 escape 처리함
+    - dangerouslySetInnerHTML 사용 시엔 반드시 sanitize 필요
+      ```js
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlContent) }} />
+      ```
+    - 서버단에서도 입력 값 필터링 권장
+
+- React에서 CSRF(Cross-Site Request Forgery)를 방지하는 방법
+  - 원리:
+    - 악성 사이트에서 사용자의 인증 정보를 탈취해 의도치 않은 요청 전송
+
+  - 방지 방법:
+    - 쿠키 기반 인증 시 SameSite=Lax/Strict 설정
+    - CSRF Token 발급 → 요청 헤더에 포함
+    - JWT 같은 토큰 기반 인증 사용 시 쿠키 대신 헤더에 토큰 전송하여 대응
+
+- React에서 JWT(JSON Web Token)을 활용한 인증 방식
+  - 절차:
+    - 로그인 성공 시 JWT 발급
+    - 클라이언트는 JWT를 Authorization: Bearer 헤더로 API 호출에 사용
+    - 서버는 JWT를 검증하고 요청 처리
+
+  - 장점:
+    - 무상태(stateless) 인증 가능
+    - SPA와 잘 어울림
+    - Refresh Token으로 장기 세션 유지 가능
+
+  - 주의:
+    - JWT는 탈취 시 위험 → HTTPS 필수, 만료 시간 설정 권장
+
+- React에서 OAuth 인증을 구현하는 방법
+  - 개요:
+    - Google, Facebook 등 외부 플랫폼 계정으로 로그인
+
+  - 흐름:
+    - 사용자 → 외부 인증 페이지로 리디렉션
+    - 인증 후 Redirect URI로 Authorization Code 전달
+    - 서버가 코드로 Access Token 교환
+    - 클라이언트에 토큰 전달 후 로그인 상태 유지
+
+  - React 구현 방법:
+    - react-oauth, next-auth, Firebase Auth, Passport.js(서버) 등 활용 가능
+    - 클라이언트는 보통 리디렉션 처리와 토큰 수신에 집중
 
 - React에서 CORS 정책을 해결하는 방법은?
 - React에서 React Testing Library와 Enzyme의 차이점은?
