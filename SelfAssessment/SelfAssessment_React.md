@@ -3944,7 +3944,13 @@ Organize concepts, features, types and Pros and Cons
     - react-oauth, next-auth, Firebase Auth, Passport.js(서버) 등 활용 가능
     - 클라이언트는 보통 리디렉션 처리와 토큰 수신에 집중
 
-- React에서 CORS 정책을 해결하는 방법은?
+- React에서 CORS 정책을 해결하는 방법
+  - CORS(Cross-Origin Resource Sharing)는 다른 도메인 간 자원 요청을 제한하는 브라우저 보안 정책.
+  - 해결 방법:
+    - 개발 환경: package.json에 "proxy": "http://localhost:4000" 설정.
+    - 서버 환경: 서버에서 Access-Control-Allow-Origin 헤더를 설정.
+    - 프록시 서버 활용: Nginx, API Gateway 등을 사용해 동일 출처 정책 회피.
+
 - React에서 React Testing Library와 Enzyme의 차이점은?
 - React에서 Jest와 Cypress의 차이점은?
 - React에서 e2e(end-to-end) 테스트를 수행하는 방법은?
