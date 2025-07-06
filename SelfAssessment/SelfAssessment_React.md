@@ -3985,11 +3985,34 @@ Organize concepts, features, types and Pros and Cons
     cy.get('button[type="submit"]').click();
     cy.contains('Welcome');
     ```
-    
-- React 19에서 추가된 주요 기능과 성능 최적화 개선 사항은?
-- React에서 WASM(WebAssembly)을 활용하는 방법은?
-- React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법은?
-- React에서 Context API의 성능 이슈를 해결하는 방법은?
+
+- React 19에서 추가된 주요 기능과 성능 최적화 개선 사항
+  - React Compiler: 자동으로 최적화된 코드 생성 (signals 추적).
+  - use hook 도입: Server Components 내에서 async 데이터 fetch를 간결하게 사용.
+  - Document Metadata 관리 개선: <title>, <meta> 등의 제어가 더 간단.
+  - Asset Loading 개선: preload/prefetch 자동화.
+  - 더 나은 디버깅 지원.
+
+- React에서 WASM(WebAssembly)을 활용하는 방법
+  - 고성능 연산이 필요한 경우 (예: 이미지 처리, 암호화).
+  - Rust/C++로 작성 → WebAssembly(.wasm) 빌드 → React에서 import하여 사용.
+  - 예시:
+    ```js
+    const wasm = await fetch('module.wasm');
+    const { instance } = await WebAssembly.instantiateStreaming(wasm);
+    console.log(instance.exports.add(1, 2));
+    ```
+- React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법
+  - Suspense: 비동기 로딩 컴포넌트를 대체 UI로 감싸 기다리게 함.
+  - Streaming SSR: HTML을 서버에서 점진적으로 전송하여 초기 렌더링 속도 향상.
+  - Next.js 13 이상에서 <Suspense>와 app/ 디렉토리 구조 + Server Components로 활용 가능.
+
+- React에서 Context API의 성능 이슈를 해결하는 방법
+  - 문제: 하나의 Context가 많은 컴포넌트를 감싸면 모든 컴포넌트가 리렌더링됨.
+  - 해결 방법:
+    - Context를 역할별로 분리.
+    - useMemo, React.memo 등으로 리렌더 최적화.
+    - 대안: zustand, Recoil, Jotai 같은 경량 상태 관리 라이브러리 사용.
 
 - React에서 Concurrent Rendering이 UI 성능에 미치는 영향은?
 - React에서 React Server Components(RSC)의 개념과 기존 CSR, SSR과의 차이점은?
