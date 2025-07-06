@@ -3962,8 +3962,30 @@ Organize concepts, features, types and Pros and Cons
 
   - 최근엔 Testing Library가 더 권장됨.
 
-- React에서 Jest와 Cypress의 차이점은?
-- React에서 e2e(end-to-end) 테스트를 수행하는 방법은?
+- React에서 Jest와 Cypress의 차이점
+  - Jest:
+    - 유닛/통합 테스트에 사용.
+    - 빠른 속도, 메모리 내 테스트 (Node 환경).
+
+  - Cypress:
+    - E2E 테스트에 최적화.
+    - 실제 브라우저에서 실행 → 사용자 경험 테스트 가능.
+    - UI 렌더링, 라우팅, 네트워크 요청까지 시뮬레이션.
+
+- React에서 e2e(end-to-end) 테스트를 수행하는 방법
+  - 대표 도구: Cypress, Playwright.
+  - 실제 사용자 시나리오 기반으로:
+    - 페이지 방문
+    - 버튼 클릭
+    - 결과 확인 등
+  - 예시 (Cypress):
+    ```js
+    cy.visit('/login');
+    cy.get('input[name="email"]').type('test@example.com');
+    cy.get('button[type="submit"]').click();
+    cy.contains('Welcome');
+    ```
+    
 - React 19에서 추가된 주요 기능과 성능 최적화 개선 사항은?
 - React에서 WASM(WebAssembly)을 활용하는 방법은?
 - React에서 Suspense와 Streaming을 결합하여 성능을 최적화하는 방법은?
