@@ -4015,119 +4015,75 @@ Organize concepts, features, types and Pros and Cons
     - 대안: zustand, Recoil, Jotai 같은 경량 상태 관리 라이브러리 사용.
 
 - Concurrent Rendering의 UI 성능 영향
-기존 React는 렌더링을 동기적으로 처리 → 렌더링 중 사용자의 입력 응답이 지연될 수 있음.
+  - 기존 React는 렌더링을 동기적으로 처리 → 렌더링 중 사용자의 입력 응답이 지연될 수 있음.
+  - Concurrent Rendering은 렌더링 작업을 중단하고 우선순위가 높은 작업(예: 사용자 입력)을 먼저 처리함.
+  - 결과적으로:
+    - 더 부드러운 사용자 경험 제공
+    - 긴 리스트나 복잡한 컴포넌트도 끊김 없이 렌더링 가능
+  - 사용 예: startTransition, useDeferredValue
 
-Concurrent Rendering은 렌더링 작업을 중단하고 우선순위가 높은 작업(예: 사용자 입력)을 먼저 처리함.
+- React Server Components(RSC) vs CSR, SSR
+  - RSC: React Server Components, 서버에서 React 컴포넌트 자체를 렌더링 → JS 번들 없이 HTML만 클라이언트로 전송 가능.
+    - 장점: 빠른 초기 로딩, 보안 (서버에서만 실행), 클라이언트 JS 무게 감소
+  - CSR (Client-Side Rendering):
+    - 모든 로직/렌더링이 브라우저에서 실행됨 → 초기 로딩 느림, SEO 약함
+  - SSR (Server-Side Rendering):
+    - 서버에서 HTML 생성 후 클라이언트에서 하이드레이션
+    - 초기 속도는 빠르지만 하이드레이션 비용 존재
+  - 요약: RSC는 렌더링 분리를 더 극단적으로 실현해 클라이언트 부담을 줄이고 서버 자원을 적극 활용.
 
-결과적으로:
+- Edge Functions의 장점
+  - 서버가 아닌 CDN의 Edge 위치(사용자와 가까운 서버)에서 실행되는 서버리스 함수.
+  - 장점:
+    - 빠른 응답속도 (지리적으로 가까움)
+    - 퍼스널라이징, 인증, A/B 테스트 등에 이상적
+    - 서버 부하 감소, 확장성 증가
+  - 대표 서비스: Vercel Edge Functions, Cloudflare Workers
 
-더 부드러운 사용자 경험 제공
+- PWA(Progressive Web App) 구현 방법
+  - 목표: 웹 앱을 네이티브 앱처럼 설치/오프라인 사용 가능하게 함.
+  - 핵심 요소:
+    - manifest.json (앱 이름, 아이콘, 시작 URL 등 정의)
+    - service-worker.js (오프라인 캐싱, 백그라운드 동작 처리)
+    - HTTPS 사용 필수
+  - React에서의 구현: create-react-app에 serviceWorkerRegistration.js 기본 포함.
 
-긴 리스트나 복잡한 컴포넌트도 끊김 없이 렌더링 가능
+- Server Actions vs useMutation()
+  - useMutation (React Query 등):
+    - 클라이언트에서 실행되는 비동기 데이터 변경 로직
+    - fetch → update → optimistic UI → error/success 처리 순
+  - Server Actions:
+    - 서버에서 직접 실행되는 함수를 클라이언트에서 호출
+    - Next.js App Router에서 사용 (server actions는 form이나 client에서 바로 서버 실행 가능)
+    - 클라이언트 번들 최소화, 보안 강화
+  - 요약: useMutation은 클라이언트 중심, Server Actions는 서버 중심.
 
-사용 예: startTransition, useDeferredValue
+- Streaming SSR vs Static Rendering
+  - Streaming SSR:
+    - HTML을 조각 단위로 점진적 전송 → LCP 속도 개선, 유저 체감 성능 향상
+    - 예: <Suspense fallback="로딩 중...">과 함께 사용
+  - Static Rendering (SSG):
+    - 빌드 시 모든 페이지를 정적으로 생성
+    - 빠르지만 동적 콘텐츠 반영 어려움
+  - 요약:
+    - Streaming SSR: 실시간 반영 가능, 초기 뷰 빠름
+    - Static: 트래픽 많은 콘텐츠에 최적 (블로그, 문서 등)
 
-✅ React Server Components(RSC) vs CSR, SSR
-RSC: 서버에서 React 컴포넌트 자체를 렌더링 → JS 번들 없이 HTML만 클라이언트로 전송 가능.
+- Preact를 사용할 경우 성능 향상 이유
+  - Preact는 React와 거의 동일한 API를 제공하지만, 더 가볍고 빠른 대안.
+  - 핵심 이유:
+    - React 대비 번들 크기 매우 작음 (~3KB).
+    - DOM 렌더링 최적화가 뛰어남.
+  - 단점: 일부 고급 React 기능(예: Context, DevTools 호환성)은 다를 수 있음.
 
-장점: 빠른 초기 로딩, 보안 (서버에서만 실행), 클라이언트 JS 무게 감소
-
-CSR (Client-Side Rendering):
-
-모든 로직/렌더링이 브라우저에서 실행됨 → 초기 로딩 느림, SEO 약함
-
-SSR (Server-Side Rendering):
-
-서버에서 HTML 생성 후 클라이언트에서 하이드레이션
-
-초기 속도는 빠르지만 하이드레이션 비용 존재
-
-요약: RSC는 렌더링 분리를 더 극단적으로 실현해 클라이언트 부담을 줄이고 서버 자원을 적극 활용.
-
-✅ Edge Functions의 장점
-서버가 아닌 **CDN의 Edge 위치(사용자와 가까운 서버)**에서 실행되는 서버리스 함수.
-
-장점:
-
-빠른 응답속도 (지리적으로 가까움)
-
-퍼스널라이징, 인증, A/B 테스트 등에 이상적
-
-서버 부하 감소, 확장성 증가
-
-대표 서비스: Vercel Edge Functions, Cloudflare Workers
-
-✅ PWA(Progressive Web App) 구현 방법
-목표: 웹 앱을 네이티브 앱처럼 설치/오프라인 사용 가능하게 함.
-
-핵심 요소:
-
-manifest.json (앱 이름, 아이콘, 시작 URL 등 정의)
-
-service-worker.js (오프라인 캐싱, 백그라운드 동작 처리)
-
-HTTPS 사용 필수
-
-React에서의 구현: create-react-app에 serviceWorkerRegistration.js 기본 포함.
-
-✅ Server Actions vs useMutation()
-useMutation (React Query 등):
-
-클라이언트에서 실행되는 비동기 데이터 변경 로직
-
-fetch → update → optimistic UI → error/success 처리 순
-
-Server Actions:
-
-서버에서 직접 실행되는 함수를 클라이언트에서 호출
-
-Next.js App Router에서 사용 (server actions는 form이나 client에서 바로 서버 실행 가능)
-
-클라이언트 번들 최소화, 보안 강화
-
-요약: useMutation은 클라이언트 중심, Server Actions는 서버 중심.
-
-✅ Streaming SSR vs Static Rendering
-Streaming SSR:
-
-HTML을 조각 단위로 점진적 전송 → LCP 속도 개선, 유저 체감 성능 향상
-
-예: <Suspense fallback="로딩 중...">과 함께 사용
-
-Static Rendering (SSG):
-
-빌드 시 모든 페이지를 정적으로 생성
-
-빠르지만 동적 콘텐츠 반영 어려움
-
-요약:
-
-Streaming SSR: 실시간 반영 가능, 초기 뷰 빠름
-
-Static: 트래픽 많은 콘텐츠에 최적 (블로그, 문서 등)
-
-✅ Preact를 사용할 경우 성능 향상 이유
-Preact는 React와 거의 동일한 API를 제공하지만, 더 가볍고 빠른 대안.
-
-핵심 이유:
-
-React 대비 번들 크기 매우 작음 (~3KB).
-
-DOM 렌더링 최적화가 뛰어남.
-
-단점: 일부 고급 React 기능(예: Context, DevTools 호환성)은 다를 수 있음.
-
-✅ useInsertionEffect의 역할과 활용
-React 18에 추가된 hook.
-
-DOM에 스타일을 "삽입하기 직전"에 실행됨.
-
-스타일 라이브러리(SCSS-in-JS)에서 스타일을 정확한 순서로 삽입하기 위해 사용됨.
-
-useLayoutEffect보다 더 빠른 시점에 실행됨 → CSS-in-JS 우선순위 관리에 유용.
-
-tsx
-코드 복사
-useInsertionEffect(() => {
-  // CSS 삽입 관련 코드
-}, []);
+- useInsertionEffect의 역할과 활용
+  - React 18에 추가된 hook.
+  - DOM에 스타일을 "삽입하기 직전"에 실행됨.
+  - 스타일 라이브러리(SCSS-in-JS)에서 스타일을 정확한 순서로 삽입하기 위해 사용됨.
+  - useLayoutEffect보다 더 빠른 시점에 실행됨 → CSS-in-JS 우선순위 관리에 유용.
+  - 예시 사용법
+    ```tsx
+    useInsertionEffect(() => {
+      // CSS 삽입 관련 코드
+    }, []);
+    ```
