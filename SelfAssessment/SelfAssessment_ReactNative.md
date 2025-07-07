@@ -1008,13 +1008,62 @@ Organize concepts, features, types and Pros and Cons
       - iOS는 App Store 정책상 RTSP 보안 문제 검토 필요
       - 네트워크 상태에 따라 reconnect 로직 필요
 
-- React Native에서 Dynamic Linking이란?
-- React Native에서 Code Splitting이 필요한 이유는?
-- React Native에서 Flipper를 사용하는 이유는?
-- React Native의 Metro Bundler와 Webpack의 차이점은?
-- React Native에서 Hermes 엔진을 사용하는 장점은?
-- React Native에서 SafeAreaView의 역할은?
-- React Native에서 Dynamic Styles을 적용하는 방법은?
+- React Native에서 Dynamic Linking
+  - Native 코드 (iOS의 .framework, Android의 .so)와 JS 코드 간 연결을 런타임에 설정하는 것.
+  - 예를 들어, 일부 라이브러리는 빌드시가 아닌 앱 실행 시 native 모듈을 로드할 수 있도록 구성되며, 이를 동적 연결이라고 함.
+  - 주로 수동 native 설정이나 외부 바이너리 연동 시 사용됨.
+
+- React Native에서 Code Splitting이 필요한 이유
+  - 앱의 초기 로딩 속도 개선
+  - 큰 JS 번들을 여러 청크로 나누어 필요한 시점에만 코드 로드 가능
+  - Web에서는 흔하지만, React Native에서는 공식적으로 지원되지 않아 수동 구현 또는 라이브러리(react-native-dynamic-bundle 등) 필요
+
+- React Native에서 Flipper를 사용하는 이유
+  - 강력한 디버깅 도구 제공
+    - 네트워크 요청 확인
+    - Redux 상태 추적
+    - Native logs 보기
+    - 레이아웃 시각화
+  - Android/iOS 모두 지원하며, 디버깅과 성능 분석에 매우 유용함
+
+- React Native의 Metro Bundler와 Webpack의 차이점
+  - Metro Bundler
+    - React Native 기본 번들러
+    - 빠른 HMR(Hot Reload), React Native에 최적화
+    - 설정이 간단하고 JS 트랜스파일에 특화됨
+
+  - Webpack
+    - 주로 Web에서 사용됨
+    - 고급 설정 및 다양한 플러그인 지원
+    - React Native에는 별도로 설정하지 않으면 직접 사용하지 않음
+
+- React Native에서 Hermes 엔진을 사용하는 장점
+  - Facebook이 개발한 경량 JavaScript 엔진
+  - 장점:
+    - 앱 시작 속도 향상
+    - 메모리 사용량 감소
+    - APK 크기 감소
+    - GC(가비지 컬렉션) 최적화
+  - 특히 저사양 Android 기기에서 효과적
+
+- React Native에서 SafeAreaView의 역할
+  - iOS의 노치, 상태바, 홈 인디케이터 등 시스템 UI를 피해서 콘텐츠 배치
+  - 장치별 안전 영역(safe area) 안에서 레이아웃이 자동 조정되도록 함
+  - react-native-safe-area-context 패키지와 함께 사용하면 더 정교한 제어 가능
+
+- React Native에서 Dynamic Styles을 적용하는 방법
+  - 조건에 따라 스타일을 동적으로 변경하는 기법
+  - 대표 예시:
+    ```js
+    const styles = {
+      container: {
+        backgroundColor: isDarkMode ? 'black' : 'white',
+      },
+    };
+    ```
+  - StyleSheet.create() 또는 객체 리터럴을 활용
+  - 테마, 상태, props 등에 따라 실시간 스타일 변경 가능
+
 - React Native에서 Performance Profiling을 수행하는 방법은?
 - React Native에서 Detox와 Appium의 차이점은?
 - React Native에서 Firebase를 연동하는 방법은?
