@@ -1064,7 +1064,21 @@ Organize concepts, features, types and Pros and Cons
   - StyleSheet.create() 또는 객체 리터럴을 활용
   - 테마, 상태, props 등에 따라 실시간 스타일 변경 가능
 
-- React Native에서 Performance Profiling을 수행하는 방법은?
+- React Native에서 Performance Profiling을 수행하는 방법
+  - Performance Profiling은 앱의 렌더링 속도, JS 스레드 병목, 메모리 사용 등을 분석하기 위한 과정
+  - 주요 방법
+    - Flipper + Hermes Debugger
+      - Flipper에서 React DevTools 플러그인으로 렌더링 트리/스케줄 분석 가능
+      - Hermes 엔진 활성화 시 JS 힙, CPU 프로파일링 지원
+    - React Native Dev Menu
+      - "Enable Perf Monitor": FPS, JS/Native Bridge 시간 확인
+    - Xcode/Android Profiler
+      - 네이티브 성능 분석 (CPU, 메모리, GPU 렌더링 등)
+    - React Profiler
+      - react-devtools로 컴포넌트 단위 렌더 시간 분석
+      
+  - 성능 이슈는 대부분 JS 스레드 block or re-render 문제 → useMemo, useCallback, FlatList 최적화 등이 핵심
+
 - React Native에서 Detox와 Appium의 차이점은?
 - React Native에서 Firebase를 연동하는 방법은?
 - React Native에서 Clipboard API를 사용하는 방법은?
