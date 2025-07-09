@@ -1079,8 +1079,26 @@ Organize concepts, features, types and Pros and Cons
       
   - 성능 이슈는 대부분 JS 스레드 block or re-render 문제 → useMemo, useCallback, FlatList 최적화 등이 핵심
 
-- React Native에서 Detox와 Appium의 차이점은?
-- React Native에서 Firebase를 연동하는 방법은?
+- React Native에서 Detox와 Appium의 차이점
+  - Detox
+    - React Native에 특화된 E2E 테스트 프레임워크
+    - 네이티브 이벤트 루프를 고려해 더 빠르고 안정적
+    - Android/iOS 둘 다 지원, JavaScript 기반
+    - CI/CD에 잘 통합됨 (예: GitHub Actions)
+
+  - Appium
+    - 플랫폼에 독립적인 범용 E2E 테스트 툴
+    - 다양한 언어(Java, Python 등)와 플랫폼(Android, iOS, 웹) 지원
+    - 설정이 복잡하고 실행 속도 느림
+    - 리액트 네이티브 전용은 아님
+
+- React Native에서 Firebase를 연동하는 방법
+  - npm install @react-native-firebase/app
+  - 필요한 서비스별 설치 (예: auth, firestore 등)
+    - 예: npm install @react-native-firebase/auth
+  - Android: google-services.json 추가, build.gradle 설정
+  - iOS: GoogleService-Info.plist 추가, pod install
+
 - React Native에서 Clipboard API를 사용하는 방법은?
 - React Native에서 StatusBar를 동적으로 변경하는 방법은?
 - React Native에서 Redux Toolkit을 사용하는 이유는?
