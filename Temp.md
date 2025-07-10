@@ -86,3 +86,51 @@
 	•	다양한 사용자 환경에서의 호환성 테스트
 	•	UI/UX에 대한 실사용 피드백
 	•	기능 누락, 예상치 못한 사용 흐름 발견
+
+
+[1] B2B vs B2C 프로젝트 차이
+구분	B2B (Business to Business)	B2C (Business to Consumer)
+사용자	기업 사용자 (관리자, 직원 등)	일반 개인 사용자
+요구사항	기능 중심, 안정성 중시
+고객사 맞춤 개발 많음	UX/UI 중심, 사용 편의성, 트래픽 대응
+배포	제한된 환경 (내부 MDM, 수동 배포)	앱 마켓 (Play Store, App Store)
+보안 요구	내부 인증, VPN, 사내 서버 연동 등 고보안 요구	보안 중요하지만 범용화된 인증 (SNS, 이메일 등)
+개발 속성	고객사 요구사항 수시 반영 → 기능 특화형	업데이트 주기 빠르고, AB 테스트 등 마케팅 요소
+예시	사내 근태 관리 앱, 스마트공장 제어 앱, CCTV 관리 툴	쇼핑몰 앱, 메신저, 금융 앱 등
+
+
+✅ [2] 앱 ↔ 서버 간 일반적인 로그인 과정
+로그인은 대부분 JWT 기반 인증 흐름으로 구성되며, 다음과 같은 과정을 따릅니다.
+
+🔐 일반적인 로그인 흐름
+앱에서 로그인 정보 입력
+
+사용자 ID / PW 또는 OAuth 로그인(SNS 등)
+
+앱 → 서버에 로그인 요청 (POST /login)
+
+JSON Body: { "id": "user1", "pw": "1234" }
+
+서버에서 사용자 인증
+
+DB에서 ID/PW 확인
+
+인증 성공 시 JWT 또는 Access/Refresh Token 발급
+
+서버 → 앱으로 토큰 응답
+
+{ "accessToken": "...", "refreshToken": "..." }
+
+SecureStorage 등에 저장
+
+앱 → 이후 요청 시 토큰 포함
+
+API 요청 시 Authorization: Bearer <accessToken> 헤더 사용
+
+토큰 만료 시 갱신
+
+401 응답 발생 시 refreshToken으로 accessToken 갱신
+
+로그아웃
+
+서버에 토큰 무효화 요청 (선택적), 앱 내 토큰 삭제
