@@ -2041,7 +2041,20 @@ Organize concepts, features, types and Pros and Cons
     )
     ```
 
-- Flutter에서 RepaintBoundary를 활용하여 성능을 최적화하는 방법은?
+- Flutter에서 RepaintBoundary를 활용하여 성능을 최적화하는 방법
+  - 개요
+    - RepaintBoundary는 화면의 일부분이 다시 그려질 때 해당 영역만 리렌더링하도록 분리하는 위젯
+  - 활용 이유 및 효과
+    - 불필요한 전체 리렌더링 방지: 자식 위젯이 자주 변경될 때, 부모까지 리렌더링 되지 않도록 막아줌
+    - 애니메이션 등 일부 위젯만 업데이트 될 때 유용
+    - 플러터 DevTools의 Repaint Rainbow 기능으로 repaint영역 디버깅 가능
+  - 사용 예
+    ```dart
+    RepaintBoundary(
+      child: SomeWidgetThatChangesFrequently(),
+    )
+    ```
+
 - Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유는?
 - Flutter에서 Image.memory()와 Image.asset()의 차이점은?
 
