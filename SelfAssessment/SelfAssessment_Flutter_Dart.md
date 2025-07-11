@@ -2623,12 +2623,126 @@ Organize concepts, features, types and Pros and Cons
   - 자동 토큰 갱신 (RefreshToken) 전략
     - Dio의 Interceptor를 사용하여 401 에러 시 토큰 재발급 요청 후 재시도 구현 가능
 
-- Flutter에서 WebSockets을 활용한 실시간 통신 방법은?
-- Flutter에서 OAuth 2.0 인증을 구현하는 방법은?
-- Flutter에서 API 호출을 위한 Rate Limiting을 적용하는 방법은?
-- Flutter에서 SSL Pinning을 적용하는 방법은?
-- Flutter에서 FlutterFire를 활용하여 Firebase 연동 방법은?
+- Flutter에서 WebSockets을 활용한 실시간 통신 방법
+  - 설치 패키지: web_socket_channel
+  - 사용 예시
+    ```dart
+    import 'package:web_socket_channel/web_socket_channel.dart';
 
+    final channel = WebSocketChannel.connect(
+      Uri.parse('wss://example.com/socket'),
+    );
+
+    // 메시지 수신
+    channel.stream.listen((message) {
+      print('Received: $message');
+    });
+
+    // 메시지 전송
+    channel.sink.add('Hello server!');
+
+    // 연결 종료
+    channel.sink.close();
+    ```
+    - 실시간 채팅, 알림, 센서 데이터 전송 등에서 활용됨
+    - stream.listen 기반이므로 StreamBuilder와 연계도 쉬움
+
+- Flutter에서 OAuth 2.0 인증을 구현하는 방법
+  - 패키지: oauth2, flutter_appauth
+  - OAuth 흐름 요약 (Authorization Code Flow)
+    - 사용자 인증 페이지로 리다렉션
+    - Authorization code 발급
+    - Backend 서버에서 액세스 토큰, 리프레쉬 토큰 교환
+    - 액세스 토큰 사용하여 API 호출
+  - AppAuth 사용 예
+    ```dart
+    final AuthorizationTokenResponse? result =
+    await appAuth.authorizeAndExchangeCode(
+      AuthorizationTokenRequest(
+        clientId,
+        redirectUrl,
+        serviceConfiguration: AuthorizationServiceConfiguration(
+          authorizationEndpoint: authUrl,
+          tokenEndpoint: tokenUrl,
+        ),
+        scopes: ['openid', 'profile', 'email'],
+      ),
+    );
+    ```
+    - Google, Kakao, Naver, GitHub 로그인 등에 활용
+    - redirect URI 등록 필수 (iOS/Android 플랫폼별 설정 필요)
+
+- Flutter에서 API 호출을 위한 Rate Limiting을 적용하는 방법
+  - 개요
+    - Rate Limiting은 특정 시간 내에 API 호출 횟수를 제한하는 기능
+    - 클라이언트 측에서는 주로 디바운싱 또는 타이머 기반 제어를 활용함
+  - 디바운싱 예
+    ```dart
+    Timer? _debounce;
+
+    void onSearchChanged(String value) {
+      if (_debounce?.isActive ?? false) _debounce!.cancel();
+      _debounce = Timer(const Duration(milliseconds: 500), () {
+        fetchApi(value);
+      });
+    }
+    ```
+  - 고급 패키지 예:
+    - rxdart 의 debounceTime
+    - custom throttler (throttle(), throttleLatest())
+
+  - 사용 이유
+    - 서버와 중복 요청을 줄이고, 쿼리 비용을 절감
+    - 실시간 검색, 자동완성 등에 매우 유용
+
+- Flutter에서 SSL Pinning을 적용하는 방법
+  - 개요
+    - SSL Pinning은 HTTPS 연결 시 서버의 공개 키 또는 인증서를 미리 앱에 저장해 검증하는 보안 기법
+  - 패키지: dio, http_certificate_pinning
+  - Dio + SSL Pinning 예시
+    ```dart
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+      SecurityContext context = SecurityContext(withTrustedRoots: false);
+      context.setTrustedCertificates('assets/cert.pem');
+      return HttpClient(context: context);
+    };
+    ```
+  - 또는 http_certificate_pinning 패키지 활용
+    ```dart
+    await HttpCertificatePinning.check(
+      serverURL: "example.com",
+      headerHttp: {},
+      sha: SHA.SHA256,
+      allowedSHAFingerprints: ["..."],
+    );
+    ```
+  - SSL Pinning
+    - 중간자 공격 방지, 인증서 위조 차단
+    - 주기적으로 인증서 갱신 필요
+
+- Flutter에서 FlutterFire를 활용한 Firebase 연동 방법
+  - 개요
+    - FlutterFire는 Flutter용 Firebase 공식 SDK
+  - 패키지
+    - firebase_core, firebase_auth
+    - cloud_firestorew, firebase_messaging
+    - firebase_crashlytics
+  - 초기화
+    ```dart
+    void main() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+      runApp(MyApp());
+    }
+    ```
+  - 주요 기능 예시
+    - FirebaseAuth.instance.signInWithEmailAndPassword(...)
+    - FirebaseFirestore.instance.collection('users').doc('id').get()
+    - FirebaseMessaging.instance.getToken() (푸시 토큰)
+    - FirebaseCrashlytics.instance.recordError(e, stack)
+    
+  - Analytics, Storage, Remote Config, Functions 등도 확장 가능
+  - 플랫폼별 GoogleService-Info.plist / google-services.json 필요
 
 - Flutter에서 Clean Architecture를 적용한 네트워크 계층 설계 방법은?
 - Flutter에서 Retrofit을 활용한 네트워크 요청 관리 방법은?
