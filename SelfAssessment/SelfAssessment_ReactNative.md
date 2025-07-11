@@ -1233,12 +1233,143 @@ Organize concepts, features, types and Pros and Cons
       .catch(error => console.error(error));
     ```
 
-- React Native에서 Clipboard API를 사용하는 방법은?
-- React Native에서 StatusBar를 동적으로 변경하는 방법은?
-- React Native에서 Native Module을 직접 구현하는 방법은?
-- React Native에서 Gesture Handler를 설정하는 방법은?
-- React Native에서 Hermes의 주요 기능은?
-- React Native에서 Expo를 사용할 때의 장단점은?
+- React Native에서 Clipboard API를 사용하는 방법
+  - 설치
+    ```bash
+    npm install @react-native-clipboard/clipboard
+    npx pod-install
+    ```
+
+  - 사용 예시
+    ```js
+    import Clipboard from '@react-native-clipboard/clipboard';
+
+    // 복사하기
+    Clipboard.setString('Hello, world!');
+
+    // 붙여넣기
+    Clipboard.getString().then((text) => {
+      console.log('Clipboard text:', text);
+    });
+    ```
+
+- React Native에서 StatusBar를 동적으로 변경하는 방법
+  - 개요
+    - 상태바 컴포넌트를 사용하여 색상, 스타일, 표시 여부 등을 동적으로 제어 가능
+
+  - 예시
+    ```js
+    import { StatusBar } from 'react-native';
+
+    <StatusBar
+      barStyle="light-content" // or 'dark-content'
+      backgroundColor="#6a51ae"
+      translucent={true}
+    />
+    ```
+  - 조건에 따라 동적으로 변경
+    ```js
+    useEffect(() => {
+      StatusBar.setBarStyle('dark-content', true);
+      StatusBar.setBackgroundColor('#ffffff');
+    }, []);
+    ```
+
+- React Native에서 Native Module을 직접 구현하는 방법
+  - 개요
+    - Java(Android), Objective-C/Swift(iOS)로 네이티브 기능을 확장 가능
+  
+  - 예시
+    - (1) 모듈 생성
+      ```java
+      package com.yourapp;
+
+      import com.facebook.react.bridge.ReactApplicationContext;
+      import com.facebook.react.bridge.ReactContextBaseJavaModule;
+      import com.facebook.react.bridge.ReactMethod;
+
+      public class MyModule extends ReactContextBaseJavaModule {
+          public MyModule(ReactApplicationContext context) {
+              super(context);
+          }
+
+          @Override
+          public String getName() {
+              return "MyModule";
+          }
+
+          @ReactMethod
+          public void showMessage(String msg) {
+              Toast.makeText(getReactApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+          }
+      }
+      ```
+    - (2) Package 등록
+      ```java
+      public class MyPackage implements ReactPackage {
+        @Override
+        public List<NativeModule> createNativeModules(...) {
+          return Arrays.asList(new MyModule(reactContext));
+        }
+      }
+      ```
+
+    - (3) JavaScript에서 사용
+      ```js
+      import { NativeModules } from 'react-native';
+      NativeModules.MyModule.showMessage('Hello from Native!');
+      ```
+
+- React Native에서 Gesture Handler를 설정하는 방법
+  - 개요
+    - 고성능 제스처 처리를 위한 라이브러리
+  - 설치
+    ```bash
+    npm install react-native-gesture-handler
+    npx pod-install
+    ```
+  - 안드로이드 설정
+    - MainActivity.java 수정 (ReactActivityDelegate 설정 필요)
+  - 사용 예시
+    ```js
+    import { GestureHandlerRootView, TapGestureHandler } from 'react-native-gesture-handler';
+
+    const App = () => (
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <TapGestureHandler onActivated={() => console.log('Tapped')}>
+          <View style={{ flex: 1, backgroundColor: 'white' }} />
+        </TapGestureHandler>
+      </GestureHandlerRootView>
+    );
+    ```
+    - 제스처는 Pan, Tap, LongPress, Pinch, Fling 등 지원
+
+- React Native에서 Hermes의 주요 기능
+  - 개요
+    - 리액트 네이티브 전용, 최적화된 경량 자바스크립트 엔진
+  - 주요 기능
+    - 빠른 앱 시작 시간: 바이트코드 precompile로 초기 로딩 속도 개선
+    - 낮은 메모리 사용량: 불필요한 JS 객체 관리 최소화
+    - JIT 미사용: 정적으로 컴파일하여 예측 가능한 성능
+    - 디버깅 도구 지원: Flipper, Chrome Debugger와 연동 가능
+    - 배터리 절약: GC 최적화로 백그라운드 전력 소모 감소
+  - 참고
+    - 리액트 네이티브 0.70+부터 Hermes가 기본으로 활성화
+
+- React Native에서 Expo를 사용할 때의 장단점
+  - 장점
+    - 빠른 개발 시작 (Zero Config)
+    - eas build로 간편한 배포
+    - 많은 모듈 내장(expo-camera, expo-image-picker 등)
+    - Hot Reload, OTA 업데이트 제공
+    - 공식 문서와 예제 풍부
+  - 단점
+    - Custom Native 코드 제한
+    - 자체 Native 빌드 필요 시 eject 필요
+    - 일부 고급 기능 미지원
+    - 앱 사이즈 커질 가능성 존재
+    - 비공식 라이브러리 호환성 이슈 있을 수 있음
+
 - React Native에서 Animated API를 활용한 애니메이션 구현 방법은?
 - React Native에서 Deep Linking을 적용하는 방법은?
 - React Native에서 AppState를 활용하는 방법은?
