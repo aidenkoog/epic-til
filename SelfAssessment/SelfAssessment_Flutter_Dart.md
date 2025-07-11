@@ -2740,17 +2740,32 @@ Organize concepts, features, types and Pros and Cons
     - FirebaseFirestore.instance.collection('users').doc('id').get()
     - FirebaseMessaging.instance.getToken() (푸시 토큰)
     - FirebaseCrashlytics.instance.recordError(e, stack)
-    
+
   - Analytics, Storage, Remote Config, Functions 등도 확장 가능
   - 플랫폼별 GoogleService-Info.plist / google-services.json 필요
 
-- Flutter에서 Clean Architecture를 적용한 네트워크 계층 설계 방법은?
+- Flutter에서 Clean Architecture를 적용한 네트워크 계층 설계 방법
+  - 기존 구조 (레이어 기준)
+    ```bash
+    lib/
+      core/         # 공통 유틸, 에러, 타입
+      data/         # DTO, API Service (Retrofit), Impl Repository
+      domain/       # Entity, UseCase, Abstract Repository
+      presentation/ # View, ViewModel
+    ```
+  - 예시 흐름
+    - ApiService > HTTP 호출 (Dio/Retrofit 등)
+    - MyRepositoryImpl implements MyRepository (도메인 레이어)
+    - GetUserUseCase > MyRepository.getUser()
+    - ViewModel에서 UseCase 호출 > UI 갱신
+  - 장점
+    - 테스트 용이, 관심사 분리, DI 가능
+    - 관련 도구: freezed, json_serializable, hooks_riverpod, get_it 등
+
 - Flutter에서 Retrofit을 활용한 네트워크 요청 관리 방법은?
 - Flutter에서 Refresh Token을 활용한 자동 로그인 구현 방법은?
 - Flutter에서 Firebase Firestore와 Realtime Database의 차이점은?
 - Flutter에서 GraphQL의 Query와 Mutation의 차이점은?
-
-
 - Flutter에서 FormData를 활용한 파일 업로드 방법은?
 - Flutter에서 Multi-part Request를 활용한 이미지 업로드 방법은?
 - Flutter에서 API 응답을 캐싱하는 방법은?
