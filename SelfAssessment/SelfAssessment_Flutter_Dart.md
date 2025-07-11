@@ -2363,7 +2363,36 @@ Organize concepts, features, types and Pros and Cons
     - Scaffold.of(context).openDrawer()로 프로그래밍 방식으로 열 수도 있음.
 
 - Flutter에서 FloatingActionButton을 커스터마이징하는 방법
+  - 개요
+    - FAB은 주로 화면 우하단에 표시되는 주요 액션 버튼
+  - 커스터 마이징 예시
+    ```dart
+    FloatingActionButton(
+      onPressed: () {},
+      backgroundColor: Colors.purple,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Icon(Icons.add, size: 32),
+    )
+    ```
+    - shape, backgroundColor, elevation, child 등을 이용해 완전히 커스터마이징 가능
+
 - Flutter에서 PageView 위젯을 활용하는 방법
+  - 개요
+    - PageView는 가로(또는 세로)로 스와이프 가능한 페이지 구조 제공
+  - 예시
+    ```dart
+    PageView(
+      controller: PageController(),
+      children: [
+        Container(color: Colors.red),
+        Container(color: Colors.green),
+        Container(color: Colors.blue),
+      ],
+    )
+    ```
+    - PageController를 이용해 animateToPage() 등 제어 가능.
+    - onPageChanged로 현재 페이지 인덱스 확인 가능.
+
 - Flutter에서 커스텀 Shimmer 효과를 구현하는 방법
 - Flutter에서 TabBar와 BottomNavigationBar의 차이점
 - Flutter에서 기본적인 Theming을 적용하는 방법
