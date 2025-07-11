@@ -1137,12 +1137,30 @@ Organize concepts, features, types and Pros and Cons
     - 민감 정보 저장용 (토큰, 패스워드)
     - Expo 환경에서 기본 제공 (expo-secure-store)
 
-- React Native에서 React Navigation과 React Router의 차이점은?
-- React Native에서 ScrollView와 FlatList의 차이점은?
+- React Native에서 React Navigation과 React Router의 차이점
+  - React Navigation
+    - 모바일 앱 전용 네비게이션, 거의 표준
+    - Stack, Tab, Drawer 등 모바일 친화적인 네비게이션 구조
+    - Android/iOS 네이티브 UX에 최적화
+    - React Native 전용으로 설계됨
+    - 사용 예: @react-navigation/native, stackNavigator, tabNavigator 등
+  - React Router
+    - 웹 전용으로 시작, 웹 + 네이티브 지원
+    - Route 중심의 선언형 네비게이션
+    - 웹 중심의 라우팅 개념을 확장
+    - React Native Web 또는 별도 설정 필요
+    - react-router-native, react-router-dom 등
+  - 정리
+    - RN에서는 React Navigation이 표준처럼 사용
+    - React Router는 웹 개발자가 기존 코드 공유 시 사용하거나 웹과의 크로스플랫폼을 고려할 때 활용
+
+- React Native에서 ScrollView와 FlatList의 차이점
 - React Native에서 Dynamic Styles을 적용하는 방법은?
 - React Native에서 Performance Profiling을 수행하는 방법은?
 - React Native에서 Detox와 Appium의 차이점은?
 - React Native에서 Firebase를 연동하는 방법은?
+
+
 - React Native에서 Clipboard API를 사용하는 방법은?
 - React Native에서 StatusBar를 동적으로 변경하는 방법은?
 - React Native에서 Native Module을 직접 구현하는 방법은?
