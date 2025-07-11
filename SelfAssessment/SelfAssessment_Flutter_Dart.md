@@ -2762,9 +2762,21 @@ Organize concepts, features, types and Pros and Cons
     - 테스트 용이, 관심사 분리, DI 가능
     - 관련 도구: freezed, json_serializable, hooks_riverpod, get_it 등
 
-- Flutter에서 Retrofit을 활용한 네트워크 요청 관리 방법은?
-- Flutter에서 Refresh Token을 활용한 자동 로그인 구현 방법은?
-- Flutter에서 Firebase Firestore와 Realtime Database의 차이점은?
+- Flutter에서 Firebase Firestore와 Realtime Database의 차이점
+  - FireStore
+    - 문서/컬렉션 기반 (NoSQL)
+    - 강력한 필터링/정렬 지원
+    - 실시간 지원 (효율적)
+    - 구조화된 문서 저장에 적합
+    - 사용량 기반, 다소 비싼 가격
+  - Realtime Database
+    - 트리 기반 (JSON 트리)
+    - 단순 쿼리만 지원
+    - 실시간 지원 (더 빠르지만 구조적 제한 존재)
+    - 빠른 실시간 동기화에 적합
+    - 저렴하나 최적화 필수
+  - 정리: 일반적으로 FireStore가 더 권장됨 (구조 / 확장성 측면)
+
 - Flutter에서 GraphQL의 Query와 Mutation의 차이점은?
 - Flutter에서 FormData를 활용한 파일 업로드 방법은?
 - Flutter에서 Multi-part Request를 활용한 이미지 업로드 방법은?
