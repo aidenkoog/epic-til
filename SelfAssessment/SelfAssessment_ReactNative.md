@@ -1444,13 +1444,122 @@ Organize concepts, features, types and Pros and Cons
       return () => Linking.removeAllListeners('url');
     }, []);
     ```
-    
-- React Native에서 AppState를 활용하는 방법은?
-- React Native에서 SafeAreaView의 역할은?
-- React Native에서 CodePush를 활용하여 앱을 배포하는 방법은?
-- React Native에서 Splash Screen을 최적화하는 방법은?
-- React Native에서 Background Task를 실행하는 방법은?
 
+- React Native에서 AppState를 활용하는 방법
+  - 개요: AppState는 앱의 현재 상태 (active, background, inactive)를 감지하는 데 사용
+
+  - 예시
+    ```js
+    import { AppState } from 'react-native';
+    import { useEffect, useRef } from 'react';
+
+    const App = () => {
+      const appState = useRef(AppState.currentState);
+
+      useEffect(() => {
+        const subscription = AppState.addEventListener('change', nextAppState => {
+          console.log('App state changed to', nextAppState);
+        });
+
+        return () => subscription.remove();
+      }, []);
+    };
+    ```
+    - 앱 백그라운드 진입 시 데이터 저장, 정지 처리 등에 유용
+
+- React Native에서 SafeAreaView의 역할
+  - SafeAreaView 역할
+    - iOS의 노치, 홈 인디케이터 영역 등 안전한 영역(safe area) 내에서만 UI를 표시하도록 보장
+    - iPhone X 이후 디바이스에서 레이아웃이 잘리는 문제를 방지
+  - 사용 예시
+    ```js
+    import { SafeAreaView } from 'react-native';
+
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <Text>안전한 영역 안의 내용</Text>
+    </SafeAreaView>
+    ```
+    - react-native-safe-area-context 사용 시 더 정밀한 처리 가능
+
+- React Native에서 CodePush를 활용하여 앱을 배포하는 방법
+  - 개요
+    - CodePush는 앱스토어 재심사없이 JS코드와 리소스를 OTA 업데이트할 수 있는 서비스
+  - 설치
+    ```bash
+    npm install react-native-code-push
+    npx pod-install
+    ```
+  - App 등록 (App Center에서)
+    - App Center에서 앱 등록 후 API Key 확보
+  - App에 연결
+    ```js
+    import codePush from 'react-native-code-push';
+
+    let App = () => {
+      return <MainApp />;
+    };
+
+    App = codePush({
+      checkFrequency: codePush.CheckFrequency.ON_APP_START,
+    })(App);
+
+    export default App;
+    ```
+  - 배포 명령어
+    ```bash
+    appcenter codepush release-react -a <owner>/<app-name> -d Production
+    ```
+
+- React Native에서 Splash Screen을 최적화하는 방법
+  - 라이브러리 사용 (권장)
+    ```bash
+    npm install react-native-splash-screen
+    npx pod-install
+    ```
+  - 네이티브 설정
+    - 안드로이드: styles.xml, MainActivity.java 설정
+    - iOS: LaunchScreen.storyboard 수정
+  - JS 코드에서 숨기기
+    ```js
+    import SplashScreen from 'react-native-splash-screen';
+
+    useEffect(() => {
+      SplashScreen.hide(); // 앱 로딩 후 호출
+    }, []);
+    ```
+    - 최적화 팁: 실제 초기 데이터 로딩 완료 후에 hide() 호출
+
+- React Native에서 Background Task를 실행하는 방법
+  - 개요
+    - 리액트 네이티브는 기본적으로 백그라운드 실행이 제한되므로 별도 라이브러리 사용이 필요
+
+  - 기능
+    - 주기적 백그라운드 작업
+      - react-native-background-fetch, 백그라운드에서 주기적으로 작업 수행 (iOS 제한)
+    - 장시간 실행
+      - react-native-background-timer, JS 타이머를 background에서 유지 (Android 한정)
+    - 푸시 기반 wake-up
+      - Firebase Cloud Messaging, 푸시 수신 시 앱을 깨움
+    - 고급 제어
+      - Headlees JS (Android 전용), 앱 종료 후에도 백그라운드 서비스 등록 가능
+
+  - 예시: react-native-background-fetch
+    ```bash
+    npm install @transistorsoft/react-native-background-fetch
+    npx pod-install
+    ```
+    ```js
+    import BackgroundFetch from 'react-native-background-fetch';
+
+    BackgroundFetch.configure({
+      minimumFetchInterval: 15,
+      stopOnTerminate: false,
+      startOnBoot: true,
+    }, async () => {
+      console.log('[BackgroundFetch] task executed');
+      BackgroundFetch.finish();
+    });
+    ```
 
 - React Native에서 WebSockets을 사용하는 방법은?
 - React Native에서 Fast Refresh가 동작하는 방식은?
