@@ -2777,9 +2777,36 @@ Organize concepts, features, types and Pros and Cons
     - 저렴하나 최적화 필수
   - 정리: 일반적으로 FireStore가 더 권장됨 (구조 / 확장성 측면)
 
-- Flutter에서 GraphQL의 Query와 Mutation의 차이점은?
-- Flutter에서 FormData를 활용한 파일 업로드 방법은?
-- Flutter에서 Multi-part Request를 활용한 이미지 업로드 방법은?
+- Flutter에서 GraphQL의 Query와 Mutation의 차이점
+  - Query
+    - 데이터 조회 (Read)
+    - 캐싱 가능, 재요청 안전
+  - Mutation
+    - 데이터 변경 (create/update/delete)
+    - 변경이므로 상태 변화 발생 가능
+  - graphql_flutter에서 Query/Mutation 위젯 혹은 client.query(), client.mutate() 사용
+
+- Flutter에서 FormData를 활용한 파일 업로드 방법 (dio)
+  ```dart
+  final formData = FormData.fromMap({
+    "file": await MultipartFile.fromFile(filePath, filename: "image.png"),
+    "userId": "1234"
+  });
+
+  final response = await dio.post('/upload', data: formData);
+  ```
+  - Content-Type은 자동 설정
+  - 여러 파일 업로드도 .fromMap에 리스트로 가능
+
+- Flutter에서 Multi-part Request를 활용한 이미지 업로드 방법 (http)
+  ```dart
+  final request = http.MultipartRequest("POST", Uri.parse(url));
+  request.files.add(await http.MultipartFile.fromPath('file', filePath));
+  final response = await request.send();
+  ```
+  - http 패키지로도 multipart/form-data 업로드 가능
+  - 다만 dio가 더 유연하고 고급 기능 제공
+  
 - Flutter에서 API 응답을 캐싱하는 방법은?
 - Flutter에서 에러 핸들링을 위한 Global Error Handler를 구현하는 방법은?
 - Flutter에서 Web과 Mobile 개발의 차이점은?
