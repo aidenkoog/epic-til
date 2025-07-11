@@ -1560,6 +1560,7 @@ Organize concepts, features, types and Pros and Cons
       BackgroundFetch.finish();
     });
     ```
+    - iOS는 백그라운드 제약이 크므로 주의
 
 - React Native에서 WebSockets을 사용하는 방법은?
 - React Native에서 Fast Refresh가 동작하는 방식은?

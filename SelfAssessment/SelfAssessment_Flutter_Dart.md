@@ -2023,7 +2023,24 @@ Organize concepts, features, types and Pros and Cons
     - 경로 기반의 그래픽 인터랙션
     - 이미지와 텍스트의 캔버스 합성
 
-- Flutter에서 SliverWidgets를 사용하는 이유는?
+- Flutter에서 SliverWidgets를 사용하는 이유
+  - 개요
+    - Sliver(조각) 위젯은 플러터의 스크롤 가능한 영역을 더 정교하게 제어할 수 있게 해주는 구성 요소
+  - 사용 이유
+    - 고성능 스크롤 리스트 구성: Sliver는 스크롤 시 필요한 부분만 렌더링해 메모리 사용을 줄임.
+    - 다양한 레이아웃 통합: SliverAppBar, SliverList, SliverGrid 등을 조합하여 동적 UI (예: 스크롤에 따라 앱바 축소/고정) 를 만들 수 있음.
+    - CustomScrollView에 통합 가능: 여러 종류의 스크롤 위젯을 하나의 스크롤 뷰로 통합 가능.
+  - 예시
+    ```dart
+    CustomScrollView(
+      slivers: [
+        SliverAppBar(...),
+        SliverList(delegate: ...),
+        SliverGrid(delegate: ...),
+      ],
+    )
+    ```
+
 - Flutter에서 RepaintBoundary를 활용하여 성능을 최적화하는 방법은?
 - Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유는?
 - Flutter에서 Image.memory()와 Image.asset()의 차이점은?
