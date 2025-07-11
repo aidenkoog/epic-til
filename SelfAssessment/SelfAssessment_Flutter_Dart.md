@@ -2875,6 +2875,11 @@ Organize concepts, features, types and Pros and Cons
       - dio_cache_interceptor, flutter_cache_manager 같은 라이브러리 사용
       - 또는 직접 shared_preferences, hive, sqflite 등 이용한 캐시 전략 구성
 
+    - 캐시 사용 시 주의점
+      - 데이터 일관성: 오래된 데이터가 남아있을 수 있음 > TTL, Manual Refresh 필요
+      - 보안 문제: 민감 데이터는 캐시 금지
+      - 캐시 사이즈 관리: 용량 무한정 증가 방지 필요 (오래된 캐시 삭제)
+
 
 - Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점은?
 - Flutter에서 Tizen 및 Embedded 기기용 앱을 개발할 때 필요한 사항은?
