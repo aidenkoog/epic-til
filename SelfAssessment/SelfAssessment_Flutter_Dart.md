@@ -2142,9 +2142,50 @@ Organize concepts, features, types and Pros and Cons
     )
     ```
 
-- Flutter에서 AnimatedList를 사용할 때의 장점은?
-- Flutter에서 ListView와 GridView의 차이점은?
+- Flutter에서 AnimatedList를 사용할 때의 장점
+  - 개요
+    - AnimatedList는 아이템 추가/삭제 시 애니매이션을 자동 적용할 수 있는 리스트 위젯
+  - 장점
+    - 항목 추가/삭제 시 부드러운 애니메이션 제공
+    - 리스트 변경사항을 시각적으로 더 자연스럽게 표현
+    - 별도 애니메이션 구현 없이도 효율적인 UX 제공
+  - 예시
+    ```dart
+    AnimatedList(
+      key: listKey,
+      initialItemCount: items.length,
+      itemBuilder: (context, index, animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          child: ListTile(title: Text(items[index])),
+        );
+      },
+    )
+    ```
+- Flutter에서 ListView와 GridView의 차이점
+  - 차이점
+    - ListView
+      - 1차원 수직/수평 스크롤 목록
+      - 일반 텍스트, 이미지 목록 등 단순 리스트
+      - 기본은 수직 (scrollDirection 변경 가능)
+      - ListView.builder 제공
+    - GridView
+      - 2차원 격자형 목록
+      - 갤러리, 카드형 UI 등 그리드 형식 UI
+      - 기본은 수직, 설정으로 수평도 가능
+      - GridView.builder 제공
+  - 예시
+    ```dart
+    ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, index) => ListTile(title: Text('Item $index')),
+    );
 
+    GridView.count(
+      crossAxisCount: 2,
+      children: List.generate(4, (index) => Text('Grid $index')),
+    );
+    ```
 
 - Flutter에서 Lottie를 활용한 애니메이션 적용 방법은?
 - Flutter에서 NestedScrollView를 사용할 때 고려해야 할 점은?
