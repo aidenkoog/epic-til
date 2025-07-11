@@ -2394,12 +2394,115 @@ Organize concepts, features, types and Pros and Cons
     - onPageChanged로 현재 페이지 인덱스 확인 가능.
 
 - Flutter에서 커스텀 Shimmer 효과를 구현하는 방법
+  - Shimmer: 로딩 중인 상태를 시각적으로 보여주는 효과
+  - 구현 방법
+    ```dart
+    Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.white,
+      child: Container(width: 200, height: 20, color: Colors.grey),
+    )
+    ```
+    - 커스텀 구현도 가능: ShaderMask + AnimatedBuilder 조합.
+
 - Flutter에서 TabBar와 BottomNavigationBar의 차이점
+  - TabBar
+    - 주로 상단에 위치
+    - TabBarView와 함께 사용
+    - 뷰 내부의 탭 구분
+  - BottomNavigationBar
+    - 화면 하단에 위치
+    - 직접 상태 관리 (setState)등 필요
+    - 주요 화면 간의 내비게이션
+  - 예시(TabBar)
+    ```dart
+    DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(bottom: TabBar(tabs: [Tab(text: 'A'), Tab(text: 'B')])),
+        body: TabBarView(children: [Text('A'), Text('B')]),
+      ),
+    );
+    ```
+
 - Flutter에서 기본적인 Theming을 적용하는 방법
+  - ThemeData를 사용하여 전체 앱의 색상, 글꼴, 버튼 스타일 등을 설정
+  - 예시
+    ```dart
+    MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 16)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.indigo),
+        ),
+      ),
+    )
+    ```
+    - Theme.of(context)로 위젯에서 접근 가능.
+
 - Flutter에서 SafeArea 위젯의 역할
+  - 개요
+    - SafeArea는 노치, 상태바, 홈 인디케이터 등 시스템 UI로부터 안전한 영역을 보장
+  - 예시
+    ```dart
+    SafeArea(
+      child: Column(
+        children: [Text('안전하게 보이는 텍스트')],
+      ),
+    )
+    ```
+    - top, bottom 속성으로 부분 지정도 가능.
+
 - Flutter에서 BackdropFilter를 활용하여 UI를 디자인하는 방법
+  - BackdropFilter는 해당 위젯 뒤에 있는 콘텐츠에 블러(흐림)효과 적용
+  - 예시
+    ```dart
+    Stack(
+      children: [
+        Image.asset('bg.jpg'),
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(color: Colors.black.withOpacity(0.2)),
+        ),
+      ],
+    )
+    ```
+    - 투명한 Container가 꼭 있어야 효과 적용됨.
+
 - Flutter에서 MaterialStateProperty를 활용하는 방법
+  - 버튼 등의 위젯에서 상태(hovered, pressed, disabled 등)에 따른 스타일을 지정할 때 사용
+  - 예시
+    ```dart
+    ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.pressed)) return Colors.red;
+          return Colors.blue;
+        }),
+      ),
+      onPressed: () {},
+      child: Text('버튼'),
+    )
+    ```
+
 - Flutter에서 Wrap과 Row, Column의 차이점
+  - Row/Column
+    - 한 줄(열)로만 배치
+    - 컨텐츠가 넘칠 때 오류 (overflow)
+    - 고정 개수 아이템일 때 사용
+  - Wrap
+    - 넘치면 자동 줄바꿈 가능
+    - 컨텐츠가 넘칠 때 자동으로 줄바꿈 또는 래핑
+    - 동적으로 아이템이 많거나 줄바꿈 필요 시
+  - Wrap 예시
+    ```dart
+    Wrap(
+      spacing: 8,
+      runSpacing: 4,
+      children: List.generate(10, (i) => Chip(label: Text('Item $i'))),
+    )
+    ```
 
 
 - Flutter에서 Dio와 http 패키지의 차이점은?
