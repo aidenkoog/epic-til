@@ -2504,8 +2504,23 @@ Organize concepts, features, types and Pros and Cons
     )
     ```
 
+- Flutter에서 Dio와 http 패키지의 차이점
+  - http 패키지
+    - 단순 REST API 호출
+    - 간단한 요청/응답 지원
+    - try-catch 수동 구현 필요 (에러 핸들링)
+    - FormData 지원 제한적 (multipart)
+    - Timeout, Cancel 등 수동 설정 필요
+  - dio 패키지
+    - 고급 기능 포함
+    - 요청/응답 인터셉터, 글로벌 설정 가능
+    - DioError로 정리된 예외 제공
+    - 강력한 FormData 및 파일 업로드 지원
+    - Timeout, Cancel 등 내장 지원
+  - 정리
+    - http: 간단한 API 호출용
+    - dio: 인터셉터, 토큰 갱신, 에러 처리 등 복잡한 네트워크 로직이 필요한 경우 추천
 
-- Flutter에서 Dio와 http 패키지의 차이점은?
 - Flutter에서 GraphQL을 활용하여 데이터를 불러오는 방법은?
 - Flutter에서 REST API 호출 시 예외 처리를 구현하는 방법은?
 - Flutter에서 Firebase Authentication을 연동하는 방법은?
