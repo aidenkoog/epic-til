@@ -2806,10 +2806,74 @@ Organize concepts, features, types and Pros and Cons
   ```
   - http 패키지로도 multipart/form-data 업로드 가능
   - 다만 dio가 더 유연하고 고급 기능 제공
-  
-- Flutter에서 API 응답을 캐싱하는 방법은?
-- Flutter에서 에러 핸들링을 위한 Global Error Handler를 구현하는 방법은?
-- Flutter에서 Web과 Mobile 개발의 차이점은?
+
+- Flutter에서 에러 핸들링을 위한 Global Error Handler를 구현하는 방법
+  ```dart
+  void main() {
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FirebaseCrashlytics.instance.recordFlutterError(details);
+    };
+
+    runZonedGuarded(() {
+      runApp(MyApp());
+    }, (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack);
+    });
+  }
+  ```
+  - Crashlytics 연동 필수
+  - 비동기 에러도 전역 처리 가능
+
+- Flutter에서 Web과 Mobile 개발의 차이점
+  - Mobile(iOS/Android)
+    - Skia 엔진 렌더링 방식
+    - SharedPref, SecureStorage
+    - 기기 파일 접근 가능
+    - 카메라, 위치 등 풍부한 플랫폼 API 접근 가능
+    - 스토어 배포
+  - Web
+    - HTML/CSS or CanvasKit 렌더링
+    - localStorage, IndexedDB
+    - 브라우저 제한 (업로드/다운로드 중심)
+    - Web API 제한 (권한 필요)
+    - URL 기반 배포 가능 (Firebase Hosting 등)
+    
+  - Platform check: kIsWeb, Platform.isAndroid 등을 활용
+  - UI, 기능 분기 필요할 수 있음
+
+- Flutter에서 API 응답을 캐싱하는 방법
+  - 패키지: dio_cache_interceptor
+    ```dart
+    DioCacheInterceptor dioCache = DioCacheInterceptor(options: CacheOptions(...));
+    dio.interceptors.add(dioCache);
+    ```
+
+  - Local DB 활용 (hive, shared_preferences, sqflite 등)
+    - API 응답을 JSON으로 저장 후 TTL 기반으로 로컬 캐시 사용
+
+  - 리소스 절약, 오프라인 대응 가능
+  - TTL, 조건부 캐시 전략 적용 가능
+  - 실질적인 이점
+    - 성능향상 (속도개선)
+      - 서버 응답 기다리지 않고 로컬 캐시된 데이터를 즉시 표현 가능
+      - 느린 네트워크 환경에서 UX가 훨씬 매끄러워짐
+      - 예: 뉴스 앱, 쇼핑 앱에서 이전에 조회한 목록이 즉시 보여짐
+    - 데이터 사용량 절감
+      - 동일한 API 요청을 여러번 서버로 보내지 않으므로 불필요한 트래픽 감소, 모바일 데이터 요금 절감에도 도움
+    - 서버 부하 감소
+      - 캐시된 응답을 재사용하면 서버 호출 횟수가 줄어들어 백엔드 리소스 절약
+      - 인기있는 API 엔드포인트에 대해 효과적
+    - 오프라인 지원
+      - 지하철에서도 마지막으로 본 정보를 계속 확인 가능, 네트워크 불량인 상태일 때도 UI 유지 가능
+    - 더 나은 사용자 경험 (UX)
+      - 앱 실행 시 빠른 데이터 로딩, 스크롤 할 때 로딩 지연 없음
+      - 더 빠르고 부드러운 앱처럼 느껴짐
+    - 지능적인 업데이트 전략 가능
+      - 일정 시간(1분, 5분 등) 동안은 캐시, 이후에는 갱신
+      - 예: 스와이프 리프레시 시 서버 데이터 우선, 평상 시에는 캐시 데이터 우선
+    - 적용 예시
+      - dio_cache_interceptor, flutter_cache_manager 같은 라이브러리 사용
+      - 또는 직접 shared_preferences, hive, sqflite 등 이용한 캐시 전략 구성
 
 
 - Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점은?
