@@ -2055,9 +2055,31 @@ Organize concepts, features, types and Pros and Cons
     )
     ```
 
-- Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유는?
-- Flutter에서 Image.memory()와 Image.asset()의 차이점은?
+- Flutter에서 const 생성자를 활용하면 성능이 향상되는 이유
+  - 개요
+    - const 생성자를 사용하면 컴파일 타임에 객체를 미리 생성하여 재사용할 수 있습니다.
 
+  - 이점:
+    - 불변 객체를 캐싱함으로써 메모리 절약 및 생성 비용 감소.
+    - 위젯 트리 비교 시 동일 객체로 간주되어 rebuild를 방지.
+    - Hot reload 시 불필요한 리렌더링 최소화.
+
+  - 추가 설명: const 사용 시 매번 새 객체 생성하지 않음
+
+- Flutter에서 Image.memory()와 Image.asset()의 차이점
+  - Image.memory()
+    - 메모리의 바이트 배열(Uint8List)로 로드
+    - base64, 다운로드된 이미지, 실시간 이미지 때 사용
+    - 기본적으로 캐시 없음, 매번 그려야 함
+    - Image.memory(bytes) 로 선언
+  - Image.asset()
+    - 앱의 asset 폴더에서 이미지 로드
+    - 정적 리소스, 앱 내 포함된 이미지 로드 때 사용
+    - 플러터 자체 캐시 적용 (성능 우수)
+    - Image.asset('assets/image.png')
+  - 핵심 차이
+    - 정적/동적 이미지
+    - 성능 및 캐싱 유무
 
 - Flutter에서 Hero 애니메이션을 구현하는 방법은?
 - Flutter에서 ShaderMask를 활용하는 방법은?
