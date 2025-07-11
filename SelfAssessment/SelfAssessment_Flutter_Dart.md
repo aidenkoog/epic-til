@@ -2187,32 +2187,190 @@ Organize concepts, features, types and Pros and Cons
     );
     ```
 
-- Flutter에서 Lottie를 활용한 애니메이션 적용 방법은?
-- Flutter에서 NestedScrollView를 사용할 때 고려해야 할 점은?
-- Flutter에서 Cupertino 디자인 시스템을 적용하는 방법은?
-- Flutter에서 AppBar의 PreferredSizeWidget을 활용하는 이유는?
-- Flutter에서 LayoutBuilder를 활용하여 반응형 UI를 구축하는 방법은?
+- Flutter에서 Lottie를 활용한 애니메이션 적용 방법
+  - 개요
+    - JSON 기반 벡터 애니매이션, After Effects 애니메이션을 플러터에 적용 가능하게 해줌
+  - 사용법
+    ```dart
+    Lottie.asset('assets/xxx.json'); // OR Lottie.network(url)
+    ```
 
+- Flutter에서 NestedScrollView를 사용할 때 고려해야 할 점
+  - 개요
+    - NestedScrollView는 AppBar와 Body가 함께 스크롤되도록 구성할 수 있는 위젯입니다.
 
-- Flutter에서 AutoSizeText를 활용하여 가변 폰트 크기를 적용하는 방법은?
-- Flutter에서 ClipRRect와 ClipPath의 차이점은?
-- Flutter에서 ImageFilter를 활용한 블러 효과 구현 방법은?
-- Flutter에서 RenderObject를 직접 구현하는 이유는?
-- Flutter에서 GestureDetector와 InkWell의 차이점은?
+  - 고려사항:
+    - headerSliverBuilder로 SliverAppBar 등을 정의
+    - 내부 Body에는 반드시 ScrollController가 일치하도록 해야 함
+    - 내부에 ListView 대신 CustomScrollView 또는 ScrollView + shrinkWrap 설정 필요
 
+- Flutter에서 Cupertino 디자인 시스템을 적용하는 방법
+  - 개요
+    - Cupertino는 iOS 스타일의 UI 컴포넌트를 제공
+  - 사용법
+    ```dart
+    import 'package:flutter/cupertino.dart';
 
-- Flutter에서 Drawer 위젯을 활용한 내비게이션 방법은?
-- Flutter에서 FloatingActionButton을 커스터마이징하는 방법은?
-- Flutter에서 PageView 위젯을 활용하는 방법은?
-- Flutter에서 커스텀 Shimmer 효과를 구현하는 방법은?
-- Flutter에서 TabBar와 BottomNavigationBar의 차이점은?
+    CupertinoApp(
+      home: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('Title'),
+        ),
+        child: Center(child: CupertinoButton(child: Text("iOS"), onPressed: () {})),
+      ),
+    )
+    ```
+  - 전체 앱을 Cupertino 스타일로 구성하거나, Theme.of(context).platform 으로 iOS/Android 스타일을 조건 분기할 수도 있음
 
+- Flutter에서 AppBar의 PreferredSizeWidget을 활용하는 이유
+  - 개요
+    - AppBar는 기본적으로 PreferredSizeWidget을 구현하고 있어야 함
+    - 커스텀 앱 바를 만들 때도 이 인터페이스를 구현해야 정확한 높이 지정이 가능
+  - 예시
+    ```dart
+    class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+      @override
+      Size get preferredSize => const Size.fromHeight(60);
 
-- Flutter에서 기본적인 Theming을 적용하는 방법은?
-- Flutter에서 SafeArea 위젯의 역할은?
-- Flutter에서 BackdropFilter를 활용하여 UI를 디자인하는 방법은?
-- Flutter에서 MaterialStateProperty를 활용하는 방법은?
-- Flutter에서 Wrap과 Row, Column의 차이점은?
+      @override
+      Widget build(BuildContext context) {
+        return AppBar(title: Text('Custom'));
+      }
+    }
+    ```
+
+- Flutter에서 LayoutBuilder를 활용하여 반응형 UI를 구축하는 방법
+  - 개요
+    - LayoutBuilder는 부모 위젯의 크기를 기준으로 조건 분기 UI를 구성할 때 유용
+  - 예시
+    ```dart
+    LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 600) {
+          return LargeScreenWidget();
+        } else {
+          return SmallScreenWidget();
+        }
+      },
+    )
+    ```
+
+- Flutter에서 AutoSizeText를 활용하여 가변 폰트 크기를 적용하는 방법
+  - 개요
+    - AutoSizeText는 텍스트가 공간을 초과할 경우 자동으로 폰트 크기를 줄여서 overflow를 방지합니다.
+
+  - 사용법:
+    ```yaml
+    auto_size_text: ^3.0.0
+    ```
+    ```dart
+    AutoSizeText(
+      '................',
+      maxLines: 2,
+      style: TextStyle(fontSize: 40),
+    )
+    ```
+
+- Flutter에서 ClipRRect와 ClipPath의 차이점
+  - ClipRRect
+    - 둥근 사각형으로 자르기
+    - 미리 정의된 borderRadius로 간단
+    - 성능 빠름
+  - ClipPath
+    - 커스텀 경로(Path)로 자르기
+    - 복잡한 도형/형태 클리핑 가능
+    - Path 계산 필요로 약간 느릴 수 있음
+  - 예시
+    ```dart
+    ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: Image.asset('img.jpg'),
+    )
+
+    ClipPath(
+      clipper: MyCustomClipper(),
+      child: Image.asset('img.jpg'),
+    )
+    ```
+
+- Flutter에서 ImageFilter를 활용한 블러 효과 구현 방법
+  - 개요
+    - ImageFilter.blur는 위젯에 블러(흐림) 효과를 줄 수 있음
+    - BackdropFilter와 함께 사용
+  - 예시
+    ```dart
+    BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+      child: Container(
+        color: Colors.black.withOpacity(0.1),
+      ),
+    )
+    ```
+
+- Flutter에서 RenderObject를 직접 구현하는 이유
+  - 개요
+    - 기본 위젯으로 표현할 수 없는 복잡한 레이아웃이나 성능 최적화가 필요한 경우, Flutter의 렌더링 파이프라인 하단의 RenderObject를 직접 구현
+
+  - 주요 목적:
+    - 매우 커스텀된 UI
+    - 성능 극대화
+    - 저수준 위치 계산, 제스처 처리 등
+
+  - 하지만 대부분의 경우는 RenderBox나 CustomPaint, CustomMultiChildLayout 등으로 충분함
+
+- Flutter에서 GestureDetector와 InkWell의 차이점
+  - GestureDetector
+    - 클릭 효과 없음 (리플 없음)
+    - 더 다양한 제스쳐 처리 가능 (드래그 등)
+    - 어느 부분에서나 사용 가능
+  - InkWell
+    - Ripple 효과 (머터리얼 스타일) 제공
+    - 기본 tap, long press 등 제한적
+    - Material 위젯 트리 내에서만 ripple 효과
+  - 예시
+    ```dart
+    GestureDetector(
+      onTap: () => print('Tapped'),
+      child: Container(color: Colors.red),
+    )
+
+    InkWell(
+      onTap: () => print('Tapped'),
+      child: Container(color: Colors.red),
+    )
+    ```
+
+- Flutter에서 Drawer 위젯을 활용한 내비게이션 방법
+  - 좌측 또는 우측에서 슬라이드로 나타나는 내비게이션 메뉴
+  - 사용법
+    ```dart
+    Scaffold(
+      appBar: AppBar(title: Text('Drawer Example')),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(child: Text('Header')),
+            ListTile(
+              title: Text('Home'),
+              onTap: () => Navigator.pushNamed(context, '/home'),
+            ),
+          ],
+        ),
+      ),
+    );
+    ```
+    - Scaffold의 drawer: 속성에 삽입.
+    - Scaffold.of(context).openDrawer()로 프로그래밍 방식으로 열 수도 있음.
+
+- Flutter에서 FloatingActionButton을 커스터마이징하는 방법
+- Flutter에서 PageView 위젯을 활용하는 방법
+- Flutter에서 커스텀 Shimmer 효과를 구현하는 방법
+- Flutter에서 TabBar와 BottomNavigationBar의 차이점
+- Flutter에서 기본적인 Theming을 적용하는 방법
+- Flutter에서 SafeArea 위젯의 역할
+- Flutter에서 BackdropFilter를 활용하여 UI를 디자인하는 방법
+- Flutter에서 MaterialStateProperty를 활용하는 방법
+- Flutter에서 Wrap과 Row, Column의 차이점
 
 
 - Flutter에서 Dio와 http 패키지의 차이점은?
