@@ -2521,11 +2521,107 @@ Organize concepts, features, types and Pros and Cons
     - http: 간단한 API 호출용
     - dio: 인터셉터, 토큰 갱신, 에러 처리 등 복잡한 네트워크 로직이 필요한 경우 추천
 
-- Flutter에서 GraphQL을 활용하여 데이터를 불러오는 방법은?
-- Flutter에서 REST API 호출 시 예외 처리를 구현하는 방법은?
-- Flutter에서 Firebase Authentication을 연동하는 방법은?
-- Flutter에서 JWT 토큰을 활용한 인증 구현 방법은?
+- Flutter에서 GraphQL을 활용하여 데이터를 불러오는 방법
+  - 설치 패키지: graphql_flutter
+  - 기본 예시
+    ```dart
+    final HttpLink httpLink = HttpLink('https://api.example.com/graphql');
 
+    ValueNotifier<GraphQLClient> client = ValueNotifier(
+      GraphQLClient(
+        link: httpLink,
+        cache: GraphQLCache(),
+      ),
+    );
+
+    GraphQLProvider(
+      client: client,
+      child: Query(
+        options: QueryOptions(document: gql('''
+          query GetUser { user { id name } }
+        ''')),
+        builder: (result, {fetchMore, refetch}) {
+          if (result.isLoading) return CircularProgressIndicator();
+          return Text(result.data!['user']['name']);
+        },
+      ),
+    )
+    ```
+    - Mutation 위젯도 사용 가능.
+    - GraphQLClient 직접 생성해서 client.query(...) 방식으로도 사용 가능.
+
+- Flutter에서 REST API 호출 시 예외 처리를 구현하는 방법
+  - 예시 (http 사용)
+    ```dart
+    try {
+      final response = await http.get(Uri.parse('https://api.example.com'));
+      if (response.statusCode == 200) {
+        // 정상 처리
+      } else {
+        throw Exception('서버 오류: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('네트워크 오류 발생: $e');
+    }
+    ```
+
+  - 예시 (dio 사용)
+    ```dart
+    try {
+      final response = await dio.get('/users');
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout) {
+        // 연결 시간 초과 처리
+      } else if (e.response?.statusCode == 401) {
+        // 인증 오류 처리
+      }
+    }
+    ```
+    - DioError는 다양한 type으로 구분 가능 (timeout, cancel, response 등)
+
+- Flutter에서 Firebase Authentication을 연동하는 방법
+  - 패키지 설치: firebase_core, firebase_auth
+  - 초기화 (main.dart)
+    ```dart
+    void main() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+      runApp(MyApp());
+    }
+    ```
+  - 로그인 예시
+    ```dart
+    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: 'test@example.com',
+      password: 'password123',
+    );
+    ```
+  - 인증 상태 감지
+    ```dart
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) print('로그인됨: ${user.email}');
+    });
+    ```
+    - Google, Apple, Anonymous, Phone 등 다양한 인증 방식 제공
+
+- Flutter에서 JWT 토큰을 활용한 인증 구현 방법
+  - 로그인 요청 시 JWT 발급
+    ```dart
+    final response = await dio.post('/login', data: {
+      'email': email,
+      'password': password,
+    });
+    final token = response.data['access_token'];
+    ```
+  - 저장
+    - await prefs.setString('jwt_token', token);
+  - 인증 요청 시 헤더에 포함
+    ```dart
+    final token = await prefs.getString('jwt_token');
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    ```
+  - 자동 토큰 갱신 (RefreshToken) 전략
+    - Dio의 Interceptor를 사용하여 401 에러 시 토큰 재발급 요청 후 재시도 구현 가능
 
 - Flutter에서 WebSockets을 활용한 실시간 통신 방법은?
 - Flutter에서 OAuth 2.0 인증을 구현하는 방법은?
