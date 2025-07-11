@@ -2081,9 +2081,67 @@ Organize concepts, features, types and Pros and Cons
     - 정적/동적 이미지
     - 성능 및 캐싱 유무
 
-- Flutter에서 Hero 애니메이션을 구현하는 방법은?
-- Flutter에서 ShaderMask를 활용하는 방법은?
-- Flutter에서 AspectRatio 위젯을 활용하는 이유는?
+- Flutter에서 Hero 애니메이션을 구현하는 방법
+  - 개요
+    - Hero 위젯은 두 화면 간에 공통 요소를 애니메이션으로 자연스럽게 전환해주는 위젯
+  - 사용 방법
+    - Hero 위젯에 동일한 태그를 부여한 두 위젯을 각각의 화면에 배치
+    - Navigator를 통해 화면 전환 시 자동으로 애니메이션이 실행됨
+  - 예
+    ```dart
+    // 첫 번째 화면
+    Hero(
+      tag: 'profile',
+      child: Image.asset('assets/profile.png'),
+    );
+
+    // 두 번째 화면
+    Hero(
+      tag: 'profile',
+      child: Image.asset('assets/profile.png'),
+    );
+
+    // 화면 전환 예시
+    Navigator.push(context, MaterialPageRoute(builder: (_) => SecondPage()));
+    ```
+
+- Flutter에서 ShaderMask를 활용하는 방법
+  - 개요
+    - ShaderMask는 자식 위젯에 그래디언트나 쉐이더 효과를 적용할 때 사용됩니다.
+
+  - 주요 활용 예:
+    - 텍스트나 이미지에 그라디언트 색상 효과 적용
+    - 마스킹/블렌딩 효과
+
+  - 예:
+    ```dart
+    ShaderMask(
+      shaderCallback: (bounds) => LinearGradient(
+        colors: [Colors.purple, Colors.blue],
+      ).createShader(bounds),
+      child: Text(
+        'Gradient Text',
+        style: TextStyle(fontSize: 40, color: Colors.white),
+      ),
+    )
+    ```
+
+- Flutter에서 AspectRatio 위젯을 활용하는 이유
+  - 개요
+    - AspectRatio는 자식 위젯의 가로:세로 비율을 고정하기 위해 사용
+
+  - 활용 이유:
+    - 화면 크기에 따라 크기를 자동으로 조정하면서 비율 유지
+    - 정사각형/4:3/16:9 등 미디어 콘텐츠 표시 시 유용
+
+  - 예시
+    ```dart
+    AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Container(color: Colors.blue),
+    )
+    ```
+
 - Flutter에서 AnimatedList를 사용할 때의 장점은?
 - Flutter에서 ListView와 GridView의 차이점은?
 
