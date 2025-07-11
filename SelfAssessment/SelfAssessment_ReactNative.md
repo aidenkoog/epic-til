@@ -1155,11 +1155,83 @@ Organize concepts, features, types and Pros and Cons
     - React Router는 웹 개발자가 기존 코드 공유 시 사용하거나 웹과의 크로스플랫폼을 고려할 때 활용
 
 - React Native에서 ScrollView와 FlatList의 차이점
-- React Native에서 Dynamic Styles을 적용하는 방법은?
-- React Native에서 Performance Profiling을 수행하는 방법은?
-- React Native에서 Detox와 Appium의 차이점은?
-- React Native에서 Firebase를 연동하는 방법은?
+  - ScrollView
+    - 모든 자식을 한 번에 렌더링
+    - 많은 데이터에 비효율적 (메모리 과다 사용)
+    - 기본적으로 수직/수평 지원
+    - 단순 스크롤 용도
+    - 항목 수가 적을 때 사용
+  - FlatList
+    - 필요한 항목만 렌더링 (가상화)
+    - 대량 리스트에 최적화
+    - 기본적으로 수직/수평 지원
+    - Lazy Loading, Pull-to-Refresh, Pagination 지원
+    - 항목이 많을 때 (10개 이상이면 FlatList 권장)
 
+- React Native에서 Dynamic Styles을 적용하는 방법
+  - 동적 스타일은 조건에 따라 스타일 객체를 조합하는 방식으로 처리
+  - 예시 1: 조건 기반
+    ```js
+    <View style={[styles.container, isDarkMode && styles.darkMode]} />
+    ```
+  - 예시 2: 인라인 스타일 사용
+    ```js
+    <View style={{ backgroundColor: isActive ? 'blue' : 'gray' }} />
+    ```
+  - 예시 3: 함수형 스타일
+    ```js
+    const getButtonStyle = (pressed) => ({
+      backgroundColor: pressed ? 'lightgray' : 'white',
+      padding: 10,
+    });
+    ```
+
+- React Native에서 Performance Profiling을 수행하는 방법
+  - Flipper
+    - Meta가 만든 공식 디버깅 도구
+    - React DevTools, Hermes Debugger, 네트워크/스토리지 확인 가능
+  - React Native Performance Monitor
+    - Shake > Show Perf Monitor로 FPS 및 JS Thread 사용량 확인
+  - Hermes Profiler
+    - Hermes 엔진 사용 시 trace를 통해 JS 실행 타임라인 분석 가능
+  - Profiling with Chrome DevTools
+    - Debug JS Remotely 사용 시 크롬의 Performance 탭 활용 가능
+
+- React Native에서 Detox와 Appium의 차이점
+  - Detox
+    - React Native 앱에 특화된 E2E 테스트
+    - 자바스크립트, 제스트 기반
+    - 빠름 (네이티브 접근)
+    - 비교적 복잡 (CI/CD 연동 시 어려움)
+    - React Native 프로젝트 전용 E2E
+  - Appium
+    - 범용 모바일 테스트 프레임워크
+    - 여러 언어(자바, 파이썬, JS 등)
+    - 상대적으로 느림 (WebDriver 기반)
+    - 다양한 플랫폼 지원, 복잡도 있음
+    - 크로스 플랫폼 앱, 복잡한 시나리오 필요 시
+
+- React Native에서 Firebase를 연동하는 방법
+  - 라이브러리 설치
+    ```bash
+    npm install @react-native-firebase/app
+    npm install @react-native-firebase/auth
+    npx pod-install
+    ```
+  - Firebase 프로젝트 연동
+    - 파이어베이스 콘솔에서 앱 추가 (iOS/Android)
+    - google-services.json (Android) 및 GoogleService-Info.plist (iOS) 파일 추가
+    - Android: android/build.gradle, app/build.gradle 수정
+    - iOS: ios/Podfile 확인 후 pod install
+  - 사용 예시
+    ```js
+    import auth from '@react-native-firebase/auth';
+
+    auth()
+      .signInWithEmailAndPassword('email@example.com', 'password')
+      .then(user => console.log(user))
+      .catch(error => console.error(error));
+    ```
 
 - React Native에서 Clipboard API를 사용하는 방법은?
 - React Native에서 StatusBar를 동적으로 변경하는 방법은?
