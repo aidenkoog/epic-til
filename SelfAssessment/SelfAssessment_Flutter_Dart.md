@@ -2899,7 +2899,21 @@ Organize concepts, features, types and Pros and Cons
     - window_manager (창 제어)
     - bitsdojo_window (창 프레임 커스터마이징)
 
-- Flutter에서 Tizen 및 Embedded 기기용 앱을 개발할 때 필요한 사항은?
+- Flutter에서 Tizen 및 Embedded 기기용 앱을 개발할 때 필요한 사항
+  - 플랫폼 지원
+    - 타이젠용 플러터는 삼성 주도로 개발된 fork (공식 플러터 SDK와 별도 관리)
+  - SDK 설치
+    - flutter-tizen CLI 사용
+  - 디바이스 연결
+    - sdb 명령어로 Tizen 기기 연결 후 flutter-tizen run
+  - UI 성능 최적화
+    - 리소스가 제한된 환경에서는 렌더링 최적화, 애니메이션 제한 필요
+  - 입력 처리
+    - 리모컨, 키패드 기반 입력 대응 필요 (RawKeyboardListener, FocusNode)
+  - 패키지 호환성
+    - 일부 패키지는 Embedded 환경에서 미지원
+  - Embedded 환경에서는 직접 Platform Channel 구현이 필요할 가능성이 큼
+
 - Flutter에서 PWA(Progressive Web App)를 구현하는 방법은?
 - Flutter에서 Native Code(Android/iOS)를 호출하는 방법은?
 - Flutter에서 isolate를 활용한 병렬 처리 방법은?
