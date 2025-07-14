@@ -2087,7 +2087,25 @@ Organize concepts, features, types and Pros and Cons
     - iOS VoiceOver / Android TalkBack 테스트 필수
     - Focus 순서 제어 → accessibilityViewIsModal, focusOnView()
 
-- React Native에서 WebView와 iframe의 차이점은?
+- React Native에서 WebView와 iframe의 차이점
+  - WebView (React Native)
+    - Native 앱에서 외부 웹 페이지 표시
+    - react-native-webview 패키지 사용
+    - sandbox 가능 / 통신 제어 가능
+      - Refs (Sandbox): 외부 프로그램이나 코드를 안전하게 테스트하거나 실행하기 위해 격리된 환경을 제공하는 보안 기술
+      - 시스템의 다른 부분에 영향을 주지 않고 잠재적으로 위험할 수 있는 코드를 실행할 수 있도록 해줍니다
+    - JS < > Native 통신 (postMessage)
+    - WebView는 네이티브 권한 처리 가능
+  - iframe (Web)
+    - 웹페이지 내에서 다른 HTML 삽입
+    - HTML 내 <iframe> 사용
+    - 비교적 낮은 보안, clickjacking 우려
+    - 제한된 cross-origin 통신
+    - iframe은 브라우저 권한만 사용 가능
+  - 정리
+    - WebView는 브라우저 대체물
+    - iframe은 HTML 레벨에서의 삽입 기능
+
 - React Native에서 배터리 소모를 줄이기 위한 방법은?
 - React Native에서 Bluetooth 기능을 구현하는 방법은?
 - React Native에서 Offline Mode를 구현하는 방법은?
