@@ -1680,8 +1680,44 @@ Organize concepts, features, types and Pros and Cons
     - RN에서는 둘다 react-native-firebase로 통합 지원 가능
     - Firestore가 더 현대적이며 유지관리 용이
 
-- React Native에서 Camera 기능을 구현하는 방법은?
-- React Native에서 Dark Mode를 적용하는 방법은?
+- React Native에서 Camera 기능을 구현하는 방법
+  - 라이브러리: react-native-vision-camera
+  - 설치
+    - npm install react-native-vision-camera
+    - npx pod-install
+  - 사용 예시
+    ```tsx
+    import { Camera } from 'react-native-vision-camera';
+
+    const cameraRef = useRef<Camera>(null);
+
+    <Camera
+      ref={cameraRef}
+      style={StyleSheet.absoluteFill}
+      device={device}
+      isActive={true}
+    />
+    ```
+  - 카메라 권한 요청은 Camera.requestCameraPermission() 사용
+  - 대안: react-native-camera (구버전, 유지보수 중단)
+
+- React Native에서 Dark Mode를 적용하는 방법
+  - 개요
+    - useColorScheme() 훅을 활용
+  - 예제
+    ```tsx
+    import { useColorScheme } from 'react-native';
+
+    const isDark = useColorScheme() === 'dark';
+
+    const styles = StyleSheet.create({
+      text: {
+        color: isDark ? '#fff' : '#000',
+      },
+    });
+    ```
+  - 또는 react-native-paper, styled-components 등의 theming 시스템 활용
+
 - React Native에서 Multi-Threading을 구현하는 방법은?
 - React Native에서 React Query를 사용하는 이유는?
 - React Native에서 WebView를 활용하는 방법은?
