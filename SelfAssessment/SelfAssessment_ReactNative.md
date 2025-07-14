@@ -1608,11 +1608,77 @@ Organize concepts, features, types and Pros and Cons
     - React Native 0.71 이후 일부 라이브러리에서 적용 가능
     - JSI 기반으로 동작
 
-- React Native에서 Flipper 디버깅 툴을 활용하는 방법은?
-- React Native에서 Accessibility를 개선하는 방법은?
-- React Native에서 Gesture Responder System이 동작하는 방식은?
-- React Native에서 Firebase Firestore와 Realtime Database의 차이점은?
+- React Native에서 Flipper 디버깅 툴을 활용하는 방법
+  - 개요
+    - Flipper는 Facebook이 만든 React Native 전용 디버깅 도구
+  - 기능
+    - 콘솔 로그, 네트워크 요청, 성능 모니터링
+    - React DevTools, Layout Inspector, Crash reporter
+    - SQLite, Redux, AsyscStorage 플러그인
+  - 설정 (안드로이드)
+    ```gradle
+    debugImplementation 'com.facebook.flipper:flipper:0.125.0'
+    ```
+  - JS 설정
+    ```ts
+    if (__DEV__) {
+      require('react-native-flipper');
+    }
+    ```
+  - 추가 플러그인으로 Firebase, GraphQL, Recoil 디버깅도 가능
 
+- React Native에서 Accessibility를 개선하는 방법
+  - 기본 속성
+    - accessible={true}: 스크린 리더 탐지 대상
+    - accessibilityLabel="Submit": 읽히는 텍스트
+    - accessibilityHint="Submits the form": 동작 설명
+    - accessibilityRole="button": 역할 선언
+  - 예시
+    ```tsx
+    <TouchableOpacity
+      accessible={true}
+      accessibilityLabel="Go to Profile"
+      accessibilityRole="button"
+      onPress={...}
+    />
+    ```
+  - 팁
+    - VoiceOver(iOS) / TalkBack (Android) 환경에서 테스트 필수
+    - 포커스 순서 제어는 importantForAccessibility 활용
+
+- React Native에서 Gesture Responder System이 동작하는 방식
+  - 개요
+    - Gesture Responder System은 RN이 터치 이벤트를 처리하는 핵심 시스템
+  - 동작 흐름
+    - (1) 터치 발생 > 이벤트 전파 시작 (onStartShouldSetResponder)
+    - (2) 최상위 responder 결정 > 이후 모든 이벤트를 해당 responder 가 처리
+    - (3) onResponderMove, onResponderRelease, onResponderTerminate 등으로 후속 처리
+  - 예시
+    ```tsx
+    <View
+      onStartShouldSetResponder={() => true}
+      onResponderMove={(e) => console.log(e.nativeEvent)}
+      onResponderRelease={() => console.log('released')}
+    />
+    ```
+  - PanResponder, react-native-gesture-handler 는 이 시스템 위에서 동작
+
+- React Native에서 Firebase Firestore와 Realtime Database의 차이점
+  - FireStore
+    - 문서 기반 (Collection-Document)
+    - 강력한 필터링/정렬, 복합 쿼리 가능
+    - 실시간 지원 가능
+    - 대규모 앱에 적합
+    - 가격은 문서 단위 과금
+  - Realtime Database
+    - 트리 기반 JSON
+    - 제한적 (key 기준, 단일 필터)
+    - 실시간 가능 (조금 더 빠름)
+    - 소규모 앱/센서/실시간 채팅에 적합
+    - 가격은 다운로드 양 기반한 산정
+  - 정리
+    - RN에서는 둘다 react-native-firebase로 통합 지원 가능
+    - Firestore가 더 현대적이며 유지관리 용이
 
 - React Native에서 Camera 기능을 구현하는 방법은?
 - React Native에서 Dark Mode를 적용하는 방법은?
