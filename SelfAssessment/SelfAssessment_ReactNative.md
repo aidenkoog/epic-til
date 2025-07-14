@@ -1588,7 +1588,15 @@ Organize concepts, features, types and Pros and Cons
     - socket.io-client (서버가 socket.io 기반일 때)
     - react-native-websocket (간단 래핑용)
 
-- React Native에서 Fast Refresh가 동작하는 방식은?
+- React Native에서 Fast Refresh가 동작하는 방식
+  - Fast Refresh는 코드 변경 시 앱 상태를 유지하면서 UI를 실시간 반영해주는 기능
+  - 동작 방식
+    - 코드 변경 시 Babel이 코드 재빌드 → JS bundle reload
+    - 컴포넌트 상태(state, hooks)는 가능한 한 유지됨
+    - Hook 오류 발생 시 해당 컴포넌트만 리셋됨
+  - 상태를 유지하려면 퓨어 컴포넌트 구조를 지켜야 함
+  - useEffect나 상태 관련 코드가 잘못되면 자동으로 해당 컴포넌트만 리셋됨
+
 - React Native에서 TurboModules의 역할은?
 - React Native에서 Flipper 디버깅 툴을 활용하는 방법은?
 - React Native에서 Accessibility를 개선하는 방법은?
