@@ -2212,7 +2212,26 @@ Organize concepts, features, types and Pros and Cons
     );
     ```
 
-- React Native에서 Background Fetch를 활용하는 방법은?
+- React Native에서 Background Fetch를 활용하는 방법
+  - 라이브러리: react-native-background-fetch
+  - 기능
+    - iOS/Android에서 백그라운드에서 주기적인 작업 수행 (예: 위치 추적, 데이터 동기화 등)
+  - 예시
+    ```ts
+    import BackgroundFetch from 'react-native-background-fetch';
+
+    BackgroundFetch.configure({
+      minimumFetchInterval: 15, // 15분
+      stopOnTerminate: false,
+      enableHeadless: true,
+    }, async () => {
+      console.log('[BackgroundFetch] Task triggered');
+      // 데이터 동기화 수행
+      BackgroundFetch.finish();
+    });
+    ```
+    - iOS는 제한적이며 사용 허가 필요 (Capabilities → Background Modes → Fetch)
+
 - React Native에서 GraphQL을 활용한 데이터 관리 방법은?
 - React Native에서 프로젝트 구조를 설계할 때 고려해야 할 사항은?
 - React Native에서 백그라운드에서 앱이 실행되도록 유지하는 방법은?
