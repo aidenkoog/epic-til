@@ -2308,9 +2308,25 @@ Organize concepts, features, types and Pros and Cons
   - 전역 상태 과도한 의존: Context/Local State로 분산
   - 디버깅 어려움: Redux DevTools 설정 (Flipper 등 연동)
 
+- React Native에서 Splash Screen이 오래 걸리는 문제를 해결하는 방법
+  - 문제 원인:
+    - JS 번들 로딩 지연
+    - 초기 렌더링에 무거운 작업 포함
 
-- React Native에서 Splash Screen이 오래 걸리는 문제를 해결하는 방법은?
-- React Native에서 앱 로딩 속도를 개선하는 방법은?
+  - 해결 방법:
+    - react-native-splash-screen 또는 expo-splash-screen 사용 시, hide() 호출을 JS 렌더 후로 지연
+    - App.js에서 무거운 작업은 useEffect로 비동기 처리
+    - react-native-mmkv, JSI 등을 활용해 빠른 local storage 사용
+    - iOS/Android native splash는 별도 구성하고, React Native splash와 명확히 구분
+
+- React Native에서 앱 로딩 속도를 개선하는 방법
+  - JS 번들 최적화: 필요 없는 polyfill, 콘솔 로그 제거
+  - 코드 스플리팅 (Dynamic import() 활용)
+  - 이미지 및 폰트 등 asset preload
+  - Firebase/Analytics 초기화는 JS 첫 렌더 이후로 미루기
+  - Hermes 엔진 활성화
+  - Android에서는 Proguard/R8로 릴리즈 앱 최소화
+
 - React Native에서 Expo에서 Bare Workflow로 마이그레이션하는 방법은?
 - React Native에서 CI/CD 파이프라인을 구축하는 방법은?
 - React Native에서 Custom Hooks를 효과적으로 활용하는 방법은?
