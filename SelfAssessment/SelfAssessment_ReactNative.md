@@ -2327,11 +2327,57 @@ Organize concepts, features, types and Pros and Cons
   - Hermes 엔진 활성화
   - Android에서는 Proguard/R8로 릴리즈 앱 최소화
 
-- React Native에서 Expo에서 Bare Workflow로 마이그레이션하는 방법은?
-- React Native에서 CI/CD 파이프라인을 구축하는 방법은?
-- React Native에서 Custom Hooks를 효과적으로 활용하는 방법은?
-- React Native에서 앱 실행 중 동적 모듈 로딩을 수행하는 방법은?
-- React Native에서 Global State 관리를 위한 최적의 방법은?
+- React Native에서 Expo에서 Bare Workflow로 마이그레이션하는 방법
+  - 단계별 절차
+    - expo eject 실행 → android/, ios/ 디렉토리 생성됨
+    - expo 패키지 일부 제거 및 react-native-unimodules 설정
+    - native 빌드 환경 구성 (Xcode, Android Studio)
+    - 필요한 native 모듈 (e.g. camera, push notification) 수동 설정
+  - 주의 사항
+    - Expo에서 제공하던 OTA 업데이트, 푸시 서비스 등 일부 기능은 직접 구현해야 함
+
+- React Native에서 CI/CD 파이프라인을 구축하는 방법
+  - 툴 예시: [EAS Build (Expo)], GitHub Actions, Bitrise, Codemagic, CircleCI 등
+
+  - 기본 흐름:
+    - Git push 시 트리거
+    - Lint → Test → Build
+    - Android: bundleRelease, iOS: xcodebuild
+    - 결과물을 Play Store / TestFlight / Firebase App Distribution 업로드
+
+  - 환경변수 관리: .env + react-native-dotenv 또는 secret injection
+
+- React Native에서 Custom Hooks를 효과적으로 활용하는 방법
+  - 사용 목적: 로직 재사용 및 관심사 분리
+  - 예시
+    ```ts
+    const useDebounce = (value, delay) => { ... }
+    const useAppState = () => { ... }
+    const useNetworkStatus = () => { ... }
+    ```
+  - Tip:
+    - 내부에서 useEffect, useState 조합
+    - 비즈니스 로직 분리 → 테스트 용이성 ↑
+    - API 요청 로직 분리용으로 useFetch 등도 유용
+
+- React Native에서 앱 실행 중 동적 모듈 로딩을 수행하는 방법
+  - import() 문법을 활용한 Lazy Loading
+    ```ts
+    const MyComponent = React.lazy(() => import('./MyComponent'));
+    ```
+  - React.Suspense로 로딩 상태 처리
+  - use case:
+    - 무거운 설정 페이지, 관리 도구 등 초기 필요 없는 경우
+  - React Native Web에서는 효과 큼. (모바일은 번들에 포함되므로 조건부 import가 더 유용)
+
+- React Native에서 Global State 관리를 위한 최적의 방법
+  - 경량/단순 앱: Context API + useReducer
+  - 비동기 로직 중심
+    - Zustand > minimal, 빠르고 TypeScript 친화
+    - Jotai / Recoil > atom 기반, 세분화된 트리거 가능
+  - 대규모 앱 또는 서버 상태 병합
+    - Redux Toolkit + RTK Query
+    - TanStack Query (구 React Query) + 로컬 상태는 Zustand
 
 
 - React Native에서 Navigation 상태를 동적으로 관리하는 방법은?
