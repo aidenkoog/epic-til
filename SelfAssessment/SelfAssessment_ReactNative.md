@@ -1952,8 +1952,18 @@ Organize concepts, features, types and Pros and Cons
   - Expo SDK 43+ 이상, eas.json 설정 필수
   - eas update로 앱을 즉시 업데이트 가능 (Code Push 대안)
 
+- React Native에서 앱 크기를 최적화하는 방법
+  - 최적화 방법
+    - Proguard / R8: Android에서 불필요한 코드 제거 (minifyEnabled)
+    - Hermes 활성화: JS 엔진 크기 감소 (hermes_enabled: true)
+    - Unused assets 제거: 사용하지 않는 이미지, 폰트 제거
+    - Code Splitting / Lazy Load: 조건부 import로 번들 크기 최소화
+    - PNG->WebP: 이미지 최적화
+    - Dynamic import, tree-shaking: 필요시에만 import (Webpack과 유사하게 처리)
+  - 안드로이드는 android/app/build.gradle의 release 설정 중요
+  - iOS는 bitcode, strip unused architectures 확인
 
-- React Native에서 앱 크기를 최적화하는 방법은?
+
 - React Native에서 서버와의 실시간 동기화를 구현하는 방법은?
 - React Native에서 File Upload 기능을 구현하는 방법은?
 - React Native에서 Custom Fonts를 적용하는 방법은?
