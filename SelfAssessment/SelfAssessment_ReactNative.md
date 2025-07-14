@@ -2190,7 +2190,28 @@ Organize concepts, features, types and Pros and Cons
   - MMKV는 대부분의 캐시/세션/설정 저장에 적합
   - 보안이 필요한 경우는 EncryptedStorage 또는 SecureStore (Expo)
 
-- React Native에서 JWT 인증을 구현하는 방법은?
+- React Native에서 JWT 인증을 구현하는 방법
+  - 핵심 흐름:
+    - 사용자 로그인 시, 서버에서 JWT 토큰을 발급
+    - 토큰을 클라이언트에서 저장 (권장: SecureStore or AsyncStorage)
+    - 이후 API 요청 시 헤더에 Authorization: Bearer <token> 추가
+    - 토큰 만료 시 → refresh token으로 갱신하거나 재로그인 유도
+  - 라이브러리 예시
+    - axios + interceptor로 자동 토큰 추가
+    - react-native-encrypted-storage (보안 저장소)
+  - 코드 예시
+    ```ts
+    axios.interceptors.request.use(
+      async (config) => {
+        const token = await SecureStore.getItemAsync('jwt_token');
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      }
+    );
+    ```
+
 - React Native에서 Background Fetch를 활용하는 방법은?
 - React Native에서 GraphQL을 활용한 데이터 관리 방법은?
 - React Native에서 프로젝트 구조를 설계할 때 고려해야 할 사항은?
