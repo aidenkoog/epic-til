@@ -1920,8 +1920,37 @@ Organize concepts, features, types and Pros and Cons
   - Expo에서는 EAS + stripe-react-native 연동 방식 권장
 
 - React Native에서 환경 변수(.env) 파일을 사용하는 방법
+  - 라이브러리: react-native-dotenv or react-native-config
+  - .env 예
+    ```env
+    API_URL=https://api.example.com
+    APP_ENV=production
+    ```
+  - 사용 예 (react-native-config)
+    ```ts
+    import Config from 'react-native-config';
+    console.log(Config.API_URL);
+    ```
+  - 빌드 시점에 .env 값 주입
+  - Android/iOS의 Gradle, Info.plist에서도 사용 가능
 
-- React Native에서 EAS(Expo Application Services)를 활용하는 방법은?
+- React Native에서 EAS(Expo Application Services)를 활용하는 방법
+  - 개요
+    - Expo가 제공하는 빌드, 배포, 업데이트, 인증서 관리 등 통합 DevOps 플랫폼
+  - 핵심 기능
+    - EAS Build: 클라우드 빌드 (Custom Native Code 포함 가능)
+    - EAS Update: OTA 업데이트 (앱 재배포 없이 JS 코드 핫픽스)
+    - EAS Submit: 앱 스토어 자동 제출
+    - EAS Secrets: 빌드시 환경 변수 암호화 관리
+  - 설치 및 사용
+    ```bash
+    npm install -g eas-cli
+    eas login
+    eas build:configure
+    eas build --platform android
+    ```
+  - Expo SDK 43+ 이상, eas.json 설정 필수
+  - eas update로 앱을 즉시 업데이트 가능 (Code Push 대안)
 
 
 - React Native에서 앱 크기를 최적화하는 방법은?
