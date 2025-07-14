@@ -1749,11 +1749,80 @@ Organize concepts, features, types and Pros and Cons
     ```
     - react-query는 zustand, redux 같은 클라이언트 상태와 별개로 사용됨
 
-- React Native에서 WebView를 활용하는 방법은?
-- React Native에서 Reanimated 라이브러리를 사용하는 방법은?
-- React Native에서 Lottie를 활용한 애니메이션을 적용하는 방법은?
-- React Native에서 Google Maps를 적용하는 방법은?
+- React Native에서 WebView를 활용하는 방법
+  - 라이브러리: react-native-webview
+  - 설치
+    ```bash
+    npm install react-native-webview
+    npx pod-install
+    ```
+  - 예제
+    ```tsx
+    import { WebView } from 'react-native-webview';
 
+    <WebView source={{ uri: 'https://example.com' }} />
+    ```
+  - JS ↔ Native 메시지 통신: onMessage, postMessage 사용
+  - PDF 뷰어, 결제, 인증 페이지 등에 유용
+
+- React Native에서 Reanimated 라이브러리를 사용하는 방법
+  - 라이브러리: react-native-reanimated
+  - 설치
+    ```bash
+    npm install react-native-reanimated
+    ```
+  - 예제
+    ```tsx
+    const offset = useSharedValue(0);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+      transform: [{ translateX: offset.value }],
+    }));
+
+    <Animated.View style={animatedStyle} />
+    ```
+  - 장점:
+    - Native thread에서 실행되는 초고성능 애니메이션
+    - Gesture, Scroll, Transition 애니메이션 구현 가능
+
+- React Native에서 Lottie를 활용한 애니메이션을 적용하는 방법
+  - 라이브러리: lottie-react-native
+  - 설치
+    ```bash
+    npm install lottie-react-native
+    npx pod-install
+    ```
+  - 예제
+    ```tsx
+    import LottieView from 'lottie-react-native';
+
+    <LottieView source={require('./loading.json')} autoPlay loop />
+    ```
+  - After Effects → Lottie JSON으로 변환한 애니메이션 사용 가능
+
+- React Native에서 Google Maps를 적용하는 방법
+  - 라이브러리: react-native-maps
+  - 설치
+    ```bash
+    npm install react-native-maps
+    npx pod-install
+    ```
+  - 안드로이드 설정
+    - AndroidManifest.xml에 API Key 추가
+  - 예제
+    ```tsx
+    <MapView
+      style={{ flex: 1 }}
+      initialRegion={{
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }}
+    />
+    ```
+  - 마커, 커스텀 지도 스타일, 지도 이벤트 지원
+  - Google Maps SDK와 연동된 네이티브 수준 성능 제공
 
 - React Native에서 Video Streaming을 구현하는 방법은?
 - React Native에서 Native Bridge를 사용하는 이유는?
