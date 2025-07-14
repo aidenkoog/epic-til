@@ -2106,14 +2106,89 @@ Organize concepts, features, types and Pros and Cons
     - WebView는 브라우저 대체물
     - iframe은 HTML 레벨에서의 삽입 기능
 
-- React Native에서 배터리 소모를 줄이기 위한 방법은?
-- React Native에서 Bluetooth 기능을 구현하는 방법은?
-- React Native에서 Offline Mode를 구현하는 방법은?
-- React Native에서 앱에서 로그를 수집하는 방법은?
-- React Native에서 AI 모델을 활용하는 방법은?
-- React Native에서 Face Recognition을 적용하는 방법은?
-- React Native에서 AsyncStorage의 대체 기술은?
+- React Native에서 배터리 소모를 줄이기 위한 방법
+  - 최적화 전략
+    - 백그라운드 처리: 필요할 때만 백그라운드 서비스 실행
+    - 위치/GPS: watchPosition 대신 getCurrentPosition 최소 사용
+    - Polling: 짧은 주기의 폴링 > WebSocket 또는 push로 대체
+    - 애니매이션: useNativeDriver: true, 과도한 loop 피하기
+    - CPU 작업: 무거운 연산은 JSI, native, web worker로 이동
+  - 추가 설명
+    - Android에서는 JobScheduler, iOS에서는 BackgroundTasks 연동 고려
 
+- React Native에서 Bluetooth 기능을 구현하는 방법
+  - 라이브러리: react-native-ble-plx
+  - 기본 흐름
+    - 권한 요청 (안드로이드 12+ > 위치 + 블루투스 권한 필요)
+    - BLE 디바이스 스캔
+    - 연결 후 characteristic 읽기/쓰기
+  - 예제
+    ```tsx
+    const manager = new BleManager();
+    manager.startDeviceScan(null, null, (error, device) => {
+      if (device?.name?.includes("MyDevice")) {
+        manager.stopDeviceScan();
+        device.connect().then(d => d.discoverAllServicesAndCharacteristics());
+      }
+    });
+    ```
+  - Classic Bluetooth 사용 시 react-native-bluetooth-classic 사용 필요
+
+- React Native에서 Offline Mode를 구현하는 방법
+  - 구현 방법
+    - 데이터 저장: AsyncStorage, MMKV, SQLite, WatermelonDB
+    - 캐시 관리: react-query + persist, or custom TTL 적용
+    - 네트워크 감지: @react-native-community/netinfo
+    - 큐잉 및 재전송: offline 상태에서 요청 큐 저장 → online 시 일괄 전송
+  - Firebase Firestore는 자체 오프라인 캐시 기능 내장
+
+- React Native에서 앱에서 로그를 수집하는 방법
+  - 수집 방법
+    - 콘솔 출력: console.log, LogBox, Reactotron
+    - 에러 수집: Sentry, Firebase Crashlytics
+    - 이벤트 추적: Amplitude, Mixpanel, Firebase Analytics
+    - 네트워크 로그: Flipper, axios 인터셉터 활용
+  - 예제 (Sentry)
+    ```tsx
+    import * as Sentry from '@sentry/react-native';
+
+    Sentry.captureException(error);
+    Sentry.captureMessage('custom event');
+    ```
+
+- React Native에서 AI 모델을 활용하는 방법
+  - AI 모델 활용을 위한 접근 방식
+    - 서버 연동: API 호출 (예: OpenAI, Custom ML Server)
+    - 온디바이스 실행: TensorFlow Lite, OMNX Runtime, mlkit
+    - Expo 기반 사용: expo-camera + Google MLKit
+  - 예시 (TFLite)
+    - Android: tflite-react-native
+    - iOS: coreml 또는 TFLite iOS wrapper
+
+- React Native에서 Face Recognition을 적용하는 방법
+  - 방법
+    - 온디바이스: react-native-camera + MLKit or OpenCV
+    - 서버 기반: 이미지 업로드 후 API (ex: AWS Rekognition, Kairos, Azure Face API 등)
+    - Expo 기반: expo-face-detector (단순 감지만 가능)
+  - 예제
+    ```tsx
+    import * as FaceDetector from 'expo-face-detector';
+
+    const faces = await FaceDetector.detectFacesAsync(uri, {
+      mode: FaceDetector.FaceDetectorMode.fast,
+    });
+    ```
+  - 얼굴 매칭은 직접 embodding을 비교하거나 API 연동 필요
+
+- React Native에서 AsyncStorage의 대체 기술
+  - 대체 기술들
+    - MMKV: 매우 빠름 (Native C++ 기반)
+    - react-native-encrypted-storage: 보안 저장
+    - react-native-mmkv-storage: 비동기/동기 지원
+    - WatermelonDB: 관계형 구조 데이터 저장 가능 (성능 매우 좋음)
+    - SQLite: 대용량 구조화된 데이터에 적합
+  - MMKV는 대부분의 캐시/세션/설정 저장에 적합
+  - 보안이 필요한 경우는 EncryptedStorage 또는 SecureStore (Expo)
 
 - React Native에서 JWT 인증을 구현하는 방법은?
 - React Native에서 Background Fetch를 활용하는 방법은?
