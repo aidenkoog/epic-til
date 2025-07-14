@@ -1736,7 +1736,19 @@ Organize concepts, features, types and Pros and Cons
       thread.postMessage('hello');
       ```
 
-- React Native에서 React Query를 사용하는 이유는?
+- React Native에서 React Query를 사용하는 이유
+  - 개요
+    - React Query는 서버 상태(server state) 관리 라이브러리로 다음과 같은 이점 존재
+      - 자동 캐싱: 동일 요청 재시도 없이 캐시에서 사용
+      - Background Fetch: 화면 전환 시 자동 재요청
+      - 쿼리 무효화: invalidateQueries()로 특정 쿼리 갱신
+      - 로딩/에러 상태 관리: useQuery 자체로 상태 관리 가능
+  - 예제
+    ```tsx
+    const { data, isLoading } = useQuery(['user', id], () => fetchUser(id));
+    ```
+    - react-query는 zustand, redux 같은 클라이언트 상태와 별개로 사용됨
+
 - React Native에서 WebView를 활용하는 방법은?
 - React Native에서 Reanimated 라이브러리를 사용하는 방법은?
 - React Native에서 Lottie를 활용한 애니메이션을 적용하는 방법은?
