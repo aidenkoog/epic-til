@@ -2379,15 +2379,77 @@ Organize concepts, features, types and Pros and Cons
     - Redux Toolkit + RTK Query
     - TanStack Query (구 React Query) + 로컬 상태는 Zustand
 
+- React Native에서 Navigation 상태를 동적으로 관리하는 방법
+  - React Navigation 기준
+    - navigation.navigate(route) 또는 navigation.reset()으로 라우팅 제어
+    - 로그인 여부, 권한 상태에 따라 Stack.Screen 조건 분기:
+      ```tsx
+      {isLoggedIn ? <AppStack /> : <AuthStack />}
+      ```
+  - 전역 Navigation 제어 (앱 외부에서 이동 시 필요)
+    ```tsx
+    // NavigationService.ts
+    export const navigationRef = createNavigationContainerRef();
 
-- React Native에서 Navigation 상태를 동적으로 관리하는 방법은?
-- React Native에서 AI 기반 음성 인식 기능을 추가하는 방법은?
-- React Native에서 Flutter와 비교했을 때의 장점은?
-- React Native에서 Expo Managed Workflow와 Bare Workflow의 차이점은?
-- React Native에서 Google Sign-In을 적용하는 방법은?
+    export function navigate(name, params) {
+      if (navigationRef.isReady()) {
+        navigationRef.navigate(name, params);
+      }
+    }
+    ```
+  - 복잡한 조건 분기 시 React Navigation v6의 Group, Conditional Screen, Drawer/Tab Nesting을 적극 활용
+
+- React Native에서 AI 기반 음성 인식 기능을 추가하는 방법
+  - 기본 음성 인식
+    - 안드로이드: react-native-voice
+    - iOS: Speech Framework 자동 사용됨 (react-native-voice 내부)
+
+  - AI 기반 정확도 향상
+    - Google Speech to Text API
+      - 오디오를 서버로 전송 > 텍스트 응답
+    - Whisper (OpenAI)
+      - Edge 디바이스 성능 부족 시 서버에서 처리 (Python 백엔드에 Whisper 서버 구축 가능)
+    - Firebase ML Kit 음성 처리 (기본 한정적)
+  
+  - Tip
+    - 오디오 압축 및 전송은 react-native-audio-recorder-player 사용
+
+- React Native에서 Flutter와 비교했을 때의 장점
+  - React Native
+    - UI 구성: 네이티브 컴포넌트 브릿징
+    - 웹 기반 라이브러리와 호환 용이
+    - 자바스크립트/타입스크립트
+    - JS <> Native 브릿지 오버헤드 존재
+    - 핫 리로드 가능
+    - 네이티브 연동은 쉽지만 일부 기능은 직접 구현 필요
+  - Flutter
+    - UI 구성: 자체 렌더링
+    - 일관성 있는 위젯 구조
+    - 다트 언어
+    - Skia 기반 고성능
+    - 핫 리로드 가능
+    - 플랫폼 채널 필요
+  - React Native 장점 요약
+    - 웹 개발자 전환 용이
+    - 라이브러리, 인프라 풍부
+    - 빠른 프로토타이핑 가능
+
+- React Native에서 Google Sign-In을 적용하는 방법
+  - 패키지 설치: npm install @react-native-google-signin/google-signin
+  - 안드로이드 설정
+    - SHA-1 등록 (파이어베이스 콘솔)
+    - android/app/build.gradle에 설정 추가
+    - GoogleSignIn.configure()로 초기화
+  - iOS 설정
+    - GoogleService-Info.plist 추가
+    - RNGoogleSignIn CocoaPods로 링크
+  - 사용 예시
+    ```tsx
+    const userInfo = await GoogleSignin.signIn();
+    ```
+    - 인증 후 받은 idToken을 백엔드로 보내 JWT 발급 등 처리
+
 - React Native에서 WebRTC를 활용한 영상 통화를 구현하는 방법은?
-
-
 - React Native에서 프로젝트를 TypeScript로 마이그레이션하는 방법은?
 - React Native에서 UI 성능을 개선하는 방법은?
 - React Native에서 FlatList의 성능 최적화를 위해 고려해야 할 점은?
