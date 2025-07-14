@@ -1852,11 +1852,75 @@ Organize concepts, features, types and Pros and Cons
     - 네이티브 SDK 연동 (카카오 로그인, 티맵 SDK 등)
   - 최신 방식: TurboModule + JSI (JS Interface)로 전환 추세
 
-- React Native에서 Native Event Emitter의 역할은?
-- React Native에서 터치 이벤트를 처리하는 방법은?
-- React Native에서 Push Notification을 설정하는 방법은?
-- React Native에서 Apple Pay와 Google Pay를 연동하는 방법은?
-- React Native에서 환경 변수(.env) 파일을 사용하는 방법은?
+- React Native에서 Native Event Emitter의 역할
+  - 개요: JS <> 네이티브 간 이벤트 기반 통신 처리
+  - 사용 예
+    ```tsx
+    import { NativeEventEmitter, NativeModules } from 'react-native';
+
+    const eventEmitter = new NativeEventEmitter(NativeModules.MyModule);
+
+    eventEmitter.addListener('onDataReceived', (data) => {
+      console.log('Received from native:', data);
+    });
+    ```
+  - 예: 센서 변화, 백그라운드 위치, 네이티브 라이브러리 콜백 수신 등에 사용
+
+- React Native에서 터치 이벤트를 처리하는 방법
+  - 기본 방식
+    - TouchableOpacity, TouchableWithoutFeedback
+    - Pressable: React Native 0.63+ 도입된 더 강력한 터치 컴포넌트
+
+  - 고급 제스처:
+    - react-native-gesture-handler
+    - PanGestureHandler, TapGestureHandler, GestureDetector
+
+  - 예시
+    ```tsx
+    <Pressable onPress={() => console.log('pressed')}>
+      <Text>Tap me</Text>
+    </Pressable>
+    ```
+
+- React Native에서 Push Notification을 설정하는 방법
+  - 추천 도구: react-native-firebase/messaging
+  - Android 설정:
+    - Firebase Console → Cloud Messaging 설정
+    - google-services.json 추가
+    - AndroidManifest.xml 권한 추가
+  - iOS 설정:
+    - info.plist 권한 설정
+    - APNs 인증 키 등록
+    - UNUserNotificationCenter 권한 요청
+  - 코드:
+    ```tsx
+    import messaging from '@react-native-firebase/messaging';
+
+    await messaging().requestPermission();
+    const token = await messaging().getToken();
+
+    messaging().onMessage(remoteMessage => {
+      Alert.alert('Push Received', JSON.stringify(remoteMessage));
+    });
+    ```
+
+- React Native에서 Apple Pay와 Google Pay를 연동하는 방법
+  - 대표 라이브러리: tipsi-stripe, [react-native-payments]
+    - Stripe 기반 Apple/Google Pay 연동이 일반적
+
+  - Apple Pay:
+    - merchant ID 발급
+    - Entitlements 및 Capabilities 설정
+    - Stripe SDK 연동 필요
+
+  - Google Pay:
+    - PaymentMethodTokenizationSpecification JSON 설정
+    - Google Play Console에서 API 활성화 필요
+
+  - Expo에서는 EAS + stripe-react-native 연동 방식 권장
+
+- React Native에서 환경 변수(.env) 파일을 사용하는 방법
+
 - React Native에서 EAS(Expo Application Services)를 활용하는 방법은?
 
 
