@@ -1718,7 +1718,24 @@ Organize concepts, features, types and Pros and Cons
     ```
   - 또는 react-native-paper, styled-components 등의 theming 시스템 활용
 
-- React Native에서 Multi-Threading을 구현하는 방법은?
+- React Native에서 Multi-Threading을 구현하는 방법
+  - 개요
+    - RN은 기본적으로 싱글 스레드 기반, 병렬 작업은 다음 방식으로 가능
+  - 구현 방법
+    - JSThread 외부 처리
+      - react-native-threads: JS Worker 스레드 생성
+      - react-native-worker: WebWorker 스타일
+    - Native Module 이용 (C++/Kotlin/Swift)
+      - JSI 기반으로 Background 작업 처리
+    - 사용 예
+      ```js
+      import { Thread } from 'react-native-threads';
+
+      const thread = new Thread('./worker.js');
+      thread.onmessage = (msg) => console.log(msg);
+      thread.postMessage('hello');
+      ```
+
 - React Native에서 React Query를 사용하는 이유는?
 - React Native에서 WebView를 활용하는 방법은?
 - React Native에서 Reanimated 라이브러리를 사용하는 방법은?
