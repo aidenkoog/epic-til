@@ -1597,7 +1597,17 @@ Organize concepts, features, types and Pros and Cons
   - 상태를 유지하려면 퓨어 컴포넌트 구조를 지켜야 함
   - useEffect나 상태 관련 코드가 잘못되면 자동으로 해당 컴포넌트만 리셋됨
 
-- React Native에서 TurboModules의 역할은?
+- React Native에서 TurboModules의 역할
+  - TurboModules는 React Native의 Native Module 시스템의 차세대 구조
+  - 목적:
+    - Native <-> JS 브릿지 성능 향상 (동기 호출 가능)
+    - 사용 시점에 로딩 → 앱 초기 로딩 시간 단축
+    - C++ 기반 브릿지 → 효율적인 메모리 사용 및 타입 안정성
+  - 예전의 NativeModules는 JS <-> Native 간 통신이 느림 (비동기만 가능)
+  - 활성화 조건:
+    - React Native 0.71 이후 일부 라이브러리에서 적용 가능
+    - JSI 기반으로 동작
+
 - React Native에서 Flipper 디버깅 툴을 활용하는 방법은?
 - React Native에서 Accessibility를 개선하는 방법은?
 - React Native에서 Gesture Responder System이 동작하는 방식은?
