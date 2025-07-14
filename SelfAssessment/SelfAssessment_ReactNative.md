@@ -2232,12 +2232,81 @@ Organize concepts, features, types and Pros and Cons
     ```
     - iOS는 제한적이며 사용 허가 필요 (Capabilities → Background Modes → Fetch)
 
-- React Native에서 GraphQL을 활용한 데이터 관리 방법은?
-- React Native에서 프로젝트 구조를 설계할 때 고려해야 할 사항은?
-- React Native에서 백그라운드에서 앱이 실행되도록 유지하는 방법은?
-- React Native에서 앱이 종료되었을 때도 알림을 받을 수 있도록 하는 방법은?
-- React Native에서 CI/CD를 구축하는 방법은?
-- React Native에서 Redux를 사용할 때 발생할 수 있는 문제점과 해결 방법은?
+- React Native에서 GraphQL을 활용한 데이터 관리 방법
+  - 주요 도구
+    - Apollo Client
+    - Relay (Facebook)
+
+  - GraphQL 흐름
+    - (1) Apollo Client 설정 (ApolloProvider, HttpLink, InMemoryCahce)
+    - (2) GraphQL 쿼리 작성 > useQuery, useMutation 등 훅으로 호출
+    - (3) 전역 캐싱과 로딩 / 에러 핸들링 자동화
+
+  - 예시 코드
+    ```ts
+    const { data, loading, error } = useQuery(GET_USER, {
+      variables: { id: 1 }
+    });
+    ```
+
+- React Native에서 프로젝트 구조를 설계할 때 고려해야 할 사항
+  - 권장 구조 예시
+    - /api
+    - /components
+    - /screens
+    - /hooks
+    - /store
+    - /utils
+    - /assets
+
+  - 고려 사항
+    - 기능별 / 도메인별 분리
+    - 전역 상태 관리 도입 여부
+    - navigation 구조 (Stack, BottomTab 등)
+    - 확장성과 테스트 용이성
+
+- React Native에서 백그라운드에서 앱이 실행되도록 유지하는 방법
+  - 기능 예시
+    - 백그라운드 GPS 추적
+    - 음악/스트리밍 등
+
+  - 필요 구성
+    - 안드로이드: 포그라운드 서비스 설정
+    - iOS: Background Modes 권한 설정 (제한적)
+
+  - 라이브러리
+    - react-native-background-fetch
+    - react-native-background-geolocation
+    - react-native-track-player (백그라운드 오디오)
+
+- React Native에서 앱이 종료되었을 때도 알림을 받을 수 있도록 하는 방법
+  - 사용 기술: Firebase Cloud Messaging (FCM)
+  - FCM 특징
+    - 앱이 백그라운드거나 종료 상태에서도 알림 수신 가능
+    - 안드로이드: notification payload 사용
+    - iOS: APNs 권한 및 Remote Notification 설정 필요
+  - 라이브러리: @react-native-firebase/messaging
+    ```ts
+    messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM arrived !!!', JSON.stringify(remoteMessage));
+    })
+    ```
+
+- React Native에서 CI/CD를 구축하는 방법
+  - 툴 추천
+    - EAS(Expo Application Services): Expo 기반 자동 빌드/배포
+    - Fastlane: 네이티브 빌드 자동화 (iOS/Android)
+    - GitHub Actions / Bitrise / CircleCI / CodeMagic: CI/CD 파이프라인
+
+  - 예시
+    - PR > Lint & Test
+    - Merge > iOS/Android 빌드 & 스토어 업로드
+
+- React Native에서 Redux를 사용할 때 발생할 수 있는 문제점과 해결 방법
+  - BoilerPlate 코드 과다: Redux Toolkit 사용 (createSlice)으로 해결
+  - 비동기 처리 복잡 (Thunk, Saga): RTK Query 또는 React Query 사용 고려한 해결
+  - 전역 상태 과도한 의존: Context/Local State로 분산
+  - 디버깅 어려움: Redux DevTools 설정 (Flipper 등 연동)
 
 
 - React Native에서 Splash Screen이 오래 걸리는 문제를 해결하는 방법은?
