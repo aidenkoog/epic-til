@@ -2074,7 +2074,19 @@ Organize concepts, features, types and Pros and Cons
     - 직관적이나 보일러플레이트 많음
     - 크고 방대한 미들웨어 생태계/커뮤니티 존재
 
-- React Native에서 Accessibility를 최적화하는 방법은?
+- React Native에서 Accessibility를 최적화하는 방법
+  - 핵심 속성
+    - accessible: 해당 요소를 스크린리더 대상 포함 여부
+    - accessibilityLabel: 읽히는 대체 텍스트
+    - accessibilityHint: 수행 동작 설명
+    - accessibilityRole: 역할 지정 (button, link, header 등)
+    - importantForAccessibility: 포커스 포함 여부 조정 (auto, yes, no)
+  
+  - TIP
+    - 터치 가능한 영역은 충분한 크기 (최소 44x44pt)
+    - iOS VoiceOver / Android TalkBack 테스트 필수
+    - Focus 순서 제어 → accessibilityViewIsModal, focusOnView()
+
 - React Native에서 WebView와 iframe의 차이점은?
 - React Native에서 배터리 소모를 줄이기 위한 방법은?
 - React Native에서 Bluetooth 기능을 구현하는 방법은?
