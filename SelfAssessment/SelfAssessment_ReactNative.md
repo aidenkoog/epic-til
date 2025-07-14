@@ -1963,12 +1963,69 @@ Organize concepts, features, types and Pros and Cons
   - 안드로이드는 android/app/build.gradle의 release 설정 중요
   - iOS는 bitcode, strip unused architectures 확인
 
+- React Native에서 서버와의 실시간 동기화를 구현하는 방법
+  - 사용 기술
+    - WebSocket: 양방향 통신, 이벤트 기반 동기화
+    - Firebase Realtime DB / FireStore: 실시간 데이터 변경 자동 반영
+    - SSE (Server Sent Events): 서버에서 Push-Only, 간단한 동기화
+    - Polling + ETag: 변경 여부만 확인하여 요청 최적화
 
-- React Native에서 서버와의 실시간 동기화를 구현하는 방법은?
-- React Native에서 File Upload 기능을 구현하는 방법은?
-- React Native에서 Custom Fonts를 적용하는 방법은?
-- React Native에서 Local Authentication(지문, 얼굴 인식)을 적용하는 방법은?
-- React Native에서 Dynamic Linking이란 무엇인가?
+- React Native에서 File Upload 기능을 구현하는 방법
+  - 라이브러리
+    - react-native-document-picker (파일 선택)
+    - react-native-image-picker (이미지/동영상 선택)
+    - axios or fetch + FormData
+  - 예제
+    ```js
+    const formData = new FormData();
+    formData.append('file', {
+      uri: file.uri,
+      type: file.type,
+      name: file.name,
+    });
+
+    await fetch('https://api.example.com/upload', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    ```
+
+- React Native에서 Custom Fonts를 적용하는 방법
+  - assets/fonts 폴더에 .ttf 또는 .otf 파일 추가
+  - react-native.config.js
+    ```js
+    module.exports = {
+      assets: ['./assets/fonts'],
+    };
+    ```
+  - npx react-native link 실행
+  - 스타일 적용
+    ```tsx
+    <Text style={{ fontFamily: 'YourFontName' }}>Hello</Text>
+    ```
+
+- React Native에서 Local Authentication(지문, 얼굴 인식)을 적용하는 방법
+  - 라이브러리
+    - react-native-local-authentication or expo-local-authentication
+  - 예시
+    ```js
+    import * as LocalAuthentication from 'expo-local-authentication';
+
+    const isSupported = await LocalAuthentication.hasHardwareAsync();
+    const result = await LocalAuthentication.authenticateAsync();
+    if (result.success) {
+      // 인증 성공
+    }
+    ```
+  - iOS: NSFaceIDUsageDescription 필요
+  - Android: USE_BIOMETRIC 권한 필요
+
+
+- React Native에서 Dynamic Linking
+  - 개요
+    - Dynamic Linking은 앱 외부에서 특정 화면으로 직접 진입할 수 있는 URL 기능
+
 - React Native에서 Third-Party 모듈을 효과적으로 관리하는 방법은?
 - React Native에서 Multi-Platform을 위한 코드 구조화 방법은?
 - React Native에서 MobX와 Redux의 차이점은?
