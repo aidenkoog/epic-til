@@ -2025,11 +2025,54 @@ Organize concepts, features, types and Pros and Cons
 - React Native에서 Dynamic Linking
   - 개요
     - Dynamic Linking은 앱 외부에서 특정 화면으로 직접 진입할 수 있는 URL 기능
+    - 예
+      - myapp://profile/123
+      - https://example.com/products/456
+  - 라이브러리
+    - react-native-app-link, react-native-deep-linking, React Navigation의 Linking 지원
+  - 예제
+    ```js
+    Linking.addEventListener('url', ({ url }) => {
+      const route = extractRouteFromUrl(url);
+      navigation.navigate(route.name, route.params);
+    });
+    ```
 
-- React Native에서 Third-Party 모듈을 효과적으로 관리하는 방법은?
-- React Native에서 Multi-Platform을 위한 코드 구조화 방법은?
-- React Native에서 MobX와 Redux의 차이점은?
+- React Native에서 Third-Party 모듈을 효과적으로 관리하는 방법
+  - 패키지 버전 고정: 정확한 버전 지정 (^ 또는 ~피하기)
+  - 패키지 레벨 관리: yarn outdated, npm audit 등으로 보안/업데이트 확인
+  - 중요 모듈만 사용: 경량 라이브러리 우선, 범용 대신 목적별
+  - 벤더화 고려: 수정한 외부 패키지는 별도로 관리 (fork or vendors)
+  - Expo 사용 시 제한 확인: Expo Go에서 지원되는 모듈인지 확인 필요
 
+- React Native에서 Multi-Platform을 위한 코드 구조화 방법
+  - Platform API 분기
+    - Platform.OS === 'android' ? ... : ...
+  - .ios.js / .android.js
+    - 플랫폼별 컴포넌트 분리
+  - 폴더 구조 분리
+    - src/platforms/web/, src/platforms/native/
+  - 환경 변수 활용
+    - .env.web, .env.mobile 등 환경 구분
+  - 공통 유틸리티/훅 추출
+    - UI와 로직 분리 (예: useLogin, useFetch)
+  - expo, react-native-web, next.js 기반 통합 개발 시에도 사용 가능
+
+- React Native에서 MobX와 Redux의 차이점
+  - MobX
+    - 작은 앱 => MobX 빠름
+    - OOP + Reactive
+    - 설정 간단, observable, action
+    - 상태 자동 추적 (proxy 기반)
+    - 학습 곡선: 학습 빠르나 디버깅 어려울 수 있음
+    - 커뮤니티는 작음
+  - Redux
+    - 팀 협업/디버깅 => Redux 안전하고 명확
+    - FP + 명시적 Flux 구조
+    - 상대적으로 복잡 (actions, reducers, store)
+    - 명시적 상태 변경
+    - 직관적이나 보일러플레이트 많음
+    - 크고 방대한 미들웨어 생태계/커뮤니티 존재
 
 - React Native에서 Accessibility를 최적화하는 방법은?
 - React Native에서 WebView와 iframe의 차이점은?
