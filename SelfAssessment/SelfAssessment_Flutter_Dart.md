@@ -2881,7 +2881,24 @@ Organize concepts, features, types and Pros and Cons
       - 캐시 사이즈 관리: 용량 무한정 증가 방지 필요 (오래된 캐시 삭제)
 
 
-- Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점은?
+- Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점
+  - 주요 고려 사항
+    - UI 스케일링
+      - 마우스, 키보드 기반 UX에 맞게 Hover, Right-Click, Tooltip 등 처리 필요
+    - 폰트 & DPI
+      - 고해상도 DPI 대응 필요 (MediaQuery.deivcePixelRatio)
+    - 창 크기 조절
+      - 화면 Resize 및 Min/Max Size 대응 (WindowManger 패키지)
+    - 파일 시스템 접근
+      - file_picker, path_provider 등 데스크탑 전용 구현 고려
+    - 마우스/키보드 이벤트
+      - Focus, KeyboardListener, MouseRegion 등 명확한 이벤트 분리 필요
+    - 플랫폼 제한
+      - 일부 라이브러리는 Desktop 미지원 (예: permission_handler 등)
+  - 플러그인 예시
+    - window_manager (창 제어)
+    - bitsdojo_window (창 프레임 커스터마이징)
+
 - Flutter에서 Tizen 및 Embedded 기기용 앱을 개발할 때 필요한 사항은?
 - Flutter에서 PWA(Progressive Web App)를 구현하는 방법은?
 - Flutter에서 Native Code(Android/iOS)를 호출하는 방법은?
