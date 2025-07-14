@@ -1562,7 +1562,32 @@ Organize concepts, features, types and Pros and Cons
     ```
     - iOS는 백그라운드 제약이 크므로 주의
 
-- React Native에서 WebSockets을 사용하는 방법은?
+- React Native에서 WebSockets을 사용하는 방법
+  - 기본 API: WebSocket (브라우저 표준과 동일)
+  - 예시
+    ```tsx
+    const socket = new WebSocket('wss://example.com/socket');
+
+    socket.onopen = () => {
+      socket.send('Hello Server!');
+    };
+
+    socket.onmessage = (e) => {
+      console.log('Received:', e.data);
+    };
+
+    socket.onerror = (e) => {
+      console.error('Socket error:', e.message);
+    };
+
+    socket.onclose = (e) => {
+      console.log('Socket closed:', e.code);
+    };
+    ```
+  - 대안 라이브러리
+    - socket.io-client (서버가 socket.io 기반일 때)
+    - react-native-websocket (간단 래핑용)
+
 - React Native에서 Fast Refresh가 동작하는 방식은?
 - React Native에서 TurboModules의 역할은?
 - React Native에서 Flipper 디버깅 툴을 활용하는 방법은?
