@@ -1824,8 +1824,34 @@ Organize concepts, features, types and Pros and Cons
   - 마커, 커스텀 지도 스타일, 지도 이벤트 지원
   - Google Maps SDK와 연동된 네이티브 수준 성능 제공
 
-- React Native에서 Video Streaming을 구현하는 방법은?
-- React Native에서 Native Bridge를 사용하는 이유는?
+- React Native에서 Video Streaming을 구현하는 방법
+  - 라이브러리: react-native-video
+  - 설치
+    - npm install react-native-video
+    - npx pod-install
+  - 기본 사용
+    ```tsx
+    import Video from 'react-native-video';
+
+    <Video
+      source={{ uri: 'https://example.com/video.m3u8' }}  // HLS/MPEG-DASH 지원
+      controls
+      resizeMode="contain"
+      style={{ width: '100%', height: 200 }}
+    />
+    ```
+  - RTMP, HLS, MPEG-DASH 등 지원
+  - 실시간 스트리밍은 별도 Player (예: ffmpeg, ExoPlayer) 커스터마이징 필요
+
+- React Native에서 Native Bridge를 사용하는 이유
+  - 개요
+    - JS에서 네이티브 기능을 호출할 수 있도록 하는 통로
+  - 사용 이유
+    - JS에서 접근할 수 없는 플랫폼 기능 호출 (블루투스, NFC, MediaCodec)
+    - 성능/하드웨어 기반 처리가 필요한 기능 (OpenGL, ARKit)
+    - 네이티브 SDK 연동 (카카오 로그인, 티맵 SDK 등)
+  - 최신 방식: TurboModule + JSI (JS Interface)로 전환 추세
+
 - React Native에서 Native Event Emitter의 역할은?
 - React Native에서 터치 이벤트를 처리하는 방법은?
 - React Native에서 Push Notification을 설정하는 방법은?
