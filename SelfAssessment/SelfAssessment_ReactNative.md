@@ -2797,7 +2797,20 @@ Organize concepts, features, types and Pros and Cons
       const MyComposeView = requireNativeComponent('MyComposeView');
       ```
 
-- React Native에서 JSI(JavaScript Interface)의 역할과 활용 방법은?
+- React Native에서 JSI(JavaScript Interface)의 역할과 활용 방법
+  - 역할:
+    - 기존 Bridge를 통하지 않고 C++ 객체와 JS 객체를 직접 연결
+    - 성능 병목 최소화 → native 동작을 JS와 거의 동기적으로 처리 가능
+
+  - 활용 예시:
+    - react-native-mmkv, react-native-skia, react-native-reanimated v2
+    - 대규모 연산, 애니메이션, 스토리지 등 고성능 네이티브 연산 수행 시 사용
+
+  - 기본 사용 흐름:
+    - C++로 JSI 바인딩 작성
+    - Android(Java/Kotlin), iOS(ObjC/Swift)에서 해당 C++ native method 노출
+    - JS 모듈에서 globalThis.MyJSIModule로 직접 호출
+
 - React Native에서 Fabric Renderer의 개념과 기존 Bridge와의 차이점은?
 - React Native에서 TurboModules의 동작 원리와 성능 개선 방법은?
 - React Native에서 Hermes 엔진을 사용하는 이유는?
