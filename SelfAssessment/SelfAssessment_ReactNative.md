@@ -2811,7 +2811,20 @@ Organize concepts, features, types and Pros and Cons
     - Android(Java/Kotlin), iOS(ObjC/Swift)에서 해당 C++ native method 노출
     - JS 모듈에서 globalThis.MyJSIModule로 직접 호출
 
-- React Native에서 Fabric Renderer의 개념과 기존 Bridge와의 차이점은?
+- React Native에서 Fabric Renderer의 개념과 기존 Bridge와의 차이점
+  - Fabric Renderer
+    - React Fiber + Native Shadow Tree
+    - 빠르고 동기화됨
+    - JSI 기반 (JS-Native 통신)
+    - 레거시 호환성 일부 제한 있음
+  - Bridge Renderer (기존)
+    - JS > JSON > Bridge > Native
+    - 느리고 Async JSON 처리 필요
+    - 브릿지 기반 (직렬화/역직렬화 필요)
+    - 레거시 호환성 (전통 방식)
+  - 정리
+    - Fabric = 새로운 렌더링 아키텍쳐로 리액트 Fiber + JSI 결합하여 기존 브릿지 병목 제거하고 더 빠른 UI 업데이트 가능
+    
 - React Native에서 TurboModules의 동작 원리와 성능 개선 방법은?
 - React Native에서 Hermes 엔진을 사용하는 이유는?
 
