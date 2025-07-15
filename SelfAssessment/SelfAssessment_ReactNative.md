@@ -2551,11 +2551,27 @@ Organize concepts, features, types and Pros and Cons
         return <HeavyComponent />;
       };
       ```
-  
-
 
 - React Native에서 Internationalization(다국어 지원)을 구현하는 방법
-
+  - 라이브러리 설치
+    ```bash
+    npm install i18next react-i18next i18next-http-backend i18next-browser-languagedetector
+    ```
+  - 초기화
+    ```ts
+    i18n.init({
+      fallbackLng: 'en',
+      resources: {
+        en: { translation: require('./locales/en.json') },
+        ko: { translation: require('./locales/ko.json') },
+      },
+    });
+    ```
+  - 사용
+    ```tsx
+    const { t } = useTranslation();
+    <Text>{t('welcome_message')}</Text>
+    ```
 
 - React Native에서 앱을 A/B 테스트하는 방법
 
