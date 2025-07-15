@@ -2606,7 +2606,17 @@ Organize concepts, features, types and Pros and Cons
     - (4) 구매 검증 서버 연동 필요 (특히 iOS 필수)
     - (5) 결제 완료 후 영수증 처리 및 acknowledge
 
-- React Native에서 Expo Go를 활용하는 방법은?
+- React Native에서 Expo Go를 활용하는 방법
+  - 목적: 디바이스에서 앱을 바로 테스트 가능
+    ```bash
+    npx create-expo-app myApp
+    cd myApp
+    npx expo start
+    ```
+    - QR 코드 스캔 > Expo Go 앱에서 실행
+    - 단점: Custom native modules 사용 불가
+  - 해결책: expo eject > Bare Workflow 전환 
+
 - React Native에서 Apple의 App Tracking Transparency(ATT)를 적용하는 방법은?
 - React Native에서 UI/UX를 개선하는 방법은?
 - React Native에서 GPU 성능 최적화를 수행하는 방법은?
