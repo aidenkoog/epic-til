@@ -2574,6 +2574,21 @@ Organize concepts, features, types and Pros and Cons
     ```
 
 - React Native에서 앱을 A/B 테스트하는 방법
+  - Firebase Remote Config 사용 (가장 일반적)
+    ```bash
+    npm install @react-native-firebase/remote-config
+    ```
+    - 백엔드에서 variant_A, variant_B 설정
+    - 클라이언트에서 fetch > 분기 처리
+    ```ts
+    const variant = remoteConfig().getValue('home_variant').asString();
+    return variant === 'A' ? <HomeA /> : <HomeB />;
+    ```
+  - Third party A/B테스트 도구
+    - Optimizely, LaunchDarkly, Split.io
+    - 트래픽 분산, 통계 제공
+  - 자체 로직 분기
+    - 예: userId.hashCode() % 2 === 0 > A 그룹
 
 - React Native에서 In-App Purchase를 구현하는 방법은?
 - React Native에서 Expo Go를 활용하는 방법은?
