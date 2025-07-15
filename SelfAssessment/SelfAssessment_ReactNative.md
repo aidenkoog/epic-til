@@ -2921,10 +2921,6 @@ Bridge 없이 동기 호출 및 속도 개선 가능
 
 JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 
-
-- React Native에서 Fabric과 기존 렌더링 방식의 차이점
-
-
 - React Native에서 Metro Bundler와 Webpack의 차이점은?
 - React Native에서 Gesture Handler를 최적화하는 방법은?
 - React Native에서 Dynamic Code Push를 적용하는 방법은?
@@ -2935,7 +2931,6 @@ JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 - React Native에서 성능 최적화를 위해 어떤 기법을 적용하는가?
 - React Native의 useEffect가 componentDidMount와 componentWillUnmount와 어떻게 비교되는가?
 - React Native에서 AsyncStorage와 SecureStore의 차이는?
-
 
 - React Native에서 Animation을 구현하는 방법은?
 - React Native에서 JSC와 Hermes 엔진의 차이는?
@@ -2959,7 +2954,6 @@ JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 
 
 - React Native에서 React Query와 SWR을 사용할 때의 차이점은?
-- React Native에서 fetch API와 Axios의 차이점은?
 - React Native에서 WebSocket과 HTTP Polling의 차이점은?
 - React Native에서 GraphQL을 활용하는 방법은?
 - React Native에서 API 호출을 최적화하는 방법은? (e.g., 캐싱, 중복 요청 방지)
@@ -2983,7 +2977,6 @@ JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 
 
 - React Native에서 Native Event Emitter를 활용하는 이유는?
-- React Native에서 Bluetooth 통신을 구현하는 방법은?
 - React Native에서 react-native link와 autolinking의 차이점은?
 - React Native에서 OAuth를 구현하는 방법은?
 - React Native에서 JWT 토큰을 안전하게 저장하는 방법은?
@@ -3012,7 +3005,6 @@ JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 - React Native에서 Apollo Client를 사용할 때의 장점은?
 - React Native에서 i18n(다국어 지원)을 구현하는 방법은?
 - React Native에서 Dynamic Font Scaling을 적용하는 방법은?
-- React Native에서 Accessibility(접근성)를 강화하는 방법은?
 - React Native에서 RTL (Right-to-Left) 언어를 지원하는 방법은?
 - React Native에서 카메라와 갤러리를 사용하는 방법은?
 - React Native에서 Face ID와 Touch ID를 적용하는 방법은?
@@ -3021,12 +3013,10 @@ JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 - React Native에서 NFC 기능을 구현하는 방법은?
 - React Native에서 GPS 및 위치 기반 서비스를 구현하는 방법은?
 - React Native에서 AR(Augmented Reality) 기능을 적용하는 방법은?
-- React Native에서 머신러닝 모델을 활용하는 방법은? (TensorFlow.js, ML Kit 등)
 - React Native의 최신 트렌드 및 업데이트된 기능은 무엇인가?
 - React Native에서 New Architecture(Fabric & TurboModules)를 적용하는 방법은?
 
 
-- React Native와 Flutter를 비교할 때, React Native의 강점과 약점은?
 - React Native의 JSI(JavaScript Interface)는 무엇이며, 어떻게 동작하는가?
 - React Native에서 Expo Router를 사용하면 어떤 장점이 있는가?
 - React Native에서 새로운 패키지를 선택할 때 고려해야 할 점은?
