@@ -2893,9 +2893,35 @@ Image Lazy Loading + Resize 처리
 
 Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
 
-- React Native의 Bridge와 TurboModules
 - React Native의 Hermes 엔진 사용 경험
+  - 개요
+    - Hermes는 React Native용 경량 자바스크립트 엔진으로 앱의 성능을 크게 향상시킵니다.
+
+사용 시 장점:
+앱 시작 시간 감소: JIT 대신 bytecode 사용
+
+메모리 사용량 절감: GC 최적화
+
+Bundle 크기 감소: Bytecode로 불필요한 코드 제거
+
+디버깅: Chrome DevTools 또는 Flipper 사용 가능
+
 - React Native의 JSI(JavaScript Interface)와 Fabric 아키텍처
+  - ✅ JSI (JavaScript Interface)
+C++ 레이어를 통해 JS 객체 ↔ Native 객체를 직접 연결
+
+TurboModules, Fabric의 핵심 기반 기술
+
+Bridge 없이 동기 호출 및 속도 개선 가능
+
+✅ Fabric 아키텍처
+새로운 UI 렌더링 엔진 (React Fiber + Shadow Tree)
+
+상태 기반 UI → 플랫폼의 native UI 트리와 직접 동기화
+
+JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
+
+
 - React Native에서 Fabric과 기존 렌더링 방식의 차이점
 
 
@@ -2903,10 +2929,7 @@ Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
 - React Native에서 Gesture Handler를 최적화하는 방법은?
 - React Native에서 Dynamic Code Push를 적용하는 방법은?
 - React Native에서 Hermes 엔진을 사용할 때의 장점은?
-- React Native에서 Accessibility를 최적화하는 방법은?
 - React Native에서 Custom Native Module을 작성하는 방법은?
-- React Native와 Flutter의 차이점은?
-
 
 - React Native에서 native module을 추가하는 방법은?
 - React Native에서 성능 최적화를 위해 어떤 기법을 적용하는가?
@@ -2915,14 +2938,10 @@ Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
 
 
 - React Native에서 Animation을 구현하는 방법은?
-- React Native에서 네이티브 코드(Android, iOS)와 연동하는 방법은?
-- React Native에서 TurboModules와 Fabric의 개념을 설명하라.
 - React Native에서 JSC와 Hermes 엔진의 차이는?
 - React Native의 Flipper 디버깅 도구를 활용하는 방법은?
 - React Native에서 네이티브 모듈을 직접 구현할 때 주의해야 할 사항은?
 - React Native의 Bridge 통신 방식과 성능 최적화 기법은?
-- React Native의 기본 개념 및 차이점
-
 
 - React Native에서 Virtual DOM이 어떻게 작동하는가?
 - React Native의 JSX와 HTML의 차이점은?
@@ -2934,7 +2953,6 @@ Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
 
 
 - React Native에서 상태 관리를 위한 다양한 방법(Redux, Recoil, Zustand, MobX 등)을 비교해보세요.
-- React Native에서 Context API와 Redux를 비교하고, 언제 Context API를 사용할지 설명하세요.
 - React Native에서 useReducer를 상태 관리에 활용하는 방법은?
 - React Native에서 상태 관리를 최적화하는 방법은? (e.g., 불필요한 리렌더링 방지)
 - React Native에서 React.memo와 useMemo의 차이점과 사용 사례는?
@@ -2946,7 +2964,6 @@ Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
 - React Native에서 GraphQL을 활용하는 방법은?
 - React Native에서 API 호출을 최적화하는 방법은? (e.g., 캐싱, 중복 요청 방지)
 - React Native에서 Background Fetch와 Foreground Fetch의 차이는?
-
 
 - React Native에서 Long Polling을 구현하는 방법은?
 - React Native에서 메모리 누수를 방지하는 방법은?
