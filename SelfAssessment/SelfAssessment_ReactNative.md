@@ -2534,6 +2534,24 @@ Organize concepts, features, types and Pros and Cons
 
 
 - React Native에서 프로젝트에서 코드 스플리팅을 적용하는 방법
+  - 개요
+    - RN은 웹처럼 코드 스플리팅이 자연스럽지 않지만, Dynamic Import + Lazy Navigation 방식으로 대체
+  - 예제 (React Navigation + Dynamic import)
+    ```ts
+    const LazyScreen = React.lazy(() => import('./screens/HeavyScreen'));
+
+    <Suspense fallback={<Loading />}>
+      <LazyScreen />
+    </Suspense>
+    ```
+    - 또는 Stack.Screen 내부에서 필요시 require()로 lazy load
+      ```tsx
+      const MyScreen = () => {
+        const HeavyComponent = require('../HeavyComponent').default;
+        return <HeavyComponent />;
+      };
+      ```
+  
 
 
 - React Native에서 Internationalization(다국어 지원)을 구현하는 방법
