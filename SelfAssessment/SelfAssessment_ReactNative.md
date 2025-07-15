@@ -2649,9 +2649,89 @@ Organize concepts, features, types and Pros and Cons
       ```
 
 - React Native에서 UI/UX를 개선하는 방법
+  - UX 반응성 개선:
+    - 버튼 클릭 → TouchableOpacity, Pressable의 피드백 효과 적극 활용
+    - ActivityIndicator로 네트워크 로딩 상태 표시
+
+  - 애니메이션 적용:
+    - react-native-reanimated, react-native-animatable 사용
+
+  - 자동 포커스 관리 & 키보드 처리:
+    - KeyboardAvoidingView, KeyboardDismissHandler 조합 사용
+
+  - 스크롤 최적화:
+    - FlatList의 initialNumToRender, windowSize, removeClippedSubviews 조정
+
+  - 다크모드 대응:
+    - useColorScheme() 및 Appearance API 활용
+
 - React Native에서 GPU 성능 최적화를 수행하는 방법
+  - 이미지 처리 최적화:
+    - SVG, GIF → 정적 이미지로 대체
+    - 크기가 큰 이미지는 CDN으로 lazy load
+
+  - 화면 전환 애니메이션 최적화:
+    - react-native-reanimated v2를 사용해 native-thread에서 동작하게 함
+
+  - 중복 렌더링 제거:
+    - 불필요한 View, 중첩 Shadow, borderRadius 조합은 성능 저하 유발
+
+  - 리스트 최적화:
+    - FlatList는 getItemLayout, keyExtractor 최적화 필수
+
+  - 비동기 렌더링:
+    - InteractionManager.runAfterInteractions 활용해 무거운 렌더링 지연 처리
+
 - React Native에서 Security Vulnerability를 해결하는 방법
+  - JS 번들 노출:
+    - code obfuscation, Hermes 활성화
+  - 네트워크 도청: 
+    - HTTPS 필수, SSL Pinning 적용 (react-native-ssl-pinning)
+  - 스토리지 노출:
+    - react-native-encrypted-storage, secure-store 사용
+  - 디버그 모드 감지
+    - __DEV__, react-native-device-info로 디버깅 차단
+  - 탈옥/루팅 감지
+    - react-native-jail-monkey, RootBeer라이브러리 사용
+  - Replay 공격
+    - 백엔드에서 토큰 만료 시간 + nonce 처리 필요
+
 - React Native에서 Context API를 Redux 대체제로 사용하는 방법
+  - 개요
+    - 간단한 상태 공유에는 Redux 없이도 충분히 대체 가능
+
+  - 예제: 로그인 상태 관리
+    - Context 정의
+      ```ts
+      import React, { createContext, useContext, useState } from 'react';
+
+      const AuthContext = createContext(null);
+
+      export const AuthProvider = ({ children }) => {
+        const [user, setUser] = useState(null);
+        const login = (userInfo) => setUser(userInfo);
+        const logout = () => setUser(null);
+
+        return (
+          <AuthContext.Provider value={{ user, login, logout }}>
+            {children}
+          </AuthContext.Provider>
+        );
+      };
+
+      export const useAuth = () => useContext(AuthContext);
+      ```
+    - 앱 루트에 Provider 연결
+      ```tsx
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+      ```
+    - 사용처에서 불러오기
+      ```tsx
+      const { user, login, logout } = useAuth();
+      ```
+      - 단, 복잡한 상태 관리(캐시, 미들웨어, 비동기 흐름 등)는 여전히 Redux Toolkit이나 Zustand 같은 별도 상태관리 라이브러리 사용이 더 적합
 
 
 - React Native에서 Navigation Stack을 효율적으로 관리하는 방법은?
