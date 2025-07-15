@@ -2733,10 +2733,70 @@ Organize concepts, features, types and Pros and Cons
       ```
       - 단, 복잡한 상태 관리(캐시, 미들웨어, 비동기 흐름 등)는 여전히 Redux Toolkit이나 Zustand 같은 별도 상태관리 라이브러리 사용이 더 적합
 
+- React Native에서 Navigation Stack을 효율적으로 관리하는 방법
+  - 권장 라이브러리:
+    - react-navigation (Stack, Drawer, BottomTab 등 포함)
+  - 관리 전략
+    - Stack 구조 명확한 구분
+      - AuthStack, MainStack, ModalStack 등을 따로 분리 후 RootNavigator에서 통합
+    - screenOptions 재사용
+      ```tsx
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+      }}
+      ```
+    - 동적 라우팅 파라미터와 타입 추적 (TypeScript + @react-navigation/native)
+    - 메모리 누수 방지
+      - unmountOnBlur: true 옵션 사용
+    - useNavigation() 커스텀 래퍼 Hook 활용
+      ```ts
+      export const useAppNavigation = () =>
+        useNavigation<StackNavigationProp<RootStackParamList>>();
+      ```
 
-- React Native에서 Navigation Stack을 효율적으로 관리하는 방법은?
-- React Native에서 Native Code와의 통신을 최적화하는 방법은?
-- React Native에서 Jetpack Compose와의 연동 방법은?
+- React Native에서 Native Code와의 통신을 최적화하는 방법
+  - 일반적인 통신 방식:
+    - Native Modules (Java/Kotlin, Objective-C/Swift)
+    - EventEmitter (native → JS)
+    - Callbacks, Promises 지원
+
+  - 최적화 팁:
+    - JSI & TurboModule 기반 구현 (React Native 0.71+)
+    → Bridge 통신을 줄이고 Native Thread에서 바로 JS 호출
+    - 대량 데이터 전송은 JSON보다 binary serialization 고려
+    - EventEmitter는 최소화, 특히 frame마다 이벤트 전송은 피해야 함
+    - 비동기 네이티브 메서드 구현 시 Promise 사용으로 JS blocking 방지
+
+- React Native에서 Jetpack Compose와의 연동 방법
+  - 개요
+    - ReactNative + Jetpack Compose 연동은 안드로이드 NativeView > RN Module로 노출하는 방식으로 처리
+  - 연동 절차
+    - Compose UI 생성
+      ```kotlin
+      @Composable
+      fun MyComposeView(name: String) {
+          Text(text = "Hello, $name from Compose")
+      }
+      ```
+    - AndroidViewComponent 생성 (ViewGroup)
+      ```kotlin
+      class MyComposeViewGroup(context: Context) : FrameLayout(context) {
+          init {
+              val composeView = ComposeView(context).apply {
+                  setContent { MyComposeView("React Native") }
+              }
+              addView(composeView)
+          }
+      }
+      ```
+    - ReactPackage 에 등록 > NativeViewManager 로 노출
+    - JS에서 사용
+      ```jsx
+      import { requireNativeComponent } from 'react-native';
+      const MyComposeView = requireNativeComponent('MyComposeView');
+      ```
+
 - React Native에서 JSI(JavaScript Interface)의 역할과 활용 방법은?
 - React Native에서 Fabric Renderer의 개념과 기존 Bridge와의 차이점은?
 - React Native에서 TurboModules의 동작 원리와 성능 개선 방법은?
