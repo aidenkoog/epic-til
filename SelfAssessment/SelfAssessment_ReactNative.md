@@ -2449,7 +2449,28 @@ Organize concepts, features, types and Pros and Cons
     ```
     - 인증 후 받은 idToken을 백엔드로 보내 JWT 발급 등 처리
 
-- React Native에서 WebRTC를 활용한 영상 통화를 구현하는 방법은?
+- React Native에서 WebRTC를 활용한 영상 통화를 구현하는 방법
+  - 패키지 설치
+    ```bash
+    npm install react-native-webrtc
+    ```
+  - 기본 구성요소
+    - RTCPeerConnection, MediaStream, getUserMedia()
+    - RTCView로 영상 출력
+  - 시그널링 서버 필요
+    - WebSocket, Firebase, Socket.IO등으로 ICE candidate, SDP 교환
+    - 서버 예시
+      ```ts
+      socket.emit('offer', sdp)
+      socket.on('answer', handleAnswer)
+      ```
+  - 네이티브 설정
+    - iOS: 카메라, 마이크 권한 설정
+    - 안드로이드: Proguard, 권한 설정
+  - 보완 기능
+    - react-native-incall-manager로 수신음/스피커 전환
+    - TURN 서버 설정 > 모바일에서 연결률 개선
+
 - React Native에서 프로젝트를 TypeScript로 마이그레이션하는 방법은?
 - React Native에서 UI 성능을 개선하는 방법은?
 - React Native에서 FlatList의 성능 최적화를 위해 고려해야 할 점은?
