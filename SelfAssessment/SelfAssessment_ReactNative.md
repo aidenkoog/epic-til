@@ -2516,11 +2516,30 @@ Organize concepts, features, types and Pros and Cons
     - ListFooterComponent나 ListEmptyComponent도 Memoization
     - 무한 스크롤 시 onEndReachedThreshold 조절
 
-- React Native에서 AsyncStorage의 데이터를 암호화하는 방법은?
-- React Native에서 프로젝트에서 코드 스플리팅을 적용하는 방법은?
-- React Native에서 Internationalization(다국어 지원)을 구현하는 방법은?
-- React Native에서 앱을 A/B 테스트하는 방법은?
+- React Native에서 AsyncStorage의 데이터를 암호화하는 방법
+  - (1) react-native-encrypted-storage
+    ```bash
+    npm install react-native-encrypted-storage
+    ```
+    ```ts
+    import EncryptedStorage from 'react-native-encrypted-storage';
 
+    await EncryptedStorage.setItem('userToken', token);
+    const token = await EncryptedStorage.getItem('userToken');
+    ```
+
+  - (2) AES 직접 암호화
+    - crypto-js 또는 react-native-sensitive-info 사용하여 직접 암호화
+    - 단, 키 관리 중요 > Android KeyStore / iOS Secure Enclave 사용 권장
+
+
+- React Native에서 프로젝트에서 코드 스플리팅을 적용하는 방법
+
+
+- React Native에서 Internationalization(다국어 지원)을 구현하는 방법
+
+
+- React Native에서 앱을 A/B 테스트하는 방법
 
 - React Native에서 In-App Purchase를 구현하는 방법은?
 - React Native에서 Expo Go를 활용하는 방법은?
