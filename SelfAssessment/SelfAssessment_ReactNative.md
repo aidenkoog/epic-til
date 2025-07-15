@@ -2617,11 +2617,41 @@ Organize concepts, features, types and Pros and Cons
     - 단점: Custom native modules 사용 불가
   - 해결책: expo eject > Bare Workflow 전환 
 
-- React Native에서 Apple의 App Tracking Transparency(ATT)를 적용하는 방법은?
-- React Native에서 UI/UX를 개선하는 방법은?
-- React Native에서 GPU 성능 최적화를 수행하는 방법은?
-- React Native에서 Security Vulnerability를 해결하는 방법은?
-- React Native에서 Context API를 Redux 대체제로 사용하는 방법은?
+- React Native에서 Apple의 App Tracking Transparency(ATT)를 적용하는 방법
+  - 개요
+    - ATT (App Tracking Transparency)는 iOS 14.5 이상에서 앱이 사용자에게 추적 권한을 요청하도록 요구하는 기능
+
+  - 적용 절차
+    - 라이브러리 설치
+      ```bash
+      npm install react-native-tracking-transparency
+      npx pod-install
+      ```
+    - iOS 설정 (Info.plist)
+      ```xml
+      <key>NSUserTrackingUsageDescription</key>
+      <string>당신의 광고 경험을 개선하기 위해 앱 사용 정보를 수집합니다.</string>
+      ```
+    - 사용자 권한 요청
+      ```ts
+      import { getTrackingPermissionStatus, requestTrackingPermission } from 'react-native-tracking-transparency';
+
+      useEffect(() => {
+        const requestATT = async () => {
+          const status = await getTrackingPermissionStatus();
+          if (status === 'not-determined') {
+            const result = await requestTrackingPermission();
+            console.log('Tracking status:', result);
+          }
+        };
+        requestATT();
+      }, []);
+      ```
+
+- React Native에서 UI/UX를 개선하는 방법
+- React Native에서 GPU 성능 최적화를 수행하는 방법
+- React Native에서 Security Vulnerability를 해결하는 방법
+- React Native에서 Context API를 Redux 대체제로 사용하는 방법
 
 
 - React Native에서 Navigation Stack을 효율적으로 관리하는 방법은?
