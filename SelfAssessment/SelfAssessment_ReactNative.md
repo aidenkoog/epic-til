@@ -2496,8 +2496,26 @@ Organize concepts, features, types and Pros and Cons
     - shouldComponentUpdate, PureComponent 또는 Memoized Hooks
   - 애니메이션 최적화
     - react-native-reanimated, useNativeDriver: true
-    
-- React Native에서 FlatList의 성능 최적화를 위해 고려해야 할 점은?
+
+- React Native에서 FlatList의 성능 최적화를 위해 고려해야 할 점
+  - 필수 설정
+    ```tsx
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id}
+      initialNumToRender={10}
+      maxToRenderPerBatch={10}
+      windowSize={5}
+      removeClippedSubviews={true}
+    />
+    ```
+  - 최적화 전략
+    - getItemLayout: 정적 높이라면 필수
+    - renderItem을 useCallback 으로 메모이제이션
+    - ListFooterComponent나 ListEmptyComponent도 Memoization
+    - 무한 스크롤 시 onEndReachedThreshold 조절
+
 - React Native에서 AsyncStorage의 데이터를 암호화하는 방법은?
 - React Native에서 프로젝트에서 코드 스플리팅을 적용하는 방법은?
 - React Native에서 Internationalization(다국어 지원)을 구현하는 방법은?
