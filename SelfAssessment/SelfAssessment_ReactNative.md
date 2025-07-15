@@ -2486,7 +2486,17 @@ Organize concepts, features, types and Pros and Cons
     - 우선 any 또는 Partial<Type> 등으로 시작해 점진적으로 좁혀감
     - 주요 타입: React.FC, NavigationProp, TextStyle, ViewStyle, etc.
 
-- React Native에서 UI 성능을 개선하는 방법은?
+- React Native에서 UI 성능을 개선하는 방법
+  - 불필요한 리렌더 방지
+    - React.memo, useMemo, useCallback 적극 활용
+  - UI 구성요소 최적화
+    - FlatList, SectionList 사용 (ScrollView는 제한된 경우만)
+    - 이미지 Lazy Load (FastImage, react-native-image-progress)
+  - Layout 최적화
+    - shouldComponentUpdate, PureComponent 또는 Memoized Hooks
+  - 애니메이션 최적화
+    - react-native-reanimated, useNativeDriver: true
+    
 - React Native에서 FlatList의 성능 최적화를 위해 고려해야 할 점은?
 - React Native에서 AsyncStorage의 데이터를 암호화하는 방법은?
 - React Native에서 프로젝트에서 코드 스플리팅을 적용하는 방법은?
