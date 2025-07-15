@@ -2471,7 +2471,21 @@ Organize concepts, features, types and Pros and Cons
     - react-native-incall-manager로 수신음/스피커 전환
     - TURN 서버 설정 > 모바일에서 연결률 개선
 
-- React Native에서 프로젝트를 TypeScript로 마이그레이션하는 방법은?
+- React Native에서 프로젝트를 TypeScript로 마이그레이션하는 방법
+  - 타입스크립트 패키지 설치
+    ```bash
+    npm install --save-dev typescript @types/react @types/react-native
+    ```
+  - tsconfig.json 생성
+    ```bash
+    npx tsc --init
+    ```
+  - 파일 확장자 변경
+    - .js -> .tsx or .ts
+  - 타입 점진적 적용
+    - 우선 any 또는 Partial<Type> 등으로 시작해 점진적으로 좁혀감
+    - 주요 타입: React.FC, NavigationProp, TextStyle, ViewStyle, etc.
+
 - React Native에서 UI 성능을 개선하는 방법은?
 - React Native에서 FlatList의 성능 최적화를 위해 고려해야 할 점은?
 - React Native에서 AsyncStorage의 데이터를 암호화하는 방법은?
