@@ -2590,7 +2590,22 @@ Organize concepts, features, types and Pros and Cons
   - 자체 로직 분기
     - 예: userId.hashCode() % 2 === 0 > A 그룹
 
-- React Native에서 In-App Purchase를 구현하는 방법은?
+- React Native에서 In-App Purchase를 구현하는 방법
+  - 라이브러리: react-native-iap
+  - 구현단계
+    - (1) 제품 ID 등록: Apple/Google콘솔에서 상품 아이디 생성
+    - (2) 초기화 및 상품 조회
+      ```ts
+      import RNIap from 'react-native-iap';
+      const products = await RNIap.getProducts(['product_id']);
+      ```
+    - (3) 구매 트리거 및 처리
+      ```ts
+      const purchase = await RNIap.requestPurchase('product_id');
+      ```
+    - (4) 구매 검증 서버 연동 필요 (특히 iOS 필수)
+    - (5) 결제 완료 후 영수증 처리 및 acknowledge
+
 - React Native에서 Expo Go를 활용하는 방법은?
 - React Native에서 Apple의 App Tracking Transparency(ATT)를 적용하는 방법은?
 - React Native에서 UI/UX를 개선하는 방법은?
