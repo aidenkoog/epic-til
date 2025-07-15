@@ -2853,12 +2853,50 @@ Organize concepts, features, types and Pros and Cons
   - JSI 지원 필수 조건
     - TurboModules, Fabric을 쓰려면 Hermes 필수
 
-- React Native와 Native 개발의 차이점은 무엇인가요?
-- React Native에서의 성능 최적화 방법을 설명해주세요.
-- React Native의 Bridge와 TurboModules에 대해 설명해주세요.
-- React Native의 Hermes 엔진 사용 경험을 설명해주세요.
-- React Native의 JSI(JavaScript Interface)와 Fabric 아키텍처에 대해 설명해주세요.
-- React Native에서 Fabric과 기존 렌더링 방식의 차이점은?
+- React Native와 Native 개발의 차이점
+  - React Native
+    - 리액트 컴포넌트 > 네이티브 위젝으로 변환
+    - 다중 플랫폼 공통 코드
+    - 빠른 핫리로드 지원
+    - JS <> Native Bridge로 성능 차이 있음
+    - Native Module로 연동 필요
+  - Native (iOS/Android)
+    - 플랫폼 SDK 위젯 직접 사용
+    - 플랫폼별 별도 개발
+    - 느린 빌드 & 디버그 주기
+    - 최적화된 성능
+    - 네이티브 API 직접 접근 가능 
+  - 요약
+    - RN은 빠른 개발, 공통 코드가 강점
+    - 성능 최적화나 복잡한 네이티브 기능은 네이티브가 유리
+
+- React Native에서의 성능 최적화 방법
+  - UI 렌더링 최적화:
+FlatList 최적 옵션: initialNumToRender, windowSize, getItemLayout
+
+React.memo, useMemo, useCallback으로 불필요한 리렌더 방지
+
+shouldComponentUpdate, PureComponent 활용
+
+네트워크/데이터 최적화:
+JSON 파싱 최소화, 필요한 필드만 전달
+
+Apollo/SWR/React Query 등 캐시 기반 상태관리 도입
+
+이미지 최적화:
+react-native-fast-image, CDN + WebP 포맷 활용
+
+Image Lazy Loading + Resize 처리
+
+브릿지 최적화:
+반복적인 JS → Native 호출은 batch 처리
+
+Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
+
+- React Native의 Bridge와 TurboModules
+- React Native의 Hermes 엔진 사용 경험
+- React Native의 JSI(JavaScript Interface)와 Fabric 아키텍처
+- React Native에서 Fabric과 기존 렌더링 방식의 차이점
 
 
 - React Native에서 Metro Bundler와 Webpack의 차이점은?
