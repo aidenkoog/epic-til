@@ -2824,10 +2824,34 @@ Organize concepts, features, types and Pros and Cons
     - 레거시 호환성 (전통 방식)
   - 정리
     - Fabric = 새로운 렌더링 아키텍쳐로 리액트 Fiber + JSI 결합하여 기존 브릿지 병목 제거하고 더 빠른 UI 업데이트 가능
-    
-- React Native에서 TurboModules의 동작 원리와 성능 개선 방법은?
-- React Native에서 Hermes 엔진을 사용하는 이유는?
 
+- React Native에서 TurboModules의 동작 원리와 성능 개선 방법
+  - TurboModules 개념:
+    - JSI 기반의 새로운 Native Module 시스템
+    - 필요한 모듈만 지연 로딩(lazy load) 하여 성능 개선
+
+  - 작동 방식:
+    - JS가 TurboModuleRegistry.get('MyNativeModule') 호출
+    - 해당 모듈이 JSI로 직접 연결되어 바로 native 메서드 호출 가능
+
+  - 성능 개선 포인트:
+    - Bridge 통신 없음 → 빠름
+    - 초기 렌더 시 필요 없는 모듈은 로딩하지 않음
+    - Native와 JS 간 Zero-Copy 구조
+
+  - 예: react-native-mmkv, react-native-skia, reanimated 등 최신 고성능 모듈들이 TurboModule로 작동
+
+- React Native에서 Hermes 엔진을 사용하는 이유
+  - 빠른 앱 시작
+    - precompiled Bytecode 사용 (JIT 없음)
+  - 낮은 메모리 사용
+    - GC 가비지 컬렉터가 lightweight
+  - 앱 크기 절감
+    - JS bundle 최적화, bytecode 축소
+  - 디버깅 도구 지원
+    - Chrome DevTools + Hermes Inspector 지원
+  - JSI 지원 필수 조건
+    - TurboModules, Fabric을 쓰려면 Hermes 필수
 
 - React Native와 Native 개발의 차이점은 무엇인가요?
 - React Native에서의 성능 최적화 방법을 설명해주세요.
