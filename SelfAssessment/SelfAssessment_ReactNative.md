@@ -3049,7 +3049,19 @@ Organize concepts, features, types and Pros and Cons
   - 변경 사항은 Virtual DOM → Shadow Tree → Native View 로 반영됩니다.
   - 정리: Virtual DOM은 변화 감지를 위한 중간계층이며, 실제로는 Native 플랫폼의 UI 계층을 업데이트합니다.
 
-- React Native의 JSX와 HTML의 차이점은?
+- React Native의 JSX와 HTML의 차이점
+  - JSX
+    - 렌더링 대상: 네이티브 UI 컴포넌트
+    - 속성: camelCase 스타일 (onPress, fontSize)
+    - 스타일: JS 객체 {}
+  - HTML
+    - DOM 요소
+    - 속성: kebab-case (onclick, font-size)
+    - 스타일: 문자열 / CSS
+  - 정리
+    - JSX는 리액트 컴포넌트를 기술하기 위한 문법
+    - WEB HTML 태그와는 완전히 상이
+
 - React Native의 View, Text, Image와 같은 기본 컴포넌트는 어떻게 동작하는가?
 - React Native에서 DOM이 없는 환경에서 스타일을 어떻게 적용하는가?
 - React Native에서 CSS 대신 StyleSheet.create를 사용하는 이유는?
