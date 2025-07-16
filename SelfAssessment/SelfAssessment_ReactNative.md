@@ -2912,22 +2912,136 @@ Organize concepts, features, types and Pros and Cons
     - 상태 기반 UI → 플랫폼의 native UI 트리와 직접 동기화
     - JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 
-- React Native에서 Metro Bundler와 Webpack의 차이점은?
-- React Native에서 Gesture Handler를 최적화하는 방법은?
-- React Native에서 Dynamic Code Push를 적용하는 방법은?
-- React Native에서 Hermes 엔진을 사용할 때의 장점은?
-- React Native에서 Custom Native Module을 작성하는 방법은?
+- React Native에서 Metro Bundler와 Webpack의 차이점
+  - Metro Bundler
+    - HMR, 트랜스파일링, 플랫폼별 번들 처리
+    - 자동 구성 (zero config)
+    - Babel 기반 JS/TS
+  - Webpack
+    - 의존성 분석, 트리 셰이킹, 코드 스플리팅
+    - 복잡한 설정 필요 (webpack.config.js)
+    - 다양한 로더 및 플러그인 확장 가능
+  - 정리
+    - 리액트 네이티브는 메트로를 자체 번들러로 사용
+    - 웹팩은 주로 리액트 웹 프로젝트에서 사용
 
-- React Native에서 native module을 추가하는 방법은?
-- React Native에서 성능 최적화를 위해 어떤 기법을 적용하는가?
+- React Native에서 Gesture Handler를 최적화하는 방법
+  - react-native-gesture-handler 사용
+  - react-native-reanimated와 함께 사용하면 JS-Thread가 아닌 UI-Thread에서 처리되어 성능 향상
+  - GestureDetector, Gesture API로 Declarative 방식 사용
+  - 스크롤 내 제스처 겹침 처리: waitFor, simultaneousWith 활용
+  - 무거운 콜백 함수 → useCallback으로 래핑
+  - 너무 많은 제스처 중첩 피하기
+
+- React Native에서 Dynamic Code Push를 적용하는 방법
+  - 라이브러리: Microsoft CodePush
+  - OTA(Over-the-Air) 업데이트 제공
+  - App Store 재심사 없이 JS Bundle 변경 가능
+  - 사용 예: App = codePush(App);
+  - 제한 사항
+    - JS 번들 & 에셋만 가능
+    - 네이티브 코드 변경 불가 (버전 업데이트 필요)
+
+- React Native에서 Hermes 엔진을 사용할 때의 장점
+  - Facebook에서 개발한 JS 엔진
+  - 주요 장점:
+    - 빠른 앱 시작 속도 (precompiled bytecode)
+    - 낮은 메모리 사용량
+    - GC 최적화
+    - 디버깅 지원 (Flipper Hermes Debugger)
+  - Android 기본, iOS opt-in
+
+- React Native에서 Custom Native Module을 작성하는 방법
+  - Android (Java/Kotlin):
+    - @ReactModule, ReactContextBaseJavaModule, @ReactMethod 사용
+    - Package로 등록 필요
+  - iOS (Obj-C/Swift):
+    - @objc 메서드 선언
+    - RCTBridgeModule 프로토콜 채택
+  - JS 브리지 노출:
+    - NativeModules.MyCustomModule 접근
+  - 최신 RN는 TurboModules 및 JSI 기반 네이티브 구현을 선호
+
+- React Native에서 native module을 추가하는 방법
+  - react-native create-library CLI 도구 사용 가능
+  - Android: MyModule.java 생성 후 MyPackage.java에 등록
+  - iOS: MyModule.m, MyModule.h 생성 및 Podfile에 포함
+  - JS에서 NativeModules.MyModule로 접근
+
+- React Native에서 성능 최적화를 위해 적용하는 기법들
+  - FlatList 최적화: 
+    - initialNumToRender
+    - windowSize
+    - removeClippedSubviews
+  - Reanimated 2 + Gesture Handler
+  - Avoid Re-renders: React.memo, useCallback, useMemo
+  - VirtualizedLists 사용
+  - 이미지 최적화: react-native-fast-image 사용
+  - JS Thread → UI Thread 최소화
+  - Background Timer 줄이기
+
 - React Native의 useEffect가 componentDidMount와 componentWillUnmount와 어떻게 비교되는가?
-- React Native에서 AsyncStorage와 SecureStore의 차이는?
+  - 마운트 시 실행
+    - componentDidMount()
+    - useEffect(() => {}, [])
+  - 언마운트 시 실행
+    - componentWillUnmount()
+    - useEffect(() => { return () => {...} }, [])
 
-- React Native에서 Animation을 구현하는 방법은?
-- React Native에서 JSC와 Hermes 엔진의 차이는?
-- React Native의 Flipper 디버깅 도구를 활용하는 방법은?
-- React Native에서 네이티브 모듈을 직접 구현할 때 주의해야 할 사항은?
-- React Native의 Bridge 통신 방식과 성능 최적화 기법은?
+- React Native에서 AsyncStorage와 SecureStore의 차이
+  - AsyncStorage
+    - 일반적인 키-값 저장
+    - 암호화 없음
+    - 백업 대상
+
+  - SecureStore
+    - 민감 데이터 저장 (토큰, 비밀번호 등)
+    - 플랫폼 수준 암호화
+    - iOS에서는 키체인, 안드로이드에서는 EncryptedSharedPrefs 사용
+
+- React Native에서 Animation을 구현하는 방법
+  - 기본: Animated API (Animated.timing, spring, decay)
+  - 고성능: react-native-reanimated
+  - 복잡한 애니메이션: react-native-animatable, Lottie
+  - Gesture 연동 애니메이션: Reanimated + Gesture Handler
+
+- React Native에서 JSC와 Hermes 엔진의 차이
+  - JSC (JavaScriptCore)
+    - 상대적으로 느림
+    - 더 많이 사용
+    - 디버깅: Chrome DevTools
+    - 플랫폼: iOS/Android 지원
+  - Hermes
+    - 빠른 앱 시작, 최적화된 바이트 코드
+    - 메모리 효율적
+    - Flipper Hermes Debugger
+    - 안드로이드 기본, iOS opt-in
+
+- React Native의 Flipper 디버깅 도구를 활용하는 방법
+  - 설치: react-native-flipper, flipper-plugin-*
+  - 지원 기능:
+    - Network Inspector
+    - Layout Inspector
+    - Logs / Hermes Debugger
+    - Redux Debugger (추가 플러그인 필요)
+  - Android: debuggable true, iOS: use_flipper! 설정 필요
+
+- React Native에서 네이티브 모듈을 직접 구현할 때 주의해야 할 사항
+  - 비동기 처리 필수: JS는 non-blocking
+  - 스레드 충돌 주의: UI 접근은 UI Thread에서만
+  - JS ↔ Native 데이터 변환: JSON-safe 형태로만 전달
+  - 메모리 누수 주의 (listener 해제 등)
+  - Android/iOS 모두 대응 필요
+
+- React Native의 Bridge 통신 방식과 성능 최적화 기법
+  - Bridge(기본)
+    - JS ↔ Native 간 비동기 메시지 전달 (JSON 기반)
+  - 성능 병목
+    - 메시지 직렬화/역직렬화 + JS/Nat 간 Thread hop
+  - 최적화 방법
+    - TurboModules, JSI (zero-copy), Fabric (UI 재작성 엔진)
+  - 정리
+    - 최신 React Native는 JSI + TurboModules + Fabric으로 성능 향상 추구
 
 - React Native에서 Virtual DOM이 어떻게 작동하는가?
 - React Native의 JSX와 HTML의 차이점은?
