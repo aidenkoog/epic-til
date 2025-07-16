@@ -2895,14 +2895,11 @@ Organize concepts, features, types and Pros and Cons
   - 개요
     - Hermes는 React Native용 경량 자바스크립트 엔진으로 앱의 성능을 크게 향상시킵니다.
 
-사용 시 장점:
-앱 시작 시간 감소: JIT 대신 bytecode 사용
-
-메모리 사용량 절감: GC 최적화
-
-Bundle 크기 감소: Bytecode로 불필요한 코드 제거
-
-디버깅: Chrome DevTools 또는 Flipper 사용 가능
+  - 사용 시 장점:
+    - 앱 시작 시간 감소: JIT 대신 bytecode 사용
+    - 메모리 사용량 절감: GC 최적화
+    - Bundle 크기 감소: Bytecode로 불필요한 코드 제거
+    - 디버깅: Chrome DevTools 또는 Flipper 사용 가능
 
 - React Native의 JSI(JavaScript Interface)와 Fabric 아키텍처
   - ✅ JSI (JavaScript Interface)
