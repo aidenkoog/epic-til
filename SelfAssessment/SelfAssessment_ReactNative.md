@@ -2902,19 +2902,15 @@ Organize concepts, features, types and Pros and Cons
     - 디버깅: Chrome DevTools 또는 Flipper 사용 가능
 
 - React Native의 JSI(JavaScript Interface)와 Fabric 아키텍처
-  - ✅ JSI (JavaScript Interface)
-C++ 레이어를 통해 JS 객체 ↔ Native 객체를 직접 연결
+  - JSI (JavaScript Interface)
+    - C++ 레이어를 통해 JS 객체 ↔ Native 객체를 직접 연결
+    - TurboModules, Fabric의 핵심 기반 기술
+    - Bridge 없이 동기 호출 및 속도 개선 가능
 
-TurboModules, Fabric의 핵심 기반 기술
-
-Bridge 없이 동기 호출 및 속도 개선 가능
-
-✅ Fabric 아키텍처
-새로운 UI 렌더링 엔진 (React Fiber + Shadow Tree)
-
-상태 기반 UI → 플랫폼의 native UI 트리와 직접 동기화
-
-JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
+  - Fabric 아키텍처
+    - 새로운 UI 렌더링 엔진 (React Fiber + Shadow Tree)
+    - 상태 기반 UI → 플랫폼의 native UI 트리와 직접 동기화
+    - JSI 기반으로 View와 JS 컴포넌트를 더 정밀하게 연결
 
 - React Native에서 Metro Bundler와 Webpack의 차이점은?
 - React Native에서 Gesture Handler를 최적화하는 방법은?
