@@ -3043,15 +3043,18 @@ Organize concepts, features, types and Pros and Cons
   - 정리
     - 최신 React Native는 JSI + TurboModules + Fabric으로 성능 향상 추구
 
-- React Native에서 Virtual DOM이 어떻게 작동하는가?
+- React Native에서 Virtual DOM 동작 방식/원리
+  - React Native도 React와 동일하게 Virtual DOM을 사용하여 UI 상태를 관리합니다.
+  - 단, 브라우저의 실제 DOM 조작이 아닌 → Native UI Tree(View, Text 등) 를 업데이트합니다.
+  - 변경 사항은 Virtual DOM → Shadow Tree → Native View 로 반영됩니다.
+  - 정리: Virtual DOM은 변화 감지를 위한 중간계층이며, 실제로는 Native 플랫폼의 UI 계층을 업데이트합니다.
+
 - React Native의 JSX와 HTML의 차이점은?
 - React Native의 View, Text, Image와 같은 기본 컴포넌트는 어떻게 동작하는가?
 - React Native에서 DOM이 없는 환경에서 스타일을 어떻게 적용하는가?
 - React Native에서 CSS 대신 StyleSheet.create를 사용하는 이유는?
 - React와 React Native에서 onClick과 onPress 이벤트의 차이점은?
 - React Native에서 iOS와 Android의 네이티브 코드 차이를 어떻게 다루는가?
-
-
 - React Native에서 상태 관리를 위한 다양한 방법(Redux, Recoil, Zustand, MobX 등)을 비교해보세요.
 - React Native에서 useReducer를 상태 관리에 활용하는 방법은?
 - React Native에서 상태 관리를 최적화하는 방법은? (e.g., 불필요한 리렌더링 방지)
@@ -3063,7 +3066,6 @@ Organize concepts, features, types and Pros and Cons
 - React Native에서 GraphQL을 활용하는 방법은?
 - React Native에서 API 호출을 최적화하는 방법은? (e.g., 캐싱, 중복 요청 방지)
 - React Native에서 Background Fetch와 Foreground Fetch의 차이는?
-
 - React Native에서 Long Polling을 구현하는 방법은?
 - React Native에서 메모리 누수를 방지하는 방법은?
 - React Native에서 Lazy Loading을 적용하는 방법은?
@@ -3079,8 +3081,6 @@ Organize concepts, features, types and Pros and Cons
 - React Native에서 Custom Native Module을 구현하는 방법은?
 - React Native에서 TurboModules와 기존 Native Module의 차이점은?
 - React Native에서 Fabric Renderer가 기존 브릿지 방식과 어떻게 다른가?
-
-
 - React Native에서 Native Event Emitter를 활용하는 이유는?
 - React Native에서 react-native link와 autolinking의 차이점은?
 - React Native에서 OAuth를 구현하는 방법은?
@@ -3095,8 +3095,6 @@ Organize concepts, features, types and Pros and Cons
 - React Native에서 Jest와 Detox의 차이점은?
 - React Native에서 CodePush를 활용하여 앱을 업데이트하는 방법은?
 - React Native에서 App Store와 Google Play 배포 프로세스를 설명하세요.
-
-
 - React Native에서 CI/CD 파이프라인을 구축하는 방법은?
 - React Native에서 Firebase Test Lab을 활용하는 방법은?
 - React Native에서 크래시 리포팅을 설정하는 방법은?
@@ -3113,15 +3111,11 @@ Organize concepts, features, types and Pros and Cons
 - React Native에서 RTL (Right-to-Left) 언어를 지원하는 방법은?
 - React Native에서 카메라와 갤러리를 사용하는 방법은?
 - React Native에서 Face ID와 Touch ID를 적용하는 방법은?
-
-
 - React Native에서 NFC 기능을 구현하는 방법은?
 - React Native에서 GPS 및 위치 기반 서비스를 구현하는 방법은?
 - React Native에서 AR(Augmented Reality) 기능을 적용하는 방법은?
 - React Native의 최신 트렌드 및 업데이트된 기능은 무엇인가?
 - React Native에서 New Architecture(Fabric & TurboModules)를 적용하는 방법은?
-
-
 - React Native의 JSI(JavaScript Interface)는 무엇이며, 어떻게 동작하는가?
 - React Native에서 Expo Router를 사용하면 어떤 장점이 있는가?
 - React Native에서 새로운 패키지를 선택할 때 고려해야 할 점은?
