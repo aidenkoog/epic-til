@@ -2872,26 +2872,24 @@ Organize concepts, features, types and Pros and Cons
 
 - React Native에서의 성능 최적화 방법
   - UI 렌더링 최적화:
-FlatList 최적 옵션: initialNumToRender, windowSize, getItemLayout
+    - FlatList 최적 옵션: 
+      - initialNumToRender
+      - windowSize
+      - getItemLayout
+    - React.memo, useMemo, useCallback으로 불필요한 리렌더 방지
+    - shouldComponentUpdate, PureComponent 활용
 
-React.memo, useMemo, useCallback으로 불필요한 리렌더 방지
+  - 네트워크/데이터 최적화:
+    - JSON 파싱 최소화, 필요한 필드만 전달
+    - Apollo/SWR/React Query 등 캐시 기반 상태관리 도입
 
-shouldComponentUpdate, PureComponent 활용
+  - 이미지 최적화:
+    - react-native-fast-image, CDN + WebP 포맷 활용
+    - Image Lazy Loading + Resize 처리
 
-네트워크/데이터 최적화:
-JSON 파싱 최소화, 필요한 필드만 전달
-
-Apollo/SWR/React Query 등 캐시 기반 상태관리 도입
-
-이미지 최적화:
-react-native-fast-image, CDN + WebP 포맷 활용
-
-Image Lazy Loading + Resize 처리
-
-브릿지 최적화:
-반복적인 JS → Native 호출은 batch 처리
-
-Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
+  - 브릿지 최적화:
+    - 반복적인 JS → Native 호출은 batch 처리
+    - Reanimated 2 (native thread animation), MMKV (TurboModule) 등 활용
 
 - React Native의 Hermes 엔진 사용 경험
   - 개요
