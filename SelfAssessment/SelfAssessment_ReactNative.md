@@ -3062,7 +3062,14 @@ Organize concepts, features, types and Pros and Cons
     - JSX는 리액트 컴포넌트를 기술하기 위한 문법
     - WEB HTML 태그와는 완전히 상이
 
-- React Native의 View, Text, Image와 같은 기본 컴포넌트는 어떻게 동작하는가?
+- React Native의 View, Text, Image와 같은 기본 컴포넌트 동작 방식
+  - React Native의 <View>, <Text>, <Image> 등은 브릿지를 통해 Native View(UI 컴포넌트) 로 매핑
+  - 예:
+    - <View> → iOS: UIView, Android: ViewGroup
+    - <Text> → iOS: UILabel, Android: TextView
+    - <Image> → iOS: UIImageView, Android: ImageView
+  - 렌더링은 React → Shadow Node → Layout Engine (Yoga) → Native Component 흐름으로 수행
+
 - React Native에서 DOM이 없는 환경에서 스타일을 어떻게 적용하는가?
 - React Native에서 CSS 대신 StyleSheet.create를 사용하는 이유는?
 - React와 React Native에서 onClick과 onPress 이벤트의 차이점은?
