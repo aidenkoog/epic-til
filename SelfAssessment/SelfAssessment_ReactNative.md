@@ -3070,15 +3070,60 @@ Organize concepts, features, types and Pros and Cons
     - <Image> → iOS: UIImageView, Android: ImageView
   - 렌더링은 React → Shadow Node → Layout Engine (Yoga) → Native Component 흐름으로 수행
 
-- React Native에서 DOM이 없는 환경에서 스타일을 어떻게 적용하는가?
-- React Native에서 CSS 대신 StyleSheet.create를 사용하는 이유는?
-- React와 React Native에서 onClick과 onPress 이벤트의 차이점은?
-- React Native에서 iOS와 Android의 네이티브 코드 차이를 어떻게 다루는가?
-- React Native에서 상태 관리를 위한 다양한 방법(Redux, Recoil, Zustand, MobX 등)을 비교해보세요.
-- React Native에서 useReducer를 상태 관리에 활용하는 방법은?
-- React Native에서 상태 관리를 최적화하는 방법은? (e.g., 불필요한 리렌더링 방지)
-- React Native에서 React.memo와 useMemo의 차이점과 사용 사례는?
+- React Native에서 DOM이 없는 환경에서 스타일 적용 방법
+  - React Native는 CSS를 직접 지원하지 않으며, StyleSheet.create 또는 객체 리터럴로 스타일을 정의
+  - 내부적으로는 Facebook의 Yoga Layout Engine을 사용해 Flexbox 스타일을 Native에 맞게 계산
 
+- React Native에서 CSS 대신 StyleSheet.create를 사용하는 이유
+  - 퍼포먼스 최적화:
+    - StyleSheet.create는 내부적으로 스타일을 고정된 ID로 치환해 브릿지를 타지 않고 효율적으로 처리
+  - 에러 검증 (정적 분석 가능)
+  - 스타일 재사용 시 성능 이점
+    - 단, 동적 스타일이 필요한 경우는 객체 리터럴({})도 유효
+
+- React와 React Native에서 onClick과 onPress 이벤트의 차이점
+  - onClick
+    - 동작 대상: DOM 요소(button, div)
+    - 사용 환경: 웹
+    - 이벤트 처리: MouseEvent, PointerEvent
+  - onPress
+    - Native 터치 요소 (TouchableOpacity etc)
+    - 사용 환경: 모바일
+    - GestureResponderEvent
+
+- React Native에서 iOS와 Android의 네이티브 코드 차이를 어떻게 다루는가?
+  - Platform 모듈 사용
+    ```js
+    import { Platform } from 'react-native';
+    if (Platform.OS === 'ios') { ... }
+    ```
+  - 파일명 분리
+    - MyComponent.ios.tsx
+    - MyComponent.android.tsx
+  - Custom Native Module 분기 처리
+
+- React Native에서 상태 관리를 최적화하는 방법은? (e.g., 불필요한 리렌더링 방지)
+  - React.memo(Component)로 프롭 변경 없으면 리렌더 방지
+  - useCallback으로 이벤트 핸들러 메모이제이션
+  - useMemo로 계산 결과 캐싱
+  - FlatList에서 keyExtractor, getItemLayout, removeClippedSubviews 설정
+  - Context 분리 (state vs action)
+
+- React Native에서 React.memo와 useMemo의 차이점과 사용 사례
+  - 목적
+    - React.memo: 컴포넌트 리렌더 방지
+    - useMemo: 값 계산 결과 캐시
+  - 대상
+    - React.memo: 컴포넌트
+    - useMemo: 함수 내부 값
+  - 예시
+    - React.memo: React.memo(MyComponent)
+    - useMemo: const value = useMemo(() => compute(), [deps])
+  - 성능
+    - React.memo: 프롭 변화 없을 때만 리렌더 방지
+    - useMemo: 값 재 계산 방지 (비싼 계산 최적화)
+  - 정리
+    - React.memo는 컴포넌트 단위, useMemo는 내부 값에 적용
 
 - React Native에서 React Query와 SWR을 사용할 때의 차이점은?
 - React Native에서 WebSocket과 HTTP Polling의 차이점은?
