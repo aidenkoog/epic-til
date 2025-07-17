@@ -3365,9 +3365,29 @@ Organize concepts, features, types and Pros and Cons
   - onShouldStartLoadWithRequest 활용: 악성 URL 차단
   - injectJavaScript 조심: 사용자 입력 삽입 금지 (XSS 방지)
   - iOS/Android 설정: Android는 setAllowFileAccess, iOS는 ATS(https 강제)
-  
+
 - React Native에서 Unit Test와 E2E Test를 수행하는 방법
+  - Unit Test
+    - 도구: Jest, React Native Testing Library
+    - 목적: 컴포넌트/함수 단위 테스트 (로직 검증)
+    - 예: 버튼 클릭 → 콜백 실행 여부 확인
+
+  - E2E Test
+    - 도구: Detox, Appium
+    - 목적: 전체 시나리오 테스트 (UI + 네이티브 통합)
+    - 예: 로그인 → 홈 진입 흐름 확인
+
 - React Native에서 Jest와 Detox의 차이점
+  - Jest
+    - 목적: JS 단위 테스트
+    - 빠르고 가벼움, CI 친화적
+    - 브라우저/디바이스 사용 X
+
+  - Detox
+    - 목적: Native 포함 실제 앱 시나리오 테스트
+    - 실제 디바이스/시뮬레이터 기반
+    - E2E 시나리오 자동화 (예: 로그인 → 스크롤 → 탭 등)
+
 - React Native에서 CodePush를 활용하여 앱을 업데이트하는 방법
 - React Native에서 App Store와 Google Play 배포 프로세스
 - React Native에서 CI/CD 파이프라인을 구축하는 방법
