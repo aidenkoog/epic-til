@@ -3242,7 +3242,34 @@ Organize concepts, features, types and Pros and Cons
     - 디버깅 시 reset-cache: npx react-native start --reset-cache
 
 - React Native에서 JavaScript 코드와 네이티브 코드 통신 방법
+  - 기본 구조
+    - React Native는 Bridge를 통해 JS와 네이티브(iOS/Android) 간 메시지를 직렬화하여 비동기 통신
+
+  - 동작 방식
+    - JS → 네이티브: NativeModules 호출
+    - 네이티브 → JS: RCTDeviceEventEmitter 또는 NativeEventEmitter 사용
+
+  - 한계
+    - 비동기이므로 성능 병목이 발생 가능
+    - 직렬화 비용 존재
+
 - React Native에서 Custom Native Module을 구현하는 방법
+  - iOS (Objective-C / Swift)
+    - RCTBridgeModule을 구현
+    - @objc로 함수 노출
+    - JS에서 NativeModules로 호출
+
+  - Android (Java/Kotlin)
+    - ReactContextBaseJavaModule 상속
+    - @ReactMethod로 함수 등록
+    - Package에 모듈 추가
+
+  - JS 사용 예시
+    ```ts
+    import { NativeModules } from 'react-native';
+    NativeModules.MyModule.myFunction();
+    ```
+
 - React Native에서 TurboModules와 기존 Native Module의 차이점
 - React Native에서 Fabric Renderer가 기존 브릿지 방식과의 차이점
 - React Native에서 Native Event Emitter를 활용하는 이유
