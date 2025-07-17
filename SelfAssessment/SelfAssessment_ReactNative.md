@@ -3271,15 +3271,93 @@ Organize concepts, features, types and Pros and Cons
     ```
 
 - React Native에서 TurboModules와 기존 Native Module의 차이점
-- React Native에서 Fabric Renderer가 기존 브릿지 방식과의 차이점
-- React Native에서 Native Event Emitter를 활용하는 이유
-- React Native에서 react-native link와 autolinking의 차이점
-- React Native에서 OAuth를 구현하는 방법
-- React Native에서 JWT 토큰을 안전하게 저장하는 방법
-- React Native에서 SecureStore와 AsyncStorage의 차이점
-- React Native에서 Code Injection을 방지하는 방법
-- React Native에서 App Transport Security (ATS)를 활성화하는 방법
+  - 기존 브릿지 방식
+    - 모든 모듈이 브릿지에 항상 등록됨
+    - 런타임에 직렬화/역직렬화 비용 발생
 
+  - TurboModules
+    - 모듈을 호출할 때만 로딩 (Lazy loading)
+    - C++ 기반 JSI 인터페이스 사용
+    - 더 빠르고 효율적인 메모리 관리
+
+  - TurboModules는 React Native의 아키텍처 리뉴얼의 핵심 요소
+
+- React Native에서 Fabric Renderer가 기존 브릿지 방식과의 차이점
+  - 기존 렌더러
+    - Shadow Tree → 브릿지 → 네이티브 뷰 업데이트
+    - JS 스레드에서 레이아웃 계산
+
+  - Fabric Renderer
+    - 네이티브 스레드에서 레이아웃 계산
+    - JSI 기반 → JS/Native 간 직접 함수 호출 가능
+    - 동기 처리 및 고성능 UI 렌더링 가능
+
+  - Fabric은 Concurrent React와도 호환 가능
+
+- React Native에서 Native Event Emitter를 활용하는 이유
+  - 사용 이유
+    - 네이티브 측에서 발생한 이벤트(예: 센서, 알림)를 JS에 전달하기 위해 사용
+    - 비동기 통신으로 React Native 이벤트 시스템과 연결 가능
+
+  - 사용 예시
+    ```ts
+    import { NativeEventEmitter } from 'react-native';
+    const emitter = new NativeEventEmitter(NativeModules.MyModule);
+    emitter.addListener('MyEvent', (data) => { ... });
+    ```
+
+- React Native에서 react-native link와 autolinking의 차이점
+  - react-native link
+    - 예전 방식 (CLI 명령어로 네이티브 코드 수동 연결)
+    - 종종 오류 발생
+
+  - Autolinking
+    - React Native 0.60 이상에서 기본 제공
+    - package.json에 선언된 native module 자동 연결
+    - CocoaPods / Gradle 설정 자동 반영
+
+  - 현대 프로젝트에서는 link는 거의 사용하지 않음
+
+- React Native에서 OAuth를 구현하는 방법
+  - OAuth 라이브러리 활용
+    - react-native-app-auth (권장)
+    - react-native-inappbrowser-reborn으로 브라우저 띄우기
+
+  - 리디렉션 URI 설정 필요 (myapp://callback)
+  - 로그인 → 인가 코드 → 토큰 교환 → 사용자 정보 호출
+  - 보안 주의
+    - 리디렉션 URI 조작 방지
+    - 민감 정보 저장 방식 고려
+
+- React Native에서 JWT 토큰을 안전하게 저장하는 방법
+  - 안전 저장 방법
+    - SecureStore (expo-secure-store): AES 기반 암호화 저장소
+    - Keychain (iOS) / Keystore (Android) 기반
+    - 직접 구현 시 react-native-keychain 추천
+
+  - 주의
+    - 절대 AsyncStorage에 저장하지 말 것 (암호화 X)
+    - 보안 요구가 높다면 biometric 연동 고려
+
+- React Native에서 SecureStore와 AsyncStorage의 차이점
+  - SecureStore: OS 기반 보안 저장소, 암호화됨, 민감 데이터 저장에 적합
+  - AsyncStorage: 단순한 key-value 저장소, 암호화 없음, 일반 캐시/세션 용
+  - 로그인 토큰, 인증서 등은 반드시 SecureStore에 저장 필수
+
+- React Native에서 Code Injection을 방지하는 방법
+  - JavaScript 코드 난독화 (e.g. metro-minify-terser)
+  - JSI + Native 구현으로 JS 코드 노출 최소화
+  - OTA (Over-the-Air) 업데이트 시 integrity 체크
+  - 루팅/탈옥 감지 및 실행 차단
+
+- React Native에서 App Transport Security (ATS)를 활성화하는 방법
+  - 활성화 방법
+    - 기본적으로 iOS는 ATS가 활성화되어 있으며, 비보안 HTTP 요청을 허용하려면 Info.plist 수정 필요.
+
+  - ATS 설정 예시 (비활성화)
+    - HTTPS만 허용
+    - SSL 인증서 필요 (self-signed 불가)
+    - 개발 중이라면 예외 도메인만 허용 설정도 가능
 
 - React Native에서 WebView 보안을 강화하는 방법은?
 - React Native에서 Unit Test와 E2E Test를 수행하는 방법은?
