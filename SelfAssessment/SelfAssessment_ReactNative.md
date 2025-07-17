@@ -3125,20 +3125,108 @@ Organize concepts, features, types and Pros and Cons
   - 정리
     - React.memo는 컴포넌트 단위, useMemo는 내부 값에 적용
 
-- React Native에서 React Query와 SWR을 사용할 때의 차이점은?
-- React Native에서 WebSocket과 HTTP Polling의 차이점은?
-- React Native에서 GraphQL을 활용하는 방법은?
-- React Native에서 API 호출을 최적화하는 방법은? (e.g., 캐싱, 중복 요청 방지)
-- React Native에서 Background Fetch와 Foreground Fetch의 차이는?
-- React Native에서 Long Polling을 구현하는 방법은?
-- React Native에서 메모리 누수를 방지하는 방법은?
-- React Native에서 Lazy Loading을 적용하는 방법은?
-- React Native에서 앱 크기를 줄이는 방법은?
-- React Native에서 FlatList의 getItemLayout을 활용하는 방법은?
-- React Native에서 Animated API와 Reanimated의 차이점은?
-- React Native에서 Fast Refresh가 어떻게 동작하는가?
-- React Native에서 Hermes를 사용할 때 성능 이점은?
+- React Native에서 React Query와 SWR을 사용할 때의 차이점
+  - React Query는 상태 기반 데이터 요청 라이브러리
+    - 캐싱, 리트라이, 페이징, Mutation 등을 완벽하게 지원
+    - 복잡한 API 호출 흐름에 적합하며 DevTools도 강력
+  - SWR은 useSWR(key, fetcher) 형태의 간단한 훅을 기반으로 한 라이브러리
+    - 캐싱과 자동 재검증(revalidate)이 핵심
+    - Mutation이 필요 없는 단순 조회에 적합
+  - 정리
+    - React Native에서는 보통 React Query가 기능이 풍부해 더 많이 사용됨
 
+- React Native에서 WebSocket과 HTTP Polling의 차이점
+  - WebSocket은 서버와 클라이언트가 한 번 연결 후 계속 데이터를 주고받는 실시간 통신 방식
+  - 실시간 채팅, 알림, 센서 데이터 스트리밍 등에 유리
+
+  - HTTP Polling은 일정 간격마다 서버에 GET 요청을 반복해서 데이터를 가져오는 방식
+  - 구현은 단순하지만 실시간성은 떨어지고 서버 부하가 커질 수 있음
+
+  - 실시간이 중요하다면 WebSocket, 간단한 상태 동기화 정도면 Polling도 가능하지만 최적화 고려 필수
+
+- React Native에서 GraphQL을 활용하는 방법
+  - GraphQL은 하나의 endpoint에서 필요한 데이터만 요청할 수 있는 쿼리 언어
+
+  - React Native에서는 Apollo Client, urql, relay 등을 통해 사용할 수 있으며, 주로 Apollo Client가 가장 많이 사용됨
+
+  - Query, Mutation, Subscription을 통한 유연한 API 구성과 캐싱, 에러 핸들링, 타입 추론 등이 장점
+
+- React Native에서 API 호출을 최적화하는 방법 (e.g., 캐싱, 중복 요청 방지)
+  - 중복 요청 방지: React Query의 deduplication, AbortController를 활용
+  - 캐싱: React Query, SWR, Apollo 등의 내부 캐시를 적극 활용
+  - Debounce/Throttle: 검색창 등에서는 요청을 늦추는 방식 적용
+  - Prefetching: 미리 데이터 가져오기
+  - 에러 및 리트라이 전략: 실패 시 간격을 두고 재시도 설정
+
+- React Native에서 Background Fetch와 Foreground Fetch의 차이
+  - Foreground Fetch는 앱이 활성 상태일 때 발생하며, 사용자와 상호작용 중 데이터를 동기화
+
+  - Background Fetch는 앱이 백그라운드에 있을 때 OS가 제한된 시간 동안 백그라운드 작업을 허용할 때 실행됨
+  - react-native-background-fetch와 같은 라이브러리로 구현
+
+  - iOS의 경우 시스템 제어가 강해 동작 타이밍이 보장되지 않음
+
+- React Native에서 Long Polling을 구현하는 방법
+  - 주기적으로 서버에 요청을 보내되, 서버가 응답을 일정 시간 지연시킨 후 새로운 데이터가 생기면 응답하는 방식
+
+  - setTimeout, setInterval을 사용하거나 async 루프로 구현 가능
+
+  - 서버가 HTTP Keep-Alive를 지원해야 하며, 네트워크와 배터리 리소스에 부담이 큼
+
+- React Native에서 메모리 누수를 방지하는 방법
+  - 컴포넌트 언마운트 시 타이머, 이벤트 리스너, WebSocket 등 해제
+  - useEffect cleanup 함수 활용
+  - 큰 이미지 또는 영상은 압축하거나 캐시에서 해제
+  - Native Module 사용 시 retain cycle 방지
+  - navigation 이동 시 listener 제거
+
+- React Native에서 Lazy Loading을 적용하는 방법
+  - React.lazy() 또는 동적 import로 컴포넌트를 지연 로딩
+  - FlatList, SectionList에서 initialNumToRender, windowSize, removeClippedSubviews 등으로 화면에 필요한 데이터만 렌더링
+  - 이미지나 미디어는 react-native-fast-image 등의 캐시 기반 라이브러리 사용
+
+- React Native에서 앱 크기를 줄이는 방법
+  - 사용하지 않는 리소스 제거 (이미지, 폰트 등)
+  - Proguard 설정으로 Android 코드 최적화
+  - Hermes 엔진 사용 (iOS, Android 모두)
+  - PNG 압축, WebP 포맷 사용
+  - 코드 스플리팅 및 외부 라이브러리 최소화
+
+- React Native에서 FlatList의 getItemLayout을 활용하는 방법
+  - getItemLayout은 각 아이템의 높이나 위치가 고정일 때 사용하여 빠른 스크롤 퍼포먼스를 보장
+  - 내부적으로 scrollToIndex 등의 메서드 성능이 개선되며, 초기 렌더링 속도도 빨라짐
+  - 예:
+    ```ts
+    getItemLayout={(data, index) => ({
+      length: ITEM_HEIGHT,
+      offset: ITEM_HEIGHT * index,
+      index,
+    })}
+    ```
+
+- React Native에서 Animated API와 Reanimated의 차이점
+  - Animated API는 React Native 기본 제공으로, JS 스레드에서 애니메이션 처리.
+  - 간단하지만 복잡한 애니메이션이나 gesture 연동은 제한적
+
+  - Reanimated는 Native 스레드에서 실행되며, 고성능, 제스처와의 결합 등 복잡한 애니메이션에 적합
+  - 특히 Reanimated 2는 worklet 기반으로 React syntax와 유사
+
+  - 리소스가 많은 UI나 드래그, 터치 기반 UI에서는 Reanimated 추천
+
+- React Native에서 Fast Refresh 동작 방식
+  - Fast Refresh는 코드 변경 시 전체 앱을 재시작하지 않고, 변경된 컴포넌트만 교체
+
+  - 상태(state)를 최대한 보존하며, 기존의 Hot Reload보다 안정적이고 빠름
+
+  - 내부적으로 Babel Plugin과 React runtime이 연결되어 메모리 구조를 추적
+
+- React Native에서 Hermes를 사용할 때 성능 이점
+  - React Native에 최적화된 JavaScript 엔진 (Facebook 개발)
+  - 앱 실행 속도 단축 (JS bundle이 bytecode로 미리 컴파일됨)
+  - 메모리 사용량 감소
+  - 앱 크기 줄어듦 (JSC 제거)
+  - GC(가비지 컬렉션) 성능 향상
+  - 특히 Android에서 효과가 크며, iOS도 Hermes 지원이 확대된 상태
 
 - React Native에서 Metro Bundler의 역할과 최적화 방법은?
 - React Native에서 JavaScript 코드와 네이티브 코드가 어떻게 통신하는가?
