@@ -3359,32 +3359,38 @@ Organize concepts, features, types and Pros and Cons
     - SSL 인증서 필요 (self-signed 불가)
     - 개발 중이라면 예외 도메인만 허용 설정도 가능
 
-- React Native에서 WebView 보안을 강화하는 방법은?
-- React Native에서 Unit Test와 E2E Test를 수행하는 방법은?
-- React Native에서 Jest와 Detox의 차이점은?
-- React Native에서 CodePush를 활용하여 앱을 업데이트하는 방법은?
-- React Native에서 App Store와 Google Play 배포 프로세스를 설명하세요.
-- React Native에서 CI/CD 파이프라인을 구축하는 방법은?
-- React Native에서 Firebase Test Lab을 활용하는 방법은?
-- React Native에서 크래시 리포팅을 설정하는 방법은?
-- React Native에서 SQLite와 Realm의 차이점은?
-- React Native에서 AsyncStorage 대신 사용할 수 있는 데이터 저장 방법은?
-- React Native에서 데이터를 암호화하는 방법은?
-- React Native에서 실시간 동기화를 구현하는 방법은? (Firebase, WebSockets 등)
+- React Native에서 WebView 보안을 강화하는 방법
+  - 스크립트 제한: javaScriptEnabled={false}로 기본 비활성화하고, 꼭 필요한 경우만 사용
+  - 도메인 화이트리스트: originWhitelist 속성 사용
+  - onShouldStartLoadWithRequest 활용: 악성 URL 차단
+  - injectJavaScript 조심: 사용자 입력 삽입 금지 (XSS 방지)
+  - iOS/Android 설정: Android는 setAllowFileAccess, iOS는 ATS(https 강제)
+  
+- React Native에서 Unit Test와 E2E Test를 수행하는 방법
+- React Native에서 Jest와 Detox의 차이점
+- React Native에서 CodePush를 활용하여 앱을 업데이트하는 방법
+- React Native에서 App Store와 Google Play 배포 프로세스
+- React Native에서 CI/CD 파이프라인을 구축하는 방법
+- React Native에서 Firebase Test Lab을 활용하는 방법
+- React Native에서 크래시 리포팅을 설정하는 방법
+- React Native에서 SQLite와 Realm의 차이점
+- React Native에서 AsyncStorage 대신 사용할 수 있는 데이터 저장 방법
+- React Native에서 데이터를 암호화하는 방법
+- React Native에서 실시간 동기화를 구현하는 방법(Firebase, WebSockets 등)
 
 
-- React Native에서 Redux Persist와 MMKV의 차이점은?
-- React Native에서 Apollo Client를 사용할 때의 장점은?
-- React Native에서 i18n(다국어 지원)을 구현하는 방법은?
-- React Native에서 Dynamic Font Scaling을 적용하는 방법은?
-- React Native에서 RTL (Right-to-Left) 언어를 지원하는 방법은?
-- React Native에서 카메라와 갤러리를 사용하는 방법은?
-- React Native에서 Face ID와 Touch ID를 적용하는 방법은?
-- React Native에서 NFC 기능을 구현하는 방법은?
-- React Native에서 GPS 및 위치 기반 서비스를 구현하는 방법은?
-- React Native에서 AR(Augmented Reality) 기능을 적용하는 방법은?
-- React Native의 최신 트렌드 및 업데이트된 기능은 무엇인가?
-- React Native에서 New Architecture(Fabric & TurboModules)를 적용하는 방법은?
-- React Native의 JSI(JavaScript Interface)는 무엇이며, 어떻게 동작하는가?
-- React Native에서 Expo Router를 사용하면 어떤 장점이 있는가?
-- React Native에서 새로운 패키지를 선택할 때 고려해야 할 점은?
+- React Native에서 Redux Persist와 MMKV의 차이점
+- React Native에서 Apollo Client를 사용할 때의 장점
+- React Native에서 i18n(다국어 지원)을 구현하는 방법
+- React Native에서 Dynamic Font Scaling을 적용하는 방법
+- React Native에서 RTL (Right-to-Left) 언어를 지원하는 방법
+- React Native에서 카메라와 갤러리를 사용하는 방법
+- React Native에서 Face ID와 Touch ID를 적용하는 방법
+- React Native에서 NFC 기능을 구현하는 방법
+- React Native에서 GPS 및 위치 기반 서비스를 구현하는 방법
+- React Native에서 AR(Augmented Reality) 기능을 적용하는 방법
+- React Native의 최신 트렌드 및 업데이트된 기능
+- React Native에서 New Architecture(Fabric & TurboModules)를 적용하는 방법
+- React Native의 JSI(JavaScript Interface) 개념 및 동작 원리
+- React Native에서 Expo Router를 사용 시 장점
+- React Native에서 새로운 패키지를 선택할 때 고려해야 할 점
