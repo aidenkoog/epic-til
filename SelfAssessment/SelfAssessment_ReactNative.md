@@ -3228,18 +3228,30 @@ Organize concepts, features, types and Pros and Cons
   - GC(가비지 컬렉션) 성능 향상
   - 특히 Android에서 효과가 크며, iOS도 Hermes 지원이 확대된 상태
 
-- React Native에서 Metro Bundler의 역할과 최적화 방법은?
-- React Native에서 JavaScript 코드와 네이티브 코드가 어떻게 통신하는가?
-- React Native에서 Custom Native Module을 구현하는 방법은?
-- React Native에서 TurboModules와 기존 Native Module의 차이점은?
-- React Native에서 Fabric Renderer가 기존 브릿지 방식과 어떻게 다른가?
-- React Native에서 Native Event Emitter를 활용하는 이유는?
-- React Native에서 react-native link와 autolinking의 차이점은?
-- React Native에서 OAuth를 구현하는 방법은?
-- React Native에서 JWT 토큰을 안전하게 저장하는 방법은?
-- React Native에서 SecureStore와 AsyncStorage의 차이점은?
-- React Native에서 Code Injection을 방지하는 방법은?
-- React Native에서 App Transport Security (ATS)를 활성화하는 방법은?
+- React Native에서 Metro Bundler의 역할과 최적화 방법
+  - 역할
+    - Metro는 React Native의 기본 JavaScript 번들러로, 코드를 번들링하고 변환(transpile)하여 네이티브 앱에서 실행할 수 있게 만듬
+
+  - 동작 방식
+    - JS 파일과 모듈을 분석하여 dependency graph를 만든 후, 하나의 번들 파일로 만들어 모바일 디바이스에서 실행
+
+  - 최적화 방법
+    - inlineRequires: true 설정으로 필요할 때만 모듈 로드
+    - exclude를 이용한 외부 모듈 제외
+    - .babelrc에서 불필요한 transform 제거
+    - 디버깅 시 reset-cache: npx react-native start --reset-cache
+
+- React Native에서 JavaScript 코드와 네이티브 코드 통신 방법
+- React Native에서 Custom Native Module을 구현하는 방법
+- React Native에서 TurboModules와 기존 Native Module의 차이점
+- React Native에서 Fabric Renderer가 기존 브릿지 방식과의 차이점
+- React Native에서 Native Event Emitter를 활용하는 이유
+- React Native에서 react-native link와 autolinking의 차이점
+- React Native에서 OAuth를 구현하는 방법
+- React Native에서 JWT 토큰을 안전하게 저장하는 방법
+- React Native에서 SecureStore와 AsyncStorage의 차이점
+- React Native에서 Code Injection을 방지하는 방법
+- React Native에서 App Transport Security (ATS)를 활성화하는 방법
 
 
 - React Native에서 WebView 보안을 강화하는 방법은?
