@@ -3389,15 +3389,85 @@ Organize concepts, features, types and Pros and Cons
     - E2E 시나리오 자동화 (예: 로그인 → 스크롤 → 탭 등)
 
 - React Native에서 CodePush를 활용하여 앱을 업데이트하는 방법
-- React Native에서 App Store와 Google Play 배포 프로세스
-- React Native에서 CI/CD 파이프라인을 구축하는 방법
-- React Native에서 Firebase Test Lab을 활용하는 방법
-- React Native에서 크래시 리포팅을 설정하는 방법
-- React Native에서 SQLite와 Realm의 차이점
-- React Native에서 AsyncStorage 대신 사용할 수 있는 데이터 저장 방법
-- React Native에서 데이터를 암호화하는 방법
-- React Native에서 실시간 동기화를 구현하는 방법(Firebase, WebSockets 등)
+  - JavaScript 코드와 리소스를 OTA(Over The Air)로 업데이트할 수 있게 해주는 Microsoft의 서비스
+  - react-native-code-push 라이브러리 사용.
+  - 배포 과정:
+    - 앱에 CodePush SDK 연동.
+    - 앱스토어 심사를 통과한 앱에서 JavaScript 코드만 업데이트.
+    - appcenter-cli 명령어로 배포 (appcenter codepush release-react).
+  - 주의사항: 
+    - 네이티브 코드 변경은 반영 불가, 스토어 정책 위반 주의 (앱 기능 변경 수준이 심하면 리젝 가능).
 
+- React Native에서 App Store와 Google Play 배포 프로세스
+  - 공통 과정:
+    - release 빌드 생성 (xcodebuild, gradlew bundleRelease).
+    - 앱 아이콘, 스플래시, 버전 등 metadata 설정.
+    - 디버깅 옵션 제거 (debuggable=false).
+
+  - iOS:
+    - Xcode에서 .ipa 생성.
+    - TestFlight 업로드 → 심사 후 App Store 배포.
+
+  - Android:
+    - .aab 파일 생성.
+    - Google Play Console에 등록 후 심사 진행.
+
+- React Native에서 CI/CD 파이프라인을 구축하는 방법
+  - 도구: GitHub Actions, Bitrise, CircleCI, Codemagic, Fastlane
+  - 흐름:
+    - PR → Lint/Build/Test 실행.
+    - main/master 병합 → 릴리즈 빌드 자동 생성.
+    - firebase app distribution, TestFlight, Play Console에 자동 업로드.
+  - 장점: 배포 자동화, 품질 보증, 시간 절약.
+
+- React Native에서 Firebase Test Lab을 활용하는 방법
+  - Firebase Test Lab은 실제 기기 및 가상 디바이스에서 앱 테스트 제공.
+  - 사용 방법:
+    - Android 앱의 경우 .apk 또는 .aab 파일 업로드.
+    - gcloud firebase test android run 명령어로 CLI 실행.
+    - 테스트 결과(GIF, 로그, 스크린샷)를 대시보드에서 확인.
+  - iOS는 XCUITest 기반 지원 (제한적 사용).
+
+- React Native에서 크래시 리포팅을 설정하는 방법
+  - 대표 툴: Firebase Crashlytics, Sentry, Bugsnag
+  - Firebase Crashlytics:
+    - @react-native-firebase/crashlytics 패키지 사용.
+    - 자동 에러 수집, 커스텀 로그 가능 (crashlytics().log()).
+  - 초기화 설정 후 JS/Native 에러 모두 수집 가능.
+
+- React Native에서 SQLite와 Realm의 차이점
+  - SQLite:
+    - 관계형 데이터베이스, 구조화된 데이터 저장에 적합.
+    - react-native-sqlite-storage 또는 expo-sqlite 사용.
+
+  - Realm:
+    - 객체 지향 NoSQL DB.
+    - 반응형 데이터 업데이트(Observer 가능), 퍼포먼스 우수.
+    - 자체 파일 포맷으로 저장됨, JSON-like 구조.
+
+- React Native에서 AsyncStorage 대신 사용할 수 있는 데이터 저장 방법
+  - SecureStore (expo-secure-store): 보안 저장용 (iOS Keychain / Android Keystore).
+  - MMKV (react-native-mmkv): 매우 빠른 key-value 저장소, 추천.
+  - Realm / SQLite: 구조적 데이터가 필요할 경우.
+
+- React Native에서 데이터를 암호화하는 방법
+  - 민감한 정보는 반드시 암호화해서 저장.
+  - 방법:
+    - SecureStore 또는 Keychain Access 활용.
+    - crypto-js로 암호화 후 저장.
+    - EncryptedSharedPreferences (Android) / Keychain (iOS) 사용.
+  - 네트워크 전송 시 HTTPS 필수.
+
+- React Native에서 실시간 동기화를 구현하는 방법(Firebase, WebSockets 등)
+  - Firebase Realtime Database / Firestore:
+    - 데이터베이스에 listener 연결 → 데이터 변경 실시간 반영.
+    - 사용이 간단하고 스케일링 용이.
+
+  - WebSocket (e.g., socket.io-client):
+    - 커스터마이징이 자유롭고 빠른 실시간 처리 가능.
+    - 서버가 필요한 구조이며 연결 관리 필요.
+
+  - Supabase: PostgreSQL 기반 + 실시간 이벤트 지원.
 
 - React Native에서 Redux Persist와 MMKV의 차이점
 - React Native에서 Apollo Client를 사용할 때의 장점
