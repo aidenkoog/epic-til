@@ -3470,6 +3470,18 @@ Organize concepts, features, types and Pros and Cons
   - Supabase: PostgreSQL 기반 + 실시간 이벤트 지원.
 
 - React Native에서 Redux Persist와 MMKV의 차이점
+  - Redux Persist
+    - Redux 상태를 로컬에 저장
+    - AsyncStorage 기반으로 느린 편
+    - 앱 재시작 시 상태 복원
+
+  - MMKV
+    - Key-Value 저장용 고속 스토리지
+    - Native(C++) 기반, 매우 빠름
+    - 단순 설정 값 캐시에 적합
+
+  - 차이점 요약: 전역 상태는 Redux Persist, 빠른 단순 저장은 MMKV에 적합
+`
 - React Native에서 Apollo Client를 사용할 때의 장점
 - React Native에서 i18n(다국어 지원)을 구현하는 방법
 - React Native에서 Dynamic Font Scaling을 적용하는 방법
