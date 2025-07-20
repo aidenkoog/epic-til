@@ -15593,15 +15593,21 @@ Organize concepts, features, types and Pros and Cons
         - sleep()은 단순한 시간 지연.
         - wait()은 동기화된 환경에서 다른 스레드의 작업을 기다릴 때 사용합니다
 
-- Java에서 ScheduledThreadPoolExecutor의 활용 방법은?
+- Java에서 ScheduledThreadPoolExecutor의 활용 방법
+  - 용도: 주기적/지연된 작업 실행
+  - 생성: new ScheduledThreacPoolExecutor(nThreads)
+  - 사용 예시
+    ```java
+    executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
+    ``` 
 - Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법은?
 - Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
-
 - Java의 Virtual Threads(프로젝트 Loom) 개념과 기존 Thread와의 차이점은?
 - Java에서 GraalVM을 활용한 AOT(Ahead-of-Time) 컴파일 성능 최적화 방법은?
 - Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
 - Java의 Structured Concurrency 개념과 기존 Thread 관리 방식과의 차이점은?
 - Java에서 CDS(Class Data Sharing)를 활용하여 JVM 성능을 최적화하는 방법은?
+- 
 - Kotlin과 Java의 주요 차이점은?
 - Kotlin에서 var와 val의 차이점은?
 - Kotlin에서 lateinit과 lazy의 차이점은?
