@@ -15600,14 +15600,26 @@ Organize concepts, features, types and Pros and Cons
     ```java
     executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
     ``` 
-- Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법은?
+  - 장점
+    - 타이머보다 정확하고 예외처리 안전
+    - 병렬 실행 가능 (스레드 수 조절 가능)
+
+- Java에서 ThreadLocal의 메모리 누수 문제를 방지하는 방법
+    - 문제 원인: ThreadLocal 변수는 Thread에 종속되어 Thread가 종료되지 않으면 GC 대상이 안됨 (특히 ThreadPool 사용 시)
+
+    - 예방 방법:
+        - 작업 완료 후 ThreadLocal.remove() 호출
+        - 가능하면 스레드 재사용 없는 환경에서만 사용
+        - ThreadLocal 사용을 피하고 다른 컨텍스트 전달 방식 고려
+
 - Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
 - Java의 Virtual Threads(프로젝트 Loom) 개념과 기존 Thread와의 차이점은?
 - Java에서 GraalVM을 활용한 AOT(Ahead-of-Time) 컴파일 성능 최적화 방법은?
 - Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
 - Java의 Structured Concurrency 개념과 기존 Thread 관리 방식과의 차이점은?
 - Java에서 CDS(Class Data Sharing)를 활용하여 JVM 성능을 최적화하는 방법은?
-- 
+
+- 2025년 안드로이드, 자바, 코틀린 트렌드 및 중요한 포인트
 - Kotlin과 Java의 주요 차이점은?
 - Kotlin에서 var와 val의 차이점은?
 - Kotlin에서 lateinit과 lazy의 차이점은?
