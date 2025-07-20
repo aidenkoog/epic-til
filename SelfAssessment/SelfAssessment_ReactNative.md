@@ -3481,18 +3481,92 @@ Organize concepts, features, types and Pros and Cons
     - 단순 설정 값 캐시에 적합
 
   - 차이점 요약: 전역 상태는 Redux Persist, 빠른 단순 저장은 MMKV에 적합
-`
+
 - React Native에서 Apollo Client를 사용할 때의 장점
+  - Apollo Client 장점
+    - GraphQL 쿼리 + 상태 관리를 통합
+    - 자동 캐싱, refetch, polling, error 관리 지원
+    - React Hook(useQuery, useMutation)과 연동 편리
+
 - React Native에서 i18n(다국어 지원)을 구현하는 방법
+  - i18n 구현 방법
+    - react-i18next 또는 i18n-js 사용
+    - 언어별 JSON 리소스 작성
+    - 디바이스 언어 자동 감지 (react-native-localize)
+    - t('key') 형태로 번역 문자열 사용
+
 - React Native에서 Dynamic Font Scaling을 적용하는 방법
+  - 적용 방법
+    - 사용자 설정 폰트 크기에 반응
+    - allowFontScaling, maxFontSizeMultiplier 옵션 사용
+    - react-native-responsive-fontsize 등 유틸 라이브러리 활용 가능
+  
 - React Native에서 RTL (Right-to-Left) 언어를 지원하는 방법
+  - Right-to-Left 지원
+    - I18nManager.forceRTL(true) 호출
+    - 앱 재시작 필요
+    - 자동으로 텍스트 정렬 및 레이아웃 반전
+    - 스타일에서 textAlign, flexDirection 유의
+
 - React Native에서 카메라와 갤러리를 사용하는 방법
+  - 카메라 / 갤러리 접근
+    - react-native-image-picker 추천
+    - 사진/비디오 촬영, 갤러리 선택 기능 제공
+    - 권한 설정 필요 (iOS: Info.plist / Android: AndroidManifest)
+
 - React Native에서 Face ID와 Touch ID를 적용하는 방법
+  - Face ID / Touch ID
+    - react-native-biometrics 또는 expo-local-authentication 사용
+    - 생체 인증 가능 여부 확인 후 인증 트리거
+    - 플랫폼별 분기 필요
+
 - React Native에서 NFC 기능을 구현하는 방법
+  - react-native-nfc-manager 사용
+  - NDEF 태그 읽기/쓰기 가능
+  - iOS는 일부 제한 사항 있음 (앱이 포그라운드일 때만 지원 등)
+
 - React Native에서 GPS 및 위치 기반 서비스를 구현하는 방법
-- React Native에서 AR(Augmented Reality) 기능을 적용하는 방법
+  - GPS 사용
+    - react-native-geolocation-service, expo-location 활용
+    - 현재 위치, 위치 변화 추적 기능 제공
+    - 정확도 설정 및 권한 관리 필수
+    - 배터리 최적화 고려 필요
+
+- React Native에서 AR(Augmented Reality) 기능을 적용하는 방법\
+  - ViroReact 또는 expo-ar 사용
+  - iOS는 ARKit, Android는 ARCore 필요
+  - Unity 연동도 대안으로 활용 가능
+
 - React Native의 최신 트렌드 및 업데이트된 기능
+  - React Native 주요 흐름 (2025 기준)
+    - New Architecture (Fabric + TurboModules) 도입 가속화
+    - Hermes 엔진 기본화
+    - TypeScript 기반 개발 확대
+    - Expo Router 도입 증가
+    - MMKV, WatermelonDB 등 고성능 Native DB 확산
+
 - React Native에서 New Architecture(Fabric & TurboModules)를 적용하는 방법
+  - Fabric
+    - 기존 브릿지 대신 동기식 UI 렌더링
+    - React Shadow Tree 생략 → 성능 개선
+  - TurboModules
+    - 네이티브 모듈을 동기 방식으로 호출 (JSI 기반)
+    - 네이티브와 JS 간 연결 지연 감소
+
 - React Native의 JSI(JavaScript Interface) 개념 및 동작 원리
+  - C++ 기반의 JS ↔ Native 통신 방식
+  - 브릿지 없이 동기 호출 가능
+  - TurboModules, Fabric 모두 JSI 기반
+
 - React Native에서 Expo Router를 사용 시 장점
+  - Next.js 스타일의 파일 기반 라우팅
+  - Stack, Tab 자동 구성
+  - Deep linking 설정 간편
+  - app/ 디렉토리 구조 → 유지보수 편리
+
 - React Native에서 새로운 패키지를 선택할 때 고려해야 할 점
+  - 최신 유지관리 여부 (최근 커밋, 이슈 응답)
+  - 커뮤니티 신뢰도 (Stars, 활용 사례)
+  - Expo 호환 여부
+  - Native 연동 여부와 성능 영향
+  - 문서화 수준과 사용 편의성
