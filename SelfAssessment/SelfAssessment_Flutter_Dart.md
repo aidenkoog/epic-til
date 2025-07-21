@@ -2968,7 +2968,20 @@ Organize concepts, features, types and Pros and Cons
     - 결과 객체(RecognizedText, Face) 반환
   - 주의사항: 카메라 연동은 camera 패키지와 병행
 
-- Flutter에서 WebRTC를 활용한 영상 통화 기능을 구현하는 방법은?
+- Flutter에서 WebRTC를 활용한 영상 통화 기능을 구현하는 방법
+  - 패키지: flutter_webrtc
+  - 기본 구성:
+    - MediaStream (카메라/마이크)
+    - RTCVideoRenderer (화면 표시)
+    - RTCPeerConnection (신호 교환, ICE 후보 등)
+    - signaling 서버 필요 (WebSocket or Firebase 등)
+
+  - 예시 흐름:
+    - 로컬 미디어 초기화
+    - offer/answer 교환
+    - ICE candidate 처리
+    - 스트림 연결 및 표시
+
 - Flutter에서 Background Task를 수행하는 방법은?
 - Flutter에서 Firebase Analytics를 활용하는 방법은?
 
