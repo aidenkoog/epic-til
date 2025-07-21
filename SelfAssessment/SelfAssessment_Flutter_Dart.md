@@ -2935,7 +2935,21 @@ Organize concepts, features, types and Pros and Cons
   - iOS (Swift): FlutterMethodChannel 사용해 동일하게 구현
   - 예시 활용: 센서, GPS, BLE, 영상 처리, SDK 호출 등
 
-- Flutter에서 isolate를 활용한 병렬 처리 방법은?
+- Flutter에서 isolate를 활용한 병렬 처리 방법
+  - 이유
+    - 플러터 메인 스레드는 단일 스레드이므로 CPU 작업을 isolate로 분리 필요
+  - 기본 사용
+    ```dart
+    final result = await compute(heavyFunction, inputData);
+    ```
+  - 직접 제어
+    ```dart
+    final ReceivePort receivePort = ReceivePort();
+    await Isolate.spawn(isolatedFunction, receivePort.sendPort);
+    ```
+  - 주의 사항
+    - isolate 간 메모리 공유 불가 > 메시지 기반 통신 사용
+
 - Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
 - Flutter에서 ML Kit을 활용한 이미지 인식 기능을 구현하는 방법은?
 - Flutter에서 WebRTC를 활용한 영상 통화 기능을 구현하는 방법은?
