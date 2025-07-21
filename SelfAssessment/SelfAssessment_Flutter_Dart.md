@@ -2914,11 +2914,17 @@ Organize concepts, features, types and Pros and Cons
     - 일부 패키지는 Embedded 환경에서 미지원
   - Embedded 환경에서는 직접 Platform Channel 구현이 필요할 가능성이 큼
 
-- Flutter에서 PWA(Progressive Web App)를 구현하는 방법은?
+- Flutter에서 PWA(Progressive Web App)를 구현하는 방법
+  - 지원 플랫폼: Flutter Web
+  - 설정
+    - flutter build web 실행 시 기본적으로 PWA 템플릿 포함
+    - web/manifest.json, web/index.html, web/icons/ 등 자동 생성
+  - 서비스 워커: flutter_service_worker.js 자동 포함
+  - 호스팅: Firebase Hosting, Vercel, GitHub Pages 등 가능
+  - 주의점: iOS 사파리는 PWA 일부 기능 제한 존재 (백그라운드 동작 등)
+
 - Flutter에서 Native Code(Android/iOS)를 호출하는 방법은?
 - Flutter에서 isolate를 활용한 병렬 처리 방법은?
-
-
 - Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
 - Flutter에서 ML Kit을 활용한 이미지 인식 기능을 구현하는 방법은?
 - Flutter에서 WebRTC를 활용한 영상 통화 기능을 구현하는 방법은?
