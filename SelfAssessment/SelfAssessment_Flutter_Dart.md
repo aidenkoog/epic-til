@@ -2959,7 +2959,15 @@ Organize concepts, features, types and Pros and Cons
     - ffi 및 ffi_helper 패키지 사용 시 편리
   - 주의: 메모리 관리와 플랫폼 별 바이너리 분리 필요
 
-- Flutter에서 ML Kit을 활용한 이미지 인식 기능을 구현하는 방법은?
+- Flutter에서 ML Kit을 활용한 이미지 인식 기능을 구현하는 방법
+  - 방법: Firebase ML Kit + google_ml_kit 패키지 활용
+  - 기능: 텍스트 인식, 얼굴 인식, 바코드 스캔, 라벨링 등
+  - 기본 흐름:
+    - InputImage.fromFile 또는 InputImage.fromBytes 생성
+    - MLKit Processor(ex. TextRecognizer, FaceDetector)로 분석
+    - 결과 객체(RecognizedText, Face) 반환
+  - 주의사항: 카메라 연동은 camera 패키지와 병행
+
 - Flutter에서 WebRTC를 활용한 영상 통화 기능을 구현하는 방법은?
 - Flutter에서 Background Task를 수행하는 방법은?
 - Flutter에서 Firebase Analytics를 활용하는 방법은?
