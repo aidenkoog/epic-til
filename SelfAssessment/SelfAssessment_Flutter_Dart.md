@@ -3025,7 +3025,23 @@ Organize concepts, features, types and Pros and Cons
     - Android: AndroidManifest.xml에 퍼미션 추가
     - iOS: UIBackgroundModes에 fetch 등록 필요
 
-- Flutter에서 OpenAI API를 활용한 챗봇 기능을 구현하는 방법은?
+- Flutter에서 OpenAI API를 활용한 챗봇 기능을 구현하는 방법
+  - HTTP 방식: dio 또는 http 사용
+  - API 호출 예 (gpt-3.5-turbo 기준)
+    ```dart
+    final response = await dio.post(
+      'https://api.openai.com/v1/chat/completions',
+      data: {
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": "안녕"}],
+      },
+      options: Options(headers: {
+        "Authorization": "Bearer YOUR_API_KEY",
+      }),
+    );
+    ```
+  - UX 개선: 타이핑 애니매이션, 대기중 인디케이터, 챗버블 UI 적용 등
+
 - Flutter에서 Dynamic Link를 활용한 딥링크 구현 방법은?
 - Flutter에서 FlutterFlow와 같은 Low-Code 개발 도구를 활용하는 방법은?
 - Flutter에서 Flare 애니메이션을 적용하는 방법은?
