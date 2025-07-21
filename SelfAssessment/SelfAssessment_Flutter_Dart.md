@@ -3005,7 +3005,26 @@ Organize concepts, features, types and Pros and Cons
   - 자동 수집 항목: 앱 열기, 첫 실행, 인앱 결제 등
   - 커스텀 이벤트: 앱 사용 패턴 분석용으로 logEvent 정의
 
-- Flutter에서 Background Fetch를 활용하는 방법은?
+- Flutter에서 Background Fetch를 활용하는 방법
+  - 패키지: background_fetch
+  - 지원 플랫폼: Android, iOS
+  - 기능: 주기적으로 백그라운드에서 작업 수행
+    - 서버 폴링, 상태 동기화 등
+  - 구현
+    ```dart
+    BackgroundFetch.configure(
+      BackgroundFetchConfig(
+        minimumFetchInterval: 15,
+        stopOnTerminate: false,
+        enableHeadless: true,
+      ),
+      onBackgroundFetch,
+    );
+    ```
+  - 주의:
+    - Android: AndroidManifest.xml에 퍼미션 추가
+    - iOS: UIBackgroundModes에 fetch 등록 필요
+
 - Flutter에서 OpenAI API를 활용한 챗봇 기능을 구현하는 방법은?
 - Flutter에서 Dynamic Link를 활용한 딥링크 구현 방법은?
 - Flutter에서 FlutterFlow와 같은 Low-Code 개발 도구를 활용하는 방법은?
