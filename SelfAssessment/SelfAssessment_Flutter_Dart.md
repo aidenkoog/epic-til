@@ -2923,7 +2923,18 @@ Organize concepts, features, types and Pros and Cons
   - 호스팅: Firebase Hosting, Vercel, GitHub Pages 등 가능
   - 주의점: iOS 사파리는 PWA 일부 기능 제한 존재 (백그라운드 동작 등)
 
-- Flutter에서 Native Code(Android/iOS)를 호출하는 방법은?
+- Flutter에서 Native Code(Android/iOS)를 호출하는 방법
+  - 방법
+    - Platform Channels 사용 (플러터 <> 네이티브 간 메시지 전달)
+  - 플러터 측
+    ```dart
+    const platform = MethodChannel('com.example/native');
+    final result = await platform.invokeMethod('nativeFunction');
+    ```
+  - Android (Kotlin/Java): MethodChannel 등록 후 setMethodCallHandler로 처리
+  - iOS (Swift): FlutterMethodChannel 사용해 동일하게 구현
+  - 예시 활용: 센서, GPS, BLE, 영상 처리, SDK 호출 등
+
 - Flutter에서 isolate를 활용한 병렬 처리 방법은?
 - Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
 - Flutter에서 ML Kit을 활용한 이미지 인식 기능을 구현하는 방법은?
