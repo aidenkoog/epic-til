@@ -2982,9 +2982,28 @@ Organize concepts, features, types and Pros and Cons
     - ICE candidate 처리
     - 스트림 연결 및 표시
 
-- Flutter에서 Background Task를 수행하는 방법은?
-- Flutter에서 Firebase Analytics를 활용하는 방법은?
+- Flutter에서 Background Task를 수행하는 방법
+  - 안드로이드/아이폰에 따라 처리 방식 다름
+  - 옵션별 방법:
+    - workmanager → 일정 간격 작업 (iOS/Android 지원)
+    - android_alarm_manager_plus → Android 백그라운드 알람
+    - flutter_background_service → 백그라운드 상태 유지 + 주기적 로직
+    - Isolate + Timer → 앱 열려 있을 때 백그라운드 루프 실행
+  - iOS 주의: 백그라운드 제한 강함 → 백그라운드 fetch 또는 알림 기반으로 처리 필요
 
+- Flutter에서 Firebase Analytics를 활용하는 방법
+  - 설정:
+    - Firebase 연동 (firebase_core, firebase_analytics)
+    - GoogleService-Info.plist / google-services.json 포함
+  - 사용법:
+    ```dart
+    FirebaseAnalytics.instance.logEvent(
+      name: 'purchase',
+      parameters: {'item': 'beer', 'value': 1},
+    );
+    ```
+  - 자동 수집 항목: 앱 열기, 첫 실행, 인앱 결제 등
+  - 커스텀 이벤트: 앱 사용 패턴 분석용으로 logEvent 정의
 
 - Flutter에서 Background Fetch를 활용하는 방법은?
 - Flutter에서 OpenAI API를 활용한 챗봇 기능을 구현하는 방법은?
