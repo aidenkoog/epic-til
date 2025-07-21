@@ -2950,7 +2950,15 @@ Organize concepts, features, types and Pros and Cons
   - 주의 사항
     - isolate 간 메모리 공유 불가 > 메시지 기반 통신 사용
 
-- Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
+- Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유
+  - 목적: C/C++ 라이브러리 등을 Flutter에서 직접 호출
+  - 활용 예: 고성능 연산, 이미지/오디오 처리, OpenCV, FFmpeg, Metal 등
+  - 구현 방식:
+    - dart:ffi 사용
+    - .so(Android), .dylib(macOS/iOS), .dll(Windows) 등 바인딩
+    - ffi 및 ffi_helper 패키지 사용 시 편리
+  - 주의: 메모리 관리와 플랫폼 별 바이너리 분리 필요
+
 - Flutter에서 ML Kit을 활용한 이미지 인식 기능을 구현하는 방법은?
 - Flutter에서 WebRTC를 활용한 영상 통화 기능을 구현하는 방법은?
 - Flutter에서 Background Task를 수행하는 방법은?
