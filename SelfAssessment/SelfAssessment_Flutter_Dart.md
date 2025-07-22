@@ -3044,12 +3044,32 @@ Organize concepts, features, types and Pros and Cons
 
 - Flutter에서 Dynamic Link를 활용한 딥링크 구현 방법
   - Firebase Dynamic Links를 통해 딥링크를 생성
+  
   - 앱 실행 시 FirebaseDynamicLinks.instance.onLink.listen 또는 getInitialLink()를 사용해 딥링크 데이터를 처리
+  
   - 앱이 종료되어 있든 백그라운드에 있든 모두 대응 가능하도록 초기 처리와 리스닝을 분리해 구성
 
-- Flutter에서 FlutterFlow와 같은 Low-Code 개발 도구를 활용하는 방법은?
-- Flutter에서 Flare 애니메이션을 적용하는 방법은?
-- Flutter에서 Riverpod의 AutoDispose 기능을 활용하는 방법은?
+- Flutter에서 FlutterFlow와 같은 Low-Code 개발 도구를 활용하는 방법
+  - Flutter 기반의 UI를 시각적으로 구성할 수 있는 Low-Code 툴로, Firebase 연동, API 연결, 상태 관리까지 GUI 환경에서 구현 가능
+
+  - 구성한 앱은 Flutter 코드로 export가 가능하여, 복잡한 비즈니스 로직은 VSCode 또는 Android Studio에서 이어서 커스터마이징 가능
+
+  - 단점은 복잡한 커스터마이징이 어렵고, 성능 튜닝/상태 관리 제한이 있으므로 MVP, 프로토타입, 관리 앱 등에 적합
+
+- Flutter에서 Flare 애니메이션을 적용하는 방법
+  - Flare(Rive)는 .riv 파일로 벡터 기반 애니메이션을 제작하여 앱에 경량으로 삽입할 수 있는 툴
+
+  - rive 패키지를 사용해 RiveAnimation.asset('assets/example.riv')로 로드하고, 상태 제어가 필요한 경우 StateMachineController를 통해 트리거나 파라미터로 조작
+
+  - FPS에 영향이 적고, Flutter UI와 자연스럽게 결합되므로 로딩 애니메이션, 전환 효과 등에 적합
+
+- Flutter에서 Riverpod의 AutoDispose 기능을 활용하는 방법
+  - 위젯이 dispose 될 때 provider도 자동으로 메모리 해제되도록 도와주는 기능
+  - 예제
+    ```dart
+    final userProvider = FutureProvider.autoDispose((ref) async => fetchUser());
+    ```
+
 - Flutter에서 플랫폼별 코드(Android, iOS)를 다르게 적용하는 방법은?
 - Flutter에서 Dart의 null-safety 기능을 활용하는 방법은?
 - Flutter에서 CI/CD 파이프라인을 구축하는 방법은?
