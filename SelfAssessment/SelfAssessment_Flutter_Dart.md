@@ -3042,7 +3042,11 @@ Organize concepts, features, types and Pros and Cons
     ```
   - UX 개선: 타이핑 애니매이션, 대기중 인디케이터, 챗버블 UI 적용 등
 
-- Flutter에서 Dynamic Link를 활용한 딥링크 구현 방법은?
+- Flutter에서 Dynamic Link를 활용한 딥링크 구현 방법
+  - Firebase Dynamic Links를 통해 딥링크를 생성
+  - 앱 실행 시 FirebaseDynamicLinks.instance.onLink.listen 또는 getInitialLink()를 사용해 딥링크 데이터를 처리
+  - 앱이 종료되어 있든 백그라운드에 있든 모두 대응 가능하도록 초기 처리와 리스닝을 분리해 구성
+
 - Flutter에서 FlutterFlow와 같은 Low-Code 개발 도구를 활용하는 방법은?
 - Flutter에서 Flare 애니메이션을 적용하는 방법은?
 - Flutter에서 Riverpod의 AutoDispose 기능을 활용하는 방법은?
@@ -3050,11 +3054,11 @@ Organize concepts, features, types and Pros and Cons
 - Flutter에서 Dart의 null-safety 기능을 활용하는 방법은?
 - Flutter에서 CI/CD 파이프라인을 구축하는 방법은?
 - Flutter에서 FFI(Foreign Function Interface)를 활용하여 네이티브 모듈과 상호작용하는 방법은?
-
-
 - Flutter의 Platform Channels과 FFI의 차이점 및 활용 방법은?
 - Flutter 3.22에서 추가된 주요 기능과 최적화 기법은?
 - Flutter에서 CustomRenderObjects를 활용하여 UI 성능을 최적화하는 방법은?
+
+
 - Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 그래픽 최적화 기법은?
 - Flutter의 주요 특징과 장단점은 무엇인가요?
 - Dart 언어의 특징을 설명해주세요.
