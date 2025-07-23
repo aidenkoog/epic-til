@@ -3214,20 +3214,66 @@ Organize concepts, features, types and Pros and Cons
   - compute()함수는 가장 간단한 Isolate 활용 방법
     - 앱의 응답성 유지, 복잡한 작업 동시에 수행 가능
 
-- Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
-- Flutter에서 AnimatedList와 ListView.builder의 차이점은?
-- Flutter에서 go_router와 기존 Navigator의 차이점은?
-- Flutter에서 Canvas API를 활용하는 방법은?
-- Flutter에서 SafeArea가 필요한 이유는?
+- Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유
+  - FFI는 C/C++ 등 네이티브 코드와 직접 연동 가능하게 해줌
+  - 성능이 중요한 로직 (이미지 처리, 암호화 등)을 직접 호출할 때 사용
 
+- Flutter에서 AnimatedList와 ListView.builder의 차이점
+  - AnimatedList
+    - 아이템 추가/삭제 시 애니매이션 제공
+  - ListView.builder
+    - 정적 리스트를 효율적으로 렌더링할 때 적합
 
-- Flutter에서 ExpansionTile과 ListTile의 차이점은?
-- Flutter에서 build() 함수의 역할과 성능 최적화 방법은?
-- Flutter에서 SliverAppBar와 AppBar의 차이점은?
-- Flutter에서 FutureBuilder와 StreamBuilder의 차이점은?
-- Flutter에서 RepaintBoundary의 역할은?
-- Flutter에서 const 키워드를 사용할 때 성능 최적화가 되는 이유는?
+- Flutter에서 go_router와 기존 Navigator의 차이점
+  - go_router
+    - 선언적 라우팅 방식
+    - URL 동기화, 리다이렉트, 쉘 라우트 같은 기능이 강화
+  - 기존 Navigator
+    - 명령형 방식의 푸시/팝 구조
 
+- Flutter에서 Canvas API를 활용하는 방법
+  - CustomPainter를 사용해 캔버스에 직접 그리기 가능
+  - 선, 원, 텍스트 등 복잡한 커스텀 그래픽을 구현
+
+- Flutter에서 SafeArea가 필요한 이유
+  - 디바이스의 노치, 상태바, 홈 인디케이터 등 시스템 UI 영역을 피해서 콘텐츠 표시
+  - 화면 요소가 잘리지 않도록 보호하는 용도로 사용
+
+- Flutter에서 ExpansionTile과 ListTile의 차이점
+  - ExpansionTile
+    - 열고 닫을 수 있는 목록 구조로 하위 항목 포함 가능
+  - ListTile
+    - 단일 행 항목 표현할 때 사용
+
+- Flutter에서 build() 함수의 역할과 성능 최적화 방법
+  - build() 함수 역할
+    - 위젯 UI를 그리는 메인 함수
+    - 상태 변경 시 호출됨
+  - 성능 최적화 방법
+    - 리빌드를 최소화하기 위해 const, shouldRebuild, memoization 등을 활용할 수 있음
+
+- Flutter에서 SliverAppBar와 AppBar의 차이점
+  - AppBar
+    - 고정된 헤더
+  - SilverAppBar
+    - 스크롤에 따라 축소/확장/고정 동작 가능
+    - CustomScrollView 에서 유연한 UI 구성 가능
+
+- Flutter에서 FutureBuilder와 StreamBuilder의 차이점
+  - FutureBuilder
+    - 단일 비동기 결과 처리
+  - StreamBuilder
+    - 여러 이벤트를 지속적으로 수신하는 스트림을 처리
+  - API 요청, 실시간 데이터 구독처럼 용도에 따라 선택됨
+
+- Flutter에서 RepaintBoundary의 역할
+  - 해당 위젯을 별도 레이어로 분리해 불필요한 리렌더링 방지
+  - 스크롤 리스트나 애니매이션에서 성능 최적화에 유리
+
+- Flutter에서 const 키워드를 사용할 때 성능 최적화가 되는 이유
+  - const는 빌드 시점에 인스턴스를 고정
+  - 위젯 트리 재구성 시 재생성되지 않음
+  - 리렌더링 비용을 줄이고 불필요한 리빌드 방지
 
 - Flutter의 State Restoration이란 무엇인가?
 - Flutter에서 isolate를 사용하는 이유는?
