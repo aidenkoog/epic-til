@@ -3150,15 +3150,69 @@ Organize concepts, features, types and Pros and Cons
     - 복잡한 앱에 적합
 
 - Flutter의 Hot Reload와 Hot Restart의 차이점
+  - Hot Reload
+    - 코드 변경 사항을 즉시 반영하나 상태는 유지
+  - Hot Restart
+    - 앱을 완전히 재시작하여 모든 상태 초기화
+  - 개발 중 UI 수정 시 핫리로드 / 구조 변경시 핫 리스타트 사용
+
 - Flutter의 Widget Tree와 Element Tree의 차이점
+  - Widget Tree
+    - 선언적인 UI 구조, Immutable
+  - Element Tree
+    - 위젯의 실제 인스턴스 관리
+    - 렌더링과 상태를 포함
+  - 위젯은 블루프린트, 엘리먼트는 그 실행체
+    - 구조, 구현체라는 의미
+
 - Flutter의 렌더링 프로세스
-- Dart의 Isolate와 멀티스레딩 처리 방법을 설명해주세요.
-- Flutter의 Skia 그래픽 엔진에 대해 설명해주세요.
-- Dart의 Sound Null Safety와 Migration 전략을 설명해주세요.
-- Flutter에서 Navigator 2.0의 장점과 기존 방식과의 차이점은?
-- Flutter의 InheritedWidget과 Provider 패턴의 차이점은?
-- Flutter에서 setState()가 불필요한 리빌드를 초래하는 이유는?
-- Flutter에서 Isolate를 활용하는 이유는?
+  - 위젯 > 엘리먼트 > 렌더 객체로 구성
+  - 빌드 > 레이아웃 > 페인트 > 컴포지팅 > Raster 단계
+  - Skia 엔진이 GPU와 통신 > 화면 렌더링 구성
+
+- Dart의 Isolate와 멀티스레딩 처리 방법
+  - 다트 자체는 단일 스레드 기반
+  - isolate 로 병렬 처리
+    - 서로 독립된 메모리 영역을 사용하여 메시지로 통신
+    - 복잡한 연산이나 백그라운드 작업에서 UI Thread 차단을 방지
+
+- Flutter의 Skia 그래픽 엔진
+  - 구글의 오픈소스 2D 렌더링 엔진
+  - 플러터의 핵심 그래픽 백엔드
+  - 벡터 기반
+  - OpenGL 또는 Vulkan을 통해 GPU 가속 렌더링을 수행
+  - 빠른 UI 성능과 플랫폼 일관성을 제공
+
+- Dart의 Sound Null Safety와 Migration 전략
+  - Sound Null Safety는 널 가능성을 컴파일 타임에 체크하여 안정성 향상
+  - String?, late, ! 등 문법 활용
+  - 기존 프로젝트는 dart migrate 명령어로 점진적 전환 가능
+  - 런타임 오류를 줄이고 유지보수 측면 향상
+
+- Flutter에서 Navigator 2.0의 장점과 기존 방식과의 차이점
+  - Navigator 1.0은 Stack 기반의 imperative 방식 (push/pop)
+    - 명령형 방식
+
+  - Navigator 2.0은 declarative 방식으로 URL 기반 라우팅 및 브라우저 히스토리 지원에 유리
+    - 선언형 방식
+    - 복잡한 앱 또는 웹 지원에 필수적인 구조
+
+- Flutter의 InheritedWidget과 Provider 패턴의 차이점
+  - InheritedWidget은 플러터 내장 상태 전달 방식이나 사용과 유지보수가 어려움
+  - Provider는 이를 더 추상화해 더 간편하게 상태를 전달하고 구독 가능하게 함
+    - Provider는 InheritedWidget 위에 만들어진 래퍼 라이브러리
+
+- Flutter에서 setState()가 불필요한 리빌드를 초래하는 이유
+  - 해당 StatefulWidget 전체를 다시 빌드하므로, 리빌드 범위 넓음
+  - 세분화된 상태 관리를 하지 않으면 작은 변화에도 전체 위젯 재구성되어 성능에 악영향
+    - 개선책
+      - ValueNotifier, Provider, Riverpod 등 사용
+
+- Flutter에서 Isolate를 활용하는 이유
+  - UI 메인 스레드가 차단되지 않도록 무거운 연산을 별도 스레드에서 처리하기 위한 목적
+    - 예: 이미지 디코딩, 압축, JSON 파싱
+  - compute()함수는 가장 간단한 Isolate 활용 방법
+    - 앱의 응답성 유지, 복잡한 작업 동시에 수행 가능
 
 - Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
 - Flutter에서 AnimatedList와 ListView.builder의 차이점은?
