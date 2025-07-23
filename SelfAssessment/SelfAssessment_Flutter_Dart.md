@@ -3069,25 +3069,80 @@ Organize concepts, features, types and Pros and Cons
     ```dart
     final userProvider = FutureProvider.autoDispose((ref) async => fetchUser());
     ```
+  - 정리
+    - 메모리 누수, 오래된 상태 유지 문제 예방 가능
+    - ref.keepAlive() 활용 시 조건부 유지도 가능
+    - PageView, TabView, Navigator 전환 시 자주 사용됨
 
-- Flutter에서 플랫폼별 코드(Android, iOS)를 다르게 적용하는 방법은?
-- Flutter에서 Dart의 null-safety 기능을 활용하는 방법은?
-- Flutter에서 CI/CD 파이프라인을 구축하는 방법은?
-- Flutter에서 FFI(Foreign Function Interface)를 활용하여 네이티브 모듈과 상호작용하는 방법은?
-- Flutter의 Platform Channels과 FFI의 차이점 및 활용 방법은?
-- Flutter 3.22에서 추가된 주요 기능과 최적화 기법은?
-- Flutter에서 CustomRenderObjects를 활용하여 UI 성능을 최적화하는 방법은?
+- Flutter에서 플랫폼별 코드(Android, iOS)를 다르게 적용하는 방법
+  - Platform.isAndroid, isIOS 통해 조건 분기 가능
+  - MethodChannel을 통해 안드로이드 또는 iOS 코드와 직접 통신 가능
+  - 예: if (Platform.isAndroid) showAndroidToast(); else showiOSToast();
 
+- Flutter에서 Dart의 null-safety 기능을 활용하는 방법
+  - 컴파일 타임에 널 오류를 방지
+  - ?(nullable), !(non-null) 등의 키워드 활용
+  - late 키워드는 선언 후 반드시 초기화 보장되는 값에 사용
 
-- Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 그래픽 최적화 기법은?
-- Flutter의 주요 특징과 장단점은 무엇인가요?
-- Dart 언어의 특징을 설명해주세요.
-- Flutter에서의 상태 관리 방법을 설명해주세요. (Provider, Riverpod, Bloc 등)
-- Flutter의 Hot Reload와 Hot Restart의 차이점은 무엇인가요?
-- Flutter의 Widget Tree와 Element Tree의 차이점은 무엇인가요?
-- Flutter의 렌더링 프로세스에 대해 설명해주세요.
+- Flutter에서 CI/CD 파이프라인을 구축하는 방법
+  - GitHub Actions, Bitrise, Codemagic 등을 사용하여 빌드, 테스트, 배포 자동화 구현
+  - 예시
+    - GitHub Actions 에서 flutter pub get, flutter test, flutter build apk, firebase deploy 단계로 구성 가능
+  - Firebase App Distribution, TestFlight, Play Store 등과 연동하여 지속적 배포 구현 가능
 
+- Flutter에서 FFI(Foreign Function Interface)를 활용하여 네이티브 모듈과 상호작용하는 방법
+  - Dart FFI
+    - C/C++로 작성된 native 라이브러리와 직접 바인딩할 수 있게 해주는 기능
+    - .so, .dylib 등을 직접 불러와 DynamicLibrary.open() 으로 연동하며, 주로 성능이 중요한 연산 처리에 사용
+  - 예시
+    - 이미지 처리, 머신러닝, 디코딩 로직 등을 native로 작성하고 Dart에서 호출
 
+- Flutter의 Platform Channels과 FFI의 차이점 및 활용 방법
+  - Platform Channels
+    - Dart <> Android/iOS 고급 API 호출 시점에 사용 
+    - 예: 카메라, GPS
+  - FFI
+    - Dart <> Native C 라이브러리 직접 호출
+    - 예: 빠른 수치 계산, 압축 해제 등
+  - Platform Channels는 플랫폼 종속적이며, FFI는 공통 C 계열 라이브러리에 적합
+
+- Flutter 3.22에서 추가된 주요 기능과 최적화 기법
+  - Impeller 렌더러의 안드로이드 지원 (정식 출시)
+  - WebAssembly(Wasm) 빌드 미리보기 제공
+  - DevTool 성능 개선 및 핫 리로드 속도 향상
+  - flutter build 시 압축률 개선, Flutter Web 에서 CanvasKit 성능 향상 등이 포함
+
+- Flutter에서 CustomRenderObjects를 활용하여 UI 성능을 최적화하는 방법
+  - RenderObject를 직접 상속하여 맞춤형 레이아웃 또는 페인팅 구현 시 성능 극대화 가능
+  - 예
+    - 복잡한 리스트뷰 또는 커스텀 페인터보다 더 정교한 픽셀 제어가 필요할 때 사용
+    - 높은 난이도와 메모리 관리 주의 필요
+
+- Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 그래픽 최적화 기법
+  - Skia
+    - 기존 플러터의 디폴트 엔진, GPU 기반 벡터 렌더링 제공
+  - Impeller
+    - shader pre-compilation 기반의 최신 렌더러로 iOS/Android 에서 더 빠른 프레임 렌더링 가능
+    - 최적화를 위해서는 repaintBoundary, const 위젯, CustomPaint 최적화 등을 병행해야 함
+
+- Flutter의 주요 특징과 장단점
+  - 장점
+    - 하나의 코드 베이스로 iOS/Android/Web/Desktop 모두 대응, 높은 생산성, 핫 리로드 성능 우수
+  - 단점
+    - 빌드 사이즈 큼
+    - 고급 네이티브 기능 접근 시 플랫폼 채널 필요
+    - iOS 최신 API 대응 느림, UI 일관성과 빠른 MVP 제작에 매우 적합
+
+- Dart 언어의 특징
+  - 정적 타입 언어이면서 동적 언어처럼 간결한 문법
+  - 널 안정성, async/await, FFI, 확장 메서드 등 최신 기능 제공
+  - AOT & JIT 컴파일 모두 지원
+  - 플러터와 결합하여 높은 성능과 생산성 제공
+
+- Flutter에서의 상태 관리 방법 (Provider, Riverpod, Bloc 등)
+- Flutter의 Hot Reload와 Hot Restart의 차이점
+- Flutter의 Widget Tree와 Element Tree의 차이점
+- Flutter의 렌더링 프로세스
 - Dart의 Isolate와 멀티스레딩 처리 방법을 설명해주세요.
 - Flutter의 Skia 그래픽 엔진에 대해 설명해주세요.
 - Dart의 Sound Null Safety와 Migration 전략을 설명해주세요.
@@ -3095,6 +3150,7 @@ Organize concepts, features, types and Pros and Cons
 - Flutter의 InheritedWidget과 Provider 패턴의 차이점은?
 - Flutter에서 setState()가 불필요한 리빌드를 초래하는 이유는?
 - Flutter에서 Isolate를 활용하는 이유는?
+
 - Flutter에서 FFI(Foreign Function Interface)를 활용하는 이유는?
 - Flutter에서 AnimatedList와 ListView.builder의 차이점은?
 - Flutter에서 go_router와 기존 Navigator의 차이점은?
