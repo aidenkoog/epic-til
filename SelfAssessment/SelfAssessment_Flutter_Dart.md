@@ -3140,6 +3140,15 @@ Organize concepts, features, types and Pros and Cons
   - 플러터와 결합하여 높은 성능과 생산성 제공
 
 - Flutter에서의 상태 관리 방법 (Provider, Riverpod, Bloc 등)
+  - Provider
+    - 가장 보편적인 관리 방식, 간단한 구조에 적합
+  - Riverpod
+    - 프로바이더 단점 개선한 구조적 상태관리 라이브러리
+    - 테스트 및 DI에 장점
+  - Bloc
+    - Event-State 기반의 명확한 흐름이 특징
+    - 복잡한 앱에 적합
+
 - Flutter의 Hot Reload와 Hot Restart의 차이점
 - Flutter의 Widget Tree와 Element Tree의 차이점
 - Flutter의 렌더링 프로세스
