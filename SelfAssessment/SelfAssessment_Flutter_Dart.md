@@ -3275,43 +3275,67 @@ Organize concepts, features, types and Pros and Cons
   - 위젯 트리 재구성 시 재생성되지 않음
   - 리렌더링 비용을 줄이고 불필요한 리빌드 방지
 
-- Flutter의 State Restoration이란 무엇인가?
-- Flutter에서 isolate를 사용하는 이유는?
-- Flutter에서 navigator key를 사용하는 이유는?
-- Flutter에서 Platform Channel을 활용한 네이티브 통신 방식은?
-- Flutter에서 DevTools을 활용한 성능 최적화 방법은?
-- Flutter에서 Platform Views를 사용하는 이유는?
-- Flutter의 implicit animation과 explicit animation의 차이점은?
-- Flutter의 State Management를 어떤 방식으로 사용했는가? (Provider, Riverpod, Bloc 등)
-- Flutter에서의 네이티브 연동 (MethodChannel) 경험이 있는가?
-- Flutter에서 성능 최적화를 위해 어떤 기법을 적용했는가?
-- Flutter Web과 Mobile의 차이점은?
+- Flutter의 State Restoration
+  - 정의
+    - 앱 종료나 백그라운드에서 제거되었을 때 이전 상태를 복원하는 기능
+  - 사용자 인터랙션을 잃지 않고 앱 복구 가능 > UX 향상
 
+- Flutter에서 navigator key를 사용하는 이유
+  - GlobalKey<NavigatorState>를 사용 시 컨텍스트 없이도 전역에서 라우팅 제어 가능
+  - 예시
+    - 알림 클릭 시 특정 화면으로 이동하는 등의 상황에서 유용
 
-- Dart의 Null Safety 개념을 설명하라.
-- Dart의 Future와 Stream의 차이점은?
-- Dart의 late 키워드는 언제 사용하는가?
-- Dart의 mixin과 abstract class의 차이는?
-- Dart에서 async와 await은 어떻게 동작하는가?
+- Flutter에서 Platform Channel을 활용한 네이티브 통신 방식
+  - 플러터와 안드로이드, iOS 간에 메서드 호출을 주고받기 위해 MethodChannel 사용
+  - 네이티브 기능 (예: 블루투스, 센서)을 직접 제어 가능
 
+- Flutter에서 DevTools을 활용한 성능 최적화 방법
+  - DevTools는 렌더링 시간, 위젯 리빌드, 메모리 사용량 등을 시각화해 성능 병목을 분석하는 도구
+  - Timeline, Repaint Rainbow, Widget Inspector 등을 자주 활용
 
-- Dart에서 const와 final의 차이점은?
-- Dart의 Isolates는 어떻게 동작하는가?
-- Dart에서 factory constructor는 어떤 역할을 하는가?
-- Flutter의 StatefulWidget과 StatelessWidget의 차이는?
-- Flutter에서 상태 관리(State Management)를 어떤 방식으로 구현하는가? (Provider, Riverpod, Bloc 등)
-- Flutter의 Widget 트리에서 BuildContext의 역할은?
-- setState()는 언제 사용하는가?
-- Flutter의 Hot Reload와 Hot Restart의 차이는?
-- Flutter의 Navigator 1.0과 2.0의 차이점은?
-- Flutter에서 Platform-specific 코드(Android, iOS)와 연동하는 방법은?
+- Flutter에서 Platform Views를 사용하는 이유
+  - 플러터 위에 네이티브 뷰 (안드로이드 뷰, iOS UIView)를 직접 삽입할 수 있는 기능
+  - 예: 웹뷰, 구글 맵스 등 네이티브 UI가 필요한 경우에 사용
 
+- Flutter의 implicit animation과 explicit animation의 차이점
+  - Implicit Animation(AnimatedContainer 등)은 상태 변경 시 자동 애니매이션 제공
+  - Explicit Animation(AnimatedController)은 더 세밀한 타이밍과 제어 가능
 
-- Flutter의 애니메이션 시스템(AnimationController, Tween, CurvedAnimation)을 설명하라.
-- Dart의 Zone은 무엇이며, 어떤 상황에서 유용하게 사용할 수 있는가?
-- Dart의 mixin과 abstract class의 활용 방식과 차이점은?
-- Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법을 설명하라.
-- Dart의 Isolates를 사용한 병렬 처리 기법을 설명하라.
+- Flutter Web과 Mobile의 차이점
+  - 웹은 SEO, 초기 로딩 속도, 브라우저 호환성 등 한계 존재
+  - 모바일은 네이티브 성능과 다양한 플랫폼 API 접근 유리
+    - 즉, 위젯 호환성과 제약 사항이 다름
+
+- Dart의 Null Safety 개념
+  - 정적 분석을 통해 NULL 오류 방지
+  - String? -> NULL 허용 / String -> NULL 허용 안됨
+  - 변수 초기화 전 사용 방지, 컴파일 타임 오류로 잡아줌
+
+- Dart의 Future와 Stream 차이점
+  - Future
+    - 한번만 반환
+    - 비동기 작업 결과 (1회성)
+    - API 응답에 주로 사용
+  - Stream
+    - 여러번 반환
+    - 이벤트나 데이터 흐름 (다회)
+    - 센서 데이터, 버튼 클릭 등에 사용
+  - 예시
+    ```dart
+    Future<String> getData() async => 'value';
+    Stream<int> numberStream() => Stream.periodic(Duration(seconds: 1), (i) => i);
+    ```
+
+- Dart의 late 키워드 사용 시점
+- Dart의 mixin과 abstract class의 차이
+- Dart에서 async와 await 동작 방식
+- Dart에서 const와 final의 차이점
+- Dart에서 factory constructor 역할
+- Flutter의 StatefulWidget과 StatelessWidget의 차이
+- Flutter의 Widget 트리에서 BuildContext의 역할
+- Flutter의 애니메이션 시스템(AnimationController, Tween, CurvedAnimation)을 설명
+- Dart의 Zone은 무엇이며, 어떤 상황에서 유용한가?
+- Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법
 
 
 - Future와 Completer의 차이점과 활용법은?
