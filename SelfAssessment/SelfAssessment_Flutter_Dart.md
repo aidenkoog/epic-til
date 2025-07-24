@@ -3337,8 +3337,29 @@ Organize concepts, features, types and Pros and Cons
     }
     ```
   - 초기화 전에 사용 시 LateInitializationError 발생
-  
+
 - Dart의 mixin과 abstract class의 차이
+  - mixin
+    - 기능 재사용 목적
+    - 생성자 사용 불가
+    - 상태 없음 (권장 사항)
+    - 여러 mixin 조합 가능 (다중 상속 가능)
+  - abstract class
+    - 상속 구조 및 규격 정의
+    - 생성자 사용 가능
+    - 상태 가짐 가능
+    - 다중 상속 불가
+  - 예시
+    ```dart
+    mixin Logger {
+      void log(String msg) => print(msg);
+    }
+
+    abstract class Animal {
+      void makeSound();
+    }
+    ```
+
 - Dart에서 async와 await 동작 방식
 - Dart에서 const와 final의 차이점
 - Dart에서 factory constructor 역할
