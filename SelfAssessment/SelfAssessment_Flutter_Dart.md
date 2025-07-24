@@ -3327,6 +3327,17 @@ Organize concepts, features, types and Pros and Cons
     ```
 
 - Dart의 late 키워드 사용 시점
+  - 초기화 지연이 필요할 때 사용
+  - Null Safety에서 Non-Null 변수를 선언하지만, 초기화는 나중에 진행
+  - 예시
+    ```dart
+    late String name;
+    void init() {
+      name = 'Aiden'; // 나중에 할당
+    }
+    ```
+  - 초기화 전에 사용 시 LateInitializationError 발생
+  
 - Dart의 mixin과 abstract class의 차이
 - Dart에서 async와 await 동작 방식
 - Dart에서 const와 final의 차이점
