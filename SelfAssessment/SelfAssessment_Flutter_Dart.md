@@ -3361,6 +3361,48 @@ Organize concepts, features, types and Pros and Cons
     ```
 
 - Dart에서 async와 await 동작 방식
+  - async > Future 반환
+  - await > Future 완료까지 기다림 (Non-Blocking)
+  - 예시
+    ```dart
+    Future<void> loadData() async {
+      final data = await fetchFromApi(); // fetch가 끝날 때까지 기다림
+    }
+    ```
+  - 추가 설명
+    - Non-Blocking
+      - 번호표 받고 기다리는 동안 다른 일 하다가 호출되면 반응
+        - 다른 일을 하다가 결과 오면 그때 반응
+    - Blocking
+      - 식당 앞에서 줄 서서 음식 나오기만 기다리는 것
+        - 아무 일도 못하고 대기
+    - Non-Blocking 예제
+      ```dart
+      void main() {
+        print('A: 시작');
+        waitSomething();
+        print('C: 다음 작업 계속함');
+      }
+
+      Future<void> waitSomething() async {
+        print('B: 대기 시작');
+        await Future.delayed(Duration(seconds: 2)); // 2초 기다림
+        print('D: 대기 끝, 후속 작업');
+      }
+      ```
+      ```makefile
+      A: 시작
+      B: 대기 시작
+      C: 다음 작업 계속함 <- 이 부분이 핵심
+      D: 대기 끝, 후속 작업
+      ```
+      - await 는 2초 동안 해당 함수 (waitSomething)의 후속 코드(D)를 보류하지만
+      - main 함수 전체를 멈추지는 않음
+      - 그래서 C가 먼저 출력됨 -> 넌 블럭킹
+    - 핵심 요약 정리
+      - await는 해당 함수의 다음 줄을 잠깐 멈춤 시키지만 전체 프로그램의 실행을 막지는 않음
+      - Flutter UI에서 await은 UI를 멈추지 않도록 보장함 (사용자가 앱을 계속 사용할 수 있음)
+
 - Dart에서 const와 final의 차이점
 - Dart에서 factory constructor 역할
 - Flutter의 StatefulWidget과 StatelessWidget의 차이
