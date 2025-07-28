@@ -3418,10 +3418,39 @@ Organize concepts, features, types and Pros and Cons
     const pi = 3.14159;             // 가능
     const time = DateTime.now();    // 에러: const는 컴파일 시점에 값을 알아야 함
     ```
+  - 요약 정리: const는 컴파일 타임 상수, final은 런타임 상수
 
 - Dart에서 factory constructor 역할
-- Flutter의 StatefulWidget과 StatelessWidget의 차이
+  - 객체를 반환하지만, 항상 새로운 인스턴스를 만들 필요 없음
+  - 싱글턴 패턴, 캐싱, 서브 클래스 반환, 조건 분기 생성자 등에 사용
+  - 예시
+    ```dart
+    class Logger {
+      static final Logger _instance = Logger._internal();
+
+      factory Logger() {
+        return _instance;
+      }
+      Logger._internal();
+    }
+    ```
+  - factory 키워드는 new 키워드 없이도 생성자 로직을 커스터마이징할 수 있게 해줌
+
 - Flutter의 Widget 트리에서 BuildContext의 역할
+  - 역할
+    - 위젯 트리에서 위치/연결 정보를 담고 있는 객체
+    - Theme.of(context), Navigator.of(context), MediaQuery.of(context) 등 위젯 트리를 탐색할 때 사용
+    - 트리 상위 요소에 접근하는 수단
+  - 예시
+    ```dart
+    Widget build(BuildContext context) {
+      // BuildContext를 통해 ThemeData에 접근
+      final theme = Theme.of(context);
+      return Text('Hello', style: theme.textTheme.titleLarge);
+    }
+    ```
+  - BuildContext는 위젯 트리의 현재 위치이자, 위젯 간 의존성 접근 경로
+
 - Flutter의 애니메이션 시스템(AnimationController, Tween, CurvedAnimation)을 설명
 - Dart의 Zone은 무엇이며, 어떤 상황에서 유용한가?
 - Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법
