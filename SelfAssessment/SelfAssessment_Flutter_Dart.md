@@ -3360,7 +3360,7 @@ Organize concepts, features, types and Pros and Cons
     }
     ```
 
-- Dart에서 async와 await 동작 방식
+- Dart에서 async와 await 동작 방식 (추가: 블럭킹, 넌블럭킹 개념)
   - async > Future 반환
   - await > Future 완료까지 기다림 (Non-Blocking)
   - 예시
