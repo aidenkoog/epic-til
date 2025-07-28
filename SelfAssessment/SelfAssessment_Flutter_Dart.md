@@ -3475,8 +3475,27 @@ Organize concepts, features, types and Pros and Cons
       _controller.forward();
     }
     ```
+  - Tween -> Curve -> AnimationController를 연결해서 부드럽고 제어된 애니매이션 구성
 
-- Dart의 Zone은 무엇이며, 어떤 상황에서 유용한가?
+- Dart의 Zone 정의 및 유용 시점
+  - 정의
+    - 비동기 작업을 감싸는 실행 컨텍스트
+    - 오류 처리, 로깅, 타이머 감시 등을 전체 비동기 코드에 걸쳐 제어 가능
+  - 예시
+    ```dart
+    Zone.current.fork(
+      specification: ZoneSpecification(
+        print: (self, parent, zone, message) {
+          parent.print(zone, "[ZoneLog] $message");
+        },
+      ),
+    ).run(() {
+      print("Hello from Zone");
+    });
+    ```
+  - 플러터 에러 추적, 로깅, 테스트 환경에서의 동작 변경 등에 유용
+
+
 - Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법
 
 
