@@ -3495,8 +3495,22 @@ Organize concepts, features, types and Pros and Cons
     ```
   - 플러터 에러 추적, 로깅, 테스트 환경에서의 동작 변경 등에 유용
 
-
 - Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법
+  - 기존 타입에 메서드를 추가할 수 있음 (상속 아님)
+  - 예시
+    ```dart
+    extension StringExtension on String {
+      String capitalize() {
+        if (this.isEmpty) return this;
+        return this[0].toUpperCase() + substring(1);
+      }
+    }
+
+    void main() {
+      print("hello".capitalize()); // Hello
+    }
+    ```
+  - 기존 클래스 수정 없이 기능을 확장할 수 있는 강력한 방법
 
 
 - Future와 Completer의 차이점과 활용법은?
