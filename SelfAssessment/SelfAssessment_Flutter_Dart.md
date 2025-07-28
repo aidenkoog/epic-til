@@ -3452,6 +3452,30 @@ Organize concepts, features, types and Pros and Cons
   - BuildContext는 위젯 트리의 현재 위치이자, 위젯 간 의존성 접근 경로
 
 - Flutter의 애니메이션 시스템(AnimationController, Tween, CurvedAnimation)을 설명
+  - 구성 요소
+    - AnimationController
+      - 애니매이션 실행/중단 타이밍 제어, vsync 필요
+    - Tween: 시작, 끝값을 정의 (보간)
+    - CurvedAnimation
+      - Tween에 부드러운 곡선 효과 (easeIn, bounce 등) 추가
+  - 예시
+    ```dart
+    AnimationController _controller;
+    Animation<double> _animation;
+
+    @override
+    void initState() {
+      super.initState();
+      _controller = AnimationController(vsync: this, duration: Duration(seconds: 2));
+      _animation = CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ).drive(Tween(begin: 0.0, end: 1.0));
+
+      _controller.forward();
+    }
+    ```
+
 - Dart의 Zone은 무엇이며, 어떤 상황에서 유용한가?
 - Dart에서 extension을 활용하여 기존 클래스를 확장하는 방법
 
