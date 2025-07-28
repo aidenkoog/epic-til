@@ -3404,6 +3404,21 @@ Organize concepts, features, types and Pros and Cons
       - Flutter UI에서 await은 UI를 멈추지 않도록 보장함 (사용자가 앱을 계속 사용할 수 있음)
 
 - Dart에서 const와 final의 차이점
+  - final
+    - 런타임에 정의 결정
+    - 한번만 할당 가능
+    - 메모리 공유: 객체마다 다름
+  - const
+    - 컴파일 타임에 결정
+    - 한번만 할당 가능
+    - 메모리 공유: 동일 값이면 메모리 공유 (canonicalization)
+  - 예시
+    ```dart
+    final now = DateTime.now();     // 가능
+    const pi = 3.14159;             // 가능
+    const time = DateTime.now();    // 에러: const는 컴파일 시점에 값을 알아야 함
+    ```
+
 - Dart에서 factory constructor 역할
 - Flutter의 StatefulWidget과 StatelessWidget의 차이
 - Flutter의 Widget 트리에서 BuildContext의 역할
