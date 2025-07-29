@@ -3510,8 +3510,6 @@ Organize concepts, features, types and Pros and Cons
       print("hello".capitalize()); // Hello
     }
     ```
-  - 기존 클래스 수정 없이 기능을 확장할 수 있는 강력한 방법
-
 
 - Future와 Completer의 차이점과 활용법은?
 - Dart의 typedef를 활용한 함수 타입 정의 방식은?
