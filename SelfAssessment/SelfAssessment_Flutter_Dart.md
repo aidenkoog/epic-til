@@ -3511,7 +3511,29 @@ Organize concepts, features, types and Pros and Cons
     }
     ```
 
-- Future와 Completer의 차이점과 활용법은?
+- Future와 Completer의 차이점과 활용법
+  - 차이
+    - Future
+      - 비동기 결과를 표현하는 클래스
+      - 비동기 API 결과 대기
+      - 상태 변경 불가 (결과 대기만 가능)
+    - Completer
+      - 미래의 Future를 수동으로 제어하는 컨트롤러 역할
+      - 직접 Future를 생성하고, 원하는 시점에 완료시키기 위해 사용
+      - complete(), completeError()로 완료 제어 가능
+  - 예시
+    ```dart
+    Future<String> asyncFunc() async {
+      final completer = Completer<String>();
+
+      Timer(Duration(seconds: 2), () {
+        completer.complete("완료됨");
+      });
+
+      return completer.future;
+    }
+    ```
+
 - Dart의 typedef를 활용한 함수 타입 정의 방식은?
 - dart:ffi를 활용하여 Native 코드와 상호작용하는 방법을 설명하라.
 - Flutter에서 setState를 많이 사용하면 성능 문제가 발생하는 이유는?
