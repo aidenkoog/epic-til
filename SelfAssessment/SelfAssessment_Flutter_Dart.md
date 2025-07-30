@@ -3534,7 +3534,25 @@ Organize concepts, features, types and Pros and Cons
     }
     ```
 
-- Dart의 typedef를 활용한 함수 타입 정의 방식은?
+- Dart의 typedef를 활용한 함수 타입 정의 방식
+  - 함수 시그니처를 간결하게 정의 가능
+  - 예시
+    ```dart
+    typedef IntBinaryOp = int Function(int a, int b);
+
+    int calc(IntBinaryOp op, int a, int b) => op(a, b);
+
+    void main() {
+      print(calc((x, y) => x + y, 3, 4)); // 7
+      // 람다 개념 정리
+      // (x, y) => x + y
+      // int add(int x, int y) => x + y 와 같으니까 람다 차원에서 생각하면 된다.
+    }
+    ```
+  - 활용 시 장점
+    - 코드 가독성 향상
+    - 콜백 함수 정의 시 유용
+
 - dart:ffi를 활용하여 Native 코드와 상호작용하는 방법을 설명하라.
 - Flutter에서 setState를 많이 사용하면 성능 문제가 발생하는 이유는?
 - InheritedWidget과 Provider의 차이점과 성능 차이를 비교하라.
