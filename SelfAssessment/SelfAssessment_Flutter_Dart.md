@@ -3553,15 +3553,124 @@ Organize concepts, features, types and Pros and Cons
     - 코드 가독성 향상
     - 콜백 함수 정의 시 유용
 
-- dart:ffi를 활용하여 Native 코드와 상호작용하는 방법을 설명하라.
-- Flutter에서 setState를 많이 사용하면 성능 문제가 발생하는 이유는?
-- InheritedWidget과 Provider의 차이점과 성능 차이를 비교하라.
-- Flutter에서 RenderObject의 역할과 커스텀 위젯 제작 방법은?
-- Flutter의 Platform Channels를 활용한 네이티브 코드 연동 방식은?
-- Flutter 앱에서 메모리 관리를 최적화하는 방법은?
-- Flutter에서 Hero 애니메이션이 동작하는 방식과 제약 사항은?
-- Flutter에서 Sliver 위젯을 활용한 고급 리스트 렌더링 기법을 설명하라.
+- dart:ffi를 활용하여 Native 코드와 상호작용하는 방법
+  - Foreign Function Interface (FFI)를 통해 C/C++ 코드 호출 가능.
 
+  - 구성 요소
+    - DynamicLibrary: 네이티브 라이브러리 로드
+    - Pointer, Struct: 네이티브 메모리 구조 사용
+    - typedef: 네이티브 함수 바인딩
+
+  - 예시: C 라이브러리의 int add(int, int) 함수 호출
+    ```dart
+    typedef c_add_func = Int32 Function(Int32, Int32);
+    typedef dart_add_func = int Function(int, int);
+
+    final dylib = DynamicLibrary.open("libmath.so");
+    final add = dylib.lookupFunction<c_add_func, dart_add_func>('add');
+
+    void main() {
+      print(add(3, 4)); // 7
+    }
+    ```
+
+- Flutter에서 setState를 많이 사용하면 성능 문제가 발생하는 이유
+  - 전체 위젯 트리를 다시 빌드하므로
+    - 너무 많은 setState() 호출 시 불필요한 렌더링 발생
+    - 성능 저하 > 특히 큰 위젯 트리나 복잡한 애니메이션 시
+  - 해결 방법
+    - ValueNotifier, Provider, Riverpod 등 상세 상태 분리
+    - StatefulWidget 최소화 > StatelessWidget + 상태 분리 전략
+
+- InheritedWidget과 Provider의 차이점과 성능 차이
+  - InheritedWidget
+    - 직접 구현 어려움, 코드 재사용성 낮음, 성능 최적화는 수동으로 updateShouldNotify 구현, 테스트 어려움
+  - Provider
+    - 고수준 추상화 제공, 코드 재사용성 높음, 성능 최적화는 내부적으로 효율적 분리 가능, 테스트 용이
+    - 내부적으로 InheritedWidget을 래핑하여 사용, 리빌드 최소화 등 성능 최적화까지 고려된 아키텍처
+
+- Flutter에서 RenderObject의 역할과 커스텀 위젯 제작 방법
+  - 개요
+    - RenderObject는 플러터의 렌더링 계층의 핵심 클래스
+  - 주요 역할
+    - 위치 계산 (performLayout)
+    - 그리기 (paint)
+    - 히트 테스트 (hitTest)
+  - 커스텀 위젯 제작 흐름
+    ```dart
+    class MyRenderBox extends RenderBox {
+      @override
+      void performLayout() {
+        size = Size(100, 100);
+      }
+
+      @override
+      void paint(PaintingContext context, Offset offset) {
+        context.canvas.drawRect(offset & size, Paint()..color = Colors.blue);
+      }
+    }
+    ```
+    - 사용 시: RenderObjectWidget을 상속한 위젯과 연결
+
+- Flutter의 Platform Channels를 활용한 네이티브 코드 연동 방식
+  - 플러터 <> iOS/Android 네이티브 통신 구조
+  - 구성
+    - MethodChannel: 단방향 호출 및 응답
+    - BasicMessageChannel: 양방향 메시지
+    - EventChannel: 이벤트 스트림 (예: 센서)
+  - 예시 (플러터 <> 안드로이드)
+    ```dart
+    const platform = MethodChannel('samples.flutter.dev/battery');
+    String level = await platform.invokeMehotd('getBatteryLevel');
+    ```
+    ```kotlin
+    MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "samples.flutter.dev/battery")
+      .setMethodCallHandler { call, result ->
+        if (call.method == "getBatteryLevel") {
+            result.success(85)
+        }
+    }
+    ```
+
+- Flutter 앱에서 메모리 관리를 최적화하는 방법
+  - 이미지 캐시 관리: CachedNetworkImage, imageCache.clear()
+  - 애니메이션/컨트롤러 해제: dispose()에서 반드시 해제
+  - 위젯 리빌드 최소화: const 사용, Selector, Consumer 활용
+  - 리스트 최적화: ListView.builder, ReorderableListView
+  - DevTools 메모리 탭 적극 활용
+
+- Flutter에서 Hero 애니메이션이 동작하는 방식과 제약 사항
+  - 동작 방식
+    - 동일한 tag를 가진 위젯 간의 전환 시 자동 애니메이션
+    - Flutter가 해당 위젯을 Overlay 계층에서 연결해주는 방식
+
+  - 제약 사항
+    - 양쪽 모두 Hero(tag: ...) 필수
+    - tag는 고유해야 함
+    - 중첩된 Hero 또는 CustomPaint와 함께 사용 시 버그 가능성
+    - Hero 안에서의 애니메이션은 제어 불가 (전체 이동만 가능)
+
+- Flutter에서 Sliver 위젯을 활용한 고급 리스트 렌더링 기법
+  - 개요: Sliver는 스크롤 동작에 따라 유동적으로 변하는 레이아웃을 구성 가능
+  - 주요 위젯
+    - SliverList: 고성능 리스트 렌더링
+    - SliverAppBar: 스크롤에 따라 축소/고정
+    - SliverGrid: 고성능 그리드
+    - SliverPersistentHeader: 고정 헤더
+  - 예시 구조
+    ```dart
+    CustomScrollView(
+      slivers: [
+        SliverAppBar(floating: true, pinned: true),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => ListTile(title: Text("Item $index")),
+            childCount: 100,
+          ),
+        ),
+      ],
+    )
+    ```
 
 - Flutter의 새로운 impeller 렌더링 엔진이 기존 엔진 대비 갖는 장점은?
 - 플러터에서 디자인 스타일 구현 방법, 위치, 통상적인 방법
