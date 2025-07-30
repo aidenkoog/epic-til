@@ -3682,10 +3682,9 @@ Organize concepts, features, types and Pros and Cons
 - PreferredSizeWidget을 활용하는 시나리오는?
 - CustomScrollView를 활용하여 SliverList와 SliverGrid를 함께 사용하는 방법은?
 - RepaintBoundary를 사용할 때의 장점과 주의할 점은?
-
-
 - Constraints 객체의 역할과 BoxConstraints를 직접 설정해야 하는 이유는?
 - IntrinsicHeight과 IntrinsicWidth 위젯을 사용할 때 성능에 미치는 영향은?
+
 - ScrollController와 NotificationListener를 활용하여 스크롤 이벤트를 감지하는 방법은?
 - AutofillGroup 위젯을 사용해야 하는 경우는?
 - NestedScrollView를 사용할 때 SliverAppBar와 body가 올바르게 동작하지 않는 경우 해결 방법은?
@@ -3694,11 +3693,11 @@ Organize concepts, features, types and Pros and Cons
 - CurvedAnimation에서 Curves.easeInOut과 Curves.bounceOut의 차이점은?
 - Hero 애니메이션이 정상적으로 동작하지 않는 경우 해결 방법은?
 - ShaderMask를 활용하여 텍스트나 이미지에 그라디언트 효과를 적용하는 방법은?
-
-
 - AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법은?
 - ImageShader를 활용하여 커스텀 효과를 구현하는 방법은?
 - dart:developer 패키지를 활용하여 디버깅을 최적화하는 방법은?
+
+
 - Performance Overlay에서 Raster Thread가 병목이 되는 이유와 해결 방법은?
 - Flutter Inspector에서 RepaintBoundary 색상이 계속 변하는 경우 해결 방법은?
 - Flutter DevTools의 Timeline을 활용하여 프레임 드랍을 분석하는 방법은?
@@ -3707,9 +3706,8 @@ Organize concepts, features, types and Pros and Cons
 - Profile Mode와 Release Mode에서 성능 차이가 발생하는 이유는?
 - Dart VM의 JIT(Just-In-Time)와 AOT(Ahead-Of-Time) 컴파일 차이는?
 - ListView.builder에서 itemCount를 설정하지 않으면 성능에 어떤 영향을 미치는가?
-
-
 - SliverPersistentHeaderDelegate를 활용하여 성능을 최적화하는 방법은?
+
 - StatefulWidget에서 didChangeDependencies()와 initState()의 차이점은?
 - InheritedWidget을 사용해야 하는 경우는?
 - ChangeNotifier와 StateNotifier 중 어떤 것이 성능적으로 더 우수한가?
