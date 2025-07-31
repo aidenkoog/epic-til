@@ -3672,9 +3672,35 @@ Organize concepts, features, types and Pros and Cons
     )
     ```
 
-- Flutter의 새로운 impeller 렌더링 엔진이 기존 엔진 대비 갖는 장점은?
+- Flutter의 새로운 impeller 렌더링 엔진이 기존 엔진 대비 갖는 장점
+  - 성능 최적화: OpenGL 대신 Metal/Vulkan을 기반으로 GPU에 최적화된 커맨드 생성.
+  - 프레임 드롭 감소: shader를 빌드 타임에 미리 컴파일 → 런타임 JIT shader compile 제거.
+  - 플랫폼 일관성: 플랫폼별 차이 줄여 iOS/Android간 시각적 동작 일치.
+  - 디버깅 용이: 각 프레임을 deterministic하게 재현 가능 (디버깅 친화적).
+  - 애니메이션 개선: 복잡한 애니메이션에서도 일관된 프레임 유지.
+
 - 플러터에서 디자인 스타일 구현 방법, 위치, 통상적인 방법
-- Flutter의 StatelessWidget이 내부적으로 StatefulWidget보다 성능이 좋은 이유는?
+  - 위치: ThemeData를 MaterialApp 또는 Theme 위젯에 정의
+  - 통상적인 방법
+    ```dart
+    MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+        textTheme: TextTheme(
+          headline6: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ),
+    )
+    ```
+  - 추가 방식
+    - Theme.of(context).textTheme.headline6
+    - 커스텀 스타일 클래스 정의 (AppTextStyles, AppColors 등)
+
+- Flutter의 StatelessWidget이 내부적으로 StatefulWidget보다 성능이 좋은 이유
+  - 불필요한 상태 트래킹 없음: 상태가 변경되지 않기 때문에 불필요한 build() 호출 없음.
+  - lifecycle이 단순: createState, initState, dispose 등의 호출 스킵.
+  - 위젯 트리 비교 최적화: 동일한 구조일 경우 빠르게 재사용 가능 (element diff 최적화)
+
 - StatefulWidget의 dispose() 메서드는 언제 호출되는가?
 - didUpdateWidget()은 언제 호출되는가?
 - GlobalKey는 언제 필요하며, LocalKey와의 차이점은?
