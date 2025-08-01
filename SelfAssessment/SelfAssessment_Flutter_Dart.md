@@ -3723,7 +3723,23 @@ Organize concepts, features, types and Pros and Cons
       }
       ```
 
-- GlobalKey는 언제 필요하며, LocalKey와의 차이점은?
+- GlobalKey는 언제 필요하며, LocalKey와의 차이점
+  - GlobalKey
+    - 위젯 인스턴스 유지 및 참조
+    - Form, ScaffoldState 접근
+    - 다른 위젯 트리에서도 공유 가능
+    - 퍼포먼스 측면: 무거움 (가능한 한 피해야 함)
+  - LocalKey
+    - 동일 타입 위젯 구분
+    - 애니메이션 전환	동일 리스트 아이템 구분
+    - 다른 위젯 트리에서 공유 불가능
+    - 퍼포먼스 측면: 가벼움
+  - GlobalKey 사용 예:
+    ```dart
+    final _formKey = GlobalKey<FormState>();
+    Form(key: _formKey, child: ...)
+    ```
+
 - CustomPainter와 RenderObject의 차이는?
 - PreferredSizeWidget을 활용하는 시나리오는?
 - CustomScrollView를 활용하여 SliverList와 SliverGrid를 함께 사용하는 방법은?
