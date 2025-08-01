@@ -3701,8 +3701,28 @@ Organize concepts, features, types and Pros and Cons
   - lifecycle이 단순: createState, initState, dispose 등의 호출 스킵.
   - 위젯 트리 비교 최적화: 동일한 구조일 경우 빠르게 재사용 가능 (element diff 최적화)
 
-- StatefulWidget의 dispose() 메서드는 언제 호출되는가?
-- didUpdateWidget()은 언제 호출되는가?
+- StatefulWidget의 dispose() 메서드 호출 시점
+  - 조건
+    - 위젯이 트리에서 제거될 때
+    - 부모 위젯이 리빌드되어 키가 변경되었을 때
+  - 용도
+    - AnimationController, TextEditingController, StreamSubscription 해제
+
+- didUpdateWidget() 호출 시점
+  - didUpdateWidget()은 StatefulWidget의 상태 객체(State)가 유지되면서, 위젯 클래스(즉, Widget)만 변경되었을 때 호출
+  - 호출 조건 예시:
+    - 부모 위젯이 setState()를 호출하여 자식 위젯의 key는 같지만 props가 바뀌는 경우
+    - build()가 다시 호출되면서 Widget 객체는 새로 생성되지만 동일한 State를 유지할 때
+      ```dart
+      @override
+      void didUpdateWidget(covariant MyWidget oldWidget) {
+        super.didUpdateWidget(oldWidget);
+        if (oldWidget.value != widget.value) {
+          // props 변경 대응
+        }
+      }
+      ```
+
 - GlobalKey는 언제 필요하며, LocalKey와의 차이점은?
 - CustomPainter와 RenderObject의 차이는?
 - PreferredSizeWidget을 활용하는 시나리오는?
@@ -3710,10 +3730,10 @@ Organize concepts, features, types and Pros and Cons
 - RepaintBoundary를 사용할 때의 장점과 주의할 점은?
 - Constraints 객체의 역할과 BoxConstraints를 직접 설정해야 하는 이유는?
 - IntrinsicHeight과 IntrinsicWidth 위젯을 사용할 때 성능에 미치는 영향은?
-
 - ScrollController와 NotificationListener를 활용하여 스크롤 이벤트를 감지하는 방법은?
 - AutofillGroup 위젯을 사용해야 하는 경우는?
 - NestedScrollView를 사용할 때 SliverAppBar와 body가 올바르게 동작하지 않는 경우 해결 방법은?
+
 - TickerProviderStateMixin과 SingleTickerProviderStateMixin의 차이점은?
 - AnimatedBuilder와 AnimatedContainer 중 어떤 것이 더 성능이 좋은가?
 - CurvedAnimation에서 Curves.easeInOut과 Curves.bounceOut의 차이점은?
