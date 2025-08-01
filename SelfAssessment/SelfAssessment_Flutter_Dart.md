@@ -3740,7 +3740,22 @@ Organize concepts, features, types and Pros and Cons
     Form(key: _formKey, child: ...)
     ```
 
-- CustomPainter와 RenderObject의 차이는?
+- CustomPainter와 RenderObject의 차이
+  - CustomPainter
+    - 캔버스에 맞춤 그림을 그릴 때 사용
+    - 복잡도 낮음 (위젯 위에 그림만 그림)
+    - 덜 유연하지만 간단
+  - RenderObject
+    - 위젯의 레이아웃 및 렌더링 로직을 직접 구현할 때
+    - 복잡도 높음 (레이아웃, hitTest까지 모두 구현)
+    - 매우 유연하나 복잡도 높음
+  - CustomPainter 사용 예:
+    ```dart
+    CustomPaint(
+      painter: MyPainter(),
+    )
+    ```
+
 - PreferredSizeWidget을 활용하는 시나리오는?
 - CustomScrollView를 활용하여 SliverList와 SliverGrid를 함께 사용하는 방법은?
 - RepaintBoundary를 사용할 때의 장점과 주의할 점은?
