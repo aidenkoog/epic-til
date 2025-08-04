@@ -3938,19 +3938,134 @@ Organize concepts, features, types and Pros and Cons
       child: Text('Gradient Text', style: TextStyle(color: Colors.white)),
     )
     ```
+    - Text나 Image에 Shader 적용 가능 (ShaderMask의 자식으로 지정)
+    - child의 color는 반드시 white 또는 Colors.white.withOpacity(...)로 설정해야 Shader가 정상 반영됨
 
-- AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법은?
-- ImageShader를 활용하여 커스텀 효과를 구현하는 방법은?
-- dart:developer 패키지를 활용하여 디버깅을 최적화하는 방법은?
-- Performance Overlay에서 Raster Thread가 병목이 되는 이유와 해결 방법은?
-- Flutter Inspector에서 RepaintBoundary 색상이 계속 변하는 경우 해결 방법은?
-- Flutter DevTools의 Timeline을 활용하여 프레임 드랍을 분석하는 방법은?
-- Dart Garbage Collector(GC)가 Flutter에서 메모리 관리를 하는 방식은?
-- Flutter에서 메모리 릭이 발생하는 주요 원인과 해결 방법은?
-- Profile Mode와 Release Mode에서 성능 차이가 발생하는 이유는?
-- Dart VM의 JIT(Just-In-Time)와 AOT(Ahead-Of-Time) 컴파일 차이는?
+- AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법
+  - AnimatedSwitcher 는 위젯 변경 시 자동 페이드, 스케일 등의 전환 애니메이션 제공
+  - 리스트 항목 변경 시 키를 부여하여 식별자 구분
+  - 예제 코드
+    ```dart
+    AnimatedSwitcher(
+      duration: Duration(milliseconds: 300),
+      child: Text('$value', key: ValueKey(value)),
+    )
+    ```
+  - 리스트 전체가 아닌 개별 아이템에 적용해야 부드럽게 동작
+
+- ImageShader를 활용하여 커스텀 효과를 구현하는 방법
+  - ImageShader는 이미지를 Shader처럼 사용할 수 있게 해줌
+  - CustomPainter 내부에서 Paint.shader로 적용 가능
+  - 예제
+    ```dart
+    final shader = ImageShader(image, TileMode.clamp, TileMode.clamp, Matrix4.identity().storage);
+    canvas.drawRect(rect, Paint()..shader = shader);
+    ```
+  - 모자이크, 반사, 반복 텍스처 등 응용 가능
+
+- dart:developer 패키지를 활용하여 디버깅을 최적화하는 방법
+  - log('message'): 콘솔에 메시지 출력 (level 지정 가능)
+  - debugger(): 중단점 삽입 (디버거 연결 시 중단)
+  - Timeline.startSync('task') + Timeline.finishSync(): DevTools Timeline에 명시적 트레이스 기록 가능
+
+- Performance Overlay에서 Raster Thread가 병목이 되는 이유와 해결 방법
+  - Raster thread가 초록 막대 초과 시 렌더링 병목 발생
+  - 원인: 과도한 리빌드, 복잡한 UI, 애니메이션 리렌더링
+  - 해결:
+    - RepaintBoundary로 리빌드 영역 분리
+    - 복잡한 UI는 offscreen caching (CachedNetworkImage, preload)
+    - 과도한 setState 방지
+
+- Flutter Inspector에서 RepaintBoundary 색상이 계속 변하는 경우 해결 방법
+  - 계속 색상이 변하면 해당 위젯이 매 프레임마다 리렌더링된다는 뜻
+  - 해결:
+    - RepaintBoundary 남용하지 않기
+    - 불필요한 애니메이션/상태 변화 제거
+    - shouldRepaint 최적화(CustomPainter 사용 시)
+
+- Flutter DevTools의 Timeline을 활용하여 프레임 드랍을 분석하는 방법
+  - Frame 항목에서 프레임 당 Build, Layout, Paint 시간 확인 가능
+  - Long Frame 표시 (16Ms 초과)가 반복되면 병목 발생
+  - 클릭 시 어떤 함수 또는 위젯이 원인인지 트리 형태로 분석 가능
+
+- Dart Garbage Collector(GC)가 Flutter에서 메모리 관리를 하는 방식
+  - Generational GC 기반
+    - New space (short_lived 객체): 빠르게 수집
+    - Old space (long-lived 객체): 점진적 수집
+  - 플러터 프레임워크는 위젯 트리의 불필요한 객체를 자동 정리함
+  - finalizer, weak reference, devtools > memory 탭에서 추적 가능
+
+- Flutter에서 메모리 릭이 발생하는 주요 원인과 해결 방법
+  - 주요 원인
+    - AnimationController, StreamController 해제 누락
+    - ScrollController, TextEditingController 등 dispose() 안함
+    - Listenable, Timer 등 콜백이 살아있음
+  - 해결 방법
+    - StatefulWidget에서 반드시 dispose() 구현
+    - DevTools로 Heap snapshot 비교
+
+- Profile Mode와 Release Mode에서 성능 차이가 발생하는 이유
+  - Profile Mode: 로그/디버깅 가능 + 성능 계측 가능 (약간 느림)
+  - Release Mode: 디버깅 불가 + 최대 최적화된 코드로 컴파일
+  - Release에서만 tree-shaking, minify, AOT 등 완전한 최적화 적용됨
+
+- 트리 쉐이킹 개념
+  - 개념
+    - 실제로 쓰이지 않는 코드(죽은 코드)를 최종 빌드에서 제거하는 최적화 기법
+  - 필요 이유
+    - 앱 개발 시 여러 라이브러리나 모듈 import하지만 그중 일부 함수, 클래스, 파일은 안 쓰는 경우가 많음
+
+  - 예시
+    ```dart
+    import 'package:awesome_library/awesome_library.dart';
+
+    // 실제로는 only this one is used:
+    doAwesomeThing();
+    ```
+
+  - 전체 라이브러리 안에 50개의 기능이 있다고 가정
+    - 필요한 1개만 사용되는데, 나머지 49개까지 빌드에 포함되면 앱이 비대 + 느려짐
+    - 이럴 때 트리 쉐이킹 사용됨 (흔들어 정리한다는 개념으로 접근)
+
+  - 플러터에서 동작 방식
+    - 릴리즈 빌드 (flutter build apk / flutter build appbundle) 시에만 트리 쉐이킹 수행
+    - 다트의 AOT(Ahead Of Time) 컴파일 과정에서 사용되지 않은 클래스, 함수, 상수 등을 자동 제거
+
+  - 제거 되지 않는 경우
+    - 동적으로 호출되는 경우 (예: Function.apply, reflect, Map<String, Function>) → Flutter는 reflection을 기본 지원하지 않음
+    - @pragma('vm:entry-point')가 붙은 경우 → 트리 쉐이킹 대상에서 제외
+    - native 코드 연동 시 → 트리쉐이킹 불가능
+
+  - 이점
+    - 빌드 파일 크기 감소
+    - 앱 실행 속도 향상
+    - 메모리 사용량 절감
+
+  - 요약
+    - Tree shaking = 쓰지 않는 코드를 자동으로 제거
+    - Flutter에서는 release 빌드에서만 적용
+    - 앱 용량과 성능 최적화에 매우 중요
+    - import했더라도, 사용하지 않으면 자동으로 제거됨
+
+- Dart VM의 JIT(Just-In-Time)와 AOT(Ahead-Of-Time) 컴파일 차이
+  - JIT (Just-in-Time):
+    - 개발 모드에서 빠른 Hot Reload 가능
+    - 실행 중 컴파일됨 → 초기 느림
+
+  - AOT (Ahead-of-Time):
+    - release 모드에서 사용
+    - 실행 전 컴파일됨 → 빠른 실행 속도
+    - 크래시 리스크 감소, 앱 사이즈 증가 가능성 있음
+
 - ListView.builder에서 itemCount를 설정하지 않으면 성능에 어떤 영향을 미치는가?
-- SliverPersistentHeaderDelegate를 활용하여 성능을 최적화하는 방법은?
+  - itemCount 없으면 무한 리스트로 간주 → 계속 build 호출
+  - 스크롤 끝까지 내려가지 않아도 build()가 여러 번 호출됨
+  - 반드시 명시하여 불필요한 리소스 사용 방지
+
+- SliverPersistentHeaderDelegate를 활용하여 성능을 최적화하는 방법
+  - 스크롤 시 헤더 고정 및 변화 가능 (ex: 고정 탭, 축소 타이틀)
+  - shouldRebuild()을 false로 유지하면 rebuild 방지 가능
+  - 이미지, 텍스트 등 복잡한 UI를 포함할 경우 캐싱 또는 Boundary 분리 권장
 
 - StatefulWidget에서 didChangeDependencies()와 initState()의 차이점은?
 - InheritedWidget을 사용해야 하는 경우는?
