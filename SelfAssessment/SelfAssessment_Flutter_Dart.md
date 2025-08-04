@@ -3756,25 +3756,145 @@ Organize concepts, features, types and Pros and Cons
     )
     ```
 
-- PreferredSizeWidget을 활용하는 시나리오는?
-- CustomScrollView를 활용하여 SliverList와 SliverGrid를 함께 사용하는 방법은?
-- RepaintBoundary를 사용할 때의 장점과 주의할 점은?
-- Constraints 객체의 역할과 BoxConstraints를 직접 설정해야 하는 이유는?
-- IntrinsicHeight과 IntrinsicWidth 위젯을 사용할 때 성능에 미치는 영향은?
-- ScrollController와 NotificationListener를 활용하여 스크롤 이벤트를 감지하는 방법은?
-- AutofillGroup 위젯을 사용해야 하는 경우는?
-- NestedScrollView를 사용할 때 SliverAppBar와 body가 올바르게 동작하지 않는 경우 해결 방법은?
+- PreferredSizeWidget을 활용하는 시나리오
+  - 활용 시나리오
+    - AppBar, TabBar 처럼 특정 높이를 명시적으로 요구하는 위젯에 사용
+  - 사용 예
+    ```dart
+    class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+      @override
+      Size get preferredSize => Size.fromHeight(80);
 
-- TickerProviderStateMixin과 SingleTickerProviderStateMixin의 차이점은?
-- AnimatedBuilder와 AnimatedContainer 중 어떤 것이 더 성능이 좋은가?
-- CurvedAnimation에서 Curves.easeInOut과 Curves.bounceOut의 차이점은?
+      @override
+      Widget build(BuildContext context) {
+        return AppBar(title: Text('Custom'));
+      }
+    }
+    ```
+  - 사용 시점: 커스텀 AppBar를 만들 때 필수
+
+- CustomScrollView를 활용하여 SliverList와 SliverGrid를 함께 사용하는 방법
+  - 예시
+    ```dart
+    CustomScrollView(
+      slivers: [
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => ListTile(title: Text('Item $index')),
+            childCount: 10,
+          ),
+        ),
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => Container(color: Colors.blue),
+            childCount: 6,
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
+        ),
+      ],
+    )
+    ```
+  - 장점: 스크롤 성능 최적화, 통일된 스크롤 영역 유지
+
+- RepaintBoundary를 사용할 때의 장점과 주의할 점
+  - 장점:
+    - 해당 위젯 subtree만 별도로 리페인트 → 리렌더링 비용 절감
+    - 성능 측정에 사용 가능 (RepaintBoundary.debugInstrumentRepaintStatistics)
+
+  - 주의할 점:
+    - 과도한 분리 → 메모리/컴포지트 비용 증가
+    - 리렌더 대상이 자주 바뀌는 경우 오히려 역효과
+
+- Constraints 객체의 역할과 BoxConstraints를 직접 설정해야 하는 이유
+  - Constraints: 부모 → 자식에게 주는 사이즈 제한 정보 (minWidth, maxHeight 등)
+  - BoxConstraints: 그 중 가장 기본 형태. 예: BoxConstraints.tight(Size(100, 100))
+  - 직접 설정 이유:
+    - CustomRenderBox 구현 시 사이즈 제어 필요
+    - Flexible한 위젯 내에서 원하는 레이아웃 강제
+
+- IntrinsicHeight과 IntrinsicWidth 위젯을 사용할 때 성능에 미치는 영향
+  - 장점: 자식 크기에 맞게 자동 정렬 가능
+  - 단점: 자식 위젯을 2번 측정 → 성능 저하
+  - 결론: 정렬 문제 해결용으로만 최소 사용 (ex: 정렬이 안 맞는 Row/Column에서)
+
+- ScrollController와 NotificationListener를 활용하여 스크롤 이벤트를 감지하는 방법
+  - 예제
+    ```dart
+    ScrollController _controller = ScrollController();
+
+    NotificationListener<ScrollNotification>(
+      onNotification: (scrollInfo) {
+        if (scrollInfo.metrics.pixels > 200) {
+          // 스크롤 이벤트 감지됨
+        }
+        return true;
+      },
+      child: ListView(
+        controller: _controller,
+        children: [...],
+      ),
+    );
+    ```
+    - ScrollController: 현재 위치, animateTo() 등 제어
+    - NotificationListener: Lazy-loading, top/bottom 도달 감지에 적합
+
+- AutofillGroup 위젯을 사용해야 하는 경우
+  - 사용 목적: 여러 입력창(FormField)에 자동완성(AutoFill)을 하나의 그룹으로 지정
+  - 사용 시점
+    - 로그인, 회원가입 등에서 여러 입력 필드가 관련 있을 때
+  - 예시:
+    ```dart
+    AutofillGroup(
+      child: Column(
+        children: [
+          TextField(autofillHints: [AutofillHints.username]),
+          TextField(autofillHints: [AutofillHints.password]),
+        ],
+      ),
+    );
+    ```
+
+- NestedScrollView를 사용할 때 SliverAppBar와 body가 올바르게 동작하지 않는 경우 해결 방법
+  - 문제: SliverAppBar가 스크롤 시 제대로 접히지 않거나 body가 동작 안함
+  - 해결:
+    - body에 TabBarView 등 사용 시 반드시 PrimaryScrollController 연결 필요
+    - NestedScrollView에서 innerScrollPositionKey 설정 고려
+    - ScrollPhysics 충돌 여부 확인
+
+- TickerProviderStateMixin과 SingleTickerProviderStateMixin의 차이점
+  - SingleTickerProviderState
+    - 생성 가능한 Ticker 수: 1개
+    - 메모리 비용 낮음
+    - 사용 시점: 단일 애니매이션 컨트롤러
+  - TickerProviderStateMixin
+    - 생성 가능한 Ticker 수: 여러개
+    - 메모리 비용 약간 더 높음
+    - 사용 시점: 복수 컨트롤러 필요할 때
+
+- AnimatedBuilder와 AnimatedContainer 성능 비교
+  - AnimatedBuilder
+    - 애니매이션에 맞춰 직접 렌더링 제어
+    - 자유로운 위젯 변경 가능
+    - 복잡한 애니메이션 시 효율적
+  - AnimatedContainer
+    - 속성 애니매이션 자동 처리
+    - 한정된 속성만 지원
+    - 내부 최적화 좋음
+  - 결론
+    - 정적 속성 변경: AnimatedContainer
+    - 복잡한 트랜스폼/커스텀 그리기: AnimatedBuilder
+
+- CurvedAnimation에서 Curves.easeInOut과 Curves.bounceOut의 차이점
+  - Curves.easeInOut: 부드러운 시작과 끝 → 자연스러운 일반 UI에 적합
+  - Curves.bounceOut: 끝에서 튀는 효과 → 버튼 클릭, 성공 메시지 등 강조 효과
+
 - Hero 애니메이션이 정상적으로 동작하지 않는 경우 해결 방법은?
 - ShaderMask를 활용하여 텍스트나 이미지에 그라디언트 효과를 적용하는 방법은?
 - AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법은?
 - ImageShader를 활용하여 커스텀 효과를 구현하는 방법은?
 - dart:developer 패키지를 활용하여 디버깅을 최적화하는 방법은?
-
-
 - Performance Overlay에서 Raster Thread가 병목이 되는 이유와 해결 방법은?
 - Flutter Inspector에서 RepaintBoundary 색상이 계속 변하는 경우 해결 방법은?
 - Flutter DevTools의 Timeline을 활용하여 프레임 드랍을 분석하는 방법은?
