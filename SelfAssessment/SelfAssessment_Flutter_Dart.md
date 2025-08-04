@@ -3890,6 +3890,38 @@ Organize concepts, features, types and Pros and Cons
   - Curves.easeInOut: 부드러운 시작과 끝 → 자연스러운 일반 UI에 적합
   - Curves.bounceOut: 끝에서 튀는 효과 → 버튼 클릭, 성공 메시지 등 강조 효과
 
+- 슈가링(Syntactic Sugaring) / 디슈가링 (Desugaring)
+  - 슈가링
+    - 문법적으로 더 쉽게 쓰도록 만든 문법
+      - 즉, 기존에 있는 기능을 더 간단하게 쓸 수 있게 만든 문법 설탕
+    - 예시
+      - 일반 방식(원래 문법)
+        ```dart
+        list = list.where((item) => item != null).toList();
+        ```
+      - 슈가링 (간편 문법)
+        ```dart
+        list = [1, 2, 3, null, ...?anotherList];  // spread + null-aware
+        ```
+        ```dart
+        // for-in 루프도 대표적인 슈가링
+        for (var item in items) {...} // == sugar
+        ```
+        - 위 코드는 사실상 내부적으로는 iterator를 사용하는 복잡한 구조로 해석
+  - 디슈가링 (Desugaring)
+    - 개념
+      - 슈가링된 문법을 컴파일러가 내부적으로 기존의 기본 문법으로 변환하는 과정
+      - 즉, Dart/Java/Js 같은 언어에서 우리가 쉽게 쓴 문법을 컴파일러가 원래 의미대로 해석 가능한 방식으로 풀어주는 작업
+    - Android 에서의 디슈가링 (자바 8 문법)
+      - 플러터(안드로이드)에서는 다음과 같은 자바 8+ 기능을 사용했을 때, 디슈가링 필요
+      - 예시: 사용된 기능
+        ```dart
+        List<String> list = Arrays.asList("a", "b", "c");
+        list.forEach(item -> System.out.println(item));  // 람다 표현식
+        ```
+        - 위 문법은 자바 8에서 도입된 문법, 오래된 안드로이드 버전에서는 실행 불가능
+        - 안드로이드 빌드 시 람다 등을 내부적으로 기존 자바 방식으로 바꿔주는 과정 = 디 슈가링 필요
+
 - Hero 애니메이션이 정상적으로 동작하지 않는 경우 해결 방법은?
 - ShaderMask를 활용하여 텍스트나 이미지에 그라디언트 효과를 적용하는 방법은?
 - AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법은?
