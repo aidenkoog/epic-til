@@ -3922,8 +3922,23 @@ Organize concepts, features, types and Pros and Cons
         - 위 문법은 자바 8에서 도입된 문법, 오래된 안드로이드 버전에서는 실행 불가능
         - 안드로이드 빌드 시 람다 등을 내부적으로 기존 자바 방식으로 바꿔주는 과정 = 디 슈가링 필요
 
-- Hero 애니메이션이 정상적으로 동작하지 않는 경우 해결 방법은?
-- ShaderMask를 활용하여 텍스트나 이미지에 그라디언트 효과를 적용하는 방법은?
+- Hero 애니메이션이 정상적으로 동작하지 않는 경우 해결 방법
+  - Hero 태그(tag)가 중복되거나 불일치하면 동작 안 함 → tag 일치 필수
+  - Hero 위젯이 route 트리 안에 있어야 함 (예: Scaffold 외부 X)
+  - 중간에 RepaintBoundary나 Material이 누락되면 애니메이션 깨짐
+  - Hero 대상 위젯의 사이즈가 변경되면 부자연스럽게 보일 수 있음 → HeroFlightShuttleBuilder로 커스터마이즈 가능
+
+- ShaderMask를 활용하여 텍스트나 이미지에 그라디언트 효과를 적용하는 방법
+  - 코드
+    ```dart
+    ShaderMask(
+      shaderCallback: (bounds) => LinearGradient(
+        colors: [Colors.red, Colors.blue],
+      ).createShader(bounds),
+      child: Text('Gradient Text', style: TextStyle(color: Colors.white)),
+    )
+    ```
+
 - AnimatedSwitcher를 활용하여 리스트 항목 변경 애니메이션을 적용하는 방법은?
 - ImageShader를 활용하여 커스텀 효과를 구현하는 방법은?
 - dart:developer 패키지를 활용하여 디버깅을 최적화하는 방법은?
