@@ -4067,8 +4067,16 @@ Organize concepts, features, types and Pros and Cons
   - shouldRebuild()을 false로 유지하면 rebuild 방지 가능
   - 이미지, 텍스트 등 복잡한 UI를 포함할 경우 캐싱 또는 Boundary 분리 권장
 
-- StatefulWidget에서 didChangeDependencies()와 initState()의 차이점은?
-- InheritedWidget을 사용해야 하는 경우는?
+- StatefulWidget에서 didChangeDependencies()와 initState()의 차이점
+  - initState(): 위젯이 최초 생성될 때 한 번 호출. BuildContext에 접근 가능하지만 InheritedWidget은 아직 구독되지 않음.
+
+  - didChangeDependencies(): 위젯이 InheritedWidget을 참조하고 있고, 그것이 변경될 때마다 호출됨. initState() 이후 최초 한 번도 자동 호출됨.
+
+- InheritedWidget을 사용해야 하는 경우
+  - 상위 위젯에서 하위 여러 위젯에 공통 데이터(Theme, Locale, MediaQuery 등) 를 효율적으로 전달해야 할 때.
+
+  - 상태 변경이 자주 발생하지 않고, 위젯 트리 구조를 따라 자연스럽게 전파될 때.
+
 - ChangeNotifier와 StateNotifier 중 어떤 것이 성능적으로 더 우수한가?
 - BLoC에서 Cubit을 사용하면 어떤 장점이 있는가?
 - 상태관리 라이브러리 없이 전역적인 상태 관리가 가능한가? 가능하다면 어떻게 구현하는가?
