@@ -4075,9 +4075,22 @@ Organize concepts, features, types and Pros and Cons
   - 상위 위젯에서 하위 여러 위젯에 공통 데이터(Theme, Locale, MediaQuery 등) 를 효율적으로 전달해야 할 때.
   - 상태 변경이 자주 발생하지 않고, 위젯 트리 구조를 따라 자연스럽게 전파될 때.
 
-- ChangeNotifier와 StateNotifier 중 어떤 것이 성능적으로 더 우수한가?
-- BLoC에서 Cubit을 사용하면 어떤 장점이 있는가?
-- 상태관리 라이브러리 없이 전역적인 상태 관리가 가능한가? 가능하다면 어떻게 구현하는가?
+- ChangeNotifier와 StateNotifier 성능 비교
+  - StateNotifier가 구조적으로 더 우수
+  - ChangeNotifier는 리스너 전체에 notify > 불필요한 리렌더링 발생 가능
+  - StateNotifier는 상태 변화 시 명시적으로 변경 > 더 효율적이고 테스트 용이
+
+- BLoC에서 Cubit을 사용 시 장점
+  - 간결함: 큐빗은 이벤트 / 상태 분리가 없어 코드가 간단
+  - 빠른 구현: 단순 상태 변경에 적합
+  - 성능 동일: 내부는 BLoC과 동일한 동작
+
+- 상태관리 라이브러리 없이 전역적인 상태 관리 하는 방법
+  - 가능여부: 가능
+  - 싱글턴 클래스 + ChangeNotifier 또는 ValueNotifier 사용
+  - InheritedWidget 또는 IngeritedModel (복잡도 증가)
+  - GlobalKey나 정적 변수 사용 (권장 사항 아님)
+
 - StreamController.broadcast()를 사용할 때 발생할 수 있는 문제는?
 - GetX에서 Bindings를 활용하여 의존성 주입을 최적화하는 방법은?
 - Flutter Hooks에서 useEffect를 사용할 때 발생할 수 있는 문제점은?
