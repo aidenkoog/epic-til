@@ -4069,12 +4069,10 @@ Organize concepts, features, types and Pros and Cons
 
 - StatefulWidget에서 didChangeDependencies()와 initState()의 차이점
   - initState(): 위젯이 최초 생성될 때 한 번 호출. BuildContext에 접근 가능하지만 InheritedWidget은 아직 구독되지 않음.
-
   - didChangeDependencies(): 위젯이 InheritedWidget을 참조하고 있고, 그것이 변경될 때마다 호출됨. initState() 이후 최초 한 번도 자동 호출됨.
 
 - InheritedWidget을 사용해야 하는 경우
   - 상위 위젯에서 하위 여러 위젯에 공통 데이터(Theme, Locale, MediaQuery 등) 를 효율적으로 전달해야 할 때.
-
   - 상태 변경이 자주 발생하지 않고, 위젯 트리 구조를 따라 자연스럽게 전파될 때.
 
 - ChangeNotifier와 StateNotifier 중 어떤 것이 성능적으로 더 우수한가?
