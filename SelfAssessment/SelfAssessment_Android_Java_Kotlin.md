@@ -15618,7 +15618,7 @@ Organize concepts, features, types and Pros and Cons
 - Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
 - Java의 Structured Concurrency 개념과 기존 Thread 관리 방식과의 차이점은?
 - Java에서 CDS(Class Data Sharing)를 활용하여 JVM 성능을 최적화하는 방법은?
-
+- Dispatchers IO 사용 시 ANR 발생하는 경우 및 해결책
 - 2025년 안드로이드, 자바, 코틀린 트렌드 및 중요한 포인트
 - Kotlin과 Java의 주요 차이점은?
 - Kotlin에서 var와 val의 차이점은?
