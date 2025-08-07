@@ -4091,19 +4091,44 @@ Organize concepts, features, types and Pros and Cons
   - InheritedWidget 또는 IngeritedModel (복잡도 증가)
   - GlobalKey나 정적 변수 사용 (권장 사항 아님)
 
-- StreamController.broadcast()를 사용할 때 발생할 수 있는 문제는?
-- GetX에서 Bindings를 활용하여 의존성 주입을 최적화하는 방법은?
-- Flutter Hooks에서 useEffect를 사용할 때 발생할 수 있는 문제점은?
-- Riverpod에서 ScopedProvider와 Override 기능을 활용하는 방법은?
-- State Restoration이 필요한 경우는?
+- StreamController.broadcast()를 사용할 때 발생할 수 있는 문제
+  - 여러 리스너를 허용하지만 이벤트가 리스너 등록 시점 이후부터 전달됨.
+  - 초기값이 필요한 경우나 캐싱이 필요한 경우에는 부적절.
+  - 동기적 동작으로 인해 race condition 발생 가능.
+  - 한 리스너의 오류가 전체 broadcast에 영향을 줄 수 있음.
 
 
-- Dio 패키지에서 Interceptors를 활용하는 방법은?
-- Flutter에서 GraphQL을 사용할 때 cache policy를 설정하는 방법은?
-- WebSockets을 사용할 때 StreamTransformer를 활용하는 이유는?
-- Flutter에서 Rate Limiting을 구현하는 방법은?
-- Retrofit을 활용하여 REST API 호출을 최적화하는 방법은?
-- Dart에서 Future.wait()와 Future.forEach()의 차이점은?
+- GetX에서 Bindings를 활용하여 의존성 주입을 최적화하는 방법
+
+
+- Flutter Hooks에서 useEffect를 사용할 때 발생할 수 있는 문제점
+
+
+- Riverpod에서 ScopedProvider와 Override 기능을 활용하는 방법
+
+
+- State Restoration이 필요한 경우
+
+
+- Dio 패키지에서 Interceptors를 활용하는 방법
+
+
+- Flutter에서 GraphQL을 사용할 때 cache policy를 설정하는 방법
+
+
+- WebSockets을 사용할 때 StreamTransformer를 활용하는 이유
+
+
+- Flutter에서 Rate Limiting을 구현하는 방법
+
+
+- Retrofit을 활용하여 REST API 호출을 최적화하는 방법
+
+
+- Dart에서 Future.wait()와 Future.forEach()의 차이점
+
+
+
 - Dart에서 Completer를 활용하여 Future를 제어하는 방법은?
 - Firebase Remote Config를 활용하여 앱의 동적 업데이트를 적용하는 방법은?
 - SQLite와 Hive, Drift의 차이점은?
