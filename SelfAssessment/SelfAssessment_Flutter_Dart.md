@@ -4303,16 +4303,85 @@ Organize concepts, features, types and Pros and Cons
   - 공식 Flutter는 아직 완전한 Embedded 지원은 미제공 (Fuchsia 예외)
 
 
-- Flutter에서 MacOS 및 Windows 지원을 위한 주요 고려사항은?
-- Flutter에서 FlutterFlow 같은 Low-Code 툴을 활용하여 개발을 최적화하는 방법은?
-- Flutter에서 PWA(Progressive Web App)를 구현하는 방법은?
-- Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점은?
-- Flutter에서 WebRTC를 활용하여 화상 채팅을 구현하는 방법은?
-- Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 최적화 방법은?
-- Flutter 3.22에서 추가된 주요 기능과 개선 사항은?
-- Flutter 4.0에서 기대할 수 있는 변화는?
-- Impeller 렌더링 엔진이 기존 Skia 대비 성능적으로 어떤 이점을 제공하는가?
-- Flutter DevTools에서 memory leak을 탐지하는 방법은?
-- Flutter에서 openAI API를 활용한 ChatGPT 챗봇 기능을 구현하는 방법은?
-- Flutter에서 Live Activities를 활용하여 실시간 업데이트를 구현하는 방법은?
-- Flutter에서 Dynamic Island를 지원하는 방법은?
+- Flutter에서 MacOS 및 Windows 지원을 위한 주요 고려사항
+  - 플랫폼별 file path, 권한 처리 상이함
+  - 파일 다이얼로그, 시스템 트레이, 키보드 이벤트 등은 플랫폼별 API 필요
+  - flutter_secure_storage 등 일부 패키지 지원 안 될 수 있음
+  - MenuBar, window_size, file_selector 등 플랫폼 위젯 고려
+
+- Flutter에서 FlutterFlow 같은 Low-Code 툴을 활용하여 개발을 최적화하는 방법
+  - 빠른 UI 프로토타입 제작 가능 (디자인 → 코드 자동 생성)
+  - Riverpod, Firebase, REST API 자동 연동 가능
+  - 복잡한 로직/커스터마이징은 Export 후 직접 Flutter 프로젝트에서 수정
+  - 팀 협업 및 MVP 제작에 적합
+
+- Flutter에서 PWA(Progressive Web App)를 구현하는 방법
+  - flutter build web 후 web/index.html에 manifest.json, service_worker.js 구성
+  - HTTPS 환경 필수
+  - flutter run -d chrome → chrome://inspect/#apps 에서 PWA 확인 가능
+  - 앱 설치, 오프라인 캐싱 등 일부 기능은 JS로 추가 작업 필요
+
+- Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점
+  - 고해상도 DPI 대응 (MediaQuery.devicePixelRatio)
+  - 마우스/키보드 전용 인터랙션 처리 필요
+  - 시스템 트레이, 메뉴바, 파일 접근 등은 플랫폼 플러그인 활용
+  - 배포 시 Mac: notarization / Win: MSI 또는 EXE 패키징 처리 필요
+
+- Flutter에서 WebRTC를 활용하여 화상 채팅을 구현하는 방법
+  - flutter_webrtc 패키지 사용
+  - RTCPeerConnection, MediaStream, RTCVideoRenderer로 구성
+  - Signaling 서버 (예: Firebase, WebSocket) 별도 구현 필수
+  - iOS는 Safari 설정, Android는 권한 처리 필요
+
+- Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 최적화 방법
+  - Skia: CPU + GPU 조합, 기존 렌더러
+  - Impeller: Vulkan/Metal 기반 GPU 렌더링, shader precompilation
+  - 장점: 첫 프레임 렌더 지연 감소, 애니메이션 부드러움
+  - Impeller 활성화:
+    ```dart
+    flutter build ios --enable-impeller
+    ```
+
+- Flutter 3.22에서 추가된 주요 기능과 개선 사항
+  - DevTools 개선 (memory snapshots, flame charts)
+  - MacOS 및 iOS에서 Impeller 렌더러 기본 적용
+  - Font fallback 성능 개선
+  - VS Code에서 Hot Restart 속도 향상
+  - 웹 접근성 개선 및 더 작은 번들 크기
+
+- Flutter 4.0에서 기대할 수 있는 변화
+  - Impeller Android 지원 정식 출시 예상
+  - 더 강력한 desktop 플랫폼 지원 (tray, window control)
+  - 새로운 animation 및 transition system
+  - 플랫폼 간 코어 API 통합
+  - DevTools의 성능 분석 자동화 강화
+
+- Impeller 렌더링 엔진의 기존 Skia 대비 성능적 이점
+  - shader 미리 컴파일 → jank 감소
+  - 플랫폼별 GPU API 최적화 지원 (Metal/Vulkan)
+  - 스크롤/애니메이션 성능 향상
+  - 정적 UI 성능 차이 크지 않지만, 복잡한 렌더링에 강점
+
+- Flutter DevTools에서 memory leak을 탐지하는 방법
+  - DevTools → Memory 탭 → Snapshot 찍기
+  - Retaining Path, Instances view로 릭 유무 확인
+  - debugPrint, Object.hashCode 등으로 추적 가능
+  - WidgetsBindingObserver 해제 누락 주의
+
+- Flutter에서 openAI API를 활용한 ChatGPT 챗봇 기능을 구현하는 방법
+  - openai REST API 호출 (https://api.openai.com/v1/chat/completions)
+  - dio 또는 http 패키지 사용하여 POST 요청
+  - 토큰 제한, 요청 속도 제한 고려
+  - 사용자 입력과 대화 이력 기반 메시지 리스트 구성 후 요청
+
+- Flutter에서 Live Activities를 활용하여 실시간 업데이트를 구현하는 방법
+  - activityKit 지원은 Native + Flutter platform channel 필요
+  - Android의 ForegroundService에 유사
+  - 타이머, 배달현황, 경기 스코어 등에 사용
+  - Flutter는 아직 공식 플러그인 없음 (custom native 구현 필요)
+
+- Flutter에서 Dynamic Island를 지원하는 방법
+  - Live Activities 기반으로 동작 (Native)
+  - Flutter → Swift platform channel 통해 정보 전달
+  - animation, 상태 전이, 텍스트/아이콘 동적 변경 필요
+  - 제한된 공간이므로 정보 설계 중요
