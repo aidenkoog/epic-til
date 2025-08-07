@@ -4097,37 +4097,104 @@ Organize concepts, features, types and Pros and Cons
   - 동기적 동작으로 인해 race condition 발생 가능.
   - 한 리스너의 오류가 전체 broadcast에 영향을 줄 수 있음.
 
-
 - GetX에서 Bindings를 활용하여 의존성 주입을 최적화하는 방법
-
+  - Bindings는 의존성 주입을 페이지 진입 시점에만 수행함
+  - Get.put() / Get.lazyPut()을 사용하여 메모리 최적화
+  - 모든 의존성을 Bindings 클래스 내에서 구성하면 의존성 누락 방지 + 테스트 용이
+  - 예시:
+    ```dart
+    class HomeBinding extends Bindings {
+      @override
+      void dependencies() {
+        Get.lazyPut<HomeController>(() => HomeController());
+      }
+    }
+    ```
 
 - Flutter Hooks에서 useEffect를 사용할 때 발생할 수 있는 문제점
-
+  - useEffect는 BuildContext 접근 시점 주의 필요 (첫 빌드 전 실행될 수 있음)
+  - 의존성 배열이 잘못되면 무한 루프 발생
+  - async 함수 직접 사용 시 잘못된 타이밍에 setState() 호출 위험
+    - 해결: 내부에서 async 함수 정의 후 호출
 
 - Riverpod에서 ScopedProvider와 Override 기능을 활용하는 방법
 
 
 - State Restoration이 필요한 경우
-
+  - 사용자가 앱을 백그라운드 → 포그라운드 또는 종료 → 재시작 시, 기존 상태(스크롤, 탭, 입력값 등)를 유지해야 할 때
+  - 특히 iOS에서 자동 스냅샷 복원 정책 대응
+  - ex: form 입력 유지, 페이지 위치 복구
 
 - Dio 패키지에서 Interceptors를 활용하는 방법
-
+  - 모든 요청/응답에 공통 로직 삽입 가능
+  - 인증 토큰 자동 추가, 로깅, 에러 처리 가능
+  - 예시:
+    ```dart
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        options.headers['Authorization'] = 'Bearer token';
+        return handler.next(options);
+      },
+      onResponse: (response, handler) {
+        return handler.next(response);
+      },
+      onError: (e, handler) {
+        // Retry, redirect, alert 등
+        return handler.next(e);
+      },
+    ));
+    ```
 
 - Flutter에서 GraphQL을 사용할 때 cache policy를 설정하는 방법
-
+  - FetchPolicy를 사용:
+    - cacheFirst: 캐시 → 네트워크 순
+    - networkOnly: 항상 네트워크
+    - noCache: 캐시 사용 안함
+    - cacheAndNetwork: 캐시 즉시 반환 + 백그라운드 업데이트
+  - 예시
+    ```dart
+    Query(
+      options: QueryOptions(
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
+      ),
+      ...
+    )
+    ```
 
 - WebSockets을 사용할 때 StreamTransformer를 활용하는 이유
-
+  - 수신 메시지 가공 (ex: JSON 파싱 → 객체)
+  - 불필요한 이벤트 필터링
+  - 중복 메시지 제거, 스로틀링 등 로직 삽입
+  - 메시지를 비동기적으로 처리할 수 있음
 
 - Flutter에서 Rate Limiting을 구현하는 방법
-
+  - debounce or throttle 로직 적용 (e.g. RxDart, riverpod async debounce)
+  - custom timer + lastRequestTime 활용
+  - 예시:
+    ```dart
+    if (DateTime.now().difference(lastRequestTime) > Duration(seconds: 1)) {
+      lastRequestTime = DateTime.now();
+      fetchData();
+    }
+    ```
 
 - Retrofit을 활용하여 REST API 호출을 최적화하는 방법
-
+  - Dio 기반으로 구성되며, 인터페이스 수준으로 API 정의 가능
+  - @GET/@POST 등으로 타입 안정성 확보
+  - Interceptor와 결합 시 모듈화 + 로깅 + 인증 최적
+  - @Headers, @QueryMap 등으로 공통 파라미터 구성
+  - 캐싱 정책, timeout 설정 등을 DioConfig로 통합 관리 가능
 
 - Dart에서 Future.wait()와 Future.forEach()의 차이점
+  - Future.wait():
+    - 동시 실행 (병렬)
+    - 모든 작업 완료 시 결과 반환
+    - 실패 시 전체 중단됨
 
-
+  - Future.forEach():
+    - 순차 실행 (직렬)
+    - 각 작업이 끝나야 다음 작업 수행
+    - 실패해도 이후 계속 진행 가능
 
 - Dart에서 Completer를 활용하여 Future를 제어하는 방법은?
 - Firebase Remote Config를 활용하여 앱의 동적 업데이트를 적용하는 방법은?
