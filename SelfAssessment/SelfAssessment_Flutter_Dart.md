@@ -4196,27 +4196,117 @@ Organize concepts, features, types and Pros and Cons
     - 각 작업이 끝나야 다음 작업 수행
     - 실패해도 이후 계속 진행 가능
 
-- Dart에서 Completer를 활용하여 Future를 제어하는 방법은?
-- Firebase Remote Config를 활용하여 앱의 동적 업데이트를 적용하는 방법은?
-- SQLite와 Hive, Drift의 차이점은?
-- Flutter에서 SSL Pinning을 적용하는 방법은?
-- Flutter Secure Storage와 SharedPreferences의 차이점은?
-- AES 암호화를 활용하여 데이터를 암호화하는 방법은?
+- Dart에서 Completer를 활용하여 Future를 제어하는 방법
+  - Completer는 수동으로 Future를 완료시키는 객체
+  - completer.complete(value) 또는 completer.completeError(err)로 제어
+  - 예시:
+    ```dart
+    final completer = Completer<String>();
+    someAsyncOp().then((res) => completer.complete(res));
+    return completer.future;
+    ```
+
+- Firebase Remote Config를 활용하여 앱의 동적 업데이트를 적용하는 방법
+  - 앱 배포 후 서버에서 변수 조정 가능
+  - 앱 내 캐시 및 fetch 설정 필요
+  - 예시:
+    ```dart
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    await remoteConfig.fetchAndActivate();
+    final isFeatureEnabled = remoteConfig.getBool('feature_flag');
+    ```
+
+- SQLite와 Hive, Drift의 차이점
+  - SQLite: 가장 전통적, SQL 쿼리 사용, 안정적
+  - Hive: 경량, 빠름, NoSQL, 직렬화 없이 동작
+  - Drift: SQLite 기반 ORM, 타입 안정성, 복잡 쿼리 지원
+
+- Flutter에서 SSL Pinning을 적용하는 방법
+  - http 대신 dio 사용 + 자체 인증서 등록
+  - SecurityContext를 통해 .cer 파일 바인딩
+  - Android는 network_security_config.xml 필요
+
+- Flutter Secure Storage와 SharedPreferences의 차이점
+  - Secure Storage: 민감 정보 저장용 (iOS Keychain, Android EncryptedStorage)
+  - SharedPreferences: 일반 설정값 저장용 (암호화 X)
+  - 보안 필요 시 무조건 SecureStorage 사용
+
+- AES 암호화를 활용하여 데이터를 암호화하는 방법
+  - encrypt 패키지 사용
+  - 고정된 Key, IV를 사용하여 문자열 암호화
+  - 예시:
+    ```dart
+    final key = Key.fromUtf8('32charlongsecretkey...');
+    final iv = IV.fromLength(16);
+    final encrypter = Encrypter(AES(key));
+    final encrypted = encrypter.encrypt('data', iv: iv);
+    final decrypted = encrypter.decrypt(encrypted, iv: iv);
+    ```
+
+- Dart에서 RSA 키 쌍을 생성하고 이를 활용하여 데이터를 암호화하는 방법
+  - pointycastle 패키지 활용
+  - 공개키/개인키 생성 후 Base64로 저장하거나 사용
+  - RSA는 주로 AES 키를 암호화하는 데 사용됨 (하이브리드 방식)
+
+- Flutter에서 App Tracking Transparency (ATT)를 적용하는 방법
+  - app_tracking_transparency 패키지 사용
+  - Info.plist에 설명 추가 (NSUserTrackingUsageDescription)
+  - 권한 요청:
+    ```dart
+    final status = await AppTrackingTransparency.requestTrackingAuthorization();
+    ```
+
+- Flutter에서 Firebase App Check를 활용하여 API 보안을 강화하는 방법
+  - 앱이 Firebase 백엔드와 통신할 때 정상 앱인지 확인
+  - Android: Play Integrity / SafetyNet
+  - iOS: DeviceCheck / AppAttest
+  - 초기화
+    ```dart
+    await FirebaseAppCheck.instance.activate(
+      androidProvider: AndroidProvider.playIntegrity,
+    );
+    ```
+
+- Flutter에서 패스워드 필드의 자동 완성을 방지하는 방법
+  - TextField에 autofillHints: [AutofillHints.newPassword] 혹은 빈 리스트 전달
+  - obscureText: true + enableSuggestions: false 설정 병행
+  - 예시
+    ```dart
+    TextField(
+      obscureText: true,
+      autofillHints: const [AutofillHints.newPassword],
+      enableSuggestions: false,
+    );
+    ```
+
+- Flutter에서 Accessibility Inspector를 활용하여 접근성을 개선하는 방법
+  - Android: TalkBack / iOS: VoiceOver 사용
+  - Flutter DevTools → Accessibility 탭 사용
+  - Semantics, label, hint 등 위젯 설정 확인
+  - 예시:
+    ```dart
+    Semantics(
+      label: '검색 버튼',
+      child: Icon(Icons.search),
+    );
+    ```
+
+- Flutter Web과 Flutter Mobile에서 Navigator 2.0을 사용할 때 차이점
+  - Web에서는 브라우저의 URL과 히스토리 동기화 필수
+  - Web에서는 RouteInformationParser, RouterDelegate 구성 필요
+  - Mobile에서는 Stack 방식 사용 가능하나, Web은 URL 경로 직접 핸들링 필요
+
+- Flutter에서 Tizen 및 Embedded Linux를 지원하는 방식
+  - Tizen: 삼성 기기 대상, flutter-tizen SDK 별도 설치 필요
+  - Embedded Linux: framebuffer, Wayland, X11 환경 대응 가능
+  - flutter-pi, flutter-embedder 등의 프로젝트 사용
+  - 공식 Flutter는 아직 완전한 Embedded 지원은 미제공 (Fuchsia 예외)
 
 
-- Dart에서 RSA 키 쌍을 생성하고 이를 활용하여 데이터를 암호화하는 방법은?
-- Flutter에서 App Tracking Transparency (ATT)를 적용하는 방법은?
-- Flutter에서 Firebase App Check를 활용하여 API 보안을 강화하는 방법은?
-- Flutter에서 패스워드 필드의 자동 완성을 방지하는 방법은?
-- Flutter에서 Accessibility Inspector를 활용하여 접근성을 개선하는 방법은?
-- Flutter Web과 Flutter Mobile에서 Navigator 2.0을 사용할 때 차이점은?
-- Flutter에서 Tizen 및 Embedded Linux를 지원하는 방식은?
 - Flutter에서 MacOS 및 Windows 지원을 위한 주요 고려사항은?
 - Flutter에서 FlutterFlow 같은 Low-Code 툴을 활용하여 개발을 최적화하는 방법은?
 - Flutter에서 PWA(Progressive Web App)를 구현하는 방법은?
 - Flutter에서 Desktop 앱을 개발할 때 고려해야 할 점은?
-
-
 - Flutter에서 WebRTC를 활용하여 화상 채팅을 구현하는 방법은?
 - Flutter에서 Skia 및 Impeller 렌더링 엔진을 활용한 최적화 방법은?
 - Flutter 3.22에서 추가된 주요 기능과 개선 사항은?
