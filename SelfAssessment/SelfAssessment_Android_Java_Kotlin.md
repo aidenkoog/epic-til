@@ -15894,31 +15894,172 @@ ConstraintLayout 확장으로, XML 기반 Scene/Transition 정의.
 시작·종료 상태 제약조건을 지정하고, Transition 속성과 KeyFrame으로 세밀한 애니메이션 구현 가능.
 예: MotionScene XML → MotionLayout 위젯에서 실행.
 
-- Jetpack Navigation Component의 Deep Link 동작 방식과 활용 사례는?
-- Android 앱에서 보안 강화를 위한 ProGuard, R8, App Integrity 적용 방법은?
-- Java에서 ClassLoader는 어떻게 동작하는가? (Bootstrap, System, Custom ClassLoader)
-- ThreadLocal은 어떤 상황에서 유용하게 사용할 수 있는가?
-- Java에서 final 키워드를 사용할 수 있는 곳과 그 의미는?
-- Java에서 static 키워드가 가지는 의미는?
-- Java에서 객체를 clone()할 때 발생할 수 있는 문제는?
-- Java에서 Serializable 인터페이스의 역할은?
-- Java에서 transient 키워드를 사용하는 이유는?
-- Java에서 try-with-resources를 사용하는 이유는?
+Jetpack Navigation Component – Deep Link
+동작 방식:
+딥링크 URI/Intent를 NavController가 수신하여 지정된 목적지(Fragment/Activity)로 이동.
+그래프 XML에 <deepLink app:uri="..."/>로 선언하거나 코드로 추가 가능.
+
+활용 사례:
+알림 클릭 시 특정 화면 이동, 외부 앱에서 콘텐츠 직접 열기, 웹 URL과 앱 화면 매핑.
+
+앱 보안 강화
+ProGuard/R8: 코드 난독화, 최적화, 사용하지 않는 코드 제거. proguard-rules.pro로 예외 규칙 설정.
+
+App Integrity: Google Play의 앱 무결성 API를 활용해 변조된 앱 탐지.
+
+추가: 네트워크 전송 시 HTTPS/TLS 강제, 키/토큰 안전 저장, 디버그 빌드 배포 방지.
+
+Java – ClassLoader 동작 원리
+Bootstrap ClassLoader: JVM 코어 라이브러리 로드(java.lang.*).
+
+Extension ClassLoader: 확장 라이브러리(jre/lib/ext).
+
+System ClassLoader: 애플리케이션 클래스패스 로드.
+
+Custom ClassLoader: 네트워크/압축 파일 등 커스텀 로딩 로직 구현 시 사용.
+
+ThreadLocal
+역할: 스레드마다 독립적인 변수를 저장해 동시성 문제 방지.
+
+활용 사례: 스레드 전용 DB 연결, 포맷터(SimpleDateFormat) 인스턴스 공유 방지.
+
+final 키워드
+클래스: 상속 불가.
+
+메서드: 오버라이드 불가.
+
+변수: 재할당 불가(참조형은 참조 변경만 불가, 내부 상태 변경 가능).
+
+static 키워드
+클래스 레벨 멤버, 인스턴스 생성 없이 접근 가능.
+
+모든 인스턴스가 공유하는 값/메서드.
+
+static block으로 클래스 로딩 시 초기화 가능.
+
+clone() 문제점
+얕은 복사로 인한 참조 공유 문제 발생.
+
+깊은 복사 구현 필요.
+
+Cloneable 인터페이스 구현 필요하며, 생성자 호출 안 되므로 초기화 로직 누락 가능.
+
+Serializable 인터페이스
+객체를 바이트 스트림으로 변환/복원 가능하게 하는 마커 인터페이스.
+
+네트워크 전송, 파일 저장 등에 활용.
+
+transient 키워드
+직렬화 시 제외할 필드 지정.
+
+민감 정보(비밀번호), 캐시 데이터, 직렬화 불필요 데이터에 사용.
+
+try-with-resources
+AutoCloseable 구현 객체의 자원을 자동으로 close().
+
+예외 발생 여부와 상관없이 안전하게 리소스 해제.
+
+코드 간결화 및 누수 방지.
 
 
-- Java의 Optional 클래스를 활용하는 방법은?
-- Java에서 varargs(가변 인자)를 사용할 때 주의할 점은?
-- Java에서 enum을 활용하는 방법과 장점은?
-- Java의 CompletableFuture와 ExecutorService의 차이점은?
-- JVM의 Garbage Collection(GC) 알고리즘(G1, CMS, ZGC 등)의 차이점과 최적화 방법은?
-- synchronized, Lock, ReentrantLock의 차이점과 각각의 장단점은?
-- Java의 ForkJoinPool은 어떤 경우에 사용하는가?
-- AOSP의 init 프로세스와 서비스 관리 방법을 설명해주세요.
-- AOSP의 Binder 드라이버와 IPC 메커니즘에 대해 설명해주세요.
-- Android MVI orbit 설명
-- Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
-- Java에서 Multi-threading을 구현하는 방법은?
-- Java에서 Immutable 객체를 설계하는 방법과 장점은?
+Java – Optional 활용
+역할: null 참조를 안전하게 다루기 위한 컨테이너.
+
+사용 예:
+
+java
+코드 복사
+Optional<String> name = Optional.ofNullable(getName());
+name.ifPresent(System.out::println);
+String result = name.orElse("default");
+장점: NPE 방지, 명시적인 null 처리 흐름 제공.
+
+varargs(가변 인자) 주의점
+내부적으로 배열로 처리되므로 성능에 민감한 경우 반복 호출 주의.
+
+오버로딩 시 모호성 발생 가능.
+
+null 전달 시 NullPointerException 가능성.
+
+enum 활용과 장점
+활용: 상태/상수 집합 표현, switch-case에서 안전하게 사용.
+
+장점: 타입 안정성, 메서드/필드 추가 가능, 싱글턴 패턴 구현 가능.
+
+CompletableFuture vs ExecutorService
+ExecutorService: 작업 제출/스레드 풀 관리 중심, 반환값 Future.
+
+CompletableFuture: 비동기 연산 체이닝, 콜백 처리, 조합 가능.
+
+java
+코드 복사
+CompletableFuture.supplyAsync(() -> "Data")
+                 .thenApply(String::toUpperCase)
+                 .thenAccept(System.out::println);
+GC 알고리즘 차이
+G1 GC: 힙을 리전으로 나누고 병렬/동시 수집, 짧은 STW 목표.
+
+CMS: 동시 마크-스윕, STW 최소화, 단편화 문제 존재.
+
+ZGC: 매우 낮은 지연 시간(<10ms), 대규모 힙(테라바이트) 지원.
+
+최적화: GC 로그 분석, 힙 크기 조정, 적절한 GC 선택.
+
+synchronized / Lock / ReentrantLock
+synchronized: JVM 모니터 락, 간단하지만 세밀한 제어 불가.
+
+Lock: 명시적 lock/unlock, 타임아웃, 인터럽트 가능.
+
+ReentrantLock: 동일 스레드 재진입 가능, 조건변수(Condition) 지원.
+
+ForkJoinPool
+용도: 큰 작업을 작은 태스크로 분할해 병렬 처리(Work-Stealing).
+
+활용 예: 재귀적 분할-정복 알고리즘, 병렬 스트림 내부 실행기.
+
+AOSP – init 프로세스 & 서비스 관리
+init: 부팅 시 최초 실행, init.rc 스크립트 기반 서비스 시작/환경 설정.
+
+서비스 관리: service 선언, property trigger, restart policy 적용.
+
+AOSP – Binder & IPC
+Binder 드라이버: 커널 모듈 /dev/binder를 통해 프로세스 간 메서드 호출 가능.
+
+IPC 메커니즘: 프록시-스텁 구조, 직렬화(Parcel) 기반 데이터 전송, 보안 검증 포함.
+
+Android – MVI Orbit
+Orbit MVI: 상태(state), 사이드 이펙트 처리, View-ViewModel 단방향 데이터 흐름.
+
+특징: 코루틴 기반, DSL 스타일로 상태 변경 정의.
+
+GC 방식
+Serial GC: 단일 스레드, 작은 힙에 적합.
+
+Parallel GC: 멀티스레드, 처리량 위주.
+
+CMS, G1, ZGC, Shenandoah: 저지연·대규모 힙 지원.
+
+Multi-threading 구현
+Thread 클래스 상속
+
+Runnable 구현
+
+ExecutorService
+
+ForkJoinPool
+
+CompletableFuture / Parallel Streams
+
+Immutable 객체 설계 & 장점
+설계:
+
+모든 필드 final
+
+setter 없음
+
+가변 객체는 복사본 저장
+
+장점: 스레드 안전성, 예측 가능한 동작, 캐싱 최적화 가능.
 
 
 - Java 17의 최신 기능과 주요 변경 사항을 설명하라.
