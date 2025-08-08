@@ -15626,6 +15626,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 data class를 사용하는 이유는?
 - Kotlin의 sealed class와 enum class의 차이점은?
 - Kotlin에서 companion object와 object의 차이점은?
+
+
 - Kotlin에서 open 키워드를 사용하는 이유는?
 - Java의 Functional Interface와 Lambda Expression의 관계는?
 - Java의 Stream API를 활용하는 방법은?
@@ -15640,6 +15642,8 @@ Organize concepts, features, types and Pros and Cons
 - 안드로이드의 권한 요청(Permission) 방식이 Android 6.0 이후 어떻게 변경되었는가?
 - 멀티 모듈(Multi Module) 프로젝트를 구성할 때 장점과 단점은?
 - Dagger, Hilt, Koin 같은 DI(Dependency Injection) 라이브러리를 사용해본 경험이 있는가?
+
+
 - Android 앱의 ANR(Application Not Responding) 이슈를 해결하는 방법은?
 - Java의 OOP(객체지향 프로그래밍) 특징을 설명하라.
 - JVM, JRE, JDK의 차이점은?
@@ -15653,6 +15657,8 @@ Organize concepts, features, types and Pros and Cons
 - Java에서 Reflection을 사용할 때 주의할 점은?
 - Kotlin과 Java의 주요 차이점은?
 - Kotlin의 data class와 일반 클래스의 차이는?
+
+
 - suspend 함수와 Coroutine의 작동 방식은?
 - Kotlin에서 lateinit과 lazy의 차이는?
 - Kotlin의 Flow에서 SharedFlow와 StateFlow의 차이는?
@@ -15664,6 +15670,8 @@ Organize concepts, features, types and Pros and Cons
 - 안드로이드에서 메모리 누수를 줄일 수 있는 방법에 대해 말해주세요.
 - 비트맵보다 용량이 작으면서 XML로 작성 가능한 방법
 - 안드로이드 어플리케이션의 빌드 시간을 줄일 수 있는 방법들을 말해주세요.
+
+
 - aaptOptions.cruncherEnabled=false 설명
 - Ext.alwaysUpdateBuildId = false 설명
 - Kotlin의 flow와 channel의 차이점은?
@@ -15674,6 +15682,8 @@ Organize concepts, features, types and Pros and Cons
 - 프로세스가 종료된 후에도 데이터가 유지되도록 하는 방법은? (DataStore, Room, SharedPreferences 비교)
 - Android에서 Parcelable과 Serializable의 차이를 설명하고, Parcelable을 사용하는 이유는?
 - MotionLayout을 활용한 애니메이션 구현 방법을 설명하라.
+
+
 - Jetpack Navigation Component의 Deep Link 동작 방식과 활용 사례는?
 - Android 앱에서 보안 강화를 위한 ProGuard, R8, App Integrity 적용 방법은?
 - Java에서 ClassLoader는 어떻게 동작하는가? (Bootstrap, System, Custom ClassLoader)
@@ -15684,6 +15694,8 @@ Organize concepts, features, types and Pros and Cons
 - Java에서 Serializable 인터페이스의 역할은?
 - Java에서 transient 키워드를 사용하는 이유는?
 - Java에서 try-with-resources를 사용하는 이유는?
+
+
 - Java의 Optional 클래스를 활용하는 방법은?
 - Java에서 varargs(가변 인자)를 사용할 때 주의할 점은?
 - Java에서 enum을 활용하는 방법과 장점은?
@@ -15697,6 +15709,8 @@ Organize concepts, features, types and Pros and Cons
 - Java의 Garbage Collection 방식에는 어떤 것들이 있는가?
 - Java에서 Multi-threading을 구현하는 방법은?
 - Java에서 Immutable 객체를 설계하는 방법과 장점은?
+
+
 - Java 17의 최신 기능과 주요 변경 사항을 설명하라.
 - Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할은?
 - Kotlin의 inline, noinline, crossinline 키워드는 언제 사용하는가?
@@ -15710,6 +15724,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 컴파일 시 생성되는 바이트코드는 어떻게 최적화되는가?
 - Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향은?
 - Kotlin에서 smart casting이 내부적으로 어떻게 동작하는가?
+
+
 - Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교는?
 - Kotlin의 companion object는 언제 메모리에 로드되는가?
 - Kotlin에서 data class의 copy() 메서드는 어떻게 동작하며, deep copy를 구현하는 방법은?
@@ -15721,6 +15737,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 reified 키워드가 컴파일러 최적화에 미치는 영향은?
 - Kotlin의 null-safety가 JVM에서 어떻게 구현되는가?
 - Kotlin의 default arguments는 Java와 어떻게 다르게 처리되는가?
+
+
 - Kotlin에서 lazy initialization의 내부 동작 방식과 성능 고려 사항은?
 - Kotlin에서 tail recursion 최적화(TCO)가 적용되지 않는 경우는?
 - Kotlin에서 synchronized 블록과 volatile 키워드의 차이점은?
@@ -15733,6 +15751,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법은?
 - Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할은?
 - Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법은?
+
+
 - Kotlin에서 collectLatest()와 collect()의 차이점은?
 - Kotlin의 StateFlow와 SharedFlow의 차이점 및 활용 방법은?
 - Kotlin에서 Immutable Data Structure를 활용한 성능 최적화 방법은?
@@ -15744,6 +15764,8 @@ Organize concepts, features, types and Pros and Cons
 - 멀티스레딩과 동시성 처리에 대해 설명해주세요. (Thread, ExecutorService, Synchronized, Volatile 등)
 - Java의 컬렉션 프레임워크에 대해 설명해주세요. (List, Set, Map 등)
 - 예외 처리의 종류와 차이점을 설명해주세요. (Checked Exception vs Unchecked Exception)
+
+
 - Kotlin의 주요 특징과 Java와의 차이점은 무엇인가요?
 - Null Safety를 어떻게 구현했는지 설명해주세요.
 - Kotlin의 Coroutine과 Java의 Thread의 차이점은 무엇인가요?
@@ -15757,6 +15779,8 @@ Organize concepts, features, types and Pros and Cons
 - Android의 생명주기(Lifecycle)에 대해 설명해주세요.
 - Activity와 Fragment의 차이점은 무엇인가요?
 - ViewModel과 LiveData의 역할과 장점은 무엇인가요?
+
+
 - Android에서의 메모리 관리와 LeakCanary 사용 경험에 대해 설명해주세요.
 - Jetpack Compose를 사용해본 경험이 있다면 설명해주세요.
 - Android에서의 DI(Dependency Injection) 사용 경험을 공유해주세요. (Dagger, Hilt 등)
@@ -15767,6 +15791,8 @@ Organize concepts, features, types and Pros and Cons
 - Java의 Garbage Collection 알고리즘에 대해 설명해주세요. (CMS, G1, ZGC 등)
 - Java의 ClassLoader와 동적 로딩에 대해 설명해주세요.
 - Java의 Reflection API 사용 사례와 주의점은 무엇인가요?
+
+
 - Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)에 대해 설명해주세요.
 - Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리를 설명해주세요.
 - 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
@@ -15778,6 +15804,8 @@ Organize concepts, features, types and Pros and Cons
 - Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
 - Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
 - Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
+
+
 - Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
 - Java의 VarHandle과 Atomic 클래스의 사용 사례를 설명해주세요.
 - Java의 Module System(JPMS)에 대해 설명해주세요.
@@ -15788,6 +15816,8 @@ Organize concepts, features, types and Pros and Cons
 - Coroutine의 Flow에서의 Backpressure 처리 방법을 설명해주세요.
 - Coroutine의 StateFlow와 SharedFlow의 차이점은 무엇인가요?
 - Coroutine의 Channel과 Actor의 차이점은 무엇인가요?
+
+
 - Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
 - Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
 - Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
@@ -15799,6 +15829,8 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 WorkManager와 AlarmManager의 차이점은?
 - Android에서 DataStore와 SharedPreferences의 차이점은?
 - Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
+
+
 - Android에서 ViewBinding과 DataBinding의 차이점은?
 - Android에서 CameraX를 사용할 때의 장점은?
 - Android에서 Activity Result API를 활용하는 방법은?
@@ -15811,6 +15843,8 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 MVVM 패턴을 적용하는 방법
 - Android에서 Jetpack Navigation Component를 사용하는 이유
 - Android에서 Coroutine을 사용한 비동기 처리 방법
+
+
 - Android에서 MutableLiveData와 StateFlow의 차이점
 - Android에서 Jetpack ViewModel을 활용하는 방법
 - Android에서 Jetpack Lifecycle Observer의 역할
@@ -15824,6 +15858,8 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 Retrofit과 Volley의 차이점
 - Android에서 FusedLocationProvider API를 사용하는 이유
 - Android에서 앱 내 결제를 구현하는 방법
+
+
 - Android에서 Fingerprint 및 Face ID 인증을 구현하는 방법
 - Android에서 Firebase Crashlytics를 활용하는 방법
 - Android에서 Jetpack WorkManager를 활용한 백그라운드 작업 수행 방법
@@ -15835,6 +15871,8 @@ Organize concepts, features, types and Pros and Cons
 - Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
 - Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
 - Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
+
+
 - Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
 - Kotlin에서 Flow와 LiveData의 차이점은?
 - Compound Component 패턴과 Slot API 설명
@@ -15847,6 +15885,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin Multiplatform을 사용해본 경험이 있는가?
 - Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
 - Android에서 Inline Class의 장점은?
+
+
 - 아이템 100개 와 ViewHolder 1개를 가진 RecyclerView의 동작원리를 설명 해주세요.
 - RecyclerView or ListView 의 Pagination 구현 방법을 설명 해주세요.
 - 네트워크 통신을 통해 이미지를 가져오는 뷰가 포함된 ListView 또는 RecyclerView에서 빠르게 스크롤 시 생길 수 있는 이슈가 무엇이고 어떻게 수정 및 최적화를 할 수 있을까요?
@@ -15857,6 +15897,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 reflection을 사용할 때 발생하는 오버헤드는 어떻게 줄일 수 있는가?
 - Kotlin에서 Lazy initialization을 성능적으로 최적화하는 방법은?
 - Kotlin에서 Coroutines과 Java의 Thread Pool의 차이점은?
+
+
 - Kotlin의 Coroutines에서 Structured Concurrency 개념이 중요한 이유는?
 - Kotlin의 Coroutines에서 GlobalScope 사용이 위험한 이유는?
 - Kotlin Coroutines에서 Dispatchers.IO와 Dispatchers.Default의 내부 구현 차이는?
@@ -15867,6 +15909,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 Thread Safety를 보장하는 방법은?
 - Kotlin의 Atomic 변수를 활용한 동시성 제어 방법은?
 - Kotlin에서 코루틴을 활용하여 Concurrent Processing을 구현하는 방법은?
+
+
 - Kotlin에서 runBlocking이 주는 성능적 부담과 이를 피하는 방법은?
 - Kotlin Coroutines에서 launch와 async의 차이점과 내부 동작 원리는?
 - Kotlin의 yield() 함수가 비동기 작업에서 어떤 역할을 하는가?
@@ -15879,6 +15923,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 Dependency Injection(DI)을 적용할 때 Koin과 Hilt의 차이점은?
 - Kotlin에서 JUnit5와 MockK를 활용한 단위 테스트 전략은?
 - Kotlin에서 비동기 네트워크 요청을 최적화하는 방법은?
+
+
 - Kotlin의 Coroutines과 RxJava의 차이점 및 선택 기준은?
 - Kotlin에서 Dagger-Hilt와 Koin을 함께 사용할 때의 장점과 단점은?
 - Kotlin의 Multiplatform 프로젝트에서 Coroutines을 활용하는 방법은?
@@ -15890,6 +15936,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 DI 프레임워크 없이 Factory 패턴을 활용한 객체 관리는 어떻게 하는가?
 - Kotlin에서 Retrofit과 Coroutines을 함께 사용할 때의 베스트 프랙티스는?
 - Kotlin에서 JSON Parsing을 최적화하는 방법은?
+
+
 - Kotlin에서 Domain Layer와 Data Layer를 분리할 때의 원칙은?
 - Kotlin의 Anvil을 활용한 DI 성능 최적화 방법은?
 - Kotlin에서 ViewModelScope를 사용할 때 발생할 수 있는 문제는?
@@ -15903,6 +15951,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 최신 정적 분석 도구(Detekt, Ktlint)를 활용하는 방법은?
 - Kotlin에서 Memory Leak을 방지하는 패턴은?
 - Kotlin의 Context Receivers 기능이 필요한 이유는?
+
+
 - Kotlin에서 Native Image를 활용한 성능 최적화 방법은?
 - Kotlin에서 Compiler Intrinsics을 활용한 성능 최적화 기법은?
 - Kotlin과 Java의 주요 차이점은 무엇인가?
@@ -15914,6 +15964,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 sealed interface를 활용하는 방법은?
 - Kotlin에서 break, continue, return의 차이점은?
 - Kotlin의 context receivers 기능을 설명하시오.
+
+
 - Kotlin에서 nullable 타입과 !! 연산자를 사용할 때 주의할 점은?
 - Kotlin에서 @JvmStatic, @JvmOverloads, @JvmField 어노테이션의 역할은?
 - Kotlin에서 is 키워드와 as 키워드의 차이점은?
@@ -15925,6 +15977,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 suspend 함수와 일반 함수의 차이점은?
 - Kotlin에서 context receivers가 도입된 이유는?
 - Kotlin에서 JvmInline을 사용하는 이유는?
+
+
 - Kotlin에서 contract API가 무엇이며, 어떻게 활용하는가?
 - Kotlin의 reified 키워드가 동작하는 원리를 설명하시오.
 - Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 차이는?
@@ -15936,6 +15990,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin의 escape analysis가 어떻게 동작하는지 설명하시오.
 - Kotlin의 inline function이 내부적으로 어떻게 동작하는가?
 - Kotlin에서 tail recursion이 동작하는 방식을 설명하시오.
+
+
 - Kotlin에서 builder pattern을 DSL로 구현하는 방법은?
 - Kotlin에서 type inference의 원리와 활용 방법은?
 - Kotlin에서 spread operator(*)의 활용 방법은?
@@ -15949,6 +16005,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin에서 CoroutineContext와 Job의 관계는?
 - Kotlin에서 JvmStatic과 JvmOverloads를 활용하는 방법은?
 - Kotlin에서 @OptIn 어노테이션을 사용하는 이유는?
+
+
 - Kotlin Coroutines의 핵심 개념은?
 - suspend 함수란 무엇이며, 일반 함수와의 차이점은?
 - Kotlin Coroutines에서 테스트를 수행하는 방법은?
@@ -15961,6 +16019,8 @@ Organize concepts, features, types and Pros and Cons
 - StateFlow에서 초기 값을 설정해야 하는 이유는?
 - yield() 함수의 역할은?
 - cancel()을 호출한 후에도 코루틴이 종료되지 않는 이유는?
+
+
 - ensureActive() 함수의 역할은?
 - select {} 블록을 활용하여 여러 채널을 동시에 처리하는 방법은?
 - produce {}와 consumeEach {}의 차이점은?
@@ -15973,6 +16033,8 @@ Organize concepts, features, types and Pros and Cons
 - Kotlin Coroutines에서 Structured Concurrency란?
 - CoroutineExceptionHandler의 역할은?
 - Paging 3 라이브러리에서 Flow를 활용하는 방법은?
+
+
 - Android에서 네트워크 요청 중간에 코루틴을 취소하는 방법은?
 - 코루틴이 과도하게 생성되었을 때 발생할 수 있는 문제는?
 - Kotlin에서 Coroutines을 활용한 효율적인 병렬 처리 방법은?
@@ -15985,6 +16047,8 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 Jetpack Compose와 Coroutines을 함께 사용하는 방법은?
 - Kotlin Coroutines을 활용한 Custom Thread Pool 구성 방법은?
 - 코루틴에서 예외 처리를 효과적으로 수행하는 방법은?
+
+
 - Kotlin Coroutines과 Kotlin Multiplatform(KMP)에서의 활용 방법은?
 - combine() 연산자를 활용한 데이터 스트림 결합 방법은?
 - retry()와 catch() 연산자의 차이점은?
@@ -15998,6 +16062,8 @@ Organize concepts, features, types and Pros and Cons
 - Android에서 Jetpack WorkManager와 Foreground Service의 차이점
 - Android에서 Jetpack Paging을 사용하는 이유
 - Android에서 UI Thread와 Worker Thread의 차이점
+
+
 - Android에서 OpenGL ES를 활용하여 2D 및 3D 그래픽을 구현하는 방법
 - Android에서 ProGuard를 활용한 코드 난독화 방법
 - Android TV 앱 개발 시 Leanback 라이브러리의 역할
@@ -16011,6 +16077,8 @@ Organize concepts, features, types and Pros and Cons
 - Android TV에서 Leanback Showcase를 활용하는 방법
 - Android TV에서 KeyEvent를 활용하여 사용자 입력을 처리하는 방법
 - Android TV에서 Fire TV와 Android TV의 차이점
+
+
 - Android TV에서 UI 최적화를 위해 Leanback Components를 활용하는 방법
 - Android TV에서 홈 화면을 커스터마이징하는 방법
 - Android TV에서 A/B 테스트를 수행하는 방법
@@ -16025,6 +16093,8 @@ Organize concepts, features, types and Pros and Cons
 - Android TV에서 Live TV 앱을 개발하는 방법
 - Android TV에서 TV Remote Control API를 활용하는 방법
 - Android TV에서 Google TV와 기존 Android TV의 차이점
+
+
 - Android TV에서 HDR 콘텐츠를 재생하는 방법
 - Android TV에서 ExoPlayer의 Cache 기능을 활용하는 방법
 - Android TV에서 HLS와 DASH 스트리밍의 차이점
@@ -16039,6 +16109,8 @@ Organize concepts, features, types and Pros and Cons
 - Android TV에서 앱 크기를 최적화하는 방법
 - Android TV에서 Firebase Analytics를 활용하는 방법
 - Android TV에서 Voice Search 기능을 구현하는 방법
+
+
 - Android TV에서 ExoPlayer의 Offline Download 기능을 활용하는 방법
 - Android TV에서 TV 앱에서의 사용자 경험(UX)을 향상시키는 방법
 - Android TV에서 ML 모델을 활용한 추천 시스템을 구축하는 방법
