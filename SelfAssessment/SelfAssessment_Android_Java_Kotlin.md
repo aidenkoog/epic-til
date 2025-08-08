@@ -15636,6 +15636,37 @@ Organize concepts, features, types and Pros and Cons
     - 클래스 메타데이터를 미리 로드해 공유 메모리 맵에 저장, JVM 시작 속도 개선 및 메모리 절약. 
     - AppCDS로 사용자 클래스도 포함 가능.
 
+- Dispatchers.IO 에서 ANR 발생 원인 / 해결책
+    - 과도한 IO 스레드 블로킹, 메인 스레드로의 전환 지연 시 발생
+    - 해결책:
+        - IO 범위를 최소화, suspend 함수/비차단 IO 사용
+        - withContext로 명확히 컨텍스트 전환
+
+- 2025년 안드로이드 / 자바 / 코틀린 트렌드
+    - Java: Virtual Threads, Structured Concurrency, GraalVM 네이티브 이미지 확산.
+    - Kotlin: K2 Compiler 안정화, Compose Multiplatform 확대, Coroutine 구조적 동시성 강화.
+    - Android: Compose 1.x → 2.x 전환, Jetpack 라이브러리 성능 최적화, AI 기반 코드 생성·분석 도구 확산.
+
+- Kotlin vs Java 주요 차이점
+    - 널 안정성, 확장 함수, 데이터 클래스, 코루틴 지원, 스마트 캐스팅 등 문법적 간결성과 안정성 강화.
+
+- var vs val
+    - var: 변경 가능 변수
+    - val: 읽기 전용(한 번 초기화 후 변경 불가).
+
+- lateinit vs lazy
+    - lateinit: 나중에 초기화하는 var, nullable 불필요. 
+    - lazy: 최초 접근 시 초기화하는 val.
+
+data class 사용 이유
+equals(), hashCode(), toString(), copy() 자동 생성. 값 기반 객체 표현에 적합.
+
+sealed class vs enum class
+sealed: 타입 계층 제한, 상태 표현·패턴 매칭에 적합. enum: 고정된 상수 집합 표현.
+
+companion object vs object
+companion object: 클래스 내부의 정적 멤버 보관. object: 싱글톤 인스턴스 생성.
+
 - Kotlin에서 open 키워드를 사용하는 이유는?
 - Java의 Functional Interface와 Lambda Expression의 관계는?
 - Java의 Stream API를 활용하는 방법은?
