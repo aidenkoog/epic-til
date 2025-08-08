@@ -15658,14 +15658,17 @@ Organize concepts, features, types and Pros and Cons
     - lateinit: 나중에 초기화하는 var, nullable 불필요. 
     - lazy: 최초 접근 시 초기화하는 val.
 
-data class 사용 이유
-equals(), hashCode(), toString(), copy() 자동 생성. 값 기반 객체 표현에 적합.
+- data class 사용 이유
+    - equals(), hashCode(), toString(), copy() 자동 생성
+    - 값 기반 객체 표현에 적합.
 
-sealed class vs enum class
-sealed: 타입 계층 제한, 상태 표현·패턴 매칭에 적합. enum: 고정된 상수 집합 표현.
+- sealed class vs enum class
+    - sealed: 타입 계층 제한, 상태 표현·패턴 매칭에 적합
+    - enum: 고정된 상수 집합 표현.
 
-companion object vs object
-companion object: 클래스 내부의 정적 멤버 보관. object: 싱글톤 인스턴스 생성.
+- companion object vs object
+    - companion object: 클래스 내부의 정적 멤버 보관.
+    - object: 싱글톤 인스턴스 생성.
 
 - Kotlin에서 open 키워드를 사용하는 이유는?
 - Java의 Functional Interface와 Lambda Expression의 관계는?
