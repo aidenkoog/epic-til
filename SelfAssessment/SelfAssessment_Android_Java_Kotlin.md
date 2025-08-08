@@ -15616,21 +15616,25 @@ Organize concepts, features, types and Pros and Cons
     - 비동기적으로 Supplier의 결과를 반환하는 작업을 실행.
     - 기본적으로 ForkJoinPool.commonPool() 사용, 특정 Executor 전달 가능.
 
-Virtual Threads (Project Loom)
-경량 스레드. OS 스레드보다 생성·스케줄링 비용이 낮아 수만 개 동시 실행 가능. 기존 Thread API와 호환되며 블로킹 코드도 효율적으로 처리.
+- Virtual Threads (Project Loom)
+    - 경량 스레드. OS 스레드보다 생성·스케줄링 비용이 낮아 수만 개 동시 실행 가능
+    - 기존 Thread API와 호환되며 블로킹 코드도 효율적으로 처리.
 
-GraalVM AOT 컴파일
-자바 코드를 네이티브 바이너리로 변환해 JIT 준비 시간 제거, 시작 속도 및 메모리 사용 최적화. 네이티브 이미지 빌드 시 리플렉션, 동적 로딩 주의 필요.
+- GraalVM AOT 컴파일
+    - 자바 코드를 네이티브 바이너리로 변환해 JIT 준비 시간 제거, 시작 속도 및 메모리 사용 최적화. 
+    - 네이티브 이미지 빌드 시 리플렉션, 동적 로딩 주의 필요.
 
-Project Panama
-JNI 없이 자바에서 네이티브 라이브러리와 직접 상호작용 가능. MemorySegment, Foreign Function API 제공.
+- Project Panama
+    - JNI 없이 자바에서 네이티브 라이브러리와 직접 상호작용 가능. 
+    - MemorySegment, Foreign Function API 제공.
 
-Structured Concurrency
-여러 작업을 그룹으로 관리해 전체 성공·실패를 제어. 스레드 수명과 작업 범위를 명확히 하여 리소스 누수 방지.
+- Structured Concurrency
+    - 여러 작업을 그룹으로 관리해 전체 성공·실패를 제어. 
+    - 스레드 수명과 작업 범위를 명확히 하여 리소스 누수 방지.
 
-CDS (Class Data Sharing)
-클래스 메타데이터를 미리 로드해 공유 메모리 맵에 저장, JVM 시작 속도 개선 및 메모리 절약. AppCDS로 사용자 클래스도 포함 가능.
-
+- CDS (Class Data Sharing)
+    - 클래스 메타데이터를 미리 로드해 공유 메모리 맵에 저장, JVM 시작 속도 개선 및 메모리 절약. 
+    - AppCDS로 사용자 클래스도 포함 가능.
 
 - Kotlin에서 open 키워드를 사용하는 이유는?
 - Java의 Functional Interface와 Lambda Expression의 관계는?
