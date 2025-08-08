@@ -15612,20 +15612,24 @@ Organize concepts, features, types and Pros and Cons
         - 가능하면 스레드 재사용 없는 환경에서만 사용
         - ThreadLocal 사용을 피하고 다른 컨텍스트 전달 방식 고려
 
-- Java에서 CompletableFuture.supplyAsync()를 활용하는 방법은?
-- Java의 Virtual Threads(프로젝트 Loom) 개념과 기존 Thread와의 차이점은?
-- Java에서 GraalVM을 활용한 AOT(Ahead-of-Time) 컴파일 성능 최적화 방법은?
-- Java에서 Panama Project를 활용하여 네이티브 코드와 상호작용하는 방법은?
-- Java의 Structured Concurrency 개념과 기존 Thread 관리 방식과의 차이점은?
-- Java에서 CDS(Class Data Sharing)를 활용하여 JVM 성능을 최적화하는 방법은?
-- Dispatchers IO 사용 시 ANR 발생하는 경우 및 해결책
-- 2025년 안드로이드, 자바, 코틀린 트렌드 및 중요한 포인트
-- Kotlin과 Java의 주요 차이점은?
-- Kotlin에서 var와 val의 차이점은?
-- Kotlin에서 lateinit과 lazy의 차이점은?
-- Kotlin에서 data class를 사용하는 이유는?
-- Kotlin의 sealed class와 enum class의 차이점은?
-- Kotlin에서 companion object와 object의 차이점은?
+- CompletableFuture.supplyAsync()
+    - 비동기적으로 Supplier의 결과를 반환하는 작업을 실행.
+    - 기본적으로 ForkJoinPool.commonPool() 사용, 특정 Executor 전달 가능.
+
+Virtual Threads (Project Loom)
+경량 스레드. OS 스레드보다 생성·스케줄링 비용이 낮아 수만 개 동시 실행 가능. 기존 Thread API와 호환되며 블로킹 코드도 효율적으로 처리.
+
+GraalVM AOT 컴파일
+자바 코드를 네이티브 바이너리로 변환해 JIT 준비 시간 제거, 시작 속도 및 메모리 사용 최적화. 네이티브 이미지 빌드 시 리플렉션, 동적 로딩 주의 필요.
+
+Project Panama
+JNI 없이 자바에서 네이티브 라이브러리와 직접 상호작용 가능. MemorySegment, Foreign Function API 제공.
+
+Structured Concurrency
+여러 작업을 그룹으로 관리해 전체 성공·실패를 제어. 스레드 수명과 작업 범위를 명확히 하여 리소스 누수 방지.
+
+CDS (Class Data Sharing)
+클래스 메타데이터를 미리 로드해 공유 메모리 맵에 저장, JVM 시작 속도 개선 및 메모리 절약. AppCDS로 사용자 클래스도 포함 가능.
 
 
 - Kotlin에서 open 키워드를 사용하는 이유는?
