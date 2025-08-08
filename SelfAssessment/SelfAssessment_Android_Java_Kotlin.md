@@ -15670,61 +15670,229 @@ Organize concepts, features, types and Pros and Cons
     - companion object: 클래스 내부의 정적 멤버 보관.
     - object: 싱글톤 인스턴스 생성.
 
-- Kotlin에서 open 키워드를 사용하는 이유는?
-- Java의 Functional Interface와 Lambda Expression의 관계는?
-- Java의 Stream API를 활용하는 방법은?
-- Java의 Comparator와 Comparable 인터페이스의 차이점은?
-- 앱의 메모리 릭을 찾고 해결하는 방법은?
-- 앱이 갑자기 크래시가 발생했을 때 어떻게 디버깅할 것인가?
-- Android 앱의 생명주기(Lifecycle)에 대해 설명하라.
-- Service와 Foreground Service의 차이점은?
-- ViewBinding과 DataBinding의 차이는?
-- Jetpack Compose와 기존 View 시스템의 차이점은?
-- RecyclerView에서 ViewHolder 패턴이 중요한 이유는?
-- 안드로이드의 권한 요청(Permission) 방식이 Android 6.0 이후 어떻게 변경되었는가?
-- 멀티 모듈(Multi Module) 프로젝트를 구성할 때 장점과 단점은?
-- Dagger, Hilt, Koin 같은 DI(Dependency Injection) 라이브러리를 사용해본 경험이 있는가?
+Kotlin
+open 키워드 사용 이유
+Kotlin의 클래스와 메서드는 기본적으로 final. open은 상속이나 오버라이드를 허용하기 위해 사용.
 
+Java
+Functional Interface와 Lambda Expression 관계
+Functional Interface(추상 메서드 1개)는 람다식의 대상이 될 수 있음. 람다는 이를 구현한 익명 클래스의 축약 표현.
 
-- Android 앱의 ANR(Application Not Responding) 이슈를 해결하는 방법은?
-- Java의 OOP(객체지향 프로그래밍) 특징을 설명하라.
-- JVM, JRE, JDK의 차이점은?
-- Retrofit과 Volley의 차이점은?
-- Firebase Crashlytics를 사용한 경험이 있는가? 어떻게 활용했는가?
-- Java의 가비지 컬렉션(GC)은 어떻게 동작하는가?
-- Java에서 volatile, synchronized, Atomic의 차이를 설명하라.
-- Java 8에서 추가된 주요 기능(람다, 스트림, Optional 등)에 대해 설명하라.
-- Checked Exception과 Unchecked Exception의 차이는?
-- HashMap과 ConcurrentHashMap의 차이점은?
-- Java에서 Reflection을 사용할 때 주의할 점은?
-- Kotlin과 Java의 주요 차이점은?
-- Kotlin의 data class와 일반 클래스의 차이는?
+Stream API 활용
+컬렉션/배열 데이터를 선언형으로 처리. stream().filter().map().collect() 패턴으로 필터링, 변환, 집계 가능.
 
+Comparator vs Comparable
+Comparable: 객체 자체에 정렬 기준 구현(compareTo).
+Comparator: 외부에서 정렬 기준 정의(compare).
 
-- suspend 함수와 Coroutine의 작동 방식은?
-- Kotlin에서 lateinit과 lazy의 차이는?
-- Kotlin의 Flow에서 SharedFlow와 StateFlow의 차이는?
-- Kotlin의 Delegation 패턴은 어떤 경우에 유용한가?
-- Jetpack Compose의 Slot API 개념과 활용 사례는?
-- invoke operator를 활용한 고급 함수형 프로그래밍 예제를 설명하라.
-- Kotlin Multiplatform에서 JVM, Native, JS 타겟을 함께 사용할 때의 문제점과 해결 방법은?
-- SharedPreferences 에서 commit() 과 apply() 의 다른점에 대해 말해주세요.
-- 안드로이드에서 메모리 누수를 줄일 수 있는 방법에 대해 말해주세요.
-- 비트맵보다 용량이 작으면서 XML로 작성 가능한 방법
-- 안드로이드 어플리케이션의 빌드 시간을 줄일 수 있는 방법들을 말해주세요.
+앱 디버깅 & 메모리 관리
+메모리 릭 찾기/해결
+LeakCanary, Android Profiler로 탐지. Context 누수, static 참조, 리스너 해제 누락 방지.
 
+크래시 발생 시 디버깅
+Logcat 스택 트레이스 확인 → 원인 코드 추적 → 재현 → 수정 및 예외 처리.
 
-- aaptOptions.cruncherEnabled=false 설명
-- Ext.alwaysUpdateBuildId = false 설명
-- Kotlin의 flow와 channel의 차이점은?
-- Jetpack Compose에서 Composition이란 무엇인가? Recomposition은 언제 발생하는가?
-- WorkManager와 AlarmManager의 차이점과 사용 사례는?
-- Android의 StrictMode를 활용한 성능 개선 방법을 설명하라.
-- ViewModel을 Scope별로 관리하는 최적의 방법은?
-- 프로세스가 종료된 후에도 데이터가 유지되도록 하는 방법은? (DataStore, Room, SharedPreferences 비교)
-- Android에서 Parcelable과 Serializable의 차이를 설명하고, Parcelable을 사용하는 이유는?
-- MotionLayout을 활용한 애니메이션 구현 방법을 설명하라.
+Android 기본 개념
+Lifecycle
+액티비티: onCreate → onStart → onResume → onPause → onStop → onDestroy.
+프래그먼트: onAttach → onCreate → onCreateView → onViewCreated → onStart → …
 
+Service vs Foreground Service
+Service: 백그라운드 작업 수행, UI 없음.
+Foreground Service: 사용자 인지 필요, 알림 필수, 종료 우선순위 낮음.
+
+ViewBinding vs DataBinding
+ViewBinding: 타입 안전한 뷰 참조.
+DataBinding: XML에서 데이터 바인딩, 양방향 바인딩 지원.
+
+UI/구조
+Jetpack Compose vs 기존 View 시스템
+Compose: 선언형 UI, 상태 기반 렌더링, XML 불필요.
+기존 View: 명령형, XML + findViewById 기반.
+
+RecyclerView에서 ViewHolder 패턴 중요성
+findViewById 반복 호출 방지, 성능 및 스크롤 효율 향상.
+
+권한 & 아키텍처
+권한 요청 변화 (Android 6.0 이후)
+설치 시점 권한 부여 → 실행 중(Runtime) 요청으로 변경. 위험 권한은 사용자 동의 필요.
+
+멀티 모듈 장단점
+장점: 빌드 속도 개선, 코드 재사용, 팀 병렬 작업 용이.
+단점: 설정 복잡, 모듈 간 의존성 관리 필요.
+
+DI 라이브러리 사용 경험
+Dagger/Hilt/Koin 등으로 의존성 주입, 모듈화, 테스트 용이성 확보.
+
+Android
+ANR 해결 방법
+메인 스레드에서 장시간 작업 금지 → 네트워크·DB·파일 I/O는 별도 스레드/코루틴 사용.
+UI 렌더링 최적화, BroadcastReceiver 실행 시간 최소화, StrictMode로 블로킹 코드 점검.
+
+Java 기초 & OOP
+OOP 특징
+추상화, 캡슐화, 상속, 다형성.
+
+JVM / JRE / JDK
+JVM: 바이트코드 실행 환경.
+JRE: JVM + 라이브러리.
+JDK: JRE + 개발 도구(javac 등).
+
+네트워킹
+Retrofit vs Volley
+Retrofit: 선언형 API, OkHttp 기반, JSON 직렬화 용이.
+Volley: 요청 큐 기반, 이미지 로딩·캐싱 지원, 소규모 프로젝트 적합.
+
+Firebase
+Crashlytics 활용
+앱 크래시 자동 수집·분석, 로그·사용자 정보 첨부, 특정 빌드·기기별 이슈 추적, 실시간 경고.
+
+Java 메모리 & 동시성
+GC 동작
+참조되지 않는 객체 식별 → Heap 영역 청소. Stop-the-world 발생 가능, GC 알고리즘(Serial, Parallel, G1 등) 사용.
+
+volatile / synchronized / Atomic 차이
+volatile: 가시성 보장, 원자성 미보장.
+synchronized: 임계영역 잠금, 가시성·원자성 보장, 성능 저하 가능.
+Atomic: 락 없이 원자성 연산 제공(CAS 기반).
+
+Java 8 기능
+주요 추가 사항
+람다 표현식, Stream API, Optional, 메서드 참조(::), 기본 메서드(default method) in interface, 날짜·시간 API(java.time).
+
+예외 처리
+Checked vs Unchecked Exception
+Checked: 컴파일 시 처리 강제(IOException, SQLException 등).
+Unchecked: Runtime 시 발생(NullPointerException 등), 처리 강제 없음.
+
+자료구조
+HashMap vs ConcurrentHashMap
+HashMap: 비동기, null key 1개 허용.
+ConcurrentHashMap: 동기화 지원, 분할 락(Concurrent Level), null key 불허.
+
+Reflection
+주의점
+성능 저하, 캡슐화 위반, 보안 이슈. 런타임 오류 가능성 높음.
+
+Kotlin vs Java
+주요 차이점
+Kotlin: Null-safety, 데이터 클래스, 확장 함수, 코루틴, 간결 문법.
+Java: 더 광범위한 생태계, 명시적 문법, NullPointerException 발생 가능.
+
+Kotlin Data Class
+차이점
+data class: equals(), hashCode(), toString(), copy(), componentN() 자동 생성.
+일반 클래스: 위 메서드 수동 구현 필요.
+
+Kotlin & Coroutine
+suspend 함수와 Coroutine 작동 방식
+suspend 함수는 일시 중단 가능한 함수로, 코루틴 컨텍스트에서만 호출 가능.
+일시 중단 시 스레드를 블록하지 않고, 다른 작업으로 전환 후 재개 시 상태 복원.
+
+lateinit vs lazy
+lateinit: 나중에 초기화되는 var (non-null), primitive 불가, 초기화 전 접근 시 예외.
+lazy: 호출 시 최초 1회 초기화되는 val, 쓰레드 안전 모드 선택 가능(LazyThreadSafetyMode).
+
+SharedFlow vs StateFlow
+SharedFlow: replay 가능, 상태 개념 없음, 여러 이벤트 브로드캐스트.
+StateFlow: 항상 최신 상태 1개 보유, 구독 시 즉시 최신값 전달.
+
+Kotlin 디자인 패턴
+Delegation 패턴
+기능을 다른 객체에 위임해 코드 재사용 및 컴포지션 강화.
+예: class MyList(private val list: List<T>) : List<T> by list.
+
+Jetpack Compose
+Slot API
+부모 컴포저블이 UI 구조를 정의하고, 자식 콘텐츠를 슬롯 형태로 전달받아 렌더링.
+예: Scaffold(topBar = { TopAppBar(...) }, content = { ... }).
+
+Kotlin 함수형 프로그래밍
+invoke operator 예제
+
+kotlin
+코드 복사
+class Greeter(val msg: String) {
+    operator fun invoke(name: String) = "$msg, $name"
+}
+val hello = Greeter("Hello")
+println(hello("World")) // Hello, World
+객체를 함수처럼 호출 가능.
+
+Kotlin Multiplatform
+문제점
+플랫폼별 API 차이, 네이티브 의존성 충돌, Gradle 빌드 속도 저하.
+
+해결
+expect/actual 키워드로 플랫폼별 구현 분리, 공통 모듈 최소화, Gradle 캐시 활용.
+
+Android
+SharedPreferences commit vs apply
+commit(): 동기 저장, 성공 여부 반환, 메인 스레드에서 호출 시 ANR 위험.
+apply(): 비동기 저장, 반환값 없음, 즉시 메모리에 반영 후 백그라운드 저장.
+
+메모리 누수 줄이는 방법
+Context 참조 관리(Activity 참조 보관 금지), 리스너/콜백 해제, ViewBinding 해제, static 변수 남용 방지, Lifecycle-aware 컴포넌트 사용.
+
+비트맵보다 용량이 작고 XML로 작성 가능한 방법
+Vector Drawable 사용 (해상도 독립, 용량 작음).
+
+빌드 시간 단축 방법
+Gradle Daemon 사용, Gradle 캐시 활성화, 불필요한 리소스/모듈 제거, Instant Run/Apply Changes 활용, Kotlin incremental compilation, 멀티 모듈 병렬 빌드.
+
+Gradle & 빌드 옵션
+aaptOptions.cruncherEnabled = false
+PNG 최적화(crunching) 비활성화. 빌드 속도는 빨라지지만 리소스 크기는 커질 수 있음.
+주로 개발 빌드에서 빌드 시간 단축 용도로 사용.
+
+ext.alwaysUpdateBuildId = false
+빌드 시 마다 새로운 Build ID를 생성하지 않도록 설정.
+Gradle 캐시 활용도를 높여 빌드 속도 개선.
+
+Kotlin 동시성
+Flow vs Channel
+Flow: cold stream, 구독 시 데이터 흐름 시작, 선언적 비동기 스트림 처리.
+Channel: hot stream, 실시간 데이터 전송 파이프, producer-consumer 패턴에 적합.
+
+Jetpack Compose
+Composition: Composable 함수 트리를 UI에 배치하는 초기 과정.
+
+Recomposition: 상태 변경(State 변화)로 인해 UI의 일부 또는 전체를 다시 그리는 과정.
+발생 조건: State, MutableState, Flow/LiveData collect, remember 값 변경 등.
+
+작업 스케줄링
+WorkManager vs AlarmManager
+WorkManager: 지연·조건 기반 백그라운드 작업, 앱 종료/재부팅 후에도 보장, 네트워크 조건 설정 가능.
+AlarmManager: 특정 시각 또는 주기로 실행, 보장성 낮고 조건 제어 제한적.
+
+성능 모니터링
+StrictMode 활용
+개발 중 메인 스레드의 디스크/네트워크 접근, 누수 객체, 리소스 누출 등을 감지.
+예: StrictMode.setThreadPolicy 로 UI 스레드에서 I/O 작업 탐지.
+
+ViewModel 관리
+Scope별로 ActivityViewModel, FragmentViewModel, Navigation Graph ViewModel로 구분 관리.
+Activity 공용 데이터 → Activity Scope,
+특정 화면만 → Fragment Scope,
+네비게이션 흐름 전체 → NavGraph Scope.
+
+데이터 영속성
+DataStore: 비동기, 타입 안전(Preferences vs Proto), 최신 권장 방식, 트랜잭션 안전.
+
+Room: SQLite 기반 구조화 데이터 저장, 쿼리 가능, 대량 데이터 적합.
+
+SharedPreferences: 간단한 key-value, 동기 방식은 ANR 위험, 경량 데이터에 적합.
+
+직렬화
+Parcelable vs Serializable
+Parcelable: Android 전용, 빠른 성능, 메모리 효율 높음, Boilerplate 코드 필요.
+Serializable: Java 표준, 속도 느림, GC 부하 높음.
+⇒ Android에서는 성능 때문에 Parcelable 선호.
+
+MotionLayout 애니메이션
+ConstraintLayout 확장으로, XML 기반 Scene/Transition 정의.
+시작·종료 상태 제약조건을 지정하고, Transition 속성과 KeyFrame으로 세밀한 애니메이션 구현 가능.
+예: MotionScene XML → MotionLayout 위젯에서 실행.
 
 - Jetpack Navigation Component의 Deep Link 동작 방식과 활용 사례는?
 - Android 앱에서 보안 강화를 위한 ProGuard, R8, App Integrity 적용 방법은?
