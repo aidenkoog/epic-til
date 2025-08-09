@@ -15915,30 +15915,34 @@ Organize concepts, features, types and Pros and Cons
     - 모든 인스턴스가 공유하는 값/메서드.
     - static block으로 클래스 로딩 시 초기화 가능.
 
-clone() 문제점
-얕은 복사로 인한 참조 공유 문제 발생.
+- clone() 문제점
+    - 얕은 복사로 인한 참조 공유 문제 발생.
+    - 깊은 복사 구현 필요.
+    - Cloneable 인터페이스 구현 필요하며, 생성자 호출 안 되므로 초기화 로직 누락 가능.
 
-깊은 복사 구현 필요.
+- Serializable 인터페이스
+    - 객체를 바이트 스트림으로 변환/복원 가능하게 하는 마커 인터페이스.
+    - 네트워크 전송, 파일 저장 등에 활용.
+    - transient 키워드
+        - 직렬화 시 제외할 필드 지정.
+    - 민감 정보(비밀번호), 캐시 데이터, 직렬화 불필요 데이터에 사용.
 
-Cloneable 인터페이스 구현 필요하며, 생성자 호출 안 되므로 초기화 로직 누락 가능.
-
-Serializable 인터페이스
-객체를 바이트 스트림으로 변환/복원 가능하게 하는 마커 인터페이스.
-
-네트워크 전송, 파일 저장 등에 활용.
-
-transient 키워드
-직렬화 시 제외할 필드 지정.
-
-민감 정보(비밀번호), 캐시 데이터, 직렬화 불필요 데이터에 사용.
-
-try-with-resources
-AutoCloseable 구현 객체의 자원을 자동으로 close().
-
-예외 발생 여부와 상관없이 안전하게 리소스 해제.
-
-코드 간결화 및 누수 방지.
-
+- try-with-resources
+    - AutoCloseable 구현 객체의 자원을 자동으로 close().
+    - 예외 발생 여부와 상관없이 안전하게 리소스 해제.
+    - 코드 간결화 및 누수 방지.
+    - finally 블록 불필요
+    - 예제
+        ```java
+        try (FileReader fr = new FileReader("path/to/file.txt")) {
+            int i;
+            while ((i = fr.read()) != -1) {
+                System.out.print((char) i);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ```
 
 Java – Optional 활용
 역할: null 참조를 안전하게 다루기 위한 컨테이너.
