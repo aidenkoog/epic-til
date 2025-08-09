@@ -15800,66 +15800,59 @@ Organize concepts, features, types and Pros and Cons
     - 기능을 다른 객체에 위임해 코드 재사용 및 컴포지션 강화.
     - 예: class MyList(private val list: List<T>) : List<T> by list.
 
-Jetpack Compose
-Slot API
-부모 컴포저블이 UI 구조를 정의하고, 자식 콘텐츠를 슬롯 형태로 전달받아 렌더링.
-예: Scaffold(topBar = { TopAppBar(...) }, content = { ... }).
+- Slot API
+    - 부모 컴포저블이 UI 구조를 정의하고, 자식 콘텐츠를 슬롯 형태로 전달받아 렌더링.
+    - 예: Scaffold(topBar = { TopAppBar(...) }, content = { ... }).
 
-Kotlin 함수형 프로그래밍
-invoke operator 예제
+- invoke operator 예제
+    ```kotlin
+    class Greeter(val msg: String) {
+        operator fun invoke(name: String) = "$msg, $name"
+    }
+    val hello = Greeter("Hello")
+    println(hello("World")) // Hello, World
+    ```
+    - 객체를 함수처럼 호출 가능.
 
-kotlin
-코드 복사
-class Greeter(val msg: String) {
-    operator fun invoke(name: String) = "$msg, $name"
-}
-val hello = Greeter("Hello")
-println(hello("World")) // Hello, World
-객체를 함수처럼 호출 가능.
+- Kotlin Multiplatform
+    - 문제점
+        - 플랫폼별 API 차이, 네이티브 의존성 충돌, Gradle 빌드 속도 저하.
+    - 해결
+        - expect/actual 키워드로 플랫폼별 구현 분리, 공통 모듈 최소화, Gradle 캐시 활용.
 
-Kotlin Multiplatform
-문제점
-플랫폼별 API 차이, 네이티브 의존성 충돌, Gradle 빌드 속도 저하.
+- SharedPreferences commit vs apply
+    - commit(): 동기 저장, 성공 여부 반환, 메인 스레드에서 호출 시 ANR 위험.
+    - apply(): 비동기 저장, 반환값 없음, 즉시 메모리에 반영 후 백그라운드 저장.
 
-해결
-expect/actual 키워드로 플랫폼별 구현 분리, 공통 모듈 최소화, Gradle 캐시 활용.
+- 메모리 누수 줄이는 방법
+    - Context 참조 관리(Activity 참조 보관 금지), 리스너/콜백 해제, ViewBinding 해제, static 변수 남용 방지, Lifecycle-aware 컴포넌트 사용.
 
-Android
-SharedPreferences commit vs apply
-commit(): 동기 저장, 성공 여부 반환, 메인 스레드에서 호출 시 ANR 위험.
-apply(): 비동기 저장, 반환값 없음, 즉시 메모리에 반영 후 백그라운드 저장.
+- 비트맵보다 용량이 작고 XML로 작성 가능한 방법
+    - Vector Drawable 사용 (해상도 독립, 용량 작음).
 
-메모리 누수 줄이는 방법
-Context 참조 관리(Activity 참조 보관 금지), 리스너/콜백 해제, ViewBinding 해제, static 변수 남용 방지, Lifecycle-aware 컴포넌트 사용.
+- 빌드 시간 단축 방법
+    - Gradle Daemon 사용, Gradle 캐시 활성화, 불필요한 리소스/모듈 제거, Instant Run/Apply Changes 활용, Kotlin incremental compilation, 멀티 모듈 병렬 빌드.
 
-비트맵보다 용량이 작고 XML로 작성 가능한 방법
-Vector Drawable 사용 (해상도 독립, 용량 작음).
+- Gradle & 빌드 옵션
+    - aaptOptions.cruncherEnabled = false
+        - PNG 최적화(crunching) 비활성화.
+        - 빌드 속도는 빨라지지만 리소스 크기는 커질 수 있음.
+        - 주로 개발 빌드에서 빌드 시간 단축 용도로 사용.
 
-빌드 시간 단축 방법
-Gradle Daemon 사용, Gradle 캐시 활성화, 불필요한 리소스/모듈 제거, Instant Run/Apply Changes 활용, Kotlin incremental compilation, 멀티 모듈 병렬 빌드.
+    - ext.alwaysUpdateBuildId = false
+        - 빌드 시 마다 새로운 Build ID를 생성하지 않도록 설정.
+        - Gradle 캐시 활용도를 높여 빌드 속도 개선.
 
-Gradle & 빌드 옵션
-aaptOptions.cruncherEnabled = false
-PNG 최적화(crunching) 비활성화. 빌드 속도는 빨라지지만 리소스 크기는 커질 수 있음.
-주로 개발 빌드에서 빌드 시간 단축 용도로 사용.
+- Flow vs Channel
+    - Flow: cold stream, 구독 시 데이터 흐름 시작, 선언적 비동기 스트림 처리.
+    - Channel: hot stream, 실시간 데이터 전송 파이프, producer-consumer 패턴에 적합.
 
-ext.alwaysUpdateBuildId = false
-빌드 시 마다 새로운 Build ID를 생성하지 않도록 설정.
-Gradle 캐시 활용도를 높여 빌드 속도 개선.
+- Jetpack Compose
+    - Composition: Composable 함수 트리를 UI에 배치하는 초기 과정.
+    - Recomposition: 상태 변경(State 변화)로 인해 UI의 일부 또는 전체를 다시 그리는 과정.
+    - 발생 조건: State, MutableState, Flow/LiveData collect, remember 값 변경 등.
 
-Kotlin 동시성
-Flow vs Channel
-Flow: cold stream, 구독 시 데이터 흐름 시작, 선언적 비동기 스트림 처리.
-Channel: hot stream, 실시간 데이터 전송 파이프, producer-consumer 패턴에 적합.
-
-Jetpack Compose
-Composition: Composable 함수 트리를 UI에 배치하는 초기 과정.
-
-Recomposition: 상태 변경(State 변화)로 인해 UI의 일부 또는 전체를 다시 그리는 과정.
-발생 조건: State, MutableState, Flow/LiveData collect, remember 값 변경 등.
-
-작업 스케줄링
-WorkManager vs AlarmManager
+- WorkManager vs AlarmManager
 WorkManager: 지연·조건 기반 백그라운드 작업, 앱 종료/재부팅 후에도 보장, 네트워크 조건 설정 가능.
 AlarmManager: 특정 시각 또는 주기로 실행, 보장성 낮고 조건 제어 제한적.
 
