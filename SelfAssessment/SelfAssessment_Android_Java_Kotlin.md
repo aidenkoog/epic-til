@@ -15714,94 +15714,91 @@ Organize concepts, features, types and Pros and Cons
 - RecyclerView에서 ViewHolder 패턴 중요성
     - findViewById 반복 호출 방지, 성능 및 스크롤 효율 향상.
 
-권한 & 아키텍처
-권한 요청 변화 (Android 6.0 이후)
-설치 시점 권한 부여 → 실행 중(Runtime) 요청으로 변경. 위험 권한은 사용자 동의 필요.
+- 권한 & 아키텍처
+    - 권한 요청 변화 (Android 6.0 이후, 마시멜로우 버전 이후)
+    - 설치 시점 권한 부여 → 실행 중(Runtime) 요청으로 변경. 
+    - 위험 권한은 사용자 동의 필요.
 
-멀티 모듈 장단점
-장점: 빌드 속도 개선, 코드 재사용, 팀 병렬 작업 용이.
-단점: 설정 복잡, 모듈 간 의존성 관리 필요.
+- 멀티 모듈 장단점
+    - 장점: 빌드 속도 개선, 코드 재사용, 팀 병렬 작업 용이.
+    - 단점: 설정 복잡, 모듈 간 의존성 관리 필요.
 
-DI 라이브러리 사용 경험
-Dagger/Hilt/Koin 등으로 의존성 주입, 모듈화, 테스트 용이성 확보.
+- DI 라이브러리 사용 경험
+    - Dagger/Hilt/Koin 등으로 의존성 주입, 모듈화, 테스트 용이성 확보.
 
-Android
-ANR 해결 방법
-메인 스레드에서 장시간 작업 금지 → 네트워크·DB·파일 I/O는 별도 스레드/코루틴 사용.
-UI 렌더링 최적화, BroadcastReceiver 실행 시간 최소화, StrictMode로 블로킹 코드 점검.
+- ANR 해결 방법
+    - 메인 스레드에서 장시간 작업 금지 → 네트워크·DB·파일 I/O는 별도 스레드/코루틴 사용.
+    - UI 렌더링 최적화, BroadcastReceiver 실행 시간 최소화, StrictMode로 블로킹 코드 점검.
 
-Java 기초 & OOP
-OOP 특징
-추상화, 캡슐화, 상속, 다형성.
+- OOP 특징
+    - 추상화, 캡슐화, 상속, 다형성.
 
-JVM / JRE / JDK
-JVM: 바이트코드 실행 환경.
-JRE: JVM + 라이브러리.
-JDK: JRE + 개발 도구(javac 등).
+- JVM / JRE / JDK
+    - JVM: 바이트코드 실행 환경.
+    - JRE: JVM + 라이브러리.
+    - JDK: JRE + 개발 도구(javac 등).
 
-네트워킹
-Retrofit vs Volley
-Retrofit: 선언형 API, OkHttp 기반, JSON 직렬화 용이.
-Volley: 요청 큐 기반, 이미지 로딩·캐싱 지원, 소규모 프로젝트 적합.
+- Retrofit vs Volley
+    - Retrofit: 선언형 API, OkHttp 기반, JSON 직렬화 용이.
+    - Volley: 요청 큐 기반, 이미지 로딩·캐싱 지원, 소규모 프로젝트 적합.
 
-Firebase
-Crashlytics 활용
-앱 크래시 자동 수집·분석, 로그·사용자 정보 첨부, 특정 빌드·기기별 이슈 추적, 실시간 경고.
+- Crashlytics 활용
+    - 앱 크래시 자동 수집·분석, 로그·사용자 정보 첨부, 특정 빌드·기기별 이슈 추적, 실시간 경고.
 
-Java 메모리 & 동시성
-GC 동작
-참조되지 않는 객체 식별 → Heap 영역 청소. Stop-the-world 발생 가능, GC 알고리즘(Serial, Parallel, G1 등) 사용.
+- Java 메모리 & 동시성
+    - GC 동작
+        - 참조되지 않는 객체 식별 → Heap 영역 청소. 
+        - Stop-the-world 발생 가능, GC 알고리즘(Serial, Parallel, G1 등) 사용.
 
-volatile / synchronized / Atomic 차이
-volatile: 가시성 보장, 원자성 미보장.
-synchronized: 임계영역 잠금, 가시성·원자성 보장, 성능 저하 가능.
-Atomic: 락 없이 원자성 연산 제공(CAS 기반).
+- volatile / synchronized / Atomic 차이
+    - volatile: 가시성 보장, 원자성 미보장.
+    - synchronized: 임계영역 잠금, 가시성·원자성 보장, 성능 저하 가능.
+    - Atomic: 락 없이 원자성 연산 제공(CAS 기반).
 
-Java 8 기능
-주요 추가 사항
-람다 표현식, Stream API, Optional, 메서드 참조(::), 기본 메서드(default method) in interface, 날짜·시간 API(java.time).
+- Java 8 기능
+    - 주요 추가 사항
+        - 람다 표현식, Stream API, Optional, 메서드 참조(::), 기본 메서드(default method) in interface, 날짜·시간 API(java.time).
 
-예외 처리
-Checked vs Unchecked Exception
-Checked: 컴파일 시 처리 강제(IOException, SQLException 등).
-Unchecked: Runtime 시 발생(NullPointerException 등), 처리 강제 없음.
+- Checked vs Unchecked Exception
+    - Checked: 컴파일 시 처리 강제(IOException, SQLException 등).
+    - Unchecked: Runtime 시 발생(NullPointerException 등), 처리 강제 없음.
 
-자료구조
-HashMap vs ConcurrentHashMap
-HashMap: 비동기, null key 1개 허용.
-ConcurrentHashMap: 동기화 지원, 분할 락(Concurrent Level), null key 불허.
+- HashMap vs ConcurrentHashMap
+    - HashMap: 비동기, null key 1개 허용.
+    - ConcurrentHashMap: 동기화 지원, 분할 락(Concurrent Level), null key 불허.
 
-Reflection
-주의점
-성능 저하, 캡슐화 위반, 보안 이슈. 런타임 오류 가능성 높음.
+- Reflection
+    - 주의점
+        - 성능 저하, 캡슐화 위반, 보안 이슈. 런타임 오류 가능성 높음.
 
-Kotlin vs Java
-주요 차이점
-Kotlin: Null-safety, 데이터 클래스, 확장 함수, 코루틴, 간결 문법.
-Java: 더 광범위한 생태계, 명시적 문법, NullPointerException 발생 가능.
+- Kotlin vs Java
+    - 주요 차이점
+        - Kotlin: Null-safety, 데이터 클래스, 확장 함수, 코루틴, 간결 문법.
+        - Java: 더 광범위한 생태계, 명시적 문법, NullPointerException 발생 가능.
 
-Kotlin Data Class
-차이점
-data class: equals(), hashCode(), toString(), copy(), componentN() 자동 생성.
-일반 클래스: 위 메서드 수동 구현 필요.
+- Kotlin Data Class
+    - 차이점
+        - data class: equals(), hashCode(), toString(), copy(), componentN() 자동 생성.
+        - 일반 클래스: 위 메서드 수동 구현 필요.
 
-Kotlin & Coroutine
-suspend 함수와 Coroutine 작동 방식
-suspend 함수는 일시 중단 가능한 함수로, 코루틴 컨텍스트에서만 호출 가능.
-일시 중단 시 스레드를 블록하지 않고, 다른 작업으로 전환 후 재개 시 상태 복원.
+- Kotlin & Coroutine
+    - suspend 함수와 Coroutine 작동 방식
+        - suspend 함수는 일시 중단 가능한 함수로, 코루틴 컨텍스트에서만 호출 가능.
+        - 일시 중단 시 스레드를 블록하지 않고, 다른 작업으로 전환 후 재개 시 상태 복원.
 
-lateinit vs lazy
-lateinit: 나중에 초기화되는 var (non-null), primitive 불가, 초기화 전 접근 시 예외.
-lazy: 호출 시 최초 1회 초기화되는 val, 쓰레드 안전 모드 선택 가능(LazyThreadSafetyMode).
+- lateinit vs lazy
+    - lateinit: 
+        - 나중에 초기화되는 var (non-null), primitive 불가, 초기화 전 접근 시 예외.
+    - lazy: 
+        - 호출 시 최초 1회 초기화되는 val, 쓰레드 안전 모드 선택 가능 (LazyThreadSafetyMode).
 
-SharedFlow vs StateFlow
-SharedFlow: replay 가능, 상태 개념 없음, 여러 이벤트 브로드캐스트.
-StateFlow: 항상 최신 상태 1개 보유, 구독 시 즉시 최신값 전달.
+- SharedFlow vs StateFlow
+    - SharedFlow: replay 가능, 상태 개념 없음, 여러 이벤트 브로드캐스트.
+    - StateFlow: 항상 최신 상태 1개 보유, 구독 시 즉시 최신값 전달.
 
-Kotlin 디자인 패턴
-Delegation 패턴
-기능을 다른 객체에 위임해 코드 재사용 및 컴포지션 강화.
-예: class MyList(private val list: List<T>) : List<T> by list.
+- Delegation 패턴
+    - 기능을 다른 객체에 위임해 코드 재사용 및 컴포지션 강화.
+    - 예: class MyList(private val list: List<T>) : List<T> by list.
 
 Jetpack Compose
 Slot API
