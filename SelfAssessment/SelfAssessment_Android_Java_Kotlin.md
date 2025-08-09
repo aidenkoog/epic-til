@@ -15670,16 +15670,17 @@ Organize concepts, features, types and Pros and Cons
     - companion object: 클래스 내부의 정적 멤버 보관.
     - object: 싱글톤 인스턴스 생성.
 
-Kotlin
-open 키워드 사용 이유
-Kotlin의 클래스와 메서드는 기본적으로 final. open은 상속이나 오버라이드를 허용하기 위해 사용.
+- open 키워드 사용 이유
+    - Kotlin의 클래스와 메서드는 기본적으로 final
+    - open은 상속이나 오버라이드를 허용하기 위해 사용
 
-Java
-Functional Interface와 Lambda Expression 관계
-Functional Interface(추상 메서드 1개)는 람다식의 대상이 될 수 있음. 람다는 이를 구현한 익명 클래스의 축약 표현.
+- Functional Interface와 Lambda Expression 관계
+    - Functional Interface(추상 메서드 1개)는 람다식의 대상이 될 수 있음
+    - 람다는 이를 구현한 익명 클래스의 축약 표현
 
-Stream API 활용
-컬렉션/배열 데이터를 선언형으로 처리. stream().filter().map().collect() 패턴으로 필터링, 변환, 집계 가능.
+- Stream API 활용
+    - 컬렉션/배열 데이터를 선언형으로 처리.
+    - stream().filter().map().collect() 패턴으로 필터링, 변환, 집계 가능.
 
 Comparator vs Comparable
 Comparable: 객체 자체에 정렬 기준 구현(compareTo).
