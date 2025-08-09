@@ -15682,37 +15682,37 @@ Organize concepts, features, types and Pros and Cons
     - 컬렉션/배열 데이터를 선언형으로 처리.
     - stream().filter().map().collect() 패턴으로 필터링, 변환, 집계 가능.
 
-Comparator vs Comparable
-Comparable: 객체 자체에 정렬 기준 구현(compareTo).
-Comparator: 외부에서 정렬 기준 정의(compare).
+- Comparator vs Comparable
+    - Comparable: 객체 자체에 정렬 기준 구현(compareTo).
+    - Comparator: 외부에서 정렬 기준 정의(compare).
 
-앱 디버깅 & 메모리 관리
-메모리 릭 찾기/해결
-LeakCanary, Android Profiler로 탐지. Context 누수, static 참조, 리스너 해제 누락 방지.
+- 앱 디버깅 & 메모리 관리
+    - 메모리 릭 찾기/해결
+    - LeakCanary, Android Profiler로 탐지. Context 누수, static 참조, 리스너 해제 누락 방지.
 
-크래시 발생 시 디버깅
-Logcat 스택 트레이스 확인 → 원인 코드 추적 → 재현 → 수정 및 예외 처리.
+- 크래시 발생 시 디버깅
+    - Logcat 스택 트레이스 확인 → 원인 코드 추적 → 재현 → 수정 및 예외 처리.
 
-Android 기본 개념
-Lifecycle
-액티비티: onCreate → onStart → onResume → onPause → onStop → onDestroy.
-프래그먼트: onAttach → onCreate → onCreateView → onViewCreated → onStart → …
+- Android 기본 개념
+    - Lifecycle
+        - 액티비티: onCreate → onStart → onResume → onPause → onStop → onDestroy.
+        - 프래그먼트: onAttach → onCreate → onCreateView → onViewCreated → onStart → …
 
-Service vs Foreground Service
-Service: 백그라운드 작업 수행, UI 없음.
-Foreground Service: 사용자 인지 필요, 알림 필수, 종료 우선순위 낮음.
+- Service vs Foreground Service
+    - Service: 백그라운드 작업 수행, UI 없음.
+    - Foreground Service: 사용자 인지 필요, 알림 필수, 종료 우선순위 낮음.
 
-ViewBinding vs DataBinding
-ViewBinding: 타입 안전한 뷰 참조.
-DataBinding: XML에서 데이터 바인딩, 양방향 바인딩 지원.
+- ViewBinding vs DataBinding
+    - ViewBinding: 타입 안전한 뷰 참조.
+    - DataBinding: XML에서 데이터 바인딩, 양방향 바인딩 지원.
 
-UI/구조
-Jetpack Compose vs 기존 View 시스템
-Compose: 선언형 UI, 상태 기반 렌더링, XML 불필요.
-기존 View: 명령형, XML + findViewById 기반.
+- UI/구조
+    - Jetpack Compose vs 기존 View 시스템
+    - Compose: 선언형 UI, 상태 기반 렌더링, XML 불필요.
+    - 기존 View: 명령형, XML + findViewById 기반.
 
-RecyclerView에서 ViewHolder 패턴 중요성
-findViewById 반복 호출 방지, 성능 및 스크롤 효율 향상.
+- RecyclerView에서 ViewHolder 패턴 중요성
+    - findViewById 반복 호출 방지, 성능 및 스크롤 효율 향상.
 
 권한 & 아키텍처
 권한 요청 변화 (Android 6.0 이후)
