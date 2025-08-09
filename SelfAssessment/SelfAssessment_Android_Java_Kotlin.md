@@ -15853,52 +15853,47 @@ Organize concepts, features, types and Pros and Cons
     - 발생 조건: State, MutableState, Flow/LiveData collect, remember 값 변경 등.
 
 - WorkManager vs AlarmManager
-WorkManager: 지연·조건 기반 백그라운드 작업, 앱 종료/재부팅 후에도 보장, 네트워크 조건 설정 가능.
-AlarmManager: 특정 시각 또는 주기로 실행, 보장성 낮고 조건 제어 제한적.
+    - WorkManager: 지연·조건 기반 백그라운드 작업, 앱 종료/재부팅 후에도 보장, 네트워크 조건 설정 가능.
+    - AlarmManager: 특정 시각 또는 주기로 실행, 보장성 낮고 조건 제어 제한적.
 
-성능 모니터링
-StrictMode 활용
-개발 중 메인 스레드의 디스크/네트워크 접근, 누수 객체, 리소스 누출 등을 감지.
-예: StrictMode.setThreadPolicy 로 UI 스레드에서 I/O 작업 탐지.
+- 성능 모니터링
+    - StrictMode 활용
+    - 개발 중 메인 스레드의 디스크/네트워크 접근, 누수 객체, 리소스 누출 등을 감지.
+    - 예: StrictMode.setThreadPolicy 로 UI 스레드에서 I/O 작업 탐지.
 
-ViewModel 관리
-Scope별로 ActivityViewModel, FragmentViewModel, Navigation Graph ViewModel로 구분 관리.
-Activity 공용 데이터 → Activity Scope,
-특정 화면만 → Fragment Scope,
-네비게이션 흐름 전체 → NavGraph Scope.
+- ViewModel 관리
+    - Scope별로 ActivityViewModel, FragmentViewModel, Navigation Graph ViewModel로 구분 관리.
+    - Activity 공용 데이터 → Activity Scope,
+    - 특정 화면만 → Fragment Scope,
+    - 네비게이션 흐름 전체 → NavGraph Scope.
 
-데이터 영속성
-DataStore: 비동기, 타입 안전(Preferences vs Proto), 최신 권장 방식, 트랜잭션 안전.
+- 데이터 영속성
+    - DataStore: 비동기, 타입 안전(Preferences vs Proto), 최신 권장 방식, 트랜잭션 안전.
+    - Room: SQLite 기반 구조화 데이터 저장, 쿼리 가능, 대량 데이터 적합.
+    - SharedPreferences: 간단한 key-value, 동기 방식은 ANR 위험, 경량 데이터에 적합.
 
-Room: SQLite 기반 구조화 데이터 저장, 쿼리 가능, 대량 데이터 적합.
+- Parcelable vs Serializable
+    - Parcelable: Android 전용, 빠른 성능, 메모리 효율 높음, Boilerplate 코드 필요.
+    - Serializable: Java 표준, 속도 느림, GC 부하 높음.
+        - ⇒ Android에서는 성능 때문에 Parcelable 선호.
 
-SharedPreferences: 간단한 key-value, 동기 방식은 ANR 위험, 경량 데이터에 적합.
+- MotionLayout 애니메이션
+    - ConstraintLayout 확장으로, XML 기반 Scene/Transition 정의.
+    - 시작·종료 상태 제약조건을 지정하고, Transition 속성과 KeyFrame으로 세밀한 애니메이션 구현 가능.
+    - 예: MotionScene XML → MotionLayout 위젯에서 실행.
 
-직렬화
-Parcelable vs Serializable
-Parcelable: Android 전용, 빠른 성능, 메모리 효율 높음, Boilerplate 코드 필요.
-Serializable: Java 표준, 속도 느림, GC 부하 높음.
-⇒ Android에서는 성능 때문에 Parcelable 선호.
+- Jetpack Navigation Component – Deep Link
+    - 동작 방식:
+        - 딥링크 URI/Intent를 NavController가 수신하여 지정된 목적지(Fragment/Activity)로 이동.
+        - 그래프 XML에 <deepLink app:uri="..."/>로 선언하거나 코드로 추가 가능.
 
-MotionLayout 애니메이션
-ConstraintLayout 확장으로, XML 기반 Scene/Transition 정의.
-시작·종료 상태 제약조건을 지정하고, Transition 속성과 KeyFrame으로 세밀한 애니메이션 구현 가능.
-예: MotionScene XML → MotionLayout 위젯에서 실행.
+    - 활용 사례:
+        - 알림 클릭 시 특정 화면 이동, 외부 앱에서 콘텐츠 직접 열기, 웹 URL과 앱 화면 매핑.
 
-Jetpack Navigation Component – Deep Link
-동작 방식:
-딥링크 URI/Intent를 NavController가 수신하여 지정된 목적지(Fragment/Activity)로 이동.
-그래프 XML에 <deepLink app:uri="..."/>로 선언하거나 코드로 추가 가능.
-
-활용 사례:
-알림 클릭 시 특정 화면 이동, 외부 앱에서 콘텐츠 직접 열기, 웹 URL과 앱 화면 매핑.
-
-앱 보안 강화
-ProGuard/R8: 코드 난독화, 최적화, 사용하지 않는 코드 제거. proguard-rules.pro로 예외 규칙 설정.
-
-App Integrity: Google Play의 앱 무결성 API를 활용해 변조된 앱 탐지.
-
-추가: 네트워크 전송 시 HTTPS/TLS 강제, 키/토큰 안전 저장, 디버그 빌드 배포 방지.
+- 앱 보안 강화
+    - ProGuard/R8: 코드 난독화, 최적화, 사용하지 않는 코드 제거. proguard-rules.pro로 예외 규칙 설정.
+    - App Integrity: Google Play의 앱 무결성 API를 활용해 변조된 앱 탐지.
+    - 추가: 네트워크 전송 시 HTTPS/TLS 강제, 키/토큰 안전 저장, 디버그 빌드 배포 방지.
 
 Java – ClassLoader 동작 원리
 Bootstrap ClassLoader: JVM 코어 라이브러리 로드(java.lang.*).
