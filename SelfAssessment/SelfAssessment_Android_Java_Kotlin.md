@@ -15895,33 +15895,25 @@ Organize concepts, features, types and Pros and Cons
     - App Integrity: Google Play의 앱 무결성 API를 활용해 변조된 앱 탐지.
     - 추가: 네트워크 전송 시 HTTPS/TLS 강제, 키/토큰 안전 저장, 디버그 빌드 배포 방지.
 
-Java – ClassLoader 동작 원리
-Bootstrap ClassLoader: JVM 코어 라이브러리 로드(java.lang.*).
+- Java – ClassLoader 동작 원리
+    - Bootstrap ClassLoader: JVM 코어 라이브러리 로드(java.lang.*).
+    - Extension ClassLoader: 확장 라이브러리(jre/lib/ext).
+    - System ClassLoader: 애플리케이션 클래스패스 로드.
+    - Custom ClassLoader: 네트워크/압축 파일 등 커스텀 로딩 로직 구현 시 사용.
 
-Extension ClassLoader: 확장 라이브러리(jre/lib/ext).
+- ThreadLocal
+    - 역할: 스레드마다 독립적인 변수를 저장해 동시성 문제 방지.
+    - 활용 사례: 스레드 전용 DB 연결, 포맷터(SimpleDateFormat) 인스턴스 공유 방지.
 
-System ClassLoader: 애플리케이션 클래스패스 로드.
+- final 키워드
+    - 클래스: 상속 불가.
+    - 메서드: 오버라이드 불가.
+    - 변수: 재할당 불가(참조형은 참조 변경만 불가, 내부 상태 변경 가능).
 
-Custom ClassLoader: 네트워크/압축 파일 등 커스텀 로딩 로직 구현 시 사용.
-
-ThreadLocal
-역할: 스레드마다 독립적인 변수를 저장해 동시성 문제 방지.
-
-활용 사례: 스레드 전용 DB 연결, 포맷터(SimpleDateFormat) 인스턴스 공유 방지.
-
-final 키워드
-클래스: 상속 불가.
-
-메서드: 오버라이드 불가.
-
-변수: 재할당 불가(참조형은 참조 변경만 불가, 내부 상태 변경 가능).
-
-static 키워드
-클래스 레벨 멤버, 인스턴스 생성 없이 접근 가능.
-
-모든 인스턴스가 공유하는 값/메서드.
-
-static block으로 클래스 로딩 시 초기화 가능.
+- static 키워드
+    - 클래스 레벨 멤버, 인스턴스 생성 없이 접근 가능.
+    - 모든 인스턴스가 공유하는 값/메서드.
+    - static block으로 클래스 로딩 시 초기화 가능.
 
 clone() 문제점
 얕은 복사로 인한 참조 공유 문제 발생.
