@@ -16021,20 +16021,29 @@ enum 활용과 장점
         - 가변 객체는 복사본 저장
     - 장점: 스레드 안전성, 예측 가능한 동작, 캐싱 최적화 가능.
 
+- Java 17의 최신 기능과 주요 변경 사항
+    - Sealed Classes (JEP 409, 정식): sealed/permits로 상속 트리를 제한해 모델링 안정성↑, 패턴매칭과 궁합 좋음.
+    - instanceof 패턴 매칭 (정식): if (obj instanceof String s)처럼 캐스트 제거로 가독성/성능 개선.
+    - Pattern Matching for switch (JEP 406, 프리뷰): switch에 타입 패턴 사용(가드 가능) → 분기 코드 단순화.
+    - Enhanced PRNGs (JEP 356): 다양한 난수 알고리즘/스트림 제공(가독성·재현성↑).
+    - JDK Internals 강한 캡슐화 (JEP 403): --add-opens 없이 내부 API 접근 차단 → 리플렉션 남용 억제.
+    - Security Manager 제거 예정 표시 (JEP 411): 장기적으로 제거 방향.
+    - Vector API (Incubator): SIMD 벡터 연산으로 수치 연산 성능 향상 여지.
+    - macOS/AArch64 포트 (JEP 391), RMI Activation 제거 (JEP 407) 등 플랫폼/레거시 정리.
 
-- Java 17의 최신 기능과 주요 변경 사항을 설명하라.
-- Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할은?
-- Kotlin의 inline, noinline, crossinline 키워드는 언제 사용하는가?
-- Coroutine에서 Mutex와 Semaphore의 차이점은?
-- CoroutineExceptionHandler가 실행되는 경우는?
-- Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법은?
-- Jetpack WorkManager와 Coroutines을 함께 사용할 때의 주의점은?
-- MVVM과 MVI의 차이점은?
-- Clean Architecture를 Android 프로젝트에 적용하는 방법은?
-- DI(Dependency Injection)에서 Hilt와 Koin의 차이점은?
-- Kotlin에서 컴파일 시 생성되는 바이트코드는 어떻게 최적화되는가?
-- Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향은?
-- Kotlin에서 smart casting이 내부적으로 어떻게 동작하는가?
+- Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할
+
+- Kotlin의 inline, noinline, crossinline 키워드 사용 시점
+- Coroutine에서 Mutex와 Semaphore의 차이점
+- CoroutineExceptionHandler가 실행되는 경우
+- Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법
+- Jetpack WorkManager와 Coroutines을 함께 사용할 때의 주의점
+- MVVM과 MVI의 차이점
+- Clean Architecture를 Android 프로젝트에 적용하는 방법
+- DI(Dependency Injection)에서 Hilt와 Koin의 차이점
+- Kotlin에서 컴파일 시 생성되는 바이트코드 최적화 방식
+- Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향
+- Kotlin에서 smart casting 내부적 동작 방식
 
 
 - Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교는?
