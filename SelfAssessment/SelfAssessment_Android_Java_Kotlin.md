@@ -15984,15 +15984,13 @@ enum 활용과 장점
     - Lock: 명시적 lock/unlock, 타임아웃, 인터럽트 가능
     - ReentrantLock: 동일 스레드 재진입 가능, 조건변수(Condition) 지원.
 
-ForkJoinPool
-용도: 큰 작업을 작은 태스크로 분할해 병렬 처리(Work-Stealing).
+- ForkJoinPool
+    - 용도: 큰 작업을 작은 태스크로 분할해 병렬 처리(Work-Stealing).
+    - 활용 예: 재귀적 분할-정복 알고리즘, 병렬 스트림 내부 실행기.
 
-활용 예: 재귀적 분할-정복 알고리즘, 병렬 스트림 내부 실행기.
-
-AOSP – init 프로세스 & 서비스 관리
-init: 부팅 시 최초 실행, init.rc 스크립트 기반 서비스 시작/환경 설정.
-
-서비스 관리: service 선언, property trigger, restart policy 적용.
+- AOSP – init 프로세스 & 서비스 관리
+    - init: 부팅 시 최초 실행, init.rc 스크립트 기반 서비스 시작/환경 설정.
+    - 서비스 관리: service 선언, property trigger, restart policy 적용.
 
 AOSP – Binder & IPC
 Binder 드라이버: 커널 모듈 /dev/binder를 통해 프로세스 간 메서드 호출 가능.
