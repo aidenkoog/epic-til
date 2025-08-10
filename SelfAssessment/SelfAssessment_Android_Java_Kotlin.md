@@ -16141,8 +16141,20 @@ enum 활용과 장점
         - 컬렉션 복사: list.map { it.copy() }, toMutableList() 등으로 새 컨테이너 + 내부 요소 복제.
         - (선택) 직렬화 왕복(kotlinx.serialization/JSON)은 간편하지만 오버헤드 큼.
 
-- Kotlin에서 typealias의 내부적인 동작 방식과 활용 사례는?
-- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 방식은?
+- Kotlin에서 typealias의 내부적인 동작 방식과 활용 사례
+    - 컴파일 타임 별칭(새 타입 아님) → 바이트코드에는 원래 타입만 남음(오버헤드 0).
+    - 활용: 긴 제네릭/함수 타입 축약, 다형 함수 시그니처 가독성 향상, 플랫폼 타입 별칭 등.
+    - 주의: 새 타입이 아니므로 오버로드/타입 안전 분리 불가, 공개 API에서 대상 타입을 바꾸면 바이너리 호환성 깨질 수 있음.
+
+- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 방식
+    - 공통: 상속 제한으로 when exhaustiveness 보장(모든 하위 타입 처리 강제).
+    - sealed class: 
+        - 상태(생성자 파라미터)를 가질 수 있음
+        - 클래스 상속 구조 모델링에 적합.
+    - sealed interface: 상태 없음, 다중 구현 설계에 유리(여러 계층에 섞어 쓰기 쉬움).
+    - 구현: 
+        - 컴파일러 메타데이터로 허용 서브타입 목록을 기록하고, 외부 상속을 금지. (Kotlin 최신 버전은 같은 패키지(모듈 제약) 등 완화 규칙 지원)
+
 - Kotlin의 contract API는 무엇이며, 최적화에 어떻게 기여하는가?
 - Kotlin에서 reflection이 성능에 미치는 영향과 이를 줄이는 방법은?
 - Kotlin에서 inline function이 성능을 개선하는 이유는?
