@@ -15992,10 +15992,11 @@ enum 활용과 장점
     - init: 부팅 시 최초 실행, init.rc 스크립트 기반 서비스 시작/환경 설정.
     - 서비스 관리: service 선언, property trigger, restart policy 적용.
 
-AOSP – Binder & IPC
-Binder 드라이버: 커널 모듈 /dev/binder를 통해 프로세스 간 메서드 호출 가능.
-
-IPC 메커니즘: 프록시-스텁 구조, 직렬화(Parcel) 기반 데이터 전송, 보안 검증 포함.
+- AOSP – Binder & IPC
+    - Binder 드라이버: 
+        - 커널 모듈 /dev/binder를 통해 프로세스 간 메서드 호출 가능.
+    - IPC 메커니즘:
+        - 프록시-스텁 구조, 직렬화(Parcel) 기반 데이터 전송, 보안 검증 포함.
 
 Android – MVI Orbit
 Orbit MVI: 상태(state), 사이드 이펙트 처리, View-ViewModel 단방향 데이터 흐름.
