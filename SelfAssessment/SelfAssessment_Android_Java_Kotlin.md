@@ -15944,55 +15944,45 @@ Organize concepts, features, types and Pros and Cons
         }
         ```
 
-Java – Optional 활용
-역할: null 참조를 안전하게 다루기 위한 컨테이너.
+- Java – Optional 활용
+    - 역할: null 참조를 안전하게 다루기 위한 컨테이너.
+    - 사용 예:
+        ```java
+        Optional<String> name = Optional.ofNullable(getName());
+        name.ifPresent(System.out::println);
+        String result = name.orElse("default");
+        ```
+    - 장점: NPE 방지, 명시적인 null 처리 흐름 제공.
 
-사용 예:
-
-java
-코드 복사
-Optional<String> name = Optional.ofNullable(getName());
-name.ifPresent(System.out::println);
-String result = name.orElse("default");
-장점: NPE 방지, 명시적인 null 처리 흐름 제공.
-
-varargs(가변 인자) 주의점
-내부적으로 배열로 처리되므로 성능에 민감한 경우 반복 호출 주의.
-
-오버로딩 시 모호성 발생 가능.
-
-null 전달 시 NullPointerException 가능성.
+- varargs(가변 인자) 주의점
+    - 내부적으로 배열로 처리되므로 성능에 민감한 경우 반복 호출 주의.
+    - 오버로딩 시 모호성 발생 가능.
+    - null 전달 시 NullPointerException 가능성.
 
 enum 활용과 장점
 활용: 상태/상수 집합 표현, switch-case에서 안전하게 사용.
-
 장점: 타입 안정성, 메서드/필드 추가 가능, 싱글턴 패턴 구현 가능.
 
-CompletableFuture vs ExecutorService
-ExecutorService: 작업 제출/스레드 풀 관리 중심, 반환값 Future.
+- CompletableFuture vs ExecutorService
+    - ExecutorService: 작업 제출/스레드 풀 관리 중심, 반환값 Future.
+    - CompletableFuture: 비동기 연산 체이닝, 콜백 처리, 조합 가능.
+    - 예제
+        ```java
+        CompletableFuture.supplyAsync(() -> "Data")
+            .thenApply(String::toUpperCase)
+            .thenAccept(System.out::println);
+        ```
 
-CompletableFuture: 비동기 연산 체이닝, 콜백 처리, 조합 가능.
+- GC 알고리즘 차이
+    - G1 GC: 힙을 리전으로 나누고 병렬/동시 수집, 짧은 STW 목표.
+    - CMS: 동시 마크-스윕, STW 최소화, 단편화 문제 존재.
+    - ZGC: 매우 낮은 지연 시간(<10ms), 대규모 힙(테라바이트) 지원.
+    - 최적화: GC 로그 분석, 힙 크기 조정, 적절한 GC 선택.
 
-java
-코드 복사
-CompletableFuture.supplyAsync(() -> "Data")
-                 .thenApply(String::toUpperCase)
-                 .thenAccept(System.out::println);
-GC 알고리즘 차이
-G1 GC: 힙을 리전으로 나누고 병렬/동시 수집, 짧은 STW 목표.
-
-CMS: 동시 마크-스윕, STW 최소화, 단편화 문제 존재.
-
-ZGC: 매우 낮은 지연 시간(<10ms), 대규모 힙(테라바이트) 지원.
-
-최적화: GC 로그 분석, 힙 크기 조정, 적절한 GC 선택.
-
-synchronized / Lock / ReentrantLock
-synchronized: JVM 모니터 락, 간단하지만 세밀한 제어 불가.
-
-Lock: 명시적 lock/unlock, 타임아웃, 인터럽트 가능.
-
-ReentrantLock: 동일 스레드 재진입 가능, 조건변수(Condition) 지원.
+- synchronized / Lock / ReentrantLock
+    - synchronized: JVM 모니터 락, 간단하지만 세밀한 제어 불가
+    - Lock: 명시적 lock/unlock, 타임아웃, 인터럽트 가능
+    - ReentrantLock: 동일 스레드 재진입 가능, 조건변수(Condition) 지원.
 
 ForkJoinPool
 용도: 큰 작업을 작은 태스크로 분할해 병렬 처리(Work-Stealing).
