@@ -16100,11 +16100,25 @@ enum 활용과 장점
         - 단점: 기본은 런타임 해석 → 오류 발견 시점 늦음, 대규모에서 성능 이슈 가능.
 
     - 안드로이드 친화성·생명주기 스코핑은 Hilt가 표준화 강함(ViewModel/ActivityRetained 등).
-    
-- Kotlin에서 컴파일 시 생성되는 바이트코드 최적화 방식
-- Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향
-- Kotlin에서 smart casting 내부적 동작 방식
 
+- Kotlin에서 컴파일 시 생성되는 바이트코드 최적화 방식
+    - 인라인: inline/reified, const val 등 컴파일 타임 치환.
+    - tailrec: 꼬리재귀 → 루프로 변환.
+    - @JvmInline value class: 박싱 제거로 할당/GC 감소(가능한 경우).
+    - for-range/when 최적화: 인덱스 루프, tableswitch/lookupswitch.
+    - Null 체크 최소화/스마트캐스트: 중복 캐스트 제거.
+    - JIT/GC/EA(핫스팟): 런타임에서 추가 최적화(인라이닝, 탈출분석, 스칼라 치환).
+    - R8/ProGuard: 난독/축소/인라이닝로 최종 APK 최적화.
+
+- Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향
+    - JVM 탈출 분석(EA)으로 객체가 스레드/스코프 밖으로 탈출하지 않으면 스택 할당/스칼라 치환 → GC 압력↓.
+    - 효과↑ 사례: 짧은 수명 객체, 인라인 람다, value class, 로컬 컬렉션 임시 객체 최소화.
+    - 보장사항 아님(JVM/JIT 상황 따라 다름) → 마이크로 최적화는 벤치마크로 검증 필요.
+
+- Kotlin에서 smart casting 내부적 동작 방식
+    - 컴파일러가 타입 검증 후 안전하다고 판단되면 로컬 변수에 한해 캐스트 생략.
+    - 바이트코드 수준에선 INSTANCEOF/IFNULL/CHECKCAST 조합으로 분기 후 좁혀진 타입 사용.
+    - val 로컬 변수·불변 프로퍼티는 잘 동작, 변경 가능성 있는 필드/멀티스레드 컨텍스트에선 스마트캐스트 불가 → 임시 변수로 고정하거나 명시 캐스트 사용.
 
 - Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교는?
 - Kotlin의 companion object는 언제 메모리에 로드되는가?
