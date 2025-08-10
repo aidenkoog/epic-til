@@ -16089,8 +16089,18 @@ enum 활용과 장점
     - 매퍼로 DTO ↔ Entity ↔ UI 모델 변환.
     - 테스트: UseCase 단위 테스트 쉬움, Data는 fake로 테스트.
     - DI: Hilt/Koin으로 구현체 바인딩, 환경 전환(BuildType) 쉬움.
-    
+
 - DI(Dependency Injection)에서 Hilt와 Koin의 차이점
+    - Hilt(Dagger 기반, 컴파일타임)
+        - 장점: 컴파일타임 검증, 런타임 오버헤드↓, 대규모/복잡 스코프에 유리.
+        - 단점: 어노테이션/모듈 설정 복잡, 빌드 타임 증가.
+
+    - Koin(런타임 DSL, 코드젠 옵션 존재)
+        - 장점: 설정 간단, DSL로 빠른 도입, 프로토타입/소규모에 유리.
+        - 단점: 기본은 런타임 해석 → 오류 발견 시점 늦음, 대규모에서 성능 이슈 가능.
+
+    - 안드로이드 친화성·생명주기 스코핑은 Hilt가 표준화 강함(ViewModel/ActivityRetained 등).
+    
 - Kotlin에서 컴파일 시 생성되는 바이트코드 최적화 방식
 - Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향
 - Kotlin에서 smart casting 내부적 동작 방식
