@@ -16012,19 +16012,14 @@ enum 활용과 장점
     - Runnable 구현
     - ExecutorService
     - ForkJoinPool
-
-CompletableFuture / Parallel Streams
-
-Immutable 객체 설계 & 장점
-설계:
-
-모든 필드 final
-
-setter 없음
-
-가변 객체는 복사본 저장
-
-장점: 스레드 안전성, 예측 가능한 동작, 캐싱 최적화 가능.
+    - CompletableFuture / Parallel Streams
+    
+- Immutable 객체 설계 & 장점
+    - 설계:
+        - 모든 필드 final
+        - setter 없음
+        - 가변 객체는 복사본 저장
+    - 장점: 스레드 안전성, 예측 가능한 동작, 캐싱 최적화 가능.
 
 
 - Java 17의 최신 기능과 주요 변경 사항을 설명하라.
