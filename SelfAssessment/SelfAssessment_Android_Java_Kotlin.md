@@ -15998,26 +15998,20 @@ enum 활용과 장점
     - IPC 메커니즘:
         - 프록시-스텁 구조, 직렬화(Parcel) 기반 데이터 전송, 보안 검증 포함.
 
-Android – MVI Orbit
-Orbit MVI: 상태(state), 사이드 이펙트 처리, View-ViewModel 단방향 데이터 흐름.
+- Android – MVI Orbit
+    - Orbit MVI: 상태(state), 사이드 이펙트 처리, View-ViewModel 단방향 데이터 흐름.
+    - 특징: 코루틴 기반, DSL 스타일로 상태 변경 정의.
 
-특징: 코루틴 기반, DSL 스타일로 상태 변경 정의.
+- GC 방식
+    - Serial GC: 단일 스레드, 작은 힙에 적합.
+    - Parallel GC: 멀티스레드, 처리량 위주.
+    - CMS, G1, ZGC, Shenandoah: 저지연·대규모 힙 지원.
 
-GC 방식
-Serial GC: 단일 스레드, 작은 힙에 적합.
-
-Parallel GC: 멀티스레드, 처리량 위주.
-
-CMS, G1, ZGC, Shenandoah: 저지연·대규모 힙 지원.
-
-Multi-threading 구현
-Thread 클래스 상속
-
-Runnable 구현
-
-ExecutorService
-
-ForkJoinPool
+- Multi-threading 구현
+    - Thread 클래스 상속
+    - Runnable 구현
+    - ExecutorService
+    - ForkJoinPool
 
 CompletableFuture / Parallel Streams
 
