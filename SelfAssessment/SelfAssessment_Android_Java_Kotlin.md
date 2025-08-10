@@ -16032,8 +16032,20 @@ enum 활용과 장점
     - macOS/AArch64 포트 (JEP 391), RMI Activation 제거 (JEP 407) 등 플랫폼/레거시 정리.
 
 - Spring Boot의 IoC 컨테이너에서 Bean Lifecycle과 @PostConstruct, @PreDestroy의 역할
+    - 생성/주입: 인스턴스화 → 의존성 주입
+    - 초기화 전: BeanPostProcessor#postProcessBeforeInitialization
+    - 초기화: @PostConstruct → InitializingBean#afterPropertiesSet → init-method
+    - 초기화 후: BeanPostProcessor#postProcessAfterInitialization
+    - 소멸: 컨텍스트 종료 시 @PreDestroy → DisposableBean#destroy → destroy-method
+    - @PostConstruct: 모든 주입 완료 후 초기화 로직(캐시 로드, 연결 준비 등).
+    - @PreDestroy: 종료 직전 정리(커넥션 종료, 버퍼 플러시 등).
+    - prototype 스코프는 자동 소멸 콜백 없음(직접 정리 필요).
 
 - Kotlin의 inline, noinline, crossinline 키워드 사용 시점
+    - inline: 호출지에 함수·람다 본문 삽입 → 할당·콜스택 비용 감소, reified 타입 파라미터 사용 가능.
+    - noinline: 인라인 함수의 매개 람다 중 특정 람다만 인라인 금지(저장/재전달 등 필요할 때).
+    - crossinline: 인라인 람다에서 non-local return 금지(람다를 다른 곳에서 호출하거나 코루틴/비동기 경로로 넘길 때 안전성 확보).
+
 - Coroutine에서 Mutex와 Semaphore의 차이점
 - CoroutineExceptionHandler가 실행되는 경우
 - Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법
