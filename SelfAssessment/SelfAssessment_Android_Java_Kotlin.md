@@ -16155,13 +16155,50 @@ enum 활용과 장점
     - 구현: 
         - 컴파일러 메타데이터로 허용 서브타입 목록을 기록하고, 외부 상속을 금지. (Kotlin 최신 버전은 같은 패키지(모듈 제약) 등 완화 규칙 지원)
 
-- Kotlin의 contract API는 무엇이며, 최적화에 어떻게 기여하는가?
-- Kotlin에서 reflection이 성능에 미치는 영향과 이를 줄이는 방법은?
-- Kotlin에서 inline function이 성능을 개선하는 이유는?
-- Kotlin에서 reified 키워드가 컴파일러 최적화에 미치는 영향은?
-- Kotlin의 null-safety가 JVM에서 어떻게 구현되는가?
-- Kotlin의 default arguments는 Java와 어떻게 다르게 처리되는가?
+- Kotlin의 contract API 정의와 최적화 기여 방법
+    - 정의: 
+        - kotlin.contracts(실험적). 
+        - 함수가 호출자 관점에서 보장하는 효과를 선언(예: null 체크, 람다 호출 시점).
 
+    - 효과
+        - returns(true) implies (x != null): 제어 흐름 분석 강화 → 스마트 캐스트 가능.
+        - callsInPlace(block, EXACTLY_ONCE): 람다 한 번만 호출을 컴파일러가 알게 되어 캡처 최적화/인라이닝 이득 극대화.
+
+    - 런타임 동작 변경 없음, 컴파일 타임 추론 개선으로 불필요한 체크/박싱/할당 감소에 도움.
+
+- Kotlin에서 reflection이 성능에 미치는 영향과 이를 줄이는 방법
+    - 영향: kotlin-reflect는 메타데이터 해석/캐시 비용이 커서 순수 Java 리플렉션보다 느린 경우 많음. 빈번 호출 시 병목.
+
+    - 대안
+        - reified + inline으로 타입 정보 전달(리플렉션 대체).
+        - KSP/KAPT 코드 생성(예: kotlinx.serialization)으로 런타임 리플렉션 제거.
+        - 리플렉션 결과 캐싱(KProperty, KFunction), 경로를 초기화 시 1회만 해석.
+        - 단순 케이스는 Java 리플렉션(java.lang.reflect) 이용이 더 가벼울 때도 있음.
+
+- Kotlin에서 inline function이 성능을 개선하는 이유
+    - 호출 오버헤드 제거: 바이트코드에 본문이 삽입.
+    - 람다 객체/캡처 할당 제거: (특히 noinline이 아닌 람다) 객체 생성·GC 감소.
+    - reified 사용 가능: 리플렉션 회피로 추가 이득.
+    - 주의: 코드 부풀어짐(메소드 크기↑) → ICache 압박/DEX 메서드 수 증가 가능, 과용 금지.
+
+- Kotlin에서 reified 키워드가 컴파일러 최적화에 미치는 영향
+    - 인라인 제네릭 함수에서 타입 인자를 실 타입으로 치환 → T::class, obj is T, as T 등을 리플렉션 없이 구현.
+    - 컴파일러가 숨은 파라미터(Class/Type 정보)를 주입하므로 분기/캐스트 최적화 여지↑.
+    - 결과적으로 리플렉션 비용 제거 + 인라이닝 시너지.
+
+- Kotlin의 null-safety가 JVM에서 구현되는 방법
+    - 컴파일러가 널 체크 삽입: 
+        - 파라미터/리턴/스마트 캐스트 지점에서 Intrinsics.checkNotNull* 호출 → 실패 시 KotlinNullPointerException 등 발생.
+    - Java 상호 운용:
+        - 자바 어노테이션(@Nullable/@NotNull)을 읽어 플랫폼 타입/안전성 결정.
+        - 플랫폼 타입은 개발자 책임(추가 런타임 체크가 삽입될 수도, 안 될 수도).
+    - 스마트 캐스트: 제어 흐름 분석으로 중복 캐스트 제거, 불필요한 런타임 체크 감소.
+
+- Kotlin의 default arguments는 Java와 어떻게 다르게 처리되는 지에 대한 설명
+    - Kotlin 호출자: 비트마스크 + DefaultConstructorMarker가 붙은 합성 시그니처를 사용해 단일 메서드에서 기본값 적용(오버로드 폭발 방지).
+    - Java 호출자: 기본값 개념이 없어 모든 인자를 전달해야 함.
+        - Java에서도 편히 쓰려면 @JvmOverloads를 붙여 오버로드 메서드를 생성(필요한 수만큼).
+    - 요약: Kotlin↔Kotlin은 마스크 기반 1개 구현, Java 노출 시에는 오버로드 제공이 관행.
 
 - Kotlin에서 lazy initialization의 내부 동작 방식과 성능 고려 사항은?
 - Kotlin에서 tail recursion 최적화(TCO)가 적용되지 않는 경우는?
