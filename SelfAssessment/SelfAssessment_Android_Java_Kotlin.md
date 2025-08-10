@@ -16200,18 +16200,39 @@ enum 활용과 장점
         - Java에서도 편히 쓰려면 @JvmOverloads를 붙여 오버로드 메서드를 생성(필요한 수만큼).
     - 요약: Kotlin↔Kotlin은 마스크 기반 1개 구현, Java 노출 시에는 오버로드 제공이 관행.
 
-- Kotlin에서 lazy initialization의 내부 동작 방식과 성능 고려 사항은?
-- Kotlin에서 tail recursion 최적화(TCO)가 적용되지 않는 경우는?
-- Kotlin에서 synchronized 블록과 volatile 키워드의 차이점은?
-- Kotlin에서 companion object가 싱글톤처럼 동작하는 이유는?
-- Kotlin에서 함수형 프로그래밍 패러다임을 적용할 때 고려해야 할 사항은?
-- Kotlin에서 inline class를 활용한 메모리 최적화 기법은?
-- Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점은?
-- Kotlin에서 Serialization을 최적화하는 방법은?
-- Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조는?
-- Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법은?
-- Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할은?
-- Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법은?
+- Kotlin에서 lazy initialization의 내부 동작 방식과 성능 고려 사항
+    - 개념: val x by lazy { ... }는 첫 접근 시 초기화, 이후 캐시.
+    - 구현: Lazy<T> 인터페이스 + 구현체(SynchronizedLazyImpl 기본). 첫 호출에서 람다 실행 후 결과를 필드에 저장.
+    - 동시성: 기본은 동기화 보장(모니터 락). lazy(LazyThreadSafetyMode.NONE)은 락 없음(싱글스레드에서 빠름), PUBLICATION은 다중 초기화 가능성 허용(가장 마지막 값 고정).
+    - 성능: 접근당 분기/필드 읽기 비용이 있음. 자주 접근하는 경량 값이면 “그냥 즉시 초기화”가 더 빠를 수 있음.
+
+- Kotlin에서 tail recursion 최적화(TCO)가 적용되지 않는 경우
+    - 조건: 함수에 tailrec + 마지막 연산이 자기 자신 호출이어야 함.
+    - 미적용 사례
+        - 호출 뒤에 추가 연산이 있는 경우(예: return 1 + f(n-1)).
+        - try/finally 등으로 마지막 호출이 보장되지 않는 경우.
+        - 람다/로컬 함수에 대한 tailcall.
+        - 인터페이스/오버라이딩 경로로 호출되어 정적 치환이 불가능한 경우.
+    - 결과: 미적용 시 스택 사용 → 큰 입력에서 StackOverflowError.
+
+- Kotlin에서 synchronized 블록과 volatile 키워드의 차이점
+    - synchronized(obj){...}: 
+        - 모니터 락 기반 상호배제 + 진입/이탈 시 가시성 보장. 임계구역 보호.
+    - @Volatile var x: 
+        - 가시성(Visibility)만 보장, 원자적 복합 연산(X++) 보장 안 됨.
+    - 정리: 
+        - 읽기 일관성만 필요하면 volatile
+        - 복수 연산을 하나의 원자적 단위로 보호하려면 synchronized/락 사용.
+
+- Kotlin에서 companion object가 싱글톤처럼 동작하는 이유
+- Kotlin에서 함수형 프로그래밍 패러다임을 적용할 때 고려해야 할 사항
+- Kotlin에서 inline class를 활용한 메모리 최적화 기법
+- Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점
+- Kotlin에서 Serialization을 최적화하는 방법
+- Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조
+- Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법
+- Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할
+- Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법
 
 
 - Kotlin에서 collectLatest()와 collect()의 차이점은?
