@@ -16063,9 +16063,33 @@ enum 활용과 장점
     - 부모/SupervisorJob 구성에 따라 부모가 우선 처리되면 핸들러까지 안 올라올 수 있음.
 
 - Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법
+    - Retrofit + suspend API, OkHttp 커넥션 풀/HTTP2 활용.
+    - Dispatchers.IO에서 실행, viewModelScope/lifecycleScope로 생명주기-연동 취소.
+    - 동시성 제어: async/await로 병렬, 필요 시 Semaphore로 동시 수 제한.
+    - 재시도/백오프: 실패 시 Result.retry 정책(네트워크 오류 구분), 429/503 대응.
+    - 캐싱/조건부 요청: ETag/If-Modified-Since, Room 캐시, 메모리 캐시 + Stale-While-Revalidate.
+    - 타임아웃/에러 매핑: OkHttp 타임아웃, 도메인 오류로 변환.
+    - 스크롤 목록은 Paging 3 + 코루틴으로 백프레셔 처리.
+
 - Jetpack WorkManager와 Coroutines을 함께 사용할 때의 주의점
+    - CoroutineWorker 사용(블로킹 금지). withContext(Dispatchers.IO)로 I/O 분리.
+    - 취소 대응: isStopped/coroutineContext.isActive 확인, 정리 로직 작성.
+    - 제약조건/백오프 지키기: 네트워크/충전/유휴 등, Result.retry() 적절히 반환.
+    - 고유 작업(UniqueWork) 으로 중복 실행 방지, 체이닝으로 순서 제어.
+    - 포그라운드 서비스 필요한 장기 작업은 setForeground().
+
 - MVVM과 MVI의 차이점
+    - MVVM: View ←→ ViewModel(상태+이벤트). 양방향 가능, 유연하지만 이벤트/상태 분리 미흡 시 흩어짐.
+    - MVI: 단일 immutable State + Intent(Action) + Reducer. 단방향 데이터 흐름, 재현성/테스트성↑, 러닝커브·보일러플레이트↑.
+
 - Clean Architecture를 Android 프로젝트에 적용하는 방법
+    - 레이어 분리: Presentation(모델·UI) / Domain(UseCase, Entity, Repository 인터페이스) / Data(Repository 구현, Remote/Local).
+    - 의존 역전: Domain이 바깥을 모름. Data가 Domain의 인터페이스를 구현.
+    - 모듈화: :app(presentation), :domain, :data.
+    - 매퍼로 DTO ↔ Entity ↔ UI 모델 변환.
+    - 테스트: UseCase 단위 테스트 쉬움, Data는 fake로 테스트.
+    - DI: Hilt/Koin으로 구현체 바인딩, 환경 전환(BuildType) 쉬움.
+    
 - DI(Dependency Injection)에서 Hilt와 Koin의 차이점
 - Kotlin에서 컴파일 시 생성되는 바이트코드 최적화 방식
 - Kotlin의 escape analysis와 stack allocation이 성능에 미치는 영향
