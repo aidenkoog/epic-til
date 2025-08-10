@@ -16047,6 +16047,15 @@ enum 활용과 장점
     - crossinline: 인라인 람다에서 non-local return 금지(람다를 다른 곳에서 호출하거나 코루틴/비동기 경로로 넘길 때 안전성 확보).
 
 - Coroutine에서 Mutex와 Semaphore의 차이점
+    - Mutex: 
+        - 1개 소유권(뮤텍스)으로 임계구역 단일 접근 보장.
+        - lock/unlock(suspend), 비재진입(non-reentrant).
+    - Semaphore: 
+        - n개의 허가증(permits). 
+        - 동시 최대 n 진입 허용. 
+        - acquire/release(suspend).
+    - 공통: 스레드 블로킹 없이 서스펜딩으로 대기, 취소 전파 지원.
+
 - CoroutineExceptionHandler가 실행되는 경우
 - Android에서 Coroutine을 활용한 네트워크 요청 최적화 방법
 - Jetpack WorkManager와 Coroutines을 함께 사용할 때의 주의점
