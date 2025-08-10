@@ -16120,9 +16120,27 @@ enum 활용과 장점
     - 바이트코드 수준에선 INSTANCEOF/IFNULL/CHECKCAST 조합으로 분기 후 좁혀진 타입 사용.
     - val 로컬 변수·불변 프로퍼티는 잘 동작, 변경 가능성 있는 필드/멀티스레드 컨텍스트에선 스마트캐스트 불가 → 임시 변수로 고정하거나 명시 캐스트 사용.
 
-- Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교는?
-- Kotlin의 companion object는 언제 메모리에 로드되는가?
-- Kotlin에서 data class의 copy() 메서드는 어떻게 동작하며, deep copy를 구현하는 방법은?
+- Kotlin의 inline class(value class)와 일반 class의 차이점 및 성능 비교
+    - 정의: value class는 단일 val 프로퍼티만 보유하는 경량 래퍼. 식별성(아이덴티티) 없음, 상속 불가.
+    - 런타임 표현: 대부분의 호출 지점에서 기저 타입으로 ‘제거(erase)’되어 객체 할당이 생략됨 → GC 압력↓/메모리↓
+    - 박싱 발생: nullable, 제네릭 경계, 배열/가변 컨테이너 등에서는 박싱될 수 있음(성능 이득↓).
+    - 제약: init 블록/가변 상태 없음, 레퍼런스 동일성 필요 시 부적합.
+    - 일반 class: 항상 객체로 힙 할당(escape analysis로 최적화될 수 있으나 보장 X).
+    - 요약: “작고 자주 쓰는 값”을 감싸 도메인 타입 안전 + 할당 제거를 노릴 때 value class 유리.
+
+- Kotlin의 companion object 메모리 로드 시점
+    - JVM 에서 클래스 초기화 시점 (처음 적극적 사용: 인스턴스 생성, 정적 멤버 접근 등)에 외부 클래스와 함께 초기화되며 그때 companion 싱글톤이 만들어짐
+    - @JvmStatic 메서드를 companion에 두면 정적 호출이 가능(바이트코드에서 정적 메서드로 노출)
+
+- Kotlin에서 data class의 copy() 메서드는 어떻게 동작하며, deep copy를 구현하는 방법
+    - 동작: 
+        - 필드별 대입으로 새 인스턴스 생성(얕은 복사). 
+        - 참조 타입 필드는 그대로 공유.
+    - deep copy 방법
+        - 수동 재귀 복사: 중첩 data class면 copy(child = child.copy(...)).
+        - 컬렉션 복사: list.map { it.copy() }, toMutableList() 등으로 새 컨테이너 + 내부 요소 복제.
+        - (선택) 직렬화 왕복(kotlinx.serialization/JSON)은 간편하지만 오버헤드 큼.
+
 - Kotlin에서 typealias의 내부적인 동작 방식과 활용 사례는?
 - Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 방식은?
 - Kotlin의 contract API는 무엇이며, 최적화에 어떻게 기여하는가?
