@@ -16250,6 +16250,15 @@ enum 활용과 장점
     - 전략 차이: JVM은 “장기 핫패스 중심”, Native는 “할당·참조 사이클·경계 복사 최소화”.
 
 - Kotlin에서 Serialization을 최적화하는 방법
+    - kotlinx.serialization 플러그인 사용: 
+        - 리플렉션 없이 컴파일타임 생성 → 런타임 오버헤드↓. (plugins { kotlin("plugin.serialization") })
+    - 바이너리 포맷 고려: JSON보다 ProtoBuf/CBOR가 대역폭·CPU에 유리. 대용량/빈번 전송에 효과적.
+    - 스트리밍 I/O 활용: encodeToStream/decodeFromStream(Input/OutputStream) 사용으로 중간 버퍼 줄이기.
+    - 고정 스키마/Sealed 계층: sealed + @SerialName으로 다형성 비용↓, unknown polymorphic 최소화.
+    - 불필요한 필드 제외: @Transient/explicitNulls = false 등으로 페이로드 절약.
+    - 캐시/모듈 준비: SerializersModule을 한 번 구성해 재사용(DI 주입).
+    - 컬렉션/숫자 타입: enum 남발 대신 숫자 코드(바이너리) 또는 짧은 @SerialName(JSON)로 크기↓.
+
 - Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조
 - Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법
 - Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할
