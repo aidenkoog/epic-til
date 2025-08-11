@@ -16237,7 +16237,18 @@ enum 활용과 장점
     - 에러모델: Result/Either(Arrow) 등으로 예외를 값으로 다루되, 과도한 중첩은 가독성 저하.
 
 - Kotlin에서 inline class를 활용한 메모리 최적화 기법
+    - 도메인 래핑: 
+        - @JvmInline value class UserId(val v: Long)처럼 타입 안정성 + 박싱 제거(대부분 call-site에서 원시값으로 대체).
+    - 핫패스 이점: 
+        - 파라미터/리턴에서 힙 할당·GC 압력↓. 
+        - DTO 내부 필드도 원시로 정리됨.
+    - 주의: nullable/제네릭/배열/컬렉션 저장 시 박싱 발생 가능 → API 표면 설계 시 고려.
+
 - Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점
+    - JVM: JIT + EA(탈출 분석) + 인라이닝/스칼라 치환/GC 최적화. 장기 실행 워크로드에서 점점 빨라짐.
+    - Native(K/N): AOT, ARC(참조 카운팅), 스레드 간 공유 제약(새 메모리 모델). 시작 지연↓/배포 용이, JIT의 동적 최적화는 없음.
+    - 전략 차이: JVM은 “장기 핫패스 중심”, Native는 “할당·참조 사이클·경계 복사 최소화”.
+
 - Kotlin에서 Serialization을 최적화하는 방법
 - Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조
 - Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법
