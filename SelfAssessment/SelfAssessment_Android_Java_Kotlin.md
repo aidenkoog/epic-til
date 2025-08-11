@@ -16259,15 +16259,61 @@ enum 활용과 장점
     - 캐시/모듈 준비: SerializersModule을 한 번 구성해 재사용(DI 주입).
     - 컬렉션/숫자 타입: enum 남발 대신 숫자 코드(바이너리) 또는 짧은 @SerialName(JSON)로 크기↓.
 
-- Kotlin에서 suspend function이 컴파일될 때 생성되는 내부 코드 구조
-- Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법
-- Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할
-- Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법
-- Kotlin에서 collectLatest()와 collect()의 차이점은?
-- Kotlin의 StateFlow와 SharedFlow의 차이점 및 활용 방법은?
-- Kotlin에서 Immutable Data Structure를 활용한 성능 최적화 방법은?
-- Kotlin의 Compiler Intrinsics을 활용한 성능 최적화 기법은?
+- suspend 함수의 컴파일 산출(내부 구조)
+    - CPS 변환 + 상태 머신: suspend fun은 Continuation<T>를 추가 인자로 받는 형태로 변환되고, label을 가진 상태 머신(when)으로 펼쳐짐.
+    - 중단 지점 마킹: COROUTINE_SUSPENDED 토큰 반환으로 재개 시점 구분.
+    - 예외 처리: try/catch가 상태 머신 각 분기(라벨)로 분해되어 resumeWith(Result)에 매핑.
+    - 로컬 캡처: 지역 변수는 프레임(Continuation 구현체) 필드로 저장되어 재개 시 복원.
 
+- 코루틴 기반 비동기 네트워크 성능 최적화
+    - 논블로킹 클라이언트: Ktor( CIO/OkHttp )의 suspend API 사용. 블로킹 I/O는 Dispatchers.IO로 격리.
+    - 컨텍스트 전환 최소화: 빈번한 withContext 남용 금지. 파이프라인은 한 디스패처에 묶기.
+    - 동시성 제한: Semaphore/Dispatcher.limitedParallelism()으로 적정 동시 연결수 관리.
+    - 배치·파이프라인: 요청 묶음은 async + 제한된 동시성, 응답 처리 스트림은 Flow로 백프레셔.
+    - 타임아웃/재시도: withTimeout + 지수백오프(최대 재시도/재시도 가능 에러만).
+    - 커넥션 풀/압축: HTTP/2, 풀 사이즈, GZIP/Deflate 활성화(클라이언트 설정).
+    - 메모리 절약: 스트리밍 디코딩/ByteArrayChannel로 대용량 응답 버퍼링 최소화.
+
+- CoroutineContext 내부, 그리고 Job/Dispatcher/ExceptionHandler
+    - 구조: 불변의 키-요소 체인(합성은 +), 조회는 키 매칭.
+    - Job: 부모-자식 트리로 생명주기/취소 전파 관리.
+    - Dispatcher: 스케줄러(스레드 지정). Default(CPU), IO(차단 I/O), Main(UI).
+    - CoroutineExceptionHandler: 루트 코루틴의 미처리 예외를 최종 처리(로그/복구 훅).
+
+- CoroutineExceptionHandler 활용 팁
+    - 루트에 넣기: CoroutineScope(SupervisorJob() + handler + Dispatchers.Default).
+    - async 주의: async 예외는 await() 시 재던짐 → 핸들러는 개입 안 함(await 안 하면 루트에서 처리).
+    - supervisor 사용: 한 자식 실패로 전체 실패 방지(SupervisorJob/supervisorScope).
+    - 로컬 처리 우선: 가능하면 try/catch로 의미 있는 레벨에서 처리, 핸들러는 마지막 안전망.
+
+- collectLatest() vs collect()
+    - collect: 각 emission을 끝까지 처리. 처리 중 새 값이 와도 대기.
+    - collectLatest: 새 emission 오면 이전 블록을 취소하고 최신 값만 처리. 느린 변환/렌더링에 유리.
+        ```kotlin
+        flow.debounce(200)
+            .map(::heavyWork)
+            .collectLatest { render(it) } // 이전 render 취소
+        ```
+
+- StateFlow vs SharedFlow (+활용)
+    - StateFlow: 항상 현재값 보유(초기값 필수), conflated(replay=1 고정), value/update로 set. UI 상태 보관/Compose/RxState 대체에 적합.
+    - SharedFlow: 값 보관 없음(옵션), replay/buffer 설정 가능, 이벤트 브로드캐스트/다중 구독에 적합.
+    - 패턴: 상태는 MutableStateFlow, 일회성 이벤트는 MutableSharedFlow(replay=0, extraBufferCapacity>0).
+
+- Immutable 자료구조로 성능 최적화
+    - Persistent Collections: kotlinx.collections.immutable(List/Set/Map)로 구조적 공유 → 복사 비용↓, 스레드 안전성↑.
+    - 데이터 모델: data class + copy() 조합, 중첩 컬렉션도 persistent로.
+    - Compose/리컴포지션: @Immutable(Compose) 힌트로 불필요한 재컴포지션 감소.
+    - 값 클래스: @JvmInline value class로 래핑 비용 제거(불변 원시 래퍼·ID 등).
+
+- Kotlin Compiler Intrinsics/언어 기능을 통한 최적화
+    - inline/reified: 고차/제네릭 호출 오버헤드↓, 리플렉션 대체(inline fun <reified T>).
+    - value class(@JvmInline): 작은 래퍼 타입의 할당 제거(JVM에서 인라이닝).
+    - tailrec: 꼬리재귀 루프화로 스택 사용↓.
+    - primitive arrays/collections: IntArray, BooleanArray로 박싱 제거.
+    - contracts: kotlin.contracts로 분기/널체크 정보 제공 → 불필요 체크/캐스트 제거(미세 최적화).
+    - @PublishedApi + internal inline: 인라이닝 가능 영역 확장.
+    - escape/alloc 최소화: buildList {}, sequence {} 과용 주의(박싱/히프); 성능 경로는 배열/버퍼 재사용.
 
 - 다이나믹 아일랜드 구현 방법 및 실시간 업데이트 처리 방법
 - Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
