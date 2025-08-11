@@ -16230,6 +16230,12 @@ enum 활용과 장점
     - @JvmStatic으로 정적 호출 노출 가능(편의성).
 
 - Kotlin에서 함수형 프로그래밍 패러다임을 적용할 때 고려해야 할 사항
+    - 불변(immutability) 우선: data class를 불변으로 두고 copy()로 파생. 컬렉션은 List/Map 읽기 전용 뷰 사용.
+    - 순수 함수·부작용 격리: I/O·상태 변경은 경계(UseCase/Repository)로 모아 테스트 용이성↑.
+    - 람다/고차함수 비용 인지: 캡처·할당 발생 → 핫패스는 inline로 줄이고 과도한 체이닝은 피하기.
+    - 지연 vs 즉시: 큰 파이프라인은 Sequence로, 작은 데이터는 List 연산이 오히려 빠른 경우 많음.
+    - 에러모델: Result/Either(Arrow) 등으로 예외를 값으로 다루되, 과도한 중첩은 가독성 저하.
+
 - Kotlin에서 inline class를 활용한 메모리 최적화 기법
 - Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점
 - Kotlin에서 Serialization을 최적화하는 방법
@@ -16237,12 +16243,12 @@ enum 활용과 장점
 - Kotlin에서 코루틴을 사용한 비동기 네트워크 요청 시 성능 최적화 방법
 - Kotlin의 CoroutineContext 내부 구조와 Job, Dispatcher, ExceptionHandler의 역할
 - Kotlin에서 CoroutineExceptionHandler를 활용한 예외 처리 방법
-
-
 - Kotlin에서 collectLatest()와 collect()의 차이점은?
 - Kotlin의 StateFlow와 SharedFlow의 차이점 및 활용 방법은?
 - Kotlin에서 Immutable Data Structure를 활용한 성능 최적화 방법은?
 - Kotlin의 Compiler Intrinsics을 활용한 성능 최적화 기법은?
+
+
 - 다이나믹 아일랜드 구현 방법 및 실시간 업데이트 처리 방법
 - Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
 - Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
