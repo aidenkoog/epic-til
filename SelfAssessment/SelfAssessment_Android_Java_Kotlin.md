@@ -16225,6 +16225,10 @@ enum 활용과 장점
         - 복수 연산을 하나의 원자적 단위로 보호하려면 synchronized/락 사용.
 
 - Kotlin에서 companion object가 싱글톤처럼 동작하는 이유
+    - 구현: 컴파일 시 별도 정적 중첩 클래스(Outer$Companion)와 단일 인스턴스 생성.
+    - 초기화 시점: 외부 클래스 로딩/초기화 때 한 번 생성 → 동일 JVM 내 단일 인스턴스가 공유되므로 싱글톤처럼 보임.
+    - @JvmStatic으로 정적 호출 노출 가능(편의성).
+
 - Kotlin에서 함수형 프로그래밍 패러다임을 적용할 때 고려해야 할 사항
 - Kotlin에서 inline class를 활용한 메모리 최적화 기법
 - Kotlin에서 JVM과 Native 컴파일 시 최적화 차이점
