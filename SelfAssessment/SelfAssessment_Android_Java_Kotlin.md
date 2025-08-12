@@ -16372,15 +16372,45 @@ enum 활용과 장점
     - 자동 생성: equals/hashCode/toString/copy/componentN.
     - DTO/상태 모델/불변 값 객체에 적합. copy로 부분 변경 쉬움.
 
-- Coroutine이란 무엇이고, 어떤 상황에서 사용하나요?
-- Coroutine의 Dispatcher 종류와 각각의 사용 사례를 설명해주세요.
-- Coroutine의 Cancellation과 Exception Handling에 대해 설명해주세요.
-- Coroutine과 RxJava의 차이점은 무엇인가요?
-- Coroutine을 사용해본 프로젝트에서의 경험을 공유해주세요.
-- Android의 생명주기(Lifecycle)에 대해 설명해주세요.
-- Activity와 Fragment의 차이점은 무엇인가요?
-- ViewModel과 LiveData의 역할과 장점은 무엇인가요?
+- Coroutine 정의 및 사용 시점
+    - 비동기·동시성을 순차 코드처럼 표현하는 경량 실행 단위.
+    - I/O 바운드(네트워크/DB), UI 비차단 처리, 타임아웃/재시도/취소가 필요한 워크플로우
 
+- Coroutine의 Dispatcher 종류와 각각의 사용 사례
+    - Main: UI 업데이트.
+    - IO: 블로킹 I/O(파일/네트워크).
+    - Default: CPU 바운드(map/filter/파싱).
+    - Unconfined: 특수/테스트용(권장X).
+    - 커스텀: 제한 풀/단일 스레드.
+
+- Coroutine의 Cancellation과 Exception Handling
+    - 취소 전파: Job 계층(부모→자식). coop: isActive, 취소 가능한 지점(delay, withContext).
+    - 예외: 기본적으로 상위로 전파, SupervisorJob/SupervisorScope로 독립 실패, CoroutineExceptionHandler(최상단), withTimeout 취소는 TimeoutCancellationException.
+
+- Coroutine과 RxJava의 차이점
+    - 코루틴: 언어/표준 비동기, 구조적 동시성, suspend 기반, Flow는 콜드 스트림.
+    - RxJava: 연산자 풍부, 복잡 스트림·백프레셔, 선언형 파이프라인.
+    - 선택: “단발/요청-응답/절차적” → 코루틴, “고도 스트림/연산자/멀티 소스 결합” → Rx.
+
+- Coroutine을 사용해본 프로젝트에서의 경험
+    - 네트워크 레이어: Retrofit + suspend, Result 래핑으로 에러 일원화.
+    - ViewModel: viewModelScope.launch, StateFlow/SharedFlow로 UI 상태/이벤트 분리.
+    - 재시도/타임아웃: retryWhen, withTimeout.
+    - 취소 안전: 화면 전환 시 Job 취소, 파일 I/O는 Dispatchers.IO로 격리.
+
+- Android의 생명주기(Lifecycle)
+    - 앱 컴포넌트: Application/Activity/Fragment/Service.
+    - Activity: onCreate → onStart → onResume → onPause → onStop → onDestroy, 구성 변경/프로세스 킬 대비 상태 저장(onSaveInstanceState).
+    - Fragment: View 생명주기 분리(onCreateView/onViewCreated/onDestroyView).
+
+- Activity와 Fragment의 차이점
+    - Activity: 윈도우/엔트리 포인트, 큰 네비게이션 단위, 권한/인텐트 처리.
+    - Fragment: UI 모듈화/재사용, 호스트 Activity에 의존, 복수 프래그먼트 합성.
+
+- ViewModel과 LiveData의 역할과 장점
+    - ViewModel: 구성 변경에도 생존, UI 상태/비즈니스 로직 보관.
+    - LiveData: 라이프사이클 인식 옵저버블(메모리 누수/크래시 감소).
+    - 요즘 권장: StateFlow/SharedFlow + Lifecycle.repeatOnLifecycle로 더 명시적 상태/이벤트 처리.
 
 - Android에서의 메모리 관리와 LeakCanary 사용 경험에 대해 설명해주세요.
 - Jetpack Compose를 사용해본 경험이 있다면 설명해주세요.
