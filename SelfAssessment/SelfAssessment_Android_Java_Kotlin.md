@@ -16423,21 +16423,74 @@ enum 활용과 장점
     - 특징: 선언형 UI, State 기반 재구성, XML 불필요, Preview 지원.
     - 경험: 기존 XML 기반 RecyclerView → LazyColumn 전환, 상태 hoisting 적용, remember/derivedStateOf로 recomposition 최소화.
 
-- Android에서의 DI(Dependency Injection) 사용 경험을 공유해주세요. (Dagger, Hilt 등)
-- Android의 백그라운드 작업 처리 방법을 설명해주세요. (WorkManager, JobScheduler 등)
-- AOSP 빌드 과정에 대해 설명해주세요.
-- Android 시스템의 주요 컴포넌트에 대해 설명해주세요. (Binder, Zygote, SystemServer 등)
-- 커스텀 ROM을 제작한 경험이 있다면 설명해주세요.
-- Java의 Garbage Collection 알고리즘에 대해 설명해주세요. (CMS, G1, ZGC 등)
-- Java의 ClassLoader와 동적 로딩에 대해 설명해주세요.
-- Java의 Reflection API 사용 사례와 주의점은 무엇인가요?
-- Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)에 대해 설명해주세요.
-- Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리를 설명해주세요.
-- 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
-- Kotlin의 Inline 함수와 Reified 타입에 대해 설명해주세요.
-- Kotlin의 Sealed Class와 Enum Class의 차이점은 무엇인가요?
-- Kotlin의 Delegated Properties 사용 사례를 설명해주세요.
+- Android에서의 DI(Dependency Injection) 사용 경험
+    - DI 필요성: 의존성 주입으로 객체 생성/라이프사이클 분리, 테스트 용이.
+    - Hilt 경험: 
+        - @AndroidEntryPoint로 Activity/Fragment 주입, ViewModelInject → @HiltViewModel, Module/Provides로 Retrofit/Repo 등록.
+    - 장점: Application/Activity/Fragment/Service 스코프 관리 자동화.
 
+- Android의 백그라운드 작업 처리 방법 (WorkManager, JobScheduler 등)
+    - WorkManager: 네트워크/전원 조건 지정 가능, 앱 재시작 시 보장, 장기작업 적합.
+    - JobScheduler: API21+, 시스템 스케줄링, OS 최적화 우선.
+    - 경험: WorkManager로 주기적 서버 동기화 구현, constraints로 Wi-Fi 연결 시에만 실행.
+
+- AOSP 빌드 과정
+    - repo init → sync → lunch(target 선택) → make.
+    - 단계:
+        - Zygote/Framework/Native build
+        - system.img, boot.img, vendor.img 생성
+        - OTA 패키지 생성 가능.
+
+- Android 시스템의 주요 컴포넌트
+    - Binder: IPC 메커니즘, 서비스 간 안전 통신.
+    - Zygote: 앱 프로세스 fork 시작점, 공용 클래스 미리 로드.
+    - SystemServer: ActivityManager, PackageManager 등 핵심 서비스 실행.
+
+- 커스텀 ROM을 제작한 경험
+    - 경험: LineageOS 기반 기기 포팅, device/vendor/kernel tree 수정, BoardConfig.mk 조정.
+    - 추가: system.prop 수정, GApps 통합, 부트 애니메이션 커스터마이징.
+
+- Java의 Garbage Collection 알고리즘
+    - CMS: 동시 마크·스윕, STW 최소화, 단편화 가능.
+    - G1: 힙을 리전으로 나눔, 예측 가능한 pause.
+    - ZGC: 초저지연(10ms 이하), 색 표시 방식으로 STW 거의 제거.
+
+- Java의 ClassLoader와 동적 로딩
+    - 역할: 클래스 바이트코드 로드(JVM→메서드 영역).
+    - 계층: Bootstrap → Extension → App → Custom.
+    - 동적 로딩: Class.forName, URLClassLoader로 런타임 플러그인 주입.
+
+- Java의 Reflection API 사용 사례와 주의점
+    - 사례: 런타임 어노테이션 처리, private 접근, 동적 메서드 호출.
+    - 주의: 성능 저하, 보안 제약(AccessibleObject.setAccessible), 캡슐화 파괴.
+
+- Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)
+    - ConcurrentHashMap: 세그먼트/노드 락, 병렬 안전, 동시 읽기·쓰기.
+    - CopyOnWriteArrayList: 변경 시 복사, 읽기 빈번/쓰기 적은 경우 최적.
+
+- Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리
+    - Functional Interface: @FunctionalInterface, 하나의 추상 메서드.
+    - Lambda 내부: invokedynamic로 런타임 람다 인스턴스 생성, Synthetic class 불필요.
+
+- 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
+    - 정의: 런타임에 인터페이스 구현체를 생성해 호출 가로채기.
+    - 이유: 공통 로직(로깅/트랜잭션) 삽입, AOP.
+    - 사용: Proxy.newProxyInstance(loader, interfaces, handler).
+
+- Kotlin의 Inline 함수와 Reified 타입
+    - inline: 함수 호출부 코드로 치환, 람다 캡처 비용 제거.
+    - reified: 타입 정보를 런타임에 유지해 T::class 사용 가능.
+
+- Kotlin의 Sealed Class와 Enum Class의 차이점
+    - Sealed: 제한된 상속 계층, 상태별 데이터 포함 가능.
+    - Enum: 고정 상수 집합, 데이터 가질 수 있으나 제한적.
+
+- Kotlin의 Delegated Properties 사용 사례
+    - 사용 사례:
+        - lazy 초기화(by lazy)
+        - Observable 패턴(Delegates.observable)
+        - Map 기반 위임(by map)
+    - 장점: 중복 코드 제거, 재사용성 향상.
 
 - Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
 - Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
