@@ -16316,14 +16316,18 @@ enum 활용과 장점
     - escape/alloc 최소화: buildList {}, sequence {} 과용 주의(박싱/히프); 성능 경로는 배열/버퍼 재사용.
 
 - 다이나믹 아일랜드 구현 방법 및 실시간 업데이트 처리 방법
+    - iOS: Live Activities(ActivityKit) + WidgetKit로 잠금화면/다이내믹 아일랜드 UI 제공 → 앱에서 Activity.request()로 시작, Activity Attributes로 상태 보관, 실시간 갱신은 Activity.update()(포그라운드) 또는 APNs Push(VoIP 아님) / PushToStart로 백그라운드 업데이트. 타임라인/스냅샷은 WidgetKit.
+
+    - 설계 포인트: “서버 이벤트 → 푸시 → Live Activity 업데이트” 파이프라인, 짧고 명확한 상태머신, 배터리·빈도 제한 고려.
+
+    - Android 유사 패턴: Heads-up 알림 + 지속 알림(포그라운드 서비스), 알림 확장(RemoteViews), 필요 시 System overlay(권장X).
+    
 - Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
 - Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
 - OOP의 4대 원칙과 SOLID 원칙에 대해 설명해주세요.
 - 멀티스레딩과 동시성 처리에 대해 설명해주세요. (Thread, ExecutorService, Synchronized, Volatile 등)
 - Java의 컬렉션 프레임워크에 대해 설명해주세요. (List, Set, Map 등)
 - 예외 처리의 종류와 차이점을 설명해주세요. (Checked Exception vs Unchecked Exception)
-
-
 - Kotlin의 주요 특징과 Java와의 차이점은 무엇인가요?
 - Null Safety를 어떻게 구현했는지 설명해주세요.
 - Kotlin의 Coroutine과 Java의 Thread의 차이점은 무엇인가요?
