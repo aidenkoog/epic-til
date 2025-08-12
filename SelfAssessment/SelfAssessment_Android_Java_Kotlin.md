@@ -16321,18 +16321,57 @@ enum 활용과 장점
     - 설계 포인트: “서버 이벤트 → 푸시 → Live Activity 업데이트” 파이프라인, 짧고 명확한 상태머신, 배터리·빈도 제한 고려.
 
     - Android 유사 패턴: Heads-up 알림 + 지속 알림(포그라운드 서비스), 알림 확장(RemoteViews), 필요 시 System overlay(권장X).
-    
-- Java의 메모리 관리 방식에 대해 설명해주세요. (GC, Heap, Stack)
-- Java 8에서 추가된 기능들(Lambda, Stream API 등)에 대해 설명해주세요.
-- OOP의 4대 원칙과 SOLID 원칙에 대해 설명해주세요.
-- 멀티스레딩과 동시성 처리에 대해 설명해주세요. (Thread, ExecutorService, Synchronized, Volatile 등)
-- Java의 컬렉션 프레임워크에 대해 설명해주세요. (List, Set, Map 등)
-- 예외 처리의 종류와 차이점을 설명해주세요. (Checked Exception vs Unchecked Exception)
-- Kotlin의 주요 특징과 Java와의 차이점은 무엇인가요?
-- Null Safety를 어떻게 구현했는지 설명해주세요.
-- Kotlin의 Coroutine과 Java의 Thread의 차이점은 무엇인가요?
-- Kotlin에서의 확장 함수(Extension Function)에 대해 설명해주세요.
-- Data Class의 장점과 사용 사례를 설명해주세요.
+
+- Java의 메모리 관리 방식 (GC, Heap, Stack)
+    - Stack: 스레드별 호출 프레임/지역변수, LIFO, 자동 해제.
+    - Heap: 객체/배열 저장, GC 대상.
+    - GC: 세대별(Young/Eden/S1/S2, Old), Stop-the-world, 알고리즘(Parallel/ CMS/G1/ZGC/ Shenandoah). 튜닝은 힙 크기, GC 선택, 객체 생애주기 단축.
+
+- Java 8에서 추가된 기능들(Lambda, Stream API 등)
+    - Lambda & Functional Interface(Runnable 등) → 간결한 콜백.
+    - Stream API → 선언형 컬렉션 처리(중간/최종 연산, 병렬 스트림).
+    - Optional, Date/Time(java.time), Default/Static methods in interfaces, CompletableFuture.
+
+- OOP의 4대 원칙과 SOLID 원칙
+    - OOP: 추상화/캡슐화/상속/다형성.
+    - SOLID: SRP(하나의 이유로만 변경), OCP(확장에 열림/수정에 닫힘), LSP(대체 가능), ISP(작은 인터페이스), DIP(추상에 의존).
+
+- 멀티스레딩과 동시성 처리 (Thread, ExecutorService, Synchronized, Volatile 등)
+    - Thread: OS 스레드. 
+    - ExecutorService: 스레드풀(생성/큐/정책 분리).
+    - synchronized: 모니터 락, 상호배제/가시성. 
+    - volatile: 가시성만 보장(원자성X).
+    - 고급: Lock/Condition, Atomic, Concurrent Collections, ForkJoin/Parallel Stream.
+
+- Java의 컬렉션 프레임워크 (List, Set, Map 등)
+    - List(ArrayList, LinkedList), Set(HashSet, LinkedHashSet, TreeSet), Map(HashMap, LinkedHashMap, TreeMap), Queue/Deque.
+    - 선택 기준: 정렬/정의역 유일성/삽입·탐색·메모리/스레드 안전성.
+
+- 예외 처리의 종류와 차이점 (Checked Exception vs Unchecked Exception)
+    - Checked: 컴파일러 강제 처리(IOException 등) → 복구 가능성 높은 케이스.
+    - Unchecked(Runtime): 프로그래밍 오류(NullPointer, IllegalArgument) → 사전 방지/검증.
+    - 원칙: 의미 있는 메시지, 도메인 예외 계층, 중첩 예외(cause) 유지.
+
+- Kotlin의 주요 특징과 Java와의 차이점
+    - Null-safety, 데이터 클래스, 확장 함수, 코루틴, 스마트 캐스트, sealed/class.
+    - 더 간결하고 안전(널/immutable 우선), 함수형 지원 강화, JVM/멀티플랫폼.
+
+- Null Safety 구현 방법
+    - Nullable 타입(String?), 안전 호출 ?., 엘비스 ?:, Non-null 단정 !!(지양), let/run/also/apply.
+    - 플랫폼 타입(Java 상호운용) 주의.
+
+- Kotlin의 Coroutine과 Java의 Thread의 차이점
+    - Coroutine: 경량 협력형, suspend로 비동기 표현, 디스패처로 컨텍스트 제어, 구조적 동시성.
+    - Thread: 무겁고 생성/컨텍스트 스위칭 비용 큼. 코루틴은 풀 위에서 스케줄됨.
+
+- Kotlin에서의 확장 함수(Extension Function)
+    - 기존 타입에 함수 “추가”처럼 보이게 하는 정적 바인딩 문법 설탕.
+    - 가독성/DSL 향상, 유틸 분리. 오버라이드 불가, 충돌/남용 주의.
+
+- Data Class의 장점과 사용 사례
+    - 자동 생성: equals/hashCode/toString/copy/componentN.
+    - DTO/상태 모델/불변 값 객체에 적합. copy로 부분 변경 쉬움.
+
 - Coroutine이란 무엇이고, 어떤 상황에서 사용하나요?
 - Coroutine의 Dispatcher 종류와 각각의 사용 사례를 설명해주세요.
 - Coroutine의 Cancellation과 Exception Handling에 대해 설명해주세요.
