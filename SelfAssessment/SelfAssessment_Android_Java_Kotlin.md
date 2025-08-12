@@ -16412,8 +16412,17 @@ enum 활용과 장점
     - LiveData: 라이프사이클 인식 옵저버블(메모리 누수/크래시 감소).
     - 요즘 권장: StateFlow/SharedFlow + Lifecycle.repeatOnLifecycle로 더 명시적 상태/이벤트 처리.
 
-- Android에서의 메모리 관리와 LeakCanary 사용 경험에 대해 설명해주세요.
-- Jetpack Compose를 사용해본 경험이 있다면 설명해주세요.
+- Android에서의 메모리 관리와 LeakCanary 사용 경험
+    - 메모리 관리: Dalvik/ART VM 기반, 힙(young/old) + GC. 액티비티·프래그먼트 참조, static 변수, listener 미해제 등이 누수 원인.
+
+    - LeakCanary: 디버그 빌드에서 Activity/Fragment destroy 시 GC 후 참조가 남아있는지 자동 분석.
+
+    - 경험: Glide ImageView 미해제, context 누수(Service→Activity 참조) 케이스를 LeakCanary로 발견·해결.
+
+- Jetpack Compose를 사용해본 경험
+    - 특징: 선언형 UI, State 기반 재구성, XML 불필요, Preview 지원.
+    - 경험: 기존 XML 기반 RecyclerView → LazyColumn 전환, 상태 hoisting 적용, remember/derivedStateOf로 recomposition 최소화.
+
 - Android에서의 DI(Dependency Injection) 사용 경험을 공유해주세요. (Dagger, Hilt 등)
 - Android의 백그라운드 작업 처리 방법을 설명해주세요. (WorkManager, JobScheduler 등)
 - AOSP 빌드 과정에 대해 설명해주세요.
@@ -16422,21 +16431,19 @@ enum 활용과 장점
 - Java의 Garbage Collection 알고리즘에 대해 설명해주세요. (CMS, G1, ZGC 등)
 - Java의 ClassLoader와 동적 로딩에 대해 설명해주세요.
 - Java의 Reflection API 사용 사례와 주의점은 무엇인가요?
-
-
 - Java의 Concurrent Collections(ConcurrentHashMap, CopyOnWriteArrayList 등)에 대해 설명해주세요.
 - Java의 Functional Interface와 Lambda 표현식의 내부 동작 원리를 설명해주세요.
 - 다이나믹 프록시 정의와 사용이유 그리고 사용 방법
 - Kotlin의 Inline 함수와 Reified 타입에 대해 설명해주세요.
 - Kotlin의 Sealed Class와 Enum Class의 차이점은 무엇인가요?
 - Kotlin의 Delegated Properties 사용 사례를 설명해주세요.
+
+
 - Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
 - Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
 - Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
 - Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
 - Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
-
-
 - Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
 - Java의 VarHandle과 Atomic 클래스의 사용 사례를 설명해주세요.
 - Java의 Module System(JPMS)에 대해 설명해주세요.
@@ -16447,12 +16454,12 @@ enum 활용과 장점
 - Coroutine의 Flow에서의 Backpressure 처리 방법을 설명해주세요.
 - Coroutine의 StateFlow와 SharedFlow의 차이점은 무엇인가요?
 - Coroutine의 Channel과 Actor의 차이점은 무엇인가요?
-
-
 - Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
 - Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
 - Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
 - Kotlin에서 Channel과 SharedFlow의 차이점은?
+
+
 - Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
 - Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
 - Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
@@ -16460,8 +16467,6 @@ enum 활용과 장점
 - Android에서 WorkManager와 AlarmManager의 차이점은?
 - Android에서 DataStore와 SharedPreferences의 차이점은?
 - Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
-
-
 - Android에서 ViewBinding과 DataBinding의 차이점은?
 - Android에서 CameraX를 사용할 때의 장점은?
 - Android에서 Activity Result API를 활용하는 방법은?
@@ -16489,8 +16494,6 @@ enum 활용과 장점
 - Android에서 Retrofit과 Volley의 차이점
 - Android에서 FusedLocationProvider API를 사용하는 이유
 - Android에서 앱 내 결제를 구현하는 방법
-
-
 - Android에서 Fingerprint 및 Face ID 인증을 구현하는 방법
 - Android에서 Firebase Crashlytics를 활용하는 방법
 - Android에서 Jetpack WorkManager를 활용한 백그라운드 작업 수행 방법
@@ -16499,11 +16502,11 @@ enum 활용과 장점
 - Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
 - Android에서 Service와 JobIntentService의 차이점은?
 - Jetpack Compose에서 recomposition이 발생하는 조건은?
+
+
 - Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
 - Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
 - Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
-
-
 - Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
 - Kotlin에서 Flow와 LiveData의 차이점은?
 - Compound Component 패턴과 Slot API 설명
@@ -16516,8 +16519,6 @@ enum 활용과 장점
 - Kotlin Multiplatform을 사용해본 경험이 있는가?
 - Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
 - Android에서 Inline Class의 장점은?
-
-
 - 아이템 100개 와 ViewHolder 1개를 가진 RecyclerView의 동작원리를 설명 해주세요.
 - RecyclerView or ListView 의 Pagination 구현 방법을 설명 해주세요.
 - 네트워크 통신을 통해 이미지를 가져오는 뷰가 포함된 ListView 또는 RecyclerView에서 빠르게 스크롤 시 생길 수 있는 이슈가 무엇이고 어떻게 수정 및 최적화를 할 수 있을까요?
@@ -16525,11 +16526,11 @@ enum 활용과 장점
 - Kotlin에서 JVM의 Code Cache를 활용한 최적화 기법은?
 - Kotlin에서 value class(구 inline class)를 활용할 때 성능적인 장점은?
 - Kotlin의 동적 바인딩과 정적 바인딩의 차이점 및 실행 성능 비교는?
+
+
 - Kotlin에서 reflection을 사용할 때 발생하는 오버헤드는 어떻게 줄일 수 있는가?
 - Kotlin에서 Lazy initialization을 성능적으로 최적화하는 방법은?
 - Kotlin에서 Coroutines과 Java의 Thread Pool의 차이점은?
-
-
 - Kotlin의 Coroutines에서 Structured Concurrency 개념이 중요한 이유는?
 - Kotlin의 Coroutines에서 GlobalScope 사용이 위험한 이유는?
 - Kotlin Coroutines에서 Dispatchers.IO와 Dispatchers.Default의 내부 구현 차이는?
@@ -16540,8 +16541,6 @@ enum 활용과 장점
 - Kotlin에서 Thread Safety를 보장하는 방법은?
 - Kotlin의 Atomic 변수를 활용한 동시성 제어 방법은?
 - Kotlin에서 코루틴을 활용하여 Concurrent Processing을 구현하는 방법은?
-
-
 - Kotlin에서 runBlocking이 주는 성능적 부담과 이를 피하는 방법은?
 - Kotlin Coroutines에서 launch와 async의 차이점과 내부 동작 원리는?
 - Kotlin의 yield() 함수가 비동기 작업에서 어떤 역할을 하는가?
@@ -16549,13 +16548,13 @@ enum 활용과 장점
 - Kotlin의 select {} 문법을 활용한 비동기 작업 최적화 방법은?
 - Kotlin에서 CoroutineExceptionHandler가 실행되는 조건은?
 - Kotlin에서 ensureActive()의 역할과 사용 예제는?
+
+
 - Kotlin에서 coroutineScope와 supervisorScope의 내부적인 동작 차이는?
 - Kotlin에서 다중 모듈 프로젝트를 효율적으로 구성하는 방법은?
 - Kotlin에서 Dependency Injection(DI)을 적용할 때 Koin과 Hilt의 차이점은?
 - Kotlin에서 JUnit5와 MockK를 활용한 단위 테스트 전략은?
 - Kotlin에서 비동기 네트워크 요청을 최적화하는 방법은?
-
-
 - Kotlin의 Coroutines과 RxJava의 차이점 및 선택 기준은?
 - Kotlin에서 Dagger-Hilt와 Koin을 함께 사용할 때의 장점과 단점은?
 - Kotlin의 Multiplatform 프로젝트에서 Coroutines을 활용하는 방법은?
@@ -16567,13 +16566,13 @@ enum 활용과 장점
 - Kotlin에서 DI 프레임워크 없이 Factory 패턴을 활용한 객체 관리는 어떻게 하는가?
 - Kotlin에서 Retrofit과 Coroutines을 함께 사용할 때의 베스트 프랙티스는?
 - Kotlin에서 JSON Parsing을 최적화하는 방법은?
-
-
 - Kotlin에서 Domain Layer와 Data Layer를 분리할 때의 원칙은?
 - Kotlin의 Anvil을 활용한 DI 성능 최적화 방법은?
 - Kotlin에서 ViewModelScope를 사용할 때 발생할 수 있는 문제는?
 - Kotlin에서 Singleton 객체를 Thread-Safe하게 생성하는 방법은?
 - Kotlin의 Anvil을 사용한 Dependency Injection의 성능 최적화 방법은?
+
+
 - Kotlin 1.9에서 새롭게 추가된 기능과 성능 최적화 요소는?
 - Kotlin의 Compiler Plugin을 활용하여 코드 최적화를 수행하는 방법은?
 - Kotlin에서 JIT과 AOT의 차이점과 각각의 활용 사례는?
@@ -16582,8 +16581,6 @@ enum 활용과 장점
 - Kotlin의 최신 정적 분석 도구(Detekt, Ktlint)를 활용하는 방법은?
 - Kotlin에서 Memory Leak을 방지하는 패턴은?
 - Kotlin의 Context Receivers 기능이 필요한 이유는?
-
-
 - Kotlin에서 Native Image를 활용한 성능 최적화 방법은?
 - Kotlin에서 Compiler Intrinsics을 활용한 성능 최적화 기법은?
 - Kotlin과 Java의 주요 차이점은 무엇인가?
@@ -16595,12 +16592,12 @@ enum 활용과 장점
 - Kotlin에서 sealed interface를 활용하는 방법은?
 - Kotlin에서 break, continue, return의 차이점은?
 - Kotlin의 context receivers 기능을 설명하시오.
-
-
 - Kotlin에서 nullable 타입과 !! 연산자를 사용할 때 주의할 점은?
 - Kotlin에서 @JvmStatic, @JvmOverloads, @JvmField 어노테이션의 역할은?
 - Kotlin에서 is 키워드와 as 키워드의 차이점은?
 - Kotlin에서 Collection과 Sequence의 차이점은?
+
+
 - Kotlin에서 vararg를 사용한 함수 호출 시 배열을 전달하는 방법은?
 - Kotlin에서 Enum class를 활용한 안전한 상태 관리는 어떻게 하는가?
 - Kotlin에서 builder pattern을 활용하여 객체를 생성하는 방법은?
@@ -16608,8 +16605,6 @@ enum 활용과 장점
 - Kotlin에서 suspend 함수와 일반 함수의 차이점은?
 - Kotlin에서 context receivers가 도입된 이유는?
 - Kotlin에서 JvmInline을 사용하는 이유는?
-
-
 - Kotlin에서 contract API가 무엇이며, 어떻게 활용하는가?
 - Kotlin의 reified 키워드가 동작하는 원리를 설명하시오.
 - Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 차이는?
@@ -16636,8 +16631,6 @@ enum 활용과 장점
 - Kotlin에서 CoroutineContext와 Job의 관계는?
 - Kotlin에서 JvmStatic과 JvmOverloads를 활용하는 방법은?
 - Kotlin에서 @OptIn 어노테이션을 사용하는 이유는?
-
-
 - Kotlin Coroutines의 핵심 개념은?
 - suspend 함수란 무엇이며, 일반 함수와의 차이점은?
 - Kotlin Coroutines에서 테스트를 수행하는 방법은?
@@ -16664,8 +16657,6 @@ enum 활용과 장점
 - Kotlin Coroutines에서 Structured Concurrency란?
 - CoroutineExceptionHandler의 역할은?
 - Paging 3 라이브러리에서 Flow를 활용하는 방법은?
-
-
 - Android에서 네트워크 요청 중간에 코루틴을 취소하는 방법은?
 - 코루틴이 과도하게 생성되었을 때 발생할 수 있는 문제는?
 - Kotlin에서 Coroutines을 활용한 효율적인 병렬 처리 방법은?
@@ -16693,8 +16684,6 @@ enum 활용과 장점
 - Android에서 Jetpack WorkManager와 Foreground Service의 차이점
 - Android에서 Jetpack Paging을 사용하는 이유
 - Android에서 UI Thread와 Worker Thread의 차이점
-
-
 - Android에서 OpenGL ES를 활용하여 2D 및 3D 그래픽을 구현하는 방법
 - Android에서 ProGuard를 활용한 코드 난독화 방법
 - Android TV 앱 개발 시 Leanback 라이브러리의 역할
@@ -16724,8 +16713,6 @@ enum 활용과 장점
 - Android TV에서 Live TV 앱을 개발하는 방법
 - Android TV에서 TV Remote Control API를 활용하는 방법
 - Android TV에서 Google TV와 기존 Android TV의 차이점
-
-
 - Android TV에서 HDR 콘텐츠를 재생하는 방법
 - Android TV에서 ExoPlayer의 Cache 기능을 활용하는 방법
 - Android TV에서 HLS와 DASH 스트리밍의 차이점
