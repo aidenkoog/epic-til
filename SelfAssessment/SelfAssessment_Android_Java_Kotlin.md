@@ -16494,306 +16494,1874 @@ enum 활용과 장점
 
 - Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)
     - Continuation: suspend 함수는 컴파일 시 상태머신으로 변환, 호출이 중단되면 상태 + 실행 위치를 Continuation 객체에 저장 후 리턴, 재개 시 저장된 상태로 복원.
-    
+
     - Dispatcher: 코루틴이 실행될 스레드 풀/스레드 컨텍스트 결정. 예: Dispatchers.Main, Dispatchers.IO, Dispatchers.Default. 스케줄링은 ContinuationInterceptor 구현체로 동작.
 
-- Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
-- Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
-- Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
-- Coroutine의 테스트 전략을 설명해주세요. (TestCoroutineDispatcher 등)
-- Java의 JIT(Just-In-Time) 컴파일러와 AOT(Ahead-Of-Time) 컴파일러의 차이점은 무엇인가요?
-- Java의 VarHandle과 Atomic 클래스의 사용 사례를 설명해주세요.
-- Java의 Module System(JPMS)에 대해 설명해주세요.
-- Java의 Bytecode 조작 라이브러리(ASM, ByteBuddy 등) 사용 경험이 있다면 설명해주세요.
-- Kotlin의 Type Alias와 Inline Class의 차이점은 무엇인가요?
-- Kotlin의 Contracts API 사용 사례를 설명해주세요.
-- Kotlin의 Multiplatform 프로젝트 경험이 있다면 설명해주세요.
-- Coroutine의 Flow에서의 Backpressure 처리 방법을 설명해주세요.
-- Coroutine의 StateFlow와 SharedFlow의 차이점은 무엇인가요?
-- Coroutine의 Channel과 Actor의 차이점은 무엇인가요?
-- Jetpack Compose에서 State Hoisting의 개념을 설명하시오.
-- Kotlin에서 inline, noinline, crossinline 키워드의 차이점은?
-- Kotlin에서 suspend 함수와 CoroutineScope의 차이점은?
-- Kotlin에서 Channel과 SharedFlow의 차이점은?
+2) Structured Concurrency
+코루틴을 계층 구조로 관리하여 부모-자식 관계에서 수명·취소 전파를 보장.
+
+CoroutineScope 내에서 실행된 Job은 scope가 취소되면 전부 함께 취소.
+
+장점: 누수 방지, 취소 일관성, 예외 전파 명확.
+
+3) Flow vs Channel
+Flow: 콜드 스트림, 구독 시마다 새로 데이터 흐름 시작, 선언적 연산자 지원, 백프레셔 자동.
+
+Channel: 핫 스트림, 송신·수신이 독립적, 버퍼 설정 가능, 직접 send/receive 호출.
+
+4) Cancellation & Exception Handling
+취소: isActive 체크, delay/withContext 등 cooperative 지점에서 취소 반응.
+
+예외: try/catch, CoroutineExceptionHandler, SupervisorJob로 독립 처리.
+
+경험: ViewModelScope에서 화면 종료 시 Job 취소, 네트워크 타임아웃 시 withTimeout 사용.
+
+5) Coroutine 테스트 전략
+TestCoroutineDispatcher(구), 현재는 StandardTestDispatcher + runTest 사용.
+
+가상 시간 제어(advanceTimeBy, advanceUntilIdle)로 지연 로직 검증.
+
+Flow는 toList()나 Turbine 라이브러리로 수집 검증.
+
+6) Java JIT vs AOT
+JIT: 바이트코드 → 런타임 최적화된 네이티브 코드, 실행 중 프로파일링 기반 최적화.
+
+AOT: 빌드 시 네이티브 코드 생성, 시작 속도 빠름, 런타임 최적화 제한.
+
+Java 9+는 jaotc로 AOT 지원.
+
+7) VarHandle vs Atomic
+VarHandle: 필드·배열 요소·static 변수에 대해 volatile/원자적 연산 제공, 리플렉션보다 빠름.
+
+Atomic: AtomicInteger, AtomicReference 등 고수준 원자 클래스.
+
+VarHandle은 저수준 제어, Atomic은 단순 사용.
+
+8) JPMS(Java Module System)
+Java 9 도입, module-info.java로 모듈 경계·exports/requires 선언.
+
+장점: 캡슐화 강화, 불필요한 패키지 노출 방지, JDK 모듈화.
+
+9) Bytecode 조작 (ASM, ByteBuddy)
+ASM: 저수준 바이트코드 조작, 클래스/메서드 방문자 패턴.
+
+ByteBuddy: 고수준 API, 런타임 프록시·클래스 생성.
+
+경험: 런타임 메서드 로깅 삽입, 테스트용 Mock 객체 동적 생성.
+
+10) Type Alias vs Inline Class
+Type Alias: 새로운 타입 생성 아님, 기존 타입에 별칭 부여.
+
+Inline Class: 런타임에 래퍼 없이 값으로 최적화, 타입 안정성 확보.
+
+11) Kotlin Contracts API
+함수가 호출 후 조건을 만족할 때 컴파일러가 흐름 제어·스마트 캐스트 가능하게 힌트 제공.
+
+예) null-check 유틸에서 “이 함수 호출 후 파라미터는 null 아님”을 보장.
+
+12) Kotlin Multiplatform 경험
+공통 모듈에 비즈니스 로직, 플랫폼별 모듈(iOS/Android/JVM/JS)에서 UI/네이티브 연동.
+
+경험: 공통 네트워크 모듈(Ktor), DB(SQLDelight)로 iOS+Android 동시 개발.
+
+13) Flow Backpressure 처리
+Flow는 suspending emit로 자동 처리, 필요 시 buffer, conflate, collectLatest로 속도 조절.
+
+14) StateFlow vs SharedFlow
+StateFlow: 상태 홀더, 항상 최신값 1개 보관, 초기값 필요, replay=1.
+
+SharedFlow: 이벤트 브로드캐스트, replay/buffer 자유 설정, 초기값 없음.
+
+15) Channel vs Actor
+Channel: 코루틴 간 데이터 전달 파이프.
+
+Actor: Channel + 처리 로직을 하나의 코루틴에 캡슐화.
+
+16) Compose State Hoisting
+상태를 컴포저블 외부로 끌어올려 상위에서 관리, 하위는 UI만 담당.
+
+장점: 재사용성, 테스트 용이, 단방향 데이터 흐름.
+
+17) inline / noinline / crossinline
+inline: 호출부로 코드 인라인, 람다 객체 생성 회피.
+
+noinline: inline 함수 내에서도 인라인하지 않고 람다 객체로 유지.
+
+crossinline: 인라인하되 non-local return 금지.
+
+18) suspend 함수 vs CoroutineScope
+suspend: 중단 가능한 함수, CoroutineScope 필요 없이 호출 가능(단, suspend context).
+
+CoroutineScope: 코루틴 빌더 실행 컨텍스트, Job/Dispatcher 포함.
+
+19) Channel vs SharedFlow
+Channel: point-to-point(기본), 송신자가 버퍼 가득 차면 suspend.
+
+SharedFlow: multicast, 구독자 수 상관없이 브로드캐스트 가능, 버퍼 설정 가능.
+
+1) remember vs rememberSaveable
+remember: recomposition 간 값 유지, 프로세스 재생성 시 소멸.
+
+rememberSaveable: Bundle/Parcel로 상태 저장 → 프로세스 재생성 시 복원.
+
+Best practice: 화면 회전, 프로세스 킬 대비가 필요하면 rememberSaveable.
+
+2) CompositionLocal 사용 이유
+계층적 상태/값 전파(Theme, LocalContext, Locale).
+
+파라미터 전달 없이 하위 Composable에서 접근 가능.
+
+주의: 과도 사용 시 추적 어려움 → 전역 상태처럼 남용 금지.
+
+3) LazyColumn vs RecyclerView
+LazyColumn: Compose 전용, 선언형, 아이템 수에 따라 필요한 UI만 Compose.
+
+RecyclerView: View 기반, Adapter/Holder 필요.
+
+LazyColumn 장점: Composable 재사용 용이, Adapter 코드 불필요.
+
+4) Modifier 역할 & Best Practice
+UI 요소의 크기, 배치, 제스처, 배경 등 속성 조합.
+
+불변 객체 → 순서 중요.
+
+Best practice: UI 스타일과 로직 분리, 재사용 가능하게 확장 함수화.
+
+5) WorkManager vs AlarmManager
+WorkManager: 지연/조건 기반 백그라운드 작업, OS 재부팅 후에도 실행 보장.
+
+AlarmManager: 정확한 시간에 작업 실행, 조건 설정 어려움, 배터리 최적화 영향 큼.
+
+WorkManager 권장 (API 레벨/제약 대응 자동).
+
+6) DataStore vs SharedPreferences
+DataStore: 비동기(Flow), 타입 안전(Proto), 트랜잭션 안전.
+
+SharedPreferences: 동기, UI 쓰레드 블로킹 위험.
+
+권장: 신규는 DataStore.
+
+7) Scoped Storage
+앱별 전용 저장소 + 공유 미디어는 MediaStore API로 접근.
+
+기존: 자유로운 외부 저장소 접근(File API).
+
+장점: 보안 강화, 권한 최소화.
+
+8) ViewBinding vs DataBinding
+ViewBinding: 타입 안전 findViewById 대체, 로직/데이터 결합 없음.
+
+DataBinding: 레이아웃에서 데이터 바인딩, 양방향 바인딩 가능, 표현식 사용.
+
+ViewBinding은 단순 뷰 참조, DataBinding은 MVVM에 적합.
+
+9) CameraX 장점
+Camera API 단순화, LifecycleOwner 연동, 호환성 확보.
+
+UseCase 기반(Preview, ImageCapture, VideoCapture)로 코드 간결.
+
+10) Activity Result API 활용
+registerForActivityResult + Contract (예: TakePicture, GetContent).
+
+onActivityResult 대체, Lifecycle 인식 → 메모리 누수 방지.
+
+11) LifecycleOwner & ViewModel 관계
+LifecycleOwner(Activity/Fragment) → ViewModelScope 생명주기 관리.
+
+ViewModel은 UI 생존 주기에 맞춰 데이터 유지.
+
+12) Hilt vs Koin
+Hilt: 컴파일 타임 DI(Dagger 기반), 어노테이션 프로세서 사용.
+
+Koin: 런타임 DI, DSL 기반, 빌드 속도 빠름.
+
+Hilt는 대규모, Koin은 소규모/빠른 개발에 적합.
+
+13) FCM vs OneSignal
+FCM: 무료, Google 공식, Android/iOS 지원, 커스터마이징 자유.
+
+OneSignal: 멀티 채널(푸시/SMS/이메일), 분석 대시보드, 비개발자 친화.
+
+규모·커스터마이징 필요 시 FCM, 마케팅/분석 중심이면 OneSignal.
+
+14) ExoPlayer vs MediaPlayer
+ExoPlayer: 오픈소스, 스트리밍 최적화(DASH, HLS), 커스터마이징 강점.
+
+MediaPlayer: 표준 API, 간단 로컬/스트리밍 재생, 확장성 낮음.
+
+15) Jetpack Paging 3
+대량 데이터 페이지 로딩 지원, Flow/LiveData 연동.
+
+PagingSource 정의 → Pager 생성 → UI에서 collectAsLazyPagingItems.
+
+16) Jetpack Security
+안전한 데이터 암호화 저장(EncryptedSharedPreferences, EncryptedFile).
+
+Android Keystore 기반.
+
+17) MVVM 적용 방법
+Model: 데이터/비즈니스 로직.
+
+View: UI, 이벤트 전달.
+
+ViewModel: 상태/이벤트 처리, LiveData/StateFlow로 View와 연결.
+
+18) Navigation Component 사용 이유
+타입 안전 네비게이션, 백스택 관리, 인자 전달 간편.
+
+Deep Link, Safe Args 지원.
+
+19) Coroutine 비동기 처리
+viewModelScope.launch + suspend 함수로 I/O 비차단.
+
+Dispatcher로 실행 컨텍스트 분리(IO/Default/Main).
+
+Flow/Channel로 스트림 처리.
+
+1) MutableLiveData vs StateFlow
+MutableLiveData: Lifecycle 인식, Observer 패턴, null 허용, 기본적으로 마지막 값만 유지, UI 구성요소에서 주로 사용.
+
+StateFlow: Kotlin Flow 기반, 항상 값 보유(replay=1), null 비권장, coroutine 친화적, 백프레셔 처리 가능.
+
+권장: 코루틴 기반 아키텍처 → StateFlow.
+
+2) Jetpack ViewModel 활용
+구성 변경에도 데이터 유지, UI 상태와 비즈니스 로직 보관.
+
+ViewModelProvider 또는 @HiltViewModel로 주입, LiveData/StateFlow로 View와 연결.
+
+3) Jetpack Lifecycle Observer 역할
+Activity/Fragment 생명주기 이벤트에 반응하는 객체.
+
+DefaultLifecycleObserver 구현 → onCreate, onStart 등에서 리소스 초기화/해제.
+
+4) ViewModelScope vs GlobalScope
+ViewModelScope: ViewModel 수명에 맞춰 자동 취소, UI 안전.
+
+GlobalScope: 앱 프로세스 단위, 수동 취소 필요, 누수 위험.
+
+UI 로직엔 ViewModelScope 권장.
+
+5) Structured Concurrency
+부모-자식 코루틴 관계로 수명 관리, 부모 취소 시 자식 모두 취소.
+
+CoroutineScope로 Job 계층화, 예외 전파·누수 방지.
+
+6) BroadcastReceiver 역할
+앱 외부/시스템 브로드캐스트(Intent) 수신 → 이벤트 기반 처리.
+
+예: 네트워크 상태 변경, 배터리 이벤트.
+
+7) IntentService vs Foreground Service
+IntentService: 백그라운드 단일 스레드, 자동 종료, API 30 이후 비권장.
+
+Foreground Service: 사용자 인식 작업, 지속 실행, 알림 필수.
+
+8) Compose State Hoisting
+상태를 Composable 외부로 끌어올려 상위에서 관리, 하위는 UI만 담당.
+
+장점: 재사용성, 테스트 용이, 단방향 데이터 흐름 유지.
+
+9) Activity vs Fragment 생명주기
+Activity: onCreate → onStart → onResume → onPause → onStop → onDestroy.
+
+Fragment: View 생명주기 분리(onCreateView, onViewCreated, onDestroyView).
+
+Fragment는 호스트 Activity에 종속.
+
+10) RecyclerView ViewHolder 패턴
+뷰 참조 캐싱으로 findViewById 호출 최소화, 스크롤 성능 향상.
+
+11) Retrofit vs Volley
+Retrofit: REST API, OkHttp 기반, 직렬화 지원, 코드 간결.
+
+Volley: 이미지 로드·캐싱 포함, 요청 큐 기반, 작은 요청에 적합.
+
+12) FusedLocationProvider API 사용 이유
+GPS, Wi-Fi, 셀 신호 통합, 배터리 효율 최적화, 위치 정확도 향상.
+
+13) 앱 내 결제 구현
+Google Play Billing Library 사용 → 상품 등록, 결제 플로우 호출, 구매 영수증 검증.
+
+14) 지문/얼굴 인증 구현
+BiometricPrompt API 사용, 지문·Face ID 통합, 안전한 키스토어 기반 인증.
+
+15) Firebase Crashlytics 활용
+실시간 크래시 수집, 스택트레이스·사용자 세션 정보 제공, 릴리즈 품질 모니터링.
+
+16) WorkManager 활용 백그라운드 작업
+제약 조건(Wi-Fi, 충전 중) 설정, OS 재부팅 후에도 실행 보장.
+
+OneTimeWorkRequest, PeriodicWorkRequest로 스케줄.
+
+17) AndroidX 사용 이유
+Jetpack 라이브러리, 레거시 지원 라이브러리의 후속, 독립 업데이트, 최신 API 호환성.
+
+18) ConstraintLayout vs RelativeLayout
+ConstraintLayout: 제약 기반, 중첩 최소화, 성능 우수.
+
+RelativeLayout: 상대 배치, 복잡 UI에 중첩 많아 성능 저하 가능.
+
+19) Navigation Component Safe Args
+타입 안전 인자 전달, 빌드 타임 체크, 번들 키 오타 방지.
+
+20) Service vs JobIntentService
+Service: 장기 실행, UI 비차단.
+
+JobIntentService: 백그라운드 제한 대응, API 26+에서도 안전 실행.
+
+21) Compose에서 recomposition 발생 조건
+State 값 변경, remember 값 변경, key 변경, effect 호출 시.
 
 
-- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
-- Jetpack Compose에서 CompositionLocal을 사용하는 이유는?
-- Jetpack Compose에서 LazyColumn과 RecyclerView의 차이점은?
-- Jetpack Compose에서 Modifier의 역할과 best practice는?
-- Android에서 WorkManager와 AlarmManager의 차이점은?
-- Android에서 DataStore와 SharedPreferences의 차이점은?
-- Android에서 Scoped Storage란 무엇이며, 기존 저장 방식과 차이점은?
-- Android에서 ViewBinding과 DataBinding의 차이점은?
-- Android에서 CameraX를 사용할 때의 장점은?
-- Android에서 Activity Result API를 활용하는 방법은?
-- Android에서 LifecycleOwner와 ViewModel의 관계를 설명하시오.
-- Android에서 Hilt와 Koin의 차이점은?
-- Android에서 Firebase Cloud Messaging(FCM)과 OneSignal의 차이점은?
-- Android에서 ExoPlayer와 MediaPlayer의 차이점은?
-- Android에서 Jetpack Paging 3 라이브러리의 개념과 사용법은?
-- Android에서 Jetpack Security 라이브러리를 사용하는 이유
-- Android에서 MVVM 패턴을 적용하는 방법
-- Android에서 Jetpack Navigation Component를 사용하는 이유
-- Android에서 Coroutine을 사용한 비동기 처리 방법
+1) Jetpack Compose - remember vs rememberSaveable
+remember: 컴포지션 동안 상태 유지, 프로세스 종료 시 소멸.
+
+rememberSaveable: Bundle/SavedStateRegistry로 저장, 프로세스 재생성 후 복원.
+
+사용: 화면 회전/프로세스 킬 복원 필요 시 rememberSaveable.
+
+2) Coroutines - Structured Concurrency 중요성
+부모-자식 관계로 Job 관리 → 취소·예외 전파 일관성, 누수 방지.
+
+ViewModelScope, lifecycleScope 등이 기본적으로 적용.
+
+3) suspend 함수의 실행 스레드 결정
+호출 시 현재 CoroutineContext의 Dispatcher에 따라 결정.
+
+명시 안 하면 상위 컨텍스트 유지, withContext(Dispatchers.IO)로 변경 가능.
+
+4) Inline Functions 장·단점
+장점: 람다 객체 생성·call stack 오버헤드 제거, reified 타입 사용 가능.
+
+단점: 바이트코드 증가, 빌드 사이즈 커질 수 있음.
+
+5) Flow vs LiveData
+Flow: Kotlin Coroutines 기반, cold stream, backpressure 처리, 연산자 풍부.
+
+LiveData: Lifecycle 인식, UI 친화, 간단한 상태 보관.
+
+코루틴 기반 MVVM → Flow 선호.
+
+6) Compound Component & Slot API
+Compound Component: 하위 컴포넌트를 조합해 상위 기능 제공(UI 패턴).
+
+Slot API: Composable 내부에 “빈 공간”을 정의해 외부에서 채우도록 설계(슬롯에 Composable 전달).
+
+7) Backing Field vs Backing Property
+Backing field: 프로퍼티 getter/setter에서 직접 접근하는 저장소(field).
+
+Backing property: private 변수 + public getter로 외부 노출 제어.
+
+8) Deep Copy vs Shallow Copy
+Shallow: 1차 참조만 복사, 내부 참조는 동일.
+
+Deep: 내부 객체까지 모두 새로 복사.
+
+9) Sealed Class vs Enum Class
+Enum: 상수 집합, 고정 멤버, 동일 메서드·속성 공유.
+
+Sealed: 제한된 상속 계층, 멤버별 다른 데이터·메서드 가능.
+
+10) Jetpack Compose - Slot API
+Composable 함수에서 UI 일부를 외부에서 주입 가능하게 설계하는 패턴.
+
+예: Scaffold의 topBar, bottomBar.
+
+11) derivedStateOf 사용 이유
+의존 상태 변경 시에만 계산, 불필요한 recomposition 방지.
+
+예: 리스트 필터링/정렬 결과 캐싱.
+
+12) LazyColumn 성능 최적화
+key 지정, itemContentType 활용, Stable data class, remember로 state 보관.
+
+불필요한 recomposition 최소화.
+
+13) Kotlin Multiplatform 경험
+공통 비즈니스 로직 공유(Ktor, SQLDelight), iOS/Android 동시 개발.
+
+플랫폼별 expect/actual 구현으로 네이티브 API 호출.
+
+14) Android 앱 크기 최적화
+R8/ProGuard 난독화, 리소스 압축, resConfig로 불필요 언어 제거, PNG→WebP, native libs ABI 필터링.
+
+15) Inline Class 장점
+런타임에 래퍼 객체 생성 제거, 타입 안정성 유지, primitive 수준 성능.
+
+16) RecyclerView: 아이템 100개 + ViewHolder 1개 동작 원리
+ViewHolder 재사용(pool) → 스크롤 시 데이터 바인딩만 교체.
+
+실제 생성 View 수는 화면 표시 범위 + 예비 캐시.
+
+17) Pagination 구현
+스크롤 리스너로 끝 근처 감지 → 다음 페이지 로드.
+
+Paging3 사용 시 자동 처리(PagingSource).
+
+18) 이미지 네트워크 로드 리스트 빠른 스크롤 이슈
+문제: View 재활용으로 잘못된 이미지 표시, 요청 cancel 안됨.
+
+해결: Glide/Picasso의 cancel, placeholder, 캐싱 사용.
+
+19) Lambda Capture 비용 줄이기
+람다에서 외부 변수 캡처 지양, 불필요 객체 참조 제거, inline 함수 사용.
+
+20) JVM Code Cache 최적화
+JIT 최적화된 코드 보관, -XX:ReservedCodeCacheSize로 크기 조정, 핫패스 빠른 실행.
+
+21) value class 성능 장점
+primitive로 인라인 → 래퍼 객체 생성 비용 없음, 불필요한 heap 할당 줄임.
+
+22) 동적 바인딩 vs 정적 바인딩
+동적: 런타임 메서드 결정(override, virtual dispatch), 약간의 호출 비용.
+
+정적: 컴파일 시 메서드 결정(private, final, static), 빠름.
+
+1) Kotlin reflection 오버헤드 줄이기
+핵심: 리플렉션 최소화 + 캐싱 + 컴파일 타임 대체.
+
+방법
+
+kotlin-reflect 의존 줄이고 **java.lang.reflect + 어노테이션 프로세싱(KSP/KAPT)**로 대체.
+
+메타데이터 캐싱(예: KClass.memberProperties 결과를 Map에 캐시).
+
+런타임 바이트코드 조작 대신 코드 생성(예: Moshi Codegen, Room KSP) 사용.
+
+빈번 경로에서는 리플렉션 대신 생성자 참조(::Foo), 함수 레퍼런스 활용.
+
+2) Lazy initialization 성능 최적화
+핵심: 적절한 동기화 전략 + 불필요한 lazy 지양.
+
+팁
+
+기본 lazy {}는 SYNCHRONIZED. 단일 스레드 초기화라면 LazyThreadSafetyMode.NONE.
+
+읽기 많고 초기화 비용 큰 경우 LazyThreadSafetyMode.PUBLICATION 고려.
+
+무거운 초기화는 백그라운드에서 준비하고 UI선은 참조만.
+
+3) Coroutines vs Java Thread Pool
+코루틴: 경량(수십만 가능), suspend로 비동기 표현, 구조적 동시성, 디스패처가 스레드풀 위에서 스케줄.
+
+스레드풀: OS 스레드 단위, 컨텍스트 전환/생성 비용 큼, 취소·수명 관리 수동.
+
+4) Structured Concurrency가 중요한 이유
+수명/취소/예외 전파를 스코프 단위로 보장 → 누수·좀비 작업 방지, 에러 처리 일관성, 테스트 용이.
+
+5) GlobalScope가 위험한 이유
+앱/프로세스 생존과 결합 → 화면 종료 후에도 작업 지속, 취소 어렵고 메모리/리소스 누수 유발.
+
+대안: viewModelScope, lifecycleScope, coroutineScope {}.
+
+6) Dispatchers.IO vs Dispatchers.Default 내부 차이
+Default: CPU 바운드용, 코어 수 기반 풀(Work-Stealing).
+
+IO: 블로킹 I/O용, Default 위에 확장 풀(최대 수 증가) 적용 → 블로킹 때문에 풀 고갈 방지.
+
+7) Flow의 Backpressure 대응
+Flow는 기본 suspending emit로 역압 완화. 추가 제어:
+
+buffer(n), conflate(), collectLatest {}, debounce(), sample().
+
+생산/소비 속도 불일치가 구조적이면 중간 캐시/배치 처리(예: chunked, windowed) 도입.
+
+8) StateFlow vs SharedFlow + 실전
+StateFlow: 상태 홀더(항상 최신값 1개), 초기값 필요, UI 상태에 최적.
+
+SharedFlow: 브로드캐스트 이벤트, replay/buffer 자유, 토스트/네비게이션 등 단발 이벤트에 적합.
+
+실전: 화면 상태는 StateFlow<UiState> / 단발 이벤트는 SharedFlow<UiEvent>.
+
+9) Channel vs Flow
+Channel: 코루틴 간 점대점 파이프, send/receive, 버퍼/용량 직접 제어.
+
+Flow: 선언적 파이프라인(콜드), 연산자 풍부, 수집 시 실행.
+
+패턴: 내부 생산자-소비자엔 Channel, 외부 API/UI 노출은 Flow.
+
+10) 동시성 제어: Mutex & Semaphore
+Mutex: 임계구역 상호배제(코루틴 친화, 스레드 블로킹 없음) → mutex.withLock { }.
+
+Semaphore: 동시 실행 개수 제한 → semaphore.withPermit { }로 N개 병렬 허용.
+
+11) Thread Safety 보장 방법
+불변 데이터(immutable), confined context(UI는 Main, I/O는 IO), 원자 연산(Atomic*), 동기화 원시(Mutex/Semaphore), 데이터 흐름 일원화(StateFlow).
+
+12) Atomic 변수로 동시성 제어
+AtomicBoolean/AtomicInt/AtomicReference로 락 없이 CAS 기반 갱신.
+
+복잡한 상태는 원자적 스냅샷 갱신: atomicRef.update { old -> old.copy(...) }.
+
+13) 코루틴으로 Concurrent Processing 구현
+coroutineScope { val a = async {…}; val b = async {…}; a.await()+b.await() }
+
+CPU 바운드: withContext(Default), I/O: withContext(IO).
+
+작업 수 제한: Semaphore/Dispatcher 커스텀.
+
+14) runBlocking의 부담과 회피
+현재 스레드를 차단 → UI/테스트 외부에서 사용 시 프리즈 위험.
+
+회피: 앱 코드에선 절대 사용 금지, 테스트는 runTest 사용, 진입점은 main 등 최소화.
+
+15) launch vs async + 내부 동작
+launch: fire-and-forget(결과 없음), 반환은 Job.
+
+async: 결과 반환, Deferred<T>, await() 호출 시 예외 전파.
+
+내부: 둘 다 코루틴 빌더, 차이는 결과 저장/예외 전파 시점.
+
+16) yield()의 역할
+현재 코루틴이 협력적으로 양보해 다른 코루틴이 실행되게 함.
+
+긴 루프에서 UI 굳음 방지, 스케줄링 공정성 개선(필요 시에만 사용).
+
+17) CoroutineScope 메모리 누수 방지
+수명에 맞는 스코프 사용(viewModelScope/lifecycleScope) + onCleared()/onStop에서 취소.
+
+커스텀 스코프는 SupervisorJob() + Dispatchers 조합 후 명시적 cancel.
+
+18) select {} 로 비동기 최적화
+여러 suspend 소스 중 가장 먼저 완료된 것을 선택.
+
+예: 레이스(두 채널 중 빠른 쪽), 타임아웃 대안(채널 vs onTimeout).
+
+19) CoroutineExceptionHandler 동작 조건
+**최상위 코루틴(루트)**에서 구조적으로 처리되지 않은 예외가 발생했을 때 호출.
+
+async 내부 예외는 await() 시 전파되므로 핸들러가 바로 받지 않음(try/catch 필요).
+
+20) ensureActive() 역할과 예시
+현재 코루틴이 취소되었는지 즉시 검사하고 CancellationException 발생.
+
+예시:
+    ```kotlin
+    suspend fun heavy() {
+        for (i in 0 until 1_000_000) {
+            ensureActive()           // 취소 응답성 향상
+            // 계산…
+        }
+    }
+    ```
+
+Kotlin 1.9 신규/최적화 포인트
+K2 컴파일러(JVM) 베타: 컴파일 파이프라인/프론트엔드 개선으로 빌드·분석 성능 향상(이후 1.9.20에선 전 타깃 베타). 
+Kotlin
+The JetBrains Blog
+
+Enum.entries 정식화(values 대체), 열린 범위 연산자 ..<, 정규식 named group 공용 함수, 경로 유틸 추가. 
+Kotlin
+The JetBrains Blog
+
+Kotlin/Native 메모리 매니저/GC 성능 향상: 1.9.20에서 새 메모리 할당기 기본 활성화, GC 최적화. 
+Kotlin
+
+컴파일러 플러그인으로 코드 최적화
+KSP/KAPT + 코드 생성: 리플렉션 경로 제거(예: DI, 직렬화).
+
+All-open/No-arg: 프록시/프레임워크 호환 최적화.
+
+Inline/Intrinsics 유도 플러그인(예: inlining 규칙, 불변성 검증)로 핫패스 최적화.
+
+JIT vs AOT (Kotlin/JVM 기준)
+JIT: 런타임 프로파일 기반 최적화, 장기 실행 서버에 유리.
+
+AOT/Graal Native Image: 시작속도·메모리 이점, CLI/서버리스에 적합(리플렉션 구성 필요).
+
+Ktor로 비동기 웹서버 구축
+Netty/CIO 엔진 + 코루틴: non-blocking 라우팅
+
+kotlin
+복사
+편집
+fun main() = embeddedServer(CIO, 8080) {
+    routing { get("/ping") { call.respondText("pong") } }
+}.start(wait = true)
+실무 포인트: ContentNegotiation(Kotlinx-Serialization), CallId + Logging, StatusPages, RateLimit, ktor-client로 내부 호출.
+
+(Kotlin/Native) Concurrent GC의 장점
+STW 단축·스루풋 개선, 멀티스레드 상호작용 단순화 → iOS 등 MPP에서 UI/백그라운드 협업 쉬워짐. 
+Kotlin
+
+정적 분석(Detekt/Ktlint)
+ktlint: 포매팅 규칙 자동화(gradle task로 CI 적용).
+
+detekt: 코드 스멜/복잡도/규칙 커스터마이징, baseline으로 점진 도입.
+
+메모리 릭 방지 패턴
+Android: 수명에 맞는 스코프(viewModelScope), 콜백 해제, Context 보관 금지.
+
+코루틴: 구조적 동시성 + onCleared() 취소.
+
+멀티플랫폼: 싱글톤/캐시의 수명 분리, 약참조/Closeable 사용.
+
+Context Receivers(문맥 수신자) 필요성
+암묵적 의존 제공(DI 컨텍스트, 트랜잭션 컨텍스트 등)을 파라미터 오염 없이 전달 → DSL/도메인 연산 가독성 향상.
+
+Native Image 최적화
+리플렉션·동적 프록시 최소화(리플렉션 config), 로그/JSON 라이브러리 native-friendly 선택, start-up/메모리 대폭 절감.
+
+Compiler Intrinsics 활용
+kotlin.math/inline/@PublishedApi 조합, 불변·널체크를 분기예측 유리하게 배치, @InlineOnly 성격의 유틸로 박싱/할당 제거.
+
+Kotlin vs Java 핵심 차이
+Null-safety/데이터 클래스/확장 함수/코루틴/Sealed/when exhaustiveness 등으로 안전·간결·비동기 친화.
+
+CoroutineScope 관리
+수명 기반 스코프(ViewModel/Lifecycle/Custom + SupervisorJob), 진입·이탈 지점에서 명시적 cancel.
+
+Structured Concurrency (왜 중요한가)
+부모-자식 Job 트리로 취소/예외 전파 일관성, 리소스 누수 방지, 테스트 용이.
+
+GlobalScope 지양
+프로세스 생존과 결합 → 취소 곤란/누수 위험. 항상 스코프 소유자를 명확히.
+
+copy() 사용하는 이유
+불변 모델의 부분 변경을 안전·간결하게(상태머신, 리듀서 패턴).
+
+object expression vs object declaration
+expression: 익명 1회성 객체.
+
+declaration: 싱글톤(전역 인스턴스 보장).
+
+sealed interface 활용
+폐쇄적 계층 + 다중 구현 조합 → 상태/이벤트 모델에 유연, when exhaustiveness 확보.
+
+break / continue / return
+반복 제어(탈출/스킵) vs 비지역 return(인라인 람다 주의, crossinline 필요).
+
+context receivers 설명
+context(A, B) fun f(){…} 형태로 수신 컨텍스트 요구. DI/스코프 바인딩/DSL에서 의존 전달 깔끔. (실험/프리뷰 단계 도입 & 1.9에서도 사용 가능 맥락) 
+Medium
+kotlinlang #announcements
+
+nullable와 !! 주의
+NPE 유발 → ?., ?:, requireNotNull, early return/Guard 함수로 대체.
+
+@JvmStatic / @JvmOverloads / @JvmField
+Static: companion/obj 메서드를 정적 노출.
+
+Overloads: JVM용 기본값 오버로드 생성.
+
+Field: 게터 없이 필드로 노출(Java 상호운용 최적화).
+
+is vs as
+is: 런타임 타입 체크(스마트 캐스트).
+
+as: 캐스트(실패 시 ClassCastException, as?는 null 반환).
+
+Collection vs Sequence
+Collection: 즉시 연산(중간 결과 생성).
+
+Sequence: 지연 연산 + 파이프라인(큰 데이터/필터-맵 체인에서 GC·할당 감소).
 
 
-- Android에서 MutableLiveData와 StateFlow의 차이점
-- Android에서 Jetpack ViewModel을 활용하는 방법
-- Android에서 Jetpack Lifecycle Observer의 역할
-- Android에서 ViewModelScope와 GlobalScope의 차이점
-- Android에서 Coroutines의 Structured Concurrency 개념
-- Android에서 BroadcastReceiver의 역할
-- Android에서 IntentService와 Foreground Service의 차이점
-- Android에서 Jetpack Compose의 State Hoisting 개념
-- Android에서 Activity의 생명주기와 Fragment의 생명주기를 비교하시오.
-- Android에서 RecyclerView의 ViewHolder 패턴을 사용하는 이유
-- Android에서 Retrofit과 Volley의 차이점
-- Android에서 FusedLocationProvider API를 사용하는 이유
-- Android에서 앱 내 결제를 구현하는 방법
-- Android에서 Fingerprint 및 Face ID 인증을 구현하는 방법
-- Android에서 Firebase Crashlytics를 활용하는 방법
-- Android에서 Jetpack WorkManager를 활용한 백그라운드 작업 수행 방법
-- Android에서 AndroidX 라이브러리를 사용하는 이유
-- Android에서 ConstraintLayout과 RelativeLayout의 차이점
-- Android에서 Jetpack Navigation Component의 Safe Args를 사용하는 이유
-- Android에서 Service와 JobIntentService의 차이점은?
-- Jetpack Compose에서 recomposition이 발생하는 조건은?
+1) coroutineScope vs supervisorScope
+차이
+
+coroutineScope: 자식 코루틴 중 하나가 실패하면 전부 취소(실패 전파).
+
+supervisorScope: 자식 간 실패가 전파되지 않음(독립 실패).
+
+언제?
+
+전체 작업이 하나의 트랜잭션처럼 실패/성공해야 하면 coroutineScope.
+
+“가능한 건 계속 진행”이 목표면 supervisorScope.
+
+2) 다중 모듈 구성 방법
+기준: 레이어( domain / data / app ) + 피처(feature-xxx) + 코어(common, network, ui, testing).
+
+의존 방향: app → feature → domain/data → core (단방향).
+
+빌드 최적화: Android Gradle version catalogs, build-logic, api/implementation 분리, KMP면 :shared.
+
+3) Koin vs Hilt
+Hilt(Dagger 기반): 컴파일 타임, 엄격한 그래프, 대규모/성능 유리.
+
+Koin: 런타임 DSL, 빠른 셋업, 유연.
+
+선택: 장기·대규모/성능 → Hilt, PoC·소규모·동적 바인딩 많음 → Koin.
+
+4) JUnit5 + MockK 단위 테스트 전략
+구조: AAA(Arrange-Act-Assert), given/when/then 네이밍.
+
+코루틴: runTest + StandardTestDispatcher.
+
+MockK: coEvery { repo.get() } returns …, coVerify, slot/capture.
+
+Flow 테스트: Turbine(test { awaitItem() }).
+
+5) 비동기 네트워크 최적화
+Retrofit + OkHttp
+
+HTTP2, 커넥션 풀, 캐시(Cache-Control), GZIP.
+
+코루틴 suspend API + 타임아웃/재시도/지수 백오프.
+
+앱 레벨
+
+병렬→제한 병렬(Semaphore), 중복 요청 합치기, 결과 메모리/디스크 캐시.
+
+6) Coroutines vs RxJava (선택 기준)
+Coroutines/Flow: 언어 통합, 구조적 동시성, 단순 요청-응답·UI 친화.
+
+RxJava: 연산자 풍부, 복잡 스트림/멀티 소스 결합/백프레셔에 강함.
+
+하이브리드: 내부는 Flow, 외부 SDK가 Rx면 interop(asFlow(), asObservable()).
+
+7) Hilt와 Koin을 함께?
+장점: Hilt로 코어 고정 의존성, Koin으로 플러그인/실험적 바인딩.
+
+단점: 두 그래프 유지 비용/혼란, 초기화 순서·스코프 충돌 위험 → 특별한 이유 없으면 단일 프레임워크 권장.
+
+8) KMP에서 Coroutines 활용
+공통 모듈: kotlinx.coroutines(Flow/StateFlow)로 비즈 로직 공유.
+
+iOS: Flow → asPublisher()/combine 래핑, 메인 디스패처는 Main(native-mt).
+
+주의: 동시성 모델 차이(iOS) → immutable 모델, 공유 mutable 최소화.
+
+9) Compose × Coroutines 고려사항
+UI는 Dispatchers.Main.immediate, 작업은 IO/Default.
+
+LaunchedEffect(key)로 수명 안전하게 시작/취소.
+
+recomposition 폭주 방지: derivedStateOf, snapshotFlow로 최소 구독.
+
+ViewModel에 상태 저장(StateFlow) 후 collectAsStateWithLifecycle().
+
+10) GraphQL 최적화
+클라이언트: Apollo Kotlin
+
+normalized cache(메모리/Sql), @defer/@stream(서버 지원 시), query persisted.
+
+Fragments로 overfetch 감소, batching/동시 요청 합치기.
+
+네트워크: gzip, cache-control, ETag.
+
+11) Room × Coroutines 주의점
+DAO는 suspend/Flow 사용, Main에서 블로킹 금지.
+
+대량 변경은 트랜잭션 + withContext(IO).
+
+Flow는 DB 변경 시 재방출 → UI에서 distinctUntilChanged() 고려.
+
+12) Paging 3 비동기 로딩
+PagingSource<Key, Value> 구현 → Pager → UI에서 collectAsLazyPagingItems().
+
+네트워크 + DB 캐시: RemoteMediator.
+
+로딩 상태: LoadState로 헤더/푸터, 리트라이 제공.
+
+13) KMM에서 네트워크 처리
+공통: Ktor Client + ContentNegotiation + Logging.
+
+플랫폼: iOS는 Darwin, Android는 OkHttp.
+
+에러/결과: sealed Result로 한정, 재시도/타임아웃 공통화.
+
+14) DI 없이 Factory 패턴
+interface FooFactory { fun create(dep: A): Foo }
+
+상위에서 의존성 조합, 하위는 팩토리만 알게 함. 테스트는 테스트 팩토리 주입.
+
+15) Retrofit × Coroutines 베스트 프랙티스
+Service는 suspend 반환, 네트워크 예외 → 도메인 예외 맵핑.
+
+공통 인터셉터(헤더/로그), Result 래퍼(Result<Body, Error>).
+
+타임아웃/재시도/회로차단기(Resilience4j)로 안정성.
+
+16) JSON Parsing 최적화
+kotlinx.serialization(코드 생성) 또는 Moshi Codegen(리플렉션 제거).
+
+큰 배열은 스트리밍 파서(Moshi JsonReader/Jackson streaming).
+
+필드 optional 전략으로 GC 부담 줄이기.
+
+17) Domain/Data 레이어 분리 원칙
+의존성 역전: domain이 data에 의존하지 않음(인터페이스는 domain).
+
+UoW/트랜잭션 경계는 data, 순수 비즈니스 규칙은 domain.
+
+DTO ↔ Entity ↔ Model 변환은 명시적 Mapper.
+
+18) Anvil로 DI 성능 최적화
+Dagger용 컴파일 타임 코드 생성 간소화, 멀티모듈에서 바인딩 자동화.
+
+KAPT 부담 감소(증분 빌드 우호적).
+
+주의: Dagger/Hilt와의 경계 명확화, 버전 호환 체크.
+
+19) ViewModelScope 사용 시 문제
+무거운 작업을 Main에 붙이면 jank. → withContext(IO/Default).
+
+화면 간 공유 스코프 오남용 시 작업 누수. → 스코프 명확히(화면 종료 시 자동 cancel).
+
+launch 남발로 에러 은닉. → async/await 또는 Result로 관리.
+
+20) Thread-Safe Singleton
+Kotlin
+
+kotlin
+복사
+편집
+object MySingleton // JVM에서 안전
+혹은
+
+kotlin
+복사
+편집
+class Foo private constructor() {
+  companion object { @Volatile private var I: Foo? = null
+    fun get(): Foo = I ?: synchronized(this) { I ?: Foo().also { I = it } }
+  }
+}
+21) (중복) Anvil 성능 최적화 한 번 더 요약
+장점: KAPT 축소, 멀티바인딩 자동화, 컴파일/빌드 시간 단축.
+
+단점: Hilt 통합 난이도, 생태계 문서 적음 → 팀 합의 필수.
+
+1) vararg 함수에 배열 전달
+스프레드 연산자 * 사용.
+
+kotlin
+복사
+편집
+fun log(vararg tags: String) { /*...*/ }
+
+val arr = arrayOf("A", "B")
+log(*arr)              // OK
+log("X", *arr, "Z")    // 혼합도 가능
+2) Enum으로 안전한 상태 관리
+상태 집합이 유한/고정일 때, when의 exhaustive 보장으로 실수 방지.
+
+kotlin
+복사
+편집
+enum class UiState { Idle, Loading, Success, Error }
+
+fun render(s: UiState) = when (s) {
+    UiState.Idle, UiState.Loading -> showSpinner()
+    UiState.Success -> showContent()
+    UiState.Error -> showError()
+}
+데이터가 필요한 상태는 sealed 계열이 더 적합(아래 10번 참고).
+
+3) Kotlin식 빌더 패턴
+전통 Builder 보다 DSL/스코프 함수가 간결.
+
+kotlin
+복사
+편집
+data class User(val name: String, val age: Int, val tags: List<String>)
+
+class UserBuilder {
+    var name = ""
+    var age = 0
+    private val _tags = mutableListOf<String>()
+    fun tag(t: String) { _tags += t }
+    fun build() = User(name, age, _tags.toList())
+}
+fun user(block: UserBuilder.() -> Unit) = UserBuilder().apply(block).build()
+
+val u = user {
+    name = "Aiden"
+    age = 38
+    tag("dev"); tag("android")
+}
+이미 생성된 불변 객체 수정은 copy 권장.
+
+4) Inline class(= value class) 개념/예제
+런타임 래퍼 없이 값으로 취급되는 경량 타입(타입 안정성 + 할당 감소).
+
+kotlin
+복사
+편집
+@JvmInline
+value class UserId(val raw: String)
+
+fun fetch(u: UserId) { /* raw는 String이지만 타입 안전 */ }
+5) suspend 함수 vs 일반 함수
+suspend: 중단 가능(스레드 블로킹 없이 일시 정지/재개), 코루틴 컨텍스트에서만 호출.
+
+일반 함수: 즉시 실행, 중단 불가.
+
+스레드는 Dispatcher로 결정(withContext(IO) 등).
+
+6) Context receivers가 필요한 이유
+함수가 암묵적으로 필요한 **컨텍스트(환경/DI/스코프)**를 파라미터 오염 없이 명시.
+
+kotlin
+복사
+편집
+context(Transaction)
+fun <T> Dao<T>.save(entity: T) { /* Transaction 컨텍스트 필요 */ }
+7) @JvmInline 사용하는 이유
+JVM 상에서 value class 최적화/호환을 명시해 박싱 최소화, 자바 상호운용 일관성 확보.
+
+8) Contracts API란? 활용법
+함수 호출 후의 흐름 보장을 컴파일러에 알려 스마트 캐스트/제어 흐름 최적화.
+
+kotlin
+복사
+편집
+import kotlin.contracts.*
+
+fun requireNotNull(x: Any?): Boolean {
+    contract { returns(true) implies (x != null) }
+    return x != null
+}
+fun foo(x: Any?) {
+    if (requireNotNull(x)) x.hashCode() // x를 Non-null로 간주
+}
+9) reified 동작 원리
+inline 함수와 함께만 사용 가능. 인라인 시 타입 인자가 호출부에 남아
+런타임에 T::class, is T 등의 타입 정보를 직접 사용 가능.
+
+kotlin
+복사
+편집
+inline fun <reified T> Any?.asOrNull(): T? = this as? T
+10) sealed interface vs sealed class
+공통점: 상속 폐쇄, when에서 exhaustive 보장.
+
+차이:
+
+sealed class: 상태 + 공유 구현 보유 가능, 단일 상속.
+
+sealed interface: 다중 구현 가능, 구현 비용 가벼움(상태는 구현체에).
+
+kotlin
+복사
+편집
+sealed interface NetworkResult
+data class Ok(val body: String): NetworkResult
+data class Fail(val code: Int): NetworkResult
+11) Kotlin default parameter vs Java 오버로딩
+Kotlin은 기본값 파라미터로 오버로드 수 감소.
+
+자바 호출 호환 필요하면 @JvmOverloads로 오버로드 메서드 생성.
+
+12) String interpolation 최적화
+JVM 9+: invokedynamic StringConcatFactory를 사용해 런타임 효율적 연결.
+
+JVM 8: StringBuilder로 컴파일.
+
+kotlin
+복사
+편집
+val s = "Hello $name, id=${user.id}"
+13) 메모리 관리와 GC (Kotlin vs Java)
+Kotlin/JVM: 자바와 동일하게 JVM GC 사용(G1/ZGC 등).
+
+Kotlin/Native: 자체 메모리 매니저/GC. 플랫폼별 차이 존재.
+
+14) 가변 객체 성능 최적화
+변경 구간 최소화(로컬 가변, 외부는 불변 공개), defensive copy 지양.
+
+컬렉션은 capacity 지정, mutable 재사용(필요 시 clear).
+
+핫패스에서 박싱/언박싱 피하기(primitive/inline class).
+
+15) 불변 객체 구현 & 활용
+data class + val 필드, 변경은 **copy**로.
+
+상태머신/Redux/멀티스레드 공유에서 안전·테스트 용이.
+
+대용량 컬렉션엔 kotlinx.collections.immutable(구조적 공유).
+
+16) Escape analysis 개념
+JIT가 객체가 스레드/스코프 밖으로 **도망가지 않음(escape X)**을 증명하면
+스택 할당/스칼라 치환으로 GC 부담 감소(Kotlin도 JVM 최적화 혜택 동일).
+
+17) Inline function 내부 동작
+호출부에 바디를 그대로 복사(인라인) → 호출/람다 객체 생성 비용 제거.
+
+부작용: 바이트코드 증가, 디버깅 스택 트레이스 어려움 가능.
+
+18) Tail recursion 동작
+tailrec 붙인 꼬리 호출은 루프로 변환되어 스택 오버플로 방지.
+
+kotlin
+복사
+편집
+tailrec fun fact(n: Long, acc: Long = 1): Long =
+    if (n <= 1) acc else fact(n - 1, acc * n)
 
 
-- Jetpack Compose에서 remember와 rememberSaveable의 차이점은?
-- Kotlin Coroutines에서 Structured Concurrency가 왜 중요한가?
-- Kotlin에서 suspend function이 호출되는 스레드는 어떻게 결정되는가?
-- Kotlin에서 inline functions을 사용할 때의 장점과 단점은?
-- Kotlin에서 Flow와 LiveData의 차이점은?
-- Compound Component 패턴과 Slot API 설명
-- Kotlin에서 backing field와 backing property란?
-- Kotlin에서 deep copy와 shallow copy의 차이점은?
-- Kotlin에서 sealed class와 enum class의 차이점은?
-- Jetpack Compose에서 Slot API란?
-- Jetpack Compose에서 derivedStateOf를 사용하는 이유는?
-- Jetpack Compose에서 LazyColumn의 성능을 최적화하는 방법은?
-- Kotlin Multiplatform을 사용해본 경험이 있는가?
-- Android 앱의 크기를 줄이기 위해 적용할 수 있는 최적화 기법은?
-- Android에서 Inline Class의 장점은?
-- 아이템 100개 와 ViewHolder 1개를 가진 RecyclerView의 동작원리를 설명 해주세요.
-- RecyclerView or ListView 의 Pagination 구현 방법을 설명 해주세요.
-- 네트워크 통신을 통해 이미지를 가져오는 뷰가 포함된 ListView 또는 RecyclerView에서 빠르게 스크롤 시 생길 수 있는 이슈가 무엇이고 어떻게 수정 및 최적화를 할 수 있을까요?
-- Kotlin에서 람다(Lambda)의 capture 비용을 줄이는 방법은?
-- Kotlin에서 JVM의 Code Cache를 활용한 최적화 기법은?
-- Kotlin에서 value class(구 inline class)를 활용할 때 성능적인 장점은?
-- Kotlin의 동적 바인딩과 정적 바인딩의 차이점 및 실행 성능 비교는?
+1) Builder Pattern을 DSL로 구현
+스코프 함수 + 수신자 리시버로 가독성 높은 DSL 제공, 중첩에는 @DslMarker.
+
+kotlin
+복사
+편집
+@DslMarker annotation class UiDsl
+@UiDsl class RowBuilder { val cells = mutableListOf<String>(); fun cell(s: String){ cells += s } }
+@UiDsl class TableBuilder { val rows = mutableListOf<RowBuilder>(); fun row(block: RowBuilder.() -> Unit){ rows += RowBuilder().apply(block) } }
+fun table(block: TableBuilder.() -> Unit) = TableBuilder().apply(block)
+
+val t = table {
+  row { cell("A"); cell("B") }
+  row { cell("C") }
+}
+2) Type Inference 원리/활용
+지역적 추론(표현식 기반) + 상향식(call-site → callee).
+
+활용: 제네릭 val x = listOf(1,2), 람다 파라미터 타입 생략, builder<T>{} 대신 reified로 추론.
+
+3) Spread 연산자(*)
+vararg 호출 시 배열을 “펼쳐서” 전달.
+
+kotlin
+복사
+편집
+fun f(vararg xs:Int){}; val arr = intArrayOf(1,2); f(*arr, 3)
+4) Tail Recursion 최적화
+tailrec 함수의 꼬리 호출을 루프로 치환 → 스택 오버플로 방지.
+
+kotlin
+복사
+편집
+tailrec fun fact(n:Long, acc:Long=1):Long = if(n<=1) acc else fact(n-1, acc*n)
+5) Map Destructuring
+kotlin
+복사
+편집
+for ((k, v) in map) { println("$k -> $v") } // Entry의 component1/2 사용
+6) 비트 연산
+shl, shr, ushr, and, or, xor, inv (Int/Long 확장 함수).
+
+kotlin
+복사
+편집
+val m = (1 shl 3) or 0b0010; val masked = m and 0b0111
+7) dynamic 키워드를 못 쓰는 이유
+Kotlin/JVM은 정적 타입 안정성이 설계 원칙. 동적은 JS 타깃에만(interop용) 존재.
+
+8) KProperty & Reflection 활용
+kotlin
+복사
+편집
+data class User(var name:String)
+val p: KMutableProperty1<User, String> = User::name
+val u = User("A"); println(p.get(u)); p.set(u, "B")
+주의: 빈번 경로는 **참조 캐싱/코드생성(KSP)**로 리플렉션 최소화.
+
+9) @DslMarker를 쓰는 이유
+중첩 DSL에서 외부 수신자(propagation) 접근을 차단해 스코프 혼동/오타를 방지.
+
+10) LazyThreadSafetyMode
+SYNCHRONIZED(기본): 최초 접근 1회 동기화, 가장 안전.
+
+PUBLICATION: 여러 스레드가 동시에 초기화 시도 가능(마지막 값 채택).
+
+NONE: 동기화 없음(단일 스레드 초기화에 최고 성능).
+
+11) CoroutineContext와 Job
+Job은 CoroutineContext의 수명/취소 요소.
+
+context = Job + Dispatcher + (기타 요소) 형태로 합성/전파.
+
+12) @JvmStatic / @JvmOverloads
+@JvmStatic: companion/obj 메서드를 정적 메서드로 노출(자바 호출 편의).
+
+@JvmOverloads: 기본값 파라미터에 대해 다중 오버로드 자동 생성(자바 호환).
+
+13) @OptIn
+실험적 API 사용 의사 명시. 선언/사용 위치에 붙여 컴파일러 경고 억제 및 가시성 확보.
+
+14) Coroutines 핵심
+suspend(중단), 디스패처(스레드 선택), 구조적 동시성(스코프/취소 전파), Flow/Channel(스트림), 협력적 취소.
+
+15) suspend vs 일반 함수
+suspend: 스레드 차단 없이 일시정지/재개, 코루틴 컨텍스트 필요.
+
+일반: 즉시 실행, 중단 불가.
+
+16) Coroutines 테스트
+kotlinx-coroutines-test의 runTest + StandardTestDispatcher, 가상시간(advanceUntilIdle).
+
+Flow는 Turbine으로 검증.
+
+kotlin
+복사
+편집
+@Test fun t() = runTest { /* ... */ }
+17) ViewModelScope로 네트워크
+kotlin
+복사
+편집
+@HiltViewModel class Vm @Inject constructor(private val api:Api): ViewModel() {
+  val state = MutableStateFlow<UiState>(UiState.Idle)
+  fun load() = viewModelScope.launch {
+    state.value = UiState.Loading
+    state.value = runCatching { api.get() }.fold({ UiState.Success(it) }, { UiState.Error(it) })
+  }
+}
+18) Retrofit × Coroutines 장점
+콜백 제거, try/catch로 표준 예외 처리, 취소 전파 자동, 테스트/조합 용이.
+
+19) Room × Coroutines
+DAO를 suspend/Flow로 정의 → I/O는 Dispatchers.IO, Flow로 변경 관찰 자동 재방출.
+
+20) LiveData + StateFlow 함께 쓸 때
+단일 소스 유지(중복 방출 주의).
+
+Compose는 collectAsStateWithLifecycle, View는 asLiveData() 변환 등 수명 인식 수집.
+
+21) WorkManager × Coroutines 주의
+CoroutineWorker 사용(블로킹 금지).
+
+취소 시점에 중단 지점(suspend 지점) 있어야 반응. 재시도/백오프는 Result로 반환.
+
+22) MutableSharedFlow의 replay
+늦게 구독한 소비자에게 최근 N개 이벤트 재전달.
+
+이벤트 버스면 replay=0, sticky 이벤트면 >0.
+
+23) StateFlow에 초기값이 필요한 이유
+상태 홀더(항상 값 1개 보유). 구독 즉시 현재 상태를 제공해야 하므로 초기값 필수.
+
+24) yield() 역할
+현재 코루틴이 스케줄러에 양보(다른 코루틴에 기회 제공). 긴 연산 루프에서 UI 굳음 방지에 유용.
+
+25) cancel() 후에도 종료 안 되는 이유
+협력적 취소이므로, 코루틴이 취소 가능한 지점(suspend, isActive/ensureActive)을 통과해야 종료.
+
+해결: 루프 내 yield()/ensureActive(), 블로킹 호출은 withContext(NonCancellable) 지양 또는 올바른 디스패처/중단 API 사용.
 
 
-- Kotlin에서 reflection을 사용할 때 발생하는 오버헤드는 어떻게 줄일 수 있는가?
-- Kotlin에서 Lazy initialization을 성능적으로 최적화하는 방법은?
-- Kotlin에서 Coroutines과 Java의 Thread Pool의 차이점은?
-- Kotlin의 Coroutines에서 Structured Concurrency 개념이 중요한 이유는?
-- Kotlin의 Coroutines에서 GlobalScope 사용이 위험한 이유는?
-- Kotlin Coroutines에서 Dispatchers.IO와 Dispatchers.Default의 내부 구현 차이는?
-- Kotlin에서 Flow의 Backpressure(역압) 문제를 해결하는 방법은?
-- Kotlin의 StateFlow와 SharedFlow의 차이점과 실전 활용법은?
-- Kotlin에서 채널(Channel)과 Flow의 차이점은?
-- Kotlin에서 Coroutines의 동시성 제어를 위해 Mutex와 Semaphore를 어떻게 활용하는가?
-- Kotlin에서 Thread Safety를 보장하는 방법은?
-- Kotlin의 Atomic 변수를 활용한 동시성 제어 방법은?
-- Kotlin에서 코루틴을 활용하여 Concurrent Processing을 구현하는 방법은?
-- Kotlin에서 runBlocking이 주는 성능적 부담과 이를 피하는 방법은?
-- Kotlin Coroutines에서 launch와 async의 차이점과 내부 동작 원리는?
-- Kotlin의 yield() 함수가 비동기 작업에서 어떤 역할을 하는가?
-- Kotlin에서 CoroutineScope의 메모리 누수를 방지하는 방법은?
-- Kotlin의 select {} 문법을 활용한 비동기 작업 최적화 방법은?
-- Kotlin에서 CoroutineExceptionHandler가 실행되는 조건은?
-- Kotlin에서 ensureActive()의 역할과 사용 예제는?
+1) ensureActive() 역할
+현재 코루틴이 취소되었는지 즉시 확인하고 취소 상태면 CancellationException을 던져 빠르게 탈출합니다.
+
+긴 루프/CPU 연산 중간중간 호출해 협력적 취소 응답성을 높입니다.
+
+kotlin
+복사
+편집
+while (true) {
+  coroutineContext.ensureActive()
+  // heavy work…
+}
+2) select {}로 여러 채널 동시 처리
+여러 비동기 소스 중 가장 먼저 준비된 분기를 처리합니다(레이스).
+
+kotlin
+복사
+편집
+select<Unit> {
+  ch1.onReceive { v -> handle1(v) }
+  ch2.onReceive { v -> handle2(v) }
+  onTimeout(3000) { handleTimeout() }
+}
+3) produce {} vs consumeEach {}
+produce {}: 생산자 코루틴을 만들고 ReceiveChannel을 리턴.
+
+consumeEach {}: 채널을 소비하며 반복(끝나면 자동 close/취소 전파).
+
+kotlin
+복사
+편집
+val ch = scope.produce { for(i in 0..10) send(i) }
+ch.consumeEach { println(it) }
+4) Mutex vs Atomic으로 동시성 해결
+Mutex: 임계구역 상호배제(코루틴 친화, suspend 기반).
+
+kotlin
+복사
+편집
+val m = Mutex()
+m.withLock { shared++ }
+Atomic: 락 없이 단일 값의 원자적 갱신(CAS).
+
+kotlin
+복사
+편집
+val count = AtomicInteger(0)
+count.incrementAndGet()
+규칙: 복합 상태(여러 필드 동시 일관성)→ Mutex / 단일 값→ Atomic.
+
+5) Android에서 코루틴 백그라운드 최적화
+WorkManager는 CoroutineWorker로, 네트워크/DB는 Dispatchers.IO.
+
+제약조건(Wi-Fi/충전 중) 활용, 재시도/백오프 설정, Semaphore로 동시 수 제한.
+
+6) CoroutineContext 구성요소
+대표적으로 Job(수명/취소), Dispatcher(스레드), CoroutineName, CoroutineExceptionHandler.
+
+컨텍스트는 +로 합성/전파됩니다.
+
+7) withContext() vs async/await
+withContext(ctx): 컨텍스트 전환 + 동기식 suspend 호출(결과 직접 반환).
+
+async {}: 비동기 작업 시작, Deferred<T> 반환 → await() 시 결과/예외 획득.
+
+규칙: 단일 작업 전환→ withContext / 병렬 합성→ async/await.
+
+8) Dispatchers.IO / Main / Default
+IO: 블로킹 I/O 전용(확장 가능한 풀).
+
+Main: UI 스레드(즉시/순차).
+
+Default: CPU 바운드(코어 수 기반, work-stealing).
+
+9) runBlocking이 위험한 이유
+현재 스레드를 차단. UI 스레드/테스트 외 사용 시 프리즈·데드락 위험.
+
+대안: runTest(테스트), 앱 코드에서는 스코프에서 launch.
+
+10) Structured Concurrency
+스코프/부모-자식 Job 트리로 수명·취소·예외를 일관 관리.
+
+누수/좀비 작업 방지, 예외 전파 예측 가능.
+
+11) CoroutineExceptionHandler 역할
+루트 코루틴의 미처리 예외를 최종 처리(로그/리포트).
+
+async 내부 예외는 await() 때 전파되므로 개별 try/catch 필요.
+
+12) Paging 3에서 Flow 활용
+Pager → flow → UI에서 collectAsLazyPagingItems().
+
+cachedIn(viewModelScope)로 수명 내 캐싱, LoadState로 로딩/에러 UI 처리.
+
+13) 네트워크 요청 중 취소
+요청을 viewModelScope.launch에서 실행하고 화면 종료 시 scope 취소.
+
+OkHttp 사용 시 코루틴 취소가 요청(cancel)로 전파됩니다.
+
+14) 코루틴 과다 생성 시 문제
+스레드풀 포화, 컨텍스트 스위칭 증가, 메모리 사용 급증 → 배터리/성능 악화.
+
+해결: 배치/합성, 동시수 제한(Semaphore), 구조/스코프 정리.
+
+15) 효율적 병렬 처리
+kotlin
+복사
+편집
+val r = coroutineScope {
+  val a = async(Dispatchers.IO) { apiA() }
+  val b = async(Dispatchers.IO) { apiB() }
+  a.await() to b.await()
+}
+과도한 병렬은 제한(세마포어/큐), 공통 실패 전략 정의.
+
+16) Job과 Deferred로 스케줄링
+Job: 완료/취소만 관리(결과 없음).
+
+Deferred<T>: 결과/예외 포함, await() 필요.
+
+스케줄링: start = CoroutineStart.LAZY, invokeOnCompletion 활용.
+
+17) Android에서 Flow로 실시간 처리
+DB/소켓/센서 → Flow/callbackFlow.
+
+UI: repeatOnLifecycle + collectLatest로 수명 안전 수집.
+
+18) 코루틴 기반 이벤트 아키텍처
+단발 이벤트: SharedFlow(replay=0) 또는 Channel.
+
+상태: StateFlow<UiState> + 리듀서.
+
+에러/취소는 상위 스코프에서 일괄 관리.
+
+19) CoroutineScope 올바른 관리
+소유자와 동일 수명: viewModelScope/lifecycleScope/커스텀(SupervisorJob).
+
+onCleared/onStop에서 cancel(). GlobalScope 금지.
+
+20) collectLatest()로 최신 데이터 유지
+새로운 값이 오면 이전 처리 중단 후 최신 값 처리(검색/타이핑에 유용).
+
+kotlin
+복사
+편집
+flow.collectLatest { latest -> render(latest) }
+21) StateFlow ↔ LiveData 변환
+kotlin
+복사
+편집
+val live = stateFlow.asLiveData()
+val state = live.asFlow().stateIn(scope, SharingStarted.Eagerly, initial)
+단일 소스 원칙 유지(중복 방출 주의).
+
+22) Compose × Coroutines 함께 사용
+LaunchedEffect(key)/rememberCoroutineScope()로 수명 안전 실행.
+
+상태는 ViewModel StateFlow → collectAsStateWithLifecycle().
+
+23) 커스텀 Thread Pool 구성
+kotlin
+복사
+편집
+val dispatcher = Executors.newFixedThreadPool(4).asCoroutineDispatcher()
+withContext(dispatcher) { /* work */ }
+종료 시 dispatcher.close()로 리소스 회수.
+
+24) 예외 처리 베스트 프랙티스
+계층 규칙: 내부는 try/catch로 도메인 예외 변환, 최상위는 CoroutineExceptionHandler.
+
+병렬 async는 await()에서 catch, supervisorScope로 독립 실패 제어.
+
+타임아웃/취소: withTimeout + 의미 있는 CancellationException 메시지.
+
+Kotlin / Coroutines / KMP
+1) Coroutines을 KMP에서 활용하는 방법
+
+공통(common) 모듈에 kotlinx.coroutines(Flow/StateFlow 포함) 사용 → 비즈니스 로직/상태 공유.
+
+Android: Dispatchers.Main(Main), iOS: Dispatchers.Main(native-mt) 사용.
+
+iOS 노출은 Flow→ callback/Combine 래핑(예: asCallback()), immutable 모델로 공유.
+
+2) combine()으로 스트림 결합
+
+kotlin
+복사
+편집
+val uiState = combine(userFlow, prefsFlow) { user, prefs ->
+  UiState(user, prefs.theme)
+}.stateIn(scope, SharingStarted.WhileSubscribed(), UiState())
+여러 Flow의 최신값을 동기화하여 단일 모델 생성. 값 하나라도 변하면 즉시 재계산.
+
+3) retry() vs catch()
+
+retry { e -> 조건 }: 실패한 upstream을 재시도(지수 백오프와 함께 자주 사용).
+
+catch { e -> … }: 에러를 하류에서 처리/대체(로깅, fallback emit 등).
+
+순서: upstream … retry … catch … collect.
+
+Android 기본
+4) Splash Screen 올바른 구현
+
+Android 12+: SplashScreen API(테마 아이콘/brand, exit animation).
+
+11 이하: SplashScreenCompat 또는 테마 스플래시 + 첫 Activity 가벼움 보장(무거운 초기화는 비동기).
+
+5) ViewModel로 데이터 저장 최적화
+
+구성변경 생존 + StateFlow/SavedStateHandle 사용.
+
+네트워크/DB는 ViewModel에서 캐싱 → 화면 재진입 시 빠른 복구.
+
+비싼 계산은 viewModelScope + withContext(Default/IO).
+
+6) Paging로 대용량 처리
+
+PagingSource → Pager.flow → UI에서 collectAsLazyPagingItems().
+
+원천 2개(네트워크+로컬)는 RemoteMediator로 싱크.
+
+Placeholders/LoadState/Retry로 UX 완성.
+
+7) App Bundle vs APK
+
+AAB: 스토어가 기기별 Split APK 생성(용량 절감, 동적 피처).
+
+APK: 단일 패키지. 로컬 배포/사이드로딩은 간편하나 용량↑.
+
+8) LiveData vs StateFlow 선택
+
+Compose/코루틴 기반, 백프레셔/연산자 필요 → StateFlow 권장.
+
+기존 View 위주, 간단 옵저빙 → LiveData도 OK(혼용 시 단일 소스 유지).
+
+9) Foreground Service로 지속 작업
+
+사용자 인지 지속 작업(항법/운동/재생) + 알림 필수.
+
+코루틴 사용 시 lifecycleScope 대신 서비스 전용 스코프 + 취소 처리.
+
+10) Bluetooth LE 사용 방법
+
+권한(BT/Location) + BLE 지원 검사 → 스캔(BluetoothLeScanner), 연결(BluetoothGatt), 서비스/특성 탐색 후 notify/읽기/쓰기.
+
+Android 12+ 권한 분리(BLUETOOTH_SCAN/CONNECT/ADVERTISE) 유의.
+
+11) WorkManager vs Foreground Service
+
+WorkManager: 지연/보장 실행(제약조건, 재부팅 생존). 알림 필요 없음(단, 긴 작업 중 포그라운드로 승격 가능).
+
+FGS: 즉시/지속, 사용자 인지 필수.
+
+12) Paging을 쓰는 이유
+
+메모리/네트워크 효율, 자동 로딩/재시도, 로딩 상태 일원화.
+
+13) UI Thread vs Worker Thread
+
+UI(Main): 렌더/입력; 블로킹 금지.
+
+Worker: I/O/CPU. 코루틴 Dispatchers.IO/Default 사용.
+
+14) OpenGL ES로 2D/3D 구현
+
+GLSurfaceView/Renderer 구성 → 셰이더 로드/컴파일 → VBO/IBO로 그리기.
+
+2D는 오쏘(orthographic), 3D는 투영/뷰 행렬 구성.
+
+15) ProGuard/R8 난독화
+
+R8 기본 활성화 + 필요 클래스 -keep 규칙(리플렉션/직렬화 대상).
+
+맵 파일 보관, Crashlytics와 연동해 역변환.
+
+Android TV
+16) Leanback 라이브러리 역할
+
+TV 최적화 UI(카드/행/브라우징)와 리모컨 네비게이션 기본 제공.
+
+17) DPAD 네비 구현
+
+포커스 이동 규칙(nextFocus…), 포커서블 최소화, 초점 뷰 명확화(스케일/글로우).
+
+18) VideoView vs ExoPlayer (TV)
+
+ExoPlayer 권장: 스트리밍 적합(HLS/DASH), DRM/어댑티브/자막/광고 확장.
+
+19) TV에서 포커스 배치 요령
+
+그리드/행 단위로 예측 가능한 이동, 초점 손실 방지, 포커스 트랩 금지.
+
+20) OTT 구축 고려사항
+
+CDN/어댑티브 스트리밍, DRM, 자막/오디오 트랙, 재생 품질 정책, 재개 시점 북마크, 리모컨 UX.
+
+21) Adaptive Streaming 활용
+
+HLS/DASH + ABR(네트워크/버퍼 기반 비트레이트 적응), ExoPlayer TrackSelector 튜닝.
+
+22) DRM이 중요한 이유
+
+콘텐츠 보호(라이선스·키 관리), Widevine/PlayReady 등 스킴 지원 필요.
+
+23) Google Cast API 활용
+
+Sender(모바일/웹) ↔ Receiver(TV 앱) 간 미디어 전송/제어, 세컨드스크린 UX.
+
+24) Leanback Showcase 활용
+
+TV UI 패턴/샘플 집합. 브라우징/검색/플레이백 화면 템플릿 참고.
+
+25) KeyEvent로 입력 처리
+
+DPAD/미디어 키 핸들링(onKeyDown/onKeyUp), 포커스 상태 기반 액션 분기.
+
+26) Fire TV vs Android TV
+
+둘 다 Android 기반이지만 스토어/인증/리모컨 키 차이, DRM/앱 제출 정책 상이. 일부 API/Intent 차이 확인 필요.
+
+실전 스니펫 / 베스트 프랙티스
+combine + retry/catch 예시
+
+kotlin
+복사
+편집
+val ui = combine(repo.user(), settings.theme()) { u, t -> Ui(u, t) }
+  .retry(3) { e -> e is IOException }
+  .catch { emit(Ui.empty()) }
+  .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), Ui.empty())
+Paging3 with RemoteMediator 요약
+
+kotlin
+복사
+편집
+val pager = Pager(
+  config = PagingConfig(pageSize = 30, enablePlaceholders = false),
+  remoteMediator = MyMediator(api, db),
+  pagingSourceFactory = { db.dao().paging() }
+).flow.cachedIn(viewModelScope)
+Foreground Service + 코루틴
+
+kotlin
+복사
+편집
+class TrackService: LifecycleService() {
+  private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+  override fun onCreate() {
+    startForeground(NOTI_ID, notification())
+    scope.launch { tracker.run() }
+  }
+  override fun onDestroy() { scope.cancel() }
+}
+BLE 스캔 요약 (권한 생략)
+
+kotlin
+복사
+편집
+val scanner = BluetoothAdapter.getDefaultAdapter().bluetoothLeScanner
+val cb = object: ScanCallback() { override fun onScanResult(c,i){ /* ... */ } }
+scanner.startScan(null, ScanSettings.Builder().build(), cb)
 
 
-- Kotlin에서 coroutineScope와 supervisorScope의 내부적인 동작 차이는?
-- Kotlin에서 다중 모듈 프로젝트를 효율적으로 구성하는 방법은?
-- Kotlin에서 Dependency Injection(DI)을 적용할 때 Koin과 Hilt의 차이점은?
-- Kotlin에서 JUnit5와 MockK를 활용한 단위 테스트 전략은?
-- Kotlin에서 비동기 네트워크 요청을 최적화하는 방법은?
-- Kotlin의 Coroutines과 RxJava의 차이점 및 선택 기준은?
-- Kotlin에서 Dagger-Hilt와 Koin을 함께 사용할 때의 장점과 단점은?
-- Kotlin의 Multiplatform 프로젝트에서 Coroutines을 활용하는 방법은?
-- Kotlin에서 Jetpack Compose와 Coroutines을 함께 사용할 때 고려해야 할 점은?
-- Kotlin에서 GraphQL API를 활용할 때 최적화하는 방법은?
-- Kotlin에서 Room Database와 Coroutines을 함께 사용할 때의 주의점은?
-- Kotlin에서 Paging 3 라이브러리를 활용한 비동기 데이터 로딩 방식은?
-- Kotlin의 KMM(Kotlin Multiplatform Mobile)에서 네트워크 요청을 처리하는 방법은?
-- Kotlin에서 DI 프레임워크 없이 Factory 패턴을 활용한 객체 관리는 어떻게 하는가?
-- Kotlin에서 Retrofit과 Coroutines을 함께 사용할 때의 베스트 프랙티스는?
-- Kotlin에서 JSON Parsing을 최적화하는 방법은?
-- Kotlin에서 Domain Layer와 Data Layer를 분리할 때의 원칙은?
-- Kotlin의 Anvil을 활용한 DI 성능 최적화 방법은?
-- Kotlin에서 ViewModelScope를 사용할 때 발생할 수 있는 문제는?
-- Kotlin에서 Singleton 객체를 Thread-Safe하게 생성하는 방법은?
-- Kotlin의 Anvil을 사용한 Dependency Injection의 성능 최적화 방법은?
+1) Leanback Components로 UI 최적화
+핵심 컴포넌트: BrowseSupportFragment, RowsSupportFragment, DetailsSupportFragment, PlaybackSupportFragment, SearchSupportFragment.
 
+최적화 포인트
 
-- Kotlin 1.9에서 새롭게 추가된 기능과 성능 최적화 요소는?
-- Kotlin의 Compiler Plugin을 활용하여 코드 최적화를 수행하는 방법은?
-- Kotlin에서 JIT과 AOT의 차이점과 각각의 활용 사례는?
-- Kotlin에서 JetBrains의 Ktor를 활용한 비동기 웹 서버 구축 방법은?
-- Kotlin에서 새로운 Concurrent Garbage Collector의 장점과 활용 방안은?
-- Kotlin의 최신 정적 분석 도구(Detekt, Ktlint)를 활용하는 방법은?
-- Kotlin에서 Memory Leak을 방지하는 패턴은?
-- Kotlin의 Context Receivers 기능이 필요한 이유는?
-- Kotlin에서 Native Image를 활용한 성능 최적화 방법은?
-- Kotlin에서 Compiler Intrinsics을 활용한 성능 최적화 기법은?
-- Kotlin과 Java의 주요 차이점은 무엇인가?
-- CoroutineScope를 올바르게 관리하는 방법은?
-- Coroutine의 Structured Concurrency란 무엇이며, 왜 중요한가?
-- GlobalScope를 사용하면 안 되는 이유는?
-- Kotlin에서 copy() 메서드를 사용하는 이유는?
-- Kotlin에서 object expression과 object declaration의 차이점은?
-- Kotlin에서 sealed interface를 활용하는 방법은?
-- Kotlin에서 break, continue, return의 차이점은?
-- Kotlin의 context receivers 기능을 설명하시오.
-- Kotlin에서 nullable 타입과 !! 연산자를 사용할 때 주의할 점은?
-- Kotlin에서 @JvmStatic, @JvmOverloads, @JvmField 어노테이션의 역할은?
-- Kotlin에서 is 키워드와 as 키워드의 차이점은?
-- Kotlin에서 Collection과 Sequence의 차이점은?
+카드 재사용: Presenter/PresenterSelector로 View 생성 최소화.
 
+비동기 썸네일: Glide/Coil + 썸네일 프리로드.
 
-- Kotlin에서 vararg를 사용한 함수 호출 시 배열을 전달하는 방법은?
-- Kotlin에서 Enum class를 활용한 안전한 상태 관리는 어떻게 하는가?
-- Kotlin에서 builder pattern을 활용하여 객체를 생성하는 방법은?
-- Kotlin에서 inline class의 개념과 사용 예제는?
-- Kotlin에서 suspend 함수와 일반 함수의 차이점은?
-- Kotlin에서 context receivers가 도입된 이유는?
-- Kotlin에서 JvmInline을 사용하는 이유는?
-- Kotlin에서 contract API가 무엇이며, 어떻게 활용하는가?
-- Kotlin의 reified 키워드가 동작하는 원리를 설명하시오.
-- Kotlin의 sealed interface와 sealed class의 차이점 및 내부 구현 차이는?
-- Kotlin의 default parameter와 Java의 method overloading 차이점은?
-- Kotlin에서 String interpolation이 내부적으로 어떻게 최적화되는가?
-- Kotlin의 메모리 관리 방식과 Java의 GC(Garbage Collector) 차이점은?
-- Kotlin에서 가변 객체(mutable object)의 성능 최적화 방법은?
-- Kotlin에서 immutable 객체를 구현하는 방법과 효과적인 활용 사례는?
-- Kotlin의 escape analysis가 어떻게 동작하는지 설명하시오.
-- Kotlin의 inline function이 내부적으로 어떻게 동작하는가?
-- Kotlin에서 tail recursion이 동작하는 방식을 설명하시오.
+DiffUtil + Paging3: 대용량 행(ROW)도 부드럽게.
 
+Focus 힌트: 첫 포커스, 다음/이전 포커스 명시.
 
-- Kotlin에서 builder pattern을 DSL로 구현하는 방법은?
-- Kotlin에서 type inference의 원리와 활용 방법은?
-- Kotlin에서 spread operator(*)의 활용 방법은?
-- Kotlin에서 tail recursion 최적화 기법을 설명하시오.
-- Kotlin에서 Map을 destructuring하여 사용하는 방법은?
-- Kotlin에서 bitwise operations을 수행하는 방법은?
-- Kotlin에서 dynamic 키워드를 사용할 수 없는 이유는?
-- Kotlin에서 KProperty와 Reflection API를 활용하는 방법은?
-- Kotlin에서 @DslMarker 어노테이션을 사용하는 이유는?
-- Kotlin에서 LazyThreadSafetyMode의 옵션들과 차이점은?
-- Kotlin에서 CoroutineContext와 Job의 관계는?
-- Kotlin에서 JvmStatic과 JvmOverloads를 활용하는 방법은?
-- Kotlin에서 @OptIn 어노테이션을 사용하는 이유는?
-- Kotlin Coroutines의 핵심 개념은?
-- suspend 함수란 무엇이며, 일반 함수와의 차이점은?
-- Kotlin Coroutines에서 테스트를 수행하는 방법은?
-- ViewModelScope를 활용하여 네트워크 요청을 수행하는 방법은?
-- Retrofit과 Coroutines을 함께 사용할 때의 장점은?
-- Room Database에서 Coroutines을 사용하는 이유는?
-- Android에서 LiveData와 StateFlow를 함께 사용할 때의 고려사항은?
-- WorkManager와 Coroutines을 함께 사용할 때의 주의점은?
-- MutableSharedFlow에서 replay 옵션을 설정하는 이유는?
-- StateFlow에서 초기 값을 설정해야 하는 이유는?
-- yield() 함수의 역할은?
-- cancel()을 호출한 후에도 코루틴이 종료되지 않는 이유는?
+스니펫
 
+kotlin
+복사
+편집
+class CardPresenter: Presenter() { /* create/bindViewHolder with image preloading */ }
+val rowsAdapter = ArrayObjectAdapter(ListRowPresenter()).apply {
+  add(ListRow(HeaderItem("Trending"), ArrayObjectAdapter(CardPresenter()).apply { addAll(0, items) }))
+}
+2) Android TV 홈 화면 커스터마이징
+Channels & Programs(Oreo+): TvContractCompat로 앱 채널 생성, 에피소드/프로그램 카드 공급.
 
-- ensureActive() 함수의 역할은?
-- select {} 블록을 활용하여 여러 채널을 동시에 처리하는 방법은?
-- produce {}와 consumeEach {}의 차이점은?
-- Mutex와 Atomic을 활용한 동시성 문제 해결 방법은?
-- Android에서 코루틴을 활용한 백그라운드 작업 최적화 방법은?
-- CoroutineContext의 구성 요소는?
-- withContext()와 async-await의 차이점은?
-- Dispatchers.IO, Dispatchers.Main, Dispatchers.Default의 차이점은?
-- runBlocking을 사용하는 것이 위험한 이유는?
-- Kotlin Coroutines에서 Structured Concurrency란?
-- CoroutineExceptionHandler의 역할은?
-- Paging 3 라이브러리에서 Flow를 활용하는 방법은?
-- Android에서 네트워크 요청 중간에 코루틴을 취소하는 방법은?
-- 코루틴이 과도하게 생성되었을 때 발생할 수 있는 문제는?
-- Kotlin에서 Coroutines을 활용한 효율적인 병렬 처리 방법은?
-- Kotlin에서 Job과 Deferred를 활용한 작업 스케줄링 방법은?
-- Android에서 Flow를 활용한 실시간 데이터 처리 방법은?
-- 코루틴을 활용한 이벤트 기반 아키텍처 설계 방법은?
-- Coroutines에서 CoroutineScope를 올바르게 관리하는 방법은?
-- Coroutines에서 Flow.collectLatest()를 활용한 최신 데이터 유지 방법은?
-- Kotlin에서 StateFlow와 LiveData를 변환하는 방법은?
-- Android에서 Jetpack Compose와 Coroutines을 함께 사용하는 방법은?
-- Kotlin Coroutines을 활용한 Custom Thread Pool 구성 방법은?
-- 코루틴에서 예외 처리를 효과적으로 수행하는 방법은?
+추천/재개 컨텐츠 노출: 시청 이력 → Channel에 업데이트(사용자 동의/권한).
 
+브랜드 일관성: 채널 로고/색상, 짧은 설명과 고해상도 아트 제공.
 
-- Kotlin Coroutines과 Kotlin Multiplatform(KMP)에서의 활용 방법은?
-- combine() 연산자를 활용한 데이터 스트림 결합 방법은?
-- retry()와 catch() 연산자의 차이점은?
-- Android에서 Splash Screen을 구현하는 올바른 방법
-- Android에서 ViewModel을 사용하여 데이터 저장을 최적화하는 방법
-- Android에서 Jetpack Paging을 활용하여 대용량 데이터 처리하는 방법
-- Android에서 App Bundle과 APK의 차이점
-- Android에서 Livedata와 StateFlow 중 어떤 경우에 StateFlow를 선택하는 것이 좋은
-- Android에서 Foreground Service를 활용하여 지속적인 작업을 수행하는 방법
-- Android에서 Bluetooth LE를 사용하는 방법
-- Android에서 Jetpack WorkManager와 Foreground Service의 차이점
-- Android에서 Jetpack Paging을 사용하는 이유
-- Android에서 UI Thread와 Worker Thread의 차이점
-- Android에서 OpenGL ES를 활용하여 2D 및 3D 그래픽을 구현하는 방법
-- Android에서 ProGuard를 활용한 코드 난독화 방법
-- Android TV 앱 개발 시 Leanback 라이브러리의 역할
-- Android TV 앱에서 DPAD 네비게이션을 구현하는 방법
-- Android TV에서 VideoView와 ExoPlayer 중 어떤 것을 선택하는 것이 좋은
-- Android TV에서 Focusable 요소를 적절하게 배치하는 방법
-- Android TV에서 OTT 서비스를 구축할 때 고려해야 할 사항
-- Android TV에서 Adaptive Streaming을 활용하는 방법
-- Android TV에서 DRM(Digital Rights Management)이 중요한 이유
-- Android TV에서 Google Cast API를 활용하는 방법
-- Android TV에서 Leanback Showcase를 활용하는 방법
-- Android TV에서 KeyEvent를 활용하여 사용자 입력을 처리하는 방법
-- Android TV에서 Fire TV와 Android TV의 차이점
+3) A/B 테스트
+원격 설정: Firebase Remote Config/Experiment(머신러닝 분배) → 레이아웃/행 순서/배지 노출 실험.
 
+측정: Firebase Analytics 커스텀 이벤트 + retention/watch time 지표.
 
-- Android TV에서 UI 최적화를 위해 Leanback Components를 활용하는 방법
-- Android TV에서 홈 화면을 커스터마이징하는 방법
-- Android TV에서 A/B 테스트를 수행하는 방법
-- Android TV에서 Voice Input을 적용하는 방법
-- Android TV에서 ExoPlayer를 활용한 재생 목록 구현 방법
-- Android TV에서 OTT 앱을 개발할 때 UX 디자인 원칙
-- Android TV에서 Fire TV Stick에서 동작하는 앱을 개발하는 방법
-- Android TV에서 Android TV Input Framework(TIF)의 역할
-- Android TV에서 Low Latency Mode를 구현하는 방법
-- Android TV에서 In-App Purchase를 구현하는 방법
-- Android TV에서 Fragment를 활용하여 Leanback UI를 구성하는 방법
-- Android TV에서 Live TV 앱을 개발하는 방법
-- Android TV에서 TV Remote Control API를 활용하는 방법
-- Android TV에서 Google TV와 기존 Android TV의 차이점
-- Android TV에서 HDR 콘텐츠를 재생하는 방법
-- Android TV에서 ExoPlayer의 Cache 기능을 활용하는 방법
-- Android TV에서 HLS와 DASH 스트리밍의 차이점
-- Android TV에서 Real-time Analytics를 적용하는 방법
-- Android TV에서 OTT 서비스의 광고 삽입(Ad Insertion) 방법
-- Android TV에서 Data Saver Mode를 적용하는 방법
-- Android TV에서 UX 성능 최적화를 위한 권장 사항
-- Android TV에서 4K와 8K 콘텐츠를 지원하는 방법
-- Android TV에서 Google Assistant를 통합하는 방법
-- Android TV에서 Low Latency Streaming을 구현하는 방법
-- Android TV에서 동적 콘텐츠 추천을 구현하는 방법
-- Android TV에서 앱 크기를 최적화하는 방법
-- Android TV에서 Firebase Analytics를 활용하는 방법
-- Android TV에서 Voice Search 기능을 구현하는 방법
+4) Voice Input 적용
+SpeechRecognizer 또는 Leanback SearchSupportFragment + 음성 인텐트.
 
+Google Assistant 딥링크/앱 액션: BII(Media) 매핑(“Play [title] on [app]”).
 
-- Android TV에서 ExoPlayer의 Offline Download 기능을 활용하는 방법
-- Android TV에서 TV 앱에서의 사용자 경험(UX)을 향상시키는 방법
-- Android TV에서 ML 모델을 활용한 추천 시스템을 구축하는 방법
-- Android TV에서 Custom Leanback Fragment를 구현하는 방법
-- Android TV에서 VOD와 Live Streaming의 차이점
-- Android TV에서 Play Billing Library를 활용하여 결제 기능을 구현하는 방법
-- Android TV에서 OTT 서비스의 콘텐츠 보안 정책
-- Android TV에서 프레임 속도 최적화를 수행하는 방법
-- Android TV에서 Dynamic UI Elements를 활용하는 방법
-- Android TV에서 Leanback Extensions의 활용 방법
-- Android TV에서 Push Notification을 적용하는 방법
+마이크 권한 및 TV 리모컨 VOICE 키 처리.
+
+5) ExoPlayer 재생 목록(Playlist)
+ConcatenatingMediaSource 또는 ConcatenatingMediaItem.
+
+kotlin
+복사
+편집
+val player = ExoPlayer.Builder(ctx).build()
+val items = listOf(url1, url2).map { MediaItem.fromUri(it) }
+player.setMediaItems(items); player.prepare(); player.play()
+Auto-advance, 프리캐시, 이어보기(bookmark) 저장.
+
+6) OTT UX 디자인 원칙 (TV)
+10-feet UI: 큰 타이포, 카드 간 넉넉한 간격, 명확한 포커스 상태.
+
+행(Row) 기반 탐색: 최근 본/추천/장르/내 리스트.
+
+최소 입력: DPAD 5키로 완주 가능, 텍스트 입력 최소화(음성/QR).
+
+재생 화면: 간결한 OSD, 자막/오디오 트랙/품질 메뉴 접근 2스텝 이내.
+
+7) Fire TV Stick 대응
+Android TV와 유사하나 스토어/권한/리모컨 키 차이 점검.
+
+In-App Purchase는 Amazon IAP(대체 계층) 사용.
+
+Widevine L1/HDCP 정책 확인(디바이스 별 DRM 능력 상이).
+
+8) TIF(Android TV Input Framework)
+Live TV 소스 제공 프레임워크: 채널/프로그램/EPG/시청을 시스템 Live TV 앱과 통합.
+
+DVB/IPTV/OTT Live 채널 구현 시 사용.
+
+9) Low Latency Mode
+ExoPlayer: Low-latency HLS/DASH(PART/HOLD-BACK 파라미터), 작은 버퍼, 빠른 시킹.
+
+Surface/VideoPipeline 튜닝: setSeekParameters(SeekParameters.CLOSEST_SYNC) 등.
+
+10) In-App Purchase (TV)
+Google Play Billing v6 + Leanback UI: 구매 흐름을 DPAD 친화적으로(큰 버튼, 최소 단계).
+
+구독/일회성 상품, 테스트 카드/테스트 계정 구성.
+
+11) Fragment로 Leanback 구성
+컨테이너 Activity + BrowseSupportFragment로 홈, DetailsSupportFragment로 상세, PlaybackSupportFragment로 재생.
+
+공유 ViewModel로 데이터 공급, ArrayObjectAdapter 갱신은 Diff 반영.
+
+12) Live TV 앱 개발
+TIF + Session 구현 → 채널 스캔/EPG/시청.
+
+DRM/CAS(Conditional Access), Timeshift(일시정지/되감기) 지원 고려.
+
+13) TV Remote Control API
+DPAD/미디어 키 처리(onKeyDown), MediaSession + PlaybackStateCompat로 표준 제어/락스크린 동기화.
+
+14) Google TV vs 기존 Android TV
+홈 피드/추천 UI가 Google 서비스 융합(탐색 탭, 집계 추천).
+
+기능 동일하게 동작하되 채널/추천 품질이 더 중요.
+
+15) HDR 재생
+트랙 선택 시 Format.colorInfo 점검, MediaCodec/하드웨어가 HDR10/HLG/Dolby Vision 지원인지 체크.
+
+UI에 HDR 배지 표시, SDR fallback 준비.
+
+16) ExoPlayer Cache
+SimpleCache(on-disk) + CacheDataSource.Factory.
+
+kotlin
+복사
+편집
+val cache = SimpleCache(dir, NoOpCacheEvictor(), db)
+val ds = DefaultDataSource.Factory(ctx)
+val cacheDs = CacheDataSource.Factory().setCache(cache).setUpstreamDataSourceFactory(ds)
+예열(Precache)로 첫 프레임 속도 개선, 데이터 절감.
+
+17) HLS vs DASH
+HLS: 광범위 지원, CMAF LL-HLS로 저지연.
+
+DASH: MPEG 표준, 적응형/자막/멀티트랙 유연. 디바이스/DRM 호환성 고려.
+
+18) Real-time Analytics
+시청 시작/중단/시킹/버퍼링 이벤트를 전송 배치(debounce) 후 업로드.
+
+Firebase Analytics + BigQuery, 혹은 Segment/Amplitude.
+
+19) 광고 삽입(Ad Insertion)
+Client-side: IMA SDK + 광고 큐브레이크.
+
+Server-side(SSAI): 매니페스트 스티칭(광고 우회 방지, 일관 품질). 측정/비콘 동기 중요.
+
+20) Data Saver Mode 적용
+네트워크 상태/모드 감지 후 낮은 비트레이트/짧은 버퍼/썸네일 품질 저하.
+
+사용자 옵션 제공(자동/데이터 절약/고화질).
+
+21) UX 성능 최적화 권장사항
+첫 화면 1초 내 콘텐츠 노출(스켈레톤/플레이스홀더).
+
+이미지: WebP/AVIF, 다이내믹 사이즈 로딩.
+
+GC 압박 줄이기: Presenter 재사용, 큰 리스트는 Paging.
+
+22) 4K/8K 지원
+디바이스 해상도/코덱/DRM 능력 확인(CodecCapabilities).
+
+HEVC/AV1 우선, 네트워크 적응(ABR) 범위 확장, UI 리소스도 고해상도 제공.
+
+23) Google Assistant 통합
+Media BII(Action schema) 매핑, App Actions/Deep Link → 재생/검색 인텐트 처리.
+
+음성 검색 결과로 앱 내 상세/재생 딥링크.
+
+24) Low-Latency Streaming 구현
+CMAF + chunked transfer(HLS/DASH LL), 최소 세그먼트, 작은 bufferForPlaybackMs.
+
+네트워크 품질 나쁠 때 자동 ABR 하향.
+
+25) 동적 콘텐츠 추천
+시청 히스토리 + 협업 필터링/콘텐츠 기반 추천 → 홈 채널 업데이트.
+
+실시간 반영: 시청 종료 시 채널 카드 교체(백그라운드 Worker).
+
+26) 앱 크기 최적화
+App Bundle + split ABI/언어, WebP/Vector, 리소스 축소, R8/리소스 난독화, Dynamic Feature로 기능 분리.
+
+27) Firebase Analytics 활용
+TV에 특화된 이벤트(행 이동, 포커스 dwell time, 재생/정지, 버퍼링) 정의.
+
+setUserProperty로 화질/DRM/디바이스군 구분, Funnel/Retention 분석.
+
+28) Voice Search 구현
+Leanback SearchSupportFragment + SpeechRecognizer 연동.
+
+콘텐츠 인덱싱(앱 내 검색) + Assistant 딥링크로 검색→상세/재생로 직행.
+
+보너스: 최소 실행 예시 조합
+Leanback + Paging + ExoPlayer 캐시(구조 요약)
+
+kotlin
+복사
+편집
+class TvHomeFragment: BrowseSupportFragment() {
+  private val rows = ArrayObjectAdapter(ListRowPresenter())
+  private val vm: HomeViewModel by viewModels()
+
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    adapter = rows
+    observeRows()
+  }
+  private fun observeRows() = lifecycleScope.launchWhenStarted {
+    vm.rows.collect { sections ->
+      rows.setItems(sections.map { (title, items) ->
+        ListRow(HeaderItem(title), ArrayObjectAdapter(CardPresenter()).apply { addAll(0, items) })
+      }, null)
+    }
+  }
+}
+
+1) ExoPlayer 오프라인 다운로드(Offline) 활용
+구성요소
+
+DownloadService + DownloadManager + DownloaderFactory(SimpleCache + CacheDataSource).
+
+MediaItem.RequestMetadata/MediaItem.LocalConfiguration로 로컬 재생 연결.
+
+설정 스니펫
+
+kotlin
+복사
+편집
+// Cache
+val cache = SimpleCache(cacheDir, NoOpCacheEvictor(), StandaloneDatabaseProvider(ctx))
+val upstream = DefaultHttpDataSource.Factory()
+val factory = CacheDataSource.Factory().setCache(cache).setUpstreamDataSourceFactory(upstream)
+
+// DownloadManager
+val downloader = DefaultDownloaderFactory(factory)
+val dm = DownloadManager(ctx, StandaloneDatabaseProvider(ctx), cache, downloader)
+
+// Service (AndroidManifest에 포그라운드 서비스 등록)
+class TvDownloadService : DownloadService(
+  FOREGROUND_NOTIFICATION_ID, DEFAULT_FOREGROUND_NOTIFICATION_UPDATE_INTERVAL,
+  "download_channel", R.string.download_channel_name
+) {
+  override fun getDownloadManager() = dm
+  override fun getForegroundNotification(taskStates: Array<DownloadManager.TaskState>) =
+    DownloadNotificationHelper(ctx, "download_channel")
+      .buildProgressNotification(ctx, R.drawable.ic_noti, null, null, taskStates)
+}
+
+// 요청
+val req = DownloadRequest.Builder("id-ep1", Uri.parse(urlHlsOrDash))
+  .setMimeType(MimeTypes.APPLICATION_M3U8) // 혹은 DASH
+  .build()
+DownloadService.sendAddDownload(ctx, TvDownloadService::class.java, req, false)
+주의: DRM(오프라인 키 허용), 저장 용량/네트워크 정책, 재생 시 CacheDataSource 우선.
+
+2) TV UX 향상 방법
+10ft UI: 큰 카드/타이포, 포커스 시 확실한 강조(스케일/글로우/쉐도).
+
+최소 입력: DPAD 5키로 모든 흐름 가능, 음성 검색/QR 로그인 제공.
+
+빠른 첫 노출: 스켈레톤/프리패치(썸네일·메타) + 최근 시청 이어보기 첫 행 고정.
+
+일관 제스처: 장기 누름(Long press) 옵션, 백키 행동 예측 가능.
+
+3) ML 추천 시스템(온디바이스/서버 하이브리드)
+수집: 시청/중단/시킹/장르 체류시간 등 이벤트 → 서버(실시간 스트림) + 디바이스 캐시.
+
+모델: 서버(협업 필터링/시퀀스 모델) + 온디바이스(경량 TF Lite, 마지막 n개 상호작용 재정렬).
+
+전달: 홈 채널(Channels API) & 앱 내부 섹션 업데이트.
+
+A/B: Remote Config로 모델/피처 토글, CTR·WatchTime·Completion으로 평가.
+
+4) Custom Leanback Fragment 구현
+BrowseSupportFragment 확장 + ListRowPresenter 커스터마이즈.
+
+Presenter/PresenterSelector로 카드 외관/포커스 애니메이션 제어.
+
+kotlin
+복사
+편집
+class HomeFragment: BrowseSupportFragment() {
+  private val rows = ArrayObjectAdapter(ListRowPresenter().apply {
+    shadowEnabled = false; selectEffectEnabled = true
+  })
+  override fun onActivityCreated(s: Bundle?) {
+    super.onActivityCreated(s); adapter = rows; buildRows()
+  }
+  private fun buildRows() {
+    val cardPresenter = CardPresenter()
+    rows.add(ListRow(HeaderItem("Continue"), ArrayObjectAdapter(cardPresenter).apply { addAll(0, items) }))
+  }
+}
+5) VOD vs Live Streaming 차이
+VOD: 구간 탐색/책갈피/광고 스케줄 고정, 캐시 효과 큼, ABR 안정.
+
+Live: 낮은 지연·채널 전환 속도 중요, EPG/타임시프트, LL-HLS/DASH, SSAI 권장.
+
+6) Play Billing(결제) 구현
+라이브러리: BillingClient v6, DPAD 친화 UI(큰 버튼/단순 플로우).
+
+플로우
+
+BillingClient.startConnection
+
+queryProductDetailsAsync()
+
+BillingFlowParams로 launchBillingFlow()
+
+서버 영수증 검증(백엔드).
+
+TV UX: 재입력 최소화(계정 연동/웹 결제 핸드오프 옵션).
+
+7) OTT 콘텐츠 보안 정책
+DRM: Widevine(L1)·PlayReady, HDCP 준수, 오프라인 키 정책.
+
+Anti-tamper: SafetyNet/Play Integrity, 리크 방지(스크린샷/HDMI 출력 정책).
+
+토큰/권한: URL 서명 만료, 키 로테이션, 도메인 제한(CORS/Referrer).
+
+8) 프레임 속도 최적화
+ABR 튜닝: 초기 버퍼/스타트업 비트레이트 보수적.
+
+렌더: 백그라운드 썸네일 디코드, UI 스레드 최소 작업, 이미지 사이즈 정확 로딩.
+
+Exo: setVideoScalingMode, setSeekParameters, Surface 유지(액티비티 전환 중 재생 유지).
+
+9) Dynamic UI Elements
+Row 동적 구성: Remote Config/추천 결과에 따라 섹션 on/off.
+
+실시간 배지: 신규/인기/시청 중 표시(메타 기반), ObjectAdapter diff 적용.
+
+칼라 모드: HDR/SDR, 테마 전환 시 카드 즉시 재바인딩.
+
+10) Leanback Extensions 활용
+PlaybackGlue/Leanback Player Adapter로 플레이백 컨트롤 UI 표준화.
+
+FullWidthDetailsOverviewRowPresenter로 상세 페이지 액션(즐겨찾기, 구매) 일관.
+
+11) Push Notification 적용
+FCM + TV 채널 업데이트/신규 에피소드 알림 → 클릭 시 딥링크로 상세/재생.
+
+전략: 야간 방해 금지, 과도 발송 금지(언섭스크라이브/주기 설정 제공).
+
+추가 스니펫 모음
+ExoPlayer + Cache 재생 파이프라인
+
+kotlin
+복사
+편집
+val player = ExoPlayer.Builder(ctx)
+  .setMediaSourceFactory(DefaultMediaSourceFactory(CacheDataSource.Factory().setCache(cache).setUpstreamDataSourceFactory(upstream)))
+  .build()
+player.setMediaItem(MediaItem.fromUri(uriOrLocal)); player.prepare(); player.playWhenReady = true
+Remote Config로 행 노출 제어
+
+kotlin
+복사
+편집
+val showTrending = remoteConfig.getBoolean("show_trending")
+if (showTrending) rows.add(buildTrendingRow())
+추천 결과 반영 (Flow)
+
+kotlin
+복사
+편집
+lifecycleScope.launch {
+  recommendationsFlow.collect { sections ->
+    rows.setItems(sections.map { toListRow(it) }, DiffUtilCallback())
+  }
+}
+Billing 구매 플로우 요약
+
+kotlin
+복사
+편집
+val product = ProductDetailsUtils.find(detailsList, "premium_month")
+val params = BillingFlowParams.newBuilder()
+  .setProductDetailsParamsList(listOf(BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(product).build()))
+  .build()
+billingClient.launchBillingFlow(activity, params)
