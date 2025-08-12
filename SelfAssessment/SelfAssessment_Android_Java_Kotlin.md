@@ -16492,7 +16492,11 @@ enum 활용과 장점
         - Map 기반 위임(by map)
     - 장점: 중복 코드 제거, 재사용성 향상.
 
-- Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)에 대해 설명해주세요.
+- Kotlin의 Coroutine 내부 동작 원리(Continuation, Dispatcher 등)
+    - Continuation: suspend 함수는 컴파일 시 상태머신으로 변환, 호출이 중단되면 상태 + 실행 위치를 Continuation 객체에 저장 후 리턴, 재개 시 저장된 상태로 복원.
+    
+    - Dispatcher: 코루틴이 실행될 스레드 풀/스레드 컨텍스트 결정. 예: Dispatchers.Main, Dispatchers.IO, Dispatchers.Default. 스케줄링은 ContinuationInterceptor 구현체로 동작.
+
 - Coroutine의 Structured Concurrency 개념에 대해 설명해주세요.
 - Coroutine의 Flow와 Channel의 차이점은 무엇인가요?
 - Coroutine의 Cancellation과 Exception Handling을 어떻게 구현하셨나요?
