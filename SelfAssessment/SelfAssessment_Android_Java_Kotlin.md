@@ -16497,12 +16497,10 @@ enum 활용과 장점
 
     - Dispatcher: 코루틴이 실행될 스레드 풀/스레드 컨텍스트 결정. 예: Dispatchers.Main, Dispatchers.IO, Dispatchers.Default. 스케줄링은 ContinuationInterceptor 구현체로 동작.
 
-2) Structured Concurrency
-코루틴을 계층 구조로 관리하여 부모-자식 관계에서 수명·취소 전파를 보장.
-
-CoroutineScope 내에서 실행된 Job은 scope가 취소되면 전부 함께 취소.
-
-장점: 누수 방지, 취소 일관성, 예외 전파 명확.
+- Structured Concurrency
+    - 코루틴을 계층 구조로 관리하여 부모-자식 관계에서 수명·취소 전파를 보장.
+    - CoroutineScope 내에서 실행된 Job은 scope가 취소되면 전부 함께 취소.
+    - 장점: 누수 방지, 취소 일관성, 예외 전파 명확.
 
 3) Flow vs Channel
 Flow: 콜드 스트림, 구독 시마다 새로 데이터 흐름 시작, 선언적 연산자 지원, 백프레셔 자동.
