@@ -16521,88 +16521,69 @@ enum 활용과 장점
     - AOT: 빌드 시 네이티브 코드 생성, 시작 속도 빠름, 런타임 최적화 제한.
     - Java 9+는 jaotc로 AOT 지원.
 
-7) VarHandle vs Atomic
-VarHandle: 필드·배열 요소·static 변수에 대해 volatile/원자적 연산 제공, 리플렉션보다 빠름.
+- VarHandle vs Atomic
+    - VarHandle: 필드·배열 요소·static 변수에 대해 volatile/원자적 연산 제공, 리플렉션보다 빠름.
+    - Atomic: AtomicInteger, AtomicReference 등 고수준 원자 클래스.
+    - VarHandle은 저수준 제어, Atomic은 단순 사용.
 
-Atomic: AtomicInteger, AtomicReference 등 고수준 원자 클래스.
+- JPMS(Java Module System)
+    - Java 9 도입, module-info.java로 모듈 경계·exports/requires 선언.
+    - 장점: 캡슐화 강화, 불필요한 패키지 노출 방지, JDK 모듈화.
 
-VarHandle은 저수준 제어, Atomic은 단순 사용.
+- Bytecode 조작 (ASM, ByteBuddy)
+    - ASM: 저수준 바이트코드 조작, 클래스/메서드 방문자 패턴.
+    - ByteBuddy: 고수준 API, 런타임 프록시·클래스 생성.
+    - 경험: 런타임 메서드 로깅 삽입, 테스트용 Mock 객체 동적 생성.
 
-8) JPMS(Java Module System)
-Java 9 도입, module-info.java로 모듈 경계·exports/requires 선언.
+- Type Alias vs Inline Class
+    - Type Alias: 새로운 타입 생성 아님, 기존 타입에 별칭 부여.
+    - Inline Class: 런타임에 래퍼 없이 값으로 최적화, 타입 안정성 확보.
 
-장점: 캡슐화 강화, 불필요한 패키지 노출 방지, JDK 모듈화.
+- Kotlin Contracts API
+    - 함수가 호출 후 조건을 만족할 때 컴파일러가 흐름 제어·스마트 캐스트 가능하게 힌트 제공.
+    - 예: null-check 유틸에서 “이 함수 호출 후 파라미터는 null 아님”을 보장.
 
-9) Bytecode 조작 (ASM, ByteBuddy)
-ASM: 저수준 바이트코드 조작, 클래스/메서드 방문자 패턴.
+- Kotlin Multiplatform 경험
+    - 공통 모듈에 비즈니스 로직, 플랫폼별 모듈(iOS/Android/JVM/JS)에서 UI/네이티브 연동.
+    - 경험: 공통 네트워크 모듈(Ktor), DB(SQLDelight)로 iOS+Android 동시 개발.
 
-ByteBuddy: 고수준 API, 런타임 프록시·클래스 생성.
+- Flow Backpressure 처리
+    - Flow는 suspending emit로 자동 처리, 필요 시 buffer, conflate, collectLatest로 속도 조절.
 
-경험: 런타임 메서드 로깅 삽입, 테스트용 Mock 객체 동적 생성.
+- StateFlow vs SharedFlow
+    - StateFlow: 상태 홀더, 항상 최신값 1개 보관, 초기값 필요, replay=1.
+    - SharedFlow: 이벤트 브로드캐스트, replay/buffer 자유 설정, 초기값 없음.
 
-10) Type Alias vs Inline Class
-Type Alias: 새로운 타입 생성 아님, 기존 타입에 별칭 부여.
+- Channel vs Actor
+    - Channel: 코루틴 간 데이터 전달 파이프.
+    - Actor: Channel + 처리 로직을 하나의 코루틴에 캡슐화.
 
-Inline Class: 런타임에 래퍼 없이 값으로 최적화, 타입 안정성 확보.
+- Compose State Hoisting
+    - 상태를 컴포저블 외부로 끌어올려 상위에서 관리, 하위는 UI만 담당.
+    - 장점: 재사용성, 테스트 용이, 단방향 데이터 흐름.
 
-11) Kotlin Contracts API
-함수가 호출 후 조건을 만족할 때 컴파일러가 흐름 제어·스마트 캐스트 가능하게 힌트 제공.
+- inline / noinline / crossinline
+    - inline: 호출부로 코드 인라인, 람다 객체 생성 회피.
+    - noinline: inline 함수 내에서도 인라인하지 않고 람다 객체로 유지.
+    - crossinline: 인라인하되 non-local return 금지.
 
-예) null-check 유틸에서 “이 함수 호출 후 파라미터는 null 아님”을 보장.
+- suspend 함수 vs CoroutineScope
+    - suspend: 중단 가능한 함수, CoroutineScope 필요 없이 호출 가능(단, suspend context).
+    - CoroutineScope: 코루틴 빌더 실행 컨텍스트, Job/Dispatcher 포함.
 
-12) Kotlin Multiplatform 경험
-공통 모듈에 비즈니스 로직, 플랫폼별 모듈(iOS/Android/JVM/JS)에서 UI/네이티브 연동.
+- Channel vs SharedFlow
+    - Channel: point-to-point(기본), 송신자가 버퍼 가득 차면 suspend.
+    - SharedFlow: multicast, 구독자 수 상관없이 브로드캐스트 가능, 버퍼 설정 가능.
 
-경험: 공통 네트워크 모듈(Ktor), DB(SQLDelight)로 iOS+Android 동시 개발.
+- remember vs rememberSaveable
+    - remember: recomposition 간 값 유지, 프로세스 재생성 시 소멸.
+    - rememberSaveable: Bundle/Parcel로 상태 저장 → 프로세스 재생성 시 복원.
+    - Best practice: 화면 회전, 프로세스 킬 대비가 필요하면 rememberSaveable.
 
-13) Flow Backpressure 처리
-Flow는 suspending emit로 자동 처리, 필요 시 buffer, conflate, collectLatest로 속도 조절.
-
-14) StateFlow vs SharedFlow
-StateFlow: 상태 홀더, 항상 최신값 1개 보관, 초기값 필요, replay=1.
-
-SharedFlow: 이벤트 브로드캐스트, replay/buffer 자유 설정, 초기값 없음.
-
-15) Channel vs Actor
-Channel: 코루틴 간 데이터 전달 파이프.
-
-Actor: Channel + 처리 로직을 하나의 코루틴에 캡슐화.
-
-16) Compose State Hoisting
-상태를 컴포저블 외부로 끌어올려 상위에서 관리, 하위는 UI만 담당.
-
-장점: 재사용성, 테스트 용이, 단방향 데이터 흐름.
-
-17) inline / noinline / crossinline
-inline: 호출부로 코드 인라인, 람다 객체 생성 회피.
-
-noinline: inline 함수 내에서도 인라인하지 않고 람다 객체로 유지.
-
-crossinline: 인라인하되 non-local return 금지.
-
-18) suspend 함수 vs CoroutineScope
-suspend: 중단 가능한 함수, CoroutineScope 필요 없이 호출 가능(단, suspend context).
-
-CoroutineScope: 코루틴 빌더 실행 컨텍스트, Job/Dispatcher 포함.
-
-19) Channel vs SharedFlow
-Channel: point-to-point(기본), 송신자가 버퍼 가득 차면 suspend.
-
-SharedFlow: multicast, 구독자 수 상관없이 브로드캐스트 가능, 버퍼 설정 가능.
-
-1) remember vs rememberSaveable
-remember: recomposition 간 값 유지, 프로세스 재생성 시 소멸.
-
-rememberSaveable: Bundle/Parcel로 상태 저장 → 프로세스 재생성 시 복원.
-
-Best practice: 화면 회전, 프로세스 킬 대비가 필요하면 rememberSaveable.
-
-2) CompositionLocal 사용 이유
-계층적 상태/값 전파(Theme, LocalContext, Locale).
-
-파라미터 전달 없이 하위 Composable에서 접근 가능.
-
-주의: 과도 사용 시 추적 어려움 → 전역 상태처럼 남용 금지.
+- CompositionLocal 사용 이유
+    - 계층적 상태/값 전파(Theme, LocalContext, Locale).
+    - 파라미터 전달 없이 하위 Composable에서 접근 가능.
+    - 주의: 과도 사용 시 추적 어려움 → 전역 상태처럼 남용 금지.
 
 3) LazyColumn vs RecyclerView
 LazyColumn: Compose 전용, 선언형, 아이템 수에 따라 필요한 UI만 Compose.
