@@ -16585,110 +16585,83 @@ enum 활용과 장점
     - 파라미터 전달 없이 하위 Composable에서 접근 가능.
     - 주의: 과도 사용 시 추적 어려움 → 전역 상태처럼 남용 금지.
 
-3) LazyColumn vs RecyclerView
-LazyColumn: Compose 전용, 선언형, 아이템 수에 따라 필요한 UI만 Compose.
+- LazyColumn vs RecyclerView
+    - LazyColumn: Compose 전용, 선언형, 아이템 수에 따라 필요한 UI만 Compose.
+    - RecyclerView: View 기반, Adapter/Holder 필요.
+    - LazyColumn 장점: Composable 재사용 용이, Adapter 코드 불필요.
 
-RecyclerView: View 기반, Adapter/Holder 필요.
+- Modifier 역할 & Best Practice
+    - UI 요소의 크기, 배치, 제스처, 배경 등 속성 조합.
+    - 불변 객체 → 순서 중요.
+    - Best practice: UI 스타일과 로직 분리, 재사용 가능하게 확장 함수화.
 
-LazyColumn 장점: Composable 재사용 용이, Adapter 코드 불필요.
+- WorkManager vs AlarmManager
+    - WorkManager: 지연/조건 기반 백그라운드 작업, OS 재부팅 후에도 실행 보장.
+    - AlarmManager: 정확한 시간에 작업 실행, 조건 설정 어려움, 배터리 최적화 영향 큼.
+    - WorkManager 권장 (API 레벨/제약 대응 자동).
 
-4) Modifier 역할 & Best Practice
-UI 요소의 크기, 배치, 제스처, 배경 등 속성 조합.
+- DataStore vs SharedPreferences
+    - DataStore: 비동기(Flow), 타입 안전(Proto), 트랜잭션 안전.
+    - SharedPreferences: 동기, UI 쓰레드 블로킹 위험.
+    - 권장: 신규는 DataStore.
 
-불변 객체 → 순서 중요.
+- Scoped Storage
+    - 앱별 전용 저장소 + 공유 미디어는 MediaStore API로 접근.
+    - 기존: 자유로운 외부 저장소 접근(File API).
+    - 장점: 보안 강화, 권한 최소화.
 
-Best practice: UI 스타일과 로직 분리, 재사용 가능하게 확장 함수화.
+- ViewBinding vs DataBinding
+    - ViewBinding: 타입 안전 findViewById 대체, 로직/데이터 결합 없음.
+    - DataBinding: 레이아웃에서 데이터 바인딩, 양방향 바인딩 가능, 표현식 사용.
+    - ViewBinding은 단순 뷰 참조, DataBinding은 MVVM에 적합.
 
-5) WorkManager vs AlarmManager
-WorkManager: 지연/조건 기반 백그라운드 작업, OS 재부팅 후에도 실행 보장.
+- CameraX 장점
+    - Camera API 단순화, LifecycleOwner 연동, 호환성 확보.
+    - UseCase 기반(Preview, ImageCapture, VideoCapture)로 코드 간결.
 
-AlarmManager: 정확한 시간에 작업 실행, 조건 설정 어려움, 배터리 최적화 영향 큼.
+- Activity Result API 활용
+    - registerForActivityResult + Contract (예: TakePicture, GetContent).
+    - onActivityResult 대체, Lifecycle 인식 → 메모리 누수 방지.
 
-WorkManager 권장 (API 레벨/제약 대응 자동).
+- LifecycleOwner & ViewModel 관계
+    - LifecycleOwner(Activity/Fragment) → ViewModelScope 생명주기 관리.
+    - ViewModel은 UI 생존 주기에 맞춰 데이터 유지.
 
-6) DataStore vs SharedPreferences
-DataStore: 비동기(Flow), 타입 안전(Proto), 트랜잭션 안전.
+- Hilt vs Koin
+    - Hilt: 컴파일 타임 DI(Dagger 기반), 어노테이션 프로세서 사용.
+    - Koin: 런타임 DI, DSL 기반, 빌드 속도 빠름.
+    - Hilt는 대규모, Koin은 소규모/빠른 개발에 적합.
 
-SharedPreferences: 동기, UI 쓰레드 블로킹 위험.
+- FCM vs OneSignal
+    - FCM: 무료, Google 공식, Android/iOS 지원, 커스터마이징 자유.
+    - OneSignal: 멀티 채널(푸시/SMS/이메일), 분석 대시보드, 비개발자 친화.
+    - 규모·커스터마이징 필요 시 FCM, 마케팅/분석 중심이면 OneSignal.
 
-권장: 신규는 DataStore.
+- ExoPlayer vs MediaPlayer
+    - ExoPlayer: 오픈소스, 스트리밍 최적화(DASH, HLS), 커스터마이징 강점.
+    - MediaPlayer: 표준 API, 간단 로컬/스트리밍 재생, 확장성 낮음.
 
-7) Scoped Storage
-앱별 전용 저장소 + 공유 미디어는 MediaStore API로 접근.
+- Jetpack Paging 3
+    - 대량 데이터 페이지 로딩 지원, Flow/LiveData 연동.
+    - PagingSource 정의 → Pager 생성 → UI에서 collectAsLazyPagingItems.
 
-기존: 자유로운 외부 저장소 접근(File API).
+- Jetpack Security
+    - 안전한 데이터 암호화 저장(EncryptedSharedPreferences, EncryptedFile).
+    - Android Keystore 기반.
 
-장점: 보안 강화, 권한 최소화.
+- MVVM 적용 방법
+    - Model: 데이터/비즈니스 로직.
+    - View: UI, 이벤트 전달.
+    - ViewModel: 상태/이벤트 처리, LiveData/StateFlow로 View와 연결.
 
-8) ViewBinding vs DataBinding
-ViewBinding: 타입 안전 findViewById 대체, 로직/데이터 결합 없음.
+- Navigation Component 사용 이유
+    - 타입 안전 네비게이션, 백스택 관리, 인자 전달 간편.
+    - Deep Link, Safe Args 지원.
 
-DataBinding: 레이아웃에서 데이터 바인딩, 양방향 바인딩 가능, 표현식 사용.
-
-ViewBinding은 단순 뷰 참조, DataBinding은 MVVM에 적합.
-
-9) CameraX 장점
-Camera API 단순화, LifecycleOwner 연동, 호환성 확보.
-
-UseCase 기반(Preview, ImageCapture, VideoCapture)로 코드 간결.
-
-10) Activity Result API 활용
-registerForActivityResult + Contract (예: TakePicture, GetContent).
-
-onActivityResult 대체, Lifecycle 인식 → 메모리 누수 방지.
-
-11) LifecycleOwner & ViewModel 관계
-LifecycleOwner(Activity/Fragment) → ViewModelScope 생명주기 관리.
-
-ViewModel은 UI 생존 주기에 맞춰 데이터 유지.
-
-12) Hilt vs Koin
-Hilt: 컴파일 타임 DI(Dagger 기반), 어노테이션 프로세서 사용.
-
-Koin: 런타임 DI, DSL 기반, 빌드 속도 빠름.
-
-Hilt는 대규모, Koin은 소규모/빠른 개발에 적합.
-
-13) FCM vs OneSignal
-FCM: 무료, Google 공식, Android/iOS 지원, 커스터마이징 자유.
-
-OneSignal: 멀티 채널(푸시/SMS/이메일), 분석 대시보드, 비개발자 친화.
-
-규모·커스터마이징 필요 시 FCM, 마케팅/분석 중심이면 OneSignal.
-
-14) ExoPlayer vs MediaPlayer
-ExoPlayer: 오픈소스, 스트리밍 최적화(DASH, HLS), 커스터마이징 강점.
-
-MediaPlayer: 표준 API, 간단 로컬/스트리밍 재생, 확장성 낮음.
-
-15) Jetpack Paging 3
-대량 데이터 페이지 로딩 지원, Flow/LiveData 연동.
-
-PagingSource 정의 → Pager 생성 → UI에서 collectAsLazyPagingItems.
-
-16) Jetpack Security
-안전한 데이터 암호화 저장(EncryptedSharedPreferences, EncryptedFile).
-
-Android Keystore 기반.
-
-17) MVVM 적용 방법
-Model: 데이터/비즈니스 로직.
-
-View: UI, 이벤트 전달.
-
-ViewModel: 상태/이벤트 처리, LiveData/StateFlow로 View와 연결.
-
-18) Navigation Component 사용 이유
-타입 안전 네비게이션, 백스택 관리, 인자 전달 간편.
-
-Deep Link, Safe Args 지원.
-
-19) Coroutine 비동기 처리
-viewModelScope.launch + suspend 함수로 I/O 비차단.
-
-Dispatcher로 실행 컨텍스트 분리(IO/Default/Main).
-
-Flow/Channel로 스트림 처리.
+- Coroutine 비동기 처리
+    - viewModelScope.launch + suspend 함수로 I/O 비차단.
+    - Dispatcher로 실행 컨텍스트 분리(IO/Default/Main).
+    - Flow/Channel로 스트림 처리.
 
 1) MutableLiveData vs StateFlow
 MutableLiveData: Lifecycle 인식, Observer 패턴, null 허용, 기본적으로 마지막 값만 유지, UI 구성요소에서 주로 사용.
