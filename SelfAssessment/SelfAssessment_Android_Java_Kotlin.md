@@ -16502,31 +16502,24 @@ enum 활용과 장점
     - CoroutineScope 내에서 실행된 Job은 scope가 취소되면 전부 함께 취소.
     - 장점: 누수 방지, 취소 일관성, 예외 전파 명확.
 
-3) Flow vs Channel
-Flow: 콜드 스트림, 구독 시마다 새로 데이터 흐름 시작, 선언적 연산자 지원, 백프레셔 자동.
+- Flow vs Channel
+    - Flow: 콜드 스트림, 구독 시마다 새로 데이터 흐름 시작, 선언적 연산자 지원, 백프레셔 자동.
+    - Channel: 핫 스트림, 송신·수신이 독립적, 버퍼 설정 가능, 직접 send/receive 호출.
 
-Channel: 핫 스트림, 송신·수신이 독립적, 버퍼 설정 가능, 직접 send/receive 호출.
+- Cancellation & Exception Handling
+    - 취소: isActive 체크, delay/withContext 등 cooperative 지점에서 취소 반응.
+    - 예외: try/catch, CoroutineExceptionHandler, SupervisorJob로 독립 처리.
+    - 경험: ViewModelScope에서 화면 종료 시 Job 취소, 네트워크 타임아웃 시 withTimeout 사용.
 
-4) Cancellation & Exception Handling
-취소: isActive 체크, delay/withContext 등 cooperative 지점에서 취소 반응.
+- Coroutine 테스트 전략
+    - TestCoroutineDispatcher(구), 현재는 StandardTestDispatcher + runTest 사용.
+    - 가상 시간 제어(advanceTimeBy, advanceUntilIdle)로 지연 로직 검증.
+    - Flow는 toList()나 Turbine 라이브러리로 수집 검증.
 
-예외: try/catch, CoroutineExceptionHandler, SupervisorJob로 독립 처리.
-
-경험: ViewModelScope에서 화면 종료 시 Job 취소, 네트워크 타임아웃 시 withTimeout 사용.
-
-5) Coroutine 테스트 전략
-TestCoroutineDispatcher(구), 현재는 StandardTestDispatcher + runTest 사용.
-
-가상 시간 제어(advanceTimeBy, advanceUntilIdle)로 지연 로직 검증.
-
-Flow는 toList()나 Turbine 라이브러리로 수집 검증.
-
-6) Java JIT vs AOT
-JIT: 바이트코드 → 런타임 최적화된 네이티브 코드, 실행 중 프로파일링 기반 최적화.
-
-AOT: 빌드 시 네이티브 코드 생성, 시작 속도 빠름, 런타임 최적화 제한.
-
-Java 9+는 jaotc로 AOT 지원.
+- Java JIT vs AOT
+    - JIT: 바이트코드 → 런타임 최적화된 네이티브 코드, 실행 중 프로파일링 기반 최적화.
+    - AOT: 빌드 시 네이티브 코드 생성, 시작 속도 빠름, 런타임 최적화 제한.
+    - Java 9+는 jaotc로 AOT 지원.
 
 7) VarHandle vs Atomic
 VarHandle: 필드·배열 요소·static 변수에 대해 volatile/원자적 연산 제공, 리플렉션보다 빠름.
