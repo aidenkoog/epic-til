@@ -16663,118 +16663,104 @@ enum 활용과 장점
     - Dispatcher로 실행 컨텍스트 분리(IO/Default/Main).
     - Flow/Channel로 스트림 처리.
 
-1) MutableLiveData vs StateFlow
-MutableLiveData: Lifecycle 인식, Observer 패턴, null 허용, 기본적으로 마지막 값만 유지, UI 구성요소에서 주로 사용.
+- MutableLiveData vs StateFlow
+    - MutableLiveData: 
+        - Lifecycle 인식, Observer 패턴, null 허용, 기본적으로 마지막 값만 유지, UI 구성요소에서 주로 사용.
+    - StateFlow: 
+        - Kotlin Flow 기반, 항상 값 보유(replay=1), null 비권장, coroutine 친화적, 백프레셔 처리 가능.
+    - 권장: 코루틴 기반 아키텍처 → StateFlow.
 
-StateFlow: Kotlin Flow 기반, 항상 값 보유(replay=1), null 비권장, coroutine 친화적, 백프레셔 처리 가능.
+- Jetpack ViewModel 활용
+    - 구성 변경에도 데이터 유지, UI 상태와 비즈니스 로직 보관.
+    - ViewModelProvider 또는 @HiltViewModel로 주입, LiveData/StateFlow로 View와 연결.
 
-권장: 코루틴 기반 아키텍처 → StateFlow.
+- Jetpack Lifecycle Observer 역할
+    - Activity/Fragment 생명주기 이벤트에 반응하는 객체.
+    - DefaultLifecycleObserver 구현 → onCreate, onStart 등에서 리소스 초기화/해제.
 
-2) Jetpack ViewModel 활용
-구성 변경에도 데이터 유지, UI 상태와 비즈니스 로직 보관.
+- ViewModelScope vs GlobalScope
+    - ViewModelScope: ViewModel 수명에 맞춰 자동 취소, UI 안전.
+    - GlobalScope: 앱 프로세스 단위, 수동 취소 필요, 누수 위험.
+    - UI 로직엔 ViewModelScope 권장.
 
-ViewModelProvider 또는 @HiltViewModel로 주입, LiveData/StateFlow로 View와 연결.
+- Structured Concurrency
+    - 부모-자식 코루틴 관계로 수명 관리, 부모 취소 시 자식 모두 취소.
+    - CoroutineScope로 Job 계층화, 예외 전파·누수 방지.
 
-3) Jetpack Lifecycle Observer 역할
-Activity/Fragment 생명주기 이벤트에 반응하는 객체.
+- BroadcastReceiver 역할
+    - 앱 외부/시스템 브로드캐스트(Intent) 수신 → 이벤트 기반 처리.
+    - 예: 네트워크 상태 변경, 배터리 이벤트.
 
-DefaultLifecycleObserver 구현 → onCreate, onStart 등에서 리소스 초기화/해제.
+- IntentService vs Foreground Service
+    - IntentService: 백그라운드 단일 스레드, 자동 종료, API 30 이후 비권장.
+    - Foreground Service: 사용자 인식 작업, 지속 실행, 알림 필수.
 
-4) ViewModelScope vs GlobalScope
-ViewModelScope: ViewModel 수명에 맞춰 자동 취소, UI 안전.
+- Compose State Hoisting
+    - 상태를 Composable 외부로 끌어올려 상위에서 관리, 하위는 UI만 담당.
+    - 장점: 재사용성, 테스트 용이, 단방향 데이터 흐름 유지.
 
-GlobalScope: 앱 프로세스 단위, 수동 취소 필요, 누수 위험.
+- Activity vs Fragment 생명주기
+    - Activity:
+        - onCreate → onStart → onResume → onPause → onStop → onDestroy.
+    - Fragment: 
+        - View 생명주기 분리(onCreateView, onViewCreated, onDestroyView).
+    - Fragment는 호스트 Activity에 종속.
 
-UI 로직엔 ViewModelScope 권장.
+- RecyclerView ViewHolder 패턴
+    - 뷰 참조 캐싱으로 findViewById 호출 최소화, 스크롤 성능 향상.
 
-5) Structured Concurrency
-부모-자식 코루틴 관계로 수명 관리, 부모 취소 시 자식 모두 취소.
+- Retrofit vs Volley
+    - Retrofit: REST API, OkHttp 기반, 직렬화 지원, 코드 간결.
+    - Volley: 이미지 로드·캐싱 포함, 요청 큐 기반, 작은 요청에 적합.
 
-CoroutineScope로 Job 계층화, 예외 전파·누수 방지.
+- FusedLocationProvider API 사용 이유
+    - GPS, Wi-Fi, 셀 신호 통합, 배터리 효율 최적화, 위치 정확도 향상.
 
-6) BroadcastReceiver 역할
-앱 외부/시스템 브로드캐스트(Intent) 수신 → 이벤트 기반 처리.
+- 앱 내 결제 구현
+    - Google Play Billing Library 사용 → 상품 등록, 결제 플로우 호출, 구매 영수증 검증.
 
-예: 네트워크 상태 변경, 배터리 이벤트.
+- 지문/얼굴 인증 구현
+    - BiometricPrompt API 사용, 지문·Face ID 통합, 안전한 키스토어 기반 인증.
 
-7) IntentService vs Foreground Service
-IntentService: 백그라운드 단일 스레드, 자동 종료, API 30 이후 비권장.
+- Firebase Crashlytics 활용
+    - 실시간 크래시 수집, 스택트레이스·사용자 세션 정보 제공, 릴리즈 품질 모니터링.
 
-Foreground Service: 사용자 인식 작업, 지속 실행, 알림 필수.
+- WorkManager 활용 백그라운드 작업
+    - 제약 조건(Wi-Fi, 충전 중) 설정, OS 재부팅 후에도 실행 보장.
+    - OneTimeWorkRequest, PeriodicWorkRequest로 스케줄.
 
-8) Compose State Hoisting
-상태를 Composable 외부로 끌어올려 상위에서 관리, 하위는 UI만 담당.
+- AndroidX 사용 이유
+    - Jetpack 라이브러리, 레거시 지원 라이브러리의 후속, 독립 업데이트, 최신 API 호환성.
 
-장점: 재사용성, 테스트 용이, 단방향 데이터 흐름 유지.
+- ConstraintLayout vs RelativeLayout
+    - ConstraintLayout: 제약 기반, 중첩 최소화, 성능 우수.
+    - RelativeLayout: 상대 배치, 복잡 UI에 중첩 많아 성능 저하 가능.
 
-9) Activity vs Fragment 생명주기
-Activity: onCreate → onStart → onResume → onPause → onStop → onDestroy.
+- Navigation Component Safe Args
+    - 타입 안전 인자 전달, 빌드 타임 체크, 번들 키 오타 방지.
 
-Fragment: View 생명주기 분리(onCreateView, onViewCreated, onDestroyView).
+- Service vs JobIntentService
+    - Service: 장기 실행, UI 비차단.
+    - JobIntentService: 백그라운드 제한 대응, API 26+에서도 안전 실행.
 
-Fragment는 호스트 Activity에 종속.
+- Compose에서 recomposition 발생 조건
+    - State 값 변경
+    - remember 값 변경
+    - key 변경
+    - effect 호출 시.
 
-10) RecyclerView ViewHolder 패턴
-뷰 참조 캐싱으로 findViewById 호출 최소화, 스크롤 성능 향상.
+- Jetpack Compose - remember vs rememberSaveable
+    - remember: 컴포지션 동안 상태 유지, 프로세스 종료 시 소멸.
+    - rememberSaveable: Bundle/SavedStateRegistry로 저장, 프로세스 재생성 후 복원.
+    - 사용: 화면 회전/프로세스 킬 복원 필요 시 rememberSaveable.
 
-11) Retrofit vs Volley
-Retrofit: REST API, OkHttp 기반, 직렬화 지원, 코드 간결.
+- Coroutines - Structured Concurrency 중요성
+    - 부모-자식 관계로 Job 관리 → 취소·예외 전파 일관성, 누수 방지.
+    - ViewModelScope, lifecycleScope 등이 기본적으로 적용.
 
-Volley: 이미지 로드·캐싱 포함, 요청 큐 기반, 작은 요청에 적합.
-
-12) FusedLocationProvider API 사용 이유
-GPS, Wi-Fi, 셀 신호 통합, 배터리 효율 최적화, 위치 정확도 향상.
-
-13) 앱 내 결제 구현
-Google Play Billing Library 사용 → 상품 등록, 결제 플로우 호출, 구매 영수증 검증.
-
-14) 지문/얼굴 인증 구현
-BiometricPrompt API 사용, 지문·Face ID 통합, 안전한 키스토어 기반 인증.
-
-15) Firebase Crashlytics 활용
-실시간 크래시 수집, 스택트레이스·사용자 세션 정보 제공, 릴리즈 품질 모니터링.
-
-16) WorkManager 활용 백그라운드 작업
-제약 조건(Wi-Fi, 충전 중) 설정, OS 재부팅 후에도 실행 보장.
-
-OneTimeWorkRequest, PeriodicWorkRequest로 스케줄.
-
-17) AndroidX 사용 이유
-Jetpack 라이브러리, 레거시 지원 라이브러리의 후속, 독립 업데이트, 최신 API 호환성.
-
-18) ConstraintLayout vs RelativeLayout
-ConstraintLayout: 제약 기반, 중첩 최소화, 성능 우수.
-
-RelativeLayout: 상대 배치, 복잡 UI에 중첩 많아 성능 저하 가능.
-
-19) Navigation Component Safe Args
-타입 안전 인자 전달, 빌드 타임 체크, 번들 키 오타 방지.
-
-20) Service vs JobIntentService
-Service: 장기 실행, UI 비차단.
-
-JobIntentService: 백그라운드 제한 대응, API 26+에서도 안전 실행.
-
-21) Compose에서 recomposition 발생 조건
-State 값 변경, remember 값 변경, key 변경, effect 호출 시.
-
-
-1) Jetpack Compose - remember vs rememberSaveable
-remember: 컴포지션 동안 상태 유지, 프로세스 종료 시 소멸.
-
-rememberSaveable: Bundle/SavedStateRegistry로 저장, 프로세스 재생성 후 복원.
-
-사용: 화면 회전/프로세스 킬 복원 필요 시 rememberSaveable.
-
-2) Coroutines - Structured Concurrency 중요성
-부모-자식 관계로 Job 관리 → 취소·예외 전파 일관성, 누수 방지.
-
-ViewModelScope, lifecycleScope 등이 기본적으로 적용.
-
-3) suspend 함수의 실행 스레드 결정
-호출 시 현재 CoroutineContext의 Dispatcher에 따라 결정.
-
-명시 안 하면 상위 컨텍스트 유지, withContext(Dispatchers.IO)로 변경 가능.
+- suspend 함수의 실행 스레드 결정
+    - 호출 시 현재 CoroutineContext의 Dispatcher에 따라 결정.
+    - 명시 안 하면 상위 컨텍스트 유지, withContext(Dispatchers.IO)로 변경 가능.
 
 4) Inline Functions 장·단점
 장점: 람다 객체 생성·call stack 오버헤드 제거, reified 타입 사용 가능.
